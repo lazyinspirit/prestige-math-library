@@ -19,6 +19,7 @@ import { ownerRepairEvidenceClosure, OWNER_REPAIR_EVIDENCE_FREEZE_POLICY } from 
 import { nativeOriginClosureEvidence } from './auditor-created-items.mjs';
 import { NATIVE_ORIGIN_FREEZE_POLICY } from './step3-native-creation-origin.mjs';
 import { step3LedgerNormalizationHistory } from './step3-ledger-normalization-history.mjs';
+import { nativeStep3LedgerSuccessorHistory } from './step3-native-ledger-successor-history.mjs';
 
 const argv = process.argv.slice(2);
 const mode = argv[0];
@@ -55,7 +56,7 @@ const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = 
   ...(version === 3 ? homeAlphaClosureEvidence(root, run) : {}),
   ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),
   ...(version === 3 ? foreignReaderClosureEvidence(root, run) : {}),
-  ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+  ...(version === 3 ? requiredPageClosureEvidence(root, run, { frozenArtifacts: frozenManifestArtifacts }) : {}),
   ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
   ...(version === 3 && repairEvidencePolicy === OWNER_REPAIR_EVIDENCE_FREEZE_POLICY
@@ -126,10 +127,16 @@ if (mode === 'verify') {
     if (currentArtifacts[relative] !== expected) errors.push(`${relative} changed after Step 3 closed`);
   }
   const ledgerRows = step3LedgerRows();
+  // This exact later native append must remain intact even if removing every
+  // selected successor would restore the original historical hash by itself.
+  let nativeSuccessorHistory = false;
+  try { nativeSuccessorHistory = nativeStep3LedgerSuccessorHistory(root, run, receipt, ledgerRows); }
+  catch (cause) { errors.push(`Step-3 native successor history changed: ${cause.message}`); }
   if (sha256(JSON.stringify(ledgerRows)) !== receipt.step3_ledger_rows_sha256
     || ledgerRows.length !== receipt.step3_ledger_rows_count) {
     try {
-      if (!step3LedgerNormalizationHistory(root, run, receipt, ledgerRows)) errors.push('Step-3 defect-ledger rows changed');
+      if (!step3LedgerNormalizationHistory(root, run, receipt, ledgerRows)
+        && !nativeSuccessorHistory) errors.push('Step-3 defect-ledger rows changed');
     } catch (cause) { errors.push(`Step-3 defect-ledger rows changed: ${cause.message}`); }
   }
   if (errors.length) fail(errors.join('; '));

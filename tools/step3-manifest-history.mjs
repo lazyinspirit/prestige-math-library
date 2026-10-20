@@ -202,6 +202,21 @@ export function historicalStep3Manifest(root,run,batch,r,route,{preclosure=false
     &&route.registry===`research/${run}-step3-owner-${route.kind}-routes.json`,
     'invalid historical route identity');
   if(preclosure){const captured=preclosureArchive(root,run,batch,r,route,current,frozenArtifacts);if(captured)return captured;}
+  if(frozenArtifacts&&route.kind==='required-page') {
+    // Read only the exact already-frozen manifest slot. A restored preimage is
+    // authenticated by that original slot, not by a new certificate or receipt.
+    assert(frozenArtifacts[r.path]===r.sha256
+      &&frozenArtifacts[route.registry]===sha(bytes(root,route.registry)),
+      'required-page history differs from original frozen artifact slots');
+    const registry=json(root,route.registry),original=registry.routes?.[route.index]?.[route.field];
+    assert(registry.version===1&&registry.run===run
+      &&registry.policy==='owner-step3-required-published-page-route-v1'
+      &&original?.path===r.path&&original.sha256===r.sha256,
+      'required-page history differs from original frozen route');
+    if(sha(current)===r.sha256)return {historical:current,current,archived:false};
+    const historical=ref(root,{path:`research/${run}-step5-v2/supporting-metadata/${r.sha256}.json`,sha256:r.sha256});
+    return {historical,current,archived:true};
+  }
   if(frozenArtifacts){
     // No new certified/owner archive may enlarge an already frozen artifact set.
     assert(frozenArtifacts[r.path]===r.sha256&&sha(current)===r.sha256,'missing exact original closure-time manifest archive');

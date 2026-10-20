@@ -52,6 +52,7 @@ import { fileURLToPath } from 'node:url';
 import { validateFrontier } from './step5-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
+import { historicalMetadataRow } from './defect-ledger-historical-metadata.mjs';
 
 const STEP3_SCOPE_TOOL = fileURLToPath(new URL('./step3-scope.mjs', import.meta.url));
 const STEP3_CLOSE_TOOL = fileURLToPath(new URL('./step3-close.mjs', import.meta.url));
@@ -348,7 +349,7 @@ function validate(rows, runFilter) {
   const frozenRows = frozenFrontier44Rows(rows, runFilter, errs);
   for (const row of rows) {
     if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
-    errs.push(...validateRow(frozenRows.has(row) ? frozenTaxonomyRow(row) : row, ids,
+    errs.push(...validateRow(frozenRows.has(row) ? frozenTaxonomyRow(row) : historicalMetadataRow(row), ids,
       { historicalTaxonomy: !active.has(row) }));
   }
   return errs;

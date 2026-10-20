@@ -769,6 +769,42 @@ All original labels and evidence remain in the ledger; no receipt is resealed.
 Every structural, severity, ownership and closure check still applies, and new
 appends and later Step-5 rows retain the strict schema.
 
+The machine-learning-all-101-2026-10-19 defect ledger uses a validation-only
+projection for 18 exact original Step-3 row objects pinned in
+`tools/defect-ledger-historical-metadata.mjs`. It maps their recorded legacy
+location/subclass vocabulary and exposes the same original URL as an evidence
+locator while retaining every original evidence field. Raw rows, reasons,
+severity, disposition, ownership, timestamps and adjudication references stay
+unchanged. Changed objects and other runs receive no compatibility; new appends
+remain strict. Missing confirmed-fatal ledger coverage remains a hard failure.
+
+The same run's original frozen 317-row Step-3 ledger projection is verified
+through `step3-native-ledger-successor-history.mjs` after its exact successful
+native gate-r1-u1 owner appended 18 taxonomy successors (11 in the draft
+Step-3 selection). This verify-only path authenticates the unchanged original
+closure, exact native report/pack/prompt, successful result and identical
+immutable attempt, all 18 original/successor row hashes, same-subject backward
+supersession, preserved semantic/evidence fields and actual execution-time
+recording dates. Removing only those authenticated selected successor IDs must
+recover exactly the original 317-row count and hash. This native append
+integrity check runs unconditionally for this run during verify, including when
+the selected historical count/hash already matches; missing all selected
+successors cannot bypass it. Missing, changed, duplicate
+or unbound rows fail; no native report, raw row, closure slot or original hash is
+rewritten. Both original and successor rows still owe ordinary current schema,
+active ownership, exact adjudication coverage and every native gate. This grants
+no new review, certification or mathematical acceptance; close/default behavior
+and existing normalization-history versions are unchanged.
+
+Required-page closure verification carries the already-selected original frozen
+artifact map through its manifest-history lookup. The unchanged closure, exact
+registry bytes, original route/index and original manifest slot authenticate a
+genuine restored hash-addressed preimage. No certificate entry, closure slot or
+historical hash is added or rewritten. Both historical and current required-page
+and consumer ownership checks remain required; default/close callers retain
+their certified-history behavior. Install and reload at a drained owner hold,
+then recertify current inputs and run the complete native gate battery.
+
 ## Run controls and cutover
 
 Published mathematics category audits use the separate TypeScript

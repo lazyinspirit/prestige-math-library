@@ -43,9 +43,10 @@ function currentManifestRoute(root,run,e,manifest) {
 // A closed route's original manifest remains historical after native Step-5
 // repairs update its mirrors. Resolve only the exact already-certified preimage;
 // no registry, closure key/hash, current manifest or native receipt is rewritten.
-function closureManifest(root,run,e,index) {
+function closureManifest(root,run,e,index,frozenArtifacts=null) {
   const result=historicalStep3Manifest(root,run,e.batch,e.manifest,{kind:'required-page',
-    registry:`research/${run}-step3-owner-required-page-routes.json`,index,field:'manifest'});
+    registry:`research/${run}-step3-owner-required-page-routes.json`,index,field:'manifest'},
+    {preclosure:Boolean(frozenArtifacts),frozenArtifacts});
   if(result.archived){
     currentManifestRoute(root,run,e,JSON.parse(result.historical));
     currentManifestRoute(root,run,e,JSON.parse(result.current));
@@ -152,7 +153,7 @@ export function requiredPageCarrier(root,run,batch,finding) {
 // Freeze only this route's authenticated historical inputs. Current mathematical
 // sources retain ordinary later-stage currency rules; the after archive is the
 // immutable corrected page carrier. Existing owner registries are unaffected.
-export function requiredPageClosureEvidence(root,run) {
+export function requiredPageClosureEvidence(root,run,{frozenArtifacts=null}={}) {
   assert(safe(run),'invalid run');const p=`research/${run}-step3-owner-required-page-routes.json`;
   if(!existsSync(resolve(root,p)))return {};
   const raw=bytes(root,p),doc=JSON.parse(raw);
@@ -160,7 +161,7 @@ export function requiredPageClosureEvidence(root,run) {
   const out={[p]:sha(raw)};
   for(const [index,e] of doc.routes.entries()) for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot','manifest','before','after','review']) {
     const r=e[key];assert(typeof r?.path==='string' && r.path.startsWith('research/'),'invalid historical closure path');
-    if(key==='manifest')closureManifest(root,run,e,index);else ref(root,r);
+    if(key==='manifest')closureManifest(root,run,e,index,frozenArtifacts);else ref(root,r);
     assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous closure reference');out[r.path]=r.sha256;
   }
   return out;
