@@ -8,6 +8,10 @@
 ## Items
 
 - File: `items/<id>.md`. The frontmatter `id` must equal the filename stem.
+  Item IDs are case-sensitive; preserve existing mixed-case mathematical segments
+  such as `lem-hat-CF-genus-one-lens-space-order-three-rank-three`. Frontier item
+  selectors accept ASCII letters and digits in hyphen-separated segments, with
+  a lowercase kind prefix. Page slugs remain lowercase.
   Keep IDs and aliases unique; `aliases: [old-id]` preserves old links.
 - `kind` determines the ID prefix: `definition` → `def-`, `algorithm` → `alg-`, `theorem` → `thm-`,
   `lemma` → `lem-`, `proposition` → `prop-`, `corollary` → `cor-`, `example` →
@@ -59,10 +63,10 @@
   statement cannot be a `deps` target.
   Omit `generation` for other statement provenance.
 
-### Bounded preservation of four reviewed local PL lemmas
+### Bounded preservation of eight reviewed local lemmas
 
 For `inverse-problems-knot-theory-all-109-2026-10-19` only, the root's
-preserve-resolved-dependencies decision permits the following four previously
+preserve-resolved-dependencies decision permits the following eight previously
 independently accepted local constructions to retain truthful
 `provenance: {statement: ai-generated, proof: ai-generated}` and remain logical
 suppliers:
@@ -71,6 +75,31 @@ suppliers:
 - `lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings`
 - `lem-pl-height-product-caps-replace-by-one-extremum`
 - `lem-pointed-flat-pl-caps-admit-saddle-free-replacements`
+- `lem-smooth-collared-arcs-in-the-four-dimensional-product-are-unknotted`
+- `lem-countable-signature-groups-with-exponent-four-kernel-split`
+- `lem-finite-framed-locally-flat-links-in-smooth-three-manifolds-have-smooth-image-models`
+- `lem-weak-coulomb-asd-connections-for-smooth-four-metrics-are-interior-smooth`
+
+The four added context suppliers have pre-existing acceptance records: the
+smooth collared-arc helper in
+`research/inverse-problems-knot-theory-all-109-2026-10-19-owner-concordance-ribbon-round1/root-original74-bare-arc-review.json`;
+the countable splitting helper in
+`research/inverse-problems-knot-theory-all-109-2026-10-19-independent-original75-classification-review-round1/report.json`;
+the finite framed-link helper in
+`research/inverse-problems-knot-theory-all-109-2026-10-19-owner-freedman-alexander-one-working-chain/top-input-whole-successor/independent-whole-original-review.json`;
+and the curved Coulomb helper in the root's Uhlenbeck acceptance entry of
+`research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json`
+(the entry naming that supplier, not a fresh review). Their literal hypotheses
+remain binding: endpoint product collars for the arc; full AC and the stated
+countability/kernel/witness assumptions for splitting; CC and supplied complete
+normal-framing classes for the finite link; full AC, Euclidean Coulomb gauge and
+the stated metric/smallness hypotheses for curved regularity. No TOP ribbon,
+point-removal, or broader group claim follows from this policy exception.
+
+The composite framed-link construction must retain its actual Hamilton/Brown
+references and qualified adaptation history. Its locally composed Statement is
+not thereby attributed to an exact published theorem. This is an exact eight-ID
+preservation rule, not a general waiver for reviewed or source-free lemmas.
 
 Each requires `pipeline_run` equal to that run,
 `generation.role: reviewed-local-lemma`, and this root-owned mapping:

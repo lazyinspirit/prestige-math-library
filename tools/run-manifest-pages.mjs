@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const itemId = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const itemId = /^[a-z]+-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
 // Only page-plan validation opts into the pre-scaffold empty item lifecycle.
 // Supplier/item evidence readers require populated inventories by default.
 export function readRunManifestPages(root, run, { allowEmptyItems = false } = {}) {

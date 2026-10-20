@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const itemId = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const itemId = /^[a-z]+-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
 const hash = text => createHash('sha256').update(text).digest('hex');
 
 // Plan validation precedes scaffolding and may explicitly select pages whose

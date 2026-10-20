@@ -88,6 +88,10 @@ const REVIEWED_LOCAL_IDS = new Set([
   'lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings',
   'lem-pl-height-product-caps-replace-by-one-extremum',
   'lem-pointed-flat-pl-caps-admit-saddle-free-replacements',
+  'lem-smooth-collared-arcs-in-the-four-dimensional-product-are-unknotted',
+  'lem-countable-signature-groups-with-exponent-four-kernel-split',
+  'lem-finite-framed-locally-flat-links-in-smooth-three-manifolds-have-smooth-image-models',
+  'lem-weak-coulomb-asd-connections-for-smooth-four-metrics-are-interior-smooth',
 ]);
 
 /** Validate an explicitly requested exception, including when used as context.
@@ -100,7 +104,7 @@ export function reviewedLocalLemmaAcceptance(metadata, body, repo) {
   if (!requested) return { eligible: false, errors: [] };
   const errors = [];
   const require_ = (condition, message) => { if (!condition) errors.push(message); };
-  require_(REVIEWED_LOCAL_IDS.has(metadata.id), 'item is outside the exact four-ID preservation scope');
+  require_(REVIEWED_LOCAL_IDS.has(metadata.id), 'item is outside the exact eight-ID preservation scope');
   require_(metadata.pipeline_run === REVIEWED_LOCAL_RUN, 'pipeline_run must match the authorized run');
   require_(metadata.kind === 'lemma', 'preserved item must remain a lemma');
   require_(nested(metadata, 'provenance', 'statement') === 'ai-generated'

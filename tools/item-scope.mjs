@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const ITEM_ID = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const ITEM_ID = /^[a-z]+-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
 
 /**
  * Parse the opt-in `--items-file PATH` selector used by repo validators.

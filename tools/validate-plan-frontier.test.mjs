@@ -327,3 +327,19 @@ test('native drift wrapper sees repaired canonical requirements without mutating
   assert.equal(unresolved.status, 1, output(unresolved));
   assert.match(output(unresolved), /\[resolve\].*lem-unresolved-current/);
 });
+
+
+test('validate-plan adapter uses populated case-sensitive manifests while Step-2 plan item arrays remain empty', t => {
+  const f = fixture(t), id = 'lem-hat-CF-genus-one-lens-space-order-three-rank-three';
+  f.pages[1].items[0] = { id, kind: 'lemma', deps: [] };
+  f.pages[2].items[0].deps = [id];
+  f.item(id); f.home('selected', [id]); f.save();
+  const plan = JSON.parse(readFileSync(join(f.repo, 'research/plan-spec.json')));
+  for (const p of plan.pages) p.items = [];
+  writeFileSync(join(f.repo, 'research/plan-spec.json'), JSON.stringify(plan));
+  const result = f.gate();
+  assert.equal(result.status, 0, output(result));
+  assert.match(result.stdout, /scope: 2 selected pages/);
+  assert.deepEqual(JSON.parse(readFileSync(join(f.repo, 'research/run-test-frontier-gate-items.json'))),
+    ['ex-selected', id].sort());
+});

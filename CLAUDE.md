@@ -25,11 +25,14 @@
 12. **Run-specific external-source boundary.** For `inverse-problems-knot-theory-all-109-2026-10-19`, the owner explicitly authorized precise external citations for remaining established dependencies across Step 1, after first applying this boundary to flyping/TOP. This overrides the local-proof-only rule in SCHEMA.md for this run only. Preserve resolved local proofs and dependencies. Clearly label every imported result as an external input; give its exact source, locator, hypotheses and actual reading limits. Do not describe it as a locally reconstructed proof, invent source coverage, or relabel an open problem as established. Ordinary source references and explicit Facts record these imports; no fabricated review, readiness or gate coverage is permitted. All ordinary workflow gates remain required. The engine must pause after `1-scaffold` gates and before Step 2. The dated scope record is `research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/external-source-closeout-direction.json`.
 
 13. **Bounded reviewed-local provenance exception.** In the run named in rule 12,
-root authorized preserving exactly the four independently accepted local PL
+root authorized preserving exactly the eight independently accepted local
 lemmas listed in SCHEMA.md under truthful `ai-generated` statement/proof tags.
 Only the exact `reviewed-local-lemma` role and root-owned
 `local_proof_acceptance` mapping, actual independent-review file, and matching
 accepted body SHA256 permit their lemma/dependency use. Root owns those item
-metadata and digest bindings. This exception creates no external attribution,
+metadata and digest bindings. Preserve actual source references, including
+Hamilton/Brown adaptations in the composite boundary-link lemma; the exception
+does not relabel its complete Statement as a published theorem. This exception
+creates no external attribution,
 mathematical acceptance, audit coverage, or waiver for other items; ordinary
 workflow gates and frozen review histories remain required.

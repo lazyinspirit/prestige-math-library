@@ -13,7 +13,7 @@ function fixture(t) {
   const repo = mkdtempSync(join(tmpdir(), 'frontier-gates-test-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   for (const dir of ['tools', 'items', 'research', 'library/test']) mkdirSync(join(repo, dir), { recursive: true });
-  for (const file of ['extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs', 'item-hash.mjs'])
+  for (const file of ['frontier-item-gate.mjs', 'extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs', 'item-hash.mjs'])
     copyFileSync(join(tools, file), join(repo, 'tools', file));
   const write = (path, text) => writeFileSync(join(repo, path), text);
   const item = (id, deps = '[]', extra = '') => `---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: ${deps}\n${extra}---\n`;
@@ -218,4 +218,32 @@ test('depsource run overlay accepts a current unspliced subject and current supp
     assert.equal(f.run('depsource', ['--items-file', 'items.json', '--run', 'r']).status, 1);
   }
   assert.equal(f.run('depsource', ['--items-file', 'items.json', '--run', 'unknown']).status, 1);
+});
+
+
+test('frontier adapters preserve mixed-case canonical item IDs through selector and run readers', t => {
+  const f = fixture(t), ids = ['lem-hat-CF-genus-one-lens-space-order-three-rank-three',
+    'lem-amenable-D-R-l2-dimension-estimate'];
+  for (const id of ids) f.write(`items/${id}.md`, f.item(id));
+  const rows = [{ id: 'selected', category: 'test', kind: 'A', order: 1,
+    items: ids.map(id => ({ id, kind: 'lemma', deps: [] })) }];
+  f.write('research/case-run-batch-1.pages.json', JSON.stringify(rows));
+  const scope = frontierGateScope({ repo: f.repo, run: 'case-run' });
+  assert.deepEqual([...scope.items].sort(), [...ids].sort());
+  assert.deepEqual(readRunManifestPages(f.repo, 'case-run')[0].items.map(i => i.id), ids);
+  const result = f.run('frontier-item-gate', ['--run', 'case-run', '--tool', 'extcheck', '--', '--json']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(JSON.parse(readFileSync(join(f.repo, 'research/case-run-frontier-gate-items.json'))), [...ids].sort());
+  for (const invalidItems of [
+    [{ id: 'Lem-bad-prefix', deps: [] }],
+    [{ id: 'lem-invalid/escape', deps: [] }],
+    [],
+    [{ id: ids[0], deps: [] }, { id: ids[0], deps: [] }],
+  ]) {
+    rows[0].items = invalidItems;
+    f.write('research/case-run-batch-1.pages.json', JSON.stringify(rows));
+    assert.throws(() => frontierGateScope({ repo: f.repo, run: 'case-run' }), /[Ii]nvalid|[Ee]mpty/);
+    assert.throws(() => readRunManifestPages(f.repo, 'case-run'), /[Ii]nvalid|[Ee]mpty/);
+    assert.equal(f.run('frontier-item-gate', ['--run', 'case-run', '--tool', 'extcheck']).status, 1);
+  }
 });

@@ -48,8 +48,10 @@ const pages = manifests.flatMap(name => {
   if (!Array.isArray(rows)) throw Error(`Invalid frontier manifest ${name}`);
   return rows;
 });
-const ids = [...new Set(pages.flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id)))].sort();
-if ((!ids.length && tool !== 'validate-plan') || ids.some(id => !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')))
+const rawIds = pages.flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id));
+const ids = [...new Set(rawIds)].sort();
+if (ids.length !== rawIds.length) throw Error(`Frontier ${run} contains duplicate item IDs`);
+if ((!ids.length && tool !== 'validate-plan') || ids.some(id => !/^[a-z]+-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(id ?? '')))
   throw Error(`Frontier ${run} has no valid populated item scope`);
 const selector = `research/${run}-frontier-gate-items.json`;
 const pageSelector = `research/${run}-frontier-gate-pages.json`;

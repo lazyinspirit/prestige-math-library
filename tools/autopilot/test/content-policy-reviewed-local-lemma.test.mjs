@@ -13,6 +13,10 @@ const ids = [
   'lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings',
   'lem-pl-height-product-caps-replace-by-one-extremum',
   'lem-pointed-flat-pl-caps-admit-saddle-free-replacements',
+  'lem-smooth-collared-arcs-in-the-four-dimensional-product-are-unknotted',
+  'lem-countable-signature-groups-with-exponent-four-kernel-split',
+  'lem-finite-framed-locally-flat-links-in-smooth-three-manifolds-have-smooth-image-models',
+  'lem-weak-coulomb-asd-connections-for-smooth-four-metrics-are-interior-smooth',
 ];
 const body = '## Statement\nFixture.\n\n## Proof\nFixture proof.\n';
 function check({ id = ids[0], mutate = () => {}, changedBody = body, evidence = true,
@@ -47,8 +51,11 @@ function check({ id = ids[0], mutate = () => {}, changedBody = body, evidence = 
 }
 
 test('each exact root-bound local lemma is allowed as a generated supplier', () => {
-  for (const id of ids) assert.equal(check({ id }).status, 0, id);
-  assert.equal(check({ contextOnly: true }).status, 0);
+  assert.equal(ids.length, 8);
+  for (const id of ids) {
+    assert.equal(check({ id }).status, 0, id);
+    assert.equal(check({ id, contextOnly: true }).status, 0, `context: ${id}`);
+  }
 });
 
 test('exception rejects scope, authority, provenance, role and evidence substitutions', () => {
@@ -70,7 +77,7 @@ test('exception rejects scope, authority, provenance, role and evidence substitu
     assert.ok(result.errors.some(e => e.code === 'local-proof-acceptance-invalid'));
     assert.ok(result.errors.some(e => e.code === 'ai-generated-statement-dependency'));
   }
-  assert.equal(check({ id: 'lem-outside-authorized-four' }).status, 1);
+  assert.equal(check({ id: 'lem-outside-authorized-eight' }).status, 1);
   assert.equal(check({ evidence: false }).status, 1);
 });
 
@@ -91,4 +98,17 @@ test('ordinary generated lemmas retain the original kind and dependency prohibit
   assert.ok(result.errors.some(e => e.code === 'generated-kind'));
   assert.ok(result.errors.some(e => e.code === 'ai-generated-statement-dependency'));
   assert.ok(!result.errors.some(e => e.code === 'local-proof-acceptance-invalid'));
+});
+
+// The composite boundary-link construction retains its actual Hamilton/Brown
+// references; reviewed local status neither removes nor fabricates attribution.
+test('reviewed composite local lemma may retain its actual source references', () => {
+  const result = check({ id: 'lem-finite-framed-locally-flat-links-in-smooth-three-manifolds-have-smooth-image-models',
+    contextOnly: true, mutate: m => {
+      m.sources = { references: [
+        { title: 'Hamilton, The triangulation of 3-manifolds', url: 'https://academic.oup.com/qjmath/article-abstract/27/1/63/1577698' },
+        { title: 'Brown, A proof of the generalized Schoenflies theorem', url: 'https://www.maths.ed.ac.uk/~v1ranick/papers/brownsch.pdf' },
+      ] };
+    } });
+  assert.equal(result.status, 0);
 });
