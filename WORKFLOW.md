@@ -1094,3 +1094,17 @@ diagram for mathematical correctness, repair defects and add missing diagrams
 where needed. This includes commutative and string diagrams, Young tableaux,
 braids, Temperley–Lieb diagrams and other types. Existing write scopes,
 read-only roles and the requirement for proofs independent of diagrams remain.
+
+An explicitly unavailable initial native reporting context may use the guarded
+[initial reporting-owner context recovery](tools/step5-initial-reporting-owner-recovery.md)
+at the actual paused, drained 5.2 boundary before any followup pack/progress.
+The opt-in all-lane receipt authenticates every original initial execution,
+root-confirmed unavailable context, complete current guards and the real hold.
+Its separate historical scheduling observation grants no current review or native
+acceptance; exact original uncertainty remains recorded, and ordinary collection
+continues to reject it. At the existing permitted owner-hold native advance-impact
+boundary, three new persistent owners review their complete original assignments
+plus pending consumers, suppliers first. Later passes resume these genuine new
+reporting sessions. Overlapping floors or genuine reader-identity conflicts fail
+closed. Default dispatch, immutable originals, repair budgets and every ordinary
+certification, judgment and gate remain unchanged.

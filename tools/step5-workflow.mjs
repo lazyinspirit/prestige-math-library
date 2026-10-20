@@ -1794,7 +1794,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
       const identities=claims.filter(row=>row.id===id).map(row=>{const binding=reportingSessionBinding(root,run,packs[0].basePhase??packs[0].phase,packs[0].round,row.unit,row.dispatch);return `${row.unit}:${binding.session_home}:${binding.session_id}`;});
       requireValue(new Set(identities).size===1,'native interface consumer has conflicting repairing session identities');
     }
-    if(recovery?.targets.has(id)){const row=recoveryDuties.coverage.find(row=>row.id===id);if(row)coverage.push(row);else {pending.set(id,recovery.row.unit);sessions[recovery.row.unit]=recoveryDuties.sessions[recovery.row.unit];}continue;}
+    if(recovery?.targets.has(id)){const row=recoveryDuties.coverage.find(row=>row.id===id&&packs.findIndex(pack=>pack.phase===row.phase)>=latest);if(row)coverage.push(row);else {const unit=recoveryDuties.pending.get(id)??recovery.owners?.get(id)??recovery.row.unit;requireValue(['1','2','3'].includes(unit)&&recoveryDuties.sessions[unit],'recovered consumer lacks its genuine reporting owner');pending.set(id,unit);sessions[unit]=recoveryDuties.sessions[unit];}continue;}
     let match=null;
     // A same-wave sibling or later genuine owner review may discharge the
     // consumer. Initial adjudicator reviews and earlier passes cannot do so.
@@ -1805,7 +1805,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
         'pending consumer review is absent from its original native collection');
       const auth=success(record);
       const claim=claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0],base=packs[0].basePhase??packs[0].phase;
-      if(['impact-repeat','gate'].includes(base)){const origin=reportingSessionBinding(root,run,base,packs[0].round,claim.unit,claim.dispatch);if(record.unit!==claim.unit||auth.native.session_id!==origin.session_id||resolve(root,auth.native.session_home??'')!==origin.session_home)continue;}
+      if(['impact-repeat','gate'].includes(base)||recovery&&claim.index>0){const origin=reportingSessionBinding(root,run,base,packs[0].round,claim.unit,claim.dispatch);if(record.unit!==claim.unit||auth.native.session_id!==origin.session_id||resolve(root,auth.native.session_home??'')!==origin.session_home)continue;}
       match={id,phase:record.pack.phase,unit:record.unit,
         report:record.reportPath,dispatch:auth.dispatchPath,review_sha256:digest(review)};
     }
@@ -1816,7 +1816,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
       // Selecting a lane must resume the actual reporting reviewer, not a
       // coincidentally numbered fresh process. Existing session routing is reused.
       const base=packs[0].basePhase??packs[0].phase;
-      if(['impact-repeat','gate'].includes(base)){const binding=reportingSessionBinding(root,run,base,packs[0].round,claim.unit,claim.dispatch);if(sessions[claim.unit])requireValue(sessions[claim.unit].session_id===binding.session_id&&sessions[claim.unit].session_home===binding.session_home,'conflicting genuine reporting owners for lane');sessions[claim.unit]=binding;evidence[binding.result]=binding.sha256;continue;}
+      if(['impact-repeat','gate'].includes(base)||recovery&&claim.index>0){const binding=reportingSessionBinding(root,run,base,packs[0].round,claim.unit,claim.dispatch);if(sessions[claim.unit])requireValue(sessions[claim.unit].session_id===binding.session_id&&sessions[claim.unit].session_home===binding.session_home,'conflicting genuine reporting owners for lane');sessions[claim.unit]=binding;evidence[binding.result]=binding.sha256;continue;}
       const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,claim.unit)}.result.json`);
       const first=read(origin),reporting=read(claim.dispatch),home=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${claim.unit}`);
       requireValue(first.run===run&&first.role==='alpha-repair'&&first.ok===true
@@ -1845,6 +1845,28 @@ export function assertImpactProgress(packs,pending,current,{items=null,reviewOwn
     if(JSON.stringify(previous)===JSON.stringify(targets)&&sameOwners&&diff(pack.before,current).filter(id=>!scoped||scoped.has(id)).length===0&&!withdrawalAllowsFreshPass(withdrawal,pack,targets,current))
       throw Error(`Step 5 no-progress hold: ${pack.phase} already assigned the same ${targets.length} pending item(s) at this exact content state. Resolve stale/missing review evidence or the repair oscillation before retry; no duplicate owner wave was launched.`);
   }
+}
+
+// This derivative is scheduling evidence only; ordinary collect never reads it.
+function impactSchedulingReceiptPath(root,run,basePhase,round,pass){
+ if(basePhase==='impact-initial'&&pass==='impact-initial'){
+  const recovery=loadReportingOwnerRecovery(root,run,basePhase,round);
+  if(recovery?.observationPath)return recovery.observationPath;
+ }
+ return effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));
+}
+export function buildInitialReportingObservation(root,run,pack,reports,evidence){
+ requireValue(pack.phase==='impact-initial'&&pack.round===1,'historical scheduling is initial only');
+ const current=hashes(root,run),reported={...current};
+ for(const r of reports)for(const row of r.reviews??[])if(pack.assignments[String(r.unit)]?.includes(row.id))reported[row.id]=row.post_sha256;
+ // Diagnostic-only structural check: no clone is returned, collected or credited.
+ const structural=validateReports(pack,reports.map(r=>({...r,reviews:r.reviews.map(v=>v.uncertain===true?{...v,uncertain:false}:v)})),reported,{root});
+ requireValue(structural.errors.length===0,'historical scheduling cannot defer another native defect hidden by uncertainty');
+ const result=validateReports(pack,reports,reported,{root});
+ const expected=reports.flatMap(r=>r.reviews.filter(v=>v.uncertain===true).map(v=>`invalid review ${r.unit}/${v.id}`));
+ requireValue(JSON.stringify(result.errors)===JSON.stringify(expected),'historical scheduling cannot defer another native defect');
+ const after=statementHashes(root,run),restated=restatedIds(pack,result.changed,after);
+ return {...result,version:2,run,phase:'impact-initial',round:1,historical_only:true,native_acceptance:false,reviews:[],historical_reviews:reports.flatMap(r=>r.reviews),evidence,post:current,downstream:[...new Set(reports.flatMap(r=>r.downstream))],ledger_updates:reports.flatMap(r=>r.ledger_updates??[]),restated,statement_events:restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:after[id]}))};
 }
 
 /** Called only after all three dispatches for the active pass have drained.
@@ -1878,8 +1900,10 @@ export function advanceImpact(root,run,phase,round) {
   }
   const active=readPack(root,run,progress.activePhase,round);
   if(active.units.some(unit=>!existsSync(workerReport(root,run,active.phase,round,unit))))return {complete:false,pack:active,passes:progress.passes};
-  collect(root,run,active.phase,round,{deferImpactClosure:true});
-  const completed=progress.passes.map(pass=>read(effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`))));
+  const schedulingRecovery=phase==='impact-initial'?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(path)}):null;
+  if(active.phase==='impact-initial'&&schedulingRecovery?.observationPath)syncMaintenance(root,run,schedulingRecovery.observation.statement_events);
+  else collect(root,run,active.phase,round,{deferImpactClosure:true});
+  const completed=progress.passes.map(pass=>read(impactSchedulingReceiptPath(root,run,phase,round,pass)));
   for(const receipt of completed)verifyEvidence(receipt.evidence,{root,run});
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
@@ -1915,7 +1939,7 @@ export function advanceImpact(root,run,phase,round) {
   const packs=progress.passes.map(pass=>readPack(root,run,pass,round));
   const withdrawal=phase==='impact-initial'&&round===1?loadOwnerReviewWithdrawal(root,run):null;
   const ownership=readerReviewOwnership(root,run,packs,completed,items,current);
-  const reportingRecovery=phase==='impact-repeat'?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(impactProgressPath(root,run,phase,round))}):null;
+  const reportingRecovery=['impact-initial','impact-repeat'].includes(phase)?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(impactProgressPath(root,run,phase,round))}):null;
   const reportingDuties=reportingRecoveryDuties(reportingRecovery,packs,completed,items,current,contexts.matches,{allowed:scope.frontier});
   const explicitPending=nativeDownstreamPending(root,run,packs,completed,items,current,reportingRecovery,reportingDuties);
   const pending=[...new Set([...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id)))
@@ -1934,13 +1958,13 @@ export function advanceImpact(root,run,phase,round) {
     order.forEach((id,index)=>assignments[selectedOwners[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
     const identity=libraryIdentity(root,run);
     const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
-    if(ownership.obligations.size||phase==='impact-initial'&&explicitPending.pending.size){
+    if(ownership.obligations.size||phase==='impact-initial'&&[...explicitPending.pending].some(([id])=>!reportingDuties.obligations.has(id)&&!explicitPending.sessions[explicitPending.pending.get(id)])){
       pack.reader_concern_owners=ownership.originalOwners;
       pack.reader_review_obligations=readerObligationInventory(ownership);
       pack.reader_review_owners=selectedOwners;
       pack.reader_owner_sessions={};pack.input_evidence={};
       for(const unit of pack.units){
-        if(!assignments[unit].some(id=>selectedOwners[id]===unit))continue;
+        if(!assignments[unit].some(id=>selectedOwners[id]===unit&&!reportingDuties.obligations.has(id)&&!explicitPending.sessions[unit]))continue;
         const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
         const result=read(origin);
         pack.reader_owner_sessions[unit]={result:origin,sha256:digest(readFileSync(origin,'utf8')),session_id:result.session_id};
@@ -1956,16 +1980,17 @@ export function advanceImpact(root,run,phase,round) {
           `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
       }
     }
-    if(['impact-repeat','gate'].includes(phase)&&(explicitPending.pending.size||reportingDuties.pending.size||reportingRecovery)){
+    if((['impact-repeat','gate'].includes(phase)||reportingRecovery)&&(explicitPending.pending.size||reportingDuties.pending.size||reportingRecovery)){
       pack.reporting_owner_sessions={};pack.input_evidence??={};
-      for(const [unit,binding]of Object.entries({...explicitPending.sessions,...reportingDuties.sessions}))if(assignments[unit].some(id=>selectedOwners[id]===unit)||reportingRecovery&&unit===reportingRecovery.row.unit){
+      for(const [unit,binding]of Object.entries({...explicitPending.sessions,...reportingDuties.sessions}))if(assignments[unit].some(id=>selectedOwners[id]===unit)||reportingRecovery&&(unit===reportingRecovery.row.unit||reportingRecovery.row.units?.includes(unit))){
         const other=explicitPending.sessions[unit];if(other&&binding.mode==='resume'&&other.mode==='resume')requireValue(other.session_id===binding.session_id&&other.session_home===binding.session_home,'conflicting reporting session continuations');
         pack.reporting_owner_sessions[unit]=binding;if(binding.result)pack.input_evidence[binding.result]=binding.sha256;
       }
     }
     if(reportingRecovery){
       pack.reporting_owner_recovery={path:reportingRecovery.path,targets:[...reportingRecovery.targets],resume_original_session:false};
-      pack.reporting_owner_review_obligations=[...reportingDuties.obligations].sort();pack.input_evidence??={};
+      pack.reporting_owner_review_obligations=[...reportingDuties.obligations].sort();
+      if(reportingRecovery.owners)pack.reporting_owner_review_owners=Object.fromEntries([...reportingDuties.coverage.map(r=>[r.id,r.unit]),...reportingDuties.pending]);pack.input_evidence??={};
       for(const [p,h]of Object.entries(reportingDuties.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'reporting recovery evidence collision');pack.input_evidence[p]=h;}
     }
     if(explicitPending.interface_obligations.length)pack.native_interface_consumer_obligations=explicitPending.interface_obligations;
@@ -1983,6 +2008,7 @@ export function advanceImpact(root,run,phase,round) {
       pack.input_evidence??={};for(const [p,h]of Object.entries(withdrawal.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'withdrawal evidence collision');pack.input_evidence[p]=h;}
     }
     for(const unit of pack.units)assertReportingSessionCompatibility(root,pack,unit);
+    if(reportingRecovery?.observationPath&&!existsSync(path))loadReportingOwnerRecovery(root,run,phase,round,{current:true});
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
@@ -1994,7 +2020,7 @@ export function advanceImpact(root,run,phase,round) {
     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
   }
   const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},explicitPending.evidence,ownership.evidence??{},reportingDuties.evidence);
-  for(const pass of progress.passes){const p=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));evidence[p]=digest(readFileSync(p,'utf8'));}
+  for(const pass of progress.passes){const p=impactSchedulingReceiptPath(root,run,phase,round,pass);evidence[p]=digest(readFileSync(p,'utf8'));}
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
   if(reportingRecovery){receipt.reporting_owner_recovery={path:reportingRecovery.path,targets:[...reportingRecovery.targets]};receipt.reporting_owner_review_obligations=[...reportingDuties.obligations].sort();receipt.reporting_owner_reviews=reportingDuties.coverage;}
@@ -2025,7 +2051,7 @@ export function verifyCompletedImpact(root,run,phase,round) {
     &&Array.isArray(result.errors)&&result.errors.length===0,'invalid completed owner collection');
   verifyEvidence(result.evidence,{root,run});
   const passes=progress.passes.map(pass=>{
-    const path=effectiveWorkflowArtifact(root,run,join(dir,`${pass}-${round}-collected.json`));
+    const path=impactSchedulingReceiptPath(root,run,phase,round,pass);
     requireValue(result.evidence[path]===digest(readFileSync(path,'utf8')),
       `completed owner collection does not bind pass: ${pass}`);
     const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
@@ -2067,7 +2093,7 @@ export function verifyCompletedImpact(root,run,phase,round) {
   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
     `completed owner collection lacks current review: ${id}`);
   const ownerPacks=progress.passes.map(pass=>readPack(root,run,pass,round));
-  const reportingRecovery=phase==='impact-repeat'?loadReportingOwnerRecovery(root,run,phase,round):null;
+  const reportingRecovery=['impact-initial','impact-repeat'].includes(phase)?loadReportingOwnerRecovery(root,run,phase,round):null;
   const reportingDuties=reportingRecoveryDuties(reportingRecovery,ownerPacks,passes,items,current,contexts.matches,{allowed:frontier});
   requireValue(reportingDuties.pending.size===0,'completed owner collection lacks genuine fresh reporting-owner recovery reviews');
   if(reportingRecovery){requireValue(digest(result.reporting_owner_review_obligations)===digest([...reportingDuties.obligations].sort())&&digest(result.reporting_owner_reviews)===digest(reportingDuties.coverage),'completed reporting recovery coverage changed');for(const [p,h]of Object.entries(reportingDuties.evidence))requireValue(result.evidence[p]===h,'completed reporting recovery provenance changed');}
