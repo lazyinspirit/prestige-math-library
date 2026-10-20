@@ -1157,3 +1157,8 @@ native advance-impact helper prepares a new ordinary pass resuming the actual
 persistent reporting session; fresh supplier/consumer reviews remain mandatory.
 No gate permission, repair-budget reset, source narrowing, old-report rewrite or
 mathematical acceptance is supplied by this scheduling bridge.
+
+The defect-ledger check drains both output streams before exiting so native
+pipe capture retains its complete excluded-finding evidence and actual checked-row
+summary. Exclusions remain excluded, not passed; errors and the positive scoped
+row liveness floor remain blocking.
