@@ -50,7 +50,10 @@ function localRepairMarkerRecords(text,run){
     }
   }
 
-  const foreign=(start,end)=>{for(const row of fragmentRecords(text.slice(start,end),'',new Set()))records.push({...row,start:row.start+start,end:row.end+start,owned:false});};
+  // The V1 table splitter emits a zero-width final row after a terminal LF.
+  // It has no source bytes and disappears when EOF becomes a blank separator.
+  // V2 foreign records exclude only that phantom; all real rows remain exact.
+  const foreign=(start,end)=>{for(const row of fragmentRecords(text.slice(start,end),'',new Set()))if(row.start!==row.end||row.end!==end-start)records.push({...row,start:row.start+start,end:row.end+start,owned:false});};
   let open=null,cursor=0;const foreignStack=[];
   for(const m of text.matchAll(/<!--([^\r\n]*?)-->/g)){
     const value=m[1].trim(),parts=/^(.+):(begin|end)$/.exec(value),key=parts?.[1],side=parts?.[2];

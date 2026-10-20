@@ -25,3 +25,23 @@ test('V1 unique-record additions and duplicate rejection retain their original A
 
 test('native temporary-Git V2 transaction preserves every foreign HEAD/index byte and current working ledger',t=>{const f=fixture(t,3),git=args=>{const r=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(r.status,0,r.stderr);return r.stdout.trimEnd();};git(['init','-b','main']);git(['config','user.name','Marker fixture']);git(['config','user.email','fixture@example.invalid']);mkdirSync(join(f.root,'empty-hooks'));git(['config','core.hooksPath',join(f.root,'empty-hooks')]);const ledger='research/published-consumer-supplier-ledger.md';f.put(ledger,f.head);f.put('foreign.md','HEAD foreign file\n');git(['add','--',ledger,'foreign.md']);git(['commit','-m','original shared foreign history']);f.put(ledger,f.index);f.put('foreign.md','INDEX foreign file\n');git(['add','--',ledger,'foreign.md']);const before=git(['ls-files','--stage','--','foreign.md']);f.put(ledger,f.working);f.put('foreign.md','WORKING foreign file\n');
  const items=[...f.ids].map(id=>({id,kind:'theorem',deps:[]}));f.put(`research/demo-scope-ledger.json`,{run:'demo',pages:[{id:'page',kind:'A',category:'test-category',items:[...f.ids]}]});f.put('research/demo-batch-1.pages.json',[{id:'page',kind:'A',category:'test-category',items}]);f.put('library/test-category/page.md','---\npage: page\nitems: '+JSON.stringify([...f.ids])+'\nexamples: []\n---\n');for(const id of f.ids)f.put(`items/${id}.md`,`---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: []\n---\n## Statement\nFixture only.\n`);f.put('research/plan-spec.json',{pages:[]});f.put('research/defect-ledger.jsonl','');for(const suffix of ['proof-layout.json','publication-readiness.json','step6-evidence.json','step6-report-integrity.json','step6-report.response.json','step6-report.md','pathway-closure.json','judge-closure.json'])f.put(`research/demo-${suffix}`,'{}');const authority='research/demo-marker-authority.json';f.put(authority,f.spec);f.put('research/demo-closeout-scope.json',{version:1,run:'demo',authorized_by:'owner',authorization:'Commit exact marker fragments only, preserving separate shared foreign bytes.',additional_paths:[],shared_fragments:[{path:ledger,authority,sha256:hash(readFileSync(join(f.root,authority),'utf8'))}]});assert.equal(preflightStep6(f.root,'demo').fragments.length,1);const result=commitStep6(f.root,'demo',{assertValidated(){}});assert.equal(git(['rev-parse','HEAD']),result.commit);assert.equal(spawnSync('git',['show','HEAD:'+ledger],{cwd:f.root,encoding:'utf8'}).stdout,composeFragment(f.head,f.spec,f.run,f.ids).text);assert.equal(spawnSync('git',['show',':'+ledger],{cwd:f.root,encoding:'utf8'}).stdout,composeFragment(f.index,f.spec,f.run,f.ids).text);assert.equal(readFileSync(join(f.root,ledger),'utf8'),f.working);assert.equal(git(['ls-files','--stage','--','foreign.md']),before);assert.equal(readFileSync(join(f.root,'foreign.md'),'utf8'),'WORKING foreign file\n');});
+
+for(const ending of ['', '\n', '\n\n', '\r\n', '\r\n\r\n'])test(`V2 table EOF boundary ${JSON.stringify(ending)} preserves real foreign records and exact bytes`,t=>{
+ const f=fixture(t,3),base='| Foreign | Exact bytes |'+ending;
+ const before=fragmentRecords(base,f.run,f.ids,f.spec);
+ assert.ok(before.every(r=>r.start!==r.end),'V2 has no zero-width table phantom');
+ const result=composeFragment(base,f.spec,f.run,f.ids);
+ const foreign=fragmentRecords(result.text,f.run,f.ids,f.spec).filter(r=>!r.owned);
+ assert.deepEqual(foreign.map(r=>recordSignature(r.text)),before.map(r=>recordSignature(r.text)));
+ assert.ok(result.text.startsWith(base));
+ let restored=result.text;for(const insertion of [...result.insertions].reverse())restored=restored.slice(0,insertion.at)+restored.slice(insertion.at+insertion.text.length);
+ assert.equal(restored,base,'inverse insertions retain every byte');
+ assert.deepEqual(fragmentRecords(result.text,f.run,f.ids,f.spec).filter(r=>r.owned).map(r=>r.text),f.blocks);
+ if(ending==='\n')assert.equal(fragmentRecords(base,f.run,f.ids).at(-1).text,'','V1 remains unchanged');
+});
+test('V2 preserves nonempty whitespace table rows rather than trimming foreign residuals',t=>{
+ const f=fixture(t,1),base='| Foreign | Exact bytes |\n \t';
+ const records=fragmentRecords(base,f.run,f.ids,f.spec);assert.equal(records.at(-1).text,' \t');
+ // The existing separator parser changes this real row on append: fail closed.
+ assert.throws(()=>composeFragment(base,f.spec,f.run,f.ids),/foreign residual/);
+});

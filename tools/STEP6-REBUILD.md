@@ -297,7 +297,11 @@ contain no owned marker blocks. Composition appends the exact authorized blocks
 to each base separately and preserves every original base byte, its ordering and
 the unchanged working file. Preparation, cutover, scope validation and all
 commit residual checks use the same explicit parser mode. V1/default paragraph
-ownership and its unique-record retention rules are unchanged.
+ownership and its unique-record retention rules are unchanged. V2 foreign table
+records exclude the zero-width phantom row produced after a terminal LF; this
+row contains no source bytes. EOF-to-interior composition therefore keeps the
+same real foreign records. Nonempty rows, including whitespace and CR bytes,
+remain exact, and inverse insertion still reconstructs every original base byte.
 
 
 Publication readiness retains an already published selected page after an exact
