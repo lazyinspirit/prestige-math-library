@@ -527,8 +527,10 @@ the authenticated prior certificate and genuine native reviews, while unchanged
 operational observations retain their original verdict coverage. Effective native
 lookups validate that projection before using the corrected variants.
 The owner-supervised wrapper forwards its reload version to the native stage
-table and applies the owner hold before progress bookkeeping, so paused work
-cannot cache derived collections before an authorized reconciliation.
+table. Manually paused work cannot run progress bookkeeping. Native impact
+stages 5.2, 5.6 and 5.9 discover successor work before applying the final owner
+hold; other stages apply that hold first. Every battery still requires current
+owner recertification and its fingerprinted permission.
 
 An owner may admit an individually confirmed Step-4 reader concern about an
 unchanged draft original-frontier item whose genuine original Luna verdict is
