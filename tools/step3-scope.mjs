@@ -12,7 +12,7 @@
 // read-modify-write one shared JSON file and erase a sibling's route.
 
 import { loadForeignReaderRoutes, foreignReaderRoute, bindForeignReaderFinding, validateForeignReaderFinding } from './step3-owner-foreign-reader-routes.mjs';
-import { loadUnmanifestedDraftContexts, bindUnmanifestedDraftContext, unmanifestedDraftCarrier, unmanifestedDraftVerdictAllowed } from './step3-owner-unmanifested-draft-context.mjs';
+import { loadUnmanifestedDraftContexts, bindUnmanifestedDraftContext, unmanifestedDraftCarrier, unmanifestedDraftVerdictAllowed, unmanifestedRefuterContexts, bindUnmanifestedRefuterContext, validateUnmanifestedRefuterOpened } from './step3-owner-unmanifested-draft-context.mjs';
 import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
 import { createHash } from 'node:crypto';
@@ -577,7 +577,10 @@ function refuterContext(batch, scope, opened, reportError, manifests = manifestI
   const roots = [...required], runIds = new Set(Object.values(manifests).flat());
   const published = publishedDependencies(roots, runIds);
   const inRun = inRunDependencies(batch, roots, manifests);
-  for (const id of extra) if (!published.has(id) && !inRun.has(id)) {
+  const registered = unmanifestedRefuterContexts(ROOT, run, batch, scope);
+  for (const id of extra) if (registered.has(id)) {
+    validateUnmanifestedRefuterOpened(ROOT, run, batch, id, scope);
+  } else if (!published.has(id) && !inRun.has(id)) {
     reportError(`extra opened context ${id} is not a reachable declared supplier of the required scope`);
   }
   return [...extra].sort();
@@ -704,8 +707,11 @@ function reportOnlyFinding(finding, refuter = false) {
     owner_downstream_reader_obligation: _downstreamReader,
     owner_partial_reader_repair: _ownerPartialReaderRepair,
     owner_unbound_reader_observation: _ownerUnboundReaderObservation,
-    owner_unmanifested_draft_context: _unmanifested, ...row } = finding;
-  if (_unmanifested) row.subject_type = 'in-run-dependency';
+    owner_unmanifested_draft_context: _unmanifested,
+    owner_unmanifested_refuter_context: _unmanifestedRefuter, ...row } = finding;
+  if (_unmanifestedRefuter && refuter) {
+    delete row.subject_type; delete row.consumer_id; delete row.observed_source;
+  } else if (_unmanifested) row.subject_type = 'in-run-dependency';
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -1033,7 +1039,8 @@ if (command === 'collect') {
   if (!sameSet([...opened.filter(id => required.has(id)), ...notOpened], scope.refuter_scope)) error('required opened and not_opened do not exactly partition the computed refuter scope');
   if (notOpened.length) error(`refuter left ${notOpened.length} item(s) unopened: ${notOpened.join(', ')}`);
 
-  const openedSet = new Set(opened.filter(id => required.has(id)));
+  const registeredContexts = unmanifestedRefuterContexts(ROOT, run, batch, scope);
+  const openedSet = new Set(opened.filter(id => required.has(id) || registeredContexts.has(id)));
   const live = liveFingerprints(batch);
   const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
   for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
@@ -1049,6 +1056,7 @@ if (command === 'collect') {
   }
   const refuterFindings = normalizeRefuterFindings(findings, batch, openedSet, error)
     .map((finding) => {
+      if (registeredContexts.has(finding.id)) return bindUnmanifestedRefuterContext(ROOT, run, batch, finding, scope);
       const routes = [...downstream.values()].filter(route => route.entry.consumer_id === finding.id);
       if (routes.length) {
         if (routes.length !== 1) { error(`${finding.obligation} has ambiguous downstream reader anchors`); return finding; }
@@ -1328,11 +1336,16 @@ if (command === 'check') {
           const context = refuterContext(batch, scope, opened, reportError, manifests);
           if (!sameSet(context, scope.refuter_context_opened ?? [])) reportError('prerequisite context no longer matches the collected context');
           if (typeof report.coverage_note !== 'string' || !report.coverage_note.trim()) reportError('coverage_note is empty');
-          const normalized = normalizeRefuterFindings(flagged, batch, new Set(opened.filter(id => (scope.refuter_scope ?? []).includes(id))), reportError);
+          const registeredContexts = unmanifestedRefuterContexts(ROOT, run, batch, scope);
+          const normalized = normalizeRefuterFindings(flagged, batch, new Set(opened.filter(id => (scope.refuter_scope ?? []).includes(id) || registeredContexts.has(id))), reportError);
           const stored = (scope.refuter_findings ?? []).map(finding => reportOnlyFinding(finding, true));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the collected obligations');
           const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests);
           for (const finding of scope.refuter_findings ?? []) {
+            if (finding.owner_unmanifested_refuter_context) {
+              try { unmanifestedDraftCarrier(ROOT, run, batch, finding); } catch (cause) { reportError(cause.message); }
+              continue;
+            }
             if (finding.owner_downstream_consumer_route
               || [...downstream.values()].some(route => route.entry.consumer_id === finding.id)) {
               try { downstreamCarrier(batch, finding); } catch (cause) { reportError(cause.message); }
@@ -1354,7 +1367,7 @@ if (command === 'check') {
       if (!sameSet(scope.opened ?? [], [...(scope.refuter_scope ?? []), ...(scope.refuter_context_opened ?? [])])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item plus its recorded context`);
       if ((scope.not_opened ?? []).length) error('refuter-incomplete', `batch ${batch} retains unopened items`);
       for (const finding of scope.refuter_findings ?? []) {
-        if (!(scope.refuter_scope ?? []).includes(finding.id)) error('flag-out-of-scope', `[${finding.id}] ${finding.obligation} is outside the refuter scope`);
+        if (!finding.owner_unmanifested_refuter_context && !(scope.refuter_scope ?? []).includes(finding.id)) error('flag-out-of-scope', `[${finding.id}] ${finding.obligation} is outside the refuter scope`);
       }
     }
   }

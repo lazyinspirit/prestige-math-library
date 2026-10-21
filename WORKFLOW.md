@@ -376,6 +376,10 @@ observation and direct assigned consumer, creates no producer home or frontier
 coverage, and permits only independent nonfatal, false-positive or escalated
 disposition. Context edits and fatal-repair acceptance require ordinary owner
 repair instead; normal ledger, carrier seals and closure evidence remain required.
+The same registered unchanged helper may be an actual refuter's extra read-only
+context and flagged obligation, with exact native output and prompt bindings.
+It gains no assigned coverage; every original reader and refuter decision is
+still independently required. Ambiguous consumer contexts fail closed.
 
 A definition may acquire its first real proof contract after its frozen
 pre-reader snapshot; routing preserves the original null contract hash and

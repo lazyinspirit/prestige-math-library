@@ -73,6 +73,16 @@ export function bindUnmanifestedDraftContext(root,run,batch,finding){
  return {...finding,subject_type:'unmanifested-draft-dependency',owner_unmanifested_draft_context:r.binding,observed_sha256:hash({item_sha256:r.entry.observed_source.sha256,owner_unmanifested_draft_context:r.binding}),observation_basis:'exact-observed-source; no producer carrier or manifested home'};
 }
 export function unmanifestedDraftCarrier(root,run,batch,finding){
+ if(finding.owner_unmanifested_refuter_context){
+  const scope=parse(bytes(root,`research/${run}-step3-scope-${batch}.json`));
+  const native=nativeRefuter(root,run,batch),index=finding.owner_unmanifested_refuter_context.index;
+  const original=native.report.flagged[index-1];
+  const expected=bindUnmanifestedRefuterContext(root,run,batch,{...original,obligation:finding.obligation},scope);
+  const {route:_route,batch:_batch,...value}=finding;
+  check(hash(value)===hash(expected),'changed refuter context binding');
+  const reader=unmanifestedRefuterContexts(root,run,batch,scope).get(finding.id);
+  return {...reader.r.carrier,owner_unmanifested_refuter_context:expected.owner_unmanifested_refuter_context};
+ }
  const r=loadUnmanifestedDraftContexts(root,run,batch).get(finding.obligation);check(r,'missing authority');
  const expected=bindUnmanifestedDraftContext(root,run,batch,{...r.original,obligation:finding.obligation});
  for(const k of ['subject_type','id','consumer_id','location','defect','evidence','severity','observed_source','owner_unmanifested_draft_context','observed_sha256','observation_basis'])check(hash(finding[k])===hash(expected[k]),`changed routed ${k}`);
@@ -86,5 +96,53 @@ export function unmanifestedDraftClosureEvidence(root,run){
  if(!(closed?.version===3&&closed.run===run&&closed.status==='closed'&&closed.basis==='dependency-ordered-step3a')){
   check(Array.isArray(doc.contexts),'invalid context inventory');for(const b of new Set(doc.contexts.map(e=>e.batch)))loadUnmanifestedDraftContexts(root,run,b);
  }
- const out={[p]:sha(bytes(root,p))};for(const e of doc.contexts??[])for(const k of ['findings','native_result','prompt','reader_report','observed_source','consumer_source','consumer_manifest']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}return out;
+ const out={[p]:sha(bytes(root,p))};for(const e of doc.contexts??[])for(const k of ['findings','native_result','prompt','reader_report','observed_source','consumer_source','consumer_manifest']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}
+ for(const batch of new Set((doc.contexts??[]).map(e=>e.batch))){
+  const scopePath=`research/${run}-step3-scope-${batch}.json`;if(!existsSync(resolve(root,scopePath)))continue;
+  const scope=parse(bytes(root,scopePath));for(const finding of scope.refuter_findings??[])if(finding.owner_unmanifested_refuter_context){
+   if(!(closed?.version===3&&closed.run===run&&closed.status==='closed'&&closed.basis==='dependency-ordered-step3a'))unmanifestedDraftCarrier(root,run,batch,finding);
+   const evidence=finding.owner_unmanifested_refuter_context;for(const k of ['report','native_result','prompt']){ref(root,run,evidence[k]);out[evidence[k].path]=evidence[k].sha256;}
+  }
+ }return out;
+}
+
+// Existing reader authority is necessary, never a new refuter scope assignment.
+function nativeRefuter(root,run,batch){
+ const reportPath=`research/${run}-refute-${batch}.json`,stablePath=`research/${run}-dispatch/refuter-refute-${batch}.result.json`;
+ const reportRaw=bytes(root,reportPath),report=parse(reportRaw),stableRaw=bytes(root,stablePath),native=parse(stableRaw);
+ check(Number.isSafeInteger(native.attempt)&&native.attempt>0,'invalid refuter attempt');
+ const nativePath=`research/${run}-dispatch/refuter-refute-${batch}.attempt-${native.attempt}.result.json`,nativeRaw=bytes(root,nativePath);
+ check(nativeRaw.equals(stableRaw)&&native.run===run&&native.role==='refuter'&&native.label===`refute-${batch}`&&native.covers?.length===1&&String(native.covers[0])===String(batch)&&native.ok===true&&native.exit_code===0&&native.process_exit_code===0&&native.timed_out!==true&&native.terminal_summary?.task_completed===true&&native.terminal_summary?.task_aborted===false&&Number.isFinite(Date.parse(native.ended_at)),'not genuine successful refuter');
+ const promptPath=nativePath.replace(/\.result\.json$/,'.prompt.md');check(native.prompt?.endsWith('/'+promptPath),'wrong refuter prompt');const promptRaw=bytes(root,promptPath);
+ let tail;try{tail=JSON.parse(native.tail);}catch{check(false,'complete structured refuter tail required');}
+ check(hash(tail)===hash(report)&&[String(batch),`${run}-batch-${batch}`].includes(String(report.batch))&&Array.isArray(report.opened)&&Array.isArray(report.not_opened)&&Array.isArray(report.flagged),'refuter report differs from complete native output');
+ return {report,binding:{report:{path:reportPath,sha256:sha(reportRaw)},native_result:{path:nativePath,sha256:sha(nativeRaw)},prompt:{path:promptPath,sha256:sha(promptRaw)}}};
+}
+export function unmanifestedRefuterContexts(root,run,batch,scope){
+ const contexts=loadUnmanifestedDraftContexts(root,run,batch);
+ if(!contexts.size)return new Map();
+ check(scope.version===2&&scope.run===run&&String(scope.batch)===String(batch),'wrong registered reader scope');
+ const byId=new Map(),counts=new Map();
+ for(const r of contexts.values())counts.set(r.entry.id,(counts.get(r.entry.id)??0)+1);
+ for(const [obligation,r] of contexts){
+  const anchor=(scope.reader_findings??[]).find(f=>f.obligation===obligation);
+  if(!anchor)continue;
+  check(counts.get(r.entry.id)===1,`ambiguous registered consumer context ${r.entry.id}`);
+  check((scope.manifest_post??[]).includes(r.entry.consumer_id),'context consumer is not assigned');
+  unmanifestedDraftCarrier(root,run,batch,anchor);
+  if(!byId.has(r.entry.id))byId.set(r.entry.id,[]);byId.get(r.entry.id).push({obligation,anchor,r});
+ }
+ return new Map([...byId].map(([id,rows])=>{check(rows.length===1,`ambiguous registered consumer context ${id}`);return[id,rows[0]];}));
+}
+export function bindUnmanifestedRefuterContext(root,run,batch,finding,scope){
+ const route=unmanifestedRefuterContexts(root,run,batch,scope).get(finding.id);check(route,'unregistered refuter context');
+ const native=nativeRefuter(root,run,batch),match=new RegExp(`^refuter:${batch}:([1-9]\\d*)$`).exec(finding.obligation??'');check(match,'wrong refuter obligation');
+ const index=Number(match[1]),original=native.report.flagged[index-1];
+ const {obligation,...raw}=finding;check(hash(raw)===hash(original)&&native.report.opened.filter(id=>id===finding.id).length===1&&!(scope.refuter_scope??[]).includes(finding.id),'changed original flagged context or assigned coverage');
+ const reader=bindUnmanifestedDraftContext(root,run,batch,{...route.r.original,obligation:route.obligation});
+ return {...finding,subject_type:'unmanifested-draft-dependency',consumer_id:route.r.entry.consumer_id,observed_source:reader.observed_source,owner_unmanifested_draft_context:route.r.binding,owner_unmanifested_refuter_context:{...native.binding,index,finding_sha256:hash(original),reader_obligation:route.obligation,source_sha256:route.r.entry.observed_source.sha256},observed_sha256:reader.observed_sha256,observation_basis:'registered unchanged reader context; no additional refuter raw-byte observation claimed'};
+}
+export function validateUnmanifestedRefuterOpened(root,run,batch,id,scope){
+ check(unmanifestedRefuterContexts(root,run,batch,scope).has(id),'unregistered extra read-only context');
+ const {report}=nativeRefuter(root,run,batch);check(report.opened.filter(x=>x===id).length===1,'context not actually opened');return true;
 }
