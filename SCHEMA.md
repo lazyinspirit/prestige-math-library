@@ -294,6 +294,8 @@ paraphrase. See [the statement policy](tools/STATEMENT-FIRST.md).
   Citation contracts record every actual numbered proof use; `uses: []` is
   valid when there are none, including in a proof-free definition. Regeneration
   refreshes these citations while preserving historical proof obligations.
+  A Facts section alone does not turn a definition into a phase proof. Any
+  supplied proof section or numbered proof still requires the ordinary checks.
 - Proof-like sections need `proof_strategy` in frontmatter and `**Given:**` in
   the checkable text. Write at least two `phase.step` numbered steps, with
   comma-separated justification tags at the end of steps and QED on the final
