@@ -54,3 +54,12 @@ Only after this authentic base exists may root apply the already reviewed two co
 `tools/autopilot/test/step5-needle-completion.test.mts` verifies the real stage descriptor after resume, scoped prerequisite/label/artifact selection, lack of advancement before the additional unit, and native progress after genuine fixture evidence. Fixtures are tests, not actual native execution or mathematical review. Actual runtime recording, execution, proof acceptance and gates remain root-owned.
 
 The five unrelated legacy assertions observed by independent FIRST review were reproduced in a targeted control using HEAD `tools/` and `briefs/` extracted to an isolated synthetic repository. Both current and control fail the same five assertions; the missing `rem-invariance-of-domain` file was separately confirmed absent from HEAD. This is a targeted tools/briefs comparison, not a full HEAD corpus or native-run audit; the unrelated fixtures remain untouched.
+
+Static `doctor` enumerates every unit declared by an unfinished stage, including
+completed needle work after its authentic base collection. Its descriptor-only
+plan uses the authenticated historical completion receipt, so later legitimate
+consumer repairs do not prevent restarting the controller. This branch does
+not launch work or grant coverage. An ordinary pending native plan still uses
+`current:true` and refuses to redispatch completion after the base exists. The
+real-stage regression checks both behaviors and that doctor changes neither the
+collected base nor current consumer source.

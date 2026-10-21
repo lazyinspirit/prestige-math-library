@@ -59,7 +59,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
         if(!ctx.doctor)prepareImpact(ctx.repo,ctx.run,phase,n,{failures});
       }
       return pending.map(u=>{
-        if(u===NEEDLE_UNIT){if(phase!=='impact-initial'||n!==1)throw Error('needle completion outside exact stage');return needleCompletionPlan(loadUnit3NeedleCompletion(ctx.repo,ctx.run,{current:true}));}
+        if(u===NEEDLE_UNIT){if(phase!=='impact-initial'||n!==1)throw Error('needle completion outside exact stage');return needleCompletionPlan(loadUnit3NeedleCompletion(ctx.repo,ctx.run,{current:!ctx.doctor}));}
         if(u.startsWith('maintenance:')){
           const [,pack,lane]=u.split(':'),input=outsideLane(ctx,u);
           return {role:'alpha-repair',label:maintenanceLabel(phase,n,pack,lane),job:'authoring',covers:[u],profile:SOL61_HIGH,
