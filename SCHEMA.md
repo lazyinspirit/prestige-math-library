@@ -291,6 +291,9 @@ paraphrase. See [the statement policy](tools/STATEMENT-FIRST.md).
 - `## Facts & Assumptions` holds blank-line-separated `[F1]`, `[A1]`, or
   `[L1]` entries. Cite source items with wikilinks. Labelled facts before the
   first numbered step of an example's Verification are also read as facts.
+  Citation contracts record every actual numbered proof use; `uses: []` is
+  valid when there are none, including in a proof-free definition. Regeneration
+  refreshes these citations while preserving historical proof obligations.
 - Proof-like sections need `proof_strategy` in frontmatter and `**Given:**` in
   the checkable text. Write at least two `phase.step` numbered steps, with
   comma-separated justification tags at the end of steps and QED on the final

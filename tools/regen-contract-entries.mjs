@@ -69,8 +69,8 @@ for (const id of ids) {
   const md = readFileSync(itemPath(id), 'utf8');
   const facts = parseFacts(md);
   const steps = parseSteps(md);
-  if (!steps.length) {
-    console.error(`SKIP ${id}: no steps parsed`);
+  if (!steps.length && ((contracts[id].derivations?.length ?? 0) || (contracts[id].routine_steps?.length ?? 0))) {
+    console.error(`SKIP ${id}: old proof rows but no current steps; explicit root migration required`);
     skipped++; continue;
   }
 

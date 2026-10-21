@@ -18,6 +18,7 @@ import {
   SOURCE_SECTIONS, factParagraphs, numberedProofSteps, sourceSectionText, splitFrontmatter,
 } from './facts-block.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { parseFrontmatter, reviewedLocalLemmaAcceptance } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const STANDARD_BOUNDARIES = [
@@ -137,7 +138,7 @@ function validateItem(id, item, entry) {
     const sourceItem = loadItem(source);
     if (!sourceItem) {
       error('citation-source-missing', `${fact} cites missing item ${source}`, id);
-    } else if (sourceItem.statementProvenance === 'ai-generated') {
+    } else if (sourceItem.statementProvenance === 'ai-generated' && !acceptedReviewedLocalSource(sourceItem)) {
       error('citation-ai-generated-statement', `${fact} cites ${source}, whose provenance.statement is ai-generated`, id);
     } else if (!SOURCE_SECTIONS.has(section)) {
       error('citation-section', `${fact} -> ${source} needs a valid source_section`, id);
@@ -146,7 +147,10 @@ function validateItem(id, item, entry) {
     } else if (!normalise(sourceSectionText(sourceItem.body, section) ?? '').includes(normalise(quote))) {
       error('citation-quote-mismatch', `${fact} quote does not occur in ${source}'s ${section}`, id);
     }
-    if (!Array.isArray(uses) || !uses.length) {
+    // An exact empty set is legitimate when this Fact has no numbered proof
+    // uses (including declarative definitions). Never invent a use to avoid it.
+    // The comparison below still rejects every omitted actual proof use.
+    if (!Array.isArray(uses)) {
       error('citation-uses', `${fact} -> ${source} needs every proof step that cites ${fact}`, id);
     } else {
       const actualUses = [...steps.values()]
@@ -301,6 +305,7 @@ function loadItem(id) {
   const { fm, body } = split(source);
   return {
     id,
+    fm,
     kind: scalar(fm, 'kind'),
     body,
     deps: list(fm, 'deps'),
@@ -308,6 +313,15 @@ function loadItem(id) {
     forward: list(fm, 'forward_refs'),
     statementProvenance: nested(fm, 'provenance', 'statement'),
   };
+}
+
+// Use the same exact run/eight-ID/evidence/body binding as content-policy.
+// This is not a blanket generated-statement waiver; quote checks still run.
+function acceptedReviewedLocalSource(item) {
+  const result = reviewedLocalLemmaAcceptance(parseFrontmatter(item.fm), item.body, REPO);
+  for (const message of result.errors)
+    error('citation-local-proof-acceptance-invalid', `${item.id}: ${message}`, item.id);
+  return result.eligible;
 }
 
 // Declarations, not `const` aliases: the main loop above runs at module load,
