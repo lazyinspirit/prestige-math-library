@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ bc65507abf0d by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ a044359d39c3 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 21224 |
+| defects caught before publication | 21426 |
 | now mechanically prevented | 384 |
 | escaped to publication | 7 |
-| still open | 121 |
+| still open | 123 |
 
 ## bayesian-computational-statistics-62 — 219 row(s)
 
@@ -976,32 +976,39 @@
 | invalid-inference | 1 |  |
 | citation-missing | 1 |  |
 
-## inverse-problems-knot-theory-all-109-2026-10-19 — 322 row(s)
+## inverse-problems-knot-theory-all-109-2026-10-19 — 524 row(s)
 
 | subclass | 3a-adjudicate |
 |---|---|
-| ill-formed | 130 |
-| citation-inaccurate | 63 |
-| missing-hypothesis | 18 |
-| unlicensed-inference | 17 |
-| citation-missing | 12 |
-| ill-typed-construction | 11 |
-| false-or-overstrong-statement | 10 |
-| invalid-inference | 9 |
-| citation-misattributed | 8 |
-| unsupported-inference | 8 |
-| false-or-overstrong-title | 6 |
-| undefined-notation | 6 |
+| ill-formed | 185 |
+| citation-inaccurate | 88 |
+| missing-hypothesis | 39 |
+| unlicensed-inference | 31 |
+| ill-typed-construction | 24 |
+| unsupported-inference | 18 |
+| citation-missing | 18 |
+| invalid-inference | 17 |
+| false-or-overstrong-statement | 15 |
+| citation-misattributed | 13 |
+| false-or-overstrong-title | 10 |
+| undefined-notation | 10 |
+| ill-typed-claim | 9 |
+| invalid-witness | 6 |
 | reader-repair | 5 |
-| ill-typed-claim | 4 |
+| contract-mismatch | 4 |
+| missing-choice-scope | 4 |
+| citation-truncated | 4 |
 | arithmetic-error | 3 |
-| contract-mismatch | 3 |
-| invalid-witness | 2 |
+| citation-inflated | 3 |
+| citation-corrupted | 3 |
+| invalid-refutation | 3 |
+| false-claim | 2 |
 | missing-case | 2 |
 | other | 2 |
+| false-computation | 2 |
+| false-boundary-disposition | 2 |
 | overstrong-statement | 1 |
-| false-claim | 1 |
-| citation-inflated | 1 |
+| incorrect-step-reference | 1 |
 
 ## machine-learning-all-101-2026-10-19 — 549 row(s)
 
@@ -1619,3 +1626,5 @@
 - `ml101-b68-reverse-generator-domination` machine-learning-all-101-2026-10-19 · unlicensed-inference · lem-reversed-kernels-and-generator-identity
 - `ipkt109-b11-3a-published-ftc-pointwise-strength` inverse-problems-knot-theory-all-109-2026-10-19 · overstrong-statement · thm-first-fundamental-theorem-of-calculus-for-l-one
 - `inverse-problems-knot-theory-all-109-2026-10-19-3a-b51-ns-periodic-model` inverse-problems-knot-theory-all-109-2026-10-19 · missing-hypothesis · ex-ip-inversebench-navier-stokes
+- `ipkt109-b89-3a-korinman-module-locator` inverse-problems-knot-theory-all-109-2026-10-19 · citation-inaccurate · def-quantum-sl2-fundamental-ribbon-module
+- `ipkt109-b89-3a-korinman-trace-locator` inverse-problems-knot-theory-all-109-2026-10-19 · citation-inaccurate · lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket

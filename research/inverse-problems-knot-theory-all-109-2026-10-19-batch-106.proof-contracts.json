@@ -73,11 +73,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "In $Q$, the relation $X^2-pX-1=0$ gives $X(X-p)=1$, so $X$ is invertible with inverse $X-p$. The homomorphism $Q\\to\\mathbb Z[x,x^{-1}]$ sending $p\\mapsto x-x^{-1}$ and $X\\mapsto x$ respects $G=0$. Conversely, sending $x\\mapsto X$ defines a homomorphism $\\mathbb Z[x,x^{-1}]\\to Q$ because $X^{-1}=X-p$. The composites fix the generators $p,X$ and $x$, respectively, so these homomorphisms are inverse. The unique representatives from step 1.1 therefore give the asserted unique Laurent decomposition.",
+          "claim": "Construct the coefficient-substitution homomorphism R[X] to Z[x,x^-1] explicitly; it kills G and therefore induces a map from Q. In Q, X(X-p)=1, so the explicit Laurent substitution x to X and x^-1 to X-p gives the inverse map. The composites fix x and the generators p,X of Q, so the maps are inverse; step 1.1 then transfers the unique degree-at-most-one representative to the unique Laurent decomposition.",
           "step": "2.1",
           "inputs": [
             "given",
             "F1",
+            "F2",
+            "F3",
             "step 1.1",
             "algebra"
           ]
@@ -215,11 +217,12 @@
       "finite_checks": [],
       "finite_smoke": [],
       "risk_review": {
-        "status": "clear",
-        "notes": "The local quotient identification supplies the exact existence and uniqueness used by the coefficient definition."
+        "status": "complete",
+        "reviewer": "alpha-batch-106",
+        "notes": "Read both proof steps and all five actual algebra suppliers. Monic division applies over Z[p] to G=X^2-pX-1, including zero and constant dividends. Multiples of G form exactly the principal ideal, so remainder uniqueness gives the rank-two normal form. Finite substitution kills G; X(X-p)=1 makes every negative Laurent power legitimate. The inverse composite sends p to X-(X-p)=p and fixes X; the other fixes x and its inverse. Existence and uniqueness hold for arbitrary finite support, including P=0, without AC. Read Carmi–Cohen v1 Appendix B.1 Proposition B.1, PDF pp.57–58; the local monic-division proof establishes the claim independently. Pre-reader HEAD raw SHA256 833853d3e1cab90d791d0c733e34c9a3ffd06f0ff57d78a22f9938f13122bb11 matches pre; current raw SHA256 9c68c7fc0de05a73af3aba7b7c26bff3d87f11f40e7554fb71ff1f38be41657e matches post. Both versions are sound: the reader expands immediately checkable substitutions. No diagrams, missing prerequisites or interface changes."
       },
       "proof_status": "complete-local-proof",
-      "proof_status_evidence": "Both the monic-remainder representation and the inverse Laurent-ring maps are derived in the two numbered steps.",
+      "proof_status_evidence": "Step 1.1 gives the unique monic remainder; step 2.1 explicitly constructs the inverse quotient and Laurent-ring maps that transfer it.",
       "unresolved_suppliers": [],
       "unresolved_assumptions": []
     },
@@ -231,24 +234,7 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "Only finitely many coefficient vectors are nonzero; the empty remaining tail is zero by the displayed unique decomposition. [Owner-focused FIRST reviewed location: Entire Definition]",
-          "template_review": {
-            "upheld": true,
-            "by": "/root",
-            "reason": "Only finitely many coefficient vectors are nonzero; the empty remaining tail is zero by the displayed unique decomposition.",
-            "item_sha256": "3582de290626f2ed1bca27908f983a71a25ebb7fe1e49822b75a45d01aeb320e",
-            "row_sha256": "92a728dbde4cb1bf047f5c6058a2b0c0d16fea93c760440542fbf59ef57ef397",
-            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
-            "delegated_reviewer": "/root/top_relative_smoothing",
-            "delegated_review_sources": [
-              {
-                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
-                "field": "rows",
-                "index": 287
-              }
-            ],
-            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
-          }
+          "evidence": "The zero polynomial has all coefficient vectors zero; arbitrary finite support has a zero tail. The Jones-polynomial assertion applies only to nonempty links: the supplier empty-link extension is -x/(x^2+1), outside Z[x^{±1}]."
         },
         {
           "case": "zero",
@@ -368,13 +354,19 @@
       "finite_checks": [],
       "finite_smoke": [],
       "risk_review": {
-        "status": "clear",
-        "notes": "The unique Laurent decomposition is proved by lem-jones-vassiliev-basis-decomposition; no finite-type property is asserted."
+        "status": "complete",
+        "reviewer": "alpha-batch-106",
+        "repair_confidence": 1,
+        "defect_ids": [
+          "ipkt-b106-3a-jvp-empty-link"
+        ],
+        "notes": "Read the complete current definition, Laurent-basis proof, actual Jones-specialization definition (including its empty-link caveat), bracket/Jones comparison, singular-knot definition and AC definition. Corrected the Jones-value sentence to nonempty oriented links: the formal empty-link extension -x/(x^2+1) is not an integer Laurent polynomial. The coefficient vectors themselves remain defined for one-component knots, including the unknot; finite support, integer coordinates and uniqueness follow from the reviewed Laurent lemma. q=0 and all zero tails are covered. Variables x=t^(1/2), t=A^-4 and the skein formula match the actual suppliers and Carmi–Cohen v1 §1.1/Appendix B.1; no finite-type theorem is asserted. Full AC is explicitly inherited through Jones invariance; coefficient extraction is finite and choice-free. Exhaustive items reference search found exactly three consumers: the unknot counterexample, trefoil example and status remark, all batch106 and all using only knots. Read each actual use: none requires a correction, and no further-hop interface change occurs. No diagrams or unmet prerequisites."
       },
       "proof_status": "not-applicable",
       "proof_status_evidence": "Definition only; the cited local lemma establishes the unique coefficient decomposition.",
       "unresolved_suppliers": [],
-      "unresolved_assumptions": []
+      "unresolved_assumptions": [],
+      "repair_confidence": 1
     },
     "rem-jones-polynomial-unknot-detection-status": {
       "citations": [],
@@ -677,7 +669,7 @@
           "fact": "F7",
           "source": "thm-bracket-state-sum-matches-library-jones-specialization",
           "source_section": "Statement",
-          "quote": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link. At each crossing of a regular diagram $D$ use the\nsource chart with over-strand southwest-to-northeast: A joins left and right\nendpoints with coefficient $A$, and B joins top and bottom endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}), \\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)} \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1} \\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
+          "quote": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link, and let $D$ be any regular oriented diagram\nrepresenting $K$. At each crossing of $D$ use the source chart with over-strand southwest-to-northeast: A joins left and right\nendpoints with coefficient $A$, and B joins top and bottom endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}), \\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)} \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nThis value is independent of the chosen regular oriented diagram of $K$.\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1} \\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
           "uses": [
             "2.1"
           ]
@@ -704,7 +696,7 @@
           "fact": "F10",
           "source": "def-jones-vassiliev-coefficient-vectors",
           "source_section": "Definition",
-          "quote": "Assume full AC for the library Jones invariant. An oriented link is a finite\ndisjoint union of oriented smooth circles embedded in $S^3$, considered up to\nambient isotopy; an oriented classical knot is the one-component case. For an\noriented link $L\\subset S^3$, let $V_L(x)\\in\\mathbb Z[x^{\\pm1}]$ be the\nlibrary-normalized Jones polynomial, with $V_U(x)=1$ for the unknot $U$;\nwrite $V_K$ for its value on a knot $K$. Here $x=t^{1/2}$ in the library\nconvention $t=A^{-4}$, so an oriented skein triple satisfies\n$$x^{-2}V_{L_+}(x)-x^2V_{L_-}(x)=(x-x^{-1})V_{L_0}(x).$$\nSet $p=x-x^{-1}$. By the unique Laurent decomposition, write\n$$V_K(x)=\\sum_{q\\ge0}(a_q(K)+b_q(K)x)p^q,$$\nwhere $a_q(K),b_q(K)\\in\\mathbb Z$ and only finitely many are nonzero. The\n**Jones–Vassiliev coefficient vector of order $q$** is\n$$f_q(K):=(a_q(K),b_q(K))^{\\mathsf T},$$\nand $c_q(K):=a_q(K)+b_q(K)$. This is the algebraic coefficient-vector\ndefinition used by Carmi and Cohen. The claim that the coordinates of $f_q$\nare finite-type invariants of order at most $q$ is a separate theorem and is\nnot part of this definition.",
+          "quote": "Assume full AC for the library Jones invariant. An oriented link is a finite\ndisjoint union of oriented smooth circles embedded in $S^3$, considered up to\nambient isotopy; an oriented classical knot is the one-component case. For a nonempty\noriented link $L\\subset S^3$, let $V_L(x)\\in\\mathbb Z[x^{\\pm1}]$ be the\nlibrary-normalized Jones polynomial, with $V_U(x)=1$ for the unknot $U$;\nwrite $V_K$ for its value on a knot $K$. Here $x=t^{1/2}$ in the library\nconvention $t=A^{-4}$, so an oriented skein triple satisfies\n$$x^{-2}V_{L_+}(x)-x^2V_{L_-}(x)=(x-x^{-1})V_{L_0}(x).$$\nSet $p=x-x^{-1}$. By the unique Laurent decomposition, write\n$$V_K(x)=\\sum_{q\\ge0}(a_q(K)+b_q(K)x)p^q,$$\nwhere $a_q(K),b_q(K)\\in\\mathbb Z$ and only finitely many are nonzero. The\n**Jones–Vassiliev coefficient vector of order $q$** is\n$$f_q(K):=(a_q(K),b_q(K))^{\\mathsf T},$$\nand $c_q(K):=a_q(K)+b_q(K)$. This is the algebraic coefficient-vector\ndefinition used by Carmi and Cohen. The claim that the coordinates of $f_q$\nare finite-type invariants of order at most $q$ is a separate theorem and is\nnot part of this definition.",
           "uses": [
             "3.1",
             "4.1"
@@ -1033,13 +1025,19 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "clear",
-        "notes": "The local finite calculation is complete; the general Carmi–Cohen proof is reported without acceptance."
+        "status": "complete",
+        "reviewer": "alpha-batch-106",
+        "repair_confidence": 1,
+        "defect_ids": [
+          "ipkt-b106-3a-trefoil-closure-gaps"
+        ],
+        "notes": "Read the entire example, five verification steps and all sixteen actual dependency carriers; directly checked the positive-generator chart transport and the distinction between closure trace delta^c and bracket delta^(c-1). Found four unintended gaps between closure arc ends at y=-0.15,3.15 and braid ends at y=0,3; moved the closure arc endpoints onto the braid endpoints, preserving exterior control points and all three crossing over/under choices. In library positive projection coordinates (t,x), the upper-left-directed over branch and upper-right-directed under branch have positive determinant at each crossing. Closure joins corresponding endpoints, so the odd permutation gives one knot component. Exhaustive item search finds no reference/dependency consumer of this example. Independent finite union-find enumeration of all eight states gives loop counts AAA:2, AAB/ABA/BAA:1, ABB/BAB/BBA:2, BBB:3. Integer Laurent arithmetic gives bracket A^-7-A^-3-A^5 and writhe3 gives A^-4+A^-12-A^-16. Independently iterated (A_n,B_n)->(B_n,A_n+pB_n) from (1,0); combining n=2,6,8 gives a=1-3p^2-4p^4-p^6 and b=-6p^3-5p^5-p^7, hence f_2=(-3,0). Nontriviality follows from Jones not equal1, and displayed crossing count gives only c(T)<=3 as claimed. Full AC/AC_omega scope is explicit. Source statements checked: Kauffman §2 bracket/normalization, Carmi–Cohen v1 §§1.1,6.2–6.3 Theorems6.8–6.9, Roberts §4.4. No general preprint proof acceptance is asserted. Proof is independent of the repaired drawing and coefficient-definition domain repair leaves the knot use unchanged."
       },
       "proof_status": "complete-local-proof",
       "proof_status_evidence": "The eight finite smoothing states, normalization, Laurent recurrence, and coefficient extraction are mapped to exact supplier excerpts and proof steps.",
       "unresolved_suppliers": [],
-      "unresolved_assumptions": []
+      "unresolved_assumptions": [],
+      "repair_confidence": 1
     },
     "cex-knot-kt-51-boundary-case": {
       "citations": [
@@ -1047,7 +1045,7 @@
           "fact": "F1",
           "source": "def-jones-vassiliev-coefficient-vectors",
           "source_section": "Definition",
-          "quote": "Assume full AC for the library Jones invariant. An oriented link is a finite\ndisjoint union of oriented smooth circles embedded in $S^3$, considered up to\nambient isotopy; an oriented classical knot is the one-component case. For an\noriented link $L\\subset S^3$, let $V_L(x)\\in\\mathbb Z[x^{\\pm1}]$ be the\nlibrary-normalized Jones polynomial, with $V_U(x)=1$ for the unknot $U$;\nwrite $V_K$ for its value on a knot $K$. Here $x=t^{1/2}$ in the library\nconvention $t=A^{-4}$, so an oriented skein triple satisfies\n$$x^{-2}V_{L_+}(x)-x^2V_{L_-}(x)=(x-x^{-1})V_{L_0}(x).$$\nSet $p=x-x^{-1}$. By the unique Laurent decomposition, write\n$$V_K(x)=\\sum_{q\\ge0}(a_q(K)+b_q(K)x)p^q,$$\nwhere $a_q(K),b_q(K)\\in\\mathbb Z$ and only finitely many are nonzero. The\n**Jones–Vassiliev coefficient vector of order $q$** is\n$$f_q(K):=(a_q(K),b_q(K))^{\\mathsf T},$$\nand $c_q(K):=a_q(K)+b_q(K)$. This is the algebraic coefficient-vector\ndefinition used by Carmi and Cohen. The claim that the coordinates of $f_q$\nare finite-type invariants of order at most $q$ is a separate theorem and is\nnot part of this definition.",
+          "quote": "Assume full AC for the library Jones invariant. An oriented link is a finite\ndisjoint union of oriented smooth circles embedded in $S^3$, considered up to\nambient isotopy; an oriented classical knot is the one-component case. For a nonempty\noriented link $L\\subset S^3$, let $V_L(x)\\in\\mathbb Z[x^{\\pm1}]$ be the\nlibrary-normalized Jones polynomial, with $V_U(x)=1$ for the unknot $U$;\nwrite $V_K$ for its value on a knot $K$. Here $x=t^{1/2}$ in the library\nconvention $t=A^{-4}$, so an oriented skein triple satisfies\n$$x^{-2}V_{L_+}(x)-x^2V_{L_-}(x)=(x-x^{-1})V_{L_0}(x).$$\nSet $p=x-x^{-1}$. By the unique Laurent decomposition, write\n$$V_K(x)=\\sum_{q\\ge0}(a_q(K)+b_q(K)x)p^q,$$\nwhere $a_q(K),b_q(K)\\in\\mathbb Z$ and only finitely many are nonzero. The\n**Jones–Vassiliev coefficient vector of order $q$** is\n$$f_q(K):=(a_q(K),b_q(K))^{\\mathsf T},$$\nand $c_q(K):=a_q(K)+b_q(K)$. This is the algebraic coefficient-vector\ndefinition used by Carmi and Cohen. The claim that the coordinates of $f_q$\nare finite-type invariants of order at most $q$ is a separate theorem and is\nnot part of this definition.",
           "uses": [
             "1.1"
           ]
@@ -1288,8 +1286,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "clear",
-        "notes": "This refutes only the false universal extension to the unknot; it does not assert that the source's nontrivial-knot theorem is false."
+        "status": "complete",
+        "reviewer": "alpha-batch-106",
+        "notes": "Read Statement refuted, all three counterexample steps, Remarks, and every cited actual dependency: AC, countable choice, crossing number, corrected coefficient vectors, nonempty bracket definition and singular-knot convention. The witness is the nonempty one-component crossing-free circle; its diagram is correct and needs no orientation for the count. V_U=1 gives exactly f_0=(1,0), all f_q=0 for q>=1 by basis uniqueness. The explicit zero-crossing diagram and nonnegative crossing counts give c(U)=0, so [2,3c(U)]=[2,0] has no integer, including either endpoint. This refutes only the broadened all-knots quantifier, not Carmi–Cohen Theorem6.8, whose nontriviality hypothesis was checked directly in v1. Full AC and AC_omega are retained; no fresh choice occurs in this finite witness. The coefficient-definition domain correction leaves this knot use sound. No proof, citation or diagram defect."
       },
       "proof_status": "complete-local-proof",
       "proof_status_evidence": "The coefficient expansion and crossing-number boundary are checked directly for the explicit unknot.",

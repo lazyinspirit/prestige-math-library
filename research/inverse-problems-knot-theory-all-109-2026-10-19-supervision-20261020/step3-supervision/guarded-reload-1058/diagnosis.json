@@ -1,0 +1,85 @@
+{
+  "scope": "Research-only native guarded reload diagnosis; no code edits, control commands, restarts, gates, mathematical source checks, or state writes.",
+  "recorded_at": "2026-10-21T11:02:16.361622+00:00",
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "observed_failure": {
+    "at": "2026-10-21T10:58:28.798Z",
+    "event": "stages-reload-refused",
+    "error": "requested module ./step5-reporting-owner-recovery.mjs does not provide an export named execution",
+    "effect": "Executor retains its previously installed stage table. Later dispatches do not establish new Step 3 closure installation."
+  },
+  "module_chain": [
+    "Executor imports root stage URL with fingerprint query.",
+    "owner-supervised-compact.mts and mathlib.compact.mts propagate the parent query.",
+    "mathlib.mts eagerly imports both mathlib.step3.mts and mathlib.step5.mts using each child mtime:size query, even in Step 3.",
+    "mathlib.step5.mts dynamically imports step5-workflow.mjs using workflow mtime:size.",
+    "step5-workflow.mjs statically imports unversioned step5-successor-uncertainty-continuation.mjs and step5-reporting-owner-recovery.mjs.",
+    "step5-successor-uncertainty-continuation.mjs statically imports execution from unversioned step5-reporting-owner-recovery.mjs.",
+    "Parent query parameters do not propagate to these relative unversioned static imports; their process-wide ESM cache entries can remain old."
+  ],
+  "evidence": [
+    "Current tools/step5-reporting-owner-recovery.mjs line 16 exports function execution.",
+    "Read-only fresh Node import of that current module succeeded with typeof execution === function; this is not a full stage-table validation or native load.",
+    "PID 156359 was a long-lived controller process whose start preceded the current Step 5 edits.",
+    "Executor sets stagesFingerprint before import. After refusal, unchanged watched files do not trigger another attempt.",
+    "stagesWatch covers sibling .mts stage files, not the complete tools/*.mjs dependency graph.",
+    "Native pause preserves in-flight execution and reconciliation but blocks new dispatch. Native stop records the stopped marker for watchdog coordination."
+  ],
+  "diagnosis_limit": "Actual process ESM ModuleMap/old bytes were not inspected. The import graph, long-lived process, missing-export failure, and successful fresh current-module import strongly support stale cached static dependency linkage; they do not certify the complete current table.",
+  "minimal_safe_proposal": [
+    "Root retains native run pause so title71 and other fresh dispatches cannot use the retained old table.",
+    "Allow every actual in-flight writer to finish and reconcile. Check actual process/artifact drainage; absence of endedAt alone is not proof of a live process.",
+    "After drainage, root uses ordinary native stop, ensures old controller/watchdog are stopped, then ordinary fresh-process start with exactly the existing run/state/config.",
+    "Preserve completed prefix, workflow revision, dispatch attempts, all ordinary validation/gates/authority, and existing run files; no reset or migration is proposed.",
+    "Keep pause until the fresh controller has successfully loaded and validated the intended current stage table/new Step 3 closure; only then root resumes ordinary scheduling."
+  ],
+  "excluded_workarounds": [
+    "Do not relax import, prefix, workflow-revision, completion, or authority guards.",
+    "Do not call a parent touch a successful load.",
+    "Do not edit unrelated Step 5/physics workflow merely to route around this cache.",
+    "Do not restart globally while actual writers remain solely to force reload.",
+    "No whole dependency-cache versioning rewrite is needed for this bounded recovery."
+  ],
+  "latest_read_only_state_snapshot": {
+    "paused": true,
+    "started_without_ended_dispatches": [
+      "3a-refute:refute-97",
+      "3a-refute:refute-108"
+    ],
+    "limit": "Point-in-time dispatch bookkeeping only, not a full process inventory or drainage assertion."
+  },
+  "source_locations": {
+    "tools/autopilot/src/executor.mts": [
+      253,
+      267,
+      271,
+      299,
+      301,
+      1295,
+      1423
+    ],
+    "tools/autopilot/bin/autopilot.mts": [
+      217,
+      230,
+      662
+    ],
+    "tools/autopilot/stages/mathlib.mts": [
+      44,
+      49
+    ],
+    "tools/autopilot/stages/mathlib.step5.mts": [
+      18
+    ],
+    "tools/step5-workflow.mjs": [
+      2,
+      17
+    ],
+    "tools/step5-successor-uncertainty-continuation.mjs": [
+      8
+    ],
+    "tools/step5-reporting-owner-recovery.mjs": [
+      1,
+      16
+    ]
+  }
+}

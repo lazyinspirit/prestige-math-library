@@ -379,8 +379,14 @@ repair instead; normal ledger, carrier seals and closure evidence remain require
 The same registered unchanged helper may be an actual refuter's extra read-only
 context and flagged obligation, with exact native output and prompt bindings.
 It gains no assigned coverage; every original reader and refuter decision is
-still independently required. Ambiguous flag attribution fails closed; an
-authenticated unflagged context read chooses no consumer.
+still independently required. A source-only shared flag may bind exactly two
+complete authenticated reader anchors and their distinct assigned consumers
+as a group; native consumer, source and observed hash stay null. It chooses
+no singular consumer and seals both current uses. Other ambiguous attribution
+fails closed. An explicit current root capture of an existing complete
+refuter last-message may preserve an actually clipped result tail, with
+strict successful-session/attempt/prompt/log bindings and no invented native
+historical digest. The default still requires complete native output.
 An explicit separate basis preserves a native `in-flight-item` finding with
 null consumer and source observation. A bound root current-proof/use review
 and separate owner consumer witness seal only the actual current context;

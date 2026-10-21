@@ -730,7 +730,7 @@ function reportOnlyFinding(finding, refuter = false) {
     owner_unbound_reader_observation: _ownerUnboundReaderObservation,
     owner_unmanifested_draft_context: _unmanifested,
     owner_unmanifested_refuter_context: _unmanifestedRefuter,
-    owner_context_consumer_id: _ownerConsumer, owner_current_context_basis: _ownerCurrentBasis, owner_repaired_context_basis: _ownerRepairedBasis, ...row } = finding;
+    owner_context_consumer_ids: _ownerConsumers, owner_context_consumer_id: _ownerConsumer, owner_current_context_basis: _ownerCurrentBasis, owner_repaired_context_basis: _ownerRepairedBasis, ...row } = finding;
   if (_unmanifestedRefuter && refuter) {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   } else if (_ownerCurrentBasis) row.subject_type = 'in-flight-item';
@@ -1599,6 +1599,8 @@ if (command === 'check') {
               validateUnmanifestedRepairDecision(ROOT,run,carrier,decision);
             if (target.owner_current_context_basis && (decision.historical_delta_unknown !== true
               || decision.owner_context_consumer_id !== target.owner_context_consumer_id
+              || hashValue(decision.owner_context_consumer_ids) !== hashValue(target.owner_context_consumer_ids)
+              || (target.owner_context_consumer_ids && Object.hasOwn(decision, 'owner_context_consumer_id'))
               || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40))
               error('unmanifested-current-history', `${decision.obligation} must retain null native attribution, separate owner witness and explicit unbound-history resolution`);
             if (decision.consumer_id !== target.consumer_id || decision.producer_batch !== undefined

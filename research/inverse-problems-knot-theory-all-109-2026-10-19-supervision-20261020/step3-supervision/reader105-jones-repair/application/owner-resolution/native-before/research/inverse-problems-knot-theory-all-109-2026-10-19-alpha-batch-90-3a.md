@@ -1,0 +1,95 @@
+# Batch 90 Step 3a adjudication
+
+Run: `inverse-problems-knot-theory-all-109-2026-10-19`; group: `batch-90`. Independent local review complete; no native acceptance, judgment, stamp or gate-battery claim.
+
+## lem-marked-knot-cut-tangles-have-relative-reidemeister-movies
+
+Reviewed steps 1.1–6.1 and actual isotopy-extension clauses 1/4, parametric transversality, transverse-preimage statements and closed-source movie proofs. The common cap permits matching endpoint frames; the terminal chart correction restricts Alexander scaling to an arc separated from its center, so it is smooth there. The cutoff vanishes on isolated product collars; degree 43 interpolation prescribes third jets at six free points. Codimensions, cusp-diagonal separation, compactness and stationary ends give finitely many interior events. Zero-event and moved-mark cases are covered; ACω is explicitly retained. Checked Queffelec Theorem 2 and §§3.2–3.6 and Khovanov §§8.3–8.4 as source context; the relative argument is local, not imported from a closed-source assertion. No diagram or claim hyperlink defect.
+
+## def-khovanov-frobenius-algebra-and-cube-of-resolutions
+
+Reviewed complete Definition and all three proof steps with smoothing, determinant-sign and cochain-complex suppliers. Monic quotient has basis 1,X; checked all four inputs for the three Frobenius composites, both counit inputs and both coassociativity inputs. Each edge has degree (1,0). The tikzcd square has correct domains, arrows and Frobenius composites. Empty diagrams are explicitly excluded; crossingless nonempty diagrams and finite ordering require no AC. Source comparison: Khovanov §2.2 equations (11)–(18), specialized at c=0; local degree convention matches the displayed formulas.
+
+
+## Reduced definition (level 4)
+
+Checked all three proof steps against the actual algorithm, Frobenius basis and square-zero lemma. Multiplication by X commutes with merges and either output of a split, so its image is a homogeneous subcomplex. Each quotient state remains free, with surviving based label 1 shifted from +1 to 0; split leaves X on the new circle. Cut-tangle module M and both displayed maps agree exactly. The crossingless unknot gives Z in (0,0). No AC, no empty-knot input, no diagram or uninterrupted-Definition violation.
+
+Procedure theorem: all 2^n states and at most n edges per state are finite; n=0 yields one finite tensor module. The reader nonempty restriction matches the actual algorithm.
+
+## lem-khovanov-graded-euler-characteristic-jones-normalization
+
+Reviewed all three steps and every cited local supplier. Rationalization via denominator clearing identifies rank Euler sums despite integral torsion; boundedness cancels images degreewise. Direct substitution q=-A^-2 gives sign (-1)^(n+-n-) and A exponent -3w in each state. Reduced quotient replaces delta^k by delta^(k-1), only for based knots. Nonempty hypothesis prevents negative loop exponent and matches bracket domain; zero-crossing unknot has values q+q^-1 and 1. Reader domain repair is sound. Source context checked Khovanov §2.2 c=0, §7.2; no reliance on torsion dimensions or division by a specialized zero value.
+
+## lem-khovanov-signed-local-cancellation-models
+
+Read all eight numbered steps and local suppliers. Checked RII i,p,h formulas: d^1d^0=ts-x-y=0; 1-ip in degree 1 is (s wX,w1-tv+(x+y)wX,wX). Gaussian changes L,T isolate phi and give Schur complement, with adjacent zeros from d². RIII six edge signs match crossing order; cancel W1->111=-1 then 001->WX=1, giving c=a and identical residual matrices after swapping E1/E2 and P/Q. Checked neck-cutting on four tensor inputs including same-circle 2X and reduced M; canceled middle circle cannot meet an exterior saddle. Degrees match both ±1 cancellations; exterior homotopy signs cancel and all maps commute with Xp. Thus integral, natural retractions, not merely acyclicity. No AC, no unsupported tensor quotient passage, no diagrams requiring repair. Compared Khovanov §8.1 Proposition 38, §§5.2–5.4 as convention checks; local formulas are independently verified.
+
+## cex-knot-kt-37-boundary-case
+
+Reviewed all three counterexample steps and suppliers. Crossingless unknot is A in degree 0. Positive curl has raw m complex with Euler 1+q^-2; negative curl has raw Delta complex with Euler -q^3-q. Both differ from q+q^-1 and represent the same unknot by the oriented R1 ambient-isotopy supplier. Rational rank cancellation is valid for these finite free complexes; integral torsion cannot restore equality. Reader nonempty restriction matches the actual raw procedure and does not remove the witnesses. Calculations are choice-free and independent of the later Jones theorem. No diagram or statement-link violation.
+
+## ex-knot-kt-37-worked-cases
+
+Read both verification steps and all three actual suppliers. Empty crossing set has one state, not zero states; nonempty circle gives A of rank 2 with quantum degrees ±1 and no edges. Quotient image X A=Z X leaves Z[1], whose reduced shift is 0. Other bidegrees vanish, so Euler sums q+q^-1 and 1 follow without any invariance or AC premise. No diagram or uninterrupted-Example violation.
+
+
+## Level 6: Reidemeister chain homotopies
+
+Reviewed all seven steps and exact signed-cancellation supplier, Frobenius maps, reduced quotient and chain/cone conventions. Adjacent order swap (-1)^(va vb) corrects both edge signs. Direct determinant calculation gives positive m curl and negative Delta curl; surviving raw degrees are respectively (0,-1) and (1,+2), canceled by normalization. RII survivor (1,+1) cancels [1]{1}. RIII common residual matrix is homogeneous; the six transitive height orders are derived using explicit two-sided RII inverses, with equal opposite-crossing counts. Exterior naturality and Xp-commuting homotopies descend to the quotient, not merely to cohomology. The tikzcd face labels/directions match 00,01,10,11 and make no false commutativity claim. All constructions finite integral and choice-free. Khovanov §§5.2–5.4 and Proposition 38 provide checked shift/decomposition context; no full bibliography reading claimed.
+
+## thm-khovanov-homology-is-an-oriented-link-invariant
+
+Reviewed both proof steps and exact oriented Reidemeister equivalence, finite-complex and local-equivalence suppliers. ACω is carried explicitly through finite movie existence; all local maps have bidegree (0,0). Homotopic maps agree on cocycles modulo boundaries, so each equivalence induces an inverse on every bidegree; finite composition covers any two nonempty diagrams. Empty move sequence is identity. No canonical identification across all movies is asserted. Source theorem interface matches Khovanov Theorem 1/c=0 version; no diagram or interrupted Statement. Item pre/post raw hashes coincide: only incoming contract citations were enriched.
+
+## thm-reduced-khovanov-basepoint-and-reidemeister-invariance
+
+Read all three steps and actual marked-cut relative movie proof, reduced quotient, local Xp-commuting contractions, isotopy-extension and chain-homotopy interfaces. Fixed endpoint collars close by the same cap with no crossings, retaining n± and reduced gradings. Each move avoids that cap; quotient maps and homotopies therefore compose to inverse maps on cohomology. Moving the mark on the single knot is covered by the proved cut-arc isotopy, not a closed-source relative transversality assertion. ACω retained exactly for relative extension/transversality; no extension to arbitrary-component reduced links claimed. Checked Khovanov §8.3 and §8.4 Theorem 3 for the tangle context. No diagram or Statement-link defect.
+
+## Level 8: Jones Euler characteristic
+
+Reviewed both proof steps, all six actual supplier interfaces, and the independently checked bracket comparison (including its trace dictionary and coefficient ring). Full AC implies ACω for both invariance results; fixed nonempty diagrams give finite rank Euler sums. Diagramwise Euler identities apply unreduced to links, reduced only to based knots. Substitution q=-A^-2, t=A^-4 preserves the stipulated A branch; the trace bridge uses s=A^-2. Unknot factors are q+q^-1 and 1; no torsion-dimension claim or division by q+q^-1 at an evaluated root occurs. Reader ring finding is false positive because F5 actual supplier already defines the localization R_A; source producer raw hash exactly equals routed observation. Pre/post item bytes coincide; touched obligation is contract citation enrichment only. No diagram or interrupted Statement.
+
+## Decisions and historical binding
+
+Exactly six obligations are decided (five touched and reader:90:1); no page, refuter or foreign-gate obligation is owed. No agent was dispatched and no judgment or stamp was performed.
+
+`touched:90:thm-khovanov-chain-complex-from-diagram-procedure-properties`: **amended_repair**. The original Statement applied the named procedure to all finite diagrams although its explicit Input excludes the empty diagram. The reader adds nonempty to Statement and Given; n=0 nonempty diagrams still have one state. Verified finite enumeration, degrees and d² from the actual algorithm and square-zero proof. Current raw bytes match post; HEAD supplies the exact pre-reader bytes. Alpha synchronizes the stale manifest statement; no further item edit. Ledger: ipkt109-b90-3a-procedure-domain.
+
+`touched:90:lem-khovanov-graded-euler-characteristic-jones-normalization`: **amended_repair**. Original Statement allowed empty links (k=0 yields a negative loop exponent outside the declared Laurent bracket domain) and stated reduced cohomology without the based-knot hypothesis required by its definition. Reader restricts to nonempty links and defines the reduced sum only for a based knot. Verified rational rank cancellation and every statewise exponent. Current raw bytes match post; HEAD supplies exact pre-reader bytes. Alpha synchronizes the stale manifest statement; proof and strongest supported domains retained. Ledger: ipkt109-b90-3a-euler-domain.
+
+`touched:90:cex-knot-kt-37-boundary-case`: **amended_repair**. The false universal claim originally invoked the defined raw procedure on the empty diagram, outside its nonempty Input domain. Reader restricts the universal domain while retaining both explicit unknot curl witnesses. Checked raw Euler polynomials q^-1(q+q^-1) and -q²(q+q^-1), distinct from the crossingless value. Current raw bytes match post; HEAD supplies exact pre-reader bytes. Alpha synchronizes the stale manifest statement. Ledger: ipkt109-b90-3a-counterclaim-domain.
+
+`touched:90:thm-khovanov-homology-is-an-oriented-link-invariant`: **reviewed_no_defect**. Pre/post/current item raw bytes are identical. The touched scope comes from refreshed incoming procedure/Euler citation quotes in the contract. Independently read the complete current proof and actual prerequisites; Reviewed both proof steps and exact oriented Reidemeister equivalence, finite-complex and local-equivalence suppliers. ACω is carried explicitly through finite movie existence; all local maps have bidegree (0,0). Homotopic maps agree on cocycles modulo boundaries, so each equivalence induces an inverse on every bidegree; finite composition covers any two nonempty diagrams. Empty move sequence is identity. No canonical identification across all movies is asserted. Source theorem interface matches Khovanov Theorem 1/c=0 version; no diagram or interrupted Statement. Item pre/post raw hashes coincide: only incoming contract citations were enriched. Ledger: .
+
+`touched:90:thm-khovanov-euler-characteristic-is-jones`: **reviewed_no_defect**. Pre/post/current item raw bytes are identical. The touched scope comes from refreshed incoming procedure/Euler citation quotes in the contract. Independently read the complete current proof and actual prerequisites; Reviewed both proof steps, all six actual supplier interfaces, and the independently checked bracket comparison (including its trace dictionary and coefficient ring). Full AC implies ACω for both invariance results; fixed nonempty diagrams give finite rank Euler sums. Diagramwise Euler identities apply unreduced to links, reduced only to based knots. Substitution q=-A^-2, t=A^-4 preserves the stipulated A branch; the trace bridge uses s=A^-2. Unknot factors are q+q^-1 and 1; no torsion-dimension claim or division by q+q^-1 at an evaluated root occurs. Reader ring finding is false positive because F5 actual supplier already defines the localization R_A; source producer raw hash exactly equals routed observation. Pre/post item bytes coincide; touched obligation is contract citation enrichment only. No diagram or interrupted Statement. Ledger: .
+
+`reader:90:1`: **false_positive**. False positive at the actual bound carrier: its current raw SHA256 is exactly cd25e6dc56cb368c26ff5cc1db9e44a5e97241ad9f17d854e186f8b8a92ca521, the producer observation/pre-reader hash. Its cited F5 supplier lem-hecke-bracket-trace-dictionary-and-local-descent explicitly defines R_A=Z[A±1,(A^-4+1)^-1] in its Statement, and proof 3.1 verifies the denominator and delta are units. This definition is also present in committed 66722d74a1, not a fresh repair. The reader checked the Jones-specialization definition but overlooked this direct supplier. Distinct powers s^k map to A^-2k; localization in the integral domain preserves injectivity. T and R_A both embed in Q(A), and the bracket value equals the image of the trace expression, so descent to T is valid. Reviewed the current producer proof, producer contract F5 and manifest, plus its actual necessary interfaces. No source repair; no true historical defect relabelled. Ledger: ipkt109-b90-3a-ring-finding-rejected.
+
+All five touched current item files exactly match their post snapshots. All five pre-reader raw hashes match `7a78a7796c3a1fd74b411546292993a44f6f182f` Git item bytes, permitting actual historical comparison. The two unchanged-item touched obligations reflect contract enrichment, not item repair. The three reader source repairs are retained verbatim; Alpha only completes their stale manifest synchronization. Each completed repair has repair_confidence 1. No statement is changed by Alpha and no new item is authored.
+
+## Consumers, pages and write boundaries
+
+Searched all item dependency/reference consumers of the three changed Statements. Within batch 90, the Euler theorem uses a nonempty link and reduced formula only for a based knot; invariance uses nonempty links; example/counterexample calculate actual nonempty unknots. The three batch-100 consumers `def-reduced-khovanov-cohomology-of-a-based-link-over-f2`, `lem-trefoil-reduced-khovanov-rank-three`, and `lem-reduced-khovanov-over-f2-basepoint-independence` were opened at their actual construction/procedure uses: each has a basepoint on a nonempty diagram. Their mathematics needs no repair. Owner/batch-100 follow-up: refresh any stale quoted procedure Statement to include nonempty; outside contracts were not edited. No downstream Statement changes or further-hop repairs are required. Stable IDs and proposed withdrawals were preserved. No defective published supplier was identified in the mathematical uses reviewed; no published content was edited. Existing unrelated published editorial links are outside this assigned-carrier review.
+
+The assigned A/B pages have YAML only and preserve compact-v1. Both assigned TikZ diagrams were checked: the Frobenius square has correct typed composites; the RII face has correctly directed 00/01/10/11 edges and explicitly does not claim signed commutativity. No missing diagram is needed for these explicit algebraic arguments. Every assigned claim/definition/example section is uninterrupted by hyperlinks; supplier links follow complete sections.
+
+## Sources and reading limits
+
+Read current owned proofs, the required algorithm and square-zero dependency, and the actual cited supplier statements. Current producer batch 82 proof, contract citation entries and manifest were independently examined; their historical authority does not supply a verdict. Relevant source reading: [Queffelec](https://arxiv.org/pdf/2406.18203v1), Theorem 2 and §§3.2–3.6 (ordinary events, not a relative-boundary theorem); [Khovanov](https://arxiv.org/pdf/math/9908171v2), §2.2 equations (11)–(18), §§5.2–5.4 at the raw-shift and decomposition statements, §7.2 Proposition 27, §8.1 Proposition 38 and §§8.2–8.4 including Theorem 3; [Kauffman](https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf), §2 opening bracket normalization. These are convention and statement checks; local signed contractions and relative movie were verified from their authored formulas. Did not read every cited bibliography entry or recursively audit every published prerequisite. PDF text was extracted with installed PyMuPDF after pdftotext proved unavailable. No source import or claim of a new external proof was made.
+
+## Checks and remaining work
+
+Local checks completed after final manifest/contract edits:
+
+- `node tools/risk-report.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-90.proof-contracts.json` was run before risk records; rerun with `--require-reviewed`: 14 routed, eleven CRITICAL reviews complete, zero errors.
+- `node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-90.proof-contracts.json --strict`: 14/14 checked, zero errors or warnings.
+- `node tools/tsx-run.mjs tools/precheck.mts` with the explicit 14 batch item paths: 13 proof-bearing files checked, zero failures; algorithm has no phase proof.
+- `node tools/rendercheck.mjs` with those 14 item paths and both page paths: 16 files, no YAML/math rendering errors.
+- One final `node tools/proof-layout.mjs` command batched all 14 explicit item paths, including all three reader-changed items: 14 items, 46 steps, zero defects. No item formatter or edit followed it.
+- `node tools/defect-ledger.mjs append --file /tmp/b90-ledger-rows.json`: four valid closed disposition rows appended under serialization, view refreshed. Three record confirmed domain defects; the fourth is the required closed reader false-positive disposition and asserts no mathematical source defect.
+- `node tools/frontier-dependency-ledger.mjs refresh --run inverse-problems-knot-theory-all-109-2026-10-19`: refreshed and deduplicated after recording current owned item-edge review evidence.
+
+No mathematical escalation remains. Owner/batch 100 retains only the outside contract quotation refresh described above. Published files and other batches' content/contracts were kept read-only. Native engine owns decision hashes and the gate battery; these focused checks are not certification.
+
+Live-state check at handoff: native status reports this run running in Step 3a, with no active writer; batch 90 is still awaiting engine collection of this dispatch. Unrelated engine blockers are collect-98, split-97 and split-105 (three failures each). No intervention or scheduling transition was attempted. Git history and exact HEAD preimages, not retired handoffs, supplied historical evidence.

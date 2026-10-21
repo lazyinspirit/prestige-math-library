@@ -1,0 +1,101 @@
+--- a/tools/step3-owner-unmanifested-draft-context.test.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.test.mjs
+@@ -9,6 +9,7 @@
+ const repo=process.cwd(),proposal=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+ const code=mkdtempSync(join(tmpdir(),'unmanifested-code-'));
+ const tracked=spawnSync('git',['ls-files','-z','tools'],{encoding:'utf8'});assert.equal(tracked.status,0);
++for(const name of ['step3-owner-native-risk-title-home.mjs','step3-owner-assigned-consumer-witness.mjs'])if(!tracked.stdout.split('\0').includes('tools/'+name))tracked.stdout+='tools/'+name+'\0';
+ for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(code,p)),{recursive:true});copyFileSync(join(repo,p),join(code,p));}
+ for(const name of ['step3-owner-unmanifested-draft-context.mjs','step3-scope.mjs','step3-close.mjs','step3-adjudication-order.mjs','step3-owner-native-risk-title-home.mjs','step3-owner-assigned-consumer-witness.mjs'])copyFileSync(join(proposal,'tools',name),join(code,'tools',name));
+ process.env.PRESTIGE_MATH_REPO=repo;
+@@ -192,7 +193,7 @@
+  return {...f,second,rows,saveMultiple};
+ }
+ test('multiple actual assigned consumers retain distinct reader anchors without inventing flag attribution',()=>{const f=multipleConsumersFixture();try{const rows=f.rows();const scope={version:2,run:'r',batch:'1',manifest_post:['thm-consumer','thm-consumer-two'],refuter_scope:['thm-consumer','thm-consumer-two'],reader_findings:rows};const contexts=api.unmanifestedRefuterContexts(f.root,'r','1',scope);assert.equal(contexts.get('lem-helper').ambiguous,true);assert.equal(contexts.get('lem-helper').contexts.length,2);assert.notEqual(rows[0].owner_unmanifested_draft_context.entry_sha256,rows[1].owner_unmanifested_draft_context.entry_sha256);for(const r of rows)assert.ok(api.unmanifestedDraftCarrier(f.root,'r','1',r).item_sha256);}finally{f.close();}});
+-test('native two-consumer lifecycle: no extra read and unflagged extra read pass, ambiguous flag rejects',()=>{const f=multipleConsumersFixture();try{
++test('native two-consumer lifecycle: source-only shared flag and owned flags retain all five obligations',()=>{const f=multipleConsumersFixture();try{
+  for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(f.root,p)),{recursive:true});copyFileSync(join(code,p),join(f.root,p));}copyFileSync(join(code,'tools/step3-owner-unmanifested-draft-context.mjs'),join(f.root,'tools/step3-owner-unmanifested-draft-context.mjs'));
+  const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});const ok=(...a)=>{const r=run(...a);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
+  f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer, thm-consumer-two]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer','thm-consumer-two'],contracts:{'thm-consumer':{},'thm-consumer-two':{}}});ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');ok('post-reader','--batch','1');
+@@ -202,11 +203,26 @@
+  const setNative=report=>{f.put('research/r-refute-1.json',report);const result={attempt:1,run:'r',role:'refuter',label:'refute-1',covers:['1'],ok:true,exit_code:0,process_exit_code:0,timed_out:false,ended_at:'2020-01-03T00:00:00Z',prompt:join(f.root,prompt),tail:JSON.stringify(report),terminal_summary:{task_completed:true,task_aborted:false}};for(const p of nativePaths)f.put(p,result);};
+  const noExtra={batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Actual independent native refuter reads only required coverage, without a supplier extra read.'};setNative(noExtra);ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
+  const extra={...noExtra,opened:[...scope.refuter_scope,'lem-helper'],coverage_note:'Actual native refuter additionally reads shared direct supplier context and reports no supplier flag.'};setNative(extra);const rawReport=readFileSync(join(f.root,'research/r-refute-1.json'));ok('collect','--batch','1');ok('check','--batch','1','--phase','split');const collected=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));assert.equal(collected.reader_findings.length,2);assert.deepEqual(collected.refuter_context_opened,['lem-helper']);assert.equal(collected.refuter_findings.length,0);assert.deepEqual(readFileSync(join(f.root,'research/r-refute-1.json')),rawReport);
+- const ambiguous={...extra,flagged:[{id:'lem-helper',location:'Statement',defect:'ill-formed',evidence:'A consumer-free refuter flag cannot select one of two genuine registered consumer anchors.',severity:'fatal'}]};setNative(ambiguous);const rejected=run('collect','--batch','1');assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/ambiguous registered consumer context for refuter flag/);
+- // Restore the genuine positive fixture input, not a real native report: all files are disposable.
+- setNative(extra);ok('collect','--batch','1');
+- const decisions=scope.reader_findings.map((r,i)=>({obligation:r.obligation,id:r.id,consumer_id:r.consumer_id,route:'reader',verdict:'false_positive',defect_ids:[`consumer-context-${i+1}`],evidence:'Independent fixture Alpha reads this exact current helper and this separate assigned consumer use, rejects the reported formatting defect and claims no source edit.'}));
+- f.put('research/defect-ledger.jsonl',decisions.map(d=>JSON.stringify({run:'r',defect_id:d.defect_ids[0],subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'false-positive'})).join('\n')+'\n');f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions});ok('stamp');ok('check','--batch','1','--phase','adjudicate');ok('check','--batch','1','--phase','final');
++ const sourceOnly={...extra,flagged:[
++  {id:'lem-helper',location:'Statement',defect:'ill-formed',evidence:'Independent native source-only shared helper flag without selecting either registered consumer.',severity:'fatal'},
++  {id:'thm-consumer',location:'Proof',defect:'unlicensed-inference',evidence:'Independent native owned consumer flag number one remains separately owed.',severity:'fatal'},
++  {id:'thm-consumer-two',location:'Proof',defect:'unlicensed-inference',evidence:'Independent native owned consumer flag number two remains separately owed.',severity:'fatal'}]};
++ setNative(sourceOnly);const sourceOnlyRaw=readFileSync(join(f.root,'research/r-refute-1.json'));ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
++ const grouped=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json'))),shared=grouped.refuter_findings[0];
++ assert.equal(grouped.reader_findings.length,2);assert.equal(grouped.refuter_findings.length,3);assert.deepEqual(shared.owner_context_consumer_ids,['thm-consumer','thm-consumer-two']);
++ for(const k of ['consumer_id','observed_source','observed_sha256'])assert.equal(shared[k],null);
++ assert.equal(Object.hasOwn(shared,'owner_context_consumer_id'),false);assert.equal(Object.hasOwn(shared.owner_unmanifested_refuter_context,'reader_obligation'),false);
++ assert.deepEqual(shared.owner_unmanifested_refuter_context.reader_obligations,['reader:1:1','reader:1:2']);assert.equal(shared.severity,'fatal');
++ assert.deepEqual(readFileSync(join(f.root,'research/r-refute-1.json')),sourceOnlyRaw);
++ const groupCarrier=api.unmanifestedDraftCarrier(f.root,'r','1',shared);assert.equal(groupCarrier.consumer_contexts.length,2);assert.ok(!grouped.refuter_scope.includes('lem-helper'));
++ const decisions=[...grouped.reader_findings,...grouped.refuter_findings].map((r,i)=>({obligation:r.obligation,id:r.id,...(r.consumer_id!==undefined?{consumer_id:r.consumer_id}:{}),...(r.owner_context_consumer_ids?{owner_context_consumer_ids:r.owner_context_consumer_ids,historical_delta_unknown:true,owner_resolution:'Independent Alpha reviews the unchanged source and both separately registered consumer contexts; no native consumer or historical raw bytes are attributed.'}:{}),route:r.obligation.startsWith('reader:')?'reader':'flagged',verdict:'false_positive',defect_ids:[`consumer-context-${i+1}`],evidence:'Independent fixture Alpha reviews this exact obligation, current source and relevant consumer interfaces. No source edit or acceptance is claimed.'}));
++ f.put('research/defect-ledger.jsonl',decisions.map(d=>JSON.stringify({run:'r',defect_id:d.defect_ids[0],subject:d.id,caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'false-positive'})).join('\n')+'\n');f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions});ok('stamp');ok('check','--batch','1','--phase','adjudicate');ok('check','--batch','1','--phase','final');
++ // Every obligation and complete group is independently required.
++ const stamped=JSON.parse(readFileSync(join(f.root,'research/r-alpha-batch-1-3a-decisions.json')));
++ for(const obligation of ['reader:1:1','reader:1:2','refuter:1:1','refuter:1:2','refuter:1:3']){f.put('research/r-alpha-batch-1-3a-decisions.json',{...stamped,decisions:stamped.decisions.filter(d=>d.obligation!==obligation)});assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);}
++ const dropGroup=structuredClone(stamped);dropGroup.decisions.find(d=>d.obligation==='refuter:1:1').owner_context_consumer_ids=['thm-consumer'];f.put('research/r-alpha-batch-1-3a-decisions.json',dropGroup);assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++ const inventedSingular=structuredClone(stamped);inventedSingular.decisions.find(d=>d.obligation==='refuter:1:1').owner_context_consumer_id=null;f.put('research/r-alpha-batch-1-3a-decisions.json',inventedSingular);assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++ f.put('research/r-alpha-batch-1-3a-decisions.json',stamped);ok('check','--batch','1','--phase','adjudicate');
+  // Still reject unrelated extra context, even when the report is genuine and complete.
+  setNative({...extra,opened:[...extra.opened,'lem-unrelated']});assert.notEqual(run('collect','--batch','1').status,0);
+  }finally{f.close();}});
+@@ -373,6 +389,49 @@
+ 
+ test('repaired context allows genuine extra read only, never an inherited refuter flag',()=>{const f=repairedFixture();try{const x=refuterFixture(f);assert.equal(api.validateUnmanifestedRefuterOpened(f.root,'r','1','lem-helper',x.scope),true);assert.throws(()=>api.bindUnmanifestedRefuterContext(f.root,'r','1',x.raw(),x.scope),/cannot inherit an extra refuter flag/);}finally{f.close();}});
+ 
++function rootCapturedRefuterFixture(){
++ const f=multipleConsumersFixture(),x=refuterFixture(f);
++ x.scope={version:2,run:'r',batch:'1',manifest_post:['thm-consumer','thm-consumer-two'],refuter_scope:['thm-consumer','thm-consumer-two'],reader_findings:f.rows()};f.put('research/r-step3-scope-1.json',x.scope);
++ x.report.opened=['thm-consumer','thm-consumer-two','lem-helper'];f.put('research/r-refute-1.json',x.report);
++ const stem='research/r-dispatch/refuter-refute-1.attempt-1';f.put(stem+'.last-message.json',x.report);f.put(stem+'.log','Existing immutable native process log.');
++ Object.assign(x.result,{session_id:'native-session',started_at:'2020-01-02T23:00:00Z',log:join(f.root,stem+'.log'),tail:'clipped native tail'});x.result.terminal_summary.final_response_present=true;
++ const saveNative=()=>{for(const p of ['research/r-dispatch/refuter-refute-1.result.json',stem+'.result.json'])f.put(p,x.result)};saveNative();
++ const e={version:1,policy:api.ROOT_REFUTER_CAPTURE_POLICY,run:'r',batch:'1',attempt:1,owner_identity:'/root',completed:true,root_capture_only:true,native_historical_digest_attested:false,mathematical_acceptance:false,coverage_adopted:false,session_id:x.result.session_id,started_at:x.result.started_at,ended_at:x.result.ended_at,recorded_at:'2020-01-03T01:00:00Z',evidence:'Root explicitly captures the existing complete immutable last-message and matches the entire canonical report. The tail is clipped and no native output digest is claimed.',native_result:f.link(stem+'.result.json'),prompt:f.link(stem+'.prompt.md'),last_message:f.link(stem+'.last-message.json'),native_log:f.link(stem+'.log'),report:f.link('research/r-refute-1.json')};
++ const regPath='research/r-step3-owner-unmanifested-draft-context.json',reg=JSON.parse(readFileSync(join(f.root,regPath)));reg.refuter_output_captures=[e];const save=()=>f.put(regPath,reg);save();
++ return{f,x,e,reg,save,saveNative,stem,bind:()=>api.bindUnmanifestedRefuterContext(f.root,'r','1',x.raw(),x.scope)};
++}
++test('explicit root capture binds clipped-tail complete output without claiming native digest',()=>{const a=rootCapturedRefuterFixture();try{
++ const n=a.bind();assert.equal(n.consumer_id,null);assert.equal(n.observed_source,null);assert.equal(n.observed_sha256,null);assert.equal(n.owner_unmanifested_refuter_context.root_output_capture.native_historical_digest_attested,false);
++ a.x.scope.refuter_findings=[n];a.f.put('research/r-step3-scope-1.json',a.x.scope);const carrier=api.unmanifestedDraftCarrier(a.f.root,'r','1',n);assert.equal(carrier.consumer_contexts.length,2);
++ const frozen=api.unmanifestedDraftClosureEvidence(a.f.root,'r');assert.ok(frozen[a.e.last_message.path]);assert.ok(frozen[a.e.native_log.path]);
++}finally{a.f.close()}});
++for(const [name,mutate]of Object.entries({
++ 'default missing capture':a=>{delete a.reg.refuter_output_captures},
++ 'capture duplicate':a=>{a.reg.refuter_output_captures.push({...a.e})},
++ 'capture missing native tail with consistent refs':a=>{delete a.x.result.tail;a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture empty native tail with consistent refs':a=>{a.x.result.tail='';a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture object native tail with consistent refs':a=>{a.x.result.tail={clipped:true};a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture not root':a=>{a.e.owner_identity='other'},
++ 'capture falsely native-attested':a=>{a.e.native_historical_digest_attested=true},
++ 'capture session mismatch':a=>{a.e.session_id='other'},
++ 'capture time predates completion':a=>{a.e.recorded_at='2019-01-01T00:00:00Z'},
++ 'capture native source rewritten':a=>{a.f.put(a.e.last_message.path,{...a.x.report,coverage_note:'Tampered output'})},
++ 'capture source with consistent refs differs from report':a=>{a.f.put(a.e.last_message.path,{...a.x.report,coverage_note:'Tampered output'});a.e.last_message=a.f.link(a.e.last_message.path)},
++ 'capture log tampered':a=>{a.f.put(a.e.native_log.path,'Tampered log')},
++ 'capture missing session even with consistent result refs':a=>{delete a.x.result.session_id;delete a.e.session_id;a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture empty session even with consistent refs':a=>{a.x.result.session_id=' ';a.e.session_id=' ';a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture aborted even with consistent refs':a=>{a.x.result.terminal_summary.task_aborted=true;a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture synthetic even with consistent refs':a=>{a.x.result.written_by='autopilot';a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture conflicting complete tail cannot fallback':a=>{a.x.result.tail=JSON.stringify({...a.x.report,coverage_note:'Conflicting complete output'});a.saveNative();a.e.native_result=a.f.link(a.e.native_result.path)},
++ 'capture stable versus attempt differs':a=>{a.f.put('research/r-dispatch/refuter-refute-1.result.json',{...a.x.result,session_id:'different'})},
++ 'incomplete reader anchor group':a=>{a.x.scope.reader_findings.pop()},
++ 'group source edited':a=>{a.f.put('items/lem-helper.md',a.f.source+'Changed source')},
++}))test('shared flag rejects '+name,()=>{const a=rootCapturedRefuterFixture();try{mutate(a);a.save();assert.throws(()=>a.bind())}finally{a.f.close()}});
++test('shared group binding rejects array/null/authority tampering',()=>{const a=rootCapturedRefuterFixture();try{
++ const n=a.bind();a.x.scope.refuter_findings=[n];a.f.put('research/r-step3-scope-1.json',a.x.scope);
++ for(const change of [x=>{x.owner_context_consumer_ids.reverse()},x=>{x.consumer_id='thm-consumer'},x=>{x.observed_source={snapshot:'current',item_sha256:a.e.last_message.sha256}},x=>{x.owner_unmanifested_refuter_context.reader_obligations.pop()},x=>{x.owner_unmanifested_draft_context.group_sha256='a'.repeat(64)}]){const bad=structuredClone(n);change(bad);assert.throws(()=>api.unmanifestedDraftCarrier(a.f.root,'r','1',bad));}
++}finally{a.f.close()}});
++
+ // Root's actual display-math application exposed String.replace replacement
+ // substitutions. Exercise the real repaired-authority validator, not just JS.
+ for(const [name,token] of [

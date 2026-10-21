@@ -5,6 +5,8 @@ import { createHash } from 'node:crypto';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { requiredPageHash as hash } from './step3-owner-required-page-routes.mjs';
+export const ROOT_REFUTER_CAPTURE_POLICY='owner-current-capture-of-complete-refuter-output-v1';
+export const SHARED_CONTEXT_REFUTER_BASIS='two-registered-consumers-unobserved-refuter-current-context-v1';
 export const OWNER_CURRENT_CONTEXT_BASIS='in-flight-null-consumer-unobserved-owner-current-context-v1';
 export const OWNER_REPAIRED_CONTEXT_BASIS='exact-observed-owner-repaired-unmanifested-context-v1';
 const ownerRepaired=e=>e.owner_repair_basis===OWNER_REPAIRED_CONTEXT_BASIS;
@@ -160,11 +162,12 @@ export function unmanifestedDraftCarrier(root,run,batch,finding){
   const {route:_route,batch:_batch,...value}=finding;
   check(hash(value)===hash(expected),'changed refuter context binding');
   const reader=unmanifestedRefuterContexts(root,run,batch,scope).get(finding.id);
+  if(reader.ambiguous)return sharedRefuterCarrier(reader,expected);
   return {...reader.r.carrier,owner_unmanifested_refuter_context:expected.owner_unmanifested_refuter_context};
  }
  const r=loadUnmanifestedDraftContexts(root,run,batch).get(finding.obligation);check(r,'missing authority');
  const expected=bindUnmanifestedDraftContext(root,run,batch,{...r.original,obligation:finding.obligation});
- for(const k of ['subject_type','id','consumer_id','location','defect','evidence','severity','observed_source','owner_context_consumer_id','owner_current_context_basis','owner_repaired_context_basis','owner_unmanifested_draft_context','observed_sha256','observation_basis'])check(hash({value:finding[k]})===hash({value:expected[k]}),`changed routed ${k}`);
+ for(const k of ['subject_type','id','consumer_id','location','defect','evidence','severity','observed_source','owner_context_consumer_ids','owner_context_consumer_id','owner_current_context_basis','owner_repaired_context_basis','owner_unmanifested_draft_context','observed_sha256','observation_basis'])check(hash({value:finding[k]})===hash({value:expected[k]}),`changed routed ${k}`);
  check(finding.producer_batch===undefined&&finding.producer_pre_snapshot===undefined,'fictitious producer');return r.carrier;
 }
 export const unmanifestedDraftVerdictAllowed=(verdict,carrier)=>carrier?.owner_repaired_context===true
@@ -184,6 +187,7 @@ export function unmanifestedDraftClosureEvidence(root,run){
   const scope=parse(bytes(root,scopePath));for(const finding of scope.refuter_findings??[])if(finding.owner_unmanifested_refuter_context){
    if(!(closed?.version===3&&closed.run===run&&closed.status==='closed'&&closed.basis==='dependency-ordered-step3a'))unmanifestedDraftCarrier(root,run,batch,finding);
    const evidence=finding.owner_unmanifested_refuter_context;for(const k of ['report','native_result','prompt']){ref(root,run,evidence[k]);out[evidence[k].path]=evidence[k].sha256;}
+   if(evidence.root_output_capture){for(const k of ['last_message','native_log']){ref(root,run,evidence.root_output_capture[k]);out[evidence.root_output_capture[k].path]=evidence.root_output_capture[k].sha256;}}
   }
  }return out;
 }
@@ -196,9 +200,9 @@ function nativeRefuter(root,run,batch){
  const nativePath=`research/${run}-dispatch/refuter-refute-${batch}.attempt-${native.attempt}.result.json`,nativeRaw=bytes(root,nativePath);
  check(nativeRaw.equals(stableRaw)&&native.run===run&&native.role==='refuter'&&native.label===`refute-${batch}`&&native.covers?.length===1&&String(native.covers[0])===String(batch)&&native.ok===true&&native.exit_code===0&&native.process_exit_code===0&&native.timed_out!==true&&native.terminal_summary?.task_completed===true&&native.terminal_summary?.task_aborted===false&&Number.isFinite(Date.parse(native.ended_at)),'not genuine successful refuter');
  const promptPath=nativePath.replace(/\.result\.json$/,'.prompt.md');check(native.prompt?.endsWith('/'+promptPath),'wrong refuter prompt');const promptRaw=bytes(root,promptPath);
- let tail;try{tail=JSON.parse(native.tail);}catch{check(false,'complete structured refuter tail required');}
+ let tail,capture;try{tail=JSON.parse(native.tail);}catch{check(typeof native.tail==='string'&&native.tail.trim().length>0,'clipped native tail must be a nonempty string');capture=capturedRefuterOutput(root,run,String(batch),native,nativePath,reportRaw);tail=report;}
  check(hash(tail)===hash(report)&&[String(batch),`${run}-batch-${batch}`].includes(String(report.batch))&&Array.isArray(report.opened)&&Array.isArray(report.not_opened)&&Array.isArray(report.flagged),'refuter report differs from complete native output');
- return {report,binding:{report:{path:reportPath,sha256:sha(reportRaw)},native_result:{path:nativePath,sha256:sha(nativeRaw)},prompt:{path:promptPath,sha256:sha(promptRaw)}}};
+ return {report,binding:{report:{path:reportPath,sha256:sha(reportRaw)},native_result:{path:nativePath,sha256:sha(nativeRaw)},prompt:{path:promptPath,sha256:sha(promptRaw)},...(capture?{root_output_capture:capture}: {})}};
 }
 export function unmanifestedRefuterContexts(root,run,batch,scope){
  const contexts=loadUnmanifestedDraftContexts(root,run,batch);
@@ -213,11 +217,11 @@ export function unmanifestedRefuterContexts(root,run,batch,scope){
   unmanifestedDraftCarrier(root,run,batch,anchor);
   if(!byId.has(r.entry.id))byId.set(r.entry.id,[]);byId.get(r.entry.id).push({obligation,anchor,r});
  }
- return new Map([...byId].map(([id,rows])=>[id,counts.get(id)===1&&rows.length===1?rows[0]:{ambiguous:true,contexts:rows}]));
+ return new Map([...byId].map(([id,rows])=>[id,counts.get(id)===1&&rows.length===1?rows[0]:{ambiguous:true,registered_count:counts.get(id),contexts:rows}]));
 }
 export function bindUnmanifestedRefuterContext(root,run,batch,finding,scope){
  const route=unmanifestedRefuterContexts(root,run,batch,scope).get(finding.id);check(route,'unregistered refuter context');
- check(route.ambiguous!==true,'ambiguous registered consumer context for refuter flag');
+ if(route.ambiguous===true)return bindSharedRefuterContext(root,run,batch,finding,scope,route);
  check(!ownerRepaired(route.r.entry),'repaired context cannot inherit an extra refuter flag');
  const native=nativeRefuter(root,run,batch),match=new RegExp(`^refuter:${batch}:([1-9]\\d*)$`).exec(finding.obligation??'');check(match,'wrong refuter obligation');
  const index=Number(match[1]),original=native.report.flagged[index-1];
@@ -239,4 +243,59 @@ export function bindUnmanifestedRefuterContext(root,run,batch,finding,scope){
 export function validateUnmanifestedRefuterOpened(root,run,batch,id,scope){
  check(unmanifestedRefuterContexts(root,run,batch,scope).has(id),'unregistered extra read-only context');
  const {report}=nativeRefuter(root,run,batch);check(report.opened.filter(x=>x===id).length===1,'context not actually opened');return true;
+}
+
+// A source-only native flag cannot identify either consumer. Preserve both
+// separately authenticated anchors; never copy either reader's observed bytes.
+function sharedGroup(route){
+ const rows=route.contexts;
+ check(route.registered_count===2&&Array.isArray(rows)&&rows.length===2,'ambiguous group requires exactly two complete registered reader anchors');
+ check(rows.every(x=>x.r.carrier.unchanged_context===true&&!ownerRepaired(x.r.entry)),'shared flag requires unchanged contexts only');
+ const ids=rows.map(x=>contextConsumer(x.r.entry));
+ check(new Set(ids).size===2,'ambiguous group requires distinct assigned consumers');
+ const sourceHashes=rows.map(x=>contextSource(x.r.entry).sha256);
+ check(new Set(sourceHashes).size===1&&rows.every(x=>x.r.carrier.item_sha256===sourceHashes[0]),'shared source authorities differ');
+ const sorted=[...rows].sort((a,b)=>contextConsumer(a.r.entry).localeCompare(contextConsumer(b.r.entry)));
+ const anchors=sorted.map(x=>({reader_obligation:x.obligation,consumer_id:contextConsumer(x.r.entry),reader_binding:x.r.binding}));
+ return {rows:sorted,ids:sorted.map(x=>contextConsumer(x.r.entry)),anchors,
+  source_sha256:sourceHashes[0],binding:{path:sorted[0].r.binding.path,group_sha256:hash({basis:SHARED_CONTEXT_REFUTER_BASIS,anchors})}};
+}
+function bindSharedRefuterContext(root,run,batch,finding,scope,route){
+ const group=sharedGroup(route),native=nativeRefuter(root,run,batch),match=new RegExp(`^refuter:${batch}:([1-9]\\d*)$`).exec(finding.obligation??'');check(match,'wrong shared refuter obligation');
+ const index=Number(match[1]),original=native.report.flagged[index-1],{obligation,...raw}=finding;
+ check(hash(raw)===hash(original)&&native.report.opened.filter(id=>id===finding.id).length===1&&!(scope.refuter_scope??[]).includes(finding.id),'changed shared flagged context or assigned coverage');
+ check(Object.keys(original).every(k=>['id','location','defect','evidence','severity'].includes(k)),'invented shared native attribution');
+ return {...finding,subject_type:'unmanifested-draft-dependency',consumer_id:null,observed_source:null,observed_sha256:null,
+  owner_context_consumer_ids:group.ids,owner_current_context_basis:SHARED_CONTEXT_REFUTER_BASIS,
+  owner_unmanifested_draft_context:group.binding,
+  owner_unmanifested_refuter_context:{...native.binding,index,finding_sha256:hash(original),reader_obligations:group.anchors.map(x=>x.reader_obligation),
+   owner_current_source_sha256:group.source_sha256,historical_source_observed:false,shared_consumer_basis:SHARED_CONTEXT_REFUTER_BASIS},
+  observation_basis:'unbound-native-refuter-observation; two registered consumers; owner-current-source only'};
+}
+function sharedRefuterCarrier(route,finding){
+ const group=sharedGroup(route),source=group.rows[0].r.carrier;
+ return {item_sha256:source.item_sha256,context_guard_sha256:source.context_guard_sha256,
+  owner_unmanifested_draft_context:group.binding,unchanged_context:true,
+  owner_context_consumer_ids:group.ids,
+  consumer_contexts:group.rows.map(x=>({reader_obligation:x.obligation,consumer_id:contextConsumer(x.r.entry),carrier:x.r.carrier})),
+  owner_unmanifested_refuter_context:finding.owner_unmanifested_refuter_context};
+}
+
+function capturedRefuterOutput(root,run,batch,native,nativePath,reportRaw){
+ const doc=parse(bytes(root,registry(run))),entries=doc.refuter_output_captures;
+ check(Array.isArray(entries),'complete structured refuter tail required; no explicit root output capture');
+ const hits=entries.filter(e=>e.batch===batch);check(hits.length===1,'missing/ambiguous explicit root output capture');
+ const e=hits[0];
+ check(e.version===1&&e.policy===ROOT_REFUTER_CAPTURE_POLICY&&e.run===run&&e.owner_identity==='/root'&&e.completed===true&&e.root_capture_only===true&&e.native_historical_digest_attested===false&&e.mathematical_acceptance===false&&e.coverage_adopted===false,'invalid root output capture authority');
+ check(e.attempt===native.attempt&&typeof native.session_id==='string'&&native.session_id.trim().length>0&&e.session_id===native.session_id&&native.written_by!=='autopilot'&&native.timed_out===false&&native.terminal_summary?.task_aborted===false&&native.terminal_summary?.final_response_present===true,'invalid captured native session/terminal');
+ check(Number.isFinite(Date.parse(native.started_at))&&Number.isFinite(Date.parse(native.ended_at))&&Number.isFinite(Date.parse(e.recorded_at))&&Date.parse(native.started_at)<=Date.parse(native.ended_at)&&Date.parse(native.ended_at)<=Date.parse(e.recorded_at)&&e.started_at===native.started_at&&e.ended_at===native.ended_at,'invalid capture chronology');
+ check(typeof e.evidence==='string'&&e.evidence.trim().length>=80,'missing truthful root capture account');
+ const stem=nativePath.replace(/\.result\.json$/,'');
+ check(e.native_result.path===nativePath&&e.prompt.path===stem+'.prompt.md'&&e.last_message.path===stem+'.last-message.json'&&e.native_log.path===stem+'.log'&&e.report.path===`research/${run}-refute-${batch}.json`,'wrong captured attempt artifacts');
+ check(native.prompt?.endsWith('/'+e.prompt.path)&&native.log?.endsWith('/'+e.native_log.path),'native prompt/log paths differ');
+ const last=ref(root,run,e.last_message),report=ref(root,run,e.report);ref(root,run,e.native_log);ref(root,run,e.prompt);
+ check(ref(root,run,e.native_result).equals(bytes(root,nativePath))&&report.equals(reportRaw)&&hash(parse(last))===hash(parse(report)),'captured complete last-message/report/result mismatch');
+ check(!Object.keys(native).some(k=>/last.?message|output.*(?:hash|digest|sha256)/i.test(k)),'native output attestation exists: separate explicit protocol required');
+ return {path:registry(run),entry_sha256:hash(e),last_message:e.last_message,native_log:e.native_log,
+  basis:ROOT_REFUTER_CAPTURE_POLICY,native_historical_digest_attested:false};
 }

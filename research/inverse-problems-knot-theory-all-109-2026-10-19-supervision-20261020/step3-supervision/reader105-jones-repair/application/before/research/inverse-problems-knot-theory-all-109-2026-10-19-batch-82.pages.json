@@ -1,0 +1,467 @@
+[
+  {
+    "order": 3146,
+    "id": "kauffman-bracket-state-sum-and-jones-polynomial",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Kauffman bracket state sum and the Jones polynomial",
+    "companion": "kauffman-bracket-state-sum-and-jones-polynomial-examples",
+    "requires": [
+      "hecke-markov-traces-and-polynomial-link-invariants",
+      "crossing-signs-writhe-and-linking-number",
+      "temperley-lieb-diagram-algebra-and-catalan-basis",
+      "temperley-lieb-root-of-unity-and-modular-representation-theory"
+    ],
+    "items": [
+      {
+        "id": "def-kauffman-bracket-smoothing-and-loop-value",
+        "kind": "definition",
+        "title": "Kauffman bracket smoothing and loop value",
+        "deps": [
+          "def-regular-oriented-link-diagram",
+          "def-planar-isotopy-of-link-diagrams"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A$ be an indeterminate and let $\\mathbb Z[A^{\\pm1}]$ be the Laurent\npolynomial ring in $A$. A **nonempty unoriented regular link diagram** is the\nfinite planar projection and over/under data of a regular oriented link diagram\nafter its strand arrows are forgotten. Its finite crossing set is denoted\n$C(D)$, and at least one closed component is required. The empty link diagram is\noutside this definition.\n\nAt a crossing use the following local chart: the over-strand runs from the\nsouthwest endpoint to the northeast endpoint and is drawn continuously over the\nunder-strand, which runs from northwest to southeast with a gap at the\nintersection. Horizontal-right followed by vertical-up is the positive\norientation of this displayed chart. In this chart the **A-smoothing** joins the\ntwo left endpoints and joins the two right endpoints; the **B-smoothing** joins\nthe two top endpoints and joins the two bottom endpoints. These labels are\nattached to this displayed chart and are transported by orientation-preserving\nchanges of local coordinates. Thus turning right from an entering underpassing\nhalf-strand gives the A-smoothing.\n\n```tikz\n\\begin{tikzpicture}[scale=0.72, line cap=round, line join=round]\n  \\begin{scope}\n    \\draw[thick] (-1,1)--(-0.14,0.14);\n    \\draw[thick] (0.14,-0.14)--(1,-1);\n    \\draw[very thick] (-1,-1)--(1,1);\n    \\node at (0,-1.45) {crossing};\n  \\end{scope}\n  \\begin{scope}[xshift=3.4cm]\n    \\draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);\n    \\draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);\n    \\node at (0,-1.45) {$A$-smoothing, weight $A$};\n  \\end{scope}\n  \\begin{scope}[xshift=6.8cm]\n    \\draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);\n    \\draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);\n    \\node at (0,-1.45) {$B$-smoothing, weight $A^{-1}$};\n  \\end{scope}\n\\end{tikzpicture}\n```\n\nFor a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.",
+        "strategy": "Proves the state set is finite, every loop exponent is nonnegative, and planar isotopy reindexes the same state sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1 and 4.3, printed pp. 21 and 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §1.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: each input diagram has a finite crossing set and the state sum is indexed by that finite set."
+      },
+      {
+        "id": "alg-kauffman-bracket-state-sum",
+        "kind": "algorithm",
+        "title": "Kauffman bracket state sum",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 1,
+        "statement": "The input is a nonempty unoriented regular link diagram $D$: a finite immersed\nplanar projection of one or more circles with finitely many transverse double\npoints, no triple points, and over/under data at each double point. Let $C(D)$\nbe its finite crossing set. At each crossing take the local chart in which the\nover-strand runs southwest to northeast and is drawn continuously over the\nunder-strand, which runs northwest to southeast with a gap at the intersection.\nThe A-smoothing joins the two left endpoints and the two right endpoints, with\nweight $A$; the B-smoothing joins the two top endpoints and the two bottom\nendpoints, with weight $A^{-1}$. These labels are transported with\norientation-preserving changes of local coordinates. Put\n$\\delta=-A^2-A^{-2}$. The output is the Laurent polynomial $\\langle D\\rangle$.\n\n1. Set an accumulator $p:=0$ in $\\mathbb Z[A^{\\pm1}]$.\n2. For each function $S:C(D)\\to\\{A,B\\}$, smooth every crossing according to\n   $S$, obtaining a crossingless diagram with $|S|$ circles. Count the A- and\n   B-smoothings as $a(S)$ and $b(S)$, and replace\n   $$p\\quad\\text{by}\\quad p+A^{a(S)-b(S)}\\delta^{|S|-1}.$$\n3. Return $p$ after all states have been processed.\n\nThe input is a mathematical diagram object, not a serialized string. The\nprocedure specifies no parsing or malformed-string rejection behavior. Since\nthe diagram has at least one component, every complete smoothing has\n$|S|\\ge1$ and every exponent of $\\delta$ is nonnegative.",
+        "strategy": "Uses the finite crossing set to enumerate exactly 2^c states and accumulates each prescribed Laurent-polynomial term.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1 and 4.3, printed pp. 21 and 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §1.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "axiom_use": "Choice-free: the input crossing set is finite, and every state is traversed."
+      },
+      {
+        "id": "lem-kauffman-bracket-r2-r3-identities",
+        "kind": "lemma",
+        "title": "Kauffman bracket R2 and R3 identities",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-temperley-lieb-diagram-category",
+          "thm-temperley-lieb-diagram-category-laws",
+          "lem-temperley-lieb-generators-satisfy-local-relations",
+          "def-oriented-reidemeister-moves"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A$ be an indeterminate and $n\\ge2$. In a vertical $n$-strand braid box\nwhose longitudinal parameter increases from bottom to top, let $I$ be the\nstraight tangle and, for\n$1\\le i<n$, let $e_i$ be the cup-cap tangle with a cap at the top and a cup\nat the bottom on strands $i,i+1$, and straight strands elsewhere. Each closed\nloop has value $\\delta=-A^2-A^{-2}$. For the positive crossing, use positive projection coordinates $(t,x)$, with $t$ longitudinal and $x$ transverse, and over and under tangent vectors $(1,-2h)$ and $(1,2h)$ for $h>0$. Transport the source chart by $(t,x)=(v,-2hu)$: its A-smoothing is the left/right pairing with coefficient $A$, giving $I$, and its B-smoothing is the top/bottom pairing with coefficient $A^{-1}$, giving $e_i$. Set\n$$C_i:=AI+A^{-1}e_i.$$\nFor the opposite crossing, the smoothings exchange their through and cup-cap\npairings; set\n$$C_i^{-}:=A^{-1}I+Ae_i.$$\nThen $C_iC_i^{-}=C_i^{-}C_i=I$, and for adjacent strands\n$$C_iC_{i+1}C_i=C_{i+1}C_iC_{i+1}.$$\nConsequently the bracket is unchanged by every local Reidemeister II or III\nreplacement; arbitrary strand orientations do not change these unoriented\ntangle identities.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8, line cap=round]\n  \\draw (-0.35,-0.25) rectangle (2.35,1.25);\n  \\foreach \\x in {0,1,2} {\n    \\fill (\\x,1) circle (1.4pt);\n    \\fill (\\x,0) circle (1.4pt);\n  }\n  \\draw (0,1) .. controls (0,0.68) and (1,0.68) .. (1,1);\n  \\draw (0,0) .. controls (0,0.32) and (1,0.32) .. (1,0);\n  \\draw (2,0) -- (2,1);\n  \\node[above] at (0,1.06) {$t_1$};\n  \\node[above] at (1,1.06) {$t_2$};\n  \\node[above] at (2,1.06) {$t_3$};\n  \\node[below] at (0,-0.06) {$b_1$};\n  \\node[below] at (1,-0.06) {$b_2$};\n  \\node[below] at (2,-0.06) {$b_3$};\n  \\node at (1,-0.55) {$e_1$};\n\\end{tikzpicture}\n```\n\nThe picture names the cap, cup, and through strand that define $e_1$; the\nalgebraic equalities above are proved below without using the picture as an\ninference.",
+        "strategy": "Identifies the fixed source-chart smoothings with the through and cup-cap diagrams, then expands both local products using the diagram-generator relations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §4.1, printed pp. 21–22",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §1.2",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: the proof is a finite local algebra calculation."
+      },
+      {
+        "id": "thm-kauffman-bracket-state-sum-procedure-properties",
+        "kind": "theorem",
+        "title": "Kauffman bracket state-sum procedure properties",
+        "deps": [
+          "alg-kauffman-bracket-state-sum"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $A$ be an indeterminate and let $D$ be a typed nonempty unoriented regular\nlink diagram with finite crossing set $C(D)$. At each crossing use the chart\nwith the over-strand southwest-to-northeast: A joins the left endpoints and the\nright endpoints with weight $A$, while B joins the top endpoints and bottom\nendpoints with weight $A^{-1}$. The Kauffman bracket state-sum algorithm\nterminates after exactly $2^{|C(D)|}$ state visits and returns\n$$\\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1},$$\nwhere $a(S)$ and $b(S)$ count the two smoothing types and $|S|$ counts the\ncircles in the smoothed diagram. The algorithm takes a mathematical diagram\nas input and makes no claim about parsing strings or rejecting malformed\nencodings.",
+        "strategy": "The finite crossing set gives a finite state set; every update is a Laurent-polynomial operation and the loop visits each state once.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §4.3, printed pp. 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §1.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: the algorithm traverses a finite set of smoothing assignments."
+      },
+      {
+        "id": "lem-kauffman-bracket-curl-and-writhe-correction",
+        "kind": "lemma",
+        "title": "Kauffman bracket curl and writhe correction",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "lem-kauffman-bracket-r2-r3-identities",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-oriented-reidemeister-moves"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $A$ be an indeterminate and let $D$ be a nonempty regular oriented link\ndiagram in an oriented $3$-sphere. Fix a unit viewing normal $n$ and orient its\nprojection plane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive\nin the ambient $3$-space. At each crossing define\n$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$\nfrom the oriented projected tangents, and set\n$\\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c)$. With\n$\\delta=-A^2-A^{-2}$, adding a positive type-I kink multiplies the\nraw bracket by $-A^3$ and increases writhe by $1$; adding a negative type-I\nkink multiplies it by $-A^{-3}$ and decreases writhe by $1$. Deleting either\nkink multiplies by the reciprocal factor. Consequently\n$$f_D(A):=(-A^3)^{-\\operatorname{wr}(D)}\\langle D\\rangle$$\nis unchanged by every oriented type-I, type-II, and type-III Reidemeister move\nand by planar isotopy.",
+        "strategy": "Resolves each curl into its straight-arc and one-circle states, evaluates both factors, and checks the writhe exponent change for each Reidemeister type.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, §§III and VI, printed pp. 430–432 and 466–469",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1 and 4.3, printed pp. 21–22 and 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §1.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "The local calculations are choice-free; only the crossing-sign supplier's separate framing clause assumes ACω, which is not used here."
+      },
+      {
+        "id": "lem-hecke-bracket-trace-dictionary-and-local-descent",
+        "kind": "lemma",
+        "title": "Hecke–bracket trace dictionary and local descent",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-elementary-geometric-half-twist",
+          "def-braid-group-by-the-artin-presentation",
+          "def-temperley-lieb-diagram-category",
+          "lem-temperley-lieb-generators-satisfy-local-relations",
+          "lem-kauffman-bracket-r2-r3-identities",
+          "def-temperley-lieb-closure-trace-and-partial-trace",
+          "lem-temperley-lieb-closure-trace-component-identities",
+          "def-markov-trace-on-the-type-a-hecke-tower",
+          "thm-the-ocneanu-markov-trace-exists-and-is-unique",
+          "lem-the-hecke-generators-satisfy-the-artin-relations-and-are-units",
+          "lem-the-hecke-tower-is-free-over-the-previous-level",
+          "def-exponent-sum-of-a-braid",
+          "def-closure-of-a-geometric-braid"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $A$ be an indeterminate, $R_A=\\mathbb Z[A^{\\pm1},(A^{-4}+1)^{-1}]$,\n$q=A^{-2}$, $t=q^2=A^{-4}$, $\\delta=-(q+q^{-1})=-A^2-A^{-2}$, and\n$z_0=-1/(t+1)$. For a nonempty regular diagram $D$, define\n$\\langle D\\rangle$ by summing its crossing smoothings with weights $A$ and\n$A^{-1}$ and the factor $\\delta^{k-1}$ for a state with $k$ circles. Let\n$B_n$ be the $n$-strand Artin braid group with positive geometric generators\n$\\sigma_i$ (label $i$ passes below the midpoint and label $i+1$ passes above),\ndrawn with braid parameter increasing from bottom to top; let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$. Let $H(n)$ be\nthe type-A Hecke algebra with generators $T_i$, quadratic relation\n$T_i^2=(v-1)T_i+v$, braid relations, and distant commutation; let $\\pi_n$\nsend $\\sigma_i$ to $T_i$. Its normalized Markov trace $\\operatorname{tr}_n$\nsatisfies $\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Let\n$\\mathrm{TL}_n$ be the noncrossing pairing algebra with loop value $\\delta$,\nand let $\\operatorname{Tr}_n(D)=\\delta^{c(D)}$ be the unnormalized trace,\nwhere $c(D)$ is the number of circles after joining corresponding top and\nbottom endpoints outside the rectangle; set\n$\\tau_n=\\delta^{-n}\\operatorname{Tr}_n$. For $\\beta\\in B_n$,\n$n\\ge1$, orient its closure in the braid direction. Under the specialization\n$v\\mapsto t$, $z\\mapsto z_0$ of the Hecke tower, one has\n$$\\langle\\widehat\\beta\\rangle =\\delta^{n-1}(-A)^{e(\\beta)}\\operatorname{tr}_n(\\pi_n(\\beta))\\big|_{v=t,\\,z=z_0}.$$\nThe identity gives bracket value $1$ on the one-strand identity closure. Its\npositive and negative Markov stabilizations multiply the raw bracket by\n$-A^3$ and $-A^{-3}$, respectively.",
+        "strategy": "Identifies the bracket crossing representation with a rescaled Hecke generator, proves the normalized diagram closure trace has the specialized Markov rules, and derives uniqueness after specialization from the free tower decomposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §III, printed pp. 430–432",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1–4.4, printed pp. 21–26",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §§1.1–2.3",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: the construction and specialized trace uniqueness use only finite algebra and diagram operations."
+      },
+      {
+        "id": "thm-normalized-bracket-is-an-oriented-link-invariant",
+        "kind": "theorem",
+        "title": "The normalized bracket is an oriented link invariant",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "lem-kauffman-bracket-r2-r3-identities",
+          "lem-kauffman-bracket-curl-and-writhe-correction",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-oriented-reidemeister-moves",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Countable Choice. Let $A$ be an indeterminate and let $D$\nbe a nonempty regular oriented link diagram in an oriented $3$-sphere. Fix a\nunit viewing normal $n$ and orient the projection plane $P$ so $(u,v)$ is\npositive exactly when $(n,u,v)$ is positive in the ambient $3$-space. At each\ncrossing define $\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},\nv_{\\rm under})$ from the oriented projected tangents and set\n$\\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c)$. At each crossing use the\nlocal source chart in which the over-strand runs southwest to northeast; the\nA-smoothing joins the left endpoints and the right endpoints with weight $A$,\nand the B-smoothing joins the top endpoints and the bottom endpoints with\nweight $A^{-1}$. Labels are transported by orientation-preserving changes of\nlocal coordinates. Let $C(D)$ be the finite crossing set. A state is a map\n$S:C(D)\\to\\{A,B\\}$; let $a(S)$ and $b(S)$ count its A- and B-smoothings, and\nlet $|S|$ be the number of circles after all crossings are smoothed. Set\n$$\\langle D\\rangle= \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nDefine\n$$f_D(A)=(-A^3)^{-\\operatorname{wr}(D)}\\langle D\\rangle,$$\nwhere $\\operatorname{wr}(D)$ is the sum of the determinant signs of its\noriented crossings. If two such diagrams represent ambient-isotopic\noriented links, their $f_D(A)$ values are equal. Thus $f_D$ defines an\ninvariant of nonempty oriented links.",
+        "strategy": "The local bracket lemmas prove invariance under each move, and the oriented Reidemeister theorem converts ambient isotopy into a finite move sequence under ACω.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §§III and VI, printed pp. 430–432 and 466–469",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1–4.4, printed pp. 21–26",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §§1.1–2.3",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω exactly for the oriented Reidemeister equivalence theorem; local bracket identities are choice-free."
+      },
+      {
+        "id": "thm-bracket-state-sum-matches-library-jones-specialization",
+        "kind": "theorem",
+        "title": "The bracket state sum matches the library Jones specialization",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-elementary-geometric-half-twist",
+          "def-exponent-sum-of-a-braid",
+          "def-closure-of-a-geometric-braid",
+          "def-braid-group-by-the-artin-presentation",
+          "lem-hecke-bracket-trace-dictionary-and-local-descent",
+          "thm-normalized-bracket-is-an-oriented-link-invariant",
+          "def-temperley-lieb-quotient-and-jones-specialization",
+          "thm-the-hecke-trace-construction-is-an-oriented-link-invariant",
+          "thm-alexanders-closed-braid-theorem",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link. At each crossing of a regular diagram $D$ use the\nsource chart with over-strand southwest-to-northeast: A joins left and right\nendpoints with coefficient $A$, and B joins top and bottom endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}), \\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)} \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1} \\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
+        "strategy": "The trace dictionary gives equality on braid closures; the bracket and Hecke-trace invariance theorems and Alexander’s braid-closure theorem extend it to every nonempty oriented link.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §§III and VI, printed pp. 430–432 and 466–469",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1–4.4, printed pp. 21–26",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §§1.1–2.3",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC for the library Hecke link invariant; derives ACω for the normalized bracket theorem through the stated implication."
+      }
+    ]
+  },
+  {
+    "order": 3147,
+    "id": "kauffman-bracket-state-sum-and-jones-polynomial-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Kauffman bracket state sum and the Jones polynomial — Examples and Counterexamples",
+    "companion": "kauffman-bracket-state-sum-and-jones-polynomial",
+    "requires": [
+      "kauffman-bracket-state-sum-and-jones-polynomial",
+      "temperley-lieb-diagram-algebra-and-catalan-basis",
+      "temperley-lieb-root-of-unity-and-modular-representation-theory"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-29-boundary-case",
+        "kind": "counterexample",
+        "title": "A type-I kink changes the raw bracket",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "lem-kauffman-bracket-curl-and-writhe-correction",
+          "def-oriented-reidemeister-moves",
+          "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy"
+        ],
+        "dependency_level": 3,
+        "statement": "The false statement is: let $A$ be an indeterminate and, for every nonempty\nregular oriented diagram $D$ of an unframed knot with finite crossing set\n$C(D)$, let\n$$\\langle D\\rangle=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1},$$\nwhere $a(S)$ and $b(S)$ count A- and B-smoothings, the over-strand runs\nsouthwest to northeast, A joins the left and right endpoint pairs with weight\n$A$, B joins the top and bottom endpoint pairs with weight $A^{-1}$, and\n$|S|$ is the number of state circles. Then\n$\\langle D\\rangle$ depends only on the\nambient-isotopy class of the represented oriented knot.",
+        "strategy": "Compares the bracket of a crossing-free unknot diagram with that of the diagram after a positive kink using the curl factor.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §§III and VI",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1 and 4.3",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §1.1",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: one explicit type-I move and two finite bracket evaluations suffice."
+      },
+      {
+        "id": "ex-knot-kt-29-worked-cases",
+        "kind": "example",
+        "title": "Trefoil, mirror, and unknot bracket calculations",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "alg-kauffman-bracket-state-sum",
+          "def-temperley-lieb-diagram-category",
+          "lem-temperley-lieb-generators-satisfy-local-relations",
+          "def-temperley-lieb-closure-trace-and-partial-trace",
+          "lem-hecke-bracket-trace-dictionary-and-local-descent",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-elementary-geometric-half-twist",
+          "def-closure-of-a-geometric-braid",
+          "thm-bracket-state-sum-matches-library-jones-specialization",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice. Let $A$ be an indeterminate. Let $D_+$ be the\npositive trefoil diagram, defined\nas the closure of the two-strand braid $\\sigma_1^3$, where $\\sigma_1$ is the\nanticlockwise geometric half twist with the left label passing below and the\nright label above the midpoint, and both strands are oriented in the braid\ndirection. Let $D_-$ be its mirror image, and let $U$ be the crossing-free\none-component unknot diagram. Fix a unit viewing normal $n$ and orient the\nprojection plane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive\nin the oriented ambient $3$-space. At each crossing use the local source chart\nwhose over-strand runs southwest to northeast; the A-smoothing joins the left\nendpoints and right endpoints with weight $A$, and the B-smoothing joins the\ntop endpoints and bottom endpoints with weight $A^{-1}$. Transport these\nlabels by orientation-preserving changes of local coordinates. For a diagram\n$D$, let $C(D)$ be its finite crossing set. Each state is a map\n$S:C(D)\\to\\{A,B\\}$; let $a(S)$ and $b(S)$ count the smoothing types and $|S|$\ncount its circles. Define\n$\\langle D\\rangle=\\sum_{S:C(D)\\to\\{A,B\\}}\nA^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}$ and\n$f_D(A)=(-A^3)^{-\\operatorname{wr}(D)}\\langle D\\rangle$, where writhe is the\nsum of determinant crossing signs, computed as\n$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$ after fixing a unit\nviewing normal $n$ and using the induced orientation of $P$ above. With\n$t=A^{-4}$ and Jones polynomial\n$V_D(t)=f_D(t^{-1/4})$, the values are\n$$V_{D_+}(t)=t+t^3-t^4,\\qquad V_{D_-}(t)=t^{-1}+t^{-3}-t^{-4},\\qquad V_U(t)=1.$$",
+        "strategy": "Lists and evaluates all eight states of the closure of the positive two-strand three-crossing braid, then applies writhe normalization and the mirror substitution.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §§III and VI",
+              "url": "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, §§4.1–4.4, printed pp. 21–26",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+            },
+            {
+              "title": "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §§1.1–2.3",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "The finite state calculations are choice-free; AC is used only through the library Jones-invariance comparison."
+      }
+    ]
+  }
+]
