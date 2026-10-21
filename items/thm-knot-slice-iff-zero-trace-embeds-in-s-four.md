@@ -46,30 +46,17 @@ smooth codimension-zero embedding into the standard $S^4$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth oriented knot $K\subset S^3$ with its fixed tubular
-neighborhood and preferred longitude; the standard decomposition
-$S^4=B_1\cup_{S^3}B_2$ into two $4$-balls; and the zero-trace convention.
-The tube and peripheral curve are fixed data throughout; no choice principle
-is used to select a family of them.
+**Given:** A smooth oriented knot $K\subset S^3$ with its fixed tubular neighborhood and preferred longitude; the standard decomposition $S^4=B_1\cup_{S^3}B_2$ into two $4$-balls; and the zero-trace convention. The tube and peripheral curve are fixed data throughout; no choice principle is used to select a family of them.
 
-[F1] [[def-smooth-zero-trace]]: $X_0(K)$ is $B^4$ with a $2$-handle attached
-using the framing whose pushoff represents the preferred zero-linking
-longitude.
+[F1] [[def-smooth-zero-trace]]: $X_0(K)$ is $B^4$ with a $2$-handle attached using the framing whose pushoff represents the preferred zero-linking longitude.
 
-[F2] [[def-knot-meridian-and-preferred-longitude]]: the preferred longitude is
-the degree-one peripheral class whose image in $H_1(E_K;\mathbb Z)$ is zero.
+[F2] [[def-knot-meridian-and-preferred-longitude]]: the preferred longitude is the degree-one peripheral class whose image in $H_1(E_K;\mathbb Z)$ is zero.
 
-[F3] [[lem-slice-disk-complement-h1-is-generated-by-meridian]]: for a proper
-slice disk $D$, the boundary exterior $E_K$ includes into the disk exterior $X$
-with $H_1(E_K)\to H_1(X)$ an isomorphism carrying meridian to meridian.
+[F3] [[lem-slice-disk-complement-h1-is-generated-by-meridian]]: for a proper slice disk $D$, the boundary exterior $E_K$ includes into the disk exterior $X$ with $H_1(E_K)\to H_1(X)$ an isomorphism carrying meridian to meridian.
 
-[F4] [[def-smooth-immersion-and-embedding-for-manifolds-with-boundary]]: a
-smooth embedding is a smooth immersion and homeomorphism onto its image; here
-both source and target have dimension four.
+[F4] [[def-smooth-immersion-and-embedding-for-manifolds-with-boundary]]: a smooth embedding is a smooth immersion and homeomorphism onto its image; here both source and target have dimension four.
 
-[F5] [[thm-euclidean-inverse-function-theorem]]: a $C^1$ map between open
-subsets of $\mathbb R^4$ with invertible derivative at a point is a local
-diffeomorphism there.
+[F5] [[thm-euclidean-inverse-function-theorem]]: a $C^1$ map between open subsets of $\mathbb R^4$ with invertible derivative at a point is a local diffeomorphism there.
 
 ## Proof
 
@@ -94,22 +81,29 @@ diffeomorphism there.
 
 ~~~tikz
 \begin{tikzpicture}[scale=0.9]
-  \draw[thick] (0,0) circle (1.15);
-  \node at (0,1.42) {$K\subset\partial B^4$};
-  \draw[thick] (-0.72,0.05) .. controls (-0.55,0.62) and (0.55,0.62) .. (0.72,0.05);
-  \draw[thick] (-0.72,0.05) .. controls (-0.55,-0.52) and (0.55,-0.52) .. (0.72,0.05);
-  \fill (0,0.04) circle (1.5pt);
-  \node[below] at (0,-0.05) {$p$};
-  \node at (2.15,0.38) {$\text{cone disk}$};
-  \draw[->] (1.8,0.32) -- (0.66,0.22);
-  \node at (2.15,-0.15) {$\text{2-handle core}$};
-  \draw[->] (1.8,-0.15) -- (0.65,-0.18);
-  \draw[dashed] (0,0.04) circle (0.34);
-  \node at (0,-1.55) {remove a small cap at $p$: the remainder is a slice disk};
+  % The two circles on the left are separate disks whose boundaries are identified.
+  \draw[thick] (0,0) circle (0.62);
+  \foreach \a in {0,45,...,315} {
+    \draw[thin] (0,0) -- ({0.62*cos(\a)},{0.62*sin(\a)});
+  }
+  \fill (0,0) circle (1.5pt);
+  \node[above] at (0,0.82) {$\partial D_{\mathrm{cone}}=K$};
+  \node[below] at (0,-0.82) {$D_{\mathrm{cone}}$};
+  \node[below] at (0,-0.1) {$p$};
+
+\draw[thick] (1.65,0) circle (0.62); \node[above] at (1.65,0.82) {$\partial D_{\mathrm{core}}=K$}; \node[below] at (1.65,-0.82) {$D_{\mathrm{core}}$}; \node at (0.82,1.28) {identify boundaries}; \node at (0.82,1.02) {$K$};
+
+\draw[->,thick] (2.38,0) -- (2.95,0); \node[above] at (2.66,0.05) {glue};
+
+\draw[thick] (3.75,0) circle (0.75); \draw[thick] (3.0,0) -- (4.5,0); \node[left] at (3.0,0) {$K$}; \fill (3.75,0.75) circle (1.5pt); \node[above] at (3.75,0.9) {$p$}; \node at (3.75,0.34) {cone}; \node at (3.75,-0.34) {core}; \node[below] at (3.75,-0.92) {piecewise-smooth sphere}; \draw[dashed,thick] (3.47,0.68) .. controls (3.75,0.8) .. (4.03,0.68); \node[right] at (4.02,0.7) {$\Gamma_\epsilon$};
+
+\draw[->,thick] (4.62,0) -- (5.2,0); \node[above] at (4.92,0.05) {remove cap};
+
+  \draw[thick] (5.9,0) ellipse (0.68 and 0.48);
+  \node at (5.9,0) {slice disk};
+  \node[above] at (5.9,0.55) {$\partial D=\Gamma_\epsilon$};
 \end{tikzpicture}
 ~~~
 
-The sketch records the cone-on-$K$ disk and the $2$-handle core that form the
-piecewise-smooth sphere. The dashed circle marks the cap removed near the cone
-point. The proof uses the local coordinate-ball argument above, not the sketch.
+The schematic identifies the cone disk and the $2$-handle core along their common boundary $K$, and marks the cone point and the small boundary $\Gamma_\epsilon$ created by deleting a cap. The proof uses the local coordinate-ball argument above, not the sketch.
 

@@ -50,7 +50,7 @@ Assume $\mathrm{AC}_\omega$. Every connected reduced alternating diagram $D$ of 
 
 [F1] The crossing number is the least crossing count among regular diagrams of the underlying unoriented link ([[def-crossing-number-of-link]]).
 
-[F2] A disconnected projection represents a split link ([[lem-disconnected-link-diagram-represents-a-split-link]]).
+[F2] A nonempty disconnected projection represents a split link ([[lem-disconnected-link-diagram-represents-a-split-link]]).
 
 [F3] A connected alternating diagram represents a nonsplit link ([[lem-connected-alternating-link-is-nonsplit]]).
 
@@ -61,7 +61,7 @@ Assume $\mathrm{AC}_\omega$. Every connected reduced alternating diagram $D$ of 
 [F6] A reduced alternating diagram is connected and alternating by definition ([[def-reduced-alternating-link-diagram]]).
 
 ## Proof
-1.1 Let $E$ be any regular diagram representing the same underlying unoriented link type as $L$. If its projection were disconnected, [F2] would make $L$ split, contradicting [F3] applied to $D$ and [F6]. Hence every competing diagram $E$ is connected. Orient each component of $E$ so an ambient isotopy to $L$ preserves its orientation. [given, F2, F3, F6, choose, contradiction]
+1.1 Let $E$ be any regular diagram representing the same underlying unoriented link type as $L$. The link $L$ is nonempty because $D$ is connected, so $E$ is nonempty. If its projection were disconnected, [F2] would make $L$ split, contradicting [F3] applied to $D$ and [F6]. Hence every competing diagram $E$ is connected. Orient each component of $E$ so an ambient isotopy to $L$ preserves its orientation. [given, F2, F3, F6, choose, contradiction]
 
 2.1 By [F4], $\operatorname{span}_A\langle D\rangle=4c(D)$ and $\operatorname{span}_A\langle E\rangle\le4c(E)$. The normalized bracket multiplies each raw bracket by a monomial, which shifts all exponents equally and preserves span. By [A1] and [F5], the normalized bracket values for the oriented diagrams $D$ and $E$ agree. Therefore $4c(D)\le4c(E)$ and $c(D)\le c(E)$. [A1, F4, F5, step 1.1, algebra]
 

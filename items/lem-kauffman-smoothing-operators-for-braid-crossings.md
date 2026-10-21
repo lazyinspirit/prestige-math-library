@@ -39,8 +39,8 @@ Let $\sigma_i$ be the positive geometric Artin braid crossing in a braid rectang
     \node at (0,1.35) {$I$};
   \end{scope}
   \begin{scope}[xshift=2.6cm]
-    \draw[thick] (-0.55,1) .. controls (0.25,0.55) and (0.25,-0.55) .. (0.55,-1);
-    \draw[thick] (0.55,1) .. controls (-0.25,0.55) and (-0.25,-0.55) .. (-0.55,-1);
+    \draw[thick] (-0.55,1) .. controls (-0.55,0.45) and (0.55,0.45) .. (0.55,1);
+    \draw[thick] (-0.55,-1) .. controls (-0.55,-0.45) and (0.55,-0.45) .. (0.55,-1);
     \node at (0,1.35) {$e_i$};
   \end{scope}
   \node at (1.25,0) {$\sigma_i=A I+A^{-1}e_i$};

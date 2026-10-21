@@ -1,7 +1,7 @@
 ---
 id: lem-ip-sharp-centered-eit-hone-logarithmic-stability
 kind: lemma
-title: Sharp H1 logarithmic stability from centered three-dimensional NtD data
+title: H1 logarithmic stability from centered three-dimensional NtD data
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

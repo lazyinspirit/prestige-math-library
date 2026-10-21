@@ -36,7 +36,7 @@ sources:
 
 ## Statement
 
-For the fixed root parameter, the normalized double-handlebody pairing on the admissible spine states of a marked handlebody is nondegenerate after quotienting by its radical. The inverse pairing defines the sewing map for gluing along a closed marked surface, and these maps satisfy the stated weighted Lagrangian anomaly correction.
+For the fixed root parameter, the normalized BHMV sesquilinear pairing between the relative skein modules of two complementary marked handlebodies induces a perfect pairing between their radical quotients, using the coefficient-conjugate space on the oppositely oriented side. The inverse pairing defines the sewing map for gluing along a closed marked surface, and these maps satisfy the stated weighted Lagrangian anomaly correction.
 
 ## Statement references
 
@@ -72,7 +72,7 @@ For the fixed root parameter, the normalized double-handlebody pairing on the ad
 
 1.1 On a fixed finite spine, each admissible coloring gives a finite colored graph state. Gluing a pair of handlebodies evaluates the resulting closed colored graph using the specified root bracket and anomaly normalization. [F1, F2, F3, given]
 
-2.1 By [F4], the radical quotients for the two orientations are finite-dimensional dual spaces and their normalized pairing is perfect. This is stronger than left nondegeneracy by the definition of a radical alone. Choose bases $v_i,w_j$ and let $B_{ij}$ be their pairing matrix. Its inverse gives the coevaluation tensor $\sum_{i,j}(B^{-1})_{ji}v_i\otimes w_j$; contraction with $B$ on either side is the identity. This finite linear-algebra identity is exactly the sewing contraction in the imported gluing theorem and is independent of the chosen dual bases. [F1, F2, F4, step 1.1, algebra]
+2.1 By [F4], the radical quotients for the two orientations are finite-dimensional dual spaces and their normalized sesquilinear pairing is perfect. Let $W$ be the quotient from the oppositely oriented handlebody and let $\overline W$ denote its coefficient-conjugate vector space. Then $B(v,\overline w):=B_\Sigma(v,w)$ is bilinear. This is stronger than left nondegeneracy by the definition of a radical alone. Choose bases $v_i$ and $\overline w_j$, and let $B_{ij}$ be their bilinear pairing matrix. Its inverse gives the coevaluation tensor $\sum_{i,j}(B^{-1})_{ji}v_i\otimes\overline w_j$; contraction with $B$ on either side is the identity. This finite linear-algebra identity is exactly the sewing contraction in the imported gluing theorem and is independent of the chosen dual bases. [F1, F2, F4, step 1.1, algebra]
 
 3.1 The imported weighted gluing in [F5] gives the prescribed anomaly factor, with weight law [F3]. Its parameter is the cube of the selected sixth root, not an independently chosen square root with an unchecked sign. The real-Lagrangian transport in [F5] respects composition because the intervening reference cylinders cancel. Thus the inverse-pairing sewing maps satisfy precisely the registered weighted law. No unweighted anomaly cancellation or positivity of every complex-root Hermitian form is asserted. [F3, F4, F5, step 2.1, algebra] ∎
 

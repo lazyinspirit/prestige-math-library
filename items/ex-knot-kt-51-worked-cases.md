@@ -60,8 +60,8 @@ $f_q(K)=(a_q(K),b_q(K))^{\mathsf T}$.
 
 ```tikz
 \begin{tikzpicture}[scale=0.88,line cap=round,line join=round]
-  \draw[thick] (-0.45,3.15) .. controls (-1.1,3.15) and (-1.1,-0.15) .. (-0.45,-0.15);
-  \draw[thick] (0.45,3.15) .. controls (1.1,3.15) and (1.1,-0.15) .. (0.45,-0.15);
+  \draw[thick] (-0.45,3) .. controls (-1.1,3.15) and (-1.1,-0.15) .. (-0.45,0);
+  \draw[thick] (0.45,3) .. controls (1.1,3.15) and (1.1,-0.15) .. (0.45,0);
   \draw[thick] (-0.45,0) .. controls (-0.45,0.28) and (-0.10,0.40) .. (-0.065,0.48);
   \draw[thick] (0.065,0.52) .. controls (0.10,0.60) and (0.45,0.72) .. (0.45,1);
   \draw[very thick] (0.45,0) .. controls (0.45,0.32) and (-0.45,0.68) .. (-0.45,1);

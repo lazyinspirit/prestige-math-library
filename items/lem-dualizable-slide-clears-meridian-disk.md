@@ -21,7 +21,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Theorem 2.1 proof, printed p. 585 (PDF p. 4), finite slides removing intersections with $D_R$"
+      locator: "Theorem 3.1 proof, §3, arXiv v1 PDF p. 4, finite slides removing intersections with $D_R$"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§3, dualizable-link cancellation argument"
@@ -37,24 +37,19 @@ circle for $G$ is disjoint from $D_R$.
 
 ## Statement references
 
-[Piccirillo, Theorem 2.1 proof](https://arxiv.org/pdf/1808.02923)
+[Piccirillo, Theorem 3.1 proof](https://arxiv.org/pdf/1808.02923)
 
 [Hom, §3](https://arxiv.org/pdf/2107.09171)
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, a dualizable handle link, and the stated spanning
-disk $D_R$.
+**Given:** Countable choice, a dualizable handle link, and the stated spanning disk $D_R$.
 
-[A1] Countable choice, written $\mathrm{AC}_\omega$, is
-[[def-countable-choice]].
+[A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]].
 
-[F1] [[def-dualizable-handle-link]]: both $B\cup R$ and $G\cup R$ are
-meridional pairs, and the components carry the specified zero framings.
+[F1] [[def-dualizable-handle-link]]: both $B\cup R$ and $G\cup R$ are meridional pairs, and the components carry the specified zero framings.
 
-[F2] [[def-handle-slide-of-one-k-handle-over-another]]: a slide of $G$ over
-$B$ replaces its attaching circle by a band sum with a signed framed parallel
-copy of $B$.
+[F2] [[def-handle-slide-of-one-k-handle-over-another]]: a slide of $G$ over $B$ replaces its attaching circle by a band sum with a signed framed parallel copy of $B$.
 
 ## Proof
 

@@ -3,7 +3,145 @@
 import {createHash} from 'node:crypto';
 const run='machine-learning-all-101-2026-10-19';
 const pins=new Map([["ml101-b11-3a-sign-tail-source-locator","d7a3038ad3e514af24460da75961e617f54eca5b94dffaca9f8e3a57bbf89fa1",{"location":"frontmatter","evidence":[{"path":"items/lem-finite-independent-sign-sum-tail.md","note":"Authenticated full pre-reader source binds its pre snapshot; only source title/reference changed at reader stage, with unchanged manifest and contract hashes. Primary PDF has B.2 and Lemma 29 on p.33, Theorem 31 on p.35 and proof ending p.38. Retained B.2 and amended PDF range from 32–37 to 33–38. Independently checked current full proof and every direct supplier statement; no mathematical interface change."},{"url":"https://arxiv.org/pdf/1804.11285v2","note":"B.2: physical/printed pp.33–38, zero-based PDF indices 32–37.","path":"https://arxiv.org/pdf/1804.11285v2"}]}],["ml101-b11-3a-posterior-odds-source-locator","a6904783119ad6130fecd07f21b72b9e201f82eeaf250062fec216e9a560a7cb",{"location":"frontmatter","evidence":[{"path":"items/lem-bernoulli-coordinate-posterior-odds-bound.md","note":"Authenticated full pre-reader source binds its pre snapshot; only source title/reference changed at reader stage, with unchanged manifest and contract hashes. Primary PDF has B.2 and Lemma 29 on p.33, Theorem 31 on p.35 and proof ending p.38. Retained B.2 and amended PDF range from 32–37 to 33–38. Independently checked current full proof and every direct supplier statement; no mathematical interface change."},{"url":"https://arxiv.org/pdf/1804.11285v2","note":"B.2: physical/printed pp.33–38, zero-based PDF indices 32–37.","path":"https://arxiv.org/pdf/1804.11285v2"}]}],["ml101-b11-3a-dimension-radius-borel-hypothesis","f5c81932005b0748a04a47f00200bcdfc49b1e4ce0b3b24b41e81e7abd3a2427",{"location":"statement","subclass":"missing-hypothesis"}],["ml101-b11-3a-natural-robust-borel-hypothesis","9becd8d6eb02c3e9e0340daad5f9003bcde7c7cd7d975b1faae61000184ca38c",{"location":"statement","subclass":"missing-hypothesis"}],["machine-learning-all-101-2026-10-19-3a-b75-entropy-lemma-chain-citation","8542e0ed96d99a23b3f1513d529e3a9e462cdd4b01d48daf9f12e187129353c2",{"location":"proof-step"}],["machine-learning-all-101-2026-10-19-3a-b75-entropy-example-chain-citation","30480dacb2e207f3cc88fecade0cba591622474c05b60d9b10ccb2e2b4ba87bf",{"location":"proof-step"}],["ml101-b83-3a-lem-ucrl2-evi-termination","9f651855cc0cb2a3b8d6ee0741e0a17b52a30bdfab808350766b8442fa42f0c7",{"location":"proof-step"}],["ml101-b83-3a-thm-communicating-mdp-common-optimal-average-reward","26804b20f9b8ba5f3683e9198d3ce170ff1d6700bbdd3059af8ec30e91889378",{"location":"proof-step"}],["ml101-b83-3a-thm-ucrl2-high-probability-regret","792b21c92d9b99f9fbf0a8c1f0e19b6edb7193e98b90b62156b92293d1bbf705",{"location":"proof-step"}],["ml101-b83-3a-reader-page-layout-false-positive","f9f8050620a6912d5cace628a98044c38327058ebcc88c5b00f30e4cddf611e2",{"location":"frontmatter"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-1","f048983565bd99053ad0b95d1d213edbca264b459a8e0a88282d563250aa90a7",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-2","1e2e5982ab29efedfcda81ceb445c31e6d16b36edc3d55412556fec6d61274f2",{"location":"statement"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-3","a0d1b49319fe43d71784c6443b6c901cedad1c892c744850cdf2db3cdcf9bb81",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-4","8d5bc7495d3a2d4defde72ade2b05b6de4bca3d14935cd0c3305c5fb61cd0758",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-5","07d523e21e8649d17948e168ddfbcec174fb18eee73f4e4705136d52f4d6e02c",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-8","adac8df40733a6de9d2924f4a5942e073df99d03a368af97705920b568333861",{"location":"remark"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-9","17df5f23d62f7f394a552b61d13839de559f11c390c362ae1a34c15008022a6b",{"location":"remark"}],["machine-learning-all-101-2026-10-19-3a-b101-cluster-assumption-qualification","9873005fe33ae90e3fc48ffeb11e32fa3eadd312ce3dd18efcaf6630accd8f9d",{"location":"remark","subclass":"false-or-overstrong-statement"}]].map(([id,sha256,fields])=>[id,{sha256,fields}]));
+// Exactly nine original rows, ten source-defined metadata interpretations.
+// Root supplies digests ONLY; neither digests nor runtime metadata define edits.
+const ipRun="inverse-problems-knot-theory-all-109-2026-10-19";
+const ipExpected=new Map([
+  [
+    "ipkt109-b11-3a-selector-measurability",
+    {
+      "location": {
+        "before": "Proof 1.1",
+        "normal_form": "proof-step"
+      }
+    }
+  ],
+  [
+    "ipkt109-b11-3a-gradiometry-multiplicity",
+    {
+      "location": {
+        "before": "Example and Verification",
+        "normal_form": "proof-step"
+      }
+    }
+  ],
+  [
+    "ipkt109-b11-3a-heat-attribution",
+    {
+      "location": {
+        "before": "Example and Verification",
+        "normal_form": "proof-step"
+      }
+    }
+  ],
+  [
+    "ipkt109-b32-3a-nonempty-1",
+    {
+      "repair_cost": {
+        "before": "reader-repair+alpha-review",
+        "normal_form": "inline-fix"
+      }
+    }
+  ],
+  [
+    "ipkt109-b32-3a-nonempty-2",
+    {
+      "repair_cost": {
+        "before": "reader-repair+alpha-review",
+        "normal_form": "inline-fix"
+      }
+    }
+  ],
+  [
+    "ipkt109-b32-3a-nonempty-3",
+    {
+      "repair_cost": {
+        "before": "reader-repair+alpha-review",
+        "normal_form": "inline-fix"
+      }
+    }
+  ],
+  [
+    "ipkt109-b75-3a-cycle-reader-false-positive",
+    {
+      "location": {
+        "before": "proof",
+        "normal_form": "frontmatter"
+      }
+    }
+  ],
+  [
+    "ipkt109-b75-3a-cycle-flagged-false-positive",
+    {
+      "location": {
+        "before": "proof",
+        "normal_form": "frontmatter"
+      }
+    }
+  ],
+  [
+    "ipkt109-b75-3a-historical-top-step-references",
+    {
+      "location": {
+        "before": "proof",
+        "normal_form": "proof-step"
+      },
+      "subclass": {
+        "before": "incorrect-step-reference",
+        "normal_form": "citation-inaccurate"
+      }
+    }
+  ]
+]);
+const ipPins=new Map([
+  [
+    "ipkt109-b11-3a-selector-measurability",
+    "94de9a5e95b7a7f457291fd58a4a7aeab32e1dbf2eea788c7b64fd052caae036"
+  ],
+  [
+    "ipkt109-b11-3a-gradiometry-multiplicity",
+    "90d2d2fc39ec0ab6d80028567809362b9437b5bca5b50b019fdafd1b7cd9b235"
+  ],
+  [
+    "ipkt109-b11-3a-heat-attribution",
+    "4906a4d66b457ac0e612c71b2250e4fd9712df4dc98b7dab32058ef170a40de3"
+  ],
+  [
+    "ipkt109-b32-3a-nonempty-1",
+    "de424544ef123961920df7f2e41d9375880d4aa4affd5a302eb3d87bb794281a"
+  ],
+  [
+    "ipkt109-b32-3a-nonempty-2",
+    "2d52bebb992ce69485bc2053f00b3fc7e3e8a74a6e93cd2264b759d618b8e289"
+  ],
+  [
+    "ipkt109-b32-3a-nonempty-3",
+    "a1c8448614c621513cc56c3046dad6fdcd47a8cf4c94295b29e5c5b142f7cf4f"
+  ],
+  [
+    "ipkt109-b75-3a-cycle-reader-false-positive",
+    "8d412bcedd6474a4ba72488876e52d89aaf2630263fd29654908292eb0436b03"
+  ],
+  [
+    "ipkt109-b75-3a-cycle-flagged-false-positive",
+    "ea99a45b6466a25b00604831b2640f22ccda143ed2780670577e8e2450f28112"
+  ],
+  [
+    "ipkt109-b75-3a-historical-top-step-references",
+    "494fd0207638913c6fd612e71bb1505d51a6ef3640c9e433b9f9094badde956d"
+  ]
+]);
+function ipHistoricalMetadata(row){
+ const edits=ipExpected.get(row.defect_id),digest=ipPins.get(row.defect_id);
+ if(!edits||!/^[a-f0-9]{64}$/.test(digest??''))return row;
+ if(createHash('sha256').update(JSON.stringify(row)).digest('hex')!==digest)return row;
+ if(Object.entries(edits).some(([field,interpretation])=>row[field]!==interpretation.before))return row;
+ const projected={...row};
+ for(const [field,interpretation]of Object.entries(edits))projected[field]=interpretation.normal_form;
+ return projected;
+}
 export function historicalMetadataRow(row){
+ if(row.run===ipRun)return ipHistoricalMetadata(row);
  const pin=pins.get(row.defect_id);
  if(row.run!==run||!pin)return row;
  if(createHash('sha256').update(JSON.stringify(row)).digest('hex')!==pin.sha256)return row;

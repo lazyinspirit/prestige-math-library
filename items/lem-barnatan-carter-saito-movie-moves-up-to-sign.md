@@ -36,9 +36,9 @@ sources:
     - title: "Magnus Jacobsson, An invariant of link cobordisms from Khovanov homology, Lemmas 5.1–5.2"
       url: "https://arxiv.org/pdf/math/0206303"
       locator: "Printed pp.1236–1244; distant critical points and the fifteen Carter–Saito move calculations"
-    - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §7"
+    - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §§6.3 and 7.1"
       url: "https://arxiv.org/pdf/math/9908171v2"
-      locator: "§7.1; the movie-level map construction and local algebra maps"
+      locator: "§6.3, printed pp.39–40, gives the movie-level maps; §7.1 gives the c=0 integral specialization"
 ---
 
 ## Statement
@@ -71,7 +71,7 @@ Assume countable choice. For each Carter–Saito movie move, the two movie segme
 
 [Jacobsson, *An invariant of link cobordisms from Khovanov homology*, Lemmas 5.1–5.2](https://arxiv.org/pdf/math/0206303)
 
-[Khovanov, *A categorification of the Jones polynomial*, §7](https://arxiv.org/pdf/math/9908171v2)
+[Khovanov, *A categorification of the Jones polynomial*, §§6.3 and 7.1](https://arxiv.org/pdf/math/9908171v2)
 
 ## Facts & Assumptions
 

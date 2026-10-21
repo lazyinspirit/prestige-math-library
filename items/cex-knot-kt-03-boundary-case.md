@@ -28,7 +28,7 @@ sources:
       locator: "§3.3, the writhe and Reidemeister-I discussion, pp. 26–27"
     - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9"
       url: "https://arxiv.org/pdf/1910.10257v6"
-      locator: "§3, Definitions 3.7–3.9 and the type-I framing change, pp. 8–9"
+      locator: "§3, Definitions 3.7–3.8 and Proposition 3.9; type-I framing discussion, pp. 8–9"
 ---
 
 ## Statement refuted

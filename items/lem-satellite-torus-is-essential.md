@@ -1,7 +1,7 @@
 ---
 id: lem-satellite-torus-is-essential
 kind: lemma
-title: "The companion torus of a nonproduct satellite is essential"
+title: "Essential companion tori for nontrivial companions and incompressible nonproduct patterns"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

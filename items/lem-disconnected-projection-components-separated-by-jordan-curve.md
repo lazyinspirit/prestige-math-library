@@ -25,7 +25,7 @@ sources:
 
 ## Statement
 
-Let $P\subset S^2$ be the finite projection graph of a regular link diagram. If $P$ is disconnected, there is a simple closed curve $\gamma\subset S^2\setminus P$ such that $P$ has points on both sides of $\gamma$.
+Let $P\subset S^2$ be the nonempty finite projection graph of a regular link diagram. If $P$ is disconnected, there is a simple closed curve $\gamma\subset S^2\setminus P$ such that $P$ has points on both sides of $\gamma$.
 
 ## Statement references
 
@@ -35,7 +35,7 @@ Let $P\subset S^2$ be the finite projection graph of a regular link diagram. If 
 
 ## Facts & Assumptions
 
-**Given:** A finite disconnected projection graph $P\subset S^2$.
+**Given:** A nonempty finite disconnected projection graph $P\subset S^2$.
 
 [F1] A regular projection is a finite graph with finitely many transverse double points and no triple points; crossingless link components are embedded circles ([[def-regular-oriented-link-diagram]]).
 
@@ -46,4 +46,4 @@ Let $P\subset S^2$ be the finite projection graph of a regular link diagram. If 
 
 2.1 Choose points $p_0\in P_0$ and $p_1$ in another component of $P$. Choose a piecewise-smooth path from $p_0$ to $p_1$ transverse to the finite smooth boundary $\partial N$. Its endpoints lie respectively in the interior of $N$ and outside $N$, so it crosses $\partial N$ an odd number of times. The boundary has finitely many disjoint simple closed components; at least one, call it $\gamma$, is met an odd number of times. The curve $\gamma$ lies in $S^2\setminus P$, since $N$ contains $P_0$ in its interior and misses every other component. By [F2], every transverse crossing of $\gamma$ switches sides, so $p_0$ and $p_1$ lie on opposite sides of $\gamma$. [given, F1, F2, step 1.1, construct]
 
-3.1 The construction uses finitely many neighborhoods and applies also when $P_0$ is a crossingless circle; therefore it proves the asserted separation for every disconnected regular projection. Its chosen separating curve is a smooth boundary component of $N$. [given, step 1.1, step 2.1, cases] ∎
+3.1 The construction uses finitely many neighborhoods and applies also when $P_0$ is a crossingless circle; therefore it proves the asserted separation for every nonempty disconnected regular projection. Its chosen separating curve is a smooth boundary component of $N$. [given, step 1.1, step 2.1, cases] ∎

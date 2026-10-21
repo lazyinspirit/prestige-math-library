@@ -47,7 +47,7 @@ The Magnus expansion is the group homomorphism
 $$E:F_r\longrightarrow \mathbb Z\langle\!\langle X_1,\ldots,X_r\rangle\!\rangle^\times, \qquad E(x_i)=1+X_i.$$
 It sends $x_i^{-1}$ to $(1+X_i)^{-1}=\sum_{k\ge0}(-1)^kX_i^k$. For an
 integer $d\ge0$, calculations through degree $d$ use the truncated ring
-$R_d=\mathbb Z\langle X_1,\ldots,X_r\rangle/\mathfrak m^{d+1}$. As a
+$R_d=\mathcal A_r/\mathfrak m^{d+1}$. As a
 $\mathbb Z$-module it has the finite monomial basis of words of length at most
 $d$. In $R_d$, the inverse of $1+A$ for $A\in\mathfrak m$ is the finite sum
 $1-A+A^2-\cdots+(-A)^d$.

@@ -100,9 +100,11 @@ The diagram illustrates compatible access paths for $r=3$. Step 1.1 uses the sup
 \draw[thick] (-0.85,0.55) circle (0.28);
 \draw[thick] (0.85,0.55) circle (0.28);
 \draw[thick] (0,-0.75) circle (0.28);
-\draw[dashed,->] (-0.85,0.27) -- (-1.35,-1.45);
-\draw[dashed,->] (0.85,0.27) -- (1.35,-1.45);
-\draw[dashed,->] (0,-1.03) -- (0,-1.95);
+\draw[dashed,->] (0,-2) -- (-0.4,-1.76) -- (-1.2,-1.55) -- (-1.45,-1.0) -- (-1.35,-0.5) -- (-1.1,0) -- (-0.85,0.27);
+\draw[dashed,->] (0,-2) -- (0.4,-1.76) -- (1.2,-1.55) -- (1.45,-1.0) -- (1.35,-0.5) -- (1.1,0) -- (0.85,0.27);
+\draw[dashed,->] (0,-2) -- (0,-1.03);
+\fill (0,-2) circle (1.5pt);
+\node[below] at (0,-2.05) {$*$};
 \node at (-0.85,0.55) {$p_1$};
 \node at (0.85,0.55) {$p_2$};
 \node at (0,-0.75) {$p_3$};

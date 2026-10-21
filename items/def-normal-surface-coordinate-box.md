@@ -40,13 +40,13 @@ A standard schematic records the two disk shapes in a tetrahedron. The vertices 
 \coordinate (A) at (0,0); \coordinate (B) at (2.7,0); \coordinate (C) at (1.35,2.2); \coordinate (D) at (1.45,0.95);
 \draw (A)--(B)--(C)--cycle; \draw (A)--(D)--(B); \draw (C)--(D);
 \node[below left] at (A) {$A$}; \node[below right] at (B) {$B$}; \node[above] at (C) {$C$}; \node[right] at (D) {$D$};
-\draw[red,thick] (0.39,0.20)--(0.68,0.30)--(0.65,0.45)--(0.43,0.48)--cycle;
+\draw[red,thick] (0.55,0.00)--(0.551,0.361)--(0.3375,0.55)--cycle;
 \node[red] at (0.30,0.70) {triangle};
 \begin{scope}[xshift=4.1cm]
 \coordinate (A) at (0,0); \coordinate (B) at (2.7,0); \coordinate (C) at (1.35,2.2); \coordinate (D) at (1.45,0.95);
 \draw (A)--(B)--(C)--cycle; \draw (A)--(D)--(B); \draw (C)--(D);
 \node[below left] at (A) {$A$}; \node[below right] at (B) {$B$}; \node[above] at (C) {$C$}; \node[right] at (D) {$D$};
-\draw[red,thick] (0.72,0.14)--(1.98,0.14)--(2.03,0.29)--(0.68,0.30)--cycle;
+\draw[red,thick] (0.483,0.317)--(0.45,0.733)--(2.25,0.733)--(2.283,0.317)--cycle;
 \node[red] at (1.35,0.62) {quadrilateral};
 \end{scope}
 \end{tikzpicture}

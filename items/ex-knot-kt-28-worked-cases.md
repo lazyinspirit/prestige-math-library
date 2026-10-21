@@ -15,6 +15,7 @@ deps:
   - def-knot-connected-sum-and-prime-knot
   - lem-general-knot-reverse-mirror-sum-is-ribbon
   - lem-reverse-mirror-sum-has-a-ribbon-immersion
+  - lem-ribbon-immersion-and-no-maximum-disk-presentations-are-equivalent
   - def-quandle-and-knot-coloring
   - lem-dihedral-operation-is-a-quandle
   - lem-dihedral-fox-coloring-count-is-reidemeister-invariant
@@ -67,6 +68,8 @@ Assume ACω. Let $T$ be the standard right-handed trefoil, represented by the cl
 
 [F6] Resolving a ribbon immersion gives a smooth proper disk with the same boundary. ([[lem-ribbon-singularity-local-resolution]])
 
+[F7] Under ACω, a ribbon immersion yields a no-maximum disk movie with the stipulated radial product boundary collar. ([[lem-ribbon-immersion-and-no-maximum-disk-presentations-are-equivalent]])
+
 [F2] The reverse mirror is reflection of the knot followed by reversal of its knot orientation, and the connected sum uses the fixed orientation-matching gluing convention. ([[def-reverse-mirror-of-oriented-knot]], [[def-knot-connected-sum-and-prime-knot]])
 
 [F3] A Fox 3-coloring assigns an element of $\mathbb F_3$ to each diagram arc and satisfies $2x_o=x_i+x_j$ at every crossing. ([[def-quandle-and-knot-coloring]], [[lem-dihedral-operation-is-a-quandle]])
@@ -81,7 +84,7 @@ Assume ACω. Let $T$ be the standard right-handed trefoil, represented by the cl
 
 **Given:** ACω, $T$ the standard right-handed trefoil, $T^\dagger$, and the stated connected-sum datum.
 
-1.1 Apply [F1] with $K=T$. Its explicit ribbon immersion has oriented boundary $T\#T^\dagger$, so the square knot is ribbon by the A-page definition. Apply [F6] to that immersion to obtain a smooth properly embedded disk in $B^4$ with the same boundary, proving smooth sliceness as well. The separate radial-disk conclusion of [F1] also gives a no-maximum disk movie; no implication from that movie to an immersion is needed here. [given, F1, F6, A1, construct]
+1.1 Apply [F1] with $K=T$. Its explicit ribbon immersion has oriented boundary $T\#T^\dagger$, so the square knot is ribbon by the A-page definition. Apply [F6] to that immersion to obtain a smooth properly embedded disk in $B^4$ with the same boundary, proving smooth sliceness as well. Applying [F7] to the same immersion also gives a no-maximum disk movie with its required radial product boundary collar. [given, F1, F6, F7, A1, construct]
 
 1.2 In the two-strand braid chart with parameter increasing from bottom to top, let $S$ be the color transfer for the positive generator whose overstrand runs from lower left to upper right. By [F3], $S(a,b)=(2a-b,a)$; the inverse crossing has transfer $S^{-1}$. Direct calculation gives $S^2(a,b)=(3a-2b,2a-b)$ and $S^3(a,b)=(4a-3b,3a-2b)=(a,b)$ in $\mathbb F_3^2$. Hence $S^{-3}$ is also the identity. Starting each trefoil tangle with the ordered pair $(0,1)$ therefore satisfies the braid closure conditions for both the trefoil and its mirror. The first arc in each closure has color $0$; choose those arcs for the connected-sum datum. The colorings glue because the shared arc colors agree, and the color-$1$ arcs remain, giving a nonconstant Fox 3-coloring of the square knot. [F2, F3, construct, algebra]
 

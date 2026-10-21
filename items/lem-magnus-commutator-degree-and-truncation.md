@@ -43,14 +43,13 @@ of the representative word.
 
 ## Facts & Assumptions
 
-**Given:** The free group, lower-central series, Magnus map, and augmentation
-ideal from the preceding definition.
+**Given:** The free group, lower-central series, Magnus map, and augmentation ideal from the preceding definition.
 
-[F1] The series map $E$ is a group homomorphism, $E(F_r)\subseteq1+\mathfrak m$,
-and $\mathfrak m^a\mathfrak m^b\subseteq\mathfrak m^{a+b}$.
-[[def-lower-central-series-and-magnus-expansion-for-links]]
+[F1] The series map $E$ is a group homomorphism, $E(F_r)\subseteq1+\mathfrak m$, and $\mathfrak m^a\mathfrak m^b\subseteq\mathfrak m^{a+b}$. [[def-lower-central-series-and-magnus-expansion-for-links]]
 
 ## Proof
+
+**Given:** The free group $F_r$, its Magnus expansion $E$, and the filtered-ring data from the Definition.
 
 1.1 In any filtered associative ring, write $U=1+a$ and $V=1+b$ with $a\in\mathfrak m^p$ and $b\in\mathfrak m^q$. Since $U,V$ are units, $$ [U,V]-1=(UV-VU)U^{-1}V^{-1}=(ab-ba)U^{-1}V^{-1}. $$ By [F1], $ab-ba\in\mathfrak m^{p+q}$, and multiplication by units preserves this two-sided ideal. Therefore $[U,V]\in1+\mathfrak m^{p+q}$. Applying this to $U=E(u)$ and $V=E(v)$ proves the first claim. [F1, algebra]
 

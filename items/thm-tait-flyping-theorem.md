@@ -31,7 +31,7 @@ sources:
       url: https://doi.org/10.1016/0040-9383(84)90023-5
     - title: Thomas Kindred, A geometric proof of the flyping theorem, arXiv:2008.06490v3, full alternative proof for prime links
       url: https://arxiv.org/pdf/2008.06490v3
-    - title: "Ben Fontaine, To the Chairman of Examiners for Part III Mathematics, §2.2, Definitions 2.8–2.9 and Theorem 2.10, pp. 11–12; full exposition of the flat pair maps and marked prime theorem"
+    - title: "Bruce Fontaine, To the Chairman of Examiners for Part III Mathematics, §2.2, Definitions 2.8–2.9 and Theorem 2.10, pp. 11–12; full exposition of the flat pair maps and marked prime theorem"
       url: https://pi.math.cornell.edu/~bfontain/partiii.pdf
 ---
 

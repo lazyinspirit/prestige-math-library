@@ -24,13 +24,13 @@ landmark: false
 proof_strategy: direct
 provenance:
   statement: literature-derived
-  proof: ai-generated
+  proof: ai-altered
 sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice, Annals of Mathematics 191 (2020), 581–591"
       url: "https://annals.math.princeton.edu/wp-content/uploads/annals-v191-n2-p05-s.pdf"
       doi: "10.4007/annals.2020.191.2.5"
-      locator: "Proposition 1.4 printed p.583; Figure 2 p.584; §2 pp.584–586, Theorem 2.1, Proposition 2.2 and proof of Proposition 1.4; Figure 4 and caption pp.587–588. External terminal framed identification only; no replay of lost local arc-map records. Read extent: those statements/proofs, §2 and Figures 2/4, not the entire paper."
+      locator: "Proposition 1.4 printed p.583; Figure 2 p.584; §2 pp.584–586, Theorem 2.1, Proposition 2.2 and proof of Proposition 1.4; Figure 4 and caption pp.587–588. External zero-trace equality, independently of the local endpoint encoding; no replay of lost local arc-map records. Read extent: those statements/proofs, §2 and Figures 2/4, not the entire paper."
     - title: "Lisa Piccirillo, The Conway knot is not slice, arXiv:1808.02923v1"
       url: "https://arxiv.org/pdf/1808.02923"
       locator: "Base URL retrieved v1 (8 August 2018), nine PDF pages: Proposition 1.4 p.3, §3 pp.4–5, Figure 2 p.3 and Figure 4 pp.8–9. Published numbering and terminal import use the official Annals reference above."
@@ -54,57 +54,33 @@ defining $C$ and $K_P$.
 
 ## Facts & Assumptions
 
-**Given:** The literal Conway and Figure 2 partner diagrams, with the handle
-and zero-framing conventions of the Statement, and full AC.
+**Given:** The literal Conway and Figure 2 partner diagrams, with the handle and zero-framing conventions of the Statement, and full AC.
 
 [A1] The Axiom of Choice, written AC, is assumed. [[def-axiom-of-choice]]
 
 [A2] AC implies dependent choice and hence countable choice $\mathrm{AC}_\omega$; this supplies every retained local countable-choice hypothesis. [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]]
 
-[F1] [[def-piccirillo-conway-pair]] specifies the two diagram isotopy classes
-$C$ and $K_P$; neither is identified by its invariants.
+[F1] [[def-piccirillo-conway-pair]] specifies the two diagram isotopy classes $C$ and $K_P$; neither is identified by its invariants.
 
-[F2] [[def-dualizable-handle-link]] requires the two meridional sublinks and
-zero green–blue linking.
+[F2] [[def-dualizable-handle-link]] requires the two meridional sublinks and zero green–blue linking.
 
-[F3] [[thm-dualizable-handle-link-has-two-knot-trace-descriptions]] supplies
-the geometric finite-slide and cancellation construction for such links.
-We use its actual framed handle calculus, rather than deducing a meridional
-sublink from a linking number.
+[F3] [[thm-dualizable-handle-link-has-two-knot-trace-descriptions]] supplies the geometric finite-slide and cancellation construction for such links. We use its actual framed handle calculus, rather than deducing a meridional sublink from a linking number.
 
-[F4] Finite encodings accompanying this proof are the previously established
-`alternate-trace-certificate.json.gz` for the common source construction
-through $K$, the `lm-local-worker` band/cancellation and $L$–$M$ records,
-and the `conway-named` records `head-three-returns-prefix.json` and
-`coupon-suffix-01.json`, `coupon-suffix-02.json`, `coupon-suffix-03.json`.
-The last record includes the complete prescribed-exterior ribbon isomorphism
-to literal $N$. The locally retained records end at literal $N$; the historical
-$N$–$O$ and $O$–Figure 2 machine-readable records are unavailable.
-The terminal framed identification is instead the explicitly imported
-published input [F8]. No recovered arc map or fresh replay is claimed.
-The local records and their exact research locations remain given under
-Proof evidence.
+[F4] Finite encodings accompanying this proof are the previously established `alternate-trace-certificate.json.gz` for the common source construction through $K$, the `lm-local-worker` band/cancellation and $L$–$M$ records, and the `conway-named` records `head-three-returns-prefix.json` and `coupon-suffix-01.json`, `coupon-suffix-02.json`, `coupon-suffix-03.json`. The last record includes the complete prescribed-exterior ribbon isomorphism to literal $N$. The locally retained records end at literal $N$; the historical $N$–$O$ and $O$–Figure 2 machine-readable records are unavailable. The equality of the named zero-traces is instead the explicitly imported published input [F8], independently of the local endpoint. No recovered arc map or fresh replay is claimed. The local records and their exact research locations remain given under Proof evidence.
 
-[F5] [[lem-knot-exterior-h1-is-generated-by-meridian]]: for every component
-$L$ with its chosen tube and positive meridian,
-$H_1(E_L;\mathbb Z)=\mathbb Z[\mu_L]$.
+[F5] [[lem-knot-exterior-h1-is-generated-by-meridian]]: for every component $L$ with its chosen tube and positive meridian, $H_1(E_L;\mathbb Z)=\mathbb Z[\mu_L]$.
 
-[F6] [[def-knot-meridian-and-preferred-longitude]]: a degree-one parallel
-whose exterior homology class is zero is a preferred longitude.
+[F6] [[def-knot-meridian-and-preferred-longitude]]: a degree-one parallel whose exterior homology class is zero is a preferred longitude.
 
-[F7] [[thm-oriented-linking-number-scan-terminates-and-is-correct]] and
-[[lem-linking-number-even-sum-and-reidemeister-invariance]]: the scan returns
-the integer half-sum of mixed crossing signs, and the half-sum is invariant
-under oriented link isotopy.
+[F7] [[thm-oriented-linking-number-scan-terminates-and-is-correct]] and [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the scan returns the integer half-sum of mixed crossing signs, and the half-sum is invariant under oriented link isotopy.
 
-[F8] **External terminal framed identification:** Piccirillo, *The Conway knot is not slice*, Annals of Mathematics 191 (2020), Proposition 1.4 (p.583) and its proof in §2 (p.586), with Figure 2 (p.584) and Figure 4 (pp.587–588), supplies the terminal identification of the Figure 4 construction with the named knot $K'$ of Figure 2. The Figure 4 caption states that arrows denote handle slides, the $L$–$M$ transition includes cancellation, and the other changes are isotopies; in particular the terminal $N$–$O$ passage is an isotopy in this framed handle presentation. The terminal single attaching circle is marked $0$, and panel $O$ is the Figure 2 knot. This is used as an external framed-geometric input at the source's displayed zero-framing convention, not as a locally reconstructed complete arc map. The published source is classical differential topology and does not state a ZF or weakened-choice theorem; no such foundational improvement is inferred from its omission of an axiom discussion.
+[F8] **External zero-trace equality:** Piccirillo, *The Conway knot is not slice*, Annals of Mathematics 191 (2020), Proposition 1.4 (p.583), with its proof in §2 (p.586), establishes $X_0(C)\cong X_0(K_P)$ for the Conway knot and the named Figure 2 knot (p.584), using the zero-framed trace convention of Definition 1.2. This full trace equality is imported as an established classical smooth result, independently of any identification of the local `N-pd.json` with Figure 4 panel $N$. The published Figure 4 and caption (pp.587–588) describe its handle construction, but supply no correspondence to our local encoding. Read extent: Definition 1.2, Lemma 1.3, Proposition 1.4 and its proof, §2, and Figures 2/4; no full-paper audit or replay of the local movies is claimed. Full AC is retained; no weakened-choice version is inferred.
 
 ## Proof
 
-**Proof technique:** direct framed handle construction, with complete finite
-attaching-circle movies.
+**Proof technique:** local framed handle construction and the external zero-trace equality [F8].
 
-1.1 By [A1] and [A2], every countable-choice premise of the retained local diagram, linking, and handle arguments is available. The published terminal input [F8] is used in the adopted classical full-AC scope, without asserting that the source proves the same result in ZF or under countable choice alone. The local constructions and their original countable-choice strength are preserved. [A1, A2, F8, given]
+1.1 By [A1] and [A2], every countable-choice premise of the retained local diagram, linking, and handle arguments is available. The published zero-trace equality [F8] is used in the adopted classical full-AC scope, without asserting that the source proves the same result in ZF or under countable choice alone. The local constructions and their original countable-choice strength are preserved. [A1, A2, F8, given]
 
 1.2 Let $K,J$ be any disjoint oriented knot components in the links below, and let $D$ be a regular oriented diagram of $K\cup J$. The inclusion $E_K\hookrightarrow S^3\setminus K$ is a homotopy equivalence by radial retraction in the punctured normal tube. By [F5], write $[J]=m[\mu_K]$. Let $\ell(D)$ be the half-sum of mixed crossing signs; [F7] makes it an integer independent of the chosen diagram. At a mixed crossing where $K$ passes over $J$ with sign $\epsilon$, switch it. The half-sum changes by $-\epsilon$. In the crossing ball, straighten $K$ to the positive $x$-axis: for $\epsilon=+1$ the old under-arc of $J$ runs in the positive $y$ direction, and the new arc minus the old arc represents the negative positive-meridian class; for $\epsilon=-1$ the class reverses. Thus the switch changes $[J]$ by $-\epsilon[\mu_K]$, so it changes $m$ by the same integer. After all such switches, $J$ passes over $K$ at every projected intersection. Raise $J$ above $K$ and move its projection into a disjoint disk. This is an isotopy in the complement of $K$; the final pair has a split diagram, so its half-sum is zero, and $[J]=0$ because it lies in a $3$-ball disjoint from $K$. Tracking the equal changes proves $\ell(D)=m$. In particular, when $J=L_f$ is a framed degree-one parallel of an attaching component $L$, its framing integer is this meridian coefficient. A computed framing value zero then gives the preferred longitude condition by [F6]. [F5, F6, F7, given, construct]
 
@@ -130,30 +106,12 @@ attaching-circle movies.
 
 11.1 Transport the coupon by these twelve successive RIII moves: $\{53,103,105\},\{54,101,105\},\{55,101,103\}, \{56,103,105\},\{57,101,105\},\{58,101,103\}, \{53,102,104\},\{54,100,104\},\{55,100,102\}, \{56,102,104\},\{57,100,104\},\{58,100,102\}$. They pass the two three-crossing return patterns through the six-crossing box in its actual three-strand chart. Then use $\{26,101,103\},\{26,100,102\},\{31,101,105\},\{31,100,104\}$. The resulting actual empty bigon removes crossings $106,107$ by RII, and the actual empty monogon removes $103$ by RI. Perform RIII at $\{105,102,104\}$ and remove the resulting empty monogon $104$ by RI. These twenty moves, following step 10.1's sixteen, give a 62-crossing endpoint. Their supports lie in the remaining patch, so every fixed exterior collar and the carried zero-normal strip are retained. [F4, step 2.1, step 10.1, construct]
 
-12.1 This endpoint is literal $N$, with its marked port data. The explicit ribbon isomorphism in `coupon-suffix-03.json` is anchored at source crossing 6 mapping to $N48$ and agrees with the prescribed map of all 26 exterior crossings. It preserves all 248 halfedge adjacencies, even crossing rotations and under/over parities. Following opposite halfedges from each of the twelve collars gives all six complete proper-arc visit words of literal $N$, including both long core arcs, not just their endpoint pairings. The six packet roles are $26\mapsto1$, $31\mapsto7$, $100\mapsto5$, $101\mapsto6$, $102\mapsto2$, $105\mapsto0$. In particular source crossings 26 and 31 survive in this actual movie; the earlier speculative prescription to delete them is unnecessary. The fixed-exterior isomorphism supplies the final relative planar redraw. Thus the preceding transport and endpoint identification prove the complete framed $M$–$N$ attaching isotopy. [F4, step 2.1, step 11.1, construct]
+12.1 This endpoint is the local graph $N$ encoded by `N-pd.json`, with its marked port data. The explicit ribbon isomorphism in `coupon-suffix-03.json` is anchored at source crossing 6 mapping to $N48$ and agrees with the prescribed map of all 26 exterior crossings. It preserves all 248 halfedge adjacencies, even crossing rotations and under/over parities. Following opposite halfedges from each of the twelve collars gives all six complete proper-arc visit words of literal $N$, including both long core arcs, not just their endpoint pairings. The six packet roles are $26\mapsto1$, $31\mapsto7$, $100\mapsto5$, $101\mapsto6$, $102\mapsto2$, $105\mapsto0$. In particular source crossings 26 and 31 survive in this actual movie; the earlier speculative prescription to delete them is unnecessary. The fixed-exterior isomorphism supplies the final relative planar redraw. Thus the preceding transport and endpoint identification prove the framed attaching isotopy to that local $N$ graph; they do not bind it to the published panel $N$. [F4, step 2.1, step 11.1, construct]
 
-13.1 At the literal $N$ endpoint established in step 12.1, apply the published terminal framed identification [F8]. It identifies this panel with panel $O$ by the source's terminal isotopy, and panel $O$ is the named Figure 2 diagram of $K_P$. The zero framing is retained as part of that framed handle presentation. This step imports that specific established geometric identification; it does not assert the availability of the lost local $N$–$O$ or $O$–Figure 2 machine-readable map. A possible reversal of the auxiliary knot parameter does not change the underlying zero-framed trace: conjugating both disk factors of the two-handle extends that reversal with positive four-dimensional orientation. [F1, F8, step 12.1, construct]
+13.1 By step 4.1, the handlebody of the local witness $H$ is diffeomorphic to $X_0(C)$. Independently, the published zero-trace equality [F8] identifies $X_0(C)$ with $X_0(K_P)$ for the exact named knots in [F1]. Composing these diffeomorphisms gives a diffeomorphism from the handlebody of $H$ to $X_0(K_P)$. No source-panel identification of the local endpoint in step 12.1 is needed. Reversing an auxiliary knot parameter leaves the zero-framed trace unchanged: conjugating both disk factors of the two-handle extends that reversal with positive four-dimensional orientation. [A1, F1, F8, step 4.1, construct]
 
-14.1 Literal $H$ is dualizable by step 5.1, and its associated handlebody is $X_0(C)$ by step 4.1. The ordinary slides, actual cancellation and framed terminal identification in steps 5.2--6.1 give a second description of that same handlebody as $X_0(K_P)$. These are precisely the two zero-trace descriptions in [F3], with the original component and zero-framing conventions carried throughout. Hence the stated compatible dualizable framed handle link exists. [F2, F3, F8, step 5.1, step 4.1, step 13.1, construct] ∎
+14.1 The local witness $H$ is dualizable by step 5.1, its handlebody is $X_0(C)$ by step 4.1, and step 13.1 identifies that same handlebody with $X_0(K_P)$. The local slides in steps 5.2–6.1 and cancellation in step 7.1 retain their framed geometric conclusions, while steps 8.1–12.1 end at the local $N$ graph. The second named trace description uses [F8], without inferring that this graph is the source panel $N$. Thus $H$ has both stated zero-trace descriptions, with the component and zero-framing conventions preserved. [F2, F8, step 4.1, step 5.1, step 13.1, construct] ∎
 
 ## Proof evidence
 
-The common source construction through $K$ is retained from
-`research/inverse-problems-knot-theory-all-109-2026-10-19-owner-conway-traces-round1/alternate-trace-certificate.json.gz`.
-The nested-band, cancellation, literal $L$ and $L$–$M$ records are in that
-family's `k2-local-worker` and `lm-local-worker` directories, with the
-geometric account `lm-local-worker/KL-through-cancellation-and-LM-proof.txt`.
-The new terminal construction and full exterior-anchored readout are in
-`research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/conway-named/`:
-`head-three-returns-prefix.json`, the three successive `coupon-suffix` records,
-and their authoring scripts. Only the newly constructed suffixes were checked
-in this continuation; accepted source, generic trace, $L$–$M$ and earlier movie
-evidence were reused without a new review. The prior $N$–$O$ and $O$–Figure 2
-identifications in step 13.1 are reused from the completed historical work.
-Their original temporary machine-readable records were lost in the later
-WSL crash; no restored copy or fresh replay is claimed. Consequently the
-terminal identification is not presented as a currently checkable local
-arc-map proof: proof step 13.1 uses the published framed input [F8] instead.
-The local construction through literal $N$ is preserved. This source pivot
-does not describe a new computation or certify a weaker-choice theorem. This is mathematical source
-assembly, not native workflow, gate, source-audit or publication credit.
+The common source construction through $K$ is retained from `research/inverse-problems-knot-theory-all-109-2026-10-19-owner-conway-traces-round1/alternate-trace-certificate.json.gz`. The nested-band, cancellation, literal $L$ and $L$–$M$ records are in that family's `k2-local-worker` and `lm-local-worker` directories, with the geometric account `lm-local-worker/KL-through-cancellation-and-LM-proof.txt`. The local endpoint construction and exterior-anchored readout are in `research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/conway-named/`: `head-three-returns-prefix.json`, the three successive `coupon-suffix` records, and their authoring scripts. They end at the local `inputs/N-pd.json` graph. A correspondence between that encoding and the published panel $N$ is not supplied. Earlier temporary $N$–$O$ and $O$–Figure 2 records are unavailable; no recovered map or new replay is claimed. The local geometric arguments and records are retained, but the named-partner conclusion in step 13.1 uses the full external trace equality [F8], independently of the local endpoint. This import is source assembly, not a locally reconstructed proof of Proposition 1.4 or native workflow, gate, source-audit or publication credit.

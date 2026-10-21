@@ -11,7 +11,6 @@ deps:
   - lem-rational-homology-four-ball-admits-spinc
   - lem-spin-c-structures-form-an-h2-torsor
   - lem-boundary-spin-c-restriction-and-line-twists-are-equivariant
-  - lem-cyclic-cover-linking-form-inverse-matrix
   - thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations
   - thm-poincare-lefschetz-duality
   - thm-long-exact-sequence-of-a-pair-in-singular-cohomology
@@ -44,19 +43,20 @@ sources:
 
 ## Statement
 
-Assume AC. Let $B$ be a compact connected oriented smooth four-manifold with $H_*(B;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$ and connected rational homology sphere boundary $Y$. Assume $Y$ has a nonsingular framed-link surgery presentation with the boundary orientation and linking convention of the surgery linking-form result. The coefficient sequence $0\to\mathbb Z\to\mathbb Q\to\mathbb Q/\mathbb Z\to0$ gives an isomorphism $\beta:H^1(Y;\mathbb Q/\mathbb Z)\to H^2(Y;\mathbb Z)$. Define the cohomological linking pairing by
+Assume AC. Let $B$ be a compact connected oriented smooth four-manifold with $H_*(B;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$ and connected rational homology sphere boundary $Y$. The coefficient sequence $0\to\mathbb Z\to\mathbb Q\to\mathbb Q/\mathbb Z\to0$ gives an isomorphism $\beta:H^1(Y;\mathbb Q/\mathbb Z)\to H^2(Y;\mathbb Z)$. Define the cohomological linking pairing by
 $$\lambda_Y(x,y)=\langle\beta^{-1}(x)\smile y,[Y]\rangle\in\mathbb Q/\mathbb Z.$$
+Under Poincare duality $H^2(Y;\mathbb Z)\cong H_1(Y;\mathbb Z)$, this pairing agrees, up to the global orientation sign, with the chain torsion linking pairing: for torsion classes represented by oriented 1-cycles $C,D$, choose $n>0$ and an integral 2-chain $F$ with $\partial F=nC$, and set $\lambda_Y([C],[D])=(F\mathbin{\cdot}D)/n\pmod{\mathbb Z}$. The two conventions therefore have the same annihilator subgroups.
 Let $M$ be the image of restriction $H^2(B;\mathbb Z)\to H^2(Y;\mathbb Z)$ and $M^\perp=\{x:\lambda_Y(m,x)=0\text{ for every }m\in M\}$. Then the boundary Spin$^c$ structures extending over $B$ form one affine coset of $M$, the pairing is nonsingular, $M=M^\perp$, and $|M|^2=|H_1(Y;\mathbb Z)|$.
 
 ## Statement references
 
-[[lem-cyclic-cover-linking-form-inverse-matrix|The chain torsion linking form and its nonsingular surgery-matrix convention]]
-
 [[lem-spin-c-structures-form-an-h2-torsor|The affine H2 action on Spin-c structures]]
+
+[[thm-poincare-duality-for-oriented-topological-manifolds|Poincare duality for the oriented boundary]]
 
 ## Facts & Assumptions
 
-**Given:** AC, the compact connected oriented smooth rational homology four-ball $B$, connected boundary $Y$, and the nonsingular surgery presentation specified in the statement.
+**Given:** AC, the compact connected oriented smooth rational homology four-ball $B$, and its connected rational homology sphere boundary $Y$.
 
 [A1] AC is assumed by the finite-triangulation, Poincare-Lefschetz, UCT, and Bockstein suppliers used below ([[def-axiom-of-choice]]).
 
@@ -68,7 +68,7 @@ Let $M$ be the image of restriction $H^2(B;\mathbb Z)\to H^2(Y;\mathbb Z)$ and $
 
 [F4] The connecting map for a short exact coefficient sequence is defined by lifting cocycles and taking the coboundary; it is independent of the chosen lift and representative ([[def-bockstein-connecting-operation]], [[lem-the-bockstein-is-independent-of-lift-and-cocycle-representative]]).
 
-[F5] Cup product is natural under inclusion; for a rational homology sphere, Poincare duality identifies $H^2(Y;\mathbb Z)$ with $H_1(Y;\mathbb Z)$, and the surgery supplier fixes the chain-linking convention as $-A^{-1}$ for a nonsingular matrix $A$ ([[prop-cup-product-is-natural-unital-and-associative]], [[thm-poincare-duality-for-oriented-topological-manifolds]], [[lem-cyclic-cover-linking-form-inverse-matrix]]).
+[F5] Cup product is natural under inclusion. For the oriented rational homology sphere $Y$, Poincare duality identifies $H^2(Y;\mathbb Z)$ with $H_1(Y;\mathbb Z)$, and the universal coefficient theorem identifies $H^1(Y;\mathbb Q/\mathbb Z)$ with $\operatorname{Hom}(H_1(Y),\mathbb Q/\mathbb Z)$ ([[prop-cup-product-is-natural-unital-and-associative]], [[thm-poincare-duality-for-oriented-topological-manifolds]], [[thm-universal-coefficient-theorem-for-cohomology-over-a-pid]]).
 
 [F6] Once a Spin$^c$ lift is given, the isomorphism classes of lifts form an affine $H^2(-;\mathbb Z)$-space ([[lem-spin-c-structures-form-an-h2-torsor]]). Boundary restriction is the actual normal-first rank-four-to-rank-three principal reduction and is equivariant for the restriction of line bundles and $H^2$ ([[lem-boundary-spin-c-restriction-and-line-twists-are-equivariant]]).
 

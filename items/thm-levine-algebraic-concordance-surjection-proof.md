@@ -33,7 +33,7 @@ aliases: []
 proof_strategy: direct
 provenance:
   statement: literature-derived
-  proof: ai-generated
+  proof: ai-altered
 sources:
   references:
     - title: Charles Livingston, A Survey of Classical Knot Concordance
@@ -76,7 +76,7 @@ Assume full AC. Let $\mathcal C_{\mathrm{sm}}$ and $\mathcal C_{\mathrm{top}}$ d
 
 [F7] Linking of disjoint oriented curves is the signed intersection with a spanning two-chain. [[thm-linking-number-equals-signed-intersection]]
 
-[F8] When the given disk is smooth, every chosen Seifert surface has a metabolic Seifert lattice. This is the proved smooth branch of the actual slice-metabolizer source, using its constructed two-sided smooth hypersurface and integral saturation. [[lem-slice-disk-induces-seifert-metabolizer]]
+[F8] When the given disk is smooth, every chosen Seifert surface has a metabolic Seifert lattice. Apply the source's locally flat argument to the smooth disk: its two-sided locally flat hypersurface, continuous-chain push-off, duality and integral saturation prove this conclusion without a smooth hypersurface. [[lem-slice-disk-induces-seifert-metabolizer]]
 
 [F9] Under the full AC assumed here, for any locally flat proper slice disk of $K$ and any chosen smooth Seifert surface, the Seifert lattice has a primitive half-rank direct summand on which the pairing vanishes. This is the exact repaired TOP slice-metabolizer interface, using its explicitly external TOP geometry and its retained chain/duality/saturation argument. [[lem-slice-disk-induces-seifert-metabolizer]]
 
@@ -89,7 +89,7 @@ Assume full AC. Let $\mathcal C_{\mathrm{sm}}$ and $\mathcal C_{\mathrm{top}}$ d
 
 2.1 Put representatives of $K,J$ and their chosen surfaces in separated balls, and join the surfaces by the connected-sum band away from the old basis curves. Their old first-homology bases together form a basis of the boundary-connected sum: collapsing the connecting band gives the wedge of the two surfaces, so first homology is their direct sum. Positive push-offs and the curves from opposite balls have linking number zero, since any curve in one ball bounds a rational, indeed integral, singular two-chain there, disjoint from the other ball. Thus the matrix is $V_K\oplus V_J$, and [F2] gives $a(K\#J)=a(K)+a(J)$. The unknot has its disk surface with empty matrix and hence $a(U)=0$. By step 1.1 these calculations are independent of the separated representatives and chosen surfaces. [F1, F2, F5, F7, step 1.1, construct, algebra]
 
-3.1 Work first in the smooth category. A knot smoothly concordant to $U$ bounds a smooth proper disk by [F6], so [F8] gives $a(K)=0$. The inverse of $[J]$ is represented by $J^\dagger$, and therefore $J\#J^\dagger$ is concordant to $U$. Step 2.1 gives $a(J^\dagger)=-a(J)$. If $K$ and $J$ are smoothly concordant, their group difference $K\#J^\dagger$ is concordant to $U$, so $0=a(K\#J^\dagger)=a(K)-a(J)$. Hence $a$ descends to a well-defined map $\Phi_{\mathrm{sm}}$ on smooth concordance classes. Step 2.1 proves that this map is a group homomorphism. These are actual smooth conclusions using [F8], not conditional uses of its unproved TOP branch. [A1, F2, F6, F8, step 1.1, step 2.1, construct, algebra]
+3.1 Work first in the smooth category. A knot smoothly concordant to $U$ bounds a smooth proper disk by [F6], so [F8] gives $a(K)=0$. The inverse of $[J]$ is represented by $J^\dagger$, and therefore $J\#J^\dagger$ is concordant to $U$. Step 2.1 gives $a(J^\dagger)=-a(J)$. If $K$ and $J$ are smoothly concordant, their group difference $K\#J^\dagger$ is concordant to $U$, so $0=a(K\#J^\dagger)=a(K)-a(J)$. Hence $a$ descends to a well-defined map $\Phi_{\mathrm{sm}}$ on smooth concordance classes. Step 2.1 proves that this map is a group homomorphism. Here [F8] applies the proved locally flat metabolizer argument to the smooth slice disk. [A1, F2, F6, F8, step 1.1, step 2.1, construct, algebra]
 
 4.1 The smooth homomorphism is onto. Each positive generator $[V]$ of $G_{\mathbb Z}$ is the image of the realizing knot from [F3]. The image of a group homomorphism is a subgroup, so it also contains the negative of every such generator. Every element of the presented integral group is a finite sum of signed generators, hence is in the image. This proves the entire smooth surjective-homomorphism assertion. [F2, F3, step 3.1, algebra]
 

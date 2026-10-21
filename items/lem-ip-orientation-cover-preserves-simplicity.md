@@ -24,7 +24,7 @@ sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Chapter 3, §3.3"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
-      locator: "Printed pp. 234–235 (PDF pp. 49–50), two-sheeted cover from local orientations; the proof here gives the tangent-line and boundary-chart version."
+      locator: "Printed pp. 234–235 (PDF pp. 50–51), two-sheeted cover from local orientations; the proof here gives the tangent-line and boundary-chart version."
     - title: "Gabriel P. Paternain, Mikko Salo, and Gunther Uhlmann, Geometric inverse problems, with emphasis on two dimensions"
       url: "https://sites.math.washington.edu/~gunther/publications/GIP2D_driver%20%2814%29.pdf"
       locator: "Chapter 4, §§4.1–4.4, printed pp. 110–121, scalar geodesic transform and its two-dimensional injectivity proof."

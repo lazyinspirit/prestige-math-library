@@ -32,12 +32,12 @@ sources:
       locator: "Theorem 1.1, printed p.2; §§2.1–2.2 for the knot and invariant computations"
     - title: "Jacob Rasmussen, Khovanov homology and the slice genus"
       url: "https://arxiv.org/pdf/math/0402131v1"
-      locator: "§§3–4; the s invariant and its smooth four-ball genus bound"
+      locator: "Theorem 1, PDF/printed p.1; proof in §4.4, printed p.12, gives |s(K)|≤2g₄(K)"
 ---
 
 ## Statement refuted
 
-Assume the Axiom of Countable Choice. The universal implication that a knot with $\tau(K)=0$ is smoothly slice is false. In the twist convention of Hedden and Ording, the positive-clasped two-twisted Whitehead double $D_+(T_{2,3},2)$ has $\tau=0$ and $s=2$, so its smooth four-ball genus is at least one and it is not smoothly slice.
+Assume the Axiom of Countable Choice. The universal implication that a knot with $\tau(K)=0$ is smoothly slice is false. Let $s(K)=s_{\max}(K)-1$, where $s_{\max}(K)$ is the maximal quantum filtration level of a nonzero class in rational Lee homology. In the twist convention of Hedden and Ording, with two full right-handed twists, the positive-clasped Whitehead double $D_+(T_{2,3},2)$ has $\tau=0$ and $s=2$, so its smooth four-ball genus is at least one and it is not smoothly slice.
 
 ## Statement references
 
@@ -55,20 +55,26 @@ Assume the Axiom of Countable Choice. The universal implication that a knot with
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, the universal implication, and the specified Whitehead double with the source's positive-clasp and two-twist conventions.
+**Given:** The Axiom of Countable Choice, the universal implication, and the specified positive-clasped, two-full-twist Whitehead double in Hedden and Ording's convention.
 
-[A1] [[def-countable-choice]] is the axiom branch inherited by the knot invariants and smooth genus.
+[A1] [[def-countable-choice]] is the axiom assumption retained in the Statement.
 
-[L1] [[lem-knot-kt41-whitehead-double-values]] proves $\tau=0$ and $s=2$ for the specified positive-clasped two-full-twist knot, using its actual finite Lee and normalized full grid computations.
+[F1] **External input, authorized by the run-specific source boundary.** Hedden and Ording, *The Ozsváth–Szabó and Rasmussen concordance invariants are not equal*, Theorem 1.1, printed p. 2, states $\tau(D_+(T_{2,3},2))=0$ and $s(D_+(T_{2,3},2))=2$ for the two-twisted positive Whitehead double of the right-handed trefoil. Their Figure 1 specifies the twist box as full right-handed twists. The theorem states both values. Section 2.1, printed p. 4, reports a computer-computed Khovanov Poincaré polynomial: its homological-degree-zero support forces $s\in\{2,4\}$, and the genus-one upper bound together with Rasmussen's inequality forces $s=2$. The acknowledgments on printed p. 3 credit Rasmussen with the $s$ computations. This is a published derivation using computer output, not a reproduced Lee chain-complex computation; the numerical theorem is imported here.
 
-[L2] [[thm-rasmussen-s-bounds-smooth-four-ball-genus]] states $|s(K)|\le2g_4^{\mathrm{sm}}(K)$, for an actual smooth spanning surface.
+[F2] **External input, authorized by the run-specific source boundary.** Rasmussen, *Khovanov homology and the slice genus*, Theorem 1 in §1, PDF p. 1, states $|s(K)|\le 2g_4(K)$ for every knot, where $g_4$ is the minimum genus of a smooth properly embedded surface in $B^4$. The source proof in §4.4 derives this from the filtered Lee cobordism map; I read that proof. This is the same smooth genus convention as [[def-smooth-and-topological-slice-genus]].
 
-[L3] [[lem-lee-cobordism-filtration-genus-bound]] is the exact supplier required by [L2]; its hypothesis is a smoothly properly embedded surface in $S^3\times[0,1]$ with product collars, not an abstract oriented surface with knot labels.
+[F3] [[def-knot-floer-filtration-and-tau]] uses the same normalized threshold convention for the standard Ozsváth–Szabó invariant in [F1]. The target total homology is one-dimensional, so nonzero image agrees with Hom's surjective-inclusion convention.
+
+[F4] The $s$ in [F1] is Rasmussen's standard integer obtained from rational Lee homology with the convention $s=s_{\max}-1$ stated in the Statement. The external Theorem 1 in [F2] uses this normalization; no local Lee-map proof is used here.
+
+[F5] [[def-smooth-and-topological-slice-genus]] defines $g_4^{\mathrm{sm}}$ by minimizing the genera of smooth connected oriented properly embedded surfaces in $B^4$ with boundary the knot.
+
+[F6] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §3.1, Theorem 3.1(1), printed p. 8, identifies the standard $\tau$ defined by the same normalized threshold as a knot-concordance homomorphism. The survey's coefficient convention is stated on printed p. 2. I read the threshold definition and theorem statement; I do not claim to reconstruct the cited proof.
 
 ## Proof
 
-**Given:** Countable Choice, the proposed implication, and the actual Whitehead double in the Statement.
+**Given:** Countable Choice, the proposed implication, and the Whitehead double in the Statement.
 
-1.1 The joint value lemma [L1] gives $\tau(D_+(T_{2,3},2))=0$ and $s(D_+(T_{2,3},2))=2$ in precisely the stated convention. Apply the smooth embedded-surface bound [L2], with its geometric supplier [L3]. It gives $2\le2g_4^{\mathrm{sm}}(D_+(T_{2,3},2))$, so this genus is at least one. [A1, L1, L2, L3, given, algebra]
+1.1 By [F1], the specified knot has $\tau=0$ and $s=2$. The smooth genus bound [F2] gives $2=|s|\le2g_4^{\mathrm{sm}}$. Since $g_4^{\mathrm{sm}}$ is a nonnegative integer, it is at least one. [A1, F1, F2, F3, F4, F5, F6, given, algebra]
 
-2.1 A smoothly slice knot bounds a smooth properly embedded disk in the four-ball and therefore has smooth four-ball genus zero. This contradicts the lower bound in step 1.1 for the displayed knot. It is consequently not smoothly slice even though its tau value is zero, giving the required counterexample to the universal implication. [step 1.1, algebra] ∎
+2.1 A smoothly slice knot bounds a smooth properly embedded disk in the four-ball and has $g_4^{\mathrm{sm}}=0$. This contradicts step 1.1 for the specified knot, proving that the universal implication is false. [F5, step 1.1, algebra] ∎

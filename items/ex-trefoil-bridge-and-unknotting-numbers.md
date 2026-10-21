@@ -159,5 +159,5 @@ The drawing is the closure of the two-strand braid $\sigma_1^3$: there are three
   \node[above] at (-1,3) {$a$};
   \node[above] at (1,3) {$b$};
   \node[right] at (1,2) {$c$};
-</tikzpicture>
+\end{tikzpicture}
 ```

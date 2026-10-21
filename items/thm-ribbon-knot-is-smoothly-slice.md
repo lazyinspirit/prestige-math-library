@@ -32,7 +32,7 @@ sources:
       locator: "Lecture 1, PDF pp.2–3, ribbon singularity resolution and radial Morse interpretation"
     - title: "Charles Livingston, A Survey of Classical Knot Concordance, Handbook of Knot Theory, Chapter 7"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/living.pdf"
-      locator: "§2.1, Definition 2.3, printed p.322"
+      locator: "§2.1, Definition 2.3, printed p.323 (PDF p.5)"
 ---
 
 ## Statement

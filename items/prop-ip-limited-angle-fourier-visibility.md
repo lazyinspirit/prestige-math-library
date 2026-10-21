@@ -1,7 +1,7 @@
 ---
 id: prop-ip-limited-angle-fourier-visibility
 kind: proposition
-title: Limited-angle data sample exactly the visible Fourier wedge
+title: Limited-angle data sample the visible Fourier wedge and zero frequency
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

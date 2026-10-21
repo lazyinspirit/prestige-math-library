@@ -77,7 +77,7 @@ The projection below is schematic: the upper crossing has the first component $K
 
 [F4] Cellular homology agrees naturally with singular homology for CW complexes ([[thm-cellular-homology-computes-singular-homology]]).
 
-[F5] $\Lambda_2$ is a domain and UFD, with signed monomials as its units ([[lem-multivariable-laurent-ring-noetherian-ufd]], [[prop-retracts-inject-fundamental-groups]]).
+[F5] $\Lambda_2$ is a domain and UFD, with signed monomials as its units ([[lem-multivariable-laurent-ring-noetherian-ufd]]).
 
 [F6] Diagonal coefficient extension of the maximal-abelian-cover chain complex is the total-linking cyclic-cover chain complex ([[lem-multivariable-alexander-order-and-specialization]]).
 

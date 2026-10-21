@@ -14,7 +14,7 @@ deps:
   - lem-commuting-laurent-and-plus-maps-give-bottom-degree-inequalities
   - lem-rational-heegaard-floer-absolute-grading-and-cobordism-maps
   - lem-rational-heegaard-floer-infinity-standardness-and-rational-cobordism-isomorphism
-dependency_level: 3
+dependency_level: 2
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -33,7 +33,7 @@ sources:
 
 ## Statement
 
-Let $B$ be a smooth compact four-manifold with $H_*(B;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$ and oriented boundary the rational homology sphere $Y$, where $H_*(Y;\mathbb Q)\cong H_*(S^3;\mathbb Q)$. Let $\mathfrak t$ be a boundary Spin$^c$ structure extending over $B$. Removing an open four-ball from the interior gives a Spin$^c$ cobordism $W$ with boundary $-S^3\sqcup Y$, and each boundary inclusion induces an isomorphism on rational homology. In both orientations, the induced Heegaard Floer infinity map is an isomorphism of degree zero and the corresponding plus-map inequality gives $d(Y,\mathfrak t)\ge0$ and $d(Y,\mathfrak t)\le0$.
+Let $B$ be a smooth compact connected oriented four-manifold with $H_*(B;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$ and oriented boundary the rational homology sphere $Y$, where $H_*(Y;\mathbb Q)\cong H_*(S^3;\mathbb Q)$. Let $\mathfrak t$ be a boundary Spin$^c$ structure extending over $B$. Removing an open four-ball from the interior gives a Spin$^c$ cobordism $W$ with boundary $-S^3\sqcup Y$, and each boundary inclusion induces an isomorphism on rational homology. In both orientations, the induced Heegaard Floer infinity map is an isomorphism of degree zero and the corresponding plus-map inequality gives $d(Y,\mathfrak t)\ge0$ and $d(Y,\mathfrak t)\le0$.
 
 ## Statement references
 

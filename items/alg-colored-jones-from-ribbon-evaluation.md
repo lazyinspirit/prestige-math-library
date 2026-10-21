@@ -38,7 +38,7 @@ Input an integer $N\ge1$, an integer $n\ge1$, a finite word $\beta=\sigma_{i_1}^
 
 4. Return $\lambda_N^{-w(\beta)}t/d_N$ in $F$. Reject a malformed braid word, matrix data differing from the prescribed color data, or an input with $d_N=0$ in the coefficient field. This algorithm does not substitute a root of unity into the generic quotient; root evaluation is a separate operation on a proved Laurent-polynomial representative.
 
-The generic output has a unique integral Laurent representative in $q=A^4$. To obtain it explicitly, perform exact Laurent-polynomial division of the rational output and collect powers of $A^4$; Laurentness guarantees zero remainder. Any subsequent root evaluation substitutes into that representative.
+The normalized-sequence Laurentness result identifies this rational output with a unique $J_N(\widehat\beta;q)\in\mathbb Z[q,q^{-1}]$ under $q=A^4$. Root evaluation is a separate finite operation: given $q_0\ne0$ and the representative $J_N(\widehat\beta;q)=\sum_k c_kq^k$, return $\sum_k c_kq_0^k$.
 
 The positive generator convention is the braid-height convention used by the matrix $c_N$: strand $i+1$ passes over strand $i$.
 

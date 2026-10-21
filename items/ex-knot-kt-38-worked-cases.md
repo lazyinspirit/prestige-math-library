@@ -44,7 +44,7 @@ sources:
 
 ## Example
 
-Assume the Axiom of Countable Choice. Let $U$ be the standard unknot, let $T_{2,3}$ be the closure of the positive two-strand braid with three crossings, and let $T_{2,3}^{\dagger}$ be its reverse mirror. Let $D_+(T_{2,3},2)$ denote the positive-clasped Whitehead double of $T_{2,3}$ with two full twists in the clasp, using the twist convention of the stated source. Then
+Assume the Axiom of Countable Choice. Let $U$ be the standard unknot, let $T_{2,3}$ be the closure of the positive two-strand braid with three crossings, and let $T_{2,3}^{\dagger}$ be its reverse mirror. Let $D_+(T_{2,3},2)$ denote the positive-clasped Whitehead double of $T_{2,3}$ with Hedden–Ording twist parameter $t=2$. Then
 $$ s(U)=0,\qquad s(T_{2,3})=2,\qquad s(T_{2,3}^{\dagger})=-2,\qquad s(D_+(T_{2,3},2))=2,\qquad \tau(D_+(T_{2,3},2))=0. $$
 The smooth four-ball genus of $T_{2,3}$ is $1$. Here $\tau$ is the integer knot Floer concordance invariant defined from the filtered knot Floer complex.
 
@@ -103,7 +103,7 @@ The trefoil is the closure of the positive two-strand braid shown schematically 
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the crossingless unknot, the standard positive trefoil diagram, and the stated Whitehead-double twist convention.
+**Given:** $\mathrm{AC}_\omega$, the crossingless unknot, the standard positive trefoil diagram, and the positive-clasped Whitehead double with Hedden–Ording twist parameter $t=2$.
 
 [F1] The standard unknot is the one-crossingless oriented knot with Lee circle algebra $A_L$ ([[def-lee-deformed-khovanov-complex]]).
 
@@ -111,7 +111,7 @@ The trefoil is the closure of the positive two-strand braid shown schematically 
 
 [F3] The reverse mirror changes the sign of $s$ ([[lem-rasmussen-s-mirror]]).
 
-[F4] The actual positive-clasped two-full-twist Whitehead double has $\tau(D_+(T_{2,3},2))=0$ and $s(D_+(T_{2,3},2))=2$ in the Hedden–Ording convention. [[lem-knot-kt41-whitehead-double-values]]
+[F4] The actual positive-clasped Whitehead double with Hedden–Ording twist parameter $t=2$ has $\tau(D_+(T_{2,3},2))=0$ and $s(D_+(T_{2,3},2))=2$. [[lem-knot-kt41-whitehead-double-values]]
 
 [F5] The smooth four-ball genus is the minimum genus of a smooth orientable proper spanning surface ([[def-smooth-and-topological-slice-genus]]).
 
@@ -132,4 +132,4 @@ The trefoil is the closure of the positive two-strand braid shown schematically 
 
 2.1 The trefoil Seifert construction from the given diagram starts with two disks and attaches three bands, so its connected orientable surface has Euler characteristic $2-3=-1$ and one boundary component. The identity $\chi=1-2g$ gives genus $1$. Push its interior into a collar of the boundary three-sphere in the four-ball, using a height function that vanishes only on the boundary knot; its graph is still an embedded orientable surface with the same boundary and genus. Thus [F5] gives $g_4^{\mathrm{sm}}(T_{2,3})\le1$. The bound in [F6] gives $2=|s(T_{2,3})|\le2g_4^{\mathrm{sm}}(T_{2,3})$, so its smooth four-ball genus is $1$. [F2, F5, F6, step 1.2, algebra]
 
-3.1 Apply the joint value lemma [F4] to the actual positive-clasped double with two full twists. Its diagram and zero-longitude convention are exactly those stipulated here, so it gives $s(D_+(T_{2,3},2))=2$ and $\tau(D_+(T_{2,3},2))=0$. Together with the unknot and trefoil calculations and the smooth genus computation above, these are every value asserted in the Example. [A1, F4, L1, step 1.1, step 1.2, step 2.1, algebra] ∎
+3.1 Apply the joint value lemma [F4] to the actual positive-clasped double with Hedden–Ording twist parameter $t=2$. Its diagram and zero-longitude convention are exactly those stipulated here, so it gives $s(D_+(T_{2,3},2))=2$ and $\tau(D_+(T_{2,3},2))=0$. Together with the unknot and trefoil calculations and the smooth genus computation above, these are every value asserted in the Example. [A1, F4, L1, step 1.1, step 1.2, step 2.1, algebra] ∎

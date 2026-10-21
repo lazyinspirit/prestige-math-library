@@ -35,6 +35,9 @@ sources:
     - title: "A Reduction of the Slice–Ribbon Conjecture: Certified Quenching and a Single Completion Condition, Zenodo record 21752847, attached PDF"
       url: "https://zenodo.org/api/records/21752847/files/cdj%20(4).pdf/content"
       locator: "Abstract; Definition 0.1; Assumption 10.5; Remarks 10.11–10.12; Theorem 10.26; Corollary 10.27; Conclusion, PDF pp.1, 9, 60–64, 67–70"
+    - title: "Current metadata for Zenodo record 21752847"
+      url: "https://zenodo.org/api/records/21752847"
+      locator: "metadata title, creator, and description checked 2026-10-21; description claims an unconditional proof, unlike the attached PDF"
 ---
 
 ## Open problem
@@ -55,6 +58,8 @@ For every smooth oriented knot $K\subset S^3$ that bounds a smooth properly embe
 
 [Attached PDF to Zenodo record 21752847, *A Reduction of the Slice–Ribbon Conjecture*](https://zenodo.org/api/records/21752847/files/cdj%20(4).pdf/content)
 
+[Zenodo record 21752847 metadata](https://zenodo.org/records/21752847)
+
 ## Status
 
-Status reviewed 2026-10-19. Hom and Park's peer-reviewed article, published 18 June 2026, still identifies the general converse from smooth sliceness to ribbonness as an open problem and proves only restricted ribbon classifications. Ray's lecture notes record positive results for 2-bridge knots and most 3-strand pretzel knots. The 71-page PDF attached to Zenodo record 21752847 is a conditional reduction: its Theorem 10.26 assumes the completion condition $H_Q$, and Corollary 10.27 says the projected-disk recovery, clean-core reduction, and Milnor-applicability clauses remain unproved. The attached PDF explicitly disclaims an unconditional proof of $H_Q$, so it does not resolve this problem. The Zenodo record metadata and an aggregator description give a different title/author claim than the attached PDF; the status assessment uses the inspected attachment and the current peer-reviewed article.
+Status reviewed 2026-10-21. Hom and Park's version of record, published 18 June 2026, still identifies the general converse from smooth sliceness to ribbonness as open in §1; it proves restricted ribbon classifications and gives a conditional dichotomy, not a resolution. Ray's lecture notes record positive results for 2-bridge knots and most 3-strand pretzel knots. The 71-page PDF currently attached to Zenodo record 21752847 is titled *A Reduction of the Slice–Ribbon Conjecture*. Its abstract states only $H_Q\Rightarrow\mathrm{SRC}$ and explicitly says no unconditional proof of $H_Q$ is claimed. Assumption 10.5 (PDF p.61) leaves $H_{nc}$ as a package-level hypothesis; Theorem 10.26 (p.67) assumes $H_Q$, and Corollary 10.27 (p.67) lists $H_{nc}$, $H_{red}$, and $H_{app}$ as remaining conditions. By contrast, the current Zenodo API metadata title is *A Conditional Proof of the Slice–Ribbon Conjecture* and its description claims an unconditional proof; it credits Jianming Wang, while the attached PDF title page credits Kianming.W. This metadata/PDF discrepancy does not supply the missing proof. The assessed article and inspected attachment leave the general conjecture open.

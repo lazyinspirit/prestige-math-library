@@ -19,9 +19,9 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Anthony Conway, Burau Maps and Twisted Alexander Polynomials, Lemma 2.7"
+    - title: "Anthony Conway, Burau Maps and Twisted Alexander Polynomials, Lemma 2.6"
       url: "https://arxiv.org/pdf/1510.06678"
-      locator: "Complete version-2 PDF, §2.4; degree-zero torsion and Euler-characteristic argument."
+      locator: "Complete version-2 PDF, §2(d), Lemma 2.6, printed pp. 8–9; localized acyclicity from torsion first homology."
     - title: "Paul Kirk and Charles Livingston, Twisted Alexander Invariants, Reidemeister Torsion, and Casson–Gordon Invariants, §§3–4"
       url: "https://chuck-livingston.github.io/math/Livingston_papers/1999_Twisted%20Alexander%20invariants%2C%20Reidemeister%20torsion%2C%20and%20Casson-Gordon%20invariants.pdf"
       locator: "Complete paper; localized twisted homology and torsion-module comparison."
@@ -32,13 +32,17 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice convention of the twisted-chain definition. Let $X$ be a connected finite based two-dimensional CW complex with one $0$-cell, $n\ge2$ $1$-cells and $n-1$ $2$-cells, so $\chi(X)=0$. Let $G=\pi_1(X)$, let $\psi:G\twoheadrightarrow H\cong\mathbb Z^m$ be an epimorphism with $m\ge1$, let $\rho:G\to\mathrm{GL}_d(\mathbb F)$ be a representation over a field, set $\Lambda=\mathbb F[H]$ and $Q=\operatorname{Frac}(\Lambda)$, and form the based twisted cellular complex from the preceding definition. If every element of $H_1(C_*^{\rho,\psi}(X;\Lambda^d))$ is annihilated by some nonzero element of $\Lambda$, then $C_*^{\rho,\psi}(X;Q^d)$ is acyclic. No assumption that its degree-two homology vanishes before localization is required.
+Assume the Axiom of Choice convention of the twisted-chain definition. Let $X$ be a connected finite based two-dimensional CW complex with one $0$-cell, $n\ge2$ $1$-cells and $n-1$ $2$-cells, so $\chi(X)=0$. Let $G=\pi_1(X)$, let $\psi:G\twoheadrightarrow H\cong\mathbb Z^m$ be an epimorphism with $m\ge1$, let $\rho:G\to\mathrm{GL}_d(\mathbb F)$ be a representation over a field $\mathbb F$, set $\Lambda=\mathbb F[H]$ and $Q=\operatorname{Frac}(\Lambda)$, and give $\Lambda^d$ the right $\mathbb F[G]$-action $v\cdot g=v\rho(g)\psi(g)$, with $\psi(g)$ acting by its central monomial. Form
+
+$$C_*^{\rho,\psi}(X;\Lambda^d)=\Lambda^d\otimes_{\mathbb F[G]}C_*(\widetilde X;\mathbb F),$$
+
+where $\widetilde X$ is the universal cover, and set $C_*^{\rho,\psi}(X;Q^d)=Q\otimes_\Lambda C_*^{\rho,\psi}(X;\Lambda^d)$. If every element of $H_1(C_*^{\rho,\psi}(X;\Lambda^d))$ is annihilated by some nonzero element of $\Lambda$, then $C_*^{\rho,\psi}(X;Q^d)$ is acyclic. No assumption that its degree-two homology vanishes before localization is required.
 
 ## Statement references
 
 [[def-knot-twisted-chain-complex-and-reidemeister-torsion|Twisted coefficient complex and deck action]]
 
-[Conway, Lemma 2.7](https://arxiv.org/pdf/1510.06678)
+[Conway, Lemma 2.6](https://arxiv.org/pdf/1510.06678)
 
 [Kirk and Livingston, §§3–4](https://chuck-livingston.github.io/math/Livingston_papers/1999_Twisted%20Alexander%20invariants%2C%20Reidemeister%20torsion%2C%20and%20Casson-Gordon%20invariants.pdf)
 
@@ -62,7 +66,7 @@ Assume the Axiom of Choice convention of the twisted-chain definition. Let $X$ b
 
 2.1 Let $z/s\in C_1\otimes_\Lambda Q$ be a fraction-field cycle, with $z\in C_1$ and $0\ne s\in\Lambda$. Since $d_1(z)/s=0$ and each coordinate of $C_0$ lies in the domain $\Lambda$, $d_1(z)=0$. The torsion hypothesis gives $0\ne f\in\Lambda$ and $w\in C_2$ with $fz=d_2(w)$. Hence $z/s=d_2(w/(fs))$, so every fraction-field $1$-cycle is a boundary and $H_1(C_*\otimes Q)=0$. [given, F1, step 1.1, algebra]
 
-2.2 Because $\psi$ is onto a positive-rank free abelian group, some $1$-cell generator $x$ has $\psi(x)=h\ne1$. In the corresponding $d_1$ block, $A=\rho(x)h-I_d$. Its determinant is a polynomial in the distinct monomials $1,h,\ldots,h^d$ whose top coefficient is $\det\rho(x)\ne0$, so $\det A\ne0$ in $\Lambda$. Thus $A$ is invertible over $Q$, this block makes $d_1:C_1\otimes Q\to C_0\otimes Q$ surjective, and $H_0(C_*\otimes Q)=0$. [given, F1, step 1.1, algebra]
+2.2 Because $\psi$ is onto a positive-rank free abelian group, some $1$-cell generator $x$ has $\psi(x)=h\ne1$. Lift that oriented edge from the unique $0$-cell to the universal-cover vertex; its cellular boundary is $(x-1)$ times that vertex. Tensoring with the stated right action gives the corresponding $d_1$ block $A=\rho(x)h-I_d$. Its determinant is a polynomial in the distinct monomials $1,h,\ldots,h^d$ whose top coefficient is $\det\rho(x)\ne0$, so $\det A\ne0$ in $\Lambda$. Thus $A$ is invertible over $Q$, this block makes $d_1:C_1\otimes Q\to C_0\otimes Q$ surjective, and $H_0(C_*\otimes Q)=0$. [given, F1, step 1.1, algebra]
 
 3.1 The fraction-field chain dimensions are $d(n-1),dn,d$, whose alternating sum is $d((n-1)-n+1)=0$. Euler–Poincaré for this finite-dimensional complex gives $\dim_QH_0-\dim_QH_1+\dim_QH_2=0$. Steps 2.1 and 2.2 make the first two terms zero, hence $H_2=0$; there are no chain groups above degree $2$. The localized complex is acyclic. [F1, step 2.1, step 2.2, algebra] ∎
 

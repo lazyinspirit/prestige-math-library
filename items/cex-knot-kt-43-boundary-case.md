@@ -32,7 +32,7 @@ sources:
       url: "https://arxiv.org/pdf/math/0607156v4"
       locator: "Printed p.2; the exact irreducible-complement hypothesis"
 verification:
-  precheck: n/a
+  precheck: pass
 ---
 
 ## Statement refuted

@@ -1,7 +1,7 @@
 ---
 id: lem-skein-module-isomorphism-respects-framings-and-boundary
 kind: lemma
-title: "Skein-module isomorphisms preserve framings and boundary actions"
+title: "Framing transport and compatible collar actions under oriented diffeomorphisms"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
@@ -29,7 +29,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9809113"
     - title: "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12"
       url: "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
-    - title: "Thang T. Q. Le, A Crash Course in Quantum Invariants of Knots and 3-Manifolds (2016), §6.1, pp. 29–30"
+    - title: "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, printed pp. 30–31"
       url: "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
 ---
 
@@ -50,10 +50,10 @@ module, a positive twist of the blackboard-framed core changes $[z]$ to
 $-A^3[z]$, with $[z]\ne -A^3[z]$.
 
 ## Statement references
+
 [[def-axiom-of-choice|Axiom of Choice]]
 
 [[thm-choice-implies-dependent-implies-countable-choice|Choice implies countable choice]]
-
 
 [[lem-general-3manifold-skein-quotient-isotopy-and-gluing|Functoriality and boundary-collar action]]
 

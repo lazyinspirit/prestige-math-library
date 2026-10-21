@@ -61,17 +61,17 @@ $$v_k=x_k+\tau_kA^{\mathsf T}(y-Ax_k),\qquad x_{k+1}=B_{\theta_k}((A,y),v_k).$$
 
 Its output nodes are the coordinates of $x_N$. Thus each stage uses its own map $B_{\theta_k}$ and step parameter $\tau_k$; no common update map or shared layer parameter is required. Represent each initialization and update by its constituent primitive nodes or by a supplied complete deterministic $C^1$ primitive with its derivative rule; an opaque call without that map and rule is not an admissible graph primitive. Require every graph primitive to be continuously differentiable on an open neighborhood of its visited inputs. For a piecewise-$C^1$ primitive, each visited input must lie strictly inside a declared branch region, with that branch label fixed on an open neighborhood of the input; at a branch boundary or ambiguous branch selection the automatic-differentiation procedure returns no derivative. Apply forward-mode automatic differentiation to each scalar output-coordinate graph in the desired parameter direction. The forward-mode correctness theorem then identifies the returned tangent with the directional derivative of that finite output; coordinate directions give the Jacobian. When all stages instead repeat one $C^1$ map $G(z,\theta)$ with a common parameter, the finite fixed-point-iteration procedure is the corresponding specialization. This differentiates only the deployed finite map and adds no assertion about an infinite iteration.
 
-The diagram records the order of function application for one fixed admissible $(A,y)$. Its arrows denote finite composition through layer $N$; they do not denote a limit.
+For $N\ge3$, the diagram compresses the intervening states and updates into a single arrow; when $N=3$, that arrow is the single update $U_{\theta_1}^{A,y}$. For $N=1$ and $N=2$, the recurrence above gives the corresponding one- and two-update chains. At one fixed admissible $(A,y)$, every arrow denotes finite function application, not a limit.
 
 ```tikz
 \begin{tikzpicture}[>=stealth]
 \node (data) at (0,1.1) {$(A,y)$};
 \node (x0) at (0,0) {$x_0=I_\theta(A,y)$};
 \node (x1) at (3,0) {$x_1=U_{\theta_0}^{A,y}(x_0)$};
-\node (dots) at (5,0) {$\cdots$};
+\node (dots) at (5,0) {$x_{N-1}$};
 \node (xn) at (8,0) {$x_N=\Phi_{\theta,N}(A,y)$};
 \draw[->] (x0) -- node[above] {$U_{\theta_0}^{A,y}$} (x1);
-\draw[->] (x1) -- node[above] {$U_{\theta_1}^{A,y}$} (dots);
+\draw[->] (x1) -- node[above] {$U_{\theta_{N-2}}^{A,y}\circ\cdots\circ U_{\theta_1}^{A,y}$} (dots);
 \draw[->] (dots) -- node[above] {$U_{\theta_{N-1}}^{A,y}$} (xn);
 \draw[->] (data) -- (x0);
 \draw[->] (data) -- (x1);

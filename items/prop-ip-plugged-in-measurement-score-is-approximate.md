@@ -27,7 +27,7 @@ sources:
 
 ## Statement
 
-Let $X_0$ take values $-1$ and $1$ with equal probability, let $X_\sigma=X_0+\sigma Z$ with $\sigma>0$ and standard Gaussian noise independent of $X_0$, and let $Y\mid X_0=u$ have density $\varphi_\tau(y-u)$ for $\tau>0$. At the observation $y=0$, the exact measurement density $r_\sigma(0\mid x)=\mathbb E[\varphi_\tau(-X_0)\mid X_\sigma=x]$ is constant in $x$, so its score is zero. The exact posterior mean is $m_\sigma(x)=\mathbb E[X_0\mid X_\sigma=x]=\tanh(x/\sigma^2)$, where $\tanh(t)=(e^{2t}-1)/(e^{2t}+1)$. The plug-in density $\varphi_\tau(-m_\sigma(x))$ has score $-m_\sigma(x)m_\sigma'(x)/\tau^2$, which is nonzero for $x\ne0$. Thus evaluating the measurement likelihood at the exact posterior mean does not in general recover the exact measurement score; this example does not rule out equality in special models.
+Let $X_0$ take values $-1$ and $1$ with equal probability, let $X_\sigma=X_0+\sigma Z$ with $\sigma>0$ and standard Gaussian noise independent of $X_0$, and let $Y=X_0+\tau W$ for $W\sim N(0,1)$ independent of $(X_0,Z)$, with $\tau>0$. At the observation $y=0$, the exact measurement density $r_\sigma(0\mid x)=\mathbb E[\varphi_\tau(-X_0)\mid X_\sigma=x]$ is constant in $x$, so its score is zero. The exact posterior mean is $m_\sigma(x)=\mathbb E[X_0\mid X_\sigma=x]=\tanh(x/\sigma^2)$, where $\tanh(t)=(e^{2t}-1)/(e^{2t}+1)$. The plug-in density $\varphi_\tau(-m_\sigma(x))$ has score $-m_\sigma(x)m_\sigma'(x)/\tau^2$, which is nonzero for $x\ne0$. Thus evaluating the measurement likelihood at the exact posterior mean does not in general recover the exact measurement score; this example does not rule out equality in special models.
 
 ## Statement references
 
@@ -45,7 +45,7 @@ Let $X_0$ take values $-1$ and $1$ with equal probability, let $X_\sigma=X_0+\si
 
 [A1] $P(X_0=1)=P(X_0=-1)=1/2$ and $X_\sigma=X_0+\sigma Z$ with $Z$ standard Gaussian independent of $X_0$.
 
-[A2] Conditional on $X_0=u$, the observation has Gaussian density $\varphi_\tau(y-u)$, with independent noise and $\tau>0$.
+[A2] The observation noise $W\sim N(0,1)$ is independent of $(X_0,Z)$, and $Y=X_0+\tau W$.
 
 [A3] The Gaussian density is $\varphi_\tau(v)=(\sqrt{2\pi}\tau)^{-1}\exp(-v^2/(2\tau^2))$.
 

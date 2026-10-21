@@ -20,15 +20,15 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Anthony Conway, The Levine–Tristram signature: a survey, Matrix Annals 2016 (arXiv:1903.04477)"
+    - title: "Anthony Conway, The Levine–Tristram signature: a survey, 2019–20 MATRIX Annals (2021), pp. 31–56 (arXiv:1903.04477)"
       url: "https://arxiv.org/pdf/1903.04477"
-      locator: "§2.1, printed pp. 3–4: Hermitian form and Alexander-root determinant relation; §2.4, printed p. 7: averaged signature at roots; complete 18-page PDF inspected."
+      locator: "§2.1, printed pp. 2–4: Hermitian form and Alexander-root determinant relation; §2.4, printed p. 6: averaged signature at roots; complete 18-page PDF inspected."
 ---
 ## Statement
 
-Assume full AC. Let $K$ be a smooth oriented knot, let $F$ be any connected compact smooth oriented spanning surface of genus $g$, let $V$ be its positive-push Seifert matrix, and let $\omega\in S^1\setminus\{1\}$. The Hermitian matrix
+Assume full AC. Let $K$ be a smooth oriented knot, let $F$ be any connected compact smooth oriented spanning surface of genus $g$, let $V$ be its positive-push Seifert matrix, let $\Delta_K(t)$ be any unit associate of the one-variable Alexander polynomial, and let $\omega\in S^1\setminus\{1\}$. The Hermitian matrix
 $$H_\omega=(1-\omega)V+(1-\bar\omega)V^T$$
-is singular if and only if the normalized knot Alexander polynomial $\Delta_K$ vanishes at $\omega$.
+is singular if and only if $\Delta_K(\omega)=0$.
 
 ## Statement references
 

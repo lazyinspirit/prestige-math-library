@@ -24,7 +24,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "§2, definition preceding Theorem 2.1, printed pp. 584–585 (PDF pp. 3–4)"
+      locator: "§3, definition preceding Theorem 3.1, arXiv v1 PDF p. 4"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§3, dualizable-link construction and trace descriptions"
@@ -55,35 +55,23 @@ longitude.
 
 ## Definition references
 
-[Piccirillo, §2, definition preceding Theorem 2.1](https://arxiv.org/pdf/1808.02923)
+[Piccirillo, §3, definition preceding Theorem 3.1](https://arxiv.org/pdf/1808.02923)
 
 [Hom, §3](https://arxiv.org/pdf/2107.09171)
 
 ## Facts & Assumptions
 
-**Given:** A three-component link in $S^3$ with the component labels and framing
-data in the Definition and countable choice.
+**Given:** A three-component link in $S^3$ with the component labels and framing data in the Definition and countable choice.
 
-[A1] Countable choice, written $\mathrm{AC}_\omega$, is
-[[def-countable-choice]].
+[A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]].
 
-[F1] [[def-oriented-link-in-s-three-and-ambient-isotopy]]: each component is
-a smooth oriented embedded circle in the standard oriented $S^3$, and
-ambient isotopy means an orientation-preserving isotopy of the ambient sphere.
+[F1] [[def-oriented-link-in-s-three-and-ambient-isotopy]]: each component is a smooth oriented embedded circle in the standard oriented $S^3$, and ambient isotopy means an orientation-preserving isotopy of the ambient sphere.
 
-[F2] [[def-knot-meridian-and-preferred-longitude]]: a meridian is the boundary
-of a normal disk to the component, oriented by the knot and ambient
-orientations, and the preferred longitude is the degree-one peripheral curve
-with zero exterior-homology class.
+[F2] [[def-knot-meridian-and-preferred-longitude]]: a meridian is the boundary of a normal disk to the component, oriented by the knot and ambient orientations, and the preferred longitude is the degree-one peripheral curve with zero exterior-homology class.
 
-[F3] [[def-regular-oriented-link-diagram]] and
-[[def-oriented-crossing-sign-writhe-and-blackboard-framing]]: a regular
-oriented diagram has finitely many transverse double crossings with over/under
-data, each assigned the determinant crossing sign.
+[F3] [[def-regular-oriented-link-diagram]] and [[def-oriented-crossing-sign-writhe-and-blackboard-framing]]: a regular oriented diagram has finitely many transverse double crossings with over/under data, each assigned the determinant crossing sign.
 
-[F4] [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the half-sum
-of mixed crossing signs is an integer independent of the regular oriented
-diagram, and it is symmetric in the two components.
+[F4] [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the half-sum of mixed crossing signs is an integer independent of the regular oriented diagram, and it is symmetric in the two components.
 
 ## Proof
 

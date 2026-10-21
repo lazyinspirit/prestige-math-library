@@ -35,7 +35,7 @@ sources:
 
 ## Statement
 
-Let $H$ be a handlebody with a fixed finite trivalent spine $G$, and let every edge carry one of the labels $0,\ldots,r-2$. Call a labeling admissible when the three labels at each trivalent vertex satisfy the root fusion rule. In the radical-quotient state space of $H$, the states represented by admissible labeled spines span, and the set of such labelings is finite. This statement asserts spanning, not linear independence.
+Let $(H,I_\Sigma,\mathbf a)$ be a marked handlebody with prescribed boundary bands $I_\Sigma$ and boundary labels $\mathbf a$. Fix a finite banded relative spine $G\subset H$, meaning a banded graph whose degree-one boundary vertices give exactly $I_\Sigma$, whose interior vertices have degree two or three, and whose regular neighborhood is $H$; for the unmarked $3$-ball, the empty graph is allowed. Let each edge carry a label in $\{0,\ldots,r-2\}$, with every boundary half-edge on a band $I_j$ labeled by its prescribed color $a_j$. Call a labeling admissible when labels agree across every interior $2$-valent vertex and the three labels at each interior trivalent vertex satisfy the root fusion rule. In the radical-quotient state space $V_p(\Sigma)$, the states represented by admissibly colored relative spines span, and the set of such labelings is finite. This statement asserts spanning, not linear independence.
 
 ## Statement references
 
@@ -51,18 +51,18 @@ Let $H$ be a handlebody with a fixed finite trivalent spine $G$, and let every e
 
 ## Facts & Assumptions
 
-**Given:** A finite handlebody spine and the root state-space construction.
+**Given:** A finite marked handlebody spine and the root state-space construction.
 
-[F1] [[def-skein-tqft-state-space-and-handlebody-pairing]] defines the state space as a radical quotient of a specialized handlebody skein module.
+[F1] [[def-skein-tqft-state-space-and-handlebody-pairing]] defines the state space as a radical quotient of the specialized colored relative handlebody skein module with its prescribed boundary bands.
 
 [F2] [[lem-root-fusion-rules-and-simple-object-completeness]] proves that the finite label set is $\{0,\ldots,r-2\}$ and gives the exact local fusion rule; it does not itself prove that arbitrary handlebody skeins are spanned by spine states.
 
-[F3] **External input — actual handlebody quotient and spine basis.** BHMV, Proposition1.9 p.891 and Theorem4.11 p.909, identify the radical-quotient handlebody model with the universal state space and give an orthogonal basis represented by the $p$-admissibly colored fixed banded spine. For even $p=2r$, the source's $q=(p-2)/2=r-1$ and colors $<q$ are exactly $0,\ldots,r-2$; $p$-admissibility is the registered truncated fusion rule. Coefficients are specialized through the given complex primitive root, with no vanishing quantum denominator inverted. This imports the actual spanning theorem, rather than inferring it from abstract semisimplicity alone.
+[F3] **External input — actual relative handlebody quotient and spine basis.** BHMV, Proposition 1.9 p. 891 and Theorem 4.11 p. 909, identify the radical-quotient relative handlebody model with the universal state space and give an orthogonal basis represented by the $p$-admissibly colored fixed banded spine whose boundary is the prescribed colored banded link. For even $p=2r$, the source's $q=(p-2)/2=r-1$ and colors $<q$ are exactly $0,\ldots,r-2$; $p$-admissibility is the registered truncated fusion rule. Coefficients are specialized through the given complex primitive root, with no vanishing quantum denominator inverted. This imports the actual spanning theorem, rather than inferring it from abstract semisimplicity alone.
 
 ## Proof
 
-**Given:** The fixed finite spine $G$ and the finite label set $\{0,\ldots,r-2\}$.
+**Given:** The fixed finite relative spine $G$, its prescribed boundary labels, and the finite label set $\{0,\ldots,r-2\}$.
 
-1.1 The edge set of $G$ is finite and each edge has only $r-1$ candidate labels by [F2]. Therefore the set of all labelings, and hence its subset of admissible labelings, is finite. [given, F2, construct]
+1.1 The edge set of $G$ is finite and each edge has only $r-1$ candidate labels by [F2]. The prescribed boundary colors are fixed, so there are at most $(r-1)^{|E(G)|}$ edge labelings; the admissible ones form a finite subset. If $G$ is empty, its unique labeling is the empty labeling. [given, F2, construct]
 
-2.1 Apply [F3] to the supplied handlebody marking and spine, using [F1] for the identical radical-quotient model and [F2] for its root labels. Every vector is a linear combination of the admissible spine states. Together with the finite count in step1.1 this proves the full Statement. Linear independence, although present in the imported theorem, is not needed for this spanning conclusion. No infinite skein reduction or additional choice campaign is performed. [F1, F2, F3, step 1.1] ∎
+2.1 Apply [F3] to the supplied relative spine, using [F1] for the matching colored relative radical-quotient model and [F2] for its root labels and vertex rule. Every vector is a linear combination of the admissible relative-spine states. Together with the finite count in step 1.1 this proves the full Statement. Linear independence, although present in the imported theorem, is not needed for this spanning conclusion. No infinite skein reduction or additional choice campaign is performed. [F1, F2, F3, step 1.1] ∎

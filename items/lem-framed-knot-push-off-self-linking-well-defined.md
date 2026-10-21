@@ -29,9 +29,9 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §§3, 5.1, pp. 3–9 and 17–18"
+    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §§3, 5, pp. 8–9 and 15"
       url: "https://arxiv.org/pdf/1910.10257v6"
-      locator: "§3, Definitions 3.6–3.7; §5.1, Definition 5.1; pp. 8–9 and 17"
+      locator: "§3, Definitions 3.6–3.7, pp. 8–9; §5, Definition 5.1, p. 15"
     - title: "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29"
       url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
       locator: "§3.3, the definition of linking number and the diagram isotopy discussion, pp. 26–27"
@@ -73,8 +73,7 @@ framing class $[s]$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, an oriented smooth embedded circle
-$K\subset S^3$, and a smooth nowhere-zero normal section $s$.
+**Given:** The Axiom of Countable Choice, an oriented smooth embedded circle $K\subset S^3$, and a smooth nowhere-zero normal section $s$.
 
 [A1] The Axiom of Countable Choice, written $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
 

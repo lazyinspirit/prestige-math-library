@@ -19,9 +19,9 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Anthony Conway, Burau Maps and Twisted Alexander Polynomials, Lemma 2.7"
+    - title: "Anthony Conway, Burau Maps and Twisted Alexander Polynomials, Lemma 2.6"
       url: "https://arxiv.org/pdf/1510.06678"
-      locator: "Complete version-2 PDF, §2.4; acyclicity from degree-one torsion for link exteriors."
+      locator: "Complete version-2 PDF, §2(d), Lemma 2.6, printed pp. 8–9; localized acyclicity from torsion first homology."
     - title: "Paul Kirk and Charles Livingston, Twisted Alexander Invariants, Reidemeister Torsion, and Casson–Gordon Invariants, §3"
       url: "https://chuck-livingston.github.io/math/Livingston_papers/1999_Twisted%20Alexander%20invariants%2C%20Reidemeister%20torsion%2C%20and%20Casson-Gordon%20invariants.pdf"
       locator: "Complete §3; Euler-characteristic and twisted homology-torsion argument."
@@ -37,7 +37,7 @@ Assume the Axiom of Choice convention of the twisted-chain definition. Let $L$ b
 
 [[lem-twisted-acyclicity-from-torsion-module|General localized acyclicity lemma]]
 
-[Conway, Lemma 2.7](https://arxiv.org/pdf/1510.06678)
+[Conway, Lemma 2.6](https://arxiv.org/pdf/1510.06678)
 
 [Kirk and Livingston, §3](https://chuck-livingston.github.io/math/Livingston_papers/1999_Twisted%20Alexander%20invariants%2C%20Reidemeister%20torsion%2C%20and%20Casson-Gordon%20invariants.pdf)
 

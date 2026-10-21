@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ def-quandle-and-knot-coloring, def-regular-oriented-link-diagram, def-group-presentation ]
-justified_by: [ thm-fundamental-quandle-and-adjoint-group-from-wirtinger ]
+justified_by: []
 aliases: []
 proof_strategy: not-applicable
 provenance:
@@ -32,7 +32,14 @@ satisfying $x*x=x$ for every $x$. For either structure, write
 $x\mathbin{\bar *}y=R_y^{-1}(x)$.
 
 For a regular oriented link diagram $D$, let $A(D)$ be its finite set of
-maximal under-arcs. Form the set of finite terms recursively: each symbol
+maximal under-arcs. For a rack $R$, an **$R$-coloring** of $D$ is an assignment
+$c:A(D)\to R$ such that at every crossing with source under-arc $u$, target
+under-arc $v$, and overarc $o$, $c(v)=c(u)*c(o)$, using the positive-normal
+convention of the diagram-coloring definition. Write $\operatorname{Col}_R(D)$
+for the set of these assignments. When $R$ is a quandle, this agrees with the
+quandle-coloring definition.
+
+Form the set of finite terms recursively: each symbol
 $x_a$ for $a\in A(D)$ is a term, and if $s,t$ are terms then $s*t$ and
 $s\mathbin{\bar *}t$ are terms. Let $\sim$ be the intersection of all
 equivalence relations on these terms that are compatible with both operations

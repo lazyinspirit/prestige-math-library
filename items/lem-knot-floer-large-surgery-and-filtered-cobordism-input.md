@@ -1,7 +1,7 @@
 ---
 id: lem-knot-floer-large-surgery-and-filtered-cobordism-input
 kind: lemma
-title: "Knot Floer cobordism maps give the tau genus shift"
+title: "A genus-g knot cobordism bounds the tau difference"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
@@ -31,7 +31,7 @@ dependency_level: 8
 justified_by: []
 aliases: []
 proof_strategy: direct
-axiom_use: "The declared AC_omega branch governs the normalized knot models and finite cut-arc constructions. Hom’s published F2 genus inequality is imported as a theorem-level input at its stated knot and four-ball scope; no separate reconstruction of its proof under a weaker choice axiom is claimed."
+axiom_use: "The Statement retains the run’s AC_omega branch. The cut-arc construction is local finite smooth geometry; Hom’s published F2 knot-concordance and genus theorem is imported as stated, with no reconstructed proof under a weaker set-theoretic base."
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -52,7 +52,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice. Let $S$ be a connected compact smooth oriented surface properly embedded in $S^3\times[0,1]$, with product collars and oriented boundary $-K_0\times\{0\}\sqcup K_1\times\{1\}$ for smooth oriented knots $K_0,K_1$. Let $g$ be the genus of $S$, and use the standard absolute Alexander normalization for the endpoint knot Floer complexes. Then
+Assume the Axiom of Countable Choice. Let $S$ be a connected compact smooth oriented surface properly embedded in $S^3\times[0,1]$, with product collars and oriented boundary $-K_0\times\{0\}\sqcup K_1\times\{1\}$ for smooth oriented knots $K_0,K_1$. Let $g$ be the genus of $S$, so its two boundary components give $\chi(S)=-2g$, and use the standard absolute Alexander normalization for the endpoint knot Floer complexes. Then
 $$|\tau(K_1)-\tau(K_0)|\le g.$$
 In particular, a smooth concordance annulus gives equal tau values, and a genus-$g$ surface from a knot to the unknot gives the four-ball genus estimate.
 
@@ -76,25 +76,22 @@ In particular, a smooth concordance annulus gives equal tau values, and a genus-
 
 **Given:** The Axiom of Countable Choice, the collared smooth oriented cobordism $S$, its endpoint knots, and the fixed Alexander normalization.
 
-[A1] [[def-countable-choice]] states that every sequence of nonempty sets admits a choice function; the normalized analytic knot models use the declared countable-choice branch.
+[A1] [[def-countable-choice]] states that every sequence of nonempty sets admits a choice function; this is the assumption retained in the Statement.
 
-[F1] [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] supplies the normalized full filtered comparison between the local knot model and the standard knot Floer invariant used in the cited genus theorem.
+[F1] [[def-knot-floer-filtration-and-tau]] defines the finite normalized threshold by the first filtration level mapping nontrivially to total homology. Hom's definition in §3.1 uses the same threshold for the standard knot Floer complex, with target $\widehat{HF}(S^3)\cong\mathbb F_2$; nonzero and surjective are equivalent.
 
-[F2] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §3.1, Theorem 3.1(2), printed p.8, states $|\tau(K)|\le g_4(K)$ for every smooth knot $K\subset S^3$. Hom states on printed p.2 that the paper works throughout with $\mathbb F_2$ coefficients. In §3.1 the threshold is the least Alexander level at which the filtered inclusion surjects onto $\widehat{HF}(S^3)\cong\mathbb F_2$; this agrees with the nonzero-image convention here because the target is one-dimensional. For any actual smooth genus-$h$ spanning surface, $g_4(K)\le h$, so the imported theorem gives $|\tau(K)|\le h$. This is a direct $\mathbb F_2$ genus input; it does not infer a mod-two nonvanishing map from an integral map.
+[F2] [[lem-tau-connected-sum-filtered-tensor-product]] uses the fixed oriented connected-sum convention. In Hom's concordance group [F3], $-K$ denotes the reverse mirror, formed using the fixed reflection convention and then reversing the knot orientation.
 
-[F3] [[lem-tau-connected-sum-filtered-tensor-product]] supplies connected-sum additivity, and [[lem-knot-floer-duality-and-filtration-swap]] identifies the normalized reverse-mirror complex with the bifiltered dual. Step 2.1 gives the finite filtered threshold calculation needed for $\tau(-K)=-\tau(K)$.
+[F3] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §3.1, Theorem 3.1(1)–(2), printed p. 8, states that $\tau$ is a homomorphism from the smooth knot concordance group and that $|\tau(K)|\le g_4(K)$. The survey states on printed p. 2 that it works throughout with $\mathbb F_2$ coefficients. I read the theorem and threshold definition; I do not claim to reconstruct the cited proof.
 
-[F4] [[def-knot-floer-filtration-and-tau]] fixes the standard unknot generator at filtration zero, so its diagramwise threshold is $\tau(U)=0$.
+[F4] [[def-knot-floer-filtration-and-tau]] fixes the one-generator standard unknot diagram at filtration zero. In its genus-zero one-pointed model the chain group has one generator and zero differential, so its total homology is $\mathbb F_2$ and the threshold is zero.
 
-[F5] [[lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms]] supplies the product-collar puncturing of an actual spanning surface when the four-ball corollary is phrased as a knot cobordism.
-
-**Coefficient boundary for retained source context.** Ozsváth–Szabó, *Knot Floer homology and the four-ball genus*, Proposition 3.1 and Lemma 3.5 are stated in that paper's integral setup (in particular, it identifies $\widehat{HF}(S^3)$ with $\mathbb Z$). Their nonvanishing and disk-bundle statements are not used here as $\mathbb F_2$ statements. Hom's direct genus theorem [F2] is the only external genus input used in the proof. The relevant passages checked were Hom's coefficient convention and Theorem 3.1(2), and the compatible threshold definition in §3.1; no whole-paper reading or reconstruction of Hom's cited proof is claimed.
+[F5] [[def-smooth-and-topological-slice-genus]] defines $g_4^{\mathrm{sm}}$ as the minimum genus of a smooth connected oriented surface in the four-ball with the stated boundary.
 
 ## Proof
 
-1.1 Let $C$ be the normalized finite filtered hat complex for a knot and put $t=\tau(C)$. Choose a cycle $x\in F_tC_n$ representing the generator of $H(C)\cong\mathbb F_2$ in degree $n$. By minimality of $t$, every cycle in $F_{t-1}C_n$ is a boundary. Hence $x\notin B_n+F_{t-1}C_n$, where $B_n=\operatorname{im}(\partial_{n+1})$; otherwise $x-b$ would be a cycle in $F_{t-1}C_n$ representing the same nonzero class. Extend a linear functional $\lambda:C_n\to\mathbb F_2$ that vanishes on $B_n+F_{t-1}C_n$ and satisfies $\lambda(x)=1$. It is a cocycle and represents the nonzero class in the dual homology, since it evaluates nontrivially on the cycle $x$. By [F3], the reflected knot's normalized Laurent complex is the R-dual with both coordinates negated. In the normalized $i=0$ hat slice, the $U^0$ terms are exactly the hat differential, while positive $U$ powers leave that slice in both original and dual complexes; transposing therefore gives the finite hat dual. Negating the Alexander coordinate gives its annihilator filtration $F_sC^\vee=\{\mu:\mu(F_{-s-1}C)=0\}$. Thus $\lambda\in F_{-t}C^\vee$, so $\tau(C^\vee)\le -t$. If $s<-t$, then $-s-1\ge t$ and every functional in $F_sC^\vee$ annihilates $F_tC$, hence pairs trivially with $[x]$. The evaluation pairing identifies $H(C^\vee)$ with $H(C)^\vee$ and is nondegenerate; therefore no such lower filtration level maps nontrivially to total dual homology. This gives $\tau(C^\vee)\ge -t$, and hence $\tau(-K)=-\tau(K)$ in the normalized knot setting. [F1, F3, given, construct, algebra]
+**Given:** The hypotheses of the Statement.
 
-1.2 Choose a smooth embedded arc on $S$ joining its two boundary components. Cut $S$ along a thin strip about that arc, and remove from $S^3\times I$ the interior of a compatible tubular neighborhood of the arc. A properly embedded arc joining the two boundary spheres in this simply connected four-dimensional product is isotopic to a product arc relative its ends: a generic homotopy of such arcs is a path of embeddings, since the coincidence condition for two distinct arc points at the same time has dimension $1+1+1-4<0$, and the derivative-zero condition is also avoidable. These are finitely many compact smooth general-position choices. Removing the product arc neighborhood turns the ambient shell into $B^4$, after rounding its product corners. The cut surface has one boundary component $K_1\#(-K_0)$ and Euler characteristic $\chi(S)+1=1-2g$, hence genus $g$. Its product collars supply the ordinary connected-sum boundary convention. Thus it is an actual smooth genus-$g$ spanning surface for $K_1\#(-K_0)$. [given, construct]
+1.1 Choose a smooth embedded arc in $S$ joining its two boundary components. After orientation-preserving isotopies of the endpoint knots inside their product collars, which preserve their knot types, choose a standard reference arc with both endpoints at the same point of $S^3$; its tubular complement is $(S^3\setminus\operatorname{int}D^3)\times[0,1]$, a four-ball after rounding corners. Since $S^3\times[0,1]$ is simply connected, the chosen arc is homotopic rel endpoints to this reference. A generic one-parameter homotopy is an isotopy through embedded arcs: the double-point condition has parameter-domain dimension $1+1+1=3<4$, and the nonimmersion condition has dimension $1+1=2<4$. Extend its velocity field from the compact arc family to a time-dependent ambient vector field using a tubular neighborhood and a bump function; integrating this field gives an ambient isotopy carrying the arc neighborhood to the reference neighborhood. Delete that tubular neighborhood from the ambient product and delete the corresponding open rectangular strip from $S$. The remaining surface is connected and has one boundary component, the oriented sum $K_1\#(-K_0)$ under [F2]. Since $\chi(S)=-2g$, cutting along this arc raises Euler characteristic by one to $1-2g$; the resulting surface has one boundary component, so its genus is $g$. [A1, F2, F5, given, construct, algebra]
 
-2.1 By [F2] and the surface from step 1.2, $$|\tau(K_1\#(-K_0))|\le g_4(K_1\#(-K_0))\le g.$$ Using connected-sum additivity from [F3] and the threshold sign established in step 1.1 gives $\tau(K_1\#(-K_0))=\tau(K_1)-\tau(K_0)$. This proves the stated inequality. If $g=0$, it gives concordance invariance. If one boundary knot is the standard unknot, [F4] gives the four-ball genus estimate; equivalently, puncture an actual spanning surface and use [F5] to obtain that cobordism case. The only external genus assertion used is Hom's direct $\mathbb F_2$ theorem [F2]; no coefficient transfer from the integral surgery-trace maps is made. [F2, F3, F4, F5, step 1.1, step 1.2, algebra] ∎
-
+2.1 Apply Hom's imported genus bound [F3] to the surface from step 1.1: $|\tau(K_1\#(-K_0))|\le g_4^{\mathrm{sm}}(K_1\#(-K_0))\le g$. Hom's homomorphism statement [F3] gives $\tau(K_1\#(-K_0))=\tau(K_1)-\tau(K_0)$, proving the asserted inequality. For a concordance annulus $g=0$, so the endpoint values agree. If one endpoint is the standard unknot, [F4] gives $\tau(U)=0$, and the inequality is the four-ball genus estimate for the other endpoint. [F3, F4, F5, step 1.1, algebra] ∎

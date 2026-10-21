@@ -29,7 +29,7 @@ sources:
 
 ## Example
 
-Fix an FWI velocity-model solver $\mathcal S$ with a declared finite admissibility predicate $\operatorname{adm}_{\mathcal S}(v)$ that checks that solver's coefficient, boundary, mesh, and time-step conditions, including its solver-specific Courant–Friedrichs–Lewy (CFL) condition. If an optimization method proposes a candidate velocity map $\widetilde v$ with $\operatorname{adm}_{\mathcal S}(\widetilde v)=\mathrm{false}$, the benchmark records the call as a solver/admissibility failure and does not assign a data-fit or reconstruction score to that iterate. In its FWI DAPS experiment, InverseBench reports that a smaller learning rate gave numerically stable but data-ineffective outputs, while a slightly larger learning rate produced a noisy velocity map that violated the PDE solver's CFL condition and failed. The paper gives no exact violating iterate or universal CFL threshold; this example claims neither.
+Fix an FWI velocity-model solver $\mathcal S$ with a declared finite admissibility predicate $\operatorname{adm}_{\mathcal S}(v)$ that checks that solver's coefficient, boundary, mesh, and time-step conditions, including its solver-specific Courant–Friedrichs–Lewy (CFL) condition. If an optimization method proposes a candidate velocity map $\widetilde v$ with $\operatorname{adm}_{\mathcal S}(\widetilde v)=\mathrm{false}$, the benchmark records the call as a solver/admissibility failure; its evaluation protocol specifies whether and how that failed trial contributes to any numerical aggregate. In its FWI DAPS experiment, InverseBench reports that a smaller learning rate gave numerically stable but data-ineffective outputs, while a slightly larger learning rate produced a noisy velocity map that violated the PDE solver's CFL condition and failed. The paper gives no exact violating iterate or universal CFL threshold; this example claims neither.
 
 ## Example references
 
@@ -55,6 +55,6 @@ Fix an FWI velocity-model solver $\mathcal S$ with a declared finite admissibili
 
 1.1 Since $\operatorname{adm}_{\mathcal S}(\widetilde v)=\mathrm{false}$, the proposed iterate fails the selected solver's declared admissibility test; it is therefore not an admissible input for that solver call. [F2, given]
 
-1.2 By [F1], the benchmark records this call as failure and does not replace it with a numerical data-fit score. The statement uses only the solver's own test and asserts no universal CFL constant. [F1, F2, given]
+1.2 By [F1], the benchmark records this call as failure and does not silently omit it. [F1] does not prescribe whether the failed call receives or contributes to a numerical score, so no particular scoring rule is asserted. [F1, F2, given]
 
 2.1 The stated smaller-step/larger-step DAPS behavior is the paper's reported FWI observation for its numerical PDE setup, as recorded by [F3]; no inference is made from it to other solvers or parameter ranges. [F3, given] ∎

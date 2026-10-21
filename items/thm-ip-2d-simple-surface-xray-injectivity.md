@@ -26,7 +26,7 @@ sources:
       locator: "Chapter 4, §4.4, printed pp. 119–121; Chapter 3, §§3.6–3.7, printed pp. 91–100."
     - title: "Joonas Ilmavirta, Geometry of geodesics, full lecture notes"
       url: "https://users.jyu.fi/~jojapeil/opetus/mats4120k26/mats4120-v2.pdf"
-      locator: "Chapter 13, §13.3, PDF pp. 90–91."
+      locator: "Chapter 13, §13.4, Theorem 13.5, printed/PDF p. 93; §13.2, Lemma 13.1, p. 90; §13.3, Proposition 13.2 and Lemma 13.3, pp. 91–92."
     - title: "Mikko Salo, On geometric inverse problems and microlocal analysis, author-hosted lecture notes"
       url: "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf"
       locator: "§2.4.2, PDF pp. 13–18."
@@ -81,7 +81,7 @@ Then $I_0f=0$ on $\partial_+SM$ implies $f=0$ on $M$. No orientability assumptio
 
 ## Proof
 
-1.1 If $f=0$, the conclusion holds; assume $f\ne0$ for contradiction. Let $C$ be any connected component of the tangent orientation cover of $M$ and let $\widetilde f=f\circ\pi$ on $C$. By [F2], $C$ is a compact oriented simple surface and $I_{0,C}\widetilde f=0$. The transport conclusion of [F3] supplies $u\in C_c^\infty(SC^\circ)$ with $Xu=-\widetilde f$ and $u=0$ on $\partial SC$. [F1, F2, F3, F4, given]
+1.1 If $f=0$, the conclusion holds; assume $f\ne0$ for contradiction. Let $C$ be any connected component of the tangent orientation cover of $M$ and let $\widetilde f=f\circ\pi$ on $C$. By [F2], $C$ is a compact oriented simple surface and $I_{0,C}\widetilde f=0$. The transport conclusion of [F4] supplies $u\in C_c^\infty(SC^\circ)$ with $Xu=-\widetilde f$ and $u=0$ on $\partial SC$. [F1, F2, F3, F4, given]
 
 2.1 The vector field $V$ is vertical, so it differentiates functions along a fixed fibre and $V\widetilde f=0$. Applying [F4] and [F5] to $u$ gives $0=\|VXu\|^2=\|XVu\|^2-(KVu,Vu)+\|Xu\|^2$. [F4, F5, step 1.1]
 

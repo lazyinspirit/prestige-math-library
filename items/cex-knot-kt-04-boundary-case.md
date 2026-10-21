@@ -41,7 +41,7 @@ Every Seifert surface for a fixed knot has minimum genus; equivalently, every ad
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a standard round unknot $U$ bounding a disk $D$, and the annular tube construction described above.
+**Given:** $\mathrm{AC}_\omega$, a standard round unknot $U$ bounding a disk $D$, and the annular tube construction in Counterexample step 1.1 below.
 
 [F1] A Seifert surface is a connected compact smooth oriented embedded surface whose oriented boundary is the given knot. ([[def-oriented-seifert-surface]])
 

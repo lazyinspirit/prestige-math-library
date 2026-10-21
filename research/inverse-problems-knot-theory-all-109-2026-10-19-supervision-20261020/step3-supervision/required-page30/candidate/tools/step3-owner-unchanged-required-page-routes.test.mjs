@@ -191,4 +191,31 @@ for(const [shape,make] of [['dependency',unchanged],['native-page-null',unchange
  decision.verdict='escalated';save();const blocked=run('check','--batch','1','--phase','adjudicate');assert.notEqual(blocked.status,0);assert.match(blocked.stdout+blocked.stderr,/owner-escalation/);
  decision.verdict='false_positive';save();ok('stamp');rmSync(join(f.root,'research/defect-ledger.jsonl'));assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
  }finally{f.close();}});
+
+function unchangedNativePage(){const f=unchanged();
+ f.finding.subject_type='page';f.finding.consumer_id=null;
+ const doc=JSON.parse(readFileSync(join(f.root,f.entry.findings.path)));doc.findings=[f.finding];
+ f.put(f.entry.findings.path,doc);f.entry.findings=f.link(f.entry.findings.path);f.entry.finding_sha256=requiredPageHash(f.finding);
+ const n=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));n.tail=JSON.stringify(doc);f.put(f.entry.native_result.path,n);f.entry.native_result=f.link(f.entry.native_result.path);
+ f.entry.native_finding_basis='native-page-null-consumer-owner-bound-consumer-v1';f.save();return f;
+}
+test('explicit unchanged page/null opt-in preserves native shape and all verdict limits',()=>{const f=unchangedNativePage();try{
+ const old=readFileSync(join(f.root,f.entry.findings.path));const n=f.normalized();const c=requiredPageCarrier(f.root,'r','1',n);
+ assert.equal(n.subject_type,'page');assert.equal(n.consumer_id,null);assert.equal(c.unchanged_context,true);assert.equal(c.item_sha256,undefined);
+ assert.equal(n.observed_sha256,null);assert.equal(n.pre_sha256,undefined);assert.deepEqual(old,readFileSync(join(f.root,f.entry.findings.path)));
+ for(const v of ['false_positive','confirmed_nonfatal','escalated'])assert.equal(requiredPageVerdictAllowed(c,v),true);
+ for(const v of ['confirmed_fatal','accepted','accepted_repair','repaired','context_accepted'])assert.equal(requiredPageVerdictAllowed(c,v),false);
+}finally{f.close();}});
+for(const[name,change]of[
+ ['missing separate native basis',f=>delete f.entry.native_finding_basis],
+ ['wrong separate native basis',f=>f.entry.native_finding_basis='arbitrary'],
+ ['dependency path missing',f=>f.entry.dependency_path=[]],
+ ['nonempty edits',f=>f.entry.edits=[{before:'Published',after:'Other'}]],
+ ['page item guards missing',f=>f.entry.page_item_guards=[]],
+ ['snapshot item inventory missing',f=>{const p=f.entry.pre_snapshot.path;const n=JSON.parse(readFileSync(join(f.root,p)));delete n.manifest;f.put(p,n);f.entry.pre_snapshot=f.link(p);}],
+ ['native structured output differs',f=>{const p=f.entry.native_result.path;const n=JSON.parse(readFileSync(join(f.root,p)));n.tail='{}';f.put(p,n);f.entry.native_result=f.link(p);}],
+ ['non-null native consumer',f=>{f.finding.consumer_id='thm-consumer';const p=f.entry.findings.path;const d=JSON.parse(readFileSync(join(f.root,p)));d.findings=[f.finding];f.put(p,d);f.entry.findings=f.link(p);f.entry.finding_sha256=requiredPageHash(f.finding);const n=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));n.tail=JSON.stringify(d);f.put(f.entry.native_result.path,n);f.entry.native_result=f.link(f.entry.native_result.path);}],
+ ['native basis on edited route',f=>{f.entry.routing_basis='native-page-null-consumer-owner-bound-consumer-v1';}],
+])test('unchanged page/null rejects '+name,()=>{const f=unchangedNativePage();try{change(f);f.save();assert.throws(()=>loadRequiredPageRoutes(f.root,'r','1'));}finally{f.close();}});
+
 test.after(()=>rmSync(toolRoot,{recursive:true,force:true}));

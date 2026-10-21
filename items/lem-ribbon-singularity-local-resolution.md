@@ -31,7 +31,7 @@ sources:
       locator: "§1.1, Proposition 1.5 and Figure 6, printed pp.4–5"
     - title: "Charles Livingston, A Survey of Classical Knot Concordance, Handbook of Knot Theory, Chapter 7"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/living.pdf"
-      locator: "§3.1, Definition 2.3 and ribbon-disk discussion, printed pp.322–323"
+      locator: "§2.1, Definition 2.3, printed p.323 (PDF p.5): radial ribbon-disk convention; the local resolution argument is supplied here"
 ---
 
 ## Statement

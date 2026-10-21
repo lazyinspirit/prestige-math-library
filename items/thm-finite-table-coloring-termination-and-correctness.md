@@ -23,14 +23,17 @@ dependency_level: 3
 
 ## Statement
 
-For $m\ge1$, a table on $\{1,\ldots,m\}$, either rack or quandle mode, and
-a finite regular oriented diagram $D$ with $a$ arcs and $c$ crossings, the
-finite-table algorithm terminates. It reports the first failed table-format
-condition or rack/quandle axiom with a witness; if every selected axiom holds,
-it returns exactly all rack or quandle colorings of $D$, each once, and their
-count. It performs at most $m^3+2m^2+2m$ row-shape, table-entry, and triple checks for the
-format, rack, and quandle conditions and
-tests at most $m^a$ arc assignments, each against the $c$ crossing rules.
+For $m\ge1$, a candidate table given as a finite list of finite lists of
+integers, either rack or quandle mode, and a finite regular oriented diagram
+$D$ with $a$ arcs and $c$ crossings, the finite-table algorithm terminates. It
+reports the first failed table-shape, table-entry, or rack/quandle-axiom
+condition with a witness; if every selected axiom holds, it returns exactly
+all rack or quandle colorings of $D$, each once, and their count. For a
+candidate with $s$ rows, shape validation reads its row count and all $s$ row
+lengths. On a shape-valid table it performs at most
+$m^3+2m^2+2m+1$ row-shape, table-entry, column-permutation, triple, and diagonal
+checks, and tests at most $m^a$ arc assignments, each against the $c$ crossing
+rules.
 
 ## Statement references
 
@@ -52,9 +55,9 @@ tests at most $m^a$ arc assignments, each against the $c$ crossing rules.
 
 ## Proof
 
-1.1 The shape check inspects the $m$ row lengths. The range check inspects the finite $m^2$ entries. Each column-permutation check inspects $m$ entries, so all columns use $m^2$ inspections. Thus these checks use at most $2m^2+m$ inspections and terminate after finitely many tests, returning the first specified witness if one fails. [given, F1, F3, algebra]
+1.1 Let $s$ be the number of rows in the candidate. The shape check reads the row count and all $s$ row lengths, so it terminates after $s+1$ shape checks and returns that witness if the shape fails. If the shape is valid, then $s=m$; the entry-range check examines at most $m^2$ values, and the column-permutation checks examine at most $m^2$ entries. Thus shape and format validation use at most $m+1+2m^2$ checks on a shape-valid table, and a malformed shape stops before any entry or axiom checks. [given, F1, F3, algebra]
 
-2.1 The triple loop visits exactly $m^3$ ordered triples and checks the right self-distributive identity of [F2]. In quandle mode the diagonal loop visits $m$ entries and checks exactly $T[x,x]=x$. Thus, after table format is valid, the algorithm accepts exactly the tables satisfying the selected rack axioms, with idempotency required precisely in quandle mode. [F1, F2, step 1.1]
+2.1 The triple loop visits exactly $m^3$ ordered triples and checks the right self-distributive identity of [F2]. In quandle mode the diagonal loop visits $m$ entries and checks exactly $T[x,x]=x$. Thus the total check bound on a shape-valid table is at most $(m+1)+2m^2+m^3+m=m^3+2m^2+2m+1$. The algorithm accepts exactly the tables satisfying the selected rack axioms, with idempotency required precisely in quandle mode. [F1, F2, step 1.1]
 
 3.1 If a column passes its permutation check, it defines a bijective right translation and its inverse column is completely determined. The assignment loop enumerates every one of the $m^a$ functions from the ordered arc set to the table elements once. At each crossing it tests exactly the relation from [F2], using that inverse column if required; hence an assignment is retained if and only if it is a coloring. [F1, F2, F3, step 2.1]
 

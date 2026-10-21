@@ -9,7 +9,7 @@ page: branched-cover-correction-terms-and-sliceness
 deps:
   - def-heegaard-floer-correction-term
   - lem-rational-ball-spin-c-cobordism-map-inequality
-dependency_level: 4
+dependency_level: 3
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -31,7 +31,7 @@ sources:
 
 ## Statement
 
-Let $B$ be a smooth compact four-manifold with $H_*(B;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$ and oriented boundary the rational homology sphere $Y$, where $H_*(Y;\mathbb Q)\cong H_*(S^3;\mathbb Q)$. If a boundary Spin$^c$ structure $\mathfrak t$ extends over $B$, then its Heegaard Floer correction term vanishes: $d(Y,\mathfrak t)=0$. The extension hypothesis is essential; no vanishing is asserted for Spin$^c$ structures that do not extend.
+Let $B$ be a smooth compact connected oriented four-manifold with $H_*(B;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$ and oriented boundary the rational homology sphere $Y$, where $H_*(Y;\mathbb Q)\cong H_*(S^3;\mathbb Q)$. If a boundary Spin$^c$ structure $\mathfrak t$ extends over $B$, then its Heegaard Floer correction term vanishes: $d(Y,\mathfrak t)=0$. The extension hypothesis is essential; no vanishing is asserted for Spin$^c$ structures that do not extend.
 
 ## Statement references
 

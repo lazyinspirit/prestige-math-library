@@ -25,7 +25,7 @@ provenance:
   proof: not-applicable
 sources:
   references:
-    - title: "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.3.1, PDF pp. 104–105"
+    - title: "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.3.1, printed pp. 104–105 (PDF pp. 105–106)"
       url: "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
       locator: "Definition 5.3 and Example 5.4: Bayes risk is average risk under a law, posterior risk is a conditional-data integral, and scalar squared-error posterior risk is minimized by the posterior mean when the expectations exist."
     - title: "Peter Hoff, Statistical Decision Problems, §§4.1–4.2, PDF pp. 7–8"

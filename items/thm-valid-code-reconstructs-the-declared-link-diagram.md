@@ -28,9 +28,9 @@ sources:
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"
-    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 Introduction, finite link-diagram representation, web text lines 102–121"
+      locator: "§3 Knots and Links, web text lines 271–283 (regular projections and crossing-graph data)"
 ---
 
 ## Statement
@@ -64,7 +64,7 @@ ambient-isotopy uniqueness clause.
 
 [Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — rotation systems encode plane embeddings up to orientation-preserving homeomorphism; lines 49–61 also identify equivalence with a continuous family of embeddings.
 
-[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — finite crossing-graph data for regular link diagrams.
+[Hass–Lagarias–Pippenger, §3](https://arxiv.org/pdf/math/9807016) — finite crossing-graph data for regular link diagrams.
 
 ## Facts & Assumptions
 

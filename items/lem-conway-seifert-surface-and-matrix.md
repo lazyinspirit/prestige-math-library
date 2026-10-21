@@ -28,7 +28,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Figure 1 (Conway diagram), PDF p. 1"
+      locator: "Figure 1 (Conway diagram), arXiv v1 PDF p. 2"
     - title: "KnotInfo complete data table"
       url: "https://raw.githubusercontent.com/knotinfo-org/assets/main/knotinfo_data_complete.xls.zip"
       locator: "The 11n34 row, PD Code and Seifert Matrix fields; candidate computation data only"
@@ -58,20 +58,15 @@ $$V=\begin{pmatrix} -1&0&0&0&0&0&0&0\\ -1&-1&0&0&0&0&0&0\\ -1&-1&0&0&1&0&0&0\\ 0
 
 ## Facts & Assumptions
 
-**Given:** Full AC, the Conway diagram fixed by the preceding item, and the
-positive-push-off convention for Seifert matrices.
+**Given:** Full AC, the Conway diagram fixed by the preceding item, and the positive-push-off convention for Seifert matrices.
 
-[A1] Full AC, written AC, is [[def-axiom-of-choice]]. It supplies countable
-choice through [[thm-choice-implies-dependent-implies-countable-choice]] for
-the finite-projection/surface interface.
+[A1] Full AC, written AC, is [[def-axiom-of-choice]]. It supplies countable choice through [[thm-choice-implies-dependent-implies-countable-choice]] for the finite-projection/surface interface.
 
 [F1] [[def-piccirillo-conway-pair]] fixes $C$ by Piccirillo's diagram.
 
 [F2] [[alg-seifert-surface-from-diagram]] and [[thm-seifert-surface-from-diagram-procedure-properties]] supply the finite disk-and-band data. [[lem-seifert-bands-embedded-orientable-boundary-correct]] proves that these data realize a connected embedded oriented surface with the specified knot boundary.
 
-[F3] [[def-knot-seifert-pairing-and-matrix]] uses
-$V_{ij}=\operatorname{lk}(a_i^+,a_j)$ for the positive push-off of a basis
-curve $a_i$ in the oriented surface.
+[F3] [[def-knot-seifert-pairing-and-matrix]] uses $V_{ij}=\operatorname{lk}(a_i^+,a_j)$ for the positive push-off of a basis curve $a_i$ in the oriented surface.
 
 [F4] The Seifert pairing is bilinear on integral homology classes, so a basis change by an integral unimodular matrix $P$ replaces $B$ by $P^TBP$. [[lem-seifert-pairing-well-defined]]
 

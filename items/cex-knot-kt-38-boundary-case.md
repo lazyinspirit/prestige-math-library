@@ -34,7 +34,7 @@ sources:
 
 ## Statement refuted
 
-Assume the Axiom of Countable Choice. The universal identity $s(K)=2\tau(K)$ for every oriented knot $K$ is false. The positive-clasped Whitehead double of the right-handed trefoil with two full twists in the clasp has $s=2$ and $\tau=0$ in the stated convention, so its two sides are unequal.
+Assume the Axiom of Countable Choice. The universal identity $s(K)=2\tau(K)$ for every oriented knot $K$ is false. The positive-clasped Whitehead double of the right-handed trefoil with Hedden–Ording twist parameter $t=2$ has $s=2$ and $\tau=0$, so its two sides are unequal.
 
 ## Statement references
 
@@ -48,7 +48,7 @@ Assume the Axiom of Countable Choice. The universal identity $s(K)=2\tau(K)$ for
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the universal identity and the knot $D_+(T_{2,3},2)$.
+**Given:** $\mathrm{AC}_\omega$, the universal identity and the positive-clasped Whitehead double $D_+(T_{2,3},2)$ with Hedden–Ording twist parameter $t=2$.
 
 [F1] The worked example proves the values $s(D_+(T_{2,3},2))=2$ and $\tau(D_+(T_{2,3},2))=0$ in the Hedden–Ording twist convention ([[ex-knot-kt-38-worked-cases]], [[lem-knot-kt41-whitehead-double-values]]).
 
@@ -58,7 +58,7 @@ Assume the Axiom of Countable Choice. The universal identity $s(K)=2\tau(K)$ for
 
 ## Proof
 
-**Given:** The proposed universal identity and the specified positive-clasped two-twisted Whitehead double.
+**Given:** The proposed universal identity and the specified positive-clasped Whitehead double with Hedden–Ording twist parameter $t=2$.
 
 1.1 For this actual knot, [F1] and [L1] give $s(D_+(T_{2,3},2))=2$ and $\tau(D_+(T_{2,3},2))=0$. Hence twice its normalized tau value is $2\cdot0=0$. [A1, F1, L1, given, algebra]
 

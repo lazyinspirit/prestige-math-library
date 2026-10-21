@@ -38,7 +38,7 @@ sources:
       locator: "§4.1, Proposition 4.5 and full proof (PDF pp. 48–49): finite-state bounded-function dual form and total-variation normalization."
     - title: "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes"
       url: https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf
-      locator: "§1.1, equation (1.9) and the following caution (PDF pp. 8–10): exact stationary sample-mean variance and limits on CLT conclusions."
+      locator: "§1.6.2, equation (1.9) and the following caution (printed pp. 8–11; PDF pp. 12–15): exact stationary sample-mean variance and limits on CLT conclusions."
     - title: "Aki Vehtari et al., Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC"
       url: https://arxiv.org/pdf/1903.08008v5
       locator: "§3.2, equations (7)–(9) (PDF pp. 6–7): autocorrelation ESS for one functional and its distinction from MCSE and other functionals."

@@ -18,9 +18,9 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 Introduction, finite graph diagram representation and crossing data, web text lines 102–121"
+      locator: "§3 Knots and Links, web text lines 271–283 (regular projections, four incident edge ends, and crossing labels)"
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"
@@ -42,7 +42,7 @@ outer face.
 
 [[lem-planar-diagram-code-realizability-and-face-validation]] — Euler face-count criterion for spherical realization.
 
-[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — finite graph encoding of oriented link diagrams.
+[Hass–Lagarias–Pippenger, §3](https://arxiv.org/pdf/math/9807016) — finite graph encoding of regular link diagrams.
 
 [Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — finite dart, rotation, face, and outer-face data.
 
@@ -52,7 +52,7 @@ outer face.
 
 [F1] [[def-planar-diagram-gauss-and-dowker-codes]]: Gauss labels occur as one over-visit and one under-visit at each crossing; signed DT codes pair each odd visit with a distinct even visit and carry a separate crossing-sign vector; PD codes give the edge incidences, oriented strands, opposite over/under pairs, crossing signs, and face selector.
 
-[F2] [[alg-planar-code-validation-and-diagram-reconstruction]]: the procedure checks the header, code-specific visit or record conditions, incidences, valence, over/under pairs, strand orientations, crossing-sign order, component cycles, crossing-graph connectedness, face cycles, Euler count, and outer-face identifier in the listed order, then builds the finite crossing-disk/edge-band model.
+[F2] [[alg-planar-code-validation-and-diagram-reconstruction]]: the procedure checks the header, code-specific visit or record conditions, incidences, valence, over/under pairs, strand orientations, crossing-sign order, component cycles, crossing-graph connectedness, face cycles, Euler count, and outer-face identifier in the listed order. For $c=0$, it accepts only a prescribed crossingless record with one allowed orientation marker and then requires outer-face marker `outside`.
 
 [F3] [[lem-planar-diagram-code-realizability-and-face-validation]]: a nonempty connected code satisfying the local crossing and orientation conditions has a spherical realization exactly when $V-E+F=2$; choosing one face gives its plane model. The crossingless one-component code is realized by the standard circle.
 
@@ -66,4 +66,4 @@ outer face.
 
 2.2 Suppose a nonempty input passes the code-format, incidence, valence, strand, over/under, crossing-sign, component, and connectedness checks. Its finite tables then define the fixed-point-free edge involution $\alpha$, the clockwise crossing rotation $\sigma$, and the face permutation $\phi=\alpha\circ\sigma$. The procedure's face scan lists exactly the cycles of this permutation by finite orbit tracing. It accepts the face stage precisely when their count satisfies $V-E+F=2$ and the supplied outer-face identifier names one of those cycles. By [F3], these conditions are necessary and sufficient for the spherical model, and deleting a point in the selected face gives the plane diagram returned in the output record. [given, F1, F2, F3, step 1.1]
 
-3.1 In the crossingless branch, the accepted forms are exactly the six format-and-orientation combinations in [F4], representing its two normalized one-component codes. The local realization in [F3] realizes each marked orientation by a circle with two sphere faces; every other zero-crossing input is rejected by the preceding format comparison. The nonempty and crossingless branches exhaust the possible nonnegative values of $c$, so the procedure terminates and has exactly the stated rejection and acceptance behavior. [given, F2, F3, F4, step 2.1, step 2.2] ∎
+3.1 In the crossingless branch, the accepted forms are exactly the six format-and-orientation combinations in [F4], with outer-face marker `outside`, representing its two normalized one-component codes. The local realization in [F3] realizes each marked orientation by a circle with two sphere faces; every other zero-crossing input, including one with a different outer-face marker, is rejected by the preceding branch checks. The nonempty and crossingless branches exhaust the possible nonnegative values of $c$, so the procedure terminates and has exactly the stated rejection and acceptance behavior. [given, F2, F3, F4, step 2.1, step 2.2] ∎

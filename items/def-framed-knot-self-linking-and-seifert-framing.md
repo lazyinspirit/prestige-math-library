@@ -25,9 +25,9 @@ verification:
   precheck: n/a
 sources:
   references:
-    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §§3, 5.1, pp. 3–9 and 17–18"
+    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §§3, 5–6, pp. 8–9 and 15–16"
       url: "https://arxiv.org/pdf/1910.10257v6"
-      locator: "§3, Definitions 3.6–3.8; §5.1, Definition 5.1 and Theorem 5.2, pp. 8–9 and 17"
+      locator: "§3, Definitions 3.6–3.8, pp. 8–9; §5, Definition 5.1 and Theorem 5.2, p. 15; §6, relative rotation and Remarks 6.1–6.2, pp. 15–16"
     - title: "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29"
       url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
       locator: "§3.3, discussion of self-linking, writhe, and the Seifert-surface intersection characterization, pp. 27–29"
@@ -50,18 +50,22 @@ independent of the metric: any two smooth fibre metrics interpolate through
 positive metrics and the corresponding angle maps are homotopic.
 
 Given a reference framing $[s_0]$ and another framing $[s_1]$, use a bundle
-metric and the positive quarter-turn $J$ on each oriented normal plane to write
-the normalized representative of $s_1$ as
-$$s_1(x)=\cos\theta(x)s_0(x)+\sin\theta(x)Js_0(x).$$
+metric and the positive quarter-turn $J$ on each oriented normal plane. Choose
+representatives $s_0,s_1$ and normalize both to unit sections
+$\widehat s_i(x):=s_i(x)/\lVert s_i(x)\rVert$. Write
+$$\widehat s_1(x)=\cos\theta(x)\widehat s_0(x)+\sin\theta(x)J\widehat s_0(x).$$
 The resulting map $S^1\to S^1$ has a continuous angle lift along a parameter
 interval $[0,1]$: subdivide into finitely many intervals whose images lie in
 open semicircles and choose consecutive local arguments agreeing at endpoints.
-Since the map is closed, the lift changes by $2\pi m$ for some $m\in\mathbb Z$;
-different lifts differ by a constant multiple of $2\pi$, and homotopies keep
-$m$ fixed. This integer $m$ is the **relative framing integer** of $[s_1]$
-with respect to $[s_0]$. Thus, once a reference framing is supplied, the
-framing classes are an integer torsor; no absolute integer is assigned before
-choosing a reference.
+Since the map is closed, the lift satisfies $\theta(1)-\theta(0)=2\pi m$ for
+some $m\in\mathbb Z$; different lifts differ by a constant multiple of
+$2\pi$, and homotopies keep $m$ fixed. Conversely, the difference between
+$\theta(t)$ and $\theta(0)+2\pi mt$ is periodic, so linear interpolation of
+these angles gives a homotopy to the degree-$m$ rotation of $\widehat s_0$.
+Every integer occurs by such a rotation. Thus $m$ classifies the framing class
+relative to $[s_0]$ and gives the **relative framing integer**. Once a reference
+framing is supplied, the framing classes are an integer torsor; no absolute
+integer is assigned before choosing a reference.
 
 The **self-linking number** of a framed knot $(K,[s])$ is the linking number
 of $K$ with a sufficiently small push-off along $s$, oriented parallel to $K$.

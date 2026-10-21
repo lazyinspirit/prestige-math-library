@@ -17,6 +17,7 @@ dependency_level: 0
 justified_by: []
 aliases: []
 proof_strategy: direct
+axiom_use: "Assumes AC only for the Poincare-duality and universal-coefficient suppliers used to compute H_2 and H_3; the covering and fundamental-group calculations use no choice axiom."
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -25,8 +26,11 @@ sources:
     - title: "Algebraic Topology, Winter Semester 2021/22, §4.5.12"
       url: "https://loeh.app.ur.de/teaching/topologie1_ws2122/lecture_notes.pdf"
       locator: "Printed pp.178–179; homology and fundamental group of the Poincaré sphere and the binary icosahedral group"
+    - title: "Arun Debray, Group Actions on S^3"
+      url: "https://adebray.github.io/lecture_notes/group_actions_on_s3.pdf"
+      locator: "§§1–2, pp.1–2; the binary icosahedral subgroup of the unit quaternions, its order and presentation, its free left action, and the quotient covering"
 verification:
-  precheck: n/a
+  precheck: pass
 ---
 
 ## Statement
@@ -36,6 +40,8 @@ Assume the Axiom of Choice. Let $I^*$ be the binary icosahedral group, the group
 ## Statement references
 
 [Algebraic Topology, Winter Semester 2021/22, §4.5.12](https://loeh.app.ur.de/teaching/topologie1_ws2122/lecture_notes.pdf)
+
+[Arun Debray, *Group Actions on $S^3$*, §§1–2](https://adebray.github.io/lecture_notes/group_actions_on_s3.pdf)
 
 ## Facts & Assumptions
 
@@ -55,11 +61,13 @@ Assume the Axiom of Choice. Let $I^*$ be the binary icosahedral group, the group
 
 [F6] [[thm-universal-coefficient-theorem-for-cohomology-over-a-pid]]: under AC, the free integral singular chain complex of $P$ gives $0\to\operatorname{Ext}^1(H_0(P),\mathbb Z)\to H^1(P;\mathbb Z)\to\operatorname{Hom}(H_1(P),\mathbb Z)\to0$.
 
+[F7] Debray, *Group Actions on $S^3$*, §§1–2, pp.1–2: $I^*$ is the order-$120$ preimage of the icosahedral rotation group in $SU(2)$, has presentation $\langle s,t\mid (st)^2=s^3=t^5\rangle$, and acts freely by left multiplication; the finite-group quotient is a smooth covering $S^3\to S^3/I^*$.
+
 ## Proof
 
-1.1 The free action makes $S^3\to P$ a covering; since $S^3$ is simply connected by [F1], it is universal by [F2]. Its deck group is $I^*$, so [F3] gives $\pi_1(P)\cong I^*$. Since $|I^*|=120$, this fundamental group is nontrivial. [given, F1, F2, F3]
+1.1 By [F7], the order-$120$ subgroup of unit quaternions acts freely by left multiplication, so $S^3\to P$ is a covering with deck group $I^*$. Each left multiplication is isotopic to the identity because $S^3$ is path-connected; hence the action preserves orientation and the quotient is oriented. Since $S^3$ is simply connected by [F1], this cover is universal by [F2]. Then [F3] gives $\pi_1(P)\cong I^*$, which is nontrivial because its order is $120$. [F1, F2, F3, F7, given]
 
-1.2 In the abelianization, write the images of $s,t$ additively. The relation $(st)^2=s^3=t^5$ gives $2s+2t=3s=5t$. The first equality yields $s=2t$; substituting into $3s=5t$ gives $6t=5t$, hence $t=0$ and $s=0$. Thus $(I^*)^{\mathrm{ab}}=0$, and [F4] gives $H_1(P;\mathbb Z)=0$. [given, F4, algebra]
+1.2 In the abelianization, write the images of $s,t$ additively. The presentation in [F7] gives the relation $(st)^2=s^3=t^5$, hence $2s+2t=3s=5t$. The first equality yields $s=2t$; substituting into $3s=5t$ gives $6t=5t$, hence $t=0$ and $s=0$. Thus $(I^*)^{\mathrm{ab}}=0$, and [F4] gives $H_1(P;\mathbb Z)=0$. [given, F4, F7, algebra]
 
 2.1 The quotient is connected, compact, and oriented, so $H_0(P;\mathbb Z)=H^0(P;\mathbb Z)=\mathbb Z$. By [F6], $H^1(P;\mathbb Z)$ is an extension of $\operatorname{Hom}(0,\mathbb Z)=0$ by $\operatorname{Ext}^1(\mathbb Z,\mathbb Z)=0$, so $H^1(P;\mathbb Z)=0$. The AC assumption is the one in [A1], needed for [F6]. [given, A1, F6, step 1.2, algebra]
 

@@ -48,7 +48,7 @@ The shaded triangle is the vertical projection of $\mathcal O_\zeta$. The dashed
   \coordinate (B) at ({cos(\a)},{sin(\a)});
   \fill[blue!12] (O)--(A)--(B)--cycle;
   \draw[thick,blue!70!black] (O)--(A)--(B)--cycle;
-  \draw[dashed] (0,0) arc[start angle=0,end angle=\a,radius=1];
+  \draw[dashed] (1,0) arc[start angle=0,end angle=\a,radius=1];
   \draw[->] (-0.08,0)--(1.13,0) node[right] {$x$};
   \draw[->] (0,-0.08)--(0,0.92) node[above] {$y$};
   \draw (0.16,0) arc[start angle=0,end angle=\a,radius=0.16];

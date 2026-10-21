@@ -18,9 +18,9 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 Introduction, regular-projection and link-diagram definition, web text lines 102–121"
+      locator: "§3 Knots and Links, web text lines 271–283 (regular projections, crossing incidence, and over/under cyclic order)"
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"
@@ -56,7 +56,7 @@ separately.
 
 [[def-regular-oriented-link-diagram]] — regular projection and decorated crossing requirements.
 
-[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — finite link-diagram graph data.
+[Hass–Lagarias–Pippenger, §3](https://arxiv.org/pdf/math/9807016) — finite link-diagram graph data and crossing conditions.
 
 [Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — rotation-system face cycles and outer-face convention.
 
@@ -74,7 +74,7 @@ separately.
 
 ## Proof
 
-1.1 **Necessity.** In a spherical realization, remove a point in one face and stereographically project the rest of the sphere to the plane. This gives a connected polygonal plane multigraph with the same crossing vertices, edge pairs, and faces. Tracing a face with its boundary on the same side applies the clockwise successor $\sigma$ and then the edge reversal $\alpha$; hence its face cycles are exactly those of $\phi$, so its face count is $F$. Applying [F2] gives $V-E+F=2$. [given, F1, F2]
+1.1 **Necessity.** In a spherical realization, choose a point $p$ in one face and a piecewise-linear chart of the standard PL sphere minus $p$ onto $\mathbb R^2$. Because the finite polygonal graph is compact and avoids $p$, it meets only finitely many chart triangles; after subdivision the chart sends its edges to polygonal arcs and preserves incidences and complementary components. This gives a connected polygonal plane multigraph with the same crossing vertices, edge pairs, and faces. Tracing a face with its boundary on the same side applies the clockwise successor $\sigma$ and then the edge reversal $\alpha$; hence its face cycles are exactly those of $\phi$, so its face count is $F$. Applying [F2] gives $V-E+F=2$. [given, F1, F2, construct]
 
 1.2 **A spanning-tree realization.** Assume $V-E+F=2$. Scan the finite edge list, retaining an edge exactly when it joins two distinct current components. Connectedness makes the retained edges a spanning tree $T$: each retained edge reduces the component count by one and cannot create a cycle, and the scan ends with one component. Root $T$ at the least crossing label. Embed that root in a small polygonal disk on the sphere. Visit the other vertices by increasing tree distance from the root, breaking ties by crossing label. For each new vertex, add its tree edge to its already embedded parent, placing the new dart in the prescribed clockwise gap among the parent darts already placed and choosing the new vertex disk in that face. The new vertex has no previously placed tree darts, so its remaining cyclic order can be completed without constraint. Each addition is a leaf edge and creates no crossing. The resulting connected polygonal tree has one face by [F2], because it has $V$ vertices and $V-1$ edges. [given, F2, construct]
 

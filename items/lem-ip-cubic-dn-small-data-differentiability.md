@@ -52,7 +52,7 @@ has a unique solution in a fixed small $H^s(M)$ ball. The parameter map $\epsilo
 
 [A2] [[def-countable-choice]] is assumed by the Sobolev and elliptic regularity interfaces [F1], [F3].
 
-**Given:** the product domain, real smooth $q$, integer $s>n/2+2$, and the fixed finite smooth boundary directions.
+**Given:** the compact smooth Riemannian domain, real smooth $q$, integer $s>n/2+2$, and the fixed finite smooth boundary directions.
 
 [F1] [[def-ip-sobolev-spaces-on-compact-riemannian-domain]]: the chartwise integer Sobolev spaces are Banach spaces, and $H_0^1(M)$ is the $H^1$ closure of interior compactly supported smooth functions. Since $H^s(M)\hookrightarrow H^1(M)$ continuously, $X_s=H^s(M)\cap H_0^1(M)$ is closed in $H^s(M)$.
 

@@ -1,7 +1,7 @@
 ---
 id: ex-knot-kt-48-worked-cases
 kind: example
-title: "Eight-crossing bracket and trefoil Fox 3-colorings"
+title: "Eight-crossing state count and trefoil Fox 3-colorings"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

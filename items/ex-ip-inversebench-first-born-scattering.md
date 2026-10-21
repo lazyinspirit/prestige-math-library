@@ -23,7 +23,7 @@ sources:
   references:
     - title: "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices"
       url: "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf"
-      locator: "§4.1 and Appendix B.1, PDF pp. 6 and 22–23: 128×128 first-Born optical-scattering setup, fixed physical dimensions, 20 transmitters, receiver counts 360/180/60, and train/validation/test split."
+      locator: "§4.1, PDF p. 6, and Appendix B.1, PDF pp. 22–23: 128×128 first-Born optical-scattering setup, fixed physical dimensions, 20 transmitters, receiver counts 360/180/60, and train/validation/test split. Appendix A.1, Table 3: measurement-noise level $\\sigma_y=10^{-4}$."
     - title: "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/inverse_scatter.py"
       url: "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/inverse_scatter.py"
       locator: "Lines 326–445: fixed incident field is passed to `full_propagate_to_sensor`; the cached matrix is formed from that field and the sensor Green function."

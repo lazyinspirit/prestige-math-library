@@ -1,7 +1,7 @@
 ---
 id: thm-closed-oriented-smooth-three-manifold-admits-heegaard-splitting
 kind: theorem
-title: "Every closed oriented smooth three-manifold has a Heegaard splitting"
+title: "Heegaard splitting existence for nonempty closed connected oriented smooth three-manifolds under AC"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

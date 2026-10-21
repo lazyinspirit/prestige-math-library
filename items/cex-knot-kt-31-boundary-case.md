@@ -40,10 +40,10 @@ the same core with one positive full framing twist also have distinct skein
 classes. In each pair the underlying unframed embedded link is identical.
 
 ## Statement references
+
 [[def-axiom-of-choice|Axiom of Choice]]
 
 [[thm-choice-implies-dependent-implies-countable-choice|Choice implies countable choice]]
-
 
 [[lem-skein-module-isomorphism-respects-framings-and-boundary|Framing changes are nontrivial]]
 

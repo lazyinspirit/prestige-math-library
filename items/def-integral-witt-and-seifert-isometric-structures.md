@@ -23,7 +23,7 @@ sources:
     - title: "Charles Livingston, A Survey of Classical Knot Concordance"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/living.pdf"
       locator: "§2.2 and §3.4, printed pp. 323–327"
-    - title: "Charles Livingston and Allison N. Miller, The concordance genus of knots, II"
+    - title: "Charles Livingston, The concordance genus of a knot, II"
       url: "https://msp.org/agt/2009/9-1/agt-v9-n1-p06-p.pdf"
       locator: "§2, printed pp. 169–171"
     - title: "Neal W. Stoltzfus, Algebraic Computations of the Integral Concordance and Double Null Concordance Group of Knots"

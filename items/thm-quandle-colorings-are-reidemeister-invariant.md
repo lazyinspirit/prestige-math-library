@@ -75,7 +75,7 @@ coloring counts alone. No claim that a coloring count classifies knots is made.
 
 1.6 In the braid-like R3 tangle, arbitrary boundary colors $x,y,z$ yield the outputs $(x*y)*z$ and $(x*z)*(y*z)$. Unique extension to the same boundary coloring forces these outputs to agree for all triples, which is right self-distributivity. [given, F2, F4]
 
-2.1 Thus the local axioms are necessary and sufficient for the stated local extension property. Under $\mathrm{AC}_\omega$, [F3] connects diagrams of the same oriented link by finitely many such moves; composing the local bijections gives a bijection of coloring sets. A finite quandle has finitely many assignments on a finite diagram, so the bijection preserves their counts. Countable choice is used only through [F3]; the move-by-move calculations in steps 1.1–2.3 are choice-free. [A1, F1, F3, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6] ∎
+2.1 Thus the local axioms are necessary and sufficient for the stated local extension property. Under $\mathrm{AC}_\omega$, [F3] connects diagrams of the same oriented link by finitely many such moves; composing the local bijections gives a bijection of coloring sets. A finite quandle has finitely many assignments on a finite diagram, so the bijection preserves their counts. Countable choice is used only through [F3]; the move-by-move calculations in steps 1.1–1.6 are choice-free. [A1, F1, F3, step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6] ∎
 
 ## Sources
 

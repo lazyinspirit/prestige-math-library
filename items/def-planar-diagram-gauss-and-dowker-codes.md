@@ -16,9 +16,9 @@ provenance:
   proof: not-applicable
 sources:
   references:
-    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 Introduction, regular-projection and link-diagram definition, web text lines 102–121"
+      locator: "§1 Introduction, web text lines 92–105 (finite diagram representation); §3 Knots and Links, lines 271–283 (regular projections and crossing-graph data)"
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Abstract Graphs, Rotation Systems, and Formalities and Trivialities, lines 1–18 and 49–72"
@@ -139,7 +139,7 @@ face-count tests pass.
 
 [[def-regular-oriented-link-diagram]] — regular diagrams have finite transverse double points, four-valent crossing vertices, oriented strands, and over/under data.
 
-[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — finite diagram representation and crossing conventions.
+[Hass–Lagarias–Pippenger, §§1, 3](https://arxiv.org/pdf/math/9807016) — finite diagram representation and four-valent crossing data.
 
 [Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — dart, rotation-system, face-cycle, and outer-face conventions.
 

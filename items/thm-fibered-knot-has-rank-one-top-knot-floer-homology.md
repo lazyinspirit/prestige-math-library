@@ -9,6 +9,7 @@ deps:
   - def-top-alexander-grading-of-knot-floer-homology
   - def-balanced-taut-sutured-manifold-and-product-region
   - def-sutured-floer-chain-complex
+  - def-axiom-of-choice
   - lem-ni-holomorphic-disk-and-jsj-analytic-inputs
   - lem-relative-sutured-diagrams-have-signed-move-equivalences
   - lem-marked-fiber-admits-a-sutured-surface-diagram
@@ -19,6 +20,7 @@ dependency_level: 6
 justified_by: []
 aliases: []
 proof_strategy: direct
+axiom_use: "Full AC is required by the imported integral sutured analytic and signed diagram-move suppliers used in the actual product-diagram comparison. No weaker-choice version is asserted."
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -37,7 +39,7 @@ sources:
 
 ## Statement
 
-Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, and suppose $Y\setminus K$ fibers over $S^1$ with connected fiber a Seifert surface $F$ of genus $g$. Then the integral top Alexander group is one copy of the integers:
+Assume full AC. Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, and suppose $Y\setminus K$ fibers over $S^1$ with connected fiber a Seifert surface $F$ of genus $g$. Then the integral top Alexander group is one copy of the integers:
 
 $$\widehat{\mathrm{HFK}}(Y,K,[F],g;\mathbb Z)\cong\mathbb Z.$$
 
@@ -65,7 +67,7 @@ $$\widehat{\mathrm{HFK}}(Y,K,[F],g;\mathbb Z)\cong\mathbb Z.$$
 
 ## Proof
 
-**Given:** A null-homologous knot K in the stated general closed oriented Y and its connected fiber F of genus g, with the meridional boundary trivialization in the definition of the integral Alexander grading.
+**Given:** Full AC, a null-homologous knot K in the stated general closed oriented Y and its connected fiber F of genus g, with the meridional boundary trivialization in the definition of the integral Alexander grading. [[def-axiom-of-choice]] supplies AC.
 
 1.1 Use the actual binding bridge and drilling construction to represent the exterior with two meridional sutures, carrying the actual page longitude and the class of F. The adapted surface cut is literally the result of cutting this mapping torus along its fiber, hence is F times an interval with its product sutures. Apply the finite permissible niceification. Signed relative diagram moves compare the resulting complex to the chosen defining complex, with its specified coherent orientation class transported. No restriction on Y or change of coefficient ring is made. [F1, F2, F3]
 

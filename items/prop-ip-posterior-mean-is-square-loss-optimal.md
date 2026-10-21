@@ -37,12 +37,12 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.3.1, PDF pp. 104–105"
+    - title: "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.3.1, printed pp. 104–105 (PDF pp. 105–106)"
       url: "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
       locator: "Example 5.4 gives scalar posterior risk under squared error as a quadratic in the action and identifies its posterior-mean minimizer when expectations exist; the local proof extends the argument coordinatewise to a Hilbert target."
     - title: "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems, arXiv:2410.00083v1"
       url: "https://arxiv.org/pdf/2410.00083v1"
-      locator: "Lemma A.1, PDF p. 25, proves a finite-dimensional conditional-mean/MMSE identity by expanding the square and conditioning the residual; it is supporting context only, while the Hilbert-target result is proved locally."
+      locator: "Appendix A, Lemma A.1, PDF p. 26, proves a finite-dimensional conditional-mean/MMSE identity by expanding the square and conditioning the residual; it is supporting context only, while the Hilbert-target result is proved locally."
     - title: "Masoumeh Dashti and Andrew M. Stuart, The Bayesian Approach to Inverse Problems, arXiv:1302.6989v4"
       url: "https://arxiv.org/pdf/1302.6989v4"
       locator: "§3.2, Theorem 3.4 and proof, for an inverse posterior as a data-indexed conditional law; §4.1, Theorem 4.3 and proof, for posterior propriety and data-version hypotheses. Context only: the Hilbert-risk proof assumes a probability kernel directly and does not import this source proof."

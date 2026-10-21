@@ -21,7 +21,7 @@ sources:
       locator: "§§1–4, especially Theorem 4.2: exact Gaussian posterior credible balls and truth/prior-dependent frequentist coverage in the Gaussian sequence inverse model."
     - title: B. Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43 (2015)
       url: https://arxiv.org/pdf/1310.4489v5
-      locator: "§§1 and 3, especially Theorems 3.6 and 3.9: honest coverage under polished-tail restrictions and counterexamples to unrestricted coverage."
+      locator: "§§1 and 3: Theorem 3.1 gives a constructed truth for which empirical-Bayes credible-set coverage tends to zero along a subsequence; Theorem 3.6 gives coverage over polished-tail truths; Theorem 3.9 controls credible-set radius on self-similar classes."
     - title: Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Cambridge University Press (2016)
       url: https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf
       locator: "§6.4 and §8.3: honest confidence sets, adaptation constraints, and self-similarity restrictions."

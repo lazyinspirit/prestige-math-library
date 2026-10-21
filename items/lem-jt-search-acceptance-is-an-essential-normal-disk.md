@@ -48,11 +48,7 @@ Whenever the JT branch of the Haken–Jaco–Tollefson search returns a disk-cer
 
 [F2] [[lem-fundamental-normal-surfaces-are-connected]]: a fundamental normal surface is connected.
 
-[F3] [[lem-normal-disk-candidate-check-characterization]]: an admissible normal vector with those three tests represents a properly embedded disk with essential boundary.
-
-[F2] [[lem-fundamental-normal-surfaces-are-connected]]: a fundamental normal surface is connected.
-
-[F3] [[lem-normal-disk-candidate-check-characterization]]: the boundary, Euler-characteristic and meridian tests characterize a properly embedded disk with essential boundary.
+[F3] [[lem-normal-disk-candidate-check-characterization]]: a connected admissible normal surface passing the nonempty-boundary, Euler-characteristic-one and odd-meridian tests is a properly embedded disk with essential boundary.
 
 ## Proof
 

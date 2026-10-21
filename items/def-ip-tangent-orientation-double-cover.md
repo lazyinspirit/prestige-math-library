@@ -18,7 +18,7 @@ sources:
   references:
     - title: "Allen Hatcher, Algebraic Topology, Chapter 3, §3.3"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
-      locator: "Printed pp. 234–235 (PDF pp. 49–50), local orientations and the two-sheeted orientation cover; the present definition uses the tangent determinant-line model and allows boundary charts."
+      locator: "Printed pp. 234–235 (PDF pp. 50–51), local orientations and the two-sheeted orientation cover; the present definition uses the tangent determinant-line model and allows boundary charts."
 verification:
   precheck: n/a
 ---

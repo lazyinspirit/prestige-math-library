@@ -11,6 +11,8 @@ deps:
   - def-absolutely-simple-object
   - def-braiding
   - def-colored-framed-knot-evaluation-from-ribbon-category
+  - def-ribbon-evaluation-of-an-x-colored-closed-braid
+  - lem-ribbon-trace-equals-the-framed-closure-evaluation
   - def-countable-choice
   - def-drinfeld-jimbo-quantized-enveloping-algebra
   - def-left-dual-and-right-dual-object
@@ -91,7 +93,7 @@ where, for a word $\beta=\sigma_{i_1}^{\varepsilon_1}\cdots\sigma_{i_m}^{\vareps
 
 [F4] For an absolutely simple color with scalar twist $\lambda I$, the generic framed trace corrected by $\lambda^{-w(\beta)}$ is invariant under oriented unframed Markov equivalence, under the stated Axiom of Choice ([[thm-twist-correction-removes-framing]]).
 
-[F5] The framed colored-link value is the ribbon-tangle evaluation in $\operatorname{End}_{\mathcal C}(\mathbf1)$, and a closed braid is evaluated by the pivotal trace of its braid action ([[def-colored-framed-knot-evaluation-from-ribbon-category]]).
+[F5] The framed colored-link value is the ribbon-tangle evaluation in $\operatorname{End}_{\mathcal C}(\mathbf1)$ ([[def-colored-framed-knot-evaluation-from-ribbon-category]]). For an $X$-colored closed braid, its categorical value is $t_n(\beta)=\operatorname{Tr}_L(j_{X^{\otimes n}}\rho_n(\beta))$ ([[def-ribbon-evaluation-of-an-x-colored-closed-braid]]) and equals the tangle evaluation of its blackboard-framed closure ([[lem-ribbon-trace-equals-the-framed-closure-evaluation]]).
 
 [F6] Absolute simplicity means $\operatorname{End}(V_N)=F I$ ([[def-absolutely-simple-object]]).
 
@@ -115,7 +117,7 @@ where, for a word $\beta=\sigma_{i_1}^{\varepsilon_1}\cdots\sigma_{i_m}^{\vareps
 
 1.3 If $N=1$, $V_N$ is one-dimensional and irreducible. For $N>1$, let $W$ be a nonzero submodule and choose $x=\sum_j c_jv_j\in W$ nonzero. The eigenvalues of $K_L$ are distinct, so the polynomial spectral projection for any $j$ with $c_j\ne0$ maps $x$ to $c_jv_j$; hence $v_j\in W$. Repeated application of $E$ gives $v_0\in W$, since every coefficient $[N-k]$ encountered is nonzero. Repeated application of $F$ to $v_0$ gives each $v_k$ because the coefficients $[k]$ are nonzero. Thus $W=V_N$, proving irreducibility. [given, algebra]
 
-1.4 The displayed sum for $d_N$ is a geometric sum, so $d_N=(-1)^{N-1}[N]$. Its numerator $A^{2N}-A^{-2N}$ is a nonzero Laurent polynomial and its denominator $A^2-A^{-2}$ is nonzero in $F$; hence the generic normalization is defined. The Hopf coproduct [F2] supplies the tensor-power action used in $\rho_N(\beta)$. By the braiding, dual, and ribbon axioms [F3] and the all-color ribbon identities [F7], these matrices define the framed evaluation, whose value is the pivotal trace by [F5]. [F2, F3, F5, F7, given, algebra]
+1.4 The displayed sum for $d_N$ is a geometric sum, so $d_N=(-1)^{N-1}[N]$. Its numerator $A^{2N}-A^{-2N}$ is a nonzero Laurent polynomial and its denominator $A^2-A^{-2}$ is nonzero in $F$; hence the generic normalization is defined. The Hopf coproduct [F2] supplies the tensor-power action used in $\rho_N(\beta)$. By the braiding, dual, and ribbon axioms [F3] and the all-color ribbon identities [F7], the comparison on $V_N^{\otimes n}$ is $G_N^{\otimes n}$. The basis coevaluation and evaluation in the left categorical trace [F5] then give the ordinary matrix trace $\operatorname{Tr}(G_N^{\otimes n}\rho_N(\beta))$, which is the scalar of the framed closure. [F2, F3, F5, F7, given, algebra]
 
 2.1 By [F4], [F7], and [A2], $\lambda_N^{-w(\beta)}t_N(\beta)$ is unchanged by every conjugation and Markov stabilization, since $V_N$ is absolutely simple and its specified twist scalar is nonzero. Countable choice [A3] supplies the evaluator's hypothesis. Dividing by the fixed nonzero $d_N$ preserves that equality, so the displayed generic value is independent of the braid representative. [A2, A3, F4, F6, F7, step 1.2, step 1.4, given]
 

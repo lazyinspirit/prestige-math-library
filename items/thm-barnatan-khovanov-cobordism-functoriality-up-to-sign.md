@@ -31,9 +31,9 @@ sources:
     - title: "Magnus Jacobsson, An invariant of link cobordisms from Khovanov homology, Theorem 2 and §5"
       url: "https://arxiv.org/pdf/math/0206303"
       locator: "Printed pp.1235–1244; boundary-fixed isotopy invariance up to sign"
-    - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §7"
+    - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §§6.3 and 7.1"
       url: "https://arxiv.org/pdf/math/9908171v2"
-      locator: "§7.1; the original cobordism-map construction and functoriality conjecture"
+      locator: "§6.3, printed pp.39–40, gives the cobordism-map construction and functoriality conjecture; §7.1 gives the c=0 integral specialization"
 ---
 
 ## Statement
@@ -42,7 +42,7 @@ Assume countable choice. Let $\Sigma\subset S^3\times[0,1]$ be a compact smooth 
 $$
 Kh(M):Kh^{i,j}(K_0)\longrightarrow Kh^{i,j+\chi(\Sigma)}(K_1),
 $$
-where $\chi(\Sigma)$ is the Euler characteristic of the surface and the integral even Khovanov groups use the normalized crossing shifts. If two such movies represent cobordisms related by an ambient isotopy fixed on the boundary collars, their maps differ by multiplication by a single overall sign, independent of the input class. The resulting assignment is a functor after each morphism group is quotiented by the relation identifying a map with its negative; before that quotient the sign is not canonical.
+where $\chi(\Sigma)$ is the Euler characteristic of the surface and the integral even Khovanov groups use the normalized crossing shifts. If two such movies represent cobordisms related by an ambient isotopy fixed on the boundary collars, their maps differ by multiplication by a single overall sign, independent of the input class. The resulting assignment is a functor after each morphism set is quotiented by the action $f\mapsto -f$; before that quotient the sign is not canonical.
 
 ## Statement references
 
@@ -58,7 +58,7 @@ where $\chi(\Sigma)$ is the Euler characteristic of the surface and the integral
 
 [Jacobsson, *An invariant of link cobordisms from Khovanov homology*, Theorem 2 and §5](https://arxiv.org/pdf/math/0206303)
 
-[Khovanov, *A categorification of the Jones polynomial*, §7](https://arxiv.org/pdf/math/9908171v2)
+[Khovanov, *A categorification of the Jones polynomial*, §§6.3 and 7.1](https://arxiv.org/pdf/math/9908171v2)
 
 [Morrison–Walker–Wedrich, *Khovanov–Rozansky homology and three-manifolds*, §§2.2–3.6](https://arxiv.org/pdf/1907.12194)
 

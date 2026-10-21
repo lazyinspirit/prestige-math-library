@@ -37,7 +37,7 @@ sources:
       url: "https://katlas.org/wiki/5_2"
       locator: "Polynomial invariants / Alexander polynomial; compare https://katlas.org/wiki/3_1, same section"
 verification:
-  precheck: n/a
+  precheck: pass
 ---
 
 ## Example
@@ -75,7 +75,7 @@ $$V_3=\begin{pmatrix}1&1\\0&1\end{pmatrix},\qquad V_5=\begin{pmatrix}1&1\\0&2\en
 
 Actual reading limits: the complete Theorem 1.3 statement and its preceding conventions on printed pp.229–230 of the primary alternating paper; the two named Alexander-polynomial table entries (not all table invariants); the full Theorems 2.3 and 2.5 statements and surrounding geometric-applications text on Manolescu p.5. No reading or local reconstruction of the full alternating theorem proof, Ni proof, or entire survey is claimed. These are explicitly authorized external imports under the run-specific source boundary. The original full-choice branch is retained; no integral full-choice theorem is silently cast as a CC theorem.
 
-## Proof
+## Verification
 
 1.1 Both named diagrams are alternating. Apply [F1] with the two polynomials in [F2]. In the trefoil case the coefficients in Alexander degrees $1,0,-1$ have absolute values $1,1,1$, with zero coefficients elsewhere. Thus the maximum nonzero Alexander grading is $1$ and its integral group is $\mathbb Z$. In the $5_2$ case the corresponding absolute values are $2,3,2$, with zero coefficients elsewhere. Its maximum grading is again $1$, with integral top group $\mathbb Z^2$. The formula for the supporting Maslov degree is exactly that of [F1]; no signature sign is guessed from a drawing. [F1, F2, given, algebra]
 

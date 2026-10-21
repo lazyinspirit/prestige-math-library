@@ -36,7 +36,7 @@ verification:
 
 Assume full AC for the library Jones invariant. An oriented link is a finite
 disjoint union of oriented smooth circles embedded in $S^3$, considered up to
-ambient isotopy; an oriented classical knot is the one-component case. For an
+ambient isotopy; an oriented classical knot is the one-component case. For a nonempty
 oriented link $L\subset S^3$, let $V_L(x)\in\mathbb Z[x^{\pm1}]$ be the
 library-normalized Jones polynomial, with $V_U(x)=1$ for the unknot $U$;
 write $V_K$ for its value on a knot $K$. Here $x=t^{1/2}$ in the library

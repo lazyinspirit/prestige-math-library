@@ -71,59 +71,42 @@ Both trefoils have smooth four-ball genus one.
 
 ## Diagram
 
-The braid schematic is the closure of the positive two-strand braid $\sigma_1^3$. Both strands are oriented downward; the right-to-left strand passes over at each positive crossing, and the exterior arcs join the top and bottom endpoints. The diagram identifies the trefoil convention only; none of the filtered-complex calculations relies on the drawing.
+The braid schematic is the closure of the positive two-strand braid $\sigma_1^3$. Both strands are oriented downward; the left-to-right strand passes over at each positive crossing, and the exterior arcs join the top and bottom endpoints. The diagram identifies the trefoil convention only; none of the filtered-complex calculations relies on the drawing.
 
 ```tikz
 \begin{tikzpicture}[scale=0.8,>=stealth,line cap=round,line join=round]
   \draw[->] (-1,0) .. controls (-2.0,0.25) and (-2.0,2.75) .. (-1,3);
   \draw[->] (1,0) .. controls (2.0,0.25) and (2.0,2.75) .. (1,3);
-  \draw (-1,3) .. controls (-1.5,2.8) and (1.5,2.2) .. (1,2)
-               .. controls (1.5,1.8) and (-1.5,1.2) .. (-1,1)
-               .. controls (-1.5,0.8) and (1.5,0.2) .. (1,0);
-  \draw (1,3) .. controls (1.5,2.8) and (-1.5,2.2) .. (-1,2)
-              .. controls (-1.5,1.8) and (1.5,1.2) .. (1,1)
-              .. controls (1.5,0.8) and (-1.5,0.2) .. (-1,0);
-  \draw[white,line width=4pt] (-0.28,2.63)--(0.28,2.37);
-  \draw[white,line width=4pt] (-0.28,1.63)--(0.28,1.37);
-  \draw[white,line width=4pt] (-0.28,0.63)--(0.28,0.37);
-  \draw[line width=0.8pt] (0.28,2.63)--(-0.28,2.37);
-  \draw[line width=0.8pt] (0.28,1.63)--(-0.28,1.37);
-  \draw[line width=0.8pt] (0.28,0.63)--(-0.28,0.37);
+  \foreach \y in {3,2,1} {
+    \draw[thick,->] (1,\y)--(-1,{\y-1});
+    \draw[thick,->,preaction={draw=white,line width=4pt}] (-1,\y)--(1,{\y-1});
+  }
   \node at (0,-0.38) {$\widehat{\sigma_1^3}=T_{2,3}$};
 \end{tikzpicture}
 ```
 
 ## Facts & Assumptions
 
-**Given:** The standard unknot, the positive right-handed trefoil, its reverse mirror, and Countable Choice. The displayed staircases are conclusions to be identified, not additional geometric hypotheses.
+**Given:** The standard unknot, the positive right-handed trefoil, its reverse mirror, and Countable Choice.
 
-[F1] [[def-knot-floer-filtration-and-tau]] defines the normalized threshold by the first nonzero filtered inclusion into total hat homology.
+[A1] [[def-countable-choice]] is the assumption retained in the Statement.
 
-[F2] [[lem-tau-of-the-unknot-is-zero]] supplies the normalized one-generator unknot complex.
+[F1] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §2.2, Figure 3(a),(c), gives the normalized $CFK^\infty(T_{2,3})$ staircase with generators $a,b,c$, $\partial b=Ua+c$, and Maslov gradings $0,-1,-2$. The displayed Alexander levels are $1,0,-1$. The same section identifies $\widehat{CFK}(T_{2,3})$ as the $i=0$ filtered complex; Example 3.3 in §3.1 computes $\tau(T_{2,3})=1$, and Theorem 3.1(1) states that this is the standard knot invariant. I read the figure caption, threshold definition, and examples; I do not claim to reconstruct the Heegaard-diagram computation.
 
-[F3] [[lem-diagonal-five-grid-filtered-staircase-reduction]] supplies the complete finite calculation for the grid $O_r=(r+1/2,r+1/2)$, $X_r=((r+2)\bmod5+1/2,r+1/2)$: its all-variable-zero filtered complex is $S_-\otimes V^{\otimes4}$, where $S_-$ has $(M,A)=(0,-1),(1,0),(2,1)$ and only $\partial c=b$. This accepted finite calculation is reused without replaying its matrices.
+[F2] [[lem-tau-of-the-unknot-is-zero]] computes $\tau(U)=0$ in the normalized genus-zero one-pointed model.
 
-[F4] [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] supplies the normalized full grid comparison, including the ordinary-collapse $V$ factors and associated-graded identification. Its retained closure is used directly, not the historical hold formerly recorded here.
+[F3] **External input, authorized by the run-specific source boundary.** Hom, *The knot Floer complex and the smooth concordance group*, §2, PDF/printed p. 5, defines $-K$ as the reverse mirror and states $CFK^\infty(-K)\simeq CFK^\infty(K)^*$, with arrows and both filtrations reversed. Its dual-basis description gives the displayed reverse-mirror staircase from [F1]. The finite filtered hat threshold sign is also proved for the supplied diagrams by [[lem-knot-floer-mirror-complex-duality]]. I read the duality statement and its convention; I do not claim to reconstruct its cited Heegaard-move proof.
 
-[F5] [[lem-knot-floer-duality-and-filtration-swap]] supplies actual normalized Laurent duality for the reverse mirror and conjugation exchanging the two filtrations. In particular each coordinate hat specialization has total homology $\mathbb F_2$ in normalized degree zero. [[lem-knot-floer-mirror-complex-duality]] supplies the finite hat-dual threshold identity.
+[F4] [[thm-seifert-algorithm-boundary-euler-and-genus]] computes the genus of the Seifert disk-and-band surface from its circle and crossing counts; for the displayed positive three-crossing braid the counts are $s=2$ and $c=3$.
 
-[F6] [[thm-seifert-algorithm-boundary-euler-and-genus]] gives genus $(1-s+c)/2$ for the connected one-boundary-component disk-and-band surface. [[def-smooth-and-topological-slice-genus]] defines its smooth four-ball minimum.
-
-[F7] [[lem-knot-floer-large-surgery-and-filtered-cobordism-input]] supplies the genus inequality using Hom’s direct $\mathbb F_2$ four-ball genus theorem and a local cut-arc reduction. Apply it to an actual spanning surface punctured near one interior point to obtain $|\tau(K)|\le g$ for that surface. This does not rely on the formerly held movie construction or on an integral-to-mod-two surgery-map inference.
+[F5] **External input, authorized by the run-specific source boundary.** Hom, §3.1, Theorem 3.1(2), printed p. 8, states $|\tau(K)|\le g_4(K)$ over the survey's stated $\mathbb F_2$ coefficient convention (printed p. 2).
 
 ## Proof
 
-1.1 The finite grid in [F3] is an actual negative trefoil diagram. Subtract $1/2$ from the marking coordinates for this projection description. Its row segments are $[0,2]$ in row $0$, $[1,3]$ in row $1$, $[2,4]$ in row $2$, $[0,3]$ in row $3$, and $[1,4]$ in row $4$, with the orientations $O\to X$. Vertical segments run $X\to O$ and pass over. The only interior crossings are $(2,1),(3,2),(1,3)$. Following the single component $O_0\to O_2\to O_4\to O_1\to O_3\to O_0$ encounters them as $A_{\rm over},B_{\rm under},C_{\rm over},A_{\rm under},B_{\rm over},C_{\rm under}$. The first two crossings have upward over-strand and rightward under-strand; the third has downward over-strand and leftward under-strand. Thus all have the same negative sign. Smoothing the degree-two grid corners gives the standard alternating three-crossing negative trefoil projection: each successive over-under pair forms one of the three braid crossings, and its two exterior connecting arcs give the closure. This is the closure of $\sigma_1^{-3}$, with the displayed cyclic traversal fixing its orientation. Reflection gives the positive trefoil convention of the Example. This finite knot admission uses the actual segments, not a deduction of knot type from a Floer polynomial. [F3, given, construct]
+**Given:** The complexes and knots in the Statement.
 
-2.1 By [F3, F4], the normalized all-variable-zero complex of this negative trefoil is filtered equivalent to both $S_-\otimes V^{\otimes4}$ and $\widehat{CFK}(T^\dagger)\otimes V^{\otimes4}$. Total homology in Maslov degree zero is one-dimensional in both tensor products: every non-top $V$ factor lowers Maslov degree, whereas $H(\widehat{CFK})$ is supported in degree zero. Its first filtered appearance in the first product is $-1$. In the second product its threshold is the threshold in $\widehat{CFK}$: inclusion into the top $V$ summand and projection onto that summand are filtered maps, with composition identity. Hence $\tau(T^\dagger)=-1$. Duality [F5] gives $\tau(T)=1$, independently of the genus inequality. The unknot value is [F2]. [F1, F2, F3, F4, F5, step 1.1, algebra]
+1.1 By [F1], the standard right-trefoil Laurent complex has the displayed staircase. In the polynomial lattice $\mathbb F_2[U]\langle a,b,c\rangle$, quotienting by $U$ leaves $\partial b=c$ and $\partial a=\partial c=0$. The subcomplex at filtration at most $0$ is $\langle b,c\rangle$, which is acyclic, while $a$ first appears at level $1$ and represents the total homology class. Thus the normalized threshold is $1$, as in Hom's Example 3.3. [A1, F1, given, algebra]
 
-2.2 The same finite calculation also identifies the associated-graded generator ranks needed for the full Laurent staircase. Record bigraded ranks by Laurent polynomials in $m,a$. The associated graded of $S_-$ has one generator in each bidegree $(0,-1),(1,0),(2,1)$ and zero differential. Thus the accepted associated-graded comparison gives $$P_{\widehat{HFK}(T^\dagger)}(m,a)(1+m^{-1}a^{-1})^4=(a^{-1}+m+m^2a)(1+m^{-1}a^{-1})^4.$$ Cancel the nonzero factor in the integral Laurent polynomial domain. Duality gives for the positive trefoil exactly one group in each bidegree $(0,1),(-1,0),(-2,-1)$, and no others, over $\mathbb F_2$. This is a mod-two conclusion; no integral rank formula is inferred. [F3, F4, F5, step 1.1, algebra]
+2.1 The dual differential and negated filtration from [F3] give $\partial a^\vee=Ub^\vee$, $\partial c^\vee=b^\vee$, and $\partial b^\vee=0$ for the reverse mirror. In its polynomial dual lattice, setting $U=0$ leaves $\partial c^\vee=b^\vee$ and the first nonzero total class occurs at level $-1$. The unknot value is [F2]. [F1, F2, F3, step 1.1, algebra]
 
-3.1 Reduce the actual finite free Laurent complex at its differential terms preserving both coordinates. Normalize each finite basis vector to first coordinate zero. Such a term has coefficient $1$, preserves Alexander grading, and lowers Maslov grading by one. Elementary cancellation of this unit term is bifiltered: the coefficient and its inverse have zero filtration shift, and the usual finite formulas $d'=d-dh d$, $i'=i-hd i$, $p'=p-pd h$ stay in both filtrations. Maslov homogeneity prevents a second, different $U$ power in the same matrix entry. Consequently no power-series inverse is needed. Each cancellation removes two generators, and finite linear changes within a fixed bidegree and these cancellations leave precisely the three generators represented by the associated-graded homology from step 2.2. This gives an actual bifiltered Laurent equivalent complex with generators $a,b,c$ of the Example, rather than promoting a rank polynomial alone to a filtered equivalence. [F4, F5, step 2.2, algebra]
-
-3.2 The oriented smoothing of the positive two-strand three-crossing braid has two circles and three bands. Its surface has genus $(1-2+3)/2=1$. Reflection gives the same for its reverse mirror, and an inward push gives smooth spanning surfaces in the four-ball. Therefore both smooth four-ball genera are at most one. By [F7] every smooth spanning surface has genus at least the absolute value of the independently computed tau invariant, which is one. Thus both genera equal one. [F6, F7, step 2.1, construct, algebra]
-
-4.1 The only possible differential entries in that reduced positive-trefoil complex, by Maslov degree and the two filtration inequalities, are $$\partial a=\alpha b,\quad\partial b=\beta Ua+\gamma c,\quad\partial c=\delta Ub,\qquad \alpha,\beta,\gamma,\delta\in\mathbb F_2.$$ In its first-coordinate hat specialization the total homology is one-dimensional. If $\alpha=1$, its surviving class would be $c$ at level $-1$, contrary to step 2.1; if $\alpha=\gamma=0$, the hat homology would have rank three. Hence $\alpha=0$, $\gamma=1$. Squaring the differential gives $\delta=0$. In the other coordinate hat specialization the only possible remaining differential is $b\mapsto\beta Ua$; if $\beta=0$, it would have rank-three homology, contrary to conjugation [F5]. Thus $\beta=1$. This proves the displayed full Laurent staircase. Its dual has $\partial a^\vee=Ub^\vee$, $\partial c^\vee=b^\vee$; after $U=0$ its hat differential is exactly the displayed reverse-mirror differential. [F1, F5, step 2.1, step 2.2, step 3.1, algebra]
-
-5.1 This proves all original Example clauses: the actual admitted finite grid and retained comparison/duality supply the invariant-level thresholds and both normalized filtered models, while Hom’s direct $\mathbb F_2$ genus input supplies the matching smooth lower bound. No integral Floer ranks or merely topological genus conclusion has been substituted. [F3, F4, F5, F6, F7, step 1.1, step 2.1, step 4.1, step 3.2] ∎
-
+3.1 The oriented smoothing of the positive two-strand three-crossing braid has two Seifert circles and three bands. By [F4] it gives a genus-one spanning surface for the positive trefoil; reflecting this surface gives a genus-one spanning surface for its reverse mirror. Thus each four-ball genus is at most one. The thresholds in steps 1.1–2.1 and Hom's genus bound [F5] give the lower bound one for each; hence both smooth four-ball genera equal one. [F4, F5, step 1.1, step 2.1, construct, algebra] ∎

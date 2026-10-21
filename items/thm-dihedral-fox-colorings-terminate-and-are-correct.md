@@ -28,8 +28,10 @@ dependency_level: 3
 For every odd prime $p$ and every finite regular oriented link diagram $D$,
 the algorithm in the Definition terminates and returns exactly
 $\operatorname{Col}_p(D)$. If its reduced system has $f$ free variables, it
-returns $p^f$ colorings. It uses at most $a$ pivot steps and at most $ca$
-row-entry elimination scans for a diagram with $a$ arcs and $c$ crossings.
+returns $p^f$ colorings. For a diagram with $a$ arcs and $c$ crossings it uses
+at most $\min(a,c)$ pivots, at most $ac$ pivot-search entry tests, at most $ac$
+row additions to clear pivot columns, at most $a^2c$ coefficient updates in
+those row additions, and at most $a^2$ divisions to normalize pivot rows.
 
 ## Statement references
 
@@ -55,11 +57,11 @@ row-entry elimination scans for a diagram with $a$ arcs and $c$ crossings.
 
 2.1 Every row operation in [F1] preserves the solution set of the homogeneous system. A row swap is reversible by the same swap; multiplying a row by a nonzero scalar is reversible by multiplying by its inverse; and adding a multiple of one row to another is reversible by subtracting the same multiple. Each transformed system is therefore equivalent to the preceding one. [F1, step 1.1]
 
-2.2 The algorithm visits each of the $a$ columns once. Each pivot search inspects at most $c$ rows, for at most $ca$ entry tests in total. Every pivot clears its column in at most $c-1$ other rows, so at most $a(c-1)\le ca$ row-entry elimination scans occur. A pivot increases the unused-row index, and there are at most $a$ columns, so there are at most $a$ pivots. The loops are finite and the chosen first nonzero entry makes the procedure deterministic. [F1, F2, step 1.1]
+2.2 The algorithm visits each of the $a$ columns once, and each pivot search inspects at most $c$ rows, for at most $ac$ pivot-search entry tests. There are at most $\min(a,c)$ pivots. If $c=0$, there are no pivots or row additions. If $c>0$, each pivot adds a multiple of its row to at most $c-1$ other rows, so at most $ac$ row additions occur; each addition updates at most $a$ coefficients, for at most $a^2c$ coefficient updates. Normalizing each pivot row divides at most $a$ entries, for at most $a^2$ divisions. The loops are finite and the chosen first nonzero entry makes the procedure deterministic. [F1, F2, step 1.1]
 
 3.1 At termination, each pivot column has a single $1$ in its pivot row and zeros in every other row; earlier pivot columns stay cleared because each later pivot row is zero in those columns. Each nonpivot column is free. The pivot equations uniquely determine the pivot variables from arbitrary free-variable values, and every such assignment satisfies the reduced system. By step 2.1 the reduced system has exactly the original solution set, so the returned assignments are exactly the Fox colorings. [F1, step 2.1, step 2.2, algebra]
 
-4.1 There are exactly $p^f$ choices of the $f$ free variables, and each determines one distinct solution. If $a=0$, then $f=0$ and the empty diagram has its unique empty assignment; if $c=0$, every arc variable is free and all $p^a$ assignments are returned. The stated pivot and scan bounds follow from step 2.2. [given, step 2.2, step 3.1, algebra] ∎
+4.1 There are exactly $p^f$ choices of the $f$ free variables, and each determines one distinct solution. If $a=0$, then $f=0$ and the empty diagram has its unique empty assignment; if $c=0$, every arc variable is free and all $p^a$ assignments are returned. The stated pivot, search, addition, update, and division bounds follow from step 2.2. [given, step 2.2, step 3.1, algebra] ∎
 
 ## Sources
 

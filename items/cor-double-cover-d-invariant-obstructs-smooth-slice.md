@@ -8,12 +8,15 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 page: branched-cover-correction-terms-and-sliceness
 deps:
   - lem-slice-disk-double-cover-is-rational-homology-ball
+  - def-cyclic-branched-cover-of-a-knot
   - lem-rational-ball-spin-c-extension-set-metabolizer
   - thm-correction-term-obstruction-from-rational-ball
-  - lem-branched-cover-surgery-presentation-from-seifert-surface
-  - lem-cyclic-cover-linking-form-inverse-matrix
+  - thm-poincare-duality-for-oriented-topological-manifolds
+  - thm-poincare-lefschetz-duality
+  - thm-long-exact-sequence-of-a-pair-in-singular-cohomology
+  - thm-universal-coefficient-theorem-for-cohomology-over-a-pid
   - def-axiom-of-choice
-dependency_level: 7
+dependency_level: 6
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -25,9 +28,9 @@ verification:
   precheck: n/a
 sources:
   references:
-    - title: "The double cover branched over a slice disk is a rational homology ball, published local supplier"
+    - title: "Ralph H. Fox and John W. Milnor, Singularities of 2-spheres in 4-space and cobordism of knots"
       url: "https://www.i-repository.net/contents/osakacu/sugaku/111F0000002-00302-8.pdf"
-      locator: "Theorem 2 and the smooth-disk scope"
+      locator: "Section 2, Theorem 2 proves the Alexander-polynomial factorization condition for slice knots; related context only. The smooth branched-cover homology assertion is proved by the cited local supplier."
     - title: "Paolo Aceto and Marco Golla, Dehn Surgeries and Rational Homology Balls"
       url: "https://arxiv.org/pdf/1509.07559v2"
       locator: "Section 2, Proposition 2.2; extension coset and metabolizer"
@@ -48,31 +51,29 @@ Assume AC. Let $K\subset S^3$ be a smooth oriented knot admitting a smooth prope
 
 [[thm-correction-term-obstruction-from-rational-ball|Correction-term vanishing for extending structures]]
 
-[[lem-branched-cover-surgery-presentation-from-seifert-surface|The Seifert-surface surgery presentation]]
-
-[[lem-cyclic-cover-linking-form-inverse-matrix|The positive-meridian surgery linking convention]]
-
 ## Facts & Assumptions
 
 **Given:** AC, a smooth oriented knot $K\subset S^3$, and a smooth proper slice disk $D\subset B^4$.
 
 [A1] AC is assumed by the smooth slice-cover and extension-set suppliers ([[def-axiom-of-choice]]).
 
-[F1] The connected cover branched over $D$ is a rational homology four-ball and its boundary is $Y=\Sigma_2(K)$ under the positive-meridian convention ([[lem-slice-disk-double-cover-is-rational-homology-ball]]).
+[F1] The connected cover branched over $D$ is a rational homology four-ball and its oriented boundary is the connected cyclic double branched cover $Y=\Sigma_2(K)$ ([[lem-slice-disk-double-cover-is-rational-homology-ball]], [[def-cyclic-branched-cover-of-a-knot]]).
 
-[F2] For a rational ball with connected rational-homology-sphere boundary, the extending Spin$^c$ structures form one affine coset of a self-annihilating subgroup of the boundary torsion cohomology, and that subgroup has square-root order ([[lem-rational-ball-spin-c-extension-set-metabolizer]]).
+[F2] Poincaré–Lefschetz duality and the cohomology long exact sequence of $(W_D,Y)$ compute the rational cohomology of $Y$ from that of $W_D$. Universal coefficients and closed-manifold Poincaré duality identify it with the rational homology of $S^3$ ([[thm-poincare-lefschetz-duality]], [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]], [[thm-universal-coefficient-theorem-for-cohomology-over-a-pid]], [[thm-poincare-duality-for-oriented-topological-manifolds]]).
 
-[F3] A Spin$^c$ structure extending over a smooth rational homology four-ball has correction term zero ([[thm-correction-term-obstruction-from-rational-ball]]).
+[F3] For a rational ball with connected rational-homology-sphere boundary, the extending Spin$^c$ structures form one affine coset of a self-annihilating subgroup for the chain linking pairing, and that subgroup has square-root order ([[lem-rational-ball-spin-c-extension-set-metabolizer]]).
 
-[F4] The double branched cover has the nonsingular Seifert-surface surgery presentation; its meridian linking form uses the matrix inverse convention fixed by the positive-meridian surgery supplier ([[lem-branched-cover-surgery-presentation-from-seifert-surface]], [[lem-cyclic-cover-linking-form-inverse-matrix]]).
+[F4] A Spin$^c$ structure extending over a smooth rational homology four-ball has correction term zero ([[thm-correction-term-obstruction-from-rational-ball]]).
 
 ## Proof
 **Proof technique:** apply the slice-cover, extension-set, and vanishing results in sequence.
 
 **Given:** The data above.
 
-1.1 Apply [F1] to $D$. It gives a rational homology four-ball $W_D$ and identifies the oriented boundary with $Y$; in particular $Y$ is a rational homology sphere. [A1, F1, given]
+1.1 Apply [F1] to $D$. It gives a connected oriented rational homology four-ball $W_D$ with connected boundary $Y$. [A1, F1, given]
 
-2.1 Apply [F2] to $(W_D,Y)$. It identifies the restriction image as one affine coset of a self-annihilating subgroup $M$ for the torsion linking form and gives $|M|^2=|H_1(Y;\mathbb Z)|$. The boundary orientation and linking convention agree with the stated one by [F4]. [F2, F4, step 1.1]
+2.1 Since $H_*(W_D;\mathbb Q)\cong H_*(\mathrm{point};\mathbb Q)$, universal coefficients give $H^0(W_D;\mathbb Q)=\mathbb Q$ and $H^j(W_D;\mathbb Q)=0$ for $j>0$. By [F2], $H^j(W_D,Y;\mathbb Q)$ is zero except for $H^4(W_D,Y;\mathbb Q)\cong\mathbb Q$. The pair sequence and connectedness of $Y$ give $H^1(Y;\mathbb Q)=H^2(Y;\mathbb Q)=0$ and $H^3(Y;\mathbb Q)\cong\mathbb Q$; also $H^0(Y;\mathbb Q)\cong\mathbb Q$. Closed-manifold Poincaré duality now gives $H_*(Y;\mathbb Q)\cong H_*(S^3;\mathbb Q)$. [F2, step 1.1, algebra]
 
-3.1 Every structure in that restriction image extends over $W_D$, so [F3] gives $d(Y,\mathfrak t)=0$ for each such structure. The proof used a smooth disk in [F1]; it does not apply to a merely locally flat topological disk. It makes no statement about structures outside the restriction image. [F1, F3, step 2.1] ∎
+3.1 Apply [F3] to $(W_D,Y)$. The restriction image is one affine coset of a self-annihilating subgroup $M$ for the chain torsion linking pairing, and $|M|^2=|H_1(Y;\mathbb Z)|$. The hypotheses hold by steps 1.1 and 2.1. [F3, step 1.1, step 2.1]
+
+4.1 Every structure in the restriction image of step 3.1 extends over $W_D$, so [F4] gives $d(Y,\mathfrak t)=0$ for each such structure. The proof used a smooth disk in [F1]; it does not apply to a merely locally flat topological disk. It makes no statement about structures outside the restriction image. [F1, F4, step 3.1] ∎

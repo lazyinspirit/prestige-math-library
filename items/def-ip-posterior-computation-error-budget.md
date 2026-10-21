@@ -34,7 +34,7 @@ sources:
       locator: "§4.2, pCN proposal (4.7)–(4.11), and §6.1, Theorem 6.2: exact invariant-kernel context for function-space posterior computation."
     - title: "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes"
       url: https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf
-      locator: "§1.1, equation (1.9) and the following caution (PDF pp. 8–10): stationary-chain variance of a sample mean and limits on CLT conclusions."
+      locator: "§1.6.2, equation (1.9) and the following caution (printed pp. 8–11; PDF pp. 12–15): stationary-chain variance of a sample mean and limits on CLT conclusions."
 ---
 
 ## Definition
@@ -116,4 +116,4 @@ estimate.
 
 [Dashti and Stuart, full lecture notes, §4.2](https://arxiv.org/pdf/1302.6989)
 
-[Geyer, full MCMC lecture notes, §1.1](https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf)
+[Geyer, full MCMC lecture notes, §1.6.2](https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf)

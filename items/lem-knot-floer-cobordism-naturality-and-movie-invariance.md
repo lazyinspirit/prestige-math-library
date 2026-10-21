@@ -34,7 +34,7 @@ Let $(W,\Sigma,\mathcal A)$ be a decorated knot cobordism between doubly pointed
 $$
 \widetilde F_{W_2,\Sigma_2,\mathcal A_2,\mathfrak s_2}\circ \widetilde F_{W_1,\Sigma_1,\mathcal A_1,\mathfrak s_1} \simeq \sum_{\substack{\mathfrak s\in\operatorname{Spin}^c(W)\\ \mathfrak s|_{W_i}=\mathfrak s_i,\ i=1,2}} \widetilde F_{W,\Sigma,\mathcal A,\mathfrak s}.
 $$
-The sum is over Spin-c structures on the glued cobordism restricting to the specified structures on the two pieces. For $W=S^3\times[0,1]$, $\operatorname{Spin}^c(W)$ has one element, so the sum has one term and the composition law is ordinary composition up to filtered equivariant chain homotopy.
+The sum is over Spin-c structures on the glued cobordism restricting to the specified structures on the two pieces. For $W=S^3\times[0,1]$, $\operatorname{Spin}^c(W)$ has one element; the sum has one term if the specified structures on the pieces are its restrictions, and is empty otherwise. In the compatible case the composition law is ordinary composition up to filtered equivariant chain homotopy.
 
 ## Statement references
 
@@ -66,5 +66,5 @@ The sum is over Spin-c structures on the glued cobordism restricting to the spec
 
 2.2 Apply [F2] to the actual gluing and the two specified structures $\mathfrak s_1,\mathfrak s_2$. Restriction of each summand to the two pieces is exactly the condition displayed in the Statement; no unmarked or total-Spin-c map has replaced these maps. The two-color specialization respects the composition and homotopies, giving the displayed formula over $\mathbb F_2[U,V]$. [F2, F3, step 1.1]
 
-3.1 Finally $H^2(S^3\times[0,1];\mathbb Z)=0$ and the product is spin. Its nonempty Spin-c torsor therefore consists of one element. In the stated product case the extension set has precisely that element and the law reduces to ordinary composition up to filtered equivariant chain homotopy. The argument imports the established naturality/composition theorems, not an unproved assertion that the local triangle identity checks all movies. [given, step 2.1, step 2.2] ∎
+3.1 Finally $H^2(S^3\times[0,1];\mathbb Z)=0$ and the product is spin. Its nonempty Spin-c torsor therefore consists of one element. If the chosen structures on the pieces restrict from this unique product structure, the extension set has that one element; otherwise it is empty. In the compatible case the law reduces to ordinary composition up to filtered equivariant chain homotopy. The argument imports the established naturality/composition theorems, not an unproved assertion that the local triangle identity checks all movies. [given, step 2.1, step 2.2] ∎
 

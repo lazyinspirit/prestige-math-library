@@ -51,7 +51,7 @@ Consequently, every positive-Euler connected finite PL surface is a disk, sphere
 
 [F1] [[def-simplicial-euler-characteristic]]: $\chi=V-E+F$. An elementary collapse of a triangle and a free edge removes one face and one edge, preserving this number. Attaching a disk along a subdivided circle adds one, because the circle has equally many vertices and edges.
 
-[F2] The dual spanning-tree collapse in [[lem-connected-normal-surface-chi-one-is-disk]], steps 1.1–1.2, applies to any connected finite triangulated surface with boundary, without using its Euler characteristic: it leaves a connected graph. Its step 2.2 proves the tree-neighborhood case. The graph-neighborhood construction for the general case is detailed below.
+[F2] The dual spanning-tree collapse in [[lem-connected-normal-surface-chi-one-is-disk]], steps 1.1–2.1, applies to any connected finite triangulated surface with boundary, without using its Euler characteristic: it leaves a connected graph. Its step 4.1 proves the tree-neighborhood case. The graph-neighborhood construction for the general case is detailed below.
 
 [F3] [[ex-cylinder-and-mobius-band-as-quotients]] specifies the two rectangle quotients $(0,y)\sim(1,y)$ and $(0,y)\sim(1,1-y)$. [[ex-projective-plane-polygonal-schema]] identifies a disk with antipodal boundary points paired as a projective plane, by an explicit finite quotient argument.
 

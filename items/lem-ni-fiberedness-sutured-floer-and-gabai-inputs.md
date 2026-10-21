@@ -20,6 +20,7 @@ dependency_level: 6
 justified_by: []
 aliases: []
 proof_strategy: direct
+axiom_use: "Assumes full AC for the imported integral sutured analytic framework, the hierarchy supplier, and the external integral product criterion. No countable-choice-only version is asserted."
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -49,7 +50,7 @@ verification:
 
 ## Statement
 
-Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $Y\setminus K$ be irreducible, and let $F$ be a genus-$g$ Seifert surface. If the integral top Alexander group $\widehat{\mathrm{HFK}}(Y,K,[F],g;\mathbb Z)$ is isomorphic to $\mathbb Z$, then the sutured manifold obtained by cutting the compact knot exterior along $F$ is a product sutured manifold. The argument uses Ni's homology-product reduction, the horizontal and separating product-annulus decompositions, the characteristic product region, and Gabai's taut-foliation input under their stated hypotheses.
+Assume full AC. Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $Y\setminus K$ be irreducible, and let $F$ be a genus-$g$ Seifert surface. If the integral top Alexander group $\widehat{\mathrm{HFK}}(Y,K,[F],g;\mathbb Z)$ is isomorphic to $\mathbb Z$, then the sutured manifold obtained by cutting the compact knot exterior along $F$ is a product sutured manifold. The argument uses Ni's homology-product reduction, the horizontal and separating product-annulus decompositions, the characteristic product region, and Gabai's taut-foliation input under their stated hypotheses.
 
 ## Statement references
 
@@ -67,7 +68,7 @@ Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y
 
 ## Facts & Assumptions
 
-**Given:** The knot, exterior, surface and integral group in the Statement. Full Choice is available through [[def-axiom-of-choice]]. A Seifert surface is connected, compact, oriented and properly embedded in the compact exterior, with its one boundary component the preferred longitude.
+**Given:** Full AC, the knot, exterior, surface and integral group in the Statement. A Seifert surface is connected, compact, oriented and properly embedded in the compact exterior, with its one boundary component the preferred longitude. [[def-axiom-of-choice]] supplies the full Choice assumption.
 
 [F1] The resolved signed top/outer comparison in [[lem-ni-holomorphic-disk-and-jsj-analytic-inputs]] identifies the actual grading-$g$ complex with the actual $F$-cut complex, with its induced coherent orientation class. Thus it identifies their integral homologies. This is also the exact external Theorem 1.5 of Juhász, *Floer homology and surface decompositions*, published p.300, for a null-homologous knot in any closed connected oriented $Y$ and any Seifert surface $F$; no three-sphere or rational-homology-sphere hypothesis occurs.
 

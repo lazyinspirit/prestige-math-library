@@ -12,6 +12,7 @@ deps:
   - lem-l-smoothness-descent-inequality
   - def-lipschitz-holder-contraction
   - def-euclidean-inner-product
+  - thm-cauchy-schwarz-and-the-euclidean-norm
 justified_by: []
 forward_refs: []
 proof_strategy: direct
@@ -62,11 +63,13 @@ from any $x_0\in\mathbb R^n$. Then $x_t\in X_\sigma$ and $f(x_t)$ is finite for 
 
 [F5] [[def-euclidean-inner-product]]: the Euclidean gradient and norm use $\langle x,y\rangle=\sum_{k<n}x_ky_k$ and $\|x\|_2=\sqrt{\langle x,x\rangle}$.
 
+[F6] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: the Euclidean norm satisfies the triangle inequality and positive homogeneity.
+
 ## Proof
 
 1.1 For a point $s\in\mathbb R^n$, define the extended-real quadratic model $\mu_s(x)=g(s)+\langle\nabla g(s),x-s\rangle+\frac1{2\gamma}\|x-s\|_2^2+h_{\sigma,\gamma}(x)$. By [F3] and $\gamma\le1/L$, its smooth part majorizes $g(x)$ and is tight at $x=s$. Adding $h_{\sigma,\gamma}$ preserves the majorization; when $h_{\sigma,\gamma}(x)=+\infty$ both objective values are $+\infty$. Thus $\mu_s(x)\ge f(x)$ for every $x$, and $\mu_s(s)=f(s)$ in extended-real order. [given, F3, F5, algebra]
 
-1.2 For $t\ge2$ put $s=x_{t-1}\in X_\sigma$ and define $r_t(x)=g(s)+\langle\nabla g(s),x-s\rangle+\frac1{2\gamma}\|x-s\|_2^2-g(x)$. By [F3], $r_t(x)\ge0$ for every $x$, $r_t(s)=0$, and $\nabla r_t(s)=0$. Its gradient is $\nabla r_t(x)=\nabla g(s)+(x-s)/\gamma-\nabla g(x)$, so [F4] and the hypothesis on $\nabla g$ give $\|\nabla r_t(x)-\nabla r_t(y)\|_2\le(1/\gamma+L)\|x-y\|_2\le(2/\gamma)\|x-y\|_2$. On $X_\sigma$, $\mu_s-f=r_t$. [F3, F4, F5, given, algebra]
+1.2 For $t\ge2$ put $s=x_{t-1}\in X_\sigma$ and define $r_t(x)=g(s)+\langle\nabla g(s),x-s\rangle+\frac1{2\gamma}\|x-s\|_2^2-g(x)$. By [F3], $r_t(x)\ge0$ for every $x$, $r_t(s)=0$, and $\nabla r_t(s)=0$. Its gradient is $\nabla r_t(x)=\nabla g(s)+(x-s)/\gamma-\nabla g(x)$, so the triangle inequality and positive homogeneity [F6], the Lipschitz bound [F4], and the hypothesis on $\nabla g$ give $\|\nabla r_t(x)-\nabla r_t(y)\|_2\le(1/\gamma+L)\|x-y\|_2\le(2/\gamma)\|x-y\|_2$. On $X_\sigma$, $\mu_s-f=r_t$. [F3, F4, F5, F6, given, algebra]
 
 2.1 Completing the square gives $\mu_s(x)=\frac1{2\gamma}\|x-(s-\gamma\nabla g(s))\|_2^2+h_{\sigma,\gamma}(x)+g(s)-\frac\gamma2\|\nabla g(s)\|_2^2$. By [F1] and the exact update in [F2] with $\widetilde D_\sigma=D_\sigma$, $x_t$ is the unique global minimizer of $\mu_{x_{t-1}}$. Hence $f(x_t)\le\mu_{x_{t-1}}(x_t)\le\mu_{x_{t-1}}(x_{t-1})=f(x_{t-1})$. Also $x_t\in X_\sigma$ for $t\ge1$, where $h_{\sigma,\gamma}$ is finite, so $f(x_t)$ is finite. [F1, F2, F5, step 1.1, given, algebra]
 

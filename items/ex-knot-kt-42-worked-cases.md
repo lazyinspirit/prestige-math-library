@@ -76,7 +76,7 @@ The horizontal and vertical coordinates are the algebraic and Alexander filtrati
 
 [F2] [[def-upsilon-function-from-filtered-complex]]: $\Upsilon=-2\nu_t$, where $\nu_t$ is the minimum $F_t$-level of a Maslov-zero cycle representing the normalized generator.
 
-[F4] [[lem-epsilon-stable-equivalence-and-not-a-homomorphism]] steps 4.3 and 6.1 give a finite signed-code admission of the positive trefoil grid and compute its normalized three-generator staircase. [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] supplies the stated normalized grid-to-analytic comparison; its current Proof includes the absolute Maslov and Alexander normalizations and has its [F1]–[F5] prerequisites recorded there.
+[F4] [[lem-epsilon-stable-equivalence-and-not-a-homomorphism]] steps 1.4 and 6.2 give a finite signed-code admission of the positive trefoil grid and compute its normalized three-generator staircase. [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] supplies the stated normalized grid-to-analytic comparison; its current Proof includes the absolute Maslov and Alexander normalizations and has its [F1]–[F5] prerequisites recorded there.
 
 [F3] [[lem-knot-floer-duality-and-filtration-swap]]: the reverse-mirror complex is filtered-chain-homotopy equivalent to the dual, which negates the two filtration coordinates; the actual analytic diagram identification and its absolute grading are supplied without requiring admission of this particular staircase.
 

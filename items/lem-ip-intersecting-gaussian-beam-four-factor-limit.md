@@ -10,7 +10,7 @@ deps:
   - def-ip-simple-surface-and-geodesic-xray-transform
   - def-axiom-of-choice
   - def-countable-choice
-dependency_level: 3
+dependency_level: 1
 proof_strategy: direct
 provenance:
   statement: literature-derived

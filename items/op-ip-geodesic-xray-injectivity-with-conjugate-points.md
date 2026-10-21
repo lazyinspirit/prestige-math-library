@@ -17,7 +17,7 @@ sources:
   references:
     - title: "Mikko Salo, On geometric inverse problems and microlocal analysis, author-hosted lecture notes"
       url: "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf"
-      locator: "§2.2, Question 2.1, PDF p. 9; the simple-manifold result and partial higher-dimensional results are discussed on PDF pp. 8–9."
+      locator: "§2.2, Question 2.1, PDF p. 10; the simple-manifold result and partial higher-dimensional results are discussed on PDF pp. 9–10."
     - title: "Gabriel P. Paternain, Mikko Salo, and Gunther Uhlmann, Geometric inverse problems, with emphasis on two dimensions"
       url: "https://sites.math.washington.edu/~gunther/publications/GIP2D_driver%20%2814%29.pdf"
       locator: "Chapter 15, §15.1, Open problem 5, printed p. 339, asking injectivity for compact nontrapping surfaces with strictly convex boundary; §15.2, printed pp. 340–342, for higher-dimensional convex-foliation results and related scope."

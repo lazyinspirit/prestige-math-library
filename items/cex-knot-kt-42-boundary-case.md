@@ -60,4 +60,4 @@ Let $C=\mathrm{CFK}^{\infty}(T_{2,3})$ be the right-handed trefoil staircase on 
 
 ## Unresolved proof obligations
 
-The finite staircase refutation is complete. Its right-handed trefoil identification is supplied by the signed three-crossing grid proof in [[lem-epsilon-stable-equivalence-and-not-a-homomorphism]], step 4.3, together with that item's finite staircase computation. The universal grid-value clause is supplied by [F2] under the comparison prerequisites it records; the earlier missing-comparison escalation is no longer current.
+The finite staircase refutation is complete. Its right-handed trefoil identification is supplied by the signed three-crossing grid proof in [[lem-epsilon-stable-equivalence-and-not-a-homomorphism]], step 1.4, together with that item's finite staircase computation. The universal grid-value clause is supplied by [F2] under the comparison prerequisites it records; the earlier missing-comparison escalation is no longer current.

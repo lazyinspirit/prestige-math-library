@@ -15,6 +15,7 @@ sources:
   references:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds, 2nd revised edition, Lecture 2 §2.2"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/3mani.pdf"
+      locator: "Lecture 1 §1.5, Theorem 1.5, pp. 23–24; Lecture 2 §2.2, p. 33"
     - title: "Peter S. Ozsváth, András I. Stipsicz, and Zoltán Szabó, Heegaard Floer homology, version 2025-12-15, §1.2.3"
       url: "https://web.math.princeton.edu/~petero/konyv9.pdf"
     - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6, §§4–7"
@@ -35,7 +36,7 @@ Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $K$ be a smooth o
 
 [[def-knot-meridian-and-preferred-longitude|Positive meridian and degree-one preferred longitude]]
 
-[Saveliev, Lecture 2 §2.2, surgery on links in $S^3$](https://poisson.phc.dm.unipi.it/~camponovo/libri/3mani.pdf)
+[Saveliev, Lecture 1 §1.5, Theorem 1.5, pp. 23–24; Lecture 2 §2.2, p. 33](https://poisson.phc.dm.unipi.it/~camponovo/libri/3mani.pdf)
 
 [Ozsváth–Stipsicz–Szabó, §1.2.3, Dehn filling and surgery coefficients](https://web.math.princeton.edu/~petero/konyv9.pdf)
 
@@ -47,15 +48,17 @@ Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $K$ be a smooth o
 
 [A1] $\mathrm{AC}_\omega$ is the stated axiom [[def-countable-choice]]. The marked data include the chosen exterior [[def-knot-exterior]], its boundary torus, and the meridian–preferred-longitude basis [[def-knot-meridian-and-preferred-longitude]]. The batch-57 definitions specify this interface; the basis is an explicit hypothesis here, not an assertion that those definitions prove its existence.
 
+[F1] **External input.** Every essential simple closed curve on a torus has primitive homology class, and unoriented isotopy classes are in bijection with primitive homology classes modulo sign. Saveliev, *Lectures on the Topology of 3-Manifolds*, Lecture 2 §2.2, p. 33, states the corresponding one-to-one classification by reduced fractions.
+
+[F2] **External input.** The map from isotopy classes of orientation-preserving homeomorphisms of $T^2$ to $\mathrm{SL}(2,\mathbb Z)$ given by the action on $H_1(T^2;\mathbb Z)$ is an isomorphism. Saveliev, Lecture 1 §1.5, Theorem 1.5, p. 24, states this result; its proof there cites Rolfsen, Theorem 2.D.4, for injectivity. We use the stated mapping-class classification, and do not claim to have read the cited Rolfsen proof.
+
 ## Proof
 
-1.1 Since $\gcd(p,q)=1$, Bézout's identity gives integers $r,s$ with $ps-qr=1$. The integer matrix with columns $(p,q)$ and $(r,s)$ is unimodular, so its linear map on $\mathbb R^2$ descends to a torus homeomorphism. The image of a coordinate circle is embedded and has class $p[\mu]+q[\lambda]$; reversing its parameter changes both coefficients' signs and leaves the unoriented curve unchanged. Thus every primitive pair defines a slope. [given, A1, construct, algebra]
+1.1 Since $\gcd(p,q)=1$, Bézout's identity gives integers $r,s$ with $ps-qr=1$. The integer matrix with columns $(p,q)$ and $(r,s)$ is unimodular, so its linear map on $\mathbb R^2$ descends to a torus homeomorphism. The image of a coordinate circle is embedded and has class $p[\mu]+q[\lambda]$; reversing its parameter changes both coefficients' signs and leaves the unoriented curve unchanged. With the product orientation on $V=D^2\times S^1$, the standard meridian–longitude basis on $\partial V$ has intersection $+1$. The matrix has determinant $+1$, whereas $\mu\cdot\lambda=-1$ on $T_K$, so the induced boundary map reverses orientation and gives the required gluing map. Thus every primitive pair defines a slope and an oriented filling. [given, A1, construct, algebra]
 
-2.1 Let $C_0,C_1$ be essential simple closed curves whose primitive classes agree up to sign. Reverse one parameter if needed, so the classes agree. Their algebraic intersection is zero. Put them in transverse position; if they intersect, their lifts to $\mathbb R^2$ are proper lines with the same primitive deck translation. An innermost pair of intersections of such lifts bounds a disk with interior disjoint from the lifts; projecting that disk gives a bigon. Isotoping one arc across the bigon removes two intersections and preserves the isotopy class. Repeating this finite reduction makes $C_0,C_1$ disjoint. Cutting the torus along $C_0$ gives an annulus, and $C_1$ is an essential curve in that annulus, hence is parallel to its core and cobounds a subannulus with $C_0$. An isotopy across that subannulus carries $C_0$ to $C_1$. Thus the unoriented slope depends only on the primitive class modulo simultaneous sign. [given, step 1.1, construct]
+2.1 Let $C_0,C_1$ be essential simple closed curves whose primitive classes agree up to sign. Reverse one parameter if needed so their classes agree. By [F1], the curves are isotopic. Thus the unoriented slope depends only on the primitive class modulo simultaneous sign. [given, F1, step 1.1]
 
-3.1 Let $V=D^2\times S^1$ and suppose $\phi_0,\phi_1:\partial V\to T_K$ are orientation-reversing and send a meridian of $V$ to the same slope. By step 2.1 and isotopy extension across a collar of $T_K$, modify one gluing map by an isotopy so their meridian curves agree. The resulting transition map $g=\phi_0^{-1}\phi_1$ preserves the meridian curve. Cut $\partial V$ along that curve; the result is an annulus. After composing with the boundary map induced by $(z,w)\mapsto(\overline z,\overline w)$ if necessary, $g$ preserves both annulus boundary circles. A lift of the annulus to $\mathbb R\times[0,1]$ shows that its isotopy class rel boundary is determined by the integer displacement of one boundary lift relative to the other, hence is a power of a Dehn twist about the meridian. [given, step 2.1, construct]
-
-4.1 In coordinates $V=D^2\times S^1$, a meridional Dehn twist of exponent $k$ is the boundary restriction of $(z,w)\mapsto(w^kz,w)$; the simultaneous reversal $(z,w)\mapsto(\overline z,\overline w)$ also extends and preserves the orientation of $V$. Thus the transition map extends over $V$ by an orientation-preserving homeomorphism. Changing one gluing map by this extension gives an oriented homeomorphism of the filled manifolds that is the identity on $E_K$. Therefore the filling type depends only on the meridian slope. [step 3.1, construct] ∎
+3.1 Let $V=D^2\times S^1$ and let $\phi_0,\phi_1:\partial V\to T_K$ be orientation-reversing gluing maps whose meridians map to the same slope. The transition map $g=\phi_0^{-1}\phi_1$ preserves boundary orientation and sends the meridian class to $\epsilon$ times itself for some $\epsilon\in\{1,-1\}$. Its matrix in the meridian–longitude basis is therefore $\begin{pmatrix}\epsilon&k\\0&\epsilon\end{pmatrix}$ for some $k\in\mathbb Z$. By [F2], $g$ is isotopic to $T^k$ if $\epsilon=1$, and to $T^{-k}R$ if $\epsilon=-1$, where $T(z,w)=(wz,w)$ and $R(z,w)=(\overline z,\overline w)$. These representatives extend over $V$: $T^j$ extends by $(z,w)\mapsto(w^jz,w)$, and $R$ extends by simultaneous complex conjugation. Both extensions preserve the orientation of $V$. To extend the isotopy from a representative $h$ to $g$, use a collar $\partial V\times[0,1]$ and the map $(x,s)\mapsto(I_{\rho(s)}(h^{-1}(x)),s)$, where $I_t$ is the isotopy from $h$ to $g$, $\rho(0)=1$, and $\rho$ is zero near the inner collar edge; composing this collar map with the extension of $h$ extends $g$ over $V$. Since $\phi_0\circ g=\phi_1$, gluing this extension to the identity on $E_K$ gives an oriented homeomorphism of the fillings. Therefore the oriented filling type depends only on the meridian slope. [given, F2, construct, algebra] ∎
 
 ## Diagram
 

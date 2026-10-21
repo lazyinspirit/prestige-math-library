@@ -29,9 +29,10 @@ sources:
         of adaptive nonparametric Bayesian credible sets, Annals of Statistics
         43 (2015)
       url: https://arxiv.org/pdf/1310.4489v5
-      locator: "§§1 and 3, especially Theorems 3.6 and 3.9: honest coverage under
-        polished-tail restrictions and counterexamples to unrestricted
-        coverage."
+      locator: "§§1 and 3: Theorem 3.1 gives a constructed truth for which
+        empirical-Bayes credible-set coverage tends to zero along a subsequence;
+        Theorem 3.6 gives coverage over polished-tail truths; Theorem 3.9 controls
+        credible-set radius on self-similar classes."
     - title: Evarist Giné and Richard Nickl, Mathematical Foundations of
         Infinite-Dimensional Statistical Models, Cambridge University Press
         (2016)

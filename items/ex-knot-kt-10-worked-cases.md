@@ -34,9 +34,9 @@ sources:
     - title: "Andrew Ranicki, Notes on Reidemeister Torsion, Definitions 4 and 6 and Theorem 15"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/torsion.pdf"
       locator: "Complete lecture notes; based acyclic torsion and unit convention."
-    - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §5.2.1"
+    - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §5.2, Theorem 5.2.1 and proof"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
-      locator: "Complete 53-page lecture notes; §5.2.1, printed pp. 27–28, torus splitting, annulus core, and the full Seifert–van Kampen calculation of the (p,q) knot-group presentation. This source does not assert a simple-spine equivalence."
+      locator: "Complete 53-page lecture notes; §5.2, proof of Theorem 5.2.1, printed pp. 28–29: the two-solid-torus decomposition, annular intersection and core inclusions, and the Seifert–van Kampen group calculation. This source does not assert a simple-spine equivalence."
     - title: "Allen Hatcher, Algebraic Topology, §1.2, Example 1.24 (Torus Knots)"
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch1.pdf"
       locator: "The complete mapping-cylinder construction of the torus-knot exterior 2-complex and the boundary-torus mapping cylinder."
@@ -90,7 +90,7 @@ The braid portion shown below uses the positive crossing convention from the col
 
 [Ranicki, Definitions 4 and 6 and Theorem 15](https://webhomes.maths.ed.ac.uk/~v1ranick/papers/torsion.pdf)
 
-[Cattabriga and Francaviglia, §5.2.1](https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf)
+[Cattabriga and Francaviglia, Theorem 5.2.1 and proof](https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf)
 
 [Hatcher, §1.2, Example 1.24](https://pi.math.cornell.edu/~hatcher/AT/ATch1.pdf)
 

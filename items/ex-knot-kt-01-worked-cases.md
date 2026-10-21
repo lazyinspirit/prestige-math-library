@@ -5,8 +5,9 @@ title: "Worked Wirtinger presentations"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
-dependency_level: 5
-deps: [alg-knot-wirtinger-presentation-from-code,
+dependency_level: 6
+deps: [lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes,
+       alg-knot-wirtinger-presentation-from-code,
        thm-knot-wirtinger-presentation-correctness,
        lem-wirtinger-local-meridian-conjugacy,
        def-group-presentation,
@@ -67,7 +68,7 @@ The panels below record the local crossing charts for the four figure-eight equa
   \node[above right] at (0.35,0.82) {$x_2$};
   \node[below left] at (-0.38,0.2) {$x_3$};
   \node at (0,-0.15) {$x_1x_2=x_3x_1$};
-  % R2: over x4, left x1, right x2; reverse under direction.
+  % R2: over x4, left x2, right x1; under direction follows the positive normal.
   \node at (3.4,1.05) {$R_2$};
   \draw (2.9,0.02)--(3.22,0.34);
   \draw (3.58,0.70)--(3.9,1.02);
@@ -77,7 +78,7 @@ The panels below record the local crossing charts for the four figure-eight equa
   \node[above right] at (3.75,0.82) {$x_2$};
   \node[below left] at (3.02,0.2) {$x_1$};
   \node at (3.4,-0.15) {$x_1x_4=x_4x_2$};
-  % R3: over x2, left x3, right x4; reverse under direction.
+  % R3: over x2, left x4, right x3; under direction follows the positive normal.
   \node at (0,-1.55) {$R_3$};
   \draw (-0.5,-2.58)--(-0.18,-2.26);
   \draw (0.18,-1.90)--(0.5,-1.58);
@@ -101,6 +102,8 @@ The panels below record the local crossing charts for the four figure-eight equa
 ```
 
 ## Example references
+
+[[lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes|Complete integer figure-eight drawing and its verified positive-meridian crossing table]]
 
 [[alg-knot-wirtinger-presentation-from-code|Finite scan that outputs one meridian generator per under-arc and one relator per crossing]]
 
@@ -128,13 +131,15 @@ The panels below record the local crossing charts for the four figure-eight equa
 
 [F6] A quotient by a relator normal closure has the presentation's universal property. [[thm-quotient-group-universal-property]]
 
+[F7] The explicit valid figure-eight drawing has exactly the four side triples and oriented under-arc transitions stated here. [[lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes]]
+
 ## Proof
 
 1.1 The crossing-free code has one under-arc and no crossing relators, so [F1] gives $\langle x\mid\ \rangle$. This is the free group on one generator, isomorphic to $(\mathbb Z,+)$ by exponent sum using [F5]; [F3] identifies it with the unknot group. [given, F1, F3, F4, F5, algebra]
 
 1.2 The trefoil panels give the crossing triples $(b,c,a)$, $(c,a,b)$, and $(a,b,c)$. Applying [F2] gives the three crossing relations in the statement. The crossing with overarc $a$ gives $c=aba^{-1}$. Substituting this into $a=bcb^{-1}$ gives $a=bab a^{-1}b^{-1}$. Right multiplication by $ba$ yields $aba=bab$. Under that braid relation, $cac^{-1}=a b a b^{-1}a^{-1}=b$, so the third crossing equation follows from the first two. Thus eliminating $c$ gives exactly $\langle a,b\mid aba=bab\rangle$. [given, F1, F2, F4, algebra]
 
-1.3 Each figure-eight panel is an oriented local crossing chart. In every panel [F2] gives $x_ox_L=x_Rx_o$. The side triples $(o,L,R)$ are $(x_1,x_2,x_3)$, $(x_4,x_2,x_1)$, $(x_2,x_4,x_3)$, and $(x_3,x_4,x_1)$. Substitution, and reversal of the written equality when needed, gives exactly the four equations in the statement. The under-arrow direction does not select a different conjugation rule. [given, F1, F2, algebra]
+1.3 By [F7], these local charts belong to the explicit figure-eight code, rather than merely prescribing four abstract crossing relations. Each panel is an oriented local crossing chart. In every panel [F2] gives $x_ox_L=x_Rx_o$. The side triples $(o,L,R)$ are $(x_1,x_2,x_3)$, $(x_4,x_2,x_1)$, $(x_2,x_4,x_3)$, and $(x_3,x_4,x_1)$. Substitution, and reversal of the written equality when needed, gives exactly the four equations in the statement. The under-arrow direction does not select a different conjugation rule. [given, F1, F2, F7, algebra]
 
 2.1 In $S_3$, the two words $(12)(23)(12)$ and $(23)(12)(23)$ both equal $(13)$, so the assignment respects the trefoil relation. The transpositions $(12)$ and $(23)$ generate all six permutations $e,(12),(23),(12)(23),(23)(12),(13)$, hence the homomorphism is surjective by [F4] and [F6]. Since $S_3$ is nonabelian, this group is nonabelian. [step 1.2, F4, F6, algebra]
 

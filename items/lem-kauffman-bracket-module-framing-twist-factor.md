@@ -20,7 +20,7 @@ sources:
   references:
     - title: "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, framing relation following Definition 2.1"
       url: "https://arxiv.org/pdf/math/9809113"
-    - title: "Thang T. Q. Le, A Crash Course in Quantum Invariants of Knots and 3-Manifolds (2016), §6.1"
+    - title: "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1"
       url: "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
 ---
 

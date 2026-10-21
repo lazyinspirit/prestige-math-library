@@ -28,7 +28,7 @@ sources:
 
 ## Statement
 
-For a finite regular oriented link diagram $D$ with $n$ ordered crossings, the procedure that enumerates all $2^n$ smoothing states, assigns one copy of $\mathcal A=\mathbb Z[X]/(X^2)$ per resolution circle, places a generator in degrees $i=|v|-n_-$ and $j=|v|+n_+-2n_-+\sum\deg(a)$, and sums the signed merge or split edge maps terminates after finitely many operations. Its output is a finite direct sum of finite-rank free abelian groups with a differential of bidegree $(1,0)$ satisfying $d^2=0$; hence it is a bounded bigraded cochain complex.
+For a nonempty finite regular oriented link diagram $D$ with $n$ ordered crossings, the procedure that enumerates all $2^n$ smoothing states, assigns one copy of $\mathcal A=\mathbb Z[X]/(X^2)$ per resolution circle, places a generator in degrees $i=|v|-n_-$ and $j=|v|+n_+-2n_-+\sum\deg(a)$, and sums the signed merge or split edge maps terminates after finitely many operations. Its output is a finite direct sum of finite-rank free abelian groups with a differential of bidegree $(1,0)$ satisfying $d^2=0$; hence it is a bounded bigraded cochain complex.
 
 ## Statement references
 
@@ -45,7 +45,7 @@ For a finite regular oriented link diagram $D$ with $n$ ordered crossings, the p
 [Zhang, *Notes on Khovanov homology* (2025), §§3.5–3.7](https://arxiv.org/pdf/2501.03115v1)
 
 ## Facts & Assumptions
-**Given:** A finite regular oriented link diagram $D$ with an ordered crossing set of cardinality $n$ and the finite state procedure in the Theorem.
+**Given:** A nonempty finite regular oriented link diagram $D$ with an ordered crossing set of cardinality $n$ and the finite state procedure in the Theorem.
 
 [F1] The procedure traverses each function $v:C(D)\to\{0,1\}$ once, uses a finite number of edge maps per state, and assigns $\mathcal A^{\otimes k(v)}$ with the stated gradings ([[alg-khovanov-chain-complex-from-diagram]]).
 

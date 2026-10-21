@@ -226,3 +226,22 @@ page repair, mathematical acceptance, an edited-page route or a native transitio
 Existing item-consumer logical-path routes keep their original minimum length,
 source guards and actual `deps`-edge checks. This additional authority does not
 weaken those routes; it records a different, explicitly page-level context fact.
+
+## Proposed unchanged native page/null opt-in
+
+An unchanged formatting context whose authentic native subject is `page` and
+whose native `consumer_id` is explicitly null additionally supplies
+`native_finding_basis: native-page-null-consumer-owner-bound-consumer-v1`.
+Keep `routing_basis: owner-unchanged-required-page-context-v1`; this second
+field authenticates the original finding shape independently of the unchanged
+carrier policy. The authority consumer remains only a separately verified routing
+witness and does not replace the native null.
+
+The explicit native basis is rejected for other original subjects, non-null native
+consumers, or edited-page policies. All existing successful native completion,
+prompt/report/finding, before/after identity, published inventory, actual item
+dependency path, native snapshot and unbound-history guards remain mandatory.
+In particular a page `requires` edge alone cannot replace an actual consumer-to-
+published-page-item dependency path. The independent verdict limits remain
+false_positive, confirmed_nonfatal, or escalated. No page edits, new frontier
+ownership or mathematical acceptance are supplied.

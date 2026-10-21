@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ a044359d39c3 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ fd61c9c8f469 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 21426 |
-| now mechanically prevented | 384 |
+| defects caught before publication | 21450 |
+| now mechanically prevented | 385 |
 | escaped to publication | 7 |
 | still open | 123 |
 
@@ -976,21 +976,21 @@
 | invalid-inference | 1 |  |
 | citation-missing | 1 |  |
 
-## inverse-problems-knot-theory-all-109-2026-10-19 — 524 row(s)
+## inverse-problems-knot-theory-all-109-2026-10-19 — 548 row(s)
 
 | subclass | 3a-adjudicate |
 |---|---|
-| ill-formed | 185 |
-| citation-inaccurate | 88 |
-| missing-hypothesis | 39 |
-| unlicensed-inference | 31 |
-| ill-typed-construction | 24 |
+| ill-formed | 192 |
+| citation-inaccurate | 90 |
+| missing-hypothesis | 43 |
+| unlicensed-inference | 37 |
+| ill-typed-construction | 25 |
+| invalid-inference | 19 |
 | unsupported-inference | 18 |
 | citation-missing | 18 |
-| invalid-inference | 17 |
 | false-or-overstrong-statement | 15 |
 | citation-misattributed | 13 |
-| false-or-overstrong-title | 10 |
+| false-or-overstrong-title | 11 |
 | undefined-notation | 10 |
 | ill-typed-claim | 9 |
 | invalid-witness | 6 |
@@ -999,12 +999,12 @@
 | missing-choice-scope | 4 |
 | citation-truncated | 4 |
 | arithmetic-error | 3 |
+| other | 3 |
 | citation-inflated | 3 |
 | citation-corrupted | 3 |
 | invalid-refutation | 3 |
 | false-claim | 2 |
 | missing-case | 2 |
-| other | 2 |
 | false-computation | 2 |
 | false-boundary-disposition | 2 |
 | overstrong-statement | 1 |

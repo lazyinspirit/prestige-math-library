@@ -19,7 +19,7 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: "Charles Livingston and Allison N. Miller, The concordance genus of knots, II"
+    - title: "Charles Livingston, The concordance genus of a knot, II"
       url: "https://msp.org/agt/2009/9-1/agt-v9-n1-p06-p.pdf"
       locator: "§2, printed pp. 169–170"
     - title: "Charles Livingston, A Survey of Classical Knot Concordance"

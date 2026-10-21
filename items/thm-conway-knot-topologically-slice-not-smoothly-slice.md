@@ -27,13 +27,13 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Theorem 1.1 and the full proof in §§2–3, printed pp. 582–587 (PDF pp. 1–6)"
+      locator: "Theorem 1.1 (arXiv v1 PDF p. 2); trace construction in §3 and proof of nonsliceness in §4 (PDF pp. 4–6)"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§§2–3, trace strategy and Freedman context"
     - title: "Freedman and Quinn, Topology of 4-Manifolds"
       url: "https://archive.mpim-bonn.mpg.de/id/eprint/4789/2/FreedmanQuinn-TopologyOf4Manifolds-Reformatted2013.pdf"
-      locator: "Theorem 11.11 and complete proof, reformatted PDF pp. 286–288"
+      locator: "§11.9, Theorem 11.11 and proof, reformatted PDF pp. 238–239 (printed pp. 224–225); the Z-slice criterion in a contractible 4-manifold"
 ---
 
 ## Statement
@@ -55,9 +55,7 @@ disk in the standard $B^4$, but it bounds no smooth proper disk there.
 
 [A1] Full AC, written AC, is [[def-axiom-of-choice]].
 
-[L1] AC supplies countable choice through
-[[thm-choice-implies-dependent-implies-countable-choice]], which is used by
-the handle and Lee branches.
+[L1] AC supplies countable choice through [[thm-choice-implies-dependent-implies-countable-choice]], which is used by the handle and Lee branches.
 
 [F1] [[lem-conway-knot-alexander-polynomial-one]] gives the actual normalized equality $\Delta_C(t)=1$.
 

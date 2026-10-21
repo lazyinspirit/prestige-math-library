@@ -96,8 +96,6 @@ The diagram is the closure of the displayed braid; the arrows give the knot orie
 
 Let $G_J:=\pi_1(S^3\setminus J)$ for a knot $J$. Let $U$ be the crossing-free unknot and let $T$ be the closed three-crossing diagram displayed above, formed from two oriented strands and the two exterior closure arcs. With the shown orientation and under-arc labels $a,b,c$, its crossing triples $(o,L,R)$ are $(b,c,a)$, $(c,a,b)$, and $(a,b,c)$, so its crossing equations are $b=cac^{-1}$, $a=bcb^{-1}$, and $c=aba^{-1}$. Eliminating $c$ gives $G_T\cong\langle a,b\mid aba=bab\rangle$. The map $a\mapsto(12)$, $b\mapsto(23)$ is a surjection of $G_T$ onto the nonabelian permutation group $S_3$. Consequently $G_U\cong\mathbb Z$ and $G_T$ is noncyclic. Their abelianizations are both $\mathbb Z$, so they are not distinguished by abelianization. Ambient-isotopic knots have isomorphic complement groups, hence $U$ and $T$ are not ambient isotopic. Thus abelianization alone does not classify knots.
 
-
-
 1.1 By [F1] and [F3], the crossing-free unknot group is $\langle x\mid\ \rangle$, the free group on one generator. By [F5] it is isomorphic to $\mathbb Z$, whose abelianization is itself by [F7]. [given, F1, F3, F4, F5, F7, algebra]
 
 1.2 The trefoil's displayed crossing triples and [F2] give $b=cac^{-1}$, $a=bcb^{-1}$, and $c=aba^{-1}$. Substituting the last into the second yields $a=bab a^{-1}b^{-1}$; right multiplication by $ba$ gives $aba=bab$. Under this relation, $cac^{-1}=a b a b^{-1}a^{-1}=b$, so the first equation follows. Thus eliminating $c$ gives $\langle a,b\mid aba=bab\rangle$, and [F3] identifies it with $G_T$. [given, F2, F3, F4, algebra]
@@ -106,4 +104,4 @@ Let $G_J:=\pi_1(S^3\setminus J)$ for a knot $J$. Let $U$ be the crossing-free un
 
 2.2 The map $a\mapsto(12)$, $b\mapsto(23)$ respects $aba=bab$, since both sides equal $(13)$. Its image contains two adjacent transpositions and hence all six elements of $S_3$, so it is surjective by [F4] and [F6]. Since $S_3$ is nonabelian, $G_T$ is nonabelian; every quotient of the cyclic group $\mathbb Z$ is cyclic, so $G_T\not\cong\mathbb Z\cong G_U$. [F4, F5, F6, step 1.2, algebra]
 
-3.1 If $U$ and $T$ were ambient isotopic, [F9] would give a homeomorphism of their complements; [F10] and [F11] would induce a fundamental-group isomorphism. Step 2.1 rules this out. Their abelianizations nevertheless agree by steps 1.1 and 1.3, proving the stated counterexample. [F9, F10, F11, step 1.1, step 2.1, step 2.2] ∎
+3.1 If $U$ and $T$ were ambient isotopic, [F9] would give a homeomorphism of their complements; [F10] and [F11] would induce a fundamental-group isomorphism. Step 2.2 rules this out. Their abelianizations nevertheless agree by steps 1.1 and 2.1, proving the stated counterexample. [F9, F10, F11, step 1.1, step 2.1, step 2.2] ∎

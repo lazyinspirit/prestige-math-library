@@ -53,7 +53,7 @@ Let P be a pattern of nonzero winding number n. Then P induces an injective func
 
 [F3] Weak injectivity and the auxiliary connected-sum reduction are proved with their category hypotheses ([[lem-cdr-weak-injectivity-and-auxiliary-pattern-reduction]]).
 
-[F4] The finite connected-sum/inverse instances for these actual knots and concordances are available without an ambient choice axiom by the compact-input construction in [F3], step0.1. The general group theorem records these same operations with AC_omega ([[thm-cdr-concordance-categories-form-abelian-groups]]); its stronger choice assumption is not a premise of this unqualified theorem.
+[F4] The finite connected-sum/inverse instances for these actual knots and concordances are available without an ambient choice axiom by the compact-input construction in [F3], step 1.1. The general group theorem records these same operations with AC_omega ([[thm-cdr-concordance-categories-form-abelian-groups]]); its stronger choice assumption is not a premise of this unqualified theorem.
 
 [F5] The satellite assignment descends to the concordance classes after concordance preservation ([[lem-satellite-operator-preserves-concordance]]).
 

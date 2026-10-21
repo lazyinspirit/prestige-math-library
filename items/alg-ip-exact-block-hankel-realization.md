@@ -23,7 +23,7 @@ sources:
   references:
     - title: "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization"
       url: "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
-      locator: "§25.4, Markov-parameter realization discussion, PDF pp. 7–8"
+      locator: "§25.4, Theorem 25.3 proof (Hankel factorization and pseudoinverse), PDF pp. 7–8; Exercise 25.4(a)–(e), Markov-parameter construction, PDF p. 12"
     - title: "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes"
       url: "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
       locator: "§9.2, Hankel factorization and realization context; §9.3, PDF pp. 5–8"

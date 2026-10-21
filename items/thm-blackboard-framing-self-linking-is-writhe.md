@@ -38,8 +38,10 @@ Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram
 of a knot $K$ with blackboard framing $b_D$. The self-linking number of the
 framed knot $(K,b_D)$ equals the diagram writhe:
 $$\operatorname{sl}(K,b_D)=\operatorname{wr}(D).$$
-For a link component $K_i$, the corresponding self-linking number is its
-self-writhe $\operatorname{wr}_i(D)$. Total writhe of a link still includes
+More generally, let $D$ be a regular oriented diagram of an oriented link
+$L=K_1\cup\cdots\cup K_r$, and let $b_{D,i}$ be the blackboard framing
+of $K_i$ induced by its component subdiagram. Then
+$\operatorname{sl}(K_i,b_{D,i})=\operatorname{wr}_i(D)\qquad(1\le i\le r).$ Total writhe of a link still includes
 the signs of mixed crossings, while the sum of component self-linking numbers
 uses only self-crossings.
 
@@ -57,8 +59,7 @@ uses only self-crossings.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and a regular oriented diagram $D$ of
-a knot $K$.
+**Given:** The Axiom of Countable Choice and a regular oriented diagram $D$ of a knot $K$, or, for the component claim, of a link $L=K_1\cup\cdots\cup K_r$.
 
 [A1] The Axiom of Countable Choice, written $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
 
@@ -72,4 +73,4 @@ a knot $K$.
 
 1.1 By [F3], the mixed crossing list for $K\cup K_{b_D}$ has two crossings of sign $\operatorname{sgn}(c)$ for each crossing $c$ of $D$ and no others. Therefore its signed mixed sum is $2\sum_c\operatorname{sgn}(c)=2\operatorname{wr}(D)$. [A1, F3, given, algebra]
 
-2.1 By [F2], the linking number of $K$ with its blackboard push-off is half this mixed sum; by [F1] it is the self-linking number. Thus $\operatorname{sl}(K,b_D)=\operatorname{wr}(D)$. For a link component, apply the same calculation to the subdiagram consisting of that component alone; crossings with other components are not mixed crossings of that component and its push-off, so precisely its self-crossings contribute. [A1, F1, F2, step 1.1, construct] ∎
+2.1 By [F2], the linking number of $K$ with its blackboard push-off is half this mixed sum; by [F1] it is the self-linking number. Thus $\operatorname{sl}(K,b_D)=\operatorname{wr}(D)$. For a link diagram $D$ and each component $K_i$, apply the same calculation to its regular component subdiagram with induced blackboard framing $b_{D,i}$; crossings with other components are not mixed crossings of that component and its push-off, so precisely its self-crossings contribute. [A1, F1, F2, step 1.1, construct] ∎

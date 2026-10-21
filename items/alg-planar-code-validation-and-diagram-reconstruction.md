@@ -16,9 +16,9 @@ provenance:
   proof: not-applicable
 sources:
   references:
-    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 Introduction, finite link-diagram representation, web text lines 102–121"
+      locator: "§1 Introduction, web text lines 92–105 (finite diagram representation); §3 Knots and Links, lines 271–283 (crossing incidence data)"
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"
@@ -57,12 +57,14 @@ this code only; it does not compare the represented link with another code.
 
 2. If $c=0$, accept only one empty Gauss component word, the empty signed-DT
    code, or the single `Loop[1]` PD record, each with exactly one orientation
-   marker, `ccw` or `cw`. Return
-   `invalid-crossingless-code` otherwise. For an accepted input return the
-   standard circle with the marked orientation, one component, its two sphere
-   faces, and the `outside` face selector. Do not run crossing-graph tests.
+   marker, `ccw` or `cw`. Return `invalid-crossingless-code` otherwise. If the
+   outer-face marker is not exactly `outside`, return `invalid-outer-face` with
+   that marker. For an accepted input return the standard circle with the marked
+   orientation, one component, its two sphere faces, and the `outside` face
+   selector. Do not run crossing-graph tests.
 
-3. For a Gauss code with $c>0$, reject an empty component word. Check that
+3. For a Gauss code with $c>0$, if a component word is empty, return
+   `invalid-empty-component-word` with the first such component index. Check that
    every label lies in $\{1,\ldots,c\}$, occurs exactly twice in total, and
    occurs once with each over/under sign. Check that its separate crossing-sign
    vector has length $c$ and entries in $\{+1,-1\}$. Return
@@ -131,6 +133,6 @@ this code only; it does not compare the represented link with another code.
 
 [[lem-planar-diagram-code-realizability-and-face-validation]] — the spherical realization criterion used at steps 8–9.
 
-[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — finite link-diagram graph input.
+[Hass–Lagarias–Pippenger, §§1, 3](https://arxiv.org/pdf/math/9807016) — finite link-diagram graph input and crossing data.
 
 [Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — permutation-based face computation and outer-face convention.

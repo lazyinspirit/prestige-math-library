@@ -42,7 +42,7 @@ Let an oriented finite ideal triangulation of the interior of a compact connecte
 
 ## Diagram
 
-Opposite edges of a normalized ideal tetrahedron carry the same shape parameter. The wire drawing records that convention only; all edge classes, products and angle sums in the proof are computed from the given face pairings, not from the drawing.
+Opposite edges of a normalized ideal tetrahedron carry the same shape parameter. The horospherical link at $\infty$ is the Euclidean triangle with vertices $0,1,z$: its corner parameters are $z$ at $0$, $z'=1/(1-z)$ at $1$, and $z''=(z-1)/z$ at $z$. The wire drawing records these edge labels; all edge classes, products and angle sums in the proof are computed from the given face pairings, not from the drawing.
 
 ```tikz
 \begin{tikzpicture}[scale=1.0,line cap=round,line join=round]
@@ -56,9 +56,9 @@ Opposite edges of a normalized ideal tetrahedron carry the same shape parameter.
   \node[below right] at (b) {$1$};
   \node[above] at (c) {$\infty$};
   \node[right] at (d) {$z$};
-  \node at (1,-0.35) {$z$ on $01,\infty z$};
-  \node at (2.9,0.95) {$z'$ on $0\infty,1z$};
-  \node at (1.0,2.05) {$z''$ on $1\infty,0z$};
+  \node at (1,-0.35) {$z''$ on $01,\infty z$};
+  \node at (2.9,0.95) {$z$ on $0\infty,1z$};
+  \node at (1.0,2.05) {$z'$ on $1\infty,0z$};
 \end{tikzpicture}
 ```
 
@@ -86,7 +86,7 @@ Opposite edges of a normalized ideal tetrahedron carry the same shape parameter.
 
 3.2 A horospherical truncation of each ideal tetrahedron is compact and has finite volume because its smooth hyperbolic volume density is bounded on that compact region. Each removed vertex tail is contained in a rank-two horocusp and has finite volume by [F4]. There are finitely many tetrahedra and vertices, so the glued manifold has finite total volume. [given, F1, F4, step 2.1, algebra]
 
-4.1 The part remaining after all cusp neighborhoods are removed is a compact union of truncated tetrahedra. Let $(x_n)$ be a Cauchy sequence. If infinitely many terms lie in that compact part, a subsequence converges there and the Cauchy property forces the whole sequence to the same limit. Otherwise the sequence eventually lies in the union of the finitely many disjoint cusp ends; sufficiently deep points in distinct ends have positive separation through the compact core, so the Cauchy property forces it eventually into one end, where it converges by step 2.1. Thus the full metric is complete. Together with step 3.2 and the curvature $-1$ charts from step 1.1, this is a complete finite-volume hyperbolic structure as defined in [F5]. [F3, F5, step 1.1, step 2.1, step 3.2, construct] ∎
+4.1 The part left after truncating all cusp ends is compact. Let $(x_n)$ be Cauchy. If infinitely many terms lie in this compact part, a subsequence converges there, and the Cauchy property forces the whole sequence to the same limit. Otherwise $(x_n)$ is eventually in the union of the finitely many cusp ends. Distinct cusp boundary tori are disjoint compact subsets of the compact core, so their pairwise distances have a positive minimum; every path between different ends crosses the corresponding boundary tori. Hence a Cauchy tail cannot switch ends and eventually lies in one cusp $T^2\times[0,\infty)$. Fix a term $x_N$ in this tail. Any path from $x_N$ to a point at cusp depth $t$ has length at least $|t-t(x_N)|$ if it stays in the cusp and at least $t+t(x_N)$ if it exits through the boundary. Since the tail stays within bounded distance of $x_N$, its depths are bounded. It is therefore contained in a compact truncation $T^2\times[0,R]$, where a Cauchy sequence converges. Thus the full metric is complete. Together with step 3.2 and the curvature $-1$ charts from step 1.1, this is a complete finite-volume hyperbolic structure as defined in [F5]. [F3, F5, step 1.1, step 2.1, step 3.2, construct] ∎
 
 ## Sources
 

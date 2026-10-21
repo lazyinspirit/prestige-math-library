@@ -23,6 +23,9 @@ sources:
     - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
       locator: "Section 4.4, meridian and peripheral orientation conventions"
+    - title: "Allen Hatcher, Vector Bundles and K-Theory"
+      url: "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+      locator: "Section 1.2, Proposition 1.14 and the discussion of oriented bundles over $S^1$, printed pp. 25-26"
 ---
 
 ## Statement
@@ -34,6 +37,8 @@ For every smooth oriented embedding $K:S^1\to S^3$, let $\nu_K=K^*TS^3/dK(TS^1)$
 [Calegari, §3.3](https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf)
 
 [Cattabriga and Francaviglia, §4.4](https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf)
+
+[Hatcher, Vector Bundles and K-Theory, §1.2](https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf)
 
 ## Facts & Assumptions
 

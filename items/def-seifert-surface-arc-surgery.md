@@ -23,7 +23,7 @@ sources:
 ---
 ## Definition
 
-Let $F$ be a compact oriented embedded surface in the oriented $3$-sphere. An **embedded arc surgery** on $F$ is the following operation. Choose an embedded solid cylinder $C=[0,1]\times D^2$ whose intersection with $F$ is exactly its two end disks $\{0,1\}\times D^2$, with the cylinder lying on the same local side of $F$ at the two disks. Replace those disks by the lateral annulus $[0,1]\times\partial D^2$. The orientation on the annulus is the one that agrees along both attaching circles with the orientation on the remaining part of $F$. The result is denoted $F_C$. The core $[0,1]\times\{0\}$ is the surgery arc. The operation preserves $\partial F$ and its boundary orientation; its reverse is called an arc-surgery reduction.
+Let $F$ be a compact oriented embedded surface in the oriented $3$-sphere. An **embedded arc surgery** on $F$ is the following operation. Choose an embedded solid cylinder $C=[0,1]\times D^2$ whose intersection with $F$ is exactly its two end disks $\{0,1\}\times D^2$, both contained in the interior of $F$, and whose interior approaches the same cooriented local side of $F$ at both disks. Require the lateral annulus $[0,1]\times\partial D^2$ to admit an orientation agreeing along both attaching circles with the orientation on the remaining part of $F$. Replace the two disks by that annulus, then round the two seams in disjoint neighbourhoods of the attaching circles to obtain a smooth embedded surface $F_C$. The core $[0,1]\times\{0\}$ is the surgery arc. The operation preserves $\partial F$ and its boundary orientation; its reverse is called an arc-surgery reduction.
 
 ```tikz
 \begin{tikzpicture}[scale=0.95,>=stealth]

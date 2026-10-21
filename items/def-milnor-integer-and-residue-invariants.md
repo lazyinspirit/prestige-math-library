@@ -41,7 +41,7 @@ Assume AC for the string-link quotient branch. Use the closed-link residue
 definition one finite maximum index length at a time, so its based word-lift
 data are finite.
 
-Let $\tau$ be a based $r$-component string link with bottom meridian symbol group
+Let $\tau$ be a based $r$-component string link with $r\geq1$ and bottom meridian symbol group
 $F_r=\langle x_1,\ldots,x_r\rangle$, exterior group $G=\pi_1(X_\tau)$, and
 based string-link longitudes $\lambda_1,\ldots,\lambda_r$. With compatible stem accesses this free group identifies the full endpoint fundamental group. For arbitrary independently based meridians, use instead its meridian map on each finite nilpotent quotient, which is still an isomorphism by the end-identification theorem; no full-group free-basis assertion is made. Longitudes retain their specified parallel and access data. For a multi-index
 $I=(i_1,\ldots,i_k,j)$ with $k\geq1$ and each index in $\{1,\ldots,r\}$,

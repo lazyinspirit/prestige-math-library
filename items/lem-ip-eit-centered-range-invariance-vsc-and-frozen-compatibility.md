@@ -79,7 +79,7 @@ In particular, the structural hypotheses of the joint and frozen one-step estima
 
 [F2] Uniform collared $H^{s_1}$ classes satisfy $H^1$ stability with modulus $O([\log(1/\delta)]^{-(s_1-3/2)})$ in their centered sequence distance. [[lem-ip-sharp-centered-eit-hone-logarithmic-stability]]
 
-[F3] For the exact intrinsic quadratic penalty, the sharp $H^1$ modulus and $B^{s_2}_{2,\infty}$ truth imply a VSC with coefficient $3/4$ and logarithmic exponent $\nu$ in the Statement. The proof treats the exact domain inner product. [[lem-ip-collared-sobolev-besov-source-functional-cutoff]]
+[F3] For the exact intrinsic quadratic penalty, the $H^1$ modulus and $B^{s_2}_{2,\infty}$ truth imply a VSC with coefficient $3/4$ and logarithmic exponent $\nu$ in the Statement. The proof treats the exact domain inner product. [[lem-ip-collared-sobolev-besov-source-functional-cutoff]]
 
 [F4] Truncated logarithmic indices are concave when the truncation point is small enough, and their conjugates satisfy $H(q)\sim C(\log q)^{-\nu}$. [[lem-ip-logarithmic-index-conjugate-and-parameter-rates]]
 

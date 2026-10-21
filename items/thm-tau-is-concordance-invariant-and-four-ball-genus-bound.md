@@ -20,7 +20,7 @@ dependency_level: 9
 justified_by: []
 aliases: []
 proof_strategy: direct
-axiom_use: "AC_omega is inherited from the smooth slice-genus minimum and finite cobordism constructions. No full Axiom of Choice is used."
+axiom_use: "The Statement retains the run’s AC_omega assumption. Hom’s knot-invariant and genus theorems are imported as stated; the source does not specify a weaker set-theoretic base, and no local analytic reconstruction is claimed."
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -70,26 +70,22 @@ $$|\tau(K)|\le g_4^{\mathrm{sm}}(K).$$
 
 **Given:** The Axiom of Countable Choice, smooth oriented knots, and the standard normalized filtered knot Floer models.
 
-[A1] [[def-countable-choice]] states that every sequence of nonempty sets admits a choice function; this is the axiom branch used by the slice-genus minimum and the finite diagram choices.
+[A1] [[def-countable-choice]] states the axiom retained in the Statement.
 
-[F1] [[lem-tau-of-the-unknot-is-zero]] computes the normalized tau value of the standard unknot as zero.
+[F1] [[def-knot-floer-filtration-and-tau]] defines the diagramwise threshold as the least Alexander level whose inclusion has nonzero image in total homology. Hom's §3.1 definition uses the same normalized knot Floer filtration; because $\widehat{HF}(S^3)\cong\mathbb F_2$, nonzero image is equivalent to surjectivity.
 
-[F2] [[lem-smooth-and-topological-slice-genus-minima-exist]] proves that the nonempty set of smooth slice-surface genera has a least element under its stated countable-choice branch.
+[F2] **External input, authorized by the run-specific source boundary.** Hom, *A survey on Heegaard Floer homology and concordance*, §3.1, Theorem 3.1(1), printed p. 8, states that $\tau$ is a surjective homomorphism from the smooth knot concordance group to $\mathbb Z$. It therefore includes diagram independence, smooth concordance invariance, and connected-sum additivity. The survey states on printed p. 2 that it works throughout with $\mathbb F_2$ coefficients. I read the threshold definition and theorem statement; I do not claim to reconstruct the cited proof.
 
-[F3] [[lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms]] moves an interior point of a smooth properly embedded genus-$g$ four-ball surface to zero, flattens it near zero by supported ambient isotopies, and removes a sufficiently small actual round ball. The explicitly concentric shell is $S^3\times[0,1]$ and the residual surface is a connected genus-$g$ smooth cobordism with product collars between its boundary knot and a standard unknot. It fixes a sufficiently small restriction of the supplied outer collar, not an arbitrary entire collar.
+[F3] **External input, authorized by the run-specific source boundary.** Hom, §3.1, Theorem 3.1(2), printed p. 8, states $|\tau(K)|\le g_4(K)$ for the smooth four-ball genus.
 
-[F4] The normalized knot/grid and analytic comparisons supply diagram independence, the actual hat threshold, and common absolute Alexander normalization. [[lem-tau-is-independent-of-heegaard-grid]]
-
-[F6] The genus-$g$ inequality $|\tau(K_1)-\tau(K_0)|\le g$ is supplied for the actual smooth oriented knot cobordism with its product collars. Its proof cuts the cobordism along an arc to obtain a genus-$g$ spanning surface for $K_1\#(-K_0)$, then applies Hom’s direct $\mathbb F_2$ four-ball genus theorem and the local connected-sum/mirror identities. It does not infer mod-two nonvanishing from an integral surgery map. [[lem-knot-floer-large-surgery-and-filtered-cobordism-input]]
-
-[F5] The full supplied filtered connected-sum tensor comparison gives tau additivity in the same normalization. [[lem-tau-connected-sum-filtered-tensor-product]]
+[F4] [[def-smooth-and-topological-slice-genus]] uses the same minimum over smooth connected oriented properly embedded surfaces in $B^4$ as Hom's $g_4$.
 
 ## Proof
 
-1.1 By [F4] the diagramwise threshold defines a single invariant $\tau(K)$, and [F5] proves $\tau(K\#J)=\tau(K)+\tau(J)$. Apply [F6] to a smooth genus-zero concordance to obtain $|\tau(K_1)-\tau(K_0)|\le0$, hence equality. These give diagram independence, concordance invariance and connected-sum additivity in the original normalization. The geometric input is the explicitly imported $\mathbb F_2$ genus theorem together with the local cut-arc construction in [F6], not a conclusion inferred solely from absolute grading. [F4, F5, F6, given, algebra]
+**Given:** The hypotheses of the Statement.
 
-2.1 Let $g=g_4^{\mathrm{sm}}(K)$ and choose a smooth genus-$g$ surface realizing the minimum by [F2]. Apply [F3] to this actual embedded surface. Its supported ambient diffeomorphism fixes the boundary knot, flattens the surface near the center, and permits removal of a sufficiently small concentric round ball. The explicit round shell contains the residual connected genus-$g$ cobordism between $K$ and a standard unknot $U$, with the required product collars. No complement of an arbitrary embedded chart ball is identified with a standard shell. The supplied inequality [F6] gives $|\tau(K)-\tau(U)|\le g$; by [F1], $\tau(U)=0$, yielding the desired bound. This proves the genus bound for the chosen minimizing surface and therefore for the minimum genus. [A1, F1, F2, F3, F6, given, construct, algebra] ∎
+1.1 The threshold in [F1] is Hom's standard $\tau$ definition: both use the normalized Alexander-filtered knot Floer complex and the first level whose inclusion maps nontrivially to total homology. The target is one-dimensional, so the nonzero-image and surjectivity formulations agree. Thus Hom's $\tau(K)$ is the common normalized threshold asserted here. [F1, given, algebra]
 
-## External-input boundary
+2.1 Hom's homomorphism theorem [F2] gives diagram independence, invariance under smooth concordance, and $\tau(K\#J)=\tau(K)+\tau(J)$. [F2, step 1.1, algebra]
 
-The original Statement follows from the displayed local deductions and the accepted model/tensor interfaces. Its geometric genus inequality uses Hom’s explicitly coefficient-qualified $\mathbb F_2$ genus theorem and the local cut-arc reduction recorded in [F6]. No full-AC hypothesis or general movie theorem is substituted. The puncturing argument retains the actual concentric-shell and smaller-collar conventions.
+3.1 Hom's genus theorem [F3], with the identical genus convention [F4], gives $|\tau(K)|\le g_4^{\mathrm{sm}}(K)$. This proves the remaining conclusion. [F3, F4, step 1.1, algebra] ∎

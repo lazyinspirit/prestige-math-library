@@ -27,9 +27,9 @@ sources:
     - title: "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29"
       url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
       locator: "§3.3, discussion of blackboard framing and crossing signs, pp. 27–28"
-    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3 and §3.1, pp. 3–8"
+    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 8–9"
       url: "https://arxiv.org/pdf/1910.10257v6"
-      locator: "§3 and §3.1, blackboard framing and local crossing calculation, pp. 3–7"
+      locator: "§3, Definition 3.7, p. 8; Proposition 3.9 and Figure 16, p. 9"
 ---
 
 ## Statement
@@ -96,8 +96,7 @@ push-off. The diagram is schematic and is not used in the proof.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, an oriented smooth embedded knot in
-$\mathbb R^3$, and its regular oriented diagram $D$.
+**Given:** The Axiom of Countable Choice, an oriented smooth embedded knot in $\mathbb R^3$, and its regular oriented diagram $D$.
 
 [A1] The Axiom of Countable Choice, written $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
 

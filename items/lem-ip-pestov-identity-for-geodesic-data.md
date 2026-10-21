@@ -16,13 +16,13 @@ sources:
   references:
     - title: "Gabriel P. Paternain, Mikko Salo, and Gunther Uhlmann, Geometric inverse problems, with emphasis on two dimensions"
       url: "https://sites.math.washington.edu/~gunther/publications/GIP2D_driver%20%2814%29.pdf"
-      locator: "Chapter 3, §3.7, printed pp. 96–100; Chapter 4, §4.3, printed pp. 117–119."
+      locator: "Chapter 3, §3.7, printed pp. 96–100; Chapter 4, §4.3, Proposition 4.3.2, printed p. 117 (PDF p. 133)."
     - title: "Joonas Ilmavirta, Geometry of geodesics, full lecture notes"
       url: "https://users.jyu.fi/~jojapeil/opetus/mats4120k26/mats4120-v2.pdf"
-      locator: "Chapter 13, §13.2, PDF pp. 88–90."
+      locator: "Chapter 13, §13.3, Proposition 13.2, printed/PDF p. 91; the proposition assumes compact interior support, while the proof here treats zero boundary trace."
     - title: "Mikko Salo, On geometric inverse problems and microlocal analysis, author-hosted lecture notes"
       url: "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf"
-      locator: "§2.4.1, PDF pp. 11–13."
+      locator: "§2.4.2, Proposition 2.15, printed/PDF p. 17; the proposition assumes compact interior support, while the proof here treats zero boundary trace."
 proof_strategy: direct
 ---
 

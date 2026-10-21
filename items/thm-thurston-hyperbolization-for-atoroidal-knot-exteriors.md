@@ -48,6 +48,8 @@ Assume the Axiom of Choice. Let $E_K$ be the compact connected orientable exteri
 
 [Jessica S. Purcell, *Hyperbolic Knot Theory*, Chapter 8](https://users.monash.edu/~jpurcell/book/HypKnotTheory.pdf)
 
+[J. Hyam Rubinstein, “Three-Manifolds with Complete Hyperbolic Metrics of Finite Volume,” §3, p. 734](https://www.claymath.org/wp-content/uploads/2022/03/cmip02.pdf)
+
 
 ## Facts & Assumptions
 
@@ -57,11 +59,11 @@ Assume the Axiom of Choice. Let $E_K$ be the compact connected orientable exteri
 
 [F2] **External input — comparison of atoroidality conventions.** For compact orientable irreducible $3$-manifolds with empty or toroidal boundary, the condition that every incompressible embedded torus is boundary-parallel and the condition that every $\pi_1$-injective torus map is homotopic into the boundary agree outside certain Seifert-fibered manifolds. In particular they agree for a manifold which is not Seifert-fibered. Source: the same survey, §1.4, p.9, immediately after its definition of atoroidal. This is the torus-theorem consequence expressly recorded there; it is imported, not reconstructed here.
 
-[F3] **External input — Hyperbolization Theorem.** If $N$ is compact, orientable, irreducible, has empty or toroidal boundary, is atoroidal in the torus-map convention, and has infinite fundamental group, then its interior admits a complete hyperbolic metric. For this empty-or-toroidal-boundary theorem the metric has finite volume. Source: the same survey, Theorem 1.13, p.13, with the definition on p.11 and finite-volume statement/convention on p.12. This imports the complete established hyperbolization result, covering both fibered and nonfibered cases; it does not invoke a conditional deformation theorem to create an initial representation.
+[F3] **External input — hyperbolization and the finite-volume case used here.** AFW's Hyperbolization Theorem says that a compact, orientable, irreducible $N$ with empty or toroidal boundary, atoroidal in the torus-map convention, and with infinite fundamental group has a complete hyperbolic interior. Source: Theorem 1.13, p.13, with the atoroidality convention on p.9 and the hyperbolic-structure definition on p.11. In the present case, where the torus boundary is incompressible and $N$ is not Seifert-fibered, the finite-volume conclusion is stated explicitly by J. Hyam Rubinstein for compact, orientable, irreducible, atoroidal, non-Seifert manifolds with incompressible torus boundary. Source: “Three-Manifolds with Complete Hyperbolic Metrics of Finite Volume,” §3, p.734. These are imported established results; no general finite-volume conclusion is claimed here for compressible torus boundary.
 
 [F4] **External input — finite-volume cusp decomposition.** A complete oriented hyperbolic $3$-manifold of finite volume is a compact submanifold bounded by tori together with finitely many horoballs modulo rank-two free abelian parabolic actions. Source: Thurston, *The Geometry and Topology of Three-Manifolds*, Chapter 5, Proposition 5.11.1, printed p.116 (PDF p.34). Thus its noncompact ends are exactly its torus cusps.
 
-The cited statements, their indicated conventions and the short proof of [F4] were read in the actual source PDFs. The full proofs of the Loop Theorem, the torus theorem and general hyperbolization are external inputs; they have not been locally reconstructed or fully reread for this application.
+The exact cited statements and their indicated conventions, including the finite-volume statement for incompressible torus boundary, were read in the source documents; the short proof of [F4] was also read. The full proofs of the Loop Theorem, the torus theorem and general hyperbolization are external inputs; they have not been locally reconstructed or fully reread for this application.
 
 ## Proof
 
@@ -76,3 +78,5 @@ The cited statements, their indicated conventions and the short proof of [F4] we
 [Aschenbrenner, Friedl and Wilton, *3-Manifold Groups*, arXiv version, Theorem 1.2 and §§1.4–1.5, pp.7,9,11–13](https://arxiv.org/pdf/1205.0202)
 
 [Thurston, *The Geometry and Topology of Three-Manifolds*, Chapter 5, Proposition 5.11.1, printed p.116](https://library.slmath.org/nonmsri/gt3m/PDF/5.pdf)
+
+[J. Hyam Rubinstein, “Three-Manifolds with Complete Hyperbolic Metrics of Finite Volume,” §3, p. 734](https://www.claymath.org/wp-content/uploads/2022/03/cmip02.pdf)

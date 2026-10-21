@@ -24,6 +24,12 @@ sources:
       url: https://arxiv.org/pdf/2511.20361
       locator: "Theorem 4.8 and §5 numerical experiments, printed pp. 23–30: continuum
         existence theorem versus finite training and test sets."
+    - title: Niklas Reinhardt, Sven Wang and Jakob Zech, Statistical Learning Theory for
+        Neural Operators
+      url: https://www.jmlr.org/papers/volume27/25-0543/25-0543.pdf
+      locator: "Theorems 5–6, 23 and 27, PDF pp. 10–12 and 22–26: ERM concentration
+        under random design and additive white or sub-Gaussian output noise; algebraic
+        FrameNet rates for holomorphic operators, including parametric Darcy flow."
     - title: Nikola Kovachki et al., On Universal Approximation and Error Bounds for
         Fourier Neural Operators
       url: https://jmlr.org/papers/volume22/21-0806/21-0806.pdf
@@ -38,7 +44,7 @@ sources:
     - title: Philipp Grohs, Samuel Lanthaler and Margaret Trautner, Theory-to-Practice
         Gap for Neural Networks and Neural Operators
       url: https://arxiv.org/pdf/2503.18219
-      locator: "Theorems 3.20–3.22, approximation-space hypotheses and Appendix B.6,
+      locator: "Theorems 3.20 and 3.22, Lemma 3.21, approximation-space hypotheses and Appendix B.6,
         PDF pp.23–28 and 40–41: sampling lower bounds for specified ReLU
         neural-operator classes and input measures."
 ---
@@ -78,10 +84,14 @@ where $\mathcal P(\mathcal Z)$ is the set of Borel probability laws on $\mathcal
 
 [de Hoop et al., Theorem 4.8 and §5 numerical experiments](https://arxiv.org/pdf/2511.20361)
 
+[Reinhardt, Wang, and Zech (2026), *Statistical Learning Theory for Neural Operators*](https://www.jmlr.org/papers/volume27/25-0543/25-0543.pdf)
+
 ## Status
 
 The question asks for a quantitative minimax characterization for this particular noisy EIT joint data set and bounded architecture. It does not assert that finite-sample learning theory for neural operators is absent. Kovachki–Lanthaler–Mhaskar already study continuum-FNO metric entropy and empirical-risk learning for operator approximation classes with a specified algebraic relation between model size and approximation error. Grohs–Lanthaler–Trautner prove sampling limitations for specified ReLU approximation classes and input measures. Their target families, activation hypotheses, sampling models and risks differ from the all-joint-laws excess-risk expression above; their bounds are not silently transferred to this EIT class.
 
+Reinhardt–Wang–Zech prove empirical-risk concentration bounds for operator regression under i.i.d. random design and additive white or sub-Gaussian output noise (Theorems 5–6), and algebraic ERM rates for ReLU/RePU FrameNet classes on holomorphic operators, including a parametric Darcy-flow problem (Theorems 23 and 27). Their results are close in subject but do not give the minimax excess-risk behavior over arbitrary Borel joint laws for the bounded generalized-FNO EIT class specified here.
+
 There is also an established elementary estimation baseline. If a uniformly bounded model class has a finite uniform $\epsilon$-net of size $m$, empirical square-loss minimization over that finite list is a Borel learner, and its expected excess risk is at most $2A\sqrt{\log(2m)/(2N)}+2(C+D)\epsilon$, uniformly over all joint laws, where $C$ bounds model outputs, $D$ bounds targets and $A=(C+D)^2$. Thus deriving some finite-sample upper bound is not the unresolved claim. With fixed finite scalar parametrizations, sufficiently slow budget growth can also be obtained qualitatively by a diagonal choice of compact model classes and finite nets; this gives no efficient quantitative rate. The remaining requested analysis is matching upper and lower behavior for the specified EIT geometry and quantitative approximation versus the budgets $(s,B)$, which the continuum existence theorem alone does not provide. The deterministic reconstruction term remains $C_\star\omega_\star(\delta)$, with the corrected kernel modulus involving $\sqrt\delta$; its contribution to square risk is handled by squaring the reconstruction bound.
 
-The nonempty compact support, Borel model-class convention, nonempty learner range and uniform output bound make the displayed risks finite and the infimum over Borel learners nonempty. The chart lift and restriction are fixed, and every learned layer, multiplier, bias and dimension-reduction kernel has the finite Fourier or affine parameterization counted in the statement. This source comparison, updated 19 October 2026, delimits the registered research question. It is not a certification that no matching result exists anywhere in the literature, and no generalization theorem is inferred from the EIT paper's finite numerical experiments.
+The nonempty compact support, Borel model-class convention, nonempty learner range and uniform output bound make the displayed risks finite and the infimum over Borel learners nonempty. The chart lift and restriction are fixed, and every learned layer, multiplier, bias and dimension-reduction kernel has the finite Fourier or affine parameterization counted in the statement. This source comparison, updated 21 October 2026, delimits the registered research question. It is not a certification that no matching result exists anywhere in the literature, and no generalization theorem is inferred from the EIT paper's finite numerical experiments.

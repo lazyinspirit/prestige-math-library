@@ -28,7 +28,7 @@ sources:
 
 ## Statement
 
-Let $\mathsf{Cob}_3$ be the additive monoidal category of oriented cobordisms before the S, T, and four-tube relations are imposed, and let $\mathsf{Cob}_{BN}$ be its quotient by those relations. Suppose $F:\mathsf{Cob}_3\to\mathsf{GrAb}$ is a symmetric monoidal functor to graded abelian groups and homogeneous maps, with a circle sent to $\mathcal A=\mathbb Z[X]/(X^2)$, a cup to $\eta(1)=1$, a cap to $\epsilon(1)=0,\epsilon(X)=1$, a merge pair of pants to $m$, and a split pair of pants to $\Delta(1)=1\otimes X+X\otimes1,\ \Delta(X)=X\otimes X$. Then every sphere component is sent to zero, every disjoint torus component acts by multiplication by $2$, and the two sides of the four-tube relation induce the same map. Therefore $F$ factors through an additive monoidal functor on $\mathsf{Cob}_{BN}$.
+Let $\mathsf{Cob}_3$ be the preadditive monoidal category of cobordisms before the S, T, and four-tube relations are imposed, and let $\mathsf{Cob}_{BN}$ be its quotient by those relations. Suppose $F:\mathsf{Cob}_3\to\mathsf{GrAb}$ is an additive symmetric monoidal functor to finite free graded abelian groups with all integral linear maps, graded by homogeneous degree, with a circle sent to $\mathcal A=\mathbb Z[X]/(X^2)$, a cup to $\eta(1)=1$, a cap to $\epsilon(1)=0,\epsilon(X)=1$, a merge pair of pants to $m$, and a split pair of pants to $\Delta(1)=1\otimes X+X\otimes1,\ \Delta(X)=X\otimes X$. Then every sphere component is sent to zero, every disjoint torus component acts by multiplication by $2$, and the two sides of the four-tube relation induce the same map. Therefore $F$ factors through an additive symmetric monoidal functor on the preadditive quotient category $\mathsf{Cob}_{BN}$.
 
 ## Statement references
 
@@ -42,7 +42,7 @@ Let $\mathsf{Cob}_3$ be the additive monoidal category of oriented cobordisms be
 
 ## Facts & Assumptions
 
-**Given:** The additive monoidal category $\mathsf{Cob}_{BN}$ and the algebra $\mathcal A$ with the stated structure maps.
+**Given:** The preadditive monoidal category $\mathsf{Cob}_{BN}$ and the algebra $\mathcal A$ with the stated structure maps.
 
 [F1] [[def-khovanov-frobenius-algebra-and-cube-of-resolutions]] gives the free basis $\{1,X\}$, the unit, counit, multiplication, and comultiplication formulas in the statement, and verifies the Frobenius identities on that basis.
 

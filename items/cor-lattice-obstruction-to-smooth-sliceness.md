@@ -1,7 +1,7 @@
 ---
 id: cor-lattice-obstruction-to-smooth-sliceness
 kind: corollary
-title: A non-diagonal filling lattice obstructs smooth sliceness under the gluing hypotheses
+title: Failure of a full-rank standard lattice embedding obstructs smooth sliceness under the gluing hypotheses
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

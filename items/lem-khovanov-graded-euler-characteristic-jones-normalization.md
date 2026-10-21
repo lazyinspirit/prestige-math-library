@@ -33,9 +33,9 @@ sources:
 
 ## Statement
 
-Let $D$ be a finite regular oriented diagram of a link with $n_+$ positive crossings, $n_-$ negative crossings, writhe $w=n_+-n_-$, and $n=n_++n_-$. For each resolution state $v$, let $k(v)$ be its number of circles and let $D_v$ use the A-smoothing at coordinates $0$ and B-smoothing at coordinates $1$. Put $\delta=-A^2-A^{-2}$ and define the normalized bracket
+Let $D$ be a nonempty finite regular oriented diagram of a link with $n_+$ positive crossings, $n_-$ negative crossings, writhe $w=n_+-n_-$, and $n=n_++n_-$. For each resolution state $v$, let $k(v)$ be its number of circles and let $D_v$ use the A-smoothing at coordinates $0$ and B-smoothing at coordinates $1$. Put $\delta=-A^2-A^{-2}$ and define the normalized bracket
 $$f_D(A):=(-A^3)^{-w}\sum_{v:C(D)\to\{0,1\}} A^{n-2|v|}\delta^{k(v)-1}.$$
-For integral unreduced Khovanov cohomology, define $\chi_q(Kh(D))=\sum_{i,j}(-1)^i\operatorname{rank}_{\mathbb Z}Kh^{i,j}(D)q^j$. For reduced cohomology use its basepoint quantum grading $\widetilde j$ and define $\widetilde\chi_q=\sum_{i,\widetilde j}(-1)^i\operatorname{rank}_{\mathbb Z}\widetilde{Kh}^{i,\widetilde j}(D,p)q^{\widetilde j}$. Under $q=-A^{-2}$ and $t=q^2=A^{-4}$,
+For the unreduced cohomology, define $\chi_q(Kh(D))=\sum_{i,j}(-1)^i\operatorname{rank}_{\mathbb Z}Kh^{i,j}(D)q^j$. If $D$ is a finite regular oriented diagram of a knot with a basepoint $p$ away from all crossings, define its reduced rank Euler characteristic using the reduced quantum grading $\widetilde j$ by $\widetilde\chi_q(D,p)=\sum_{i,\widetilde j}(-1)^i\operatorname{rank}_{\mathbb Z}\widetilde{Kh}^{i,\widetilde j}(D,p)q^{\widetilde j}$. Under $q=-A^{-2}$ and $t=q^2=A^{-4}$,
 $$\chi_q(Kh(D))=(q+q^{-1})f_D(A),\qquad \widetilde\chi_q(D,p)=f_D(A).$$
 Thus the unreduced unknot factor is $q+q^{-1}$ and the reduced unknot factor is $1$.
 
@@ -60,7 +60,7 @@ Thus the unreduced unknot factor is $q+q^{-1}$ and the reduced unknot factor is 
 [Zhang, *Notes on Khovanov homology* (2025), §§3.5–3.7](https://arxiv.org/pdf/2501.03115v1)
 
 ## Facts & Assumptions
-**Given:** A finite oriented link diagram, its ordered Khovanov state cube, and the integral unreduced and based reduced cochain complexes.
+**Given:** A nonempty finite oriented link diagram $D$, its ordered Khovanov state cube, and, when $D$ is a based knot diagram, its reduced cochain complex.
 
 [F1] The Kauffman state sum is $\langle D\rangle=\sum_v A^{n-2|v|}(-A^2-A^{-2})^{k(v)-1}$, with each state using the prescribed A/B smoothing chart ([[def-kauffman-bracket-smoothing-and-loop-value]]).
 

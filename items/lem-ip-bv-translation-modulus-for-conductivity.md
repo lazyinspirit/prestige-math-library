@@ -32,7 +32,7 @@ Assume Countable Choice and let $d=2$ with the conductivity class $X_2(R)$ of th
 $$\|\gamma_e(\cdot+h)-\gamma_e\|_{L^1(\mathbb R^2)}\le C_1|h|\qquad(h\in\mathbb R^2).$$
 For every finite $p>2B$ there is $C_p<\infty$, depending only on $\Omega,m,M,R,p$, such that
 $$\sup_{\gamma\in X_2(R)}\ \sup_{|h|\le t}\|\gamma_e(\cdot+h)-\gamma_e\|_{L^p(\mathbb R^2)}\le C_p t^{1/p}\qquad(t\ge0).$$
-The extension is an almost-everywhere measurable class; no pointwise continuity is asserted.
+The outer supremum is taken in $[0,\infty]$, with $\sup\varnothing=0$. The extension is an almost-everywhere measurable class; no pointwise continuity is asserted.
 
 ## Statement references
 
@@ -64,5 +64,5 @@ The extension is an almost-everywhere measurable class; no pointwise continuity 
 
 2.1 By the zero-extension part of [F2], $\widetilde u\in BV(\mathbb R^2)$ and $$TV(\widetilde u;\mathbb R^2)\le C_\Omega\bigl(|\Omega|(M+1)+R\bigr)=:V_0.$$ Since $\gamma_e=1+\widetilde u$, [F3] gives $\|\gamma_e(\cdot+h)-\gamma_e\|_1=\|\widetilde u(\cdot+h)-\widetilde u\|_1\le V_0|h|$. Thus the first inequality holds with $C_1=V_0$. [A1, F2, F3, step 1.1, algebra]
 
-3.1 The bound $m\le\gamma\le M$ inside $\Omega$ and the background value $1$ outside show $|\gamma_e|\le B$ almost everywhere; hence $|\gamma_e(\cdot+h)-\gamma_e|\le2B$ almost everywhere. Applying [F3] and step 2.1 yields $$\|\gamma_e(\cdot+h)-\gamma_e\|_p^p\le(2B)^{p-1}V_0|h|.$$ Taking $p$-th roots and then the supremum over $|h|\le t$ gives the second inequality with $C_p=((2B)^{p-1}V_0)^{1/p}$. At $t=0$ both sides vanish. [F1, F3, step 2.1, algebra] ∎
+3.1 The bound $m\le\gamma\le M$ inside $\Omega$ and the background value $1$ outside show $|\gamma_e|\le B$ almost everywhere; hence $|\gamma_e(\cdot+h)-\gamma_e|\le2B$ almost everywhere. Applying [F3] and step 2.1 yields $$\|\gamma_e(\cdot+h)-\gamma_e\|_p^p\le(2B)^{p-1}V_0|h|.$$ Taking $p$-th roots and then the supremum over $|h|\le t$ gives the second inequality with $C_p=((2B)^{p-1}V_0)^{1/p}$. The bound is uniform in $\gamma$, so taking the outer supremum proves the claim when $X_2(R)$ is nonempty; when it is empty, the stated convention gives zero. At $t=0$ both sides vanish. [F1, F3, step 2.1, algebra] ∎
 

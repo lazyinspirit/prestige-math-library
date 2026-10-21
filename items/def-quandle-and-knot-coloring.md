@@ -61,7 +61,7 @@ underpassing strand.
   \node at (0.92,-0.82) {$x$};
   \node at (-0.82,-0.82) {$y$};
   \node at (-0.82,0.92) {$z$};
-  \node at (0.35,0.35) {$z=x*y$};
+  \node[right] at (1.25,0.05) {$z=x*y$};
 \end{tikzpicture}
 ```
 

@@ -23,7 +23,7 @@ proof_strategy: direct
 axiom_use: Assumes full AC through the exterior boundary-incompressibility and
   Property P suppliers. The unknot case is independent of that branch.
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 sources:
   references:
@@ -41,7 +41,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice. Let $K,K'\subset S^3$ be smooth knots with chosen compact exteriors $E_K,E_{K'}$, and let $h:E_K\to E_{K'}$ be a homeomorphism. Exactly one of $K,K'$ cannot be the unknot. If both are unknotted, they are ambiently equivalent, but this particular $h$ need not preserve their knot-meridian slopes. If both are nontrivial, $h(\mu_K)$ is carried to $\mu_{K'}$ by an isotopy through homeomorphisms of the boundary torus, and $h$ extends across their tubular solid tori to a homeomorphism of pairs $(S^3,K)\to(S^3,K')$; that extension preserves ambient orientation when $h$ preserves orientation and reverses it when $h$ reverses orientation.
+Assume the Axiom of Choice. Let $K,K'\subset S^3$ be smooth knots with chosen compact exteriors $E_K,E_{K'}$, and let $h:E_K\to E_{K'}$ be a homeomorphism. Either both $K,K'$ are unknotted or both are nontrivial. If both are unknotted, they are ambiently equivalent, but this particular $h$ need not preserve their knot-meridian slopes. If both are nontrivial, $h(\mu_K)$ is carried to $\mu_{K'}$ by an isotopy through homeomorphisms of the boundary torus, and $h$ extends across their tubular solid tori to a homeomorphism of pairs $(S^3,K)\to(S^3,K')$; that extension preserves ambient orientation when $h$ preserves orientation and reverses it when $h$ reverses orientation.
 
 ## Statement references
 

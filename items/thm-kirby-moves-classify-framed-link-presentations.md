@@ -62,7 +62,7 @@ Assume the Axiom of Choice. Let $D_0$ and $D_1$ be finite integral framed-link s
 
 [F3] [[lem-relative-three-bordism-surgery-presentation]] proves marked relative surgery completeness. In the empty-decoration, closed-boundary case with fixed base $N=S^3$, any prescribed orientation-preserving diffeomorphism of two surgery outputs is realized by a finite sequence of exterior framed isotopies, split signed-unit-unknot moves O1, framed slides O2, and moves O3 inserting or deleting a framed knot together with its small disk-zero-framed meridian. The proof supplies the signature-adjusted marked five-bordism, common middle trace, based descending handle movie and its full framed conversion; none of those constructions is inferred from a generic function path alone.
 
-[F4] [[lem-zero-meridian-pairs-are-generated-by-kirby-moves-in-s-three]] proves that every such O3 move in $S^3$ is a finite sequence of the moves in [F1], with the full component framings retained.
+[F4] [[lem-zero-meridian-pairs-are-generated-by-kirby-moves-in-s-three]] proves that every such O3 insertion or deletion, using the positively oriented small meridian, is a finite sequence of the moves in [F1], with the full component framings retained.
 
 ## Proof
 

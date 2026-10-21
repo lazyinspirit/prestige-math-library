@@ -85,6 +85,7 @@
           "source_section": "Statement",
           "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
           "uses": [
+            "3.1",
             "4.1",
             "4.2",
             "5.2",
@@ -176,7 +177,8 @@
           "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "5.1"
           ]
         },
         {
@@ -196,12 +198,21 @@
           "uses": [
             "2.1"
           ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$",
+          "uses": [
+            "1.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1.1",
-          "claim": "Since $0<\\rho_\\sigma(z-u)\\le1$, $p_\\sigma(z)\\le1$. For fixed $z$, the measurable sets $E_k=\\{u:\\rho_\\sigma(z-u)\\ge1/k\\}$, $k\\ge1$, cover $\\mathbb R^n$. By [F2] and countable subadditivity, some $E_k$ has positive $\\mu$-measure; hence $p_\\sigma(z)\\ge\\mu(E_k)/k>0$. For $j=1,2$, the function $u\\mapsto\\|u\\|_2^j\\rho_\\sigma(z-u)$ is bounded because a polynomial factor is dominated at infinity by the Gaussian exponential, so its $\\mu$-integral is finite. Put $w_{\\sigma,z}(u)=\\rho_\\sigma(z-u)/p_\\sigma(z)$. This is a nonnegative Borel function. By [F14], $E\\mapsto\\int_Ew_{\\sigma,z}\\,d\\mu$ is a measure; [F16] identifies it with $\\nu_{\\sigma,z}$ and gives total mass $\\int w_{\\sigma,z}\\,d\\mu=p_\\sigma(z)^{-1}p_\\sigma(z)=1$. Hence $\\nu_{\\sigma,z}$ is a probability measure.",
+          "claim": "Since $0<\\rho_\\sigma(z-u)\\le1$, $p_\\sigma(z)\\le1$. For fixed $z$, the measurable sets $E_k=\\{u:\\rho_\\sigma(z-u)\\ge1/k\\}$, $k\\ge1$, cover $\\mathbb R^n$. Their union is $\\mathbb R^n$, so [F19] and [F2] give $1=\\mu(\\mathbb R^n)\\le\\sum_{k\\ge1}\\mu(E_k)$; some $E_k$ therefore has positive $\\mu$-measure, and $p_\\sigma(z)\\ge\\mu(E_k)/k>0$. For $j=1,2$, the function $u\\mapsto\\|u\\|_2^j\\rho_\\sigma(z-u)$ is bounded because a polynomial factor is dominated at infinity by the Gaussian exponential, so its $\\mu$-integral is finite. Put $w_{\\sigma,z}(u)=\\rho_\\sigma(z-u)/p_\\sigma(z)$. This is a nonnegative Borel function. By [F14], $E\\mapsto\\int_Ew_{\\sigma,z}\\,d\\mu$ is a measure; [F16] identifies it with $\\nu_{\\sigma,z}$ and gives total mass $\\int w_{\\sigma,z}\\,d\\mu=p_\\sigma(z)^{-1}p_\\sigma(z)=1$. Hence $\\nu_{\\sigma,z}$ is a probability measure.",
           "step": "1.1",
           "inputs": [
             "given",
@@ -209,7 +220,8 @@
             "F2",
             "F14",
             "F16",
-            "algebra"
+            "algebra",
+            "F19"
           ]
         },
         {
@@ -228,7 +240,7 @@
         },
         {
           "id": "step-2.1",
-          "claim": "Let $\\alpha\\in\\mathbb N^n$ be a multi-index as in [F13]. At order zero, $\\partial^\\alpha\\rho_\\sigma=\\rho_\\sigma$. If $\\partial^\\alpha\\rho_\\sigma(w)=P(w)\\rho_\\sigma(w)$ for a polynomial $P$, then $\\partial_j(P(w)\\rho_\\sigma(w))=(\\partial_jP(w)-w_jP(w)/\\sigma^2)\\rho_\\sigma(w)$, again a polynomial times $\\rho_\\sigma$. Induction on $|\\alpha|$ proves the stated form for every finite derivative. On each compact set of $z$ values, both $|\\partial^\\alpha\\rho_\\sigma(z-u)|$ and $|u_i\\partial^\\alpha\\rho_\\sigma(z-u)|$ are bounded uniformly in $u$, since every polynomial times the Gaussian tends to zero at infinity. Apply [F3] coordinate by coordinate to $p_\\sigma$ and to each numerator $N_i(z)=\\int u_i\\rho_\\sigma(z-u)\\,\\mu(du)$; the uniform bounds supply an integrable majorant and [F4] justifies passage of each derivative limit through the integral. The same bounds for derivatives of order $|\\alpha|+1$ give a uniform bound $M$ for the first derivatives of each resulting derivative on any compact ball $K$. For $z,w\\in K$, apply [F12] to that derivative along $z+t(w-z)$, $0\\le t\\le1$, to obtain a difference bound $\\sqrt n M\\|z-w\\|_2$; thus each resulting derivative is continuous. Iterating over $\\alpha$ makes $p_\\sigma$ and every $N_i$ smooth. Since $p_\\sigma>0$, the reciprocal $r(s)=1/s$ is smooth on $(0,\\infty)$: its first derivative is $-r(s)^2$ by the difference quotient, and repeated use of [F8] shows every higher derivative is a polynomial in $r$. Thus [F9] makes $D_\\sigma=(N_i/p_\\sigma)_{i<n}$ smooth; [F6], [F8], and positivity of $p_\\sigma$ also make $q_\\sigma=-\\log p_\\sigma$ smooth.",
+          "claim": "Let $\\alpha\\in\\mathbb N^n$ be a multi-index as in [F13]. At order zero, $\\partial^\\alpha\\rho_\\sigma=\\rho_\\sigma$. If $\\partial^\\alpha\\rho_\\sigma(w)=P(w)\\rho_\\sigma(w)$ for a polynomial $P$, then [F7] and [F8] give $\\partial_j(P(w)\\rho_\\sigma(w))=(\\partial_jP(w)-w_jP(w)/\\sigma^2)\\rho_\\sigma(w)$, again a polynomial times $\\rho_\\sigma$. Induction on $|\\alpha|$, in any coordinate order, proves the stated form for every finite derivative. On each compact set of $z$ values, both $|\\partial^\\alpha\\rho_\\sigma(z-u)|$ and $|u_i\\partial^\\alpha\\rho_\\sigma(z-u)|$ are bounded uniformly in $u$, since every polynomial times the Gaussian tends to zero at infinity. Apply [F3] coordinate by coordinate to $p_\\sigma$ and to each numerator $N_i(z)=\\int u_i\\rho_\\sigma(z-u)\\,\\mu(du)$; the uniform bounds supply an integrable majorant and [F4] justifies passage of each derivative limit through the integral. The same bounds for derivatives of order $|\\alpha|+1$ give a uniform bound $M$ for the coordinate derivatives of each resulting derivative on any compact box $K$. For $z,w\\in K$, change one coordinate at a time from $z$ to $w$. Each coordinate restriction is differentiable on an open interval containing its segment by [F3], hence continuous on the segment, so [F12] bounds its increment by $M|z_j-w_j|$. Summing gives a difference bound $M\\sum_{j<n}|z_j-w_j|\\le nM\\|z-w\\|_2$; thus each resulting derivative is continuous. Iterating over $\\alpha$ makes $p_\\sigma$ and every $N_i$ smooth. Since $p_\\sigma>0$, the reciprocal $r(s)=1/s$ is smooth on $(0,\\infty)$: its first derivative is $-r(s)^2$ by the difference quotient, and repeated use of [F8] shows every higher derivative is a polynomial in $r$. Thus [F9] makes $D_\\sigma=(N_i/p_\\sigma)_{i<n}$ smooth. Since $r=1/s$ is smooth and [F6] gives $(\\log)'=r$ on $(0,\\infty)$, $\\log$ is smooth there; then [F9] and $p_\\sigma>0$ make $q_\\sigma=-\\log p_\\sigma$ smooth.",
           "step": "3.1",
           "inputs": [
             "F2",
@@ -275,13 +287,14 @@
         },
         {
           "id": "step-4.1",
-          "claim": "For nonzero $v\\in\\mathbb R^n$, $$v^{\\mathsf T}J D_\\sigma(z)v=\\sigma^{-2}\\int\\langle v,u-D_\\sigma(z)\\rangle^2\\,\\nu_{\\sigma,z}(du).$$ If this were zero, then for each $k\\ge1$ the set where $|\\langle v,u-D_\\sigma(z)\\rangle|\\ge1/k$ would have $\\nu_{\\sigma,z}$-measure zero; their union is the complement of the affine hyperplane $\\{u:\\langle v,u\\rangle=\\langle v,D_\\sigma(z)\\rangle\\}$. Hence that hyperplane has full $\\nu_{\\sigma,z}$-measure. The density $\\rho_\\sigma(z-u)/p_\\sigma(z)$ is strictly positive, so $\\nu_{\\sigma,z}$ and $\\mu$ have the same null sets: if $\\nu_{\\sigma,z}(E)=0$, then each set $E\\cap\\{\\rho_\\sigma(z-u)/p_\\sigma(z)\\ge1/k\\}$ has zero $\\mu$-measure, and these sets cover $E$. Thus the hyperplane has full $\\mu$-measure, contradicting the hypothesis. Therefore $J D_\\sigma(z)$ is positive definite.",
+          "claim": "For nonzero $v\\in\\mathbb R^n$, $$v^{\\mathsf T}J D_\\sigma(z)v=\\sigma^{-2}\\int\\langle v,u-D_\\sigma(z)\\rangle^2\\,\\nu_{\\sigma,z}(du).$$ If this were zero, then for each $k\\ge1$ the set where $|\\langle v,u-D_\\sigma(z)\\rangle|\\ge1/k$ would have $\\nu_{\\sigma,z}$-measure zero, since the integral is at least $k^{-2}$ times that set's measure by [F16]; their union is the complement of the affine hyperplane $\\{u:\\langle v,u\\rangle=\\langle v,D_\\sigma(z)\\rangle\\}$. Hence that hyperplane has full $\\nu_{\\sigma,z}$-measure. The density $\\rho_\\sigma(z-u)/p_\\sigma(z)$ is strictly positive, so $\\nu_{\\sigma,z}$ and $\\mu$ have the same null sets: if $\\nu_{\\sigma,z}(E)=0$, then for each $k$, [F16] and step 1.1 give $\\mu(E\\cap\\{\\rho_\\sigma(z-u)/p_\\sigma(z)\\ge1/k\\})\\le k\\nu_{\\sigma,z}(E\\cap\\{\\rho_\\sigma(z-u)/p_\\sigma(z)\\ge1/k\\})=0$, and these sets cover $E$. Thus the hyperplane has full $\\mu$-measure, contradicting the hypothesis. Therefore $J D_\\sigma(z)$ is positive definite.",
           "step": "5.1",
           "inputs": [
             "given",
             "F1",
             "step 1.1",
-            "step 4.1"
+            "step 4.1",
+            "F16"
           ]
         },
         {
@@ -414,7 +427,12 @@
       "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
-      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Read all ten proof steps and F1-F19 supplier statements. Positive Gaussian level sets normalize a Borel probability; weighted polynomial bounds give moments even for a heavy-tailed prior, and simple approximation/MCT give the density integration identity. Every coordinate-word derivative has a compact-uniform integrable bound. Replaced the unlicensed oblique-line MVT by differentiable coordinate restrictions on a compact box, proving continuity without assuming total differentiability. Posterior risk expansion and quotient differentiation give covariance/Tweedie identities; strictly positive density transfers null sets, and non-hyperplane support gives SPD. MVT gives injectivity; choice-free IFT patches the unique inverse on the open image. The radial derivative t v^T JD v proves a unique global minimum, with infinite objective off the image. No convexity, coercivity, finite prior moment or arbitrary choice is assumed. Reader measure/norm fact-use changes retained; refuter finding confirmed nonfatal and repaired. Statements unchanged."
+      }
     },
     "def-ip-pnp-ista-with-denoiser": {
       "citations": [],
@@ -502,7 +520,12 @@
       "proof_status_evidence": "The finite deterministic recursion is fully defined. Actual IP-46 definitions were inspected; the A page’s posterior-mean prerequisite was also read, and no learning or convergence guarantee is claimed. This completion record is not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
-      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed full deterministic recurrence, n>=1, sigma,gamma>0, C1 g, arbitrary supplied total map and fixed x0. Finite recursion evaluates uniquely at every t>=1 without choice or convergence assumptions. Diagram now has precisely the two forward data-flow arrows with matching indices. Reader diagram removal is accepted; no mathematical interface changes. Read def-ip-learned-reconstruction-estimator and def-euclidean-inner-product; no training or MMSE conclusion is imported."
+      }
     },
     "thm-ip-exact-mmse-pnp-ista-stationarity": {
       "citations": [
@@ -521,7 +544,7 @@
           "fact": "F2",
           "source": "def-ip-pnp-ista-with-denoiser",
           "source_section": "Definition",
-          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n  \\draw[->,rounded corners] (den.south) -- (7,-1) -- (0,-1) -- (old.south);\n\\end{tikzpicture}\n~~~",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
           "uses": [
             "2.1"
           ]
@@ -557,6 +580,15 @@
             "2.1",
             "5.1"
           ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2"
+          ]
         }
       ],
       "derivations": [
@@ -573,14 +605,15 @@
         },
         {
           "id": "step-1.2",
-          "claim": "For $t\\ge2$ put $s=x_{t-1}\\in X_\\sigma$ and define $r_t(x)=g(s)+\\langle\\nabla g(s),x-s\\rangle+\\frac1{2\\gamma}\\|x-s\\|_2^2-g(x)$. By [F3], $r_t(x)\\ge0$ for every $x$, $r_t(s)=0$, and $\\nabla r_t(s)=0$. Its gradient is $\\nabla r_t(x)=\\nabla g(s)+(x-s)/\\gamma-\\nabla g(x)$, so [F4] and the hypothesis on $\\nabla g$ give $\\|\\nabla r_t(x)-\\nabla r_t(y)\\|_2\\le(1/\\gamma+L)\\|x-y\\|_2\\le(2/\\gamma)\\|x-y\\|_2$. On $X_\\sigma$, $\\mu_s-f=r_t$.",
+          "claim": "For $t\\ge2$ put $s=x_{t-1}\\in X_\\sigma$ and define $r_t(x)=g(s)+\\langle\\nabla g(s),x-s\\rangle+\\frac1{2\\gamma}\\|x-s\\|_2^2-g(x)$. By [F3], $r_t(x)\\ge0$ for every $x$, $r_t(s)=0$, and $\\nabla r_t(s)=0$. Its gradient is $\\nabla r_t(x)=\\nabla g(s)+(x-s)/\\gamma-\\nabla g(x)$, so the triangle inequality and positive homogeneity [F6], the Lipschitz bound [F4], and the hypothesis on $\\nabla g$ give $\\|\\nabla r_t(x)-\\nabla r_t(y)\\|_2\\le(1/\\gamma+L)\\|x-y\\|_2\\le(2/\\gamma)\\|x-y\\|_2$. On $X_\\sigma$, $\\mu_s-f=r_t$.",
           "step": "1.2",
           "inputs": [
             "F3",
             "F4",
             "F5",
             "given",
-            "algebra"
+            "algebra",
+            "F6"
           ]
         },
         {
@@ -724,7 +757,12 @@
       "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
-      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed all seven steps and F1-F6 against their actual suppliers. gamma<=1/L includes equality: majorization still holds, and the nonnegative residual r_t has gradient Lipschitz constant <=2/gamma. Completing the square uses the repaired lemma global minimizer; x_t lies in the open image and has finite objective from t=1, even if f(x0)=+infinity. Telescoping starts at t=2 to avoid infinity subtraction. Finite infimum bounds residual sums; the descent lemma applied on all R^n at x_t-gamma grad r_t/2 gives ||grad r_t||^2<=4r_t/gamma. Interior first-order optimality yields grad f=-grad r_t. No convexity, iterate convergence or trained-network conclusion is claimed. Reader F6 triangle/homogeneity citation is retained; no statement change or added choice."
+      }
     },
     "rem-ip-arbitrary-denoiser-has-no-inherited-objective": {
       "citations": [
@@ -1019,7 +1057,12 @@
       "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
-      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed all three verification steps and F1-F4. Positive a gives two distinct atoms, each of mass 1/2, hence a Borel probability not supported on any scalar affine hyperplane (singleton). Both Gaussian weights are positive for every real input and sigma>0. Factoring their common exponential yields exactly a tanh(az/sigma^2), including zero input and either sign. The repaired local lemma applies with gamma>0 and supplies both unique risk minimization and unique global proximal minimization. a=0 and sigma=0 are excluded explicitly; no finite-prior-moment or choice difficulty arises."
+      }
     },
     "cex-ip-pnp-iterative-awgn-error-model": {
       "citations": [
@@ -1192,7 +1235,12 @@
       "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
-      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed all three counterexample steps, F1-F3 and A1. With theta=x0=0, gamma=1/2 and D(z)=z^2, direct substitution gives z2=(epsilon+2)^2/8-1/2. Recomputed endpoints: epsilon in (-1/2,1/2) gives (-7/32,9/32), while epsilon in (-5/2,-3/2) gives [-1/2,-15/32). Both events have positive standard-normal probability and disjoint images, excluding a point mass. The lower bound excludes every positive-variance normal by the strictly positive full-line density. AC is explicitly inherited from both normal-law suppliers. The universal claim is refuted by a total continuous deterministic map; no exact-MMSE hypothesis is needed or claimed."
+      }
     },
     "ex-ip-approximate-cnn-mmse-denoiser": {
       "citations": [
@@ -1352,7 +1400,12 @@
       "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
-      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed both verification steps, complete Example, F1-F5 and all eight actual dependencies. The two-point prior meets non-hyperplane support; Gaussian weight cancellation gives a tanh(az/sigma^2). Choosing b=eta/2 supplies the nonzero bias without choice. Error equals |b| at every input and the exact map differs at zero. The network diagram correctly composes multiplication by a/sigma^2, tanh, scaling a and bias b. Only failure of the exact map hypothesis for this prior is asserted; no absence of another objective or impossibility of convergence follows. The remark supplier was read completely: finite competing proximal values permit cancellation and imply monotonicity, contradicted by P(z)=-z. No fitted-network empirical guarantee is imported."
+      }
     }
   },
   "supplier_reconciliation": [

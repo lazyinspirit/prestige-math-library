@@ -59,7 +59,7 @@ for the positive trefoil and the figure-eight knot, respectively. At $\omega=-1$
 
 [F3] The Arf invariant is $q(a)q(b)$ for a genus-one symplectic basis and equals $a_2$ modulo two. [[def-knot-arf-invariant-from-seifert-form]], [[thm-arf-equals-second-conway-coefficient-mod-two]]
 
-[F4] For a Seifert matrix $V$, the determinant substitution gives the normalized Conway polynomial $D_K(u)=\det(uV-u^{-1}V^T)=\nabla_K(u-u^{-1})$. [[lem-conway-polynomial-from-seifert-determinant]]
+[F4] For a Seifert matrix $V$, the Seifert determinant $\Theta_K(u)=\det(u^{-1}V-uV^T)$ gives the normalized Conway polynomial $\Theta_K(u)=\nabla_K(u-u^{-1})$. [[lem-conway-polynomial-from-seifert-determinant]]
 
 [F5] The Levine–Tristram signature of the knot is independent of the chosen surface and basis, including the one-sided-average value at an Alexander root. [[lem-seifert-stabilization-preserves-levine-tristram-signature]]
 

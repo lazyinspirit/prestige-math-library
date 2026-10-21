@@ -18,7 +18,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Figure 1 (Conway diagram) and Figure 2 (trace partner), PDF pp. 1–3"
+      locator: "Figure 1 (Conway diagram), PDF p. 2, and Figure 2 (trace partner), PDF p. 3"
     - title: "Marc Kegel and Jonathan Spreer, The search for exotic knot traces"
       url: "https://arxiv.org/html/2603.22438"
       locator: "§1.3 and Example 2.2; the Conway knot is $K11n34$ and $K_3$ is the Piccirillo friend"
@@ -41,9 +41,7 @@ symbols $C$ and $K_P$ refer to these specified diagram isotopy classes.
 
 **Given:** The two diagram isotopy classes specified in the Definition.
 
-[F1] Piccirillo labels the knot in Figure 1 as the Conway knot and the knot in
-Figure 2 as its trace partner $K'$. The figures determine the two isotopy
-classes used here.
+[F1] Piccirillo labels the knot in Figure 1 as the Conway knot and the knot in Figure 2 as its trace partner $K'$. The figures determine the two isotopy classes used here.
 
 ## Proof
 

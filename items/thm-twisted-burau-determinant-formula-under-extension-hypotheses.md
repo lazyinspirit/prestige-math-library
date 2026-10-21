@@ -70,7 +70,7 @@ Assume the Axiom of Choice convention of the twisted-chain definition. Let a fin
 
 [F3] The twisted torsion convention assigns zero to a nonacyclic fraction-field complex and takes acyclic torsion modulo the determinant and deck-unit subgroup. [[def-knot-twisted-chain-complex-and-reidemeister-torsion]]
 
-[F4] The colored-braid algorithm requires forming the full positive-meridian abelianization before applying the declared color map; the chain-model theorem computes the maximal-abelian-cover module for that full system. [[alg-twisted-burau-determinant-for-colored-braid-closure]]; [[thm-abelian-cover-chain-model-computes-alexander-module]]
+[F4] The colored-braid algorithm forms the full positive-meridian abelianization before applying the declared color map. [[alg-twisted-burau-determinant-for-colored-braid-closure]]
 
 ## Proof
 

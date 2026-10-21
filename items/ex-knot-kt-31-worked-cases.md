@@ -28,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/math/9809113"
     - title: "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12"
       url: "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
-    - title: "Thang T. Q. Le, A Crash Course in Quantum Invariants of Knots and 3-Manifolds (2016), §6.1–§6.2, pp. 29–30"
+    - title: "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1–§6.2, printed pp. 30–31"
       url: "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
 ---
 
@@ -65,10 +65,10 @@ between the annulus boundary circles carries its blackboard framing.
 ```
 
 ## Example references
+
 [[def-axiom-of-choice|Axiom of Choice]]
 
 [[thm-choice-implies-dependent-implies-countable-choice|Choice implies countable choice]]
-
 
 [[def-kauffman-bracket-skein-module-of-a-three-manifold|Kauffman bracket skein module]]
 

@@ -26,6 +26,10 @@ sources:
       url: "https://arxiv.org/pdf/q-alg/9702009v1"
     - title: "Introduction to Vassiliev Knot Invariants"
       url: "https://www.math.cinvestav.mx/~mostovoy/cdbook/cdbook-as-submitted.pdf"
+      locator: "§4.2.2, printed p. 94"
+    - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020)"
+      url: "https://arxiv.org/pdf/1910.10257v6"
+      locator: "§3, PDF pp. 7–9; §6, PDF pp. 15–16"
 ---
 
 ## Statement
@@ -36,7 +40,9 @@ Let $R$ be a commutative ring, let $n\ge1$, and let $V$ be an $R$-valued invaria
 
 [Bar-Natan and Stoimenow, §1.1, pp. 3–5](https://arxiv.org/pdf/q-alg/9702009v1)
 
-[Chmutov, Duzhin, and Mostovoy, §§3.5.1 and 4.1–4.2, pp. 73–75 and 89–94](https://www.math.cinvestav.mx/~mostovoy/cdbook/cdbook-as-submitted.pdf)
+[Chmutov, Duzhin, and Mostovoy, §4.2.2, p. 94](https://www.math.cinvestav.mx/~mostovoy/cdbook/cdbook-as-submitted.pdf)
+
+[Elhamdadi, Hajij, and Istvan, “Framed Knots,” §§3 and 6](https://arxiv.org/pdf/1910.10257v6)
 
 ## Facts & Assumptions
 
@@ -58,6 +64,8 @@ Let $R$ be a commutative ring, let $n\ge1$, and let $V$ be an $R$-valued invaria
 
 [F8] [[thm-oriented-linking-number-scan-terminates-and-is-correct]]: under $\mathrm{AC}_\omega$, the finite scan returns the integer linking number.
 
+[F9] External input: framing classes are classified by the winding integer in $\pi_1(SO(2))$, and a unit framing twist changes self-linking by one. Elhamdadi, Hajij, and Istvan identify the framing integer with push-off self-linking ("Framed Knots," §3, PDF pp. 7–9, and §6, PDF pp. 15–16). Only these passages are used; the sign of the positive twist is fixed directly by the oriented meridian calculation in step 1.2.
+
 [A1] [[def-countable-choice]]: $\mathrm{AC}_\omega$ asserts that every sequence of nonempty sets has a choice function; it is used only for the framed self-linking supplier branch, not for the finite unframed crossing-change argument.
 
 ## Proof
@@ -66,6 +74,6 @@ Let $R$ be a commutative ring, let $n\ge1$, and let $V$ be an $R$-valued invaria
 
 1.1 Let $K$ be an $n$-singular knot with an isolated chord corresponding to the double point $p$. Its two preimages split the parameter circle into arcs $A$ and $B$. Isolation means no other marked double point has one preimage on each of $A$ and $B$. Choose a regular projection. There are finitely many ordinary crossings between the arcs. Switch them one at a time until every crossing has the $A$-branch over the $B$-branch. Each switch changes $D_nV$ by, up to sign, the $(n+1)$-fold difference on the knot with that ordinary crossing newly marked; this is zero by [F1]. Thus these switches preserve $D_nV(K)$. [given, F1, F2, F3, choose]
 
-1.2 For the framed branch, let $V$ be integer-valued self-linking. On a regular framed diagram compare a unit representative of its framing section $f$ with the unit blackboard normal section $b$. Their oriented fibrewise angle defines a map $S^1\to S^1$; let $\tau(f,b)\in\mathbb Z$ be its degree. A full turn of $f$ relative to $b$ adds one local clasp to the push-off: the two mixed crossings in that clasp have the same sign, so [F7]–[F8] give a linking-number change of one. Thus [F4]–[F8] give $\operatorname{sl}(K,f)=\operatorname{wr}(D)+\tau(f,b)$. For a framed singular knot with two disjoint singularities, all changes outside their local balls are fixed. Inside each ball, resolving a double point changes only that crossing's writhe contribution and local angle path; resolving a framing zero changes only the local angle path. Winding degrees add under concatenation, so the four self-linking values have the form $C+c_1\epsilon_1+c_2\epsilon_2$ for constants independent of $(\epsilon_1,\epsilon_2)$. Their alternating second difference is $(C+c_1+c_2)-(C+c_1-c_2)-(C-c_1+c_2)+(C-c_1-c_2)=0$. This covers any pair of double-point or framing-zero singularities, so self-linking has type at most $1$. On a one-chord diagram with blackboard framing, the two crossing resolutions have writhes $+1$ and $-1$ and zero relative twist; their derivative is $1-(-1)=2$ by [F3] and [F6]. This is nonzero over $\mathbb Z$, so no universal framed 1T vanishing law is valid. The $\mathrm{AC}_\omega$ assumption enters only through [F4]–[F8] and [A1]. [given, A1, F1, F3, F4, F5, F6, F7, F8, algebra]
+1.2 For the framed branch, let $V$ be integer-valued self-linking. On a regular framed diagram compare a unit representative of its framing section $f$ with the unit blackboard normal section $b$. Their oriented fibrewise angle defines a map $S^1\to S^1$; let $\tau(f,b)\in\mathbb Z$ be its degree. In the tubular coordinates determined by $(b,Jb)$, the push-off along $f$ winds $\tau(f,b)$ times meridionally relative to the blackboard push-off. A positive meridian links the core once, since its oriented normal disk meets the core once with the sign fixed by the positive frame $(T,b,Jb)$. Thus $\operatorname{sl}(K,f)=\operatorname{sl}(K,b)+\tau(f,b)$; [F9] supplies the unit-twist normalization, and this local orientation calculation fixes its sign. Equivalently, each positive turn creates a local clasp with two positive mixed crossings, and [F7]–[F8] give the same linking increment. By [F6], $\operatorname{sl}(K,b)=\operatorname{wr}(D)$. For a framed singular knot with two disjoint singularities, all changes outside their local balls are fixed. Inside each ball, resolving a double point changes only that crossing's writhe contribution and local angle path; resolving a framing zero changes only the local angle path. Winding degrees add under concatenation, so the four self-linking values have the form $C+c_1\epsilon_1+c_2\epsilon_2$ for constants independent of $(\epsilon_1,\epsilon_2)$. Their alternating second difference is $(C+c_1+c_2)-(C+c_1-c_2)-(C-c_1+c_2)+(C-c_1-c_2)=0$. This covers any pair of double-point or framing-zero singularities, so self-linking has type at most $1$. On a one-chord diagram with blackboard framing, the two crossing resolutions have writhes $+1$ and $-1$ and zero relative twist; their derivative is $1-(-1)=2$ by [F3] and [F6]. This is nonzero over $\mathbb Z$, so no universal framed 1T vanishing law is valid. The $\mathrm{AC}_\omega$ assumption enters only through [F4]–[F9] and [A1]. [given, A1, F1, F3, F4, F5, F6, F7, F8, F9, algebra]
 
 2.1 The consistent over-under assignment lets the lifts of the interiors of $A$ and $B$ lie in opposite open half-spaces bounded by a plane through $p$. Cap each arc on its own side by a short boundary-parallel arc to obtain oriented singular knots $A^\circ$ and $B^\circ$ carrying the remaining marked double points. The two resolutions at $p$ are the connected sums $A^\circ\#B^\circ$ and $B^\circ\#A^\circ$. An orientation-preserving half-turn of the round $S^3$ that exchanges the two balls of the connected-sum decomposition carries the first knot, with its orientation, to the second; the path of rotations through angles from $0$ to $\pi$ is an ambient isotopy. Hence the two resolutions are ambient-isotopic, so their $V$-values agree and $D_nV(K)=0$. [given, F1, step 1.1, construct] ∎

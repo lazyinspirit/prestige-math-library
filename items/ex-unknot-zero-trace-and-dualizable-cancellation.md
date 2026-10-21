@@ -23,7 +23,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Definition 1.2 and the dualizable-link cancellation in Theorem 2.1"
+      locator: "Definition 1.2 and the dualizable-link cancellation in Theorem 3.1, §3, arXiv v1 PDF p. 4"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§2.1, trace of the unknot as a disk neighborhood"
@@ -42,31 +42,23 @@ trace.
 
 ## Example references
 
-[Piccirillo, Definition 1.2 and Theorem 2.1](https://arxiv.org/pdf/1808.02923)
+[Piccirillo, Definition 1.2 and Theorem 3.1](https://arxiv.org/pdf/1808.02923)
 
 [Hom, §2.1](https://arxiv.org/pdf/2107.09171)
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the standard unknot $U$, and the framed link
-described in the Example.
+**Given:** Countable choice, the standard unknot $U$, and the framed link described in the Example.
 
-[A1] Countable choice, written $\mathrm{AC}_\omega$, is
-[[def-countable-choice]].
+[A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]].
 
-[F1] [[def-smooth-zero-trace]]: $X_0(U)$ is obtained by attaching a single
-zero-framed $2$-handle to $B^4$ along $U$.
+[F1] [[def-smooth-zero-trace]]: $X_0(U)$ is obtained by attaching a single zero-framed $2$-handle to $B^4$ along $U$.
 
-[F2] [[def-dualizable-handle-link]]: a dotted $R$ represents a $1$-handle,
-and the meridional sublinks and zero mutual linking are the dualizability
-conditions.
+[F2] [[def-dualizable-handle-link]]: a dotted $R$ represents a $1$-handle, and the meridional sublinks and zero mutual linking are the dualizability conditions.
 
-[F3] [[thm-handle-cancellation]]: a $1$-handle and $2$-handle with one
-transverse attaching/belt-sphere intersection cancel, transporting remaining
-attaching data.
+[F3] [[thm-handle-cancellation]]: a $1$-handle and $2$-handle with one transverse attaching/belt-sphere intersection cancel, transporting remaining attaching data.
 
-[F4] [[thm-knot-slice-iff-zero-trace-embeds-in-s-four]]: a smooth slice disk
-for $U$ gives a smooth embedding of $X_0(U)$ in $S^4$.
+[F4] [[thm-knot-slice-iff-zero-trace-embeds-in-s-four]]: a smooth slice disk for $U$ gives a smooth embedding of $X_0(U)$ in $S^4$.
 
 ## Proof
 
@@ -95,7 +87,5 @@ for $U$ gives a smooth embedding of $X_0(U)$ in $S^4$.
 \end{tikzpicture}
 ~~~
 
-The sketch shows handle incidence only: dotted $R$ denotes the $1$-handle and
-subscript $0$ denotes zero framing. The proof uses the disjoint normal disks and
-the single-intersection cancellation, not the sketch.
+The sketch shows handle incidence only: dotted $R$ denotes the $1$-handle and subscript $0$ denotes zero framing. The proof uses the disjoint normal disks and the single-intersection cancellation, not the sketch.
 

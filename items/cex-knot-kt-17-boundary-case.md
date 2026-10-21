@@ -32,10 +32,6 @@ For every nontrivial companion knot and every pattern in its solid torus, the co
 
 [[def-satellite-pattern-companion-and-winding-number]]
 
-## Construction
-
-Let $K$ be any nontrivial knot. Take the core pattern $P=S^1\times\{0\}\subset V=S^1\times D^2$, choose its tubular neighbourhood to be a smaller concentric solid torus inside a companion neighbourhood $V=e(S^1\times D^2)$ of $K$, and use the induced companion embedding. Then $P(K)=K$. The companion torus is the boundary of the larger chosen neighbourhood, while the satellite exterior has boundary the boundary of the smaller tube around $K$.
-
 ## Facts & Assumptions
 
 **Given:** The pattern, the companion embedding, and the two nested tubular neighbourhoods specified in the Counterexample.
@@ -44,11 +40,13 @@ Let $K$ be any nontrivial knot. Take the core pattern $P=S^1\times\{0\}\subset V
 
 [F2] [[def-incompressibility-seifert-fibration-and-jsj-system]] defines boundary-parallel torus and essential torus.
 
-## Proof
+## Counterexample
 
-1.1 The companion embedding sends the core $S^1\times\{0\}$ to $K$, so the satellite knot $P(K)$ is exactly $K$ with the specified smaller tubular neighbourhood. The companion torus is the boundary of the larger neighbourhood. [F1, given]
+**Given:** A nontrivial knot $K$ with companion solid torus $V=e(S^1\times D^2)$.
 
-2.1 The shell between the two concentric tubular neighbourhoods is explicitly $T^2\times[0,1]$, by radial interpolation in the $D^2$ coordinate. It lies in the satellite exterior and has the companion torus and the satellite exterior boundary as its end tori. Thus the companion torus is boundary-parallel and, by [F2], is not essential. This refutes the unrestricted statement. [F1, F2, step 1.1, construct] ∎
+1.1 Take the core pattern $P=S^1\times\{0\}\subset V$ and choose its tubular neighbourhood $N(P)$ to be a smaller concentric solid torus. The companion embedding sends this core to $K$, so $P(K)=K$ with the smaller chosen tube, while the companion torus is the boundary of the larger tube. [F1, given, construct]
+
+2.1 Radial interpolation in the $D^2$ coordinate identifies the shell between the two concentric tubes with $T^2\times[0,1]$. It lies in the satellite exterior and has the companion torus and the satellite exterior boundary as its ends. Thus the companion torus is boundary-parallel and is not essential by [F2]. This refutes the unrestricted statement. [F1, F2, step 1.1, construct] ∎
 
 ## Remarks
 

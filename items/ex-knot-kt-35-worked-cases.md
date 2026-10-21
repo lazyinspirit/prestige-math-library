@@ -29,9 +29,9 @@ sources:
 
 ## Example
 
-Assume a Conway skein function $\nabla$ on oriented links exists with $\nabla_U=1$ and $\nabla_{L_+}-\nabla_{L_-}=z\nabla_{L_0}$. For a knot $K$, put $a_2(K)=[z^2]\nabla_K(z)$. The unframed degree-one chord-diagram module is zero. The degree-two symbol of $a_2$ is the weight system $w_2$ that assigns $1$ to the intersecting two-chord diagram and $0$ to the diagram with two nonintersecting chords. In particular, $a_2(U)=0$ for the unknot and $a_2(T)=1$ for the positive trefoil $T$ that is the closure of the two-strand braid $\sigma_1^3$. Under countable choice, the degree-two truncation of the normalized Kontsevich series recovers this example up to its unique degree-zero normalization: for every knot type $K$,
+Assume a Conway skein function $\nabla$ on oriented links exists with $\nabla_U=1$ and $\nabla_{L_+}-\nabla_{L_-}=z\nabla_{L_0}$. For a knot $K$, put $a_2(K)=[z^2]\nabla_K(z)$. The unframed degree-one chord-diagram module is zero. The degree-two symbol of $a_2$ is the weight system $w_2$ that assigns $1$ to the intersecting two-chord diagram and $0$ to the diagram with two nonintersecting chords. In particular, $a_2(U)=0$ for the unknot and $a_2(T)=1$ for the positive trefoil $T$ that is the closure of the two-strand braid $\sigma_1^3$. Let $\widetilde w_2:\mathcal A_2^{\mathrm{un}}\otimes_{\mathbb Q}\mathbb C\to\mathbb C$ be the complex-linear extension of $w_2$. Under countable choice, the degree-two truncation of the normalized Kontsevich series recovers this example up to its unique degree-zero normalization: for every knot type $K$,
 $$
-a_2(K)=w_2(I_2(K))-w_2(I_2(U)).
+a_2(K)=\widetilde w_2(I_2(K))-\widetilde w_2(I_2(U)).
 $$
 Here $I_2(K)$ is the degree-two coefficient of $I(K)$, and $I_0(K)=1$ is its degree-zero coefficient. This calculation is conditional on the existence supplier for $\nabla$ and asserts no rationality for the coefficients of $I(K)$.
 
@@ -88,7 +88,7 @@ The two degree-two chord patterns are shown below. Endpoints alternate in the fi
 
 
 
-[F6] **Discharged existence input.** [[def-conway-polynomial]] now supplies the actual unique $\mathbb Z[z]$-valued oriented ambient-link invariant by its explicitly external Garaev coefficient theorem and CDM ambient-link/skein interpretation, followed by the finite polynomial/uniqueness argument. Thus the Conway function in the Given is an actual available object, not an unresolved well-definedness premise. The finite coefficient/chord/trefoil arguments below are retained unchanged; no general rationality assertion for the Kontsevich coefficients is used.
+[F6] **Discharged existence input.** [[def-conway-polynomial]] now supplies the actual unique $\mathbb Z[z]$-valued oriented ambient-link invariant by its explicitly external Lickorish Seifert-determinant and skein theorem (Chapter 8, Theorems 8.5–8.6, printed pp. 82–83) and CDM ambient-link/skein interpretation, followed by the finite polynomial/uniqueness argument. Thus the Conway function in the Given is an actual available object, not an unresolved well-definedness premise. The finite coefficient/chord/trefoil arguments below are retained unchanged; no general rationality assertion for the Kontsevich coefficients is used.
 
 ## Verification
 
@@ -98,4 +98,4 @@ The two degree-two chord patterns are shown below. Endpoints alternate in the fi
 
 1.2 The unknot normalization gives $a_2(U)=0$. For the positive Hopf link $H_2=\widehat{\sigma_1^2}$, switching one crossing cancels an adjacent positive and negative half twist and gives the two-component unlink; smoothing gives $\widehat{\sigma_1}=U$. A local type-I curl on one component of the two-component unlink has both crossing signs isotopic to that unlink and smoothing equal to the three-component unlink. The skein relation therefore gives $z\nabla_{U_3}=0$. Multiplication by the indeterminate $z$ is injective in $\mathbb Z[z]$, because a polynomial $f=\sum a_jz^j$ with $zf=0$ has every coefficient $a_j=0$; hence $\nabla_{U_3}=0$. Applying the same curl argument to the unknot gives $\nabla_{U_2}=0$. Thus $\nabla_{H_2}=z$. For $T=\widehat{\sigma_1^3}$, switching one crossing cancels an adjacent inverse pair and gives $U$, while smoothing gives $H_2$. Hence $\nabla_T-1=z\nabla_{H_2}=z^2$, so $a_2(T)=1$. [F1, F2, given, algebra]
 
-2.1 Let $W$ be the functional supplied by [F4] for $a_2$. Its degree-two restriction is $w_2$ by [F2]; the only lower-degree summand is degree zero because [F3] makes degree one zero. Since $a_2(U)=0$ and $I_0(U)=1$ by [F5], the value of $W$ on the degree-zero unit is $-w_2(I_2(U))$. Therefore $W(I_{\le2}(K))=w_2(I_2(K))-w_2(I_2(U))$, which equals $a_2(K)$ by [F4]. This verifies the displayed universal-series recovery for every knot type. [F2, F3, F4, F5, step 1.1, step 1.2, algebra] ∎
+2.1 Let $W$ be the functional supplied by [F4] for $a_2$. Its degree-two restriction is $\widetilde w_2$ by [F2] and complex linearity; the only lower-degree summand is degree zero because [F3] makes degree one zero. Since $a_2(U)=0$ and $I_0(U)=1$ by [F5], the value of $W$ on the degree-zero unit is $-\widetilde w_2(I_2(U))$. Therefore $W(I_{\le2}(K))=\widetilde w_2(I_2(K))-\widetilde w_2(I_2(U))$, which equals $a_2(K)$ by [F4]. This verifies the displayed universal-series recovery for every knot type. [F2, F3, F4, F5, step 1.1, step 1.2, algebra] ∎

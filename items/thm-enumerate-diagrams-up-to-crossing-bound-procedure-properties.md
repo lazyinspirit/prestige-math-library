@@ -20,7 +20,7 @@ sources:
   references:
     - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), sections 1 and 7"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 finite diagram inputs and §7 polygonal reconstruction, web text lines 102–121 and 381–398"
+      locator: "§1, web text lines 92–105 (finite diagram inputs); §7 Triangulations, lines 758–854 (polygonal realization of a diagram)"
     - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
       url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
       locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"

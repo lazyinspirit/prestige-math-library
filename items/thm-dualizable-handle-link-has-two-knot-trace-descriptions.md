@@ -29,7 +29,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Theorem 2.1 and complete handle-slide/cancellation proof, printed p. 585 (PDF p. 4)"
+      locator: "Theorem 3.1 and complete handle-slide/cancellation proof, §3, arXiv v1 PDF p. 4"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§3, dualizable-link handle argument"
@@ -49,7 +49,7 @@ $$
 
 ## Statement references
 
-[Piccirillo, Theorem 2.1](https://arxiv.org/pdf/1808.02923)
+[Piccirillo, Theorem 3.1](https://arxiv.org/pdf/1808.02923)
 
 [Hom, §3](https://arxiv.org/pdf/2107.09171)
 
@@ -57,44 +57,23 @@ $$
 
 **Given:** Countable choice and a dualizable framed handle link $(B,G,R)$.
 
-[A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]].
-It is used only through the handle-slide and cancellation suppliers below.
+[A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]]. It is used only through the handle-slide and cancellation suppliers below.
 
-[F1] [[def-dualizable-handle-link]]: $R$ is a dotted $1$-handle, $B,G$ are
-$0$-framed $2$-handles, each of $B\cup R$ and $G\cup R$ is a meridional
-two-component link, and $\operatorname{lk}(B,G)=0$.
+[F1] [[def-dualizable-handle-link]]: $R$ is a dotted $1$-handle, $B,G$ are $0$-framed $2$-handles, each of $B\cup R$ and $G\cup R$ is a meridional two-component link, and $\operatorname{lk}(B,G)=0$.
 
-[F2] [[def-handle-slide-of-one-k-handle-over-another]] and
-[[lem-handle-slides-preserve-the-relative-diffeomorphism-type]]: a slide of
-one $2$-handle over another replaces its attaching circle by a band sum with
-a signed framed parallel copy and preserves the relative diffeomorphism type.
+[F2] [[def-handle-slide-of-one-k-handle-over-another]] and [[lem-handle-slides-preserve-the-relative-diffeomorphism-type]]: a slide of one $2$-handle over another replaces its attaching circle by a band sum with a signed framed parallel copy and preserves the relative diffeomorphism type.
 
-[F3] [[thm-handle-cancellation]]: a $1$-handle and $2$-handle whose attaching
-and belt spheres meet transversely once cancel, preserving the diffeomorphism
-type relative to the incoming boundary and transporting all remaining
-attaching data.
+[F3] [[thm-handle-cancellation]]: a $1$-handle and $2$-handle whose attaching and belt spheres meet transversely once cancel, preserving the diffeomorphism type relative to the incoming boundary and transporting all remaining attaching data.
 
-[F4] [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the
-half-sum of mixed crossing signs is invariant under regular diagram changes
-and is symmetric in the two components.
+[F4] [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the half-sum of mixed crossing signs is invariant under regular diagram changes and is symmetric in the two components.
 
-[F5] [[lem-dualizable-slide-clears-meridian-disk]]: after finitely many slides
-and isotopies, the remaining attaching circle can be made disjoint from a
-spanning disk of the dotted circle. It constructs one framed slide and a product-bigon isotopy for each current intersection, reducing their finite count by one at every stage.
+[F5] [[lem-dualizable-slide-clears-meridian-disk]]: after finitely many slides and isotopies, the remaining attaching circle can be made disjoint from a spanning disk of the dotted circle. It constructs one framed slide and a product-bigon isotopy for each current intersection, reducing their finite count by one at every stage.
 
-[F6] [[thm-oriented-linking-number-scan-terminates-and-is-correct]] and
-[[lem-linking-number-even-sum-and-reidemeister-invariance]]: on a finite
-regular diagram of two oriented components, the scan returns the integer
-half-sum of mixed crossing signs, and that half-sum is invariant under
-orientation-preserving isotopy of the link. These suppliers do not identify
-the integer with a homology coordinate.
+[F6] [[thm-oriented-linking-number-scan-terminates-and-is-correct]] and [[lem-linking-number-even-sum-and-reidemeister-invariance]]: on a finite regular diagram of two oriented components, the scan returns the integer half-sum of mixed crossing signs, and that half-sum is invariant under orientation-preserving isotopy of the link. These suppliers do not identify the integer with a homology coordinate.
 
-[F7] [[lem-knot-exterior-h1-is-generated-by-meridian]]: for a knot $K$ with
-the chosen tube and positive meridian, $H_1(E_K;\mathbb Z)=\mathbb Z[\mu_K]$.
+[F7] [[lem-knot-exterior-h1-is-generated-by-meridian]]: for a knot $K$ with the chosen tube and positive meridian, $H_1(E_K;\mathbb Z)=\mathbb Z[\mu_K]$.
 
-[F8] [[def-knot-meridian-and-preferred-longitude]]: a preferred longitude has
-zero class in $H_1(E_K;\mathbb Z)$, and a degree-one parallel with zero class
-is a preferred longitude.
+[F8] [[def-knot-meridian-and-preferred-longitude]]: a preferred longitude has zero class in $H_1(E_K;\mathbb Z)$, and a degree-one parallel with zero class is a preferred longitude.
 
 ## Proof
 
@@ -126,8 +105,5 @@ is a preferred longitude.
 \end{tikzpicture}
 ~~~
 
-The diagram records the two handle reductions. The dotted label $R$ means a
-$1$-handle, and each subscript $0$ means a zero-framed $2$-handle. The proof
-establishes both reductions by framed slides and geometric cancellation; no
-handlebody conclusion is inferred from the diagram alone.
+The diagram records the two handle reductions. The dotted label $R$ means a $1$-handle, and each subscript $0$ means a zero-framed $2$-handle. The proof establishes both reductions by framed slides and geometric cancellation; no handlebody conclusion is inferred from the diagram alone.
 

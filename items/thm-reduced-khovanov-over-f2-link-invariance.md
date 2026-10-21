@@ -10,6 +10,8 @@ deps:
   - def-reduced-khovanov-cohomology-of-a-based-link-over-f2
   - lem-reduced-khovanov-over-f2-basepoint-independence
   - thm-oriented-reidemeister-equivalence-theorem
+  - def-oriented-link-in-s-three-and-ambient-isotopy
+  - lem-every-oriented-link-admits-a-regular-projection
   - def-countable-choice
   - lem-khovanov-reidemeister-chain-homotopies
   - lem-based-link-reduced-khovanov-reidemeister-equivalences
@@ -50,6 +52,8 @@ Assume ACω. For every nonempty oriented link $L\subset S^3$, the bigraded $\mat
 
 **Given:** ACω, two finite regular diagrams of the same nonempty oriented link, and a basepoint on a component of each diagram.
 
+[F0] Every nonempty oriented link in $S^3$ has a finite regular diagram: move it off $\infty$ using the link definition's ambient-isotopy convention, then choose a regular projection direction. Since the crossing set is finite, each component has points away from crossings at which it can be based ([[def-oriented-link-in-s-three-and-ambient-isotopy]], [[lem-every-oriented-link-admits-a-regular-projection]]).
+
 [F1] Under ACω, two diagrams of the same oriented link are connected by a finite sequence of planar isotopies and oriented Reidemeister moves ([[thm-oriented-reidemeister-equivalence-theorem]]).
 
 [F2] For every oriented link Reidemeister move with an unchanged exterior mark, the actual normalized integral maps and inverse homotopies commute with the marked actions and descend to bigraded equivalences of the quotient complexes; reducing the same identities modulo two proves the corresponding based-link equivalences over $\mathbb F_2$ ([[lem-based-link-reduced-khovanov-reidemeister-equivalences]]).
@@ -61,7 +65,7 @@ Assume ACω. For every nonempty oriented link $L\subset S^3$, the bigraded $\mat
 ## Proof
 
 
-1.1 By [F1], choose a finite sequence $D=D_0,D_1,\ldots,D_r=D'$ of planar isotopies and oriented Reidemeister moves. For a Reidemeister step choose a marked point on an unchanged exterior arc and carry it to the corresponding arc on the other diagram. Such an arc exists: the move models contain a continuing strand meeting the boundary of their disk, and a closed regular link diagram continues that strand outside the disk. For a planar isotopy choose any mark and carry it by the isotopy. There are finitely many steps and every diagram is nonempty, so these are finite point choices, adding no choice hypothesis beyond [F1]. These auxiliary marks need not all lie on a single tracked component. [F1, given, choose, construct]
+1.1 By [F0], the based reduced groups in the Statement are defined for diagrams of every nonempty oriented link. For any two such diagrams $D,D'$, [F1] gives a finite sequence $D=D_0,D_1,\ldots,D_r=D'$ of planar isotopies and oriented Reidemeister moves. For a Reidemeister step choose a marked point on an unchanged exterior arc and carry it to the corresponding arc on the other diagram. Such an arc exists: the move models contain a continuing strand meeting the boundary of their disk, and a closed regular link diagram continues that strand outside the disk. For a planar isotopy choose any mark and carry it by the isotopy. There are finitely many steps and every diagram is nonempty, so these are finite point choices, adding no choice hypothesis beyond [F1]. These auxiliary marks need not all lie on a single tracked component. [F0, F1, given, choose, construct]
 
 2.1 At the start of a step, [F3] identifies the current reduced group with the reduction at its chosen auxiliary mark, even if that mark lies on another component. For a Reidemeister move, [F2] then gives a bigraded cochain homotopy equivalence between the reductions at the two unchanged exterior marks. Its integral maps and contractions commute with the marked action before quotienting, and their explicit equations remain true over $\mathbb F_2$. For a planar isotopy the relabeling of circles preserves that marked factor and every normalized degree. Thus each step supplies a bigraded cohomology isomorphism, followed if necessary by another fixed-diagram change of mark using [F3]. [F2, F3, F4, step 1.1, construct, algebra]
 

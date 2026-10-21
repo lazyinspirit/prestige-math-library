@@ -9,6 +9,8 @@ dependency_level: 9
 deps:
   - def-axiom-of-choice
   - def-countable-choice
+  - def-oriented-link-in-s-three-and-ambient-isotopy
+  - lem-every-oriented-link-admits-a-regular-projection
   - lem-double-branched-cover-of-an-oriented-link-well-defined
   - thm-os-spectral-sequence-for-a-fixed-link-diagram
   - thm-reduced-khovanov-over-f2-link-invariance
@@ -43,7 +45,9 @@ Assume AC and ACω. For every nonempty oriented link $L\subset S^3$, there is a 
 
 ## Facts & Assumptions
 
-**Given:** AC, ACω, a nonempty oriented link $L$, a diagram of $L$, and a basepoint on its mirror diagram.
+**Given:** AC, ACω, and a nonempty oriented link $L$.
+
+[F0] Every nonempty oriented link in $S^3$ has a finite regular diagram: move it off $\infty$ using the link definition's ambient-isotopy convention, then choose a regular projection direction. Every component has a point away from the finite crossing set for the basepoint ([[def-oriented-link-in-s-three-and-ambient-isotopy]], [[lem-every-oriented-link-admits-a-regular-projection]]).
 
 [F1] The branched cover is well-defined up to oriented diffeomorphism ([[lem-double-branched-cover-of-an-oriented-link-well-defined]]).
 
@@ -55,7 +59,7 @@ Assume AC and ACω. For every nonempty oriented link $L\subset S^3$, there is a 
 
 ## Proof
 
-1.1 Choose a finite regular diagram of $L$ and a point on its mirror away from crossings. By [F2], this fixed diagram gives a spectral sequence with the stated target and with $E_2$ equal to the based reduced Khovanov group of the mirror diagram. [F1, F2, A1, given, choose]
+1.1 By [F0], choose an ambient-isotopic representative $L'$ with a finite regular diagram $D$ and a point on its mirror away from crossings. Apply [F2] to $D$; this gives a spectral sequence with $E_2$ equal to the based reduced Khovanov group of the mirror diagram and abutment $\widehat{HF}(\Sigma(L');\mathbb F_2)$. By [F1], $\widehat{HF}(\Sigma(L');\mathbb F_2)\cong\widehat{HF}(\Sigma(L);\mathbb F_2)$. [F0, F1, F2, A1, given, choose]
 
 2.1 Apply [F3] to identify that page, up to bigraded isomorphism, with $\widetilde{Kh}(\overline L;\mathbb F_2)$ independently of the selected diagram and component. The convergence in [F2] and target invariance in [F1] give the stated invariant endpoints, with no diagram-independent filtered chain claim. [F1, F2, F3, step 1.1]
 

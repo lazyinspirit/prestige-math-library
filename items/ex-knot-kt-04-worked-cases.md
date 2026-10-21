@@ -55,17 +55,17 @@ The arrows orient the first diagram, and at each crossing the unbroken strand is
   % Close bottom endpoints to top endpoints on the same side.
   \draw[thick,->] (0.8,-1.5) .. controls (1.8,-1.5) and (1.8,1.5) .. (0.8,1.5);
   \draw[thick,->] (-0.8,-1.5) .. controls (-1.8,-1.5) and (-1.8,1.5) .. (-0.8,1.5);
-  % The right-to-left strand is under at each of the three crossings.
-  \draw[thick] (0.8,1.5)--(-0.8,0.5);
-  \draw[thick,white,line width=4pt] (0.12,1.075)--(-0.12,0.925);
+  % The left-to-right branch is under at all three positive-generator crossings.
+  \draw[thick,->] (-0.8,1.5)--(0.8,0.5);
+  \draw[thick,white,line width=4pt] (-0.12,1.075)--(0.12,0.925);
   \draw[thick] (-0.8,0.5)--(0.8,-0.5);
   \draw[thick,white,line width=4pt] (-0.12,0.075)--(0.12,-0.075);
-  \draw[thick] (0.8,-0.5)--(-0.8,-1.5);
-  \draw[thick,white,line width=4pt] (0.12,-0.925)--(-0.12,-1.075);
-  % The left-to-right strand passes over at all three crossings.
-  \draw[thick,->] (-0.8,1.5)--(0.8,0.5);
-  \draw[thick,->] (0.8,0.5)--(-0.8,-0.5);
   \draw[thick,->] (-0.8,-0.5)--(0.8,-1.5);
+  \draw[thick,white,line width=4pt] (-0.12,-0.925)--(0.12,-1.075);
+  % The right-to-left branch passes over at all three crossings.
+  \draw[thick] (0.8,1.5)--(-0.8,0.5);
+  \draw[thick,->] (0.8,0.5)--(-0.8,-0.5);
+  \draw[thick] (0.8,-0.5)--(-0.8,-1.5);
   \node[below] at (0,-1.9) {three-crossing two-strand closure};
 \end{tikzpicture}
 ```

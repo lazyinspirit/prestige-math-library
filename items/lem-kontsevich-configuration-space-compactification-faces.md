@@ -28,7 +28,7 @@ Fix either a strict Morse presentation $K:S^1\hookrightarrow\mathbb C\times\math
 
 The diagram shows the level simplex for $m=2$. Its diagonal is the equal-level face, the outer edges are the minimum/maximum endpoint faces, and the dashed cuts are critical levels; their intersections are the corner strata.
 
-FENCETIKZ
+```tikz
 \begin{tikzpicture}[scale=0.8]
   \coordinate (A) at (0,0);
   \coordinate (B) at (3,0);
@@ -43,7 +43,7 @@ FENCETIKZ
   \node at (0.85,0.22) {$t_2=t_{\min}$};
   \node at (2.55,2.2) {$t_2=t_1$};
 \end{tikzpicture}
-FENCE
+```
 
 ## Statement references
 

@@ -22,9 +22,9 @@ verification:
   precheck: n/a
 sources:
   references:
-    - title: "The double cover branched over a slice disk is a rational homology ball, published local supplier"
+    - title: "Ralph H. Fox and John W. Milnor, Singularities of 2-spheres in 4-space and cobordism of knots"
       url: "https://www.i-repository.net/contents/osakacu/sugaku/111F0000002-00302-8.pdf"
-      locator: "Theorem 2 and proof; smooth properly embedded disk, mod-two acyclicity, and rational-homology conclusion"
+      locator: "Section 2, Theorem 2 proves the Alexander-polynomial factorization condition for slice knots; cited as related context only. The mod-two homology of the branched cover is proved in the local supplier."
     - title: "Dale Rolfsen, Knots and Links"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
       locator: "Chapter 10.C, cyclic covers, positive meridian, and branched filling"

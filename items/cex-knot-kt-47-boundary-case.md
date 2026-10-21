@@ -23,19 +23,16 @@ sources:
     - title: "Knot Atlas, Gauss Codes manual"
       url: "https://katlas.org/wiki/Gauss_Codes"
       locator: "Gauss-code definition, lines 65–70"
-    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)"
       url: "https://arxiv.org/pdf/math/9807016"
-      locator: "§1 Introduction, finite four-valent diagram representation, web text lines 102–121"
+      locator: "§3 Knots and Links, web text lines 271–283 (four-valent crossing graph and over/under labels)"
 ---
 
 ## Statement refuted
 
-The one-entry signed Gauss word $-1$ with declared crossing count $c=1$ has
-every declared label present, but it is not a Gauss code for a closed regular
-oriented diagram: label $1$ occurs once, only as an under-visit, instead of
-twice with one over-visit and one under-visit. The validation procedure returns
-`invalid-crossing-visit-count` with counts $(0\text{ over},1\text{ under})$
-before performing any crossing-graph or face-count calculation.
+For every positive integer $c$, every finite signed word with labels in
+$\{1,\ldots,c\}$ in which each declared label occurs at least once is a Gauss
+code of a closed regular oriented diagram.
 
 ## Statement references
 
@@ -47,7 +44,7 @@ before performing any crossing-graph or face-count calculation.
 
 [Knot Atlas, “Gauss Codes”](https://katlas.org/wiki/Gauss_Codes) — each crossing is recorded on both visits, with over/under signs.
 
-[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — a regular diagram crossing is a four-valent vertex.
+[Hass–Lagarias–Pippenger, §3](https://arxiv.org/pdf/math/9807016) — a regular diagram crossing is a four-valent vertex.
 
 ## Facts & Assumptions
 
@@ -59,7 +56,9 @@ before performing any crossing-graph or face-count calculation.
 
 [F3] [[thm-planar-code-validation-and-diagram-reconstruction-procedure-properties]]: each invalid return is the first failed predicate in the stated procedure order.
 
-## Proof
+## Counterexample
+
+**Given:** The declared crossing count $c=1$ and the one-entry word $-1$.
 
 1.1 The only declared label is $1$, which lies in $\{1\}$. The word has one entry, and its negative sign makes that entry an under-visit. Hence its visit-count pair is $(0,1)$, not the required $(1,1)$ in [F1]. [given, F1, algebra]
 

@@ -29,7 +29,7 @@ sources:
 
 ## Statement
 
-If the underlying projection of a regular link diagram on $S^2$ is disconnected, then the represented link is split.
+If the underlying projection of a nonempty regular link diagram on $S^2$ is disconnected, then the represented link is split.
 
 ## Statement references
 
@@ -39,13 +39,13 @@ If the underlying projection of a regular link diagram on $S^2$ is disconnected,
 
 ## Facts & Assumptions
 
-**Given:** A regular link diagram whose projection graph is a finite disconnected subset $P\subset S^2$.
+**Given:** A regular link diagram whose projection graph is a nonempty finite disconnected subset $P\subset S^2$.
 
 [F1] A regular diagram is the projection of a finite disjoint union of embedded circles, and its projection has finitely many transverse double points ([[def-oriented-link-in-s-three-and-ambient-isotopy]], [[def-regular-oriented-link-diagram]]).
 
 [F2] A link is split if a sphere disjoint from it has link points on both sides ([[def-split-link]]).
 
-[F3] A disconnected finite projection graph admits a Jordan curve in its complement with diagram points on both sides ([[lem-disconnected-projection-components-separated-by-jordan-curve]]).
+[F3] A nonempty disconnected finite projection graph admits a Jordan curve in its complement with diagram points on both sides ([[lem-disconnected-projection-components-separated-by-jordan-curve]]).
 
 [F4] The proof of [F3] constructs its separating curve as a smooth boundary component of a finite regular neighborhood. The choice-free smooth Jordan-disk result gives a closed disk on either side of that curve on $S^2$ ([[lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars]]).
 

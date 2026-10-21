@@ -35,7 +35,7 @@ sources:
 
 Assume the Axiom of Choice and Countable Choice.
 
-Let $(M,g)$ be a compact smooth Riemannian domain with smooth boundary. If $\gamma_1,\gamma_2\in C^\infty(M,\mathbb R)$ are strictly positive and $u_j$ solves $\operatorname{div}_g(\gamma_j\nabla_gu_j)=0$ with smooth boundary value $f_j$, then
+Let $(M,g)$ be a nonempty compact connected smooth Riemannian domain with nonempty smooth boundary. If $\gamma_1,\gamma_2\in C^\infty(M,\mathbb R)$ are strictly positive and $u_j$ solves $\operatorname{div}_g(\gamma_j\nabla_gu_j)=0$ with smooth boundary value $f_j$, then
 $$\langle(\Lambda_{\gamma_1}-\Lambda_{\gamma_2})f_1,f_2\rangle_{\partial M} =\int_M(\gamma_1-\gamma_2)g(\nabla_gu_1,\nabla_g\overline{u_2})\,dV_g.$$
 If instead $q_1,q_2\in C^\infty(M,\mathbb R)$ have trivial Dirichlet kernels for $-\Delta_g+q_j$ and $u_j$ solves $(-\Delta_g+q_j)u_j=0$ with smooth boundary value $f_j$, then
 $$\langle(\Lambda_{q_1}-\Lambda_{q_2})f_1,f_2\rangle_{\partial M} =\int_M(q_1-q_2)u_1\overline{u_2}\,dV_g.$$

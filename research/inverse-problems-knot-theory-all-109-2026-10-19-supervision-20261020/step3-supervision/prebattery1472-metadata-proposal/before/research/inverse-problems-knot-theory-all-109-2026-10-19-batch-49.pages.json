@@ -1,0 +1,331 @@
+[
+  {
+    "order": 3094,
+    "id": "plug-and-play-mmse-regularization",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Plug-and-play MMSE denoisers and stationarity",
+    "companion": "plug-and-play-mmse-regularization-examples",
+    "requires": [
+      "learned-reconstruction-targets-and-risk",
+      "proximal-gradient-and-accelerated-composite-optimization"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+        "kind": "lemma",
+        "title": "Tweedie identity, positive Jacobian, and the MMSE proximal potential",
+        "statement": "Let $n\\ge1$, let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane, and let $\\sigma,\\gamma>0$. Put\n$$\\rho_\\sigma(w)=\\exp\\!\\left(-\\frac{\\|w\\|_2^2}{2\\sigma^2}\\right),\\qquad p_\\sigma(z)=\\int_{\\mathbb R^n}\\rho_\\sigma(z-u)\\,\\mu(du),$$\nand define the normalized posterior measure and its mean by\n$$\\nu_{\\sigma,z}(E)=\\frac{\\int_E\\rho_\\sigma(z-u)\\,\\mu(du)}{p_\\sigma(z)}\\quad(E\\in\\mathcal B(\\mathbb R^n)),\\qquad D_\\sigma(z)=\\int_{\\mathbb R^n}u\\,\\nu_{\\sigma,z}(du).$$\nThe omitted normalizing constant of the $N(0,\\sigma^2I)$ likelihood is independent of $u$ and cancels in $\\nu_{\\sigma,z}$. Writing $U(u)=u$ for the identity random vector under $\\nu_{\\sigma,z}$, its covariance matrix is\n$$\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)=\\int_{\\mathbb R^n}(u-D_\\sigma(z))(u-D_\\sigma(z))^{\\mathsf T}\\,\\nu_{\\sigma,z}(du).$$\nThen $p_\\sigma$ is positive and smooth, each $\\nu_{\\sigma,z}$ has finite second moment, and $D_\\sigma(z)$ uniquely minimizes the posterior squared-error risk $a\\mapsto\\int\\|u-a\\|_2^2\\,\\nu_{\\sigma,z}(du)$. Moreover, $D_\\sigma$ is smooth and\n$$J D_\\sigma(z)=\\sigma^{-2}\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)$$\nis symmetric positive definite. Hence $D_\\sigma$ is injective with open image $X_\\sigma=D_\\sigma(\\mathbb R^n)$ and smooth inverse on $X_\\sigma$. Put $q_\\sigma=-\\log p_\\sigma$ and, for $x\\in X_\\sigma$, define\n$$h_{\\sigma,\\gamma}(x)=-\\frac{\\|x-D_\\sigma^{-1}(x)\\|_2^2}{2\\gamma}+\\frac{\\sigma^2}{\\gamma}q_\\sigma(D_\\sigma^{-1}(x));$$\nset $h_{\\sigma,\\gamma}(x)=+\\infty$ outside $X_\\sigma$. The restriction of $h_{\\sigma,\\gamma}$ to $X_\\sigma$ is smooth. For any extended-real $h:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}$, define\n$$\\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h}(z)=\\operatorname*{arg\\,min}_{x\\in\\mathbb R^n}\\left\\{\\frac12\\|x-z\\|_2^2+\\gamma h(x)\\right\\},$$\nwhere the argmin is the set of global minimizers and $h$ need not be convex. Then\n$$D_\\sigma(z)=z+\\sigma^2\\nabla\\log p_\\sigma(z)=z-\\sigma^2\\nabla q_\\sigma(z),\\qquad \\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h_{\\sigma,\\gamma}}(z)=\\{D_\\sigma(z)\\}\\quad(z\\in\\mathbb R^n).$$",
+        "deps": [
+          "def-ip-learned-reconstruction-estimator",
+          "def-euclidean-inner-product",
+          "def-probability-measure",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "cor-mean-value-theorem",
+          "def-measure-with-density",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "§2, Assumption 1 and equation (8); Appendix A.1, equations (9)–(12), complete proof."
+            },
+            {
+              "title": "Rémi Gribonval and Mila Nikolova, On Bayesian Estimation and Proximity Operators, Applied and Computational Harmonic Analysis 50 (2021), 49–72, arXiv:1807.04021",
+              "url": "https://arxiv.org/pdf/1807.04021",
+              "locator": "§2.1, Corollary 2; §2.5.1 and Appendix A.4, complete Gaussian MMSE proximity argument."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§1.1, pp. 124–125: the standard definition is restricted to closed proper convex penalties; the nonconvex identity here is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The local Gaussian-kernel, moment, Jacobian, and potential arguments use no choice axiom. The IP-46 learned-estimator definition states no choice use. The AC- and Countable-Choice-dependent Hilbert posterior-mean proposition is not used; the pointwise finite-posterior-risk identity is proved directly here."
+      },
+      {
+        "id": "def-ip-pnp-ista-with-denoiser",
+        "kind": "definition",
+        "title": "Plug-and-play ISTA with a denoiser",
+        "statement": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n  \\draw[->,rounded corners] (den.south) -- (7,-1) -- (0,-1) -- (old.south);\n\\end{tikzpicture}\n~~~",
+        "deps": [
+          "def-ip-learned-reconstruction-estimator",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "§1, equations (6a)–(6b), PnP-ISTA update."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§4.2, equation (4.6), proximal-gradient iteration before the proximal replacement."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The recursion is deterministic and uses no choice axiom. This is an ideal plug-in-map definition and does not assert that the map was fitted or trained."
+      },
+      {
+        "id": "thm-ip-exact-mmse-pnp-ista-stationarity",
+        "kind": "theorem",
+        "title": "Exact-MMSE PnP-ISTA has monotone objective and vanishing gradient",
+        "statement": "Let $n\\ge1$, let $\\sigma>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane. Use the analytic Gaussian posterior-mean map $D_\\sigma$ and potential $h_{\\sigma,\\gamma}$ constructed from $\\mu$ in the local lemma. This map is used as the exact MMSE plug-in map; no fitted parameter or training guarantee is assumed. Let $g:\\mathbb R^n\\to\\mathbb R$ be $C^1$ and suppose\n$$\\|\\nabla g(u)-\\nabla g(v)\\|_2\\le L\\|u-v\\|_2\\quad(u,v\\in\\mathbb R^n)$$\nfor some $L>0$. Suppose the extended-real objective $f=g+h_{\\sigma,\\gamma}$ has finite infimum in $\\mathbb R$, fix $0<\\gamma\\le1/L$, and run\n$$x_t=D_\\sigma\\!\\left(x_{t-1}-\\gamma\\nabla g(x_{t-1})\\right)\\quad(t\\ge1)$$\nfrom any $x_0\\in\\mathbb R^n$. Then $x_t\\in X_\\sigma$ and $f(x_t)$ is finite for every $t\\ge1$; $f(x_t)\\le f(x_{t-1})$ in extended-real order for $t\\ge1$; the finite sequence $(f(x_t))_{t\\ge1}$ converges; and $\\|\\nabla f(x_t)\\|_2\\to0$, where $\\nabla f$ is the ordinary gradient of its restriction to the open set $X_\\sigma$. This is a stationarity conclusion only: it asserts no global minimizer, objective rate, iterate convergence, posterior sampling, or trained-network guarantee.",
+        "deps": [
+          "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "def-ip-pnp-ista-with-denoiser",
+          "lem-l-smoothness-descent-inequality",
+          "def-lipschitz-holder-contraction",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "§2, Assumptions 1–3 and Theorem 1; Appendix A.2, complete majorization and summable-residual proof."
+            },
+            {
+              "title": "Rémi Gribonval and Mila Nikolova, On Bayesian Estimation and Proximity Operators, Applied and Computational Harmonic Analysis 50 (2021), 49–72, arXiv:1807.04021",
+              "url": "https://arxiv.org/pdf/1807.04021",
+              "locator": "§2.5.1 and Appendix A.4, Gaussian posterior mean as a global proximity selection."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§4.2.1, equations (4.7)–(4.8), smooth quadratic majorizer for proximal-gradient descent; convex penalty assumptions do not cover h_{σ,γ}."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The local stationarity proof uses no choice axiom. It treats the analytic posterior-mean map as an exact plug-in map; it imports neither the AC-dependent Hilbert posterior-mean proposition nor a trained-network guarantee."
+      },
+      {
+        "id": "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
+        "kind": "remark",
+        "title": "An arbitrary denoiser does not inherit the exact-MMSE objective",
+        "statement": "For $\\gamma>0$, a global proximal selection of an extended-real penalty $h:\\mathbb R\\to\\mathbb R\\cup\\{+\\infty\\}$ is a map $P:\\mathbb R\\to\\mathbb R$ such that, for every $z\\in\\mathbb R$, $P(z)$ is a global minimizer of $x\\mapsto\\frac12|x-z|^2+\\gamma h(x)$. The potential $h_{\\sigma,\\gamma}$ in the exact-MMSE stationarity result is constructed from the conditional-mean map $D_\\sigma$. Replacing $D_\\sigma$ in PnP-ISTA by an arbitrary map $\\widetilde D_\\sigma$ does not in general give a global proximal representation or inherit that stationarity conclusion: for every $\\gamma>0$, the map $z\\mapsto-z$ is not a global proximal selection of any such $h$ that is finite somewhere and nowhere $-\\infty$. This does not assert that a particular other denoiser has no different objective.",
+        "deps": [
+          "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "def-ip-pnp-ista-with-denoiser",
+          "thm-ip-exact-mmse-pnp-ista-stationarity",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "§1, pp. 1–2; §3 and Conclusion, pp. 3–5: exact versus approximate MMSE denoisers and the stated iterative-AWGN modeling limitation."
+            },
+            {
+              "title": "Rémi Gribonval and Mila Nikolova, On Bayesian Estimation and Proximity Operators, Applied and Computational Harmonic Analysis 50 (2021), 49–72, arXiv:1807.04021",
+              "url": "https://arxiv.org/pdf/1807.04021",
+              "locator": "§1.3 and §2.1: a posterior mean may have a specifically constructed proximity penalty; this is a property to establish, not a consequence of an arbitrary map."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§1.1, p. 124: standard convex proximal-map definition and its convexity scope."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The scalar proximal-selection comparison uses no choice axiom. Its exact-MMSE comparison refers to the locally constructed analytic conditional-mean map."
+      }
+    ]
+  },
+  {
+    "order": 3095,
+    "id": "plug-and-play-mmse-regularization-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Plug-and-play MMSE denoisers and stationarity — Examples and Counterexamples",
+    "companion": "plug-and-play-mmse-regularization",
+    "requires": [
+      "plug-and-play-mmse-regularization"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-scalar-mmse-exact-denoiser",
+        "kind": "example",
+        "title": "Exact scalar MMSE denoiser for a two-point prior",
+        "statement": "Let $a,\\sigma,\\gamma>0$ and let the scalar prior put mass $1/2$ at each of $-a$ and $a$. Under the Gaussian likelihood kernel $\\rho_\\sigma(z-u)=\\exp(-(z-u)^2/(2\\sigma^2))$, its exact posterior-mean map is\n$$D_\\sigma(z)=a\\tanh\\!\\left(\\frac{az}{\\sigma^2}\\right),\\qquad \\tanh(s)=\\frac{\\exp(s)-\\exp(-s)}{\\exp(s)+\\exp(-s)}.$$\nThe normalizing constant of the Gaussian likelihood cancels in the posterior. For every $z$, $D_\\sigma(z)$ uniquely minimizes the posterior squared-error risk and, with the potential $h_{\\sigma,\\gamma}$ constructed from this prior, is the unique global minimizer of $x\\mapsto (x-z)^2/2+\\gamma h_{\\sigma,\\gamma}(x)$.",
+        "deps": [
+          "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-probability-measure",
+          "thm-exponential-addition-formula"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "Appendix A.1, equation (7) and equations (9)–(12); the finite two-point posterior weights are computed locally."
+            },
+            {
+              "title": "Rémi Gribonval and Mila Nikolova, On Bayesian Estimation and Proximity Operators, Applied and Computational Harmonic Analysis 50 (2021), 49–72, arXiv:1807.04021",
+              "url": "https://arxiv.org/pdf/1807.04021",
+              "locator": "§2.5.1 and Appendix A.4, Gaussian likelihood and posterior-mean proximity representation."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§1.1, pp. 124–125, proximal minimization notation; the nonconvex identity is supplied by the local lemma."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The explicit finite prior, posterior weights, and potential identity use no choice axiom. The AC-dependent Hilbert posterior-mean proposition is not used; the local lemma supplies the exact pointwise identity."
+      },
+      {
+        "id": "cex-ip-pnp-iterative-awgn-error-model",
+        "kind": "counterexample",
+        "title": "Gaussian measurement noise need not remain Gaussian at later PnP-ISTA inputs",
+        "statement": "Assume the Axiom of Choice. Let $\\varepsilon$ have the standard normal law, let $Y=\\theta+\\varepsilon$, and let $g(x)=(x-Y)^2/2$. For any noise parameter $\\sigma>0$, deterministic map $\\widetilde D_\\sigma:\\mathbb R\\to\\mathbb R$, step $\\gamma>0$, and initialization $x_0\\in\\mathbb R$, define $z_t=x_{t-1}-\\gamma(x_{t-1}-Y)$ and $x_t=\\widetilde D_\\sigma(z_t)$. The false claim is that Gaussian measurement noise forces $z_t-\\theta$ to have a Gaussian law at every iteration $t\\ge1$, for every such denoiser, step, and initialization.",
+        "deps": [
+          "def-ip-pnp-ista-with-denoiser",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-location-scale-density"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "§3, pp. 3–4, discussion of the iterative-AWGN modeling limitation; the exact scalar witness is proved locally."
+            },
+            {
+              "title": "Rémi Gribonval and Mila Nikolova, On Bayesian Estimation and Proximity Operators, Applied and Computational Harmonic Analysis 50 (2021), 49–72, arXiv:1807.04021",
+              "url": "https://arxiv.org/pdf/1807.04021",
+              "locator": "§1.3 and §2.5.1, distinctions between Gaussian likelihood, posterior mean, and denoiser-specific proximity representations."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§4.2, equation (4.6), gradient-step structure used in the scalar model."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC to use the library standard-normal probability law and positive-density normal-law suppliers. The recurrence and scalar support argument use no further choice."
+      },
+      {
+        "id": "ex-ip-approximate-cnn-mmse-denoiser",
+        "kind": "example",
+        "title": "A biased one-pixel CNN approximates but is not the exact MMSE denoiser",
+        "statement": "Let $a,\\sigma>0$ and use the scalar two-point prior assigning mass $1/2$ to each of $-a$ and $a$, whose exact Gaussian posterior-mean map is $D_\\sigma(z)=a\\tanh(az/\\sigma^2)$, where $\\tanh(s)=(\\exp(s)-\\exp(-s))/(\\exp(s)+\\exp(-s))$. For any tolerance $\\eta>0$, choose $b$ with $0<|b|<\\eta$ and define the one-pixel convolutional neural network (CNN) map\n$$\\widetilde D_\\sigma(z)=a\\tanh(az/\\sigma^2)+b.$$\nThis map is implemented by a $1\\times1$ convolution, a $\\tanh$ activation, output scaling, and an output bias $b$. It satisfies $\\sup_{z\\in\\mathbb R}|\\widetilde D_\\sigma(z)-D_\\sigma(z)|=|b|<\\eta$, while $\\widetilde D_\\sigma(0)\\ne D_\\sigma(0)$. It is approximate and does not meet the exact-denoiser hypothesis of the stationarity theorem; this example makes no claim that it lacks some other objective.",
+        "deps": [
+          "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "def-ip-pnp-ista-with-denoiser",
+          "thm-ip-exact-mmse-pnp-ista-stationarity",
+          "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-probability-measure",
+          "thm-exponential-addition-formula"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojian Xu, Yu Sun, Jiaming Liu, Brendt Wohlberg, and Ulugbek S. Kamilov, Provable Convergence of Plug-and-Play Priors with MMSE Denoisers, IEEE Signal Processing Letters 27 (2020), arXiv:2005.07685",
+              "url": "https://arxiv.org/pdf/2005.07685",
+              "locator": "§1 and §3, pp. 1–4, exact versus approximate MMSE denoisers and the DnCNN experiment; this one-pixel network is a local mathematical example."
+            },
+            {
+              "title": "Rémi Gribonval and Mila Nikolova, On Bayesian Estimation and Proximity Operators, Applied and Computational Harmonic Analysis 50 (2021), 49–72, arXiv:1807.04021",
+              "url": "https://arxiv.org/pdf/1807.04021",
+              "locator": "§1.3 and §2.5.1, exact posterior-mean denoiser and its prior-specific proximity penalty."
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf",
+              "locator": "§4.2, proximal-gradient update; the exact-MMSE stationarity conclusion requires the local theorem's stricter denoiser hypothesis."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The explicit finite prior and biased scalar map use no choice axiom. The AC-dependent Hilbert posterior-mean proposition is not used; the local lemma supplies the exact pointwise identity."
+      }
+    ]
+  }
+]

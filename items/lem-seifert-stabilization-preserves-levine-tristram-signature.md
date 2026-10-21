@@ -24,9 +24,9 @@ sources:
     - title: "W. B. Raymond Lickorish, An Introduction to Knot Theory, Graduate Texts in Mathematics 175, Springer (1997)"
       url: "https://ebooks.karbust.me/Mathematics/W.%20B.%20Raymond%20Lickorish%20-%20An%20Introduction%20to%20Knot%20Theory%20%281997%29%20%5B978-1-4612-0691-0%5D.pdf"
       locator: "Chapter 8, Theorem 8.4, printed pp. 81–82: the rank-two elementary Seifert enlargements; the block-signature calculation is proved in this item."
-    - title: "Anthony Conway, The Levine–Tristram signature: a survey, Matrix Annals 2016 (arXiv:1903.04477)"
+    - title: "Anthony Conway, The Levine–Tristram signature: a survey, 2019–20 MATRIX Annals (2021), pp. 31–56 (arXiv:1903.04477)"
       url: "https://arxiv.org/pdf/1903.04477"
-      locator: "§2.1, printed pp. 3–4: Hermitian form convention; §2.4, printed p. 7: averaged signature at roots; complete 18-page PDF inspected."
+      locator: "§2.1, printed pp. 2–4: Hermitian form convention; §2.4, printed p. 6: averaged signature at roots; complete 18-page PDF inspected."
 ---
 ## Statement
 

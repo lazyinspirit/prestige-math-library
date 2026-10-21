@@ -10,6 +10,8 @@ deps:
   - def-knot-exterior
   - def-knot-meridian-and-preferred-longitude
   - def-stiefel-whitney-classes-from-the-projective-bundle-relation
+  - thm-poincare-lefschetz-duality
+  - thm-first-chern-class-classifies-complex-line-bundles
   - def-axiom-of-choice
 justified_by:
   - lem-instanton-knot-complex-asd-analytic-foundations
@@ -36,6 +38,8 @@ Assume full AC for the instanton constructions. Let $K\subset S^3$ be a smooth k
 
 Here $PU(2)=U(2)/U(1)\cong SO(3)$; a principal $PU(2)$ bundle $P\to X$ is equivalently an oriented real 3-plane bundle, and $w_2(P)\in H^2(X;\mathbb Z/2)$ denotes its second Stiefel–Whitney class. Poincaré–Lefschetz duality for the oriented compact 3-manifold $X$ with boundary is the isomorphism $PD:H_1(X,\partial X;\mathbb Z/2)\to H^2(X;\mathbb Z/2)$. Include a bundle $P$ with $w_2(P)=PD([\omega])$ in the singular bundle data.
 
+Such a bundle exists for every marked earring. Orient the truncated arc as a relative integral cycle and set $c=PD_{\mathbb Z}[\omega]\in H^2(X;\mathbb Z)$. Choose a complex line bundle $Q\to X$ with $c_1(Q)=c$, and let $P$ be the projective unitary frame bundle of $Q\oplus\underline{\mathbb C}$. On each 2-cell, a clutch of $Q$ with winding $n$ gives the projective transition whose $SU(2)$ lift ends at $(-1)^n$; its lifting obstruction is therefore $n\bmod2$. Hence $w_2(P)=c\bmod2=PD_{\mathbb F_2}[\omega]$, as required.
+
 In a local meridional angular coordinate $\theta$, an $SU(2)$ lift of the singular connection has the standard model $A_0+\frac14\begin{pmatrix}i&0\\0&-i\end{pmatrix}d\theta$, where $A_0$ is smooth in an $O(2)$ reduction. Parallel transport (holonomy) around either meridian is conjugate in $SU(2)$ to $\operatorname{diag}(i,-i)$; its image has order two in $PU(2)$. Define $I^\natural(K;\mathbb Z)$ to be the singular instanton Floer homology $I^\omega(S^3,K^\natural;P)$ associated to these data by Analytic foundations for the singular instanton knot complex, which supplies its analytic complex and independence of auxiliary choices under full AC. This does not assert sutured closure independence or a distinguished canonical class.
 
 For the sutured version, let $E_K$ be the compact knot exterior and put two oppositely oriented meridional sutures $\gamma$ on its boundary torus. Choose a connected oriented annulus $T$, attach $[-1,1]\times T$ along the annular sutured region, and glue the two resulting boundary surfaces by an orientation-compatible diffeomorphism fixing a chosen point from $T$. The result is a closed oriented 3-manifold $\bar Y$ with a distinguished torus $\bar R$; the fixed point determines a standard circle meeting $\bar R$ once. Choose a line bundle $w\to\bar Y$ whose first Chern class is Poincaré dual to that circle, so $\langle c_1(w),[\bar R]\rangle$ is odd. Let $I_*(\bar Y,w;\mathbb Q)$ denote the closed instanton Floer group with rational coefficients, using the admissible fixed-determinant theory in the external input below. For a homology class $z$ of dimension $0$ or $2$ in $\bar Y$, let $\mu(z)$ denote the standard instanton Floer operator associated to $z$; the point and surface operators commute and have degrees $4$ and $-2$, respectively. If $y\in\bar R$, define the closure group $KHI_{\bar Y,\bar R,w}(K;\mathbb Q)$ by
@@ -51,6 +55,10 @@ This uses the generalized $0$-eigenspace of the surface operator and the ordinar
 [[def-knot-meridian-and-preferred-longitude|Meridian and longitude conventions]]
 
 [[def-stiefel-whitney-classes-from-the-projective-bundle-relation|Second Stiefel–Whitney class of the associated real 3-plane bundle]]
+
+[[thm-poincare-lefschetz-duality|Integral and mod-two duals of the marked relative arc]]
+
+[[thm-first-chern-class-classifies-complex-line-bundles|Existence of a line bundle with the prescribed first Chern class]]
 
 [Hatcher, *Algebraic Topology*, Theorem 3.43](https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf)
 

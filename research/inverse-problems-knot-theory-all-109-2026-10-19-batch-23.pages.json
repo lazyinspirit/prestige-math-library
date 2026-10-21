@@ -46,7 +46,7 @@
             {
               "title": "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes",
               "url": "https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf",
-              "locator": "§1.1, equation (1.9) and the following caution (PDF pp. 8–10): stationary-chain variance of a sample mean and limits on CLT conclusions."
+              "locator": "§1.6.2, equation (1.9) and the following caution (printed pp. 8–11; PDF pp. 12–15): stationary-chain variance of a sample mean and limits on CLT conclusions."
             }
           ]
         },
@@ -92,7 +92,7 @@
             {
               "title": "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes",
               "url": "https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf",
-              "locator": "§1.1, equation (1.9) and the following caution (PDF pp. 8–10): exact stationary sample-mean variance and limits on CLT conclusions."
+              "locator": "§1.6.2, equation (1.9) and the following caution (printed pp. 8–11; PDF pp. 12–15): exact stationary sample-mean variance and limits on CLT conclusions."
             },
             {
               "title": "Aki Vehtari et al., Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC",
@@ -126,7 +126,7 @@
         "id": "ex-ip-exact-invariant-kernel-short-run",
         "kind": "example",
         "title": "An exact invariant kernel can be biased over a short run",
-        "statement": "Let $E=\\{-1,+1\\}$, and let the target posterior $\\pi$ assign mass $1/2$ to\neach state. For $0<\\varepsilon<1/2$, define a transition kernel by\n$$K_\\varepsilon(x,\\{x\\})=1-\\varepsilon,\\qquad K_\\varepsilon(x,\\{-x\\})=\\varepsilon.$$\nTake $\\varepsilon=1/1000$, let $(X_n)_{n\\ge0}$ be the time-homogeneous Markov\nchain with kernel $K_\\varepsilon$ relative to its natural filtration and with\n$X_0=+1$, and retain the next $N=100$ draws for the bounded functional\n$f(x)=x$. The target law $\\pi$ is\ninvariant for this exact kernel, but the expected reported average is\n$$\\mathbb E\\left[\\frac1{100}\\sum_{j=1}^{100}X_j\\right]=\\frac{499}{100}\\left(1-\\left(\\frac{499}{500}\\right)^{100}\\right)>0=\\pi(f).$$\nFor the error ledger take each deterministic posterior stage to be $\\pi$;\nthen the invariant-kernel error is zero while the finite-run burn-in error is\npositive.",
+        "statement": "Assume AC. Let $E=\\{-1,+1\\}$ with the discrete sigma-algebra $2^E$, and let\nthe target posterior $\\pi$ assign mass $1/2$ to each state. For\n$0<\\varepsilon<1/2$, define\n$$K_\\varepsilon(x,A):=(1-\\varepsilon)\\mathbf1_A(x)+\\varepsilon\\mathbf1_A(-x)\\qquad(x\\in E,\\ A\\subseteq E).$$\nTake $\\varepsilon=1/1000$. The Ionescu--Tulcea construction supplies a\ntime-homogeneous Markov chain on canonical path space with initial law\n$\\delta_{+1}$ and transition kernel $K_\\varepsilon$. Use this chain with its\nnatural filtration, retain the next $N=100$ draws, and set the bounded\nfunctional $f(x)=x$. The target law $\\pi$ is\ninvariant for this exact kernel, but the expected reported average is\n$$\\mathbb E\\left[\\frac1{100}\\sum_{j=1}^{100}X_j\\right]=\\frac{499}{100}\\left(1-\\left(\\frac{499}{500}\\right)^{100}\\right)>0=\\pi(f).$$\nFor the error ledger take each deterministic posterior stage to be $\\pi$;\nthen the invariant-kernel error is zero while the finite-run burn-in error is\npositive.",
         "deps": [
           "def-axiom-of-choice",
           "def-invariant-and-stationary-distribution-for-a-markov-kernel",
@@ -135,6 +135,9 @@
           "def-moments-variance-and-covariance",
           "def-probability-measure",
           "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
           "prop-ip-bounded-posterior-functional-error"
         ],
         "justified_by": [],
@@ -150,7 +153,7 @@
           ]
         },
         "proof_strategy": "direct",
-        "axiom_use": "AC is assumed only by the library time-homogeneous Markov-chain interface. Invariance and the finite-state expectation calculation use no choice.",
+        "axiom_use": "AC is used through conditional-expectation existence for the time-homogeneous chain interface and through the Ionescu--Tulcea construction. Invariance and the finite-state calculations use no additional choice.",
         "provenance": {
           "statement": "ai-generated",
           "proof": "ai-generated"
@@ -163,7 +166,7 @@
         "id": "ex-ip-low-ess-despite-correct-invariance",
         "kind": "example",
         "title": "Correct invariance can coexist with low effective sample size",
-        "statement": "Let the target posterior $\\pi$ be uniform on $E=\\{-1,+1\\}$ and define\n$$K_\\varepsilon(x,\\{x\\})=1-\\varepsilon,\\qquad K_\\varepsilon(x,\\{-x\\})=\\varepsilon,$$\nwith $\\varepsilon=1/100$. Let $(X_n)_{n\\ge0}$ be the time-homogeneous Markov\nchain with kernel $K_\\varepsilon$ relative to its natural filtration, started\nwith $X_0\\sim\\pi$, and take $f(x)=x$. Define its lag-$k$ autocorrelation by\n$$\\rho_f(k):=\\frac{\\operatorname{Cov}(f(X_0),f(X_k))}{\\operatorname{Var}(f(X_0))}.$$\nFor every $k\\ge1$, $\\rho_f(k)=(49/50)^k$. Its integrated autocorrelation\ntime $\\tau_f:=1+2\\sum_{k=1}^\\infty\\rho_f(k)$ is therefore $99$, so the\ntheoretical functional-specific effective sample size of $N=10{,}000$ draws is\n$$\\operatorname{ESS}_f(10{,}000)=\\frac{10{,}000}{99}\\approx101.01.$$\nThe invariant law is exactly the target posterior, while this functional has\nonly about one percent of the nominal independent-sample size. This is the\ntheoretical ESS from the stationary autocorrelation sequence, not an empirical\nfinite-run ESS estimate, and it asserts no central limit theorem.",
+        "statement": "Assume AC. Let $E=\\{-1,+1\\}$ with the discrete sigma-algebra $2^E$, and let\nthe target posterior $\\pi$ be uniform on $E$. For $0<\\varepsilon<1/2$, define\n$$K_\\varepsilon(x,A):=(1-\\varepsilon)\\mathbf1_A(x)+\\varepsilon\\mathbf1_A(-x)\\qquad(x\\in E,\\ A\\subseteq E),$$\nand set $\\varepsilon=1/100$. The Ionescu--Tulcea construction supplies a\ntime-homogeneous Markov chain on canonical path space with initial law $\\pi$\nand transition kernel $K_\\varepsilon$. Use this chain with its natural\nfiltration and set $f(x)=x$. Define its lag-$k$ autocorrelation by\n$$\\rho_f(k):=\\frac{\\operatorname{Cov}(f(X_0),f(X_k))}{\\operatorname{Var}(f(X_0))}.$$\nFor every $k\\ge1$, $\\rho_f(k)=(49/50)^k$. Its integrated autocorrelation\ntime $\\tau_f:=1+2\\sum_{k=1}^\\infty\\rho_f(k)$ is therefore $99$, so the\ntheoretical functional-specific effective sample size of $N=10{,}000$ draws is\n$$\\operatorname{ESS}_f(10{,}000)=\\frac{10{,}000}{99}\\approx101.01.$$\nThe invariant law is exactly the target posterior, while this functional has\nonly about one percent of the nominal independent-sample size. This is the\ntheoretical ESS from the stationary autocorrelation sequence, not an empirical\nfinite-run ESS estimate, and it asserts no central limit theorem.",
         "deps": [
           "def-axiom-of-choice",
           "def-functional-specific-effective-sample-size",
@@ -175,7 +178,10 @@
           "def-stationary-process-and-canonical-shift",
           "def-time-homogeneous-markov-chain-with-transition-kernel",
           "prop-ip-bounded-posterior-functional-error",
-          "thm-invariant-initial-law-makes-the-chain-stationary"
+          "thm-invariant-initial-law-makes-the-chain-stationary",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known"
         ],
         "justified_by": [],
         "forward_refs": [],
@@ -190,7 +196,7 @@
           ]
         },
         "proof_strategy": "direct",
-        "axiom_use": "AC is assumed through the library Markov-chain and invariant-initial-law interfaces. The finite transition, covariance, and geometric-series calculations use no choice and establish no central limit theorem.",
+        "axiom_use": "AC is used through conditional-expectation existence for the Markov-chain interface and invariant-initial-law theorem, and through the Ionescu--Tulcea construction. The finite transition, covariance, and geometric-series calculations use no additional choice and establish no central limit theorem.",
         "provenance": {
           "statement": "ai-generated",
           "proof": "ai-generated"

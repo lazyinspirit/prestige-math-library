@@ -10,7 +10,6 @@ deps:
   - thm-plancherel
   - thm-tonelli-theorem-for-sigma-finite-product-spaces
   - lem-ip-positive-sobolev-cgo-remainders-by-shifted-lattice
-  - thm-smooth-up-to-the-boundary-density-on-smooth-domains
   - lem-compact-support-zero-extension-in-wkp
 proof_strategy: direct
 provenance:
@@ -54,9 +53,7 @@ whenever the scalar family $R$ is measurable. No continuity or derivative bound 
 
 [F3] The positive-Sobolev CGO construction supplies remainders with $H^{1/2}$ norm $O(t^{-1})$ and uniformly bounded $L^\infty$ norm for the phases used in the application. [[lem-ip-positive-sobolev-cgo-remainders-by-shifted-lattice]]
 
-[F4] Ambient smooth restrictions are dense in $H^2(B_2)$, so compactly supported cutoff remainders can be approximated in $H^2$ by smooth compactly supported functions. [[thm-smooth-up-to-the-boundary-density-on-smooth-domains]]
-
-[F5] A Sobolev class supported in a compact subset of an open set extends by zero with its weak derivatives unchanged. [[lem-compact-support-zero-extension-in-wkp]]
+[F4] A Sobolev class supported in a compact subset of an open set extends by zero with its weak derivatives unchanged. [[lem-compact-support-zero-extension-in-wkp]]
 
 ## Proof
 
@@ -70,11 +67,11 @@ whenever the scalar family $R$ is measurable. No continuity or derivative bound 
 
 ## Application to the conductivity remainder
 
-For $w\in C_c^\infty(\mathbb R^3)$, set $[w]^2_{1/2}:=\iint |w(x)-w(y)|^2|x-y|^{-4}\,dx\,dy$. Translation, Plancherel and Tonelli [F1]–[F2] give
+For $w\in L^2(\mathbb R^3)$, set $[w]^2_{1/2}:=\iint |w(x)-w(y)|^2|x-y|^{-4}\,dx\,dy$. Translation, Plancherel and Tonelli [F1]–[F2] give
 
 $$[w]^2_{1/2}=\int |\widehat w(\xi)|^2\left(\int \frac{|e^{i\xi\cdot h}-1|^2}{|h|^4}\,dh\right)d\xi=c_3\int |\xi|\,|\widehat w(\xi)|^2d\xi,$$
 
-where rotation and dilation give the inner integral, and $0<c_3<\infty$ follows from $|e^{iu}-1|\le\min\{2,|u|\}$. Thus $\|w\|_{H^{1/2}}^2\asymp\|w\|_2^2+[w]^2_{1/2}$. By [F4], each cutoff remainder from [F3] is an $H^2$ limit of smooth restrictions on $B_2$; multiplying the approximants by a fixed compact cutoff and using [F5] gives convergence in $H^2(\mathbb R^3)$ and extends this norm comparison to the cutoff remainders. The identity $f(x)g(x)-f(y)g(y)=f(x)(g(x)-g(y))+g(y)(f(x)-f(y))$ therefore yields
+where rotation and dilation give the inner integral, and $0<c_3<\infty$ follows from $|e^{iu}-1|\le\min\{2,|u|\}$. The identity holds with values in $[0,\infty]$, since Plancherel applies to each $L^2$ translate difference and Tonelli to its nonnegative squared integrand. Thus $w\in H^{1/2}$ exactly when $\|w\|_2^2+[w]^2_{1/2}<\infty$, and this quantity is equivalent to $\|w\|_{H^{1/2}}^2$. Cutoff remainders are whole-space $H^2$ functions by [F4], so this identity applies directly to them. The identity $f(x)g(x)-f(y)g(y)=f(x)(g(x)-g(y))+g(y)(f(x)-f(y))$ therefore yields
 
 $$\|fg\|_{H^{1/2}}\le C\bigl(\|f\|_\infty\|g\|_{H^{1/2}}+\|g\|_\infty\|f\|_{H^{1/2}}\bigr)$$
 

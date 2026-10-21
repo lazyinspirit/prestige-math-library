@@ -28,7 +28,7 @@ sources:
       locator: "§3.1 and §4.1, PDF pp. 6–11, for matched training pairs, direct reconstruction maps, and finite unrolled updates; §4.2.1, PDF pp. 11–13, for denoisers and learned generative priors."
     - title: "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems, arXiv:2410.00083v1"
       url: "https://arxiv.org/pdf/2410.00083v1"
-      locator: "§1.2 and §§2.4.2–2.4.3, PDF pp. 3 and 7–8, distinguish point reconstruction, score fields, conditional-score updates, and posterior sampling. The survey reports method-specific scope and does not establish generic sampler correctness."
+      locator: "§1.2 and §§2.4.2–2.4.3, PDF pp. 4 and 8, distinguish point reconstruction, score fields, conditional-score updates, and posterior sampling. The survey reports method-specific scope and does not establish generic sampler correctness."
     - title: "Masoumeh Dashti and Andrew M. Stuart, The Bayesian Approach to Inverse Problems, arXiv:1302.6989v4"
       url: "https://arxiv.org/pdf/1302.6989v4"
       locator: "§3.2, Theorem 3.4 and proof, for a supplied data-indexed posterior kernel and its evidence/version conventions; §4.1, Theorem 4.3, for posterior well-posedness under stated potential hypotheses."

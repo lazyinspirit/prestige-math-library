@@ -825,6 +825,16 @@ severity, disposition, ownership, timestamps and adjudication references stay
 unchanged. Changed objects and other runs receive no compatibility; new appends
 remain strict. Missing confirmed-fatal ledger coverage remains a hard failure.
 
+For `inverse-problems-knot-theory-all-109-2026-10-19`, the same validation-only
+helper interprets exactly nine original Step-3 rows through ten approved
+metadata normal forms. Exact run, ID, complete original-row digest and old
+field values are required. The original ledger bytes, evidence, verdicts,
+severity, ownership and references remain unchanged; append stays strict.
+This reconciles location, repair-cost and internal-citation taxonomy without
+creating review coverage or exempting new or changed rows. The original and
+normal-form evidence is in the run supervision `ledger-schema99-normalization`
+packet.
+
 The same run's original frozen 317-row Step-3 ledger projection is verified
 through `step3-native-ledger-successor-history.mjs` after its exact successful
 native gate-r1-u1 owner appended 18 taxonomy successors (11 in the draft

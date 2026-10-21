@@ -36,7 +36,7 @@ sources:
 
 Assume the Axiom of Choice and Countable Choice.
 
-Let $(M,g)$ be a compact smooth Riemannian domain with smooth boundary, let $\gamma\in C^\infty(M,\mathbb R)$ be strictly positive, put $\rho=\sqrt{\gamma}$, and define $q=(\Delta_g\rho)/\rho$. If $v$ solves $\operatorname{div}_g(\gamma\nabla_gv)=0$ and $u=\rho v$, then $u$ solves $(-\Delta_g+q)u=0$. The potential $q$ has trivial Dirichlet kernel. For boundary data $f=v|_{\partial M}$, with $\rho_b=\rho|_{\partial M}$ and the physical flux convention $\Lambda_\gamma f=\gamma\partial_{\nu_{\rm out}}v|_{\partial M}$, the exact boundary relation is
+Let $(M,g)$ be a nonempty compact connected smooth Riemannian domain with nonempty smooth boundary, let $\gamma\in C^\infty(M,\mathbb R)$ be strictly positive, put $\rho=\sqrt{\gamma}$, and define $q=(\Delta_g\rho)/\rho$. If $v$ solves $\operatorname{div}_g(\gamma\nabla_gv)=0$ and $u=\rho v$, then $u$ solves $(-\Delta_g+q)u=0$. The potential $q$ has trivial Dirichlet kernel. For boundary data $f=v|_{\partial M}$, with $\rho_b=\rho|_{\partial M}$ and the physical flux convention $\Lambda_\gamma f=\gamma\partial_{\nu_{\rm out}}v|_{\partial M}$, the exact boundary relation is
 $$\Lambda_\gamma f=\rho_b\Lambda_q(\rho_b f)-\rho_b(\partial_{\nu_{\rm out}}\rho)|_{\partial M}f.$$
 
 ## Statement references

@@ -34,7 +34,7 @@ sources:
 
 ## Statement refuted
 
-For every finite regular oriented diagram $D$, form the integral Khovanov state cube but omit the cohomological shift $-n_-$ and quantum shift $n_+-2n_-$. The false claim is that the resulting raw cohomology groups are invariant under oriented Reidemeister moves and that their graded rank Euler characteristic equals the Jones polynomial with the usual unreduced unknot factor $q+q^{-1}$, under $q=-A^{-2}$ and $t=q^2=A^{-4}$.
+For every nonempty finite regular oriented diagram $D$, form the integral Khovanov state cube but omit the cohomological shift $-n_-$ and quantum shift $n_+-2n_-$. The false claim is that the resulting raw cohomology groups are invariant under oriented Reidemeister moves and that their graded rank Euler characteristic equals the Jones polynomial with the usual unreduced unknot factor $q+q^{-1}$, under $q=-A^{-2}$ and $t=q^2=A^{-4}$.
 
 ## Statement references
 

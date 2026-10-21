@@ -31,7 +31,7 @@ sources:
     - title: "Neal W. Stoltzfus, Unraveling the Integral Knot Concordance Group"
       url: "https://doi.org/10.1090/memo/0192"
       locator: "Memoirs of the American Mathematical Society 12(192), 1977; full classification and localization sequence"
-    - title: "Charles Livingston and Allison N. Miller, The concordance genus of knots, II"
+    - title: "Charles Livingston, The concordance genus of a knot, II"
       url: "https://msp.org/agt/2009/9-1/agt-v9-n1-p06-p.pdf"
       locator: "§2, printed pp. 169–171: integral group, rationalization, and injection"
 ---

@@ -26,7 +26,7 @@ sources:
       locator: "§3 and §4.1, PDF pp. 4–6; Appendix B.3, PDF pp. 24–25: visibility and closure-quantity model, GRMHD training images, synthetic validation/test data, and multi-modal behavior."
     - title: "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/blackhole.py"
       url: "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/blackhole.py"
-      locator: "Lines 110–197 and 231–267: orientation-corrected directed triangle products, closure-phase argument, and ordered quadruple log-amplitude ratio."
+      locator: "Lines 110–140: baseline-orientation flags and ordered triangle/quadrangle indices; lines 208–233: complex-conjugation correction and closure-phase argument; lines 241–260: ordered log-closure-amplitude ratio."
 ---
 
 ## Example

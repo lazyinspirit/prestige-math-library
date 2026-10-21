@@ -24,7 +24,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "§3, proof of Theorem 1.5 and Table 1, printed pp. 586–587 (PDF pp. 5–6); comparison data only"
+      locator: "§4, proof of Theorem 1.5 and Table 1, arXiv v1 PDF pp. 5–6; comparison data only"
     - title: "Lisa Piccirillo, The Conway knot is not slice, published Annals of Mathematics 191 (2020), 581–591"
       url: "https://annals.math.princeton.edu/wp-content/uploads/annals-v191-n2-p05-s.pdf"
       locator: "§3, printed p.587; the published incoming bidegree is correct"
@@ -53,7 +53,7 @@ Lee filtration levels needed to determine these values.
 
 ## Statement references
 
-[Piccirillo, §3 and Table 1](https://arxiv.org/pdf/1808.02923)
+[Piccirillo, §4 and Table 1](https://arxiv.org/pdf/1808.02923)
 
 [Rasmussen, *Khovanov homology and the slice genus*](https://arxiv.org/pdf/math/0402131v1)
 
@@ -63,24 +63,17 @@ Lee filtration levels needed to determine these values.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and the two oriented diagrams fixed in the
-Definition.
+**Given:** Countable choice and the two oriented diagrams fixed in the Definition.
 
-[A1] Countable choice, written $\mathrm{AC}_\omega$, is
-[[def-countable-choice]].
+[A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]].
 
-[F1] [[def-piccirillo-conway-pair]] fixes the exact knots $C$ and $K_P$ by
-their diagrams.
+[F1] [[def-piccirillo-conway-pair]] fixes the exact knots $C$ and $K_P$ by their diagrams.
 
-[F2] [[alg-khovanov-chain-complex-from-diagram]] gives a finite cube complex
-from an explicit regular diagram, with its homological and quantum gradings.
+[F2] [[alg-khovanov-chain-complex-from-diagram]] gives a finite cube complex from an explicit regular diagram, with its homological and quantum gradings.
 
-[F3] [[lem-lee-filtered-spectral-sequence-and-two-orientation-classes]] gives
-the Lee spectral sequence, its filtration changes, and the two orientation
-classes for a knot.
+[F3] [[lem-lee-filtered-spectral-sequence-and-two-orientation-classes]] gives the Lee spectral sequence, its filtration changes, and the two orientation classes for a knot.
 
-[F4] [[def-rasmussen-s-invariant]] defines $s(K)$ from the two Lee filtration
-levels as $s_{max}-1=s_{min}+1$.
+[F4] [[def-rasmussen-s-invariant]] defines $s(K)$ from the two Lee filtration levels as $s_{max}-1=s_{min}+1$.
 
 [F5] A PD quadruple is listed counterclockwise starting from the incoming under-arc; equal arc labels are joined. This is only a finite encoding convention. The actual diagram match is proved by the transcription in the proof, without using the AC-dependent Seifert-matrix theorem.
 

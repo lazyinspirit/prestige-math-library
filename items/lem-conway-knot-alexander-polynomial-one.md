@@ -29,7 +29,7 @@ sources:
       locator: "Introduction, printed pp. 582–583 (PDF pp. 1–2); Alexander-polynomial-one scope"
     - title: "Freedman and Quinn, Topology of 4-Manifolds"
       url: "https://archive.mpim-bonn.mpg.de/id/eprint/4789/2/FreedmanQuinn-TopologyOf4Manifolds-Reformatted2013.pdf"
-      locator: "Theorem 11.11 and its full proof, reformatted PDF pp. 286–288"
+      locator: "§11.9, Theorem 11.11 and proof, reformatted PDF pp. 238–239 (printed pp. 224–225); the Z-slice criterion in a contractible 4-manifold"
 ---
 
 ## Statement
@@ -47,21 +47,15 @@ $$\Delta_C^\#(t)=1.$$
 
 ## Facts & Assumptions
 
-**Given:** Full AC and the fixed Conway diagram and Alexander-polynomial
-normalization.
+**Given:** Full AC and the fixed Conway diagram and Alexander-polynomial normalization.
 
-[A1] The Axiom of Choice, written AC, is [[def-axiom-of-choice]]. It supplies
-countable choice through [[thm-choice-implies-dependent-implies-countable-choice]].
+[A1] The Axiom of Choice, written AC, is [[def-axiom-of-choice]]. It supplies countable choice through [[thm-choice-implies-dependent-implies-countable-choice]].
 
 [F1] [[lem-conway-seifert-surface-and-matrix]] constructs the actual embedded disk-and-band surface and an integral homology basis for the selected Conway diagram with the displayed matrix $V$, by a direct diagram transcription, local push-off counts and an explicit unimodular basis change.
 
-[F2] [[thm-seifert-determinant-is-the-knot-alexander-polynomial]] identifies
-the normalized Alexander polynomial with the determinant of a Seifert matrix
-up to a unit $\pm t^m$ in $\mathbb Z[t,t^{-1}]$.
+[F2] [[thm-seifert-determinant-is-the-knot-alexander-polynomial]] identifies the normalized Alexander polynomial with the determinant of a Seifert matrix up to a unit $\pm t^m$ in $\mathbb Z[t,t^{-1}]$.
 
-[F3] [[cor-knot-alexander-normalization-symmetry-and-genus-bound]]: every knot
-Alexander generator has a unique symmetric unit associate taking value $1$ at
-$t=1$.
+[F3] [[cor-knot-alexander-normalization-symmetry-and-genus-bound]]: every knot Alexander generator has a unique symmetric unit associate taking value $1$ at $t=1$.
 
 ## Proof
 

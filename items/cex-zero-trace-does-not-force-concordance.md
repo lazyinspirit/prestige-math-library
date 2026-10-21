@@ -26,7 +26,7 @@ sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice"
       url: "https://arxiv.org/pdf/1808.02923"
-      locator: "Introduction, printed p. 583, and §3, printed pp. 586–587 (PDF pp. 2, 5–6)"
+      locator: "Introduction (arXiv v1 PDF p. 1) and §4, proof of Theorem 1.5 (PDF pp. 5–6)"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
       locator: "§3, same trace but distinct concordance discussion"
@@ -40,7 +40,7 @@ $X_0(K_0)\cong X_0(K_1)$ implies that $K_0$ and $K_1$ are smoothly concordant.
 
 ## Statement references
 
-[Piccirillo, Introduction and §3](https://arxiv.org/pdf/1808.02923)
+[Piccirillo, Introduction and §4](https://arxiv.org/pdf/1808.02923)
 
 [Hom, §3](https://arxiv.org/pdf/2107.09171)
 
@@ -58,7 +58,7 @@ $X_0(K_0)\cong X_0(K_1)$ implies that $K_0$ and $K_1$ are smoothly concordant.
 
 [F3] [[lem-lee-cobordism-filtration-genus-bound]] gives $|s(K_1)-s(K_0)|\le2g$ for an actual smoothly properly embedded oriented genus-$g$ cobordism with product collars.
 
-[F4] [[thm-piccirillo-conway-trace-partner-has-s-two]] proves under full AC that $X_0(C)\cong X_0(K_P)$ and $s(K_P)=2$, using the retained local framed construction with its explicit published terminal input and the direct rational Lee calculation.
+[F4] [[thm-piccirillo-conway-trace-partner-has-s-two]] proves under full AC that $X_0(C)\cong X_0(K_P)$ and $s(K_P)=2$, using the retained local framed witness, the explicitly imported published zero-trace equality for the named knots, and the direct rational Lee calculation.
 
 ## Counterexample
 

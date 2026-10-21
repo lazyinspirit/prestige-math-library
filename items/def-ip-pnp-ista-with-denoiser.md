@@ -42,7 +42,6 @@ The diagram depicts the data flow for one update; the displayed recurrence, not 
   \node at (7,0) (den) {$x_t=\widetilde D_\sigma(z_t)$};
   \draw[->] (old) -- (grad);
   \draw[->] (grad) -- (den);
-  \draw[->,rounded corners] (den.south) -- (7,-1) -- (0,-1) -- (old.south);
 \end{tikzpicture}
 ~~~
 

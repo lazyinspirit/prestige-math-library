@@ -23,7 +23,7 @@ sources:
   references:
     - title: "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, Appendix B.4"
       url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
-      locator: "Theorem B.4.1 and its bridge-presentation proof, printed pp.387–393"
+      locator: "Appendix B.4, Definition B.4.4, Proposition B.4.3, and Theorem B.4.1; bridge approximation and grid-move generation"
 ---
 
 ## Statement
@@ -51,13 +51,15 @@ Assume countable choice. Let $G_0,G_1$ be finite planar grid diagrams, with vert
 
 [F3] [[lem-planar-isotopy-preserves-grid-move-class]] connects arbitrary bridge rectifications of planar-isotopic bridge diagrams by finitely many permitted grid moves.
 
-[F4] [[lem-grid-reidemeister-moves-with-arbitrary-exterior]] supplies bridge representatives of the endpoints of any local Reidemeister move and connects arbitrary rectifications of any such bridge representatives, with arbitrary exterior and every oriented sign variant.
+[F4] [[lem-grid-reidemeister-moves-with-arbitrary-exterior]] connects arbitrary rectifications when bridge representatives of the endpoints of a local Reidemeister move have been supplied; it covers arbitrary exterior and every oriented sign variant.
+
+[F5] External input: Ozsvath, Stipsicz, and Szabo, *Grid Homology for Knots and Links*, Appendix B.4, Definition B.4.4, says every diagram can be approximated arbitrarily closely in $C^2$ by bridge diagrams; the proof of Proposition B.4.3 begins by isotoping the diagram to bridge position. For a regular diagram, choose this small planar isotopy so its finite transverse crossings and their decorations persist. I use this source only to supply bridge representatives; the local arbitrary-exterior move realization remains [F4]. I inspected Definition B.4.4 and the surrounding Proposition B.4.3 and Theorem B.4.1 discussion.
 
 ## Proof
 
 1.1 A knot grid is nonempty. Apply [F1] to each $G_i$, obtaining a finite grid-move sequence to a bridge-like grid $B_i$. Smooth $B_i$ as in that supplier to a bridge diagram $D_i$. Its crossing decorations and strand orientation agree with the original grid diagram, and the supplier proves planar isotopy after smoothing. Thus $D_0,D_1$ represent the same oriented knot. The three-mark splits and strict interval commutations in [F1] are among those specified here: the retained exterior row and column partners provide the two markings outside the stabilization block in the Statement. No unlisted shared-endpoint switch has been used. [F1, given, construct]
 
-2.1 By [F2] choose a finite sequence of planar isotopies and oriented Reidemeister moves from $D_0$ to $D_1$. Compose successive planar isotopies, and regard each remaining Reidemeister move as an edge between its two decorated planar-isotopy classes. The sequence now traverses finitely many such classes, with the first and last represented by $D_0,D_1$. If there is no Reidemeister edge, these two diagrams are planar isotopic. Otherwise each intermediate class is incident to a Reidemeister edge and has a bridge representative by [F4]. Choose one bridge representative for each occurrence of a class in this finite sequence, keeping $D_0,D_1$ at its ends, and choose a bridge rectification there. The choices are finite; no stronger choice principle is invoked. [F2, F4, step 1.1, construct]
+2.1 By [F2] choose a finite sequence of planar isotopies and oriented Reidemeister moves from $D_0$ to $D_1$. Compose successive planar isotopies, and regard each remaining Reidemeister move as an edge between its two decorated planar-isotopy classes. The sequence now traverses finitely many such classes, with the first and last represented by $D_0,D_1$. If there is no Reidemeister edge, these two diagrams are planar isotopic. Otherwise every intermediate representative is a regular diagram and has a bridge representative in its decorated planar-isotopy class by [F5]; choose the perturbation small enough that its crossings and decorations persist. Choose one bridge representative for each occurrence of a class in this finite sequence, keeping $D_0,D_1$ at its ends, and choose a bridge rectification there. The choices are finite; no stronger choice principle is invoked. [F2, F5, step 1.1, construct]
 
 3.1 Across a Reidemeister edge, the chosen bridge representatives need only be planar isotopic to that edge's original endpoint diagrams. This is exactly the relative-representative interface of [F4], so their chosen grid rectifications are joined by actual grid moves, with every exterior strand included. Across an interval with only planar isotopy, [F3] joins the chosen rectifications. This also treats the sequence with no Reidemeister edge. The endpoint rectifications may be taken to be precisely $B_0,B_1$, because both suppliers apply to arbitrary rectifications. Concatenating the finitely many constituent finite sequences gives a sequence of allowed commutations, stabilizations and destabilizations from $B_0$ to $B_1$. [F3, F4, step 2.1, construct, cases]
 

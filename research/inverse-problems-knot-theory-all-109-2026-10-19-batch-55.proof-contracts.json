@@ -95,7 +95,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Definition: Countable Choice is declared as the inherited SVD hypothesis; no full AC or DC is assumed."
+          "evidence": "Definition: finite real matrix SVD and pseudoinverse operations require no choice principle; the current SVD supplier has no Countable Choice hypothesis."
         },
         {
           "case": "iff-forward",
@@ -107,7 +107,12 @@
           "status": "not_applicable",
           "reason": "This item defines a procedure and states no if-and-only-if theorem."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Reviewed Definition steps 1\u20134, all six supplier interfaces and MIT Chapter 25 Theorem 25.3/Exercise 25.4. H0 and H1 are qp by qm; last index is 2q-1. Rank mismatch returns before the SVD, so impossible d is handled. Positive diagonal square roots give full-rank factors. Penrose inverses have shapes d by qp and qm by d, yielding d by d Ahat, d by m Bhat and p by d Chat. d=0 uses empty factors even for nonzero H1: success is a procedural outcome, not a consistency/recovery assertion for arbitrary data. Recovery is proved separately under exact-system hypotheses. q=1 is valid. Exact-operation model makes no bit-computability or stability claim; no AC use. Verified source-locator-only reader delta against git 66722d74a1 matching pre hash; accepted the precise locator. Corrected stale contract Countable Choice boundary metadata."
+      }
     },
     "thm-ip-finite-observability-identifies-initial-state": {
       "citations": [
@@ -314,7 +319,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Step 1.2 uses Countable Choice only through the finite SVD supplier; the kernel/rank argument in step 2.1 is choice-free."
+          "evidence": "The current finite-dimensional supplier statements require no Countable Choice; all constructions here use finite matrix operations or explicit induction, with no choice principle."
         },
         {
           "case": "iff-forward",
@@ -326,7 +331,12 @@
           "status": "checked",
           "evidence": "Step 2.1 proves rank O_q=d implies ker O_q={0} and hence injectivity."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read all five proof steps and twelve actual supplier statements and proof context. Induction gives the forced response with empty sum at k=0 and no input when q=1. Equality of output stacks is equivalent to kernel membership, and rank-nullity proves both iff directions, including d=0. For d>=1 full column rank gives d positive singular values; the right singular expansion yields the lower bound. Full-column formula implies O+O=I; the least-squares theorem applies to any z+e. Projection OO+ and Pythagoras give contraction; division uses strictly positive sigma_min. No bound is asserted at d=0 or rank deficiency. Finite-dimensional real hypotheses match all suppliers; no AC or diagram is involved. No defect found."
+      }
     },
     "thm-ip-state-similarity-preserves-input-output-data": {
       "citations": [
@@ -477,7 +487,7 @@
           "fact": "F5",
           "source": "alg-ip-exact-block-hankel-realization",
           "source_section": "Definition",
-          "quote": "Fix integers $d\\ge0$, $m,p\\ge1$, and $q\\ge1$. The input is a list of exact\nMarkov matrices\n$$M_0,\\ldots,M_{2q-1}\\in M_{p\\times m}(\\mathbb R).$$\nUse the exact-real linear-algebra model: an exact rank test returns the rank of\na finite real matrix; a thin rank-$d$ singular-value decomposition of a\nrank-$d$ matrix $H_0$ returns $H_0=U_d\\Sigma_dV_d^{\\mathsf T}$ with\n$\\Sigma_d$ diagonal and strictly positive, and an exact Moore--Penrose routine\nreturns a matrix satisfying the four Penrose equations. A routine failure or a\nreturned object that fails its stated exact identities is reported explicitly.\nThis specification makes no finite-bit computability or complexity claim for\narbitrary real inputs.\n\nForm the $q$-by-$q$ block Hankel matrices\n$$H_0=[M_{i+j}]_{0\\le i,j<q},\\qquad H_1=[M_{i+j+1}]_{0\\le i,j<q},$$\neach of shape $qp$ by $qm$. Execute the following steps.\n\n1. Apply the exact rank test to $H_0$. If it fails, return\n   `failed-solve`; if its value is not $d$, return `inconsistent-rank-data`.\n\n2. If $d=0$, use the empty factorization $H_0=\\widehat O\\widehat R$ with\n   $\\widehat O$ of shape $qp$ by $0$ and $\\widehat R$ of shape $0$ by $qm$.\n   If $d>0$, obtain the thin rank-$d$ SVD in the declared exact model and set\n   $$\\widehat O:=U_d\\Sigma_d^{1/2},\\qquad \\widehat R:=\\Sigma_d^{1/2}V_d^{\\mathsf T}.$$\n   Verify $H_0=\\widehat O\\widehat R$, $\\operatorname{rank}\\widehat O=d$,\n   and $\\operatorname{rank}\\widehat R=d$; if any operation or verification\n   fails, return `failed-solve`.\n\n3. Compute the exact Moore--Penrose inverses $\\widehat O^+$ and\n   $\\widehat R^+$ and verify their four Penrose equations. If a computation or\n   verification fails, return `failed-solve`.\n\n4. Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$. Return `success` with $(\\widehat A,\\widehat B,\\widehat C)$. For $d=0$,\n   these are the corresponding empty matrices.\n\nThe routine can report `failed-solve` for a failed or invalid exact-operation\nbackend. The existence theorems for finite-matrix SVDs and Moore--Penrose\ninverses ensure that the exact mathematical operations requested in steps 2–3\nexist; this definition alone asserts no noisy rank selection or stable\nparameter recovery.",
+          "quote": "Fix integers $d\\ge0$, $m,p\\ge1$, and $q\\ge1$. The input is a list of exact\nMarkov matrices\n$$M_0,\\ldots,M_{2q-1}\\in M_{p\\times m}(\\mathbb R).$$\nUse the exact-real linear-algebra model: an exact rank test returns the rank of\na finite real matrix; a thin rank-$d$ singular-value decomposition of a\nrank-$d$ matrix $H_0$ returns $H_0=U_d\\Sigma_dV_d^{\\mathsf T}$ with\n$\\Sigma_d$ diagonal and strictly positive, and an exact Moore--Penrose routine\nreturns a matrix satisfying the four Penrose equations. A routine failure or a\nreturned object that fails its stated exact identities is reported explicitly.\nThis specification makes no finite-bit computability or complexity claim for\narbitrary real inputs.\n\nForm the $q$-by-$q$ block Hankel matrices\n$$H_0=[M_{i+j}]_{0\\le i,j<q},\\qquad H_1=[M_{i+j+1}]_{0\\le i,j<q},$$\neach of shape $qp$ by $qm$. Execute the following steps.\n\n1. Apply the exact rank test to $H_0$. If it fails, return\n   `failed-solve`; if its value is not $d$, return `inconsistent-rank-data`.\n\n2. If $d=0$, use the empty factorization $H_0=\\widehat O\\widehat R$ with\n   $\\widehat O$ of shape $qp$ by $0$ and $\\widehat R$ of shape $0$ by $qm$.\n   If $d>0$, obtain the thin rank-$d$ SVD in the declared exact model and set\n   $$\\widehat O:=U_d\\Sigma_d^{1/2},\\qquad \\widehat R:=\\Sigma_d^{1/2}V_d^{\\mathsf T}.$$\n   Verify $H_0=\\widehat O\\widehat R$, $\\operatorname{rank}\\widehat O=d$,\n   and $\\operatorname{rank}\\widehat R=d$; if any operation or verification\n   fails, return `failed-solve`.\n\n3. Compute the exact Moore--Penrose inverses $\\widehat O^+$ and\n   $\\widehat R^+$ and verify their four Penrose equations. If a computation or\n   verification fails, return `failed-solve`.\n\n4. Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$. Return `success` with $(\\widehat A,\\widehat B,\\widehat C)$. For $d=0$,\n   these are the corresponding empty matrices.\n\nThe routine can report `failed-solve` for a failed or invalid exact-operation\nbackend. The existence theorems for finite-matrix SVDs and Moore--Penrose\ninverses ensure that the exact mathematical operations requested in steps 2\u20133\nexist; this definition alone asserts no noisy rank selection or stable\nparameter recovery.",
           "uses": [
             "1.1",
             "2.1",
@@ -653,7 +663,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Step 2.1 uses Countable Choice only for the finite SVD interface."
+          "evidence": "The current finite-dimensional supplier statements require no Countable Choice; all constructions here use finite matrix operations or explicit induction, with no choice principle."
         },
         {
           "case": "iff-forward",
@@ -665,7 +675,12 @@
           "status": "not_applicable",
           "reason": "The theorem is a sufficient exact-realization result under full-rank assumptions, not an if-and-only-if claim."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read all seven proof steps and ten actual dependencies, including the full state-similarity induction and its coordinate diagram. Full ranks make Rq onto and Oq injective, hence H0=OqRq has rank d and H1=Oq A Rq. Common image gives unique T with Ohat=Oq T; full column rank and rank-nullity make T invertible. Cancellation gives Rhat=T^-1 Rq. Penrose equations plus injectivity/surjectivity give Ohat+ Ohat=I and Rhat Rhat+=I without any reverse-order pseudoinverse assumption. Thus Ahat=T^-1 A T; first blocks give Bhat and Chat. d=0 gives all-zero Markov matrices and unique empty inverse I0. q=1 and successful-exact-backend hypothesis are retained; no perturbed-data stability claimed. Diagram paths both equal T^-1 A, independently supported by induction. MIT Theorem 25.3/Exercise 25.4 and Lall Theorem 8 support context, while this local proof covers the exact stated finite-horizon hypotheses. No mathematical defect or AC use."
+      }
     },
     "cex-ip-continuous-time-frequency-aliasing": {
       "citations": [
@@ -840,7 +855,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Step 2.1 invokes the theorem under its Countable Choice assumption; the coordinate calculation in step 1.1 uses no choice."
+          "evidence": "The current finite-dimensional supplier statements require no Countable Choice; all constructions here use finite matrix operations or explicit induction, with no choice principle."
         },
         {
           "case": "iff-forward",
@@ -852,7 +867,12 @@
           "status": "not_applicable",
           "reason": "The example illustrates nonidentifiability and states no if-and-only-if result."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read all three verification steps and both dependencies after finite-observability review. With diagonal A=(1,2), B=0 and C=[1,0], the difference e2 evolves as 2^k e2, killed by C at every sample. Oq has q copies of [1,0], rank exactly one since q>=1, including q=1. Distinct initial states give identical data, so a single data-only rule cannot recover both. No positivity, stability or controllability assumption is smuggled in. No mathematical defect, AC use or diagram."
+      }
     },
     "ex-ip-similar-state-space-realizations-same-data": {
       "citations": [
@@ -983,7 +1003,7 @@
           "fact": "F4",
           "source": "def-hilbert-space",
           "source_section": "Definition",
-          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
           "uses": [
             "1.2"
           ]
@@ -1015,22 +1035,32 @@
             "1.2",
             "3.1"
           ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point) and\ndifferentiable at every point of $I$ that is interior to $I$\n(Interior, closure, boundary and exterior of a subset of $\\mathbb{R}$, The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "1.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "solve-ode-endpoint-map",
-          "claim": "The function $z_\\theta(t)=\\theta t^2/2$ has $z_\\theta(0)=0$ and, by [F1], derivative $\\dot z_\\theta(t)=\\theta t$. It therefore gives the exact endpoint map $A(\\theta)=z_\\theta(1)=\\theta/2$. At $\\theta=1$ the exact observation is $1/2$.",
+          "claim": "The function $z_\\theta(t)=\\theta t^2/2$ has $z_\\theta(0)=0$ and, by [F1], derivative $\\dot z_\\theta(t)=\\theta t$. Any other solution is continuous on $[0,1]$ and has the same derivative on $(0,1)$, so [F8] makes its difference from $z_\\theta$ constant; the common initial value makes this constant zero. Thus the solution is unique and gives the exact endpoint map $A(\\theta)=z_\\theta(1)=\\theta/2$. At $\\theta=1$ the exact observation is $1/2$.",
           "step": "1.1",
           "inputs": [
             "given",
             "F1",
+            "F8",
             "algebra"
           ]
         },
         {
           "id": "verify-error-budget-hypotheses",
-          "claim": "By [F2]–[F4], $X=Y=\\mathbb R$ with the standard inner product is a real Hilbert space. The maps $A(\\theta)=\\theta/2$ and $A_h(\\theta)=0$ are linear and bounded by [F5], with bounds $1/2$ and $0$; their ranges have bases $(1)$ and the empty basis, respectively. Hence $A$ is compact by [F6], and $A_h$ has finite-dimensional range. The adjoints are multiplication by $1/2$ and $0$, since $\\langle A\\theta,y\\rangle=\\theta y/2=\\langle\\theta,y/2\\rangle$ and $\\langle A_h\\theta,y\\rangle=0$. For $\\lambda=1$, the shifted normal operators are multiplication by $5/4$ and $1$, so both are bijective. All hypotheses of [F7] are satisfied.",
+          "claim": "The stated datum $b=0$ belongs to $Y=\\mathbb R$. By [F2]\u2013[F4], $X=Y=\\mathbb R$ with the standard inner product is a real Hilbert space. The maps $A(\\theta)=\\theta/2$ and $A_h(\\theta)=0$ are linear and bounded by [F5], with bounds $1/2$ and $0$; their ranges have bases $(1)$ and the empty basis, respectively. Hence $A$ is compact by [F6], and $A_h$ has finite-dimensional range. The adjoints are multiplication by $1/2$ and $0$, since $\\langle A\\theta,y\\rangle=\\theta y/2=\\langle\\theta,y/2\\rangle$ and $\\langle A_h\\theta,y\\rangle=0$. For $\\lambda=1$, the shifted normal operators are multiplication by $5/4$ and $1$, so both are bijective. All hypotheses of [F7] are satisfied.",
           "step": "1.2",
           "inputs": [
             "given",
@@ -1109,7 +1139,12 @@
           "status": "not_applicable",
           "reason": "The example is a concrete error computation, not an if-and-only-if result."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read all four current verification steps, the seven original supplier interfaces including the complete batch-4 error-budget definition, and the added zero-derivative corollary proof. The candidate theta t^2/2 solves the IVP. Confirmed refuter:55:1 as nonfatal: uniqueness was implicit and follows immediately by zero derivative on the connected interval. Added exact F8 and explicit uniqueness using continuity on [0,1], equal interior derivatives and common initial value, without changing the Example. Verified scalar Hilbert completeness, bounded maps, explicit ordered range bases, compactness, adjoints, lambda=1 and shifted operators 5/4 and 1; b=0 is a valid datum and need not equal the truth datum in this definition. Euler yields zero, and d_h=(A-A_h)1=1/2 with e=delta=0. Reader datum repair is retained. No choice principle or diagram. Focused item/library search finds no logical consumer; sole page inventory use remains valid."
+      }
     },
     "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation": {
       "citations": [
@@ -1136,7 +1171,7 @@
           "fact": "F3",
           "source": "alg-ip-exact-block-hankel-realization",
           "source_section": "Definition",
-          "quote": "Fix integers $d\\ge0$, $m,p\\ge1$, and $q\\ge1$. The input is a list of exact\nMarkov matrices\n$$M_0,\\ldots,M_{2q-1}\\in M_{p\\times m}(\\mathbb R).$$\nUse the exact-real linear-algebra model: an exact rank test returns the rank of\na finite real matrix; a thin rank-$d$ singular-value decomposition of a\nrank-$d$ matrix $H_0$ returns $H_0=U_d\\Sigma_dV_d^{\\mathsf T}$ with\n$\\Sigma_d$ diagonal and strictly positive, and an exact Moore--Penrose routine\nreturns a matrix satisfying the four Penrose equations. A routine failure or a\nreturned object that fails its stated exact identities is reported explicitly.\nThis specification makes no finite-bit computability or complexity claim for\narbitrary real inputs.\n\nForm the $q$-by-$q$ block Hankel matrices\n$$H_0=[M_{i+j}]_{0\\le i,j<q},\\qquad H_1=[M_{i+j+1}]_{0\\le i,j<q},$$\neach of shape $qp$ by $qm$. Execute the following steps.\n\n1. Apply the exact rank test to $H_0$. If it fails, return\n   `failed-solve`; if its value is not $d$, return `inconsistent-rank-data`.\n\n2. If $d=0$, use the empty factorization $H_0=\\widehat O\\widehat R$ with\n   $\\widehat O$ of shape $qp$ by $0$ and $\\widehat R$ of shape $0$ by $qm$.\n   If $d>0$, obtain the thin rank-$d$ SVD in the declared exact model and set\n   $$\\widehat O:=U_d\\Sigma_d^{1/2},\\qquad \\widehat R:=\\Sigma_d^{1/2}V_d^{\\mathsf T}.$$\n   Verify $H_0=\\widehat O\\widehat R$, $\\operatorname{rank}\\widehat O=d$,\n   and $\\operatorname{rank}\\widehat R=d$; if any operation or verification\n   fails, return `failed-solve`.\n\n3. Compute the exact Moore--Penrose inverses $\\widehat O^+$ and\n   $\\widehat R^+$ and verify their four Penrose equations. If a computation or\n   verification fails, return `failed-solve`.\n\n4. Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$. Return `success` with $(\\widehat A,\\widehat B,\\widehat C)$. For $d=0$,\n   these are the corresponding empty matrices.\n\nThe routine can report `failed-solve` for a failed or invalid exact-operation\nbackend. The existence theorems for finite-matrix SVDs and Moore--Penrose\ninverses ensure that the exact mathematical operations requested in steps 2–3\nexist; this definition alone asserts no noisy rank selection or stable\nparameter recovery.",
+          "quote": "Fix integers $d\\ge0$, $m,p\\ge1$, and $q\\ge1$. The input is a list of exact\nMarkov matrices\n$$M_0,\\ldots,M_{2q-1}\\in M_{p\\times m}(\\mathbb R).$$\nUse the exact-real linear-algebra model: an exact rank test returns the rank of\na finite real matrix; a thin rank-$d$ singular-value decomposition of a\nrank-$d$ matrix $H_0$ returns $H_0=U_d\\Sigma_dV_d^{\\mathsf T}$ with\n$\\Sigma_d$ diagonal and strictly positive, and an exact Moore--Penrose routine\nreturns a matrix satisfying the four Penrose equations. A routine failure or a\nreturned object that fails its stated exact identities is reported explicitly.\nThis specification makes no finite-bit computability or complexity claim for\narbitrary real inputs.\n\nForm the $q$-by-$q$ block Hankel matrices\n$$H_0=[M_{i+j}]_{0\\le i,j<q},\\qquad H_1=[M_{i+j+1}]_{0\\le i,j<q},$$\neach of shape $qp$ by $qm$. Execute the following steps.\n\n1. Apply the exact rank test to $H_0$. If it fails, return\n   `failed-solve`; if its value is not $d$, return `inconsistent-rank-data`.\n\n2. If $d=0$, use the empty factorization $H_0=\\widehat O\\widehat R$ with\n   $\\widehat O$ of shape $qp$ by $0$ and $\\widehat R$ of shape $0$ by $qm$.\n   If $d>0$, obtain the thin rank-$d$ SVD in the declared exact model and set\n   $$\\widehat O:=U_d\\Sigma_d^{1/2},\\qquad \\widehat R:=\\Sigma_d^{1/2}V_d^{\\mathsf T}.$$\n   Verify $H_0=\\widehat O\\widehat R$, $\\operatorname{rank}\\widehat O=d$,\n   and $\\operatorname{rank}\\widehat R=d$; if any operation or verification\n   fails, return `failed-solve`.\n\n3. Compute the exact Moore--Penrose inverses $\\widehat O^+$ and\n   $\\widehat R^+$ and verify their four Penrose equations. If a computation or\n   verification fails, return `failed-solve`.\n\n4. Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$. Return `success` with $(\\widehat A,\\widehat B,\\widehat C)$. For $d=0$,\n   these are the corresponding empty matrices.\n\nThe routine can report `failed-solve` for a failed or invalid exact-operation\nbackend. The existence theorems for finite-matrix SVDs and Moore--Penrose\ninverses ensure that the exact mathematical operations requested in steps 2\u20133\nexist; this definition alone asserts no noisy rank selection or stable\nparameter recovery.",
           "uses": [
             "1.1",
             "1.2"
@@ -1222,7 +1257,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Steps 1.1 and 1.2 use the exact theorem with its Countable Choice hypothesis."
+          "evidence": "Steps 1.1 and 1.2 apply the current exact recovery theorem to finite scalar matrices and need no choice principle."
         },
         {
           "case": "iff-forward",
@@ -1234,7 +1269,12 @@
           "status": "not_applicable",
           "reason": "The example is a sensitivity witness, not an if-and-only-if result."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read all three verification steps and all four actual prerequisites, after algorithm and recovery review. For q=d=m=p=1 and epsilon>0, O1=[1] and R1=[epsilon] have rank one in both systems. H0 is epsilon and its singular value is sqrt(epsilon^2)=epsilon. Original H1=0 yields zero transition; perturbed H1=sqrt(epsilon) is exactly C A B for A=1/sqrt(epsilon), B=epsilon, C=1. Successful exact calls therefore satisfy the recovery theorem. All one-dimensional changes of coordinates leave scalar A invariant, so SVD sign choices do not affect this conclusion. At epsilon=1 formulas remain defined; epsilon=0 is excluded and no rank-change claim is made. epsilon_n=1/n^2 gives perturbation 1/n and transition change n. Unbounded sensitivity near rank zero is exactly the claim, with no uniform stability or noisy rank guarantee. No choice principle or diagram; no defect."
+      }
     }
   }
 }

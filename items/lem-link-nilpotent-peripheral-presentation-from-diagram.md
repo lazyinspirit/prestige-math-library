@@ -64,6 +64,8 @@ The words can be chosen coherently through each finite degree. They are obtained
 
 ## Proof
 
+**Given:** Full AC, the finite based link diagram, its initial meridian arcs, and $q\ge2$.
+
 1.1 Cut the traversal of component $i$ just before its initial arc. For every other arc $a$ of that component let $v_a$ be the signed product of over-arc symbols encountered before $a$; for the initial arc set $v_a=1$. The nonclosing relations in [F1] successively say $a=v_a^{-1}x_iv_a$. The final relation on that component is $x_i=W_i^{-1}x_iW_i$, with $W_i$ the full traversal product. This rewriting follows by induction along the traversal and does not treat an over-arc as an already eliminated free generator. [A1, F1, given, construct]
 
 2.1 Define words in $F$ simultaneously by $P_a^{(1)}=x_i$ and $P_a^{(s+1)}=v_a(P^{(s)})^{-1}x_iv_a(P^{(s)})$, retaining $P_a^{(s)}=x_i$ at each initial arc. Substitution in a finite word preserves congruence modulo a normal subgroup. If the substituends change modulo $\Gamma_s$, the conjugate of a weight-one generator changes only modulo $\Gamma_{s+1}$, because $[F,\Gamma_s]\subseteq\Gamma_{s+1}$ by [F3]. Consequently $P_a^{(s+1)}\equiv P_a^{(s)}\pmod{\Gamma_{s+1}F}$: the case $s=1$ is equality in the abelianization, and this observation proves the induction. In $G$, the true arc meridian equals $P_a^{(s)}$ modulo $\Gamma_{s+1}G$, by the same induction starting from conjugate meridians in the abelianization. [F1, F3, F4, step 1.1, induction, construct]

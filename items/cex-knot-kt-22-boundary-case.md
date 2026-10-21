@@ -32,7 +32,7 @@ sources:
 
 ## Statement refuted
 
-Assume full AC. The false claim is: every positive-rank integral Seifert lattice with unimodular alternating part is metabolic. The right-handed trefoil's positive-push Seifert lattice has $V=\begin{pmatrix}-1&0\\-1&-1\end{pmatrix}$ and $V-V^T=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$. Its invertible matrix gives the rational isometric structure with $B=V+V^T=\begin{pmatrix}-2&-1\\-1&-2\end{pmatrix}$, which is negative definite; the rational extension of $V$ has no isotropic line, so the rational-to-integral saturation lemma has no input. No rank-one integral subgroup has zero Seifert self-pairing, so the lattice is not metabolic.
+Assume full AC. The false claim is: every positive-rank integral Seifert lattice with unimodular alternating part is metabolic.
 
 ## Statement references
 
@@ -58,7 +58,9 @@ Assume full AC. The false claim is: every positive-rank integral Seifert lattice
 
 [F4] A rational isotropic line for an integral bilinear form saturates to a rank-one integral direct summand with zero restriction. [[lem-rational-isotropic-subspace-saturates-to-integral-metabolizer]]
 
-## Proof
+## Counterexample
+
+The right-handed trefoil's positive-push Seifert lattice has $V=\begin{pmatrix}-1&0\\-1&-1\end{pmatrix}$ and $V-V^T=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$. Its symmetric form $B=V+V^T=\begin{pmatrix}-2&-1\\-1&-2\end{pmatrix}$ is negative definite, so the lattice is not metabolic, as the calculation below proves.
 
 1.1 From [F1], $V-V^T=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$ has determinant $1$, so this is a positive-rank integral Seifert lattice satisfying the false claim's hypothesis. [A1, F1, given, algebra]
 

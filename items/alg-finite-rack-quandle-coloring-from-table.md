@@ -25,13 +25,16 @@ dependency_level: 2
 
 ## Definition
 
-Input an integer $m\ge1$, a table $T\in\{1,\ldots,m\}^{m\times m}$ with
-entry $T[x,y]$ intended to be $x*y$, a mode "rack" or "quandle", a finite
-regular oriented link diagram $D$ with $a$ arcs and $c$ crossings, and fixed
-finite orderings of its arcs and crossings. If the table is not $m\times m$,
-return invalid-table-shape with its row lengths. If an entry is outside
-$\{1,\ldots,m\}$, return invalid-table-entry with its row, column, and value.
-Otherwise perform these checks in order:
+Input an integer $m\ge1$, a candidate table $T$ represented by a finite list of
+finite lists of integers, with each entry intended to be $x*y$ on
+$\{1,\ldots,m\}$, a mode "rack" or "quandle", a finite regular oriented link
+diagram $D$ with $a$ arcs and $c$ crossings, and fixed finite orderings of its
+arcs and crossings. Read the row count and every row length. If $T$ does not
+have exactly $m$ rows of length $m$, return invalid-table-shape with its row
+count and vector of row lengths. Otherwise scan entries in row-major order; if
+an entry is outside $\{1,\ldots,m\}$, return invalid-table-entry with the first
+such row, column, and value. If the table format passes, perform these checks
+in order:
 
 1. For each $y=1,\ldots,m$, check whether the column
    $(T[1,y],\ldots,T[m,y])$ is a permutation of $\{1,\ldots,m\}$. If not,
