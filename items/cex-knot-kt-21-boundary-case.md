@@ -70,17 +70,17 @@ Every abstract oriented cobordism between two oriented knot circles in the stand
 
 [A2] Full Axiom of Choice implies the countable-choice hypothesis used by [F6]. ([[thm-choice-implies-dependent-implies-countable-choice]])
 
-[F7] For a smooth slice disk, the smooth branch of [[lem-slice-disk-induces-seifert-metabolizer]] constructs a metabolizer for every specified smooth Seifert surface using the actual hypersurface and positive product supplied by [[lem-locally-flat-slice-surface-bounds-seifert-hypersurface]]. The separate TOP branch of the slice-to-metabolizer lemma is not used here. This direct finite-form obstruction needs neither surface-choice invariance nor a general signature-vanishing theorem.
+[F7] Every locally flat slice disk, including every smooth slice disk, induces a metabolizer for the positive-push Seifert form of each specified smooth Seifert surface. The proof uses a locally flat hypersurface and smooth chains only in disjoint smooth ambient neighborhoods; it requires no smoothing of that hypersurface. [[lem-slice-disk-induces-seifert-metabolizer]], [[lem-locally-flat-slice-surface-bounds-seifert-hypersurface]]
 
 ## Counterexample
 
-**Proof technique:** direct finite-form obstruction using the proved smooth slice-to-metabolizer branch.
+**Proof technique:** direct finite-form obstruction using the slice-to-metabolizer lemma.
 
 1.1 Let $C_0$ be the oriented circle underlying $U$ and $C_1$ the oriented circle underlying $T$. Take the abstract annulus $S^1\times[0,1]$ and identify its lower and upper boundary circles orientation-preservingly with $C_0$ and $C_1$, orienting the annulus so its boundary is $-C_0\sqcup C_1$. By [F1] this is an abstract oriented cobordism from $U$ to $T$. [F1, given, construct]
 
 1.2 For the fixed trefoil matrix in [F3], $$V+V^T=\begin{pmatrix}-2&1\\1&-2\end{pmatrix}.$$ Its characteristic polynomial is $\lambda^2+4\lambda+3=(\lambda+1)(\lambda+3)$, so its eigenvalues are $-1,-3$ and its signature is $-2$. More directly, for $x=(a,b)\ne0$ over $\mathbb Q$ or $\mathbb R$, $$x^T(V+V^T)x=-2(a^2-ab+b^2)=-(a-b)^2-a^2-b^2<0.$$ Consequently $V$ cannot have a rank-one metabolizer: a nonzero vector in one would have zero value by [F5]. This is a calculation for the displayed Seifert surface and basis; no knot-level signature invariance is being inferred. The unknot's rank-zero form in [F4] still has signature zero. [F2, F3, F4, F5, A1, algebra]
 
-2.1 If $U$ were smoothly concordant to $T$, reverse the interval coordinate to obtain smooth concordance of $T$ to the unknot. By [F6] and [A2], $T$ would bound a smooth proper disk. Apply the proved smooth branch [F7] to the particular trefoil Seifert surface in [F3]. It gives a rank-one metabolizer for $V$, contradicting the strict negative-definiteness calculation and [F5] in step 1.2. Thus the displayed abstract oriented annulus has no realization as a smooth concordance between its specified endpoint knots, refuting the claimed universal realization. No locally flat TOP slice-to-metabolizer assertion is used. [A2, F3, F5, F6, F7, step 1.1, step 1.2] ∎
+2.1 If $U$ were smoothly concordant to $T$, reverse the interval coordinate to obtain smooth concordance of $T$ to the unknot. By [F6] and [A2], $T$ would bound a smooth proper disk. Apply [F7] to the particular trefoil Seifert surface in [F3]. It gives a rank-one metabolizer for $V$, contradicting the strict negative-definiteness calculation and [F5] in step 1.2. Thus the displayed abstract oriented annulus has no realization as a smooth concordance between its specified endpoint knots, refuting the claimed universal realization. The locally flat slice-to-metabolizer lemma applies because every smooth proper disk is locally flat. [A2, F3, F5, F6, F7, step 1.1, step 1.2] ∎
 
 ## Sources
 

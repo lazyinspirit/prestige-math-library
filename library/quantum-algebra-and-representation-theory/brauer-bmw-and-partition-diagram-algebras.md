@@ -44,17 +44,17 @@ Companion: [[brauer-bmw-and-partition-diagram-algebras-examples]]. The first pic
 \end{tikzpicture}
 ```
 
-For the BMW crossing convention, the left input passes over the right input in the first sketch. The uninterrupted strand is the overstrand; the white gap marks the understrand. The inverse generator has these same endpoints with the over/under choices reversed. This is a convention picture; the items supply the complete skein, untwisting, and basis arguments without relying on the sketches.
+For the BMW crossing convention, inputs are at the top and the right input passes over the left input in the $g_i$ sketch, as in the $G_i$ diagram of Goodman–Hauschild, PDF p. 6. The uninterrupted strand is the overstrand; the gap marks the understrand. The inverse generator has the same endpoints with the over/under choices reversed. With $z_B=q-q^{-1}$, the parameter substitution is $z_{GH}=-z_B$ and $\lambda=\rho$, so their relation $G_i-G_i^{-1}=z_{GH}(E_i-1)$ is $G_i-G_i^{-1}=z_B(1-E_i)$. The items supply the skein, untwisting, and basis arguments without relying on the sketch.
 
 ```tikz
 \begin{tikzpicture}[baseline=-0.4ex]
   \node[above] at (0,1) {$i$};
   \node[above] at (1,1) {$i+1$};
-  \node[below] at (0,0) {$(i+1)'$};
-  \node[below] at (1,0) {$i'$};
-  \draw (1,1) -- (0.56,0.56);
-  \draw (0.44,0.44) -- (0,0);
-  \draw (0,1) -- (1,0);
+  \node[below] at (0,0) {$i'$};
+  \node[below] at (1,0) {$(i+1)'$};
+  \draw (0,1) -- (0.44,0.56);
+  \draw (0.56,0.44) -- (1,0);
+  \draw (1,1) -- (0,0);
   \node at (1.38,0.5) {$g_i$};
 \end{tikzpicture}
 ```
