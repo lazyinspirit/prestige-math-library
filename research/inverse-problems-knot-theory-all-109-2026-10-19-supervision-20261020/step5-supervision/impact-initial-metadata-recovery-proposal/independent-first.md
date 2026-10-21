@@ -1,0 +1,9 @@
+PASS for the frozen historical metadata extension. No concrete blocker remains.
+
+Independent rerun: **50/50** tests passed (22 focused recovery tests and 28 existing withdrawal regressions), plus **3/3** independently added probes for original-report tampering, a forged native model and substituting the current hash for an original pin. Whitespace checks passed. The actual read-only preview passed with six carriers and fifteen deltas in 0.323 seconds.
+
+All six recovered raw preimages match unit 1’s original supporting hashes exactly. Their current snapshots equal the six live carriers. The fifteen changed leaves belong to nine unit 3 contracts, whose source guards match the original native reports; their quotes or claim agree with the current supplier sections or proof step. All 128 unit 1 post guards also match current sources. All thirty captured actual provenance paths remained unchanged during review.
+
+The implementation authenticates actual original native execution, prompt, final report reference, session identity and logged metadata write. Unit 3 originally declared two supporting pins; no six successor pins are invented. The current snapshots are explicitly owner-captured evidence. Whole-object substitution restricts changes to the exact fifteen fields. The resolver supplies exact historical bytes without granting current proof, context, execution or certification credit. Version 1 remains restricted, and version 2 retains operational evidence requirements.
+
+No actual receipt or canonical/runtime change was made. This review checks metadata provenance and code integrity, not mathematical acceptance of all affected proofs. Unit 3 completion code and real collection/certification/gates are outside this review. The JSON companion pins the three owned files, unchanged caller, actual payload and thirty actual provenance artifacts.

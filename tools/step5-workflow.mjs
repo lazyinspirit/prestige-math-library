@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {loadSuccessorUncertaintyContinuation,successorSchedulingView} from './step5-successor-uncertainty-continuation.mjs';
+import {loadUnit3NeedleCompletion,completedNeedleReport,completedNeedleReportView,NEEDLE_ID,NEEDLE_LABEL} from './step5-unit3-needle-completion.mjs';
 // Round-based Step 5. Mathematical workers write evidence; only the controller
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
 import { sol61Effort } from './math-workflow-effort.mjs';
@@ -1379,7 +1380,8 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
   const pack=readPack(root,run,phase,round);
-  const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const needleCompletion=phase==='impact-initial'&&round===1?loadUnit3NeedleCompletion(root,run):null;
+  const reports=pack.units.map(unit=>completedNeedleReportView(needleCompletion,pack,read(workerReport(root,run,phase,round,unit)),{current:true}));
   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
   const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):phase==='repeat'?loadRepeatMetadataHistory(root,run,round,{current:true}):null;
   const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
@@ -1406,8 +1408,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+  if(needleCompletion)Object.assign(evidence,completedNeedleReport(needleCompletion,{current:true}).evidence);
   Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{});
   for(const [p,h]of Object.entries(withdrawal?.evidence??{})){requireValue(!evidence[p]||evidence[p]===h,'withdrawal evidence collision');evidence[p]=h;}
+  if(needleCompletion)Object.assign(evidence,frozenSupportingEvidence(root,run,completedNeedleReport(needleCompletion).report.supporting_evidence??{}));
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   const currentSlot=reclassification??loadOriginalSlotReclassification(root,run);
@@ -1477,6 +1481,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     receipt.historical_original_slot_changes=receipt.changed.filter(id=>id===original_id);
     receipt.changed=[...new Set(receipt.changed.map(id=>id===original_id?current_id:id))];
   }
+  if(needleCompletion)receipt.unit3_needle_completion={path:needleCompletion.path,supplier:needleCompletion.row.supplier,original_report_unchanged:true,consumer_pending:[...needleCompletion.consumers]};
   if(withdrawal){
     receipt.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets],review_credit_granted:false,repair_acceptance_granted:false};
     receipt.withdrawn_native_reviews=withdrawal.row.original_reviews;
@@ -1641,6 +1646,7 @@ function historicalCreatedEvent(root,run,pack,receipt,unit,review,event,withdraw
 function readerReviewOwnership(root,run,packs,receipts,items,current) {
   const obligations=new Map(),originalOwners={},events=[],records=[],contexts=reviewContexts(items),evidence={};
   const withdrawal=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadOwnerReviewWithdrawal(root,run):null;
+  const needleCompletion=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadUnit3NeedleCompletion(root,run):null;
   const createdIds=collectedCreationIds(root,run,receipts);
   const frontier=new Set([...packs.flatMap(pack=>pack.frontier_ids??[]),...createdIds]);
   const add=(id,unit)=>{
@@ -1659,6 +1665,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
     }
   }
   if(withdrawal)for(const id of withdrawal.row.targets){requireValue(!originalOwners[id]||originalOwners[id]==='1','withdrawn original reviewer changed');originalOwners[id]='1';add(id,'1');}
+  if(needleCompletion){add(NEEDLE_ID,'3');for(const id of needleCompletion.consumers)add(id,'3');}
   if(!obligations.size)return {originalOwners,obligations,pending:new Map(),coverage:[],evidence};
   const originCache=new Map();
   const origin=unit=>{
@@ -1681,7 +1688,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
       requireValue(Array.isArray(units)&&units.length>0,`invalid reader review obligations: ${id}`);
       for(const unit of units)add(id,unit);
     }
-    const nativeReports=new Map(pack.units.map(unit=>[unit,read(workerReport(root,run,pack.phase,pack.round,unit))]));
+    const nativeReports=new Map(pack.units.map(unit=>[unit,completedNeedleReportView(needleCompletion,pack,read(workerReport(root,run,pack.phase,pack.round,unit)))]));
     for(const event of receipt.statement_events??[]){
       if(event.before_statement_sha256===event.after_statement_sha256)continue;
       const createdBy=unit=>createdIds.has(event.id)&&!Object.hasOwn(pack.before,event.id)
@@ -1702,7 +1709,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
     for(const unit of pack.units){
       const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=nativeReports.get(unit);
       const dispatchPath=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
-      if(!withdrawnOwnerReport(withdrawal,pack,unit,receipt))for(const review of report.reviews??[])records.push({id:review.id,unit,review,pack,receipt,reportPath,dispatchPath});
+      if(!withdrawnOwnerReport(withdrawal,pack,unit,receipt))for(const review of report.reviews??[]){if(needleCompletion&&pack.phase==='impact-initial'&&unit==='3'&&review.id===NEEDLE_ID){const done=completedNeedleReport(needleCompletion);for(const [p,h]of Object.entries(done.evidence)){requireValue(receipt.evidence[p]===h,'needle owner evidence not collected');evidence[p]=h;}records.push({id:review.id,unit,review,pack,receipt,reportPath:done.reportPath,dispatchPath:done.dispatchPath,needle_completion:true});}else records.push({id:review.id,unit,review,pack,receipt,reportPath,dispatchPath});}
     }
   }
   // Only actual interface changes propagate. If an already affected consumer
@@ -1726,6 +1733,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
       // aggregate receipts cannot relabel another lane's review as this one's.
       let match=null;
       for(const record of records.filter(row=>row.id===id&&row.unit===unit)){
+        if(needleCompletion&&needleCompletion.consumers.includes(id)&&record.pack.phase==='impact-initial')continue;
         const claimed=(record.pack.reader_review_owners??record.pack.reader_concern_owners)?.[id]===unit;
         const currentReview=contexts.matches(record.review,current,record.receipt.post);
         if(!claimed&&!currentReview)continue;
@@ -1735,7 +1743,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
           `reader review is not bound to its original collected native evidence: ${id}/${unit}`);
         const dispatch=read(record.dispatchPath);
         const sameReviewer=dispatch.run===run&&dispatch.role==='alpha-repair'
-          &&dispatch.label===workerLabel(record.pack.phase,record.pack.round,unit)
+          &&dispatch.label===(record.needle_completion?NEEDLE_LABEL:workerLabel(record.pack.phase,record.pack.round,unit))
           &&dispatch.ok===true&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run)
           &&typeof dispatch.session_home==='string'
           &&resolve(root,dispatch.session_home)===resolve(root,auth.result.session_home)
@@ -1768,9 +1776,10 @@ const readerObligationInventory=ownership=>Object.fromEntries([...ownership.obli
 // old initial source review still matches an unchanged Statement/Definition.
 function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=null,recoveryDuties=null) {
   const withdrawal=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadOwnerReviewWithdrawal(root,run):null;
+  const needleCompletion=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadUnit3NeedleCompletion(root,run):null;
   const contexts=reviewContexts(items),frontier=gateFrontier(root,run),claims=[],records=[],evidence={};
   const bound=(receipt,path)=>receipt.evidence?.[path]===digest(readFileSync(path,'utf8'));
-  const success=record=>{
+  const success=(record,{needle=false}={})=>{
     const {pack,receipt,unit,report,reportPath}=record;
     const label=workerLabel(pack.phase,pack.round,unit);
     const dispatchPath=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`);
@@ -1797,12 +1806,13 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
     requireValue(readFileSync(attemptPath,'utf8')===readFileSync(dispatchPath,'utf8'),
       'native pending work immutable attempt differs from original collected result');
     for(const path of [reportPath,dispatchPath,attemptPath])evidence[path]=digest(readFileSync(path,'utf8'));
+    if(needle&&needleCompletion&&pack.phase==='impact-initial'&&unit==='3'){const done=completedNeedleReport(needleCompletion);for(const [p,h]of Object.entries(done.evidence)){requireValue(receipt.evidence?.[p]===h,'needle completion missing exact collected evidence');evidence[p]=h;}return {dispatchPath:done.dispatchPath,attemptPath:done.attemptPath,native:done.native,reportPath:done.reportPath};}
     return {dispatchPath,attemptPath,native};
   };
   for(let index=0;index<packs.length;index++){
     const pack=packs[index],receipt=receipts[index];
     for(const unit of pack.units){
-      const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=read(reportPath);
+      const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=completedNeedleReportView(needleCompletion,pack,read(reportPath));
       const record={pack,receipt,unit,report,reportPath,index};records.push(record);
       // Separate derived duty: an actual native interface repair owns its
       // reported direct consumer. This is not a fabricated downstream_pending
@@ -1847,10 +1857,12 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
           &&report.downstream.includes(id)&&receipt.downstream?.includes(id)),
         'native downstream_pending must be unique actual downstream frontier IDs');
       if(!report.downstream_pending.length)continue;
-      const auth=success(record);
-      for(const id of report.downstream_pending)claims.push({id,unit,phase:pack.phase,index,
-        report:reportPath,dispatch:auth.dispatchPath,attempt:auth.attemptPath,
-        affected_use:typeof report.downstream_uses?.[id]==='string'?report.downstream_uses[id]:null});
+      for(const id of report.downstream_pending){
+        const needle=Boolean(needleCompletion&&pack.phase==='impact-initial'&&unit==='3'&&needleCompletion.consumers.includes(id)),auth=success(record,{needle});
+        claims.push({id,unit,phase:pack.phase,index,...(needle?{kind:'needle-interface-consumer'}:{}),
+          report:auth.reportPath??reportPath,dispatch:auth.dispatchPath,attempt:auth.attemptPath,
+          affected_use:typeof report.downstream_uses?.[id]==='string'?report.downstream_uses[id]:null});
+      }
     }
   }
   const pending=new Map(),coverage=[],sessions={};
@@ -1872,14 +1884,16 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
       requireValue(record.receipt.reviews.some(row=>digest(row)===digest(review)),
         'pending consumer review is absent from its original native collection');
       const auth=success(record);
-      const claim=claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0],base=packs[0].basePhase??packs[0].phase;
+      const needleClaim=claims.find(row=>row.id===id&&row.kind==='needle-interface-consumer');
+      if(needleClaim&&(record.pack.phase==='impact-initial'||record.unit!=='3'||auth.native.session_id!==needleCompletion.row.original_session_id||resolve(root,auth.native.session_home??'')!==needleCompletion.home))continue;
+      const claim=claims.find(row=>row.id===id&&row.kind==='needle-interface-consumer')??claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0],base=packs[0].basePhase??packs[0].phase;
       if(['impact-repeat','gate'].includes(base)||recovery&&claim.index>0){const origin=reportingSessionBinding(root,run,base,packs[0].round,claim.unit,claim.dispatch);if(record.unit!==claim.unit||auth.native.session_id!==origin.session_id||resolve(root,auth.native.session_home??'')!==origin.session_home)continue;}
       match={id,phase:record.pack.phase,unit:record.unit,
         report:record.reportPath,dispatch:auth.dispatchPath,review_sha256:digest(review)};
     }
     if(match)coverage.push(match);
     else {
-      const claim=claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0];
+      const claim=claims.find(row=>row.id===id&&row.kind==='needle-interface-consumer')??claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0];
       pending.set(id,claim.unit);
       // Selecting a lane must resume the actual reporting reviewer, not a
       // coincidentally numbered fresh process. Existing session routing is reused.

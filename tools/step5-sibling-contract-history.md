@@ -75,3 +75,60 @@ native metadata survive closeout. Only the genuine sealed historical path uses
 those archived source and contract snapshots without asserting they remain the
 current versions; ordinary current certification and gate checks retain their
 roles. Missing operational proof before the first genuine seal still rejects.
+
+## Exact recovered first-impact preimages (version 2)
+
+The opt-in `exact-first-impact-six-recovered-preimages` mode is limited to
+`inverse-problems-knot-theory-all-109-2026-10-19`, its first `impact-initial`
+round, original unit 1 and sibling unit 3, and six proof-contract carriers:
+batches 45, 48, 73, 75, 91 and 99. The original unit-1 report declares each old
+raw SHA256. Exact recovered raw bytes can satisfy that declaration even when
+recovery used finite contract-row reconstruction; this is not described as an
+original physical snapshot. The six actual changes comprise fifteen fixed
+leaves across nine unit-3-owned contracts: citation quotations, one citation's
+source/section, and one proof-step claim. Whole-object substitution rejects
+all other changes.
+
+This mode preserves historical supporting bytes. It does not repair or accept
+sources, metadata or proofs, issue reviews, or waive current review contexts,
+proof-contract checks, certification or gates. The actual original unit-3
+report has only two supporting pins; this mode expressly does not invent six
+successor native supporting hashes. After snapshots are captured by the owner
+at recording, with that attribution. Actual native write output, disjoint
+assignments, original source review guards and exact current supplier sections
+and proof-step claims establish the bounded metadata transition. Source and
+supplier copies are immutable evidence of that event; later source changes
+still owe ordinary current review and certification.
+
+Root supplies only:
+
+```js
+{
+  version: 2,
+  mode: 'exact-first-impact-six-recovered-preimages',
+  reason: 'Specific historical-only explanation of at least eighty characters.',
+  carriers: [
+    {path: 'research/RUN-batch-45.proof-contracts.json',
+     archive: 'research/exact-before.json',
+     current_archive: 'research/actual-after.json'},
+    // Exactly the other five licensed carriers.
+  ]
+}
+```
+
+`previewRecoveredSiblingContractHistory(root, run, payload)` validates without
+writing. `recordSiblingContractHistory(root, run, payload)` recognizes version
+2 and records the existing immutable receipt path. It captures the actual
+manually paused, drained `5.2-impact` state; it neither requires nor creates a
+fictional `5.2` battery request. Recording must precede collection and the
+second owner pass. Native pack, complete unit-1 assignment, retained incomplete
+unit-3 assignment, unchanged detailed reports, stable/immutable attempt results,
+actual prompt, final report reference, session ID/home and log write evidence
+are bound. Original operational prompt/log files remain required by this exact
+mode; it does not use version 1's sealed operational-file omission.
+
+The existing historical resolver returns the six exact old archives and
+receipt bindings. The ordinary collector freezes the real old bytes into its
+content-addressed supporting-metadata store. Neither the original reports nor
+their declared hashes are rewritten. The version-1 metadata-only risk/boundary
+mode retains its existing restrictions.

@@ -4,6 +4,7 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import {loadUnit3NeedleCompletion,needleCompletionPlan,unit3NeedleReportPath,NEEDLE_UNIT,NEEDLE_LABEL} from '../../step5-unit3-needle-completion.mjs';
 
 // The battery adapter is also composed into live stage closures. Version its
 // import so a stage reload cannot retain descriptors from before an adapter edit.
@@ -27,26 +28,27 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
   const pattern=(phase:string,id:string)=>(ctx:any)=>new RegExp(`^(?:alpha-adjudicate|alpha-repair|tool)-step5-v2-${phase}(?:-pass-[0-9]+)?-r${round(ctx,id)}-(?:u[^.]+|all)\\.result\\.json$`);
   const report=(ctx:any,phase:string,n:number,unit:string)=>workerReport(ctx.repo,ctx.run,phase,n,unit);
   const decode=(phase:string,u:string)=>u.includes(':')?u.split(':'):[phase,u];
-  const ownerUnits=(ctx:any,phase:string,id:string)=>impactWork(ctx.repo,ctx.run,phase,round(ctx,id))
-    .flatMap((work:any)=>['1','2','3'].map(u=>work.kind==='maintenance'?`maintenance:${work.id}:${u}`:work.phase===phase?u:`${work.phase}:${u}`));
+  const ownerUnits=(ctx:any,phase:string,id:string)=>[...impactWork(ctx.repo,ctx.run,phase,round(ctx,id))
+    .flatMap((work:any)=>['1','2','3'].map(u=>work.kind==='maintenance'?`maintenance:${work.id}:${u}`:work.phase===phase?u:`${work.phase}:${u}`)),
+    ...(phase==='impact-initial'&&round(ctx,id)===1&&loadUnit3NeedleCompletion(ctx.repo,ctx.run)?[NEEDLE_UNIT]:[])];
   const outsideLane=(ctx:any,u:string)=>{const [,pack,lane]=u.split(':');return maintenancePack(ctx.repo,ctx.run,pack).lanes.find((row:any)=>String(row.lane)===lane);};
   const workerStage=(id:string,phase:string,adjudication:boolean):any=>({
     id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
     modelProfile:SOL61_HIGH,
     units:(ctx:any)=>adjudication ? (existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
       ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1']) : ownerUnits(ctx,phase,id),
-    pattern:(ctx:any)=>adjudication?new RegExp(`(?:${pattern(phase,id)(ctx).source})|^tool-step5-v2-empty-${phase}-r${round(ctx,id)}-u[^.]+\\.result\\.json$`):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$`),concurrency:adjudication?24:3,
+    pattern:(ctx:any)=>adjudication?new RegExp(`(?:${pattern(phase,id)(ctx).source})|^tool-step5-v2-empty-${phase}-r${round(ctx,id)}-u[^.]+\\.result\\.json$`):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$${phase==='impact-initial'&&round(ctx,id)===1&&loadUnit3NeedleCompletion(ctx.repo,ctx.run)?`|^alpha-repair-${NEEDLE_LABEL}\\.result\\.json$`:''}`),concurrency:adjudication?24:3,
     // Sibling owners run concurrently. Shared metadata edits use a short
     // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
-      unitPrerequisites:(ctx:any,u:string)=>{const units=ownerUnits(ctx,phase,id),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
+      unitPrerequisites:(ctx:any,u:string)=>{if(u===NEEDLE_UNIT)return ['1','2','3'];const units=ownerUnits(ctx,phase,id).filter(v=>v!==NEEDLE_UNIT),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
       onProgress:({ctx,executor,stage}:any)=>{
         if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
         const complete=executor.unitsComplete(stage,ctx);
         if(ownerUnits(ctx,phase,id).every((u:string)=>complete.has(u)))advanceImpact(ctx.repo,ctx.run,phase,round(ctx,id));
       },
     }:{}),
-    artifacts:(ctx:any,u:string)=>{if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
+    artifacts:(ctx:any,u:string)=>{if(u===NEEDLE_UNIT)return relative(ctx.repo,unit3NeedleReportPath(ctx.repo,ctx.run));if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
     plan:(ctx:any,pending:string[])=>{
       const n=round(ctx,id);
       let adjudicationPack:any;
@@ -57,6 +59,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
         if(!ctx.doctor)prepareImpact(ctx.repo,ctx.run,phase,n,{failures});
       }
       return pending.map(u=>{
+        if(u===NEEDLE_UNIT){if(phase!=='impact-initial'||n!==1)throw Error('needle completion outside exact stage');return needleCompletionPlan(loadUnit3NeedleCompletion(ctx.repo,ctx.run,{current:true}));}
         if(u.startsWith('maintenance:')){
           const [,pack,lane]=u.split(':'),input=outsideLane(ctx,u);
           return {role:'alpha-repair',label:maintenanceLabel(phase,n,pack,lane),job:'authoring',covers:[u],profile:SOL61_HIGH,
