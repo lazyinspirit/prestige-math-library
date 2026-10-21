@@ -6,6 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
+  - def-axiom-of-choice
   - lem-integral-sutured-floer-compactness-and-orientations
   - lem-integral-sutured-auxiliary-triangle-and-move-maps
   - lem-relative-sutured-diagrams-have-signed-move-equivalences
@@ -30,9 +31,11 @@ sources:
 
 ## Statement
 
-An actual good decomposing surface admits an adapted admissible nice diagram. For a specified coherent orientation class on the exterior complex, the outer summand of that diagram is integrally chain isomorphic to the cut diagram with the induced orientation class; nonzero periodic domains are retained by pullback of characters. When the surface separates into two balanced pieces, every generator is outer and the full complex is identified with the graded tensor product of the two component complexes. In particular the usual two-piece horizontal decomposition has this chain formula. It gives the homology tensor formula over every field; over the integers it gives the graded Künneth exact sequence including Tor.
+Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. An actual good decomposing surface admits an adapted admissible nice diagram. For a specified coherent orientation class on the exterior complex, the outer summand of that diagram is integrally chain isomorphic to the cut diagram with the induced orientation class; nonzero periodic domains are retained by pullback of characters. When the surface separates into two balanced pieces, every generator is outer and the full complex is identified with the graded tensor product of the two component complexes. In particular the usual two-piece horizontal decomposition has this chain formula. It gives the homology tensor formula over every field; over the integers it gives the graded Künneth exact sequence including Tor.
 
 ## Facts & Assumptions
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is assumed when invoking existence, regularity, compactification, and invariant comparison maps from the imported integral sutured analytic framework. The finite domain and determinant calculations retain their stated conditional supplied-data hypotheses; no unconditional Countable-Choice analytic existence theorem is asserted. In particular the Countable-Choice selection result applies only GIVEN its actual pointwise operator constructions, not merely because the diagrams or domain classes are countable.
 
 [F1] [[lem-integral-sutured-floer-compactness-and-orientations]] supplies its actual construction or operator interface at its stated scope.
 
@@ -48,7 +51,7 @@ An actual good decomposing surface admits an adapted admissible nice diagram. Fo
 
 ## Proof
 
-**Given:** The actual marked sutured diagrams and decomposition hypotheses of the statement, with a specified coherent orientation class.
+**Given:** The actual marked sutured diagrams and decomposition hypotheses of the statement, with a specified coherent orientation class. The Axiom of Choice is assumed for the analytic invocations [A1]; the relative finite-move geometry and supplied finite-complex algebra keep their stated inputs.
 
 1.1 **The trace bookkeeping on the punctured surface.** Use a product complex structure on the actual surface. A holomorphic strip in Sym^dΣ has its incidence trace in Σ×strip. Normalize that trace; the projection to the strip has degree d. The trace is compact away from its two ends, because all counted boundary-region multiplicities vanish. Constant components are the stationary generator coordinates. Write D for the projected two-chain, e(D) for its Euler measure (a disk region with k right-angle corners has measure 1−k/4), and n_x,n_y for the sums of the four quadrant averages at the two generators. Let Δ be intersection with the discriminant, counted positively. On normalization this is [construct]
 

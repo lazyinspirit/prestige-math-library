@@ -448,6 +448,19 @@ alert inventory and never acquire a fabricated in-run owner or new review covera
 Original Step-3 closure and judge verdicts remain immutable. Existing judge
 currency rules continue to govern unchanged consumer carriers.
 
+An explicit [outside-context presentation disposition](tools/step4-outside-context-alerts.md)
+may retain an unchanged editorial observation about a supplier outside every
+current manifest. It binds the exact original successful native reader and
+alert, current captured source, run policy and focused owner disposition.
+It grants no repair, authored ownership, mathematical acceptance or audit
+coverage; absent or invalid authority retains the ordinary blocking behavior.
+These observations remain separately visible as `outside_context_alerts`.
+The [finite batch-96 draft-supplier repair](tools/step4-repaired-draft-context-alerts.md)
+instead binds the actual seven reviewed Choice-premise corrections, all affected
+uses, unchanged frontier seals and the original closed Step-3 record. It remains
+separate as `repaired_draft_context_alerts`; its truthful inherited outside-context
+precheck observations do not replace or relax any scoped frontier gate.
+
 Step-4 alerts about another batch's in-run page route to its actual page-owning
 group, just as item alerts route to their item-owning group. Same-batch findings
 belong in concerns. Page findings retain ordinary owning-group disposition and

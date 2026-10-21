@@ -6,6 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
+  - def-axiom-of-choice
   - lem-integral-sutured-floer-compactness-and-orientations
   - def-sutured-floer-chain-complex
   - def-balanced-taut-sutured-manifold-and-product-region
@@ -29,9 +30,11 @@ sources:
 
 ## Statement
 
-For the actual balanced local isotopy and disk-slide multidiagrams, the auxiliary top cycles have a triangle product equal to a unit top generator. Positive domains contributing to that product are exhausted by the explicit local triangles. For complete weakly admissible configurations, triangle and quadrilateral counts give integral slide and inverse-slide chain homotopies, with the specified exterior coherent orientation class transported through the full periodic-domain lattice. Every prescribed finite move is realizable by simultaneously weakly admissible local configurations and literal diagram conjugacies.
+Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. For the actual balanced local isotopy and disk-slide multidiagrams, the auxiliary top cycles have a triangle product equal to a unit top generator. Positive domains contributing to that product are exhausted by the explicit local triangles. For complete weakly admissible configurations, triangle and quadrilateral counts give integral slide and inverse-slide chain homotopies, with the specified exterior coherent orientation class transported through the full periodic-domain lattice. Every prescribed finite move is realizable by simultaneously weakly admissible local configurations and literal diagram conjugacies.
 
 ## Facts & Assumptions
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is assumed when invoking existence, regularity, compactification, and invariant comparison maps from the imported integral sutured analytic framework. The finite domain and determinant calculations retain their stated conditional supplied-data hypotheses; no unconditional Countable-Choice analytic existence theorem is asserted. In particular the Countable-Choice selection result applies only GIVEN its actual pointwise operator constructions, not merely because the diagrams or domain classes are countable.
 
 [F1] [[lem-integral-sutured-floer-compactness-and-orientations]] supplies its stated definitions or proved operator/construction interface at its stated scope.
 
@@ -41,7 +44,7 @@ For the actual balanced local isotopy and disk-slide multidiagrams, the auxiliar
 
 ## Proof
 
-**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement.
+**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement. The Axiom of Choice is assumed for the analytic invocations [A1]; the relative finite-move geometry and supplied finite-complex algebra keep their stated inputs.
 
 1.1 New authoring, 2026-10-20. This computes the missing compatibility condition, including the punctured-surface radical. It supplies a signed determinant extension and the resulting inverse-map formulas for actual moduli problems satisfying the explicit analytic inputs below. It does not extend closed-manifold moduli theorems to incomplete sutured systems by omission. [construct]
 

@@ -12,9 +12,7 @@ justified_by: [cor-general-linear-group-is-a-group]
 aliases: []
 landmark: true
 verification:
-  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-invertible-matrix-and-general-linear-group.json
-  precheck: n/a
-  audited: 2026-08-11
+  repair: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step4-supervision/root-three-published-repairs/def-invertible-matrix-and-general-linear-group.repair.json
 sources:
   scraped: []
   references:
@@ -36,8 +34,8 @@ Such a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is
 
 $$\operatorname{GL}_n(F):=\{A\in M_n(F):A\text{ is invertible}\}.$$
 
-It is the set of units of the ring $M_n(F)$. The fact that it is a group under
-matrix multiplication is $\operatorname{GL}_n(F)$ is a group under matrix multiplication, including the trivial group $\operatorname{GL}_0(F)$. For $n=0$,
+It is the set of units of the ring $M_n(F)$. Under matrix multiplication,
+$\operatorname{GL}_n(F)$ is a group, including the trivial group $\operatorname{GL}_0(F)$. For $n=0$,
 the unique empty matrix is $I_0$ and is its own inverse.
 
 ## Definition references

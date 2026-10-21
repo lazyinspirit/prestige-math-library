@@ -6,6 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
+  - def-axiom-of-choice
   - lem-integral-sutured-floer-compactness-and-orientations
   - lem-integral-sutured-auxiliary-triangle-and-move-maps
   - def-sutured-floer-chain-complex
@@ -30,9 +31,11 @@ sources:
 
 ## Statement
 
-Two balanced Heegaard diagrams of the same marked sutured manifold are connected by relative attaching-circle isotopies, own-family disk slides, and ordinary stabilizations and destabilizations. An ordinary stabilization can be moved by such slides to the true boundary region. These moves induce integral chain homotopy equivalences for the transported coherent orientation class. The product sutured manifold has integral homology equal to one copy of the integers; on a homology-product branch the periodic-domain character ambiguity vanishes.
+Two balanced Heegaard diagrams of the same marked sutured manifold are connected by relative attaching-circle isotopies, own-family disk slides, and ordinary stabilizations and destabilizations. An ordinary stabilization can be moved by such slides to the true boundary region. Under the Axiom of Choice, these moves induce integral chain homotopy equivalences for the transported coherent orientation class, and the product sutured manifold has integral homology equal to one copy of the integers. For supplied actual coherent systems on a homology-product branch, the periodic-domain character ambiguity vanishes.
 
 ## Facts & Assumptions
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is assumed when invoking existence, regularity, compactification, and invariant comparison maps from the imported integral sutured analytic framework. The finite domain and determinant calculations retain their stated conditional supplied-data hypotheses; no unconditional Countable-Choice analytic existence theorem is asserted. In particular the Countable-Choice selection result applies only GIVEN its actual pointwise operator constructions, not merely because the diagrams or domain classes are countable.
 
 [F1] [[lem-integral-sutured-floer-compactness-and-orientations]] supplies its stated definitions or proved operator/construction interface at its stated scope.
 
@@ -44,7 +47,7 @@ Two balanced Heegaard diagrams of the same marked sutured manifold are connected
 
 ## Proof
 
-**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement.
+**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement. The Axiom of Choice is assumed for the analytic invocations [A1]; the relative finite-move geometry and supplied finite-complex algebra keep their stated inputs.
 
 1.1 New construction, 2026-10-20. Both negative and positive marked boundary surfaces are assumed connected, as they are for the knot cut along its connected Seifert surface. Their genus is arbitrary. All boundary identifications and sutured collars are held fixed. This does not apply a closed Reidemeister--Singer conclusion to a manifold with boundary. [construct]
 

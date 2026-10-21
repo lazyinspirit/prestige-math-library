@@ -6,6 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
+  - def-axiom-of-choice
   - def-balanced-taut-sutured-manifold-and-product-region
   - def-sutured-floer-chain-complex
   - thm-balanced-taut-sutured-manifolds-admit-finite-good-hierarchies
@@ -26,9 +27,11 @@ sources:
 
 ## Statement
 
-Let a balanced sutured manifold be taut. For a specified coherent orientation class, its integral sutured Floer homology has a direct summand isomorphic to the integers. More precisely, a finite good taut hierarchy terminating in product balls induces a split inclusion of the terminal product homology into the original homology, with orientation classes induced along the cuts.
+Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. Let a balanced sutured manifold be taut. For a specified coherent orientation class, its integral sutured Floer homology has a direct summand isomorphic to the integers. More precisely, a finite good taut hierarchy terminating in product balls induces a split inclusion of the terminal product homology into the original homology, with orientation classes induced along the cuts.
 
 ## Facts & Assumptions
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is assumed when invoking existence, regularity, compactification, and invariant comparison maps from the imported integral sutured analytic framework. The finite domain and determinant calculations retain their stated conditional supplied-data hypotheses; no unconditional Countable-Choice analytic existence theorem is asserted. In particular the Countable-Choice selection result applies only GIVEN its actual pointwise operator constructions, not merely because the diagrams or domain classes are countable.
 
 [F1] [[thm-balanced-taut-sutured-manifolds-admit-finite-good-hierarchies]] supplies the actual finite good taut hierarchy with its terminal product balls.
 
@@ -40,7 +43,7 @@ Let a balanced sutured manifold be taut. For a specified coherent orientation cl
 
 ## Proof
 
-**Given:** A taut balanced sutured manifold and a specified coherent orientation class on its finite admissible integral chain complex.
+**Given:** A taut balanced sutured manifold and a specified coherent orientation class on its finite admissible integral chain complex. The Axiom of Choice is assumed for the analytic invocations [A1]; the relative finite-move geometry and supplied finite-complex algebra keep their stated inputs.
 
 1.1 For a good cut surface S and its actual adapted polygon P, choose the standard fixed boundary vector field and a frame of its orthogonal plane along the one-dimensional boundary of S. Such a frame always exists along those circles; no global trivialization of the plane over the entire boundary is assumed. Let c(S) be the relative Euler obstruction for the outer local Morse field. Replacing that field along an interior generator trajectory adds two positive turns on S, one on either side of its trajectory tube. Boundary creases contribute the fixed tangent Euler, half-suture-crossing and boundary rotation terms to c(S); they are independent of the generator. Therefore the relative plane Euler obstruction of a generator x on S is c(S)+2n_P(x), where n_P counts its interior polygon coordinates. In particular it has the outer value exactly when n_P(x)=0. [construct]
 

@@ -25,7 +25,7 @@ sources:
       url: "https://arxiv.org/pdf/1702.08128"
       locator: "§2.1–2.2, printed pp. 3–4: the first root-boundary idempotent and quotient." 
 verification:
-  precheck: n/a
+  repair: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step4-supervision/root-three-published-repairs/def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators.repair.json
 ---
 
 ## Definition
@@ -42,11 +42,8 @@ where $U_r$ is the cap-cup generator on the final two of the $r+1$ strands in [[
   \draw (1,0) -- (1,1.8);
   \node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,1.25) {$p_r$};
   \node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,0.45) {$p_r$};
-  \draw (2,0) -- (2,1.8);
-  \draw (3,0) .. controls (3,0.55) and (2.75,0.75) .. (2.5,0.9);
-  \draw (2,0) .. controls (2,0.55) and (2.25,0.75) .. (2.5,0.9);
-  \draw (2.5,0.9) .. controls (2.75,1.05) and (3,1.25) .. (3,1.8);
-  \draw (2.5,0.9) .. controls (2.25,1.05) and (2,1.25) .. (2,1.8);
+  \draw (2,0) .. controls (2,0.55) and (3,0.55) .. (3,0);
+  \draw (2,1.8) .. controls (2,1.25) and (3,1.25) .. (3,1.8);
 \end{tikzpicture}
 ```
 

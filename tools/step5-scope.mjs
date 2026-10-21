@@ -50,6 +50,8 @@ import { spawnSync } from 'node:child_process';
 import { buildGroupBundle } from './evidence-bundle.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { publishedAlertRoute } from './step4-published-alerts.mjs';
+import { outsideContextAlertRoute } from './step4-outside-context-alerts.mjs';
+import { repairedDraftContextAlertRoute } from './step4-repaired-draft-context-alerts.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard } from './item-hash.mjs';
@@ -217,6 +219,8 @@ function openRejections() {
 function collectAlerts(groups, index, { includeConcerns = true } = {}) {
   const alerts = [];
   const publishedAlerts = [];
+  const outsideContextAlerts = [];
+  const repairedDraftContextAlerts = [];
   const problems = [];
   const groupLabels = new Set(groups.map((g) => g.label));
   for (const digest of readAllDigests()) {
@@ -245,6 +249,16 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     }
     for (const [alertIndex, raw] of (digest.alerts ?? []).entries()) {
       const ownerRecord = index.itemOwner.get(raw.item) ?? index.pageOwner.get(raw.item);
+      if (!ownerRecord) {
+        const outside = outsideContextAlertRoute({ root: REPO, run, batch: fromBatch, group: from,
+          digestPath: rel(digestPath(fromBatch)), digest, alertIndex });
+        if (outside.ok) { outsideContextAlerts.push(outside.route); continue; }
+        if (!outside.unavailable) { problems.push(`batch ${fromBatch}: outside context alert ${raw.item}: ${outside.reason}`); continue; }
+        const repairedDraft = repairedDraftContextAlertRoute({ root: REPO, run, batch: fromBatch, group: from,
+          digestPath: rel(digestPath(fromBatch)), digest, alertIndex });
+        if (repairedDraft.ok) { repairedDraftContextAlerts.push(repairedDraft.route); continue; }
+        if (!repairedDraft.unavailable) { problems.push(`batch ${fromBatch}: repaired draft context alert ${raw.item}: ${repairedDraft.reason}`); continue; }
+      }
       if (!ownerRecord && isPublishedItem(REPO, raw.item)) {
         const routed = publishedAlertRoute({ root: REPO, run, batch: fromBatch, group: from,
           digestPath: rel(digestPath(fromBatch)), digest, alertIndex, frontierIds: new Set(index.itemOwner.keys()) });
@@ -301,7 +315,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     if (ids.has(alert.alert_id)) problems.push(`${alert.alert_id}: duplicate alert`);
     ids.add(alert.alert_id);
   }
-  return { alerts, publishedAlerts, problems };
+  return { alerts, publishedAlerts, outsideContextAlerts, repairedDraftContextAlerts, problems };
 }
 
 /** Edges that leave a group: this group's pages requiring another group's, and
@@ -532,7 +546,7 @@ if (mode === 'render') {
   const rejections = openRejections();
   const alertReceipt = collectAlerts(groups, index);
   if (alertReceipt.problems.length) fail(alertReceipt.problems.join('\n'));
-  writeFileSync(alertsPath, `${JSON.stringify({ version: 2, run, alerts: alertReceipt.alerts, published_alerts: alertReceipt.publishedAlerts }, null, 2)}\n`);
+  writeFileSync(alertsPath, `${JSON.stringify({ version: 2, run, alerts: alertReceipt.alerts, published_alerts: alertReceipt.publishedAlerts, outside_context_alerts: alertReceipt.outsideContextAlerts, repaired_draft_context_alerts: alertReceipt.repairedDraftContextAlerts }, null, 2)}\n`);
 
   const orphans = rejections.filter((r) => !index.itemOwner.has(r.id));
 
@@ -664,6 +678,16 @@ if (mode === 'digests') {
     // delivering it would send the batch its own finding back.
     for (const [alertIndex, a] of (d.alerts ?? []).entries()) {
       const owner = index.itemOwner.get(a.item) ?? index.pageOwner.get(a.item);
+      if (!owner) {
+        const outside = outsideContextAlertRoute({ root: REPO, run, batch: g.label, group: g.group,
+          digestPath: rel(p), digest: d, alertIndex });
+        if (outside.ok) continue;
+        if (!outside.unavailable) { bad.push(`batch ${g.label}: outside context alert ${a.item}: ${outside.reason}`); continue; }
+        const repairedDraft = repairedDraftContextAlertRoute({ root: REPO, run, batch: g.label, group: g.group,
+          digestPath: rel(p), digest: d, alertIndex });
+        if (repairedDraft.ok) continue;
+        if (!repairedDraft.unavailable) { bad.push(`batch ${g.label}: repaired draft context alert ${a.item}: ${repairedDraft.reason}`); continue; }
+      }
       if (!owner && isPublishedItem(REPO, a.item)) {
         const routed = publishedAlertRoute({ root: REPO, run, batch: g.label, group: g.group,
           digestPath: rel(p), digest: d, alertIndex, frontierIds: new Set(index.itemOwner.keys()) });
@@ -851,7 +875,7 @@ for (const alert of alertReceipt.alerts) {
     }
   }
 }
-writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version >= 2 ? 2 : 1, run, alerts: alertReceipt.alerts, published_alerts: alertReceipt.publishedAlerts }, null, 2)}\n`);
+writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version >= 2 ? 2 : 1, run, alerts: alertReceipt.alerts, published_alerts: alertReceipt.publishedAlerts, outside_context_alerts: alertReceipt.outsideContextAlerts, repaired_draft_context_alerts: alertReceipt.repairedDraftContextAlerts }, null, 2)}\n`);
 
 reportProblems();
 console.log(`step5-scope --check: ${scope.groups.length} group(s) scoped, `

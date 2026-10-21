@@ -6,6 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
+  - def-axiom-of-choice
   - lem-integral-sutured-floer-compactness-and-orientations
   - lem-integral-sutured-auxiliary-triangle-and-move-maps
   - lem-relative-sutured-diagrams-have-signed-move-equivalences
@@ -34,9 +35,11 @@ sources:
 
 ## Statement
 
-For an actual nice admissible good surface diagram whose cut has zero periodic-domain group, the outer differential and the cut differential are identified over the integers after changing generator signs. This identifies the top Alexander homology with the integral homology of the cut diagram when the surface is the marked Seifert surface and the outer degree is its genus. The conclusion applies in particular to a fiber cut and to the rank-one branch of the cut Euler-matrix reduction.
+Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. For an actual nice admissible good surface diagram whose cut has zero periodic-domain group, the outer differential and the cut differential are identified over the integers after changing generator signs. This identifies the top Alexander homology with the integral homology of the cut diagram when the surface is the marked Seifert surface and the outer degree is its genus. The conclusion applies in particular to a fiber cut and to the rank-one branch of the cut Euler-matrix reduction.
 
 ## Facts & Assumptions
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is assumed when invoking existence, regularity, compactification, and invariant comparison maps from the imported integral sutured analytic framework. The finite domain and determinant calculations retain their stated conditional supplied-data hypotheses; no unconditional Countable-Choice analytic existence theorem is asserted. In particular the Countable-Choice selection result applies only GIVEN its actual pointwise operator constructions, not merely because the diagrams or domain classes are countable.
 
 [F1] [[lem-integral-sutured-floer-compactness-and-orientations]] supplies its stated definitions or proved operator/construction interface at its stated scope.
 
@@ -56,7 +59,7 @@ For an actual nice admissible good surface diagram whose cut has zero periodic-d
 
 ## Proof
 
-**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement.
+**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement. The Axiom of Choice is assumed for the analytic invocations [A1]; the relative finite-move geometry and supplied finite-complex algebra keep their stated inputs.
 
 1.1 New construction, 2026-10-20. No canonical source or accepted supplier is changed or rechecked. This file concerns the difference between existing coherent orientations. It does not assume existence, coherence, or signed diagram invariance merely from orientability of individual determinant lines. [construct]
 

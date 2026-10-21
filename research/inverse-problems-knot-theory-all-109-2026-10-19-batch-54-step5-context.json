@@ -1,0 +1,362 @@
+{
+  "group": "r",
+  "batches": [
+    "54"
+  ],
+  "pages_read": [
+    "bayesian-inverse-experimental-design-and-information-gain",
+    "bayesian-inverse-experimental-design-and-information-gain-examples"
+  ],
+  "items_read": [
+    "def-ip-design-indexed-inverse-experiment",
+    "def-ip-expected-information-gain",
+    "thm-ip-eig-is-joint-relative-entropy",
+    "thm-ip-linear-gaussian-information-gain-logdet",
+    "alg-ip-finite-candidate-information-design",
+    "thm-ip-finite-candidate-information-design-correctness",
+    "cex-ip-eig-cannot-identify-wrong-forward-operator",
+    "ex-ip-eig-high-prior-variance-direction",
+    "ex-ip-eig-repeated-correlated-noise",
+    "ex-ip-eig-singular-prior-support"
+  ],
+  "conventions": [
+    {
+      "convention": "The design set is finite; the prior is a probability; sampling kernels have specified jointly measurable densities relative to a common sigma-finite observation measure. Posterior quotients are assigned only where the predictive density is positive and finite.",
+      "fixed_by": "def-ip-design-indexed-inverse-experiment",
+      "matters_for": [
+        "def-ip-expected-information-gain",
+        "thm-ip-eig-is-joint-relative-entropy",
+        "cex-ip-eig-cannot-identify-wrong-forward-operator"
+      ]
+    },
+    {
+      "convention": "EIG averages posterior-to-prior directional KL using natural logarithms, permits positive infinity, and sets the integrand to zero outside positive finite evidence fibers. AC is assumed for the library KL convention.",
+      "fixed_by": "def-ip-expected-information-gain",
+      "matters_for": [
+        "thm-ip-eig-is-joint-relative-entropy",
+        "thm-ip-linear-gaussian-information-gain-logdet",
+        "alg-ip-finite-candidate-information-design",
+        "cex-ip-eig-cannot-identify-wrong-forward-operator"
+      ]
+    },
+    {
+      "convention": "The finite Gaussian formula permits singular positive-semidefinite prior covariance, but requires positive-definite Gaussian noise independent of the parameter; both dimensions are positive.",
+      "fixed_by": "thm-ip-linear-gaussian-information-gain-logdet",
+      "matters_for": [
+        "alg-ip-finite-candidate-information-design",
+        "thm-ip-finite-candidate-information-design-correctness",
+        "ex-ip-eig-high-prior-variance-direction",
+        "ex-ip-eig-repeated-correlated-noise",
+        "ex-ip-eig-singular-prior-support"
+      ]
+    },
+    {
+      "convention": "Candidate utility is EIG minus declared cost, feasibility means cost at most budget, and exact ties preserve the first candidate. Candidates with different observation dimensions are evaluated as separate singleton experiments.",
+      "fixed_by": "alg-ip-finite-candidate-information-design",
+      "matters_for": [
+        "thm-ip-finite-candidate-information-design-correctness"
+      ]
+    },
+    {
+      "convention": "Floating-point inputs denote their represented exact real values. Numerical guarantees require checked definiteness and score certificates; unresolved certification returns numerically-unresolved without an optimum claim. Matrix certificates require a positive-semidefinite approximation and residual radius strictly below one.",
+      "fixed_by": "alg-ip-finite-candidate-information-design",
+      "matters_for": [
+        "thm-ip-finite-candidate-information-design-correctness"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-ip-linear-gaussian-information-gain-logdet",
+      "statement": "Assume AC. For independent θ ∼ N_n(m₀,C) and η ∼ N_m(0,Γ), with n,m ≥ 1, C symmetric positive semidefinite and Γ symmetric positive definite, observing Y=Aθ+η has EIG = ½ log det(I_m + Γ^(-1/2)ACAᵀΓ^(-1/2)). Singular C is permitted.",
+      "used_by": [
+        "alg-ip-finite-candidate-information-design",
+        "thm-ip-finite-candidate-information-design-correctness",
+        "ex-ip-eig-high-prior-variance-direction",
+        "ex-ip-eig-repeated-correlated-noise",
+        "ex-ip-eig-singular-prior-support"
+      ]
+    },
+    {
+      "id": "thm-ip-eig-is-joint-relative-entropy",
+      "statement": "Assume AC. For a design in the specified dominated inverse experiment, EIG(d)=D(P_d ∥ μ₀ ⊗ P_{Y|d}) ∈ [0,+∞]. On positive finite evidence fibers the joint-to-product density is the likelihood divided by the predictive density almost everywhere; the identity has finite negative part.",
+      "used_by": [
+        "thm-ip-linear-gaussian-information-gain-logdet",
+        "cex-ip-eig-cannot-identify-wrong-forward-operator"
+      ]
+    },
+    {
+      "id": "def-ip-expected-information-gain",
+      "statement": "Assume AC for the library KL convention. EIG(d) is the integral over G_d={y:0<p_d(y)<∞} of D(μ_d^y ∥ μ₀)p_d(y) with respect to ν, with the integrand zero outside G_d and values in [0,+∞].",
+      "used_by": [
+        "thm-ip-eig-is-joint-relative-entropy",
+        "alg-ip-finite-candidate-information-design",
+        "cex-ip-eig-cannot-identify-wrong-forward-operator"
+      ]
+    },
+    {
+      "id": "def-ip-design-indexed-inverse-experiment",
+      "statement": "A finite design set indexes probability sampling kernels with specified jointly measurable densities relative to a common sigma-finite measure and a proper prior; predictive densities are prior integrals, and posterior probabilities on positive finite evidence fibers are normalized likelihood-weighted priors.",
+      "used_by": [
+        "def-ip-expected-information-gain",
+        "thm-ip-eig-is-joint-relative-entropy",
+        "alg-ip-finite-candidate-information-design",
+        "cex-ip-eig-cannot-identify-wrong-forward-operator"
+      ]
+    },
+    {
+      "id": "alg-ip-finite-candidate-information-design",
+      "statement": "For the specified finite ordered linear-Gaussian candidate list, exact mode evaluates Cholesky log-determinant utilities and retains the first feasible maximum. Floating mode requires checked score certificates, selects the first computed τ-maximizer, and reports the stated certified utility-gap bound or numerically-unresolved.",
+      "used_by": [
+        "thm-ip-finite-candidate-information-design-correctness"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measurable-space",
+      "used_for": "Parameter and observation measurable spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-cardinality",
+      "used_for": "Finite design-index convention, including an empty finite set.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Proper prior and probability-law normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability rows and measurable event evaluations.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sigma-finite-and-semifinite-measures",
+      "used_for": "Sigma-finite dominating measure and finite-measure exhaustion.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint measurability and generating measurable rectangles.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability convention for likelihoods.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-formula-for-dominated-kernels",
+      "used_for": "Predictive density, posterior kernel, and null exceptional evidence fibers without standard-Borel assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-bayesian-posterior-as-regular-conditional-law",
+      "used_for": "Distinction between sample-indexed posterior RCD and data-indexed posterior kernel.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional KL, RN density representation, and finite negative-part bound.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited AC assumptions.",
+      "opened": true
+    },
+    {
+      "id": "thm-kullback-leibler-is-nonnegative",
+      "used_for": "Nonnegativity and zero divergence exactly for equal probability laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Measurability of section integrals and separate positive/negative-part integral exchanges.",
+      "opened": true
+    },
+    {
+      "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+      "used_for": "Identifying the predictive-product measure from its rectangle values.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Zero-evidence likelihood sections vanish almost everywhere.",
+      "opened": true
+    },
+    {
+      "id": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+      "used_for": "Constructing joint and predictive-density measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Changing integrals to the explicit product-density representation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Existence and rectangle formulas for the product measures.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian projections, means, covariances, and singular Gaussian laws.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+      "used_for": "Joint Gaussianity of the independent parameter/noise stack.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Conditional and predictive Gaussian likelihood densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Covariance square roots and symmetric noise whitening.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Finite square determinant convention.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural logarithm on positive real arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Whitening determinant identities and Cholesky determinant products.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Lower-triangular positive-diagonal factor convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Exact admissibility and existence of the required factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+      "used_for": "Exact triangular solves through Cholesky factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Evaluating log determinants by positive Cholesky diagonals.",
+      "opened": true
+    },
+    {
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "used_for": "Failure-aware rounded factorization procedure.",
+      "opened": true
+    },
+    {
+      "id": "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "used_for": "Conditional backward-error interface for successful triangular solves; forward error additionally requires conditioning.",
+      "opened": true
+    },
+    {
+      "id": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+      "used_for": "Successful-factorization residual certificate and its unit-roundoff conditions.",
+      "opened": true
+    },
+    {
+      "id": "lem-information-matrix-perturbation-bound",
+      "used_for": "One-point unit-weight Gram-matrix perturbation bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-logdet-information-perturbation-bound",
+      "used_for": "Log-determinant error on segments with eigenvalue floors 1 and 1−ρ.",
+      "opened": true
+    },
+    {
+      "id": "def-nonlinear-experimental-design-and-local-identifiability",
+      "used_for": "Checking the one-point linear-sensitivity specialization of the information-matrix bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithm product identities and strict comparisons in the examples.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-ip-eig-repeated-correlated-noise",
+      "concern": "The Example states only 'noise covariance Γ_ρ' and then asserts EIG = ½ log(1+2/(1+ρ)). It does not specify Gaussian noise or independence from θ, both required by F1. Even jointly Gaussian noise with the stated covariance can violate the claim: at ρ=0, take independent standard normals T,Z₁,Z₂, θ=T, η₁=T/2+√3 Z₁/2, η₂=Z₂, and Y=(T,T)ᵀ+η. The noise covariance is I₂, but the conditional noise covariance is diag(3/4,1), and EIG is ½ log 5 rather than ½ log 3. Verification 1.1 also assumes the unstated independence when identifying the predictive covariance.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "ex-ip-eig-singular-prior-support",
+      "concern": "The Example says 'With unit-variance Gaussian noise' but does not require independence from θ before asserting EIG values 0 and ½ log 2. Let θ=(T,0) with T standard normal and let η=T/2+√3 Z/2 for an independent standard normal Z. This is unit-variance Gaussian noise. For A_perp=(0,1), Y=η has EIG ½ log(4/3)>0; for A_parallel=(1,0), Y=T+η has EIG ½ log 4. Both are dominated Gaussian conditional experiments. The cited theorem requires the missing independence hypothesis.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-bayesian-posterior-as-regular-conditional-law",
+      "finding": "The published Definition contains inline hyperlinks, beginning 'supplied by [[lem-prior-and-model-kernel-define-joint-law]]' and continuing with links throughout all three paragraphs. It has no immediately following Definition references section. This violates the required uninterrupted-definition policy; the mathematical distinction between posterior RCD and data-indexed kernel should be preserved when moving the links.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-rounded-cholesky-with-failure-status",
+      "finding": "The published Definition contains inline links including 'using the convention of [[def-cholesky-factorisation-with-positive-diagonal]]', the operationwise-model link, and the final Cholesky-existence link. These interrupt the procedure and are not moved into an immediately following Definition references section, contrary to the statement-first instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "finding": "The published Statement says 'Use the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] at unit roundoff u.' The inline hyperlink interrupts the Statement, with no immediately following Statement references section. Preserve the arithmetic-model hypothesis while moving its link.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-information-matrix-perturbation-bound",
+      "finding": "The published Statement opens 'Use the finite observation designs of [[def-nonlinear-experimental-design-and-local-identifiability]].' This inline hyperlink interrupts the Statement and is not placed in an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-nonlinear-experimental-design-and-local-identifiability",
+      "finding": "The published Definition contains inline links in 'C¹ in the sense of [[def-c-one-map-and-local-inverse]]' and 'as in [[def-approximate-linear-model-design-and-optimality-criteria]]'. No immediately following Definition references section separates these links from the complete definition, contrary to the uninterrupted-definition instruction.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "bayesian-inverse-experimental-design-and-information-gain",
+      "to": "feature-inference-and-map-testing",
+      "faithful": true,
+      "note": "Read the prerequisite page and isonormal posterior Statement. This is a contextual page prerequisite; the batch makes no item-level use of its injective infinite-dimensional covariance theorem and does not extend it to singular finite priors."
+    },
+    {
+      "from": "bayesian-inverse-experimental-design-and-information-gain",
+      "to": "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "faithful": true,
+      "note": "Read the prerequisite page, likelihood/evidence Definition, and propriety Statement. Their proper-prior and positive-finite-evidence conventions agree with the batch. The batch constructs dominated probability sampling kernels and does not infer a sampling model from an arbitrary potential."
+    },
+    {
+      "from": "bayesian-inverse-experimental-design-and-information-gain",
+      "to": "linear-gaussian-inverse-posteriors-and-tikhonov",
+      "faithful": true,
+      "note": "Read the prerequisite page and complete finite-posterior and singular-support arguments. The logdet theorem faithfully retains AC, positive-semidefinite prior covariance, positive-definite noise, and independence; the singular-support example uses exactly support=m+Ran(C). Its separate missing noise-independence assumption is recorded in concerns."
+    },
+    {
+      "from": "bayesian-inverse-experimental-design-and-information-gain",
+      "to": "posterior-computation-error-and-diagnostics",
+      "faithful": true,
+      "note": "Read the prerequisite page and computation-error-budget Definition, including its correctly labelled adjacent-error diagram. This is contextual: the batch does not substitute bounded-functional posterior error accounting for its separate logdet and factorization certificates."
+    }
+  ]
+}

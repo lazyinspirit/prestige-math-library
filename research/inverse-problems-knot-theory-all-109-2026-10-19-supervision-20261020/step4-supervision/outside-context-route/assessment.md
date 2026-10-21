@@ -1,0 +1,11 @@
+# Policy and guard assessment
+
+The actual inventory contains225 suppliers and363 presentation alerts. Four supplier IDs already have run ownership claims (two batch82, one batch53, one batch83); an unnecessary formatting campaign would interact with their existing pre-edit claims and recorded repairs. There is no generic statement-link formatter in the inspected canonical tools: statement-first exports an inspector, not a semantics-preserving rewriter. Label grammar, mathematical aliases, reference-style definitions and citation-only parentheticals need real preservation review if a repair is necessary.
+
+Current CLAUDE9 and STATEMENT-FIRST scope do not make unrelated legacy published prerequisites authored formatting subjects. The existing published-alert route nevertheless requires every outside alert to carry a genuine recorded repair. It must not be satisfied by fabricated no-op receipts: recordedPublishedRepair requires a changed canonical carrier, matching original claim, prior publication, exact ledger marker and actual local checks. The correct bounded addition is a separate unchanged-context disposition with original native output retained and fresh complete-frontier exclusion.
+
+The new module does only that. Its common authentication helper is reusable by a separate real draft-repair route; this module supplies no mathematical repair route. Existing published-repair code and Step5 callers remain untouched for root integration. The caller should keep distinct inventories and use an unavailable result only to attempt existing strict routing, never to drop an alert.
+
+Frozen Step3 artifacts and original judge/read histories must not be rewritten. No new published claim, source edit, claim-ledger group transfer, audit stamp or item hash is needed for the unchanged route. Genuine mathematics/diagram/hypothesis defects remain outside this policy and require actual focused resolution. A future real published repair retains the ordinary pre-edit ownership/recorded repair process; this disposition does not replace it.
+
+Actual reading scope: policy, routing, receipt and closure code; inventory/claim metadata; no225-source proof or mathematical audit. Tests44/44 pass in isolated fixtures. Root owns exact occurrence reviews, real records and caller integration.

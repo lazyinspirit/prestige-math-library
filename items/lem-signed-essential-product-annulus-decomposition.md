@@ -6,6 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
+  - def-axiom-of-choice
   - lem-integral-sutured-floer-compactness-and-orientations
   - lem-integral-sutured-auxiliary-triangle-and-move-maps
   - lem-relative-sutured-diagrams-have-signed-move-equivalences
@@ -33,9 +34,11 @@ sources:
 
 ## Statement
 
-Let a balanced sutured manifold have connected positive and negative boundary faces. An essential separating product-annulus decomposition into balanced pieces admits a graded integral tensor chain equivalence, with coherent orientation classes induced from the specified class. This realizes the homology tensor formula over every field and the integral Künneth formula with Tor. Product-disk decompositions and product one-handle additions have literal integral complex identifications. The closure construction for any connected pair of faces identifies its top knot complex with the actual sutured disk complex using the specified marking and orientation class.
+Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. Let a balanced sutured manifold have connected positive and negative boundary faces. An essential separating product-annulus decomposition into balanced pieces admits a graded integral tensor chain equivalence, with coherent orientation classes induced from the specified class. This realizes the homology tensor formula over every field and the integral Künneth formula with Tor. Product-disk decompositions and product one-handle additions have literal integral complex identifications. The closure construction for any connected pair of faces identifies its top knot complex with the actual sutured disk complex using the specified marking and orientation class.
 
 ## Facts & Assumptions
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is assumed when invoking existence, regularity, compactification, and invariant comparison maps from the imported integral sutured analytic framework. The finite domain and determinant calculations retain their stated conditional supplied-data hypotheses; no unconditional Countable-Choice analytic existence theorem is asserted. In particular the Countable-Choice selection result applies only GIVEN its actual pointwise operator constructions, not merely because the diagrams or domain classes are countable.
 
 [F1] [[lem-integral-sutured-floer-compactness-and-orientations]] supplies its actual construction or operator interface at its stated scope.
 
@@ -57,7 +60,7 @@ Let a balanced sutured manifold have connected positive and negative boundary fa
 
 ## Proof
 
-**Given:** The actual marked sutured diagrams and decomposition hypotheses of the statement, with a specified coherent orientation class.
+**Given:** The actual marked sutured diagrams and decomposition hypotheses of the statement, with a specified coherent orientation class. The Axiom of Choice is assumed for the analytic invocations [A1]; the relative finite-move geometry and supplied finite-complex algebra keep their stated inputs.
 
 1.1 **Product one-handles are literal complex identifications.** Adding a product one-handle with feet at sutures attaches a two-dimensional band to the boundary of the actual Heegaard surface and adds no attaching circle. The resulting handlebody thickening is exactly the three-dimensional product one-handle: the two level faces are its upper and lower rectangles and its remaining face carries the suture. The band lies in a true boundary region. Every counted domain has coefficient zero there. Point-divisor positivity therefore prevents a holomorphic trace from entering the band, not merely from passing through its center. The generator set, disk maps, linearized operators and determinant orientations are consequently unchanged. A periodic domain is also unchanged, because its coefficient on the new band is zero and its attaching-circle boundary is the old one. This gives a literal integral chain identification, with the specified orientation character. Cutting a product disk is the inverse operation. In particular finitely many such handles may connect suture components without changing the complex. [construct]
 

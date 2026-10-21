@@ -1,0 +1,60 @@
+--- tools/step4-outside-context-alerts.mjs
++++ tools/step4-outside-context-alerts.mjs
+@@ -49,12 +49,16 @@
+     && isDeepStrictEqual(digest.batches, [String(batch)]), 'stale digest or group');
+   const prefix = `research/${run}-dispatch/alpha-batch-read-${batch}`;
+   need(typeof route.native_result?.path === 'string'
+-    && route.native_result.path.startsWith(prefix + '.attempt-')
+-    && /^\.attempt-[1-9]\d*(?:\.replay-[1-9]\d*)?\.result\.json$/.test(route.native_result.path.slice(prefix.length)), 'native result must name exact immutable reader attempt');
++    && route.native_result.path.startsWith(prefix + '.attempt-'), 'native result must name exact immutable reader attempt');
++  const suffix = route.native_result.path.slice(prefix.length);
++  const attempt = /^\.attempt-([1-9]\d*)(?:\.replay-[1-9]\d*)?\.result\.json$/.exec(suffix);
++  need(attempt, 'native result must name exact immutable reader attempt');
+   const native = JSON.parse(bound(root, route.native_result));
++  need(Number.isSafeInteger(native.attempt) && native.attempt === Number(attempt[1])
++    && native.evidence_tag === suffix.slice(0, -'.result.json'.length), 'native attempt/evidence tag disagrees with immutable path');
+   need(native.run === run && native.role === 'alpha-batch-read' && native.label === String(batch)
+     && isDeepStrictEqual(native.covers, [String(batch)]) && native.ok === true
+-    && native.exit_code === 0 && native.timed_out === false
++    && native.exit_code === 0 && native.process_exit_code === 0 && native.timed_out === false
+     && native.terminal_summary?.task_completed === true && native.terminal_summary?.task_aborted === false
+     && native.terminal_summary?.final_response_present === true
+     && date(native.started_at) && date(native.ended_at) && Date.parse(native.started_at) <= Date.parse(native.ended_at), 'not a completed successful native batch reader');
+
+--- tools/step4-outside-context-alerts.test.mjs
++++ tools/step4-outside-context-alerts.test.mjs
+@@ -18,7 +18,7 @@
+   const digest={group,batches:[batch],pages_read:['page'],items_read:['lem-owned-item'],conventions:['fixed convention'],load_bearing:['lem-owned-item'],published_dependencies:[{id,opened:true,used_for:'Prerequisite context.'}],concerns:[],alerts:[{item:id,finding:'The legacy prerequisite Statement retains inline links rather than a following references section.',severity:'presentation'}],seams_checked:[]};
+   const digestPath=`research/${run}-batch-1-step5-context.json`;put(digestPath,digest);
+   const nativePath=`research/${run}-dispatch/alpha-batch-read-1.attempt-1.result.json`;
+-  const native={run,role:'alpha-batch-read',label:batch,covers:[batch],ok:true,exit_code:0,timed_out:false,started_at:'2026-01-01T00:00:00Z',ended_at:'2026-01-01T01:00:00Z',terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true}};
++  const native={run,role:'alpha-batch-read',label:batch,covers:[batch],attempt:1,evidence_tag:'.attempt-1',ok:true,exit_code:0,process_exit_code:0,timed_out:false,started_at:'2026-01-01T00:00:00Z',ended_at:'2026-01-01T01:00:00Z',terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true}};
+   put(nativePath,native);put(nativePath.replace('.result.json','.last-message.json'),digest);
+   const policyPath=`research/${run}-statement-first.json`;put(policyPath,{version:1,run,domain:'math',standard:'statement-first-v1',page_layout:'compact-v1'});
+   const route={source_batch:batch,source_group:group,digest_path:digestPath,digest_sha256:reference(digestPath).sha256,alert_index:0,alert:structuredClone(digest.alerts[0]),disposition:'unchanged-outside-scope-presentation',category:'statement-first-outside-frontier',reason:'The exact reported link-placement concern concerns unchanged legacy context outside this run frontier; no mathematical defect or repair is inferred from this narrowly scoped disposition.',native_result:reference(nativePath),native_output:reference(nativePath.replace('.result.json','.last-message.json')),before_file:reference(`research/${run}-context-before.md`),source_raw_sha256:sha(source),source_guard:itemHashGuard(source),source_captured_at:'2026-01-01T02:00:00Z',statement_first_policy:reference(policyPath)};
+@@ -79,3 +79,13 @@
+ 
+ test('fresh frontier accepts existing canonical mixed-case IDs',t=>{const f=fixture(t);f.put(`research/${f.run}-batch-2.pages.json`,[{id:'mixed-case-page',items:[{id:'lem-hat-CF-genus-one-lens-space-order-three-rank-three'},{id:'lem-amenable-D-R-l2-dimension-estimate'}]}]);const r=f.check();assert.equal(r.ok,true,r.reason);});
+ for(const invalid of ['Lemma-uppercase-prefix','lem--double-gap','lem-trailing-','lem-with_underscore','nohyphen','lem-space in-id'])test('fresh frontier rejects invalid canonical ID '+invalid,t=>{const f=fixture(t);f.put(`research/${f.run}-batch-2.pages.json`,[{id:'bad-page',items:[{id:invalid}]}]);assert.match(f.check().reason,/invalid or duplicate current frontier item/);});
++
++for(const [name,mutate] of [
++ ['missing attempt',n=>delete n.attempt],['wrong attempt',n=>n.attempt=2],['noninteger attempt',n=>n.attempt=1.5],
++ ['missing evidence tag',n=>delete n.evidence_tag],['wrong evidence tag',n=>n.evidence_tag='.attempt-2'],
++ ['unexpected replay tag',n=>n.evidence_tag='.attempt-1.replay-1'],
++ ['missing process exit',n=>delete n.process_exit_code],['failed process exit',n=>n.process_exit_code=1]
++])test('reject rebound native identity '+name,t=>{const f=fixture(t);mutate(f.native);f.put(f.nativePath,f.native);f.route.native_result=f.reference(f.nativePath);f.save();assert.equal(f.check().ok,false);});
++test('relabelled successful result and output under another attempt are rejected',t=>{const f=fixture(t);const p=f.nativePath.replace('.attempt-1.','.attempt-2.');f.put(p,f.native);f.put(p.replace('.result.json','.last-message.json'),f.digest);f.route.native_result=f.reference(p);f.route.native_output=f.reference(p.replace('.result.json','.last-message.json'));f.save();assert.match(f.check().reason,/attempt\/evidence tag/);});
++test('exact replay tag/path agreement is supported',t=>{const f=fixture(t);const p=f.nativePath.replace('.attempt-1.','.attempt-1.replay-2.');f.native.evidence_tag='.attempt-1.replay-2';f.put(p,f.native);f.put(p.replace('.result.json','.last-message.json'),f.digest);f.route.native_result=f.reference(p);f.route.native_output=f.reference(p.replace('.result.json','.last-message.json'));f.save();assert.equal(f.check().ok,true,f.check().reason);});
++for(const tag of [undefined,'.attempt-1','.attempt-1.replay-3','.attempt-2.replay-2'])test('replay path rejects missing or mismatched tag '+String(tag),t=>{const f=fixture(t);const p=f.nativePath.replace('.attempt-1.','.attempt-1.replay-2.');if(tag===undefined)delete f.native.evidence_tag;else f.native.evidence_tag=tag;f.put(p,f.native);f.put(p.replace('.result.json','.last-message.json'),f.digest);f.route.native_result=f.reference(p);f.route.native_output=f.reference(p.replace('.result.json','.last-message.json'));f.save();assert.match(f.check().reason,/attempt\/evidence tag/);});
+
+--- tools/step4-outside-context-alerts.md
++++ tools/step4-outside-context-alerts.md
+@@ -42,7 +42,7 @@
+ `native_result` and `native_output` are `{path, sha256}` references to the exact
+ successful immutable reader attempt and corresponding `.last-message.json`.
+ The full parsed native output must equal the canonical digest byte serialization.
+-The native completion, batch, group, exact alert and index are checked.
++The native completion, batch, group, exact alert and index are checked. The numeric `attempt` and full `evidence_tag` must agree with the immutable attempt/replay filename, and both `exit_code` and `process_exit_code` must be zero.
+ 
+ `before_file: {path, sha256}`, `source_raw_sha256`, `source_guard` and
+ `source_captured_at` bind the **current owner-boundary capture**, which must be

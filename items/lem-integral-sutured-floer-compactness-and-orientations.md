@@ -36,7 +36,7 @@ sources:
 
 ## Statement
 
-For an actual weakly admissible balanced sutured diagram on a surface with boundary, the integral disk complex exists for each specified coherent orientation class. Its disk, triangle and quadrilateral moduli spaces admit finite signed counts and the corresponding oriented boundary identities on actual weakly admissible multidiagrams. Sphere and one-torus boundary bubbles are excluded by the zero boundary-region multiplicities. Orientation classes are transported rather than declared equivalent.
+Assume the Axiom of Choice. For an actual weakly admissible balanced sutured diagram on a surface with boundary, the integral disk complex exists for each specified coherent orientation class. Its disk, triangle and quadrilateral moduli spaces admit finite signed counts and the corresponding oriented boundary identities on actual weakly admissible multidiagrams. Sphere and one-torus boundary bubbles are excluded by the zero boundary-region multiplicities. Orientation classes are transported rather than declared equivalent.
 
 ## Facts & Assumptions
 
@@ -52,7 +52,7 @@ For an actual weakly admissible balanced sutured diagram on a surface with bound
 
 ## Proof
 
-**Given:** The actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement.
+**Given:** The Axiom of Choice and the actual diagrams, markings, orientation classes, and admissibility hypotheses in the statement.
 
 1.1 New operation, 2026-10-20. The argument below is a domain calculation. It is independent of determinant orientation choices and uses no manifold restriction. [construct]
 

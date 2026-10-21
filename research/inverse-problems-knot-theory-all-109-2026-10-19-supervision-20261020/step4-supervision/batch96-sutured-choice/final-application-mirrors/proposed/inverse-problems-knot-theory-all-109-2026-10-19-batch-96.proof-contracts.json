@@ -1,0 +1,2451 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere",
+    "def-balanced-taut-sutured-manifold-and-product-region",
+    "def-sutured-floer-chain-complex",
+    "def-knot-relative-spinc-structure",
+    "def-top-alexander-grading-of-knot-floer-homology",
+    "thm-knot-floer-detects-seifert-genus",
+    "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+    "lem-ni-fiberedness-sutured-floer-and-gabai-inputs",
+    "thm-fibered-knot-has-rank-one-top-knot-floer-homology",
+    "thm-rank-one-top-knot-floer-detects-fiberedness",
+    "ex-knot-kt-43-worked-cases",
+    "cex-knot-kt-43-boundary-case"
+  ],
+  "contracts": {
+    "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere": {
+      "authoring_status": "ready",
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected ([[def-simply-connected]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-universal-covering-space",
+          "source_section": "Definition",
+          "quote": "A **universal covering space** of $B$ is a covering map $p:\\widetilde B\\to B$ whose total space $\\widetilde B$ is simply connected ([[def-covering-map-and-evenly-covered-neighbourhoods]], [[def-simply-connected]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "source_section": "Statement",
+          "quote": "For a path-connected, locally path-connected, semilocally simply connected base $B$, the deck group of a universal cover is isomorphic to $\\pi_1(B,b_0)$. With the library's traversal-order path product the monodromy action is a right action, and the assignment carrying a loop class to the deck transformation that moves the chosen point of the fibre to the corresponding lifted endpoint is itself an isomorphism; no path reversal is inserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "source_section": "Statement",
+          "quote": "For every path-connected topological space $X$ and $x_0\\in X$, the Hurewicz map\n$$h:\\pi_1(X,x_0)\\longrightarrow H_1(X;\\mathbb Z)$$\nis surjective and has kernel $[\\pi_1(X,x_0),\\pi_1(X,x_0)]$. Hence it induces a natural isomorphism\n$$\\pi_1(X,x_0)^{\\mathrm{ab}}\\cong H_1(X;\\mathbb Z).$$\nThe proof is choice-free and requires no CW, separation, local path-connectivity or local simple-connectivity assumption.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-poincare-duality-for-oriented-topological-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be an $R$-oriented boundaryless $n$-manifold, with $R$ commutative unital; manifolds are Hausdorff and second countable here. Then cap with the compatible compact orientation classes gives isomorphisms\n$$D_M:H_c^p(M;R)\\xrightarrow{\\sim}H_{n-p}(M;R)$$\nfor every integer $p$, including disconnected, noncompact and empty $M$.\n\nNaturality means that for an open inclusion $i:U\\hookrightarrow M$ with restricted orientation, $D_M e=i_*D_U$, where $e$ is extension of compact supports. For compact $M$, $H_c^p(M;R)=H^p(M;R)$ canonically and $D_M(a)=a\\cap[M]$. For arbitrary $M$ the isomorphism is the direct sum of those on its components. AC is used in the countable coordinate-neighborhood selection for exhaustion and in the local universal-coefficient proof.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free\n$R$-modules, and $G$ an $R$-module. Then naturally\n$$0\\to\\operatorname{Ext}^1_R(H_{n-1}C,G)\\to H^n\\operatorname{Hom}_R(C,G)\\xrightarrow{\\operatorname{ev}_n}\\operatorname{Hom}_R(H_nC,G)\\to0$$\nis exact.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F7], the order-$120$ subgroup of unit quaternions acts freely by left multiplication, so $S^3\\to P$ is a covering with deck group $I^*$. Each left multiplication is isotopic to the identity because $S^3$ is path-connected; hence the action preserves orientation and the quotient is oriented. Since $S^3$ is simply connected by [F1], this cover is universal by [F2]. Then [F3] gives $\\pi_1(P)\\cong I^*$, which is nontrivial because its order is $120$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the abelianization, write the images of $s,t$ additively. The presentation in [F7] gives the relation $(st)^2=s^3=t^5$, hence $2s+2t=3s=5t$. The first equality yields $s=2t$; substituting into $3s=5t$ gives $6t=5t$, hence $t=0$ and $s=0$. Thus $(I^*)^{\\mathrm{ab}}=0$, and [F4] gives $H_1(P;\\mathbb Z)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The quotient is connected, compact, and oriented, so $H_0(P;\\mathbb Z)=H^0(P;\\mathbb Z)=\\mathbb Z$. By [F6], $H^1(P;\\mathbb Z)$ is an extension of $\\operatorname{Hom}(0,\\mathbb Z)=0$ by $\\operatorname{Ext}^1(\\mathbb Z,\\mathbb Z)=0$, so $H^1(P;\\mathbb Z)=0$. The AC assumption is the one in [A1], needed for [F6].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5] and step 2.1, $H_2(P;\\mathbb Z)=0$ and $H_3(P;\\mathbb Z)\\cong H^0(P;\\mathbb Z)=\\mathbb Z$. For $i>3$, [F5] identifies $H_i(P;\\mathbb Z)$ with negative-degree cohomology, which is zero. Together with steps 1.2 and 2.1, this is exactly the integral homology of $S^3$. Step 1.1 shows that $P$ is not simply connected, so it is not $S^3$. The use of [F5] requires [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The given quotient P=S3/I* is nonempty, so no empty quotient is in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 compute H1(P)=H2(P)=0 and all homology groups."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement gives |I*|=120 and step 1.1 proves pi1(P) is nontrivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The given action is free and orientation-preserving; no nonfree action is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "P is a closed manifold and the statement has no boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and the Given hypothesis state AC; steps 2.1 and 3.1 name its UCT and Poincare-duality uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct computation, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct computation, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked free finite left action and presentation against Debray §§1–2 pp.1–2, and the current covering, Hurewicz, UCT and Poincare-duality Statements. The quotient is closed connected oriented, so the suppliers apply under explicit AC. Abelianization gives s=2t, then t=s=0. UCT gives H1 cohomology zero and duality computes H2,H3 and higher degrees. Nontrivial fundamental group distinguishes S3. No empty quotient or nonfree-action extension is asserted."
+      }
+    },
+    "cex-knot-kt-43-boundary-case": {
+      "authoring_status": "ready",
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $I^*$ be the binary icosahedral group, the group of $120$ unit quaternions acting on the unit sphere $S^3$ by left multiplication, and put $P=S^3/I^*$. The quotient is a closed connected oriented $3$-manifold with universal cover $S^3$ and deck group $I^*$. Then $H_*(P;\\mathbb Z)\\cong H_*(S^3;\\mathbb Z)$ and $\\pi_1(P)\\cong I^*$ is nontrivial.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mayer-vietoris-sequence-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For an open cover $X=U\\cup V$, the sequence\n$$\\cdots\\to H_n(U\\cap V;G)\\to H_n(U;G)\\oplus H_n(V;G)\\to H_n(X;G)\\xrightarrow{\\delta}H_{n-1}(U\\cap V;G)\\to\\cdots$$\nis exact, with middle map $(u,v)\\mapsto u+v$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix the usual orientation of $S^n$. If $K$ is a nonempty proper compact weakly locally contractible subspace of $S^n$ and $R$ is a commutative unital ring, there are isomorphisms\n$$\\widetilde H_i(S^n\\setminus K;R)\\cong\\widetilde H^{n-i-1}(K;R)$$\nfor every integer $i$. They are natural for inclusions of such compact subsets, with the reverse inclusions of their complements, and with the fixed sphere orientation.\n\nFor the nonempty spaces here, reduced homology in degree zero is the augmentation kernel, reduced cohomology in degree zero is the quotient by constant classes, positive reduced groups are ordinary groups, and negative reduced groups are zero. AC is inherited from Poincaré duality and the neighborhood-retract theorem.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-homology-of-spheres",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\widetilde H_k(S^n;G)$ is $G$ for $k=n$ and $0$ otherwise.\nFor $S^0$, $\\widetilde H_0(S^0;G)\\cong G$ and all other reduced groups vanish.\nThus $H_0(S^n;G)\\cong G$ for $n\\ge1$, whereas\n$H_0(S^0;G)\\cong G\\oplus G$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free\n$R$-modules, and $G$ an $R$-module. Then naturally\n$$0\\to\\operatorname{Ext}^1_R(H_{n-1}C,G)\\to H^n\\operatorname{Hom}_R(C,G)\\xrightarrow{\\operatorname{ev}_n}\\operatorname{Hom}_R(H_nC,G)\\to0$$\nis exact.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-poincare-duality-for-oriented-topological-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be an $R$-oriented boundaryless $n$-manifold, with $R$ commutative unital; manifolds are Hausdorff and second countable here. Then cap with the compatible compact orientation classes gives isomorphisms\n$$D_M:H_c^p(M;R)\\xrightarrow{\\sim}H_{n-p}(M;R)$$\nfor every integer $p$, including disconnected, noncompact and empty $M$.\n\nNaturality means that for an open inclusion $i:U\\hookrightarrow M$ with restricted orientation, $D_M e=i_*D_U$, where $e$ is extension of compact supports. For compact $M$, $H_c^p(M;R)=H^p(M;R)$ canonically and $D_M(a)=a\\cap[M]$. For arbitrary $M$ the isomorphism is the direct sum of those on its components. AC is used in the countable coordinate-neighborhood selection for exhaustion and in the local universal-coefficient proof.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free\n$R$-modules, and $G$ an $R$-module. Then naturally\n$$0\\to\\operatorname{Ext}^1_R(H_{n-1}C,G)\\to H^n\\operatorname{Hom}_R(C,G)\\xrightarrow{\\operatorname{ev}_n}\\operatorname{Hom}_R(H_nC,G)\\to0$$\nis exact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The unknot $U$ bounds its spanning disk inside $B_0$, so $[U]=0$ in $H_1(Y;\\mathbb Z)$. For $X=P\\setminus\\operatorname{int}B^3$, use the collar enlargements [F5] of $X$ and $B^3$ in $P$. They form an open cover, retract to those pieces, and have intersection retracting to $S^2$; apply [F2] to this open cover. Since $H_1(S^2)=0$ by [F3], exactness injects $H_1(X)$ into $H_1(P)=0$, so $H_1(X)=0$. The same exact sequence in degree zero, using $H_1(P)=0$ and $H_0(P)=H_0(S^2)=H_0(B^3)=\\mathbb Z$, gives $0\\to\\mathbb Z\\to H_0(X)\\oplus\\mathbb Z\\to\\mathbb Z\\to0$. Rank comparison yields $H_0(X)\\cong\\mathbb Z$, so each punctured summand is connected with $H_1=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $A=B_0\\setminus U$ and let $C$ be the closed ball on the other side of $\\partial B_0$ in $S^3$. Identify $B_0$ with the unit ball and $U$ with a round circle in the plane $z=0$. From every point of $A$, the vertical segment in the direction of the sign of its $z$-coordinate reaches $\\partial B_0$ without meeting $U$; when $z=0$, the starting point is not on $U$ and the upward segment meets the plane only there. Since $\\partial B_0$ is path-connected, $A$ is path-connected. Thicken $A$ and $C$ by collars to obtain an open cover of $S^3\\setminus U$ whose overlap retracts to $S^2$. The map on $H_0(S^2)$ is the injection $1\\mapsto(1,-1)$. Since $H_1(S^2)=0$ and $C$ is contractible, [F2] identifies $H_1(A;\\mathbb Z)$ with $H_1(S^3\\setminus U;\\mathbb Z)$; [F3] identifies the latter with $\\mathbb Z$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to the open collar enlargements [F5] of the two punctured summands in $Y$; the pieces and intersection retract to the punctured summands and $S^2$, respectively. By step 1.1 both summands are connected and have zero $H_1$, and the map $H_0(S^2;\\mathbb Z)\\to H_0(P\\setminus\\operatorname{int}B^3;\\mathbb Z)\\oplus H_0(P\\setminus\\operatorname{int}B^3;\\mathbb Z)$ sends $1$ to $(1,-1)$ and is injective. Exactness gives $H_1(Y;\\mathbb Z)=0$. Since $Y$ is closed, connected, and oriented, [F4] gives $H_2(Y;\\mathbb Z)=0$ and $H_0(Y;\\mathbb Z)=H_3(Y;\\mathbb Z)=\\mathbb Z$. Hence $Y$ is an integral homology sphere. The duality and UCT uses are under [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The side of $S$ in the second summand is $P\\setminus\\operatorname{int}B^3$, which is not a $3$-ball: capping it with a ball would identify $P$ with $S^3$, contrary to [F1]. The other side is the union of $P\\setminus\\operatorname{int}(B^3\\cup B_0)$ and $A$, glued along $\\partial B_0$. Apply [F5] to obtain an open cover of this side, relative to its remaining boundary, with intersection retracting to that sphere and pieces retracting to the two named sets. Since $H_1(S^2)=0$ by [F3], exactness in [F2] makes the map from the direct sum of the two pieces' $H_1$ groups into the union's $H_1$ injective. Step 1.2 therefore makes this side's $H_1$ nonzero. Neither side is a $3$-ball, so $S$ cannot bound a $3$-ball in $Y\\setminus U$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "given",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $Y\\setminus U$ is reducible and the displayed universal assertion is false. The diagram records the separation and location of $U$; the proof uses the homology and homotopy arguments above, not the diagram.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Given data include a standard round unknot U, so the counterexample is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 establish H1(Y)=H2(Y)=0 and H0(Y)=H3(Y)=Z; step 1.2 computes H1(A)=Z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and Given data specify one standard round circle U as the knot."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Given data make U round and S disjoint from U; step 1.2 supplies the collar cover and verifies the complement-side calculation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "U is a closed knot and S is a closed sphere; neither has endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and the Given hypothesis explicitly assume AC; step 2.1 uses it for the PD/UCT supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is universal, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is universal, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked all five argument steps and the cited current MV, sphere homology, Alexander duality, UCT, duality and Poincare-sphere Statements. The actual collar-open covers satisfy MV; H1 of the punctured sphere summands vanishes, whereas B0 minus U has H1=Z. The connected-sum sphere has neither ball side after deleting U. The other punctured P cannot be a ball since capping would give S3. AC is explicit. The schematic TikZ labels correctly place the unknot in the left summand; no diagram identity is used in the proof."
+      }
+    },
+    "def-balanced-taut-sutured-manifold-and-product-region": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For empty R the product and the component sum x(S) use empty sets and sum zero; for nonempty closed R, R×I fails balancedness because its boundary misses annular sutures. The definition does not automatically call every product balanced.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "For empty R the product and the component sum x(S) use empty sets and sum zero; for nonempty closed R, R×I fails balancedness because its boundary misses annular sutures. The definition does not automatically call every product balanced.",
+            "item_sha256": "3b8295766f197bc5e9960a0ddcc650ab7ff0420c7a566d743977d20b1e6c7382",
+            "row_sha256": "08e07f800e75043844d137e04768f86e2e985a5bf07ec78f61ff12a2b9bf963c",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 380
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. iff-reverse is not independently checked here."
+        }
+      ]
+    },
+    "def-sutured-floer-chain-complex": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At d=0 the Definition explicitly makes Sym0 and both tori a point with the unique empty generator and zero differential; an empty disk-class sum is zero, not an existence failure.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "At d=0 the Definition explicitly makes Sym0 and both tori a point with the unique empty generator and zero differential; an empty disk-class sum is zero, not an existence failure.",
+            "item_sha256": "3c80c8ecef515b11402bccf11232d407f78fe983306068987f8f2ba11774f575",
+            "row_sha256": "e44724f50260175a97af607ddf5d2044fb36a318d9407d8d9a6c6925e0dc37ba",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 381
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. iff-reverse is not independently checked here."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked Juhasz surface-decomposition paper Definitions 2.10–2.22 against balanced diagrams, zero boundary-region domains, periodic admissibility and signed disk-count formula. Sym^0 is a point with one empty generator and zero differential. Analytic existence and invariance are explicitly conditional, rather than asserted by this notation definition. Orientation systems are supplied for integral counts. Repeated definitions are editorial redundancy, not a changed mathematical interface."
+      }
+    },
+    "def-knot-relative-spinc-structure": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. iff-reverse is not independently checked here."
+        }
+      ]
+    },
+    "def-top-alexander-grading-of-knot-floer-homology": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. iff-reverse is not independently checked here."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Read the current relative Spin-c definition and meridional frame convention, the sutured complex definition and Juhasz §3. The pairing uses a relative H2 class and a relative Chern class, and the direct sum fixes integral coefficients at the supplied Seifert class. Diagram invariance and comparison with grid coefficients are expressly deferred. No mod-two computation is promoted to an integral theorem. The actual meridional frame is also the one retained by the outer-grading supplier."
+      }
+    },
+    "thm-knot-floer-detects-seifert-genus": {
+      "authoring_status": "complete",
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $S\\subset S^3$ be the image of a smooth embedding of the standard $S^2$. There is a smooth ambient isotopy $H_t:S^3\\to S^3$, with $H_0=\\operatorname{id}$, such that $H_1(S)$ is the standard equatorial sphere $E$. In particular $S^3\\setminus S$ has exactly two components. Their closures $B_+$ and $B_-$ are smoothly embedded standard closed $3$-balls with common boundary $S$. If $D_+$ and $D_-$ denote the standard closed hemispheres bounded by $E$, the labels can be chosen so that the restrictions $H_1:B_\\pm\\to D_\\pm$ are diffeomorphisms with the same boundary restriction $H_1|_S:S\\to E$. Thus the ball identifications are compatible on their boundary and on a common two-sided collar of that boundary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-integral-sutured-floer-taut-hierarchy-nonvanishing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. Let a balanced sutured manifold be taut. For a specified coherent orientation class, its integral sutured Floer homology has a direct summand isomorphic to the integers. More precisely, a finite good taut hierarchy terminating in product balls induces a split inclusion of the terminal product homology into the original homology, with orientation classes induced along the cuts.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $F$ be a genus-$g$ Seifert surface, and let $(M,\\gamma)$ be the balanced sutured manifold obtained by cutting the compact exterior of $K$ along $F$. For a surface-adapted admissible sutured Heegaard diagram, the generator correspondence between the top Alexander summand of the knot Floer complex and the sutured Floer disk-count module identifies their disk-count differentials. Under the hypotheses of a horizontal decomposition, the induced chain map realizes Ni's horizontal decomposition formula. For an essential separating product annulus with connected $R_+$ and $R_-$ whose decomposition has two balanced pieces, the induced chain map realizes Ni's product-annulus tensor formula. These assertions use the specified basepoint domains, periodic-domain admissibility, and exact characteristic-product-region hypotheses; they make no claim that generic Heegaard disk existence alone supplies the decomposition maps.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fiber-outer-grading-and-integral-cut-euler-matrix",
+          "source_section": "Statement",
+          "quote": "For the actual marked Seifert surface of genus g, oriented as minus the fiber for the cut, an adapted generator x has Alexander degree g minus the number of its interior polygon coordinates. Thus the top degree-g generators are exactly the outer generators and correspond to the cut diagram generators with their ordered intersection signs. If the integral top homology is one copy of the integers, the actual cut incidence matrix is unimodular, the cut is an integral homology product, and its periodic-domain group vanishes.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-oriented-seifert-surface-and-knot-genus",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. For an oriented smooth knot $K\\subset S^3$, define\n\n$$\\mathcal G(K):=\\{n\\in\\mathbb N_0: \\text{there is a Seifert surface }F\\text{ for }K\\text{ with }g(F)=n\\}.$$\n\nEvery element of $\\mathcal G(K)$ is the genus of a connected compact oriented surface. The existence theorem makes $\\mathcal G(K)$ nonempty, and the well-ordering of $\\mathbb N_0$ gives its least element. The **smooth knot genus** is $g(K):=\\min\\mathcal G(K)$. This genus is the minimum over embedded spanning surfaces; it is not the number of Seifert circles or the genus of every surface produced from a diagram.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-integral-sutured-floer-compactness-and-orientations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For an actual weakly admissible balanced sutured diagram on a surface with boundary, the integral disk complex exists for each specified coherent orientation class. Its disk, triangle and quadrilateral moduli spaces admit finite signed counts and the corresponding oriented boundary identities on actual weakly admissible multidiagrams. Sphere and one-torus boundary bubbles are excluded by the zero boundary-region multiplicities. Orientation classes are transported rather than declared equivalent.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-countable-analytic-choice-for-fixed-sutured-floer-data",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix a finite collection of admitted compact marked sutured diagrams, a finite sequence of diagram moves or surface cuts, and finite-dimensional parameter families of dimension at most two. Suppose the local Fredholm, finite-dimensional Sard, compactness and gluing constructions are supplied for their actual Cauchy–Riemann operators, including the prescribed endpoint and protected-neighborhood conditions. All selections needed to apply those constructions, choose coherent determinant orientations, and obtain simultaneous regular data can then be made under Countable Choice. In particular no uncountable choice of analytic charts or regular data is needed for these fixed finite integral Floer constructions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a Seifert surface F realizing the least genus g=g(K), and let E be the compact exterior. The exterior is irreducible: a sphere in its interior bounds two balls in S³ by F1; the connected knot neighborhood lies entirely on one side, so the other ball is disjoint from it and lies in E. A small oriented meridian loop meets F once, so F is nonseparating: a separating two-sided surface would have algebraic intersection zero with every closed loop. Cut E along the connected F to obtain connected M with the product annular suture and the two F faces. Their Euler characteristics agree and the boundary meets that suture, so M is balanced. A sphere in M is disjoint from F in E. Its E-ball is also disjoint from F: since F is connected, disjoint from the sphere, and has its boundary on ∂E outside that interior ball, it lies entirely on the other side. Thus that ball remains a ball in M. This proves irreducibility of the actual cut without a general-Y irreducibility assertion.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The two faces are incompressible. A compression of F along a nonseparating essential circle produces a connected Seifert surface of genus g−1. A separating compression produces a boundary-bearing Seifert component and a closed component. The latter has positive genus, since otherwise the original compression circle bounded a disk on F; discarding it again gives a Seifert surface of genus strictly less than g. Both contradict minimality. A face compression in M would be such a compression in E. For g=0 the disk has no essential compression circle.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "To prove the actual sutured norm-minimality, take any compact oriented properly embedded competitor T representing the positive face class in H₂(M,γ;Z). Its total oriented boundary in H₁(γ;Z) is one copy of the longitude. Put its boundary circles in the interior of the annular suture. Cap an innermost contractible boundary circle by its disk in the annulus, pushed into the boundary collar; this operation increases Euler characteristic and cannot increase the Thurston complexity. Continue until every boundary circle is essential. Whenever both orientations remain, choose an adjacent opposite pair. The annulus between them contains no other boundary circle. Glue it to T in a thin boundary collar and round the corners. This gives an embedded oriented surface and removes the pair. Euler characteristic is unchanged; if two components merge, the inequality max(0,−(χ₁+χ₂))≤max(0,−χ₁)+max(0,−χ₂) shows that total complexity cannot increase. For two circles on one component its Euler characteristic, hence complexity, is unchanged. The finite sequence ends with exactly one essential boundary circle, since its total winding is one. Delete all closed components, which also cannot increase complexity. The remaining connected surface embeds in E and extends across the knot collar to an actual Seifert surface for K of the same genus. Its genus is at least g by minimality. For g≥1 its complexity is therefore at least 2g−1=x(F); for g=0 it is at least zero=x(F). It follows that x(T)≥x(F). The same argument applies to the negative face. Thus M is the actual taut balanced sutured manifold, by irreducibility and norm-minimality. The boundary cancellations were used only to derive a lower bound and need not preserve the competitor's relative class after it is mapped to E.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Work under the full-Choice analytic framework F6 on the actual fixed finite hierarchy and marked adapted diagram. Its admitted sutured operator problems retain the boundary/divisor barriers, periodic-domain and area conditions and the specified coherent orientation class. With the regular data and compactification/gluing construction supplied at that scope, apply F3 to the marked Seifert surface F. Its meridional frame, rather than an unspecified closure framing, gives an admissible adapted representative. By F4 every generator has Alexander degree g−n_P(x), with n_P(x) a nonnegative integer. Hence its whole integral chain complex has no generator, and thus no homology, in a grading greater than g.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The entire degree-g summand is the outer summand, and F3 identifies its signed differential with the actual cut complex of M. Since M is taut, F2 gives that this cut homology contains a split copy of Z for the orientation class induced by the given knot complex. Consequently the integral knot Floer group at degree g is nonzero. This also covers g=0: the taut cut argument and the same signed chain map apply to the minimum disk, without a genus-one connected-sum or field-coefficient substitution.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Degree g is nonzero and every larger degree is zero, so the maximum of the stated nonvanishing degree set is exactly g(K). The proof uses only the literal S³ ball-side and minimum-Seifert-genus arguments above; it makes no claim of arbitrary general-Y Thurston norm detection.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A smooth knot has a nonempty connected spanning surface, and2.2 proves a nonzero top integral group; no empty complex maximum is taken.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "A smooth knot has a nonempty connected spanning surface, and2.2 proves a nonzero top integral group; no empty complex maximum is taken.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "18f62c9b37d2b088225c771a1a102e67805affe347524654925a1f712f2d6735",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 184
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For g=0 the disk has no essential compression circle in 1.2 and the same signed cut identification gives nonzero degree-zero homology in 4.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "For g=0 the disk has no essential compression circle in1.2 and the same signed cut identification gives nonzero degree-zero homology in2.2.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "20b0f55e1c3d64782458867055d90925910cc38ae664e7bca9df8b1b122efd02",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 185
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Genus one is an instance of the same taut-cut argument, not a separate stabilization premise.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Genus one is an instance of the same taut-cut argument, not a separate stabilization premise.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "6281152ab065c0efb9ea0e0cfbf3fe06ee79789426f3eb3b9ef666a4efe73c76",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 186
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Integral top nonvanishing is supplied as a split Z in2.2; it is not inferred just from mod-two coefficients.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Integral top nonvanishing is supplied as a split Z in2.2; it is not inferred just from mod-two coefficients.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "cadfea04ea85c1a95c84f13f9ef0c184fd0a3226748179773dd2c1339bfd9a20",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 187
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All Alexander degrees above g vanish in2.1, while degree g survives in2.2; these are precisely the upper-support boundary cases.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "All Alexander degrees above g vanish in2.1, while degree g survives in2.2; these are precisely the upper-support boundary cases.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "daa11b26deaebac0ccc73d4fd6d8bab29186685124ba7fd1a7b25f1c5755efd1",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 188
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Full AC is explicit; F6 imports the classical integral sutured analytic framework and does not certify a CC-only strengthening.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Full AC is explicit; F6 imports the classical integral sutured analytic framework and does not certify a CC-only strengthening.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "a2d64a022ec5c4560b62b28ca4bf28c6f703b38c4b9b83b3bddc07127d95fc15",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 191
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Integral hat HFK of a knot in S3 has highest nonzero Alexander grading equal to minimum Seifert genus. This is the stated implication/computation under its hypotheses; a forward biconditional direction is not separately asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Integral hat HFK of a knot in S3 has highest nonzero Alexander grading equal to minimum Seifert genus. This is the stated implication/computation under its hypotheses; a forward biconditional direction is not separately asserted.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "7478859d6fd7216ea1cffa9b8312178e729e47c4fd7ef56928f9609e34e7c909",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 189
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Integral hat HFK of a knot in S3 has highest nonzero Alexander grading equal to minimum Seifert genus. This is the stated implication/computation under its hypotheses; a converse characterization of those hypotheses is not separately asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Integral hat HFK of a knot in S3 has highest nonzero Alexander grading equal to minimum Seifert genus. This is the stated implication/computation under its hypotheses; a converse characterization of those hypotheses is not separately asserted.",
+            "item_sha256": "3ab8db093d6b08e582ae924234a78c1af739ac592e9f2e17d9f3792441c2d070",
+            "row_sha256": "1f7ca6bd1e7bb8253a04f61d677f02355a0dd547c719e88620107c5a6e504ad5",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 190
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply a complete integral-coefficient genus-detection proof with all analytic, taut-sutured nonvanishing, and HFK/SFH comparison inputs.",
+        "Resolve the axiom-strength gap: the statement assumes AC_omega but the local PD/UCT proof branch requires full AC.",
+        "Do not use the batch-92 mod-two grid comparison as proof of the integral claim."
+      ],
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Full integral S3 genus theorem exactCountableChoice scope restored by new nine-step restricted analytic selection/compactness/gluing branch and explicit genus proof wiring. Whole broad analytic helper remains fullAC; no toolkit-wide weakening. Actual finite admitted inputs and pointwise constructions supplied; no generalY norm theorem.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and genus bounds, arXiv:math/0311496, Theorem 1.2 and proof",
+                "url": "https://arxiv.org/pdf/math/0311496",
+                "locator": "Printed pp.2 and 18–19; zero-surgery, taut foliation, contact nonvanishing, and the genus-one connected-sum case"
+              },
+              {
+                "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, Theorems 1.4–1.5 and Corollary 8.3",
+                "url": "https://arxiv.org/pdf/math/0609779v3",
+                "locator": "Printed pp.2–3 and 28–29; taut sutured Floer nonvanishing, the HFK-sutured decomposition, and genus detection"
+              },
+              {
+                "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorem 2.3",
+                "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+                "locator": "Printed p.5; S3 genus-detection formula and normalization"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": null,
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-96.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked all six numbered steps: S3 sphere ball sides imply exterior and cut irreducibility; either kind of face compression contradicts minimum genus; finite boundary caps and opposite annular cancellations turn a competitor into a Seifert surface without increasing complexity (g=0 separately). The actual outer grading gives no generators above g; signed top/cut identification and taut hierarchy give a nonzero integral group at g. Current sphere, genus, conditional-choice, outer-grading and hierarchy interfaces were read. Full AC in the Statement and F6 covers the analytic input whose read-only helper Statement omits AC; no CC-only theorem is inferred. That broader helper mismatch is separately escalated."
+      }
+    },
+    "lem-ni-holomorphic-disk-and-jsj-analytic-inputs": {
+      "authoring_status": "complete",
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-signed-relative-surface-cut-and-horizontal-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. An actual good decomposing surface admits an adapted admissible nice diagram. For a specified coherent orientation class on the exterior complex, the outer summand of that diagram is integrally chain isomorphic to the cut diagram with the induced orientation class; nonzero periodic domains are retained by pullback of characters. When the surface separates into two balanced pieces, every generator is outer and the full complex is identified with the graded tensor product of the two component complexes. In particular the usual two-piece horizontal decomposition has this chain formula. It gives the homology tensor formula over every field; over the integers it gives the graded Künneth exact sequence including Tor.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-signed-essential-product-annulus-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. Let a balanced sutured manifold have connected positive and negative boundary faces. An essential separating product-annulus decomposition into balanced pieces admits a graded integral tensor chain equivalence, with coherent orientation classes induced from the specified class. This realizes the homology tensor formula over every field and the integral Künneth formula with Tor. Product-disk decompositions and product one-handle additions have literal integral complex identifications. The closure construction for any connected pair of faces identifies its top knot complex with the actual sutured disk complex using the specified marking and orientation class.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-top-alexander-grading-of-knot-floer-homology",
+          "source_section": "Definition",
+          "quote": "Let $Y$ be a closed connected oriented $3$-manifold, let $K\\subset Y$ be a smooth oriented null-homologous knot, and let $F\\subset Y$ be a compact connected oriented embedded surface with oriented boundary $K$. Choose a closed tubular neighborhood $N(K)$, put $M=Y\\setminus\\operatorname{int}N(K)$, and let $\\gamma_\\mu$ be the union of two disjoint annuli on $\\partial M$ whose core sutures are parallel meridians of $K$ with opposite orientations. Delete a collar of $\\partial F$ to regard $F$ as a properly embedded surface in $(M,\\gamma_\\mu)$, with relative class $[F]\\in H_2(M,\\partial M;\\mathbb Z)$. Let $t_\\mu$ be the meridional boundary trivialization of the oriented plane field used in the relative Spin-c definition. For $\\mathfrak{s}\\in\\operatorname{Spin}^c(M,\\gamma_\\mu)$, its Alexander grading is\n\n$$A_F(\\mathfrak{s})=\\frac12\\left\\langle c_1(\\mathfrak{s},t_\\mu),[F]\\right\\rangle,$$\n\nwith the standard sign convention that gives the usual Alexander grading for knots in $S^3$. For a balanced admissible sutured Heegaard diagram of $(M,\\gamma_\\mu)$, the Spin-c summand $SFH(M,\\gamma_\\mu,\\mathfrak{s};\\mathbb Z)$ is the homology of the integral sutured Floer disk-count complex generated by the Heegaard generators assigned to $\\mathfrak{s}$. Define the integral knot Floer group in Alexander grading $i$ by\n\n$$\\widehat{\\mathrm{HFK}}(Y,K,[F],i;\\mathbb Z)=\\bigoplus_{\\substack{\\mathfrak{s}\\in\\operatorname{Spin}^c(M,\\gamma_\\mu)\\\\ A_F(\\mathfrak{s})=i}}SFH(M,\\gamma_\\mu,\\mathfrak{s};\\mathbb Z).$$\n\nThis fixes the integral coefficient convention. The equivalent associated-graded closed Heegaard-complex presentation, invariance under changing diagrams, and comparison with the mod-two grid complex are separate theorems; this definition supplies none of their proofs or a coefficient-change map.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fiber-outer-grading-and-integral-cut-euler-matrix",
+          "source_section": "Statement",
+          "quote": "For the actual marked Seifert surface of genus g, oriented as minus the fiber for the cut, an adapted generator x has Alexander degree g minus the number of its interior polygon coordinates. Thus the top degree-g generators are exactly the outer generators and correspond to the cut diagram generators with their ordered intersection signs. If the integral top homology is one copy of the integers, the actual cut incidence matrix is unimodular, the cut is an integral homology product, and its periodic-domain group vanishes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Construct the actual marked closure/adapted surface diagram from the relative Morse handles, carrying the page longitude and meridional boundary frame. Positive boundary fingers, the uniform relative windings, and permissible niceification give the admitted diagram. The Chern obstruction formula evaluates on minus F as minus 2g plus twice the number of interior polygon coordinates. Consequently its degree-g generators are exactly its outer generators. Each index-one disk is an exhausted embedded bigon or rectangle and lifts uniquely in the cut/double surface. The literal Fredholm conjugacies and the pullback of the specified periodic-domain orientation character align every coefficient after generator signs. Thus this generator correspondence identifies the full disk-count differentials over the integers. Signed relative moves transport the identification to the defining complexes, with their markings and coherent orientation classes.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a horizontal decomposition, the cut components are balanced. In its adapted diagram there is no reverse cross-family intersection from side two to side one; the equal row and column counts force every perfect-matching generator to avoid the polygon. Thus the whole complex is the outer complex. The cut surface is a disjoint union, so each index-one disk has exactly one nonconstant factor. Ordering determinant factors gives the Koszul differential ∂(x1⊗x2)=∂x1⊗x2+(−1)^|x1|x1⊗∂x2. This is the horizontal chain map and the complete integral chain formula. Taking homology over any field gives Ni's horizontal formula. Taking homology over the integers instead gives the Künneth exact sequence including Tor; no unqualified integral homology tensor formula is asserted.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For an essential separating product annulus with connected R+ and R− and two balanced cut pieces, form the two rounded horizontal surfaces from opposite boundary faces and the annulus. Their actual cobordism regions give the required relative class and their Euler sums give the horizontal equality. This reduces the operation to attachment of a product region. A rooted cut-arc forest removes a product region meeting the sutures by literal product-disk identifications. For an interior essential product region, the explicit once-punctured-torus block forces its two fixed coordinates and isolates the only possible extra genus-one two-corner domain, whose Maslov index is minus one; it cannot contribute. Both comparison diagrams therefore have precisely the same supported disks and conjugate oriented operators in the unchanged complement. The resulting integral chain identification, followed by the remaining product-disk cuts, gives the full separating-annulus graded tensor operation. It gives Ni's field formula and the integral Künneth/Tor formulation as above. All constructions keep the stated basepoint zero regions, actual periodic lattices and essential-annulus hypotheses. They apply when the specified characteristic product region supplies those actual surfaces; they do not infer its geometry from generic disk existence.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Y is closed connected and K has a supplied Seifert surface and balanced sutured cut; an empty link or absent adapted diagram is not an input.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Y is closed connected and K has a supplied Seifert surface and balanced sutured cut; an empty link or absent adapted diagram is not an input.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "a401389c69880e1d3872b9e43f61bf09e5ad16b218505adcf7406f4dbf92008f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 120
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 1.1 identifies the absolute outer grading by −2g plus twice the interior-coordinate count; g=0 is not removed, and1.2 retains the integral Tor correction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof1.1 identifies the absolute outer grading by −2g plus twice the interior-coordinate count; g=0 is not removed, and1.2 retains the integral Tor correction.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "2bdd7996684eeb127c425a0db387a00e047a85d30a5bd058056899c7c04ef491",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 121
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 2.1 uses index-one disks with one nonconstant factor;3.1 expressly requires connected R+ and R− for the separating-annulus operation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof1.2 uses index-one disks with one nonconstant factor;3.1 expressly requires connected R+ and R− for the separating-annulus operation.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "7fd4e5f8caaf7daffe16896e1e0cc4644fa242f359d76068997c183aaddda579",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 122
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The diagram must be admissible with specified basepoint-zero regions; nonessential/nonseparating annuli or wrong characteristic-product hypotheses are explicitly not covered.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The diagram must be admissible with specified basepoint-zero regions; nonessential/nonseparating annuli or wrong characteristic-product hypotheses are explicitly not covered.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "8f4e418eb7f5209615a6330c98d81a01578fd7d73042cbb3536f40fdd363cb11",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 123
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 1.1 transports the meridional frame/longitude and orientation character;3.1 keeps the same basepoint-zero regions and actual periodic lattices through the cuts.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof1.1 transports the meridional frame/longitude and orientation character;3.1 keeps the same basepoint-zero regions and actual periodic lattices through the cuts.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "a0376f09bdc46e796325ce8e88c4ad62b83cf5daf82d3469bf4c4c1d87f30aa0",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 124
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement works with supplied admissible surface-adapted data;1.1–3.1 transport those data and invoke exact local interfaces, without a new arbitrary-family selection claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The statement works with supplied admissible surface-adapted data;1.1–3.1 transport those data and invoke exact local interfaces, without a new arbitrary-family selection claim.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "f63e4f1ba64f388573c2e904ae2b47fd34e85b3e1b70274836e4e03426c3d067",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 127
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma identifies supplied chain differentials/maps under decomposition hypotheses; it does not characterize all fibered knots or product regions by an iff.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The lemma identifies supplied chain differentials/maps under decomposition hypotheses; it does not characterize all fibered knots or product regions by an iff.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "b23ae05abaca3c59cc7a2c4bc5730289cb3d33d6d1a04acd6214f6eb348b446a",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 125
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse infers a product-annulus geometry from generic holomorphic disk existence or an abstract tensor decomposition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No converse infers a product-annulus geometry from generic holomorphic disk existence or an abstract tensor decomposition.",
+            "item_sha256": "292ec9de0f9e9ec161b7f20f4868bf4d5813981c0af47f50ca9a5d76a60edf02",
+            "row_sha256": "6fd8ff23d9307950006f46884b0e4afcd59494260f95572a77340b733b141723",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 126
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply the integral signed sutured disk-count compactness, regularity, gluing, orientation, and surface-decomposition proof.",
+        "The planned thm-jsj-decomposition-of-knot-exteriors carrier is absent; its batch-71 manifest statement only covers knots in S3, while this lemma quantifies over general closed oriented Y.",
+        "The planned satellite-pattern definition is S3-specific and does not cover a knot in arbitrary Y.",
+        "Resolve full-AC use in the planned JSJ proof against the AC-free theorem statement."
+      ],
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Full original analytic/horizontal/essential-separating-annulus package integrated with unchanged Statement. Actual nonzero-periodic signed cut and integral chain tensor supplied; Ni field homology formulas and correct integral Tor scope retained. Shared hierarchy/characteristic/product/converse claims remain separate.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §§2.2–5",
+                "url": "https://arxiv.org/pdf/math/0607156v4",
+                "locator": "Printed pp.5–15; sutured Floer setup, surface-adapted diagrams, horizontal decomposition, and separating product-annulus decomposition"
+              },
+              {
+                "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §§1–7",
+                "url": "https://arxiv.org/pdf/math/0609779v3",
+                "locator": "Printed pp.1–31; balanced sutured diagrams, surface-decomposition chain maps, admissibility, and analytic construction"
+              },
+              {
+                "title": "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and topological invariants for closed three-manifolds, arXiv:math/0101206",
+                "url": "https://arxiv.org/pdf/math/0101206",
+                "locator": "Printed pp.19–35; Fredholm regularity, energy bounds, compactness, and index-two boundary and gluing arguments"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": null,
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-96.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked current signed horizontal-cut, essential-annulus and outer-grading suppliers against each of steps 1.1–3.1. Full AC now appears in the public claim. The annulus branch is corrected to the actual essential separating-annulus, connected-face, two-balanced-piece scope of F2; the balanced/product-annulus definition does not itself imply essentiality. Integral claims are chain comparisons; homology tensor products are restricted to fields, with Tor retained over Z. Ni Theorem 5.1 p.17 supplies a field formula, not the stronger signed chain statement. Direct consumers use the top/outer comparison or the separately imported product criterion, so none uses a nonessential integral annulus comparison. No higher claim changes."
+      }
+    },
+    "lem-ni-fiberedness-sutured-floer-and-gabai-inputs": {
+      "authoring_status": "complete",
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $F$ be a genus-$g$ Seifert surface, and let $(M,\\gamma)$ be the balanced sutured manifold obtained by cutting the compact exterior of $K$ along $F$. For a surface-adapted admissible sutured Heegaard diagram, the generator correspondence between the top Alexander summand of the knot Floer complex and the sutured Floer disk-count module identifies their disk-count differentials. Under the hypotheses of a horizontal decomposition, the induced chain map realizes Ni's horizontal decomposition formula. For an essential separating product annulus with connected $R_+$ and $R_-$ whose decomposition has two balanced pieces, the induced chain map realizes Ni's product-annulus tensor formula. These assertions use the specified basepoint domains, periodic-domain admissibility, and exact characteristic-product-region hypotheses; they make no claim that generic Heegaard disk existence alone supplies the decomposition maps.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E$ be the compact exterior and $(M,\\gamma)$ its cut along $F$. Its two faces are copies of $F$, and its vertical boundary is the annulus $\\partial F\\times I$. It is balanced: both faces have Euler characteristic $1-2g$, no component is closed, and every boundary component meets the vertical annulus. A meridian intersects $F$ algebraically once, so $F$ is nonseparating and the cut is connected.",
+          "step": "1.1",
+          "inputs": [
+            "Given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The signed cut comparison gives $\\operatorname{SFH}(M,\\gamma;\\mathbb Z)\\cong\\widehat{\\mathrm{HFK}}(Y,K,[F],g;\\mathbb Z)\\cong\\mathbb Z$. The grading uses the supplied class $[F]$ and genus of this actual surface; no genus-detection theorem for a different ambient manifold is substituted.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The irreducibility assumption applies to $E$: pushing away the deleted-knot end identifies every compact sphere question with that in $Y\\setminus K$. A sphere in the interior of $M$ is therefore a sphere disjoint from $F$ in $E$ and bounds a ball in $E$. Since $F$ is connected and disjoint from this sphere, if it entered the ball it would lie wholly in its interior, contradicting $\\partial F\\subset\\partial E$. The ball is consequently disjoint from $F$; shrink the cut collar if necessary to obtain the same ball in $M$. Thus $M$ is irreducible.",
+          "step": "2.1",
+          "inputs": [
+            "Given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $(M,\\gamma)$ were not taut, its integral sutured Floer homology would vanish by the external vanishing input, contradicting step 1.2. Therefore it is taut. This is the contrapositive of F2, not a reversal of taut hierarchy nonvanishing.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If the taut balanced $(M,\\gamma)$ were not a product, F3 would give $\\mathbb Z^2\\hookrightarrow\\operatorname{SFH}(M,\\gamma;\\mathbb Z)$. Such an injection into $\\mathbb Z$ is impossible: images $a,b$ of its two basis vectors satisfy the nontrivial integer relation $b a-a b=0$ when either is nonzero, and an image zero itself contradicts injectivity. The two disjoint outer summands in the source argument therefore contradict step 1.2. Hence the actual $F$-cut exterior is a product sutured manifold. This includes $g=0$ and uses the corrected characteristic-pair qualification F4.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The actual Seifert surface is connected with one boundary circle;1.1 gives two nonempty faces and a vertical annulus.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The actual Seifert surface is connected with one boundary circle;1.1 gives two nonempty faces and a vertical annulus.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "4711ef34d4165365214ef89f841f61f0e7f021f7a1dc5f705348358d85c68a22",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 120
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Genus0 is explicitly included in 4.1; the balanced-face Euler characteristic is1-2g and the same rank contradiction applies.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Genus0 is explicitly included in4.1; the balanced-face Euler characteristic is1-2g and the same rank contradiction applies.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "6524c8cea3da4f049a0db1137f0680283f2b1fd191d03f6782634ec420725178",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 121
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rank-one hypothesis is used as SFH≅Z in 1.2;4.1 rules out the two-generator nonproduct alternative.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The rank-one hypothesis is used as SFH≅Z in2.1;4.1 rules out the two-generator nonproduct alternative.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "bc6aa3e12be1c0dcb57d151d2a7963ead32b0da61398c52f661fb80d6f419f9b",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 122
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Irreducible complement is an explicit hypothesis;2.1 proves the cut is irreducible before applying external nontaut vanishing.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Irreducible complement is an explicit hypothesis;2.1 proves the cut is irreducible before applying external nontaut vanishing.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "d9de55c1b3f15a7e0ee936a85a04d5a7bcc915a12cf63d59fc23fed130defa9f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 123
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two actual F copies and the annular vertical boundary are identified in 1.1; no different Seifert surface is selected.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The two actual F copies and the annular vertical boundary are identified in1.1; no different Seifert surface is selected.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "037e620f0370b0110adfd754141d8b90e262612ce6ce6874920b70ad103a5fe2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 124
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The supplied knot/F and meridian establish a connected cut in 1.1; corrected maximal product-pair theory is explicitly imported, not chosen from S3 JSJ.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The supplied knot/F and meridian establish a connected cut in1.1; corrected maximal product-pair theory is explicitly imported, not chosen from S3 JSJ.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "dc504d1feba0c197718618f858a51c5d3b90a7017e3a29fe71da005169a290d6",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 127
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Rank-one integral top HFK implies the actual F-cut exterior is a product; the reverse implication is not asserted in this lemma. The forward-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Rank-one integral top HFK implies the actual F-cut exterior is a product; the reverse implication is not asserted in this lemma. The forward-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "29849d0bd7a9337c67916a4f31e751a5b3586a0a84128966dac6c97b339b8d20",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 125
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Rank-one integral top HFK implies the actual F-cut exterior is a product; the reverse implication is not asserted in this lemma. The reverse-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Rank-one integral top HFK implies the actual F-cut exterior is a product; the reverse implication is not asserted in this lemma. The reverse-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "fcc5b1d1b67b34c9c95b98f11ec0210589e39d205256beff2e6b9f4a41fb1bd1",
+            "row_sha256": "9301dd4d6181ce04938411e3348f603a523b4ac5369cde76a51589b279981732",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 126
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply complete proofs of the homology-product reduction, horizontal and product-annulus decompositions, characteristic-region argument, and Gabai input.",
+        "Supply a general-Y JSJ supplier with exact hypotheses; the only planned batch-71 JSJ statement is for knots in S3 and its carrier is absent.",
+        "Resolve full-AC use in the proof route against the AC-free statement."
+      ],
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/carrier-ni2-source-binding-review.md",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §§3–7",
+                "url": "https://arxiv.org/pdf/math/0607156v4",
+                "locator": "Author version Theorem 1.1 p.2, characteristic-region material p.29, and main proof pp.35–36; must be used with the cited Corrigendum"
+              },
+              {
+                "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §§8–9",
+                "url": "https://arxiv.org/pdf/math/0609779v3",
+                "locator": "Author version Theorem 1.5 p.2, Theorem 9.7 pp.34–38 and Theorem 9.11 pp.38–39; published pagination is recorded separately below"
+              },
+              {
+                "title": "David Gabai, Foliations and the topology of 3-manifolds III, Theorem 3.13 and Theorem 8.9",
+                "url": "https://doi.org/10.2307/1971333",
+                "locator": "Taut hierarchies, norm-minimizing surfaces, and the foliations used in Ni's characteristic-product-region argument"
+              },
+              {
+                "title": "András Juhász, Holomorphic discs and sutured manifolds, Algebraic & Geometric Topology 6 (2006), 1429–1457",
+                "url": "https://msp.org/agt/2006/6-3/agt-v6-n3-p16-s.pdf",
+                "locator": "Proposition 9.18, printed pp.1452–1453: irreducible balanced and not taut implies integral SFH vanishes"
+              },
+              {
+                "title": "András Juhász, Floer homology and surface decompositions, Geometry & Topology 12 (2008), 299–350",
+                "url": "https://msp.org/gt/2008/12-1/gt-v12-n1-p07-s.pdf",
+                "locator": "Theorem 1.5 p.300, Theorem 9.7 pp.343–348 and Theorem 9.11 p.348; general ambient manifold, integral cut identification and nonproduct rank bound"
+              },
+              {
+                "title": "Yi Ni, Corrigendum to Knot Floer homology detects fibred knots, Inventiones Mathematicae 177 (2009), 235–238",
+                "url": "https://arxiv.org/pdf/0808.0940",
+                "locator": "Author version pp.1–3: Theorem 4, Definitions 5–6, Theorem 6.2-prime, Corollary 7 and corrected proof of Theorem 1.1; maximal product pairs replace the original incorrect characteristic-product-region citation"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": null,
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-96.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked all five proof stages against current top/cut comparison and external Juhasz Theorem 1.5 (p300), Proposition 9.18 (pp1452–1453), Theorem 9.7 (p343) and Ni Corrigendum pp1–3. The cut is connected by meridional intersection, balanced, and irreducible by the ball-disjointness argument. Nonzero SFH implies taut only using the stated irreducible vanishing theorem. The nonproduct theorem injects Z2, impossible in Z. It applies to arbitrary closed Y; the S3 JSJ supplier is not used to prove general-Y characteristic-pair geometry. Full AC is retained and g=0 is included."
+      }
+    },
+    "thm-fibered-knot-has-rank-one-top-knot-floer-homology": {
+      "authoring_status": "complete",
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-marked-fiber-admits-a-sutured-surface-diagram",
+          "source_section": "Statement",
+          "quote": "Let a null-homologous knot in a closed connected oriented three-manifold be fibered with a specified connected oriented Seifert fiber. Its compact exterior with two meridional sutures admits a good surface-adapted balanced diagram carrying that actual Seifert surface, its boundary longitude, and the meridional boundary trivialization. For a fiber of an actual open book the cut/double diagram represents the marked product obtained by cutting along the fiber, with the original monodromy retained in regluing.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-permissible-surface-niceification-preserves-admissibility",
+          "source_section": "Statement",
+          "quote": "A good admissible surface-adapted balanced diagram can be made nice by a finite sequence of permissible fingers and own-family disk slides preserving its surface marking. Weak admissibility is preserved. Every complementary region of the underlying diagram disjoint from its true boundary is a bigon or square.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-relative-sutured-diagrams-have-signed-move-equivalences",
+          "source_section": "Statement",
+          "quote": "Two balanced Heegaard diagrams of the same marked sutured manifold are connected by relative attaching-circle isotopies, own-family disk slides, and ordinary stabilizations and destabilizations. An ordinary stabilization can be moved by such slides to the true boundary region. Under the Axiom of Choice, these moves induce integral chain homotopy equivalences for the transported coherent orientation class, and the product sutured manifold has integral homology equal to one copy of the integers. For supplied actual coherent systems on a homology-product branch, the periodic-domain character ambiguity vanishes.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fiber-outer-grading-and-integral-cut-euler-matrix",
+          "source_section": "Statement",
+          "quote": "For the actual marked Seifert surface of genus g, oriented as minus the fiber for the cut, an adapted generator x has Alexander degree g minus the number of its interior polygon coordinates. Thus the top degree-g generators are exactly the outer generators and correspond to the cut diagram generators with their ordered intersection signs. If the integral top homology is one copy of the integers, the actual cut incidence matrix is unimodular, the cut is an integral homology product, and its periodic-domain group vanishes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-signed-outer-summand-cut-comparison-with-zero-periodic-cut",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the analytic existence and invariant chain-comparison assertions. For an actual nice admissible good surface diagram whose cut has zero periodic-domain group, the outer differential and the cut differential are identified over the integers after changing generator signs. This identifies the top Alexander homology with the integral homology of the cut diagram when the surface is the marked Seifert surface and the outer degree is its genus. The conclusion applies in particular to a fiber cut and to the rank-one branch of the cut Euler-matrix reduction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the actual binding bridge and drilling construction to represent the exterior with two meridional sutures, carrying the actual page longitude and the class of F. The adapted surface cut is literally the result of cutting this mapping torus along its fiber, hence is F times an interval with its product sutures. Apply the finite permissible niceification. Signed relative diagram moves compare the resulting complex to the chosen defining complex, with its specified coherent orientation class transported. No restriction on Y or change of coefficient ring is made.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In this marked adapted diagram the local Euler obstruction is minus 2g plus twice the number of interior polygon coordinates when evaluated on minus F. Therefore the Alexander degree is g minus that number: degree g is precisely the outer generator set, and no higher degree occurs. The product cut has zero periodic-domain group, either directly from its empty product diagram and the relative handle description, or from its vanishing relative integral homology. The signed cut comparison consequently identifies the whole degree-g differential with the cut differential, after harmless changes of generator signs.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The empty diagram of the actual product has one empty-tuple generator and no nonconstant disk, so its integral chain complex is Z with zero differential. The signed relative move equivalences identify its homology with that of the actual cut diagram. Combining with the full top-summand chain identification gives the asserted integral group isomorphism. The exterior orientation character restricts trivially to the zero-periodic cut, so this conclusion holds for the specified defining class without asserting equivalence of arbitrary orientation systems on the uncut exterior.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof 1.3computes the product using one empty-tuple generator and zero differential; an empty diagram is not a zero chain module. [Owner-focused FIRST reviewed location: Statement/Facts and proof1.1–3.1, with integral orientation class and empty product diagram.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: Proof1.3computes the product using one empty-tuple generator and zero differential; an empty diagram is not a zero chain module.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "df57169fbc69a0ef998c21bb4f01794ec99d3014a3b814af1c487c016d402b56",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 176
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For genus g=0the same product cut and1.3empty-diagram computation give Zat Alexander degree0, without dividing by g. [Owner-focused FIRST reviewed location: Statement/Facts and proof1.1–3.1, with integral orientation class and empty product diagram.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: For genus g=0the same product cut and1.3empty-diagram computation give Zat Alexander degree0, without dividing by g.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "44fd9597fcc7215e43fedf6fed00ded766c62b8bb89d8f18dbf15b5f02b664c6",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 177
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 1.3gives one integral generator, not merely odd mod2rank; signed move and cut comparisons preserve the Zcoefficient claim. [Owner-focused FIRST reviewed location: Statement/Facts and proof1.1–3.1, with integral orientation class and empty product diagram.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: Proof1.3gives one integral generator, not merely odd mod2rank; signed move and cut comparisons preserve the Zcoefficient claim.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "94d20408a08478657d8b1065f764c2e6abafacc5f19250a37170f704103f2ee9",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 178
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Connected Seifert fiber and actual fibration are hypotheses; disconnected pages or singular fibrations are outside this theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: Connected Seifert fiber and actual fibration are hypotheses; disconnected pages or singular fibrations are outside this theorem.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "4bbdba343dbc9fe41972455ff6241f9ba9b20a7ebbaa5fd9f9577177a9192272",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 179
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 1.1retains meridional sutures and the actual page longitude;1.2uses the supplied Seifert class to anchor the top degreeg. [Owner-focused FIRST reviewed location: Statement/Facts and proof1.1–3.1, with integral orientation class and empty product diagram.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: Proof1.1retains meridional sutures and the actual page longitude;1.2uses the supplied Seifert class to anchor the top degreeg.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "4b255b14b066967d9c830a56b6a136331f87659d5629026efd442f920c9343e9",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 180
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A connected fiberFand its meridional marking are given;1.1uses finite permissible niceification and transported orientation data, not arbitrary unmarked orientation-system choices. [Owner-focused FIRST reviewed location: Statement/Facts and proof1.1–3.1, with integral orientation class and empty product diagram.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: A connected fiberFand its meridional marking are given;1.1uses finite permissible niceification and transported orientation data, not arbitrary unmarked orientation-system choices.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "715db52258d0fab60f6a69aaf11de57b904fe7c99483d472a9a5a3088a71d50a",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 183
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only fibered⇒top integral groupZis asserted; the converse detection theorem is not part of this Statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: Only fibered⇒top integral groupZis asserted; the converse detection theorem is not part of this Statement.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "822ee0ee4699f284e5628afb6e50321002e786e5c7a0d3c0ce2fa1c87125c733",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 181
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proof does not infer fibering from a rank-one group; it starts with the actual mapping-torus fiber.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The proof does not infer fibering from a rank-one group; it starts with the actual mapping-torus fiber.",
+            "item_sha256": "db44c2a4dcc97b271c8f9cab7931f8c4845baa136b607a64feb5270931f29601",
+            "row_sha256": "6b29d51578ae1a5ec7fa310632a3aec568fbdbf62b7bd7da51744c882b99643a",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 182
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply a complete product-sutured Floer computation and integral top-HFK identification, including the signed analytic chain model."
+      ],
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Whole signed integral general-Y forward fibered theorem integrated with seven canonical helpers. Statement preserved; obsolete Ni analytic dependency unused in actual proof and deferred final graph reconciliation. Larger Ni analytic/converse/product and shared hierarchy not inferred.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §1",
+                "url": "https://arxiv.org/pdf/math/0607156v4",
+                "locator": "Printed p.2; the top group of a fibered knot is a single copy of Z"
+              },
+              {
+                "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, Theorem 1.5 and §9",
+                "url": "https://arxiv.org/pdf/math/0609779v3",
+                "locator": "Printed pp.2–3 and 31–38; top knot Floer group as sutured Floer homology and the product criterion"
+              },
+              {
+                "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorem 2.5",
+                "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+                "locator": "Printed p.5; the S3 fibered-knot rank-one equivalence"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": null,
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-96.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Read steps 1.1–3.1 and actual marked-fiber, permissible-niceification, signed-relative-move, outer-grading and zero-periodic-cut interfaces. A connected fiber cuts its mapping torus into F times I; both marked faces are connected. The product has zero periodic lattice, so induced orientation classes have no character ambiguity, and its empty diagram computes Z, including genus zero. Full AC covers the integral analytic framework. The read-only move supplier omits connectedness in its global Statement, but its proof expressly handles exactly these connected faces; that unresolved broader supplier obligation is separately escalated, not silently repaired or certified."
+      }
+    },
+    "thm-rank-one-top-knot-floer-detects-fiberedness": {
+      "authoring_status": "complete",
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ni-fiberedness-sutured-floer-and-gabai-inputs",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $Y\\setminus K$ be irreducible, and let $F$ be a genus-$g$ Seifert surface. If the integral top Alexander group $\\widehat{\\mathrm{HFK}}(Y,K,[F],g;\\mathbb Z)$ is isomorphic to $\\mathbb Z$, then the sutured manifold obtained by cutting the compact knot exterior along $F$ is a product sutured manifold. The argument uses Ni's homology-product reduction, the horizontal and separating product-annulus decompositions, the characteristic product region, and Gabai's taut-foliation input under their stated hypotheses.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply F1 to the actual class $[F]$, the actual genus $g$ and the given integral group. The cut exterior is a product $F\\times[0,1]$ as a sutured manifold. In particular the two horizontal faces correspond to the two copies of the original $F$, rather than to a surface selected only by a genus or homology calculation.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "To restore the exterior, identify those two faces using their actual gluing map. In product coordinates this is $(x,1)\\sim(h(x),0)$ for a self-homeomorphism $h:F\\to F$. Thus the exterior is the mapping torus of $h$. Its projection to $[0,1]/(0\\sim1)=S^1$ is a surface bundle, and the seam is precisely the original embedded $F$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vertical boundary is the mapping torus of $\\partial F$. Its boundary collar extends this bundle over the deleted-knot end, giving the fibration of $Y\\setminus K$ with fiber the interior of $F$, or equivalently with compact fiber $F$ in the compact exterior. This proves the stated fiberedness with the prescribed surface, for arbitrary $Y$ and also for genus zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. K is a null-homologous knot and F a connected Seifert surface, so the cut/product fiber is not empty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "K is a null-homologous knot and F a connected Seifert surface, so the cut/product fiber is not empty.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "08d4d43bfd4e9b37f59a5a7687cf14a0f456a5054ba45efd3b8210ef675153cf",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 192
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. Proof 3.1 explicitly includes genus0; a disk product cut restores a disk-fibered compact exterior.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof3.1 explicitly includes genus0; a disk product cut restores a disk-fibered compact exterior.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "1a8b02808b8f458d98613123184c7db21722b3781647561e728780bad1d8ca35",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 193
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. The assumed group is integrally Z, not a rank-one vector space or a torsion group; F1 uses that exact hypothesis. [Owner-focused FIRST reviewed location: Read the current complete claim/Definition and the listed relevant numbered rows: Statement; Proof 1.1–3.1; F1. This is boundary-case reading, not an entire-proof or accepted-supplier audit.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The assumed group is integrally Z, not a rank-one vector space or a torsion group; F1 uses that exact hypothesis.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "4215a48e22ad8d76aa38948fc2ba4a2e011d17b7423acee6060f6fb070e07b1b",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 194
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. Reducible complements are excluded by the stated irreducibility premise, so the product criterion is not extended to them.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Reducible complements are excluded by the stated irreducibility premise, so the product criterion is not extended to them.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "033428be2bf2e6831383980851c9a5c6a4aa04b9407f43963acbe136a28c6531",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 195
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. Proof 2.1 glues the actual two F faces by h with(x,1)~(h(x),0);3.1 extends the bundle over the deleted-knot collar.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof2.1 glues the actual two F faces by h with(x,1)~(h(x),0);3.1 extends the bundle over the deleted-knot collar.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "afdfe706461442918635e027b629012cc4f8ed2a68b33dfe660751428307bc92",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 196
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The current public Statement and Given explicitly assume fullAC, and F1 invokes the Ni/Juhasz product criterion under that same axiom. The actual-face regluing and boundary-collar proof1.1–3.1 retain all arbitraryY/integral-group hypotheses and add no further selection. Root recorded exact qualifier application in root-four-qualifier-and-proof-repairs.json.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Root applied the exact fullAC Statement prefix and matching Given/F1/axiom_use note. Current Statement/Facts inspected after application; source premise now agrees with the accepted classical criterion. Original before_row is unchanged.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "861732b90892d728dcf26bb040f343a1d3d5501506fe4c82f263f5663ece2d20",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 199
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. Only rank-one implies fiberedness with this F is stated here; the forward fibered-knot theorem is separate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Only rank-one implies fiberedness with this F is stated here; the forward fibered-knot theorem is separate.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "71445a9a4f31c8827821a735b021503955b82157d199e3cca49942c2b234b660",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 197
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Integral rank-one top HFK on the actual Seifert surface gives a product cut and its mapping-torus fibration. The converse homology calculation is not a proof obligation of this one-way theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The converse homology calculation is not a proof obligation of this one-way theorem.",
+            "item_sha256": "98d3d73182880447d927070569c6b42cbba9a601090687b3dbb043120c4bae3f",
+            "row_sha256": "64f45af679d16909c1da189fe081fda30d9bbc02b6b8670fa4d492cb96cc1291",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 198
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply the complete Ni proof, including general-Y JSJ/characteristic-region inputs, analytic decomposition maps, and Gabai argument.",
+        "The planned JSJ interface is S3-only and is absent as an authored item body; it does not meet the theorem’s general-Y scope.",
+        "Resolve full-AC use in the proof dependencies against the AC-free theorem statement."
+      ],
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/carrier-ni2-source-binding-review.md",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, Theorem 1.1",
+                "url": "https://arxiv.org/pdf/math/0607156v4",
+                "locator": "Printed p.2 for exact hypotheses; §§3–7 for the homology-product, horizontal-decomposition, product-annulus, characteristic-region, and regluing proof"
+              },
+              {
+                "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, Theorem 9.11 and proof",
+                "url": "https://arxiv.org/pdf/math/0609779v3",
+                "locator": "Author version Theorem 9.11 pp.38–39; published Geometry & Topology 12 (2008), Theorem 9.11 p.348, with Theorems 1.5 and 9.7"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": null,
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-96.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked the exact null-homology, arbitrary closed oriented connected Y, irreducible complement, actual surface/class and integral Z hypothesis against the current product-criterion lemma and Ni Theorem 1.1 p2. The product identification respects the actual two faces, so their original gluing is a mapping torus. Its boundary collar extends to the deleted knot end; compact fiber means F, open-complement fiber means its interior. No minimum-genus premise or S3-only JSJ conclusion is substituted, and genus zero remains covered. Full AC is propagated."
+      }
+    },
+    "ex-knot-kt-43-worked-cases": {
+      "authoring_status": "complete",
+      "risk": "high",
+      "kind": "example",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both named diagrams are alternating. Apply [F1] with the two polynomials in [F2]. In the trefoil case the coefficients in Alexander degrees $1,0,-1$ have absolute values $1,1,1$, with zero coefficients elsewhere. Thus the maximum nonzero Alexander grading is $1$ and its integral group is $\\mathbb Z$. In the $5_2$ case the corresponding absolute values are $2,3,2$, with zero coefficients elsewhere. Its maximum grading is again $1$, with integral top group $\\mathbb Z^2$. The formula for the supporting Maslov degree is exactly that of [F1]; no signature sign is guessed from a drawing.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] the genus is one for both knots. The trefoil's integral top group is $\\mathbb Z$, so the fiberedness equivalence in [F3] proves that it is fibered. For $5_2$, $\\mathbb Z^2$ is not isomorphic to $\\mathbb Z$ (tensoring with $\\mathbb Q$ already distinguishes their dimensions), so the same equivalence proves that it is not fibered. These arguments prove every Example clause at its full integral coefficient scope. They do not invoke an unearned generic-$Y$ local supplier or weaken a rank over integers to a mod-two rank.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two named nonempty knots and their displayed Alexander polynomials are fixed; no empty link Floer invariant is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Two named nonempty knots and their displayed Alexander polynomials are fixed; no empty link Floer invariant is claimed.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "e4047253312c15ab78caef85b10087a8f5bf8eb1ce1752bb427eefdc1afd3cdf",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 56
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Their maximal Alexander degree is fixed at one, while the degree-zero coefficients are explicitly 1 and −3; there is no genus-zero example here.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Their maximal Alexander degree is fixed at one, while the degree-zero coefficients are explicitly 1 and −3; there is no genus-zero example here.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "c5702064cd31466101620579a1a65a30b718c2def7c2752cad1591e266391044",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 57
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The trefoil top group is Z by coefficient absolute value one in1.1; this is the rank-one fibered branch applied in2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The trefoil top group is Z by coefficient absolute value one in1.1; this is the rank-one fibered branch applied in2.1.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "be81167ccad62bec684cd6c4ce2d5c1128a090939c18d72abf9048b98d4582ee",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 58
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The 5_2 top group is free Z², distinguished from Z even over Q; no integral conclusion is inferred merely from an F2 rank.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The 5_2 top group is free Z², distinguished from Z even over Q; no integral conclusion is inferred merely from an F2 rank.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "28b42e3076a63295b54dfddf7373792af956c0b368db586dc593fa443c101f94",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 59
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The two examples have top Alexander grading one and zero coefficients above it; no moving grading endpoint is omitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The two examples have top Alexander grading one and zero coefficients above it; no moving grading endpoint is omitted.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "0840fd83d00864e16bc55755d227b733ebe703a127f45a72e27587e214a734ee",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 60
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The CURRENT Example now begins Assume the Axiom of Choice and its Given begins Full AC. This matches the classical INTEGRAL Floer imports and retained Z versus Z² computations; it asserts no CC-only or choice-free integral strengthening.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The CURRENT Example now begins Assume the Axiom of Choice and its Given begins Full AC. This matches the classical INTEGRAL Floer imports and retained Z versus Z² computations; it asserts no CC-only or choice-free integral strengthening.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "51f135486bc6162a34bd7531ef236c8d0b43e314aa7acd5b1dd9e073c433808a",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 63
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes two fixed integral groups and applies the external fiberedness iff at those knots in2.1; it does not state a new universal biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Example computes two fixed integral groups and applies the external fiberedness iff at those knots in2.1; it does not state a new universal biconditional.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "83c6e1dc8be55a629195578b273ec7bcb77ece20496a2cabfe71013ae44dab26",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 61
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The nonfibered5_2 case uses top group Z² in2.1 and the cited supplier equivalence; no converse to this two-knot example is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The nonfibered5_2 case uses top group Z² in2.1 and the cited supplier equivalence; no converse to this two-knot example is asserted.",
+            "item_sha256": "9e02044eac4fbbcae75e751c686b7ab7174d236cce79a95ff6af4f52fbede6c5",
+            "row_sha256": "bef41adac97a961354405653280d63a6fd14fd11ef4458e2045ae72f2f24e4a7",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 62
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply the explicit trefoil and 5_2 integral HFK calculations and complete fibered/nonfibered arguments.",
+        "Trefoil use of rank-one detection requires an irreducible-exterior input; its current supplier is draft and its Schoenflies supplier remains a draft prerequisite."
+      ],
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-free-five-focused-final.md",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Peter Ozsvath, Andras Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, Chapter 4",
+                "url": "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf",
+                "locator": "Printed pp.65–82; explicit grid complexes and trefoil calculations"
+              },
+              {
+                "title": "Peter Ozsvath and Zoltan Szabo, Heegaard Floer homology and alternating knots, arXiv:math/0209149v3, Theorem 1.3",
+                "url": "https://arxiv.org/pdf/math/0209149v3",
+                "locator": "Printed pp.5–8; integral HFK of alternating knots from the symmetrized Alexander polynomial and signature"
+              },
+              {
+                "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorems 2.3 and 2.5",
+                "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+                "locator": "Printed p.5; genus and S3 fiberedness criteria"
+              },
+              {
+                "title": "Knot Atlas, 3_1 and 5_2 tables",
+                "url": "https://katlas.org/wiki/5_2",
+                "locator": "Polynomial invariants / Alexander polynomial; compare https://katlas.org/wiki/3_1, same section"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "Uses the original classical AC branch for the explicitly imported integral genus/fiberedness results; the finite rank deductions use no choice. No reduction of these imported integral theorems to a stronger choice claim is asserted.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-96.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-96",
+        "notes": "Checked both verification paragraphs against primary Ozsvath–Szabo Theorem 1.3 p230, table Alexander entries and the stated external genus/fibering criteria. The alternating formula is integral and free, with rank the absolute polynomial coefficient; determinants yield 1-t+t2 and 2-3t+2t2. Thus both maximum degrees are one, top groups Z and Z2. The two directions of fiberedness are used correctly: trefoil from top Z; 52 is nonfibered by contrapositive of fibered implies Z, since rational dimensions differ. Signature changes only Maslov shift. Full AC is explicit; no mod-two lifting is claimed."
+      }
+    }
+  }
+}
