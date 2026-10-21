@@ -21,7 +21,8 @@ const canon = (x) =>
       : x;
 const hash = (x) => sha(JSON.stringify(canon(x)));
 const base = path.dirname(new URL(import.meta.url).pathname);
-function fixture() {
+function fixture({itemId=id,kind="lemma",heading="Statement",proof=true,claim="The integer zero equals itself."} = {}) {
+  const id=itemId;
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "step3-continuity-"));
   for (const p of ["tools", "research", "items"])
     fs.mkdirSync(path.join(dir, p));
@@ -46,7 +47,7 @@ function fixture() {
       fs.readFileSync(path.join(root, "tools", "proof-contract.mjs"), "utf8"),
     ),
   );
-  const item = `---\nid: ${id}\nkind: lemma\ndeps: []\n---\n\n## Statement\n\nThe integer zero equals itself.\n\n## Facts & Assumptions\n\n**Given:** Zero.\n\n## Proof\n\n1.1 Zero is zero. [given]\n\n2.1 This is the claim. [step 1.1] ∎\n`;
+  const item = `---\nid: ${id}\nkind: ${kind}\ndeps: []\n---\n\n## ${heading}\n\n${claim}\n${proof ? "\n## Facts & Assumptions\n\n**Given:** Zero.\n\n## Proof\n\n1.1 Zero is zero. [given]\n\n2.1 This is the claim. [step 1.1] ∎\n" : "\n## Status\n\nUnresolved; not a logical supplier.\n"}`;
   fs.writeFileSync(path.join(dir, "items", id + ".md"), item);
   const contract = {
     citations: [],
@@ -72,11 +73,11 @@ function fixture() {
   };
   fs.writeFileSync(
     path.join(dir, "research", `${run}-batch-1.proof-contracts.json`),
-    JSON.stringify({ version: 1, scope: [id], contracts: { [id]: contract } }),
+    JSON.stringify({ version: 1, scope: proof ? [id] : [], contracts: proof ? { [id]: contract } : {} }),
   );
   const manifest = {
     id,
-    statement: "The integer zero equals itself.",
+    statement: claim,
     deps: [],
     dependency_level: 2,
   };
@@ -86,7 +87,7 @@ function fixture() {
   );
   const current = {
       item_sha256: sha(item),
-      contract_sha256: hash(contract),
+      contract_sha256: hash(proof ? contract : null),
       manifest_sha256: hash({ ...manifest, __step4_page_id: "test" }),
     },
     before = { ...current, manifest_sha256: "0".repeat(64) },
@@ -386,3 +387,12 @@ export function ownerRehomeCarrierBatch() { calls.push("ownerRehomeCarrierBatch"
     fs.rmSync(f.dir, { recursive: true, force: true });
   }
 });
+
+
+function openFixture(){return fixture({itemId:'op-continuity-test',kind:'open-problem',heading:'Open problem',proof:false,claim:'Does the stated research property hold?'});}
+test('unchanged Open problem source and null contract permits exact typed claim-mirror metadata continuity',async()=>{const f=openFixture();try{assert.equal(await evaluate(f),true);}finally{fs.rmSync(f.dir,{recursive:true,force:true});}});
+test('Open problem wrong complete manifest claim fails even with refreshed entry seal',async()=>{const f=openFixture();try{const p=path.join(f.dir,'research',`${run}-batch-1.pages.json`),m=JSON.parse(fs.readFileSync(p));m[0].items[0].statement='A different question.';fs.writeFileSync(p,JSON.stringify(m));f.current.manifest_sha256=hash({...m[0].items[0],__step4_page_id:'test'});f.entry.current_carrier_sha256=hash(f.current);assert.equal(await evaluate(f),false);}finally{fs.rmSync(f.dir,{recursive:true,force:true});}});
+test('Open problem changed body fails even with refreshed entry seal',async()=>{const f=openFixture();try{const p=path.join(f.dir,'items',f.decision.id+'.md');fs.appendFileSync(p,'Changed question body.');f.current.item_sha256=sha(fs.readFileSync(p));f.entry.current_carrier_sha256=hash(f.current);assert.equal(await evaluate(f),false);}finally{fs.rmSync(f.dir,{recursive:true,force:true});}});
+test('Open problem numbered proof is not eligible for non-proof continuity, even with supplied proof contract',async()=>{const f=fixture({itemId:'op-proof-test',kind:'open-problem',heading:'Open problem',proof:true});try{assert.equal(await evaluate(f),false);}finally{fs.rmSync(f.dir,{recursive:true,force:true});}});
+test('Open problem numbered proof with null contract also fails',async()=>{const f=fixture({itemId:'op-proof-null-test',kind:'open-problem',heading:'Open problem',proof:true});try{fs.writeFileSync(path.join(f.dir,'research',`${run}-batch-1.proof-contracts.json`),JSON.stringify({version:1,scope:[],contracts:{}}));f.current.contract_sha256=hash(null);f.before.contract_sha256=hash(null);f.entry.post_reader_carrier_sha256=hash(f.before);f.entry.post_reader_snapshot=f.ref(`${run}-step3-hash-1-post.json`,{version:2,run,batch:'1',label:'post',hashes:{[f.decision.id]:f.before}});f.entry.current_carrier_sha256=hash(f.current);assert.equal(await evaluate(f),false);}finally{fs.rmSync(f.dir,{recursive:true,force:true});}});
+test('Open problem missing native acceptance evidence still fails',async()=>{const f=openFixture();try{f.entry.native_result=f.ref('failed-open-native.json',{run,role:'alpha',ok:false,exit_code:1,covers:['1']});assert.equal(await evaluate(f),false);}finally{fs.rmSync(f.dir,{recursive:true,force:true});}});

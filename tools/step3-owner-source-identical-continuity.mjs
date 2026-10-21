@@ -238,8 +238,13 @@ export function sourceIdenticalAcceptanceContinuity(
       hash(row.deps ?? []) !== hash(meta.deps ?? [])
     )
       return false;
+    // An open question remains a non-proof status item; this path grants no proof or supplier equivalence.
+    if (meta.kind === "open-problem" && numberedProofSteps(body).length !== 0)
+      return false;
     const heading =
-      meta.kind === "definition" || meta.kind === "algorithm"
+      meta.kind === "open-problem"
+        ? "Open problem"
+        : meta.kind === "definition" || meta.kind === "algorithm"
         ? "Definition"
         : meta.kind === "example" && sectionText(body, "Example")
           ? "Example"
@@ -261,7 +266,7 @@ export function sourceIdenticalAcceptanceContinuity(
       return false;
     if (contract == null) {
       return (
-        ["definition", "algorithm", "remark"].includes(meta.kind) &&
+        ["definition", "algorithm", "remark", "open-problem"].includes(meta.kind) &&
         numberedProofSteps(body).length === 0 &&
         before.contract_sha256 === hash(null) &&
         current.contract_sha256 === hash(null)

@@ -1,3 +1,4 @@
+import {lensSourceIdenticalReversionContinuity,LENS_REVERSION_POLICY} from './step3-owner-lens-reversion-successor.mjs';
 // Explicit source-identical reversion continuity; no new verdict or review credit.
 import {readFileSync,lstatSync} from 'node:fs';
 import {resolve,relative,sep} from 'node:path';
@@ -59,6 +60,7 @@ const manifestRow=(doc,id)=>{
 };
 const semanticDecision=d=>{const {subject_sha256,...rest}=d;return rest;};
 export function sourceIdenticalReversionContinuity(root,run,decision,target,before,current,entry){
+ if(entry?.policy===LENS_REVERSION_POLICY)return lensSourceIdenticalReversionContinuity(root,run,decision,target,before,current,entry);
  if(!entry||entry.policy!==SOURCE_IDENTICAL_REVERSION_POLICY||entry.id!==decision?.id||entry.obligation!==decision?.obligation)return false;
  try{
   const allowed=['version','policy','run','id','obligation','owner_identity','reason','target_sha256','pre_carrier_sha256','current_carrier_sha256','risk_review_sha256','independent_execution_coverage_adopted',...Object.keys(PINS)];

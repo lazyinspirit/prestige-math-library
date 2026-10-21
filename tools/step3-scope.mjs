@@ -1923,7 +1923,8 @@ if (command === 'check') {
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
           decisionRows.push(row);
           if(repairedUnmanifestedContext && (decision.verdict!=='confirmed_fatal'||row.severity!=='fatal'||row.disposition!=='fixed'
-            ||!row.adjudication_ref?.some(ref=>ref.path===`research/${run}-alpha-${group.label}-3a-decisions.json`&&ref.obligation===decision.obligation)))
+            ||!(row.adjudication_ref?.some(ref=>ref.path===`research/${run}-alpha-${group.label}-3a-decisions.json`&&ref.obligation===decision.obligation)
+              ||priorAppliedRepair(decision,target,[row]))))
             error('repaired-unmanifested-ledger', `${defectId} must retain the original fatal defect and exact fixed disposition`);
           if (unchangedRequiredPageContext && decision.verdict === 'confirmed_nonfatal'
             && row.disposition !== 'nonfatal-recorded')

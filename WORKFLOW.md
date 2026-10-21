@@ -249,6 +249,14 @@ and preserves missing historical manifest projections as explicitly unknown.
 This records acceptance continuity, never new worker coverage; it neither
 stamps decisions nor waives any other gate.
 
+A repaired unmanifested-context decision retains its original fatal, fixed
+ledger row. Its exact typed adjudication reference may instead be bound by the
+existing `prior_applied_repairs` evidence: the same obligation and target, whole
+ledger-row digest, current source, genuine application and uniquely reversible
+before/after literal repair. Full independent proof and affected-consumer review,
+confidence 1 and all ordinary current-carrier checks remain mandatory. This
+route preserves append-only ledger history; it creates no new acceptance.
+
 The ordinary continuity case requires identical raw source bytes. A separately
 hash-proven complete reader-post source preimage may also establish metadata
 continuity when the entire current body is exactly identical and parsed
@@ -259,6 +267,8 @@ published-repair markers may not be added or changed through this exception.
 An unknown source delta is never classified as metadata from hashes alone.
 A definition, algorithm or remark with no numbered proof may retain the exact
 original/current null contract; proof-bearing missing contracts remain errors.
+
+An `open-problem` item uses its complete `Open problem` heading for the manifest claim mirror. It remains an unproved question/status record, never a proved theorem or logical supplier. Source-identical continuity still requires the authentic native acceptance and unchanged source, exact current claim/dependency mirrors, and all ordinary contract checks; a missing contract is permitted only when both historical and current contract carriers are null and no numbered proof exists. An open problem with numbered proof cannot use this non-proof continuity path.
 
 Stabilized `post-reader` acceptance may separately use
 `stabilized_source_identical_acceptance_continuities`, as specified in
