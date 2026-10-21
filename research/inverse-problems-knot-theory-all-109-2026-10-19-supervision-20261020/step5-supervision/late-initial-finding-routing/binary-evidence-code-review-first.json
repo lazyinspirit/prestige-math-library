@@ -1,0 +1,33 @@
+{
+  "review": "independent-binary-evidence-code-FIRST",
+  "reviewer": "/root/step5_concerns_2",
+  "verdict": "PASS",
+  "cycle": 1,
+  "scope": "Small raw-byte file evidence hashing correction only; separate from concluded unit3 needle protocol review. No general recovery or mathematical re-review.",
+  "code_bindings": {
+    "tools/step5-workflow.mjs": "3c23a52fbe3ad90d8747c2da285793b46bbaa7fc0f5c188049d678e37666fdf3",
+    "tools/autopilot/test/step5-workflow.test.mts": "0fc1deeac21dc8656cf2cd74fed669d1b4eb461301e79cd3daa132fdabfc6f23",
+    "tools/step5-evidence-bytes.md": "d41598c941fa325883cdf24f23e66e508522e717a7eb513d53c42544a935bbdd"
+  },
+  "findings": [],
+  "reason": "A dedicated evidenceFileDigest hashes readFileSync(path) Buffer bytes directly. Only the central verifyEvidence comparison and two frozenSupportingEvidence comparisons use it. Generic digest(string/object) semantics, all text metadata archive/history validation branches, current source/Statement/context guards, certification payload seals, and native ownership logic are unchanged. Collection/certification issuance and reuse call the same strict central evidence verifier. Unchanged binary PDF pins remain at their original path and expected raw digest; no input evidence is rewritten.",
+  "reviewed_paths": [
+    "Complete production diff in tools/step5-workflow.mjs",
+    "Full new binary lifecycle test plus its existing real fixture/collection/certification helpers and surrounding supporting-evidence negative",
+    "Complete tools/step5-evidence-bytes.md",
+    "Actual verifyEvidence/frozenSupportingEvidence, metadata-history fallback ordering and verifyCertification/cached collect/certification call paths"
+  ],
+  "tests": [
+    {
+      "command": "node tools/tsx-run.mjs --test --test-name-pattern='binary PDF evidence|handoff supporting evidence|supporting metadata' tools/autopilot/test/step5-workflow.test.mts",
+      "result": "PASS2/2 actually selected. Binary fixture is accepted through collection, normal certification, cached certificate verification and cached certify. Mutation changes raw bytes while decoded UTF8 text remains identical; all cached reuse paths reject it. Non-ASCII UTF8 JSON and JSON-object payload digests remain unchanged. Ordinary supporting-evidence tampering also remains rejected."
+    },
+    {
+      "command": "node --test tools/step5-recovered-sibling-contract-history.test.mjs tools/step5-certification-consumer.test.mjs",
+      "result": "PASS27/27. Exact recovered historical metadata preimages and tampering/identity/hold negatives remain strict; central consumer source/context matching remains strict."
+    }
+  ],
+  "actual_incident_limits": "Root/author reported unchanged721033-byte Zenodo PDF raw digest06bba7a8... equals its original native evidence pin, while UTF8-decoded digest e265529... does not. This reviewer did not read or rehash that actual PDF, modify the report/pin, or execute actual deferred collection. Synthetic byte-level fixtures independently demonstrate the exact bug and fix.",
+  "acceptance_limits": "Code mechanism only. No mathematical acceptance, source review, actual native execution, collection/certification/gate coverage, or receipt admission is granted. No canonical item, actual evidence, receipt or runtime state was changed by this review.",
+  "next": "No focused repair is requested. Root may reattempt ordinary evidence validation/collection with the original PDF/report/raw pin unchanged; all normal closure, certification, current Sol and gate obligations remain in force."
+}

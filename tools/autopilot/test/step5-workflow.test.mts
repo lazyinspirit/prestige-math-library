@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,appendFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
+import {createHash} from 'node:crypto';
 import { initialize,prepareAdjudication,prepareImpact,validateReports,collect,certify,judge,checkWorkflow,verifyCertification,workflowDir,workerReport,workerLabel,digest,advanceImpact,impactPasses,reviewContextHashes,reviewMatchesCurrent } from '../../step5-workflow.mjs';
 import {itemHashGuard,itemHashJudge} from '../../item-hash.mjs';
 import {MODELS} from '../../models.mjs';
@@ -545,6 +546,41 @@ test('handoff supporting evidence is hash-bound and later tampering blocks colle
     assert.equal(receipt.evidence[supplement],report.supporting_evidence[supplement]);
     json(supplement,{by:'changed'});
     assert.throws(()=>collect(f.root,run,pack.phase,1,{deferImpactClosure:true}),/evidence changed/);
+  }finally{f.cleanup();}
+});
+
+test('binary PDF evidence keeps exact raw bytes through collection, certification and cached verification',()=>{
+  const f=fixture();try{
+    const pack=initial(f.root,f.ids);reports(f.root,pack);
+    const pdf=join(f.root,'research','actually-read-source.pdf');
+    const original=Buffer.from([0x25,0x50,0x44,0x46,0x2d,0x31,0x2e,0x37,0x0a,0xff,0x80,0x00,0x0a]);
+    const raw=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
+    const expected=raw(original);
+    assert.notEqual(expected,digest(original.toString('utf8')));
+    writeFileSync(pdf,original);
+    const text=join(f.root,'research','utf8-evidence.json'),textBytes=JSON.stringify({note:'π and 中文 remain exact UTF-8 text'});
+    writeFileSync(text,textBytes);
+    assert.equal(raw(Buffer.from(textBytes)),digest(textBytes));
+    assert.equal(digest({note:'payload semantics unchanged'}),raw(Buffer.from(JSON.stringify({note:'payload semantics unchanged'}))));
+    const rp=workerReport(f.root,run,pack.phase,1,pack.units[0]),report=JSON.parse(readFileSync(rp,'utf8'));
+    report.supporting_evidence={[pdf]:expected,[text]:digest(textBytes)};json(rp,report);
+    const receipt=collect(f.root,run,pack.phase,1,{deferImpactClosure:true});
+    assert.equal(receipt.evidence[pdf],expected);assert.equal(receipt.evidence[text],digest(textBytes));
+    assert.deepEqual(readFileSync(pdf),original);
+    assert.equal(advanceImpact(f.root,run,pack.phase,1).complete,true);
+    const certificate=certify(f.root,run,pack.phase,1,{contextHasher:contexts});
+    assert.equal(certificate.evidence[pdf],expected);
+    assert.equal(verifyCertification(f.root,run,{allowMissing:false})?.sha256,certificate.sha256);
+    assert.equal(certify(f.root,run,pack.phase,1,{contextHasher:contexts}).sha256,certificate.sha256);
+    // Distinct raw bytes can decode to the same replacement character. Such a
+    // mutation must fail, even though a lossy UTF-8 comparison cannot see it.
+    const altered=Buffer.from(original);altered[9]=0xfe;
+    assert.equal(altered.toString('utf8'),original.toString('utf8'));assert.notEqual(raw(altered),expected);
+    writeFileSync(pdf,altered);
+    assert.throws(()=>verifyCertification(f.root,run,{allowMissing:false}),/evidence changed/);
+    assert.throws(()=>certify(f.root,run,pack.phase,1,{contextHasher:contexts}),/evidence changed/);
+    assert.throws(()=>collect(f.root,run,pack.phase,1,{deferImpactClosure:true}),/evidence changed/);
+    writeFileSync(pdf,original);assert.equal(verifyCertification(f.root,run,{allowMissing:false})?.sha256,certificate.sha256);
   }finally{f.cleanup();}
 });
 

@@ -36,6 +36,9 @@ import {loadOriginalSlotReclassification,projectedOriginalIds,originalSlotView,i
 export { readerConcernSession };
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
+// Evidence hashes attest original file bytes, including binary source PDFs.
+// Keep digest's existing string/JSON payload semantics separate.
+const evidenceFileDigest = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const lines = path => existsSync(path) ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse) : [];
 export const workflowDir = (root, run) => join(root, 'research', `${run}-step5-v2`);
@@ -306,7 +309,7 @@ function supportingMetadataHistory(history,path,expected) {
   return {archive,marker};
 }
 const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(
-  existsSync(p)&&(digest(readFileSync(p,'utf8'))===hash
+  existsSync(p)&&(evidenceFileDigest(p)===hash
     ||history&&(gateAggregationEvidenceReference(history,p,hash)||supportingMetadataHistory(history,p,hash)
       ||repairedRun44LedgerHistory(history,p,hash)
       ||restoredLedgerHistory(history.root,history.run,history.certificate??{},p,hash)
@@ -316,7 +319,7 @@ function frozenSupportingEvidence(root,run,supporting) {
   verifyEvidence(supporting,{root,run});
   const evidence={};
   for(const [path,hash]of Object.entries(supporting)){
-    requireValue(digest(readFileSync(path,'utf8'))===hash||!gateAggregationEvidenceReference({root,run},path,hash),
+    requireValue(evidenceFileDigest(path)===hash||!gateAggregationEvidenceReference({root,run},path,hash),
       `supporting metadata preimage unavailable: ${path}`);
     // Keep ordinary immutable evidence at its original path. Only batch
     // metadata and shared ledgers need durable historical carriers.
@@ -324,7 +327,7 @@ function frozenSupportingEvidence(root,run,supporting) {
       && !['research/defect-ledger.jsonl','research/DEFECT-LEDGER.md','research/published-consumer-supplier-ledger.md'].includes(path)){
       evidence[path]=hash;continue;
     }
-    const history=digest(readFileSync(path,'utf8'))===hash?null:supportingMetadataHistory({root,run},path,hash);
+    const history=evidenceFileDigest(path)===hash?null:supportingMetadataHistory({root,run},path,hash);
     const bytes=readFileSync(history?.archive??path,'utf8');
     requireValue(digest(bytes)===hash,`supporting metadata preimage unavailable: ${path}`);
     const archive=join(workflowDir(root,run),'supporting-metadata',`${hash}.json`);
