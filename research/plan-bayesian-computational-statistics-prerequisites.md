@@ -7,8 +7,8 @@ The BCS-55 conditional Euler examples require strong SDE well-posedness, Euler c
 | Pair | Category | A page | B page | A requirements |
 |---|---|---|---|---|
 | P-SDE-01 | probability | `forward-ito-sde-well-posedness` | `forward-ito-sde-well-posedness-examples` | `brownian-motion-construction-and-continuity`, `the-ito-integral-with-respect-to-brownian-motion`, `itos-formula-and-brownian-martingales` |
-| P-NUM-SDE-01 | numerical-analysis | `euler-maruyama-scheme-and-conditions` | `euler-maruyama-scheme-and-conditions-examples` | `forward-ito-sde-well-posedness` |
-| P-NUM-SDE-02 | numerical-analysis | `euler-maruyama-convergence` | `euler-maruyama-convergence-examples` | `forward-ito-sde-well-posedness`, `euler-maruyama-scheme-and-conditions` |
+| P-NUM-SDE-01 | numerical-differential-equations-and-stochastic-dynamics | `euler-maruyama-scheme-and-conditions` | `euler-maruyama-scheme-and-conditions-examples` | `forward-ito-sde-well-posedness` |
+| P-NUM-SDE-02 | numerical-differential-equations-and-stochastic-dynamics | `euler-maruyama-convergence` | `euler-maruyama-convergence-examples` | `forward-ito-sde-well-posedness`, `euler-maruyama-scheme-and-conditions` |
 
 Every B page requires its own A page. BCS-55 adds the scheme and convergence A pages to its existing BCS-25/54 requirements; its examples companion requires its own A page. No B page exports logical suppliers.
 

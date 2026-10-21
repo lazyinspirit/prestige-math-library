@@ -331,6 +331,11 @@ Set Theory uses the internal category identifier `set-theory` and directory
 `library/set-theory/` (renamed from `foundations` on 2026-10-12). Page and item
 identities are unchanged; historical run receipts retain their recorded paths.
 
+The former `numerical-analysis` category is retired. Its two Euler–Maruyama
+pairs belong to `numerical-differential-equations-and-stochastic-dynamics`;
+page/item identities and historical run receipts retain their original identities
+and recorded paths, respectively.
+
 - Page file: `library/<category>/<page>.md`. Frontmatter uses `page`, `title`,
   `status`, `items: [id, ...]`, and `examples: [id, ...]`; the body is the page
   summary. The two lists control placement, not item kind. Entries must resolve
