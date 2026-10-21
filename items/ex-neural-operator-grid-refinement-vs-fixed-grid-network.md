@@ -2,7 +2,7 @@
 id: ex-neural-operator-grid-refinement-vs-fixed-grid-network
 kind: example
 title: "A kernel integral has a mesh-refinement limit while a fixed-grid map needs a separate interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

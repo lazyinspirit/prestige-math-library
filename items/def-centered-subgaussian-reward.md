@@ -2,7 +2,7 @@
 id: def-centered-subgaussian-reward
 kind: definition
 title: "Centered 1-sub-Gaussian reward"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

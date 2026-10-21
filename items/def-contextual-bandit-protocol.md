@@ -2,7 +2,7 @@
 id: def-contextual-bandit-protocol
 kind: definition
 title: Contextual bandit protocol with finite expert advice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

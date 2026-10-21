@@ -2,7 +2,7 @@
 id: lem-mean-field-first-variation-and-measure-optimality
 kind: lemma
 title: First variation and optimality over nonnegative measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

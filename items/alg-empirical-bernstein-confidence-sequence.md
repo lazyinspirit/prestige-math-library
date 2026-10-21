@@ -2,7 +2,7 @@
 id: alg-empirical-bernstein-confidence-sequence
 kind: algorithm
 title: Empirical-Bernstein confidence-sequence interval update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

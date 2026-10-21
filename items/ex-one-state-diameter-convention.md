@@ -2,7 +2,7 @@
 id: ex-one-state-diameter-convention
 kind: example
 title: "One-state MDP and normalized diameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

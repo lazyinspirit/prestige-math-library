@@ -2,7 +2,7 @@
 id: ex-offline-ope-full-support-and-missing-support
 kind: example
 title: "Full action support permits reweighting while missing support does not"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

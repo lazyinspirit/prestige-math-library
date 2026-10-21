@@ -1,7 +1,7 @@
 ---
 page: ml02-clustering-mixtures
 title: "K-means, Gaussian mixtures, and soft assignments"
-status: draft
+status: published
 requires:
   - central-limit-theorems
   - em-algorithm-and-latent-variable-likelihood-ascent

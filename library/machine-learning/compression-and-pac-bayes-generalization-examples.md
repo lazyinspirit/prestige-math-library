@@ -1,7 +1,7 @@
 ---
 page: compression-and-pac-bayes-generalization-examples
 title: "Sample compression and PAC-Bayes bounds — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pac-bayes-single-hypothesis-posterior

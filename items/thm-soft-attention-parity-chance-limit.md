@@ -2,7 +2,7 @@
 id: thm-soft-attention-parity-chance-limit
 kind: theorem
 title: "Fixed soft attention has no parity advantage over the unigram predictor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

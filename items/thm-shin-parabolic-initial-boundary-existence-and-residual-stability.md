@@ -2,7 +2,7 @@
 id: thm-shin-parabolic-initial-boundary-existence-and-residual-stability
 kind: theorem
 title: "Variable-coefficient parabolic initial-boundary existence and residual stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

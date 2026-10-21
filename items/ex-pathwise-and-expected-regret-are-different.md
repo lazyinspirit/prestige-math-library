@@ -2,7 +2,7 @@
 id: ex-pathwise-and-expected-regret-are-different
 kind: example
 title: "A random reward separates pathwise and expected regret"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

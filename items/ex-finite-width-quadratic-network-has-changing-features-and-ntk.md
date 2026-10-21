@@ -2,7 +2,7 @@
 id: ex-finite-width-quadratic-network-has-changing-features-and-ntk
 kind: example
 title: A finite-width quadratic feature network has a changing NTK
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

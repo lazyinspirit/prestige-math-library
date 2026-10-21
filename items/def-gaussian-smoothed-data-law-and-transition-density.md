@@ -2,7 +2,7 @@
 id: def-gaussian-smoothed-data-law-and-transition-density
 kind: definition
 title: Gaussian-smoothed data law and transition density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

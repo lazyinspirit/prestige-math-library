@@ -2,7 +2,7 @@
 id: lem-gaussian-rbf-power-function-fill-distance-bound
 kind: lemma
 title: Gaussian RKHS power function decays exponentially with inverse fill distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

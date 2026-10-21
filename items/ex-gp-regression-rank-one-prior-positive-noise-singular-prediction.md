@@ -2,7 +2,7 @@
 id: ex-gp-regression-rank-one-prior-positive-noise-singular-prediction
 kind: example
 title: Positive observation noise with a singular rank-one prediction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

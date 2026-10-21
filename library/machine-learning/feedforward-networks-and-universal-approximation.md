@@ -1,7 +1,7 @@
 ---
 page: feedforward-networks-and-universal-approximation
 title: "Feedforward networks and single-hidden-layer universality"
-status: draft
+status: published
 items:
   - def-feedforward-neural-network
   - def-activation-class-locally-essentially-bounded-ae-continuous

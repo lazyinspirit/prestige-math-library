@@ -2,7 +2,7 @@
 id: "lem-lower-semicontinuity-of-path-quadratic-energy"
 kind: lemma
 title: "Quadratic path energy is lower semicontinuous"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

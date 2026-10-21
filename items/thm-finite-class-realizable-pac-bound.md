@@ -2,7 +2,7 @@
 id: thm-finite-class-realizable-pac-bound
 kind: theorem
 title: "Finite-class realizable PAC bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-gaussian-smoothing-endpoint-weak-limit
 kind: theorem
 title: Gaussian smoothing converges weakly at the endpoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

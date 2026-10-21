@@ -1,7 +1,7 @@
 ---
 page: neural-operators-and-physics-informed-learning-examples
 title: Neural operators and PINN consistency — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-non-global-training-stationary-point

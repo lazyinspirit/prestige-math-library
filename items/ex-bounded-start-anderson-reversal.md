@@ -2,7 +2,7 @@
 id: ex-bounded-start-anderson-reversal
 kind: example
 title: Bounded-start Brownian reversal under Anderson's hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion-examples

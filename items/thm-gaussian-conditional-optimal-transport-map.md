@@ -2,7 +2,7 @@
 id: thm-gaussian-conditional-optimal-transport-map
 kind: theorem
 title: The Gaussian conditional affine map is quadratic-cost optimal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-paired-crossentropy-mixture-bound
 kind: lemma
 title: "Close paired predictions incur mixture entropy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

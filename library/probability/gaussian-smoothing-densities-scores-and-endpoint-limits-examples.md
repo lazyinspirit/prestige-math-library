@@ -1,7 +1,7 @@
 ---
 page: gaussian-smoothing-densities-scores-and-endpoint-limits-examples
 title: Gaussian smoothing densities, scores, and endpoint limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-two-point-mixture-smoothing-density

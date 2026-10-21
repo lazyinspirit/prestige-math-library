@@ -2,7 +2,7 @@
 id: def-vc-pac-learning-criterion
 kind: definition
 title: "Measurable PAC learning criteria for a possibly infinite VC class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

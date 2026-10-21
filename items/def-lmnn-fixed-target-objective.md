@@ -2,7 +2,7 @@
 id: def-lmnn-fixed-target-objective
 kind: definition
 title: "Fixed-target large-margin nearest-neighbor objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: cex-ogd-infeasible-comparator
 kind: counterexample
 title: The projected OGD bound does not cover infeasible comparators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

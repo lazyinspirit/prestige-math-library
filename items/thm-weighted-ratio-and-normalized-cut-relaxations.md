@@ -2,7 +2,7 @@
 id: thm-weighted-ratio-and-normalized-cut-relaxations
 kind: theorem
 title: "Weighted RatioCut and Ncut spectral relaxations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

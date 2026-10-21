@@ -2,7 +2,7 @@
 id: ex-threshold-class-has-vc-dimension-one
 kind: example
 title: "Thresholds on the real line have VC dimension one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

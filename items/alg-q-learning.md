@@ -2,7 +2,7 @@
 id: alg-q-learning
 kind: algorithm
 title: Tabular Q-learning
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

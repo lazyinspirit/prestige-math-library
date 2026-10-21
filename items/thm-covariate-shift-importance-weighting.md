@@ -2,7 +2,7 @@
 id: thm-covariate-shift-importance-weighting
 kind: theorem
 title: "Importance weighting under covariate shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

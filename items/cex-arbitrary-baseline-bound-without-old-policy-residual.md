@@ -7,7 +7,7 @@ verification:
 id: cex-arbitrary-baseline-bound-without-old-policy-residual
 kind: counterexample
 title: "An arbitrary baseline requires the old-policy residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

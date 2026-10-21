@@ -2,7 +2,7 @@
 id: "ex-isotropic-gaussian-wasserstein-geodesic"
 kind: example
 title: "An isotropic Gaussian Wasserstein geodesic"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

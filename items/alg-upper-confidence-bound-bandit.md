@@ -2,7 +2,7 @@
 id: alg-upper-confidence-bound-bandit
 kind: algorithm
 title: "Finite-horizon upper-confidence-bound bandit algorithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

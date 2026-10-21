@@ -2,7 +2,7 @@
 id: thm-sequential-infinite-width-ntk-limit
 kind: theorem
 title: Sequential infinite-width NTK limit and finite-time lazy training dynamics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

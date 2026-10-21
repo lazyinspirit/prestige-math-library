@@ -2,7 +2,7 @@
 id: alg-extended-value-iteration
 kind: algorithm
 title: "Extended value iteration for a confidence set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-independent-subgaussian-prefix-tail
 kind: lemma
 title: "Tail bounds for deterministic prefixes of independent sub-Gaussian rewards"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

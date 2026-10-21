@@ -2,7 +2,7 @@
 id: def-physics-informed-neural-network-loss
 kind: definition
 title: "Physics-informed residual loss and Hölder regularization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

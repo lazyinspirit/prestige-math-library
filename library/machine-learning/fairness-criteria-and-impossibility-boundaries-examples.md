@@ -1,7 +1,7 @@
 ---
 page: fairness-criteria-and-impossibility-boundaries-examples
 title: "Fairness criteria, impossibility boundaries, and limits — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-equal-base-rates-admit-constant-calibrated-score

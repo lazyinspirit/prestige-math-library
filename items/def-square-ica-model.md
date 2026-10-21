@@ -2,7 +2,7 @@
 id: def-square-ica-model
 kind: definition
 title: "Square independent-component model with standardized sources"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 provenance:

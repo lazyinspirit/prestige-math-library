@@ -2,7 +2,7 @@
 id: thm-hard-attention-languages
 kind: theorem
 title: "Fixed-depth hard attention cannot recognize PARITY or 2DYCK"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

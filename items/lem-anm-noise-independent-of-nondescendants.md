@@ -2,7 +2,7 @@
 id: lem-anm-noise-independent-of-nondescendants
 kind: lemma
 title: "An ANM noise is independent of every set of nondescendants"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

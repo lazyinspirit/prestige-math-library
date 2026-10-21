@@ -1,7 +1,7 @@
 ---
 page: stochastic-finite-armed-bandits
 title: Stochastic finite-armed bandits
-status: draft
+status: published
 items:
 - def-centered-subgaussian-reward
 - lem-zeta-two-and-three-converge

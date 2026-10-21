@@ -2,7 +2,7 @@
 id: "def-wasserstein-two-space-and-couplings"
 kind: definition
 title: "The Euclidean quadratic Wasserstein space"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

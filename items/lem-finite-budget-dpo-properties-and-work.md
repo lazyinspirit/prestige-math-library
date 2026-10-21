@@ -2,7 +2,7 @@
 id: lem-finite-budget-dpo-properties-and-work
 kind: lemma
 title: "Finite-budget DPO preserves its valid pair and terminates with finite oracle work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

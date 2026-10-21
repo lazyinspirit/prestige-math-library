@@ -2,7 +2,7 @@
 id: ex-zero-loss-finite-grid-risk-control
 kind: example
 title: "The all-zero loss boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

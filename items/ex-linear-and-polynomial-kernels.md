@@ -2,7 +2,7 @@
 id: ex-linear-and-polynomial-kernels
 kind: example
 title: Linear and polynomial kernels as finite feature inner products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

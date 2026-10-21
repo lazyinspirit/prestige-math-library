@@ -1,7 +1,7 @@
 ---
 page: ml02-spectral-clustering-examples
 title: "Spectral clustering and graph cuts — Examples"
-status: draft
+status: published
 requires:
   - ml02-spectral-clustering
 items: []

@@ -1,7 +1,7 @@
 ---
 page: tabular-prediction-and-control
 title: Tabular prediction and control by interaction
-status: draft
+status: published
 items:
   - lem-bounded-square-summable-martingale-difference-series-converges
   - def-optimal-action-value-bellman-operator

@@ -2,7 +2,7 @@
 id: ex-nonseparable-perceptron-cycles
 kind: example
 title: Two contradictory labels make the cyclic perceptron repeat a two-update cycle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: contextual-expert-bandits
 title: Contextual expert bandits
-status: draft
+status: published
 items:
   - def-contextual-bandit-protocol
   - alg-exp4

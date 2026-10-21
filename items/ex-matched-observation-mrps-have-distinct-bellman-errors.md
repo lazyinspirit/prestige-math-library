@@ -2,7 +2,7 @@
 id: ex-matched-observation-mrps-have-distinct-bellman-errors
 kind: example
 title: At discount one-half, identical observable laws hide different Bellman-error minima
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

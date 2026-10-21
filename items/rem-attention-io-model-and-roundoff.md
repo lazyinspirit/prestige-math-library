@@ -2,7 +2,7 @@
 id: rem-attention-io-model-and-roundoff
 kind: remark
 title: "The scalar workspace result is not a hardware I/O bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

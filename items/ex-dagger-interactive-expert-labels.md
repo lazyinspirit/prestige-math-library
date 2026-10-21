@@ -2,7 +2,7 @@
 id: ex-dagger-interactive-expert-labels
 kind: example
 title: DAgger queries expert labels on learner-visited states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

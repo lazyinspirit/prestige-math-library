@@ -2,7 +2,7 @@
 id: thm-ucrl2-high-probability-regret
 kind: theorem
 title: "UCRL2 high-probability pathwise regret bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

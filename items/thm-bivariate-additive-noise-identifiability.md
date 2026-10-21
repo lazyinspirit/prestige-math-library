@@ -2,7 +2,7 @@
 id: thm-bivariate-additive-noise-identifiability
 kind: theorem
 title: "Bivariate additive-noise direction identifiability under Condition 19"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

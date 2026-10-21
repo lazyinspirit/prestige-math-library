@@ -2,7 +2,7 @@
 id: thm-relu-forward-variance-recurrence
 kind: theorem
 title: "ReLU forward preactivation-variance recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

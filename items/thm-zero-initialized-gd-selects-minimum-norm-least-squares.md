@@ -2,7 +2,7 @@
 id: thm-zero-initialized-gd-selects-minimum-norm-least-squares
 kind: theorem
 title: "Zero-initialized gradient descent selects minimum-norm least squares"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

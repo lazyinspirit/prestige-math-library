@@ -2,7 +2,7 @@
 id: thm-spectral-margin-bound-for-multiclass-networks
 kind: theorem
 title: "A simultaneous spectral margin bound for multiclass networks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

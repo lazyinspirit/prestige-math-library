@@ -2,7 +2,7 @@
 id: "thm-ac2-curve-admits-minimal-velocity"
 kind: theorem
 title: "AC2 curves admit a unique minimum-action velocity field"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -2,7 +2,7 @@
 id: lem-hermitian-rank-one-resolvent-update-and-trace-norm-bound
 kind: lemma
 title: "Hermitian rank-one resolvent update and trace-norm bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

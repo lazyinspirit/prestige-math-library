@@ -2,7 +2,7 @@
 id: ex-short-versus-long-model-rollouts
 kind: example
 title: "A small transition error accumulates over longer rollouts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

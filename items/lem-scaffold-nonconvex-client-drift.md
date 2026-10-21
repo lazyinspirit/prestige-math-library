@@ -2,7 +2,7 @@
 id: lem-scaffold-nonconvex-client-drift
 kind: lemma
 title: Nonconvex SCAFFOLD query-point drift bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-gaussian-ltwo-hermite-completeness
 kind: lemma
 title: Completeness of normalized probabilists’ Hermite polynomials in Gaussian L²
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

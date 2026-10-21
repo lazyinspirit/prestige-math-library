@@ -1,7 +1,7 @@
 ---
 page: normalizing-flows-and-exact-density-models
 title: "Exact-density normalizing flows"
-status: draft
+status: published
 items:
   - def-normalizing-flow
   - thm-change-of-variables-density-for-diffeomorphic-flow

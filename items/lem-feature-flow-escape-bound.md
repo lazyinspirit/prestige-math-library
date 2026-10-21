@@ -2,7 +2,7 @@
 id: lem-feature-flow-escape-bound
 kind: lemma
 title: The localized flow cannot escape all cutoffs in finite time
-status: draft
+status: published
 dependency_level: 10
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

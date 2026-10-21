@@ -7,7 +7,7 @@ verification:
 id: ex-two-arm-deterministic-gap
 kind: example
 title: "A two-arm deterministic gap and explore-then-commit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

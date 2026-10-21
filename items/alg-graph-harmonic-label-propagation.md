@@ -2,7 +2,7 @@
 id: alg-graph-harmonic-label-propagation
 kind: algorithm
 title: "Finite graph-harmonic label propagation with a residual status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

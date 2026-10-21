@@ -2,7 +2,7 @@
 id: lem-localized-lift-generates-continuity-equation
 kind: lemma
 title: The Hilbert lift induces the localized Wasserstein continuity equation
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

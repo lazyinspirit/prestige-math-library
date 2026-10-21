@@ -2,7 +2,7 @@
 id: thm-telgarsky-depth-separation-l1
 kind: theorem
 title: "Depth separation with explicit semi-algebraic crossing budgets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-sgd-stability-convex-loss
 kind: theorem
 title: Expected generalization of convex stochastic gradient training
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

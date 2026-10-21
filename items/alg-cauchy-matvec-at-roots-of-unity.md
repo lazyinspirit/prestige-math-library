@@ -2,7 +2,7 @@
 id: alg-cauchy-matvec-at-roots-of-unity
 kind: algorithm
 title: Exact Cauchy matrix-vector product on a radix-two root grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

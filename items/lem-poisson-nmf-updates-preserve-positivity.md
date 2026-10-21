@@ -2,7 +2,7 @@
 id: lem-poisson-nmf-updates-preserve-positivity
 kind: lemma
 title: "Strictly positive initialization keeps the Poisson NMF updates well-defined"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 provenance:

@@ -2,7 +2,7 @@
 id: thm-ucrl2-regret-lower-bound
 kind: theorem
 title: "Expected regret lower bound for communicating MDPs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

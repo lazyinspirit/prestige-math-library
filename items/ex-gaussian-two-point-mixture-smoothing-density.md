@@ -2,7 +2,7 @@
 id: ex-gaussian-two-point-mixture-smoothing-density
 kind: example
 title: Smoothing a two-point data law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

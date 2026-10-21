@@ -2,7 +2,7 @@
 id: ex-nonconvex-cosine-gradient-descent-has-distinct-basins
 kind: example
 title: "Two initial intervals converge to different minima of a periodic objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

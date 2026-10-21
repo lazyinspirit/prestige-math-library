@@ -1,7 +1,7 @@
 ---
 page: linear-contextual-bandits-and-linucb
 title: Linear contextual bandits and LinUCB
-status: draft
+status: published
 items:
   - lem-linucb-elliptical-potential
   - lem-linucb-trace-determinant-bound

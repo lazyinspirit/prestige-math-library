@@ -1,7 +1,7 @@
 ---
 page: low-rank-adaptation-and-parameter-update-geometry
 title: "Low-rank adaptation and the geometry of parameter updates"
-status: draft
+status: published
 items:
   - def-low-rank-adaptation-of-a-linear-layer
   - alg-finite-budget-low-rank-adaptation

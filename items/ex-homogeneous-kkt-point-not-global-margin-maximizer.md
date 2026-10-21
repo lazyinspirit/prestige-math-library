@@ -2,7 +2,7 @@
 id: ex-homogeneous-kkt-point-not-global-margin-maximizer
 kind: example
 title: "A homogeneous-network KKT point that is not globally optimal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

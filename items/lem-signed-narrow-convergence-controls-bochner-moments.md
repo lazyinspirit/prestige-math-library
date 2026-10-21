@@ -2,7 +2,7 @@
 id: lem-signed-narrow-convergence-controls-bochner-moments
 kind: lemma
 title: Signed narrow convergence controls variation tails and Bochner moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

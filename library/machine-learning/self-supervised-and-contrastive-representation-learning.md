@@ -1,7 +1,7 @@
 ---
 page: self-supervised-and-contrastive-representation-learning
 title: Self-supervised and contrastive representations
-status: draft
+status: published
 items:
   - lem-contrastive-hinge-and-logistic-loss-properties
   - lem-vector-rademacher-contraction-for-bounded-classes

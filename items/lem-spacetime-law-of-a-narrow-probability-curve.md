@@ -2,7 +2,7 @@
 id: "lem-spacetime-law-of-a-narrow-probability-curve"
 kind: lemma
 title: "A narrow probability curve defines its space-time measure"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

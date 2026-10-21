@@ -2,7 +2,7 @@
 id: ex-rank-q-pca-exact-reconstruction
 kind: example
 title: "A rank-one centered data matrix is reconstructed exactly by rank-one PCA"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

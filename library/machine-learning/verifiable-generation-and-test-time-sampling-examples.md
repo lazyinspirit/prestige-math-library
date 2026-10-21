@@ -1,7 +1,7 @@
 ---
 page: verifiable-generation-and-test-time-sampling-examples
 title: "Verifiable generation, group-relative updates, and test-time sampling — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-equal-group-rewards-zero-advantages

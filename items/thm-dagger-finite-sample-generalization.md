@@ -2,7 +2,7 @@
 id: thm-dagger-finite-sample-generalization
 kind: theorem
 title: Finite-sample DAgger surrogate-loss guarantee
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

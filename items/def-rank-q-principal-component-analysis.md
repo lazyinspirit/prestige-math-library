@@ -2,7 +2,7 @@
 id: def-rank-q-principal-component-analysis
 kind: definition
 title: "Rank-q principal component analysis by Frobenius reconstruction error"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

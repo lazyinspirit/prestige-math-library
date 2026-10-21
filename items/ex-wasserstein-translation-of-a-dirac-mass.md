@@ -2,7 +2,7 @@
 id: "ex-wasserstein-translation-of-a-dirac-mass"
 kind: example
 title: "Translation of a Dirac mass"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

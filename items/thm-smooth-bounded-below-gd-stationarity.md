@@ -2,7 +2,7 @@
 id: thm-smooth-bounded-below-gd-stationarity
 kind: theorem
 title: "Gradient descent has vanishing gradients when the objective is bounded below along its iterates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

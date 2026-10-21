@@ -2,7 +2,7 @@
 id: thm-delayed-q-learning-pac-bound
 kind: theorem
 title: "PAC-MDP sample complexity of Delayed Q-learning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

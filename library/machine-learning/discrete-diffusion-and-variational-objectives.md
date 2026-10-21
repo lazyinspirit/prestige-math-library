@@ -1,7 +1,7 @@
 ---
 page: discrete-diffusion-and-variational-objectives
 title: Discrete diffusion chains and DDPM objectives
-status: draft
+status: published
 items:
   - def-forward-gaussian-diffusion-chain
   - lem-isotropic-gaussian-kl-formula

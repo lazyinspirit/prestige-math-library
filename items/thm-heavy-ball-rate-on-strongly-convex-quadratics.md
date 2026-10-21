@@ -2,7 +2,7 @@
 id: thm-heavy-ball-rate-on-strongly-convex-quadratics
 kind: theorem
 title: "Tuned heavy-ball has the minimax root factor on positive-definite quadratics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

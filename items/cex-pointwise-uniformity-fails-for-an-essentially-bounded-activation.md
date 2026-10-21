@@ -2,7 +2,7 @@
 id: cex-pointwise-uniformity-fails-for-an-essentially-bounded-activation
 kind: counterexample
 title: "Essential boundedness does not imply pointwise uniform universality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

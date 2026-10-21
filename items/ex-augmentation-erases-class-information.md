@@ -2,7 +2,7 @@
 id: ex-augmentation-erases-class-information
 kind: example
 title: "An augmentation that erases the label-relevant class coordinate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

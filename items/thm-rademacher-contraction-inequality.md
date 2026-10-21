@@ -2,7 +2,7 @@
 id: thm-rademacher-contraction-inequality
 kind: theorem
 title: "One-sided coordinate Rademacher contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: preference-learning-and-direct-preference-optimization
 title: Preference learning and direct preference optimization
-status: draft
+status: published
 items:
   - def-kl-regularized-policy-improvement
   - def-bradley-terry-preference-model

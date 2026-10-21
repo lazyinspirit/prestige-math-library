@@ -2,7 +2,7 @@
 id: lem-smooth-nonpolynomial-activation-dense-on-compact-intervals
 kind: lemma
 title: "Smooth nonpolynomial activations are dense on compact sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

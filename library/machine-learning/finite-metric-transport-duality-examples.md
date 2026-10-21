@@ -1,7 +1,7 @@
 ---
 page: finite-metric-transport-duality-examples
 title: "Finite-metric transport duality — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-point-finite-metric-transport-duality

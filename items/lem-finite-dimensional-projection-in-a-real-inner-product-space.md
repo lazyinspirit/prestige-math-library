@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-projection-in-a-real-inner-product-space
 kind: lemma
 title: Projection onto a finite-dimensional subspace of an arbitrary real inner-product space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

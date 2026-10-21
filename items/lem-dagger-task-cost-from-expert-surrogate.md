@@ -2,7 +2,7 @@
 id: lem-dagger-task-cost-from-expert-surrogate
 kind: lemma
 title: Expert-surrogate loss bounds finite-horizon task-cost increase
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

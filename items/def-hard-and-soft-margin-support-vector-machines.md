@@ -2,7 +2,7 @@
 id: def-hard-and-soft-margin-support-vector-machines
 kind: definition
 title: Hard- and soft-margin support-vector machines with an unpenalized bias
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

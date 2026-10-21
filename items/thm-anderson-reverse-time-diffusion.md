@@ -2,7 +2,7 @@
 id: thm-anderson-reverse-time-diffusion
 kind: theorem
 title: Anderson's bounded-start reverse-time diffusion theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

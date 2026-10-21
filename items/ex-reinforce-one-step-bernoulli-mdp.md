@@ -7,7 +7,7 @@ verification:
 id: ex-reinforce-one-step-bernoulli-mdp
 kind: example
 title: "One-step Bernoulli REINFORCE has the exact expected gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

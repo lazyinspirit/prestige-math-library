@@ -2,7 +2,7 @@
 id: cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain
 kind: counterexample
 title: "Exterior-sphere domains need not have global C2alpha Dirichlet solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

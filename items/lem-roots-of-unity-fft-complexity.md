@@ -2,7 +2,7 @@
 id: lem-roots-of-unity-fft-complexity
 kind: lemma
 title: Roots-of-unity orthogonality and radix-two FFT cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

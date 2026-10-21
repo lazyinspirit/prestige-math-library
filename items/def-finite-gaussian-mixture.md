@@ -2,7 +2,7 @@
 id: def-finite-gaussian-mixture
 kind: definition
 title: "Finite Gaussian mixture with positive-definite component covariances"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

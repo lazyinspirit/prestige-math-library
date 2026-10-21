@@ -1,7 +1,7 @@
 ---
 page: ml02-boosting-examples
 title: "AdaBoost and gradient boosting — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-adaboost-perfect-round-stops

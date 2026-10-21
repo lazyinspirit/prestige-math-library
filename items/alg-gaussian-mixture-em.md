@@ -2,7 +2,7 @@
 id: alg-gaussian-mixture-em
 kind: algorithm
 title: "Exact EM updates for a finite Gaussian mixture"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

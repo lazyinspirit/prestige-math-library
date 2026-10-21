@@ -2,7 +2,7 @@
 id: ex-stationary-ornstein-uhlenbeck-reversal
 kind: example
 title: A stationary Ornstein–Uhlenbeck diffusion reverses to itself
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion-examples

@@ -1,7 +1,7 @@
 ---
 page: rl-function-approximation-and-off-policy-limits-examples
 title: Function approximation, off-policy instability, and deep-RL limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-on-policy-one-state-linear-td-is-stable

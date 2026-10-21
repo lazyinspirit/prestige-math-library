@@ -1,7 +1,7 @@
 ---
 page: ml02-graphical-models-examples
 title: "Undirected graphical models and sparse precision estimation — Examples"
-status: draft
+status: published
 requires:
   - ml02-graphical-models
 items: []

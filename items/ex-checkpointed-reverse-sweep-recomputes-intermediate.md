@@ -2,7 +2,7 @@
 id: ex-checkpointed-reverse-sweep-recomputes-intermediate
 kind: example
 title: "Checkpointed reverse sweep recomputes an intermediate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

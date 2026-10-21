@@ -2,7 +2,7 @@
 id: lem-linucb-ridge-estimates-are-measurable
 kind: lemma
 title: The ridge estimates and self-normalized sums are measurable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-soft-2dyck-crossentropy-gap-paired-prefixes
 kind: lemma
 title: "Paired-prefix lower bound for soft-attention 2DYCK prediction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

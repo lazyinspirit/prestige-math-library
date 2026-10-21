@@ -2,7 +2,7 @@
 id: def-marginal-score-function
 kind: definition
 title: Marginal score function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: score-sdes-and-reverse-time-generation

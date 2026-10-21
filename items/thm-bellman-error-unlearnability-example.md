@@ -2,7 +2,7 @@
 id: thm-bellman-error-unlearnability-example
 kind: theorem
 title: Feature-reward data do not determine the Bellman error or, at positive discount, its minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

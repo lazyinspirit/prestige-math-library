@@ -2,7 +2,7 @@
 id: "lem-wasserstein-gluing"
 kind: lemma
 title: "Gluing two Euclidean couplings"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -2,7 +2,7 @@
 id: thm-online-gradient-descent-regret
 kind: theorem
 title: Projected online gradient descent has static regret at most three-halves of DG square-root T
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

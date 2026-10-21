@@ -2,7 +2,7 @@
 id: def-constrained-markov-decision-process
 kind: definition
 title: "Finite discounted constrained Markov decision process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

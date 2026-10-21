@@ -2,7 +2,7 @@
 id: "lem-carath-ode-flow-with-integrable-local-bounds"
 kind: lemma
 title: "Local flows for time-measurable fields with integrable local bounds"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

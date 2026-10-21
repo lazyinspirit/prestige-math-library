@@ -2,7 +2,7 @@
 id: ex-du-residual-skip-at-every-layer
 kind: example
 title: "The analyzed residual network skips at every layer after the first"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

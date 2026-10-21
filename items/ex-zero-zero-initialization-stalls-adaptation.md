@@ -2,7 +2,7 @@
 id: ex-zero-zero-initialization-stalls-adaptation
 kind: example
 title: "Zero-zero initialization stalls one step, while nonzero A can move"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

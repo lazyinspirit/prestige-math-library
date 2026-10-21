@@ -2,7 +2,7 @@
 id: ex-kernel-ridge-singular-and-zero-gram-matrices
 kind: example
 title: Kernel ridge systems with singular and zero Gram matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

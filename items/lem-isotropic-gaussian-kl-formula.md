@@ -2,7 +2,7 @@
 id: lem-isotropic-gaussian-kl-formula
 kind: lemma
 title: Reverse KL between isotropic Gaussian laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

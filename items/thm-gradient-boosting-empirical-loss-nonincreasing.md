@@ -2,7 +2,7 @@
 id: thm-gradient-boosting-empirical-loss-nonincreasing
 kind: theorem
 title: "Gradient tree boosting does not increase empirical loss"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

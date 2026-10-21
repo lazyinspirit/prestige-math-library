@@ -2,7 +2,7 @@
 id: lem-affine-dilation-is-quadratic-cost-optimal
 kind: lemma
 title: A centered law and its affine dilation have an optimal affine coupling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: rademacher-complexity-and-generalization-examples
 title: "Rademacher complexity and uniform generalization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-class-rademacher-complexity

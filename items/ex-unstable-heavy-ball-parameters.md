@@ -2,7 +2,7 @@
 id: ex-unstable-heavy-ball-parameters
 kind: example
 title: "An untuned heavy-ball recurrence diverges on a scalar quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

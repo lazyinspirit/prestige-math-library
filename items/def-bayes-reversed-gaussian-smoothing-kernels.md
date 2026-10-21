@@ -2,7 +2,7 @@
 id: def-bayes-reversed-gaussian-smoothing-kernels
 kind: definition
 title: Bayes-reversed Gaussian smoothing kernels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

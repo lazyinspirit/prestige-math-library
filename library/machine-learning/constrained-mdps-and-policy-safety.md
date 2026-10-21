@@ -1,7 +1,7 @@
 ---
 page: constrained-mdps-and-policy-safety
 title: Constrained MDPs and policy safety
-status: draft
+status: published
 items:
   - lem-finite-action-average-tv-controlled-by-kl
   - def-constrained-markov-decision-process

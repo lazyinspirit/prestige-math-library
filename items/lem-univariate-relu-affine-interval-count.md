@@ -2,7 +2,7 @@
 id: lem-univariate-relu-affine-interval-count
 kind: lemma
 title: "A univariate ReLU network with H hidden layers has a product bound on affine intervals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

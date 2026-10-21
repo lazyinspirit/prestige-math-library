@@ -2,7 +2,7 @@
 id: ex-correlated-predictors-and-shrinkage
 kind: example
 title: Duplicate predictors give a least-squares line, a ridge point, and a lasso segment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

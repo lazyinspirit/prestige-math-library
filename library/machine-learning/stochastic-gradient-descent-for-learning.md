@@ -1,7 +1,7 @@
 ---
 page: stochastic-gradient-descent-for-learning
 title: "Stochastic gradient descent and random-iterate guarantees"
-status: draft
+status: published
 items:
   - lem-sgd-trajectory-integrability
   - lem-independent-finite-random-index-extension

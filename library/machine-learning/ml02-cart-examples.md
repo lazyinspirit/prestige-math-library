@@ -1,7 +1,7 @@
 ---
 page: ml02-cart-examples
 title: 'CART trees and pruning — Examples'
-status: draft
+status: published
 items: []
 examples:
   - ex-cart-subtrees-same-fit-different-penalties

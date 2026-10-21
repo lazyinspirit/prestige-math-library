@@ -2,7 +2,7 @@
 id: ex-value-iteration-attains-error-rate
 kind: example
 title: "A one-state value-iteration model attains the Bellman error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

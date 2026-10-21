@@ -1,7 +1,7 @@
 ---
 page: monotone-risk-calibration-and-deployment-guarantees-examples
 title: "Monotone risk calibration and finite-sample deployment guarantees — Examples"
-status: draft
+status: published
 requires:
   - monotone-risk-calibration-and-deployment-guarantees
 items: []

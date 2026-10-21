@@ -2,7 +2,7 @@
 id: lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains
 kind: lemma
 title: Inward mollification and smooth finite-rank approximation on Lipschitz domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

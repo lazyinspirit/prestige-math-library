@@ -2,7 +2,7 @@
 id: lem-complex-sample-covariance-norm-bound-from-real-edge
 kind: lemma
 title: "A coarse complex sample-covariance norm bound from real edge bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

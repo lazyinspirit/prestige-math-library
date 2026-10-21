@@ -2,7 +2,7 @@
 id: def-discounted-cost-constraint
 kind: definition
 title: "Expected discounted-cost feasibility constraint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

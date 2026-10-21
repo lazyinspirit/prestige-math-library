@@ -2,7 +2,7 @@
 id: lem-local-sgd-sampling-variance
 kind: lemma
 title: Variance reduction across independent local-SGD workers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

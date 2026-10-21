@@ -2,7 +2,7 @@
 id: lem-mean-classifier-loss-from-contrastive-loss
 kind: lemma
 title: "Jensen comparison with the average mean-classifier loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

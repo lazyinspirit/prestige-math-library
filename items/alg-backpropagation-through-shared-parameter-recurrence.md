@@ -2,7 +2,7 @@
 id: alg-backpropagation-through-shared-parameter-recurrence
 kind: algorithm
 title: "Backpropagation through a finite shared-parameter recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

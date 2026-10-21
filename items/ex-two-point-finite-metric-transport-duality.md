@@ -2,7 +2,7 @@
 id: ex-two-point-finite-metric-transport-duality
 kind: example
 title: "Two-point finite-metric transport"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

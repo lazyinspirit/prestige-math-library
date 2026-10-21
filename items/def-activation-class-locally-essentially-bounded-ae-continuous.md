@@ -2,7 +2,7 @@
 id: def-activation-class-locally-essentially-bounded-ae-continuous
 kind: definition
 title: "Locally essentially bounded activations with null discontinuity closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

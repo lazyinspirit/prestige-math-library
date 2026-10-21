@@ -2,7 +2,7 @@
 id: ex-gaussian-point-mass-score-lipschitz-blows-up-at-zero
 kind: example
 title: The score Lipschitz bound blows up for a point mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

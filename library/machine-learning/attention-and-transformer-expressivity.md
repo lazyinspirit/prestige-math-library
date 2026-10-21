@@ -1,7 +1,7 @@
 ---
 page: attention-and-transformer-expressivity
 title: "Attention, transformer universality, and sequence limits"
-status: draft
+status: published
 items:
   - lem-2dyck-pcfg-prefix-mass-positive
   - def-scaled-dot-product-attention

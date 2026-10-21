@@ -2,7 +2,7 @@
 id: ex-training-gram-does-not-control-test-prediction
 kind: example
 title: A training Gram matrix does not determine a test prediction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

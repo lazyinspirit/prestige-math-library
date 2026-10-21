@@ -2,7 +2,7 @@
 id: thm-finite-horizon-pomdp-piecewise-linear-convex-value
 kind: theorem
 title: "Finite-horizon POMDP values are piecewise-linear and convex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

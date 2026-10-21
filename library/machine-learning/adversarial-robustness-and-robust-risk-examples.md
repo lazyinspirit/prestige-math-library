@@ -1,7 +1,7 @@
 ---
 page: adversarial-robustness-and-robust-risk-examples
 title: Adversarial robustness and robust risk — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-robust-risk-dimension-radius-scaling

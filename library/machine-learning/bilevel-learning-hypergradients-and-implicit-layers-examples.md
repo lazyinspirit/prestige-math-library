@@ -1,7 +1,7 @@
 ---
 page: bilevel-learning-hypergradients-and-implicit-layers-examples
 title: "Bilevel learning, hypergradients, and implicit layers — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ridge-hyperparameter-hypergradient

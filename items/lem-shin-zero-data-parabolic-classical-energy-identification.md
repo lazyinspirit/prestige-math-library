@@ -2,7 +2,7 @@
 id: lem-shin-zero-data-parabolic-classical-energy-identification
 kind: lemma
 title: "Zero-data bounded classical parabolic errors are weak energy solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

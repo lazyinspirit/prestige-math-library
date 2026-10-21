@@ -1,7 +1,7 @@
 ---
 page: generative-adversarial-networks-examples
 title: GAN objectives and the ideal discriminator — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-disjoint-supports-saturate-ideal-discriminator

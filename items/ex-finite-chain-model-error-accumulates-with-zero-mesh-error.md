@@ -2,7 +2,7 @@
 id: ex-finite-chain-model-error-accumulates-with-zero-mesh-error
 kind: example
 title: Finite model error accumulates in a fixed chain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

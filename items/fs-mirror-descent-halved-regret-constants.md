@@ -2,7 +2,7 @@
 id: fs-mirror-descent-halved-regret-constants
 kind: false-statement
 title: Halving both terms in the agile mirror-descent regret bound
-status: draft
+status: published
 origin: session
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: verifiable-generation-and-test-time-sampling
 title: "Verifiable generation, group-relative updates, and test-time sampling"
-status: draft
+status: published
 items:
   - def-verifier-and-generation-protocol
   - alg-budgeted-verifier-guided-generation

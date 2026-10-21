@@ -1,7 +1,7 @@
 ---
 page: reconstruction-and-masked-autoencoders
 title: "Reconstruction and masked autoencoders"
-status: draft
+status: published
 items:
   - def-reconstruction-autoencoder
   - alg-masked-autoencoder-pretraining

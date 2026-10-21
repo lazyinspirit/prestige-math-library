@@ -1,7 +1,7 @@
 ---
 page: momentum-and-accelerated-training
 title: "Momentum and quadratic acceleration"
-status: draft
+status: published
 items:
   - alg-heavy-ball-momentum
   - alg-nesterov-accelerated-gradient

@@ -2,7 +2,7 @@
 id: def-episodic-returns-td-errors-and-policy-support
 kind: definition
 title: Episodic returns, temporal-difference errors, and policy support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

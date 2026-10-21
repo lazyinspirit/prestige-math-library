@@ -1,7 +1,7 @@
 ---
 page: gaussian-smoothing-densities-scores-and-endpoint-limits
 title: Gaussian smoothing densities, scores, and endpoint limits
-status: draft
+status: published
 items:
   - lem-deterministic-ito-integral-has-gaussian-independent-increments
   - def-gaussian-smoothed-data-law-and-transition-density

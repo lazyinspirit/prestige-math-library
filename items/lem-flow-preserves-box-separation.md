@@ -2,7 +2,7 @@
 id: lem-flow-preserves-box-separation
 kind: lemma
 title: Partial-homogeneity flows preserve box separation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 12

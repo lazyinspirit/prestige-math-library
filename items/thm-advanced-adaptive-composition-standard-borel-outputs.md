@@ -2,7 +2,7 @@
 id: thm-advanced-adaptive-composition-standard-borel-outputs
 kind: theorem
 title: Advanced adaptive composition for standard-Borel outputs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

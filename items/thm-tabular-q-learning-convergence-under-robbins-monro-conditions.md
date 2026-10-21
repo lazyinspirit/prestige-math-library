@@ -2,7 +2,7 @@
 id: thm-tabular-q-learning-convergence-under-robbins-monro-conditions
 kind: theorem
 title: Tabular Q-learning converges under per-pair Robbins–Monro steps and full visitation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-binary-logistic-and-multiclass-softmax-models
 kind: definition
 title: Binary logistic and multiclass softmax conditional models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

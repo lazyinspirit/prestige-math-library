@@ -2,7 +2,7 @@
 id: lem-hermitian-resolvent-trace-concentration
 kind: lemma
 title: "Concentration of the normalized complex Hermitian resolvent trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

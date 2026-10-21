@@ -2,7 +2,7 @@
 id: thm-basic-and-advanced-composition
 kind: theorem
 title: Basic and advanced adaptive composition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

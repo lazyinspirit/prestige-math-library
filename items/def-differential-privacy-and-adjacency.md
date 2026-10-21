@@ -2,7 +2,7 @@
 id: def-differential-privacy-and-adjacency
 kind: definition
 title: Differential privacy, databases, and add/remove adjacency
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

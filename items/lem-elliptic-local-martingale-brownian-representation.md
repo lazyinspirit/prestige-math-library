@@ -2,7 +2,7 @@
 id: lem-elliptic-local-martingale-brownian-representation
 kind: lemma
 title: An elliptic local martingale has a Brownian driver
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

@@ -2,7 +2,7 @@
 id: thm-gp-regression-log-marginal-likelihood
 kind: theorem
 title: Log marginal likelihood for a finite Gaussian-process regression model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

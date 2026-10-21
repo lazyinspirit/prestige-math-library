@@ -2,7 +2,7 @@
 id: thm-single-hidden-layer-universal-approximation
 kind: theorem
 title: "Single-hidden-layer universal approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

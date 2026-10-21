@@ -2,7 +2,7 @@
 id: lem-pinn-residual-loss-from-fill-distance
 kind: lemma
 title: "Fill-distance control of the population PINN loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

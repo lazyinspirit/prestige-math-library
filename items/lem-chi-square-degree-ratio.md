@@ -2,7 +2,7 @@
 id: lem-chi-square-degree-ratio
 kind: lemma
 title: A chi-square variable divided by a comparable dimension converges to one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

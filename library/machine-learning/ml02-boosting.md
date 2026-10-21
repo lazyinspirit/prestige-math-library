@@ -1,7 +1,7 @@
 ---
 page: ml02-boosting
 title: "AdaBoost and gradient boosting"
-status: draft
+status: published
 items:
   - alg-adaboost-m1
   - def-negative-gradient-pseudo-residual

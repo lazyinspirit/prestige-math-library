@@ -2,7 +2,7 @@
 id: lem-scaffold-nonconvex-control-lag
 kind: lemma
 title: Nonconvex SCAFFOLD control-anchor tracking recursion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

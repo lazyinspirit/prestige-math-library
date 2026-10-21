@@ -2,7 +2,7 @@
 id: def-communicating-mdp-and-diameter
 kind: definition
 title: "Communicating MDP and diameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

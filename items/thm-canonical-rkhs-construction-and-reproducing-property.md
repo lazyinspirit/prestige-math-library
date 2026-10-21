@@ -2,7 +2,7 @@
 id: thm-canonical-rkhs-construction-and-reproducing-property
 kind: theorem
 title: A positive semidefinite kernel has a canonical reproducing kernel Hilbert space under countable choice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-smooth-bilevel-learning-problem
 kind: definition
 title: "Smooth bilevel stationary problems and their hypergradients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

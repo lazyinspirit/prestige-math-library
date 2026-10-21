@@ -2,7 +2,7 @@
 id: thm-gaussian-zero-partial-correlation-is-conditional-independence
 kind: theorem
 title: "Zero Gaussian partial correlation is conditional independence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

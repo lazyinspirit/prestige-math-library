@@ -2,7 +2,7 @@
 id: thm-self-normalized-linear-confidence-ellipsoid
 kind: theorem
 title: The ridge estimate lies in a time-uniform linear confidence ellipsoid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

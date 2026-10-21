@@ -2,7 +2,7 @@
 id: lem-pc-fisher-transform-uniform-concentration
 kind: lemma
 title: "Uniform concentration of Gaussian sample partial correlations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

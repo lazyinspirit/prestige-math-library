@@ -2,7 +2,7 @@
 id: thm-graph-harmonic-extension-uniqueness-and-maximum-principle
 kind: theorem
 title: "Anchored graph-harmonic extensions are unique and obey a maximum principle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

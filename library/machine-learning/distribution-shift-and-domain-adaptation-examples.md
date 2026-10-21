@@ -1,7 +1,7 @@
 ---
 page: distribution-shift-and-domain-adaptation-examples
 title: "Distribution shift and domain adaptation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-support-mismatch-prevents-covariate-weighting

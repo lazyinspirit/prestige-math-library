@@ -2,7 +2,7 @@
 id: def-mirror-map-and-bregman-divergence
 kind: definition
 title: Mirror maps, Bregman divergence, and local Hessian norms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

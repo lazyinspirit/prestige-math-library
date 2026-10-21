@@ -1,7 +1,7 @@
 ---
 page: variational-autoencoders-and-the-elbo
 title: Variational autoencoders and pathwise training
-status: draft
+status: published
 items:
   - def-variational-autoencoder
   - cor-vae-elbo-kl-decomposition

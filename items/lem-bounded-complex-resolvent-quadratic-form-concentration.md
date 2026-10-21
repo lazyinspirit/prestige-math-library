@@ -2,7 +2,7 @@
 id: lem-bounded-complex-resolvent-quadratic-form-concentration
 kind: lemma
 title: "Adapted concentration of bounded complex resolvent quadratic forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

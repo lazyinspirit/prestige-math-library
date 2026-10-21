@@ -1,7 +1,7 @@
 ---
 page: foundation-models-transfer-and-scaling-evidence-examples
 title: "Foundation models, transfer, and scaling evidence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-empirical-language-model-scaling-law

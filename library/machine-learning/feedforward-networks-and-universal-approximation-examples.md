@@ -1,7 +1,7 @@
 ---
 page: feedforward-networks-and-universal-approximation-examples
 title: "Feedforward networks and single-hidden-layer universality — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-offset-free-sine-ridge-functions-are-not-dense

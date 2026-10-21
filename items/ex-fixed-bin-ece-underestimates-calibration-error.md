@@ -2,7 +2,7 @@
 id: ex-fixed-bin-ece-underestimates-calibration-error
 kind: example
 title: "A fixed confidence bin hides calibration error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-single-policy-finite-horizon-simulation-bound
 kind: theorem
 title: "Finite-horizon simulation bound for one fixed policy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-orthogonal-independent-mixing-shared-columns-gaussian
 kind: lemma
 title: "A shared column of an independent orthogonal mixing must be Gaussian"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 provenance:

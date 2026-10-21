@@ -2,7 +2,7 @@
 id: alg-locally-linear-embedding
 kind: algorithm
 title: "Finite locally linear embedding with minimum-norm weights and a simple constant kernel"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

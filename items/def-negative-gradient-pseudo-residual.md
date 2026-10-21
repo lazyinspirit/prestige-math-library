@@ -2,7 +2,7 @@
 id: def-negative-gradient-pseudo-residual
 kind: definition
 title: "Negative-gradient pseudo-residuals for a finite empirical loss"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

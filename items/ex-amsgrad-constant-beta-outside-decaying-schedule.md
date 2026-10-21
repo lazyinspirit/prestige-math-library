@@ -2,7 +2,7 @@
 id: ex-amsgrad-constant-beta-outside-decaying-schedule
 kind: example
 title: Constant first-moment weight is outside the proved square-root regret schedule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

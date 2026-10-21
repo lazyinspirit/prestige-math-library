@@ -2,7 +2,7 @@
 id: ex-tiled-attention-replay-dropout-mask
 kind: example
 title: "A different dropout mask changes the reverse result"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

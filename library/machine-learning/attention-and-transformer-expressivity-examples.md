@@ -1,7 +1,7 @@
 ---
 page: attention-and-transformer-expressivity-examples
 title: "Attention, transformer universality, and sequence limits — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-position-free-vs-position-encoded-token-order

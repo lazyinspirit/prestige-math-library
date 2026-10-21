@@ -2,7 +2,7 @@
 id: ex-identifiable-nonlinear-additive-noise-model
 kind: example
 title: "An identifiable nonlinear ANM with a cubic cause-to-effect function"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

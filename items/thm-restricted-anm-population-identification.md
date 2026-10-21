@@ -2,7 +2,7 @@
 id: thm-restricted-anm-population-identification
 kind: theorem
 title: "Population identifiability and RESIT correctness for restricted ANMs"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -2,7 +2,7 @@
 id: lem-normalized-parabolic-bellman-bounded-weak-solution
 kind: lemma
 title: "A normalized parabolic Bellman equation has a bounded weak solution"
-status: draft
+status: published
 origin: session
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

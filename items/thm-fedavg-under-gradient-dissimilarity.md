@@ -2,7 +2,7 @@
 id: thm-fedavg-under-gradient-dissimilarity
 kind: theorem
 title: Strongly convex FedAvg under bounded gradient dissimilarity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

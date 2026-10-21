@@ -2,7 +2,7 @@
 id: thm-gaussian-mixture-exact-m-step-maximizes-q
 kind: theorem
 title: "The full-affine-span Gaussian-mixture M-step maximizes Q"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-offline-coverage-impossibility-example
 kind: theorem
 title: "Without trajectory coverage, logged data need not identify policy value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

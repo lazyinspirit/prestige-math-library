@@ -1,7 +1,7 @@
 ---
 page: ml02-clustering-mixtures-examples
 title: "K-means, Gaussian mixtures, and soft assignments — Examples"
-status: draft
+status: published
 requires:
   - ml02-clustering-mixtures
 items: []

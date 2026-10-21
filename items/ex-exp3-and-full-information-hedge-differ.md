@@ -2,7 +2,7 @@
 id: ex-exp3-and-full-information-hedge-differ
 kind: example
 title: Exp3 and full-information Hedge update differently
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

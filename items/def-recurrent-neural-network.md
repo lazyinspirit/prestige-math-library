@@ -2,7 +2,7 @@
 id: def-recurrent-neural-network
 kind: definition
 title: Shared-parameter recurrent neural network
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

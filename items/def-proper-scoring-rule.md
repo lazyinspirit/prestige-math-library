@@ -2,7 +2,7 @@
 id: def-proper-scoring-rule
 kind: definition
 title: "Strictly proper scoring rules on a finite label set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

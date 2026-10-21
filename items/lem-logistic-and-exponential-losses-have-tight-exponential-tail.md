@@ -2,7 +2,7 @@
 id: lem-logistic-and-exponential-losses-have-tight-exponential-tail
 kind: lemma
 title: "Logistic and exponential losses satisfy the tight-tail condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

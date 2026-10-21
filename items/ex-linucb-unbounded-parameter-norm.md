@@ -2,7 +2,7 @@
 id: ex-linucb-unbounded-parameter-norm
 kind: example
 title: No common confidence radius without a parameter norm bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

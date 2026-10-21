@@ -2,7 +2,7 @@
 id: lem-anm-parent-dependence-persists-under-conditioning
 kind: lemma
 title: "Parent dependence persists under nondescendant conditioning"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

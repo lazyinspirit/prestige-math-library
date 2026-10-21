@@ -1,7 +1,7 @@
 ---
 page: overparameterized-training-and-interpolation
 title: "Overparameterized networks and training to interpolation"
-status: draft
+status: published
 items:
   - lem-du-activation-normalizer-finite-positive
   - lem-du-conditional-loss-contraction-under-gram-control

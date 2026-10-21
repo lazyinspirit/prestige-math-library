@@ -2,7 +2,7 @@
 id: thm-tiled-attention-exactness
 kind: theorem
 title: "Tiled attention and its recomputed reverse pass are exact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

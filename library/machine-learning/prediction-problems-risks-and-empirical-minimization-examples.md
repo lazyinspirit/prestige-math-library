@@ -1,7 +1,7 @@
 ---
 page: prediction-problems-risks-and-empirical-minimization-examples
 title: "Prediction problems, risks, and empirical minimization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-binary-zero-one-loss

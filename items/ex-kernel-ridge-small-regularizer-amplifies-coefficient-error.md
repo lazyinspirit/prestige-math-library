@@ -2,7 +2,7 @@
 id: ex-kernel-ridge-small-regularizer-amplifies-coefficient-error
 kind: example
 title: Small regularization can amplify coefficient error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-three-node-gaussian-chain
 kind: example
 title: "A three-node Gaussian chain has conditionally independent endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-localized-wasserstein-flow
 kind: theorem
 title: The localized Wasserstein gradient flow exists, satisfies EVI, and is unique
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

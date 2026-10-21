@@ -2,7 +2,7 @@
 id: thm-low-rank-adapter-merging-and-gradients
 kind: theorem
 title: "Exact merging and gradients for a low-rank adapter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-finite-list-empirical-risk-selector-is-measurable
 kind: lemma
 title: "The finite-list ERM selector is measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-clipped-linear-class-shows-loose-radius-bound
 kind: example
 title: "Clipping can make the linear radius bound loose"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-gaussian-robust-risk-dimension-radius-scaling
 kind: example
 title: Gaussian robust risk across dimensions and radii
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk-examples

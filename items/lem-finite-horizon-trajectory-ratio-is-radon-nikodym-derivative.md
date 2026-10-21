@@ -2,7 +2,7 @@
 id: lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative
 kind: lemma
 title: "Finite-horizon policy ratios are trajectory Radon-Nikodym derivatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

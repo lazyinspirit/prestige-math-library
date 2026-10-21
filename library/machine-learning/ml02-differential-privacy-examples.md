@@ -1,7 +1,7 @@
 ---
 page: ml02-differential-privacy-examples
 title: Differential privacy mechanisms and composition — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-add-remove-noisy-count

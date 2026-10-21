@@ -2,7 +2,7 @@
 id: lem-gaussian-activation-covariance-strictness-and-ntk-recursion
 kind: lemma
 title: Gaussian activation covariance and tangent recursion preserve strict positivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

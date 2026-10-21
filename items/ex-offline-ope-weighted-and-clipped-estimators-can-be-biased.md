@@ -2,7 +2,7 @@
 id: ex-offline-ope-weighted-and-clipped-estimators-can-be-biased
 kind: example
 title: "Self-normalization and clipping can introduce finite-sample bias"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

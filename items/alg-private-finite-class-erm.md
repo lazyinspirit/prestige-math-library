@@ -2,7 +2,7 @@
 id: alg-private-finite-class-erm
 kind: algorithm
 title: "Finite-class empirical-risk selection with exponential weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

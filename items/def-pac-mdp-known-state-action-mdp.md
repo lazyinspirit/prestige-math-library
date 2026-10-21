@@ -2,7 +2,7 @@
 id: def-pac-mdp-known-state-action-mdp
 kind: definition
 title: "Known-state/action MDP with prescribed absorbing values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

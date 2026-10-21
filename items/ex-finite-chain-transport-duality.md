@@ -2,7 +2,7 @@
 id: ex-finite-chain-transport-duality
 kind: example
 title: "Transport on a finite chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-graphical-lasso-objective
 kind: definition
 title: "Gaussian sparse-precision objective with the all-entry penalty"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

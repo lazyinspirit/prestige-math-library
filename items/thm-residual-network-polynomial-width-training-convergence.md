@@ -2,7 +2,7 @@
 id: thm-residual-network-polynomial-width-training-convergence
 kind: theorem
 title: "Wide residual networks converge geometrically to zero empirical loss with polynomial depth dependence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-adaboost-exponential-training-error-bound
 kind: theorem
 title: "AdaBoost's exponential training-loss and nonpositive-margin bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

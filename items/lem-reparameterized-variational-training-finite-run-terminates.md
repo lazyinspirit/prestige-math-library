@@ -2,7 +2,7 @@
 id: lem-reparameterized-variational-training-finite-run-terminates
 kind: lemma
 title: "The fixed-horizon reparameterized variational-training procedure terminates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

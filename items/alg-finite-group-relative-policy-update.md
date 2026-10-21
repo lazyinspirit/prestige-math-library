@@ -2,7 +2,7 @@
 id: alg-finite-group-relative-policy-update
 kind: algorithm
 title: "Finite-budget group-relative policy update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

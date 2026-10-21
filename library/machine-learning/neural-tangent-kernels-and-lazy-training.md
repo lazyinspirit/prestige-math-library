@@ -1,7 +1,7 @@
 ---
 page: neural-tangent-kernels-and-lazy-training
 title: "Neural tangent kernels and lazy training"
-status: draft
+status: published
 items:
   - def-neural-tangent-kernel
   - def-width-normalized-fully-connected-network

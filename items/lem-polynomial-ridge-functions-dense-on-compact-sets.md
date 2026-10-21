@@ -2,7 +2,7 @@
 id: lem-polynomial-ridge-functions-dense-on-compact-sets
 kind: lemma
 title: "Polynomial ridge functions are dense on compact sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

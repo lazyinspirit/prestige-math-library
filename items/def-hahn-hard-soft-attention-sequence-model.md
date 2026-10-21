@@ -2,7 +2,7 @@
 id: def-hahn-hard-soft-attention-sequence-model
 kind: definition
 title: "Hard and soft attention sequence models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-small-margin-sample-does-not-fix-population-error
 kind: example
 title: "A small empirical margin loss does not determine population error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

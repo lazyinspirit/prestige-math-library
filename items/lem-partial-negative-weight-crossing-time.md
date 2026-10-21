@@ -2,7 +2,7 @@
 id: lem-partial-negative-weight-crossing-time
 kind: lemma
 title: Correct finite-time bound for partial-homogeneity zero crossing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

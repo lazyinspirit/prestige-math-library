@@ -2,7 +2,7 @@
 id: lem-continuous-functions-dense-in-lp-for-compactly-supported-finite-borel-measures
 kind: lemma
 title: "Continuous functions are dense in Lp for compactly supported finite measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

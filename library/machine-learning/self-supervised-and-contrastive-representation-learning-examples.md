@@ -1,7 +1,7 @@
 ---
 page: self-supervised-and-contrastive-representation-learning-examples
 title: Self-supervised and contrastive representations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-contrastive-same-class-negative-collision

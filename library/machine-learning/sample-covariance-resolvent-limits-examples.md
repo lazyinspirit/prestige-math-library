@@ -1,7 +1,7 @@
 ---
 page: sample-covariance-resolvent-limits-examples
 title: Sample-covariance resolvent deterministic equivalents — Examples
-status: draft
+status: published
 items: []
 examples:
 - ex-anisotropic-sample-covariance-directional-condition

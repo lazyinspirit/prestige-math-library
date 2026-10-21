@@ -1,7 +1,7 @@
 ---
 page: ml02-random-forests-examples
 title: 'Bagging and random forests — Examples'
-status: draft
+status: published
 items: []
 examples:
   - ex-random-forest-zero-margin-vote-limit

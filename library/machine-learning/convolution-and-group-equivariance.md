@@ -1,7 +1,7 @@
 ---
 page: convolution-and-group-equivariance
 title: "Convolution and finite-group equivariance"
-status: draft
+status: published
 items:
   - def-discrete-convolutional-layer
   - def-group-action-on-feature-maps

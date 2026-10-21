@@ -2,7 +2,7 @@
 id: def-sample-covariance-directional-spectral-measure
 kind: definition
 title: "Directional spectral measure of a Hermitian matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

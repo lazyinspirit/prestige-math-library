@@ -2,7 +2,7 @@
 id: lem-bounded-variable-lower-tail-from-mean
 kind: lemma
 title: "A lower-tail bound from a bounded mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

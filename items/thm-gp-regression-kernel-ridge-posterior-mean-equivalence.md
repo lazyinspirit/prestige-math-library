@@ -2,7 +2,7 @@
 id: thm-gp-regression-kernel-ridge-posterior-mean-equivalence
 kind: theorem
 title: Kernel ridge regression equals the Gaussian-process posterior mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

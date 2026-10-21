@@ -2,7 +2,7 @@
 id: thm-shared-parameter-backpropagation-gradient-formula
 kind: theorem
 title: "Reverse accumulation sums gradients over shared parameter uses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

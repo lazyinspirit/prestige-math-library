@@ -2,7 +2,7 @@
 id: thm-trajectory-importance-sampling-is-unbiased
 kind: theorem
 title: "Trajectory and per-decision importance sampling are unbiased under coverage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

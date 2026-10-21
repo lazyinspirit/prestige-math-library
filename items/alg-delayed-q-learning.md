@@ -2,7 +2,7 @@
 id: alg-delayed-q-learning
 kind: algorithm
 title: "Delayed Q-learning with an admissible heuristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

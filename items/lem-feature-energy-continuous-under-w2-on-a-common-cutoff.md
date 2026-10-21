@@ -2,7 +2,7 @@
 id: lem-feature-energy-continuous-under-w2-on-a-common-cutoff
 kind: lemma
 title: Feature energy is W2-continuous on a common cutoff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

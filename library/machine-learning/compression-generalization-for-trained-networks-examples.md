@@ -1,7 +1,7 @@
 ---
 page: compression-generalization-for-trained-networks-examples
 title: "Compression generalization for trained networks — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-compressed-classifier-vs-original-predictor

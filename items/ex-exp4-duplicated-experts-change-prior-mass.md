@@ -2,7 +2,7 @@
 id: ex-exp4-duplicated-experts-change-prior-mass
 kind: example
 title: Duplicated experts change Exp4's uniform prior mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

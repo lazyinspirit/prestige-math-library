@@ -1,7 +1,7 @@
 ---
 page: hedge-and-online-gradient-descent
 title: Hedge and online gradient descent
-status: draft
+status: published
 items:
   - alg-hedge
   - alg-online-gradient-descent

@@ -2,7 +2,7 @@
 id: ex-poisson-nmf-nonunique-factorizations
 kind: example
 title: "A positive rate matrix has NMFs beyond scale and permutation"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 provenance:

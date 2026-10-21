@@ -2,7 +2,7 @@
 id: thm-two-homogeneous-projected-limit-is-global-minimizer
 kind: theorem
 title: A separating two-homogeneous flow has globally minimizing projection limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: thm-yarotsky-adaptive-one-dimensional-lipschitz-approximation
 kind: theorem
 title: "Target-dependent depth-six approximation of Lipschitz functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

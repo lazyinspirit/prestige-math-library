@@ -2,7 +2,7 @@
 id: thm-log-and-brier-strict-propriety
 kind: theorem
 title: "Log and Brier losses are strictly proper"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

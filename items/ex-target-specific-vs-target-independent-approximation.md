@@ -2,7 +2,7 @@
 id: ex-target-specific-vs-target-independent-approximation
 kind: example
 title: "Same target with adaptive and target-independent architectures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

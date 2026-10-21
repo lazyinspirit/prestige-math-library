@@ -2,7 +2,7 @@
 id: def-clarke-subdifferential-and-gradient-flow
 kind: definition
 title: "Clarke subdifferential and gradient-flow trajectory"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

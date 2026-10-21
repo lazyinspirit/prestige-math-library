@@ -1,7 +1,7 @@
 ---
 page: neural-tangent-kernels-and-lazy-training-examples
 title: "Neural tangent kernels and lazy training — Examples"
-status: draft
+status: published
 requires:
   - neural-tangent-kernels-and-lazy-training
 items: []

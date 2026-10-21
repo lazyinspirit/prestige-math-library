@@ -1,7 +1,7 @@
 ---
 page: minimax-learning-lower-bounds-and-optimal-rates-examples
 title: "Minimax learning lower bounds and optimal rates — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bernoulli-two-point-testing

@@ -2,7 +2,7 @@
 id: def-symmetric-image-text-contrastive-loss
 kind: definition
 title: "Symmetric image-text contrastive loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

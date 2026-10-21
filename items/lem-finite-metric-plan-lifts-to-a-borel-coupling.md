@@ -2,7 +2,7 @@
 id: lem-finite-metric-plan-lifts-to-a-borel-coupling
 kind: lemma
 title: "A finite coupling lifts to a Borel coupling with a controlled metric cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

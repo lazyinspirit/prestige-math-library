@@ -2,7 +2,7 @@
 id: ex-gradient-boosting-zero-tree-direction
 kind: example
 title: "A one-leaf fit can project a nonzero gradient to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

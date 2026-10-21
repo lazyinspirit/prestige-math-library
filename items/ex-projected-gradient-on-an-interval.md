@@ -2,7 +2,7 @@
 id: ex-projected-gradient-on-an-interval
 kind: example
 title: A projected gradient step on an interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

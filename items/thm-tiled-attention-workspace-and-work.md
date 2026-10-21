@@ -2,7 +2,7 @@
 id: thm-tiled-attention-workspace-and-work
 kind: theorem
 title: "Tiled attention uses linear retained memory and quadratic arithmetic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-pretraining-adaptation-interface-limitations
 kind: example
 title: "A pretraining–adaptation interface with no shift guarantee"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

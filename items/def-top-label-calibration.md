@@ -2,7 +2,7 @@
 id: def-top-label-calibration
 kind: definition
 title: "Top-label calibration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

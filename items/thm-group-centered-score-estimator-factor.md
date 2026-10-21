@@ -2,7 +2,7 @@
 id: thm-group-centered-score-estimator-factor
 kind: theorem
 title: "The group-centered score estimator has factor one minus one over G"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

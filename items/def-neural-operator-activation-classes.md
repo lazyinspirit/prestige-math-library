@@ -2,7 +2,7 @@
 id: def-neural-operator-activation-classes
 kind: definition
 title: "Activation classes for neural-operator universality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

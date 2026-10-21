@@ -2,7 +2,7 @@
 id: def-h-delta-h-divergence
 kind: definition
 title: "H-delta-H divergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

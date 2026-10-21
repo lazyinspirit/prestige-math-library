@@ -2,7 +2,7 @@
 id: ex-adaboost-perfect-round-stops
 kind: example
 title: "AdaBoost stops at a perfect round"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

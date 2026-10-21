@@ -2,7 +2,7 @@
 id: ex-stochastic-momentum-experiment
 kind: example
 title: "A reported stochastic Nesterov experiment is empirical evidence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

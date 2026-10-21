@@ -2,7 +2,7 @@
 id: lem-lmnn-explicit-subgradient-and-data-bound
 kind: lemma
 title: "LMNN hinge subgradient formula and a uniform data-dependent bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

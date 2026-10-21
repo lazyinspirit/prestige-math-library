@@ -1,7 +1,7 @@
 ---
 page: marchenko-pastur-law-and-edge-bounds-examples
 title: Marchenko–Pastur law and sample-covariance edge bounds — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-marchenko-pastur-law-and-edges-at-aspect-one-quarter

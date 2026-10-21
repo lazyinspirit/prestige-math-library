@@ -2,7 +2,7 @@
 id: thm-transformer-formal-language-limits
 kind: theorem
 title: "Hard and soft attention limits for formal-language prediction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

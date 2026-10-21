@@ -2,7 +2,7 @@
 id: ex-isotropic-sample-covariance-directional-marchenko-pastur-limit
 kind: example
 title: "An isotropic finite-fourth-moment design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

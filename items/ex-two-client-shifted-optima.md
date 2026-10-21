@@ -2,7 +2,7 @@
 id: ex-two-client-shifted-optima
 kind: example
 title: Two clients with shifted least-squares optima
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

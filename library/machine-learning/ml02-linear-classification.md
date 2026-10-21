@@ -1,7 +1,7 @@
 ---
 page: ml02-linear-classification
 title: "Linear classifiers, discriminants, and logistic models"
-status: draft
+status: published
 items:
   - def-linear-score-classifier
   - def-indicator-response-least-squares-classifier

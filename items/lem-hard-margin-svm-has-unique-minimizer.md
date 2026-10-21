@@ -2,7 +2,7 @@
 id: lem-hard-margin-svm-has-unique-minimizer
 kind: lemma
 title: "A strictly separable finite sample has a unique hard-margin vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: alg-cart-greedy-split
 kind: algorithm
 title: "Greedy axis-aligned CART growth on a finite sample"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

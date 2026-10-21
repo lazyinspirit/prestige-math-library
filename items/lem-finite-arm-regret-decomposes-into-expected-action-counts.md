@@ -2,7 +2,7 @@
 id: lem-finite-arm-regret-decomposes-into-expected-action-counts
 kind: lemma
 title: "Finite-arm regret decomposes into expected action counts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-square-ica-identifiability-at-most-one-gaussian
 kind: theorem
 title: "Square ICA is identifiable up to signs and permutation with at most one Gaussian source"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: ml02-latent-representations-examples
 title: "Latent factors, ICA, NMF, and representation ambiguity — Examples"
-status: draft
+status: published
 requires:
   - ml02-latent-representations
 items: []

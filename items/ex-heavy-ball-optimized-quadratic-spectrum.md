@@ -7,7 +7,7 @@ verification:
 id: ex-heavy-ball-optimized-quadratic-spectrum
 kind: example
 title: "The spectrum 1, 4, 9 gives tuned root factor one half"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

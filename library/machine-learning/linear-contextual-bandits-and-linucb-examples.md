@@ -1,7 +1,7 @@
 ---
 page: linear-contextual-bandits-and-linucb-examples
 title: Linear contextual bandits and LinUCB — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-linucb-feature-norm-violation

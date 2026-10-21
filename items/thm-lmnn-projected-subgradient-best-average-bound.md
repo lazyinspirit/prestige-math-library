@@ -2,7 +2,7 @@
 id: thm-lmnn-projected-subgradient-best-average-bound
 kind: theorem
 title: "Conditional best-iterate and weighted-average bound for LMNN training"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

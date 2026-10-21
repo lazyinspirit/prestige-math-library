@@ -2,7 +2,7 @@
 id: lem-finite-label-conditional-probability-function
 kind: lemma
 title: "A finite label has a conditional probability function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

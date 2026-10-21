@@ -2,7 +2,7 @@
 id: ex-marchenko-pastur-law-and-edges-at-aspect-four
 kind: example
 title: "Structural zeros and the positive edge above aspect one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-yun-transformer-grid-lookup
 kind: lemma
 title: "Two-head fixed-width Transformers implement finite-grid lookups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

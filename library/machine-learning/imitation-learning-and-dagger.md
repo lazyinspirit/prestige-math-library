@@ -1,7 +1,7 @@
 ---
 page: imitation-learning-and-dagger
 title: Imitation learning and DAgger
-status: draft
+status: published
 items:
   - lem-dagger-strongly-convex-follow-the-leader-regret
   - lem-finite-horizon-mdp-policy-occupancy

@@ -2,7 +2,7 @@
 id: thm-perceptron-margin-mistake-bound
 kind: theorem
 title: The perceptron makes at most R squared over gamma squared mistakes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

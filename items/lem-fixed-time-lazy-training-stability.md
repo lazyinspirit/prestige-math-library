@@ -2,7 +2,7 @@
 id: lem-fixed-time-lazy-training-stability
 kind: lemma
 title: Finite-data fixed-time NTK stability under integrably bounded training directions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

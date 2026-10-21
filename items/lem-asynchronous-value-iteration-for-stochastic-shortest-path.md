@@ -2,7 +2,7 @@
 id: lem-asynchronous-value-iteration-for-stochastic-shortest-path
 kind: lemma
 title: "Asynchronous value iteration for finite positive-cost shortest paths"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

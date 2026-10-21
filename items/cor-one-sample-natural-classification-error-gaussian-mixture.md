@@ -2,7 +2,7 @@
 id: cor-one-sample-natural-classification-error-gaussian-mixture
 kind: corollary
 title: One-sample natural error in the Gaussian model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

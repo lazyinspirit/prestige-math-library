@@ -3,7 +3,7 @@ dependency_level: 5
 id: cex-neural-operator-sup-norm-discretization-does-not-control-c1
 kind: counterexample
 title: "A one-neuron kernel has convergent uniform quadratures and divergent C1 quadratures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 deps: [def-activation-class-locally-essentially-bounded-ae-continuous, def-neural-operator-activation-classes, def-neural-operator, alg-neural-operator-mesh-discretization, lem-schwartz-cutoffs-from-the-standard-smooth-step, def-countable-choice, thm-single-hidden-layer-universal-approximation]

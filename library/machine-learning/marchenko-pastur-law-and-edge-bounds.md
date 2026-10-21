@@ -1,7 +1,7 @@
 ---
 page: marchenko-pastur-law-and-edge-bounds
 title: Marchenko–Pastur law and sample-covariance edge bounds
-status: draft
+status: published
 items:
   - def-sample-covariance-empirical-spectral-distribution
   - def-stieltjes-transform-of-a-real-probability-measure

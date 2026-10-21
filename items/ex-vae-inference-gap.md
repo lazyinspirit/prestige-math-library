@@ -2,7 +2,7 @@
 id: ex-vae-inference-gap
 kind: example
 title: "A Gaussian model with a positive inference gap and a collapsed latent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

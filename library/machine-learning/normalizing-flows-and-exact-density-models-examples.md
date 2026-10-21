@@ -1,7 +1,7 @@
 ---
 page: normalizing-flows-and-exact-density-models-examples
 title: "Exact-density normalizing flows — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-affine-coupling-triangular-jacobian

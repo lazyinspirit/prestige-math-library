@@ -1,7 +1,7 @@
 ---
 page: reconstruction-and-masked-autoencoders-examples
 title: "Reconstruction and masked autoencoders — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-reconstruction-objective-shortcut

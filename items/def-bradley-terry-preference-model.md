@@ -2,7 +2,7 @@
 id: def-bradley-terry-preference-model
 kind: definition
 title: Finite Bradley–Terry preference model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

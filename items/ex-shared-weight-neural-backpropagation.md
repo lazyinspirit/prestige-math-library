@@ -2,7 +2,7 @@
 id: ex-shared-weight-neural-backpropagation
 kind: example
 title: "Backpropagation through a two-layer network with a shared weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

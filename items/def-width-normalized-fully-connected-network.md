@@ -2,7 +2,7 @@
 id: def-width-normalized-fully-connected-network
 kind: definition
 title: Jacot–Gabriel–Hongler width-normalized fully connected networks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

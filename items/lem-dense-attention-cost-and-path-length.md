@@ -2,7 +2,7 @@
 id: lem-dense-attention-cost-and-path-length
 kind: lemma
 title: "Dense full-attention interaction cost and path length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-pc-separating-set-collider
 kind: lemma
 title: "A separating set identifies an unshielded collider"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

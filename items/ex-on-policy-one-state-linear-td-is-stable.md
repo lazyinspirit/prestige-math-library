@@ -2,7 +2,7 @@
 id: ex-on-policy-one-state-linear-td-is-stable
 kind: example
 title: A one-state on-policy linear TD(0) update contracts to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

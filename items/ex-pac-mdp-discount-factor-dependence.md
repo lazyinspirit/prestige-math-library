@@ -2,7 +2,7 @@
 id: ex-pac-mdp-discount-factor-dependence
 kind: example
 title: "The uninformative heuristic exposes the discount-factor powers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

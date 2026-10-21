@@ -2,7 +2,7 @@
 id: lem-nonbacktracking-covariance-high-moment-bound
 kind: lemma
 title: "Nonbacktracking covariance high moments and an independent coarse norm bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

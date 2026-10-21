@@ -2,7 +2,7 @@
 id: lem-relu-square-approximation
 kind: lemma
 title: "Logarithmic-size ReLU approximation of the square"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

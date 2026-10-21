@@ -2,7 +2,7 @@
 id: lem-ucb-sharp-suboptimal-arm-expected-pulls
 kind: lemma
 title: A sharper expected suboptimal-arm pull count for the unchanged UCB rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

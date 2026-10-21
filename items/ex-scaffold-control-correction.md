@@ -2,7 +2,7 @@
 id: ex-scaffold-control-correction
 kind: example
 title: SCAFFOLD controls cancel shifted local gradients at the server model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

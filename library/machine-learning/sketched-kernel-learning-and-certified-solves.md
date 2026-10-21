@@ -1,7 +1,7 @@
 ---
 page: sketched-kernel-learning-and-certified-solves
 title: Sketched kernel learning and certified approximate solves
-status: draft
+status: published
 items:
   - def-regularized-kernel-prediction-system
   - lem-regularized-gram-matrix-inverse-bound

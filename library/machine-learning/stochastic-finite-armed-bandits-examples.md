@@ -1,7 +1,7 @@
 ---
 page: stochastic-finite-armed-bandits-examples
 title: "Stochastic finite-armed bandits — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-arm-deterministic-gap

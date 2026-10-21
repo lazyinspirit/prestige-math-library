@@ -2,7 +2,7 @@
 id: lem-biased-hermite-kernel-is-strictly-positive-definite
 kind: lemma
 title: Positive bias makes the Hermite feature kernel strictly positive definite on every sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

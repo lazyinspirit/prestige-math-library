@@ -1,7 +1,7 @@
 ---
 page: finite-class-pac-learning-and-erm
 title: "Finite-class PAC learning and ERM guarantees"
-status: draft
+status: published
 items:
   - def-realizable-and-agnostic-pac
   - thm-finite-class-agnostic-erm-bound

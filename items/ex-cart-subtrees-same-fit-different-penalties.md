@@ -2,7 +2,7 @@
 id: ex-cart-subtrees-same-fit-different-penalties
 kind: example
 title: "Two fitted subtrees with different leaf penalties"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

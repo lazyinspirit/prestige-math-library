@@ -2,7 +2,7 @@
 id: lem-s4-convolution-root-of-unity-reduction
 kind: lemma
 title: DPLR SSM filter values reduce to Cauchy products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

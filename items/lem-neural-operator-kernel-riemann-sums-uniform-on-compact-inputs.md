@@ -2,7 +2,7 @@
 id: lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs
 kind: lemma
 title: "Kernel Riemann sums converge uniformly on compact continuous-input sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-exact-trust-region-and-sampled-line-search-disagree
 kind: example
 title: "Exact CPO cost feasibility can disagree with a sampled line-search cost check"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-largest-sample-covariance-eigenvalue-upper-bound
 kind: lemma
 title: "Finite-fourth-moment upper bound for the largest sample-covariance eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

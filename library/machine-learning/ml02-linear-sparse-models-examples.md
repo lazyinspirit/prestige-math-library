@@ -1,7 +1,7 @@
 ---
 page: ml02-linear-sparse-models-examples
 title: "Linear prediction, shrinkage, and sparse regression — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-correlated-predictors-and-shrinkage

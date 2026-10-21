@@ -2,7 +2,7 @@
 id: thm-positive-definite-kernel-flow-converges-for-attained-convex-cost
 kind: theorem
 title: A finite positive-definite kernel flow converges for an attained convex cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

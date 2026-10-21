@@ -2,7 +2,7 @@
 id: lem-smooth-residual-independence-has-pointwise-density-factorization
 kind: lemma
 title: "A smooth independent residual gives a pointwise density factorization"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

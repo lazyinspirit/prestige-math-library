@@ -2,7 +2,7 @@
 id: lem-convex-gradient-step-nonexpansive
 kind: lemma
 title: Gradient steps of smooth convex functions are nonexpansive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

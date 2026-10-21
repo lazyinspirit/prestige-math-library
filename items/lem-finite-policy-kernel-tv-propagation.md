@@ -2,7 +2,7 @@
 id: lem-finite-policy-kernel-tv-propagation
 kind: lemma
 title: "One-step total-variation propagation under a fixed policy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

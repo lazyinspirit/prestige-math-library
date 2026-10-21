@@ -1,7 +1,7 @@
 ---
 page: message-passing-graph-neural-networks-examples
 title: "Message-passing GNNs and the 1-WL ceiling — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl

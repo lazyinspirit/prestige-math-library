@@ -2,7 +2,7 @@
 id: def-graph-harmonic-label-extension
 kind: definition
 title: "Graph-harmonic label extension on a finite weighted graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: algorithmic-stability-and-generalization-examples
 title: "Algorithmic stability and generalization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-strongly-convex-regularized-loss-stability

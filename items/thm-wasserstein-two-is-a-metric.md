@@ -2,7 +2,7 @@
 id: "thm-wasserstein-two-is-a-metric"
 kind: theorem
 title: "The quadratic Wasserstein distance is a metric"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

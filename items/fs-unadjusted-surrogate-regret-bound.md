@@ -2,7 +2,7 @@
 id: fs-unadjusted-surrogate-regret-bound
 kind: false-statement
 title: "The unadjusted surrogate-regret bound has the wrong scale and tie convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

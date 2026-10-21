@@ -2,7 +2,7 @@
 id: ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue
 kind: example
 title: "A non-Euclidean three-point dissimilarity produces a negative MDS eigenvalue"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -1,7 +1,7 @@
 ---
 page: finite-class-pac-learning-and-erm-examples
 title: "Finite-class PAC learning and ERM guarantees — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-finite-lookup-table-pac-sample-complexities

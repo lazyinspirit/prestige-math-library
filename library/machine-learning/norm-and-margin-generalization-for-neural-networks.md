@@ -1,7 +1,7 @@
 ---
 page: norm-and-margin-generalization-for-neural-networks
 title: "Norm and margin generalization for neural networks"
-status: draft
+status: published
 items:
   - def-sample-covering-number
   - def-spectral-network-complexity

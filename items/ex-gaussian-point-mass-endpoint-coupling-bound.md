@@ -2,7 +2,7 @@
 id: ex-gaussian-point-mass-endpoint-coupling-bound
 kind: example
 title: The Gaussian coupling bound is exact for a point mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

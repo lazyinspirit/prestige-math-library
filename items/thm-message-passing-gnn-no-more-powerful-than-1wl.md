@@ -2,7 +2,7 @@
 id: thm-message-passing-gnn-no-more-powerful-than-1wl
 kind: theorem
 title: "Message-passing GNNs cannot distinguish beyond one-dimensional Weisfeiler–Leman"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-cauchy-matvec-at-roots-of-unity-exact-cost
 kind: theorem
 title: Exact roots-of-unity Cauchy matvec has quasi-linear arithmetic cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

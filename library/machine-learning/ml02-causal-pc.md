@@ -1,7 +1,7 @@
 ---
 page: ml02-causal-pc
 title: 'PC algorithm and Markov-equivalence structure learning'
-status: draft
+status: published
 items:
   - def-causal-discovery-oracle-regime
   - def-cpdag-markov-equivalence-class

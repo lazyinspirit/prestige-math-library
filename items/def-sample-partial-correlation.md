@@ -2,7 +2,7 @@
 id: def-sample-partial-correlation
 kind: definition
 title: "Sample partial correlation by residualization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

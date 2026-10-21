@@ -2,7 +2,7 @@
 id: lem-policy-score-has-zero-conditional-mean
 kind: lemma
 title: "A policy score has zero conditional mean before the action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

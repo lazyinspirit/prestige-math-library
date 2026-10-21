@@ -1,7 +1,7 @@
 ---
 page: ml02-causal-anm-examples
 title: "Additive-noise causal discovery and identifiability — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-latent-confounding-mimics-anm-direction

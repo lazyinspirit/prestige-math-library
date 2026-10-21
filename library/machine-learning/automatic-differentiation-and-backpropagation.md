@@ -1,7 +1,7 @@
 ---
 page: automatic-differentiation-and-backpropagation
 title: "Automatic differentiation and backpropagation"
-status: draft
+status: published
 items:
   - alg-backpropagation-through-shared-parameter-recurrence
   - thm-shared-parameter-backpropagation-gradient-formula

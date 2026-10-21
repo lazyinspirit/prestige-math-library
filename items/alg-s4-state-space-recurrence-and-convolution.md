@@ -2,7 +2,7 @@
 id: alg-s4-state-space-recurrence-and-convolution
 kind: algorithm
 title: S4 state-space recurrence and convolution procedure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

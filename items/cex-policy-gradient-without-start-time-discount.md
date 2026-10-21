@@ -7,7 +7,7 @@ verification:
 id: cex-policy-gradient-without-start-time-discount
 kind: counterexample
 title: "Omitting the start-time discount changes the policy gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

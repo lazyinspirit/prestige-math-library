@@ -2,7 +2,7 @@
 id: "thm-wasserstein-two-is-complete"
 kind: theorem
 title: "The quadratic Wasserstein space is complete"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

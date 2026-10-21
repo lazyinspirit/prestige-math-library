@@ -1,7 +1,7 @@
 ---
 page: exact-tiled-attention-and-memory-aware-differentiation-examples
 title: "Exact tiled attention and memory-aware differentiation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-tiled-attention-one-key

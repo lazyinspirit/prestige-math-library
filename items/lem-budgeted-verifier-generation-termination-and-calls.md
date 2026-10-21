@@ -2,7 +2,7 @@
 id: lem-budgeted-verifier-generation-termination-and-calls
 kind: lemma
 title: "Budgeted verifier generation terminates with bounded response and selection calls"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: neural-operators-and-physics-informed-learning
 title: Neural operators and PINN consistency
-status: draft
+status: published
 items:
   - def-discretization-invariant-operator-family
   - def-physics-informed-neural-network-loss

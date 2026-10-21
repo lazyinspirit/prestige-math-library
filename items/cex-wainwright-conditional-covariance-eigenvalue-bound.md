@@ -2,7 +2,7 @@
 id: cex-wainwright-conditional-covariance-eigenvalue-bound
 kind: counterexample
 title: A unit-diagonal covariance can have conditional covariance below the reciprocal global eigenvalue bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

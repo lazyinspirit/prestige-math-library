@@ -2,7 +2,7 @@
 id: thm-dpo-reward-policy-reparameterization
 kind: theorem
 title: Bradley–Terry reward-policy reparameterization and finite DPO gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-cost-complexity-pruning
 kind: definition
 title: "Cost-complexity criteria for subtrees"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-linear-regions-do-not-guarantee-learning
 kind: example
 title: "Many linear regions give no training or generalization guarantee"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

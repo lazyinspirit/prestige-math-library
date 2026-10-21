@@ -1,7 +1,7 @@
 ---
 page: semi-supervised-graph-propagation-and-pseudolabeling-limits-examples
 title: "Semi-supervised graph propagation and pseudo-labeling limits — Examples"
-status: draft
+status: published
 requires:
   - semi-supervised-graph-propagation-and-pseudolabeling-limits
 items: []

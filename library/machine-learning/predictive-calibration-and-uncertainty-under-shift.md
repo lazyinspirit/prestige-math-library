@@ -1,7 +1,7 @@
 ---
 page: predictive-calibration-and-uncertainty-under-shift
 title: "Predictive calibration and uncertainty under shift"
-status: draft
+status: published
 items:
   - alg-split-conformal-set-for-classification
   - def-top-label-calibration

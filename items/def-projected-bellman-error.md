@@ -2,7 +2,7 @@
 id: def-projected-bellman-error
 kind: definition
 title: State-weighted Bellman error and projected Bellman error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

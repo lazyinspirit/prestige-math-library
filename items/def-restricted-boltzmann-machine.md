@@ -2,7 +2,7 @@
 id: def-restricted-boltzmann-machine
 kind: definition
 title: "Binary restricted Boltzmann machine, exact likelihood gradient, and finite contrastive divergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

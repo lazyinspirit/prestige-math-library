@@ -2,7 +2,7 @@
 id: def-partial-homogeneous-relaxed-objective
 kind: definition
 title: Relaxed objective for a partially one-homogeneous projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

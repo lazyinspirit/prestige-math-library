@@ -2,7 +2,7 @@
 id: thm-relu-linear-region-lower-bounds
 kind: theorem
 title: "One-dimensional and multidimensional ReLU region lower bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

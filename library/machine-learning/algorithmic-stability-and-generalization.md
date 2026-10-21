@@ -1,7 +1,7 @@
 ---
 page: algorithmic-stability-and-generalization
 title: "Algorithmic stability and generalization"
-status: draft
+status: published
 items:
   - def-uniform-algorithmic-stability
   - thm-uniform-stability-expected-generalization

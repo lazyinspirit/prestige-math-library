@@ -2,7 +2,7 @@
 id: lem-finite-masked-generative-joint-law-is-normalized
 kind: lemma
 title: Finite masked-diffusion joint model is normalized
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

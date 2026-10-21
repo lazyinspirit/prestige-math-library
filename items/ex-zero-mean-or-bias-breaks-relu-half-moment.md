@@ -2,7 +2,7 @@
 id: ex-zero-mean-or-bias-breaks-relu-half-moment
 kind: example
 title: "Mean-zero weights or a nonzero bias do not supply the ReLU half-moment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

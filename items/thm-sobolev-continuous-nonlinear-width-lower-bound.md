@@ -2,7 +2,7 @@
 id: thm-sobolev-continuous-nonlinear-width-lower-bound
 kind: theorem
 title: "Sobolev lower bound for continuous parameter selection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

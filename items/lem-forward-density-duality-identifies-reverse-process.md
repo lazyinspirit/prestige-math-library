@@ -2,7 +2,7 @@
 id: lem-forward-density-duality-identifies-reverse-process
 kind: lemma
 title: Forward density duality identifies an auxiliary reverse process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

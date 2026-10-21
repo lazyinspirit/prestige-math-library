@@ -2,7 +2,7 @@
 id: lem-weighted-graph-laplacian-quadratic-form-and-kernel
 kind: lemma
 title: "Quadratic form and kernel of a weighted graph Laplacian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

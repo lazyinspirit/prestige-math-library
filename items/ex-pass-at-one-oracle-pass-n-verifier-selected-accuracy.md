@@ -2,7 +2,7 @@
 id: ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy
 kind: example
 title: "Pass-at-one, oracle pass-at-N, and verifier-selected accuracy differ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

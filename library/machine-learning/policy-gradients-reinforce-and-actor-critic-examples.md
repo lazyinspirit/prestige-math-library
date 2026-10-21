@@ -1,7 +1,7 @@
 ---
 page: policy-gradients-reinforce-and-actor-critic-examples
 title: "Policy gradients, REINFORCE, and actor–critic — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-actor-critic-bootstrap-can-bias-policy-update

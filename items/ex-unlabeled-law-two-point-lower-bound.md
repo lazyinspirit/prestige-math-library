@@ -2,7 +2,7 @@
 id: ex-unlabeled-law-two-point-lower-bound
 kind: example
 title: "Two indistinguishable laws leave error on an unseen atom"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-yarotsky-fixed-architecture-sobolev-approximation-rate
 kind: theorem
 title: "Target-independent ReLU rate on the unit Sobolev ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

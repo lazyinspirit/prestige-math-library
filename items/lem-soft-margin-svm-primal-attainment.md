@@ -2,7 +2,7 @@
 id: lem-soft-margin-svm-primal-attainment
 kind: lemma
 title: The soft-margin SVM primal attains its minimum, including the unpenalized-bias boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

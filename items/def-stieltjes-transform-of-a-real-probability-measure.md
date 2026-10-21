@@ -2,7 +2,7 @@
 id: def-stieltjes-transform-of-a-real-probability-measure
 kind: definition
 title: "Stieltjes transform of a probability measure on the real line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

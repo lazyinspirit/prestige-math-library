@@ -1,7 +1,7 @@
 ---
 page: adversarial-robustness-and-robust-risk
 title: Adversarial robustness and robust risk
-status: draft
+status: published
 items:
   - def-adversarial-threat-set-and-robust-risk
   - def-two-class-spherical-gaussian-mixture-model

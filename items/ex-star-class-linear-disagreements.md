@@ -2,7 +2,7 @@
 id: ex-star-class-linear-disagreements
 kind: example
 title: "A finite star class can require one query per alternative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

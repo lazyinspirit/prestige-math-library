@@ -2,7 +2,7 @@
 id: def-subexponential-uniform-boundary
 kind: definition
 title: One-sided sub-exponential uniform boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

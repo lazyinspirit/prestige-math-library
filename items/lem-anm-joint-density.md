@@ -2,7 +2,7 @@
 id: lem-anm-joint-density
 kind: lemma
 title: "Positive joint density of a finite additive-noise model"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

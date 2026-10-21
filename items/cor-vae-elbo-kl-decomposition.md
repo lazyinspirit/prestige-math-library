@@ -2,7 +2,7 @@
 id: cor-vae-elbo-kl-decomposition
 kind: corollary
 title: "The VAE evidence equals the ELBO plus reverse KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

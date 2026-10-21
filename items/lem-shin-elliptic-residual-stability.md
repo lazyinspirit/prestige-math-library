@@ -2,7 +2,7 @@
 id: lem-shin-elliptic-residual-stability
 kind: lemma
 title: "Elliptic residual and boundary stability from a maximum principle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

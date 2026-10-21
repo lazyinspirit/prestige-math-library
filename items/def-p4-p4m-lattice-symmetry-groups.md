@@ -2,7 +2,7 @@
 id: def-p4-p4m-lattice-symmetry-groups
 kind: definition
 title: "The p4 and p4m square-lattice symmetry groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

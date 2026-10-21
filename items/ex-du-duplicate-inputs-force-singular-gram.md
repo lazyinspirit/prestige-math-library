@@ -2,7 +2,7 @@
 id: ex-du-duplicate-inputs-force-singular-gram
 kind: example
 title: "Duplicate inputs force the population Gram matrix to be singular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

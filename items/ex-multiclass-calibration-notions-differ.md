@@ -2,7 +2,7 @@
 id: ex-multiclass-calibration-notions-differ
 kind: example
 title: "Three distinct calibration notions in three classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

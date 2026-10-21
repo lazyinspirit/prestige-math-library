@@ -2,7 +2,7 @@
 id: lem-zeta-two-and-three-converge
 kind: lemma
 title: "The zeta sums at 2 and 3 are finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

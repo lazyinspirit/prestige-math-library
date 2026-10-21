@@ -2,7 +2,7 @@
 id: lem-subgaussian-contrastive-margin-comparison
 kind: lemma
 title: "Class-conditional sub-Gaussian concentration yields a contrastive margin bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

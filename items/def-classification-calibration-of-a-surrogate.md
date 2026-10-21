@@ -2,7 +2,7 @@
 id: def-classification-calibration-of-a-surrogate
 kind: definition
 title: "Binary surrogate classification risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

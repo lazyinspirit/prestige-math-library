@@ -2,7 +2,7 @@
 id: def-restricted-additive-noise-model
 kind: definition
 title: "Condition 19 and restricted additive-noise models"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -2,7 +2,7 @@
 id: lem-ucb-prefix-envelope-sum-bound
 kind: lemma
 title: A deterministic-prefix envelope sum for the sharper UCB count bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

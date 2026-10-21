@@ -2,7 +2,7 @@
 id: ex-linucb-two-context-two-action-update
 kind: example
 title: A two-context, two-action ridge update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

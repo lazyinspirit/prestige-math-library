@@ -2,7 +2,7 @@
 id: ex-singular-data-support-limitation
 kind: example
 title: "A full-dimensional flow cannot represent a line-supported law exactly"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

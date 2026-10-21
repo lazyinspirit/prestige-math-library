@@ -2,7 +2,7 @@
 id: thm-injective-message-passing-matches-1wl
 kind: theorem
 title: "Injective message passing matches the one-dimensional Weisfeiler–Leman test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

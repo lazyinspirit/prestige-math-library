@@ -2,7 +2,7 @@
 id: lem-ucrl2-adaptive-sample-tape-representation
 kind: lemma
 title: "Adaptive MDP visits admit fixed sample tapes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

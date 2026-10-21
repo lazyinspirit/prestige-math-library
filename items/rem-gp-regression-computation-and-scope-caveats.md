@@ -2,7 +2,7 @@
 id: rem-gp-regression-computation-and-scope-caveats
 kind: remark
 title: Computational costs and limits of finite Gaussian-process regression
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

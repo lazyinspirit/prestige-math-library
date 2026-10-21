@@ -2,7 +2,7 @@
 id: ex-weight-clipping-is-not-exact-lipschitz-enforcement
 kind: example
 title: "Point masses, Jensen–Shannon saturation, and weight clipping"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

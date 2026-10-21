@@ -2,7 +2,7 @@
 id: thm-wgan-ideal-critic-generator-gradient
 kind: theorem
 title: "Continuity and ideal-critic gradients for compact-space Wasserstein GAN objectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

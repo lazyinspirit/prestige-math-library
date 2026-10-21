@@ -2,7 +2,7 @@
 id: lem-standard-borel-label-kernel-over-arbitrary-instance-space
 kind: lemma
 title: "A standard-Borel label has a conditional kernel over an arbitrary measurable instance space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

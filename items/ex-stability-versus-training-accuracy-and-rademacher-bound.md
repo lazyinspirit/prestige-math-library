@@ -2,7 +2,7 @@
 id: ex-stability-versus-training-accuracy-and-rademacher-bound
 kind: example
 title: "Training accuracy, algorithmic stability, and class-wide Rademacher bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

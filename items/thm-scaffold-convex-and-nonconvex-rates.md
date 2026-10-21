@@ -2,7 +2,7 @@
 id: thm-scaffold-convex-and-nonconvex-rates
 kind: theorem
 title: SCAFFOLD rates for strongly convex, convex and nonconvex objectives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

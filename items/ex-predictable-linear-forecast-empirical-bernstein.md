@@ -2,7 +2,7 @@
 id: ex-predictable-linear-forecast-empirical-bernstein
 kind: example
 title: A predictable linear forecast and its empirical residual process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-mean-max-aggregation-lose-multiplicity
 kind: example
 title: "Mean and max aggregation can lose multiset multiplicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

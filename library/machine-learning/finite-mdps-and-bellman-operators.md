@@ -1,7 +1,7 @@
 ---
 page: finite-mdps-and-bellman-operators
 title: Finite MDPs and Bellman operators
-status: draft
+status: published
 items:
   - def-finite-markov-decision-process
   - lem-bounded-discounted-return-converges

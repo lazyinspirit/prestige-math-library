@@ -2,7 +2,7 @@
 id: cex-zero-reference-support-breaks-dpo-log-ratio
 kind: counterexample
 title: Zero reference support makes the DPO reward ratio undefined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

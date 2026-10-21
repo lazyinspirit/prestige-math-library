@@ -2,7 +2,7 @@
 id: ex-scalar-gaussian-diffusion-chain
 kind: example
 title: Two-step scalar Gaussian forward chain and posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

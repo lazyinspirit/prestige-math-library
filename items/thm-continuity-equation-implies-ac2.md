@@ -2,7 +2,7 @@
 id: "thm-continuity-equation-implies-ac2"
 kind: theorem
 title: "Finite-action continuity equations generate AC2 Wasserstein curves"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

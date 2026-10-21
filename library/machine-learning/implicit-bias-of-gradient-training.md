@@ -1,7 +1,7 @@
 ---
 page: implicit-bias-of-gradient-training
 title: "Implicit bias of gradient-based learning"
-status: draft
+status: published
 items:
   - def-clarke-subdifferential-and-gradient-flow
   - def-linear-separable-margin-and-hard-margin-svm

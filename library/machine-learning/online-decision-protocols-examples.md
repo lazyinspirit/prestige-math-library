@@ -1,7 +1,7 @@
 ---
 page: online-decision-protocols-examples
 title: "Online protocols and regret benchmarks — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-full-information-finite-experts

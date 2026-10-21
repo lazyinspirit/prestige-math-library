@@ -2,7 +2,7 @@
 id: ex-heavy-tailed-reward-law-outside-subgaussian-model
 kind: example
 title: "A finite-mean polynomial-tail reward is not sub-Gaussian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

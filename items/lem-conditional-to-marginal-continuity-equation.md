@@ -2,7 +2,7 @@
 id: lem-conditional-to-marginal-continuity-equation
 kind: lemma
 title: Conditional continuity equations pass to the marginal path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

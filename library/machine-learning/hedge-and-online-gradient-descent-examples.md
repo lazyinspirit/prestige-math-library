@@ -1,7 +1,7 @@
 ---
 page: hedge-and-online-gradient-descent-examples
 title: Hedge and online gradient descent — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-hedge-two-experts

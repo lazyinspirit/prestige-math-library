@@ -2,7 +2,7 @@
 id: lem-discounted-occupancy-change-bounded-by-average-tv
 kind: lemma
 title: "Discounted occupancy change is bounded by average policy TV"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

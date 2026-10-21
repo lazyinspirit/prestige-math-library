@@ -2,7 +2,7 @@
 id: def-group-convolution
 kind: definition
 title: "First-layer and group-to-group cross-correlation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

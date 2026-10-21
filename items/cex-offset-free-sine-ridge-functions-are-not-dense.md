@@ -2,7 +2,7 @@
 id: cex-offset-free-sine-ridge-functions-are-not-dense
 kind: counterexample
 title: "Offset-free sine ridge functions cannot uniformly approximate the square function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

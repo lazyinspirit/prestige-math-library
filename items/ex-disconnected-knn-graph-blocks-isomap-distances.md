@@ -2,7 +2,7 @@
 id: ex-disconnected-knn-graph-blocks-isomap-distances
 kind: example
 title: "A one-nearest-neighbor graph can disconnect finite ISOMAP"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

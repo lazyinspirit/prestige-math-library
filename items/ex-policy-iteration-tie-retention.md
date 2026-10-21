@@ -2,7 +2,7 @@
 id: ex-policy-iteration-tie-retention
 kind: example
 title: "Changing a tied greedy action can cycle, while retention stops"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

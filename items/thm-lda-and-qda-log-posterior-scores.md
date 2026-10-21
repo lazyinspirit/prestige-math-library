@@ -2,7 +2,7 @@
 id: thm-lda-and-qda-log-posterior-scores
 kind: theorem
 title: Common-covariance LDA scores are affine and QDA scores are quadratic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-hilbert-valued-path-energy-characterization
 kind: lemma
 title: Finite partition energy yields Hilbert-valued AC2 paths
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

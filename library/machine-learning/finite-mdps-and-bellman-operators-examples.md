@@ -1,7 +1,7 @@
 ---
 page: finite-mdps-and-bellman-operators-examples
 title: Finite MDPs and Bellman operators — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-undiscounted-single-state-mdp-diverges

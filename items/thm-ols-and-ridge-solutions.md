@@ -2,7 +2,7 @@
 id: thm-ols-and-ridge-solutions
 kind: theorem
 title: The full ordinary least-squares solution set and the unique ridge solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

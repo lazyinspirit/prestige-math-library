@@ -2,7 +2,7 @@
 id: thm-node-mean-minimizes-squared-error
 kind: theorem
 title: "The sample mean uniquely minimizes squared error on a nonempty leaf"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

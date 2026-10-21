@@ -2,7 +2,7 @@
 id: thm-surrogate-regret-controls-classification-regret
 kind: theorem
 title: "Surrogate regret controls classification regret with explicit tie and scale terms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

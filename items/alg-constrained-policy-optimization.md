@@ -2,7 +2,7 @@
 id: alg-constrained-policy-optimization
 kind: algorithm
 title: "Sample-based constrained policy optimization update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

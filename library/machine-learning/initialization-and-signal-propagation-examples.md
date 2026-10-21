@@ -1,7 +1,7 @@
 ---
 page: initialization-and-signal-propagation-examples
 title: "Initialization and signal propagation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-zero-mean-or-bias-breaks-relu-half-moment

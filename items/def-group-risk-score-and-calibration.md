@@ -2,7 +2,7 @@
 id: def-group-risk-score-and-calibration
 kind: definition
 title: "KMR's finite group-conditioned risk-score assignment and calibration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

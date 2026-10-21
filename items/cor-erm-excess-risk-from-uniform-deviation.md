@@ -2,7 +2,7 @@
 id: cor-erm-excess-risk-from-uniform-deviation
 kind: corollary
 title: "ERM excess risk from Rademacher uniform deviation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

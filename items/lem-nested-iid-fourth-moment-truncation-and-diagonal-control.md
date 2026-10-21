@@ -2,7 +2,7 @@
 id: lem-nested-iid-fourth-moment-truncation-and-diagonal-control
 kind: lemma
 title: "Nested iid fourth-moment truncation and uniform diagonal control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

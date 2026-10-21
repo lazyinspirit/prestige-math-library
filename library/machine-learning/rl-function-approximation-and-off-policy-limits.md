@@ -1,7 +1,7 @@
 ---
 page: rl-function-approximation-and-off-policy-limits
 title: Function approximation, off-policy instability, and deep-RL limits
-status: draft
+status: published
 items:
   - lem-projected-bellman-error-is-well-defined
   - def-projected-bellman-error

@@ -2,7 +2,7 @@
 id: lem-hyperplane-arrangement-region-count
 kind: lemma
 title: "Hyperplane arrangement upper count and general-position count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

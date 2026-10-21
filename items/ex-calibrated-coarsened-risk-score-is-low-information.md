@@ -2,7 +2,7 @@
 id: ex-calibrated-coarsened-risk-score-is-low-information
 kind: example
 title: "A calibrated coarsened risk score loses information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

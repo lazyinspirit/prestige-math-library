@@ -2,7 +2,7 @@
 id: cex-zero-measure-does-not-force-a-nonpolynomial-activation
 kind: counterexample
 title: "The zero-measure Lp boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

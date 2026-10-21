@@ -3,7 +3,7 @@ dependency_level: 3
 id: thm-neural-operator-discretization-invariance
 kind: theorem
 title: "Neural-operator quadratures in the uniform norm and compatible Banach norms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 deps:

@@ -2,7 +2,7 @@
 id: lem-standard-gaussian-maximum-expectation-lower-bound
 kind: lemma
 title: The maximum of independent standard normals has expectation of order at least the square root of log dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: rademacher-complexity-and-generalization
 title: "Rademacher complexity and uniform generalization"
-status: draft
+status: published
 items:
   - def-rademacher-complexity
   - thm-rademacher-contraction-inequality

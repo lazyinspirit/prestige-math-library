@@ -1,7 +1,7 @@
 ---
 page: discrete-masked-diffusion-and-reverse-generation
 title: Discrete masked diffusion and finite-state reverse generation
-status: draft
+status: published
 requires:
   - markov-kernels-and-markov-chains
   - prediction-problems-risks-and-empirical-minimization

@@ -2,7 +2,7 @@
 id: rem-offline-rl-distribution-shift-and-pessimism
 kind: remark
 title: "Off-policy estimates do not guarantee offline policy safety"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

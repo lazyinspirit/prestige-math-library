@@ -2,7 +2,7 @@
 id: def-finite-weighted-graph-laplacian
 kind: definition
 title: "Finite weighted graph Laplacian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

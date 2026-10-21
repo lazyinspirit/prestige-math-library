@@ -2,7 +2,7 @@
 id: ex-pc-chain-versus-collider-separating-sets
 kind: example
 title: "PC distinguishes a chain from an unshielded collider"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

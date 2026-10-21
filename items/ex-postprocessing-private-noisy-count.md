@@ -2,7 +2,7 @@
 id: ex-postprocessing-private-noisy-count
 kind: example
 title: Thresholding a private noisy count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

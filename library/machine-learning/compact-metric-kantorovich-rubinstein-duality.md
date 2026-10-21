@@ -1,7 +1,7 @@
 ---
 page: compact-metric-kantorovich-rubinstein-duality
 title: "Kantorovich–Rubinstein duality on compact metric spaces"
-status: draft
+status: published
 requires:
   - finite-metric-transport-duality
   - metric-spaces

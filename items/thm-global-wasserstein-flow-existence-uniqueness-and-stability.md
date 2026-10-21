@@ -2,7 +2,7 @@
 id: thm-global-wasserstein-flow-existence-uniqueness-and-stability
 kind: theorem
 title: The global Wasserstein gradient flow exists uniquely and is stable
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

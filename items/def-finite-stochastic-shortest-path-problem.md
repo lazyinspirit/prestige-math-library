@@ -2,7 +2,7 @@
 id: def-finite-stochastic-shortest-path-problem
 kind: definition
 title: "Finite stochastic shortest-path problems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

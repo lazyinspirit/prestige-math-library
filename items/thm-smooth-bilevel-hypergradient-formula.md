@@ -2,7 +2,7 @@
 id: thm-smooth-bilevel-hypergradient-formula
 kind: theorem
 title: "Hypergradient of a smooth local stationary branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

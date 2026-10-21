@@ -1,7 +1,7 @@
 ---
 page: prediction-problems-risks-and-empirical-minimization
 title: "Prediction problems, risks, and empirical minimization"
-status: draft
+status: published
 items:
   - def-supervised-learning-problem
   - def-population-and-empirical-risk

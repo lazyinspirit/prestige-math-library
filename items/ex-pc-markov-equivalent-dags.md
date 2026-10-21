@@ -2,7 +2,7 @@
 id: ex-pc-markov-equivalent-dags
 kind: example
 title: "A complete three-vertex skeleton has several equivalent DAGs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

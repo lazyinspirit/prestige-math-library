@@ -2,7 +2,7 @@
 id: def-finite-metric-wasserstein-one
 kind: definition
 title: "The finite-metric 1-Wasserstein transport cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

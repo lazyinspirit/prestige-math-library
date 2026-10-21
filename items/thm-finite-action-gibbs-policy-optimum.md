@@ -2,7 +2,7 @@
 id: thm-finite-action-gibbs-policy-optimum
 kind: theorem
 title: The finite-action Gibbs policy uniquely maximizes reward minus KL
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

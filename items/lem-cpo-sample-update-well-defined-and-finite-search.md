@@ -2,7 +2,7 @@
 id: lem-cpo-sample-update-well-defined-and-finite-search
 kind: lemma
 title: "The sample CPO update has a well-defined proposal and finite backtracking search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

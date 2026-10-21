@@ -2,7 +2,7 @@
 id: thm-instantaneous-change-of-variables-for-ode-flow
 kind: theorem
 title: Instantaneous change of variables along a neural ODE flow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

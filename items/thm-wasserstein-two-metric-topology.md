@@ -2,7 +2,7 @@
 id: "thm-wasserstein-two-metric-topology"
 kind: theorem
 title: "The topology of W2 is narrow convergence plus uniform second-moment tails"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

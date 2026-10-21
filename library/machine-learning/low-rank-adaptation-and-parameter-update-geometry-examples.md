@@ -1,7 +1,7 @@
 ---
 page: low-rank-adaptation-and-parameter-update-geometry-examples
 title: "Low-rank adaptation and the geometry of parameter updates — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-low-rank-adapter-change-of-basis

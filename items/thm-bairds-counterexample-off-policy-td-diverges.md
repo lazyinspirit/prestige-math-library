@@ -2,7 +2,7 @@
 id: thm-bairds-counterexample-off-policy-td-diverges
 kind: theorem
 title: Expected off-policy TD(0) diverges in Baird’s seven-state example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

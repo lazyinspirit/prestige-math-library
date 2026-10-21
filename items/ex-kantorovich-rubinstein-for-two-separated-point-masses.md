@@ -2,7 +2,7 @@
 id: ex-kantorovich-rubinstein-for-two-separated-point-masses
 kind: example
 title: "Kantorovich–Rubinstein duality for masses on two separated points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

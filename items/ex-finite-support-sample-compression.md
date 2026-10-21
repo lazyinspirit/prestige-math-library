@@ -2,7 +2,7 @@
 id: ex-finite-support-sample-compression
 kind: example
 title: "A finite-support sample-compressed classifier"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

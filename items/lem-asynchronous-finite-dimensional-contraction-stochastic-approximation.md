@@ -2,7 +2,7 @@
 id: lem-asynchronous-finite-dimensional-contraction-stochastic-approximation
 kind: lemma
 title: Coordinate-wise stochastic approximation converges to a contraction fixed point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

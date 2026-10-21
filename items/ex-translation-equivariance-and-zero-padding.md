@@ -2,7 +2,7 @@
 id: ex-translation-equivariance-and-zero-padding
 kind: example
 title: "Full-lattice translation equivariance and a zero-padding boundary failure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

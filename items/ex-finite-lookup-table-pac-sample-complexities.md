@@ -2,7 +2,7 @@
 id: ex-finite-lookup-table-pac-sample-complexities
 kind: example
 title: "Finite lookup tables have explicit PAC sample bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

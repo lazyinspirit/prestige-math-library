@@ -2,7 +2,7 @@
 id: lem-adagrad-accumulated-gram-matrix-is-psd
 kind: lemma
 title: "AdaGrad accumulated Gram matrices and both scales are positive semidefinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

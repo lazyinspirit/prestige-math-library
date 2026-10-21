@@ -2,7 +2,7 @@
 id: lem-woodbury-dplr-bilinear-inverse
 kind: lemma
 title: Woodbury inverse for a diagonal-plus-low-rank update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

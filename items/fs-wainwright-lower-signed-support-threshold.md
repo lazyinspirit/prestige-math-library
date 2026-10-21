@@ -2,7 +2,7 @@
 id: fs-wainwright-lower-signed-support-threshold
 kind: false-statement
 title: The Cmax-only Wainwright lower signed-support threshold can predict failure when Lasso succeeds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-s4-filter-cost-excludes-training
 kind: example
 title: The filter-operation bound is not a training-cost bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: nonconvex-gradient-descent-and-stationarity-examples
 title: "Nonconvex gradient descent and stationarity — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-nonconvex-cosine-gradient-descent-has-distinct-basins

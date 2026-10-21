@@ -2,7 +2,7 @@
 id: ex-tiled-attention-two-merge-orders
 kind: example
 title: "Two merge orders give the same attention summary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

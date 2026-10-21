@@ -1,7 +1,7 @@
 ---
 page: initialization-and-signal-propagation
 title: "Initialization and signal propagation"
-status: draft
+status: published
 items:
   - lem-centered-independent-weighted-sum-variance
   - lem-symmetric-rectifier-moments

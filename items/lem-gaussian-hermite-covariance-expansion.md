@@ -2,7 +2,7 @@
 id: lem-gaussian-hermite-covariance-expansion
 kind: lemma
 title: Hermite expansion of a correlated Gaussian feature kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

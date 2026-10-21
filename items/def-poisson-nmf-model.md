@@ -2,7 +2,7 @@
 id: def-poisson-nmf-model
 kind: definition
 title: "Poisson nonnegative matrix-factorization model"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 provenance:

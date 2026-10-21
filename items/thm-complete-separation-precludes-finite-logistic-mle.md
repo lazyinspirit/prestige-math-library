@@ -2,7 +2,7 @@
 id: thm-complete-separation-precludes-finite-logistic-mle
 kind: theorem
 title: Complete separation gives an unattained logistic likelihood supremum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

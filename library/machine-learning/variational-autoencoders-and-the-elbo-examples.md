@@ -1,7 +1,7 @@
 ---
 page: variational-autoencoders-and-the-elbo-examples
 title: Variational autoencoders and pathwise training — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-vae-inference-gap

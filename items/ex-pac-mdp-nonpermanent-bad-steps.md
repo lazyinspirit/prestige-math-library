@@ -2,7 +2,7 @@
 id: ex-pac-mdp-nonpermanent-bad-steps
 kind: example
 title: "A finite bad-step count need not be a permanent stopping time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

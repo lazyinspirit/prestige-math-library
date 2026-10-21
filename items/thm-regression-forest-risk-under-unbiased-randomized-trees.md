@@ -2,7 +2,7 @@
 id: thm-regression-forest-risk-under-unbiased-randomized-trees
 kind: theorem
 title: "Unbiased randomized-tree residual correlation bounds forest risk"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-iid-uniform-fill-distance-rate
 kind: lemma
 title: Uniform samples have logarithmic fill-distance rate on a cube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

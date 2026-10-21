@@ -1,7 +1,7 @@
 ---
 page: anytime-valid-scalar-confidence-sequences-examples
 title: Empirical-Bernstein confidence sequences under adaptive sampling — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-repeated-fixed-level-tests-not-anytime-valid

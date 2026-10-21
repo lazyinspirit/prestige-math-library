@@ -2,7 +2,7 @@
 id: lem-density-translation-factorization
 kind: lemma
 title: A translated conditional density factorizes after subtraction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

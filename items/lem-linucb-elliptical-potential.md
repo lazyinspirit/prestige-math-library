@@ -2,7 +2,7 @@
 id: lem-linucb-elliptical-potential
 kind: lemma
 title: The elliptical-potential bound for ridge design matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

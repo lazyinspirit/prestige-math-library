@@ -1,7 +1,7 @@
 ---
 page: ml02-rkhs-svm
 title: RKHS regularization, kernels, and support-vector machines
-status: draft
+status: published
 items:
   - def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces
   - lem-finite-dimensional-projection-in-a-real-inner-product-space

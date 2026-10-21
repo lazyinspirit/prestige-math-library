@@ -2,7 +2,7 @@
 id: lem-positive-semidefinite-cone-is-frobenius-closed
 kind: lemma
 title: "The real positive-semidefinite cone is closed in the Frobenius metric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

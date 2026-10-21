@@ -2,7 +2,7 @@
 id: thm-dp-postprocessing
 kind: theorem
 title: Differential privacy is preserved under randomized postprocessing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

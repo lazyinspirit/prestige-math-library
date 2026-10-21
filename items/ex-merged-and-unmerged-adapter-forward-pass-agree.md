@@ -2,7 +2,7 @@
 id: ex-merged-and-unmerged-adapter-forward-pass-agree
 kind: example
 title: "Merged and unmerged adapter forward passes agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

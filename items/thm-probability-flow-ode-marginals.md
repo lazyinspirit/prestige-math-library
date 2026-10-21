@@ -2,7 +2,7 @@
 id: thm-probability-flow-ode-marginals
 kind: theorem
 title: Probability-flow ODE has the same one-time marginals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: score-sdes-and-reverse-time-generation

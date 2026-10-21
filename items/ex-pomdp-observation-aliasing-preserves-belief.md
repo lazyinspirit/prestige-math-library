@@ -2,7 +2,7 @@
 id: ex-pomdp-observation-aliasing-preserves-belief
 kind: example
 title: "An observation with identical state likelihoods leaves the belief unchanged"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

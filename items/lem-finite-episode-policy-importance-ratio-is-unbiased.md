@@ -2,7 +2,7 @@
 id: lem-finite-episode-policy-importance-ratio-is-unbiased
 kind: lemma
 title: Finite-episode importance sampling has the target-policy mean under support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

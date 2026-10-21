@@ -2,7 +2,7 @@
 id: ex-one-lmnn-projected-step-is-not-convergence
 kind: example
 title: "One decreasing LMNN projection step is not a convergence certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

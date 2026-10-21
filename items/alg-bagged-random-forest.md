@@ -2,7 +2,7 @@
 id: alg-bagged-random-forest
 kind: algorithm
 title: "Bagged random-forest construction on a fixed finite sample"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

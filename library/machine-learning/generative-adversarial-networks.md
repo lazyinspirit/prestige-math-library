@@ -1,7 +1,7 @@
 ---
 page: generative-adversarial-networks
 title: GAN objectives and the ideal discriminator
-status: draft
+status: published
 items:
   - def-gan-minimax-objective
   - def-gan-jensen-shannon-divergence

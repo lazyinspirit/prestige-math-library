@@ -2,7 +2,7 @@
 id: ex-isotropic-risk-components-and-signal-to-noise-regimes
 kind: example
 title: Bias, variance, and signal-to-noise regimes of the isotropic risk curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 11

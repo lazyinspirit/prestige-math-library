@@ -2,7 +2,7 @@
 id: ex-underdetermined-linear-system-gd-minimum-norm
 kind: example
 title: "Zero-initialized descent on an underdetermined system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

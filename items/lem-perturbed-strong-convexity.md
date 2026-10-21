@@ -2,7 +2,7 @@
 id: lem-perturbed-strong-convexity
 kind: lemma
 title: Strong-convexity inequality for a perturbed gradient point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: imitation-learning-and-dagger-examples
 title: Imitation learning and DAgger — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-behavior-cloning-covariate-shift

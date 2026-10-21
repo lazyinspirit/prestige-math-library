@@ -2,7 +2,7 @@
 id: alg-trajectory-importance-sampling-ope
 kind: algorithm
 title: "Ordinary, per-decision, and weighted trajectory importance sampling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

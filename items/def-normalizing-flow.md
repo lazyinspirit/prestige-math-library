@@ -2,7 +2,7 @@
 id: def-normalizing-flow
 kind: definition
 title: "A normalizing flow and its base density"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

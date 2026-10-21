@@ -2,7 +2,7 @@
 id: def-covariance-factor-model
 kind: definition
 title: "Covariance factor model with diagonal residual covariance"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 provenance:

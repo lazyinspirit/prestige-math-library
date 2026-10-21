@@ -2,7 +2,7 @@
 id: ex-metric-stress-objective-nonconvex
 kind: example
 title: "The metric stress objective is not convex even for two points"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

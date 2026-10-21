@@ -2,7 +2,7 @@
 id: ex-single-particle-initialization-does-not-separate
 kind: example
 title: A single particle does not separate two spheres
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

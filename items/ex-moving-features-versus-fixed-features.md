@@ -2,7 +2,7 @@
 id: ex-moving-features-versus-fixed-features
 kind: example
 title: Moving features can represent a target missed by a fixed feature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

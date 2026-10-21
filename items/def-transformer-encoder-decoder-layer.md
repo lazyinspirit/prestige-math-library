@@ -2,7 +2,7 @@
 id: def-transformer-encoder-decoder-layer
 kind: definition
 title: "Transformer encoder, decoder, and fixed-width expressivity blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

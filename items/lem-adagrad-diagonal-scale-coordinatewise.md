@@ -2,7 +2,7 @@
 id: lem-adagrad-diagonal-scale-coordinatewise
 kind: lemma
 title: The diagonal AdaGrad scale is the coordinatewise square root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

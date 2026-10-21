@@ -2,7 +2,7 @@
 id: ex-fourier-neural-operator-layer-and-claim-boundary
 kind: example
 title: "A one-frequency Fourier layer on the circle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

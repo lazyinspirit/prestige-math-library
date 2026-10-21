@@ -2,7 +2,7 @@
 id: thm-gaussian-smoothing-reversal-on-truncated-time-interval
 kind: theorem
 title: Reverse Gaussian smoothing on a truncated time interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

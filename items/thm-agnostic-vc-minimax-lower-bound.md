@@ -2,7 +2,7 @@
 id: thm-agnostic-vc-minimax-lower-bound
 kind: theorem
 title: "An agnostic VC minimax lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

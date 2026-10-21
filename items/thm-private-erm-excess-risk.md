@@ -2,7 +2,7 @@
 id: thm-private-erm-excess-risk
 kind: theorem
 title: "Private finite-class ERM excess-risk bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

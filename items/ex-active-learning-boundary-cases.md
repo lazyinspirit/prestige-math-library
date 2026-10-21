@@ -2,7 +2,7 @@
 id: ex-active-learning-boundary-cases
 kind: example
 title: "Empty pools, singleton classes, and zero query budgets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

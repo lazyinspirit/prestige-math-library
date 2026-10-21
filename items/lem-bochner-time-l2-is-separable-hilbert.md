@@ -2,7 +2,7 @@
 id: lem-bochner-time-l2-is-separable-hilbert
 kind: lemma
 title: Bochner L2 on a finite interval is a separable Hilbert space
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

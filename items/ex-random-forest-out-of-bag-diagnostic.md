@@ -2,7 +2,7 @@
 id: ex-random-forest-out-of-bag-diagnostic
 kind: example
 title: "An out-of-bag prediction can differ from the full finite forest"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

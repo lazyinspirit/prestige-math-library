@@ -2,7 +2,7 @@
 id: def-discrete-convolutional-layer
 kind: definition
 title: "Discrete convolutional layer with local receptive fields, channel mixing, stride, and padding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-relu-rank-sensitive-region-recursion
 kind: lemma
 title: "Rank-sensitive layer recursion for ReLU regions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

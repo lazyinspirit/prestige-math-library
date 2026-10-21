@@ -2,7 +2,7 @@
 id: def-linear-state-space-model
 kind: definition
 title: Continuous-time linear state-space model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-bregman-three-point-identity
 kind: lemma
 title: The Bregman three-point identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

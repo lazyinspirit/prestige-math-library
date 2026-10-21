@@ -1,7 +1,7 @@
 ---
 page: neural-odes-and-continuous-normalizing-flows
 title: Neural ODEs and continuous normalizing flows
-status: draft
+status: published
 items:
   - def-neural-ode
   - thm-neural-ode-global-smooth-flow

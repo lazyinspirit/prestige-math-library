@@ -1,7 +1,7 @@
 ---
 page: algorithmic-stability-of-stochastic-training-examples
 title: "Algorithmic stability of stochastic training — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-sgd-convex-stability-linear-in-steps

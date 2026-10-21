@@ -2,7 +2,7 @@
 id: ex-generative-lda-and-logistic-share-a-boundary
 kind: example
 title: A Gaussian LDA model and a conditional logistic model can share a decision boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-kl-regularized-policy-improvement
 kind: definition
 title: Finite KL-regularized policy improvement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

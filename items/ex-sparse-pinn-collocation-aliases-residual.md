@@ -2,7 +2,7 @@
 id: ex-sparse-pinn-collocation-aliases-residual
 kind: example
 title: "A smooth residual can vanish at every collocation point and remain nonzero in population loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

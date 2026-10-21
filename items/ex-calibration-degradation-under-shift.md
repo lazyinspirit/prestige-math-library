@@ -2,7 +2,7 @@
 id: ex-calibration-degradation-under-shift
 kind: example
 title: "Calibration examples under validation and distribution shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: wasserstein-metric-and-continuity-equation-examples
 title: "Wasserstein metric and continuity-equation foundations — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-wasserstein-translation-of-a-dirac-mass

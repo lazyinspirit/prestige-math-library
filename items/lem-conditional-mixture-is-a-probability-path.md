@@ -2,7 +2,7 @@
 id: lem-conditional-mixture-is-a-probability-path
 kind: lemma
 title: A conditional mixture is a probability path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

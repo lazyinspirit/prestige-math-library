@@ -2,7 +2,7 @@
 id: alg-transformer-forward-pass
 kind: algorithm
 title: "Transformer encoder-decoder forward pass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

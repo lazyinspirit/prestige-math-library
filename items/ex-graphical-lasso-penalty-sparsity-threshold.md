@@ -2,7 +2,7 @@
 id: ex-graphical-lasso-penalty-sparsity-threshold
 kind: example
 title: "Increasing λ creates an exact zero edge in a two-variable graphical lasso"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

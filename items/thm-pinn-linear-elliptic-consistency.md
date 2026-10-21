@@ -2,7 +2,7 @@
 id: thm-pinn-linear-elliptic-consistency
 kind: theorem
 title: "Elliptic PINN minimizers converge to the Dirichlet solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

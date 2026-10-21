@@ -1,7 +1,7 @@
 ---
 page: norm-and-margin-generalization-for-neural-networks-examples
 title: "Norm and margin generalization for neural networks — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-norm-margin-network-two-class-computation

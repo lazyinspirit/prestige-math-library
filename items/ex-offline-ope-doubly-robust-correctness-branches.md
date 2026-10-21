@@ -2,7 +2,7 @@
 id: ex-offline-ope-doubly-robust-correctness-branches
 kind: example
 title: "Correct ratios and a correct value model give separate DR identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

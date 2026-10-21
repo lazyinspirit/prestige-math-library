@@ -1,7 +1,7 @@
 ---
 page: ml02-dimension-reduction-examples
 title: "PCA, kernel PCA, MDS, and manifold embeddings — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-rank-q-pca-exact-reconstruction

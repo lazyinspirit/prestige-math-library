@@ -2,7 +2,7 @@
 id: "thm-metric-derivative-of-ac2-wasserstein-curves"
 kind: theorem
 title: "Metric derivatives of AC2 Wasserstein curves"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

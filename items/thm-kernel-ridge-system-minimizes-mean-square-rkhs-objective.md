@@ -2,7 +2,7 @@
 id: thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective
 kind: theorem
 title: The kernel ridge system uniquely minimizes the mean-square RKHS objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

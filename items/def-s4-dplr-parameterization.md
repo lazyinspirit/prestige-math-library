@@ -2,7 +2,7 @@
 id: def-s4-dplr-parameterization
 kind: definition
 title: DPLR structured state-space parameterization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

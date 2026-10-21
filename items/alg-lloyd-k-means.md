@@ -2,7 +2,7 @@
 id: alg-lloyd-k-means
 kind: algorithm
 title: "Lloyd's k-means algorithm with explicit tie handling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

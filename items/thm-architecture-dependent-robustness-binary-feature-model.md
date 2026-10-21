@@ -2,7 +2,7 @@
 id: thm-architecture-dependent-robustness-binary-feature-model
 kind: theorem
 title: Architecture-dependent robustness in the Bernoulli model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

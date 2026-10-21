@@ -2,7 +2,7 @@
 id: ex-low-rank-adapter-change-of-basis
 kind: example
 title: "A change of basis gives different factors with the same adapter update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

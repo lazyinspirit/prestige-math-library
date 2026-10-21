@@ -2,7 +2,7 @@
 id: ex-random-forest-strength-correlation-tradeoff
 kind: example
 title: "A two-stump strength and correlation calculation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

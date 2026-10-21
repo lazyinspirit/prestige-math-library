@@ -2,7 +2,7 @@
 id: thm-pac-bayes-kl-bound
 kind: theorem
 title: "The PAC-Bayes KL generalization bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

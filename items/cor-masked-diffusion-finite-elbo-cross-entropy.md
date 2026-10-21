@@ -2,7 +2,7 @@
 id: cor-masked-diffusion-finite-elbo-cross-entropy
 kind: corollary
 title: Negative expected finite masked-diffusion ELBO is weighted cross-entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

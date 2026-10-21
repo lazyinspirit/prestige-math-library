@@ -2,7 +2,7 @@
 id: lem-fedavg-one-round-progress
 kind: lemma
 title: One-round progress of strongly convex FedAvg
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

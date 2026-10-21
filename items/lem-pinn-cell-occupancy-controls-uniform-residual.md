@@ -2,7 +2,7 @@
 id: lem-pinn-cell-occupancy-controls-uniform-residual
 kind: lemma
 title: "Populated sampling cells control the uniform PINN residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

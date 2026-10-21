@@ -7,7 +7,7 @@ verification:
 id: ex-empirical-cost-satisfaction-can-miss-population-violation
 kind: example
 title: "A finite sample can report cost satisfaction while the policy violates its expected-cost limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

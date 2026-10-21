@@ -2,7 +2,7 @@
 id: ex-threshold-median-query-binary-search
 kind: example
 title: "Median queries identify a finite threshold by binary search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

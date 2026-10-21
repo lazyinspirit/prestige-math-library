@@ -2,7 +2,7 @@
 id: rem-cpo-implementation-is-approximate
 kind: remark
 title: "Practical CPO updates do not inherit exact safety guarantees automatically"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

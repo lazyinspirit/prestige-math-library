@@ -2,7 +2,7 @@
 id: lem-cardinality-of-finite-natural-initial-segment
 kind: lemma
 title: "A finite initial segment of the naturals has its index as cardinality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

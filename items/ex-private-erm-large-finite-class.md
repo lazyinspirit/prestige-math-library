@@ -2,7 +2,7 @@
 id: ex-private-erm-large-finite-class
 kind: example
 title: "A finite class can make private ERM impractical"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

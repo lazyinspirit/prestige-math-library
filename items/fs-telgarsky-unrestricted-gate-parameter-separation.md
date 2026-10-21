@@ -2,7 +2,7 @@
 id: fs-telgarsky-unrestricted-gate-parameter-separation
 kind: false-statement
 title: "The unrestricted all-parameter depth separation is false"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

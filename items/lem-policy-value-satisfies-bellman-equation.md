@@ -2,7 +2,7 @@
 id: lem-policy-value-satisfies-bellman-equation
 kind: lemma
 title: "Expected discounted policy value is a fixed point of its Bellman operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

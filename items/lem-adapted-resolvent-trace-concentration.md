@@ -2,7 +2,7 @@
 id: lem-adapted-resolvent-trace-concentration
 kind: lemma
 title: "Adapted resolvent-trace martingale concentration for independent columns"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent
 kind: lemma
 title: "The printed all-scale probability cell-mass bound is inconsistent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

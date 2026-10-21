@@ -2,7 +2,7 @@
 id: ex-ordinary-importance-sampling-infinite-variance
 kind: example
 title: Ordinary importance sampling can have infinite variance under full support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

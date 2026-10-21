@@ -2,7 +2,7 @@
 id: def-localized-hilbert-lift
 kind: definition
 title: Localized Hilbert lift of the feature energy
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

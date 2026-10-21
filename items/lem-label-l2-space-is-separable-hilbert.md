@@ -2,7 +2,7 @@
 id: lem-label-l2-space-is-separable-hilbert
 kind: lemma
 title: A Euclidean probability label space gives a separable Hilbert L2 space
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

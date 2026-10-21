@@ -2,7 +2,7 @@
 id: lem-du-output-gradient-gram-update-identity
 kind: lemma
 title: "Gradient descent induces an exact output Gram update with a Taylor remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

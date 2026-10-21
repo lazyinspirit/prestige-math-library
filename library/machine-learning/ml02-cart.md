@@ -1,7 +1,7 @@
 ---
 page: ml02-cart
 title: 'CART trees and pruning'
-status: draft
+status: published
 items:
   - def-empirical-decision-tree
   - thm-node-mean-minimizes-squared-error

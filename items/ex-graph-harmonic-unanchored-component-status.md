@@ -2,7 +2,7 @@
 id: ex-graph-harmonic-unanchored-component-status
 kind: example
 title: "An unanchored component is rejected before solving"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

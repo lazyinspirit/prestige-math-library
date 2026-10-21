@@ -2,7 +2,7 @@
 id: ex-model-accurate-on-behavior-support
 kind: example
 title: "An inaccurate model can give the exact return on behavior support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

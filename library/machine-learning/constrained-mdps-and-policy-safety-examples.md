@@ -1,7 +1,7 @@
 ---
 page: constrained-mdps-and-policy-safety-examples
 title: Constrained MDPs and policy safety — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-expected-discounted-cost-does-not-imply-pathwise-safety

@@ -2,7 +2,7 @@
 id: lem-du-population-gram-kernels-are-finite-symmetric-psd
 kind: lemma
 title: "The recursively defined population Gram matrices are finite, symmetric, and positive semidefinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

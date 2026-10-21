@@ -2,7 +2,7 @@
 id: ex-infinite-singleton-class-has-finite-vc-dimension
 kind: example
 title: "An infinite singleton class has VC dimension one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

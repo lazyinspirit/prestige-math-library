@@ -2,7 +2,7 @@
 id: lem-complex-quadratic-form-fourth-moment-bound
 kind: lemma
 title: "Fourth-moment bound for a centered complex quadratic form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

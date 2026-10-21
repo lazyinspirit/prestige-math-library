@@ -3,7 +3,7 @@ dependency_level: 0
 id: lem-ap-finite-dimensional-factorization-of-continuous-maps
 kind: lemma
 title: "Approximation property gives finite-dimensional factorization on compacta"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 deps: [def-approximation-property-and-bounded-approximation-property, thm-coordinate-map-for-a-finite-dimensional-normed-space]

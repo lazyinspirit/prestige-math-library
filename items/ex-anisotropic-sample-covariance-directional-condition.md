@@ -2,7 +2,7 @@
 id: ex-anisotropic-sample-covariance-directional-condition
 kind: example
 title: "An anisotropic population with a balanced deterministic direction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

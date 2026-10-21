@@ -2,7 +2,7 @@
 id: thm-hippo-leg-matrices-have-low-rank-structure
 kind: theorem
 title: HiPPO LegS, LegT, and LagT matrices have normal-plus-low-rank form after specified similarities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

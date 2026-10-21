@@ -2,7 +2,7 @@
 id: lem-continuous-local-martingale-quadratic-variation
 kind: lemma
 title: Quadratic variation of a continuous local martingale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

@@ -2,7 +2,7 @@
 id: lem-dp-pure-privacy-loss-kl-bound
 kind: lemma
 title: Pure differential privacy bounds relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

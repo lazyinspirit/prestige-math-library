@@ -1,7 +1,7 @@
 ---
 page: adaptive-gradient-optimizers-examples
 title: Adaptive gradient algorithms and regret limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-adam-fixed-epsilon-online-regret-counterexample

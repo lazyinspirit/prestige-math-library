@@ -1,7 +1,7 @@
 ---
 page: online-decision-protocols
 title: "Online protocols and regret benchmarks"
-status: draft
+status: published
 items:
   - def-online-decision-protocol
   - def-adversary-and-feedback-model

@@ -2,7 +2,7 @@
 id: ex-pinn-small-scale-cube-sampling-has-instances
 kind: example
 title: "Uniform cube sampling satisfies the corrected small-scale conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

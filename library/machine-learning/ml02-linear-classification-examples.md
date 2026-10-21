@@ -1,7 +1,7 @@
 ---
 page: ml02-linear-classification-examples
 title: "Linear classifiers, discriminants, and logistic models — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-generative-lda-and-logistic-share-a-boundary

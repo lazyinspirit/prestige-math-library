@@ -2,7 +2,7 @@
 id: lem-partial-homogeneous-projection-limit-has-convergent-penalty
 kind: lemma
 title: A partial signed projection limit has convergent penalty and energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

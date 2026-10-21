@@ -2,7 +2,7 @@
 id: thm-independent-generation-success-and-verifier-error
 kind: theorem
 title: "Independent generation success and verifier false-acceptance bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

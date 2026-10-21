@@ -2,7 +2,7 @@
 id: def-discounted-value-and-advantage-functions
 kind: definition
 title: "Discounted value, action-value, and advantage functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

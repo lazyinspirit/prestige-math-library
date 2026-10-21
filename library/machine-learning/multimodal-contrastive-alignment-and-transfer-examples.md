@@ -1,7 +1,7 @@
 ---
 page: multimodal-contrastive-alignment-and-transfer-examples
 title: Multimodal contrastive alignment and transfer — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-prompt-and-distribution-sensitive-transfer

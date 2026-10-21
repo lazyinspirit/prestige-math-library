@@ -2,7 +2,7 @@
 id: ex-contrastive-high-within-class-variance
 kind: example
 title: "High within-class variance raises contrastive loss despite perfect mean separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

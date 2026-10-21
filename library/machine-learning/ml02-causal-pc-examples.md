@@ -1,7 +1,7 @@
 ---
 page: ml02-causal-pc-examples
 title: 'PC algorithm and Markov-equivalence structure learning — Examples'
-status: draft
+status: published
 items: []
 examples:
   - ex-pc-chain-versus-collider-separating-sets

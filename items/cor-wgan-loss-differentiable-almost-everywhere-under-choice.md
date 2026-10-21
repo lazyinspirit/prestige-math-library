@@ -2,7 +2,7 @@
 id: cor-wgan-loss-differentiable-almost-everywhere-under-choice
 kind: corollary
 title: "The compact-space WGAN value is differentiable almost everywhere under choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

@@ -1,7 +1,7 @@
 ---
 page: compression-generalization-for-trained-networks
 title: "Compression generalization for trained networks"
-status: draft
+status: published
 items:
   - def-margin-preserving-compression
   - thm-finite-description-compression-bound

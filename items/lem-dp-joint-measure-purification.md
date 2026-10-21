@@ -2,7 +2,7 @@
 id: lem-dp-joint-measure-purification
 kind: lemma
 title: Approximate privacy admits purification of a joint measure with fixed history marginal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

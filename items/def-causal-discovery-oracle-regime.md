@@ -2,7 +2,7 @@
 id: def-causal-discovery-oracle-regime
 kind: definition
 title: "Causally sufficient perfect-oracle discovery regime"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

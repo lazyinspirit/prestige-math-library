@@ -2,7 +2,7 @@
 id: lem-pushforward-support-is-closure-of-image
 kind: lemma
 title: Support of a continuous pushforward is the image closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-clarke-euler-identity-for-homogeneous-margins
 kind: lemma
 title: "Euler identity for Clarke subgradients of homogeneous margins"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

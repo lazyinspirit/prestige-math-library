@@ -2,7 +2,7 @@
 id: lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap
 kind: lemma
 title: "Smooth elliptic Dirichlet solvability from a boundary Sobolev bootstrap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

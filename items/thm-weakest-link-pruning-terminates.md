@@ -2,7 +2,7 @@
 id: thm-weakest-link-pruning-terminates
 kind: theorem
 title: "Weakest-link pruning terminates at the root"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

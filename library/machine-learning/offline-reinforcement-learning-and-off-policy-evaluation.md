@@ -1,7 +1,7 @@
 ---
 page: offline-reinforcement-learning-and-off-policy-evaluation
 title: Offline reinforcement learning and off-policy evaluation
-status: draft
+status: published
 items:
   - thm-offline-coverage-impossibility-example
   - def-offline-reinforcement-learning-dataset

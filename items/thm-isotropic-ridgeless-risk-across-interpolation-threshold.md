@@ -2,7 +2,7 @@
 id: thm-isotropic-ridgeless-risk-across-interpolation-threshold
 kind: theorem
 title: Isotropic ridgeless least-squares risk on both sides of interpolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 9

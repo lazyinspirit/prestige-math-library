@@ -1,7 +1,7 @@
 ---
 page: vc-dimension-growth-and-pac-classification-examples
 title: "VC dimension, growth functions, and classification sample complexity — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-threshold-class-has-vc-dimension-one

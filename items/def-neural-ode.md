@@ -2,7 +2,7 @@
 id: def-neural-ode
 kind: definition
 title: A parameterized neural ordinary differential equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

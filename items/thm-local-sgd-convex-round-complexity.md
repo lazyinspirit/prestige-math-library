@@ -2,7 +2,7 @@
 id: thm-local-sgd-convex-round-complexity
 kind: theorem
 title: Strongly convex local-SGD round complexity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

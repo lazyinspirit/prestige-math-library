@@ -2,7 +2,7 @@
 id: ex-reference-network-changes-complexity-not-predictions
 kind: example
 title: "Changing the reference matrix changes complexity, not the network"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

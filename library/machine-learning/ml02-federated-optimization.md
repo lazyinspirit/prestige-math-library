@@ -1,7 +1,7 @@
 ---
 page: ml02-federated-optimization
 title: "Federated averaging, local SGD, and SCAFFOLD"
-status: draft
+status: published
 order: 2754
 category: machine-learning
 companion: ml02-federated-optimization-examples

@@ -2,7 +2,7 @@
 id: lem-bounded-complex-iid-matrix-norm-bound
 kind: lemma
 title: "Operator-norm bound for bounded complex iid matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

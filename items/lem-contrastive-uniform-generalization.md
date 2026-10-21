@@ -2,7 +2,7 @@
 id: lem-contrastive-uniform-generalization
 kind: lemma
 title: "Uniform generalization bound for the one-negative contrastive loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

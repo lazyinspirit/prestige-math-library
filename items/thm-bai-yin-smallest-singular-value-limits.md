@@ -2,7 +2,7 @@
 id: thm-bai-yin-smallest-singular-value-limits
 kind: theorem
 title: "Bai–Yin lower singular-value limits and full rank away from aspect one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

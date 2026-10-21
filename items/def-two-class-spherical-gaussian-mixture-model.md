@@ -2,7 +2,7 @@
 id: def-two-class-spherical-gaussian-mixture-model
 kind: definition
 title: Two-class spherical Gaussian model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

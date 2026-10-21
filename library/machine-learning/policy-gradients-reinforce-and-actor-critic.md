@@ -1,7 +1,7 @@
 ---
 page: policy-gradients-reinforce-and-actor-critic
 title: "Policy gradients, REINFORCE, and actor–critic"
-status: draft
+status: published
 items:
   - def-differentiable-stochastic-policy
   - lem-policy-score-has-zero-conditional-mean

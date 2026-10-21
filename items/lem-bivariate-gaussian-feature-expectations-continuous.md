@@ -2,7 +2,7 @@
 id: lem-bivariate-gaussian-feature-expectations-continuous
 kind: lemma
 title: Continuity of bivariate Gaussian feature expectations, including singular limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

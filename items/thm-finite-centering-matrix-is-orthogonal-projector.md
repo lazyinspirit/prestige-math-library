@@ -2,7 +2,7 @@
 id: thm-finite-centering-matrix-is-orthogonal-projector
 kind: theorem
 title: "The finite centering matrix is the orthogonal projection onto the zero-sum subspace"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -1,7 +1,7 @@
 ---
 page: wasserstein-metric-and-continuity-equation
 title: "Wasserstein metric and continuity-equation foundations"
-status: draft
+status: published
 items:
   - def-wasserstein-two-space-and-couplings
   - def-ac2-curves-in-wasserstein-two

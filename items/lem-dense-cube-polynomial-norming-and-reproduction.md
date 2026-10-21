@@ -2,7 +2,7 @@
 id: lem-dense-cube-polynomial-norming-and-reproduction
 kind: lemma
 title: Dense samples on a cube norm and reproduce polynomials with exponential coefficient bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

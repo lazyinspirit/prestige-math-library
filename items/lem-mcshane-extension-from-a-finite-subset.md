@@ -2,7 +2,7 @@
 id: lem-mcshane-extension-from-a-finite-subset
 kind: lemma
 title: "The McShane formula extends a 1-Lipschitz function from a finite subset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

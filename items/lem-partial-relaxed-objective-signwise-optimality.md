@@ -2,7 +2,7 @@
 id: lem-partial-relaxed-objective-signwise-optimality
 kind: lemma
 title: Signwise first-variation conditions minimize the relaxed objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: anytime-valid-scalar-confidence-sequences
 title: Empirical-Bernstein confidence sequences under adaptive sampling
-status: draft
+status: published
 items:
   - def-subexponential-uniform-boundary
   - def-time-varying-target-confidence-sequence

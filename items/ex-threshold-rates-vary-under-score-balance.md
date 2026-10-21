@@ -2,7 +2,7 @@
 id: ex-threshold-rates-vary-under-score-balance
 kind: example
 title: "Threshold rates can vary despite balanced mean scores"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

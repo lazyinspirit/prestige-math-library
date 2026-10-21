@@ -2,7 +2,7 @@
 id: lem-gaussian-sample-mean-signal-alignment
 kind: lemma
 title: Signal alignment of a Gaussian sample mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

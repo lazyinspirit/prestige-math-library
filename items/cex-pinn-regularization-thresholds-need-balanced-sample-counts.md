@@ -2,7 +2,7 @@
 id: cex-pinn-regularization-thresholds-need-balanced-sample-counts
 kind: counterexample
 title: "The PINN regularization thresholds need not be comparable under the stated count condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

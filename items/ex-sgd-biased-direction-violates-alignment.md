@@ -2,7 +2,7 @@
 id: ex-sgd-biased-direction-violates-alignment
 kind: example
 title: "A biased SGD direction can fail positive alignment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

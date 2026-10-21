@@ -2,7 +2,7 @@
 id: lem-sample-covariance-empirical-law-is-a-probability-measure
 kind: lemma
 title: "The empirical spectral distribution of a sample covariance matrix is a probability measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

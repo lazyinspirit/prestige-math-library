@@ -2,7 +2,7 @@
 id: def-bounded-domain-degree-from-relative-homology
 kind: definition
 title: Bounded-domain degree from relative homology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

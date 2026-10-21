@@ -1,7 +1,7 @@
 ---
 page: energy-models-score-matching-and-contrastive-divergence
 title: Energy models, score matching, and contrastive divergence
-status: draft
+status: published
 items:
   - def-energy-based-density-and-partition-function
   - lem-energy-based-density-is-a-probability-measure

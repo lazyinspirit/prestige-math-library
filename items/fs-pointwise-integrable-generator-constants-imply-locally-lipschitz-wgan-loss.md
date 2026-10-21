@@ -2,7 +2,7 @@
 id: fs-pointwise-integrable-generator-constants-imply-locally-lipschitz-wgan-loss
 kind: false-statement
 title: "FALSE: pointwise-integrable generator constants imply a locally Lipschitz WGAN loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

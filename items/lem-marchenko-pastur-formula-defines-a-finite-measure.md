@@ -2,7 +2,7 @@
 id: lem-marchenko-pastur-formula-defines-a-finite-measure
 kind: lemma
 title: "The Marchenko–Pastur formula defines a probability law with the fixed-point transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

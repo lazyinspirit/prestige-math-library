@@ -2,7 +2,7 @@
 id: ex-deterministic-rewards-importance-weighted-feedback
 kind: example
 title: Deterministic rewards can give a negative estimated reward
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

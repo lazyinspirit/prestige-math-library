@@ -2,7 +2,7 @@
 id: fs-wainwright-signed-support-threshold-claim
 kind: false-statement
 title: The unrestricted Wainwright signed-support threshold claim fails without active-dimension control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

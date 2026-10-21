@@ -2,7 +2,7 @@
 id: lem-chordal-components-admit-both-orientations
 kind: lemma
 title: "Edges of finite chordal graphs admit both collider-free orientations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

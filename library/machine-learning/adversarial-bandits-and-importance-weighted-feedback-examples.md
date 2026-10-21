@@ -1,7 +1,7 @@
 ---
 page: adversarial-bandits-and-importance-weighted-feedback-examples
 title: Adversarial bandits and importance-weighted feedback — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-rare-arm-importance-weighted-estimator

@@ -2,7 +2,7 @@
 id: cex-telgarsky-small-k-large-degree-gate
 kind: counterexample
 title: "A single high-degree gate defeats the stated small-k separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

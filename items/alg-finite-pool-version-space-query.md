@@ -2,7 +2,7 @@
 id: alg-finite-pool-version-space-query
 kind: algorithm
 title: "Finite-pool version-space query procedure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

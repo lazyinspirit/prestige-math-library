@@ -1,7 +1,7 @@
 ---
 page: compact-metric-kantorovich-rubinstein-duality-examples
 title: "Kantorovich–Rubinstein duality on compact metric spaces — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-kantorovich-rubinstein-on-a-compact-interval

@@ -2,7 +2,7 @@
 id: lem-local-margin-minimum-satisfies-kkt-under-mfcq
 kind: lemma
 title: "A constrained local margin minimum satisfies Clarke KKT under MFCQ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

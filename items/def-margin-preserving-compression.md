@@ -2,7 +2,7 @@
 id: def-margin-preserving-compression
 kind: definition
 title: "Margin-preserving compression of score classifiers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-affine-conditional-path-velocity
 kind: lemma
 title: An affine conditional path has the stated velocity field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

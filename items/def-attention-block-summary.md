@@ -2,7 +2,7 @@
 id: def-attention-block-summary
 kind: definition
 title: "Stable summary of an attention key block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

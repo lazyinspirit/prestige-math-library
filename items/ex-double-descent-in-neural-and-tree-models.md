@@ -2,7 +2,7 @@
 id: ex-double-descent-in-neural-and-tree-models
 kind: example
 title: Reported double-descent experiments for neural networks and tree ensembles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

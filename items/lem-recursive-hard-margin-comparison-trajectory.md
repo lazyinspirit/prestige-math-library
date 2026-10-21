@@ -2,7 +2,7 @@
 id: lem-recursive-hard-margin-comparison-trajectory
 kind: lemma
 title: "Recursive hard-margin comparison trajectories have summable descent defects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

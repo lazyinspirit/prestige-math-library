@@ -2,7 +2,7 @@
 id: def-multihead-self-attention
 kind: definition
 title: "Multi-head attention and self-attention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

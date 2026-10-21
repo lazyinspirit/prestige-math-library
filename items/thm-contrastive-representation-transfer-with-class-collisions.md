@@ -2,7 +2,7 @@
 id: thm-contrastive-representation-transfer-with-class-collisions
 kind: theorem
 title: "Contrastive transfer bound with class collisions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

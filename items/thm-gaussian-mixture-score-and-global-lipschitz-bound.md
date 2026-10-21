@@ -2,7 +2,7 @@
 id: thm-gaussian-mixture-score-and-global-lipschitz-bound
 kind: theorem
 title: Gaussian-mixture score identities and a global Lipschitz bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

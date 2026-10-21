@@ -2,7 +2,7 @@
 id: lem-finite-response-score-gradient-identities
 kind: lemma
 title: "Finite-response score mean and reward-gradient identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

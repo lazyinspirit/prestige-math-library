@@ -2,7 +2,7 @@
 id: lem-amsgrad-one-step-regret-inequality
 kind: lemma
 title: One-step regret inequality for AMSGrad
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

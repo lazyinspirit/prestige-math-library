@@ -7,7 +7,7 @@ verification:
 id: ex-action-independent-baseline-eliminates-variance
 kind: example
 title: "A state baseline can eliminate this estimator's variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

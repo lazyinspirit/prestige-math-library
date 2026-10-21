@@ -2,7 +2,7 @@
 id: alg-direct-preference-optimization-finite-budget
 kind: algorithm
 title: Finite-budget direct preference optimization by mini-batch gradient descent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

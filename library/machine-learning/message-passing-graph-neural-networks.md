@@ -1,7 +1,7 @@
 ---
 page: message-passing-graph-neural-networks
 title: "Message-passing GNNs and the 1-WL ceiling"
-status: draft
+status: published
 items:
   - def-finite-labeled-graph
   - def-multiset

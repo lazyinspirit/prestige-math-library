@@ -2,7 +2,7 @@
 id: thm-pca-frobenius-optimality
 kind: theorem
 title: "The top right singular subspace minimizes rank-q PCA Frobenius reconstruction error"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

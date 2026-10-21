@@ -2,7 +2,7 @@
 id: thm-change-of-variables-density-for-diffeomorphic-flow
 kind: theorem
 title: "A diffeomorphic flow has the inverse-Jacobian density"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

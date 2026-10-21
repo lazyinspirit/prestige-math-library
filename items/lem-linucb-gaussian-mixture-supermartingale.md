@@ -2,7 +2,7 @@
 id: lem-linucb-gaussian-mixture-supermartingale
 kind: lemma
 title: The conditional Gaussian mixture is a nonnegative supermartingale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

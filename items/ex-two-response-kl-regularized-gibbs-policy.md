@@ -2,7 +2,7 @@
 id: ex-two-response-kl-regularized-gibbs-policy
 kind: example
 title: A two-response Gibbs policy with exact probabilities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

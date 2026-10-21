@@ -2,7 +2,7 @@
 id: def-gan-jensen-shannon-divergence
 kind: definition
 title: Density-defined Jensen–Shannon divergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

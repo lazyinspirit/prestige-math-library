@@ -2,7 +2,7 @@
 id: ex-bernoulli-perturbations-preserve-signs
 kind: example
 title: Thresholding removes Bernoulli sign perturbations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk-examples

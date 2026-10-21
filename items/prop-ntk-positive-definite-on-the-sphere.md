@@ -2,7 +2,7 @@
 id: prop-ntk-positive-definite-on-the-sphere
 kind: proposition
 title: The limiting neural tangent kernel is strictly positive definite on every unit sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

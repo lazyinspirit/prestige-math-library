@@ -2,7 +2,7 @@
 id: lem-dp-approximate-kernel-purification
 kind: lemma
 title: Approximate-DP kernels admit a nearby pure-DP kernel on standard-Borel targets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

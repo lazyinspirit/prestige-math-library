@@ -2,7 +2,7 @@
 id: lem-gaussian-sample-covariance-operator-concentration
 kind: lemma
 title: Gaussian sample covariance converges in operator norm when dimension is little-o of sample size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

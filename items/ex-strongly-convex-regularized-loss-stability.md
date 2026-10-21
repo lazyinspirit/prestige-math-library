@@ -2,7 +2,7 @@
 id: ex-strongly-convex-regularized-loss-stability
 kind: example
 title: "Absolute-loss RKHS regularization has an explicit stability envelope"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

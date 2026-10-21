@@ -2,7 +2,7 @@
 id: ex-cart-one-dimensional-threshold-tree
 kind: example
 title: "A one-dimensional regression threshold tree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

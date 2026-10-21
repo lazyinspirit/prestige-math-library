@@ -2,7 +2,7 @@
 id: ex-private-threshold-class-erm
 kind: example
 title: "Private ERM on a four-threshold class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

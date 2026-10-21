@@ -2,7 +2,7 @@
 id: lem-reversed-smoothing-generator-and-martingale
 kind: lemma
 title: Generator and martingale problem for reversed Gaussian smoothing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

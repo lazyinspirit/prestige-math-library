@@ -1,7 +1,7 @@
 ---
 page: fairness-criteria-and-impossibility-boundaries
 title: "Fairness criteria, impossibility boundaries, and limits"
-status: draft
+status: published
 items:
   - def-group-risk-score-and-calibration
   - def-positive-and-negative-score-balance

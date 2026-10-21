@@ -2,7 +2,7 @@
 id: lem-smooth-convex-gradient-difference
 kind: lemma
 title: Smooth convex gradient differences around a minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

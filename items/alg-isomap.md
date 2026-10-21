@@ -2,7 +2,7 @@
 id: alg-isomap
 kind: algorithm
 title: "Finite ISOMAP with deterministic neighborhoods and connected-graph shortest paths"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

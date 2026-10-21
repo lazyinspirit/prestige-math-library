@@ -2,7 +2,7 @@
 id: lem-ridgeless-risk-decomposition
 kind: lemma
 title: Exact bias and noise decomposition of isotropic prediction risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

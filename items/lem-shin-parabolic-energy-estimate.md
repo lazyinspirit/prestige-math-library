@@ -2,7 +2,7 @@
 id: lem-shin-parabolic-energy-estimate
 kind: lemma
 title: "Parabolic L2 energy estimate with zero initial-lateral trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

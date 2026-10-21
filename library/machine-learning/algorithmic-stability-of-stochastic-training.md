@@ -1,7 +1,7 @@
 ---
 page: algorithmic-stability-of-stochastic-training
 title: "Algorithmic stability of stochastic training"
-status: draft
+status: published
 items:
   - lem-iid-sample-plus-ghost-point-are-exchangeable
   - def-uniform-stability

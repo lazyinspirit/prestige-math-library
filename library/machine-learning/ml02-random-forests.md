@@ -1,7 +1,7 @@
 ---
 page: ml02-random-forests
 title: 'Bagging and random forests'
-status: draft
+status: published
 items:
   - alg-bagged-random-forest
   - thm-infinite-forest-vote-limit

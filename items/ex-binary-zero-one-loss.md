@@ -2,7 +2,7 @@
 id: ex-binary-zero-one-loss
 kind: example
 title: "Binary zero-one loss and risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

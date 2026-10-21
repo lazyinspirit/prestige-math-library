@@ -2,7 +2,7 @@
 id: lem-mdp-performance-difference-identity-with-arbitrary-baseline
 kind: lemma
 title: "Performance-difference identity for an arbitrary bounded baseline"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

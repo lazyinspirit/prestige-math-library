@@ -2,7 +2,7 @@
 id: lem-localized-lift-subdifferential
 kind: lemma
 title: The localized lifted subdifferential is a pointwise constrained subdifferential
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

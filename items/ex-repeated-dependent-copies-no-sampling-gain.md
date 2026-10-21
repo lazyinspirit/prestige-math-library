@@ -2,7 +2,7 @@
 id: ex-repeated-dependent-copies-no-sampling-gain
 kind: example
 title: "Repeated dependent copies do not increase success probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

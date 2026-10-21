@@ -1,7 +1,7 @@
 ---
 page: convolution-and-group-equivariance-examples
 title: "Convolution and finite-group equivariance — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-translation-equivariance-and-zero-padding

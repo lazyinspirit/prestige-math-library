@@ -2,7 +2,7 @@
 id: lem-pinn-random-samples-are-space-filling
 kind: lemma
 title: "Lower cell-mass bounds give a random fill-distance estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-pseudo-residuals-are-negative-score-gradient
 kind: lemma
 title: "Pseudo-residuals are the negative gradient in sample-score space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-kernel-ridge-nystrom-exact-range
 kind: example
 title: Exact Nyström capture gives the exact kernel ridge fit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

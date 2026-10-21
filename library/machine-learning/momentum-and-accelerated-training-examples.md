@@ -1,7 +1,7 @@
 ---
 page: momentum-and-accelerated-training-examples
 title: "Momentum and quadratic acceleration — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-unstable-heavy-ball-parameters

@@ -2,7 +2,7 @@
 id: thm-dagger-no-regret-reduction
 kind: theorem
 title: DAgger no-regret reduction under strongly convex surrogate losses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

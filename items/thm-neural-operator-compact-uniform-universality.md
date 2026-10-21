@@ -3,7 +3,7 @@ dependency_level: 5
 id: thm-neural-operator-compact-uniform-universality
 kind: theorem
 title: "Neural operators approximate continuous maps uniformly on compacta"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 deps:

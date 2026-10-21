@@ -2,7 +2,7 @@
 id: def-generalized-wasserstein-geodesic-and-strong-subgradient
 kind: definition
 title: Generalized W2 geodesics and strong Wasserstein subgradients
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

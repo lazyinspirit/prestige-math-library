@@ -2,7 +2,7 @@
 id: lem-youngest-child-descendants-conditionally-independent
 kind: lemma
 title: "Descendants of a youngest child are conditionally independent of its parent"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

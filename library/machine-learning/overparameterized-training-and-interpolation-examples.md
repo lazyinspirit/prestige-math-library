@@ -1,7 +1,7 @@
 ---
 page: overparameterized-training-and-interpolation-examples
 title: "Overparameterized networks and training to interpolation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-du-relu-outside-analytic-activation-class

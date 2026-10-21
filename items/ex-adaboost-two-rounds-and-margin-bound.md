@@ -2,7 +2,7 @@
 id: ex-adaboost-two-rounds-and-margin-bound
 kind: example
 title: "Two AdaBoost rounds with normalized weights"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

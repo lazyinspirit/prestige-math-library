@@ -2,7 +2,7 @@
 id: lem-symmetric-matrix-frobenius-isometry
 kind: lemma
 title: "Symmetric matrices are Euclidean under the Frobenius norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

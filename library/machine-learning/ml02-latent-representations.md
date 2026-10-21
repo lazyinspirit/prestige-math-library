@@ -1,7 +1,7 @@
 ---
 page: ml02-latent-representations
 title: "Latent factors, ICA, NMF, and representation ambiguity"
-status: draft
+status: published
 requires:
   - the-spectral-theorem-and-singular-value-decomposition
   - characteristic-functions-inversion-and-continuity

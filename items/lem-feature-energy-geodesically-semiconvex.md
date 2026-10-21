@@ -2,7 +2,7 @@
 id: lem-feature-energy-geodesically-semiconvex
 kind: lemma
 title: The localized feature energy is semiconvex along generalized geodesics
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

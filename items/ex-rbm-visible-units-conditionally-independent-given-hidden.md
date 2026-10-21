@@ -2,7 +2,7 @@
 id: ex-rbm-visible-units-conditionally-independent-given-hidden
 kind: example
 title: "Visible RBM units are conditionally independent but dependent marginally"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

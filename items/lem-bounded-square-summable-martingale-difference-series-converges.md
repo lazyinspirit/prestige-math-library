@@ -2,7 +2,7 @@
 id: lem-bounded-square-summable-martingale-difference-series-converges
 kind: lemma
 title: Predictably weighted bounded martingale differences have a convergent series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

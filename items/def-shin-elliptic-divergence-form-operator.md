@@ -2,7 +2,7 @@
 id: def-shin-elliptic-divergence-form-operator
 kind: definition
 title: "Shin's positive divergence-form operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

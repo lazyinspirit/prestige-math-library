@@ -2,7 +2,7 @@
 id: def-adversarial-threat-set-and-robust-risk
 kind: definition
 title: Measurable threat correspondences and robust risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

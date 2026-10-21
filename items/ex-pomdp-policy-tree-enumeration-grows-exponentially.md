@@ -2,7 +2,7 @@
 id: ex-pomdp-policy-tree-enumeration-grows-exponentially
 kind: example
 title: "A finite POMDP family has exponentially many witnessed alpha vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

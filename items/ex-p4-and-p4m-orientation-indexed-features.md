@@ -2,7 +2,7 @@
 id: ex-p4-and-p4m-orientation-indexed-features
 kind: example
 title: "p4 and p4m orientation-indexed feature maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-repeated-fixed-level-tests-not-anytime-valid
 kind: example
 title: Repeated fixed-level tests do not give an all-times bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

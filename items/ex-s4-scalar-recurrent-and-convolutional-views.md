@@ -2,7 +2,7 @@
 id: ex-s4-scalar-recurrent-and-convolutional-views
 kind: example
 title: A scalar state-space layer has matching recurrent and convolutional outputs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

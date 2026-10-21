@@ -2,7 +2,7 @@
 id: lem-rough-nonpolynomial-activation-universal-on-compact-sets
 kind: lemma
 title: "Rough nonpolynomial activations are dense on compact sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-marchenko-pastur-law-for-sample-covariance
 kind: theorem
 title: "Almost-sure Marchenko–Pastur law for finite-fourth-moment sample covariance matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

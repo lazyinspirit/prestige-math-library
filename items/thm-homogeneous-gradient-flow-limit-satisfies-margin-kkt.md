@@ -2,7 +2,7 @@
 id: thm-homogeneous-gradient-flow-limit-satisfies-margin-kkt
 kind: theorem
 title: "Homogeneous gradient-flow limit points satisfy margin KKT conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

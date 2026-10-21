@@ -1,7 +1,7 @@
 ---
 page: calibration-proper-losses-and-surrogate-classification
 title: "Calibration, proper losses, and surrogate classification"
-status: draft
+status: published
 items:
   - def-proper-scoring-rule
   - lem-jensen-for-simplex-pairs

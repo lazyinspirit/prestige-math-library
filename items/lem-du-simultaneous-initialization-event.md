@@ -2,7 +2,7 @@
 id: lem-du-simultaneous-initialization-event
 kind: lemma
 title: "Simultaneous initialization estimates for the Du architectures"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 pipeline_run: machine-learning-all-101-2026-10-19

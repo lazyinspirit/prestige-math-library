@@ -2,7 +2,7 @@
 id: alg-weighted-spectral-clustering
 kind: algorithm
 title: "Deterministic weighted spectral clustering with explicit isolate and eigenspace conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

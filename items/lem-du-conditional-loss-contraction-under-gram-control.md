@@ -2,7 +2,7 @@
 id: lem-du-conditional-loss-contraction-under-gram-control
 kind: lemma
 title: "Gram control and a Taylor remainder imply one-step loss contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

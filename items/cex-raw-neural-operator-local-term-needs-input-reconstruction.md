@@ -2,7 +2,7 @@
 id: cex-raw-neural-operator-local-term-needs-input-reconstruction
 kind: counterexample
 title: A raw neural-operator local term cannot be reconstructed exactly from finitely many samples
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

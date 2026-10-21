@@ -1,7 +1,7 @@
 ---
 page: ml02-gaussian-process-regression
 title: Gaussian-process regression and prediction
-status: draft
+status: published
 items:
   - def-gaussian-process-regression-observation-model
   - lem-finite-span-orthogonal-projection-in-inner-product-space

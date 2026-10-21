@@ -2,7 +2,7 @@
 id: lem-projected-bellman-error-is-well-defined
 kind: lemma
 title: The weighted feature projection is well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

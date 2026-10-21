@@ -2,7 +2,7 @@
 id: thm-borsuk-ulam-general
 kind: theorem
 title: "Borsuk–Ulam theorem in every dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

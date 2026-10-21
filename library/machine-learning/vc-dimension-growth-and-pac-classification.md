@@ -1,7 +1,7 @@
 ---
 page: vc-dimension-growth-and-pac-classification
 title: "VC dimension, growth functions, and classification sample complexity"
-status: draft
+status: published
 items:
   - def-shattered-set-and-vc-dimension
   - def-growth-function

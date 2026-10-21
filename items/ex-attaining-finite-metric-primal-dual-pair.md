@@ -2,7 +2,7 @@
 id: ex-attaining-finite-metric-primal-dual-pair
 kind: example
 title: "An attaining coupling and potential on a three-point metric space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: ml02-graphical-models
 title: "Undirected graphical models and sparse precision estimation"
-status: draft
+status: published
 requires:
   - central-limit-theorems
   - convex-and-semicontinuous-functions-on-rn

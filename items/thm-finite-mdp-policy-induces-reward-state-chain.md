@@ -2,7 +2,7 @@
 id: thm-finite-mdp-policy-induces-reward-state-chain
 kind: theorem
 title: "A finite MDP and stationary policy generate a reward-state Markov chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

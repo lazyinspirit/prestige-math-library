@@ -1,7 +1,7 @@
 ---
 page: bilevel-learning-hypergradients-and-implicit-layers
 title: "Bilevel learning, hypergradients, and implicit layers"
-status: draft
+status: published
 items:
   - def-smooth-bilevel-learning-problem
   - alg-adjoint-hypergradient-with-residual

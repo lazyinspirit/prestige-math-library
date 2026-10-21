@@ -1,7 +1,7 @@
 ---
 page: contextual-expert-bandits-examples
 title: Contextual expert bandits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-exp4-finite-two-expert-set

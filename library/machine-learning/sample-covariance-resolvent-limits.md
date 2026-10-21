@@ -1,7 +1,7 @@
 ---
 page: sample-covariance-resolvent-limits
 title: Sample-covariance resolvent deterministic equivalents
-status: draft
+status: published
 items:
 - def-sample-covariance-directional-spectral-measure
 - lem-bounded-complex-iid-matrix-norm-bound

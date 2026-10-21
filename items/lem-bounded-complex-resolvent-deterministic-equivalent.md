@@ -2,7 +2,7 @@
 id: lem-bounded-complex-resolvent-deterministic-equivalent
 kind: lemma
 title: "Deterministic equivalent for the bounded complex sample-covariance resolvent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

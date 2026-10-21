@@ -2,7 +2,7 @@
 id: lem-spectral-network-output-covering-entropy
 kind: lemma
 title: "Spectral and reference-matrix covering entropy for network outputs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

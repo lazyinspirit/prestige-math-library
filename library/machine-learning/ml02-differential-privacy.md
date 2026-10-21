@@ -1,7 +1,7 @@
 ---
 page: ml02-differential-privacy
 title: Differential privacy mechanisms and composition
-status: draft
+status: published
 items:
   - def-differential-privacy-and-adjacency
   - def-laplace-distribution

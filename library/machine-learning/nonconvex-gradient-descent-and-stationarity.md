@@ -1,7 +1,7 @@
 ---
 page: nonconvex-gradient-descent-and-stationarity
 title: "Nonconvex gradient descent and stationarity"
-status: draft
+status: published
 items:
   - thm-smooth-bounded-below-gd-stationarity
 examples: []

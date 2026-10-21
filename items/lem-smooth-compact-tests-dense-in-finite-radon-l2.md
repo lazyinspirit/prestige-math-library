@@ -2,7 +2,7 @@
 id: "lem-smooth-compact-tests-dense-in-finite-radon-l2"
 kind: lemma
 title: "Smooth compactly supported tests are dense for finite Radon L2 measures"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

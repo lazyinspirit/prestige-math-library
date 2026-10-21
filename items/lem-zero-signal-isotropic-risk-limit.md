@@ -2,7 +2,7 @@
 id: lem-zero-signal-isotropic-risk-limit
 kind: lemma
 title: Isotropic ridgeless risk limit when the signal is zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 8

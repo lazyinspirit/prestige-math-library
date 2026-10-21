@@ -2,7 +2,7 @@
 id: ex-contrastive-same-class-negative-collision
 kind: example
 title: "A negative sample collides with the positive class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

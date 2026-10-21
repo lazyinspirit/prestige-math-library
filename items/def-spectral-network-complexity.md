@@ -2,7 +2,7 @@
 id: def-spectral-network-complexity
 kind: definition
 title: "Spectral network complexity with reference matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-yarotsky-approximation-lower-bounds
 kind: theorem
 title: "Approximation lower bounds under distinct selection assumptions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

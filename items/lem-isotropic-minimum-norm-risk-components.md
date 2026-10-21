@@ -2,7 +2,7 @@
 id: lem-isotropic-minimum-norm-risk-components
 kind: lemma
 title: Separate isotropic ridgeless risk into limiting bias and variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-neural-operator-compact-union-under-uniform-convergence
 kind: lemma
 title: "Uniformly convergent images of a compact set have compact union"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

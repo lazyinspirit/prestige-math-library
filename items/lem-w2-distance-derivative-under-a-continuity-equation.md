@@ -2,7 +2,7 @@
 id: lem-w2-distance-derivative-under-a-continuity-equation
 kind: lemma
 title: Derivative of squared W2 distance along a finite-action continuity equation
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

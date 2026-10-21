@@ -2,7 +2,7 @@
 id: lem-ica-whitening-reduces-mixing-to-orthogonal
 kind: lemma
 title: "Whitening a square ICA model gives orthogonal mixing"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 provenance:

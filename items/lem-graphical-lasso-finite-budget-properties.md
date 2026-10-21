@@ -2,7 +2,7 @@
 id: lem-graphical-lasso-finite-budget-properties
 kind: lemma
 title: "Coordinate minimization, positive-definiteness invariant and termination of the finite-budget graphical-lasso procedure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

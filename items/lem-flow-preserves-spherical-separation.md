@@ -2,7 +2,7 @@
 id: lem-flow-preserves-spherical-separation
 kind: lemma
 title: A homogeneous flow preserves spherical support separation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 12

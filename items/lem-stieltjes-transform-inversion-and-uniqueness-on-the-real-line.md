@@ -2,7 +2,7 @@
 id: lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line
 kind: lemma
 title: "Stieltjes inversion and uniqueness for probability measures on the real line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

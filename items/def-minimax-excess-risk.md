@@ -2,7 +2,7 @@
 id: def-minimax-excess-risk
 kind: definition
 title: "Binary learning minimax excess risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

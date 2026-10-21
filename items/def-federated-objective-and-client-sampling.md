@@ -2,7 +2,7 @@
 id: def-federated-objective-and-client-sampling
 kind: definition
 title: Federated objectives and client sampling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-binary-zero-one-risk-excess-with-zero-tie
 kind: lemma
 title: "Binary zero-one excess risk with a zero-score error convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

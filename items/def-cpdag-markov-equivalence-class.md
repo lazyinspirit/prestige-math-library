@@ -2,7 +2,7 @@
 id: def-cpdag-markov-equivalence-class
 kind: definition
 title: "DAG Markov equivalence, patterns, and CPDAGs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

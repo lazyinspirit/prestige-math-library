@@ -2,7 +2,7 @@
 id: alg-sarsa-on-policy-control
 kind: algorithm
 title: Tabular on-policy Sarsa control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

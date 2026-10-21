@@ -1,7 +1,7 @@
 ---
 page: automatic-differentiation-and-backpropagation-examples
 title: "Automatic differentiation and backpropagation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-checkpointed-reverse-sweep-recomputes-intermediate

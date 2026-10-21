@@ -1,7 +1,7 @@
 ---
 page: recurrent-and-state-space-networks
 title: "Recurrent, LSTM, and structured state-space models"
-status: draft
+status: published
 order: 2764
 category: machine-learning
 companion: recurrent-and-state-space-networks-examples

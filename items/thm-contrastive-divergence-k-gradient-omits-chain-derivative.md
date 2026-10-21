@@ -2,7 +2,7 @@
 id: thm-contrastive-divergence-k-gradient-omits-chain-derivative
 kind: theorem
 title: The finite-state CD-k gradient includes the chain-distribution derivative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

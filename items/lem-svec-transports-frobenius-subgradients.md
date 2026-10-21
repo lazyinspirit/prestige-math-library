@@ -2,7 +2,7 @@
 id: lem-svec-transports-frobenius-subgradients
 kind: lemma
 title: "Symmetric vectorization transports closed convex domains and subgradients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

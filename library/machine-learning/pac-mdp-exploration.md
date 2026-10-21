@@ -1,7 +1,7 @@
 ---
 page: pac-mdp-exploration
 title: "Optimistic exploration and PAC-MDP sample complexity"
-status: draft
+status: published
 items:
   - def-pac-mdp-bounded-reward-model
   - thm-pac-mdp-value-functions

@@ -2,7 +2,7 @@
 id: lem-bernoulli-coordinate-posterior-odds-bound
 kind: lemma
 title: Posterior-odds concentration in the Bernoulli model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

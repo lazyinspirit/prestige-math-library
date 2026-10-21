@@ -2,7 +2,7 @@
 id: ex-affine-halfspaces-have-vc-dimension-p-plus-one
 kind: example
 title: "Affine halfspaces in real p-space have VC dimension p plus one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

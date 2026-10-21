@@ -2,7 +2,7 @@
 id: lem-pc-skeleton-separation
 kind: lemma
 title: "DAG adjacency is equivalent to having no separating set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

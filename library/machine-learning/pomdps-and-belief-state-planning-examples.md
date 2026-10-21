@@ -1,7 +1,7 @@
 ---
 page: pomdps-and-belief-state-planning-examples
 title: POMDPs and belief-state planning — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-pomdp-two-state-bayes-update

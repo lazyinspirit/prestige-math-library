@@ -2,7 +2,7 @@
 id: thm-cart-greedy-split-is-best-listed-split-and-terminates
 kind: theorem
 title: "Greedy CART minimizes the listed split loss and terminates"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

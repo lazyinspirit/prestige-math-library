@@ -2,7 +2,7 @@
 id: thm-policy-gradient-theorem
 kind: theorem
 title: "Discounted episodic policy gradients from trajectory likelihoods"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

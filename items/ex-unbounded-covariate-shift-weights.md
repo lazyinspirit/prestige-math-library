@@ -2,7 +2,7 @@
 id: ex-unbounded-covariate-shift-weights
 kind: example
 title: "Covariate-shift weights can be unbounded and integrable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

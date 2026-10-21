@@ -2,7 +2,7 @@
 id: ex-disjoint-supports-saturate-ideal-discriminator
 kind: example
 title: Separated supports saturate the ideal discriminator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

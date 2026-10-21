@@ -2,7 +2,7 @@
 id: lem-finite-response-likelihood-ratio-change-of-measure
 kind: lemma
 title: "Finite response likelihood ratios change measure by cancellation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

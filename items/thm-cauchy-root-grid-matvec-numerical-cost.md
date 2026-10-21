@@ -2,7 +2,7 @@
 id: thm-cauchy-root-grid-matvec-numerical-cost
 kind: theorem
 title: Numerical Cauchy products on a root grid with explicit accuracy scale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

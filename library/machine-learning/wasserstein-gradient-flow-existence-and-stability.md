@@ -1,7 +1,7 @@
 ---
 page: wasserstein-gradient-flow-existence-and-stability
 title: Existence, uniqueness, and stability of Wasserstein gradient flows
-status: draft
+status: published
 category: machine-learning
 companion: wasserstein-gradient-flow-existence-and-stability-examples
 requires:

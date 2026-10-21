@@ -2,7 +2,7 @@
 id: ex-diagonal-scalar-bounds-miss-offdiagonal-matrix
 kind: example
 title: Diagonal scalar bounds miss off-diagonal matrix size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

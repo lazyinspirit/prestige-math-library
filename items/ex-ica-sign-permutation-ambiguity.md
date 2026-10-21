@@ -2,7 +2,7 @@
 id: ex-ica-sign-permutation-ambiguity
 kind: example
 title: "A standardized Laplace ICA model has signed-permutation alternatives"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 provenance:

@@ -2,7 +2,7 @@
 id: alg-deterministic-neighbor-selection
 kind: algorithm
 title: "Deterministic finite nearest-neighbor lists and graph symmetrizations"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

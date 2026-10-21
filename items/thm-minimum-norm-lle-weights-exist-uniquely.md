@@ -2,7 +2,7 @@
 id: thm-minimum-norm-lle-weights-exist-uniquely
 kind: theorem
 title: "Finite LLE affine least-squares weights have a unique minimum-norm minimizer"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

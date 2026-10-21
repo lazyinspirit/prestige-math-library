@@ -2,7 +2,7 @@
 id: thm-largest-eigenvalue-sample-covariance-edge
 kind: theorem
 title: "Almost-sure limit of the largest sample-covariance eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

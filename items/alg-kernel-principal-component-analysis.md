@@ -2,7 +2,7 @@
 id: alg-kernel-principal-component-analysis
 kind: algorithm
 title: "Kernel principal component analysis for a finite positive-semidefinite Gram matrix"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

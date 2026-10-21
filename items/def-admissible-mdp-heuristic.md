@@ -2,7 +2,7 @@
 id: def-admissible-mdp-heuristic
 kind: definition
 title: "Admissible upper heuristic for a discounted MDP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

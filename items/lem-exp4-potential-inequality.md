@@ -2,7 +2,7 @@
 id: lem-exp4-potential-inequality
 kind: lemma
 title: Exp4 exponential-weights potential inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

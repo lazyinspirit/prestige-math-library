@@ -1,7 +1,7 @@
 ---
 page: anderson-reverse-time-diffusion
 title: "Anderson reverse-time diffusion"
-status: draft
+status: published
 items:
   - def-reversed-transition-kernels-for-diffusions
   - lem-continuous-local-martingale-quadratic-variation

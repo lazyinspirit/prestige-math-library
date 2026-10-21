@@ -2,7 +2,7 @@
 id: thm-neural-ode-global-smooth-flow
 kind: theorem
 title: A globally Lipschitz neural ODE has a global smooth flow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

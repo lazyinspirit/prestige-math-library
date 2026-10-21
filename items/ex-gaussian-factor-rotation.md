@@ -2,7 +2,7 @@
 id: ex-gaussian-factor-rotation
 kind: example
 title: "Two Gaussian latent factors admit a nontrivial orthogonal rotation"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 provenance:

@@ -2,7 +2,7 @@
 id: thm-optimal-discriminator-and-js-divergence
 kind: theorem
 title: Optimal discriminator and Jensen–Shannon divergence in the unrestricted GAN game
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

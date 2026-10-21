@@ -1,7 +1,7 @@
 ---
 page: active-querying-version-spaces-and-abstention
 title: "Active querying, version spaces, and abstention"
-status: draft
+status: published
 requires:
   - finite-class-pac-learning-and-erm
   - prediction-problems-risks-and-empirical-minimization

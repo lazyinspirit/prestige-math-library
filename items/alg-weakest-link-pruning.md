@@ -2,7 +2,7 @@
 id: alg-weakest-link-pruning
 kind: algorithm
 title: "Weakest-link pruning of a finite tree"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

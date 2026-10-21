@@ -2,7 +2,7 @@
 id: def-foundation-model-as-broad-pretraining-and-adaptation
 kind: definition
 title: "Foundation models as broad-pretraining and adaptation systems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

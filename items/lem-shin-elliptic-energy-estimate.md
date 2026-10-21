@@ -2,7 +2,7 @@
 id: lem-shin-elliptic-energy-estimate
 kind: lemma
 title: "Elliptic H1 error estimate from the source coefficient bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-fixed-width-transformer-lp-universality
 kind: theorem
 title: "Fixed-width Transformer approximation on compact domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

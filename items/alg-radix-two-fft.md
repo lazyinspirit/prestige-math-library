@@ -2,7 +2,7 @@
 id: alg-radix-two-fft
 kind: algorithm
 title: Radix-two discrete Fourier transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

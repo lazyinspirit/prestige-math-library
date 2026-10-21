@@ -2,7 +2,7 @@
 id: ex-knn-symmetrization-changes-ratio-cut
 kind: example
 title: "KNN symmetrization changes a graph cut"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

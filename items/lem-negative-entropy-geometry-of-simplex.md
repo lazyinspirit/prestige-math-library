@@ -2,7 +2,7 @@
 id: lem-negative-entropy-geometry-of-simplex
 kind: lemma
 title: Negative entropy on the simplex is strongly convex and has range log n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: prop-poisson-nmf-loglikelihood
 kind: proposition
 title: "Independent Poisson counts have the stated NMF log-likelihood"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 provenance:

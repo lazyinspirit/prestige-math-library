@@ -1,7 +1,7 @@
 ---
 page: ml02-metric-learning-examples
 title: Nearest neighbors and learned metrics — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-singular-mahalanobis-metric-identifies-distinct-points

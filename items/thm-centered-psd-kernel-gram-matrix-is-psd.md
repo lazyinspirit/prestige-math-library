@@ -2,7 +2,7 @@
 id: thm-centered-psd-kernel-gram-matrix-is-psd
 kind: theorem
 title: "Double-centering a finite positive-semidefinite Gram matrix preserves positive semidefiniteness"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

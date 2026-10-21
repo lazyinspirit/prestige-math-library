@@ -2,7 +2,7 @@
 id: ex-nonstrided-subgroup-and-coset-pooling
 kind: example
 title: "Non-strided, subgroup, and coset pooling on p4 features"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

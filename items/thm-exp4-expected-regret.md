@@ -2,7 +2,7 @@
 id: thm-exp4-expected-regret
 kind: theorem
 title: Exp4 expected regret against the best fixed expert
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

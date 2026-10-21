@@ -1,7 +1,7 @@
 ---
 page: relu-approximation-rates-and-depth-expressivity
 title: "ReLU approximation rates, depth separation, and linear regions"
-status: draft
+status: published
 items:
   - def-relu-network
   - def-relu-linear-region

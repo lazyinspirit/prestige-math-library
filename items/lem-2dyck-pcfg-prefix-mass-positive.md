@@ -2,7 +2,7 @@
 id: lem-2dyck-pcfg-prefix-mass-positive
 kind: lemma
 title: "Exact 2DYCK PCFG prefix laws and positive paired-prefix mass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

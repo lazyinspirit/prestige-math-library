@@ -2,7 +2,7 @@
 id: ex-square-loop-mds-isomap-lle-differ
 kind: example
 title: "Classical MDS, ISOMAP, and LLE give different embeddings of a four-point square"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

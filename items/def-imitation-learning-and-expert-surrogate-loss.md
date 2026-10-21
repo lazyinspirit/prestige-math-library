@@ -2,7 +2,7 @@
 id: def-imitation-learning-and-expert-surrogate-loss
 kind: definition
 title: Finite-horizon imitation learning and expert-surrogate loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

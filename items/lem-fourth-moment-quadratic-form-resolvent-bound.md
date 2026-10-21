@@ -2,7 +2,7 @@
 id: lem-fourth-moment-quadratic-form-resolvent-bound
 kind: lemma
 title: "Fourth-moment bound for a centered quadratic form of an independent vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

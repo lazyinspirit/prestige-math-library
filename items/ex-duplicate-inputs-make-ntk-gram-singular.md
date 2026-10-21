@@ -2,7 +2,7 @@
 id: ex-duplicate-inputs-make-ntk-gram-singular
 kind: example
 title: Duplicate inputs make the unquotiented NTK Gram matrix singular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

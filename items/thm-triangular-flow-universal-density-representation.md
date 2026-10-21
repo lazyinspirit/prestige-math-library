@@ -2,7 +2,7 @@
 id: thm-triangular-flow-universal-density-representation
 kind: theorem
 title: "Positive densities with smooth conditional CDFs admit an exact triangular-flow representation"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

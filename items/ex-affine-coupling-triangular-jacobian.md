@@ -2,7 +2,7 @@
 id: ex-affine-coupling-triangular-jacobian
 kind: example
 title: "A unit-scale affine coupling has a triangular Jacobian"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

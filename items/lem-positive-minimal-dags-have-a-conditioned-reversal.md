@@ -2,7 +2,7 @@
 id: lem-positive-minimal-dags-have-a-conditioned-reversal
 kind: lemma
 title: "Distinct positive minimal ANM DAGs contain a conditionally reversible edge"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

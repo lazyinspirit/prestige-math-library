@@ -1,7 +1,7 @@
 ---
 page: stochastic-gradient-descent-for-learning-examples
 title: "Stochastic gradient descent and random-iterate guarantees — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-constant-step-sgd-noise-floor

@@ -2,7 +2,7 @@
 id: thm-finite-chain-reverse-kernel-error-telescope
 kind: theorem
 title: Finite-chain reverse-kernel error telescope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

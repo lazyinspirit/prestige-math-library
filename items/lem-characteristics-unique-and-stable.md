@@ -2,7 +2,7 @@
 id: lem-characteristics-unique-and-stable
 kind: lemma
 title: One-sided semiconvex characteristics give W2 uniqueness and stability
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -2,7 +2,7 @@
 id: ex-reconstruction-objective-shortcut
 kind: example
 title: "A normalized-pixel objective with a constant representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

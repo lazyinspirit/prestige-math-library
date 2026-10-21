@@ -2,7 +2,7 @@
 id: lem-forward-path-is-admissible-for-finite-masked-model
 kind: lemma
 title: Forward path law is admissible for the finite masked model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

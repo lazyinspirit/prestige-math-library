@@ -2,7 +2,7 @@
 id: lem-du-initial-output-gaussian-concentration
 kind: lemma
 title: "Gaussian output initialization concentrates conditionally on the hidden features"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

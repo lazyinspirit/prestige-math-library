@@ -2,7 +2,7 @@
 id: lem-two-homogeneous-projection-limit-is-stationary
 kind: lemma
 title: A weak two-homogeneous projection limit is stationary on its support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

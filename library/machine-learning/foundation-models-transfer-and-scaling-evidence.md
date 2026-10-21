@@ -1,7 +1,7 @@
 ---
 page: foundation-models-transfer-and-scaling-evidence
 title: "Foundation models, transfer, and scaling evidence"
-status: draft
+status: published
 items:
   - def-foundation-model-as-broad-pretraining-and-adaptation
 examples: []

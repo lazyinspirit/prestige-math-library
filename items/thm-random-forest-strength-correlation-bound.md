@@ -2,7 +2,7 @@
 id: thm-random-forest-strength-correlation-bound
 kind: theorem
 title: "Breiman's random-forest strength–correlation error bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

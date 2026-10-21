@@ -2,7 +2,7 @@
 id: lem-psd-matrix-has-unique-psd-square-root
 kind: lemma
 title: A positive-semidefinite matrix has a unique positive-semidefinite square root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

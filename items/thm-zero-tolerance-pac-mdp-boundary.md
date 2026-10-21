@@ -2,7 +2,7 @@
 id: thm-zero-tolerance-pac-mdp-boundary
 kind: theorem
 title: "The zero-tolerance boundary of PAC-MDP exploration"
-status: draft
+status: published
 origin: session
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

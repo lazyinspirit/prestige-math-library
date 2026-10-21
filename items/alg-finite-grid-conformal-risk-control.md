@@ -2,7 +2,7 @@
 id: alg-finite-grid-conformal-risk-control
 kind: algorithm
 title: "Finite-grid conformal risk control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

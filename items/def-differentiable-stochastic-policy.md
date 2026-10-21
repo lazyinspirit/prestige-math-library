@@ -2,7 +2,7 @@
 id: def-differentiable-stochastic-policy
 kind: definition
 title: "Differentiable stationary stochastic policies and score vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

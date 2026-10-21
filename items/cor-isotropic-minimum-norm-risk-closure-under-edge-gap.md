@@ -2,7 +2,7 @@
 id: cor-isotropic-minimum-norm-risk-closure-under-edge-gap
 kind: corollary
 title: "Isotropic minimum-norm risk limits under a positive spectral gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

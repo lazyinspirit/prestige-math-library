@@ -2,7 +2,7 @@
 id: lem-almost-additive-sequence-has-limit
 kind: lemma
 title: "Almost-additive sequences have a normalized limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

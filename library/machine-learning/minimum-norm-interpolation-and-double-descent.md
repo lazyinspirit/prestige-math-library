@@ -1,7 +1,7 @@
 ---
 page: minimum-norm-interpolation-and-double-descent
 title: Minimum-norm interpolation and double descent
-status: draft
+status: published
 items:
   - def-ridgeless-minimum-norm-regression
   - lem-iid-uniform-fill-distance-rate

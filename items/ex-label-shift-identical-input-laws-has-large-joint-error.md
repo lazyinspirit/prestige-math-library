@@ -2,7 +2,7 @@
 id: ex-label-shift-identical-input-laws-has-large-joint-error
 kind: example
 title: "Identical input laws can hide a large joint-labeling error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

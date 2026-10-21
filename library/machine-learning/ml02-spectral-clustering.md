@@ -1,7 +1,7 @@
 ---
 page: ml02-spectral-clustering
 title: "Spectral clustering and graph cuts"
-status: draft
+status: published
 requires:
   - algebraic-and-spectral-graph-theory
   - ml02-clustering-mixtures

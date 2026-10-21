@@ -2,7 +2,7 @@
 id: lem-sgd-trajectory-integrability
 kind: lemma
 title: "Finite-horizon SGD trajectories have integrable objectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

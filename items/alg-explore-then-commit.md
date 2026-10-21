@@ -2,7 +2,7 @@
 id: alg-explore-then-commit
 kind: algorithm
 title: "Explore-then-commit for a finite stochastic bandit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

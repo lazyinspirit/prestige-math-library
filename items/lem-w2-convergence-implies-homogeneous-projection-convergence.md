@@ -2,7 +2,7 @@
 id: lem-w2-convergence-implies-homogeneous-projection-convergence
 kind: lemma
 title: W2 convergence implies weak convergence of homogeneous projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

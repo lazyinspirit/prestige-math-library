@@ -2,7 +2,7 @@
 id: def-bounded-reward-finite-mdp
 kind: definition
 title: "Finite MDP with bounded real rewards"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

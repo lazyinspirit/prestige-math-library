@@ -2,7 +2,7 @@
 id: lem-finite-masking-path-reversal-factorization
 kind: lemma
 title: Finite masking path law factors backward by its posterior rows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

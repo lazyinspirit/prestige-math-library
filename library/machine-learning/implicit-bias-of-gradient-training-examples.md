@@ -1,7 +1,7 @@
 ---
 page: implicit-bias-of-gradient-training-examples
 title: "Implicit bias of gradient-based learning — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-underdetermined-linear-system-gd-minimum-norm

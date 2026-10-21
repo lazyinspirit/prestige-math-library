@@ -2,7 +2,7 @@
 id: thm-r-max-pac-bound
 kind: theorem
 title: "PAC-MDP sample complexity of R-MAX"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

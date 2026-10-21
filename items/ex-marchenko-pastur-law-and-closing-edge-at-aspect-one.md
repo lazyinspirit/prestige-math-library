@@ -2,7 +2,7 @@
 id: ex-marchenko-pastur-law-and-closing-edge-at-aspect-one
 kind: example
 title: "The Marchenko–Pastur support and closing lower edge at aspect one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

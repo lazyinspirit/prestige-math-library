@@ -2,7 +2,7 @@
 id: lem-ratio-cut-indicator-trace-identities
 kind: lemma
 title: "RatioCut and Ncut as indicator-matrix traces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

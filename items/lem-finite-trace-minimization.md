@@ -2,7 +2,7 @@
 id: lem-finite-trace-minimization
 kind: lemma
 title: "Finite-dimensional trace minimization under orthonormal constraints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

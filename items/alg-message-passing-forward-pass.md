@@ -2,7 +2,7 @@
 id: alg-message-passing-forward-pass
 kind: algorithm
 title: "Finite-depth message-passing forward pass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

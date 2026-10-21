@@ -2,7 +2,7 @@
 id: ex-singular-hessian-nonisolated-inner-minimum
 kind: example
 title: "A singular Hessian leaves the minimizing branch undetermined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

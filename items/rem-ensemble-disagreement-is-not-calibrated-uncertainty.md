@@ -2,7 +2,7 @@
 id: rem-ensemble-disagreement-is-not-calibrated-uncertainty
 kind: remark
 title: "Ensemble disagreement is not calibrated uncertainty by definition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

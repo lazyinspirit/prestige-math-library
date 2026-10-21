@@ -1,7 +1,7 @@
 ---
 page: sketched-kernel-learning-and-certified-solves-examples
 title: Sketched kernel learning and certified approximate solves — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-kernel-ridge-singular-and-zero-gram-matrices

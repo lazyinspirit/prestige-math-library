@@ -2,7 +2,7 @@
 id: lem-partial-homogeneous-penalty-is-constant-under-global-hypotheses
 kind: lemma
 title: The full global partial-model hypotheses force a constant penalty coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

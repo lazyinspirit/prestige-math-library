@@ -1,7 +1,7 @@
 ---
 page: finite-metric-transport-duality
 title: "Finite-metric transport duality"
-status: draft
+status: published
 items:
   - def-finite-metric-coupling
   - lem-finitely-generated-cone-is-closed

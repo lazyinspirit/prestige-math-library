@@ -2,7 +2,7 @@
 id: lem-finite-horizon-mdp-policy-occupancy
 kind: lemma
 title: Finite-horizon MDP policy occupancy is a probability distribution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

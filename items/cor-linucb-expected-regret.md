@@ -2,7 +2,7 @@
 id: cor-linucb-expected-regret
 kind: corollary
 title: LinUCB has expected pseudo-regret of order $d\sqrt n\log(nL)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

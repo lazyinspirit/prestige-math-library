@@ -2,7 +2,7 @@
 id: thm-semiconvex-hilbert-gradient-flow
 kind: theorem
 title: A lower-bounded semiconvex Hilbert energy generates a unique gradient flow
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

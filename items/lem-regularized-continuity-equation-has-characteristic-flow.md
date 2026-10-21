@@ -2,7 +2,7 @@
 id: "lem-regularized-continuity-equation-has-characteristic-flow"
 kind: lemma
 title: "Regularized continuity equations are represented by characteristic flows"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

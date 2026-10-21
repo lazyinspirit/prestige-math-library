@@ -2,7 +2,7 @@
 id: thm-transformer-permutation-equivariance-without-position
 kind: theorem
 title: "Position-free unmasked self-attention is permutation equivariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

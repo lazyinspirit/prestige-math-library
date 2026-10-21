@@ -2,7 +2,7 @@
 id: lem-flow-matching-training-and-exact-sampling-properties
 kind: lemma
 title: Conditional flow-matching batch gradients and exact-flow output law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

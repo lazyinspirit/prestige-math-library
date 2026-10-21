@@ -2,7 +2,7 @@
 id: lem-distribution-with-vanishing-highest-derivative-is-polynomial
 kind: lemma
 title: "A distribution with a vanishing derivative is a polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-undirected-graphical-model-and-markov-properties
 kind: definition
 title: "Finite undirected graphs, Markov properties, and clique factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-general-population-sample-covariance-esd-limit-for-bounded-entries
 kind: theorem
 title: "General-population sample-covariance law for bounded entries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

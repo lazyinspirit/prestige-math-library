@@ -2,7 +2,7 @@
 id: fs-scaffold-general-convex-uniform-output-round-headline
 kind: false-statement
 title: SCAFFOLD general-convex round headline with a uniform server-iterate output
-status: draft
+status: published
 origin: session
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

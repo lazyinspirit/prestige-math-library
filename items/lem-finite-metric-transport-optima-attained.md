@@ -2,7 +2,7 @@
 id: lem-finite-metric-transport-optima-attained
 kind: lemma
 title: "Finite-metric transport and normalized dual optima are attained"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

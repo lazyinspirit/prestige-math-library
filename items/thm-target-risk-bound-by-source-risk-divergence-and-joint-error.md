@@ -2,7 +2,7 @@
 id: thm-target-risk-bound-by-source-risk-divergence-and-joint-error
 kind: theorem
 title: "Target risk bound by source risk, H-delta-H divergence, and joint error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

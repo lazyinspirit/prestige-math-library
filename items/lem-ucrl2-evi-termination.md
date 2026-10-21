@@ -2,7 +2,7 @@
 id: lem-ucrl2-evi-termination
 kind: lemma
 title: "Termination of extended value iteration under communicating assumptions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

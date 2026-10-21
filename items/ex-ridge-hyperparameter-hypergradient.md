@@ -2,7 +2,7 @@
 id: ex-ridge-hyperparameter-hypergradient
 kind: example
 title: "A scalar ridge penalty and its validation hypergradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

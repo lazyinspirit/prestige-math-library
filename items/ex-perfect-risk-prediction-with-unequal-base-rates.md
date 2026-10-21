@@ -2,7 +2,7 @@
 id: ex-perfect-risk-prediction-with-unequal-base-rates
 kind: example
 title: "Perfect prediction permits unequal base rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

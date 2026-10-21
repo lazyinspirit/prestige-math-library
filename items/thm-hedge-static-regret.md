@@ -2,7 +2,7 @@
 id: thm-hedge-static-regret
 kind: theorem
 title: Hedge's second-order and static-regret bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

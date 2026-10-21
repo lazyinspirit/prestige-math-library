@@ -1,7 +1,7 @@
 ---
 page: ml02-gaussian-process-regression-examples
 title: Gaussian-process regression and prediction — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-gp-regression-noisy-finite-interpolation

@@ -2,7 +2,7 @@
 id: lem-bernoulli-two-point-testing-for-vc-lower-bound
 kind: lemma
 title: "A Bernoulli two-point testing lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

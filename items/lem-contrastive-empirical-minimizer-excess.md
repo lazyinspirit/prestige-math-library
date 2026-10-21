@@ -2,7 +2,7 @@
 id: lem-contrastive-empirical-minimizer-excess
 kind: lemma
 title: "Population contrastive excess of an approximate empirical minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

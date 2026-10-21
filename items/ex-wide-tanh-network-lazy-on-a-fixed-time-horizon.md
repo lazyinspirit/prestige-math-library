@@ -2,7 +2,7 @@
 id: ex-wide-tanh-network-lazy-on-a-fixed-time-horizon
 kind: example
 title: A wide tanh network stays lazy on a fixed time horizon
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

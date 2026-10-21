@@ -2,7 +2,7 @@
 id: lem-orthonormal-lasso-soft-thresholding
 kind: lemma
 title: Lasso on an orthonormal design is coordinatewise soft-thresholding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

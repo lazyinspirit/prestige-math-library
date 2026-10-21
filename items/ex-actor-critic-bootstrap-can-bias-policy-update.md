@@ -7,7 +7,7 @@ verification:
 id: ex-actor-critic-bootstrap-can-bias-policy-update
 kind: example
 title: "A bootstrapped critic can bias the first actor update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

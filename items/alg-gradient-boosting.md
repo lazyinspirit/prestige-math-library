@@ -2,7 +2,7 @@
 id: alg-gradient-boosting
 kind: algorithm
 title: "Exact-line-search gradient tree boosting on a finite sample"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

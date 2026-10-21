@@ -2,7 +2,7 @@
 id: alg-exp3
 kind: algorithm
 title: Exp3 with importance-weighted loss feedback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

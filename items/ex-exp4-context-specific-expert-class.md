@@ -2,7 +2,7 @@
 id: ex-exp4-context-specific-expert-class
 kind: example
 title: A context-specific expert class with no shared policy structure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

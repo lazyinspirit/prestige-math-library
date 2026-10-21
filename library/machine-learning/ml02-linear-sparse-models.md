@@ -1,7 +1,7 @@
 ---
 page: ml02-linear-sparse-models
 title: "Linear prediction, shrinkage, and sparse regression"
-status: draft
+status: published
 items:
   - def-linear-regression-objectives
   - lem-gaussian-sample-covariance-operator-concentration

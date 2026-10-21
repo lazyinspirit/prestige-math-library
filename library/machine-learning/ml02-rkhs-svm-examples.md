@@ -1,7 +1,7 @@
 ---
 page: ml02-rkhs-svm-examples
 title: RKHS regularization, kernels, and support-vector machines — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-linear-and-polynomial-kernels

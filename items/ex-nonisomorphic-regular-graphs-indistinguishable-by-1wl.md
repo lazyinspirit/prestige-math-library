@@ -2,7 +2,7 @@
 id: ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl
 kind: example
 title: "A six-cycle and two disjoint triangles are regular but one-WL-indistinguishable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-vc-entropy-uniform-convergence
 kind: theorem
 title: "VC entropy uniform deviation without a logarithmic sample-size factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

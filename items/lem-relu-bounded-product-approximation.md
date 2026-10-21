@@ -2,7 +2,7 @@
 id: lem-relu-bounded-product-approximation
 kind: lemma
 title: "Correctly scaled bounded product approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

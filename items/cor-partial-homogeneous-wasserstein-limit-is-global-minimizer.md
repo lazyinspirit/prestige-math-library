@@ -2,7 +2,7 @@
 id: cor-partial-homogeneous-wasserstein-limit-is-global-minimizer
 kind: corollary
 title: A W2 limit in the partial one-homogeneous case is globally minimizing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 14

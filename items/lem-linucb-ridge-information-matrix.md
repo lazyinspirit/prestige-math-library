@@ -2,7 +2,7 @@
 id: lem-linucb-ridge-information-matrix
 kind: lemma
 title: The ridge information matrix is positive definite and invertible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-weighted-importance-sampling-finite-sample-bias
 kind: example
 title: A one-sample weighted importance-sampling estimate can be biased
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

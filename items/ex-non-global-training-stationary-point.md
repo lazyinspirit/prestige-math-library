@@ -2,7 +2,7 @@
 id: ex-non-global-training-stationary-point
 kind: example
 title: "Gradient descent can stay at a non-global stationary point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

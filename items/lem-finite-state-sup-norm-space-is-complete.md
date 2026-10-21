@@ -2,7 +2,7 @@
 id: lem-finite-state-sup-norm-space-is-complete
 kind: lemma
 title: "Completeness of the sup metric on finite-state value functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-pac-mdp-value-simulation
 kind: lemma
 title: "Value stability under empirical model error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: alg-adagrad
 kind: algorithm
 title: Gram-matrix AdaGrad with full or singular diagonal metrics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-common-shift-robust-risk-lower-bound
 kind: lemma
 title: Common shifts force binary robust risk at least one half
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

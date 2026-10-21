@@ -1,7 +1,7 @@
 ---
 page: anderson-reverse-time-diffusion-examples
 title: "Anderson reverse-time diffusion — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-state-dependent-diffusion-score-only-reversal

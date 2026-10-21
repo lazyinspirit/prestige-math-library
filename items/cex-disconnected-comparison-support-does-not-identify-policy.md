@@ -2,7 +2,7 @@
 id: cex-disconnected-comparison-support-does-not-identify-policy
 kind: counterexample
 title: Disconnected comparison support does not identify Gibbs policy mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: conditional-flow-matching-and-transport-paths
 title: Conditional flow matching and transport paths
-status: draft
+status: published
 requires:
   - compact-metric-kantorovich-rubinstein-duality
   - neural-odes-and-continuous-normalizing-flows

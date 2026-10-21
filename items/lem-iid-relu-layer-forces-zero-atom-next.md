@@ -2,7 +2,7 @@
 id: lem-iid-relu-layer-forces-zero-atom-next
 kind: lemma
 title: "An IID ReLU layer forces a zero atom in the next preactivation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

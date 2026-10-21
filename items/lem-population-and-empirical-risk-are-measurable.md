@@ -2,7 +2,7 @@
 id: lem-population-and-empirical-risk-are-measurable
 kind: lemma
 title: "Population and empirical risks are measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

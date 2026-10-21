@@ -2,7 +2,7 @@
 id: lem-scaffold-nonconvex-round-progress
 kind: lemma
 title: Nonconvex SCAFFOLD progress in one communication round
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-uniform-row-partial-sums-of-nested-finite-variance-array
 kind: lemma
 title: "Uniform row partial sums of a nested finite-variance array"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

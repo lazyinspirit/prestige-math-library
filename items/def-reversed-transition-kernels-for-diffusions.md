@@ -2,7 +2,7 @@
 id: def-reversed-transition-kernels-for-diffusions
 kind: definition
 title: Bayes-reversed transition kernels for a diffusion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

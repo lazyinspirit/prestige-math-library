@@ -2,7 +2,7 @@
 id: ex-ntk-mode-wise-exponential-decay
 kind: example
 title: An NTK eigenmode decays exponentially under least squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

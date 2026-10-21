@@ -2,7 +2,7 @@
 id: ex-quadratic-feature-energy-flow
 kind: example
 title: Exact quadratic feature-energy flow and particle limit
-status: draft
+status: published
 dependency_level: 13
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

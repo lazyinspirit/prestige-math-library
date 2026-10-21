@@ -1,7 +1,7 @@
 ---
 page: compression-and-pac-bayes-generalization
 title: "Sample compression and PAC-Bayes bounds"
-status: draft
+status: published
 items:
   - def-pac-bayes-prior-and-posterior
   - lem-compression-binomial-sum-bound

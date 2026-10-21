@@ -2,7 +2,7 @@
 id: ex-singular-local-lle-covariance
 kind: example
 title: "A singular local LLE covariance still has a unique minimum-norm weight vector"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

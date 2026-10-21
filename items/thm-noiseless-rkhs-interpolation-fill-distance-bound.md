@@ -2,7 +2,7 @@
 id: thm-noiseless-rkhs-interpolation-fill-distance-bound
 kind: theorem
 title: Noiseless Gaussian RKHS interpolation error under uniform sampling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

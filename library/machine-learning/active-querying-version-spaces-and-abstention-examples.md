@@ -1,7 +1,7 @@
 ---
 page: active-querying-version-spaces-and-abstention-examples
 title: "Active querying, version spaces, and abstention — Examples"
-status: draft
+status: published
 requires:
   - active-querying-version-spaces-and-abstention
 items: []

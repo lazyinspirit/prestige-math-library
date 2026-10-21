@@ -2,7 +2,7 @@
 id: def-probability-path-and-velocity-field
 kind: definition
 title: Probability paths and velocity fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

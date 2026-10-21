@@ -2,7 +2,7 @@
 id: lem-sample-covariance-spectrum-confinement
 kind: lemma
 title: "Finite-fourth-moment covariance spectral confinement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

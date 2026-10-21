@@ -2,7 +2,7 @@
 id: ex-connected-lle-graph-need-not-have-simple-zero
 kind: example
 title: "A connected LLE neighbor graph can have more than one fixed vector"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

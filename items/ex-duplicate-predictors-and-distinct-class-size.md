@@ -2,7 +2,7 @@
 id: ex-duplicate-predictors-and-distinct-class-size
 kind: example
 title: "Duplicate predictors do not enlarge the finite class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

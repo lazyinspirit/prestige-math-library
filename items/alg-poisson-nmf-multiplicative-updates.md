@@ -2,7 +2,7 @@
 id: alg-poisson-nmf-multiplicative-updates
 kind: algorithm
 title: "Finite Poisson NMF multiplicative-update sweeps"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 provenance:

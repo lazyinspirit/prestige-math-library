@@ -2,7 +2,7 @@
 id: ex-euclidean-mirror-descent-is-projected-ogd
 kind: example
 title: A quadratic mirror map gives a projected gradient step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

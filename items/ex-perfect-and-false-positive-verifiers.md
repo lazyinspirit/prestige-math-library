@@ -2,7 +2,7 @@
 id: ex-perfect-and-false-positive-verifiers
 kind: example
 title: "Perfect and false-positive verifiers have different rejection outcomes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

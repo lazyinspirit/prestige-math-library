@@ -1,7 +1,7 @@
 ---
 page: integral-probability-metrics-and-wasserstein-gans
 title: "Integral probability metrics and Wasserstein GANs"
-status: draft
+status: published
 requires:
   - compact-metric-kantorovich-rubinstein-duality
   - construction-of-r-via-cauchy-sequences

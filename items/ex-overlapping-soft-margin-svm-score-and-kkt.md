@@ -2,7 +2,7 @@
 id: ex-overlapping-soft-margin-svm-score-and-kkt
 kind: example
 title: Conflicting labels, a soft-margin optimum, and the meaning of its score
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: ml02-causal-anm
 title: "Additive-noise causal discovery and identifiability"
-status: draft
+status: published
 items:
   - def-additive-noise-model
   - lem-probability-measure-has-no-nonzero-period

@@ -2,7 +2,7 @@
 id: ex-gaussian-radial-kernel
 kind: example
 title: The Gaussian radial kernel is positive semidefinite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

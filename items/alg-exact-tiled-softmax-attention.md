@@ -2,7 +2,7 @@
 id: alg-exact-tiled-softmax-attention
 kind: algorithm
 title: "Exact tiled softmax attention with block-recomputed vector-Jacobian products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

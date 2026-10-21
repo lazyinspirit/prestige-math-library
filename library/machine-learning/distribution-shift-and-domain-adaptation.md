@@ -1,7 +1,7 @@
 ---
 page: distribution-shift-and-domain-adaptation
 title: "Distribution shift and domain adaptation"
-status: draft
+status: published
 items:
   - def-source-target-distributions-and-shift
   - def-h-delta-h-divergence

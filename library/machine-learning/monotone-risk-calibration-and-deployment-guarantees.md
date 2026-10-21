@@ -1,7 +1,7 @@
 ---
 page: monotone-risk-calibration-and-deployment-guarantees
 title: "Monotone risk calibration and finite-sample deployment guarantees"
-status: draft
+status: published
 requires:
   - conformal-prediction-and-exchangeable-ranks
   - predictive-calibration-and-uncertainty-under-shift

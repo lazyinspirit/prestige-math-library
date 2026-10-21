@@ -2,7 +2,7 @@
 id: ex-compressed-classifier-vs-original-predictor
 kind: example
 title: "A compressed classifier can differ from its trained predictor off the sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

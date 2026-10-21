@@ -2,7 +2,7 @@
 id: lem-du-neighborhood-gram-and-hessian-control
 kind: lemma
 title: "Parameter-ball control of the last-layer Gram and loss Hessian"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 pipeline_run: machine-learning-all-101-2026-10-19

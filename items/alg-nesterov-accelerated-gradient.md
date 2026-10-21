@@ -2,7 +2,7 @@
 id: alg-nesterov-accelerated-gradient
 kind: algorithm
 title: "Nesterov accelerated gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: cex-state-dependent-diffusion-score-only-reversal
 kind: counterexample
 title: State-dependent diffusion needs a divergence correction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion-examples

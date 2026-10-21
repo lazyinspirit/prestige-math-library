@@ -1,7 +1,7 @@
 ---
 page: minimum-norm-interpolation-and-double-descent-examples
 title: Minimum-norm interpolation and double descent — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-double-descent-in-neural-and-tree-models

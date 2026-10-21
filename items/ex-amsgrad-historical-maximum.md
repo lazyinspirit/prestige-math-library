@@ -2,7 +2,7 @@
 id: ex-amsgrad-historical-maximum
 kind: example
 title: AMSGrad retains an earlier second-moment maximum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

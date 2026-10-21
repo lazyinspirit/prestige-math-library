@@ -2,7 +2,7 @@
 id: thm-pinn-regularized-loss-consistency
 kind: theorem
 title: "Regularized PINN minimizers have vanishing residuals under sample refinement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

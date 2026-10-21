@@ -2,7 +2,7 @@
 id: prop-poisson-nmf-factorization-invariances
 kind: proposition
 title: "Positive component rescaling and permutation preserve an NMF rate matrix"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 provenance:

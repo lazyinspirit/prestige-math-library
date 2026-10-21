@@ -2,7 +2,7 @@
 id: lem-forward-kolmogorov-duality-gives-reversed-martingales
 kind: lemma
 title: Forward Kolmogorov duality gives reversed martingales
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

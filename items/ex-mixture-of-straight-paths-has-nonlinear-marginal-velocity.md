@@ -2,7 +2,7 @@
 id: ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity
 kind: example
 title: A mixture of straight Gaussian paths has a nonlinear marginal velocity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

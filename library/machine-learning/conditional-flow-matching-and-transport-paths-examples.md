@@ -1,7 +1,7 @@
 ---
 page: conditional-flow-matching-and-transport-paths-examples
 title: Conditional flow matching and transport paths — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-prior-to-data-conditional-interpolation

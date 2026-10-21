@@ -2,7 +2,7 @@
 id: ex-hedge-two-experts
 kind: example
 title: Hedge with two experts over two rounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

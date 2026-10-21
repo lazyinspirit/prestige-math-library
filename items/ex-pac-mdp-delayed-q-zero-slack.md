@@ -2,7 +2,7 @@
 id: ex-pac-mdp-delayed-q-zero-slack
 kind: example
 title: "Zero heuristic slack can still require one Delayed Q-learning update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

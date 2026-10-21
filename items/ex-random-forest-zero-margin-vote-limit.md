@@ -2,7 +2,7 @@
 id: ex-random-forest-zero-margin-vote-limit
 kind: example
 title: "A zero-margin bootstrap forest need not approach strict-margin risk"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

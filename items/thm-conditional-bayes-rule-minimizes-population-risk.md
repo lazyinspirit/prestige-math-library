@@ -2,7 +2,7 @@
 id: thm-conditional-bayes-rule-minimizes-population-risk
 kind: theorem
 title: "A conditional Bayes rule minimizes population risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

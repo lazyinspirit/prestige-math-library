@@ -2,7 +2,7 @@
 id: "prop-existence-and-lower-semicontinuity-of-optimal-couplings"
 kind: proposition
 title: "Optimal quadratic couplings exist and their cost is weakly lower semicontinuous"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

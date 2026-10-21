@@ -1,7 +1,7 @@
 ---
 page: preference-learning-and-direct-preference-optimization-examples
 title: Preference learning and direct preference optimization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-two-response-kl-regularized-gibbs-policy

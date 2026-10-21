@@ -2,7 +2,7 @@
 id: lem-linucb-trace-determinant-bound
 kind: lemma
 title: Trace control of the regularized design determinant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

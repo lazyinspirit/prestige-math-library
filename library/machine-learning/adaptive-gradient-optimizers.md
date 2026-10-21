@@ -1,7 +1,7 @@
 ---
 page: adaptive-gradient-optimizers
 title: Adaptive gradient algorithms and regret limits
-status: draft
+status: published
 items:
   - alg-rmsprop
   - alg-adam

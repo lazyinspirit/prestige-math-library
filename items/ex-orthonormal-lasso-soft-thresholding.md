@@ -2,7 +2,7 @@
 id: ex-orthonormal-lasso-soft-thresholding
 kind: example
 title: An orthonormal design makes the Lasso threshold visible coordinate by coordinate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

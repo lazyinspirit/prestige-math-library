@@ -2,7 +2,7 @@
 id: rem-discrete-diffusion-factorization-and-endpoint-limits
 kind: remark
 title: Factorization and finite-endpoint warnings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: cex-signed-square-relu-differential-is-not-locally-lipschitz
 kind: counterexample
 title: The signed-square ReLU differential need not be locally Lipschitz
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-bellman-contraction-and-unique-fixed-point
 kind: theorem
 title: "Finite-MDP Bellman operators are gamma contractions with unique fixed points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-vp-finite-terminal-prior-mismatch
 kind: example
 title: Finite VP noise leaves a terminal-prior mismatch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: score-sdes-and-reverse-time-generation-examples

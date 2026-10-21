@@ -2,7 +2,7 @@
 id: cor-prelu-variance-preserving-scale
 kind: corollary
 title: "PReLU fan-in and fan-out variance scales"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

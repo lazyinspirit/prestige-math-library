@@ -2,7 +2,7 @@
 id: thm-calibration-and-balance-incompatibility-for-risk-scores
 kind: theorem
 title: "Calibration and both outcome-balance criteria force equal base rates or perfect prediction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

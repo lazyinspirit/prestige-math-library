@@ -2,7 +2,7 @@
 id: rem-statistical-and-numerical-kernel-errors
 kind: remark
 title: Statistical and numerical limits of finite kernel solve guarantees
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

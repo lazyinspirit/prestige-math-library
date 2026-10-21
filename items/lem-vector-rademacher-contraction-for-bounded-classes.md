@@ -2,7 +2,7 @@
 id: lem-vector-rademacher-contraction-for-bounded-classes
 kind: lemma
 title: "A finite-dimensional vector contraction bound for one-sided Rademacher averages"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

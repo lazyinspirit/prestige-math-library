@@ -2,7 +2,7 @@
 id: thm-belief-mdp-sufficient-statistic
 kind: theorem
 title: "The belief state is a sufficient statistic for finite POMDP control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

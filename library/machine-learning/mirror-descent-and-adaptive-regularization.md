@@ -1,7 +1,7 @@
 ---
 page: mirror-descent-and-adaptive-regularization
 title: Mirror descent and adaptive regularization
-status: draft
+status: published
 items:
   - def-mirror-map-and-bregman-divergence
   - lem-psd-matrix-has-unique-psd-square-root

@@ -2,7 +2,7 @@
 id: def-average-reward-and-regret
 kind: definition
 title: "Average reward and pathwise regret"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

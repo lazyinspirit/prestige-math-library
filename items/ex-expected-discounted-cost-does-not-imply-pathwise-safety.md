@@ -7,7 +7,7 @@ verification:
 id: ex-expected-discounted-cost-does-not-imply-pathwise-safety
 kind: example
 title: "A small expected cost can coexist with frequent finite-horizon violations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cex-rtdp-optimal-relevant-state-convergence-fails
 kind: counterexample
 title: "RTDP need not visit every state reachable under an optimal policy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

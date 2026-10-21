@@ -2,7 +2,7 @@
 id: thm-robust-sample-upper-bound-gaussian-mixture
 kind: theorem
 title: Robust sample upper bound in the Gaussian model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

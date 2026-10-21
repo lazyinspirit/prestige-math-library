@@ -1,7 +1,7 @@
 ---
 page: semi-supervised-graph-propagation-and-pseudolabeling-limits
 title: "Semi-supervised graph propagation and pseudo-labeling limits"
-status: draft
+status: published
 requires:
   - ml02-spectral-clustering
   - prediction-problems-risks-and-empirical-minimization

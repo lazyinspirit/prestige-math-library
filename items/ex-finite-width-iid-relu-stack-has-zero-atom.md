@@ -2,7 +2,7 @@
 id: ex-finite-width-iid-relu-stack-has-zero-atom
 kind: example
 title: "A symmetric atomless IID ReLU layer creates a zero atom next"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

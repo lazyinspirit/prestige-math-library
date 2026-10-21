@@ -2,7 +2,7 @@
 id: def-finite-centering-matrix
 kind: definition
 title: "Finite centering matrices and centered data"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

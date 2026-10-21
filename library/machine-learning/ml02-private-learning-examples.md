@@ -1,7 +1,7 @@
 ---
 page: ml02-private-learning-examples
 title: "Private ERM and private online learning — Examples"
-status: draft
+status: published
 order: 2753
 category: machine-learning
 companion: ml02-private-learning

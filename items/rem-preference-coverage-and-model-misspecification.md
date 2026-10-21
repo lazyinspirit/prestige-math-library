@@ -2,7 +2,7 @@
 id: rem-preference-coverage-and-model-misspecification
 kind: remark
 title: Preference coverage and Bradley–Terry model limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

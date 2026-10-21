@@ -2,7 +2,7 @@
 id: def-source-target-distributions-and-shift
 kind: definition
 title: "Source and target joint laws, risks, and covariate shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-contrastive-representation-transfer-under-within-class-deviation
 kind: theorem
 title: "Contrastive transfer with a within-class covariance penalty"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 7

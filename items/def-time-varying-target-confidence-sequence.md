@@ -2,7 +2,7 @@
 id: def-time-varying-target-confidence-sequence
 kind: definition
 title: Confidence sequence for a time-varying target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

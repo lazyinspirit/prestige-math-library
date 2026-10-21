@@ -2,7 +2,7 @@
 id: lem-deterministic-ito-integral-has-gaussian-independent-increments
 kind: lemma
 title: A deterministic Itô integral has independent Gaussian increments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

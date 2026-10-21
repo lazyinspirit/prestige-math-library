@@ -2,7 +2,7 @@
 id: ex-singular-line-law-has-smooth-positive-time-density
 kind: example
 title: A singular line law has a smooth positive-time density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 axiom_base: Full AC

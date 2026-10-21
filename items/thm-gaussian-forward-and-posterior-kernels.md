@@ -2,7 +2,7 @@
 id: thm-gaussian-forward-and-posterior-kernels
 kind: theorem
 title: Closed Gaussian forward marginal and conditioned posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

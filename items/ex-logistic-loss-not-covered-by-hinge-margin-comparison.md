@@ -2,7 +2,7 @@
 id: ex-logistic-loss-not-covered-by-hinge-margin-comparison
 kind: example
 title: "The hinge margin comparison does not extend to logistic contrastive loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 9

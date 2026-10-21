@@ -2,7 +2,7 @@
 id: def-pac-mdp-bounded-reward-model
 kind: definition
 title: "Finite discounted MDP with bounded real rewards"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

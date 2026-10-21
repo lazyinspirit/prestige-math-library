@@ -1,7 +1,7 @@
 ---
 page: discrete-diffusion-and-variational-objectives-examples
 title: Discrete diffusion chains and DDPM objectives — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-scalar-gaussian-diffusion-chain

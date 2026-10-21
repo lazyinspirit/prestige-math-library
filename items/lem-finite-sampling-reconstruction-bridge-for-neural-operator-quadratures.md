@@ -2,7 +2,7 @@
 id: lem-finite-sampling-reconstruction-bridge-for-neural-operator-quadratures
 kind: lemma
 title: Finite sampling reconstruction bridges compact-uniform raw quadrature limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

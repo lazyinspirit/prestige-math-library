@@ -2,7 +2,7 @@
 id: alg-nystrom-kernel-ridge-fit
 kind: algorithm
 title: Finite-budget Nyström kernel ridge fit with residual status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

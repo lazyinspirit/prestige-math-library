@@ -2,7 +2,7 @@
 id: lem-reversed-kernels-and-generator-identity
 kind: lemma
 title: Reversed kernels, generator, and martingale problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

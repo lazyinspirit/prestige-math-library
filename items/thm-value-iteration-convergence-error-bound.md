@@ -2,7 +2,7 @@
 id: thm-value-iteration-convergence-error-bound
 kind: theorem
 title: "Value iteration converges at the Bellman contraction rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

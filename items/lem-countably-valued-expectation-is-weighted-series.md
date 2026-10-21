@@ -2,7 +2,7 @@
 id: lem-countably-valued-expectation-is-weighted-series
 kind: lemma
 title: "Expectation of a countably valued nonnegative random variable is its weighted series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

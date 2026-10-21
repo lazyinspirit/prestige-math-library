@@ -2,7 +2,7 @@
 id: def-relu-linear-region
 kind: definition
 title: "Connected activation-pattern regions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

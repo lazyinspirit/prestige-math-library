@@ -2,7 +2,7 @@
 id: lem-hermitian-spectral-measure-is-probability
 kind: lemma
 title: "A Hermitian directional spectral measure is a probability law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

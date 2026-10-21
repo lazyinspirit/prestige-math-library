@@ -2,7 +2,7 @@
 id: lem-relu-folding-block
 kind: lemma
 title: "A width-n ReLU block makes n+1 full folds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

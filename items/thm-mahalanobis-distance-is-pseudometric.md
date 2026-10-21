@@ -2,7 +2,7 @@
 id: thm-mahalanobis-distance-is-pseudometric
 kind: theorem
 title: "The Mahalanobis distance is a pseudometric and comes from a linear feature map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

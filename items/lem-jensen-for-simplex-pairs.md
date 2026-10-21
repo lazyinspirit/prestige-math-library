@@ -2,7 +2,7 @@
 id: lem-jensen-for-simplex-pairs
 kind: lemma
 title: "Jensen's inequality for pairs of simplex-valued forecasts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

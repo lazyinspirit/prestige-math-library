@@ -2,7 +2,7 @@
 id: ex-neural-game-nonconvergence
 kind: example
 title: A finite adversarial gradient game can cycle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

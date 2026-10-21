@@ -2,7 +2,7 @@
 id: ex-gp-regression-noisy-finite-interpolation
 kind: example
 title: Noisy interpolation on two independent coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

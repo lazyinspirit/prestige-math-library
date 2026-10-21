@@ -2,7 +2,7 @@
 id: cor-pac-bayes-risk-bound
 kind: corollary
 title: "A PAC-Bayes bound for a finite tuning grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

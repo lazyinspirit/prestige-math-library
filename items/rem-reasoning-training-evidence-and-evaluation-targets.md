@@ -2,7 +2,7 @@
 id: rem-reasoning-training-evidence-and-evaluation-targets
 kind: remark
 title: "Reasoning-training evidence and evaluation targets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

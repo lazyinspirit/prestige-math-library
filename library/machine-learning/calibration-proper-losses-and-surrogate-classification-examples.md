@@ -1,7 +1,7 @@
 ---
 page: calibration-proper-losses-and-surrogate-classification-examples
 title: "Calibration, proper losses, and surrogate classification — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-multiclass-calibration-notions-differ

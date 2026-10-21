@@ -2,7 +2,7 @@
 id: lem-rank-one-resolvent-update-and-trace-bound
 kind: lemma
 title: "Rank-one resolvent update and trace bound for a positive semidefinite matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

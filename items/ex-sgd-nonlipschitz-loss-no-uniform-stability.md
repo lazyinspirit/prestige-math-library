@@ -2,7 +2,7 @@
 id: ex-sgd-nonlipschitz-loss-no-uniform-stability
 kind: example
 title: A smooth quadratic loss without global Lipschitzness has unbounded stability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

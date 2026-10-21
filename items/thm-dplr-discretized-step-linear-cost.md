@@ -2,7 +2,7 @@
 id: thm-dplr-discretized-step-linear-cost
 kind: theorem
 title: A fixed-rank DPLR bilinear recurrent step has linear arithmetic cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

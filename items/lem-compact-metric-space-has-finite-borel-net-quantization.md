@@ -2,7 +2,7 @@
 id: lem-compact-metric-space-has-finite-borel-net-quantization
 kind: lemma
 title: "A compact metric space has a finite Borel nearest-center quantization at every positive scale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

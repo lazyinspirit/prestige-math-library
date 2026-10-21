@@ -2,7 +2,7 @@
 id: thm-classical-mds-recovers-euclidean-distances
 kind: theorem
 title: "Double-centering Euclidean squared distances recovers their centered Gram matrix"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

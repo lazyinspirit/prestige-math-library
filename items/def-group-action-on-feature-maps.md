@@ -2,7 +2,7 @@
 id: def-group-action-on-feature-maps
 kind: definition
 title: "The left action on feature maps induced by an action on sites"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

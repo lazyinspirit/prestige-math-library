@@ -2,7 +2,7 @@
 id: rem-marginal-risk-control-and-adaptive-reuse
 kind: remark
 title: "Marginal risk control, calibration, and adaptive reuse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

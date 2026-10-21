@@ -2,7 +2,7 @@
 id: fs-shin-global-holder-dirichlet-claim
 kind: false-statement
 title: "Exterior spheres and continuous boundary data do not give global bounded C2alpha solvability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

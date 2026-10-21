@@ -2,7 +2,7 @@
 id: lem-local-sgd-weighted-recursion
 kind: lemma
 title: Quadratic-weighted telescope for a strongly convex recursion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

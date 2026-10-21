@@ -2,7 +2,7 @@
 id: ex-separated-logistic-sample-has-unattained-supremum
 kind: example
 title: A strictly separated two-point sample has an unattained logistic likelihood supremum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

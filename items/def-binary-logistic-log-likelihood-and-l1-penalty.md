@@ -2,7 +2,7 @@
 id: def-binary-logistic-log-likelihood-and-l1-penalty
 kind: definition
 title: Binary logistic log-likelihood and L1-penalized objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

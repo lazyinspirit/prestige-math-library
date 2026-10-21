@@ -2,7 +2,7 @@
 id: lem-fixed-degree-covariance-trace-and-edge-witnesses
 kind: lemma
 title: "Fixed-degree covariance trace moments and independent edge witnesses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

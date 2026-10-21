@@ -2,7 +2,7 @@
 id: ex-prompt-and-distribution-sensitive-transfer
 kind: example
 title: "Prompt and distribution-sensitive transfer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

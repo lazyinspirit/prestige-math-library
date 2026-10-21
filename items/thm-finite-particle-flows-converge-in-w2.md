@@ -2,7 +2,7 @@
 id: thm-finite-particle-flows-converge-in-w2
 kind: theorem
 title: Finite-particle flows converge to the measure-valued flow in W2
-status: draft
+status: published
 dependency_level: 12
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

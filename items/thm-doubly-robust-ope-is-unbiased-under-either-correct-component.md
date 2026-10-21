@@ -2,7 +2,7 @@
 id: thm-doubly-robust-ope-is-unbiased-under-either-correct-component
 kind: theorem
 title: "Doubly robust evaluation is unbiased under either exact component"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

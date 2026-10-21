@@ -2,7 +2,7 @@
 id: def-additive-noise-model
 kind: definition
 title: "Continuous additive-noise models on finite DAGs"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

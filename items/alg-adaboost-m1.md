@@ -2,7 +2,7 @@
 id: alg-adaboost-m1
 kind: algorithm
 title: "Finite-sample AdaBoost.M1 with half-log coefficients"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-smallest-positive-eigenvalue-sample-covariance-edge
 kind: theorem
 title: "Almost-sure limit and structural-zero count at the lower sample-covariance edge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 5

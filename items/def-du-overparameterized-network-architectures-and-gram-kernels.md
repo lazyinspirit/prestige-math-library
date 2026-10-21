@@ -2,7 +2,7 @@
 id: def-du-overparameterized-network-architectures-and-gram-kernels
 kind: definition
 title: "Fully connected and residual networks with the Du Gram kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

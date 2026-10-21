@@ -1,7 +1,7 @@
 ---
 page: offline-reinforcement-learning-and-off-policy-evaluation-examples
 title: Offline reinforcement learning and off-policy evaluation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-offline-ope-full-support-and-missing-support

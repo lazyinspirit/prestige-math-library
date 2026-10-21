@@ -2,7 +2,7 @@
 id: def-forward-gaussian-diffusion-chain
 kind: definition
 title: Finite Gaussian forward chain and Gaussian reverse model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

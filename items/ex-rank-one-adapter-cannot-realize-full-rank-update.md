@@ -2,7 +2,7 @@
 id: ex-rank-one-adapter-cannot-realize-full-rank-update
 kind: example
 title: "A rank-one adapter cannot realize a full-rank two-dimensional update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-compact-metric-space-is-second-countable-under-countable-choice
 kind: lemma
 title: "A compact metric space is second-countable under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

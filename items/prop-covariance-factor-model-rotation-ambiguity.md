@@ -2,7 +2,7 @@
 id: prop-covariance-factor-model-rotation-ambiguity
 kind: proposition
 title: "Orthogonal rotation preserves the covariance factor model"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 provenance:

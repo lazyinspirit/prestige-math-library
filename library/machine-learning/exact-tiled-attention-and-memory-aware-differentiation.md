@@ -1,7 +1,7 @@
 ---
 page: exact-tiled-attention-and-memory-aware-differentiation
 title: "Exact tiled attention and memory-aware differentiation"
-status: draft
+status: published
 items:
   - def-attention-block-summary
   - alg-exact-tiled-softmax-attention

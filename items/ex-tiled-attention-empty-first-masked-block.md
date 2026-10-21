@@ -2,7 +2,7 @@
 id: ex-tiled-attention-empty-first-masked-block
 kind: example
 title: "An empty first masked key block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

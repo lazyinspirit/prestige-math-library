@@ -2,7 +2,7 @@
 id: thm-adam-online-regret-counterexample
 kind: theorem
 title: Adam can have nonzero average regret on a one-dimensional convex sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

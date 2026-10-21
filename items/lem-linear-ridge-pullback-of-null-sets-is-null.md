@@ -2,7 +2,7 @@
 id: lem-linear-ridge-pullback-of-null-sets-is-null
 kind: lemma
 title: "Nonconstant affine ridge pullbacks preserve Lebesgue nullity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

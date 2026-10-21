@@ -1,7 +1,7 @@
 ---
 page: score-sdes-and-reverse-time-generation
 title: Score SDEs and reverse-time generation
-status: draft
+status: published
 items:
 - def-marginal-score-function
 - thm-probability-flow-ode-marginals

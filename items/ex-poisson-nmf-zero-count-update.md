@@ -2,7 +2,7 @@
 id: ex-poisson-nmf-zero-count-update
 kind: example
 title: "A zero-count cell remains well-defined in a positive NMF update"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 provenance:

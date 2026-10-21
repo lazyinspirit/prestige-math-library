@@ -2,7 +2,7 @@
 id: lem-ucrl2-uniform-confidence-bounds
 kind: lemma
 title: "Uniform empirical reward and transition confidence bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

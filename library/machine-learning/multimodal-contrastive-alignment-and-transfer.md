@@ -1,7 +1,7 @@
 ---
 page: multimodal-contrastive-alignment-and-transfer
 title: Multimodal contrastive alignment and transfer
-status: draft
+status: published
 requires:
   - distribution-shift-and-domain-adaptation
   - feedforward-networks-and-universal-approximation

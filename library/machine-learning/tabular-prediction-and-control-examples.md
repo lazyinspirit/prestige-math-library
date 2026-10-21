@@ -1,7 +1,7 @@
 ---
 page: tabular-prediction-and-control-examples
 title: Tabular prediction and control by interaction — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-tabular-insufficient-exploration-leaves-q-values-unknown

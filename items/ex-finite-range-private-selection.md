@@ -2,7 +2,7 @@
 id: ex-finite-range-private-selection
 kind: example
 title: Finite-range private selection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

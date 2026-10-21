@@ -2,7 +2,7 @@
 id: ex-surrogate-loss-fails-task-cost-control
 kind: example
 title: A candidate loss score that does not control task cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

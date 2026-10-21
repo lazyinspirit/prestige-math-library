@@ -2,7 +2,7 @@
 id: thm-amsgrad-online-convex-regret
 kind: theorem
 title: AMSGrad has an online convex regret bound under decaying first-moment weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

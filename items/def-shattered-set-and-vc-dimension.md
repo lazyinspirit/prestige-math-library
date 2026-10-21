@@ -2,7 +2,7 @@
 id: def-shattered-set-and-vc-dimension
 kind: definition
 title: "Indexed shattering and VC dimension of a binary class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 0

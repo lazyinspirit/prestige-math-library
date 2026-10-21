@@ -2,7 +2,7 @@
 id: lem-approximate-margin-kkt-limit-under-mfcq
 kind: lemma
 title: "Limits of approximate margin-KKT points under MFCQ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

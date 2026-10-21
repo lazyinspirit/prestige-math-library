@@ -1,7 +1,7 @@
 ---
 page: mirror-descent-and-adaptive-regularization-examples
 title: Mirror descent and adaptive regularization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-adagrad-singular-adaptive-metric

@@ -2,7 +2,7 @@
 id: thm-rademacher-uniform-generalization
 kind: theorem
 title: "Rademacher uniform generalization bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

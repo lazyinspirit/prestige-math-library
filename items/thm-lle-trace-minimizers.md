@@ -2,7 +2,7 @@
 id: thm-lle-trace-minimizers
 kind: theorem
 title: "Under the simple constant-kernel condition, LLE trace minimizers are bottom positive eigenvectors"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

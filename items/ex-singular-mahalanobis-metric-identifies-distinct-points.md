@@ -2,7 +2,7 @@
 id: ex-singular-mahalanobis-metric-identifies-distinct-points
 kind: example
 title: "A rank-deficient Mahalanobis matrix identifies distinct points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

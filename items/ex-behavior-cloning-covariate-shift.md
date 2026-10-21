@@ -2,7 +2,7 @@
 id: ex-behavior-cloning-covariate-shift
 kind: example
 title: Behavior cloning can incur quadratic cost under state-distribution shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

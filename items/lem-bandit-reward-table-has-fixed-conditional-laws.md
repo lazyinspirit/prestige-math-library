@@ -2,7 +2,7 @@
 id: lem-bandit-reward-table-has-fixed-conditional-laws
 kind: lemma
 title: "The independent reward-stack model has the prescribed conditional arm laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

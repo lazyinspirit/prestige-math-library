@@ -2,7 +2,7 @@
 id: alg-budgeted-verifier-guided-generation
 kind: algorithm
 title: "Budgeted verifier-guided generation and best-of-N sampling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

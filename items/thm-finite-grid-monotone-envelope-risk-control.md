@@ -2,7 +2,7 @@
 id: thm-finite-grid-monotone-envelope-risk-control
 kind: theorem
 title: "Finite-grid risk control by monotone envelopes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

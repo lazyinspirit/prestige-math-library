@@ -2,7 +2,7 @@
 id: thm-infinite-forest-vote-limit
 kind: theorem
 title: "Almost-sure limiting risk of an infinite random-forest classifier"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

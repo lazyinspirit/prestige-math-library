@@ -1,7 +1,7 @@
 ---
 page: adversarial-bandits-and-importance-weighted-feedback
 title: Adversarial bandits and importance-weighted feedback
-status: draft
+status: published
 items:
   - lem-exp-negative-argument-second-order-upper-bound
   - def-bandit-importance-weighted-estimator

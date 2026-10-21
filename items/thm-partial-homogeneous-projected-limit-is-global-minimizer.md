@@ -2,7 +2,7 @@
 id: thm-partial-homogeneous-projected-limit-is-global-minimizer
 kind: theorem
 title: A partially homogeneous signed projection limit is a minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 13

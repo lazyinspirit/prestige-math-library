@@ -2,7 +2,7 @@
 id: thm-finite-sample-representer-theorem-in-an-rkhs
 kind: theorem
 title: Finite-sample representer theorem when a minimizer exists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

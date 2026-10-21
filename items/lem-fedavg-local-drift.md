@@ -2,7 +2,7 @@
 id: lem-fedavg-local-drift
 kind: lemma
 title: Client drift under FedAvg gradient dissimilarity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

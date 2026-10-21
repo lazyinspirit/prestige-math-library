@@ -2,7 +2,7 @@
 id: lem-local-gaussian-characteristic-function-is-global
 kind: lemma
 title: "A characteristic function that is Gaussian near zero is globally Gaussian"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 provenance:

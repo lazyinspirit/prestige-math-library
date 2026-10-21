@@ -2,7 +2,7 @@
 id: ex-linear-gaussian-reversible-additive-noise-model
 kind: example
 title: "A reversible linear-Gaussian additive-noise model"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

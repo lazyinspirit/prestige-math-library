@@ -2,7 +2,7 @@
 id: thm-finite-description-compression-bound
 kind: theorem
 title: "Finite-description compression bound for trained classifiers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

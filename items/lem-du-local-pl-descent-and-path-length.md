@@ -2,7 +2,7 @@
 id: lem-du-local-pl-descent-and-path-length
 kind: lemma
 title: "Local Gram positivity and loss smoothness give confined gradient descent"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 pipeline_run: machine-learning-all-101-2026-10-19

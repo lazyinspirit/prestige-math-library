@@ -1,7 +1,7 @@
 ---
 page: mean-field-training-and-feature-learning
 title: Mean-field training and feature learning
-status: draft
+status: published
 category: machine-learning
 companion: mean-field-training-and-feature-learning-examples
 requires:

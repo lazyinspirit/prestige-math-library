@@ -2,7 +2,7 @@
 id: ex-sgd-convex-stability-linear-in-steps
 kind: example
 title: The convex constant-step stability bound is linear in the step count
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 4

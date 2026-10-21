@@ -2,7 +2,7 @@
 id: ex-fractional-gaussian-mixture-responsibilities
 kind: example
 title: "A tied observation keeps fractional Gaussian responsibilities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-gaussian-normal-prior-posterior
 kind: lemma
 title: Gaussian normal-prior posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: adversarial-robustness-and-robust-risk

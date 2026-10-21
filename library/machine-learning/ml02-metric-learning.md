@@ -1,7 +1,7 @@
 ---
 page: ml02-metric-learning
 title: Nearest neighbors and learned metrics
-status: draft
+status: published
 items:
   - def-mahalanobis-pseudometric
   - lem-symmetric-matrix-frobenius-isometry

@@ -2,7 +2,7 @@
 id: def-loss-discrepancy-between-domains
 kind: definition
 title: "Loss discrepancy between domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 3

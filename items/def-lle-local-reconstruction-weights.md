@@ -2,7 +2,7 @@
 id: def-lle-local-reconstruction-weights
 kind: definition
 title: "Minimum-norm affine reconstruction weights for a finite LLE neighborhood"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19

@@ -2,7 +2,7 @@
 id: thm-mean-field-particle-time-limits-interchange
 kind: theorem
 title: Particle number and training time limits interchange qualitatively
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 13

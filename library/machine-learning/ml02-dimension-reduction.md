@@ -1,7 +1,7 @@
 ---
 page: ml02-dimension-reduction
 title: "PCA, kernel PCA, MDS, and manifold embeddings"
-status: draft
+status: published
 items:
   - def-finite-centering-matrix
   - lem-ky-fan-trace-maximization

@@ -2,7 +2,7 @@
 id: def-empirical-decision-tree
 kind: definition
 title: "Empirical axis-aligned binary decision trees"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

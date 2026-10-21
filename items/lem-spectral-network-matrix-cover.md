@@ -2,7 +2,7 @@
 id: lem-spectral-network-matrix-cover
 kind: lemma
 title: "A proper matrix-product cover from the mixed (2,1) norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 1

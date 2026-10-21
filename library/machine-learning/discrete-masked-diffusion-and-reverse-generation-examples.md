@@ -1,7 +1,7 @@
 ---
 page: discrete-masked-diffusion-and-reverse-generation-examples
 title: Discrete masked diffusion and finite-state reverse generation — Examples
-status: draft
+status: published
 requires:
   - discrete-masked-diffusion-and-reverse-generation
 items: []

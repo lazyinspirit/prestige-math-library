@@ -2,7 +2,7 @@
 id: ex-marchenko-pastur-law-and-edges-at-aspect-one-quarter
 kind: example
 title: "Marchenko–Pastur law and edges below aspect one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 dependency_level: 6

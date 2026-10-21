@@ -2,7 +2,7 @@
 id: lem-stopped-uniformly-elliptic-semimartingale-occupation-absolute-continuity
 kind: lemma
 title: Stopped occupation absolute continuity for uniformly elliptic Ito processes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: machine-learning-all-101-2026-10-19
 page: anderson-reverse-time-diffusion

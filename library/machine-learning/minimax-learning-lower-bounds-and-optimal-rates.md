@@ -1,7 +1,7 @@
 ---
 page: minimax-learning-lower-bounds-and-optimal-rates
 title: "Minimax learning lower bounds and optimal rates"
-status: draft
+status: published
 items:
   - lem-bernoulli-two-point-testing-for-vc-lower-bound
   - lem-bounded-variable-lower-tail-from-mean
