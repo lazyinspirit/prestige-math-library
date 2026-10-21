@@ -1,0 +1,205 @@
+{
+  "group": "q",
+  "batches": ["51"],
+  "pages_read": [
+    "inverse-problem-benchmarking-and-shift",
+    "inverse-problem-benchmarking-and-shift-examples"
+  ],
+  "items_read": [
+    "def-ip-benchmark-risk-and-compute-budget",
+    "rem-ip-inversebench-scoped-findings",
+    "ex-ip-inversebench-first-born-scattering",
+    "ex-ip-inversebench-multicoil-mri",
+    "ex-ip-inversebench-black-hole-imaging",
+    "ex-ip-inversebench-full-waveform-inversion",
+    "ex-ip-inversebench-navier-stokes",
+    "ex-ip-inversebench-prior-shift",
+    "ex-ip-inversebench-solver-invalid-iterate"
+  ],
+  "conventions": [
+    {
+      "convention": "Training, validation, and test laws are separately declared. Test risk uses the specified joint input-target law and a nonnegative product-measurable loss; no train-to-test inequality is implicit.",
+      "fixed_by": "def-ip-benchmark-risk-and-compute-budget",
+      "matters_for": [
+        "rem-ip-inversebench-scoped-findings",
+        "ex-ip-inversebench-prior-shift"
+      ]
+    },
+    {
+      "convention": "Failed admissibility tests and solver calls remain recorded. The evaluation protocol determines their contribution to numerical aggregates; no universal failure score or CFL threshold is prescribed.",
+      "fixed_by": "def-ip-benchmark-risk-and-compute-budget",
+      "matters_for": [
+        "ex-ip-inversebench-full-waveform-inversion",
+        "ex-ip-inversebench-navier-stokes",
+        "ex-ip-inversebench-solver-invalid-iterate"
+      ]
+    },
+    {
+      "convention": "First-Born scattering follows the pinned implementation's fixed incident field. The contrast array is real, and the displayed sensor formula conjugates the incident field, giving a real-linear map.",
+      "fixed_by": "ex-ip-inversebench-first-born-scattering",
+      "matters_for": [
+        "rem-ip-inversebench-scoped-findings",
+        "ex-ip-inversebench-first-born-scattering"
+      ]
+    },
+    {
+      "convention": "MRI linearity holds with the Fourier, subsampling, and per-slice estimated sensitivity operators fixed. Reported reconstruction metrics use magnitude-MVUE references; raw measurement noise is not assumed Gaussian.",
+      "fixed_by": "ex-ip-inversebench-multicoil-mri",
+      "matters_for": [
+        "ex-ip-inversebench-multicoil-mri",
+        "ex-ip-inversebench-prior-shift"
+      ]
+    },
+    {
+      "convention": "VLBI closure phase uses the oriented cycle (a,b), (b,c), (c,a), conjugating oppositely stored baselines. The ordered log-amplitude ratio uses numerator baselines (a,b), (c,d) and denominator baselines (a,d), (b,c). The formulas require the stated nonzero visibility conditions.",
+      "fixed_by": "ex-ip-inversebench-black-hole-imaging",
+      "matters_for": [
+        "ex-ip-inversebench-black-hole-imaging"
+      ]
+    },
+    {
+      "convention": "Periodic physical vorticity has zero spatial mean. The numerical scalar state may retain a constant offset; only its mean-zero part is identified with curl. Five-time-unit seed evolution prepares the dataset and is separate from the inversion horizon.",
+      "fixed_by": "ex-ip-inversebench-navier-stokes",
+      "matters_for": [
+        "ex-ip-inversebench-navier-stokes"
+      ]
+    },
+    {
+      "convention": "InverseBench comparisons and prior-shift observations are empirical for the named datasets, methods, solvers, tuning, and hardware; they establish no universal ranking, calibration, posterior exactness, or robustness theorem.",
+      "fixed_by": "rem-ip-inversebench-scoped-findings",
+      "matters_for": [
+        "ex-ip-inversebench-first-born-scattering",
+        "ex-ip-inversebench-multicoil-mri",
+        "ex-ip-inversebench-black-hole-imaging",
+        "ex-ip-inversebench-full-waveform-inversion",
+        "ex-ip-inversebench-navier-stokes",
+        "ex-ip-inversebench-prior-shift",
+        "ex-ip-inversebench-solver-invalid-iterate"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-ip-benchmark-risk-and-compute-budget",
+      "statement": "A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.",
+      "used_by": [
+        "rem-ip-inversebench-scoped-findings",
+        "ex-ip-inversebench-first-born-scattering",
+        "ex-ip-inversebench-multicoil-mri",
+        "ex-ip-inversebench-black-hole-imaging",
+        "ex-ip-inversebench-full-waveform-inversion",
+        "ex-ip-inversebench-navier-stokes",
+        "ex-ip-inversebench-prior-shift",
+        "ex-ip-inversebench-solver-invalid-iterate"
+      ]
+    },
+    {
+      "id": "rem-ip-inversebench-scoped-findings",
+      "statement": "These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.",
+      "used_by": [
+        "ex-ip-inversebench-first-born-scattering",
+        "ex-ip-inversebench-multicoil-mri",
+        "ex-ip-inversebench-black-hole-imaging",
+        "ex-ip-inversebench-full-waveform-inversion",
+        "ex-ip-inversebench-navier-stokes",
+        "ex-ip-inversebench-prior-shift",
+        "ex-ip-inversebench-solver-invalid-iterate"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-loss-function-and-risk",
+      "used_for": "Expected nonnegative loss and the inclusion of deterministic rules as point-mass randomized rules, through the inverse-risk supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel requirements for observation laws and randomized reconstruction rules.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of randomized conditional risk. Its finite-kernel hypothesis applies to the supplied probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Specified sigma-algebras on data, targets, and training variables.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint evaluation laws, product-measurable losses, and measurable coverage events.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Training, evaluation, noise, and prior laws as probability measures.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of reconstruction rules, targets, forward maps, and diagnostics.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "learned-reconstruction-targets-and-risk",
+      "faithful": true,
+      "note": "The estimator and inverse-risk definitions support deterministic rules, randomized kernels, and distinct fitting/evaluation laws. The benchmark preserves extended nonnegative risk and asserts no generalization bound."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "neural-operator-eit-inverse-map",
+      "faithful": true,
+      "note": "Contextual prerequisite only: the assigned items invoke no EIT approximation theorem. They do not promote continuum compact-noise existence to training, finite-sample, or calibration guarantees."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "unrolled-inverse-solvers-and-generalization",
+      "faithful": true,
+      "note": "No finite-unrolling convergence or shifted-risk guarantee is inferred. This agrees with the supplier's explicit finite-depth and distribution-shift limitations."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "plug-and-play-mmse-regularization",
+      "faithful": true,
+      "note": "No exact-MMSE stationarity result is applied to arbitrary trained denoisers or diffusion-prior benchmark methods. The supplier's exact-map and objective hypotheses remain distinct from empirical comparisons."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "score-diffusion-inverse-solvers",
+      "faithful": true,
+      "note": "The cited score definition distinguishes exact conditional scores from learned fields and plug-in approximations. The benchmark remark claims neither posterior exactness nor calibration."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "statistical-inverse-model-misspecification",
+      "faithful": true,
+      "note": "Operator mismatch, noise-law mismatch, prior-support mismatch, and empirical source-family shift remain distinct. Within-source MRI evaluation is explicitly not equality of population laws."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "manifold-and-physical-constraint-inversion",
+      "faithful": true,
+      "note": "Contextual prerequisite only: no constrained-identifiability or manifold-optimization theorem is used. The benchmark independently declares a measurable admissible set without attributing stronger properties to this supplier."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "numerical-pde-inversion-and-adjoint-error-control",
+      "faithful": true,
+      "note": "The admissibility contract is used for finite, model-specific tests and visible failure status. The examples infer no universal CFL threshold, residual certificate, or solver convergence theorem."
+    },
+    {
+      "from": "open-frontiers-in-learned-inverse-problems",
+      "to": "inverse-problem-benchmarking-and-shift",
+      "faithful": true,
+      "note": "The downstream page lists the benchmark as context. Its two open-problem items do not cite benchmark observations as mathematical premises or claim benchmark-derived coverage or sample-complexity bounds."
+    }
+  ]
+}

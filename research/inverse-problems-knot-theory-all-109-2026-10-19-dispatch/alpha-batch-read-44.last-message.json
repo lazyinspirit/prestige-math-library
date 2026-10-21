@@ -1,0 +1,255 @@
+{
+  "group": "o",
+  "batches": ["44"],
+  "pages_read": [
+    "numerical-pde-inversion-and-adjoint-error-control",
+    "numerical-pde-inversion-and-adjoint-error-control-examples"
+  ],
+  "items_read": [
+    "def-ip-pde-solver-admissibility-contract",
+    "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+    "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+    "prop-ip-discrete-adjoint-gradient-and-residual-status",
+    "alg-ip-finite-element-pde-tikhonov",
+    "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+    "ex-ip-pde-cfl-invalid-iterate",
+    "cex-ip-pde-biased-under-solved-adjoint-gradient",
+    "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+  ],
+  "conventions": [
+    {
+      "convention": "All discrete coefficient spaces use standard real Euclidean inner products. The adjoint solves (D_u R)^T p = ∇_u J, and the reduced gradient is ∇_q J − (D_q R)^T p.",
+      "fixed_by": "def-ip-pde-solver-admissibility-contract",
+      "matters_for": [
+        "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+        "prop-ip-discrete-adjoint-gradient-and-residual-status",
+        "cex-ip-pde-biased-under-solved-adjoint-gradient"
+      ]
+    },
+    {
+      "convention": "The parameter set is nonempty, closed and convex; the state branch is continuously differentiable on an open neighborhood, with an invertible state Jacobian at admissible parameters. Exact projection is a supplied finite-return routine.",
+      "fixed_by": "def-ip-pde-solver-admissibility-contract",
+      "matters_for": [
+        "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+        "prop-ip-discrete-adjoint-gradient-and-residual-status",
+        "alg-ip-finite-element-pde-tikhonov"
+      ]
+    },
+    {
+      "convention": "The adjoint residual certificate concerns the equation evaluated at the exact state. Algebraic residuals require separate stability estimates to bound state and adjoint errors; mesh error requires a separate certificate.",
+      "fixed_by": "def-ip-pde-solver-admissibility-contract",
+      "matters_for": [
+        "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+        "prop-ip-discrete-adjoint-gradient-and-residual-status",
+        "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+      ]
+    },
+    {
+      "convention": "The outer index runs from 0 through N_iter inclusive. Stationarity is checked before discrepancy. L is merely positive, and accepted trials satisfy upper(trial objective) ≤ lower(current objective).",
+      "fixed_by": "alg-ip-finite-element-pde-tikhonov",
+      "matters_for": [
+        "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+        "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+      ]
+    },
+    {
+      "convention": "The mesh-error example assumes Countable Choice for weak-state well-posedness and zero-boundary conformity; its explicit finite-dimensional calculations use no choice principle.",
+      "fixed_by": "ex-ip-finite-element-mesh-error-at-zero-solve-residual",
+      "matters_for": [
+        "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-ip-pde-solver-admissibility-contract",
+      "statement": "A continuously differentiable finite-element residual and observation model supplies a continuously differentiable state branch, invertible admissible state Jacobians, exact Euclidean projections, certified state/adjoint and derivative-data bounds, objective intervals containing the exact discrete objective, and finite-return routines. Algebraic residual certificates do not imply a mesh certificate.",
+      "used_by": [
+        "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+        "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+        "prop-ip-discrete-adjoint-gradient-and-residual-status",
+        "alg-ip-finite-element-pde-tikhonov",
+        "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+        "ex-ip-pde-cfl-invalid-iterate",
+        "cex-ip-pde-biased-under-solved-adjoint-gradient",
+        "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+      ]
+    },
+    {
+      "id": "prop-ip-discrete-adjoint-gradient-and-residual-status",
+      "statement": "Under the stated certified error and derivative bounds, ε_g = (L_J,u + L_R,u P)η_u + M_q η_p and ε_F = L_G,u η_u bound the gradient and forward errors. For L > 0, the exact projected-gradient norm is at most its computed counterpart plus ε_g, and the exact discrete data residual is at most its computed counterpart plus ε_F.",
+      "used_by": [
+        "alg-ip-finite-element-pde-tikhonov",
+        "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+        "cex-ip-pde-biased-under-solved-adjoint-gradient"
+      ]
+    },
+    {
+      "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+      "statement": "For the stated continuously differentiable finite-dimensional residual, observation and state maps, with invertible state Jacobian at q, the unique adjoint gives ∇Φ(q) = ∇_q J(q,S(q)) − (D_q R(q,S(q)))^T p.",
+      "used_by": [
+        "prop-ip-discrete-adjoint-gradient-and-residual-status",
+        "alg-ip-finite-element-pde-tikhonov",
+        "cex-ip-pde-biased-under-solved-adjoint-gradient",
+        "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+      ]
+    },
+    {
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "statement": "The finite-budget procedure checks admissibility, validates solver certificates, tests certified discrete projected stationarity and discrepancy, and searches finitely many projected trials using certified objective intervals.",
+      "used_by": [
+        "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+        "ex-ip-pde-cfl-invalid-iterate",
+        "cex-ip-pde-biased-under-solved-adjoint-gradient",
+        "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-matching-affine-simplicial-meshes",
+      "used_for": "Finite matching affine mesh hypotheses and the two four-triangle example geometries.",
+      "opened": true
+    },
+    {
+      "id": "def-reference-finite-element-and-unisolvent-dofs",
+      "used_for": "Coefficient identification and unique nodal shape functions.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Coefficient norms, bilinearity and transpose pairings.",
+      "opened": true
+    },
+    {
+      "id": "thm-riesz-representation-in-finite-dimensions",
+      "used_for": "Unique Euclidean representatives of derivative functionals.",
+      "opened": true
+    },
+    {
+      "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "used_for": "Existence and uniqueness of the discrete projections.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating the state identity and reduced objective.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Inverse-residual and derivative-matrix error estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-projection-onto-closed-convex-set-is-nonexpansive",
+      "used_for": "Transferring gradient error to projected-gradient residual error.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean triangle inequalities in the certificate proposition.",
+      "opened": true
+    },
+    {
+      "id": "thm-discrete-adjoint-gradient-recursion",
+      "used_for": "Contextual comparison with exact differentiation of finite state-step graphs.",
+      "opened": true
+    },
+    {
+      "id": "thm-elliptic-adjoint-reduced-gradient",
+      "used_for": "Contextual continuous elliptic adjoint comparison, retaining its separate hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "lem-fem-control-gradient-residual-bound",
+      "used_for": "Contextual continuous-objective Strang certificate, explicitly distinguished from algebraic discrete-model bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The choice assumption in the mesh-error example.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-elliptic-pde-constrained-control-problem",
+      "used_for": "The coercive weak-state framework used by the mesh-error example.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+      "used_for": "Existence and uniqueness of the example's continuous weak state under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+      "used_for": "Membership of the example's piecewise polynomial w = φ² in H¹₀.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Boundedness of the example's control operator and observation.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "concern": "Step 7 says: “If evaluation fails because a required linear solve fails its contract, return `linear-solve-failed`; if it only exhausts the finite evaluation budget, return `budget-exhausted`.” The model contract permits nonlinear state equations and objective-evaluation failure when a required state/adjoint solve fails its contract. A trial evaluation can therefore fail because a nonlinear state solve fails, with neither budget exhausted and no linear-solve failure. Neither stated branch handles that permitted outcome, and the subsequent acceptance comparison requires an interval that was not returned. This leaves the general procedure undefined on an allowed failure and undermines the universal termination assertion in thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-operator-norm",
+      "finding": "The Definition contains “T:X→Y be bounded in the sense of [[def-bounded-linear-operator]]” and later “([[cor-cauchy-reals-lub-complete]])”. These inline hyperlinks interrupt the complete Definition, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-linear-elliptic-pde-constrained-control-problem",
+      "finding": "The Definition contains inline hyperlinks including “in the W^{1,2} norm of [[def-wkp-zero-as-a-sobolev-closure]]” and “the pointwise box of [[def-pde-box-control-set]]”. The complete Definition is therefore interrupted by hyperlinks instead of placing them in a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+      "finding": "The Statement begins “Assume Countable Choice and the setting of [[def-linear-elliptic-pde-constrained-control-problem]].” This hyperlink occurs inside the Statement rather than in a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-elliptic-adjoint-reduced-gradient",
+      "finding": "The Statement begins “Assume Countable Choice and the elliptic state setting of [[def-parameterized-elliptic-variational-problem]] and [[lem-elliptic-state-map-c1-under-uniform-coercivity]].” Both hyperlinks interrupt the Statement, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-fem-control-gradient-residual-bound",
+      "finding": "The Statement contains “Assume the continuous problem of [[def-linear-elliptic-pde-constrained-control-problem]]” and later cites “[[thm-first-strang-lemma-for-conforming-perturbed-galerkin]]” inline. These hyperlinks occur before the complete Statement ends rather than in a following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "numerical-pde-inversion-and-adjoint-error-control",
+      "to": "nonlinear-inverse-problems-and-tangential-cone-conditions",
+      "faithful": true,
+      "note": "The actual use is the open-domain nonlinear forward-map interface. No tangential-cone condition or convergence consequence is inferred."
+    },
+    {
+      "from": "numerical-pde-inversion-and-adjoint-error-control",
+      "to": "nonlinear-tikhonov-existence-and-stability",
+      "faithful": true,
+      "note": "Consumers use the half-squared misfit plus α/2 reference penalty definition. They explicitly disclaim minimizer existence and iterative convergence."
+    },
+    {
+      "from": "numerical-pde-inversion-and-adjoint-error-control",
+      "to": "operator-approximation-and-regularization-error",
+      "faithful": true,
+      "note": "The separate algebraic and model-error channels are respected. The compact-linear error decomposition is not invoked as a generic nonlinear residual-to-state estimate."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "numerical-pde-inversion-and-adjoint-error-control",
+      "faithful": true,
+      "note": "The benchmark definition records solver budgets, admissibility and failures; its remark treats CFL conditions as model-specific and makes no universal stability claim."
+    }
+  ]
+}

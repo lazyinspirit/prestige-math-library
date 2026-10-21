@@ -1,0 +1,143 @@
+{
+  "group": "b",
+  "batches": ["6"],
+  "pages_read": [
+    "factorized-and-composite-linear-inversion",
+    "factorized-and-composite-linear-inversion-examples"
+  ],
+  "items_read": [
+    "def-ip-composite-double-regularization",
+    "thm-ip-double-discrepancy-conditional-convergence",
+    "op-ip-optimal-composite-discrepancy-rate",
+    "ex-ip-composite-linear-inversion-commuting-diagonal",
+    "cex-ip-composite-pseudoinverse-factorization-fails"
+  ],
+  "conventions": [
+    {
+      "convention": "The forward factorization is A = G ∘ F; reconstruction applies the G-regularizer first and the F-regularizer second. No general pseudoinverse product identity is assumed.",
+      "fixed_by": "def-ip-composite-double-regularization",
+      "matters_for": [
+        "thm-ip-double-discrepancy-conditional-convergence",
+        "op-ip-optimal-composite-discrepancy-rate",
+        "ex-ip-composite-linear-inversion-commuting-diagonal",
+        "cex-ip-composite-pseudoinverse-factorization-fails"
+      ]
+    },
+    {
+      "convention": "The convergence theorem assumes Countable Choice and a common positive singular system, with 0 < λ_j, μ_j ≤ 1 and the middle range-closure equality. Pseudoinverse compatibility is established for the specified exact datum under these hypotheses.",
+      "fixed_by": "thm-ip-double-discrepancy-conditional-convergence",
+      "matters_for": [
+        "thm-ip-double-discrepancy-conditional-convergence",
+        "op-ip-optimal-composite-discrepancy-rate"
+      ]
+    },
+    {
+      "convention": "The source condition is x† = |A|^ν w = (A*A)^(ν/2)w, with ||w|| ≤ ρ, ρ > 0, ν₀ > 2, and 1 < ν ≤ ν₀ − 1. Qualification is expressed in singular-value powers s, corresponding to spectral powers s/2.",
+      "fixed_by": "thm-ip-double-discrepancy-conditional-convergence",
+      "matters_for": [
+        "thm-ip-double-discrepancy-conditional-convergence",
+        "op-ip-optimal-composite-discrepancy-rate"
+      ]
+    },
+    {
+      "convention": "Both parameter sequences start at index 1 and have successive ratios in [θ,1). Selection uses the first qualifying residual index. Convergence is conditional on both indices existing for sufficiently small positive noise levels; exact data are nonzero.",
+      "fixed_by": "thm-ip-double-discrepancy-conditional-convergence",
+      "matters_for": [
+        "thm-ip-double-discrepancy-conditional-convergence",
+        "op-ip-optimal-composite-discrepancy-rate"
+      ]
+    },
+    {
+      "convention": "The open problem concerns deterministic worst-case error for the specified two-stage stopping rule, with factors, filters, parameter sequences, and radius fixed; it does not assert optimality among all reconstruction procedures.",
+      "fixed_by": "op-ip-optimal-composite-discrepancy-rate",
+      "matters_for": ["op-ip-optimal-composite-discrepancy-rate"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-ip-composite-double-regularization",
+      "statement": "For compact linear maps F:X→Y and G:Y→Z, set A:=G∘F. For spectral regularization families and a parameter rule (α,γ):(0,∞)×Z→(0,∞)², define Tδ(zδ):=R^F_{γ(δ,zδ)}(R^G_{α(δ,zδ)}zδ). First regularize G, then F; no general identity A†=F†G† is part of the definition.",
+      "used_by": [
+        "thm-ip-double-discrepancy-conditional-convergence",
+        "op-ip-optimal-composite-discrepancy-rate",
+        "ex-ip-composite-linear-inversion-commuting-diagonal",
+        "cex-ip-composite-pseudoinverse-factorization-fails"
+      ]
+    },
+    {
+      "id": "thm-ip-double-discrepancy-conditional-convergence",
+      "statement": "Under Countable Choice, the stated normalized common singular system, source condition x†=|A|^νw with ||w||≤ρ and Ax†≠0, filter norm and qualification bounds, threshold inequalities, and first-crossing parameter rules, any sequence δ↓0 on which both selected indices eventually exist satisfies, for sufficiently small δ, ||x†−R^F_γ R^G_α zδ||≤C₁ρ^(1/(ν+1))δ^(ν/(ν+1))+C₂ρ^(2/(ν+1))δ^((ν−1)/(ν+1)), with constants independent of δ and ρ. For fixed ρ the reconstruction converges to x†.",
+      "used_by": ["op-ip-optimal-composite-discrepancy-rate"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-compact-spectral-filter-and-qualification",
+      "used_for": "Compact spectral multipliers, Tikhonov reconstruction, residual filters, and translation between powers of H*H and singular-value powers.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption in the convergence theorem and its Hilbert-space spectral prerequisites.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space-adjoint",
+      "used_for": "The adjoint identity, complex inner-product convention, and derivation of the composite singular system.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition-for-compact-operators",
+      "used_for": "Norm-convergent singular expansions, kernel complements, and positive-singular-value indexing in the convergence theorem and interpolation supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "The four finite-matrix Penrose equations in both assigned matrix verifications.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Identifying the explicitly verified matrices as the unique pseudoinverses in both assigned matrix verifications.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-compact-spectral-filter-and-qualification",
+      "finding": "In def-compact-spectral-filter-and-qualification, the Definition contains inline supplier links, including “By [[lem-compact-gram-operator-is-positive-and-has-kernel]], S is compact” and “where the finite-subset net converges in norm by [[lem-compact-spectral-multiplier-is-well-defined]].” These interrupt the complete Definition and have no immediately following Definition references section. This violates the supplied uninterrupted-statement instruction; the mathematical multiplier and qualification claims checked here are unaffected.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-hilbert-space-adjoint",
+      "finding": "In def-hilbert-space-adjoint, the Definition embeds supplier hyperlinks, including “bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]])” and “By Riesz representation ([[thm-riesz-representation-for-hilbert-space]])”. The complete Definition is therefore interrupted by hyperlinks rather than followed by a Definition references section, contrary to the supplied editorial instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-singular-value-decomposition-for-compact-operators",
+      "finding": "In thm-singular-value-decomposition-for-compact-operators, the Statement begins “Assume the Axiom of Countable Choice ([[def-countable-choice]]).” It also embeds links for Hilbert spaces, compact operators, the absolute-value definition, and dimension before completing its four conclusions. These links interrupt the Statement and are not moved into an immediately following Statement references section, contrary to the supplied editorial instruction.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "factorized-and-composite-linear-inversion",
+      "to": "linear-operators-pseudoinverses-and-picard-criteria",
+      "faithful": true,
+      "note": "The compact inverse-model and Hilbert Moore–Penrose interfaces match the consumer's scalar-field, range-domain, and minimum-norm conventions. The consumer proves its special compatible factorization and does not infer a general pseudoinverse product law. The prerequisite page makes no reverse assertion about composite inversion."
+    },
+    {
+      "from": "factorized-and-composite-linear-inversion",
+      "to": "deterministic-source-conditions-and-optimal-recovery",
+      "faithful": true,
+      "note": "The source-power convention and interpolation inequality agree exactly: x=|K|^νw implies ||x||≤||Kx||^(ν/(ν+1))||w||^(1/(ν+1)). The convergence proof supplies the required source representations for both the first-stage bias and composite bias. No reverse dependency or stronger supplier assertion is introduced."
+    },
+    {
+      "from": "factorized-and-composite-linear-inversion",
+      "to": "parameter-choice-and-bakushinskii-veto",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. The composite rules explicitly receive δ, whereas the veto concerns deterministic noise-level-free rules with convergence over full admissible error balls. Neither page claims that the veto prohibits the stated conditional, source-restricted composite convergence."
+    }
+  ]
+}

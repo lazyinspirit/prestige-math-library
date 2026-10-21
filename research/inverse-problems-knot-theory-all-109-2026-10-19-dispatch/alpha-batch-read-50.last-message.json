@@ -1,0 +1,177 @@
+{
+  "group": "q",
+  "batches": ["50"],
+  "pages_read": [
+    "score-diffusion-inverse-solvers",
+    "score-diffusion-inverse-solvers-examples"
+  ],
+  "items_read": [
+    "lem-ip-conditional-score-and-tweedie-identities",
+    "def-ip-diffusion-prior-score-and-measurement-score",
+    "alg-ip-measurement-guided-diffusion-reconstruction",
+    "prop-ip-plugged-in-measurement-score-is-approximate",
+    "ex-ip-finite-score-guidance-laws-converge-without-finite-exactness",
+    "ex-ip-diffusion-inverse-method-families-and-exactness"
+  ],
+  "conventions": [
+    {
+      "convention": "Gaussian noising is Xσ = X0 + σZ with σ > 0, Z standard Gaussian and independent of X0. The prior may be singular and need not have bounded support.",
+      "fixed_by": "lem-ip-conditional-score-and-tweedie-identities",
+      "matters_for": [
+        "def-ip-diffusion-prior-score-and-measurement-score",
+        "alg-ip-measurement-guided-diffusion-reconstruction",
+        "prop-ip-plugged-in-measurement-score-is-approximate",
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    },
+    {
+      "convention": "The fixed-observation likelihood in the exact conditional-score identity is bounded, strictly positive and Borel, relative to a fixed sigma-finite observation measure; observation and noising noise are conditionally independent given the clean state.",
+      "fixed_by": "lem-ip-conditional-score-and-tweedie-identities",
+      "matters_for": [
+        "def-ip-diffusion-prior-score-and-measurement-score",
+        "alg-ip-measurement-guided-diffusion-reconstruction",
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    },
+    {
+      "convention": "Predictors are Borel and square-integrable under the smoothed marginal. Denoising-risk minimization additionally assumes a finite prior second moment; score-risk minimization does not. Uniqueness is modulo smoothed-marginal almost-everywhere equality.",
+      "fixed_by": "lem-ip-conditional-score-and-tweedie-identities",
+      "matters_for": [
+        "def-ip-diffusion-prior-score-and-measurement-score"
+      ]
+    },
+    {
+      "convention": "The measurement score differentiates the likelihood averaged over the clean-state conditional law; evaluating the likelihood at the conditional mean is a separate approximation.",
+      "fixed_by": "def-ip-diffusion-prior-score-and-measurement-score",
+      "matters_for": [
+        "prop-ip-plugged-in-measurement-score-is-approximate",
+        "alg-ip-measurement-guided-diffusion-reconstruction",
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    },
+    {
+      "convention": "A finite schedule runs from k = N down to 1. Initialization, correction, sampling and projection have explicit failure branches and finite budgets; completed output is not automatically posterior-exact.",
+      "fixed_by": "alg-ip-measurement-guided-diffusion-reconstruction",
+      "matters_for": [
+        "ex-ip-finite-score-guidance-laws-converge-without-finite-exactness",
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    },
+    {
+      "convention": "The finite-law sequence starts at m = 1. Weak convergence concerns bounded continuous test functions and does not assert equality at any finite index.",
+      "fixed_by": "ex-ip-finite-score-guidance-laws-converge-without-finite-exactness",
+      "matters_for": [
+        "ex-ip-finite-score-guidance-laws-converge-without-finite-exactness"
+      ]
+    },
+    {
+      "convention": "Finite reverse-kernel exactness requires the supplied terminal marginal and adjacent reverse conditional kernels, no projection, and almost-sure success. A realized finite particle measure is distinguished from the marginal law of a selected particle.",
+      "fixed_by": "ex-ip-diffusion-inverse-method-families-and-exactness",
+      "matters_for": [
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-ip-conditional-score-and-tweedie-identities",
+      "statement": "For any Borel probability prior on R^d and σ > 0, Gaussian convolution has a positive continuously differentiable density and the displayed probability kernel is the clean-state conditional law. Its score is (mσ(x) − x)/σ². With finite prior second moment, mσ uniquely minimizes squared denoising risk; the score uniquely minimizes the stated score risk without that extra moment assumption. Under the stated bounded positive likelihood and conditional-independence hypotheses, the conditional score equals the prior score plus the logarithmic derivative of the averaged likelihood.",
+      "used_by": [
+        "def-ip-diffusion-prior-score-and-measurement-score",
+        "alg-ip-measurement-guided-diffusion-reconstruction",
+        "prop-ip-plugged-in-measurement-score-is-approximate",
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    },
+    {
+      "id": "alg-ip-measurement-guided-diffusion-reconstruction",
+      "statement": "The procedure initializes from the supplied terminal reference law, applies the declared correction and reverse probability kernel for k = N,...,1, applies any declared projection and admissibility check, and returns the first failure status or completed x0. It makes no posterior-exactness claim unless terminal, transition and projection conditions are separately certified.",
+      "used_by": [
+        "ex-ip-finite-score-guidance-laws-converge-without-finite-exactness",
+        "ex-ip-diffusion-inverse-method-families-and-exactness"
+      ]
+    },
+    {
+      "id": "def-ip-diffusion-prior-score-and-measurement-score",
+      "statement": "The diffusion prior score is the gradient of the log smoothed prior density; the measurement score is the gradient of the log likelihood averaged over the clean-state conditional law. Their sum is the conditional score. Likelihood evaluated at the clean-state conditional mean is a plug-in approximation.",
+      "used_by": [
+        "alg-ip-measurement-guided-diffusion-reconstruction",
+        "prop-ip-plugged-in-measurement-score-is-approximate",
+        "ex-ip-diffusion-inverse-method-families-and-exactness",
+        "rem-ip-inversebench-scoped-findings"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel domains and measurable sets in the Gaussian smoothing construction.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel requirements for the conditional law and reverse transitions.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total mass one of the prior and normalized conditional laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Nonnegative section integrals, normalization, disintegration identities and risk integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-convergence-of-borel-probability-measures",
+      "used_for": "The bounded-continuous-test-function verification of convergence of the explicit two-atom output laws.",
+      "opened": true
+    },
+    {
+      "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "used_for": "The invariance identity used to preserve posterior marginals when the chain starts in the posterior law.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "finding": "The published item's Definition contains inline hyperlinks, including “([[def-measure-kernel-and-probability-kernel]])”, “([[def-probability-measure]])” and “see [[thm-invariant-initial-law-makes-the-chain-stationary]]”, before the complete definition ends. Further links occur in its countable-state specialization. These violate the required uninterrupted-definition presentation and are not collected in an immediately following Definition references section. The invariance identity used by this batch is mathematically faithful.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "score-diffusion-inverse-solvers",
+      "to": "learned-reconstruction-targets-and-risk",
+      "faithful": true,
+      "note": "The score page preserves the distinction between point estimators, score fields and posterior sampling. Its finite-dimensional Gaussian risk proof is local and does not import the Hilbert proposition without its AC and moment hypotheses."
+    },
+    {
+      "from": "score-diffusion-inverse-solvers",
+      "to": "unrolled-inverse-solvers-and-generalization",
+      "faithful": true,
+      "note": "The finite reverse-kernel interface and explicit finite-law example make no inference from finite evaluability to convergence, risk transfer or posterior exactness. The prerequisite is contextual; no stronger unrolling theorem is cited."
+    },
+    {
+      "from": "score-diffusion-inverse-solvers",
+      "to": "plug-and-play-mmse-regularization",
+      "faithful": true,
+      "note": "The Gaussian posterior-mean identities agree after accounting for the PnP lemma's omitted Gaussian normalizing constant. The score page does not import its nondegeneracy-dependent inverse/proximal conclusions or turn PnP stationarity into posterior sampling."
+    },
+    {
+      "from": "inverse-problem-benchmarking-and-shift",
+      "to": "score-diffusion-inverse-solvers",
+      "faithful": true,
+      "note": "The InverseBench remark cites the distinction between exact scores and learned or plug-in approximations and expressly disclaims posterior-exactness and universal performance guarantees."
+    },
+    {
+      "from": "open-frontiers-in-learned-inverse-problems",
+      "to": "score-diffusion-inverse-solvers",
+      "faithful": true,
+      "note": "The coverage problem independently specifies variance-preserving noising and its reverse Euler chain. It does not identify that convention with additive Gaussian noising or claim exactness from a learned score or finite discretization. This is a contextual page prerequisite rather than a logical use of the batch's additive-noising lemma."
+    }
+  ]
+}

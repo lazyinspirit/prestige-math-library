@@ -1,0 +1,216 @@
+{
+  "group": "j",
+  "batches": [
+    "29"
+  ],
+  "pages_read": [
+    "regularized-gauss-newton-and-levenberg-marquardt",
+    "regularized-gauss-newton-and-levenberg-marquardt-examples"
+  ],
+  "items_read": [
+    "def-ip-product-tangential-cone-condition",
+    "lem-ip-lm-product-condition-implies-range-approximation",
+    "alg-ip-regularized-levenberg-marquardt",
+    "lem-ip-lm-step-existence-and-residual-forcing",
+    "lem-ip-lm-fejer-decrease-and-parameter-bound",
+    "thm-ip-lm-local-discrepancy-stopping",
+    "ex-ip-lm-scalar-regularized-step-stability",
+    "cex-ip-lm-zero-noise-discrepancy-stopping"
+  ],
+  "conventions": [
+    {
+      "convention": "The product condition holds for every ordered pair x, x̃ in V, with derivative evaluated at x and remainder bounded by c‖x−x̃‖‖F(x)−F(x̃)‖. It is assumed separately from the earlier one-basepoint cone condition.",
+      "fixed_by": "def-ip-product-tangential-cone-condition",
+      "matters_for": [
+        "lem-ip-lm-product-condition-implies-range-approximation",
+        "thm-ip-lm-local-discrepancy-stopping",
+        "cex-ip-lm-zero-noise-discrepancy-stopping"
+      ]
+    },
+    {
+      "convention": "The iteration uses real Hilbert spaces and Countable Choice, exact minimizers, and positive damping selected by exact residual-forcing equality. The penalty is on the increment, without an anchoring term.",
+      "fixed_by": "alg-ip-regularized-levenberg-marquardt",
+      "matters_for": [
+        "lem-ip-lm-step-existence-and-residual-forcing",
+        "lem-ip-lm-fejer-decrease-and-parameter-bound",
+        "thm-ip-lm-local-discrepancy-stopping",
+        "ex-ip-lm-scalar-regularized-step-stability"
+      ]
+    },
+    {
+      "convention": "Indices start at zero. Discrepancy is checked before the budget check and before updating; equality with τδ triggers stopping. The algorithm requires δ>0.",
+      "fixed_by": "alg-ip-regularized-levenberg-marquardt",
+      "matters_for": [
+        "thm-ip-lm-local-discrepancy-stopping",
+        "cex-ip-lm-zero-noise-discrepancy-stopping"
+      ]
+    },
+    {
+      "convention": "In the decrease lemma, e=x−x† and r=yδ−F(x), so Te+r is the negative of the linearized residual at the solution.",
+      "fixed_by": "lem-ip-lm-fejer-decrease-and-parameter-bound",
+      "matters_for": [
+        "thm-ip-lm-local-discrepancy-stopping"
+      ]
+    },
+    {
+      "convention": "The stopping theorem uses open balls, a strictly small initial error, τ>1/σ, and positive noise. Its logarithmic bound concerns the first discrepancy index, without asserting a stopped-solution error rate.",
+      "fixed_by": "thm-ip-lm-local-discrepancy-stopping",
+      "matters_for": [
+        "cex-ip-lm-zero-noise-discrepancy-stopping"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-ip-lm-fejer-decrease-and-parameter-bound",
+      "statement": "Assume Countable Choice. For real Hilbert spaces, bounded linear T, e∈X, r≠0, 0<σ<1, γ>1, and α>0, let h minimize ½‖Th−r‖²+α‖h‖²/2. If ‖Th−r‖=σ‖r‖ and ‖Te+r‖≤(σ/γ)‖r‖, then ‖e‖²−‖e+h‖²≥‖h‖²+2(γ−1)σ²‖r‖²/(γα). If ‖T‖≤M with M>0, then α≤σM²/(1−σ).",
+      "used_by": [
+        "thm-ip-lm-local-discrepancy-stopping"
+      ]
+    },
+    {
+      "id": "lem-ip-lm-step-existence-and-residual-forcing",
+      "statement": "Assume Countable Choice. Let T:X→Y be bounded linear between real Hilbert spaces, r≠0, 0<σ<1, γ>1, and suppose a fixed v satisfies ‖Tv−r‖≤(σ/γ)‖r‖. For every α>0, ½‖Th−r‖²+α‖h‖²/2 has the unique global minimizer hα=(T*T+αI)⁻¹T*r. Some α>0 satisfies ‖Thα−r‖=σ‖r‖.",
+      "used_by": [
+        "alg-ip-regularized-levenberg-marquardt",
+        "lem-ip-lm-fejer-decrease-and-parameter-bound",
+        "thm-ip-lm-local-discrepancy-stopping"
+      ]
+    },
+    {
+      "id": "lem-ip-lm-product-condition-implies-range-approximation",
+      "statement": "For a continuously Fréchet differentiable real Hilbert-space map satisfying the product condition with c>0 on V, let x†,x∈V, F(x†)=y, ‖yδ−y‖≤δ≥0, τ>0, and ‖x−x†‖≤e. If R=‖F(x)−yδ‖>τδ, then ‖F′(x)(x†−x)+F(x)−yδ‖≤[1+ce(1+τ)]R/τ. If 0<σ<1, e≤e₀, and γ=στ/[1+ce₀(1+τ)]>1, the bound is at most (σ/γ)R.",
+      "used_by": [
+        "lem-ip-lm-step-existence-and-residual-forcing",
+        "lem-ip-lm-fejer-decrease-and-parameter-bound",
+        "thm-ip-lm-local-discrepancy-stopping"
+      ]
+    },
+    {
+      "id": "alg-ip-regularized-levenberg-marquardt",
+      "statement": "For its stated admissible inputs and local range margin, the procedure checks domain, discrepancy, and budget in that order, then requests an exact damped linearized minimizer and a positive parameter giving residual norm σ times the current residual norm, updates by that increment, and continues. It returns the specified state/index/status triple.",
+      "used_by": [
+        "lem-ip-lm-step-existence-and-residual-forcing",
+        "lem-ip-lm-fejer-decrease-and-parameter-bound",
+        "thm-ip-lm-local-discrepancy-stopping",
+        "ex-ip-lm-scalar-regularized-step-stability",
+        "cex-ip-lm-zero-noise-discrepancy-stopping"
+      ]
+    },
+    {
+      "id": "thm-ip-lm-local-discrepancy-stopping",
+      "statement": "Under Countable Choice, the stated continuous differentiability, local derivative and product-condition bounds, τ>1/σ, and e₀<min{r,(στ−1)/(c(1+τ)),(1−σ)/(2c)}, the exact residual-forcing iteration reaches a finite first discrepancy index for every δ>0. With q=(σ+ce₀)/(1−ce₀), K=1+‖F(x₀)−y‖, and δ₀=min{1,K/τ}, one has Nδ≤1+log(K/(τδ))/(−log q) for 0<δ≤δ₀.",
+      "used_by": [
+        "cex-ip-lm-zero-noise-discrepancy-stopping"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-frechet-derivative-between-banach-spaces",
+      "used_for": "Real Banach-space differentiation on an open domain and bounded linear derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Real Hilbert spaces with Cauchy-sequence completeness and induced norms.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption carried through the Hilbert adjoint and normal-operator interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space-adjoint",
+      "used_for": "Adjoint existence under Countable Choice and the defining inner-product identity.",
+      "opened": true
+    },
+    {
+      "id": "lem-hilbert-tikhonov-normal-operator-invertible",
+      "used_for": "Bijectivity of T*T+αI and its inverse bound 1/α; checked against the minimizer construction and continuity argument.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-linear-operator",
+      "used_for": "Boundedness of linearized operators.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Unit-ball operator norm and pointwise operator bounds, including the zero-space convention.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Real bilinear inner-product expansions and the induced squared norm.",
+      "opened": true
+    },
+    {
+      "id": "cor-inner-product-induces-a-norm",
+      "used_for": "Triangle and reverse-triangle inequalities throughout the range, continuity, and stopping estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Attainment of the forcing residual between positive damping endpoints.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Bounding a real inner product by its absolute value.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "The inner-product estimate in the decrease proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-hilbert-adjoint-properties",
+      "used_for": "The identity ‖T*‖=‖T‖ in the damping upper bound.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "The positive domain and inverse-exponential convention for log.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity, quotient laws, and the sign of log q in the iteration bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-cauchy-reals-archimedean",
+      "used_for": "Choosing a finite update count exceeding the telescoping bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Positive square roots and the scalar fixed-damping estimate.",
+      "opened": true
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "used_for": "The scalar example's exact augmented QR trial, ratio-one acceptance, and unchanged damping for an interior trust-radius step.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "regularized-gauss-newton-and-levenberg-marquardt",
+      "to": "nonlinear-inverse-problems-and-tangential-cone-conditions",
+      "faithful": true,
+      "note": "The supplier provides the real Hilbert forward-map and exact-solution conventions. Its cone condition fixes one derivative basepoint; the consumer explicitly assumes a stronger two-point product condition and does not infer it from that supplier."
+    },
+    {
+      "from": "regularized-gauss-newton-and-levenberg-marquardt",
+      "to": "nonlinear-tikhonov-existence-and-stability",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. The supplier concerns global nonlinear minimization on weakly closed domains under its explicit additional principles. The consumer proves existence for a regularized linearized quadratic through the shifted normal operator and imports neither global nonlinear minimizer existence nor the supplier's stronger assumptions."
+    }
+  ]
+}

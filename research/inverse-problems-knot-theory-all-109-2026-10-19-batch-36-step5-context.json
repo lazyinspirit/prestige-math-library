@@ -1,0 +1,241 @@
+{
+  "group": "l",
+  "batches": [
+    "36"
+  ],
+  "pages_read": [
+    "radon-transform-and-fourier-slice-reconstruction",
+    "radon-transform-and-fourier-slice-reconstruction-examples"
+  ],
+  "items_read": [
+    "def-ip-2d-radon-transform",
+    "thm-ip-fourier-slice-identity",
+    "thm-ip-radon-normal-operator",
+    "alg-ip-filtered-backprojection-complete-data",
+    "ex-ip-smooth-radial-phantom",
+    "ex-ip-point-source-distributional-limit",
+    "ex-ip-discretized-complete-data-backprojection"
+  ],
+  "conventions": [
+    {
+      "convention": "The Fourier transform has phase exp(−2πi x·ξ). The detector ramp multiplier is 2π|σ|, and the inverse-potential multiplier is (2π|ξ|)⁻¹, assigned value zero at ξ=0.",
+      "fixed_by": "def-ip-2d-radon-transform",
+      "matters_for": [
+        "thm-ip-fourier-slice-identity",
+        "thm-ip-radon-normal-operator",
+        "alg-ip-filtered-backprojection-complete-data",
+        "ex-ip-discretized-complete-data-backprojection"
+      ]
+    },
+    {
+      "convention": "θ is the unit line normal, θ⊥=(−θ₂,θ₁), and the line coordinates are x=sθ+tθ⊥. Full data include all oriented normals; (θ,s) and (−θ,−s) represent the same unoriented line.",
+      "fixed_by": "def-ip-2d-radon-transform",
+      "matters_for": [
+        "thm-ip-fourier-slice-identity",
+        "thm-ip-radon-normal-operator",
+        "alg-ip-filtered-backprojection-complete-data",
+        "ex-ip-smooth-radial-phantom",
+        "ex-ip-point-source-distributional-limit",
+        "ex-ip-discretized-complete-data-backprojection"
+      ]
+    },
+    {
+      "convention": "Backprojection integrates over the full polar surface measure μ(E)=2λ₂({rθ: θ∈E, 0<r≤1}); the inversion scale is 1/(4π). The normal-operator theorem assumes Countable Choice.",
+      "fixed_by": "thm-ip-radon-normal-operator",
+      "matters_for": [
+        "alg-ip-filtered-backprojection-complete-data",
+        "ex-ip-discretized-complete-data-backprojection"
+      ]
+    },
+    {
+      "convention": "The continuous procedure accepts exact full sinograms of compactly supported smooth complex functions. It supplies no finite-sampling, truncation, or noise guarantee.",
+      "fixed_by": "alg-ip-filtered-backprojection-complete-data",
+      "matters_for": [
+        "ex-ip-discretized-complete-data-backprojection"
+      ]
+    },
+    {
+      "convention": "The finite example uses eight full-circle directions, detector bins s_m=m−2, the unnormalised negative-sign DFT with inverse factor 1/4, sampled ramp λ_k=2π min(k,4−k)/4, and angular weight π/4. Its array is synthetic.",
+      "fixed_by": "ex-ip-discretized-complete-data-backprojection",
+      "matters_for": [
+        "ex-ip-discretized-complete-data-backprojection"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-ip-2d-radon-transform",
+      "statement": "For f∈C_c^∞(R²;C), Rf(θ,s)=∫_R f(sθ+tθ⊥)dt, with θ⊥=(−θ₂,θ₁), compact-support Riemann integration, and Fourier phase exp(−2πi x·ξ).",
+      "used_by": [
+        "thm-ip-fourier-slice-identity",
+        "thm-ip-radon-normal-operator",
+        "alg-ip-filtered-backprojection-complete-data",
+        "ex-ip-smooth-radial-phantom",
+        "ex-ip-point-source-distributional-limit"
+      ]
+    },
+    {
+      "id": "thm-ip-fourier-slice-identity",
+      "statement": "For every f∈C_c^∞(R²;C), every θ∈S¹, and every σ∈R, the offset Fourier transform satisfies Fourier(Rf)(θ,σ)=Fourier(f)(σθ).",
+      "used_by": [
+        "thm-ip-radon-normal-operator",
+        "alg-ip-filtered-backprojection-complete-data",
+        "cor-ip-limited-angle-compact-support-uniqueness",
+        "prop-ip-limited-angle-fourier-visibility"
+      ]
+    },
+    {
+      "id": "thm-ip-radon-normal-operator",
+      "statement": "Assume Countable Choice and use the stated full polar surface measure. For every f∈C_c^∞(R²;C) and every x∈R², R*Rf(x)=4π|D|⁻¹f(x) and f(x)=(1/(4π))R*|D_s|Rf(x).",
+      "used_by": [
+        "alg-ip-filtered-backprojection-complete-data"
+      ]
+    },
+    {
+      "id": "alg-ip-filtered-backprojection-complete-data",
+      "statement": "Assume Countable Choice. Given the exact full sinogram g=Rf of some f∈C_c^∞(R²;C), Fourier transform each detector row, multiply by 2π|σ|, inverse transform, backproject over the full polar surface measure, and divide by 4π.",
+      "used_by": [
+        "ex-ip-discretized-complete-data-backprojection"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-fourier-transform-on-an-lca-group",
+      "used_for": "Conjugate-phase Fourier convention and its Euclidean specialisation.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Difference-quotient integral identities when differentiating smooth Radon rows.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Directional derivatives of compositions with the linear line-coordinate map.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+      "used_for": "Riemann integrability of continuous compactly supported integrands, componentwise for complex functions.",
+      "opened": true
+    },
+    {
+      "id": "cor-change-of-variables-for-compactly-supported-functions",
+      "used_for": "Orthogonal line coordinates and the positive dilations in the point-source example.",
+      "opened": true
+    },
+    {
+      "id": "thm-riemann-fubini-on-product-rectangles",
+      "used_for": "The Fourier-slice calculation and the unit-mass identity for the point-source detector profile.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice hypothesis of the Lebesgue, Schwartz inversion, and continuous backprojection interfaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+      "used_for": "Schwartz decay of the Fourier transforms under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-inversion-on-schwartz-space",
+      "used_for": "Pointwise absolutely convergent inversion of the object and detector rows.",
+      "opened": true
+    },
+    {
+      "id": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+      "used_for": "Identification of compact-support Riemann Fourier transforms with the Lebesgue transforms used in inversion.",
+      "opened": true
+    },
+    {
+      "id": "def-polar-surface-measure-on-the-unit-sphere",
+      "used_for": "The precise angular measure in backprojection.",
+      "opened": true
+    },
+    {
+      "id": "thm-polar-coordinates-formula-for-lebesgue-measure",
+      "used_for": "Conversion of signed radial-frequency integrals to planar Fourier integrals and local integrability of |ξ|⁻¹.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-change-of-variables-for-lebesgue-measure",
+      "used_for": "Measure preservation under angular antipodes and one-dimensional frequency reflection.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Interchanging absolutely integrable angular and frequency integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Extending the nonnegative polar formula to integrable complex functions.",
+      "opened": true
+    },
+    {
+      "id": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+      "used_for": "Sigma-finiteness of frequency Lebesgue measure in the normal-operator proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-integrals-are-invariant-under-measure-preserving-maps",
+      "used_for": "Integral substitutions under the antipodal and reflection maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-integral-properties",
+      "used_for": "Positivity, finiteness, normalisation, and integral estimates in the point-source example.",
+      "opened": true
+    },
+    {
+      "id": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "used_for": "The finite negative-sign Fourier convention and its unitary normalisation.",
+      "opened": true
+    },
+    {
+      "id": "def-unnormalised-engineering-dft-and-conversion",
+      "used_for": "The forward finite sum and inverse factor 1/N used in the four-bin calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-recursive-radix-two-fast-fourier-transform",
+      "used_for": "The specified length-four recursive transform.",
+      "opened": true
+    },
+    {
+      "id": "thm-radix-two-fft-correctness",
+      "used_for": "Identification of the recursive FFT output with the unnormalised DFT.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-fourier-inversion",
+      "used_for": "The positive-sign inverse finite transform and its normalisation.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "limited-angle-tomography-and-invisible-singularities",
+      "to": "radon-transform-and-fourier-slice-reconstruction",
+      "faithful": true,
+      "note": "The line-normal definition and compact-support slice citations preserve the domain, phase, and all real frequencies. General Schwartz inputs use a separately defined extension and separate slice lemma. The distinction between choice-free compact-support Riemann arguments and Countable Choice for Lebesgue identification is explicit. Batch 36 has no reverse citation to this page."
+    },
+    {
+      "from": "geodesic-x-ray-transforms-on-simple-manifolds",
+      "to": "radon-transform-and-fourier-slice-reconstruction",
+      "faithful": true,
+      "note": "This is a page prerequisite. The geodesic definition independently specifies unit-speed integration to first exit; it does not invoke the Euclidean Fourier-slice or inversion theorem on curved surfaces. No direct item citation or reverse citation misstates a batch-36 result."
+    },
+    {
+      "from": "analytic-double-fibration-and-bolker-visibility",
+      "to": "radon-transform-and-fourier-slice-reconstruction",
+      "faithful": true,
+      "note": "The Euclidean examples preserve s=x·θ and θ⊥=(−θ₂,θ₁). Their incidence calculation gives ξ=τθ and angular data component −τ x·θ⊥, consistently with those conventions. Distributional and analytic conclusions cite separate suppliers rather than extending the compact-support slice theorem implicitly. Batch 36 has no reverse citation to this page."
+    }
+  ]
+}

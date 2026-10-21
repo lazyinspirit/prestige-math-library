@@ -1,0 +1,368 @@
+{
+  "group": "h",
+  "batches": ["24"],
+  "pages_read": [
+    "conditional-flow-matching-for-inverse-posteriors",
+    "conditional-flow-matching-for-inverse-posteriors-examples"
+  ],
+  "items_read": [
+    "lem-ip-gronwall-with-integrable-coefficient",
+    "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+    "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+    "alg-ip-conditional-flow-matching",
+    "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+    "op-ip-function-space-flow-matching-error-theory",
+    "ex-ip-cfm-low-imh-acceptance-with-accurate-means",
+    "ex-ip-likelihood-free-conditional-flow-matching"
+  ],
+  "conventions": [
+    {
+      "convention": "The ODE bounds hold almost everywhere in time simultaneously for all states and parameters in each compact parameter set. Joint continuity is required; the Jacobian density formula additionally requires a jointly continuous spatial derivative.",
+      "fixed_by": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+      "matters_for": [
+        "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+        "alg-ip-conditional-flow-matching",
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "ex-ip-likelihood-free-conditional-flow-matching"
+      ]
+    },
+    {
+      "convention": "Image measures use S#μ(E)=μ(S⁻¹(E)). The triangular map preserves the data coordinate, and posterior fiber equality holds outside one data-marginal-null set, rather than at every query datum.",
+      "fixed_by": "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+      "matters_for": [
+        "alg-ip-conditional-flow-matching",
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "ex-ip-likelihood-free-conditional-flow-matching"
+      ]
+    },
+    {
+      "convention": "Training uses independent time, reference state and joint parameter/data pair, with X_t=(1−t)X_0+tX_1 and target velocity X_1−X_0. Conditional regression specifies an almost-sure class, not an off-support extension.",
+      "fixed_by": "alg-ip-conditional-flow-matching",
+      "matters_for": [
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "op-ip-function-space-flow-matching-error-theory"
+      ]
+    },
+    {
+      "convention": "Unbiased empirical-loss evaluation is asserted for each fixed candidate, not for a candidate fitted to the same training data.",
+      "fixed_by": "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+      "matters_for": [
+        "alg-ip-conditional-flow-matching",
+        "op-ip-function-space-flow-matching-error-theory"
+      ]
+    },
+    {
+      "convention": "Optimizer stopping statuses and solver success do not certify exact posterior sampling. Unavailable solver, regression and optimizer error estimates are unquantified rather than zero.",
+      "fixed_by": "alg-ip-conditional-flow-matching",
+      "matters_for": [
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "op-ip-function-space-flow-matching-error-theory"
+      ]
+    },
+    {
+      "convention": "The function-space question uses W₂ in the ambient Hilbert space after explicit inclusion of finite-rank laws, selected conditional versions on every datum in K, and constants uniform in rank. Hellinger estimates require additional moment or tail arguments to control W₂.",
+      "fixed_by": "op-ip-function-space-flow-matching-error-theory",
+      "matters_for": ["op-ip-function-space-flow-matching-error-theory"]
+    },
+    {
+      "convention": "The independent-MH density ratio is stated on pairs with positive forward proposal-flow density. Sampler-only access generally does not provide that ratio, while likelihood cancellation and additional correction interfaces remain possible.",
+      "fixed_by": "ex-ip-likelihood-free-conditional-flow-matching",
+      "matters_for": ["ex-ip-likelihood-free-conditional-flow-matching"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+      "statement": "Under Countable Choice and Dependent Choice, joint continuity and compact-parameter-uniform integrable global spatial-Lipschitz and origin bounds give unique global C¹ solution paths, jointly continuous bijective terminal maps and inverses, and the stated exponential Lipschitz bounds. A jointly continuous spatial derivative additionally gives C¹ diffeomorphisms, the variational equation, Liouville formula and pushforward density formula.",
+      "used_by": [
+        "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+        "alg-ip-conditional-flow-matching",
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "op-ip-function-space-flow-matching-error-theory",
+        "ex-ip-likelihood-free-conditional-flow-matching"
+      ]
+    },
+    {
+      "id": "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+      "statement": "Assume AC. For a probability π on Rᵈ×Rᵐ, a reference probability η, a supplied disintegration π_y, and a Borel triangular map T(x,y)=(T_y(x),y) with Borel bijective fibers, T#(η⊗π_Y)=π implies T_y#η=π_y as probability measures for π_Y-almost every y.",
+      "used_by": [
+        "alg-ip-conditional-flow-matching",
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "op-ip-function-space-flow-matching-error-theory",
+        "ex-ip-likelihood-free-conditional-flow-matching"
+      ]
+    },
+    {
+      "id": "lem-ip-gronwall-with-integrable-coefficient",
+      "statement": "For a≤b, A≥0, continuous nonnegative u and nonnegative measurable integrable ℓ, u(t)≤A+∫ₐᵗℓ(s)u(s)ds implies u(t)≤A exp(∫ₐᵗℓ(s)ds). The corresponding backward integral inequality implies the backward exponential bound.",
+      "used_by": ["lem-ip-lipschitz-ode-triangular-flow-and-c1-density"]
+    },
+    {
+      "id": "alg-ip-conditional-flow-matching",
+      "statement": "Defines prior-predictive linear-path regression, a finite-budget optimizer with explicit stopping and failure statuses, a flow-regularity check, and finite-budget numerical endpoint sampling with per-call records. Exact posterior meaning remains conditional on a separate exact joint pushforward identity.",
+      "used_by": [
+        "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "op-ip-function-space-flow-matching-error-theory"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice assumption used by the calculus and change-of-variables suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Choice assumption used by the absolute-continuity calculus interface.",
+      "opened": true
+    },
+    {
+      "id": "def-l-one-of-a-measure",
+      "used_for": "Integrable representatives and the meaning of the time-dependent L¹ bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+      "used_for": "Absolute continuity of the integrating factors' primitives and continuity of partition-control integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+      "used_for": "Almost-everywhere differentiation of the Grönwall primitives.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+      "used_for": "Recovering increments of the absolutely continuous integrating-factor product from its derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous",
+      "used_for": "Absolute continuity of the exponential integrating factor.",
+      "opened": true
+    },
+    {
+      "id": "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+      "used_for": "Absolute continuity of the Grönwall product.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Scalar integrating-factor differentiation.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "used_for": "Product and scalar chain rules in Grönwall and Liouville calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Exponential differentiation and compact-range Lipschitz estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-mean-value-theorem-on-closed-interval",
+      "used_for": "Compact-range Lipschitz estimates and constancy of the Liouville integrating-factor product.",
+      "opened": true
+    },
+    {
+      "id": "cor-c-one-change-of-variables-for-l-one-functions",
+      "used_for": "Reflection substitution in the backward Grönwall estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-continuous-map-top",
+      "used_for": "Joint continuity and composition with solution curves.",
+      "opened": true
+    },
+    {
+      "id": "lem-vector-valued-continuous-curve-space-is-complete",
+      "used_for": "Completeness of the continuous-curve space for Picard contraction.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Existence and uniqueness of the cellwise integral-equation fixed point.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Integral-equation contraction, growth and solution-difference estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Finite partition selection and uniform continuity on compact trajectory tubes.",
+      "opened": true
+    },
+    {
+      "id": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+      "used_for": "The available Banach-valued continuous-curve FTC interface.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Monotonicity and scalar bounds for the integrable ODE coefficients.",
+      "opened": true
+    },
+    {
+      "id": "thm-c1-dependence-of-solutions-on-initial-data",
+      "used_for": "Compact-tube difference-quotient argument and variational equation; the proof was inspected for this use.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating inverse flow compositions and the determinant along the matrix solution.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-differential-and-jacobis-formula",
+      "used_for": "Determinant differentiation in Liouville's formula.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Determinant and absolute-determinant conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Trace in the variational determinant identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Cyclic trace simplification of A⁻¹BA.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "The optional C¹ pushforward density formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Riemann integrability of continuous ODE integrands.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+      "used_for": "Comparing continuous vector integrals with almost-everywhere Lebesgue coefficient bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-first-part",
+      "used_for": "Coordinatewise differentiation of continuous integral-equation solutions, including endpoint conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit AC assumptions for disintegration, conditional projection and density-based MH.",
+      "opened": true
+    },
+    {
+      "id": "thm-choice-implies-dependent-implies-countable-choice",
+      "used_for": "Discharging CC and DC requirements in consumers assuming AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-euclidean-space-is-standard-borel",
+      "used_for": "Standard-Borel hypotheses for disintegration, regression representatives and MH.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Product measurability in the triangular transport proof.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability requirements for the triangular map and its event evaluations.",
+      "opened": true
+    },
+    {
+      "id": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+      "used_for": "Measurable coordinate rearrangement before kernel integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Product probabilities and rectangle identities for transport and training laws.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Everywhere probability sections and measurable event evaluations.",
+      "opened": true
+    },
+    {
+      "id": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+      "used_for": "Existence and uniqueness outside one common marginal-null set; the relevant proof was inspected.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of y↦η(T_y⁻¹(A)) using the constant probability kernel.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Identifying the pushed kernel's rectangle integrals with the joint pushforward.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-law-given-a-random-element",
+      "used_for": "Posterior-kernel version conventions and null-datum qualifications.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Meaning of the coordinatewise regression conditional expectation.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+      "used_for": "Almost-sure uniqueness of the population least-squares predictor; the projection proof was inspected.",
+      "opened": true
+    },
+    {
+      "id": "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable",
+      "used_for": "A measurable representative in the finite-dimensional conditioning coordinates.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Unbiased empirical-loss evaluation for each fixed finite-loss candidate.",
+      "opened": true
+    },
+    {
+      "id": "lem-metropolis-hastings-density-ratio",
+      "used_for": "Common-density MH acceptance ratio and its positive-forward-flow qualification.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "conditional-flow-matching-for-inverse-posteriors",
+      "to": "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "faithful": true,
+      "note": "The supplier definition distinguishes fixed-data normalization from posterior-kernel versions in a proper observation model. The transport theorem and algorithm retain that distinction, positive-finite evidence where needed, and the marginal-almost-everywhere qualification."
+    },
+    {
+      "from": "conditional-flow-matching-for-inverse-posteriors",
+      "to": "hellinger-posterior-stability-and-discretization",
+      "faithful": true,
+      "note": "The open formulation accurately treats the supplier results as fixed-data Hellinger bounds under their envelope hypotheses. It explicitly requires an additional moment or tail argument for W₂ and does not claim a learned-flow bound follows from those results."
+    },
+    {
+      "from": "conditional-flow-matching-for-inverse-posteriors",
+      "to": "posterior-computation-error-and-diagnostics",
+      "faithful": true,
+      "note": "The algorithm and population lemma use the six-term budget as telescoping bookkeeping, preserve unavailable components as unquantified, and explicitly state that it supplies neither regression nor optimizer estimates. The bounded-functional supplier is not strengthened into a Wasserstein or flow-error theorem."
+    }
+  ]
+}
