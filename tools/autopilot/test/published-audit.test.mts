@@ -12,7 +12,7 @@ import { stagesForRun as auditStages, auditProfile } from '../stages/mathlib.aud
 import { stagesForRun as nativeStages } from '../stages/owner-supervised.mts';
 import { renderAuditPages } from '../src/audit-render.mts';
 import { auditClaimText } from '../src/audit-editorial.mts';
-import { prepareAuditCarrier } from '../bin/audit.mts';
+import { prepareAuditCarrier, handoffAudit } from '../bin/audit.mts';
 import { split, yaml } from '../../pathway-lib.mjs';
 import { sol61Effort } from '../../math-workflow-effort.mjs';
 
@@ -57,13 +57,19 @@ test('a published subject cannot evade adjudication by having no Step-4 verdict'
   finally { f.cleanup(); }
 });
 
-test('audit composes the complete original suffix and preserves native controls', () => {
+test('audit skips independent review and preserves the remaining native controls', () => {
   const ctx: any = { repo: resolve('.'), run: 'audit-composition-probe', doctor: true };
   const original = nativeStages(ctx), first = original.findIndex(stage => stage.id === '2-scope-review');
   const composed = auditStages(ctx), suffix = composed.slice(2);
-  assert.deepEqual(suffix.map(s => s.id), original.slice(first).map(s => s.id));
+  const retained = original.slice(first).filter(s => !/^3(?:[ab]|-)/.test(s.id));
+  assert.ok(original.some(s => s.id === '3a-read'), 'ordinary builds retain independent review');
+  assert.deepEqual(suffix.map(s => s.id), retained.map(s => s.id));
+  assert.deepEqual(suffix.slice(0, 3).map(s => s.id), ['2-scope-review', '4-scope', '4-judge']);
+  assert.ok(!composed.some(s => /^3(?:[ab]|-)/.test(s.id)));
+  assert.deepEqual([...new Set(composed.map(s => /^Step (\d):/.exec(s.label)?.[1]))], ['1', '2', '3', '4', '5']);
+  assert.equal(suffix[1].plan!(ctx, ['all'])[0].argv?.at(-3), 'handoff');
   for (let n = 0; n < suffix.length; n++) {
-    const expected = original[first + n], actual = suffix[n];
+    const expected = retained[n], actual = suffix[n];
     for (const key of ['concurrency', 'pipeline', 'maxFixRounds', 'maxAttempts', 'perItemFixBudget', 'finalValidation'])
       assert.deepEqual(actual[key], expected[key], `${actual.id}: ${key}`);
     const profile = (stage, role) => typeof stage.modelProfile === 'function' ? stage.modelProfile({ role }) : stage.modelProfile;
@@ -74,13 +80,31 @@ test('audit composes the complete original suffix and preserves native controls'
   assert.equal(suffix.at(-1)?.id, '6-finalize-v3');
 });
 
+test('audit handoff checks acceptance and the plan before freezing and rendering scope', () => {
+  const calls: string[][] = [];
+  handoffAudit('/unused', 'audit-test', (_root, argv) => { calls.push(argv); return ''; });
+  assert.deepEqual(calls.map(argv => argv[1]), ['tools/tsx-run.mjs', 'tools/batch-scope-review.mjs',
+    'tools/splice-plan.mjs', 'tools/touchlog.mjs', 'tools/step5-scope.mjs']);
+  assert.ok(calls[2].includes('--verify'));
+  assert.ok(calls[3].includes('audit-after-scope-review'));
+  assert.ok(calls[4].includes('render'));
+  for (const failed of [0, 1, 2, 3]) {
+    let count = 0;
+    assert.throws(() => handoffAudit('/unused', 'audit-test', () => {
+      if (count++ === failed) throw Error('handoff held');
+      return '';
+    }), /handoff held/);
+    assert.equal(count, failed + 1, 'failed prerequisites cannot render the review scope');
+  }
+});
+
 test('audit-only medium effort is selected and accepted by native Step-5 collection', () => {
   const f = fixture();
   const put = (path: string, data: any) => { mkdirSync(join(path, '..'), { recursive: true }); writeFileSync(path, JSON.stringify(data)); };
   try {
     assert.equal(sol61Effort(f.root, f.run), 'high', 'ordinary builds retain high effort');
     put(join(f.root, 'research', `${f.run}-audit`, 'origin.json'), {
-      version: 1, run: f.run, kind: 'published-math-category-audit', workflowRevision: 'published-math-audit-v1',
+      version: 1, run: f.run, kind: 'published-math-category-audit', workflowRevision: 'published-math-audit-v2',
       sol61_effort: 'medium', historical_execution_coverage_adopted: false,
     });
     assert.equal(sol61Effort(f.root, f.run), 'medium');

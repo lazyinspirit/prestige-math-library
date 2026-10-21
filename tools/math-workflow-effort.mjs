@@ -14,7 +14,7 @@ export function sol61Effort(root, run) {
   if (cache.get(path) === stamp) return 'medium';
   const record = JSON.parse(readFileSync(path, 'utf8'));
   if (record.version !== 1 || record.kind !== 'published-math-category-audit'
-    || record.run !== run || record.workflowRevision !== 'published-math-audit-v1'
+    || record.run !== run || !['published-math-audit-v1', 'published-math-audit-v2'].includes(record.workflowRevision)
     || record.sol61_effort !== 'medium' || record.historical_execution_coverage_adopted !== false)
     throw Error('Invalid published-audit model effort policy');
   cache.set(path, stamp);

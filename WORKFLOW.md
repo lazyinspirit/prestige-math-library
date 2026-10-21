@@ -820,7 +820,13 @@ Published mathematics category audits use the separate TypeScript
 [the audit runbook](tools/autopilot/AUDIT.md). They run on main and preserve all
 original published statuses. Preparation deletes page summaries and installs
 collapsed prerequisites/all-item diagrams mechanically, without an LLM. The
-actual native Steps 2–6, owner holds and complete gate batteries are reused.
+audit omits native Step 3 (independent review), reusing native Steps 2, 4, 5
+and 6 with their owner holds and complete gate batteries. Audit numbering is
+1 intake, 2 scope review, 3 batch review/judging, 4 adjudication/repair, 5 closeout.
+After scope acceptance and its full battery, a mechanical handoff verifies the
+accepted manifest-to-plan join and records a snapshot before batch review.
+Native stage/evidence IDs retain their existing numbers; the audit uses fresh
+`published-math-audit-v2` state without migrating existing runs.
 Every GPT-6.1 Sol call in the audit, including repairs and nested rejudges, uses
 medium effort through its recorded run policy; ordinary-build effort is unchanged.
 

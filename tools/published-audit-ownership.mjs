@@ -11,7 +11,7 @@ export function publishedAuditOwnerMatcher(root, run) {
   if (!existsSync(file)) return () => false;
   const record = JSON.parse(readFileSync(file, 'utf8'));
   if (record.version !== 1 || record.kind !== 'published-math-category-audit'
-    || record.run !== run || record.workflowRevision !== 'published-math-audit-v1' || record.sol61_effort !== 'medium'
+    || record.run !== run || !['published-math-audit-v1', 'published-math-audit-v2'].includes(record.workflowRevision) || record.sol61_effort !== 'medium'
     || record.historical_execution_coverage_adopted !== false
     || !Array.isArray(record.originals) || !record.originals.length
     || !Array.isArray(record.items) || !record.items.length

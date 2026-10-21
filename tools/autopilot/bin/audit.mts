@@ -39,14 +39,26 @@ export function prepareAudit(root: string, run: string) {
   writeJSON(path, receipt); return receipt;
 }
 
+// The Step-2 owner has already reconciled accepted manifests and authorized its
+// full battery. Verify that join before rendering the next native review scope;
+// never manufacture Step-3 review, baseline or closure evidence.
+export function handoffAudit(root: string, run: string, execute = command) {
+  execute(root, ['node', 'tools/tsx-run.mjs', 'tools/autopilot/bin/audit.mts', 'check-origin', '--run', run]);
+  execute(root, ['node', 'tools/batch-scope-review.mjs', 'check', '--run', run]);
+  execute(root, ['node', 'tools/splice-plan.mjs', '--run', run, '--verify']);
+  execute(root, ['node', 'tools/touchlog.mjs', 'snap', `research/${run}-touches.json`,
+    'audit-after-scope-review', '--idempotent']);
+  execute(root, ['node', 'tools/step5-scope.mjs', 'render', '--run', run]);
+}
+
 async function main() {
   const args = process.argv.slice(2), mode = args[0], root = resolve(process.cwd());
   const get = (name: string) => { const at = args.indexOf(`--${name}`); return at < 0 ? undefined : args[at + 1]; };
   const allowed: Record<string, string[]> = {
-    inspect: ['category'], plan: ['category', 'run'], prepare: ['run'],
+    inspect: ['category'], plan: ['category', 'run'], prepare: ['run'], handoff: ['run'],
     'check-origin': ['run'], 'check-editorial': ['run'],
   };
-  if (!allowed[mode]) throw Error('Usage: audit.mts inspect --category SLUG | plan --category SLUG --run RUN | prepare|check-origin|check-editorial --run RUN');
+  if (!allowed[mode]) throw Error('Usage: audit.mts inspect --category SLUG | plan --category SLUG --run RUN | prepare|handoff|check-origin|check-editorial --run RUN');
   for (let n = 1; n < args.length; n += 2) if (!args[n].startsWith('--') || !allowed[mode].includes(args[n].slice(2)) || !args[n + 1] || args[n + 1].startsWith('--'))
     throw Error(`Unsupported or missing audit option: ${args[n]}`);
   if (['inspect', 'plan'].includes(mode)) {
@@ -65,6 +77,9 @@ async function main() {
   if (mode === 'prepare') {
     const receipt = prepareAudit(root, run);
     console.log(`audit-prepare: ${receipt.changes.length} published carrier(s) prepared; no status changes`);
+  } else if (mode === 'handoff') {
+    handoffAudit(root, run);
+    console.log('audit-handoff: accepted scope verified; batch review scope rendered');
   } else if (mode === 'check-origin') {
     const { record, pages } = checkAuditScope(root, run);
     for (const row of record.originals) if (carrier(root, row.path).data.status !== 'published') throw Error(`Audit changed publication: ${row.path}`);

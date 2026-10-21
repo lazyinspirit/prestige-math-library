@@ -1,6 +1,6 @@
 // The published-category audit's additional editorial contract. Native review
 // and acceptance are deliberately not implemented here.
-export const AUDIT_REVISION = 'published-math-audit-v1';
+export const AUDIT_REVISION = 'published-math-audit-v2';
 export const AUDIT_LAYOUT = 'statement-first-v1';
 export const auditDirections = `
 ## Published-category audit: additional owner requirements
@@ -8,10 +8,14 @@ export const auditDirections = `
 This is a fresh audit of existing published mathematics on main. Original
 published carriers and verification are archived under research/RUN-audit/originals.
 Keep every originally published item/page published throughout. Publication is
-not fresh acceptance: all selected items owe the complete native steps 2–6,
-including current judging, adjudication and certification. Outside published
-suppliers retain their usual maintenance policy. New prerequisite/helper items
-remain draft until explicitly authorized. Preserve the strongest sound claims,
+not fresh acceptance: all selected items owe audit Steps 2–5, including current
+judging, adjudication and certification. Audit numbering is: 1 intake, 2 scope
+review, 3 batch review/judging, 4 adjudication/repair, 5 closeout. Native Step 3
+(independent review) is omitted; scope acceptance and its full battery lead
+directly to batch review/judging. Native stage IDs, filenames and tool arguments
+retain their existing numbers: native Steps 4/5/6 mean audit Steps 3/4/5.
+Outside published suppliers retain their usual maintenance policy. New
+prerequisite/helper items remain draft until explicitly authorized. Preserve the strongest sound claims,
 identities, complete A/B inventories, proofs, dependencies and attribution.
 
 Every GPT-6.1 Sol call in this audit uses MEDIUM effort, including adjudicators,
@@ -47,5 +51,5 @@ and necessary outside repairs escalate to the owner, never disappear from scope.
 Step 2 retains its TWO whole-batch reviews and ONE local repair, and its owner
 handoff. Its workers do not maintain contracts, manifests, levels or hashes.
 Later native stages retain every repair, certification and gate requirement,
-including Step 5's ZERO adjudicator-confirmed defective-item threshold.
+including audit Step 4's (native Step 5) ZERO adjudicator-confirmed defective-item threshold.
 `;

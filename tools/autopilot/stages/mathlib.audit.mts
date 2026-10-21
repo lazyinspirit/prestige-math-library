@@ -1,4 +1,6 @@
-// Reuse the actual native Steps 2–6. No forked copy of their review engines,
+// Reuse native Steps 2, 4, 5 and 6; the audit omits independent Step-3 review.
+// Keep native evidence/stage IDs stable while numbering audit labels 1–5.
+// No forked copy of their review engines,
 // gates, zero-defect threshold, repair routes, counters or closeout transaction.
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -60,10 +62,20 @@ export function stagesForRun(ctx: Ctx): Stage[] {
   const all = native.stagesForRun(ctx);
   const first = all.findIndex((stage: Stage) => stage.id === '2-scope-review');
   if (first < 0) throw Error('Native Step 2 is missing; audit cannot select an approximate continuation');
-  const suffix = all.slice(first).map((source: Stage): Stage => {
+  const selected = all.slice(first).filter((stage: Stage) => !/^3(?:[ab]|-)/.test(stage.id));
+  if (selected[0]?.id !== '2-scope-review' || selected[1]?.id !== '4-scope')
+    throw Error('Audit requires a direct native Step-2 to Step-4 handoff');
+  const suffix = selected.map((source: Stage): Stage => {
+    const number = source.id.startsWith('2-') ? 2 : Number(source.id[0]) - 1;
     const stage = mediumStage(source);
+    stage.label = `Step ${number}: ${stage.label.replace(/^5\.\d+\s+/, '')
+      .replace(/Step ([456])/g, (_match, value) => `Step ${Number(value) - 1}`)}`;
     if (source.plan) stage.plan = (context, pending, slots) =>
       source.plan!(context, pending, slots).map(plan => auditPlan(context, plan));
+    if (source.id === '4-scope') stage.plan = context => [{
+      role: 'tool', label: 'step4-scope', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: auditArgv(context, 'handoff'),
+    }];
     if (source.onProgress) stage.onProgress = args => source.onProgress!(hookArgs(args));
     if (source.onGateFailure) stage.onGateFailure = args => source.onGateFailure!(hookArgs(args));
     if (source.gates) stage.gates = context => [
@@ -72,13 +84,13 @@ export function stagesForRun(ctx: Ctx): Stage[] {
     return stage;
   });
   return [{
-    id: 'audit-prepare', label: 'prepare published audit presentation and archive-bound baseline',
+    id: 'audit-prepare', label: 'Step 1: prepare published audit presentation and archive-bound baseline',
     units: () => ['all'], pattern: /^tool-audit-prepare\.result\.json$/,
     artifacts: context => `research/${context.run}-audit/preparation.json`, concurrency: 1,
     plan: context => [{ role: 'tool', label: 'audit-prepare', job: 'bookkeeping-mechanical', covers: ['all'], argv: auditArgv(context, 'prepare') }],
     gates: context => [originGate(context)],
   }, {
-    id: 'audit-evidence', label: 'read existing pairs and prepare genuine source/contract metadata',
+    id: 'audit-evidence', label: 'Step 1: read existing pairs and prepare genuine source/contract metadata',
     modelProfile: MODEL_PROFILE_NAMES.lunaMax, units: batches,
     pattern: /^beta-audit-evidence-\d+\.result\.json$/, concurrency: 30,
     artifacts: (context, unit) => ['coverage', 'proof-contracts', 'cross-batch-dependencies'].map(suffix =>

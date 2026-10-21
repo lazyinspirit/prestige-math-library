@@ -1,11 +1,29 @@
 # Published mathematics category audits
 
-`stages/mathlib.audit.mts` composes the current native mathematics **Steps 2–6**
-directly. Their independent review, bounded Step-2 loop, consumer
-ownership, owner handoffs, gates, Step-5 rounds, zero confirmed-fatal threshold,
-final metadata/render preparation, report and scoped local commit remain native.
-There is no second implementation of those stages or LLM transition controller.
-The audit has its own `published-math-audit-v1` revision and fresh run state.
+`stages/mathlib.audit.mts` reuses native mathematics Steps **2, 4, 5 and 6**.
+Independent review (native Step 3) is omitted. The audit has five numbered steps:
+
+| Audit step | Work | Native implementation |
+|---|---|---|
+| 1 | Mechanical preparation and evidence intake | Audit intake stages |
+| 2 | Scope/prerequisite review, local repair and owner handoff | Step 2 |
+| 3 | Read-only batch review and per-item judging | Step 4 |
+| 4 | Adjudication, repair, consumer maintenance and rejudgment | Step 5 |
+| 5 | Metadata/render preparation, final gates, report and scoped local commit | Step 6 |
+
+After audit Step 2's owner reconciliation and full battery, the engine proceeds
+directly to audit Step 3. Its mechanical handoff verifies accepted batches and
+manifest-to-plan correspondence, records `audit-after-scope-review`, then renders
+batch review scopes. It creates no independent-review receipts or acceptance.
+The bounded scope loop, consumer ownership, owner holds, remaining gate batteries,
+repair rounds and zero confirmed-fatal threshold remain native. There is no
+second implementation of those engines or LLM transition controller.
+
+The revision is `published-math-audit-v2` and requires fresh run state. Existing
+runs are not migrated or resumed automatically. Audit stage labels use Steps 1–5;
+native stage IDs, evidence filenames, commands and inherited task references keep
+their native numbering (4/5/6 correspond to audit 3/4/5). The shared repair and
+closeout tools require those stable identities. Historical v1 evidence is retained.
 All GPT-6.1 Sol agents and nested judge calls use **medium** effort in this audit.
 This includes adjudication, repairs, escalation/consumer maintenance and rejudges.
 Other model assignments remain native; ordinary builds keep their existing
@@ -63,7 +81,7 @@ archives under `research/RUN-audit/originals/`. It grants no review coverage and
 does not change source content or verification. Historical stamps stay in the
 archives and confer no fresh review or judgment credit.
 
-The native engine first runs two intake stages:
+Audit Step 1 contains two intake stages:
 
 1. **Mechanical preparation**, with no model: delete the entire A/B page body
    (the summary), retain frontmatter, reconcile redundant placements, install
@@ -79,7 +97,7 @@ The native engine first runs two intake stages:
    before it can reach Step 2. It records gaps honestly; Step 2's unchanged full
    coverage/source/contract battery must pass after repair and owner reconciliation.
 
-Then the real Step 2 begins. The renderer mechanically uses a native closed
+Then audit Step 2 begins. The renderer mechanically uses a native closed
 `details` element for prerequisites and includes **all** actual `items` and
 `examples` in each A/B flowchart, including isolated nodes. Landmark metadata
 and mathematical edges are not fabricated to obtain complete drawings.
@@ -118,7 +136,7 @@ The renderer implementation lives in the sibling application checkout. Set
 through the application's ordinary release process; installing content-workflow
 code alone does not change the live website.
 
-## Step 5 and supervision
+## Audit Step 4 and supervision (native Step 5)
 
 **All published items in the native frozen frontier now owe the same full
 Step-5 adjudication, repair licensing, current certification, required rejudgment
@@ -136,7 +154,7 @@ remain separate native creations and draft, with their normal certification.
 The audit wrapper supplies its editorial brief appendix to original dispatches
 and repairs, preserving schemas, model identities, sessions and write ownership,
 with GPT-6.1 Sol profiles set to medium effort.
-Step 2 still has two complete reviews, one local repair and its owner pause.
+Audit Step 2 still has two complete reviews, one local repair and its owner pause.
 The owner resolves escalations supplier-first, reconciles changed contracts and
 manifests, performs the existing accepted-manifest plan join and post-authoring
 snapshot, then authorizes the native gates. No fabricated Step-1 completion or
@@ -149,7 +167,7 @@ record changes still require native projection authority rather than a whole-fil
 commit. Closeout remains preparation → all final gates → report → scoped commit,
 with no post-commit content battery, publication action or push.
 
-In Steps 2–5, repairers and adjudicators check every assigned TikZ/tikzcd
+In audit Steps 2–4, repairers and adjudicators check every assigned TikZ/tikzcd
 diagram for mathematical correctness, repair defects and add missing diagrams
 where needed. This includes commutative and string diagrams, Young tableaux,
 braids, Temperley–Lieb diagrams and other types. Existing write scopes,
