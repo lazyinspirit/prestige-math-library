@@ -1,0 +1,170 @@
+[
+  {
+    "order": 3024,
+    "id": "statistical-inverse-model-misspecification",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Unknown operators, model mismatch, and robustness limits",
+    "companion": "statistical-inverse-model-misspecification-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "statistical-inverse-experiments-and-white-noise",
+      "gaussian-sequence-models-and-risk-decomposition",
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "def-ip-operator-and-prior-mismatch",
+        "kind": "definition",
+        "title": "Operator, noise-law, and prior-support mismatch",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-metric-space",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-statistical-experiment",
+          "def-measurable-function-between-measurable-spaces",
+          "def-random-element-and-real-random-variable",
+          "def-law-or-distribution-of-a-random-element",
+          "lem-law-of-a-random-element-is-a-probability-measure"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $(X,d_X)$ and $(\\mathsf Y,d_Y)$ be metric spaces, let $U\\subseteq X$ be a nonempty class of admissible truths, and let $q:U\\to Q$ assign each truth its recovery target in a metric space $(Q,d_Q)$. Let $\\mathfrak A$ index forward maps $F_A:U\\to\\mathsf Y$; in this definition an **operator** means such a forward map, and linearity is not assumed. A specified set $\\mathcal C\\subseteq U\\times\\mathfrak A$ records which truth/operator pairs are admissible; no full-product assumption is made. Equip $\\mathsf Y$ with a sigma-algebra $\\mathcal Y$ and an addition operation such that every translation $\\tau_z(e)=z+e$ is measurable. A **noise law** is a probability measure $\\nu$ on $(\\mathsf Y,\\mathcal Y)$. For each admissible pair $(x,A)\\in\\mathcal C$, the observation random element on the probability space $(\\mathsf Y,\\mathcal Y,\\nu)$ is $e\\mapsto F_A(x)+e$, and its sampling law is\n$$P_{x,A,\\nu}(B)=\\nu\\bigl(\\{e\\in\\mathsf Y:F_A(x)+e\\in B\\}\\bigr),\\qquad B\\in\\mathcal Y.$$\nThe translation measurability assumption makes this law a probability measure.\n\nFor a true specification $(x_\\star,A_\\star,\\nu_\\star)$ with $(x_\\star,A_\\star)\\in\\mathcal C$ and a specified working operator $\\widetilde A$ and noise law $\\widetilde\\nu$, there is **operator mismatch at the truth** when $F_{A_\\star}(x_\\star)\\ne F_{\\widetilde A}(x_\\star)$, and there is **noise-law mismatch** when $\\nu_\\star\\ne\\widetilde\\nu$. A **working statistical model** is a metric index space $(\\Xi,d_\\Xi)$, a family $(Q_\\xi)_{\\xi\\in\\Xi}$ of sampling laws on the same data space, and a prior probability measure $\\Pi$ on a sigma-algebra containing every open metric ball. The statistical model is **misspecified** for true observation law $P_\\star=P_{x_\\star,A_\\star,\\nu_\\star}$ when $P_\\star\\notin\\{Q_\\xi:\\xi\\in\\Xi\\}$. If a true model index $\\xi_\\star\\in\\Xi$ is specified, there is a **prior-support mismatch** at $\\xi_\\star$ when some open ball $B_\\Xi(\\xi_\\star,r)$, $r>0$, has $\\Pi(B_\\Xi(\\xi_\\star,r))=0$. These are distinct properties; an operator or noise-law mismatch need not by itself make the statistical model misspecified or exclude the true index from the prior's support. This definition makes no assertion about posterior existence or convergence.",
+        "strategy": "Specify a measurable additive-noise observation law as the law of a translated noise random element, then distinguish operator, noise-law, sampling-model, and prior-support discrepancies.",
+        "sources": {
+          "references": [
+            {
+              "title": "Youngsoo Baek, Wilkins Aquino, and Sayan Mukherjee, Generalized Bayes Approach to Inverse Problems with Model Misspecification",
+              "url": "https://arxiv.org/pdf/2210.06921",
+              "locator": "§1 and §§2.2–2.3, PDF pp. 1–6"
+            },
+            {
+              "title": "Nada Cvetković, Han Cheng Lie, Harshit Bansal, and Karen Veroy, Choosing Observation Operators to Mitigate Model Error in Bayesian Inverse Problems",
+              "url": "https://arxiv.org/pdf/2301.04863",
+              "locator": "Abstract, §1 and §2.1, PDF pp. 1–5"
+            },
+            {
+              "title": "Masoumeh Dashti and Andrew M. Stuart, The Bayesian Approach to Inverse Problems",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§1.1 and §3.2, PDF pp. 3–4 and 29–30"
+            },
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences",
+              "url": "https://arxiv.org/pdf/2503.11043",
+              "locator": "Full 29-page paper; scope caution from §§4.3–5 and Appendix C"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-ip-no-uniform-recovery-under-unrestricted-operator-mismatch",
+        "kind": "theorem",
+        "title": "Equal observation laws force a metric-risk lower bound",
+        "deps": [
+          "def-ip-operator-and-prior-mismatch",
+          "def-ip-forward-map-and-solution-classes",
+          "def-metric-space",
+          "lem-metric-nonnegativity",
+          "def-probability-measure",
+          "def-loss-function-and-risk",
+          "lem-procedure-action-law-is-measurable",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $(Q,d_Q)$ be a metric target space and let $\\mathcal G$ be a sigma-algebra on $Q$. Let $\\tau_i=(x_i,A_i,\\nu_i)$, $i\\in\\{0,1\\}$, be two admissible truth/operator/noise specifications on one measurable data space $(\\mathsf Y,\\mathcal Y)$, with sampling laws $P_i$ and targets $q_i=q(x_i)$. Assume the metric-loss sections $a\\mapsto d_Q(q_i,a)$ are $\\mathcal G$-measurable. Let $\\delta$ be one randomized decision rule from $(\\mathsf Y,\\mathcal Y)$ to $(Q,\\mathcal G)$, used under both specifications, and define its expected metric risk by\n$$R_i(\\delta)=\\int_{\\mathsf Y}\\left(\\int_Q d_Q(q_i,a)\\,\\delta(y,da)\\right)P_i(dy).$$\nIf $P_0=P_1$ and $\\Delta=d_Q(q_0,q_1)$, then\n$$\\max\\{R_0(\\delta),R_1(\\delta)\\}\\ge\\frac{\\Delta}{2}.$$\nEach risk is an extended nonnegative integral; deterministic measurable estimators are included as point-mass decision kernels. This theorem makes no assertion when the observation laws differ, and quantitative robustness requires a separately established stability modulus.",
+        "strategy": "Integrate the pointwise metric triangle inequality under the common decision kernel and common observation law, then compare the sum of the two risks with their maximum.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Maxim Raginsky, Minimax lower bounds, §1, Lemma 1 and complete proof, PDF pp. 3–5",
+              "url": "https://maxim.ece.illinois.edu/teaching/fall13/notes/minimax.pdf",
+              "locator": "§1, Lemma 1 and proof"
+            },
+            {
+              "title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 8, §§8.1–8.3",
+              "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf",
+              "locator": "§8.1 metric risk; Proposition 8.2.1 proof; §8.3, especially (8.3.1)–(8.3.3)"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "No choice principle is used."
+      }
+    ]
+  },
+  {
+    "order": 3025,
+    "id": "statistical-inverse-model-misspecification-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Unknown operators, model mismatch, and robustness limits — Examples and Counterexamples",
+    "companion": "statistical-inverse-model-misspecification",
+    "requires": [
+      "statistical-inverse-model-misspecification"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-restricted-operator-class-positive-modulus",
+        "kind": "example",
+        "title": "A restricted two-operator class with a positive stability modulus",
+        "deps": [
+          "def-ip-operator-and-prior-mismatch",
+          "def-ip-identifiability-and-stability-modulus",
+          "def-metric-space",
+          "lem-metrics-on-rn",
+          "lem-real-line-is-a-metric-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let the truth space be $U=[1,2]\\cup[4,5]$ with its absolute-value metric, the operator labels be $\\mathfrak A=\\{1,2\\}$, and the data space be $\\mathbb R$ with its absolute-value metric. For each label $a$, define $F_a(x)=ax$ on $U$. Restrict the admissible truth/operator pairs to\n$$\\mathcal C=\\{(x,1):1\\le x\\le2\\}\\cup\\{(x,2):4\\le x\\le5\\}\\subseteq U\\times\\mathfrak A,$$\nwith the restriction to $\\mathcal C$ of the metric $d_1((x,a),(x',a'))=|x-x'|+|a-a'|$ on $\\mathbb R^2$. Take $Q=q(\\mathcal C)=U$ with its absolute-value metric and target map $q(x,a)=x$; the recovery equivalence on $\\mathcal C$ is equality. The configuration forward map is $G(x,a)=F_a(x)=ax$. Then $\\omega(t)=t$ is a uniform stability modulus: for every $c,c'\\in\\mathcal C$, $|q(c)-q(c')|\\le\\omega(|G(c)-G(c')|)$.",
+        "strategy": "Verify the target-to-data distance inequality within each operator branch and across the two separated branches.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "ex-ip-identical-laws-under-operator-mismatch",
+        "kind": "example",
+        "title": "Distinct truths and operators with identical noisy data laws",
+        "deps": [
+          "def-ip-operator-and-prior-mismatch",
+          "thm-ip-no-uniform-recovery-under-unrestricted-operator-mismatch",
+          "lem-real-line-is-a-metric-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let the truth space and target space both be $\\mathbb R$ with their absolute-value metric, and take the action sigma-algebra to be the power set $\\mathcal P(\\mathbb R)$, so every absolute metric-loss section is measurable. Let the admissible truth/operator pairs be $\\mathbb R\\times\\{A_0,A_1\\}$ and take target map $q(x)=x$. Define the linear forward operators $A_0(x)=x$ and $A_1(x)=x/2$. Equip the data space $\\mathbb R$ with its power-set sigma-algebra and usual addition, so every translation is measurable, and let $\\nu$ be any probability measure on that measurable space, for example the Dirac measure at $0$. The specifications $(1,A_0,\\nu)$ and $(2,A_1,\\nu)$ have the same data law, since both forward signals equal $1$, while their targets are distance $1$ apart. Every randomized decision rule into the stated action space therefore has maximum expected absolute loss at least $1/2$.",
+        "strategy": "Compute the two forward signals, identify the translated noise laws, and apply the equal-law metric-risk theorem.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice principle is used."
+      }
+    ]
+  }
+]

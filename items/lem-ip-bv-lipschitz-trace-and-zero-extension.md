@@ -1,0 +1,68 @@
+---
+id: lem-ip-bv-lipschitz-trace-and-zero-extension
+kind: lemma
+title: Trace formula and bounded zero extension on Lipschitz domains
+status: draft
+origin: pipeline
+proof_strategy: direct
+deps:
+  - def-countable-choice
+  - def-ip-spatial-bv-and-distributional-tv
+  - lem-ip-bv-one-sided-trace-on-lipschitz-graph
+  - lem-ip-lipschitz-graph-area-and-calculus-under-countable-choice
+  - lem-ip-vector-radon-variation-is-radon
+  - lem-ip-distributional-radon-representation-unique
+  - lem-smooth-bump-between-concentric-euclidean-balls
+  - thm-heine-borel-rn
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
+      url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
+    - title: "Piotr Rybka, The space in variational and evolution problems — Lecture Notes in Mathematical Sciences 15"
+      url: "https://www.ms.u-tokyo.ac.jp/publication/docs/lecturenotes15-rybka.pdf"
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 3
+---
+
+## Statement
+
+Assume Countable Choice. Here $\mathcal H^m$ on a boundary denotes normalized Hausdorff measure: the repository's unnormalised $m$-dimensional Hausdorff measure divided by $c_m=H^m((0,1]^m)$ for $m\ge1$, and counting measure for $m=0$. Let $n\ge2$ and let $\Omega\subset\mathbb R^n$ be a bounded Lipschitz domain, meaning a bounded open set whose boundary has a finite cover by coordinate neighborhoods in which it is the graph of a Lipschitz function and $\Omega$ lies on one side of the graph. There is a unique bounded linear trace operator $T:BV(\Omega)\to L^1(\partial\Omega,\mathcal H^{n-1})$ such that for every $u\in BV(\Omega)$ and $\phi\in C_c^1(\mathbb R^n;\mathbb R^n)$, $$\int_\Omega u\,\operatorname{div}\phi\,dx=-\int_\Omega\phi\cdot dDu+\int_{\partial\Omega}Tu\,\phi\cdot\nu\,d\mathcal H^{n-1},$$ where $\nu$ is the outward unit normal defined almost everywhere on $\partial\Omega$. The zero extension $\widetilde u$ belongs to $BV(\mathbb R^n)$ and satisfies $$TV(\widetilde u;\mathbb R^n)=TV(u;\Omega)+\|Tu\|_{L^1(\partial\Omega)}\le C_\Omega\bigl(\|u\|_{L^1(\Omega)}+TV(u;\Omega)\bigr)$$ for a finite constant $C_\Omega$ depending only on the domain. The same conclusions hold in dimension one for a bounded open set with a finite one-sided graph cover, with the two one-sided endpoint traces and counting measure on its finite boundary.
+
+## Statement references
+
+[[def-ip-spatial-bv-and-distributional-tv|The spatial BV and total-variation conventions.]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, a bounded Lipschitz domain $\Omega\subset\mathbb R^n$, and $u\in BV(\Omega)$.
+
+[F1] Every smaller Lipschitz graph chart has a linear one-sided $L^1$ trace, its local norm estimate, and the local BV Green formula. Traces agree on overlapping charts. The same result supplies the endpoint case in dimension one. ([[lem-ip-bv-one-sided-trace-on-lipschitz-graph]])
+
+[F2] Normalized Hausdorff measure on a Lipschitz graph has density $\sqrt{1+|Dh|^2}$, with its almost-everywhere unit outward normal. ([[lem-ip-lipschitz-graph-area-and-calculus-under-countable-choice]])
+
+[F3] Compact sets admit finite smooth cutoff covers, and finite signed Radon measures are determined by smooth compactly supported tests. ([[lem-smooth-bump-between-concentric-euclidean-balls]], [[lem-ip-distributional-radon-representation-unique]])
+
+[F4] A finite vector of signed Radon measures has finite Radon partition variation. ([[lem-ip-vector-radon-variation-is-radon]])
+
+[F5] Since $\Omega$ is bounded, $\overline\Omega$ and $\partial\Omega$ are closed bounded subsets of $\mathbb R^n$, hence compact. A finite subcover by smaller graph charts still covers $\partial\Omega$; the graph area formula in [F2] gives finite Radon surface measure there. In dimension one the finite chart cover makes the boundary finite. ([[thm-heine-borel-rn]])
+
+[F6] If $\mu$ is a finite positive Radon measure and $f\in L^1(\mu;\mathbb R)$, then the signed measure $f\mu$ is finite Radon. For $\rho:=|f|\mu$, truncate $f$ so the $L^1$ tail is arbitrarily small. For the bounded truncation, compact inner approximation of open sets and open outer approximation of Borel sets for $\mu$ control the weighted errors by the uniform bound. Taking the tail and regularity errors to zero gives compact inner regularity on open sets and outer regularity on Borel sets for $\rho$. Finiteness upgrades compact approximation to all Borel sets: for Borel $A$, choose compact $C\subset X$ with $\rho(X\setminus C)<\epsilon/2$ and open $G\supset X\setminus A$ with $\rho(G\cap A)<\epsilon/2$; then $C\setminus G$ is compact in $A$ and $\rho(A\setminus(C\setminus G))<\epsilon$. Finally, the partition of $A$ into $A\cap\{f\ge0\}$ and $A\cap\{f<0\}$ gives $|f\mu|=|f|\mu=\rho$, so the signed measure has regular total variation.
+
+[F7] A compactly supported $C^1$ vector field can be approximated together with its first derivatives uniformly by smooth compactly supported mollifications. Normalize a nonnegative bump from [F3] to mass one; uniform continuity of the field and its derivatives gives uniform convergence, and differentiation of the convolution follows by integration by parts.
+
+## Proof
+
+**Given:** Countable Choice and the bounded Lipschitz domain in the Statement.
+
+1.1 If $\Omega=\varnothing$, its BV space and boundary $L^1$ space are both the zero space, the zero trace is unique, and every formula and estimate holds with both sides zero. Assume henceforth $\Omega\ne\varnothing$. By [F5], $\partial\Omega$ is compact; choose finitely many smaller graph charts with positive margins inside the original charts that still cover it. Each smaller graph base is bounded and its Lipschitz constant finite, so [F2] gives finite Radon surface measure on that patch and $\mathcal H^{n-1}(\partial\Omega)<\infty$. In each chart [F1] defines a local trace and bounds its surface $L^1$ norm, using [F2], by a chart constant times $\|u\|_1+|Du|(\Omega)$. On overlaps these local traces agree by [F1]. Consequently they define one class $Tu\in L^1(\partial\Omega,\mathcal H^{n-1})$ with $\|Tu\|_1\le C(\|u\|_1+TV(u;\Omega))$. Linearity follows locally from [F1], hence globally. [F1, F2, F5, given, construct]
+
+2.1 Construct a finite smooth partition equal to one on a neighborhood of $\overline\Omega$, subordinate to the boundary charts and the interior open set $\Omega$: by [F5] this compact set is covered by finitely many balls with doubled closures in those open sets; take the bumps in [F3], and divide them by their positive sum near $\overline\Omega$. Multiply by one further smooth cutoff supported where the sum is positive and equal to one near $\overline\Omega$. First take $\phi\in C_c^\infty(\mathbb R^n;\mathbb R^n)$ and apply the local Green identity [F1] to each chart-supported field $\eta_j\phi$. For the interior-supported field the defining distributional identity applies. Sum the identities. Since $\sum_j\eta_j=1$ and $\sum_j\nabla\eta_j=0$ near $\overline\Omega$, the interior and boundary sums are exactly $$\int_\Omega u\operatorname{div}\phi=-\int_\Omega\phi\cdot dDu+\int_{\partial\Omega}Tu\,\phi\cdot\nu\,d\mathcal H^{n-1}.$$ For an arbitrary $\phi\in C_c^1$, use [F7] to approximate $\phi$ and its first derivatives uniformly by compactly supported smooth fields; finite variation and $Tu\in L^1$ pass every term to the limit. [F1, F2, F3, F5, F7, step 1.1, construct, algebra]
+
+3.1 Extend each coordinate of $Du$ by zero from $\Omega$ to $\mathbb R^n$. It is a finite signed Radon measure: compact inner approximation can be performed inside $\Omega$, and outer approximation in the ambient space follows by applying that inner approximation to the complement and using finiteness. For each coordinate $i$, the boundary density $f_i:=Tu\,\nu_i$ is integrable because $Tu\in L^1$ and $|\nu_i|\le1$. By [F6], $f_i\mathcal H^{n-1}|_{\partial\Omega}$ is a finite signed Radon measure; this verifies the required weighted-measure regularity, not just its finiteness. Thus their difference $\mu=i_\#Du-Tu\,\nu\mathcal H^{n-1}|_{\partial\Omega}$ is a finite Radon vector measure by [F4]. The formula in step 2.1 says exactly that $D\widetilde u=\mu$, so $\widetilde u\in BV(\mathbb R^n)$. [F2, F4, F6, step 1.1, step 2.1, construct]
+
+4.1 The two summands defining $\mu$ in step 3.1 are supported on the disjoint Borel sets $\Omega$ and $\partial\Omega$. The partition definition of variation therefore gives the sum of their variations. For a unit measurable vector density $\nu$ and scalar density $Tu$, the boundary variation is $|Tu|\mathcal H^{n-1}$: the triangle inequality gives the upper bound, and a finite partition of the unit sphere into pieces of diameter below $\epsilon$, applied to the direction $\operatorname{sgn}(Tu)\nu$, gives the lower bound $(1-\epsilon)|Tu|\mathcal H^{n-1}$ by projection; let $\epsilon\downarrow0$. Hence $TV(\widetilde u)=TV(u;\Omega)+\|Tu\|_1$. Step 1.1 gives the asserted bound. If another trace satisfied the Green identity, their difference times $\nu\mathcal H^{n-1}$ would integrate to zero on all smooth tests, hence be zero by [F3]; the same variation calculation gives equality of the trace classes. [F3, step 1.1, step 3.1, algebra]
+
+5.1 In dimension one, each smaller graph neighborhood contains one boundary point, so the finite graph cover makes the boundary finite. A bounded open set with finite boundary is a finite disjoint union of bounded intervals. Use the one-sided endpoint construction in [F1] on each of their finitely many endpoints. The partition argument of step 2.1 and the disjoint interior/boundary measure calculation in steps 3.1–4.1 apply verbatim with $\mathcal H^0$ counting measure and outward signs $-1$ at a left endpoint and $+1$ at a right endpoint. This proves the stated dimension-one companion. [F1, F3, step 2.1, step 3.1, step 4.1, construct] ∎ 

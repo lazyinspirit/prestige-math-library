@@ -1,0 +1,70 @@
+---
+id: lem-ip-planar-oscillatory-beltrami-phase-decay
+kind: lemma
+title: Power decay for oscillatory complex-linear Beltrami phases
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-axiom-of-choice
+  - def-countable-choice
+  - lem-ip-planar-cauchy-beurling-and-near-two-inversion
+  - lem-ip-planar-principal-beltrami-inverse-gradient-integrability
+  - thm-plancherel
+  - thm-young-convolution-inequality
+  - thm-fourier-transform-converts-convolution-to-products
+  - thm-l-one-fourier-inversion
+  - thm-maximum-modulus-principle-with-boundary-and-infinity-control
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Faraco and Prats, Characterization for stability in planar conductivities"
+      url: "https://arxiv.org/pdf/1701.06480"
+      locator: "Section 4.2, Proposition 4.4, Lemmas 4.5–4.6 and their complete proofs, printed pp. 16–23. For power moduli the proof here uses an L2 estimate on a smoothed truncated Cauchy kernel."
+dependency_level: 2
+---
+
+## Statement
+
+Assume the Axiom of Choice and Countable Choice. Fix $0<\kappa<1$, $R,A>0$, $q>2$ and $0<\theta\le1$. Let $\mu$ be measurable, supported in $D_R$, with $\|\mu\|_\infty\le\kappa$ and $\omega_q(\mu,t)\le At^\theta$ for $0<t\le1$. For $v\in\mathbb R^2\setminus\{0\}$ and $|c_v|=1$, let $\Psi_v$ be the principal quasiconformal solution of
+$$\bar\partial\Psi_v(z)=c_v e^{iv\cdot z}\mu(z)\partial\Psi_v(z).$$
+There exist $C>0$ and $b>0$, depending only on $\kappa,R,A,q,\theta$, such that
+$$\sup_{z\in\mathbb C}|\Psi_v(z)-z|\le C|v|^{-b}\qquad(|v|\ge1).$$
+Both constants are uniform in $\mu$, the direction of $v$ and its unimodular factor $c_v$.
+
+## Statement references
+
+[[lem-ip-planar-principal-beltrami-inverse-gradient-integrability|Existence and normalized Cauchy representation of principal solutions.]]
+
+[[lem-ip-planar-cauchy-beurling-and-near-two-inversion|Beurling norms, translation commutation and near-two inversion.]]
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice and Countable Choice and the coefficient and parameters in the statement.
+
+[F1] The Beurling transform has norm $1$ on $L^2$, is bounded on every strict $L^p$, and commutes with translations. One can choose $r>2$ so that $c:=\kappa\|\mathcal B\|_{r\to r}<1$. The Cauchy transform and near-two inverse identify the principal solution as $\Psi_v-z=\mathcal Ch_v$, where $h_v=(I-c_ve^{iv\cdot z}\mu\mathcal B)^{-1}(c_ve^{iv\cdot z}\mu)$ is supported in $\overline D_R$. ([[lem-ip-planar-cauchy-beurling-and-near-two-inversion]], [[lem-ip-planar-principal-beltrami-inverse-gradient-integrability]])
+
+[F2] Plancherel and Fourier inversion hold; convolution becomes a Fourier product. Young's convolution inequality holds, including $L^{r'}*L^r\to L^\infty$. ([[thm-plancherel]], [[thm-fourier-transform-converts-convolution-to-products]], [[thm-l-one-fourier-inversion]], [[thm-young-convolution-inequality]])
+
+[F3] A holomorphic function on an exterior disk, continuous to its boundary and tending to zero at infinity, has supremum bounded by its boundary supremum. ([[thm-maximum-modulus-principle-with-boundary-and-infinity-control]])
+
+[A1] The Axiom of Choice and Countable Choice are used at [F1]–[F3]. ([[def-axiom-of-choice]], [[def-countable-choice]])
+
+## Proof
+
+**Given:** The data in the statement.
+
+1.1 Write $K=|v|$, $\nu=c_ve^{iv\cdot z}\mu$, and $h_n=(\nu\mathcal B)^n\nu$. The Neumann series $h_v=\sum_{n\ge0}h_n$ converges in $L^r$ by [F1]. For $g_N=\sum_{n=0}^Nh_n$ and $b_N=h_v-g_N$, one has $\|b_N\|_r\le Cc^{N+1}$ and $\|g_N\|_r\le C$. Also $\|g_N\|_2\le C$, because $\|\nu\mathcal B\|_{2\to2}\le\kappa<1$. All these functions have support in $\overline D_R$. Define $f_n=c_v^{-(n+1)}e^{-i(n+1)v\cdot z}h_n$. Then $f_0=\mu$ and $f_n=\mu T_nf_{n-1}$, where $T_nu=e^{-inv\cdot z}\mathcal B(e^{inv\cdot z}u)$. This is a translation-invariant Fourier multiplier, and $\|T_n\|_{p\to p}=\|\mathcal B\|_{p\to p}$, since the two modulation factors have modulus one. [A1, F1, given, algebra]
+
+2.1 Put $\ell=2q/(q-2)$, so $1/2=1/q+1/\ell$, and $M=2+\|\mathcal B\|_{\ell\to\ell}$. Iteration of the product norm gives $\|f_n\|_\ell\le C_R\kappa^{n+1}\|\mathcal B\|_{\ell\to\ell}^n$. The translation product identity and Hölder give $\omega_2(f_n,t)\le\omega_q(\mu,t)\|T_nf_{n-1}\|_\ell+\kappa\omega_2(T_nf_{n-1},t)$. By translation commutation and the $L^2$ norm one, the second term is at most $\kappa\omega_2(f_{n-1},t)$. For $n=0$, bounded support gives $\omega_2(f_0,t)\le C_R\omega_q(\mu,t)$. Induction therefore yields $\omega_2(f_n,t)\le C_RA\kappa^nM^nt^\theta$ for $0<t\le1$: the two induction contributions are bounded by $M^{n-1}$ and $\|\mathcal B\|_{\ell\to\ell}^n$, whose sum is at most $M^n$ after increasing the fixed constant. [F1, step 1.1, algebra]
+
+3.1 For any $L^2$ function $f$ and $T>0$, averaging $\|f(\cdot-y)-f\|_2^2$ over $[-2/T,2/T]^2$ and using Plancherel gives the multiplier $2[1-\operatorname{sinc}(2\xi_1/T)\operatorname{sinc}(2\xi_2/T)]$. On $|\xi|\ge T$, one sinc factor has absolute value at most $1/\sqrt2$; the multiplier is bounded below by a positive absolute constant. Hence $\|\mathbf1_{\{|\xi|\ge T\}}\widehat f\|_2\le C\omega_2(f,3/T)$. Since $\widehat h_n$ is the shifted transform of $f_n$ by $(n+1)v$, the disk $|\xi|\le K/2$ samples $\widehat f_n$ only at frequencies at least $K/2$. Step 2.1 therefore gives, when $K\ge6$, $\|\widehat g_N\|_{L^2(D_{K/2})}\le C A M^{N+1}K^{-\theta}$, by summing the geometric upper bounds and discarding the beneficial factors $\kappa^n$. [F2, step 1.1, step 2.1, algebra]
+
+4.1 Choose $\chi\in C_c^\infty(\mathbb C)$ equal to one on $|z|\le 2R+1$, and set $P(z)=\chi(z)/(\pi z)$ for $z\ne0$, with arbitrary value at zero. Thus $P$ is compactly supported and belongs to $L^1\cap L^{r\prime}$ for every $1<r\prime<2$, although it is singular at zero. On $D_R$, convolution $P*h_v$ equals $\mathcal Ch_v$. The latter is holomorphic outside $\overline D_R$, continuous everywhere and tends to zero at infinity, so [F3] shows that a supremum estimate on $D_R$ controls its global supremum. Let $r'=r/(r-1)\in(1,2)$, $\theta_0=1-2/r>0$, and $P_\delta=\rho_\delta*P$ for a fixed smooth nonnegative mollifier. Then $\|P-P_\delta\|_{r'}\le C\delta^{\theta_0}$, $\|P_\delta\|_2\le C\delta^{-1}$, and $\|\nabla P_\delta\|_2\le C\delta^{-2}$. For the first assertion, split a translation difference of $P$ into disks of radius $3|y|$ at its two singularities and their complement. Hölder integration of $|z|^{-r'}$ on the disks gives the power $|y|^{2/r'-1}$; off them use the derivative bound $C|y||z|^{-2}$ and integrate its $r'$-power from $|y|$ to the fixed cutoff radius, giving the same power. Integrating this estimate against $\rho_\delta(y)$ proves the first bound. The other two follow from Young applied to $P\in L^1$ and the scaled $L^2$ norms of $\rho_\delta$ and its derivative. [F1, F2, F3, step 1.1, step 3.1, algebra]
+
+5.1 The tail $P*b_N$ has supremum at most $C\|b_N\|_r\le Cc^{N+1}$, and $(P-P_\delta)*g_N$ has supremum at most $C\delta^{\theta_0}$, by step 4.1 and the $L^r$ bounds of step 1.1. Fourier inversion and Cauchy–Schwarz bound the remaining term by $C\|\widehat P_\delta\widehat g_N\|_1$. Below frequency $K/2$, steps 3.1–4.1 bound it by $C\delta^{-1} A M^{N+1}K^{-\theta}$. Above that frequency, Plancherel gives $\|\widehat P_\delta\|_{L^2(\{|\xi|>K/2\})}\le CK^{-1}\|\nabla P_\delta\|_2\le CK^{-1}\delta^{-2}$; combine this with $\|g_N\|_2\le C$. We have proved $\|\Psi_v-z\|_\infty\le C[c^N+\delta^{\theta_0}+\delta^{-1}M^{N+1}K^{-\theta}+K^{-1}\delta^{-2}]$. [F2, step 1.1, step 3.1, step 4.1, algebra]
+
+6.1 Choose $a=\theta/(4\log M)$, $N=\lfloor a\log K\rfloor$ and $\delta=K^{-\theta/4}$. For sufficiently large $K$, $c^N\le C K^{a\log c}$, $M^{N+1}\le M K^{\theta/4}$, and the four terms in step 5.1 are bounded by $C K^{-b}$ with $b=\min\{-a\log c,\theta\theta_0/4,\theta/2,1/2\}>0$. Indeed, the third term has exponent at most $-\theta/2$ and the fourth at most $-1/2$ because $\theta\le1$. The remaining bounded interval of $1\le K$ is absorbed by increasing $C$, using the uniform principal deformation bound in [F1]. This proves the result uniformly in all stated parameters and phase directions. [F1, step 5.1, algebra] ∎

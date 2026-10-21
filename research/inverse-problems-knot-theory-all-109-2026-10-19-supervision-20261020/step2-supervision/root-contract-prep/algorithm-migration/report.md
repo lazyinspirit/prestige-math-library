@@ -1,0 +1,11 @@
+# Two algorithm contract migrations
+
+Exact before/after JSON entries and the full original batch34/56 contract documents are archived here. `exact-contract-migration-proposal.json` contains both proposed replacements. No canonical file was changed.
+
+Both actual root FINAL records explicitly adopt procedure/property separation. For BPDN, three old explanatory rows are preserved verbatim in the existing batch34 archive. Their substantive results are still proved in the five named existing objective/conjugate/proximal/attainment/certificate suppliers. I inspected the selected actual destination rows recorded in `destination-row-evidence.json`; the objective and feasible-attainment arguments include epsilon0, and the certificate supplier retains the exact signed success/infeasibility tests. Solver/checker soundness remains an input assumption. Old row1.2 is unchanged procedural recurrence/cap/failure behavior in the two existing Definitions, not an invented relocated convergence theorem.
+
+For Wirtinger, the actual correctness theorem proof1.1 now gives finite rational validation, cyclic traversal and crossing-pass termination itself; proof1.1/2.1/3.1 retain the positive-normal relators and based-meridian quotient identification. These actual rows exist and were inspected for this placement check. The algorithm remains pure instructions. The root56 FINAL expressly adopts that placement.
+
+The proposal clears only citations, derivations and routine_steps at the two algorithms, and adds a reconciliation note pointing to those actual proofs, row maps, whole historical contract archives and root FINAL records. Every pre-existing nonmirror key, including boundary/risk/finite-check/status/resolution history, remains verbatim. In particular the old proof_status/evidence are preserved as historical records and explicitly labeled as such by the reconciliation note; root owns any separate status normalization. No obligation is deleted or assigned a new fabricated proof.
+
+This is a bounded metadata placement check, not a new independent audit of the accepted property proofs, no native review/counter reset and no gate or hash operation. Root may integrate after the actual writer drain and exact current-input check.

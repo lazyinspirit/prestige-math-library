@@ -1,0 +1,1499 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-index-source-elements-are-minimum-norm",
+    "lem-ip-spectral-interpolation-for-power-source-balls",
+    "thm-ip-deterministic-minimax-lower-bound-on-source-balls",
+    "thm-ip-source-ball-modulus-of-continuity",
+    "ex-ip-polynomial-singular-decay-source-balls",
+    "ex-ip-exponential-singular-decay-source-balls"
+  ],
+  "contracts": {
+    "lem-ip-index-source-elements-are-minimum-norm": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-index-source-ball",
+          "source_section": "Definition",
+          "quote": "An admissible spectral index is a bounded function $\\psi:\\Lambda_K\\to[0,\\infty)$ with $\\psi(0)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "For a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is $$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "By [F1], write $w=w_0+\\sum_j w_jv_j$ in norm, with $w_0\\in N(K)$ and the $v_j$ an orthonormal basis of $N(K)^\\perp$. The compact spectral multiplier in [F2] gives $x=\\psi(|K|)w=\\psi(0)w_0+\\sum_j\\psi(s_j)w_jv_j=\\sum_j\\psi(s_j)w_jv_j$. If the positive singular set is empty, this sum is zero and $x=0$. In every case, each term is orthogonal to $N(K)$, so continuity of the inner product gives $x\\perp N(K)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "If $Kz=Kx$, then $n:=z-x\\in N(K)$. By step 1.1, $x\\perp n$, so [F3] gives $\\|z\\|^2=\\|x+n\\|^2=\\|x\\|^2+\\|n\\|^2\\ge\\|x\\|^2$, with equality only when $n=0$, that is, $z=x$. Thus $x$ is the unique minimum-norm solution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles an empty positive singular set and gives x=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses psi(0)=0 to remove the kernel component."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a singleton positive singular system."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero positive-singular-value case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 reaches equality only when n=0, which forces z=x."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Countable-Choice SVD to expand w."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a reverse direction."
+        }
+      ]
+    },
+    "lem-ip-spectral-interpolation-for-power-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define $$a^x:=\\exp(x\\log a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "(x^\\alpha)'=\\alpha x^{\\alpha-1}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "Let $J$ index the positive singular values in [F1]. Write $w=w_0+\\sum_{j\\in J}w_jv_j$ in norm, with $w_0\\in N(K)$. By [F2]–[F3], $x=\\sum_{j\\in J}s_j^\\nu w_jv_j$ and $Kx=\\sum_{j\\in J}s_j^{\\nu+1}w_ju_j$, with norm-convergent expansions. For each finite $F\\subseteq J$, orthonormality gives the squared norms of the partial sums as the sums of squared coefficients; taking limits by continuity of the norm gives $\\|x\\|_X^2=\\sum_{j\\in J}c_j$ and $\\|Kx\\|_Y^2=\\sum_{j\\in J}a_j$. The same finite-sum identity and $w_0\\perp v_j$ give $\\|w\\|_X^2=\\|w_0\\|_X^2+\\sum_{j\\in J}b_j\\ge\\sum_{j\\in J}b_j$, where $c_j=s_j^{2\\nu}|w_j|^2$, $a_j=s_j^{2\\nu+2}|w_j|^2$, and $b_j=|w_j|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "claim": "Put $\\theta=\\nu/(\\nu+1)\\in(0,1)$. For a finite $F\\subseteq J$, set $A_F=\\sum_{j\\in F}a_j$, $B_F=\\sum_{j\\in F}b_j$, and $C_F=\\sum_{j\\in F}c_j$. If $A_F=0$ or $B_F=0$, then every $w_j$ with $j\\in F$ is zero because $s_j>0$, so $C_F=0$. Otherwise, for $j\\in F$ put $p_j=a_j/A_F$ and $q_j=b_j/B_F$. The scalar inequality $t^\\theta\\le\\theta t+1-\\theta$ holds for $t\\ge0$: for $t>0$ set $g(t)=\\theta t+1-\\theta-t^\\theta$. By [F4], $g'(t)=\\theta(1-t^{\\theta-1})$. If $0<t<1$, strict increase of $u\\mapsto u^{1-\\theta}$ gives $t^{1-\\theta}<1^{1-\\theta}=1$; by [F4] and inverse order this implies $t^{\\theta-1}>1$ and $g'(t)<0$. If $t>1$, the inequalities reverse and $g'(t)>0$. The mean value theorem then gives $g(t)\\ge g(1)=0$ for every $t>0$, while $g(0)=1-\\theta>0$. If $q_j>0$, apply the scalar inequality to $t=p_j/q_j$ to obtain $p_j^\\theta q_j^{1-\\theta}\\le\\theta p_j+(1-\\theta)q_j$; if $q_j=0$, the same inequality is immediate. Since $c_j=a_j^\\theta b_j^{1-\\theta}$, summing and using $\\sum p_j=\\sum q_j=1$ gives $C_F\\le A_F^\\theta B_F^{1-\\theta}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Exhaust $J$ by its first $n$ indices when $J$ is infinite, and take $F=J$ when it is finite; if $J$ is empty, all three sums in step 1.1 are zero. Passing to the limit in step 1.2 gives $\\|x\\|_X^2\\le\\|Kx\\|_Y^{2\\theta}\\|w\\|_X^{2(1-\\theta)}$. Taking nonnegative square roots and substituting $\\theta=\\nu/(\\nu+1)$ proves the claimed inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 states all sums vanish when J is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles A_F=0 or B_F=0 before normalization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes a finite set F with one singular direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the zero-rank case J empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 handles zero-sum endpoints before defining p_j and q_j."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Countable-Choice singular system and its norm-convergent expansion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a reverse direction."
+        }
+      ]
+    },
+    "thm-ip-deterministic-minimax-lower-bound-on-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-index-source-elements-are-minimum-norm",
+          "source_section": "Statement",
+          "quote": "Then $x\\in N(K)^\\perp$; consequently, among all $z\\in X$ satisfying $Kz=Kx$, $x$ is the unique vector of minimum norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "The class $X_{\\nu,\\rho}(K)$ contains $0$ by taking $w=0$ in [F1]. It is symmetric: if $x=|K|^\\nu w$ with $\\|w\\|_X\\le\\rho$, then $-x=|K|^\\nu(-w)$ with $\\|-w\\|_X\\le\\rho$. It is convex: for $x_i=|K|^\\nu w_i$ with $\\|w_i\\|_X\\le\\rho$ and $0\\le t\\le1$, $tx_1+(1-t)x_2=|K|^\\nu(tw_1+(1-t)w_2)$, while the triangle inequality gives $\\|tw_1+(1-t)w_2\\|_X\\le t\\rho+(1-t)\\rho=\\rho$. By [F3], this class is contained in $N(K)^\\perp$, so [F2] applies.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Let $x\\in X_{\\nu,\\rho}(K)$ satisfy $\\|Kx\\|_Y\\le\\delta$. The two admissible truths $x$ and $-x$ with noises $-Kx$ and $Kx$ both produce the same observed datum $0$. Their reconstruction errors are $\\|A(0)-x\\|_X$ and $\\|A(0)+x\\|_X$, and the triangle inequality yields $2\\|x\\|_X=\\|(A(0)+x)-(A(0)-x)\\|_X\\le\\|A(0)+x\\|_X+\\|A(0)-x\\|_X$. Hence the larger error is at least $\\|x\\|_X$, so taking the supremum over all such $x$ gives $E_\\delta(A)\\ge\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)$. Taking the infimum over $A$ preserves this lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "claim": "If $x_1,x_2\\in X_{\\nu,\\rho}(K)$ and $\\|K(x_1-x_2)\\|_Y\\le2\\delta$, then $z=(x_1-x_2)/2$ lies in the class by symmetry and convexity from step 1.1 and satisfies $\\|Kz\\|_Y\\le\\delta$; thus $\\|x_1-x_2\\|_X=2\\|z\\|_X\\le2\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)$. Conversely, for every $z$ in the centered-modulus set, the pair $(z,-z)$ lies in the source ball and has $\\|K(z-(-z))\\|_Y=2\\|Kz\\|_Y\\le2\\delta$, so the two-truth supremum is at least $2\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)$. Taking suprema proves the claimed factor of two.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the source ball contains 0, so the class is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the zero lower bound when the feasible truth is x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers one positive singular direction and proves the factor two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits K=0; Step 1.1 and the minimum-norm fact force its source class to {0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at delta=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the defined source ball and makes no new representative choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a reverse direction."
+        }
+      ]
+    },
+    "thm-ip-source-ball-modulus-of-continuity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-index-source-elements-are-minimum-norm",
+          "source_section": "Statement",
+          "quote": "Then $x\\in N(K)^\\perp$; consequently, among all $z\\in X$ satisfying $Kz=Kx$, $x$ is the unique vector of minimum norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-spectral-interpolation-for-power-source-balls",
+          "source_section": "Statement",
+          "quote": "Then $\\|x\\|_X\\le\\|Kx\\|_Y^{\\nu/(\\nu+1)}\\|w\\|_X^{1/(\\nu+1)}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "source_section": "Definition",
+          "quote": "with $s_n\\downarrow0",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "If $\\delta=0$ and $x$ belongs to the centered-modulus set, then $Kx=0$. By [F3], $x\\in N(K)^\\perp$ as well, so $x=0$ and $\\varepsilon_K(X_{\\nu,\\rho}(K),0)=0$. If $K=0$, [F3] likewise forces every member of the power source ball to be zero, so the asserted bound holds with no positive singular direction.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "claim": "Suppose $\\delta>0$ and let $x$ be any element of the centered-modulus set. By [F1], choose $w\\in X$ with $x=|K|^\\nu w$ and $\\|w\\|_X\\le\\rho$. Applying [F4] and using $\\|Kx\\|_Y\\le\\delta$ gives $\\|x\\|_X\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$; taking the supremum over the centered-modulus set proves the bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Fix a positive singular value $s_j$ and its unit right singular vector $v_j$ from [F5]. Set $w_j=\\rho v_j$ and $x_j=|K|^\\nu w_j=\\rho s_j^\\nu v_j$. Then $\\|Kx_j\\|_Y=\\rho s_j^{\\nu+1}=\\delta_j$ and $\\|x_j\\|_X=\\rho s_j^\\nu=\\delta_j^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. Thus $x_j$ is feasible in the centered-modulus supremum at $\\delta_j$ and attains the upper bound from step 1.2. If there are infinitely many positive singular values, compactness gives $s_j\\to0$ and hence $\\delta_j\\to0$; finite positive rank gives only the stated finite list, while $K=0$ was handled in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the zero source ball when K=0; the feasible set contains 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the modulus is zero at delta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives equality using one positive singular direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats K=0 separately, with no positive singular direction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 cover delta=0 and delta>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the Countable-Choice SVD to select a right singular vector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a reverse direction."
+        }
+      ]
+    },
+    "ex-ip-polynomial-singular-decay-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space $$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$ with its canonical inner product and norm from [[def-square-summable-family-on-an-arbitrary-index-set]], is complete and therefore is a real Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "and the adjoint of an operator is unique;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-positive-unitary-and-normal-operator",
+          "source_section": "Definition",
+          "quote": "$T$ is **self-adjoint** when $T^*=T$; - $T$ is **positive** when $\\langle Tx,x\\rangle$ is a real number in $[0,+\\infty)$ for every $x\\in H$;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact ([[def-compact-linear-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "with $\\|T_n-T\\|\\to0$ for a bounded linear operator $T:X\\to Y$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-square-root-of-a-compact-positive-operator",
+          "source_section": "Statement",
+          "quote": "The root acts by multiplication by $\\sqrt\\lambda$ on each positive eigenspace",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-index-source-ball",
+          "source_section": "Definition",
+          "quote": "An admissible spectral index is a bounded function $\\psi:\\Lambda_K\\to[0,\\infty)$ with $\\psi(0)=0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-source-ball-modulus-of-continuity",
+          "source_section": "Statement",
+          "quote": "For every $\\delta\\ge0$, $\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define $$a^x:=\\exp(x\\log a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "(x^\\alpha)'=\\alpha x^{\\alpha-1}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with identity $1>0$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "For $0<t\\le1$, $1/t\\ge1$, so [F8] gives $\\log(1/t)\\ge\\log1=0$. Thus $1+\\log(1/t)\\ge1$; since $q>0$, the positive power of this base is at least $1$, and its reciprocal $\\psi_q(t)$ lies in $(0,1]$. Together with $\\psi_q(0)=0$, this verifies that the logarithmic index is bounded and is admissible under [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "claim": "For $x=(x_j)\\in\\ell^2$, $\\|K_ax\\|_2^2=\\sum_j j^{-2a}|x_j|^2\\le\\|x\\|_2^2$, so $K_a$ is a well-defined bounded linear map with $\\|K_a\\|\\le1$; $K_ae_1=e_1$ gives $\\|K_a\\|\\ge1$. For $x,y\\in\\ell^2$, [F2] makes $\\sum_j j^{-a}x_jy_j$ absolutely convergent, and the coordinate inner product gives $\\langle K_ax,y\\rangle=\\sum_j j^{-a}x_jy_j=\\langle x,K_ay\\rangle$. Uniqueness of the adjoint in [F3] yields $K_a^*=K_a$, and $\\langle K_ax,x\\rangle=\\sum_jj^{-a}|x_j|^2\\ge0$, so $K_a$ is positive.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "For $N\\ge1$ define $(K_{a,N}x)_j=j^{-a}x_j$ for $j\\le N$ and $0$ for $j>N$. The coordinate estimate from step 1.2 gives $\\|K_{a,N}x\\|_2\\le\\|x\\|_2$, so $K_{a,N}$ is bounded; its range is contained in $\\operatorname{span}\\{e_1,\\ldots,e_N\\}$ and hence it is compact by [F4]. For every $x$, $\\|(K_a-K_{a,N})x\\|_2^2=\\sum_{j>N}j^{-2a}|x_j|^2\\le(N+1)^{-2a}\\|x\\|_2^2$, with equality at $x=e_{N+1}$; therefore $\\|K_a-K_{a,N}\\|=(N+1)^{-a}$. Given $\\varepsilon>0$, [F8] supplies a threshold $N$ with $1/j<\\varepsilon^{1/a}$ for all $j\\ge N+1$; monotonicity of $t\\mapsto t^a$ gives $(N+1)^{-a}<\\varepsilon$. Thus $K_{a,N}\\to K_a$ in norm, and [F4] makes $K_a$ compact. Each diagonal coefficient is positive, so $K_ax=0$ forces every $x_j=0$ and $K_a$ is injective.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "claim": "Since $K_a$ is compact, self-adjoint and positive by steps 1.2–2.1, $K_a$ is the unique positive square root of $K_a^*K_a=K_a^2$; [F5] therefore gives $|K_a|=K_a$. Each $e_j$ is an eigenvector of $|K_a|$ with eigenvalue $j^{-a}$. Applying the compact spectral multiplier [F5] coordinatewise yields $(|K_a|^\\nu w)_j=j^{-a\\nu}w_j$ and $(\\psi_q(|K_a|)w)_j=\\psi_q(j^{-a})w_j=(1+a\\log j)^{-q}w_j$, proving the stated power and logarithmic coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "F1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-4.1",
+          "claim": "For each $j\\ge1$ take $w^{(j)}=\\rho e_j$ and $x^{(j)}=|K_a|^\\nu w^{(j)}=\\rho j^{-a\\nu}e_j$. Then $\\|K_ax^{(j)}\\|_2=\\rho j^{-a(\\nu+1)}=\\delta_j$ and $\\|x^{(j)}\\|_2=\\rho j^{-a\\nu}=\\delta_j^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. This feasible source-ball element attains the universal upper bound from [F7], so equality holds at $\\delta_j$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "F1",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes N={1,2,...} and an infinite diagonal operator, so its positive singular set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines psi_q(0)=0 at the zero spectral value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes j=1 and the first singular direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example assumes a>0 and has positive diagonal entries, so K_a is injective and infinite rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 check t=1 and j=1, the upper spectral endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 use Countable Choice for adjoints, compact norm limits, and spectral roots."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a reverse direction."
+        }
+      ]
+    },
+    "ex-ip-exponential-singular-decay-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space $$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$ with its canonical inner product and norm from [[def-square-summable-family-on-an-arbitrary-index-set]], is complete and therefore is a real Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "and the adjoint of an operator is unique;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-positive-unitary-and-normal-operator",
+          "source_section": "Definition",
+          "quote": "$T$ is **self-adjoint** when $T^*=T$; - $T$ is **positive** when $\\langle Tx,x\\rangle$ is a real number in $[0,+\\infty)$ for every $x\\in H$;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact ([[def-compact-linear-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "with $\\|T_n-T\\|\\to0$ for a bounded linear operator $T:X\\to Y$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-square-root-of-a-compact-positive-operator",
+          "source_section": "Statement",
+          "quote": "The root acts by multiplication by $\\sqrt\\lambda$ on each positive eigenspace",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-index-source-ball",
+          "source_section": "Definition",
+          "quote": "An admissible spectral index is a bounded function $\\psi:\\Lambda_K\\to[0,\\infty)$ with $\\psi(0)=0$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-source-ball-modulus-of-continuity",
+          "source_section": "Statement",
+          "quote": "For every $\\delta\\ge0$, $\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define $$a^x:=\\exp(x\\log a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "(x^\\alpha)'=\\alpha x^{\\alpha-1}",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with identity $1>0$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "For $0<t\\le1$, [F8] gives $\\log(1/t)\\ge0$, so $1+\\log(1/t)\\ge1$; since $q>0$, $(1+\\log(1/t))^q\\ge1$ and $\\psi_q(t)\\le1$. Together with $\\psi_q(0)=0$, this verifies that the logarithmic index is bounded and admissible under [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "claim": "Since $\\gamma_j\\ge0$, strict increase of the exponential [F10] gives $0<\\exp(-\\gamma_j)\\le1$. Thus for $x=(x_j)\\in\\ell^2$, $\\|K_\\gamma x\\|_2^2=\\sum_j\\exp(-2\\gamma_j)|x_j|^2\\le\\|x\\|_2^2$, so $K_\\gamma$ is bounded with $\\|K_\\gamma\\|\\le1$; $K_\\gamma e_1=e_1$ gives $\\|K_\\gamma\\|=1$. For $x,y\\in\\ell^2$, [F2] makes $\\sum_j\\exp(-\\gamma_j)x_jy_j$ absolutely convergent, and the coordinate inner product gives $\\langle K_\\gamma x,y\\rangle=\\sum_j\\exp(-\\gamma_j)x_jy_j=\\langle x,K_\\gamma y\\rangle$. By uniqueness in [F3], $K_\\gamma^*=K_\\gamma$; moreover $\\langle K_\\gamma x,x\\rangle=\\sum_j\\exp(-\\gamma_j)|x_j|^2\\ge0$, so $K_\\gamma$ is positive.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Since $\\gamma_j\\to\\infty$, [F9] gives $s_j=\\exp(-\\gamma_j)\\to0$. For $N\\ge1$, truncate $K_\\gamma$ by $(K_{\\gamma,N}x)_j=s_jx_j$ for $j\\le N$ and $0$ for $j>N$. By step 1.2, $K_{\\gamma,N}$ is bounded; its range lies in $\\operatorname{span}\\{e_1,\\ldots,e_N\\}$, so [F4] makes it compact. Since $s_j$ decreases to $0$, $\\|K_\\gamma-K_{\\gamma,N}\\|=\\sup_{j>N}s_j=s_{N+1}\\to0$; [F4] then makes $K_\\gamma$ compact, and positivity of each $s_j$ makes it injective. The choices $\\gamma_j=j-1$ and $\\gamma_j=j(j-1)/2$ are strictly increasing from $0$ to infinity; for the second, $\\gamma_j\\ge j-1$ for $j\\ge2$ and [F8] makes the natural numbers cofinal. Its gaps are $\\gamma_{j+1}-\\gamma_j=j$, so [F10] gives $s_{j+1}/s_j=\\exp(-\\gamma_{j+1})/\\exp(-\\gamma_j)=\\exp(-j)\\to0$ by [F8]–[F9].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "claim": "By steps 1.2 and 2.1, $K_\\gamma$ is compact, self-adjoint, and positive, so [F5] gives $|K_\\gamma|=K_\\gamma$. Hence each coordinate vector has singular value $s_j=\\exp(-\\gamma_j)$; [F5] gives $(|K_\\gamma|^\\nu w)_j=\\exp(-\\nu\\gamma_j)w_j$ and $(\\psi_q(|K_\\gamma|)w)_j=(1+\\log(1/s_j))^{-q}w_j=(1+\\gamma_j)^{-q}w_j$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-4.1",
+          "claim": "For each $j$, take $w^{(j)}=\\rho e_j$ and $x^{(j)}=|K_\\gamma|^\\nu w^{(j)}=\\rho s_j^\\nu e_j$ by step 3.1. Then $\\|K_\\gamma x^{(j)}\\|_2=\\rho s_j^{\\nu+1}$ and $\\|x^{(j)}\\|_2=\\rho s_j^\\nu=(\\rho s_j^{\\nu+1})^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$, so [F7] gives equality at that noise radius.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "F1",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-5.1",
+          "claim": "Take $\\gamma_j=j(j-1)/2$, write $r_j=s_{j+1}/s_j=\\exp(-j)$, and set $\\delta_j^\\star=\\rho(s_js_{j+1})^{(\\nu+1)/2}$. For any $x=|K_\\gamma|^\\nu w$ with $\\|w\\|_2\\le\\rho$ and $\\|K_\\gamma x\\|_2\\le\\delta_j^\\star$, step 3.1 gives $x_k=s_k^\\nu w_k$ and $(K_\\gamma x)_k=s_k^{\\nu+1}w_k$. Since $s_k\\ge s_j$ for $k\\le j$, $\\sum_{k\\le j}|x_k|^2\\le s_j^{-2}\\sum_{k\\le j}|(K_\\gamma x)_k|^2\\le(\\delta_j^\\star)^2/s_j^2$; since $s_k\\le s_{j+1}$ for $k>j$, $\\sum_{k>j}|x_k|^2\\le s_{j+1}^{2\\nu}\\sum_{k>j}|w_k|^2\\le\\rho^2s_{j+1}^{2\\nu}$. Thus $\\|x\\|_2^2\\le(\\delta_j^\\star)^2/s_j^2+\\rho^2s_{j+1}^{2\\nu}$. With $M_j=(\\delta_j^\\star)^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}=\\rho(s_js_{j+1})^{\\nu/2}$, this gives $\\|x\\|_2^2/M_j^2\\le r_j+r_j^\\nu$. By [F8], $r_j^\\nu=\\exp(-\\nu j)\\to0$ by [F9], since $\\nu>0$ and the natural numbers are cofinal; likewise $r_j=\\exp(-j)\\to0$. Taking the supremum over such feasible x and using [F2] gives $\\varepsilon_{K_\\gamma}(X_{\\nu,\\rho}(K_\\gamma),\\delta_j^\\star)/M_j\\le\\sqrt{r_j+r_j^\\nu}\\to0$. By step 2.1, $\\gamma_j\\to\\infty$; [F8] and the real-power definition give $\\delta_j^\\star=\\rho\\exp(-\\tfrac{\\nu+1}{2}(\\gamma_j+\\gamma_{j+1}))\\to0$ by [F9]. Therefore, for every $c>0$ and $\\delta_0>0$, some $j$ has $\\delta_j^\\star<\\delta_0$ and $\\varepsilon_{K_\\gamma}(X_{\\nu,\\rho}(K_\\gamma),\\delta_j^\\star)<cM_j$, ruling out a positive constant lower bound by the power scale at every sufficiently small noise radius.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes N={1,2,...} and strictly positive diagonal coefficients, so its positive singular set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines psi_q(0)=0 at the zero spectral value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the first singular direction and equality radius."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses make gamma strictly increasing and every exp(-gamma_j) positive, so K_gamma is injective with infinite rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check t=1 and gamma_1=0, the upper spectral endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 use Countable Choice for adjoints, compact norm limits, and spectral roots."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or worked example and makes no equivalence claim with a reverse direction."
+        }
+      ]
+    }
+  }
+}

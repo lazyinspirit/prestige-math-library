@@ -1,0 +1,749 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-posterior-computation-error-budget",
+    "prop-ip-bounded-posterior-functional-error",
+    "ex-ip-exact-invariant-kernel-short-run",
+    "ex-ip-low-ess-despite-correct-invariance",
+    "ex-ip-biased-pde-solver-posterior-error"
+  ],
+  "contracts": {
+    "def-ip-posterior-computation-error-budget": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability measure of total mass one cannot exist on the empty state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if f is identically zero, every expectation difference and every listed budget component is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 is expressly allowed and each finite average is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: on a one-point space or for constant f, all adjacent expectation differences vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: b=0 and N=1 are allowed, and the invariant-law term is defined only when an invariant law is supplied."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the particular invariant law and initial chain law are inputs; the definition selects no member from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-23-author",
+        "notes": "Self-audit of the error-budget definition, its exact supplier excerpts, assumptions, axiom branch, boundary worksheet, and current dependency labels. This is author evidence, not independent approval. The distinction between invariant-law discrepancy, burn-in bias, and random Monte Carlo deviation is explicit; an unverified component is not called a certificate."
+      }
+    },
+    "prop-ip-bounded-posterior-functional-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Their **total variation distance** is $$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-total-variation-bounds-for-expectations",
+          "source_section": "Statement",
+          "quote": "With the convention $$\\lVert P-Q\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}|P(A)-Q(A)|,$$ one has $$\\left|\\int f\\,dP-\\int f\\,dQ\\right|\\le 2M\\lVert P-Q\\rVert_{\\mathrm{TV}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-posterior-computation-error-budget",
+          "source_section": "Definition",
+          "quote": "The **posterior computation error budget** is $$\\mathcal B_f:=\\delta_{\\rm model}+\\delta_{\\rm solver}+\\delta_{\\rm disc}+\\delta_K+\\delta_{\\rm burn}+\\delta_{\\rm MC}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "The probability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a **stationary distribution** of $K$, when $$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-stationary-process-and-canonical-shift",
+          "source_section": "Definition",
+          "quote": "Let $S\\in\\{\\mathbb R,\\mathbb C\\}$ with Borel sigma-algebra $\\mathcal E$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a\nprobability space, and let $Y=(Y_n)_{n\\ge0}$ be a stochastic process with each\n$Y_n:\\Omega\\to S$ a random element\n([[def-stochastic-process-and-finite-dimensional-distributions]]). The process\n$Y$ is **strictly stationary** when every finite-dimensional law is unchanged\nby a common nonnegative time shift: for every $r\\ge1$, every\n$0\\le n_1<\\cdots<n_r$ and every $m\\ge0$,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is $$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pathwise-error-ledger-decomposition",
+          "source_section": "Statement",
+          "quote": "Then, pointwise, $$\\widetilde r-\\theta=\\sum_{j=1}^{m}(r_j-r_{j-1})+(\\widetilde r-r_m),$$ and consequently $$|\\widetilde r-\\theta|\\le\\sum_{j=1}^{m}|r_j-r_{j-1}|+|\\widetilde r-r_m|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice. Let $K$ be a probability kernel on $(E,\\mathcal E)$,\nlet $(\\Omega,\\mathcal F,\\mathbb P,(\\mathcal F_n)_{n\\ge0})$ be a filtered\nprobability space, and let $X=(X_n)_{n\\ge0}$ be an adapted $E$-valued process.\nWe call $X$ a **time-homogeneous Markov chain with transition kernel $K$ relative\nto $(\\mathcal F_n)$** if, for every $n\\ge0$ and $A\\in\\mathcal E$,\n$$ \\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=K(X_n,A)\\qquad\\text{a.s.} $$\nHere the left side is an almost-everywhere class of conditional-probability\nversions. The right side is $\\mathcal F_n$-measurable because\n$x\\mapsto K(x,A)$ is $\\mathcal E$-measurable and $X_n$ is\n$\\mathcal F_n/\\mathcal E$-measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tv-expectation-bound",
+          "claim": "Apply the established bounded-function total-variation theorem with bound M and the library event-supremum convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "budget-telescoping-bound",
+          "claim": "The finite scalar references telescope; the triangle inequality gives the sum of the six absolute adjacent-stage errors.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stationary-covariance-expansion",
+          "claim": "Center the stationary functional values and count N diagonal terms and N-k lag-k pairs, each off-diagonal pair appearing twice.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "absolute-covariance-bound",
+          "claim": "Use N-k≤N and absolute covariance summability to bound the finite covariance sum by the stated infinite-series expression.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There are no probability measures on an empty state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero when M=0; the sample covariance terms also vanish for f=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes N=1, when the lag sum is empty and the variance is gamma_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to constant f; then gamma_0 and all lag covariances are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 allow b=0, N=1, and an empty covariance tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 use no selection; A1 records AC only for the library Markov-chain interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Proposition contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Proposition contains no biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-23-author",
+        "notes": "Self-audit of the bounded-functional proposition, its exact supplier excerpts, assumptions, axiom branch, boundary worksheet, and current dependency labels. This is author evidence, not independent approval. The TV convention and constant 2 are matched to the event-supremum definition; the stationary covariance bound is separate from any CLT claim."
+      }
+    },
+    "ex-ip-exact-invariant-kernel-short-run": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice. Let $K$ be a probability kernel on $(E,\\mathcal E)$,\nlet $(\\Omega,\\mathcal F,\\mathbb P,(\\mathcal F_n)_{n\\ge0})$ be a filtered\nprobability space, and let $X=(X_n)_{n\\ge0}$ be an adapted $E$-valued process.\nWe call $X$ a **time-homogeneous Markov chain with transition kernel $K$ relative\nto $(\\mathcal F_n)$** if, for every $n\\ge0$ and $A\\in\\mathcal E$,\n$$ \\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=K(X_n,A)\\qquad\\text{a.s.} $$\nHere the left side is an almost-everywhere class of conditional-probability\nversions. The right side is $\\mathcal F_n$-measurable because\n$x\\mapsto K(x,A)$ is $\\mathcal E$-measurable and $X_n$ is\n$\\mathcal F_n/\\mathcal E$-measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-posterior-computation-error-budget",
+          "source_section": "Definition",
+          "quote": "When all stages are present, define the component errors\n$$\\begin{aligned}\\delta_{\\rm model}&:=|\\mu_\\star(f)-\\mu_{\\rm model}(f)|,\\\\ \\delta_{\\rm solver}&:=|\\mu_{\\rm model}(f)-\\mu_{\\rm solver}(f)|,\\\\ \\delta_{\\rm disc}&:=|\\mu_{\\rm solver}(f)-\\mu_{\\rm disc}(f)|,\\\\ \\delta_K&:=|\\mu_{\\rm disc}(f)-\\pi_K(f)|,\\\\ \\delta_{\\rm burn}&:=|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|,\\\\ \\delta_{\\rm MC}&:=|\\mathbb E_\\lambda\\bar f_{b,N}-\\bar f_{b,N}|.\\end{aligned}$$\nThe last component is random and the earlier components are fixed for the\ndeclared data and computation. The **posterior computation error budget** is\n$$\\mathcal B_f:=\\delta_{\\rm model}+\\delta_{\\rm solver}+\\delta_{\\rm disc}+\\delta_K+\\delta_{\\rm burn}+\\delta_{\\rm MC}.$$\nIf a computation stops before one of these stages, report the shorter reference\nchain and its component terms. The term $\\delta_K$ measures the invariant-law\ndiscrepancy induced by the implemented transition rule; it is not a one-step\ndistance between kernels. A one-step kernel error cannot replace it without a\nseparate perturbation theorem with its own hypotheses.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is integrable, its **mean** is $\\mathbb E[X]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-state-invariance",
+          "claim": "Both singleton masses remain one half under the symmetric stay-or-switch transition, so the uniform law is invariant.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-run-mean",
+          "claim": "The conditional one-step mean is lambda times the current state; induction gives E X_j=lambda^j.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "burn-in-bias",
+          "claim": "Summing the geometric progression gives the stated positive expected sample mean; the invariant-kernel term is zero and the difference is burn-in bias.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-state space E={-1,+1}."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes epsilon=1/1000 and f(x)=x; it makes no zero-functional claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The retained run is fixed at N=100."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The target is nondegenerate and the transition parameter is fixed strictly between zero and one half."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the invariant law on both singleton events, which generate the finite sigma-algebra."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the given finite-state chain; AC is used only through its declared chain interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state invariant kernel and 100-draw bias",
+          "method": "exact finite transition-matrix recurrence",
+          "input": {
+            "epsilon": "1/1000",
+            "initial_state": "+1",
+            "draws": 100
+          },
+          "calculation": "lambda=499/500 and E[mean]=100^-1 sum_{j=1}^{100} lambda^j=(499/100)(1-lambda^100).",
+          "expected": {
+            "invariant_target": "uniform",
+            "target_mean": 0,
+            "expected_sample_mean": "positive"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-23-author",
+        "notes": "Self-audit of the short-run example, its exact supplier excerpts, assumptions, axiom branch, boundary worksheet, and current dependency labels. This is author evidence, not independent approval. The target is exactly invariant; the nonstationary initial state is kept separate from invariant-law and Monte Carlo errors."
+      }
+    },
+    "ex-ip-biased-pde-solver-posterior-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-posterior-computation-error-budget",
+          "source_section": "Definition",
+          "quote": "When all stages are present, define the component errors\n$$\\begin{aligned}\\delta_{\\rm model}&:=|\\mu_\\star(f)-\\mu_{\\rm model}(f)|,\\\\ \\delta_{\\rm solver}&:=|\\mu_{\\rm model}(f)-\\mu_{\\rm solver}(f)|,\\\\ \\delta_{\\rm disc}&:=|\\mu_{\\rm solver}(f)-\\mu_{\\rm disc}(f)|,\\\\ \\delta_K&:=|\\mu_{\\rm disc}(f)-\\pi_K(f)|,\\\\ \\delta_{\\rm burn}&:=|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|,\\\\ \\delta_{\\rm MC}&:=|\\mathbb E_\\lambda\\bar f_{b,N}-\\bar f_{b,N}|.\\end{aligned}$$\nThe last component is random and the earlier components are fixed for the\ndeclared data and computation. The **posterior computation error budget** is\n$$\\mathcal B_f:=\\delta_{\\rm model}+\\delta_{\\rm solver}+\\delta_{\\rm disc}+\\delta_K+\\delta_{\\rm burn}+\\delta_{\\rm MC}.$$\nIf a computation stops before one of these stages, report the shorter reference\nchain and its component terms. The term $\\delta_K$ measures the invariant-law\ndiscrepancy induced by the implemented transition rule; it is not a one-step\ndistance between kernels. A one-step kernel error cannot replace it without a\nseparate perturbation theorem with its own hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-ip-bounded-posterior-functional-error",
+          "source_section": "Statement",
+          "quote": "Let $(E,\\mathcal E)$ be a measurable space, let $\\mu,\\nu$ be probability\nmeasures on it, and let $f:E\\to\\mathbb R$ be measurable with\n$|f|\\le M$ for some $0\\le M<\\infty$. Use the library convention\n$$\\|\\mu-\\nu\\|_{\\rm TV}:=\\sup_{A\\in\\mathcal E}|\\mu(A)-\\nu(A)|.$$\nThen\n$$|\\mu(f)-\\nu(f)|\\le2M\\|\\mu-\\nu\\|_{\\rm TV}.$$\n\nFor the complete posterior computation error budget defined above, the\npathwise total error satisfies\n$$|\\mu_\\star(f)-\\bar f_{b,N}|\\le\\mathcal B_f.$$\nThis is a telescoping bound; it does not estimate any component.\n\nSeparately, let $(X_n)_{n\\ge0}$ be a stationary time-homogeneous Markov chain\nwith transition kernel $K$, invariant law $\\pi_K$, and initial law\n$X_0\\sim\\pi_K$, and use the same bounded functional $f$. Put\n$$\\gamma_k:=\\operatorname{Cov}(f(X_0),f(X_k))\\qquad(k\\ge0).$$\nIf $\\sum_{k=1}^\\infty|\\gamma_k|<\\infty$, then for every burn-in $b\\ge0$ and\nsample size $N\\ge1$,\n$$\\mathbb E\\left[|\\bar f_{b,N}-\\pi_K(f)|^2\\right]=\\frac{1}{N^2}\\left[N\\gamma_0+2\\sum_{k=1}^{N-1}(N-k)\\gamma_k\\right]\\le\\frac{\\gamma_0+2\\sum_{k=1}^\\infty|\\gamma_k|}{N}.$$\nThe sample bound assumes stationarity; for a nonstationary start, the budget\nkeeps $|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|$ as a separate burn-in term.\nThis finite-$N$ variance bound is not a central limit theorem or a confidence\ninterval.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gaussian-posterior-densities",
+          "claim": "Multiply prior by each unit-variance likelihood, complete the square, evaluate the Gaussian normalizers, and identify the normalized densities.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-functional-values",
+          "claim": "Symmetry gives the exact posterior mass one half; centering and scaling the solver posterior gives Phi_0(sqrt(2)).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "solver-stage-classification",
+          "claim": "The selected reference chain makes the computed functional difference exactly the solver-stage term; apply the established total-variation bound with M=1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter space is the nonempty real line."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The solver shift is fixed at +2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the finite normal-normal check includes n=1, tau=1, and barX=0 and -2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both posterior variances are fixed at 1/2 and are positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the event boundary u=0; both continuous Gaussian laws assign it zero mass."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 assumes AC only for the normal-law interface; all density algebra is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "normal-normal posterior parameters",
+          "method": "registered independent prior/likelihood quadrature",
+          "input": {
+            "n": 1,
+            "tau": 1,
+            "barX_exact": 0,
+            "barX_solver_equivalent": -2
+          },
+          "calculation": "The exact and solver posteriors have variances 1/2 and means 0 and -1.",
+          "expected": {
+            "exact_posterior": "N(0,1/2)",
+            "solver_posterior": "N(-1,1/2)"
+          }
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "normal-normal-finite-n-posterior",
+          "asserts": "The exact posterior is $N(0,1/2)$ and the solver posterior is $N(-1,1/2)$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-23-author",
+        "notes": "Self-audit of the biased-solver example, its exact supplier excerpts, assumptions, axiom branch, boundary worksheet, and current dependency labels. This is author evidence, not independent approval. The solver shift is an explicit toy assumption, not a claim about all PDE discretizations; the finite Gaussian check does not validate general solver error."
+      }
+    },
+    "ex-ip-low-ess-despite-correct-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice. Let $K$ be a probability kernel on $(E,\\mathcal E)$,\nlet $(\\Omega,\\mathcal F,\\mathbb P,(\\mathcal F_n)_{n\\ge0})$ be a filtered\nprobability space, and let $X=(X_n)_{n\\ge0}$ be an adapted $E$-valued process.\nWe call $X$ a **time-homogeneous Markov chain with transition kernel $K$ relative\nto $(\\mathcal F_n)$** if, for every $n\\ge0$ and $A\\in\\mathcal E$,\n$$ \\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=K(X_n,A)\\qquad\\text{a.s.} $$\nHere the left side is an almost-everywhere class of conditional-probability\nversions. The right side is $\\mathcal F_n$-measurable because\n$x\\mapsto K(x,A)$ is $\\mathcal E$-measurable and $X_n$ is\n$\\mathcal F_n/\\mathcal E$-measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-invariant-initial-law-makes-the-chain-stationary",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $K$ be a probability kernel on a\nmeasurable space $(E,\\mathcal E)$, let $\\pi$ be an invariant probability for $K$\n([[def-invariant-and-stationary-distribution-for-a-markov-kernel]]), and let\n$X$ be a $K$-chain with initial law $\\pi$\n([[def-initial-distribution-of-a-markov-chain]]). Then every finite-dimensional\nlaw of $X$ is invariant under every nonnegative integer time shift: for every\n$r\\ge1$, every $0\\le n_1<\\cdots<n_r$ and every $m\\ge0$,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-functional-specific-effective-sample-size",
+          "source_section": "Definition",
+          "quote": "If $\\sum_{k\\ge1}|\\rho_h(k)|<\\infty$ and\n$\\tau_h:=1+2\\sum_{k\\ge1}\\rho_h(k)>0$, define the theoretical\n**functional-specific effective sample size** for an integer $n\\ge1$ draws by\n$\\operatorname{ESS}_h(n):=n/\\tau_h$. Here $Y_n$ is the scalar\nfunctional whose Monte Carlo average is being assessed. When a central limit\ntheorem for that average has asymptotic variance\n$\\sigma_h^2\\tau_h$, this definition is the iid sample size with the same\nasymptotic variance. It does not assert that such a central limit theorem holds.\nIf the covariance series is not absolutely summable or $\\tau_h\\le0$, this\ndefinition does not assign a finite positive effective sample size.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-ip-bounded-posterior-functional-error",
+          "source_section": "Statement",
+          "quote": "Let $(E,\\mathcal E)$ be a measurable space, let $\\mu,\\nu$ be probability\nmeasures on it, and let $f:E\\to\\mathbb R$ be measurable with\n$|f|\\le M$ for some $0\\le M<\\infty$. Use the library convention\n$$\\|\\mu-\\nu\\|_{\\rm TV}:=\\sup_{A\\in\\mathcal E}|\\mu(A)-\\nu(A)|.$$\nThen\n$$|\\mu(f)-\\nu(f)|\\le2M\\|\\mu-\\nu\\|_{\\rm TV}.$$\n\nFor the complete posterior computation error budget defined above, the\npathwise total error satisfies\n$$|\\mu_\\star(f)-\\bar f_{b,N}|\\le\\mathcal B_f.$$\nThis is a telescoping bound; it does not estimate any component.\n\nSeparately, let $(X_n)_{n\\ge0}$ be a stationary time-homogeneous Markov chain\nwith transition kernel $K$, invariant law $\\pi_K$, and initial law\n$X_0\\sim\\pi_K$, and use the same bounded functional $f$. Put\n$$\\gamma_k:=\\operatorname{Cov}(f(X_0),f(X_k))\\qquad(k\\ge0).$$\nIf $\\sum_{k=1}^\\infty|\\gamma_k|<\\infty$, then for every burn-in $b\\ge0$ and\nsample size $N\\ge1$,\n$$\\mathbb E\\left[|\\bar f_{b,N}-\\pi_K(f)|^2\\right]=\\frac{1}{N^2}\\left[N\\gamma_0+2\\sum_{k=1}^{N-1}(N-k)\\gamma_k\\right]\\le\\frac{\\gamma_0+2\\sum_{k=1}^\\infty|\\gamma_k|}{N}.$$\nThe sample bound assumes stationarity; for a nonstationary start, the budget\nkeeps $|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|$ as a separate burn-in term.\nThis finite-$N$ variance bound is not a central limit theorem or a confidence\ninterval.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-invariance",
+          "claim": "The symmetric stay-or-switch transition preserves the uniform law on both singleton events.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stationary-initialization",
+          "claim": "The initial law is the invariant law, so the chain has stationary finite-dimensional distributions under AC.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lag-covariance",
+          "claim": "The conditional mean recursion multiplies the lag-k covariance by lambda at each step, giving rho_f(k)=lambda^k.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "theoretical-ess",
+          "claim": "The geometric autocorrelation series sums to 49, so tau=99 and the theoretical functional-specific ESS is 10000/99.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-state space E={-1,+1}."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes epsilon=1/100 and f(x)=x."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the functional variance is exactly one and hence strictly positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 computes Var(X_n)=1, so the functional is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fixed transition parameter epsilon=1/100 is strictly inside (0,1/2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 states the only AC use, through the invariant-initial-law stationarity theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state stationary autocorrelation and ESS",
+          "method": "exact transition-matrix recursion and geometric series",
+          "input": {
+            "epsilon": "1/100",
+            "lambda": "49/50",
+            "draws": 10000
+          },
+          "calculation": "rho(k)=(49/50)^k; sum rho=49; tau=99.",
+          "expected": {
+            "invariant": "uniform",
+            "variance": 1,
+            "ess": "10000/99"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-23-author",
+        "notes": "Self-audit of the low-ESS example, its exact supplier excerpts, assumptions, axiom branch, boundary worksheet, and current dependency labels. This is author evidence, not independent approval. ESS is theoretical and functional-specific; no CLT, mixing rate, or empirical diagnostic is claimed."
+      }
+    }
+  }
+}

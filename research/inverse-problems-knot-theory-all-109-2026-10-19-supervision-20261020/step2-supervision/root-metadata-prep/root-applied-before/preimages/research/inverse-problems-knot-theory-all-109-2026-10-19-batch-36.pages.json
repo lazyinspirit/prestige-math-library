@@ -1,0 +1,253 @@
+[
+  {
+    "order": 3068,
+    "id": "radon-transform-and-fourier-slice-reconstruction",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Euclidean Radon transform and filtered backprojection",
+    "companion": "radon-transform-and-fourier-slice-reconstruction-examples",
+    "requires": [
+      "tempered-distributions-and-the-fourier-transform",
+      "bochner-inversion-and-plancherel-on-lca-groups",
+      "finite-fourier-analysis-and-the-fast-fourier-transform"
+    ],
+    "items": [
+      {
+        "id": "def-ip-2d-radon-transform",
+        "kind": "definition",
+        "title": "The Euclidean Radon transform on R²",
+        "deps": [
+          "def-fourier-transform-on-an-lca-group"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "forward_refs": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, RICAM lecture notes v1, §2.1: Radon transform in R²",
+              "url": "https://users.jyu.fi/~salomi/lecturenotes/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–7: line parameterization, Fourier convention, and full-angle backprojection."
+            },
+            {
+              "title": "Frank Natterer, X-ray Tomography, in Inverse Problems and Imaging",
+              "url": "https://www.researchgate.net/publication/profile/Frank-Natterer/publication/226521751_X-ray_Tomography/links/02e7e525392792a0a3000000/X-ray-Tomography.pdf",
+              "locator": "§2.1, pp. 18–20: Radon transform, Fourier slice theorem, and inversion; §3.1, pp. 26–28: filtered-backprojection discretization."
+            }
+          ]
+        },
+        "statement": "Write $C_c^\\infty(\\mathbb R^2;\\mathbb C)$ for the complex-valued smooth functions of compact support on the Euclidean plane. For $u\\in C_c^\\infty(\\mathbb R^n;\\mathbb C)$, $n=1$ or $2$, use the compact-support Riemann Fourier transform\n$$\\widehat u(\\xi)=\\int_{\\mathbb R^n}u(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\nFor $\\theta=(\\theta_1,\\theta_2)\\in S^1:=\\{x\\in\\mathbb R^2:|x|=1\\}$ put $\\theta^\\perp=(-\\theta_2,\\theta_1)$. The line with normal $\\theta$ and signed offset $s$ is $\\{x\\in\\mathbb R^2:x\\cdot\\theta=s\\}$. Its **Euclidean Radon transform** is\n$$Rf(\\theta,s):=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt,\\qquad f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C),\\ (\\theta,s)\\in S^1\\times\\mathbb R.$$\nThe line integral is a compact-support Riemann integral.\nThe full data set uses every oriented normal $\\theta\\in S^1$ and every $s\\in\\mathbb R$; the same unoriented line is represented by $(\\theta,s)$ and $(-\\theta,-s)$.\nFor a one-dimensional function $h$ with integrable Fourier transform, define\n$$|D_s|h(s):=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat h(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nFor $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ define the Riesz potential notation used here by\n$$|D|^{-1}f(x):=\\int_{\\mathbb R^2}e^{2\\pi i x\\cdot\\xi}\\frac{\\widehat f(\\xi)}{2\\pi|\\xi|}\\,d\\xi.$$\nThe quotient in the last integral is assigned value $0$ at $\\xi=0$. These integrals are absolutely convergent on the stated classes: compact-support integration by parts gives rapid decay of $\\widehat f$ and $\\widehat h$, while $\\widehat f$ is bounded near $0$ and $|\\xi|^{-1}$ is locally integrable in two dimensions. Here the multiplier for $|D_s|$ is $2\\pi|\\sigma|$, corresponding to the $e^{-2\\pi i s\\sigma}$ Fourier convention."
+      },
+      {
+        "id": "thm-ip-fourier-slice-identity",
+        "kind": "theorem",
+        "title": "The Fourier-slice identity for the Euclidean Radon transform",
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-riemann-fubini-on-product-rectangles"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, RICAM lecture notes v1, §2.1: Radon transform in R²",
+              "url": "https://users.jyu.fi/~salomi/lecturenotes/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–7: Fourier-slice theorem and its Fubini proof."
+            },
+            {
+              "title": "Frank Natterer, X-ray Tomography, in Inverse Problems and Imaging",
+              "url": "https://www.researchgate.net/publication/profile/Frank-Natterer/publication/226521751_X-ray_Tomography/links/02e7e525392792a0a3000000/X-ray-Tomography.pdf",
+              "locator": "§2.1, pp. 18–20, Theorem 2.1: projection-slice theorem and line-coordinate proof."
+            }
+          ]
+        },
+        "statement": "For every $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$, every unit normal $\\theta\\in S^1$, and every $\\sigma\\in\\mathbb R$, the compact-support Fourier transform of the line data in the offset variable equals the restriction of the two-dimensional Fourier transform to the line in frequency space with direction $\\theta$:\n$$\\widehat{Rf}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta).$$"
+      },
+      {
+        "id": "thm-ip-radon-normal-operator",
+        "kind": "theorem",
+        "title": "The Euclidean Radon normal operator and inversion formula",
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "thm-ip-fourier-slice-identity",
+          "def-countable-choice",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "thm-fourier-inversion-on-schwartz-space",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, RICAM lecture notes v1, §2.1: Radon transform in R²",
+              "url": "https://users.jyu.fi/~salomi/lecturenotes/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–7: normal operator, polar-coordinate calculation, and filtered-backprojection formula."
+            },
+            {
+              "title": "Frank Natterer, X-ray Tomography, in Inverse Problems and Imaging",
+              "url": "https://www.researchgate.net/publication/profile/Frank-Natterer/publication/226521751_X-ray_Tomography/links/02e7e525392792a0a3000000/X-ray-Tomography.pdf",
+              "locator": "§2.1, pp. 18–20, Theorems 2.1–2.2 and formula (7): slice theorem and two-dimensional inversion formula."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $\\mu$ be the polar surface measure on $S^1$, defined on Borel $E\\subseteq S^1$ by\n$$\\mu(E):=2\\lambda_2\\bigl(\\{r\\theta:\\theta\\in E,\\ 0<r\\le1\\}\\bigr),$$\nwhere $\\lambda_2$ is Lebesgue measure on $\\mathbb R^2$. For continuous $g:S^1\\times\\mathbb R\\to\\mathbb C$ for which the integral exists, define its **backprojection** by\n$$R^*g(x):=\\int_{S^1}g(\\theta,x\\cdot\\theta)\\,d\\mu(\\theta).$$\nFor every $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ and every $x\\in\\mathbb R^2$, the normal-operator and filtered-backprojection identities hold:\n$$R^*Rf(x)=4\\pi|D|^{-1}f(x),\\qquad f(x)=\\frac1{4\\pi}R^*|D_s|Rf(x),$$\nwith $|D|^{-1}$ and $|D_s|$ as defined for the compact-support Fourier convention in the Euclidean Radon transform definition."
+      },
+      {
+        "id": "alg-ip-filtered-backprojection-complete-data",
+        "kind": "algorithm",
+        "title": "Complete-data filtered backprojection",
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "thm-ip-fourier-slice-identity",
+          "thm-ip-radon-normal-operator"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, RICAM lecture notes v1, §2.1: Radon transform in R²",
+              "url": "https://users.jyu.fi/~salomi/lecturenotes/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–7: the full-data filtered-backprojection identity."
+            },
+            {
+              "title": "Frank Natterer, X-ray Tomography, in Inverse Problems and Imaging",
+              "url": "https://www.researchgate.net/publication/profile/Frank-Natterer/publication/226521751_X-ray_Tomography/links/02e7e525392792a0a3000000/X-ray-Tomography.pdf",
+              "locator": "§3.1, pp. 26–28: filtering and backprojection steps and their finite-sampling context."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and let $\\mu$ be the polar surface measure on $S^1$, with $\\mu(E)=2\\lambda_2(\\{r\\theta:\\theta\\in E,\\ 0<r\\le1\\})$ for Borel $E\\subseteq S^1$. The **complete-data filtered-backprojection procedure** takes as input the exact full sinogram $g=Rf$ of some $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$; all oriented normals $\\theta\\in S^1$ and all offsets $s\\in\\mathbb R$ are supplied. It returns the function $f_{\\mathrm{FBP}}:\\mathbb R^2\\to\\mathbb C$ defined by\n$$f_{\\mathrm{FBP}}(x)=\\frac1{4\\pi}\\int_{S^1}q(\\theta,x\\cdot\\theta)\\,d\\mu(\\theta),$$\nwhere the filter output is\n$$q(\\theta,s)=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat{g(\\theta,\\cdot)}(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nThe exact instructions are: (1) for each $\\theta$, take the one-dimensional Fourier transform of $g(\\theta,\\cdot)$ with the negative-sign $2\\pi$ convention; (2) multiply that transform by the declared ramp filter $2\\pi|\\sigma|$ and take its inverse Fourier integral to form $q(\\theta,\\cdot)$; (3) evaluate $q(\\theta,\\cdot)$ at $s=x\\cdot\\theta$ and integrate over the full polar surface measure in $\\theta$; (4) divide by $4\\pi$. For this input class the slice identity and Schwartz decay make the filter integral absolutely convergent and the backprojection integral well defined. This definition specifies the continuous full-data procedure; it gives no guarantee for finitely sampled, truncated, or noisy measurements. Exact recovery on the stated class is proved by the normal-operator theorem."
+      }
+    ]
+  },
+  {
+    "order": 3069,
+    "id": "radon-transform-and-fourier-slice-reconstruction-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Euclidean Radon transform and filtered backprojection — Examples and Counterexamples",
+    "companion": "radon-transform-and-fourier-slice-reconstruction",
+    "requires": [
+      "radon-transform-and-fourier-slice-reconstruction"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-smooth-radial-phantom",
+        "kind": "example",
+        "title": "A smooth radial phantom and its sinogram",
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        },
+        "statement": "Define $\\eta(u)=0$ for $u\\le0$ and $\\eta(u)=e^{-1/u}$ for $u>0$, and put $f(x)=\\eta(1-|x|^2)$ on $\\mathbb R^2$. This is a nonzero, smooth, compactly supported radial phantom. Its Euclidean Radon transform is independent of $\\theta$ and is\n$$Rf(\\theta,s)=\\begin{cases}\\displaystyle\\int_{-\\sqrt{1-s^2}}^{\\sqrt{1-s^2}}\\exp\\!\\left(-\\frac{1}{1-s^2-t^2}\\right)\\,dt,&|s|<1,\\\\[1.2ex]0,&|s|\\ge1.\\end{cases}$$"
+      },
+      {
+        "id": "ex-ip-point-source-distributional-limit",
+        "kind": "example",
+        "title": "A point source as a distributional Radon limit",
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-multidimensional-integral-properties",
+          "thm-riemann-fubini-on-product-rectangles"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        },
+        "statement": "Let $\\eta(u)=0$ for $u\\le0$ and $\\eta(u)=e^{-1/u}$ for $u>0$, set $\\psi(x)=\\eta(1-|x|^2)$ on $\\mathbb R^2$, let $J=\\int_{\\mathbb R^2}\\psi(x)\\,dx$, and define $\\phi=J^{-1}\\psi$. For $\\varepsilon>0$ put $\\phi_\\varepsilon(x)=\\varepsilon^{-2}\\phi(x/\\varepsilon)$. The functions $\\phi_\\varepsilon$ are radial smooth unit-mass point-source approximations. For $\\rho(s)=\\int_{\\mathbb R}\\phi(s\\theta+t\\theta^\\perp)\\,dt$, which is independent of $\\theta$, their full line data satisfy\n$$R\\phi_\\varepsilon(\\theta,s)=\\varepsilon^{-1}\\rho(s/\\varepsilon).$$\nFor each fixed $\\theta\\in S^1$ and every test function $h\\in C_c^\\infty(\\mathbb R)$, the offset distributions converge to the point mass:\n$$\\lim_{\\varepsilon\\downarrow0}\\int_{\\mathbb R}R\\phi_\\varepsilon(\\theta,s)h(s)\\,ds=h(0).$$\nThus the point-source sinogram is $\\delta_0(s)$ in the offset variable, for every line normal."
+      },
+      {
+        "id": "ex-ip-discretized-complete-data-backprojection",
+        "kind": "example",
+        "title": "A finite complete-angle filtered-backprojection calculation",
+        "deps": [
+          "alg-ip-filtered-backprojection-complete-data",
+          "def-countable-choice",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "def-unnormalised-engineering-dft-and-conversion",
+          "def-recursive-radix-two-fast-fourier-transform",
+          "thm-radix-two-fft-correctness",
+          "thm-finite-fourier-inversion"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Frank Natterer, X-ray Tomography, in Inverse Problems and Imaging",
+              "url": "https://www.researchgate.net/publication/profile/Frank-Natterer/publication/226521751_X-ray_Tomography/links/02e7e525392792a0a3000000/X-ray-Tomography.pdf",
+              "locator": "§3.1, pp. 26–28: filtering and angular backprojection quadrature for sampled data."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the continuous backprojection convention. As a finite-grid illustration, take eight equally spaced full-circle directions $\\theta_j=(\\cos(2\\pi j/8),\\sin(2\\pi j/8))$, $j=0,\\ldots,7$, four detector offsets $s_m=m-2$ for $m=0,1,2,3$, detector spacing $\\Delta s=1$, and the synthetic row $G_j=(0,0,1,0)$ at every direction. Apply the length-four radix-two FFT to each row, multiply frequency $k$ by the declared sampled ramp $\\lambda_k=2\\pi\\min(k,4-k)/4$, and invert the finite transform. Each filtered row is $Q=(0,-\\pi/4,\\pi/2,-\\pi/4)$. With the eight-point trapezoidal angular rule of weight $\\Delta\\theta=\\pi/4$, the one-pixel backprojection at $x=0$ is\n$$\\widetilde f_h(0)=\\frac1{4\\pi}\\Delta\\theta\\sum_{j=0}^7Q_j[2]=\\frac\\pi4.$$\nThis is the exact output of the specified finite computation. The array is a synthetic discrete sinogram; no claim is made that the finite detector or angle grid exactly represents a continuous phantom or that this output converges to one. The continuous theorem assumes full continuous data and makes no finite-sampling, truncation, or noise guarantee."
+      }
+    ]
+  }
+]

@@ -1,0 +1,871 @@
+{
+  "version": 1,
+  "scope": [
+    "def-singular-knot-and-vassiliev-derivative",
+    "def-framed-chord-diagram-and-four-term-relations",
+    "rem-weight-system-integration-proof-boundary",
+    "lem-vassiliev-4t-from-singular-reidemeister-move",
+    "lem-vassiliev-framing-one-term-relation",
+    "thm-vassiliev-invariant-induces-weight-system",
+    "cex-knot-kt-34-boundary-case",
+    "ex-knot-kt-34-worked-cases"
+  ],
+  "contracts": {
+    "def-singular-knot-and-vassiliev-derivative": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the m=0 finite difference is explicitly set to D0V(K)=V(K), and degree zero has no marked points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: type at most n is stated for all n≥0, including n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-double-point finite difference is V(K+)−V(K−)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: double points are transverse and framing zeroes are simple; degenerate singularities are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition is on S1 and has no interval endpoint or boundary-value claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: framed clauses explicitly assume ACω; the unframed finite resolution sum is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        }
+      ]
+    },
+    "def-framed-chord-diagram-and-four-term-relations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: degree zero is the oriented circle with no chords or dots."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-degree diagram has no singular marks and is included in the graded family."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: degree one permits one chord or one dot; 4T is only defined for n≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: all chord endpoints and dots are distinct and disjoint."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Diagrams are on a closed oriented circle and have no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: diagrams are finite combinatorial objects and no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        }
+      ]
+    },
+    "rem-weight-system-integration-proof-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-framed-chord-diagram-and-four-term-relations",
+          "source_section": "Definition",
+          "quote": "The **4T relation** is\n$$\nD_1-D_2+D_3-D_4=0.\n$$\nTwo chords **intersect** if their endpoints alternate around the oriented circle. A chord is **isolated** if it intersects no other chord. The **1T relation** sets every unframed diagram with an isolated chord equal to zero. The framed degree-$n$ chord-diagram module is the free $R$-module on degree-$n$ chord diagrams modulo all 4T relations. The unframed degree-$n$ chord-diagram module is the free $R$-module on degree-$n$ chord diagrams modulo 4T and 1T relations. A framed weight system is an $R$-linear functional on the framed module; an unframed weight system is an $R$-linear functional on the unframed module.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A degree-$n$ chord diagram is a pairing of $2n$ cyclically ordered endpoints, so only finitely many such diagrams exist. A 4T relation is determined by a background diagram and finitely many endpoint positions, and a 1T relation by one diagram; hence there are finitely many relation vectors. By [F1], each has integer coefficients, so they form the rows of a finite integer matrix $A$. Write $A_n(F):=F^{C_n}/\\operatorname{rowspan}_F(A)$ and $W_n(F):=\\operatorname{Hom}_F(A_n(F),F)$. Since $k$ has characteristic zero, $\\mathbb Q$ embeds in $k$. The rank of $A$ is unchanged by this field extension: a nonzero maximal minor over $\\mathbb Q$ remains nonzero in $k$, while every larger minor that vanishes over $\\mathbb Q$ still vanishes in $k$. Thus the row space over $k$ is the scalar extension of the rational row space, and $A_n(k)\\cong A_n(\\mathbb Q)\\otimes_{\\mathbb Q}k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The quotient is finite-dimensional, so extending a rational basis and its dual basis gives $W_n(k)\\cong W_n(\\mathbb Q)\\otimes_{\\mathbb Q}k$. If $n=0$, the sole diagram is the empty diagram and any weight system is its value $c\\in k$; the constant invariant $V(K)=c$ has top symbol $c$. For $n>0$, choose a finite $\\mathbb Q$-basis $\\phi_1,\\ldots,\\phi_d$ of $W_n(\\mathbb Q)$; finite-dimensional row reduction chooses this basis without a choice axiom. By [F2], for each $i$ there is a rational-valued finite-type invariant $V_i$ with top symbol $\\phi_i$. Write the given weight system as $W=\\sum_{i=1}^d a_i\\phi_i$ with $a_i\\in k$, and define $V=\\sum_{i=1}^d a_iV_i$, viewing each rational value in $k$. Linearity of the finite-difference operator gives top symbol $W$. If $W_n(\\mathbb Q)=0$, the sum is empty and the zero invariant supplies the zero weight system.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers degree zero: the empty chord diagram is the sole generator and the constant invariant integrates its scalar weight."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the zero weight system by the empty basis sum and zero invariant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers degree one; the only chord is isolated and 1T kills it, so the weight-system space is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 rank argument also covers a zero relation matrix or zero quotient; no analytic regularity is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns finite-dimensional diagram quotients and has no endpoint or boundary-value data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 selects a basis by finite-dimensional row reduction from a finite diagram set; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states an existence result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states an existence result, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-87",
+        "notes": "The converse is used only inside this remark to derive the characteristic-zero field extension from the unframed rational theorem; it is not a premise in the KT-34 symbol, 4T, or 1T results. Chmutov–Lando states the rational theorem, and the finite-dimensional scalar-extension proof is local."
+      }
+    },
+    "lem-vassiliev-4t-from-singular-reidemeister-move": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-singular-knot-and-vassiliev-derivative",
+          "source_section": "Definition",
+          "quote": "An invariant has **type at most $n$** if $D_{n+1}V$ vanishes on every $(n+1)$-singular object in its category.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-framed-chord-diagram-and-four-term-relations",
+          "source_section": "Definition",
+          "quote": "For a commutative ring $R$, a **degree-$n$ chord diagram** is an oriented circle with $n$ disjoint unordered pairs of distinct points, called chords, considered up to orientation-preserving homeomorphism of the circle.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy",
+          "source_section": "Statement",
+          "quote": "The local Reidemeister replacement has a realization supported in a ball over its move disk, after choosing lifts that agree outside that ball.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "realize-diagram",
+          "step": "1.1",
+          "claim": "Construct an unframed or framed representative of each finite chord-and-dot diagram.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "representative-independence",
+          "step": "2.1",
+          "claim": "Relate representatives by a generic compact homotopy and use the vanishing of the next finite difference at each isolated event.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "four-term-cancellation",
+          "step": "3.1",
+          "claim": "Resolve the four local configurations and cancel the repeated values a,b,c,d.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers n=0 with the unmarked circle; there is no 4T generator in degree zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the degree-zero representative, and Step 2.1 proves representative independence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The 4T definition requires n≥2, so degree one has no 4T generator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Step 2.1 restrict the event list to transverse double points and simple framing zeroes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is on closed knots parametrized by S1 and asserts no interval-boundary result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use finite constructions; the framed branch explicitly assumes ACω in the statement and Fact A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states representative independence and 4T vanishing, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states representative independence and 4T vanishing, not an equivalence."
+        }
+      ]
+    },
+    "lem-vassiliev-framing-one-term-relation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-singular-knot-and-vassiliev-derivative",
+          "source_section": "Definition",
+          "quote": "An invariant has **type at most $n$** if $D_{n+1}V$ vanishes on every $(n+1)$-singular object in its category.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-framed-chord-diagram-and-four-term-relations",
+          "source_section": "Definition",
+          "quote": "The **1T relation** sets every unframed diagram with an isolated chord equal to zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "The **writhe** of $D$ is $$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-framed-knot-self-linking-and-seifert-framing",
+          "source_section": "Definition",
+          "quote": "The **self-linking number** of a framed knot $(K,[s])$ is the linking number of $K$ with a sufficiently small push-off along $s$, oriented parallel to $K$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-framed-knot-push-off-self-linking-well-defined",
+          "source_section": "Statement",
+          "quote": "The integer linking number of $K$ with $K_{\\varepsilon s}$ is independent of the sufficiently small radius, of the representative section in its homotopy class, and of the normalized tubular chart.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-blackboard-framing-self-linking-is-writhe",
+          "source_section": "Statement",
+          "quote": "The self-linking number of the framed knot $(K,b_D)$ equals the diagram writhe: $$\\operatorname{sl}(K,b_D)=\\operatorname{wr}(D).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "Return $s/2$. The even-sum lemma establishes that this output is an integer and is the diagram's linking number.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "On every finite regular oriented diagram with exactly two components, the crossing-scan algorithm halts after one iteration per crossing and returns the integer half-sum of the mixed crossing signs.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "crossing-switches",
+          "step": "1.1",
+          "claim": "Switching only unmarked crossings between the two arcs preserves the top derivative by type at most n.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "isolated-resolution-equality",
+          "step": "2.1",
+          "claim": "After separation the two resolutions are orientation-preserving connected-sum exchanges and hence have equal invariant value.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "framed-self-linking-witness",
+          "step": "1.2",
+          "claim": "Relative framing winding is additive over disjoint local resolutions, making self-linking affine on each two-singularity cube; the one-chord derivative is 2.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1, so the zero-singularity case is outside its scope."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1, so the zero-singularity case is outside its scope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 prove the one-chord unframed case; Step 1.2 gives the framed one-chord witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: only transverse double points and simple framing zeroes are admitted; degenerate singularities are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof concerns closed knot components and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only finitely many crossing changes; the separate framed branch states ACω in Fact A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states a vanishing law and counter-witness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states a vanishing law and counter-witness, not a biconditional."
+        }
+      ]
+    },
+    "thm-vassiliev-invariant-induces-weight-system": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-singular-knot-and-vassiliev-derivative",
+          "source_section": "Definition",
+          "quote": "An invariant has **type at most $n$** if $D_{n+1}V$ vanishes on every $(n+1)$-singular object in its category.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-framed-chord-diagram-and-four-term-relations",
+          "source_section": "Definition",
+          "quote": "The framed degree-$n$ chord-diagram module is the free $R$-module on degree-$n$ chord diagrams modulo all 4T relations.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-vassiliev-4t-from-singular-reidemeister-move",
+          "source_section": "Statement",
+          "quote": "In either category, every degree-$n$ chord diagram $D$ has an $n$-singular representative $K$ with no framing zeroes in the framed case, and $w_V(D):=D_nV(K)$ is independent of the representative and of its zero-free framing class.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-vassiliev-framing-one-term-relation",
+          "source_section": "Statement",
+          "quote": "Then $D_nV(K)=0$ whenever the degree-$n$ chord diagram of the $n$-singular knot $K$ has a chord that intersects no other chord.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "symbol-functional",
+          "step": "1.1",
+          "claim": "Choose representatives, use representative independence, and extend the symbol linearly.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "four-term-quotient",
+          "step": "2.1",
+          "claim": "The functional kills the 4T submodule and therefore factors through the quotient.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "one-term-and-framing",
+          "step": "3.1",
+          "claim": "The unframed symbol kills 1T; the framed self-linking witness prevents a universal framed 1T law.",
+          "inputs": [
+            "F2",
+            "F4",
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes n=0: the unique unmarked degree-zero diagram is evaluated by D0V=V."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the functional by the degree-n derivative; the zero invariant gives the zero functional."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 cover degree-one 4T/1T and the framed one-chord witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem uses the transverse/simple singularities in Definition and Fact F1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns closed oriented knots, not interval endpoint data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 and Fact A1 isolate ACω to the framed branch; the unframed 4T and 1T arguments are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts factorization through diagram quotients, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts factorization through diagram quotients, not a biconditional."
+        }
+      ]
+    },
+    "cex-knot-kt-34-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy",
+          "source_section": "Statement",
+          "quote": "If the diagrams differ by one oriented Reidemeister move or a planar isotopy, the links are equivalent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-singular-knot-and-vassiliev-derivative",
+          "source_section": "Definition",
+          "quote": "For an $R$-valued ambient-isotopy invariant $V$ of unframed oriented knots and an $m$-singular knot $K$, its **finite difference** is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "The **writhe** of $D$ is $$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "same-unknot",
+          "step": "1.1",
+          "claim": "The two diagrams represent the same unframed oriented knot by a local type-I move.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "writhe-jump",
+          "step": "2.1",
+          "claim": "The crossing-free diagram has writhe zero and its positive-curl representative has writhe one, contradicting invariance.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly uses the zero-crossing diagram D0 with writhe zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the zero-writhe boundary value on D0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the one-crossing positive-curl value on D1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample uses regular diagrams with one ordinary transverse crossing at most."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns closed knot diagrams and no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use one local Reidemeister move and a finite crossing sum; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no biconditional."
+        }
+      ]
+    },
+    "ex-knot-kt-34-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-singular-knot-and-vassiliev-derivative",
+          "source_section": "Definition",
+          "quote": "An invariant has **type at most $n$** if $D_{n+1}V$ vanishes on every $(n+1)$-singular object in its category.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "At each crossing whose branches lie on different components, add $$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$ to $s$, where the determinant is taken in the oriented projection plane; ignore self-crossings. Return $s/2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "On every finite regular oriented diagram with exactly two components, the crossing-scan algorithm halts after one iteration per crossing and returns the integer half-sum of the mixed crossing signs.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linking-number-is-invariant-and-writhe-is-not",
+          "source_section": "Statement",
+          "quote": "For any two regular oriented diagrams of ambient-isotopic two-component links, the algorithmic linking numbers agree.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "single-mixed-derivative",
+          "step": "1.1",
+          "claim": "The marked mixed crossing contributes one half with sign +1 and one half with sign −1, so the derivative is +1.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "second-difference",
+          "step": "2.1",
+          "claim": "The linking formula is affine in two mixed crossing signs; self-crossings contribute zero, so every second difference vanishes.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "one-component-sum",
+          "step": "1.2",
+          "claim": "A one-component knot has no distinct component pair in its total pairwise linking sum.",
+          "inputs": [
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow an empty mixed-crossing list, for which C=0 and the linking sum is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero for a one-component knot because there are no distinct component pairs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the single marked mixed crossing derivative as +1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example assumes a finite regular oriented link diagram, so every crossing is transverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval endpoint or boundary-value claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 and Fact A1 state ACω for the topological link-invariance suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states explicit derivative values, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states explicit derivative values, not an equivalence."
+        }
+      ]
+    }
+  }
+}

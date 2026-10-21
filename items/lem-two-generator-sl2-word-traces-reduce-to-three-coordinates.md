@@ -1,0 +1,42 @@
+---
+id: lem-two-generator-sl2-word-traces-reduce-to-three-coordinates
+kind: lemma
+title: Two-generator SL2 word traces reduce to three coordinates
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: []
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: Explicit rank-two Cayley–Hamilton and polarized matrix identities
+      locator: All identities and the word induction are proved below; no unproved trace-coordinate theorem is used.
+    - title: Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds
+      url: https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf
+      locator: §2.1, trace-character model baseline. The explicit Cayley–Hamilton word induction here, including reducible/scalar cases, is a local formulation/proof refinement, not a verbatim theorem attributed to this source.
+  attribution_boundary: Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.
+  reading_limits: URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim.
+dependency_level: 0
+---
+
+## Statement
+
+Let $A,B\in SL_2(\mathbb C)$ and put $a=\operatorname{tr}A$, $b=\operatorname{tr}B$, $c=\operatorname{tr}(AB)$. Every word matrix in $A^{\pm1},B^{\pm1}$ is a linear combination of $I,A,B,AB$ with coefficients in $\mathbb Z[a,b,c]$, computed by finite word induction. Consequently its trace is a polynomial in those three traces. If $a=b=x$ and $c=y$, the coefficients specialize to $\mathbb Z[x,y]$. The assertion includes scalar, unipotent, reducible and irreducible pairs and uses no choice axiom.
+
+## Facts & Assumptions
+
+**Given:** Two determinant-one complex $2\times2$ matrices, their indicated traces and any finite word in the matrices and their inverses.
+
+[F1] For a $2\times2$ matrix $T$, the entrywise identity $T^2-(\operatorname{tr}T)T+(\det T)I=0$ follows by multiplying its four entries.
+
+## Proof
+
+1.1 Apply [F1] to $A$ and $B$. Since both determinants are one, $$A^{-1}=aI-A,\qquad B^{-1}=bI-B,\qquad A^2=aA-I,\qquad B^2=bB-I.$$ Thus it suffices to reduce positive words. Apply [F1] also to $A+B$ and subtract the identities for $A,B$. The entrywise determinant polarization is $\det(A+B)-\det A-\det B=ab-c$. Hence $$AB+BA=aB+bA+(c-ab)I,$$ an identity valid without any genericity or independence of the four matrices. [F1, given, construct, algebra]
+
+2.1 The span of $I,A,B,AB$ over $\mathbb Z[a,b,c]$ is stable under right multiplication by $A$ and $B$. Besides the products already displayed in step 1.1, the needed two are $$ABA=cA+B-bI,\qquad ABB=bAB-A.$$ For the first multiply the polarized identity by $A$ on the left and use $A^2=aA-I$; the second is $AB^2=A(bB-I)$. The other products are $IA=A$, $IB=B$, $AA=aA-I$, $AB=AB$, $BA=-AB+aB+bA+(c-ab)I$, $BB=bB-I$. This is the complete multiplication table needed for one-letter extension of a word. [step 1.1, construct, algebra]
+
+3.1 Start the empty word at $I$ and apply the table of step 2.1 once per positive letter. Replace each inverse letter by its two-term expression from step 1.1, or use linearity to extend that same table to inverse letters. Induction gives a finite coefficient expression for every word. Taking traces uses only $\operatorname{tr}I=2$, $\operatorname{tr}A=a$, $\operatorname{tr}B=b$, $\operatorname{tr}AB=c$, proving the trace assertion. Substituting $a=b=x,c=y$ gives the stated equal-trace specialization. No matrix-basis independence, diagonalization or infinite choice of word expressions is required. [step 1.1, step 2.1, construct, induction, algebra] ∎

@@ -1,0 +1,270 @@
+[
+  {
+    "order": 3036,
+    "id": "posterior-contraction-in-gaussian-sequence-inversion",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Posterior contraction in Gaussian sequence inversion",
+    "companion": "posterior-contraction-in-gaussian-sequence-inversion-examples",
+    "requires": [
+      "statistical-inverse-experiments-and-white-noise",
+      "gaussian-sequence-models-and-risk-decomposition",
+      "minimax-estimation-over-inverse-source-classes",
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "linear-gaussian-inverse-posteriors-and-tikhonov",
+      "gaussian-process-posterior-contraction",
+      "gaussian-process-priors-and-posterior-laws"
+    ],
+    "items": [
+      {
+        "id": "def-ip-posterior-contraction-rate",
+        "kind": "definition",
+        "title": "Posterior contraction rate in a Gaussian sequence inverse experiment",
+        "statement": "Let $\\mathbb N=\\{1,2,3,\\ldots\\}$. For each positive noise level $\\epsilon$, let $\\Pi_{0,\\epsilon}$ be a proper Borel prior on $\\ell^2(\\mathbb N,\\mathbb R)$ in the Gaussian sequence inverse experiment, and let $\\mathbb P_{\\Pi_{0,\\epsilon}}$ be the resulting prior-predictive joint law of parameter and data. A posterior kernel is a data-measurable assignment $y\\mapsto\\Pi_\\epsilon(\\cdot\\mid y)$ of Borel probability measures on $\\ell^2$ satisfying\n$$\\mathbb P_{\\Pi_{0,\\epsilon}}(\\theta\\in A,\\,Y\\in B)=\\int_B\\Pi_\\epsilon(A\\mid y)\\,\\mathbb P_{\\Pi_{0,\\epsilon}}^Y(dy)$$\nfor every Borel $A\\subseteq\\ell^2$ and every product-Borel $B\\subseteq\\mathbb R^{\\mathbb N}$, where $\\mathbb P_{\\Pi_{0,\\epsilon}}^Y$ is the prior-predictive data marginal. Fix a truth $\\theta^\\dagger\\in\\ell^2$ and write $\\mathbb P_{\\theta^\\dagger}^\\epsilon$ for its data law. Since a conditional-law version is specified only up to a prior-predictive null set, any contraction claim under $\\mathbb P_{\\theta^\\dagger}^\\epsilon$ refers to the stated version. A positive function $r_\\epsilon\\to0$ is a posterior contraction rate in the $\\ell^2$ norm at $\\theta^\\dagger$ if, for every positive function $M_\\epsilon\\to\\infty$,\n$$\\mathbb E_{\\theta^\\dagger}^\\epsilon\\!\\left[\\Pi_\\epsilon\\!\\left(\\{\\theta\\in\\ell^2:\\|\\theta-\\theta^\\dagger\\|_2>M_\\epsilon r_\\epsilon\\}\\mid Y\\right)\\right]\\longrightarrow0\\quad\\text{as }\\epsilon\\downarrow0.$$",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "B. T. Knapik, A. W. van der Vaart, and J. H. van Zanten, Bayesian inverse problems with Gaussian priors, The Annals of Statistics 39 (2011), §4, Theorem 4.1",
+              "url": "https://arxiv.org/pdf/1103.2692",
+              "locator": "Theorem 4.1 states expected posterior tail convergence outside M_n times a rate for every M_n tending to infinity."
+            },
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2013 draft",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf",
+              "locator": "§2.3, printed pp. 25–29, for product priors/posteriors and posterior risk terminology."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No additional axiom is required to define this rate; a posterior kernel and the sequence experiment are inputs."
+      },
+      {
+        "id": "thm-ip-conjugate-gaussian-sequence-contraction",
+        "kind": "theorem",
+        "title": "Exact posterior second moment and contraction bound for a Gaussian sequence inverse problem",
+        "statement": "Assume the Axiom of Choice and the Axiom of Countable Choice. Let $0<\\epsilon$, let $(s_j)_{j\\ge1}$ be the positive singular values in the Gaussian sequence inverse model, and let a fixed truth $\\theta^\\dagger=(\\theta^\\dagger_j)_{j\\ge1}$ belong to $\\ell^2(\\mathbb N,\\mathbb R)$. Let $\\tau_j>0$ satisfy $\\sum_{j\\ge1}\\tau_j^2<\\infty$, and let the prior be a Borel probability on $\\ell^2$ whose coordinates are independent $N(0,\\tau_j^2)$ variables, independent of the observation noise. Under the prior-predictive law the observations are $Y_j=s_j\\theta_j+\\epsilon\\xi_j$; under the fixed truth they are $Y_j=s_j\\theta^\\dagger_j+\\epsilon\\xi_j$, where the $\\xi_j$ are independent $N(0,1)$ variables. Define $v_j=(\\tau_j^{-2}+s_j^2/\\epsilon^2)^{-1}$ and $\\lambda_j=\\tau_j^2s_j^2/(\\epsilon^2+\\tau_j^2s_j^2)$. For fixed-truth-almost every data sequence, a posterior version on $\\ell^2$ is the restriction of $\\bigotimes_{j\\ge1}N(\\lambda_jY_j/s_j,v_j)$. Its expected posterior squared distance from the truth is\n$$S_\\epsilon(\\theta^\\dagger):=\\mathbb E_{\\theta^\\dagger}\\!\\left[\\int_{\\ell^2}\\|\\theta-\\theta^\\dagger\\|_2^2\\,\\Pi_\\epsilon(d\\theta\\mid Y)\\right]=\\sum_{j\\ge1}\\left[(1-\\lambda_j)^2(\\theta^\\dagger_j)^2+\\frac{v_j^2s_j^2}{\\epsilon^2}+v_j\\right].$$\nThe identity holds in $[0,+\\infty]$; under the stated trace condition its right side is finite. For every $R>0$, the expected posterior mass outside the radius-$R$ ball is at most $S_\\epsilon(\\theta^\\dagger)/R^2$. In particular, if $S_\\epsilon(\\theta^\\dagger)\\le C r_\\epsilon^2$ for a constant $C$ and a positive $r_\\epsilon\\to0$, then $r_\\epsilon$ is a posterior contraction rate in the sense of the preceding definition.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-posterior-contraction-rate",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-independent-random-elements",
+          "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "thm-ip-finite-linear-gaussian-posterior",
+          "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "thm-dynkin-pi-lambda",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "B. T. Knapik, A. W. van der Vaart, and J. H. van Zanten, Bayesian inverse problems with Gaussian priors, The Annals of Statistics 39 (2011), 2626–2657",
+              "url": "https://arxiv.org/pdf/1103.2692",
+              "locator": "§3, Proposition 3.1; §4, Theorem 4.1; §7.1 complete proof, with the diagonal coordinate expressions and sum bounds in Lemmas 8.1–8.2. The present coordinatewise trace identity is proved locally."
+            },
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2013 draft",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf",
+              "locator": "§§1.2 and 2.3, equations (1.4), (2.14)–(2.20), and the product-prior discussion (2.16), printed pp. 6 and 25–29."
+            },
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions",
+              "url": "https://arxiv.org/pdf/1707.01706",
+              "locator": "§1, equations (1)–(3), PDF pp. 1–2, for the sequence inverse experiment and its compact-SVD convention; no Bayesian contraction claim is taken from this minimax paper."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited from the compact-SVD sequence model. AC is used to construct the countable Gaussian product law. The posterior-moment, nonnegative-series, and Markov calculations use no stronger choice principle."
+      }
+    ]
+  },
+  {
+    "order": 3037,
+    "id": "posterior-contraction-in-gaussian-sequence-inversion-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Posterior contraction in Gaussian sequence inversion — Examples and Counterexamples",
+    "companion": "posterior-contraction-in-gaussian-sequence-inversion",
+    "requires": [
+      "posterior-contraction-in-gaussian-sequence-inversion",
+      "hilbert-valued-clt-for-weakly-dependent-functional-time-series",
+      "linear-prediction-for-dependent-data"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-polynomial-singular-value-posterior-contraction",
+        "kind": "example",
+        "title": "Polynomial singular-value decay and a power Gaussian prior",
+        "statement": "Assume AC and Countable Choice. Fix $\\alpha,\\beta,p,L>0$. For each $0<\\epsilon\\le1$, use the centered Gaussian Borel prior on $\\ell^2$ with independent coordinates $\\theta_j\\sim N(0,j^{-1-2\\alpha})$, independent of the observation noise. Under the fixed-truth law, observe $Y_j=j^{-p}\\theta^\\dagger_j+\\epsilon\\xi_j$ with independent $N(0,1)$ noise and a fixed truth $\\theta^\\dagger$ in the power ellipsoid $\\{\\theta\\in\\ell^2:\\sum_{j\\ge1}j^{2\\beta}(\\theta_j)^2\\le L^2\\}$. Then the posterior contracts in the $\\ell^2$ norm at rate $r_\\epsilon=\\epsilon^{2\\min(\\alpha,\\beta)/(1+2\\alpha+2p)}$, meaning that for every $M_\\epsilon\\to\\infty$ the expected posterior mass outside radius $M_\\epsilon r_\\epsilon$ tends to zero as $\\epsilon\\downarrow0$.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-posterior-contraction-rate",
+          "thm-ip-conjugate-gaussian-sequence-contraction",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "def-separable-space",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "lem-finite-rank-operators-are-compact",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "lem-positive-trace-class-covariance-defines-hilbert-gaussian",
+          "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-real-power",
+          "thm-real-power-laws",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-limits-and-range",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-geometric-series"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "B. T. Knapik, A. W. van der Vaart, and J. H. van Zanten, Bayesian inverse problems with Gaussian priors, The Annals of Statistics 39 (2011), 2626–2657",
+              "url": "https://arxiv.org/pdf/1103.2692",
+              "locator": "Assumption 3.1, Theorem 4.1(i), and §7.1 proof, printed pp. 8–9 and 20–21, for polynomial singular-value decay, power prior variances, and the regularity dependence; the exact bound here is proved locally."
+            },
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2013 draft",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf",
+              "locator": "§2.3, equations (2.19)–(2.20) and product-prior discussion (2.16), printed pp. 26–29, for coordinatewise Gaussian posterior mean and variance."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "Countable Choice is inherited from the sequence model and used by the compactness and nuclear trace-class criteria. AC constructs the Hilbert Gaussian prior and is assumed by the conjugate posterior theorem. The dyadic cutoff and moment bounds use no additional choice principle."
+      },
+      {
+        "id": "ex-ip-exponential-singular-value-posterior-contraction",
+        "kind": "example",
+        "title": "Exponential singular-value decay and an exponentially weighted truth class",
+        "statement": "Assume AC and Countable Choice. Fix $\\alpha,\\beta,p,L>0$. For each $0<\\epsilon<1/e^{\\alpha+p}$, use the centered Gaussian Borel prior on $\\ell^2$ with independent coordinates $\\theta_j\\sim N(0,e^{-2\\alpha j})$, independent of the observation noise. Under the fixed-truth law, observe $Y_j=e^{-pj}\\theta^\\dagger_j+\\epsilon\\xi_j$ with independent $N(0,1)$ noise and a fixed truth $\\theta^\\dagger$ in the exponential ellipsoid $\\{\\theta\\in\\ell^2:\\sum_{j\\ge1}e^{2\\beta j}(\\theta_j)^2\\le L^2\\}$. Then the posterior contracts in the $\\ell^2$ norm at rate $r_\\epsilon=\\epsilon^{\\min(\\alpha,\\beta)/(\\alpha+p)}$, meaning that for every $M_\\epsilon\\to\\infty$ the expected posterior mass outside radius $M_\\epsilon r_\\epsilon$ tends to zero as $\\epsilon\\downarrow0$.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-posterior-contraction-rate",
+          "thm-ip-conjugate-gaussian-sequence-contraction",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "def-separable-space",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "lem-finite-rank-operators-are-compact",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "lem-positive-trace-class-covariance-defines-hilbert-gaussian",
+          "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-natural-logarithm-laws",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-limits-and-range",
+          "thm-exponential-addition-formula",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-geometric-series"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions",
+              "url": "https://arxiv.org/pdf/1707.01706",
+              "locator": "§3 and Table 1, PDF pp. 5–6, for exponential singular-value and source-axis regimes in the minimax setting; the posterior rate here is proved locally."
+            },
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2013 draft",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf",
+              "locator": "§2.3, equations (2.19)–(2.20) and product-prior discussion (2.16), printed pp. 26–29, for coordinatewise Gaussian posterior mean and variance."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "Countable Choice is inherited from the sequence model and used by the compactness and nuclear trace-class criteria. AC constructs the Hilbert Gaussian prior and is assumed by the conjugate posterior theorem. The threshold split and geometric bounds use no additional choice principle."
+      },
+      {
+        "id": "cex-ip-point-mass-prior-excludes-truth-no-contraction",
+        "kind": "counterexample",
+        "title": "A point-mass Gaussian prior excluding the truth prevents contraction",
+        "statement": "Assume AC and Countable Choice. In every positive-noise Gaussian sequence inverse experiment, every proper centered Gaussian prior on $\\ell^2$ yields posterior contraction at some rate $r_\\epsilon\\to0$ about every truth $\\theta^\\dagger\\in\\ell^2$, including truths for which the prior gives zero mass to every ball of radius less than $1$ centered at $\\theta^\\dagger$.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-posterior-contraction-rate",
+          "thm-ip-conjugate-gaussian-sequence-contraction",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "B. T. Knapik, A. W. van der Vaart, and J. H. van Zanten, Bayesian inverse problems with Gaussian priors, The Annals of Statistics 39 (2011), 2626–2657",
+              "url": "https://arxiv.org/pdf/1103.2692",
+              "locator": "§3, Proposition 3.1, and §4, Theorem 4.1, for the positive trace-class Gaussian prior and truth-smoothness assumptions; the point-mass support boundary is proved locally."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "axiom_use": "AC and Countable Choice are stated for consistency with the sequence model and the theorem whose scope is contrasted. The point-mass posterior identity and one-coordinate likelihood-ratio calculation use no additional choice principle."
+      }
+    ]
+  }
+]

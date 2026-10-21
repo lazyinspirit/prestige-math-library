@@ -1,0 +1,1047 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-singular-gaussian-support-and-pseudoinverse",
+    "thm-ip-finite-linear-gaussian-posterior",
+    "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+    "ex-ip-singular-state-gaussian-posterior",
+    "ex-ip-prior-whitened-tikhonov-posterior",
+    "cex-ip-nongaussian-map-differs-from-posterior-mean"
+  ],
+  "contracts": {
+    "lem-ip-singular-gaussian-support-and-pseudoinverse": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose an orthonormal eigenbasis of $C$ and order it so the positive eigenvalues are $\\lambda_1,\\ldots,\\lambda_r$. Let $U$ have the corresponding eigenvectors as columns and set $\\Lambda=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_r)$. The zero eigenspace is the orthogonal complement of these columns, so $C=U\\Lambda U^T$ and $\\operatorname{Ran}(C)=\\operatorname{Ran}(U)$. When $r=0$, the eigenbasis gives $C=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $r>0$, set $P=U\\Lambda^{-1}U^T$. The decomposition in step 1.1 gives $CP=PC=UU^T$, hence $CPC=C$ and $PCP=P$; also $CP$ and $PC$ are symmetric. Thus $P$ satisfies all four equations in [F5], so uniqueness gives $P=C^\\dagger$. If $r=0$, the zero matrix satisfies the four equations for $C=0$, and uniqueness gives $C^\\dagger=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $r>0$. By [F2], the square root is $C^{1/2}=U\\Lambda^{1/2}U^T$. By [F3], $X$ has the law of $m+U\\Lambda^{1/2}U^TZ_n$ for a standard-normal vector $Z_n$. For every $a\\in\\mathbb R^r$, the scalar $a^TU^TZ_n=(Ua)^TZ_n$ is centered normal with variance $\\|Ua\\|_2^2=\\|a\\|_2^2$, so $U^TZ_n$ has law $N_r(0,I_r)$. Therefore $X$ has the stated representation. When $r=0$, [F3] makes $X=m$ almost surely.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $r>0$, let $x=m+U\\Lambda^{1/2}z$ be any point of $m+\\operatorname{Ran}(C)$. The continuous map $t\\mapsto m+U\\Lambda^{1/2}t$ sends $z$ to $x$, so the preimage of every open ball about $x$ contains an open ball about $z$. By [F4], $N_r(0,I_r)$ assigns positive measure to every nonempty open ball. The representation in step 2.2 therefore gives positive $\\mu_X$-mass to every neighborhood of $x$. Conversely, the law in step 2.2 is concentrated on the finite-dimensional closed affine subspace $m+\\operatorname{Ran}(C)$; every point outside it has a neighborhood of zero mass. Hence the support is exactly that subspace. If $r=0$, the point-mass law from step 2.2 has support $\\{m\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.2",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite-dimensional model and makes no empty-space existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 2.2, and 3.1 explicitly handle r=0, C=0, C dagger=0, the point-mass law, and singleton support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply when r=n; U is square orthogonal and the support is all of R^n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove the range coordinates and support for every 0<r<n."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval-endpoint or limiting claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC and step 2.2 uses the supplied Gaussian construction interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The proof treats zero rank, intermediate rank, and full rank directly; it makes no infinite-dimensional support claim."
+      }
+    },
+    "thm-ip-finite-linear-gaussian-posterior": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-singular-gaussian-support-and-pseudoinverse",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $m\\in\\mathbb R^n$, and let\n$C\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TCv\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$X$ be a random vector with law $N_n(m,C)$, and define\n$\\mu_X(E)=\\mathbb P(X\\in E)$ for Borel $E\\subseteq\\mathbb R^n$. Write\n$\\operatorname{Ran}(C)=\\{Cv:v\\in\\mathbb R^n\\}$, and put\n$r=\\dim\\operatorname{Ran}(C)$. For a Borel probability $\\mu$ on\n$\\mathbb R^n$, define its topological support by\n$$ \\operatorname{supp}(\\mu)=\\{x:\\mu(B(x,\\varepsilon))>0\\text{ for every }\\varepsilon>0\\}, $$\nwhere $B(x,\\varepsilon)$ is the open Euclidean ball. If $r>0$, there are\n$U\\in\\mathbb R^{n\\times r}$ and a symmetric positive-definite\n$\\Lambda\\in\\mathbb R^{r\\times r}$ with $U^TU=I_r$ such that\n$$ C=U\\Lambda U^T,\\qquad \\operatorname{Ran}(C)=\\operatorname{Ran}(U),\\qquad C^\\dagger=U\\Lambda^{-1}U^T. $$\nMoreover, $X$ has the same law as $m+U\\Lambda^{1/2}Z$, where\n$Z\\sim N_r(0,I_r)$, and\n$$ \\operatorname{supp}(\\mu_X)=m+\\operatorname{Ran}(C). $$\nHere $C^\\dagger$ is the unique matrix satisfying\n$CC^\\dagger C=C$, $C^\\dagger CC^\\dagger=C^\\dagger$, and such that\n$CC^\\dagger$ and $C^\\dagger C$ are symmetric. If $r=0$, then\n$C=0$, $X=m$ almost surely, $C^\\dagger=0$, and the support is $\\{m\\}$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A real stochastic process\n$X=(X_t)_{t\\in I}$\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.\n\nEquivalently, for every such time list the evaluation vector\n$(X_{t_1},\\ldots,X_{t_n})$ has a possibly singular multivariate normal law in\nthe sense of Multivariate normal law, including singular covariance. Indeed, that definition says\nexactly that every scalar projection of the vector is normal. This also covers\nrepeated times, zero coefficients, and singular covariance matrices; no\ndistinct-time convention is needed for this definition.\n\nChoice is declared because the library's scalar and multivariate normal-law\ninterfaces construct their probability laws and independent standard-normal\nrealizations under AC. The equivalence itself is only an unpacking of the\nfinite-dimensional projection definition and makes no further selection.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\nIndependent sigma-algebras and independent events.\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from The sigma-algebra generated by a function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\nthe existence theorem for a mean and a positive-semidefinite covariance kernel.\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.\n\nLet $\\epsilon\\sim N_n(0,R)$ be independent of the process, where $R$ is\nsymmetric positive semidefinite, and set $Y=f_X+\\epsilon$. Assume the\nobserved covariance $C=K_{XX}+R$ is positive definite. Then a version of the\nconditional law of $f_{X_*}$ given $Y=y$ is, for every $y\\in\\mathbb R^n$,\n$$N_p\\!\\left(m_*+K_{*X}C^{-1}(y-m_X),\\;K_{**}-K_{*X}C^{-1}K_{X*}\\right).$$\nThe displayed conditional covariance is positive semidefinite and may be\nsingular; $K_{XX}$ and $K_{**}$ may also be singular. If a prediction-noise\nvector $\\eta_*\\sim N_p(0,R_*)$ jointly independent of the process and\n$\\epsilon$ is added to $f_{X_*}$, with $R_*$ symmetric positive semidefinite,\nthe conditional mean is unchanged and\n$R_*$ is added to the conditional covariance. The displayed kernel is a\nversion defined at every $y$; conditional-law versions are determined only\n$P_Y$-almost surely.\n\nFor computation, the occurrences of $C^{-1}v$ mean solving $Cu=v$. Since\n$C$ is positive definite, its Cholesky factorization and forward/back\nsubstitution evaluate these solves without forming $C^{-1}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.3",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-ip-function-space-posterior-propriety",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a separable real Banach space with norm $\\|\\cdot\\|_X$, let $D\\subseteq X$ be Borel, and let $\\mu_0$ be a Borel probability on $X$ with $\\mu_0(D)=1$. Here $\\mathcal B(X)$ is generated by the norm-open sets. Give $D$ the relative topology and Borel sigma-algebra $\\mathcal B(D)=\\{D\\cap B:B\\in\\mathcal B(X)\\}$, and let $\\mu_{0,D}$ be the restriction of $\\mu_0$ to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D)$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. Assume $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B(\\overline{\\mathbb R})$ is generated by the order topology on the extended real line and $\\mathcal B((-\\infty,+\\infty])$ is its trace on $(-\\infty,+\\infty]$; thus $+\\infty$ is allowed and $-\\infty$ is excluded. Let $\\mathsf Y_0\\subseteq\\mathsf Y$. Suppose that for every $y\\in\\mathsf Y_0$, the section $u\\mapsto\\Phi(u;y)$ is finite and continuous as a real-valued function on $D$ with its relative topology inherited from the norm topology. Suppose there is one Borel function $M_1:[0,\\infty)\\to[0,\\infty)$, independent of $y\\in\\mathsf Y_0$, such that\n$$\\Phi(u;y)\\ge -M_1(\\|u\\|_X)\\quad(u\\in D,\\ y\\in\\mathsf Y_0),\\qquad \\int_D e^{M_1(\\|u\\|_X)}\\,\\mu_{0,D}(du)<\\infty.$$\nDefine $\\operatorname{supp}\\mu_0:=\\{x\\in X:\\mu_0(U)>0\\text{ for every open neighborhood }U\\text{ of }x\\}$. Then for every $y\\in\\mathsf Y_0$, the evidence $Z_\\Phi(y)$ is finite and strictly positive, and the normalized fiberwise update $\\Pi^y$ is a probability measure on $D$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $v\\in\\mathbb R^m\\setminus\\{0\\}$, $v^TSv=(A^Tv)^TC_0(A^Tv)+v^T\\Gamma v>0$, since the first term is nonnegative and the second is positive. Thus $S\\succ0$ and $S^{-1}$ exists.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $T$ be the finite index set with state indices $s_1,\\ldots,s_n$ and observation indices $o_1,\\ldots,o_m$. Define $f_{s_i}=X_i$ and $f_{o_j}=(AX)_j$. Every finite linear combination of these coordinates is a linear projection of $X$, so it is normal by [F1] and $f$ is a Gaussian process by [F3]. Its covariance blocks are $K_{SS}=C_0$, $K_{SO}=C_0A^T$, and $K_{OO}=AC_0A^T$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For each fixed $y$, $\\Phi_y$ is finite, continuous, and nonnegative on $\\mathbb R^n$, and $(x,y)\\mapsto\\Phi_y(x)$ is jointly continuous. The prior $\\mu_0$ is a probability on the separable Banach space $\\mathbb R^n$, and the envelope $M_1(r)=0$ satisfies $\\int e^{M_1(\\|x\\|_2)}\\,\\mu_0(dx)=1$. Therefore [F9] gives $0<Z(y)<\\infty$ for every $y$, and [F8] defines $\\Pi^y$. The likelihood density from [F7] is a positive constant independent of $x$ times $e^{-\\Phi_y(x)}$; its constant cancels in the normalized update.",
+          "step": "1.3",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vector $f$ is a measurable function of $X$, so [F4] and [F5] make $\\eta$ independent of $f$. The observed covariance is $K_{OO}+\\Gamma=S\\succ0$ by step 1.1. Applying [F6] with test list $S$ and observation list $O$ gives the displayed Gaussian conditional-law version for every $y$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $r=\\operatorname{rank}(C_0)>0$. By [F2], write $C_0=U\\Lambda U^T$ and represent $X$ as $m_0+L\\xi$, where $L=U\\Lambda^{1/2}$ and $\\xi\\sim N_r(0,I_r)$. Put $B=AL$ and $d=y-Am_0$. By the pushforward formula for $\\mu_0$ and the likelihood in [F7], the density of the normalized update in these coordinates is proportional, for every $y$, to $$ \\exp\\!\\left(-\\tfrac12\\left[\\xi^T\\xi+(d-B\\xi)^T\\Gamma^{-1}(d-B\\xi)\\right]\\right). $$ This is a pointwise fixed-data calculation; it does not replace the all-data version convention in step 1.3.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "step 1.3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $Q=I_r+B^T\\Gamma^{-1}B$ and $h=B^T\\Gamma^{-1}d$. Then $Q\\succ0$, and expansion gives $$ \\xi^T\\xi+(d-B\\xi)^T\\Gamma^{-1}(d-B\\xi) =(\\xi-Q^{-1}h)^TQ(\\xi-Q^{-1}h)+d^T\\Gamma^{-1}d-h^TQ^{-1}h. $$ Thus the update in step 2.2 is the Gaussian law of $\\xi$ with mean $Q^{-1}h$ and covariance $Q^{-1}$, so the update of $X=m_0+L\\xi$ has mean $m_0+LQ^{-1}B^T\\Gamma^{-1}d$ and covariance $LQ^{-1}L^T$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $S=\\Gamma+BB^T$, multiplication gives $QB^T=B^T\\Gamma^{-1}S$, hence $Q^{-1}B^T\\Gamma^{-1}=B^TS^{-1}$. Also $Q(I_r-B^TS^{-1}B)=Q-QB^TS^{-1}B=I_r$, so $Q^{-1}=I_r-B^TS^{-1}B$. Substituting these identities into step 3.1 yields $$ m_0+LQ^{-1}B^T\\Gamma^{-1}d=m_0+C_0A^TS^{-1}d $$ and $$ LQ^{-1}L^T=C_0-C_0A^TS^{-1}AC_0. $$ These are exactly the mean and covariance in the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $r=0$, [F2] gives $C_0=0$ and $X=m_0$ almost surely. Reweighting a point mass by the positive likelihood leaves that point mass, while the displayed formulas reduce to mean $m_0$ and covariance $0$. This also matches the conditional version from step 2.1 and proves the rank-zero boundary. Thus the fixed-data update and the stated all-data conditional version have the displayed law in every rank case.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite-dimensional model and makes no empty-space existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 verifies C0=0, point-mass posterior, and the reduced mean and covariance formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.2–4.1 apply when C0 is positive definite and r=n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2–4.1 derive the update for positive rank; step 5.1 handles rank zero and singular prior/posterior covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 gives 0<Z(y)<infinity for every y, excluding both improper evidence endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, and steps 1.2 and 2.1 apply the Gaussian-process conditioning interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The matrix inverse is only of the positive-definite observed covariance. Singular prior and posterior covariance and the all-datum version convention are explicit; the result is finite-dimensional only."
+      }
+    },
+    "cor-ip-gaussian-map-equals-tikhonov-minimizer": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-finite-linear-gaussian-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n,m\\ge1$, $m_0\\in\\mathbb R^n$, and let\n$C_0\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TC_0v\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$A\\in\\mathbb R^{m\\times n}$ and let\n$\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite, meaning\n$u^T\\Gamma u>0$ for every nonzero $u\\in\\mathbb R^m$. Suppose\n$X$ and $\\eta$ are independent random vectors with laws\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$, and set\n$Y=AX+\\eta$. Define $\\mu_0(E)=\\mathbb P(X\\in E)$ for Borel\n$E\\subseteq\\mathbb R^n$, and set\n$S=AC_0A^T+\\Gamma$. Then $S$ is positive definite. For each\n$y\\in\\mathbb R^m$, define\n$$ \\Phi_y(x)=\\tfrac12(y-Ax)^T\\Gamma^{-1}(y-Ax),\\qquad Z(y)=\\int_{\\mathbb R^n}e^{-\\Phi_y(x)}\\,\\mu_0(dx). $$\nFor every $y$, $0<Z(y)<\\infty$, so the normalized potential update\n$$ \\Pi^y(E)=\\frac{\\int_E e^{-\\Phi_y(x)}\\,\\mu_0(dx)}{Z(y)} \\quad(E\\in\\mathcal B(\\mathbb R^n)) $$\nis a probability measure and equals the conditional-law version obtained by\nconditioning the observation model at $y$. Its Gaussian formula, defined for\nevery $y$, is\n$$ N_n\\!\\left( m_0+C_0A^TS^{-1}(y-Am_0),\\ C_0-C_0A^TS^{-1}AC_0 \\right). $$\nLet $P_Y(B)=\\mathbb P(Y\\in B)$ for Borel $B\\subseteq\\mathbb R^m$.\nConditional-law versions are unique only $P_Y$-almost surely. The displayed\nmean and covariance formulas invert only $S$, not $C_0$; $C_0$ and the\nposterior covariance may be singular. The prior support is\n$m_0+\\operatorname{Ran}(C_0)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-singular-gaussian-support-and-pseudoinverse",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $m\\in\\mathbb R^n$, and let\n$C\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TCv\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$X$ be a random vector with law $N_n(m,C)$, and define\n$\\mu_X(E)=\\mathbb P(X\\in E)$ for Borel $E\\subseteq\\mathbb R^n$. Write\n$\\operatorname{Ran}(C)=\\{Cv:v\\in\\mathbb R^n\\}$, and put\n$r=\\dim\\operatorname{Ran}(C)$. For a Borel probability $\\mu$ on\n$\\mathbb R^n$, define its topological support by\n$$ \\operatorname{supp}(\\mu)=\\{x:\\mu(B(x,\\varepsilon))>0\\text{ for every }\\varepsilon>0\\}, $$\nwhere $B(x,\\varepsilon)$ is the open Euclidean ball. If $r>0$, there are\n$U\\in\\mathbb R^{n\\times r}$ and a symmetric positive-definite\n$\\Lambda\\in\\mathbb R^{r\\times r}$ with $U^TU=I_r$ such that\n$$ C=U\\Lambda U^T,\\qquad \\operatorname{Ran}(C)=\\operatorname{Ran}(U),\\qquad C^\\dagger=U\\Lambda^{-1}U^T. $$\nMoreover, $X$ has the same law as $m+U\\Lambda^{1/2}Z$, where\n$Z\\sim N_r(0,I_r)$, and\n$$ \\operatorname{supp}(\\mu_X)=m+\\operatorname{Ran}(C). $$\nHere $C^\\dagger$ is the unique matrix satisfying\n$CC^\\dagger C=C$, $C^\\dagger CC^\\dagger=C^\\dagger$, and such that\n$CC^\\dagger$ and $C^\\dagger C$ are symmetric. If $r=0$, then\n$C=0$, $X=m$ almost surely, $C^\\dagger=0$, and the support is $\\{m\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tikhonov-regularised-least-squares",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. The **Tikhonov regularised\nleast-squares objective** is the map\n\n$$ J_\\lambda(x):=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2 \\qquad(x\\in\\mathbb F^n), $$\n\nwhere $\\|\\cdot\\|_2$ is the Euclidean norm induced by the standard inner product\n([[def-inner-product-norm]]).\n\nThe parameter $\\lambda$ is part of the problem data. The second term penalises\nlarge norms of $x$, so the regularised problem is not the same optimisation\nproblem as the unregularised least-squares problem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. Then\nthe Tikhonov objective\n\n$$J_\\lambda(x)=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$$\n\nis strictly convex and has the unique minimiser\n\n$$x_\\lambda=(A^*A+\\lambda I)^{-1}A^*b.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $r=0$, [F2] gives $C_0=0$ and $S_0=\\{m_0\\}$. The posterior is the point mass at $m_0$ by [F1], so its mean and unique MAP point are $m_0$. The objective $J_y$ has only this admissible point, hence it has the same unique minimizer on $S_0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $r>0$. By [F2], choose $U,\\Lambda$ with $C_0=U\\Lambda U^T$, $C_0^\\dagger=U\\Lambda^{-1}U^T$, and write $L=U\\Lambda^{1/2}$. The map $z\\mapsto m_0+Lz$ is a bijection from $\\mathbb R^r$ onto $S_0$. For $x=m_0+Lz$, $(x-m_0)^TC_0^\\dagger(x-m_0)=z^Tz$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $W$ be the non-negative square root of $\\Gamma^{-1}$. Since $\\Gamma\\succ0$, $W$ is symmetric positive definite and $W^TW=\\Gamma^{-1}$ by [F4]. Set $D=WAL$ and $b=W(y-Am_0)$. Substituting $x=m_0+Lz$ into the objective in the Statement gives $J_y(m_0+Lz)=\\|Dz-b\\|_2^2+\\|z\\|_2^2$. This is the Tikhonov objective in [F5] with $\\lambda=1$, so [F6] gives the unique minimizer $\\widehat z=(D^TD+I_r)^{-1}D^Tb$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the Gaussian representation in [F2], the prior coordinate $z$ has standard Gaussian density. The likelihood is proportional to $\\exp(-\\tfrac12\\|Dz-b\\|_2^2)$ by [F7]. Thus the posterior density in $z$ is proportional to $\\exp[-\\tfrac12(\\|Dz-b\\|_2^2+\\|z\\|_2^2)]$. Its precision matrix $H=I_r+D^TD$ is positive definite, and completing the square gives a Gaussian density with mean $H^{-1}D^Tb=\\widehat z$ and covariance $H^{-1}$. This density has its unique maximum at its mean. The affine bijection in step 1.2 has constant positive Jacobian in orthonormal coordinates on $S_0$, so its image has the unique MAP point $\\widehat x=m_0+L\\widehat z$. Its posterior mean is also $m_0+L\\widehat z$, and step 2.1 makes this point the unique minimizer of $J_y$ on $S_0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite-dimensional model and makes no empty-space existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles rank zero and the unique point of the support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 apply when C0 is positive definite and the support is all of R^n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 prove uniqueness and the density mode on every positive-rank affine support."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval-endpoint or limiting claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC and step 3.1 uses the supplied Gaussian-law density interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "MAP is defined relative to the induced volume on the affine prior support; the rank-zero case is separate and no outside-support optimization claim is made."
+      }
+    },
+    "ex-ip-singular-state-gaussian-posterior": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-finite-linear-gaussian-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n,m\\ge1$, $m_0\\in\\mathbb R^n$, and let\n$C_0\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TC_0v\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$A\\in\\mathbb R^{m\\times n}$ and let\n$\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite, meaning\n$u^T\\Gamma u>0$ for every nonzero $u\\in\\mathbb R^m$. Suppose\n$X$ and $\\eta$ are independent random vectors with laws\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$, and set\n$Y=AX+\\eta$. Define $\\mu_0(E)=\\mathbb P(X\\in E)$ for Borel\n$E\\subseteq\\mathbb R^n$, and set\n$S=AC_0A^T+\\Gamma$. Then $S$ is positive definite. For each\n$y\\in\\mathbb R^m$, define\n$$ \\Phi_y(x)=\\tfrac12(y-Ax)^T\\Gamma^{-1}(y-Ax),\\qquad Z(y)=\\int_{\\mathbb R^n}e^{-\\Phi_y(x)}\\,\\mu_0(dx). $$\nFor every $y$, $0<Z(y)<\\infty$, so the normalized potential update\n$$ \\Pi^y(E)=\\frac{\\int_E e^{-\\Phi_y(x)}\\,\\mu_0(dx)}{Z(y)} \\quad(E\\in\\mathcal B(\\mathbb R^n)) $$\nis a probability measure and equals the conditional-law version obtained by\nconditioning the observation model at $y$. Its Gaussian formula, defined for\nevery $y$, is\n$$ N_n\\!\\left( m_0+C_0A^TS^{-1}(y-Am_0),\\ C_0-C_0A^TS^{-1}AC_0 \\right). $$\nLet $P_Y(B)=\\mathbb P(Y\\in B)$ for Borel $B\\subseteq\\mathbb R^m$.\nConditional-law versions are unique only $P_Y$-almost surely. The displayed\nmean and covariance formulas invert only $S$, not $C_0$; $C_0$ and the\nposterior covariance may be singular. The prior support is\n$m_0+\\operatorname{Ran}(C_0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $n,m\\ge1$, $m_0\\in\\mathbb R^n$,\n$C_0\\in\\mathbb R^{n\\times n}$ symmetric with $v^TC_0v\\ge0$ for all\n$v\\in\\mathbb R^n$,\n$A\\in\\mathbb R^{m\\times n}$, and\n$\\Gamma\\in\\mathbb R^{m\\times m}$ symmetric with $u^T\\Gamma u>0$ for all\nnonzero $u\\in\\mathbb R^m$. Let\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$ be independent, and\nobserve $Y=AX+\\eta$. Put\n$S_0=m_0+\\operatorname{Ran}(C_0)$ and\n$r=\\dim\\operatorname{Ran}(C_0)$. The $r$-dimensional Euclidean Lebesgue\nmeasure on $S_0$ is the pushforward of Lebesgue measure on $\\mathbb R^r$\nunder any affine isometry onto $S_0$; this measure is independent of the\nchosen orthonormal coordinates. A MAP point means a maximizer of the\nposterior density with respect to this measure; for $r=0$, the unique point\nof $S_0$ is the MAP point. The Moore–Penrose pseudoinverse $C_0^\\dagger$\nsatisfies\n$$ C_0C_0^\\dagger C_0=C_0,\\qquad C_0^\\dagger C_0C_0^\\dagger=C_0^\\dagger, $$\nand $C_0C_0^\\dagger$ and $C_0^\\dagger C_0$ are symmetric. The optimization\nbelow is restricted to $S_0$. Then for every $y\\in\\mathbb R^m$, the unique\nMAP point equals the posterior mean and the unique minimizer over $x\\in S_0$ of\n$$ J_y(x)=(Ax-y)^T\\Gamma^{-1}(Ax-y) +(x-m_0)^TC_0^\\dagger(x-m_0). $$\nAll objects are finite-dimensional; no minimization over points outside the\nprior support is asserted when $C_0$ is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-singular-gaussian-support-and-pseudoinverse",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $m\\in\\mathbb R^n$, and let\n$C\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TCv\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$X$ be a random vector with law $N_n(m,C)$, and define\n$\\mu_X(E)=\\mathbb P(X\\in E)$ for Borel $E\\subseteq\\mathbb R^n$. Write\n$\\operatorname{Ran}(C)=\\{Cv:v\\in\\mathbb R^n\\}$, and put\n$r=\\dim\\operatorname{Ran}(C)$. For a Borel probability $\\mu$ on\n$\\mathbb R^n$, define its topological support by\n$$ \\operatorname{supp}(\\mu)=\\{x:\\mu(B(x,\\varepsilon))>0\\text{ for every }\\varepsilon>0\\}, $$\nwhere $B(x,\\varepsilon)$ is the open Euclidean ball. If $r>0$, there are\n$U\\in\\mathbb R^{n\\times r}$ and a symmetric positive-definite\n$\\Lambda\\in\\mathbb R^{r\\times r}$ with $U^TU=I_r$ such that\n$$ C=U\\Lambda U^T,\\qquad \\operatorname{Ran}(C)=\\operatorname{Ran}(U),\\qquad C^\\dagger=U\\Lambda^{-1}U^T. $$\nMoreover, $X$ has the same law as $m+U\\Lambda^{1/2}Z$, where\n$Z\\sim N_r(0,I_r)$, and\n$$ \\operatorname{supp}(\\mu_X)=m+\\operatorname{Ran}(C). $$\nHere $C^\\dagger$ is the unique matrix satisfying\n$CC^\\dagger C=C$, $C^\\dagger CC^\\dagger=C^\\dagger$, and such that\n$CC^\\dagger$ and $C^\\dagger C$ are symmetric. If $r=0$, then\n$C=0$, $X=m$ almost surely, $C^\\dagger=0$, and the support is $\\{m\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $C_0=\\operatorname{diag}(1,0)$ and $S=AC_0A^T+\\Gamma=\\operatorname{diag}(2,1)$. Thus $C_0S^{-1}y=(1,0)^T$ and $C_0-C_0S^{-1}C_0=\\operatorname{diag}(1/2,0)$, which gives the posterior mean and covariance in the Example by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $S_0$, $x_2=0$ and $C_0^\\dagger=\\operatorname{diag}(1,0)$ by [F3]. The objective becomes $(x_1-2)^2+9+x_1^2 =2(x_1-1)^2+11$, so it has the unique minimizer $(1,0)^T$. By [F2] this point is also the posterior MAP and mean, as asserted.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "rank-one singular-state posterior and restricted objective",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "C0": "diag(1,0)",
+            "A": "I_2",
+            "Gamma": "I_2",
+            "y": [
+              2,
+              3
+            ]
+          },
+          "calculation": "S=diag(2,1); C0 S^{-1} y=(1,0); C0-C0 S^{-1} C0=diag(1/2,0); J_y(t,0)=2(t-1)^2+11.",
+          "expected": {
+            "mean": [
+              1,
+              0
+            ],
+            "covariance": "diag(1/2,0)",
+            "unique_minimizer": [
+              1,
+              0
+            ]
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite-dimensional model and makes no empty-space existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero-variance state coordinate and zero posterior variance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-value claim for this boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check the rank-one prior and posterior supported on x2=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval-endpoint or limiting claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC and step 1.1 applies the finite Gaussian posterior formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The finite rank-one calculation checks the singular state direction and the restricted objective directly."
+      }
+    },
+    "ex-ip-prior-whitened-tikhonov-posterior": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-finite-linear-gaussian-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n,m\\ge1$, $m_0\\in\\mathbb R^n$, and let\n$C_0\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TC_0v\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$A\\in\\mathbb R^{m\\times n}$ and let\n$\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite, meaning\n$u^T\\Gamma u>0$ for every nonzero $u\\in\\mathbb R^m$. Suppose\n$X$ and $\\eta$ are independent random vectors with laws\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$, and set\n$Y=AX+\\eta$. Define $\\mu_0(E)=\\mathbb P(X\\in E)$ for Borel\n$E\\subseteq\\mathbb R^n$, and set\n$S=AC_0A^T+\\Gamma$. Then $S$ is positive definite. For each\n$y\\in\\mathbb R^m$, define\n$$ \\Phi_y(x)=\\tfrac12(y-Ax)^T\\Gamma^{-1}(y-Ax),\\qquad Z(y)=\\int_{\\mathbb R^n}e^{-\\Phi_y(x)}\\,\\mu_0(dx). $$\nFor every $y$, $0<Z(y)<\\infty$, so the normalized potential update\n$$ \\Pi^y(E)=\\frac{\\int_E e^{-\\Phi_y(x)}\\,\\mu_0(dx)}{Z(y)} \\quad(E\\in\\mathcal B(\\mathbb R^n)) $$\nis a probability measure and equals the conditional-law version obtained by\nconditioning the observation model at $y$. Its Gaussian formula, defined for\nevery $y$, is\n$$ N_n\\!\\left( m_0+C_0A^TS^{-1}(y-Am_0),\\ C_0-C_0A^TS^{-1}AC_0 \\right). $$\nLet $P_Y(B)=\\mathbb P(Y\\in B)$ for Borel $B\\subseteq\\mathbb R^m$.\nConditional-law versions are unique only $P_Y$-almost surely. The displayed\nmean and covariance formulas invert only $S$, not $C_0$; $C_0$ and the\nposterior covariance may be singular. The prior support is\n$m_0+\\operatorname{Ran}(C_0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $n,m\\ge1$, $m_0\\in\\mathbb R^n$,\n$C_0\\in\\mathbb R^{n\\times n}$ symmetric with $v^TC_0v\\ge0$ for all\n$v\\in\\mathbb R^n$,\n$A\\in\\mathbb R^{m\\times n}$, and\n$\\Gamma\\in\\mathbb R^{m\\times m}$ symmetric with $u^T\\Gamma u>0$ for all\nnonzero $u\\in\\mathbb R^m$. Let\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$ be independent, and\nobserve $Y=AX+\\eta$. Put\n$S_0=m_0+\\operatorname{Ran}(C_0)$ and\n$r=\\dim\\operatorname{Ran}(C_0)$. The $r$-dimensional Euclidean Lebesgue\nmeasure on $S_0$ is the pushforward of Lebesgue measure on $\\mathbb R^r$\nunder any affine isometry onto $S_0$; this measure is independent of the\nchosen orthonormal coordinates. A MAP point means a maximizer of the\nposterior density with respect to this measure; for $r=0$, the unique point\nof $S_0$ is the MAP point. The Moore–Penrose pseudoinverse $C_0^\\dagger$\nsatisfies\n$$ C_0C_0^\\dagger C_0=C_0,\\qquad C_0^\\dagger C_0C_0^\\dagger=C_0^\\dagger, $$\nand $C_0C_0^\\dagger$ and $C_0^\\dagger C_0$ are symmetric. The optimization\nbelow is restricted to $S_0$. Then for every $y\\in\\mathbb R^m$, the unique\nMAP point equals the posterior mean and the unique minimizer over $x\\in S_0$ of\n$$ J_y(x)=(Ax-y)^T\\Gamma^{-1}(Ax-y) +(x-m_0)^TC_0^\\dagger(x-m_0). $$\nAll objects are finite-dimensional; no minimization over points outside the\nprior support is asserted when $C_0$ is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tikhonov-regularised-least-squares",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. The **Tikhonov regularised\nleast-squares objective** is the map\n\n$$ J_\\lambda(x):=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2 \\qquad(x\\in\\mathbb F^n), $$\n\nwhere $\\|\\cdot\\|_2$ is the Euclidean norm induced by the standard inner product\n([[def-inner-product-norm]]).\n\nThe parameter $\\lambda$ is part of the problem data. The second term penalises\nlarge norms of $x$, so the regularised problem is not the same optimisation\nproblem as the unregularised least-squares problem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. Then\nthe Tikhonov objective\n\n$$J_\\lambda(x)=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$$\n\nis strictly convex and has the unique minimiser\n\n$$x_\\lambda=(A^*A+\\lambda I)^{-1}A^*b.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $S=C_0+\\Gamma=5I_2$, so [F1] gives $m(y)=C_0S^{-1}y=(8/5,4/5)^T$ and $C(y)=C_0-C_0S^{-1}C_0=(4/5)I_2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The whitening matrices satisfy $W\\Gamma W^T=I_2$ and $D=WAL=\\operatorname{diag}(2,1/2)$, while $b=Wy=(2,2)^T$. Applying [F3] with $\\lambda=1$ gives $\\widehat z=(D^TD+I_2)^{-1}D^Tb=(4/5,4/5)^T$. Therefore $x=L\\widehat z=(8/5,4/5)^T$. By [F2] this is the unique MAP, posterior mean, and support-restricted minimizer.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "anisotropic prior and noise whitening",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "C0": "diag(4,1)",
+            "Gamma": "diag(1,4)",
+            "A": "I_2",
+            "y": [
+              2,
+              4
+            ],
+            "L": "diag(2,1)",
+            "W": "diag(1,1/2)"
+          },
+          "calculation": "W Gamma W^T=I_2; D=diag(2,1/2); b=(2,2); (D^T D+I)^{-1}D^T b=(4/5,4/5); L z=(8/5,4/5); C_post=(4/5)I_2.",
+          "expected": {
+            "whitened_noise": "I_2",
+            "z": [
+              0.8,
+              0.8
+            ],
+            "posterior_mean": [
+              1.6,
+              0.8
+            ],
+            "posterior_covariance": "(4/5)I_2"
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite-dimensional model and makes no empty-space existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no separate zero-value claim for this boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate unit-value claim for this boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-case claim beyond the cases named in its proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no interval-endpoint or limiting claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC and step 1.1 applies the finite Gaussian posterior formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The finite anisotropic covariance calculation checks both whitening transforms and the lambda-one Tikhonov solution directly."
+      }
+    },
+    "cex-ip-nongaussian-map-differs-from-posterior-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By The standard normal density has total mass one and The indefinite integral of a nonnegative measurable function is a measure, gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. The law of a random element is a probability measure makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in The Dirac set function at a point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $n,m\\ge1$, $m_0\\in\\mathbb R^n$,\n$C_0\\in\\mathbb R^{n\\times n}$ symmetric with $v^TC_0v\\ge0$ for all\n$v\\in\\mathbb R^n$,\n$A\\in\\mathbb R^{m\\times n}$, and\n$\\Gamma\\in\\mathbb R^{m\\times m}$ symmetric with $u^T\\Gamma u>0$ for all\nnonzero $u\\in\\mathbb R^m$. Let\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$ be independent, and\nobserve $Y=AX+\\eta$. Put\n$S_0=m_0+\\operatorname{Ran}(C_0)$ and\n$r=\\dim\\operatorname{Ran}(C_0)$. The $r$-dimensional Euclidean Lebesgue\nmeasure on $S_0$ is the pushforward of Lebesgue measure on $\\mathbb R^r$\nunder any affine isometry onto $S_0$; this measure is independent of the\nchosen orthonormal coordinates. A MAP point means a maximizer of the\nposterior density with respect to this measure; for $r=0$, the unique point\nof $S_0$ is the MAP point. The Moore–Penrose pseudoinverse $C_0^\\dagger$\nsatisfies\n$$ C_0C_0^\\dagger C_0=C_0,\\qquad C_0^\\dagger C_0C_0^\\dagger=C_0^\\dagger, $$\nand $C_0C_0^\\dagger$ and $C_0^\\dagger C_0$ are symmetric. The optimization\nbelow is restricted to $S_0$. Then for every $y\\in\\mathbb R^m$, the unique\nMAP point equals the posterior mean and the unique minimizer over $x\\in S_0$ of\n$$ J_y(x)=(Ax-y)^T\\Gamma^{-1}(Ax-y) +(x-m_0)^TC_0^\\dagger(x-m_0). $$\nAll objects are finite-dimensional; no minimization over points outside the\nprior support is asserted when $C_0$ is singular.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The evidence in [F2] is $Z=\\int_0^1e^{-t^2/2}\\,dt$. Since $e^{-1/2}\\le e^{-t^2/2}\\le1$ on $[0,1]$, one has $0<e^{-1/2}\\le Z\\le1$. Thus the displayed normalized posterior density is proper.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $(0,1]$, the derivative of $e^{-\\theta^2/2}$ is $-\\theta e^{-\\theta^2/2}<0$. The posterior density vanishes outside $[0,1]$, so its unique global maximizer is $\\theta=0$. Its support is the bounded interval $[0,1]$ and it is not a point mass. A nondegenerate one-dimensional Gaussian has a strictly positive density on all of $\\mathbb R$ by [F1], whereas a zero-variance Gaussian is a point mass. Therefore this posterior is non-Gaussian.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The posterior mean is $$ \\frac{\\int_0^1 t e^{-t^2/2}\\,dt}{Z} =\\frac{1-e^{-1/2}}{Z}>0, $$ which differs from the MAP point $0$. This refutes the universal claim. It also shows why [F3] is restricted to the Gaussian model.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "bounded uniform prior posterior has distinct mode and mean",
+          "method": "exact one-dimensional integral and derivative with Simpson numerical check (100000 subintervals)",
+          "input": {
+            "prior": "Uniform[0,1]",
+            "noise": "N(0,1)",
+            "observation": 0
+          },
+          "calculation": "Z=integral_0^1 exp(-t^2/2)dt is positive; exp(-theta^2/2) is strictly decreasing for theta>0, so the unique MAP is 0; integral_0^1 t exp(-t^2/2)dt=1-exp(-1/2)>0.",
+          "expected": {
+            "MAP": 0,
+            "posterior_mean": "(1-exp(-1/2))/Z > 0",
+            "normalizer_approx": 0.8556243918921412,
+            "numeric_mean_approx": 0.4598622292864279,
+            "gaussian": false
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite-dimensional model and makes no empty-space existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies zero as the unique MAP, while step 3.1 proves the posterior mean is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the closed endpoint theta=1 is below the unique maximum at theta=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item makes no degenerate-case claim beyond the cases named in its proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the posterior support includes both endpoints and the maximum occurs only at theta=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC through the normal-law interface, and step 1.1 uses its density."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The posterior is proper and nondegenerate with compact support; the source warning is illustrated by an exact locally proved witness."
+      }
+    }
+  }
+}

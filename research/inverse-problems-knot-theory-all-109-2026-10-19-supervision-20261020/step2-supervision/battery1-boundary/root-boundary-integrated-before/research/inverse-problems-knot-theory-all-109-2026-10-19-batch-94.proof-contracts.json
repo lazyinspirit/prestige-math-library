@@ -1,0 +1,1929 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "94",
+  "scope": [
+    "lem-knot-floer-mirror-complex-duality",
+    "lem-tau-additive-for-filtered-tensor-products",
+    "lem-tau-of-the-unknot-is-zero",
+    "lem-knot-floer-large-surgery-and-filtered-cobordism-input",
+    "lem-tau-connected-sum-filtered-tensor-product",
+    "thm-tau-is-concordance-invariant-and-four-ball-genus-bound",
+    "ex-knot-kt-41-worked-cases",
+    "cex-knot-kt-41-boundary-case"
+  ],
+  "contracts": {
+    "lem-knot-floer-mirror-complex-duality": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-knot-floer-filtration-and-tau",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a smooth oriented knot in the standard oriented three-sphere. Let $F$ be a compact connected oriented Seifert surface with boundary $K$, and let $\\mathcal H=(\\Sigma,\\boldsymbol\\alpha,\\boldsymbol\\beta,w,z)$ be an admissible doubly pointed Heegaard diagram representing $(K,F)$. The associated one-pointed hat chain complex $\\widehat{CF}(\\mathcal H)$ is the finite-dimensional chain complex over $\\mathbb F_2$ obtained from the minus complex by setting its basepoint variable to zero; its differential counts index-one disks with zero multiplicity at $w$. Assume for this specified data that the differential is nonincreasing in the Alexander filtration, that the absolute Alexander formula below takes integer values, and that $H(\\widehat{CF}(\\mathcal H))\\cong\\mathbb F_2$. Give a generator $\\mathbf x$ its absolute Alexander filtration\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the homology class of the nowhere-vanishing vector field assigned to $\\mathbf x$ by the pointed Morse construction, with its prescribed boundary data near the two basepoints; $c_1$ is the first Chern class of the oriented plane field perpendicular to that vector field. To form the zero-framed surgery, remove a tubular neighborhood of $K$ and glue in a solid torus whose meridian is the longitude induced by $F$. The surface $\\widehat F$ is obtained by deleting a boundary collar of $F$ and capping its longitude by the meridian disk of that solid torus. This is the standard integer normalization, with the one-generator diagram of the standard unknot at filtration zero. The subcomplex $F_s\\widehat{CF}(\\mathcal H)$ is spanned by generators of Alexander filtration at most $s$.\n\nMore generally, a finite integer-filtered chain complex is a finite-dimensional chain complex $C$ over $\\mathbb F_2$ with subcomplexes $F_sC$ such that $F_sC=0$ for all sufficiently small integers $s$ and $F_sC=C$ for all sufficiently large integers $s$. If $H(C)\\cong\\mathbb F_2$, define\n$$\\tau(C):=\\min\\{s\\in\\mathbb Z:\\operatorname{im}(H(F_sC)\\longrightarrow H(C))\\ne0\\}.$$\nFor the fixed diagram and surface above, write $\\tau_{\\mathcal H,F}(K)=\\tau(\\widehat{CF}(\\mathcal H),F_*\\widehat{CF}(\\mathcal H))$. Once diagram and surface independence is proved, their common value is the knot invariant $\\tau(K)$. Until that comparison is proved, $\\tau_{\\mathcal H,F}(K)$ denotes only the value for the specified data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-knot-connected-sum-and-prime-knot",
+          "source_section": "Definition",
+          "quote": "Fix a coordinate orientation-reversing reflection $r:S^3\\to S^3$ for the mirror convention. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere. A connected-sum datum consists of one smoothly embedded closed three-ball around a short subarc of $K$ and one around a short subarc of $J$, each meeting its knot in a single trivial properly embedded arc, together with the fixed standard orientation-reversing boundary identification of the two standard oriented ball boundaries that joins the oriented arcs into one circle. Choose this standard map once in the standard two-ball model so that it commutes with $r$ and an orientation-preserving half-turn interchanging the two balls preserves the joining convention. Here a trivial arc is an embedded interval in a ball that is carried by an orientation-preserving diffeomorphism of ball-arc pairs to a straight diameter. Remove the interiors of the two balls and glue the remaining boundary spheres using this fixed identification; the resulting oriented knot in the standard oriented three-sphere is a connected sum of $K$ and $J$, denoted $K\\#J$ for the specified datum.\n\nThe **standard unknot** is the oriented unit circle in a fixed coordinate two-plane of $S^3\\subset\\mathbb R^4$. A knot is **nontrivial** if it is not ambient isotopic through orientation-preserving diffeomorphisms of $S^3$ to the standard unknot. A nontrivial knot is **prime** if it has no connected-sum presentation whose two summand knots are both nontrivial.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-admissible-pointed-heegaard-floer-data",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category inherited from the oriented-link convention. In particular, an embedded bridge witness disk means the image of a smooth rank-two embedding of a planar disk, with ordinary smooth boundary or smooth transverse corners at its two marked endpoints; smoothness at a boundary or corner means local smooth extension in its charts. Witness parametrizations can be chosen for the finite disk families. This category convention does not require the knot arcs to meet the Heegaard surface transversely: tangential smooth crossings remain permitted.\n\nLet $K\\subset S^3$ be a smooth oriented knot. Let $\\Sigma$ be a closed oriented surface of genus $h$, let $k\\ge1$, and put $m=h+k-1$. A **handlebody** is a compact three-manifold that is a regular neighborhood of a finite connected graph. A **$2k$-pointed Heegaard diagram for $S^3$** consists of a splitting $S^3=U_{\\alpha}\\cup_{\\Sigma}U_{\\beta}$ into handlebodies, two systems $\\boldsymbol\\alpha=(\\alpha_1,\\ldots,\\alpha_m)$ and $\\boldsymbol\\beta=(\\beta_1,\\ldots,\\beta_m)$ of pairwise disjoint simple closed curves on $\\Sigma$ that bound pairwise disjoint properly embedded disks in $U_{\\alpha}$ and $U_{\\beta}$, respectively, cutting each handlebody into exactly $k$ three-balls, and two ordered sets of distinct points $\\mathbf w=(w_1,\\ldots,w_k)$ and $\\mathbf z=(z_1,\\ldots,z_k)$ disjoint from the curves. Curves from different systems intersect transversely in finitely many points. Each component of $\\Sigma\\setminus\\boldsymbol\\alpha$ and of $\\Sigma\\setminus\\boldsymbol\\beta$ contains exactly one $w$-point and exactly one $z$-point. The diagram also includes trivial arc systems in the two handlebodies: the $\\alpha$-arcs join $w_i$ to $z_i$, and the $\\beta$-arcs join $z_i$ to $w_{i-1}$, with indices modulo $k$. Each system is disjoint from its compression disks and is simultaneously boundary parallel: its arcs cobound pairwise disjoint embedded disks with arcs in the corresponding components of the attaching-system complement on $\\Sigma$. Thus each ball obtained by compression contains one unknotted arc. Together the arcs form an oriented knot, oriented from $w_i$ to $z_i$ in $U_{\\alpha}$ and from $z_i$ to $w_{i-1}$ in $U_{\\beta}$. The diagram is **compatible with $K$** when this knot is orientation-preservingly ambient isotopic to $K$. For a grid diagram, compatibility uses the row and column orientation fixed in the grid definition, with $w$-points at $O$ and $z$-points at $X$. For a grid representing one knot, the basepoint pairs can be numbered cyclically in reverse order of travel along the oriented knot so that $w_i,z_i$ lie in the same component $A_i$ of $\\Sigma\\setminus\\boldsymbol\\alpha$ and $w_i,z_{i+1}$ lie in the same component $B_i$ of $\\Sigma\\setminus\\boldsymbol\\beta$.\n\nComparisons of these embedded diagrams allow **orientation-preserving diagram isomorphisms**: an orientation-preserving diffeomorphism of $S^3$ carrying the two handlebodies, their oriented Heegaard surface, the two attaching systems, the ordered $w,z$ points, and the two simultaneously boundary-parallel arc systems to the corresponding data. Equivalently one may specify the surface isomorphism together with its compatible collared extensions over both handlebodies carrying those arcs. The attaching systems are carried as systems; reordering their curve factors induces the corresponding product identification. Comparisons also allow **arc normalizations in the fixed splitting**: a smooth isotopy of the represented oriented knot, supported near the ordered marks and fixing each mark, during which every open connecting arc stays in its original handlebody and the two simultaneous boundary-parallel witness systems are retained or replaced by embedded witnesses for those same arcs. The surface, attaching curves, marked points and compression disks stay fixed. Such a normalization may replace a tangential marked crossing by a transverse one; the original data are not required to have neat arcs. This is a change of knot representative relative to the fixed surface, not a diagram isomorphism carrying both objects. Analytic and assigned grading data depending on the fixed surface diagram can be kept identical; the corresponding generator and disk-count identification is then the identity. Existence of normalizations with the required witnesses is a separate geometric assertion, not part of this definition. Such a comparison transports the represented oriented knot and any specified Seifert surface as well. For analytic data, it transports $j$, the surface area form, all chosen divisor neighborhoods and $J_t$ by the induced symmetric-product diffeomorphism. The comparison maps on generators and disk classes are their pushforwards under this map; compatibility with the count differential is a mathematical property to be proved. No identity action is part of this convention, even when the ambient diffeomorphism is isotopic to the identity.\n\nThe $m$-fold symmetric product $\\operatorname{Sym}^{m}(\\Sigma)=\\Sigma^m/S_m$ is the space of unordered $m$-tuples of points of $\\Sigma$, where $S_m$ permutes coordinates. Let $q:\\Sigma^m\\to\\operatorname{Sym}^{m}(\\Sigma)$ be the quotient map. The product tori are the images $\\mathbb T_{\\alpha}=q(\\alpha_1\\times\\cdots\\times\\alpha_m)$ and $\\mathbb T_{\\beta}=q(\\beta_1\\times\\cdots\\times\\beta_m)$. Their intersection points are the generators. A **Whitney disk class** $\\phi\\in\\pi_2(\\mathbf x,\\mathbf y)$ is a relative homotopy class of maps from a disk to $\\operatorname{Sym}^{m}(\\Sigma)$ whose two boundary arcs lie on $\\mathbb T_{\\alpha}$ and $\\mathbb T_{\\beta}$ and whose endpoints are $\\mathbf x$ and $\\mathbf y$. Its domain is the integral two-chain of complementary regions with coefficients equal to local multiplicities. Write $n_{w_i}(\\phi)$ and $n_{z_i}(\\phi)$ for its local multiplicities at the marked points. An almost complex structure $J$ on $\\operatorname{Sym}^{m}(\\Sigma)$ is a smooth endomorphism of the tangent bundle with $J^2=-1$. Fix a complex structure $j$ and an area form on $\\Sigma$. For $m>0$, choose a smooth path $\\mathbb J=(J_t)_{t\\in[0,1]}$ of nearly symmetric almost complex structures, constant near $t=0,1$: each $J_t$ agrees with the induced integrable structure $\\operatorname{Sym}^{m}(j)$ on a fixed neighborhood of the diagonal and of every divisor $\\{p\\}+\\operatorname{Sym}^{m-1}(\\Sigma)$ for a chosen interior point $p$ of every complementary region, including every marked point, and tames the form descended from the product area form off that neighborhood. The path is a sufficiently small perturbation in this class. For $m=0$ the symmetric product is a point. Local multiplicities are intersection numbers with these divisors; positivity is a mathematical property to be proved, not an additional choice of disk counts. A $\\mathbb J$-holomorphic strip representative is a smooth map $u:\\mathbb R\\times[0,1]\\to\\operatorname{Sym}^{m}(\\Sigma)$ satisfying $\\partial_{\\tau}u+J_t(u)\\partial_tu=0$, with $u(\\tau,0)\\in\\mathbb T_{\\alpha}$, $u(\\tau,1)\\in\\mathbb T_{\\beta}$, and limits $\\mathbf x,\\mathbf y$ as $\\tau\\to-\\infty,+\\infty$. Translation in $\\tau$ defines an $\\mathbb R$-action. The Maslov index $\\mu(\\phi)$ is the Fredholm index of the linearized Cauchy–Riemann operator at a representative of $\\phi$; the relative Maslov grading convention is $M(\\mathbf x)-M(\\mathbf y)=\\mu(\\phi)-2\\sum_{i=1}^{k}n_{w_i}(\\phi)$, up to one overall additive constant.\n\nA **periodic domain** is an integral two-chain in the complementary regions whose boundary is an integral sum of full $\\alpha$- and $\\beta$-curves; its local multiplicity at a marked point is the coefficient of the containing region. The pointed diagram is **admissible** when every nonzero periodic domain with $n_{w_i}=0$ for all $i$ has at least one positive and at least one negative region coefficient. A path $\\mathbb J$ is **regular for a set of disk classes** when the linearized Cauchy–Riemann operator at every holomorphic-strip representative in those classes is surjective. For a path regular on the classes used, let $\\mathcal M_{\\mathbb J}(\\phi)$ be the space of strip representatives. If, for each generator $\\mathbf x$, only finitely many pairs $(\\mathbf y,\\phi)$ with $\\mathcal M_{\\mathbb J}(\\phi)\\ne\\varnothing$, $\\mu(\\phi)=1$, and $n_{w_i}(\\phi)\\ge0$ for every $i$ occur, and each quotient is finite, the multipointed full filtered minus module is the free module over $\\mathbb F_2[U_1,\\ldots,U_k]$ generated by $\\mathbb T_{\\alpha}\\cap\\mathbb T_{\\beta}$, with differential\n$$\\partial^-\\mathbf x=\\sum_{\\mathbf y}\\sum_{\\substack{\\phi\\in\\pi_2(\\mathbf x,\\mathbf y),\\;\\mathcal M_{\\mathbb J}(\\phi)\\ne\\varnothing\\\\\\mu(\\phi)=1,\\; n_{w_i}(\\phi)\\ge0\\ \\forall i}}\\#_2\\bigl(\\mathcal M_{\\mathbb J}(\\phi)/\\mathbb R\\bigr)\\,U_1^{n_{w_1}(\\phi)}\\cdots U_k^{n_{w_k}(\\phi)}\\mathbf y.$$\nHere $\\#_2$ is the count modulo two of the zero-dimensional quotient when it is finite. Quotienting by all $U_i$ leaves the fully blocked multipointed chain complex (the hat chain complex when $k=1$), with terms only from classes satisfying $n_{w_i}=0$ for every $i$; its Alexander-filtered associated-graded complex further retains only classes with every $n_{z_i}=0$. The relative Alexander grading convention is $A(\\mathbf x)-A(\\mathbf y)=\\sum_i n_{z_i}(\\phi)-\\sum_i n_{w_i}(\\phi)$, with an overall additive constant. Each $U_i$ lowers Maslov grading by two and Alexander filtration by one. In a grid diagram, $\\Sigma=T^2$, $h=1$, $k=n$, and $m=n$; the horizontal circles are the $\\alpha$-curves, the vertical circles are the $\\beta$-curves, and the $w$-points and $z$-points are the $O$- and $X$-markings respectively.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-knot-floer-mirror-complex-duality-1-1",
+          "claim": "Put $t=\\tau(C_K)$ and let $[x]$ be its nonzero total homology class in degree $n$. There is a cycle $x\\in F_tC_{K,n}$ representing $[x]$. Since $H(F_{t-1}C_K)\\to H(C_K)$ has zero image, every cycle in $F_{t-1}C_{K,n}$ is a boundary. Thus $x\\notin B_n+F_{t-1}C_{K,n}$, where $B_n$ is the subspace of boundaries. Extend a linear functional $\\lambda$ that vanishes on $B_n+F_{t-1}C_{K,n}$ and satisfies $\\lambda(x)=1$. It is a cocycle. For a finite-dimensional chain complex, $\\ker(\\partial^\\vee)=B^\\perp$ and $\\operatorname{im}(\\partial^\\vee)=Z^\\perp$, so evaluation identifies $H(C_K^\\vee)=B^\\perp/Z^\\perp$ with $H(C_K)^\\vee$; hence $\\lambda$ represents the nonzero dual class. It belongs to $F_{-t}C_K^\\vee$. If $s<-t$, every element of $F_sC_K^\\vee$ vanishes on $F_tC_K$, so its induced class pairs trivially with $[x]$ and maps to zero in total dual homology. Therefore $\\tau(C_K^\\vee)=-t$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-knot-floer-mirror-complex-duality-2-1",
+          "claim": "Write the pointed holomorphic-strip equation on the symmetric product of $\\Sigma$ as $\\partial_su+J_t(u)\\partial_tu=0$. On the reflected surface $-\\Sigma$ use the reflected almost-complex structure $-J_t$ and define $u^\\dagger(s,t)=u(-s,t)$. Then $\\partial_su^\\dagger+(-J_t)(u^\\dagger)\\partial_tu^\\dagger=-(\\partial_su+J_t(u)\\partial_tu)(-s,t)=0$. The map reverses the two asymptotic ends, so an index-one strip from $\\mathbf x$ to $\\mathbf y$ corresponds bijectively to an index-one strip from $\\mathbf y^\\vee$ to $\\mathbf x^\\vee$; conjugation of the linearized operators preserves regularity and the mod-two counts agree. Consequently the reflected differential is the transpose. Under the orientation-reversing identification, the relative $\\operatorname{Spin}^c$ structure is conjugated, which reverses the orientation of its orthogonal plane field and negates its first Chern class; the capped Seifert class is carried forward by the reflection. Hence the Alexander pairing changes sign and the dual generator has filtration $-A_F(\\mathbf x)$. The reflected complex is therefore $C_K^\\vee$, and step 1.1 gives the tau sign formula.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-mirror-complex-duality requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-mirror-complex-duality has no separate zero-input branch beyond its stated integer filtration and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional total homology condition is explicit in the Statement and used in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-mirror-complex-duality has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-mirror-complex-duality has no endpoint parameter case beyond its named objects and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite linear-algebra construction is choice-free as shown in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-mirror-complex-duality asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-mirror-complex-duality asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "right-trefoil-staircase-dual",
+          "calculation": "For db=c at A(a,b,c)=(1,0,-1), tau=1; the dual has dc*=b* and A(a*,b*,c*)=(-1,0,1).",
+          "result": "The dual threshold is -1.",
+          "evidence": "Proof steps 1.1–2.1."
+        }
+      ],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "All numbered steps in the current carrier are mapped to their stated inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-tau-additive-for-filtered-tensor-products": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-knot-floer-filtration-and-tau",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a smooth oriented knot in the standard oriented three-sphere. Let $F$ be a compact connected oriented Seifert surface with boundary $K$, and let $\\mathcal H=(\\Sigma,\\boldsymbol\\alpha,\\boldsymbol\\beta,w,z)$ be an admissible doubly pointed Heegaard diagram representing $(K,F)$. The associated one-pointed hat chain complex $\\widehat{CF}(\\mathcal H)$ is the finite-dimensional chain complex over $\\mathbb F_2$ obtained from the minus complex by setting its basepoint variable to zero; its differential counts index-one disks with zero multiplicity at $w$. Assume for this specified data that the differential is nonincreasing in the Alexander filtration, that the absolute Alexander formula below takes integer values, and that $H(\\widehat{CF}(\\mathcal H))\\cong\\mathbb F_2$. Give a generator $\\mathbf x$ its absolute Alexander filtration\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the homology class of the nowhere-vanishing vector field assigned to $\\mathbf x$ by the pointed Morse construction, with its prescribed boundary data near the two basepoints; $c_1$ is the first Chern class of the oriented plane field perpendicular to that vector field. To form the zero-framed surgery, remove a tubular neighborhood of $K$ and glue in a solid torus whose meridian is the longitude induced by $F$. The surface $\\widehat F$ is obtained by deleting a boundary collar of $F$ and capping its longitude by the meridian disk of that solid torus. This is the standard integer normalization, with the one-generator diagram of the standard unknot at filtration zero. The subcomplex $F_s\\widehat{CF}(\\mathcal H)$ is spanned by generators of Alexander filtration at most $s$.\n\nMore generally, a finite integer-filtered chain complex is a finite-dimensional chain complex $C$ over $\\mathbb F_2$ with subcomplexes $F_sC$ such that $F_sC=0$ for all sufficiently small integers $s$ and $F_sC=C$ for all sufficiently large integers $s$. If $H(C)\\cong\\mathbb F_2$, define\n$$\\tau(C):=\\min\\{s\\in\\mathbb Z:\\operatorname{im}(H(F_sC)\\longrightarrow H(C))\\ne0\\}.$$\nFor the fixed diagram and surface above, write $\\tau_{\\mathcal H,F}(K)=\\tau(\\widehat{CF}(\\mathcal H),F_*\\widehat{CF}(\\mathcal H))$. Once diagram and surface independence is proved, their common value is the knot invariant $\\tau(K)$. Until that comparison is proved, $\\tau_{\\mathcal H,F}(K)$ denotes only the value for the specified data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-tau-additive-for-filtered-tensor-products-1-1",
+          "claim": "Write $t=\\tau(C)$ and $u=\\tau(D)$. For each degree $n$, let $B_n=\\operatorname{im}(\\partial_{n+1})$ and $Z_n=\\ker(\\partial_n)$. Finite-dimensional linear algebra gives complements $H_n,L_n$ with $Z_n=B_n\\oplus H_n$ and $C_n=Z_n\\oplus L_n$; the differential maps $L_n$ isomorphically onto $B_{n-1}$. Thus each complex is the direct sum of homology representatives with contractible two-term complexes. If $h$ contracts one such summand $A$, then $h\\otimes 1$ contracts $A\\otimes E$: the two cross terms cancel by the graded tensor signs, while $(\\partial h+h\\partial)\\otimes1=1$. Hence $H(C\\otimes D)\\cong H(C)\\otimes H(D)\\cong\\mathbb F_2$. By [F1], choose cycles $x\\in F_tC$ and $y\\in F_uD$ representing the nonzero homology classes. Their tensor is a nonzero class in $H(C\\otimes D)$ and lies in $F_{t+u}(C\\otimes D)$, so $\\tau(C\\otimes D)\\le t+u$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-tau-additive-for-filtered-tensor-products-2-1",
+          "claim": "Let $n$ be the homological degree of $[x]$. The image of $H(F_{t-1}C)$ in $H(C)$ is zero by minimality of $t$, so every cycle in $F_{t-1}C_n$ is a boundary in $C$. The cycle $x$ cannot lie in $B_n+F_{t-1}C_n$; otherwise $x=b+v$ would make $v=x-b$ a cycle in $F_{t-1}C$ representing the same nonzero class. Extend the linear functional that is zero on $B_n+F_{t-1}C_n$ and one on $x$ to a functional $\\lambda:C_n\\to\\mathbb F_2$. It vanishes on boundaries, so is a cocycle. Construct $\\mu$ on the homological degree of $y$ in $D$ in the same way. The tensor cocycle $\\lambda\\otimes\\mu$ evaluates to one on $x\\otimes y$ and vanishes on every $F_{t+u-1}(C\\otimes D)$: each summand $F_pC\\otimes F_qD$ with $p+q\\le t+u-1$ has either $p<t$ or $q<u$. Therefore no class in that lower filtration maps to the nonzero total homology class, and $\\tau(C\\otimes D)\\ge t+u$. Together with step 1.1 this proves equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "lem-tau-additive-for-filtered-tensor-products requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "lem-tau-additive-for-filtered-tensor-products has no separate zero-input branch beyond its stated integer filtration and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional total homology condition is explicit in the Statement and used in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-tau-additive-for-filtered-tensor-products has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-tau-additive-for-filtered-tensor-products has no endpoint parameter case beyond its named objects and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite linear-algebra construction is choice-free as shown in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-tau-additive-for-filtered-tensor-products asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-tau-additive-for-filtered-tensor-products asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-generator-factors",
+          "calculation": "C=F2<x> at A=r and D=F2<y> at A=s, both zero differential.",
+          "result": "The tensor generator is at r+s and tau(C tensor D)=tau(C)+tau(D).",
+          "evidence": "Proof step 1.1; step 2.1 gives the lower bound for arbitrary finite complexes."
+        }
+      ],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "All numbered steps in the current carrier are mapped to their stated inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-tau-of-the-unknot-is-zero": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-knot-floer-filtration-and-tau",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a smooth oriented knot in the standard oriented three-sphere. Let $F$ be a compact connected oriented Seifert surface with boundary $K$, and let $\\mathcal H=(\\Sigma,\\boldsymbol\\alpha,\\boldsymbol\\beta,w,z)$ be an admissible doubly pointed Heegaard diagram representing $(K,F)$. The associated one-pointed hat chain complex $\\widehat{CF}(\\mathcal H)$ is the finite-dimensional chain complex over $\\mathbb F_2$ obtained from the minus complex by setting its basepoint variable to zero; its differential counts index-one disks with zero multiplicity at $w$. Assume for this specified data that the differential is nonincreasing in the Alexander filtration, that the absolute Alexander formula below takes integer values, and that $H(\\widehat{CF}(\\mathcal H))\\cong\\mathbb F_2$. Give a generator $\\mathbf x$ its absolute Alexander filtration\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the homology class of the nowhere-vanishing vector field assigned to $\\mathbf x$ by the pointed Morse construction, with its prescribed boundary data near the two basepoints; $c_1$ is the first Chern class of the oriented plane field perpendicular to that vector field. To form the zero-framed surgery, remove a tubular neighborhood of $K$ and glue in a solid torus whose meridian is the longitude induced by $F$. The surface $\\widehat F$ is obtained by deleting a boundary collar of $F$ and capping its longitude by the meridian disk of that solid torus. This is the standard integer normalization, with the one-generator diagram of the standard unknot at filtration zero. The subcomplex $F_s\\widehat{CF}(\\mathcal H)$ is spanned by generators of Alexander filtration at most $s$.\n\nMore generally, a finite integer-filtered chain complex is a finite-dimensional chain complex $C$ over $\\mathbb F_2$ with subcomplexes $F_sC$ such that $F_sC=0$ for all sufficiently small integers $s$ and $F_sC=C$ for all sufficiently large integers $s$. If $H(C)\\cong\\mathbb F_2$, define\n$$\\tau(C):=\\min\\{s\\in\\mathbb Z:\\operatorname{im}(H(F_sC)\\longrightarrow H(C))\\ne0\\}.$$\nFor the fixed diagram and surface above, write $\\tau_{\\mathcal H,F}(K)=\\tau(\\widehat{CF}(\\mathcal H),F_*\\widehat{CF}(\\mathcal H))$. Once diagram and surface independence is proved, their common value is the knot invariant $\\tau(K)$. Until that comparison is proved, $\\tau_{\\mathcal H,F}(K)$ denotes only the value for the specified data.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-unknot-hat-diagram-rank-one",
+          "source_section": "Statement",
+          "quote": "Let $U$ be the standard oriented unknot and take its genus-zero one-pointed Heegaard diagram: $\\Sigma=S^2$, each handlebody is a three-ball, there are no $\\alpha$- or $\\beta$-curves, and one $w$-point and one $z$-point are joined by trivial arcs in the two balls. The associated-graded hat chain complex has one generator, zero differential, and homology of rank one over $\\mathbb F_2$. This is a computation for the stated diagram; it makes no invariance claim for other diagrams.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-tau-of-the-unknot-is-zero-1-1",
+          "claim": "By [F2], the total complex has one generator and zero differential, so its only nonzero homology class is represented by that generator.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-tau-of-the-unknot-is-zero-2-1",
+          "claim": "By [F1] the generator has Alexander level $0$. For every $s<0$ its filtered subcomplex is zero, while at $s=0$ the inclusion is the identity on the one-dimensional homology. Thus the first level with nonzero image is $0$, which is the asserted value.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "lem-tau-of-the-unknot-is-zero requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero tau/genus boundary is explicit in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional total homology condition is explicit in the Statement and used in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-tau-of-the-unknot-is-zero has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The filtration endpoints or cobordism boundary are explicit in the Statement and addressed in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite linear-algebra construction is choice-free as shown in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-tau-of-the-unknot-is-zero asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-tau-of-the-unknot-is-zero asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-generator-unknot",
+          "calculation": "C=F2<u>, d=0, A(u)=0; F_s=0 for s<0 and F_0=C.",
+          "result": "The inclusion first has nonzero image at s=0, so tau(U)=0.",
+          "evidence": "Proof steps 1.1–2.1."
+        }
+      ],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "All numbered steps in the current carrier are mapped to their stated inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-knot-floer-large-surgery-and-filtered-cobordism-input": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": []
+        },
+        {
+          "fact": "F1",
+          "source": "thm-grid-homology-independent-of-grid-and-equals-knot-floer",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $K$ be an oriented knot in $S^3$, and let $F$ be a compact connected oriented surface embedded in $S^3$ with boundary $K$ and minimum possible genus; write $g(K)=\\operatorname{genus}(F)$. Let $G$ be any toroidal grid diagram for $K$ with grid number $n$. Let $C^-_{\\mathrm{grid}}(G)$ be the full filtered minus complex produced by the grid-complex algorithm, and let $C^-_U(G)$ denote this same complex regarded over $\\mathbb F_2[U]$ by letting $U$ act as one chosen $U_i$, with the other variables retained independently. For an admissible $2n$-pointed Heegaard diagram $\\mathcal H$ compatible with $(K,F)$, define $C^-_U(\\mathcal H)$ by the same restriction to a single variable action. Write $CFK^-(K)$ for the full filtered complex of an admissible doubly-pointed diagram. The ordinary fully collapsed quotient, obtained instead by setting all $U_i=U$, has type $CFK^-(K)\\otimes V^{\\otimes(n-1)}$; the restriction of scalars $C^-_U$ has type $CFK^-(K)$.\n\nFor the absolute Alexander normalization, let $\\mathcal H_1$ be an admissible doubly-pointed Heegaard diagram for $(K,F)$. For a generator $\\mathbf x$ of $\\mathcal H_1$, set\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the relative $\\operatorname{Spin}^c$ structure assigned to this generator by the pointed Heegaard construction: it is the homology class of the nowhere-vanishing vector field obtained from the gradient trajectories through $\\mathbf x$ and the chosen basepoint pair, after extending the field across small balls around the critical points. Its first Chern class is that of the oriented plane field orthogonal to this vector field. The surface $\\widehat F$ is obtained by removing a tubular neighborhood $N(K)$ from $F$ and capping the resulting longitude with the meridian disk of the solid torus attached in zero-framed surgery on $K$. Let $\\widehat{HFK}(K)$ be the homology of the Alexander-associated-graded complex obtained from the doubly-pointed complex $C^-_U(\\mathcal H_1)$ by quotienting by its sole variable $U$, with this $A_F$ normalization.\n\nThen $C^-_U(G)$ and $C^-_U(\\mathcal H)$ are filtered chain homotopy equivalent, preserving relative Maslov grading and the $A_F$ filtration, and their Alexander-associated-graded minus complexes are chain homotopy equivalent. For any two grids of $K$, the resulting normalized filtered complexes are filtered chain homotopy equivalent. If $\\widetilde{GH}(G)$ denotes the homology of the tilde grid complex over $\\mathbb F_2$, then\n$$\\widetilde{GH}(G)\\cong\\widehat{HFK}(K)\\otimes V^{\\otimes(n-1)},$$\nwhere $V$ is the two-dimensional bigraded vector space with one generator in bidegree $(0,0)$ and one in bidegree $(-1,-1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tau-connected-sum-filtered-tensor-product",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere, with chosen minimum-genus oriented Seifert surfaces. A normalized $CFK^\\infty(K)$ is a free finite-rank chain complex over $\\mathbb F_2[U,U^{-1}]$ with two integer filtrations $(i,j)$, where multiplication by $U$ lowers both coordinates by one. Give the connected sum $K\\#J$ the fixed oriented gluing convention and the sum filtrations and Maslov/Alexander gradings. Then $CFK^\\infty(K\\#J)$ is bifiltered chain homotopy equivalent to $CFK^\\infty(K)\\otimes_{\\mathbb F_2[U,U^{-1}]}CFK^\\infty(J)$, with an equivalence and homotopies preserving both filtration coordinates. Moreover, the normalized finite filtered hat complex of $K\\#J$ is filtered chain homotopy equivalent to $C_K\\otimes C_J$ with tensor filtration $F_s(C_K\\otimes C_J)=\\sum_{p+q\\le s}F_pC_K\\otimes F_qC_J$. Consequently,\n$$\\tau(K\\#J)=\\tau(K)+\\tau(J).$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-knot-floer-duality-and-filtration-swap",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset S^3$ be a smooth oriented knot and let $C(K)=\\mathrm{CFK}^{\\infty}(K)$ be its normalized bifiltered complex over $\\mathbb F_2[U,U^{-1}]$. The complex of the reverse mirror $-K$ is filtered-chain-homotopy equivalent to the dual complex $C(K)^*=\\operatorname{Hom}_{\\mathbb F_2[U,U^{-1}]}(C(K),\\mathbb F_2[U,U^{-1}])$, with dual differential $d\\phi(x)=\\phi(\\partial x)$ and dual basis elements at negated bifiltration coordinates. There is also a Maslov-graded filtered-chain-homotopy equivalence from $C(K)$ to the complex obtained by exchanging the algebraic and Alexander filtrations. These are distinct symmetries: duality negates both filtration coordinates, while conjugation exchanges them.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-knot-floer-filtration-and-tau",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a smooth oriented knot in the standard oriented three-sphere. Let $F$ be a compact connected oriented Seifert surface with boundary $K$, and let $\\mathcal H=(\\Sigma,\\boldsymbol\\alpha,\\boldsymbol\\beta,w,z)$ be an admissible doubly pointed Heegaard diagram representing $(K,F)$. The associated one-pointed hat chain complex $\\widehat{CF}(\\mathcal H)$ is the finite-dimensional chain complex over $\\mathbb F_2$ obtained from the minus complex by setting its basepoint variable to zero; its differential counts index-one disks with zero multiplicity at $w$. Assume for this specified data that the differential is nonincreasing in the Alexander filtration, that the absolute Alexander formula below takes integer values, and that $H(\\widehat{CF}(\\mathcal H))\\cong\\mathbb F_2$. Give a generator $\\mathbf x$ its absolute Alexander filtration\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the homology class of the nowhere-vanishing vector field assigned to $\\mathbf x$ by the pointed Morse construction, with its prescribed boundary data near the two basepoints; $c_1$ is the first Chern class of the oriented plane field perpendicular to that vector field. To form the zero-framed surgery, remove a tubular neighborhood of $K$ and glue in a solid torus whose meridian is the longitude induced by $F$. The surface $\\widehat F$ is obtained by deleting a boundary collar of $F$ and capping its longitude by the meridian disk of that solid torus. This is the standard integer normalization, with the one-generator diagram of the standard unknot at filtration zero. The subcomplex $F_s\\widehat{CF}(\\mathcal H)$ is spanned by generators of Alexander filtration at most $s$.\n\nMore generally, a finite integer-filtered chain complex is a finite-dimensional chain complex $C$ over $\\mathbb F_2$ with subcomplexes $F_sC$ such that $F_sC=0$ for all sufficiently small integers $s$ and $F_sC=C$ for all sufficiently large integers $s$. If $H(C)\\cong\\mathbb F_2$, define\n$$\\tau(C):=\\min\\{s\\in\\mathbb Z:\\operatorname{im}(H(F_sC)\\longrightarrow H(C))\\ne0\\}.$$\nFor the fixed diagram and surface above, write $\\tau_{\\mathcal H,F}(K)=\\tau(\\widehat{CF}(\\mathcal H),F_*\\widehat{CF}(\\mathcal H))$. Once diagram and surface independence is proved, their common value is the knot invariant $\\tau(K)$. Until that comparison is proved, $\\tau_{\\mathcal H,F}(K)$ denotes only the value for the specified data.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $F\\subset B^4\\subset\\mathbb R^4$ be a compact connected oriented smoothly properly embedded surface of genus $g$, with its supplied smooth boundary collar and oriented boundary the knot $K\\subset S^3$. There is an orientation-preserving ambient diffeomorphism $\\Psi:B^4\\to B^4$ equal to the identity on a neighborhood of the outer boundary, and $0<\\varepsilon<1$, such that $\\Psi(F)\\cap B^4_\\varepsilon$ is exactly a flat two-disk in a plane through $0$. The surface $\\Psi(F)\\setminus\\operatorname{int}B^4_\\varepsilon$, in the explicitly round shell $B^4\\setminus\\operatorname{int}B^4_\\varepsilon\\cong S^3\\times[0,1]$, is a connected smooth oriented knot cobordism between $K$ and a standard unknot, with genus $g$ and Euler characteristic $-2g$. Both boundary components have product collars in a shell identification fixing $K$ and the inner sphere. The ambient diffeomorphism $\\Psi$ fixes a sufficiently small restriction of the supplied outer collar; the shell coordinates may be adjusted there to make that surface collar a product. No assertion about the complement of an arbitrary embedded four-ball is used.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C$ be the normalized finite filtered hat complex for a knot and put $t=\\tau(C)$. Choose a cycle $x\\in F_tC_n$ representing the generator of $H(C)\\cong\\mathbb F_2$ in degree $n$. By minimality of $t$, every cycle in $F_{t-1}C_n$ is a boundary. Hence $x\\notin B_n+F_{t-1}C_n$, where $B_n=\\operatorname{im}(\\partial_{n+1})$; otherwise $x-b$ would be a cycle in $F_{t-1}C_n$ representing the same nonzero class. Extend a linear functional $\\lambda:C_n\\to\\mathbb F_2$ that vanishes on $B_n+F_{t-1}C_n$ and satisfies $\\lambda(x)=1$. It is a cocycle and represents the nonzero class in the dual homology, since it evaluates nontrivially on the cycle $x$. By [F3], the reflected knot's normalized Laurent complex is the R-dual with both coordinates negated. In the normalized $i=0$ hat slice, the $U^0$ terms are exactly the hat differential, while positive $U$ powers leave that slice in both original and dual complexes; transposing therefore gives the finite hat dual. Negating the Alexander coordinate gives its annihilator filtration $F_sC^\\vee=\\{\\mu:\\mu(F_{-s-1}C)=0\\}$. Thus $\\lambda\\in F_{-t}C^\\vee$, so $\\tau(C^\\vee)\\le -t$. If $s<-t$, then $-s-1\\ge t$ and every functional in $F_sC^\\vee$ annihilates $F_tC$, hence pairs trivially with $[x]$. The evaluation pairing identifies $H(C^\\vee)$ with $H(C)^\\vee$ and is nondegenerate; therefore no such lower filtration level maps nontrivially to total dual homology. This gives $\\tau(C^\\vee)\\ge -t$, and hence $\\tau(-K)=-\\tau(K)$ in the normalized knot setting.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose a smooth embedded arc on $S$ joining its two boundary components. Cut $S$ along a thin strip about that arc, and remove from $S^3\\times I$ the interior of a compatible tubular neighborhood of the arc. A properly embedded arc joining the two boundary spheres in this simply connected four-dimensional product is isotopic to a product arc relative its ends: a generic homotopy of such arcs is a path of embeddings, since the coincidence condition for two distinct arc points at the same time has dimension $1+1+1-4<0$, and the derivative-zero condition is also avoidable. These are finitely many compact smooth general-position choices. Removing the product arc neighborhood turns the ambient shell into $B^4$, after rounding its product corners. The cut surface has one boundary component $K_1\\#(-K_0)$ and Euler characteristic $\\chi(S)+1=1-2g$, hence genus $g$. Its product collars supply the ordinary connected-sum boundary convention. Thus it is an actual smooth genus-$g$ spanning surface for $K_1\\#(-K_0)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F2] and the surface from step 1.2,\n$$|\\tau(K_1\\#(-K_0))|\\le g_4(K_1\\#(-K_0))\\le g.$$\nUsing connected-sum additivity from [F3] and the threshold sign established in step 1.1 gives $\\tau(K_1\\#(-K_0))=\\tau(K_1)-\\tau(K_0)$. This proves the stated inequality. If $g=0$, it gives concordance invariance. If one boundary knot is the standard unknot, [F4] gives the four-ball genus estimate; equivalently, puncture an actual spanning surface and use [F5] to obtain that cobordism case. The only external genus assertion used is Hom's direct $\\mathbb F_2$ theorem [F2]; no coefficient transfer from the integral surgery-trace maps is made.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-large-surgery-and-filtered-cobordism-input requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-large-surgery-and-filtered-cobordism-input has no separate zero-input branch beyond its stated integer filtration and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-large-surgery-and-filtered-cobordism-input has no separate one-object boundary case beyond its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-large-surgery-and-filtered-cobordism-input has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The filtration endpoints or cobordism boundary are explicit in the Statement and addressed in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The axiom branch and selected geometric data are explicit in the Statement and Facts & Assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-large-surgery-and-filtered-cobordism-input asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-knot-floer-large-surgery-and-filtered-cobordism-input asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [
+        {
+          "name": "AC_omega",
+          "supplier": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "evidence": "[A1] [[def-countable-choice]] states that every sequence of nonempty sets has a choice function; the declared movie and diagram route uses this axiom."
+        }
+      ],
+      "proof_status": "complete",
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "unresolved_supplier_checks": [
+        {
+          "supplier": "def-knot-floer-cobordism-map",
+          "required_hypotheses": [
+            "[[def-knot-floer-cobordism-map]] defines a representative by composing elementary triangle, handle, band, and basepoint maps, but its Definition says independence from the chosen decomposition and regular data is a separate naturality assertion. The current proof is `not-supplied`."
+          ],
+          "affected_claims": [
+            "lem-knot-floer-large-surgery-and-filtered-cobordism-input"
+          ],
+          "evidence": "[L1] [[def-knot-floer-cobordism-map]] defines a representative by composing elementary triangle, handle, band, and basepoint maps, but its Definition says independence from the chosen decomposition and regular data is a separate naturality assertion. The current proof is `not-supplied`. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "lem-knot-floer-holomorphic-triangle-transversality-compactness-gluing",
+          "required_hypotheses": [
+            "[[lem-knot-floer-holomorphic-triangle-transversality-compactness-gluing]] states regularity, compactness, and the listed boundary strata for the triangle spaces, but its current proof is `not-supplied`; the disk-analysis supplier does not prove triangle analysis."
+          ],
+          "affected_claims": [
+            "lem-knot-floer-large-surgery-and-filtered-cobordism-input"
+          ],
+          "evidence": "[L2] [[lem-knot-floer-holomorphic-triangle-transversality-compactness-gluing]] states regularity, compactness, and the listed boundary strata for the triangle spaces, but its current proof is `not-supplied`; the disk-analysis supplier does not prove triangle analysis. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "lem-knot-floer-cobordism-naturality-and-movie-invariance",
+          "required_hypotheses": [
+            "[[lem-knot-floer-cobordism-naturality-and-movie-invariance]] states filtered equivariant chain homotopy invariance and the composition law, but its current proof is `not-supplied` and the finite movie-move checks remain open."
+          ],
+          "affected_claims": [
+            "lem-knot-floer-large-surgery-and-filtered-cobordism-input"
+          ],
+          "evidence": "[L3] [[lem-knot-floer-cobordism-naturality-and-movie-invariance]] states filtered equivariant chain homotopy invariance and the composition law, but its current proof is `not-supplied` and the finite movie-move checks remain open. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "lem-smooth-link-cobordisms-admit-finite-generic-movies",
+          "required_hypotheses": [
+            "[[lem-smooth-link-cobordisms-admit-finite-generic-movies]] is the exact finite-movie existence input of the generic-movie definition. The carrier exists but is not registered in a batch manifest and has no current Step-1 decision; its proof/readiness is unresolved."
+          ],
+          "affected_claims": [
+            "lem-knot-floer-large-surgery-and-filtered-cobordism-input"
+          ],
+          "evidence": "[L4] [[lem-smooth-link-cobordisms-admit-finite-generic-movies]] is the exact finite-movie existence input of the generic-movie definition. The carrier exists but is not registered in a batch manifest and has no current Step-1 decision; its proof/readiness is unresolved. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "thm-grid-homology-independent-of-grid-and-equals-knot-floer",
+          "required_hypotheses": [
+            "[[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is the required bridge from the normalized grid complexes to the analytic filtered knot Floer complexes. Its current Step-1 decision is escalated, so its grid-to-analytic and absolute-grading claims are not treated as proved."
+          ],
+          "affected_claims": [
+            "lem-knot-floer-large-surgery-and-filtered-cobordism-input"
+          ],
+          "evidence": "[L5] [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is the required bridge from the normalized grid complexes to the analytic filtered knot Floer complexes. Its current Step-1 decision is escalated, so its grid-to-analytic and absolute-grading claims are not treated as proved. This records an unresolved supplier; its Statement is not used as a proved fact."
+        }
+      ],
+      "unresolved_obligations": [
+        "def-knot-floer-cobordism-map: [[def-knot-floer-cobordism-map]] defines a representative by composing elementary triangle, handle, band, and basepoint maps, but its Definition says independence from the chosen decomposition and regular data is a separate naturality assertion. The current proof is `not-supplied`.",
+        "lem-knot-floer-holomorphic-triangle-transversality-compactness-gluing: [[lem-knot-floer-holomorphic-triangle-transversality-compactness-gluing]] states regularity, compactness, and the listed boundary strata for the triangle spaces, but its current proof is `not-supplied`; the disk-analysis supplier does not prove triangle analysis.",
+        "lem-knot-floer-cobordism-naturality-and-movie-invariance: [[lem-knot-floer-cobordism-naturality-and-movie-invariance]] states filtered equivariant chain homotopy invariance and the composition law, but its current proof is `not-supplied` and the finite movie-move checks remain open.",
+        "lem-smooth-link-cobordisms-admit-finite-generic-movies: [[lem-smooth-link-cobordisms-admit-finite-generic-movies]] is the exact finite-movie existence input of the generic-movie definition. The carrier exists but is not registered in a batch manifest and has no current Step-1 decision; its proof/readiness is unresolved.",
+        "thm-grid-homology-independent-of-grid-and-equals-knot-floer: [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is the required bridge from the normalized grid complexes to the analytic filtered knot Floer complexes. Its current Step-1 decision is escalated, so its grid-to-analytic and absolute-grading claims are not treated as proved."
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-free-five-focused-final.md",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Peter S. Ozsvath and Zoltan Szabo, Knot Floer homology and the four-ball genus",
+                "url": "https://arxiv.org/pdf/math/0301149v4",
+                "locator": "Theorem 1.1 and §§3.3–3.5, printed pp.2 and 9–15; large-surgery cobordism maps, adjunction, and the four-ball genus bound"
+              },
+              {
+                "title": "Jennifer Hom, A survey on Heegaard Floer homology and concordance",
+                "url": "https://arxiv.org/pdf/1512.00383v3",
+                "locator": "§§3.1–3.2, printed pp.8–12; tau threshold, genus bound, and large-surgery maps"
+              },
+              {
+                "title": "Ian Zemke, Link cobordisms and absolute gradings on link Floer homology",
+                "url": "https://arxiv.org/pdf/1701.03454v2",
+                "locator": "Theorem 1.4, §§7.3, 9.9, and 10.1; Alexander grading shifts and the cobordism genus inequality"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "AC_omega suffices for the fixed compact trace specialization: finite diagrams and handle data, countably many homotopy/Spin-c labels and generic analytic choices. The general full-choice four-manifold theorem is not silently cast as a countable-choice theorem.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-94.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "lem-tau-connected-sum-filtered-tensor-product": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-balanced-knot-data-admit-full-marked-square-zero-holomorphic-counts",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix an actual balanced multipointed Heegaard diagram for an oriented knot in $S^3$, with $k\\ge1$ cyclically ordered mark pairs, $m=h+k-1$, transverse attaching systems and complete compression disks cutting the two handlebodies into $k$ balls. Broad auxiliary proper disk witnesses are permitted. Label the cut components by $A_i$ containing $w_i,z_i$ and $B_i$ containing $w_i,z_{i+1}$, cyclically.\n\nThere is a choice of integrable surface background, protected nearly symmetric geometry, common exact generator charts and ONE smooth tame path constant on genuine positive time collars, with no nonconstant strip of index at most zero, for which every actual nonconstant strip of index one or two is regular and there are finitely many index-one translation orbits across ALL generators, realized classes and nonnegative $w,z$ vectors. No $n_z=0$ restriction is imposed. Its endpoint unit boundary disks are regular and finite at every generator. Their mod-two counts are one for each $A_i,B_i$ when $k\\ge2$, and zero for the single alpha and beta components when $k=1$; in the latter case unit spheres through the generators are excluded as in the singly pointed construction.\n\nLet $C$ be the free module on the finite generator set over $\\mathbb F_2[U_1,\\ldots,U_k]$. The ACTUAL differential\n$$d x=\\sum_{y,\\,[u]\\in\\widehat{\\mathcal M}_1(x,y)}U_1^{n_{w_1}(u)}\\cdots U_k^{n_{w_k}(u)}\\,y$$\ncounts all the above index-one orbits, including every positive $z$ multiplicity. It is a finite polynomial matrix, $d^2=0$, and it preserves the relative Alexander filtration with each $U_i$ lowering filtration by one. Identifying or localizing variables by any ring homomorphism preserves this identity.\n\nFor $k\\ge2$, retaining separate $V_i$ weights for $z_i$ gives the actual full-marked curvature identity\n$$D^2=\\left(\\sum_{i=1}^kU_i(V_i+V_{i+1})\\right)I.$$\nFor $k=1$ the corresponding full-marked $D$ has $D^2=0$ by the zero unit counts. These are chosen-data analytic count identities. Comparison to other paths or diagrams, absolute gradings, analytic/combinatorial identification and Floer invariance are not input or conclusion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-balanced-s-three-knot-generators-admit-consistent-relative-gradings",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix an actual balanced multipointed diagram of an oriented knot in $S^3$, with $m=h+k-1$, its surface complex structure and common product-integrable generator charts. Every two actual generators $x,y$ are joined by an actual continuous Whitney class. For $m>0$, the actual index and marked degrees define consistent relative integer gradings: if the generator set is nonempty, there are functions $M,A$ on it satisfying, for EVERY realized class $u:x\\to y$,\n$$M(x)-M(y)=\\mu(u)-2\\sum_i n_{w_i}(u),\\qquad A(x)-A(y)=\\sum_i n_{z_i}(u)-\\sum_i n_{w_i}(u).$$\nEach function is unique up to one common additive constant. In particular every actual index-one term weighted by $U_1^{a_1}\\cdots U_k^{a_k}$, where $a_i=n_{w_i}(u)$, lowers $M$ by one and lowers $A$ by exactly $\\sum_i n_{z_i}(u)$ when each $U_i$ has degrees $(-2,-1)$. Positive $z$ degrees are included.\n\nNo holomorphic representative is required for Whitney connectivity. No absolute normalization, nonemptiness of the generator set, existence of regular counts, square-zero or invariant comparison is asserted. For $m=0$ the point target has its sole generator and constant class, with arbitrary constant gradings.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-strictly-admissible-triple-free-polygons-have-full-marked-low-dimensional-counts",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Supply finite balanced polygon Morse data of rank $m=h+k-1\\ge1$, with common $w,z$ marks, and no triple intersection of the product tori. Fix a Spin-c structure on the polygon cobordism and use the STRICT all-$w$ normalized strong admissibility condition of the named geometric lattice theorem. Use the same condition for its relevant boundary-pair sectors. The boundary systems have their actual complete $k$-ball cuts, and nearly symmetric geometry has exact constant product-angle generator charts. No $S^3$ or torsion restriction on the intermediate three-manifolds is made.\n\nIn the smooth topology, the genuine constant-collar end paths having no nonconstant strip of index at most zero and regularity for every actual index-one strip in the relevant sectors form an open dense subset of the allowed protected end paths. With these paths, compatible coherent source-dependent polygon perturbations can be chosen generically, relative to their faces and any regular parameter endpoints. Their count-dimension-zero total sets are finite, and their count-dimension-one spaces compactify to actual compact one-manifolds. All nonnegative $w,z$ degrees are retained. These conclusions hold for the fixed total Spin-c label, across all its literal realized classes; they also hold for fixed degree vectors or fixed actual classes. The boundary consists exactly of the label-compatible rigid polygon–polygon faces and strip–polygon breakings, with additive marked vectors and actual exhaustive gluing collars. No sphere or one-torus disk bubble occurs in these polygon dimensions. This includes $k=1$.\n\nFor triangles the fixed count index is $\\mu$, so rigid counts have $\\mu=0$ and the chain-map boundary has $\\mu=1$. In a generic one-parameter triangle family with fixed regular end data the universal count index is $\\mu+1$: the index-minus-one universal counts are finite, and universal index-zero spaces have the parameter endpoints and strip–triangle boundaries. Thus the finite actual counts satisfy the weighted triangle chain-map equation and its auxiliary-data chain homotopy over $\\mathbb F_2$. They may be specialized to the two-color ring by sending every $w$ variable to $U$ and every $z$ variable to $V$. No top-generator cycle, handle-map inverse, arbitrary diagram invariance or absolute grading is part of this assertion.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1",
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-os-disk-and-polygon-analytic-foundations",
+          "source_section": "Statement",
+          "quote": "Assume ACω. Let a finite pointed Heegaard multidiagram have actual complete handlebody disk systems for closed oriented three-manifolds, with a basepoint in every one-system cut component. Ordered polygons use distinct labeled, pairwise transverse attaching systems; when an operation repeats a geometric system, use its separately labeled small transverse auxiliary copies. For the full hat operations impose global weak multidiagram admissibility: every nonzero full-curve multiperiodic domain vanishing at all basepoints has both signs. For operations in a specified total Spin-c family, ordinary weak admissibility is also allowed: every nonzero formal periodic domain difference in the capped Spin-c kernel, normalized at every mark and with Chern evaluation zero, has both signs. The same formal sector condition is imposed on each relevant boundary pair, including intended sectors with no generators. In this ordinary weak branch all basepoint multiplicities are fixed to zero, the required arities and compact auxiliary parameter families are finite, and counts use the corresponding fixed actual index bands. Strict all-mark normalized strong admissibility is a further allowed branch; it is not substituted for ordinary weakness. For a single diagram the full-module admissibility convention tests all intended Spin-c sectors, including empty sectors, and implies the required global weak domain condition.\n\nIn positive symmetric rank choose, among the auxiliary data, an arbitrarily small pointed Hamiltonian representative with no triple product-torus intersection, following its pair generators and transporting its domains, actual Spin-c labels and admissibility. Fix that representative. Compatible generic source-dependent perturbations, coherent over the required conformal faces and auxiliary parameter families, then make the disk and polygon spaces entering the hat differential, continuation, handleslide, stabilization and surgery operations regular with their actual expected dimensions. The common protected tensor and arbitrary constant product-angle end charts can be prescribed, and coherent perturbations can be arbitrarily small about a supplied compatible reference model. Auxiliary polygon and anchored-continuation parameter families here keep the autonomous end paths fixed and regular on the required energy budget; regular compatible parameter-boundary data may be retained. No slice-regularity assertion is made for arbitrary parameter-varying autonomous end paths. This does not assert regularity by almost-complex variations alone on an arbitrary fixed triple, or invariance under the preliminary curve choice.\n\nDimensions include every allowed conformal and auxiliary family parameter. Quotient only actual source automorphisms: longitudinal translation acts freely on autonomous nonconstant two-ended strips; an anchored source-dependent continuation strip and a three-marked triangle have no translation quotient. Every total zero-dimensional space used in a mod-two count is finite, across all its literal realized classes and with its specified labels. The one-dimensional spaces entering the chain-map, composition and homotopy identities compactify to actual compact one-manifolds. At fixed data their boundaries are precisely the matching rigid polygon–polygon conformal splittings and strip–polygon breakings. In an auxiliary family the broken configurations are the rigid joint fiber configurations at one common parameter, together with the prescribed parameter-boundary strata; they need not be products of individually rigid parameterized polygon spaces. Every such broken end has an exhaustive gluing collar. For the zero-basepoint operations no nonconstant sphere or one-torus boundary disk survives; thus the specified boundary-degeneration terms vanish, and there is no further escape or uncontrolled periodic-domain end. Boundary parity gives the differential square-zero identity and the polygon chain-map, composition and homotopy identities.\n\nAt symmetric rank zero retain the original empty systems and use the point target directly: the differential is zero, the matching constant triangle is counted once, higher rigid operations vanish, and the conformal and parameter boundary identities are the actual source-space identities. No triple-torus exclusion or free translation quotient is imposed on that point map.\n\nThis is the analytic count theorem. It does not construct a subordinate surgery diagram, prove that a named top generator is a cycle, identify the homology of a surgery total complex with a filling, or prove Heegaard-move invariance. Those remain duties of the respective operation constructions.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1",
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-transverse-linear-strip-cauchy-riemann-isomorphism",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix $m\\ge1$ and angles $0<\\theta_j<\\pi$ for $1\\le j\\le m$. On the strip $S=\\mathbb R\\times[0,1]$ impose the real product-plane boundary conditions $u(s,0)\\in\\mathbb R^m$ and $u(s,1)\\in\\prod_j e^{i\\theta_j}\\mathbb R$. Let $H^1_\\theta$ be the completion of smooth maps satisfying these conditions and compactly supported in the $s$ direction, for the norm\n$$\\|u\\|_{H^1}^2=\\|u\\|_2^2+\\|u_s\\|_2^2+\\|u_t\\|_2^2.$$\nThe real linear operator $D=\\partial_s+i\\partial_t$ extends to an isomorphism $H^1_\\theta\\to L^2(S;\\mathbb C^m)$. Put $\\gamma=\\min_j\\{\\theta_j,\\pi-\\theta_j\\}>0$. Its inverse satisfies\n$$\\|D^{-1}f\\|_2\\le\\gamma^{-1}\\|f\\|_2,\\qquad \\|D^{-1}f\\|_{H^1}\\le\\sqrt{\\gamma^{-2}+5}\\,\\|f\\|_2.$$\nFor $0\\le\\delta<\\gamma$, set $w(s)=e^{\\delta|s|}$, $H^1_{\\theta,\\delta}=\\{u:wu\\in H^1_\\theta\\}$ with norm $\\|wu\\|_{H^1}$, and $L^2_\\delta=\\{f:wf\\in L^2\\}$ with norm $\\|wf\\|_2$. Then $D:H^1_{\\theta,\\delta}\\to L^2_\\delta$ is an isomorphism and\n$$\\|D^{-1}f\\|_{H^1_{\\theta,\\delta}}\\le\\frac{\\sqrt{\\gamma^{-2}+5}}{1-\\delta/\\gamma}\\,\\|f\\|_{L^2_\\delta},\\qquad \\|wD^{-1}f\\|_2\\le\\frac{\\|wf\\|_2}{\\gamma-\\delta}.$$\nThese are estimates for the constant linear asymptotic model. They make no assertion about nonlinear strip decay, a variable-coefficient operator, or its Maslov index.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-boundary-strip-cauchy-riemann-inverse-with-free-end-constants",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $S=\\mathbb R_s\\times[0,1]_t$ and $m\\ge1$. Let $\\mathcal X_{\\mathbb R}^1$ be the real $H^1$ completion of smooth maps compactly supported in $s$ with values in $\\mathbb R^m$ on both horizontal edges. Choose a smooth $\\rho\\ge0$ equal to $|s|$ for $|s|\\ge1$, with $|\\rho'|\\le1$ and bounded derivatives of every positive order, and let $w=e^{\\delta\\rho}$ for $0<\\delta<\\pi$. Put $H^q_\\delta=w^{-1}H^q$ and $\\mathcal X^1_{\\mathbb R,\\delta}=w^{-1}\\mathcal X^1_{\\mathbb R}$. Fix a smooth real cutoff $\\chi_+$ equal to zero for $s\\le-1$ and one for $s\\ge1$, and put $\\chi_-=1-\\chi_+$.\n\nFor every integer $q\\ge0$ define the real Hilbert domain of maps with free real end constants by\n$$\\mathcal E_q=\\{u=r+\\chi_-c_-+\\chi_+c_+:\\ r\\in H^{q+1}_\\delta\\cap\\mathcal X^1_{\\mathbb R,\\delta},\\ c_-,c_+\\in\\mathbb R^m\\},$$\nwith norm $\\|wr\\|_{H^{q+1}}+|c_-|+|c_+|$ or its equivalent squared-sum Hilbert norm. This representation is unique. The actual operator\n$$D_0=\\partial_s+i\\partial_t:\\mathcal E_q\\longrightarrow H^q_\\delta$$\nis bounded and onto, has kernel exactly the global real constant maps, and has real Fredholm index $m$. It has a specified bounded right inverse $Q_q$ whose solutions have $c_-=0$; these right inverses agree on their common domains. For $u\\in\\mathcal E_0$ and $f=D_0u$, the exact matching identity is\n$$c_+-c_-=\\int_{\\mathbb R}f_0(s)\\,ds,\\qquad f_0(s)=\\operatorname{Re}\\int_0^1 f(s,t)\\,dt.$$\nIn particular a solution with both end constants zero exists exactly when this real integral is zero, and is then unique. At higher orders only the zeroth real boundary trace is imposed; no normal-derivative or forcing trace is added. This is the actual linear same-boundary neck model. It asserts no geometric boundary-degeneration classification or nonlinear gluing theorem.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-flat-complex-torus-cauchy-riemann-mean-inverse-and-normalized-dipoles",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2$ be an oriented complex lattice, $A=\\operatorname{Im}(\\overline{\\omega_1}\\omega_2)>0$, and $E=\\mathbb C/\\Lambda$. Use coordinates $z=\\omega_1s+\\omega_2t$ on the unit coordinate torus and normalized measure $ds\\,dt$. For an integer $q\\ge0$, let $H^q(E)$ mean complex-valued functions with coordinate weak derivatives through order $q$ in $L^2$, and let $H^q_0$ be its closed subspace of integral zero. Then $D=2\\partial_{\\bar z}$ has kernel the complex constants and range $H^q_0$ on $H^{q+1}$, and restricts to a bounded isomorphism $H^{q+1}_0\\to H^q_0$. Its inverse is the actual Fourier multiplier\n$$\\widehat{Qf}(k,l)=\\frac{A\\widehat f(k,l)}{2\\pi(\\omega_2k-\\omega_1l)}\\quad((k,l)\\ne(0,0)),\\qquad\\widehat{Qf}(0,0)=0.$$\nOn a compact set of oriented nondegenerate lattice bases these inverse norms are uniform. On the open set of such bases, $Q:H^q_0\\to H^{q+1}_0$ is smooth in operator norm after the coordinate identifications. Thus the unrestricted operator has complex kernel and cokernel dimensions one and Fredholm index zero; specifying zero mean removes its kernel and its exact single complex obstruction.\n\nFor distinct $a,b\\in E$, a point $z_0\\notin\\{a,b\\}$, and $R\\in\\mathbb C$, there is exactly one meromorphic function on $E$ having no poles except possibly $a,b$, principal parts $R/(z-a)$ and $-R/(z-b)$ in the translation coordinates, and value zero at $z_0$. It is\n$$G_{a,b,R;z_0}(z)=R\\bigl[\\zeta_\\Lambda(z-a)-\\zeta_\\Lambda(z-b)-\\zeta_\\Lambda(z_0-a)+\\zeta_\\Lambda(z_0-b)\\bigr].$$\nLifts of $a,b,z_0,z$ do not affect this expression. For fixed $\\Lambda$ it is smooth in the point and residue parameters away from collisions and poles, with uniform bounds for each finite number of derivatives on compact subsets of that parameter and evaluation domain. In particular a torus meromorphic function with just two prescribed simple principal parts can exist only when their residues sum to zero, and this condition suffices, with uniqueness after one value is prescribed. When $R=0$ the normalized function is zero.\n\nThese are actual periodic operator and meromorphic-function statements. They assert no gluing, incidence-cover matching, boundary-degeneration count or Floer invariance.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-balanced-knot-ordinary-stabilization-has-full-minus-inverse-maps",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. An ordinary Heegaard stabilization of an actual balanced multipointed knot diagram in S3, disjoint from the attaching curves, marks and actual knot arcs, gives a filtered chain homotopy equivalence of its full minus complexes over $R=\\mathbb F_2[U_1,\\ldots,U_k]$. Take actual finite square-zero good endpoint counts: no nonconstant strip has index at most zero, and all index-one strips are regular. All positive z terms and individual marked variables are retained. Maps have relative Maslov degree zero, homotopies degree plus one, and are Alexander filtered after identifying the relative origins. This asserts no absolute centering or marked-pair stabilization.\n\nFor chosen data the nearest bijection $x\\mapsto x\\times c$ literally identifies the actual rigid counts, including their individual w and z vectors. The stabilized chosen path has no nonconstant nonpositive-index strip and has regular index-one strips. Independent good endpoint choices are compared by actual full-minus continuations. The proof solves the torus mean obstructions and exhausts changing-target limits; it does not assume a transverse split disk disjoint union of horizontal tori.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-same-handlebody-model-top-counts-have-no-positive-marked-terms",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let complete balanced disk systems of rank $m=h+k-1$ on a genus-h surface belong to ONE specified handlebody, with one w and one z mark in every cut component, and with the same actual trivial arcs and marks. Realize a specified own-system handleslide and its sufficiently small auxiliary copies by the circular ribbon model of the named suppliers; take the other curve copies sufficiently small. A handleslide requires $m\\ge2$. Small isotopy copies alone are allowed for $m\\ge1$. The actual ribbon and its common exterior avoid all marks.\n\nThe full marked index-one differential of each required model pair kills its top generator. Both actual top-input, index-zero triangle products in the circular move construction equal the stated top output with coefficient one, with NO other output or positive marked term. These assertions hold over the polynomial ring with all individual w and z variables retained, and hence after setting every z variable equal to one. They hold for sufficiently small regular coherent protected perturbations of the model.\n\nThis applies to every actual balanced h,k, including dependent meridian lists and genus zero when the required number of curves exists. No inference is made about mixed-system triangles involving the opposite handlebody. The proof computes actual zero-Chern restrictions and same-corner index differences; it does not assume every formal degree-one periodic domain has a Whitney representative.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1",
+            "6.1",
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-balanced-knot-full-minus-auxiliary-continuations-are-filtered-equivalences",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix one actual balanced multipointed diagram of an oriented knot in $S^3$, with $k\\ge1$, $m=h+k-1$ and its ordered marks. Take two actual finite square-zero full minus count complexes over $R=\\mathbb F_2[U_1,\\ldots,U_k]$, with all positive z degrees retained. Suppose their chosen end paths have no nonconstant strip of index at most zero and every index-one strip is regular, as in the full-marked chosen-count construction. Background surface complex structures, positive area forms, full torus tensors and optional generator charts may have been chosen independently.\n\nThere are finite actual anchored continuation matrices over R and inverse chain homotopies. They are filtered for the relative Alexander filtration and homogeneous for the relative Maslov degree, after identifying the origins on the SAME geometric generator set. Every $U_i$ has degrees $(-2,-1)$. Positive z terms are included and lower filtration by their total z degree; no associated-graded substitution is made. Scalar restriction to any chosen variable, or identification or localization of variables, preserves these actual finite identities.\n\nThe proof supplies compact low-dimensional continuation spaces and their exhaustive collars by an actual full-marked index budget. No zero-basepoint bubble exclusion is substituted for that budget. No comparison of different attaching systems, genus changes, basepoint-pair cones or absolute normalization is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1",
+            "6.1",
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-balanced-knot-attaching-moves-have-full-minus-inverse-maps",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix an actual balanced multipointed knot diagram in $S^3$ with $m=h+k-1$, its ordered marks and actual good square-zero full minus count data. For an attaching-circle handleslide or isotopy avoiding the other circles of its family and all marks, preserving the balanced knot data, the two full filtered minus complexes have finite actual chain maps and inverse chain homotopies over $R=\\mathbb F_2[U_1,\\ldots,U_k]$. Counts include ALL positive z degrees; the variables and their marked-point actions are retained individually. A supplied finite word of such moves and pointed diagram isomorphisms gives the corresponding finite equivalence. The maps specialize or restrict to any chosen-variable module by the actual ring operation.\n\nMaslov homogeneity and the Alexander filtration are relative: choose the origins by the actual small comparison triangles and continuous class transports in the proof. Maps have degree zero, homotopies degree plus one, and every $U_i$ has degrees $(-2,-1)$. This supplies a relative filtered comparison, not its Seifert-surface centering or absolute Maslov normalization. It proves neither ordinary Heegaard stabilization nor basepoint-pair stabilization; their weighted target-neck operations are separate.\n\nThe handleslide maps are actual marked triangle counts. Their inverses and homotopies are finite polynomial matrices; no U-adic completion or inversion of a nonunit polynomial is used. An isotopy handles EVERY complementary generator pair created at a tangency, including possible positive-U reverse arrows.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1",
+            "6.1",
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-globally-weak-hat-handleslides-have-explicit-inverse-homotopies",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $(\\Sigma,\\alpha,\\beta,z)$ be a complete globally weakly admissible pointed Heegaard diagram for any closed connected oriented smooth three-manifold, and let a specified beta handleslide band avoid z and the remaining beta curves. There is a representative gamma of this actual slide, followed by pointed attaching-curve isotopies, and there are genuine allowed chosen hat data on both diagrams, such that the actual triangle map\n$$F(x)=m_2(x,\\Theta_{\\beta\\gamma})$$\nis a chain homotopy equivalence. Its count is the finite actual zero-basepoint index-zero triangle count, with no triangle translation quotient. The proof gives an explicit finite inverse and inverse chain homotopies by actual quadrilateral counts. The diagram and the whole required finite multidiagram are globally weakly admissible; no rational-homology-sphere or torsion restriction is imposed.\n\nThe analogous alpha move follows by conjugating the source and surface complex structures and interchanging the two attaching families. Auxiliary chosen-data comparisons supplied by the named continuation theorem may be composed before and after these maps wherever its stated endpoint hypotheses apply. This theorem proves the globally weak hat handleslide operation. It does not replace an ordinary sector-admissibility hypothesis by global weakness, assert positive-basepoint minus invariance, or infer absolute grading or naturality.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1",
+            "6.1",
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-doubly-pointed-knot-morse-fields-have-a-zero-framed-seifert-extension",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Supply an embedded admissible DOUBLY pointed diagram for an oriented knot $K$ in the standard oriented three-sphere, its compression disks and compatible Morse trajectory data, and a compact oriented Seifert surface $F$. Use the knot orientation from $w$ to $z$ in the alpha handlebody and from $z$ to $w$ in the beta handlebody. In positive genus let $x$ be a generator. In genus zero use the empty generator. There is an actual relative knot Spin-c lift $t_{w,z}(x)$ on the zero surgery $S^3_0(K)$, constructed with the following convention: on the knot exterior use the NEGATIVE of the compatible gradient after cancelling the index-one/index-two trajectories selected by $x$; across the zero-surgery solid torus use the zero-relative-Euler extension specified in the proof. Reversing this vector field convention would reverse its Alexander evaluation and is not silently permitted.\n\nThe integer\n$$A_F(x)=\\frac12\\langle c_1(t_{w,z}(x)),[\\widehat F]\\rangle$$\nis well defined, independent of the local extension and framing choices in that construction and of the choice of Seifert surface for the fixed oriented knot. For every actual Whitney class from $x$ to $y$,\n$$A_F(x)-A_F(y)=n_z(\\phi)-n_w(\\phi).$$\nThe standard genus-zero unknot generator has value zero. The construction is carried by orientation-preserving isomorphisms of the supplied knot, surface and Morse data, and by a smooth mark-free attaching-curve isotopy with its followed generator. Swapping $w,z$ with the same underlying attaching systems gives $A_{z,w}(x)=-A_{w,z}(x)$; this is a statement about the actual Chern pairing, not a homological symmetry theorem. Its value can be computed as half the relative Euler number of the exterior perpendicular plane on $F\\setminus N(K)$ with the explicit boundary frame in the proof; the solid-torus cap contributes zero.\n\nConsequently this construction fixes the additive constant of the relative Alexander grading on every connected generator set. In an actual full filtered minus differential, including positive multiplicities at both basepoints, the term $U^{n_w(\\phi)}y$ has Alexander level $A_F(x)-n_z(\\phi)$. An exact finite matrix model of that diagram acquires its absolute grading by evaluating this Euler number at one generator and then using the relative differences. This last assertion does not claim that an uncalibrated numerical matrix or the relative grading alone already supplies that Euler evaluation. In particular, if an actual orientation-preserving diagram isomorphism exchanges the two marks, followed by a mark-free attaching-curve isotopy returning its generator to $y$ in the original diagram, then $A_F(x)=-A_F(y)$. If the relative calculation also gives $A_F(x)=A_F(y)$, both are zero. Arbitrary Heegaard-move comparison and a grid closed-form centering calculation are separate operations.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "5.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-doubly-pointed-s-three-moves-preserve-the-seifert-normalized-filtration",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Take two actual doubly pointed Heegaard diagrams of the same oriented knot in the oriented three-sphere, their compatible Morse and compression data, and good finite square-zero full minus count data as in the named move operations. Both diagrams have exactly ONE ordered pair w,z, possibly different genera. Use the actual negative-Morse exterior field with its zero-relative-Euler zero-surgery cap to define the integral Seifert-surface Alexander grading. Normalize the relative Maslov grading by placing the sole total zero-w hat homology generator in degree zero.\n\nThere are finite chain homotopy equivalences over F_2[U] between these full filtered minus complexes preserving these absolute conventions: the maps have Maslov degree zero, their inverse homotopies degree one, and every term U^a y of an actual count map from x satisfies A(y)-a=A(x)-n_z. In particular all positive z terms are retained. After U=0 the maps and both inverse homotopies are finite Alexander-filtered maps of the actual total hat complexes. They identify the first Alexander level detecting the total generator, and identify the associated-graded homology with its normalized Maslov parity.\n\nThis comparison is between doubly pointed analytic diagrams. It neither computes a finite diagram's Seifert Euler anchor nor supplies a grid-to-analytic comparison. No absolute multipointed cone-centering assertion is made.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "5.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-handle-cancellation",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact smooth $n$-manifold with collared boundary $\\partial W=\\partial_0W\\sqcup\\partial_1W$, let $\\varphi:S^{k-1}\\times D^{n-k}\\to\\partial_1W$ be an attaching embedding of a $k$-handle and let $\\psi:S^k\\times D^{n-k-1}\\to\\partial_1(W\\cup_\\varphi h^k)$ be an attaching embedding of a $(k+1)$-handle attached after it, where $0\\le k\\le n-1$. If the attaching sphere of $h^{k+1}$ meets the belt sphere of $h^k$ transversely in exactly one point, then $W\\cup_\\varphi h^k\\cup_\\psi h^{k+1}$ is diffeomorphic to $W$ relative to $\\partial_0W$. Consequently a geometrically cancelling consecutive pair may be deleted from, or added to, any handle presentation of the same manifold; the diffeomorphism may be taken to act only in a collar of the affected boundary disc and in the two handles, so the attaching data of all later handles are carried along.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "5.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-heegaard-polygon-spin-c-difference-is-the-capped-periodic-domain",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $\\Sigma$ be an oriented genus-$h$ surface, let $k\\ge1$ and $m=h+k-1$, and give $q\\ge3$ balanced attaching systems $\\boldsymbol\\eta^0,\\ldots,\\boldsymbol\\eta^{q-1}$ of $m$ circles. Supply their disjoint compression disks in oriented handlebodies $U_i$, their compatible Morse functions with $k$ index-zero and $m$ index-one critical points, and $k$ distinct points $\\mathbf w$ with one in each cut component of every system. Distinct systems meet transversely and finitely. Use the usual product tori in $\\operatorname{Sym}^m\\Sigma$. Let $W$ be the oriented polygon cobordism obtained from the polygon times $\\Sigma$ by attaching $e_i\\times U_i$ along $e_i\\times\\Sigma$, with rounded corners. A realized Whitney polygon is a continuous disk map with these successive torus edges and specified corner generators; no holomorphic representative is assumed.\n\nThe finite Morse construction below assigns such a class $u$ a Spin-c structure $\\mathfrak s_{\\mathbf w}(u)$ on $W$, restricting to the specified Morse labels of its corners. If $u,v$ have the same corners, their domain difference $P=D(u)-D(v)$ has boundary an integral sum of full attaching circles. Capping those circles with the supplied disks along polygon legs gives a class $H(P)\\in H_2(W;\\mathbb Z)$. With the common source/surface orientations, their Spin-c difference is\n$$\\mathfrak s_{\\mathbf w}(u)-\\mathfrak s_{\\mathbf w}(v)=j\\operatorname{PD}_W H(P),$$\nwhere $j:H^2(W,\\partial W;\\mathbb Z)\\to H^2(W;\\mathbb Z)$. The sign is fixed by the positive index-one/index-two gradient modification having determinant degree $+2$ on a positive transverse disk.\n\nIn particular, if the two Spin-c structures and every $w$-multiplicity agree, then $P$ is a sum of actual doubly-periodic domains for the adjacent Heegaard pairs, each with all $w$-multiplicities zero. For a triangle these are the $\\alpha\\beta$, $\\beta\\gamma$ and $\\alpha\\gamma$ pairs. Their capped classes need not be zero individually. Fixed all $w,z$ multiplicities imply this hypothesis without any extra normalization convention.\n\nThe construction is compatible with gluing polygons along a common Heegaard boundary. Compatible Spin-c structures on the pieces have the usual extension orbit under the image of $H^1$ of that common boundary in $H^2$ of the glued cobordism; no unique extension is asserted. Along an actual continuous class-preserving family and its actual neck-smoothing, the assigned total Spin-c structure is constant, and the glued pieces recover that total extension, not an arbitrarily chosen member of the orbit. Point-divisor multiplicity vectors at every supplied $w,z$ mark add under these actual gluings. These assertions do not supply an analytic compactification or a gluing existence theorem. For supplied small attaching-curve isotopies away from the marks, transport the compatible Morse data in the actual handlebody collars and supply a continuous transport of the polygon maps. On the unchanged cobordism this carries their Spin-c labels and capped periodic classes, including torsion information. If one witness point in every old region misses the swept curves, all coefficients at those witnesses are unchanged. Hence strict strong admissibility, and the corresponding sector or global weak witness conditions, pass to the transported lattice. No existence of the continuous polygon-map transport is inferred from the mere isotopy of its boundary curves.\n\nThe statement does not identify all literal Whitney classes with their domains, divide genus-two classes by a sphere action, assert finiteness of classes with one domain, or supply any analytic count or Maslov-index formula. The point target $m=0$ has only the constant map and the domain conclusion is zero.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "5.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-heegaard-polygon-relative-maslov-variation-is-chern-plus-marks",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and the finite balanced polygon Morse data, with $q\\ge3$, $m=h+k-1$, and polygon cobordism $W$. Let $u,v$ be actual Whitney polygons with the same corner generators and the same assigned Spin-c structure $\\mathfrak s$ on $W$. Put $P=D(u)-D(v)$. Fix identical real-plane corner caps for the two maps and compute their relative Maslov number as the difference of the squared determinant boundary windings. Then\n$$\\mu_{\\rm rel}(u,v)=\\langle c_1(\\mathfrak s),H(P)\\rangle+2\\sum_l n_{w_l}(P).$$\nIf every marked multiplicity agrees, $P$ is a sum of normalized adjacent doubly-periodic domains, and the Chern term is equivalently the sum of the Chern evaluations of the restricted Spin-c structures on their actual capped pair classes. That sum is independent of the chosen decomposition. The formula applies also for genus one and two, for multiple marks, and for zero or negative realized indices. It is compatible with insertion and gluing along fixed corner caps.\n\nThe two-edge case is included separately: for actual strips with fixed corner generators in one boundary-pair Spin-c sector, take $W=Y\\times[0,1]$ and its pulled-back Spin-c structure. Then every formal pair-periodic domain lies in $L$, and the same formula computes the difference between the two actual strip indices, even when the incoming and outgoing generators differ.\n\nFor actual finite-ended polygon Cauchy–Riemann operators in the standard symmetric-product complex bundle, or with an actual supplied comparison homotopy to it preserving the totally real boundary tori and specified transverse corner caps, this is also their real Fredholm-index difference. The protected nearly symmetric tame class has this comparison homotopy. Coefficients may tend to those models with the derivatives needed in their integer Sobolev realization. Common conformal or external parameter columns cancel from the difference; an added actual parameter contributes its one extra index. Existence, regularity, compactness, gluing of nonlinear solution spaces, or finiteness of literal homotopy classes is not assumed or asserted.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "5.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-tau-additive-for-filtered-tensor-products",
+          "source_section": "Statement",
+          "quote": "Let $C$ and $D$ be finite integer-filtered chain complexes over $\\mathbb F_2$, with increasing bounded exhaustive filtrations by subcomplexes and with $H(C)\\cong H(D)\\cong\\mathbb F_2$. Give $C\\otimes D$ the tensor differential and the convolution filtration\n$$F_s(C\\otimes D)=\\sum_{p+q\\le s}F_pC\\otimes F_qD.$$\nThen $H(C\\otimes D)\\cong\\mathbb F_2$ and\n$$\\tau(C\\otimes D)=\\tau(C)+\\tau(D).$$",
+          "uses": [
+            "1.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-knot-connected-sum-and-prime-knot",
+          "source_section": "Definition",
+          "quote": "Fix a coordinate orientation-reversing reflection $r:S^3\\to S^3$ for the mirror convention. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere. A connected-sum datum consists of one smoothly embedded closed three-ball around a short subarc of $K$ and one around a short subarc of $J$, each meeting its knot in a single trivial properly embedded arc, together with the fixed standard orientation-reversing boundary identification of the two standard oriented ball boundaries that joins the oriented arcs into one circle. Choose this standard map once in the standard two-ball model so that it commutes with $r$ and an orientation-preserving half-turn interchanging the two balls preserves the joining convention. Here a trivial arc is an embedded interval in a ball that is carried by an orientation-preserving diffeomorphism of ball-arc pairs to a straight diameter. Remove the interiors of the two balls and glue the remaining boundary spheres using this fixed identification; the resulting oriented knot in the standard oriented three-sphere is a connected sum of $K$ and $J$, denoted $K\\#J$ for the specified datum.\n\nThe **standard unknot** is the oriented unit circle in a fixed coordinate two-plane of $S^3\\subset\\mathbb R^4$. A knot is **nontrivial** if it is not ambient isotopic through orientation-preserving diffeomorphisms of $S^3$ to the standard unknot. A nontrivial knot is **prime** if it has no connected-sum presentation whose two summand knots are both nontrivial.",
+          "uses": [
+            "1.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-knot-connected-sum-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For two smooth oriented knots, changing either representative by oriented ambient isotopy, changing the sufficiently small coordinate ball and trivial subarc used for either knot, or changing the positive local frame used to identify that ball with the standard oriented ball does not change the oriented ambient-isotopy class of the connected-sum knot, when the boundary gluing map is the fixed standard orientation-reversing map from the definition.",
+          "uses": [
+            "1.1",
+            "11.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose finite doubly pointed good diagrams $(\\Sigma_1,\\alpha,\\beta,w_1,z_1)$ and $(\\Sigma_2,\\xi,\\eta,w_2,z_2)$ and their actual full count data from [F1]. Remove disks at $z_1,w_2$ and join their oriented boundaries; retain $w_1,z_2$. The two knot arcs ending at the removed points concatenate across that cylinder. Their other ends, and the boundary-parallel arc witnesses in both handlebodies, are unchanged. This is the oriented connected-sum neck. For the multiplication triple use the three systems $A=\\alpha\\cup\\xi'$, $B=\\beta\\cup\\xi$, $C=\\beta'\\cup\\eta$, where primes are separately labeled sufficiently small exact Hamiltonian copies. Give each copied circle a Morse function with one maximum and one minimum, chosen away from its finitely many old intersection points. The maximum crossings specify $\\Theta_\\beta,\\Theta_\\xi$. In a cut handlebody, carry its complete disk system to meridians of the standard boundary-connected sum of solid tori; this gives an actual split product-circle model for these copied systems. These are diffeomorphisms of the diagram and its arc witnesses, not extra analytic identifications.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "We first establish the required split one-handle inclusion, including a mark moved across its neck. Let $E$ be a flat torus with a circle and a small exact Hamiltonian copy, having top and bottom crossings $c_+,c_-$. Put its plumbing point $a$ and its new mark $b$ off the narrow isotopy annuli and off these crossings. Let $D_1,D_2$ be its two elementary bigons. Lifting boundary paths to the plane identifies the relative class ambiguity with the kernel of $\\mathbb Z\\oplus\\mathbb Z\\to\\mathbb Z^2$ sending the two circle windings to their common primitive slope; since the torus has zero second homotopy, this kernel is precisely the annular period $P=D_1-D_2$. Its area is zero by exactness and it has both signs. A self-end domain is $kP$; a forward domain is $(k+1)D_1-kD_2$, nonnegative only for $k=0,-1$; a reverse domain has coefficients $k-1,-k$, never both nonnegative. Thus a nonconstant holomorphic self-end strip would have zero area and cannot exist. From $c_+$ to $c_-$ there are exactly the two positive bigons in the isotopy annuli, each a disk with its two corners and hence a unique representative modulo translation by the disk Riemann map; reflection or the transverse strip inverse gives its regularity and count one. Both bigons miss $a,b$. A reverse-direction class has negative area, so cannot occur. The other periodic classes change neither these areas nor the mark vectors. These are the actual split $S^1\\times S^2$ top data, not the once-intersecting cancelling torus.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Plumb $E$ at a point $q$ in the region of the old mark to be transferred, and place the transferred mark at $b$. Choose $q$ a regular simple-root value for every old rigid strip, with distinct physical incidence positions; this is possible in a small disk of its old marked region because the finitely many protected holomorphic root maps have finitely many critical and discriminant values there. Moving the mark within that region changes no domain coefficient or represented pointed knot. Use a smaller disk on which the whole incidence tensor is standard. At a self-end limit the principal torus root is the constant $c_+$ by step 1.2. Every old simple incidence at $q$ then contributes one inclusion copy of $E$ with two source punctures, one at $a$ and one at $c_+$. Its local equations are exactly the constant-root equations in [F3]: for residues $\\lambda_j=\\epsilon L_j$ at positions $b_j$ the transverse strip response is $\\sum\\chi_j\\lambda_j/(z-b_j)-Q_\\perp D(\\sum\\chi_j\\lambda_j/(z-b_j))$; the physical projection uses the real/real inverse, retaining its right real end constant. The torus response subtracts its mean using a supported density away from both punctures. Transfer of a positive Laurent mode multiplies it by $(\\epsilon/r^2)^n$ or $(\\lambda_j/r^2)^n$. The resulting trace equation has operator norm $O(|\\epsilon|)$, and its divided mean equations are $A_j+L_j+O_{C^1}(|\\epsilon|)=0$, where $A_j\\ne0$ is the old simple-root inverse derivative. Thus they have the unique solution $b_j=w_j+O(|\\epsilon|)$, $L_j=-A_j+O(|\\epsilon|)$. The two transverse boundary lines near $c_+$ may have any fixed nonzero angle: their strip inverse in [F3] applies unchanged. No global straightness of the two copied circles is needed by this response.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "**Construct the compatible connected Morse data.** Use [F5]'s actual tube coordinates on each input, with its Seifert collar $\\theta=0$ and its function $f=\\sin t(1-r^2/2)$. Choose the connecting disks about $z_1,w_2$ so small that their knot-tube neighborhoods miss every selected index-one/index-two generator trajectory tube. The lower and upper pieces of the connected surface bound the boundary-connected sums of the respective handlebodies. Before cancelling their tree handles the lower half has its two old minimum balls and the joining one-handle; the upper half has its two old maximum balls and the joining two-handle. Put the joining handle cores on the concatenated lower and upper bridge arcs. This is possible in the product neighborhoods of their boundary-parallel witness disks: the joining core and the two old bridge pieces are an interval in that product, and the collars of $F_1,F_2$ extend across it as the untwisted connected-sum Seifert ribbon. The lower interval contains, in order, one old minimum, the new index-one point, and the other old minimum. Cancel the first minimum with the joining index-one point; dually cancel the second maximum with the joining index-two point in the upper interval. These are the tree-edge zero/one cancellations (and their reversed two/three versions): one joining-handle foot is on each old ball, hence the attaching zero-sphere meets the cancelled ball's belt sphere once. No old higher-index handle or selected generator trajectory is cancelled. After cancellation there is precisely one minimum and maximum and the two original higher-index systems. Thus the result is actual compatible Morse data for the connected diagram of step 1.1, with its concatenated bridge witnesses, not an arbitrarily assigned nonzero exterior field.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Verify exhaustion and the index, rather than assuming a tensor differential. The root determinant transition is $-\\epsilon/\\xi^2$ at each target matching; its squared winding is minus four, cancelled by the four additional projection branch orders of the torus dipole. Consequently a self-end reference has the old index. Any additional same-domain ambiguity here is an exact-copy annular period with zero Chern evaluation in the torsion pair sector, so the general relative index formula [F5] gives the same index for each actual class; the comparison is not relying on the new manifold being $S^3$. The extraction in [F3] uses only fixed old-core estimates, bounded nonnegative domain coefficients, Laurent expansion on target annuli, and finite projection branching. Those arguments apply to this same plumbing before identifying its torus principal map: here step 1.2 makes it constant at its specified crossing. The additional torus annular periods have zero area, so cannot add a positive component or an unbounded domain ray. Old boundary disks and closed horizontal degrees have index at least two, exactly as in the referenced determinant calculation. At total index one a self-end limit therefore contains exactly one old rigid strip. Its simple incidences force one degree-one torus per incidence and no branching matching tree. The converse response and residue estimate $\\lambda+\\epsilon A+o(\\max|\\lambda|+|\\epsilon|)=0$ force every convergent solution into step 2.1's unique response neighborhood. Its normalized kernel is zero by the same trace/mean inverse, so the actual operator is onto. A top-to-bottom limit has the single bigon of step 1.2 and old index zero; the good old path forces its old component to be constant and its incidence list empty. Its two bigons cancel with identical marked vectors. For a bottom self-end the identical constant-root argument applies; a bottom-to-top principal component has negative area by step 1.2 and is impossible. These facts for ALL the split-factor generators also exclude a nonconstant nonpositive-index end path. Finally each degree-one inclusion torus passes through $b$ once, so the NEW $b$ multiplicity equals the OLD $q$ multiplicity, including positive multiplicities. All other marks are untouched. Hence $x\\mapsto x\\times c_+$ is an actual full-polynomial chain inclusion preserving the transferred and retained mark degrees. This proves the operation for the supplied split factor; no assertion about arbitrary nontrivial summand-neck disk matching has been used.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "construct",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "**Check the cancellation fields and their Seifert frames.** Here are local functions for the preceding cancellations, retaining the surface and knot. Write the relevant interval as $K=\\{y=z=0\\}$ and its Seifert ribbon as $F=\\{z=0,y\\ge0\\}$. The old minimum tube model is converted to $x^2+y^2+z^2$ by $x=\\operatorname{sgn}(t-t_0)\\sqrt{1+\\sin t}$ and radial rescaling $(y,z)\\mapsto\\sqrt{-\\sin t/2}(y,z)$ near $t_0=3\\pi/2$; both changes preserve this ribbon and its normal direction. Use the analogous negative model at a maximum. The joining handle and its paired minimum have the local family $f_s=x^3/3-sx+y^2+z^2$, with the product metric. For $s>0$ its two critical points on the interval have indices one and zero; for $s<0$ there is none. This family can be made fixed on its two end collars: write its longitudinal derivative as $x^2-s\\chi(x)$ on a compact inner interval, with $\\chi=1$ near the cancelling pair; compensate its changed integral by a bump on an outer collar where the derivative is bounded away from zero. Restrict the parameter interval so that this correction preserves that bound. Integration then keeps both end values fixed and introduces no other longitudinal zero; smooth product collars match the old Morse levels. The transverse quadratic coefficient remains positive, so off the interval the gradient cannot vanish. The upper cancellation uses $-f_s$. On the wider tube use the original normal-even functions and a metric splitting the ribbon tangent plane from its normal line; the product collars agree with these choices. Hence throughout both actual cancellations the negative gradient is tangent to the Seifert ribbon, and its nonzero normal vector is a nowhere-zero section of its perpendicular plane on the EXTERIOR, including where the critical pair has disappeared. Degeneracy at $s=0$ occurs only on $K$, which is excised. After cancellation the restricted function on the knot circle has exactly one minimum and maximum, on its lower and upper bridge respectively. Reparametrize its two monotone intervals to the sine-model intervals, retaining the ordered marks. In the thin tube the longitudinal derivatives then have the same sign away from those extrema, and at an extremum the transverse quadratic signs agree with the sine model. Interpolate the longitudinal derivative and transverse coefficient there to the sine model, keeping the transverse sign fixed near each extremum and the longitudinal derivative nonzero on its complement. The resulting negative gradients have no zero off $K$, remain tangent to the Seifert collar, and keep its normal section. Choose the corresponding product metrics and carry these tube coordinates into the actual compatible Morse data; the zero-relative-Euler filling of [F5] is now precisely its prescribed sine-model filling. All selected trajectory modifications lie outside these supports and are exactly the original modifications. Tiny copied attaching curves follow their mark-free isotopies in [F5], carrying this field comparison to the distinguished product generator.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Iterate step 3.1 over the split meridian factors of step 1.1. Associating their connected sums in sequence and carrying the mark to the last factor gives precisely the original neck and its surviving mark, by their product collar coordinates. This constructs the chain maps $\\iota_1(x)=x\\times\\Theta_\\xi$ and $\\iota_2(y)=\\Theta_\\beta\\times y$ into the $AB$ and $BC$ complexes. In the first map $z_1$ is transferred to $z_2$; in the second $w_2$ is transferred to $w_1$. Thus the first input's $w$ exponent and the second input's $w$ exponent have the same actual action in the common triple. All additional torus top factors are cycles, and the iterated cancellation of their paired bigons is literal over $\\mathbb F_2$. The intermediate manifolds are $S^3\\#^{g_2}(S^1\\times S^2)$ and $\\#^{g_1}(S^1\\times S^2)\\#S^3$ in their torsion sectors. Their normalized periodic domains are generated by exact-copy annuli and have zero area, hence both signs. For the multiplication triple this lattice identification can be checked integrally: in the first surface a relation has the form $a\\alpha+(b+c)\\beta=0$, so $a=0,b=-c$ because the $S^3$ meridians give complementary integral sublattices; in the second it is $(a+b)\\xi+c\\eta=0$, so $a=-b,c=0$. Thus only the two families of exact-copy annuli remain, modulo the outgoing normalized $S^3$ periodic domain, which is zero. A positive area form may therefore be chosen first and the copies made exact for that form; no unsupported claim that arbitrary strong admissibility annihilates periods is needed. Apply the general-manifold sector branch of [F2] to these actual good ends.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Compose these inclusions with the actual weighted triangle map of [F2]. It gives the finite polynomial chain map $\\Gamma$ whose infinity notation is $$\\Gamma([x,i_1,j_1]\\otimes[y,i_2,j_2])=\\sum_{v,\\ \\mu(\\psi)=0}\\#\\mathcal M(\\psi)\\,[v,i_1+i_2-n_{w_1}(\\psi),j_1+j_2-n_{z_2}(\\psi)].$$ The inputs of $\\psi$ are $x\\times\\Theta_\\xi$ and $\\Theta_\\beta\\times y$. Replacing either input by its $U$ multiple lowers the sum $i_1+i_2$ by one and gives the identical output $U$ multiple, with unchanged triangle class; thus the formula is $R$-balanced. Its chain-map equation is the actual triangle boundary equation, after the two chain inclusions just proved. The full nonnegative $w_1,z_2$ degrees are retained. The generator origins needed to read the displayed $j$ coordinate will be checked by the Seifert-cap calculation below; at this stage the formula is the corresponding relative-filtration formula.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Prove the leading coefficient by the actual small-copy operation in [F4], rather than assuming that a top cycle makes it one. In the first surface it is the small-copy triangle at $x$ for $(\\alpha,\\beta,\\beta')$, and in the second the reverse-family small-copy triangle at $y$ for $(\\xi',\\xi,\\eta)$. The operation chooses the copy crossing away from all old crossings, straightens the old opposite arc while preserving the copied-circle model, and gives the unique scalar triangle with bounded inverse and count one. Its root supports are disjoint; the product inverse is therefore the direct sum of those actual inverses. Their domains avoid the neck disks and both surviving marks. They consequently define the same product triangle in the connected target, without any root entering the target neck, and persist under the protected coherent perturbation. To check the other domains use precisely the retained-core construction in that operation: retain a point and a small disk in every old region, and the private positive and negative lune disks of every copy. A triangle confined to the thin copy ribbons must have the nearest output, because each opposite arc in such a ribbon has its single old crossing and the top corner starts its one prescribed partial lune. Its domain and representative are the just proved unique small triangle. Every other nonnegative triangle domain contains one retained old-region core. Balance the private exact-copy lunes and use the positive periodic-annihilating form of step 4.1, with fixed lower area $m_0>0$ on all those cores and unsigned ribbon area $O(\\epsilon)$. This bounded-density adjustment is exactly the finite region-bump construction in [F4]: balance each private signed lune, then correct the $O(\\epsilon)$ changes of old periodic evaluations in one invertible finite minor off the ribbons. Densities remain positive. The core estimate and the protected small-triangle inverse therefore hold uniformly, and every other contributing triangle has area at least $m_0-O(\\epsilon)$ while all nearest areas are $O(\\epsilon)$. Take $\\epsilon$ so small that this is a strict gap. This is a positive-core/domain argument, not a claim that an arbitrary area-small triangle automatically has count one. The common data in [F2] may be taken sufficiently close to this reference retaining its protected cores, small models and regular ends, as in the actual weighted attaching construction [F4].",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 4.1",
+            "step 5.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "**Evaluate the actual absolute origin.** In [F5]'s finite Euler computation, remove the small joining rectangles from the two exterior Seifert surfaces where their tube-normal sections already extend without zeros. This changes neither relative Euler obstruction. Join their remaining surface pieces by step 3.2's ribbon. Its normal section agrees with those old sections and with the Seifert boundary section $\\partial_\\lambda=-\\partial_\\theta$, up to a constant nonzero real factor. The oriented untwisted gluing makes these factors constant along each seam; they have zero circle winding. Thus the ribbon contributes zero: subdividing the surfaces and ribbon into finitely many framed cells, all internal seam windings cancel and the obstruction is the sum of the two old obstructions. The new longitude is the boundary-connected-sum Seifert longitude. Its explicit zero-relative-Euler cap, as well as each old cap, contributes zero by [F5]. Consequently for the distinguished nearest generator $x'\\times y'$ the actual normalized values satisfy $A_{F_1\\natural F_2}(x'\\times y')=A_{F_1}(x)+A_{F_2}(y)$. This uses actual compatible negative-Morse data from step 2.2, with the exterior sections verified in step 3.2; it assumes neither that an attaching curve is a physical meridian nor that a closed S3 periodic domain is a zero-surgery Seifert domain. For every other triangle compare its actual trajectory line cochain with this smooth nearest reference, as in [F5]'s absolute attaching-map comparison: cap its attaching-circle terms by their supplied knot-disjoint compression disks. The only uncancelled crossings of its spanning incidence chain with the oriented knot occur positively at $z_2$ and negatively at $w_1$. Its determinant difference is twice their signed count, so its Alexander difference is $n_{w_1}-n_{z_2}$ in the output convention of step 5.1. This gives that step's absolute $j$ formula. The distinguished identification and the actual triangle map are therefore bifiltered, with respectively zero losses and the nonnegative marked losses $n_{w_1},n_{z_2}$. The actual boundary sum of the chosen minimum-genus surfaces is the surface used here; no genus-additivity theorem is needed for this Chern evaluation.",
+          "step": "7.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 5.1",
+            "step 6.1",
+            "step 2.2",
+            "step 3.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Construct a FINITE polynomial inverse. Identify the outgoing basis with $x\\otimes y$ by the distinguished small triangles. Triangle relative index gives a common Maslov shift for this nearest identification and $\\Gamma$; temporarily subtract it from the outgoing grading. Every coefficient $U^a v$ is then homogeneous, $M(v)-2a=M(x\\otimes y)$, and $a\\ge0$. For a ZERO-exponent nonnearest term subtract its distinguished small triangle. Its corrected area is strictly positive by step 6.1. Along any closed walk of such terms the outgoing corner paths glue: the two incoming paths cancel with their small references, leaving an actual normalized periodic domain, not a purported nonnegative difference domain. Its $w$ coefficient is zero. The integral attaching-lattice calculation in step 4.1 identifies its lattice as the exact-copy annuli and the normalized outgoing $S^3$ periods, whose area is zero. Hence a closed walk of zero-exponent terms would have simultaneously positive and zero corrected area. This proves that the zero-exponent coefficient graph has no directed cycle. It requires neither a globally asserted action potential nor a positivity claim for reference-subtracted domains.",
+          "step": "8.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 4.1",
+            "step 6.1",
+            "step 7.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Write the actual matrix as $I+N$. On a directed cycle in its finite monomial coefficient graph Maslov homogeneity gives $2\\sum a=0$. Since $a\\ge0$, every edge of the cycle has exponent zero, contradicting step 8.1. Thus the whole graph is acyclic. A positive-$U$ diagonal term is excluded by its degree, and a zero-exponent diagonal correction by its positive corrected area. If there are $d$ basis generators, $N^d=0$, so $(I+N)^{-1}=I+N+\\cdots+N^{d-1}$ is a genuine finite matrix over $R$. It is a two-sided chain inverse because $\\Gamma$ is a chain map. Both $N$ and every term in this inverse preserve both filtrations by step 7.1. There is no completion and no inversion of a polynomial such as $1+U$. The outgoing copied diagram already represents the oriented connected sum by step 1.1; carry its copies back by the actual mark-free attaching isotopies in [F4] and [F5]. Their finite normalized filtered inverses and homotopies give the equivalence for the chosen connected-sum diagram. Apply [F5] to compare arbitrary normalized input and output models. Tensor the two input comparisons and their inverses over $R$; expanding their finite inverse identities gives tensor inverse homotopies, still bifiltered. Composing these actual equivalences requires no canonical naturality or uniqueness of the connected-sum map.",
+          "step": "9.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 5.1",
+            "step 7.1",
+            "step 8.1",
+            "construct",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "The temporary Maslov shift is zero. Reduce this finite chain isomorphism modulo $U$ and compose with the mark-free copy comparison. Its source is the tensor of the two finite hat complexes, so its homology is the tensor of two copies of $\\mathbb F_2$, in degree zero. The target also has its single $\\widehat{HF}(S^3)$ generator in degree zero by [F5]. Since the induced map is an isomorphism homogeneous of the one common shift, that shift must be zero. This proves the absolute additive Maslov origin, using the actually constructed equivalence rather than assuming it to obtain the inverse. The Alexander origin was already fixed independently by step 7.1.",
+          "step": "10.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 9.1",
+            "construct",
+            "algebra",
+            "step 7.1"
+          ]
+        },
+        {
+          "id": "step-11-1",
+          "claim": "Localize the polynomial identities at $U$ to obtain the stated $CFK^\\infty$ bifiltered equivalence and its inverse homotopies. For the hat conclusion instead specialize those SAME polynomial identities at $U=0$; no flatness assertion about homology is used. The source quotient is literally $C_K\\otimes_{\\mathbb F_2}C_J$: all generators and differentials are the tensor ones, and step 7.1 gives its sum Alexander filtration. Thus its level $s$ is exactly $\\sum_{p+q\\le s}F_pC_K\\otimes F_qC_J$. The maps and homotopies specialize to filtered chain homotopy inverse identities. Apply [F6] to get $\\tau(K\\#J)=\\tau(K)+\\tau(J)$. This analytic construction uses no grid-identification theorem and makes no claim about a separate grid model. Rank-zero summands use the point-target triangle of [F2], with coefficient one and no added torus; all preceding constructions then reduce to the other factor. Countable choice is used only in the supplied finite-diagram analytic choices and their generic sequence arguments.",
+          "step": "11.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 7.1",
+            "step 9.1",
+            "step 10.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product has no separate zero-input branch beyond its stated integer filtration and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product has no separate one-object boundary case beyond its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product has no endpoint parameter case beyond its named objects and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The axiom branch and selected geometric data are explicit in the Statement and Facts & Assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-tau-connected-sum-filtered-tensor-product asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [
+        {
+          "name": "AC_omega",
+          "supplier": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "evidence": "[A1] [[def-countable-choice]] is the sequence-choice principle used to select the finite diagrams in the analytic connected-sum construction."
+        }
+      ],
+      "proof_status": "complete",
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "unresolved_supplier_checks": [
+        {
+          "supplier": "lem-heegaard-floer-holomorphic-disk-regularity-compactness-gluing",
+          "required_hypotheses": [
+            "[[lem-heegaard-floer-holomorphic-disk-regularity-compactness-gluing]] treats pointed disk moduli spaces, but its current proof is `not-supplied` and its statement contains no neck-stretching factorization for a connected-sum diagram."
+          ],
+          "affected_claims": [
+            "lem-tau-connected-sum-filtered-tensor-product"
+          ],
+          "evidence": "[L1] [[lem-heegaard-floer-holomorphic-disk-regularity-compactness-gluing]] treats pointed disk moduli spaces, but its current proof is `not-supplied` and its statement contains no neck-stretching factorization for a connected-sum diagram. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "thm-pointed-heegaard-floer-invariance-under-moves-and-stabilization",
+          "required_hypotheses": [
+            "[[thm-pointed-heegaard-floer-invariance-under-moves-and-stabilization]] is required to identify the chosen connected-sum diagram with the normalized endpoint models; its current Step-1 record is escalated."
+          ],
+          "affected_claims": [
+            "lem-tau-connected-sum-filtered-tensor-product"
+          ],
+          "evidence": "[L2] [[thm-pointed-heegaard-floer-invariance-under-moves-and-stabilization]] is required to identify the chosen connected-sum diagram with the normalized endpoint models; its current Step-1 record is escalated. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "thm-grid-homology-independent-of-grid-and-equals-knot-floer",
+          "required_hypotheses": [
+            "[[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is required for the declared grid presentation and normalized analytic complex to agree; its current Step-1 record is escalated."
+          ],
+          "affected_claims": [
+            "lem-tau-connected-sum-filtered-tensor-product"
+          ],
+          "evidence": "[L3] [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is required for the declared grid presentation and normalized analytic complex to agree; its current Step-1 record is escalated. This records an unresolved supplier; its Statement is not used as a proved fact."
+        }
+      ],
+      "unresolved_obligations": [
+        "lem-heegaard-floer-holomorphic-disk-regularity-compactness-gluing: [[lem-heegaard-floer-holomorphic-disk-regularity-compactness-gluing]] treats pointed disk moduli spaces, but its current proof is `not-supplied` and its statement contains no neck-stretching factorization for a connected-sum diagram.",
+        "thm-pointed-heegaard-floer-invariance-under-moves-and-stabilization: [[thm-pointed-heegaard-floer-invariance-under-moves-and-stabilization]] is required to identify the chosen connected-sum diagram with the normalized endpoint models; its current Step-1 record is escalated.",
+        "thm-grid-homology-independent-of-grid-and-equals-knot-floer: [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is required for the declared grid presentation and normalized analytic complex to agree; its current Step-1 record is escalated."
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Whole stated arbitrary embedded doubly pointed S3 tensor equivalence; no grid/Whitehead/generalY/knotification scope inferred.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/floer-duality/root-review-final.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Ozsvath and Szabo, Holomorphic disks and knot invariants",
+                "url": "https://arxiv.org/pdf/math/0209056",
+                "locator": "Section7, Theorem7.1, actual PDF43–45; multiplication triple, meridian slide and Seifert-cap origins"
+              },
+              {
+                "title": "Ozsvath and Szabo, Holomorphic disks and three-manifold invariants: properties and applications",
+                "url": "https://arxiv.org/pdf/math/0105202",
+                "locator": "Section6, actual PDF34–40, especially Proposition6.4 and the triangle multiplication proof of Theorem6.2"
+              },
+              {
+                "title": "Peter S. Ozsvath and Zoltan Szabo, Knot Floer homology and the four-ball genus",
+                "url": "https://arxiv.org/pdf/math/0301149v4",
+                "locator": "Proposition 3.2, printed pp.9–10; connected-sum filtered tensor product and tau additivity"
+              },
+              {
+                "title": "Jennifer Hom, A survey on Heegaard Floer homology and concordance",
+                "url": "https://arxiv.org/pdf/1512.00383v3",
+                "locator": "§3.1, connected-sum additivity of tau"
+              },
+              {
+                "title": "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links",
+                "url": "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf",
+                "locator": "Chapters 5, 6, and 13; connected-sum grid models and their filtered knot Floer interpretation"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "AC_omega is used for the actual diagram, perturbation and compactness/gluing choices in the analytic multiplication construction; the finite polynomial inverse and filtered tensor threshold calculation use no further choice.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-94.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "thm-tau-is-concordance-invariant-and-four-ball-genus-bound": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tau-of-the-unknot-is-zero",
+          "source_section": "Statement",
+          "quote": "For the standard oriented unknot $U$ and its standard genus-zero one-pointed Heegaard diagram, the normalized Alexander-filtered hat complex has total homology $\\mathbb F_2$ generated at filtration level $0$. Consequently the diagramwise threshold is $\\tau_{\\mathcal H,F}(U)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-and-topological-slice-genus-minima-exist",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in the standard oriented three-sphere, let $\\mathcal S_{\\mathrm{sm}}(K)$ be the set of genera $g(F)\\in\\mathbb N_0$ of connected compact orientable smooth properly embedded surfaces $F\\subset B^4$ with oriented boundary $K$, and let $\\mathcal S_{\\mathrm{top}}(K)$ be the corresponding set for locally flat topologically properly embedded surfaces. For each surface, $g(F)$ is the nonnegative integer determined by $\\chi(F)=1-2g(F)$. Both sets are nonempty and have least elements.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $F\\subset B^4\\subset\\mathbb R^4$ be a compact connected oriented smoothly properly embedded surface of genus $g$, with its supplied smooth boundary collar and oriented boundary the knot $K\\subset S^3$. There is an orientation-preserving ambient diffeomorphism $\\Psi:B^4\\to B^4$ equal to the identity on a neighborhood of the outer boundary, and $0<\\varepsilon<1$, such that $\\Psi(F)\\cap B^4_\\varepsilon$ is exactly a flat two-disk in a plane through $0$. The surface $\\Psi(F)\\setminus\\operatorname{int}B^4_\\varepsilon$, in the explicitly round shell $B^4\\setminus\\operatorname{int}B^4_\\varepsilon\\cong S^3\\times[0,1]$, is a connected smooth oriented knot cobordism between $K$ and a standard unknot, with genus $g$ and Euler characteristic $-2g$. Both boundary components have product collars in a shell identification fixing $K$ and the inner sphere. The ambient diffeomorphism $\\Psi$ fixes a sufficiently small restriction of the supplied outer collar; the shell coordinates may be adjusted there to make that surface collar a product. No assertion about the complement of an arbitrary embedded four-ball is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tau-is-independent-of-heegaard-grid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot, let $F$ be a fixed minimum-genus oriented Seifert surface, and let $\\mathcal H_0,\\mathcal H_1$ be admissible doubly pointed Heegaard diagrams for the same pair $(K,F)$ whose hat complexes have total homology $\\mathbb F_2$ and the same absolute Alexander normalization. Their diagramwise thresholds agree. Moreover, every grid presentation of $(K,F)$ gives this same value after the full filtered grid complex is converted to the normalized singly pointed model, with all basepoint-variable and stabilization factors accounted for. The common value is $\\tau(K)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-knot-floer-large-surgery-and-filtered-cobordism-input",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $S$ be a connected compact smooth oriented surface properly embedded in $S^3\\times[0,1]$, with product collars and oriented boundary $-K_0\\times\\{0\\}\\sqcup K_1\\times\\{1\\}$ for smooth oriented knots $K_0,K_1$. Let $g$ be the genus of $S$, and use the standard absolute Alexander normalization for the endpoint knot Floer complexes. Then\n$$|\\tau(K_1)-\\tau(K_0)|\\le g.$$\nIn particular, a smooth concordance annulus gives equal tau values, and a genus-$g$ surface from a knot to the unknot gives the four-ball genus estimate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tau-connected-sum-filtered-tensor-product",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere, with chosen minimum-genus oriented Seifert surfaces. A normalized $CFK^\\infty(K)$ is a free finite-rank chain complex over $\\mathbb F_2[U,U^{-1}]$ with two integer filtrations $(i,j)$, where multiplication by $U$ lowers both coordinates by one. Give the connected sum $K\\#J$ the fixed oriented gluing convention and the sum filtrations and Maslov/Alexander gradings. Then $CFK^\\infty(K\\#J)$ is bifiltered chain homotopy equivalent to $CFK^\\infty(K)\\otimes_{\\mathbb F_2[U,U^{-1}]}CFK^\\infty(J)$, with an equivalence and homotopies preserving both filtration coordinates. Moreover, the normalized finite filtered hat complex of $K\\#J$ is filtered chain homotopy equivalent to $C_K\\otimes C_J$ with tensor filtration $F_s(C_K\\otimes C_J)=\\sum_{p+q\\le s}F_pC_K\\otimes F_qC_J$. Consequently,\n$$\\tau(K\\#J)=\\tau(K)+\\tau(J).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4] the diagramwise threshold defines a single invariant $\\tau(K)$, and [F5] proves $\\tau(K\\#J)=\\tau(K)+\\tau(J)$. Apply [F6] to a smooth genus-zero concordance to obtain $|\\tau(K_1)-\\tau(K_0)|\\le0$, hence equality. These give diagram independence, concordance invariance and connected-sum additivity in the original normalization. The geometric input is the explicitly imported $\\mathbb F_2$ genus theorem together with the local cut-arc construction in [F6], not a conclusion inferred solely from absolute grading.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $g=g_4^{\\mathrm{sm}}(K)$ and choose a smooth genus-$g$ surface realizing the minimum by [F2]. Apply [F3] to this actual embedded surface. Its supported ambient diffeomorphism fixes the boundary knot, flattens the surface near the center, and permits removal of a sufficiently small concentric round ball. The explicit round shell contains the residual connected genus-$g$ cobordism between $K$ and a standard unknot $U$, with the required product collars. No complement of an arbitrary embedded chart ball is identified with a standard shell. The supplied inequality [F6] gives $|\\tau(K)-\\tau(U)|\\le g$; by [F1], $\\tau(U)=0$, yielding the desired bound. This proves the genus bound for the chosen minimizing surface and therefore for the minimum genus.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "thm-tau-is-concordance-invariant-and-four-ball-genus-bound requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero tau/genus boundary is explicit in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-tau-is-concordance-invariant-and-four-ball-genus-bound has no separate one-object boundary case beyond its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-tau-is-concordance-invariant-and-four-ball-genus-bound has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The filtration endpoints or cobordism boundary are explicit in the Statement and addressed in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The axiom branch and selected geometric data are explicit in the Statement and Facts & Assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-tau-is-concordance-invariant-and-four-ball-genus-bound asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-tau-is-concordance-invariant-and-four-ball-genus-bound asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [
+        {
+          "name": "AC_omega",
+          "supplier": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "evidence": "[A1] [[def-countable-choice]] states that every sequence of nonempty sets admits a choice function; this is the axiom branch used by the slice-genus minimum and the finite diagram choices."
+        }
+      ],
+      "proof_status": "complete",
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "unresolved_supplier_checks": [
+        {
+          "supplier": "lem-tau-is-independent-of-heegaard-grid",
+          "required_hypotheses": [
+            "[[lem-tau-is-independent-of-heegaard-grid]] has the full diagram/grid-independence Statement, but its current proof leaves the required grid-to-analytic and filtered move maps unresolved."
+          ],
+          "affected_claims": [
+            "thm-tau-is-concordance-invariant-and-four-ball-genus-bound"
+          ],
+          "evidence": "[L1] [[lem-tau-is-independent-of-heegaard-grid]] has the full diagram/grid-independence Statement, but its current proof leaves the required grid-to-analytic and filtered move maps unresolved. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "lem-knot-floer-large-surgery-and-filtered-cobordism-input",
+          "required_hypotheses": [
+            "[[lem-knot-floer-large-surgery-and-filtered-cobordism-input]] states the genus-$g$ cobordism inequality $|\\tau(K_1)-\\tau(K_0)|\\le g$, but its current proof leaves the triangle-map, adjunction, movie, and normalization obligations open."
+          ],
+          "affected_claims": [
+            "thm-tau-is-concordance-invariant-and-four-ball-genus-bound"
+          ],
+          "evidence": "[L2] [[lem-knot-floer-large-surgery-and-filtered-cobordism-input]] states the genus-$g$ cobordism inequality $|\\tau(K_1)-\\tau(K_0)|\\le g$, but its current proof leaves the triangle-map, adjunction, movie, and normalization obligations open. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "lem-tau-connected-sum-filtered-tensor-product",
+          "required_hypotheses": [
+            "[[lem-tau-connected-sum-filtered-tensor-product]] states the filtered connected-sum equivalence and tau additivity, but its current proof leaves the neck-stretching Kunneth equivalence open."
+          ],
+          "affected_claims": [
+            "thm-tau-is-concordance-invariant-and-four-ball-genus-bound"
+          ],
+          "evidence": "[L3] [[lem-tau-connected-sum-filtered-tensor-product]] states the filtered connected-sum equivalence and tau additivity, but its current proof leaves the neck-stretching Kunneth equivalence open. This records an unresolved supplier; its Statement is not used as a proved fact."
+        }
+      ],
+      "unresolved_obligations": [
+        "lem-tau-is-independent-of-heegaard-grid: [[lem-tau-is-independent-of-heegaard-grid]] has the full diagram/grid-independence Statement, but its current proof leaves the required grid-to-analytic and filtered move maps unresolved.",
+        "lem-knot-floer-large-surgery-and-filtered-cobordism-input: [[lem-knot-floer-large-surgery-and-filtered-cobordism-input]] states the genus-$g$ cobordism inequality $|\\tau(K_1)-\\tau(K_0)|\\le g$, but its current proof leaves the triangle-map, adjunction, movie, and normalization obligations open.",
+        "lem-tau-connected-sum-filtered-tensor-product: [[lem-tau-connected-sum-filtered-tensor-product]] states the filtered connected-sum equivalence and tau additivity, but its current proof leaves the neck-stretching Kunneth equivalence open."
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/floer_duality_repair/source-binding-check-by-flyping_repair.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Peter S. Ozsvath and Zoltan Szabo, Knot Floer homology and the four-ball genus",
+                "url": "https://arxiv.org/pdf/math/0301149v4",
+                "locator": "Theorem 1.1 and §§3.3–3.5, printed pp.2 and 9–15"
+              },
+              {
+                "title": "Jennifer Hom, A survey on Heegaard Floer homology and concordance",
+                "url": "https://arxiv.org/pdf/1512.00383v3",
+                "locator": "§§3.1–3.2, printed pp.8–12"
+              },
+              {
+                "title": "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links",
+                "url": "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf",
+                "locator": "Chapters 6, 8, and 13; tau, filtered cobordism maps, and the four-ball genus bound"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "AC_omega is inherited from the smooth slice-genus minimum and finite cobordism constructions. No full Axiom of Choice is used.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-94.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "ex-knot-kt-41-worked-cases": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-knot-floer-filtration-and-tau",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a smooth oriented knot in the standard oriented three-sphere. Let $F$ be a compact connected oriented Seifert surface with boundary $K$, and let $\\mathcal H=(\\Sigma,\\boldsymbol\\alpha,\\boldsymbol\\beta,w,z)$ be an admissible doubly pointed Heegaard diagram representing $(K,F)$. The associated one-pointed hat chain complex $\\widehat{CF}(\\mathcal H)$ is the finite-dimensional chain complex over $\\mathbb F_2$ obtained from the minus complex by setting its basepoint variable to zero; its differential counts index-one disks with zero multiplicity at $w$. Assume for this specified data that the differential is nonincreasing in the Alexander filtration, that the absolute Alexander formula below takes integer values, and that $H(\\widehat{CF}(\\mathcal H))\\cong\\mathbb F_2$. Give a generator $\\mathbf x$ its absolute Alexander filtration\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the homology class of the nowhere-vanishing vector field assigned to $\\mathbf x$ by the pointed Morse construction, with its prescribed boundary data near the two basepoints; $c_1$ is the first Chern class of the oriented plane field perpendicular to that vector field. To form the zero-framed surgery, remove a tubular neighborhood of $K$ and glue in a solid torus whose meridian is the longitude induced by $F$. The surface $\\widehat F$ is obtained by deleting a boundary collar of $F$ and capping its longitude by the meridian disk of that solid torus. This is the standard integer normalization, with the one-generator diagram of the standard unknot at filtration zero. The subcomplex $F_s\\widehat{CF}(\\mathcal H)$ is spanned by generators of Alexander filtration at most $s$.\n\nMore generally, a finite integer-filtered chain complex is a finite-dimensional chain complex $C$ over $\\mathbb F_2$ with subcomplexes $F_sC$ such that $F_sC=0$ for all sufficiently small integers $s$ and $F_sC=C$ for all sufficiently large integers $s$. If $H(C)\\cong\\mathbb F_2$, define\n$$\\tau(C):=\\min\\{s\\in\\mathbb Z:\\operatorname{im}(H(F_sC)\\longrightarrow H(C))\\ne0\\}.$$\nFor the fixed diagram and surface above, write $\\tau_{\\mathcal H,F}(K)=\\tau(\\widehat{CF}(\\mathcal H),F_*\\widehat{CF}(\\mathcal H))$. Once diagram and surface independence is proved, their common value is the knot invariant $\\tau(K)$. Until that comparison is proved, $\\tau_{\\mathcal H,F}(K)$ denotes only the value for the specified data.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tau-of-the-unknot-is-zero",
+          "source_section": "Statement",
+          "quote": "For the standard oriented unknot $U$ and its standard genus-zero one-pointed Heegaard diagram, the normalized Alexander-filtered hat complex has total homology $\\mathbb F_2$ generated at filtration level $0$. Consequently the diagramwise threshold is $\\tau_{\\mathcal H,F}(U)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-diagonal-five-grid-filtered-staircase-reduction",
+          "source_section": "Statement",
+          "quote": "Take the grid on $\\mathbb R^2/(5\\mathbb Z)^2$ with marks $O_r=(r+\\frac12,r+\\frac12)$ and $X_r=((r+2)\\bmod5+\\frac12,r+\\frac12)$ for $0\\le r<5$. Let $C$ have the $120$ grid states as its $\\mathbb F_2$-basis, Maslov grading $M_{\\mathbb O}$ and Alexander filtration $A_G$. Its differential counts empty directed torus rectangles avoiding every $O$ but allowing $X$; equivalently, it is the full filtered minus matrix with all five variables set to zero. Then $C$ is a filtered chain complex and is filtered chain homotopy equivalent, preserving Maslov grading, to $S\\otimes V^{\\otimes4}$. Here $S$ has basis $a,b,c$ at respective $(M,A)$ values $(0,-1),(1,0),(2,1)$ with $\\partial c=b$ and other differential zero, and $V$ has zero differential and basis at $(M,A)=(0,0),(-1,-1)$.\n\nIn particular, $H(C)$ has rank $16$. Its homology classes in Maslov degree $-k$, $0\\le k\\le4$, have multiplicity $\\binom4k$ and first appear in Alexander filtration $-1-k$. This is a calculation of the specified grid matrix; no knot type or normalized analytic knot Floer identification is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-grid-homology-independent-of-grid-and-equals-knot-floer",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $K$ be an oriented knot in $S^3$, and let $F$ be a compact connected oriented surface embedded in $S^3$ with boundary $K$ and minimum possible genus; write $g(K)=\\operatorname{genus}(F)$. Let $G$ be any toroidal grid diagram for $K$ with grid number $n$. Let $C^-_{\\mathrm{grid}}(G)$ be the full filtered minus complex produced by the grid-complex algorithm, and let $C^-_U(G)$ denote this same complex regarded over $\\mathbb F_2[U]$ by letting $U$ act as one chosen $U_i$, with the other variables retained independently. For an admissible $2n$-pointed Heegaard diagram $\\mathcal H$ compatible with $(K,F)$, define $C^-_U(\\mathcal H)$ by the same restriction to a single variable action. Write $CFK^-(K)$ for the full filtered complex of an admissible doubly-pointed diagram. The ordinary fully collapsed quotient, obtained instead by setting all $U_i=U$, has type $CFK^-(K)\\otimes V^{\\otimes(n-1)}$; the restriction of scalars $C^-_U$ has type $CFK^-(K)$.\n\nFor the absolute Alexander normalization, let $\\mathcal H_1$ be an admissible doubly-pointed Heegaard diagram for $(K,F)$. For a generator $\\mathbf x$ of $\\mathcal H_1$, set\n$$A_F(\\mathbf x)=\\frac12\\left\\langle c_1(\\mathfrak s_{w,z}(\\mathbf x)),[\\widehat F]\\right\\rangle,$$\nwhere $\\mathfrak s_{w,z}(\\mathbf x)$ is the relative $\\operatorname{Spin}^c$ structure assigned to this generator by the pointed Heegaard construction: it is the homology class of the nowhere-vanishing vector field obtained from the gradient trajectories through $\\mathbf x$ and the chosen basepoint pair, after extending the field across small balls around the critical points. Its first Chern class is that of the oriented plane field orthogonal to this vector field. The surface $\\widehat F$ is obtained by removing a tubular neighborhood $N(K)$ from $F$ and capping the resulting longitude with the meridian disk of the solid torus attached in zero-framed surgery on $K$. Let $\\widehat{HFK}(K)$ be the homology of the Alexander-associated-graded complex obtained from the doubly-pointed complex $C^-_U(\\mathcal H_1)$ by quotienting by its sole variable $U$, with this $A_F$ normalization.\n\nThen $C^-_U(G)$ and $C^-_U(\\mathcal H)$ are filtered chain homotopy equivalent, preserving relative Maslov grading and the $A_F$ filtration, and their Alexander-associated-graded minus complexes are chain homotopy equivalent. For any two grids of $K$, the resulting normalized filtered complexes are filtered chain homotopy equivalent. If $\\widetilde{GH}(G)$ denotes the homology of the tilde grid complex over $\\mathbb F_2$, then\n$$\\widetilde{GH}(G)\\cong\\widehat{HFK}(K)\\otimes V^{\\otimes(n-1)},$$\nwhere $V$ is the two-dimensional bigraded vector space with one generator in bidegree $(0,0)$ and one in bidegree $(-1,-1)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-knot-floer-duality-and-filtration-swap",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset S^3$ be a smooth oriented knot and let $C(K)=\\mathrm{CFK}^{\\infty}(K)$ be its normalized bifiltered complex over $\\mathbb F_2[U,U^{-1}]$. The complex of the reverse mirror $-K$ is filtered-chain-homotopy equivalent to the dual complex $C(K)^*=\\operatorname{Hom}_{\\mathbb F_2[U,U^{-1}]}(C(K),\\mathbb F_2[U,U^{-1}])$, with dual differential $d\\phi(x)=\\phi(\\partial x)$ and dual basis elements at negated bifiltration coordinates. There is also a Maslov-graded filtered-chain-homotopy equivalence from $C(K)$ to the complex obtained by exchanging the algebraic and Alexander filtrations. These are distinct symmetries: duality negates both filtration coordinates, while conjugation exchanges them.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-knot-floer-mirror-complex-duality",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a smooth oriented knot with a supplied regular admissible doubly pointed Heegaard diagram and normalized finite filtered hat complex $C_K$ whose total homology is $\\mathbb F_2$. Let $K^\\dagger$ be its reverse mirror under the fixed orientation-reversing reflection convention, with the reflected Seifert surface and reflected regular diagram. For a finite filtered complex $C$, define its dual complex $C^\\vee=\\operatorname{Hom}_{\\mathbb F_2}(C,\\mathbb F_2)$ with transposed differential and filtration\n$$F_sC^\\vee=\\{\\lambda\\in C^\\vee:\\lambda(F_{-s-1}C)=0\\}.$$\nThen the reflected diagram's normalized filtered hat complex is filtered chain isomorphic to $C_K^\\vee$. In particular, its total homology is $\\mathbb F_2$ and\n$$\\tau_{\\mathcal H^\\dagger,F^\\dagger}(K^\\dagger)=-\\tau_{\\mathcal H,F}(K).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-seifert-algorithm-boundary-euler-and-genus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. If a connected compact oriented disk-and-band surface $F$ is built from $s$ disjoint disks by attaching $c$ rectangular bands along boundary intervals and has one boundary component, then $\\chi(F)=s-c$ and $g(F)=(1-s+c)/2$. In particular, if the Seifert algorithm on an oriented knot diagram $D$ has $s$ Seifert circles and $c$ crossings, its output surface has genus $(1-s+c)/2$ and the knot genus satisfies $g(K)\\le (1-s+c)/2$. This is an upper bound from one spanning surface, not a minimality assertion.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-and-topological-slice-genus",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot in the standard oriented three-sphere and let $B^4$ be the standard four-ball with boundary $S^3$. Let $\\mathcal S_{\\mathrm{sm}}(K)$ be the set of genera of connected compact orientable smooth properly embedded surfaces $F\\subset B^4$ with oriented boundary $K$. Let $\\mathcal S_{\\mathrm{top}}(K)$ be the set of genera of connected compact orientable locally flat topologically properly embedded surfaces $F\\subset B^4$ with oriented boundary $K$. For each such surface, its genus $g(F)$ is the nonnegative integer determined by $\\chi(F)=1-2g(F)$. Define the smooth slice genus and the locally flat topological slice genus by\n\n$$\ng_4^{\\mathrm{sm}}(K):=\\min\\mathcal S_{\\mathrm{sm}}(K),\\qquad g_4^{\\mathrm{top}}(K):=\\min\\mathcal S_{\\mathrm{top}}(K).\n$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-knot-floer-large-surgery-and-filtered-cobordism-input",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $S$ be a connected compact smooth oriented surface properly embedded in $S^3\\times[0,1]$, with product collars and oriented boundary $-K_0\\times\\{0\\}\\sqcup K_1\\times\\{1\\}$ for smooth oriented knots $K_0,K_1$. Let $g$ be the genus of $S$, and use the standard absolute Alexander normalization for the endpoint knot Floer complexes. Then\n$$|\\tau(K_1)-\\tau(K_0)|\\le g.$$\nIn particular, a smooth concordance annulus gives equal tau values, and a genus-$g$ surface from a knot to the unknot gives the four-ball genus estimate.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite grid in [F3] is an actual negative trefoil diagram. Subtract $1/2$ from the marking coordinates for this projection description. Its row segments are $[0,2]$ in row $0$, $[1,3]$ in row $1$, $[2,4]$ in row $2$, $[0,3]$ in row $3$, and $[1,4]$ in row $4$, with the orientations $O\\to X$. Vertical segments run $X\\to O$ and pass over. The only interior crossings are $(2,1),(3,2),(1,3)$. Following the single component $O_0\\to O_2\\to O_4\\to O_1\\to O_3\\to O_0$ encounters them as $A_{\\rm over},B_{\\rm under},C_{\\rm over},A_{\\rm under},B_{\\rm over},C_{\\rm under}$. The first two crossings have upward over-strand and rightward under-strand; the third has downward over-strand and leftward under-strand. Thus all have the same negative sign. Smoothing the degree-two grid corners gives the standard alternating three-crossing negative trefoil projection: each successive over-under pair forms one of the three braid crossings, and its two exterior connecting arcs give the closure. This is the closure of $\\sigma_1^{-3}$, with the displayed cyclic traversal fixing its orientation. Reflection gives the positive trefoil convention of the Example. This finite knot admission uses the actual segments, not a deduction of knot type from a Floer polynomial.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3, F4], the normalized all-variable-zero complex of this negative trefoil is filtered equivalent to both $S_-\\otimes V^{\\otimes4}$ and $\\widehat{CFK}(T^\\dagger)\\otimes V^{\\otimes4}$. Total homology in Maslov degree zero is one-dimensional in both tensor products: every non-top $V$ factor lowers Maslov degree, whereas $H(\\widehat{CFK})$ is supported in degree zero. Its first filtered appearance in the first product is $-1$. In the second product its threshold is the threshold in $\\widehat{CFK}$: inclusion into the top $V$ summand and projection onto that summand are filtered maps, with composition identity. Hence $\\tau(T^\\dagger)=-1$. Duality [F5] gives $\\tau(T)=1$, independently of the genus inequality. The unknot value is [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same finite calculation also identifies the associated-graded generator ranks needed for the full Laurent staircase. Record bigraded ranks by Laurent polynomials in $m,a$. The associated graded of $S_-$ has one generator in each bidegree $(0,-1),(1,0),(2,1)$ and zero differential. Thus the accepted associated-graded comparison gives\n$$P_{\\widehat{HFK}(T^\\dagger)}(m,a)(1+m^{-1}a^{-1})^4=(a^{-1}+m+m^2a)(1+m^{-1}a^{-1})^4.$$\nCancel the nonzero factor in the integral Laurent polynomial domain. Duality gives for the positive trefoil exactly one group in each bidegree $(0,1),(-1,0),(-2,-1)$, and no others, over $\\mathbb F_2$. This is a mod-two conclusion; no integral rank formula is inferred.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Reduce the actual finite free Laurent complex at its differential terms preserving both coordinates. Normalize each finite basis vector to first coordinate zero. Such a term has coefficient $1$, preserves Alexander grading, and lowers Maslov grading by one. Elementary cancellation of this unit term is bifiltered: the coefficient and its inverse have zero filtration shift, and the usual finite formulas $d'=d-dh d$, $i'=i-hd i$, $p'=p-pd h$ stay in both filtrations. Maslov homogeneity prevents a second, different $U$ power in the same matrix entry. Consequently no power-series inverse is needed. Each cancellation removes two generators, and finite linear changes within a fixed bidegree and these cancellations leave precisely the three generators represented by the associated-graded homology from step 2.1. This gives an actual bifiltered Laurent equivalent complex with generators $a,b,c$ of the Example, rather than promoting a rank polynomial alone to a filtered equivalence.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The only possible differential entries in that reduced positive-trefoil complex, by Maslov degree and the two filtration inequalities, are\n$$\\partial a=\\alpha b,\\quad\\partial b=\\beta Ua+\\gamma c,\\quad\\partial c=\\delta Ub,\\qquad \\alpha,\\beta,\\gamma,\\delta\\in\\mathbb F_2.$$\nIn its first-coordinate hat specialization the total homology is one-dimensional. If $\\alpha=1$, its surviving class would be $c$ at level $-1$, contrary to step 1.2; if $\\alpha=\\gamma=0$, the hat homology would have rank three. Hence $\\alpha=0$, $\\gamma=1$. Squaring the differential gives $\\delta=0$. In the other coordinate hat specialization the only possible remaining differential is $b\\mapsto\\beta Ua$; if $\\beta=0$, it would have rank-three homology, contrary to conjugation [F5]. Thus $\\beta=1$. This proves the displayed full Laurent staircase. Its dual has $\\partial a^\\vee=Ub^\\vee$, $\\partial c^\\vee=b^\\vee$; after $U=0$ its hat differential is exactly the displayed reverse-mirror differential.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The oriented smoothing of the positive two-strand three-crossing braid has two circles and three bands. Its surface has genus $(1-2+3)/2=1$. Reflection gives the same for its reverse mirror, and an inward push gives smooth spanning surfaces in the four-ball. Therefore both smooth four-ball genera are at most one. By [F7] every smooth spanning surface has genus at least the absolute value of the independently computed tau invariant, which is one. Thus both genera equal one.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "This proves all original Example clauses: the actual admitted finite grid and retained comparison/duality supply the invariant-level thresholds and both normalized filtered models, while Hom’s direct $\\mathbb F_2$ genus input supplies the matching smooth lower bound. No integral Floer ranks or merely topological genus conclusion has been substituted.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "step 2.3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-knot-kt-41-worked-cases requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero tau/genus boundary is explicit in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "ex-knot-kt-41-worked-cases has no separate one-object boundary case beyond its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "ex-knot-kt-41-worked-cases has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "ex-knot-kt-41-worked-cases has no endpoint parameter case beyond its named objects and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The axiom branch and selected geometric data are explicit in the Statement and Facts & Assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "ex-knot-kt-41-worked-cases asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "ex-knot-kt-41-worked-cases asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "trefoil-staircase",
+          "calculation": "Set U=0 in db=Ua+c, leaving db=c with A(a,b,c)=(1,0,-1). F_0=span{b,c} is acyclic and [a] first survives at F_1.",
+          "result": "The displayed right-trefoil model has threshold 1; mirror duality gives -1 for the dual.",
+          "evidence": "Proof steps 1.2 and 2.1; the staircase identification remains unresolved under L1."
+        }
+      ],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "unresolved_supplier_checks": [
+        {
+          "supplier": "thm-grid-homology-independent-of-grid-and-equals-knot-floer",
+          "required_hypotheses": [
+            "[[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is the declared bridge from the source's trefoil staircase to the normalized grid/analytic complex, but its current proof is escalated. The source-reported staircase is therefore not treated as a locally verified identification here."
+          ],
+          "affected_claims": [
+            "ex-knot-kt-41-worked-cases"
+          ],
+          "evidence": "[L1] [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is the declared bridge from the source's trefoil staircase to the normalized grid/analytic complex, but its current proof is escalated. The source-reported staircase is therefore not treated as a locally verified identification here. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "thm-tau-is-concordance-invariant-and-four-ball-genus-bound",
+          "required_hypotheses": [
+            "[[thm-tau-is-concordance-invariant-and-four-ball-genus-bound]] states $|\\tau(K)|\\le g_4^{\\mathrm{sm}}(K)$, but its current proof remains escalated on the grid, cobordism, and connected-sum inputs."
+          ],
+          "affected_claims": [
+            "ex-knot-kt-41-worked-cases"
+          ],
+          "evidence": "[L2] [[thm-tau-is-concordance-invariant-and-four-ball-genus-bound]] states $|\\tau(K)|\\le g_4^{\\mathrm{sm}}(K)$, but its current proof remains escalated on the grid, cobordism, and connected-sum inputs. This records an unresolved supplier; its Statement is not used as a proved fact."
+        }
+      ],
+      "unresolved_obligations": [
+        "thm-grid-homology-independent-of-grid-and-equals-knot-floer: [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]] is the declared bridge from the source's trefoil staircase to the normalized grid/analytic complex, but its current proof is escalated. The source-reported staircase is therefore not treated as a locally verified identification here.",
+        "thm-tau-is-concordance-invariant-and-four-ball-genus-bound: [[thm-tau-is-concordance-invariant-and-four-ball-genus-bound]] states $|\\tau(K)|\\le g_4^{\\mathrm{sm}}(K)$, but its current proof remains escalated on the grid, cobordism, and connected-sum inputs."
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-free-five-focused-final.md",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Jennifer Hom, A survey on Heegaard Floer homology and concordance",
+                "url": "https://arxiv.org/pdf/1512.00383v3",
+                "locator": "§2.2, Example 2.2 and Figure 3(a),(c); §3.1, Example 3.3 and the tau threshold"
+              },
+              {
+                "title": "Peter S. Ozsvath and Zoltan Szabo, Knot Floer homology and the four-ball genus",
+                "url": "https://arxiv.org/pdf/math/0301149v4",
+                "locator": "§2.1 and Proposition 3.2; the unknot and trefoil filtered models, connected sum, and genus bound"
+              },
+              {
+                "title": "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links",
+                "url": "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf",
+                "locator": "Chapters 6 and 13; finite grid models, tau, and the analytic comparison"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "AC_omega is inherited from the normalized knot Floer and smooth-genus definitions; the finite staircase calculations use no choice.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-94.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "cex-knot-kt-41-boundary-case": {
+      "risk": "high",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-knot-kt41-whitehead-double-values",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D_+(T_{2,3},2)$ be the positive-clasped Whitehead double of the right-handed trefoil with two full twists in the clasp, using the twist convention of Hedden and Ording. The normalized knot Floer threshold and Rasmussen invariant satisfy\n$$\\tau(D_+(T_{2,3},2))=0,\\qquad s(D_+(T_{2,3},2))=2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rasmussen-s-bounds-smooth-four-ball-genus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in the standard oriented three-sphere,\n$$\n|s(K)|\\le 2g_4^{\\mathrm{sm}}(K),\n$$\nwhere $g_4^{\\mathrm{sm}}(K)$ is the minimum genus of a connected compact orientable smooth properly embedded surface in the standard four-ball with oriented boundary $K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-lee-cobordism-filtration-genus-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $S\\subset S^3\\times[0,1]$ be a connected compact oriented smoothly properly embedded surface of genus $g$, with product collars and oriented boundary $(-K_0\\times\\{0\\})\\sqcup(K_1\\times\\{1\\})$ for oriented knots $K_0,K_1$ in the standard three-sphere. A **finite movie** for $S$ is a finite ordered sequence of regular-level link diagrams whose changes are planar isotopies, oriented Reidemeister moves, births, saddles or deaths. Such a movie defines a map on rational Lee homology that preserves the induced decreasing filtration with degree $\\chi(S)=-2g$. The map is an isomorphism; consequently\n$$\n|s(K_1)-s(K_0)|\\le 2g.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The joint value lemma [L1] gives $\\tau(D_+(T_{2,3},2))=0$ and $s(D_+(T_{2,3},2))=2$ in precisely the stated convention. Apply the smooth embedded-surface bound [L2], with its geometric supplier [L3]. It gives $2\\le2g_4^{\\mathrm{sm}}(D_+(T_{2,3},2))$, so this genus is at least one.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A smoothly slice knot bounds a smooth properly embedded disk in the four-ball and therefore has smooth four-ball genus zero. This contradicts the lower bound in step 1.1 for the displayed knot. It is consequently not smoothly slice even though its tau value is zero, giving the required counterexample to the universal implication.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "cex-knot-kt-41-boundary-case requires the nonempty mathematical objects and nonzero total homology stated in its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero tau/genus boundary is explicit in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "cex-knot-kt-41-boundary-case has no separate one-object boundary case beyond its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "cex-knot-kt-41-boundary-case has no degenerate parameter or input branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "cex-knot-kt-41-boundary-case has no endpoint parameter case beyond its named objects and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The axiom branch and selected geometric data are explicit in the Statement and Facts & Assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "cex-knot-kt-41-boundary-case asserts no biconditional and has no forward-implication direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "cex-knot-kt-41-boundary-case asserts no biconditional and has no reverse-implication direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "conditional-s-genus-contradiction",
+          "status": "conditional",
+          "calculation": "If tau=0 and s=2 are verified, then |s|<=2g4 gives 2<=2g4, hence g4>=1.",
+          "result": "This would refute tau=0 implies smooth sliceness; the numerical values and s-bound remain escalated.",
+          "evidence": "Proof steps 1.1–2.1."
+        }
+      ],
+      "axioms": [
+        {
+          "name": "AC_omega",
+          "supplier": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "evidence": "[A1] [[def-countable-choice]] is the axiom branch inherited by the knot invariants and smooth genus."
+        }
+      ],
+      "proof_status": "complete",
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "unresolved_supplier_checks": [
+        {
+          "supplier": "lem-knot-kt41-whitehead-double-values",
+          "required_hypotheses": [
+            "[[lem-knot-kt41-whitehead-double-values]] states $\\tau=0$ and $s=2$ for the specified knot, but its current proof does not reproduce the finite Khovanov/Lee and knot Floer computations."
+          ],
+          "affected_claims": [
+            "cex-knot-kt-41-boundary-case"
+          ],
+          "evidence": "[L1] [[lem-knot-kt41-whitehead-double-values]] states $\\tau=0$ and $s=2$ for the specified knot, but its current proof does not reproduce the finite Khovanov/Lee and knot Floer computations. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "thm-rasmussen-s-bounds-smooth-four-ball-genus",
+          "required_hypotheses": [
+            "[[thm-rasmussen-s-bounds-smooth-four-ball-genus]] states $|s(K)|\\le2g_4^{\\mathrm{sm}}(K)$, but its current proof is escalated on the Lee cobordism filtration supplier."
+          ],
+          "affected_claims": [
+            "cex-knot-kt-41-boundary-case"
+          ],
+          "evidence": "[L2] [[thm-rasmussen-s-bounds-smooth-four-ball-genus]] states $|s(K)|\\le2g_4^{\\mathrm{sm}}(K)$, but its current proof is escalated on the Lee cobordism filtration supplier. This records an unresolved supplier; its Statement is not used as a proved fact."
+        },
+        {
+          "supplier": "lem-lee-cobordism-filtration-genus-bound",
+          "required_hypotheses": [
+            "[[lem-lee-cobordism-filtration-genus-bound]] is the exact supplier required by [L2]; its current proof has unresolved map, movie, and local filtration checks."
+          ],
+          "affected_claims": [
+            "cex-knot-kt-41-boundary-case"
+          ],
+          "evidence": "[L3] [[lem-lee-cobordism-filtration-genus-bound]] is the exact supplier required by [L2]; its current proof has unresolved map, movie, and local filtration checks. This records an unresolved supplier; its Statement is not used as a proved fact."
+        }
+      ],
+      "unresolved_obligations": [
+        "lem-knot-kt41-whitehead-double-values: [[lem-knot-kt41-whitehead-double-values]] states $\\tau=0$ and $s=2$ for the specified knot, but its current proof does not reproduce the finite Khovanov/Lee and knot Floer computations.",
+        "thm-rasmussen-s-bounds-smooth-four-ball-genus: [[thm-rasmussen-s-bounds-smooth-four-ball-genus]] states $|s(K)|\\le2g_4^{\\mathrm{sm}}(K)$, but its current proof is escalated on the Lee cobordism filtration supplier.",
+        "lem-lee-cobordism-filtration-genus-bound: [[lem-lee-cobordism-filtration-genus-bound]] is the exact supplier required by [L2]; its current proof has unresolved map, movie, and local filtration checks."
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Full numerical Whitehead direct consumers integrated using closed original94 and frozen s/mirror/smooth-genus interfaces. Statements and existing dependency lists preserved; obsolete conditional tau holds replaced by actual application. Inward collar surface push supplies trefoil upper genus bound.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Matthew Hedden and Philip Ording, The Ozsvath-Szabo and Rasmussen concordance invariants are not equal",
+                "url": "https://arxiv.org/pdf/math/0512348v1",
+                "locator": "Theorem 1.1, printed p.2; §§2.1–2.2 for the knot and invariant computations"
+              },
+              {
+                "title": "Jacob Rasmussen, Khovanov homology and the slice genus",
+                "url": "https://arxiv.org/pdf/math/0402131v1",
+                "locator": "§§3–4; the s invariant and its smooth four-ball genus bound"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "AC_omega is inherited from the knot invariant and smooth genus definitions; the final contradiction is finite arithmetic.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-94.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    }
+  }
+}

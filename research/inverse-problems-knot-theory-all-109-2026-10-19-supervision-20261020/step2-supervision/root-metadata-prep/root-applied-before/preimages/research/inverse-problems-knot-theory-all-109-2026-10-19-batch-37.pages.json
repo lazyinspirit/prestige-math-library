@@ -1,0 +1,497 @@
+[
+  {
+    "order": 3070,
+    "id": "limited-angle-tomography-and-invisible-singularities",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Limited-angle visibility and instability",
+    "companion": "limited-angle-tomography-and-invisible-singularities-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "radon-transform-and-fourier-slice-reconstruction",
+      "tempered-distributions-and-the-fourier-transform"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-compact-support-fourier-laplace-is-entire",
+        "kind": "lemma",
+        "title": "The compact-support Fourier-Laplace transform is entire by coordinate slices",
+        "dependency_level": 1,
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-multidimensional-integral-properties",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "def-complex-differentiability-holomorphic-and-entire"
+        ],
+        "strategy": "Differentiate the compact-support Riemann integral in one complex coordinate. Bounded coordinates on a containing rectangle make the exponential difference quotients converge uniformly, so the Riemann integrals converge componentwise without a Lebesgue/Riemann identification or choice axiom.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: compact-support Fourier transform and analytic continuation for uniqueness."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 13–14, Theorem 3 proof: compact-support analytic continuation."
+            }
+          ]
+        },
+        "statement": "Let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ and, for $z=(z_1,z_2)\\in\\mathbb C^2$, define $F(z)=\\int_{\\mathbb R^2}f(x)e^{-2\\pi i(x_1z_1+x_2z_2)}\\,dx$ using the compact-support Riemann integral on any rectangle containing $\\operatorname{supp}f$. This value is independent of the containing rectangle. Each coordinate slice of $F$ is entire, with $\\frac{\\partial F}{\\partial z_j}(z)=\\int_{\\mathbb R^2}(-2\\pi ix_j)f(x)e^{-2\\pi i x\\cdot z}\\,dx$ for $j=1,2$, and the restriction of $F$ to $\\mathbb R^2$ is the compact-support Fourier transform in the stated line-normal convention. The proof uses no Countable Choice."
+      },
+      {
+        "id": "def-ip-visible-covector-for-limited-angle-data",
+        "kind": "definition",
+        "title": "Visible covectors for limited-angle data",
+        "dependency_level": 1,
+        "deps": [
+          "def-ip-2d-radon-transform"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: line-normal convention and Fourier-slice identity."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.5.1, pp. 34–35: visible directions for restricted Radon data."
+            }
+          ]
+        },
+        "statement": "Let $\\Theta\\subset S^1$ be a nonempty proper open set of line normals, assume $\\theta\\in\\Theta$ if and only if $-\\theta\\in\\Theta$, and assume $S^1\\setminus\\overline{\\Theta}$ contains a nonempty open arc. The measured line with normal $\\theta$ and signed offset $s$ is $\\ell_{\\theta,s}=\\{y\\in\\mathbb R^2:y\\cdot\\theta=s\\}$. Identify the nonzero cotangent vectors of the Euclidean plane with pairs $(x,\\xi)\\in\\mathbb R^2\\times(\\mathbb R^2\\setminus\\{0\\})$. Such a covector is visible from $\\Theta$ when $\\xi/|\\xi|\\in\\Theta$, and invisible when $\\xi/|\\xi|\\notin\\Theta$. The associated measured Fourier wedge is\n\n$$W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}.$$"
+      },
+      {
+        "id": "def-ip-schwartz-radon-transform",
+        "kind": "definition",
+        "title": "Radon transform on Schwartz functions",
+        "dependency_level": 1,
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "def-schwartz-space-and-its-seminorms",
+          "def-countable-choice",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "justified_by": [
+          "lem-ip-schwartz-radon-well-defined"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: Radon transform definition and Fourier convention."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 12–13: line parameterization and Fourier-slice theorem."
+            }
+          ]
+        },
+        "statement": "For $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta=(\\theta_1,\\theta_2)\\in S^1$, $s\\in\\mathbb R$, and $\\theta^\\perp=(-\\theta_2,\\theta_1)$, define $R_{\\mathcal S}f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$, where the absolutely convergent integral is with respect to one-dimensional Lebesgue measure. Here $\\mathcal S(\\mathbb R^2)$ is the space of smooth complex functions for which every seminorm $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|$, for multi-indices $\\alpha,\\beta$, is finite. The parameter $\\theta$ is the unit normal to the line, so $(\\theta,s)$ and $(-\\theta,-s)$ represent the same unoriented line. Under the Axiom of Countable Choice, the Lebesgue integral in this definition agrees on compactly supported smooth inputs with the compact-support Riemann line integral, so the normalization is the same."
+      },
+      {
+        "id": "lem-ip-schwartz-radon-well-defined",
+        "kind": "lemma",
+        "title": "The Radon transform maps Schwartz functions to Schwartz offset data",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-schwartz-radon-transform",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-differentiation-under-the-integral-sign",
+          "cor-mean-value-theorem"
+        ],
+        "strategy": "Use Schwartz seminorms to obtain uniform decay in both line coordinates, then differentiate the offset integral under an integrable derivative majorant and estimate every directional derivative uniformly over the unit normal.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: Radon transform on compactly supported smooth functions."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 12–13: line-integral parameterization."
+            }
+          ]
+        },
+        "statement": "For every $f\\in\\mathcal S(\\mathbb R^2)$ and every $\\theta\\in S^1$, the defining line integral for $R_{\\mathcal S}f(\\theta,s)$ converges absolutely for every $s\\in\\mathbb R$, and $s\\mapsto R_{\\mathcal S}f(\\theta,s)$ belongs to $\\mathcal S(\\mathbb R)$. For each pair of nonnegative integers $k,N$, its $k$th derivative is bounded by $C_{k,N}(1+|s|)^{-N}$ with a finite constant $C_{k,N}$ independent of $s$ and $\\theta$."
+      },
+      {
+        "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+        "kind": "lemma",
+        "title": "Restricted Radon data are square-integrable on fixed compact support",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-schwartz-radon-transform",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Bound each line integral by its support length times the line L2 integral, then integrate the resulting compactly supported product-space function and apply the orthogonal change of variables.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: compactly supported Radon data."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 12–13: line-data parameterization."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be a nonempty bounded open set, let $\\Theta\\subset S^1$ be measurable, and use arc-length measure $d\\theta$ on $S^1$. For every $f\\in C_c^\\infty(\\Omega;\\mathbb C)$, the function $(\\theta,s)\\mapsto R_{\\mathcal S}f(\\theta,s)$ belongs to $L^2(\\Theta\\times\\mathbb R,d\\theta\\,ds)$ and satisfies $\\|R_{\\mathcal S}f\\|_{L^2(\\Theta\\times\\mathbb R)}^2\\le \\operatorname{diam}(\\Omega)\\,|\\Theta|\\,\\|f\\|_{L^2(\\mathbb R^2)}^2$."
+      },
+      {
+        "id": "cor-ip-limited-angle-compact-support-uniqueness",
+        "kind": "corollary",
+        "title": "Compactly supported smooth functions are unique from any open set of Radon angles",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "thm-ip-fourier-slice-identity",
+          "lem-ip-compact-support-fourier-laplace-is-entire",
+          "thm-multidimensional-integral-properties",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces"
+        ],
+        "strategy": "The compact-support slice identity vanishes on an open polar sector; extend by one-variable identity theorems, obtain all moments, and use real Stone-Weierstrass to approximate the conjugate object in the compact-support Riemann integral.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: Fourier-slice identity and compact-support uniqueness by analytic continuation."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 13–14, Theorem 3 and full proof of limited-angle uniqueness for compact support."
+            }
+          ]
+        },
+        "statement": "Let $\\Theta\\subset S^1$ be a nonempty open set of unit line normals and let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$. If the line integral $Rf(\\theta,s)$ is zero for every $\\theta\\in\\Theta$ and $s\\in\\mathbb R$, then $f$ is zero everywhere. The assertion holds without Countable Choice."
+      },
+      {
+        "id": "prop-ip-limited-angle-data-no-holder-stability",
+        "kind": "proposition",
+        "title": "Limited-angle inversion has no Hölder modulus on a fixed-support H1 ball",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice"
+        ],
+        "strategy": "Modulate one normalized compactly supported bump in a frequency direction uniformly transverse to all measured line tangents. Repeated linewise integration by parts yields superpolynomial data decay while the H1 norm stays bounded and the L2 norm decays only as N^-1.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: line-normal data and Fourier-slice convention."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2 and §1.5.1, pp. 13–14 and 34–35: restricted-angle geometry and visible directions."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be a bounded open set containing a closed ball $K=\\overline B_R(x_0)$ of positive radius, and let $\\Theta\\subset S^1$ be a nonempty open antipodally symmetric set. Write $\\theta^\\perp=(-\\theta_2,\\theta_1)$ and, for a Schwartz function $g$, define $R_{\\mathcal S}g(\\theta,s)=\\int_{\\mathbb R}g(s\\theta+t\\theta^\\perp)\\,dt$; use the same integral for smooth functions supported in $K$. Suppose a unit vector $v\\in S^1$ satisfies $c:=\\inf_{\\theta\\in\\Theta}|v\\cdot\\theta^\\perp|>0$. For each smooth complex function $u$ supported in $K$, define $\\|u\\|_{H^1}:=(\\|u\\|_2^2+\\|\\partial_1u\\|_2^2+\\|\\partial_2u\\|_2^2)^{1/2}$ using Lebesgue measure on $\\mathbb R^2$, and set $\\|R_\\Theta u\\|_D:=(\\int_\\Theta\\int_{\\mathbb R}|R_{\\mathcal S}u(\\theta,s)|^2\\,ds\\,d\\theta)^{1/2}$, where $ds$ is Lebesgue measure and $d\\theta$ is arc-length measure. For every $M>0$ there are $a_M>0$, functions $u_N\\in C_c^\\infty(\\operatorname{int}K;\\mathbb C)$ for all integers $N\\ge1$, and constants $C_m>0$ for all integers $m\\ge1$, such that all $u_N$ have one fixed compact support and $\\|u_N\\|_{H^1}\\le M$, $\\|u_N\\|_2=a_MN^{-1}$, and $\\|R_\\Theta u_N\\|_D\\le C_mN^{-m-1}$. Consequently, for every fixed $M>0$, no $\\alpha>0$ and $C\\ge0$ satisfy $\\|u\\|_2\\le C\\|R_\\Theta u\\|_D^\\alpha$ for every smooth $u$ supported in $K$ with $\\|u\\|_{H^1}\\le M$."
+      },
+      {
+        "id": "lem-ip-fourier-slice-identity-on-schwartz",
+        "kind": "lemma",
+        "title": "Fourier-slice identity for Schwartz inputs",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-schwartz-radon-well-defined",
+          "def-fourier-transform-on-l-one-of-rn",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Apply L1 Fubini to the line coordinates, prove the identity for smooth compact cutoffs by Lebesgue change of variables, then pass both integrals to their Schwartz limits by dominated convergence.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5, Theorem 2.1 and its Fubini proof."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 12–14: line-normal parameterization and Fourier-slice identity."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. For every $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta\\in S^1$, and $\\sigma\\in\\mathbb R$, the one-dimensional Fourier transform in the offset variable, using the phase $e^{-2\\pi i s\\sigma}$, satisfies $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta)$, where the two-dimensional transform uses the phase $e^{-2\\pi i x\\cdot\\xi}$. On compactly supported smooth inputs the formula has the same line parameterization and normalization as the Euclidean Radon transform."
+      },
+      {
+        "id": "prop-ip-limited-angle-fourier-visibility",
+        "kind": "proposition",
+        "title": "Limited-angle data sample exactly the visible Fourier wedge",
+        "dependency_level": 4,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-fourier-slice-identity-on-schwartz",
+          "thm-ip-fourier-slice-identity",
+          "cor-ip-limited-angle-compact-support-uniqueness",
+          "def-countable-choice"
+        ],
+        "strategy": "Use the Schwartz Fourier-slice identity for wedge visibility and the independent compact-support Fourier-slice theorem plus the choice-free analytic-continuation corollary for the compact-support uniqueness branch.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5, Theorems 2.1–2.2."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 13–14, Theorems 2–3 and the complete limited-angle proof."
+            },
+            {
+              "title": "Marco Mazzucchelli, Mikko Salo, and Leo Tzou, A general support theorem for analytic double fibration transforms",
+              "url": "https://arxiv.org/pdf/2306.05906",
+              "locator": "§1.2, Theorem 1.2, and §1.3, Theorem 1.3, pp. 4–5; contextual analytic-transform comparison."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $\\Theta\\subset S^1$ be a nonempty proper open antipodally symmetric set whose complement contains a nonempty open arc, and let $W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}$. For $f\\in\\mathcal S(\\mathbb R^2)$ and every measured normal $\\theta\\in\\Theta$, the one-dimensional Fourier transform in the offset variable obeys $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta)$ for all $\\sigma\\in\\mathbb R$. In particular, zero restricted data imply that $\\widehat f$ vanishes on $W_\\Theta$. If in addition $f\\in C_c^\\infty(\\mathbb R^2)$, zero restricted data imply $f=0$ everywhere; this compact-support implication is proved separately from the choice-free compact-support Fourier-slice theorem and uses no Countable Choice."
+      },
+      {
+        "id": "op-ip-stable-limited-angle-reconstruction",
+        "kind": "open-problem",
+        "title": "Sharp deterministic stability for limited-angle reconstruction",
+        "dependency_level": 5,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+          "prop-ip-limited-angle-fourier-visibility",
+          "prop-ip-limited-angle-data-no-holder-stability",
+          "def-ip-identifiability-and-stability-modulus"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: the full-angle Fourier-slice and compact-support uniqueness baseline."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 13–14, Theorem 3; §1.5.1, pp. 34–35, visible directions."
+            },
+            {
+              "title": "Marco Mazzucchelli, Mikko Salo, and Leo Tzou, A general support theorem for analytic double fibration transforms",
+              "url": "https://arxiv.org/pdf/2306.05906",
+              "locator": "§1.2, Theorem 1.2, and §1.3, Theorem 1.3, pp. 4–5; contextual analytic continuation result."
+            }
+          ]
+        },
+        "statement": "Let $\\Omega\\subset\\mathbb R^2$ be any bounded open set with nonempty interior, and let $\\Theta\\subset S^1$ be any nonempty proper open antipodally symmetric set whose complement contains a nonempty open arc. Write $\\theta^\\perp=(-\\theta_2,\\theta_1)$ and define $R_\\Theta f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$ for $\\theta\\in\\Theta$, $s\\in\\mathbb R$. Equip $L^2(\\Theta\\times\\mathbb R)$ with the norm $\\|g\\|_2=(\\int_\\Theta\\int_{\\mathbb R}|g(\\theta,s)|^2\\,ds\\,d\\theta)^{1/2}$, where $ds$ is Lebesgue measure and $d\\theta$ is arc-length measure, and equip $L^2(\\mathbb R^2)$ with Lebesgue measure. The line data of every compactly supported smooth input are regarded as elements of this data space. For $M>0$ define $\\mathcal K_M(\\Omega)=\\{f\\in C_c^\\infty(\\Omega;\\mathbb C):\\|f\\|_{H^1}\\le M\\}$ with $\\|f\\|_{H^1}^2=\\|f\\|_2^2+\\|\\partial_1f\\|_2^2+\\|\\partial_2f\\|_2^2$. For deterministic noise radius $\\delta>0$, define the worst-case reconstruction error $\\mathcal E_{\\Omega,\\Theta,M}(\\delta)=\\inf_{\\Phi:L^2(\\Theta\\times\\mathbb R)\\to L^2(\\mathbb R^2)}\\sup_{\\substack{f\\in\\mathcal K_M(\\Omega),\\ \\eta\\in L^2(\\Theta\\times\\mathbb R)\\\\\\|\\eta\\|_2\\le\\delta}}\\|\\Phi(R_\\Theta f+\\eta)-f\\|_2$.\nDetermine the sharp asymptotic order of $\\mathcal E_{\\Omega,\\Theta,M}(\\delta)$ as $\\delta\\downarrow0$, with matching upper and lower bounds and a deterministic reconstruction rule attaining the upper bound, for every such $\\Omega$ and $\\Theta$. In particular, determine the dependence of the sharp modulus on the geometry and aperture of the measured normal set."
+      }
+    ]
+  },
+  {
+    "order": 3071,
+    "id": "limited-angle-tomography-and-invisible-singularities-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Limited-angle visibility and instability — Examples and Counterexamples",
+    "companion": "limited-angle-tomography-and-invisible-singularities",
+    "requires": [
+      "limited-angle-tomography-and-invisible-singularities"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-compact-support-limited-angle-uniqueness",
+        "kind": "example",
+        "title": "A compactly supported bump remains uniquely determined from limited angles",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-ip-compact-support-fourier-laplace-is-entire",
+          "thm-ip-fourier-slice-identity",
+          "cor-ip-limited-angle-compact-support-uniqueness"
+        ],
+        "strategy": "Choose a nonzero bump, convert equality of limited-angle data into equality of Fourier values on the measured wedge, and apply the fully proved choice-free compact-support uniqueness result to the difference.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: compact-support analytic continuation and uniqueness."
+            },
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 13–14, Theorem 3 and its complete compact-support uniqueness proof."
+            }
+          ]
+        },
+        "statement": "Let $\\Theta\\subset S^1$ be a nonempty proper open antipodally symmetric set whose complement contains a nonempty open arc. Write $\\theta^\\perp=(-\\theta_2,\\theta_1)$ and define the line Radon integral by $Rg(\\theta,s)=\\int_{\\mathbb R}g(s\\theta+t\\theta^\\perp)\\,dt$ using Lebesgue measure $dt$. Choose a smooth function $\\psi$ supported in $B_1(0)$ and equal to one on $\\overline B_{1/2}(0)$. For every $h\\in C_c^\\infty(B_1(0);\\mathbb C)$, equality of the restricted line data $Rh(\\theta,s)=R\\psi(\\theta,s)$ for all $\\theta\\in\\Theta$ and $s\\in\\mathbb R$ forces $h=\\psi$. The Fourier-Laplace transforms of these compactly supported functions are entire in each complex frequency coordinate, so their agreement on the measured open wedge determines their values at every real frequency. In particular, $R\\psi$ is not identically zero."
+      },
+      {
+        "id": "ex-ip-high-frequency-limited-angle-instability",
+        "kind": "example",
+        "title": "Rapid oscillations make limited-angle data smaller than every power",
+        "dependency_level": 4,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-ip-limited-angle-data-no-holder-stability",
+          "def-countable-choice"
+        ],
+        "strategy": "Verify an explicit aperture has a uniform transverse line-tangent factor, normalize one fixed bump, and instantiate the proved high-frequency modulation estimate.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.5.1, pp. 34–35: limited-angle visible covectors and missing directions."
+            },
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: line-normal Fourier geometry; the quantitative oscillatory estimate is proved locally."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Take $\\Omega=B_2(0)$, $K=\\overline B_1(0)$, $\\Theta=\\{\\theta\\in S^1:|\\theta_1|<1/2\\}$, and $v=(1,0)$. Write $\\theta^\\perp=(-\\theta_2,\\theta_1)$ and define $R_\\Theta u(\\theta,s)=\\int_{\\mathbb R}u(s\\theta+t\\theta^\\perp)\\,dt$ for $\\theta\\in\\Theta$, $s\\in\\mathbb R$. Give the data space $D=L^2(\\Theta\\times\\mathbb R,d\\theta\\,ds)$ the norm $\\|g\\|_D=(\\int_\\Theta\\int_{\\mathbb R}|g(\\theta,s)|^2\\,ds\\,d\\theta)^{1/2}$, with arc-length measure $d\\theta$ and Lebesgue measure $ds$, and define $\\|u\\|_{H^1}=(\\|u\\|_2^2+\\|\\partial_1u\\|_2^2+\\|\\partial_2u\\|_2^2)^{1/2}$ using Lebesgue measure on $\\mathbb R^2$. Then $\\Theta$ is open and antipodally symmetric, its complement contains open horizontal arcs, and $\\inf_{\\theta\\in\\Theta}|v\\cdot\\theta^\\perp|=\\sqrt3/2$. For every $M>0$, the class of smooth functions supported in $K$ with $H^1$ norm at most $M$ has no uniform Hölder stability estimate from the restricted Radon data. More explicitly, choose a real bump $\\psi\\in C_c^\\infty(B_1(0))$ with $\\|\\psi\\|_2=1$, set $\\lambda_M=M/[2(1+\\|\\nabla\\psi\\|_2+2\\pi)]$, and let $u_N(x)=\\lambda_MN^{-1}e^{2\\pi iNx_1}\\psi(x)$ for integers $N\\ge1$. These functions have the same compact support, satisfy $\\|u_N\\|_{H^1}\\le M$ and $\\|u_N\\|_2=\\lambda_MN^{-1}$, while for every integer $m\\ge1$ there is $C_m<\\infty$ with $\\|R_\\Theta u_N\\|_D\\le C_mN^{-m-1}$."
+      },
+      {
+        "id": "ex-ip-invisible-wedge-null-function",
+        "kind": "example",
+        "title": "A nonzero Schwartz function invisible to a limited-angle Radon transform",
+        "dependency_level": 4,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-schwartz-radon-well-defined",
+          "lem-ip-fourier-slice-identity-on-schwartz",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "thm-fourier-inversion-on-schwartz-space",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "def-metric-space",
+          "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+          "def-ip-forward-map-and-solution-classes",
+          "def-countable-choice"
+        ],
+        "strategy": "Place a smooth frequency bump in a blind annular sector, invert it using the Schwartz Fourier transform under Countable Choice, recover zero Radon data by offset Fourier inversion, and apply the exact two-truth estimator lower bound.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography",
+              "url": "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf",
+              "locator": "§1.3.2, pp. 13–14, Theorem 3 and its proof: a nonzero Schwartz null function for limited-angle data."
+            },
+            {
+              "title": "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1",
+              "url": "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf",
+              "locator": "§2.1, pp. 4–5: line-normal convention and Fourier-slice identity."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $\\Theta\\subset S^1$ be a nonempty proper open antipodally symmetric set such that $S^1\\setminus\\overline\\Theta$ contains a nonempty open arc. Choose an open arc $J$ with $\\overline J\\subset S^1\\setminus\\overline\\Theta$, put $V=\\{r\\omega:1<r<2,\\ \\omega\\in J\\}$, choose a nonzero smooth function $q\\in C_c^\\infty(V;\\mathbb C)$, and define $f(x)=\\int_{\\mathbb R^2}q(\\xi)e^{2\\pi i x\\cdot\\xi}\\,d\\xi$. For $\\theta=(\\theta_1,\\theta_2)$ write $\\theta^\\perp=(-\\theta_2,\\theta_1)$ and, for a Schwartz function $g$, define $R_{\\mathcal S}g(\\theta,s)=\\int_{\\mathbb R}g(s\\theta+t\\theta^\\perp)\\,dt$ using Lebesgue measure $dt$. Let $Y=L^2(\\Theta\\times\\mathbb R,d\\theta\\,ds)$, where $d\\theta$ is arc-length measure and $ds$ is Lebesgue measure. Then $f$ is a nonzero Schwartz function in $L^2(\\mathbb R^2)$ with Lebesgue measure, its Fourier transform is $q$, and $R_{\\mathcal S}f(\\theta,s)=0$ for every $\\theta\\in\\Theta$ and $s\\in\\mathbb R$, so both $0$ and $f$ give datum $0$ in $Y$ without either truth being required to have compact support. For the two-truth class $\\{0,f\\}$ with target loss $\\|g-h\\|_{L^2(\\mathbb R^2)}$, every deterministic estimator $\\Phi:Y\\to L^2(\\mathbb R^2)$ satisfies $\\max\\{\\|\\Phi(0)\\|_2,\\|\\Phi(0)-f\\|_2\\}\\ge \\|f\\|_2/2>0$."
+      }
+    ]
+  }
+]

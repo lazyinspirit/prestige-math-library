@@ -1,0 +1,780 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+    "lem-ip-nullspace-property-stability-cone",
+    "ex-ip-failed-nsp-two-column-nonunique-basis-pursuit",
+    "ex-ip-nontrivial-order-one-nsp-matrix",
+    "ex-ip-gaussian-identity-design-minimax-lower-bound"
+  ],
+  "contracts": {
+    "thm-ip-basis-pursuit-exact-recovery-under-nsp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "\\|h_S\\|_1<\\|h_{S^c}\\|_1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "**(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "(Au)_i:=\\sum_{j=1}^n A_{ij}u_j",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "feasible-difference-is-kernel",
+          "claim": "Every feasible vector distinct from the target gives a nonzero kernel vector on the target support, so the strict NSP applies.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "strict-l1-objective-increase",
+          "claim": "The triangle inequality on the target support and the strict NSP on its complement make every distinct feasible vector have strictly larger l1 objective.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the zero target, S is empty in step 1.1; the assumed NSP supplies 0<||h||_1 for every distinct feasible difference, and step 2.1 still proves strict minimality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 only considers z distinct from x†; if ker A={0}, no such distinct feasible z exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply without change at s=1, using the stated NSP for every support of size at most one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At s=n, any nonzero h in ker A would contradict NSP with S=[n], since ||h||_1<0; the zero-kernel case is covered by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement is for the exact constraint Az=Ax† and explicitly excludes noisy recovery; step 1.1 uses only an exact feasible difference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 fix an arbitrary feasible z and select no representatives or families; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way sufficiency claim and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way sufficiency claim and states no equivalence."
+        }
+      ]
+    },
+    "lem-ip-nullspace-property-stability-cone": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "\\|h_S\\|_1<\\|h_{S^c}\\|_1",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "**(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "Every norm is Lipschitz for the Euclidean metric.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent. 1. $A$ is compact. 2. $A$ is closed and bounded. 3. $A$ is pseudocompact. 4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "every nonempty finite subset of $\\mathbb{R}$ has a maximum and a minimum",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "(Au)_i:=\\sum_{j=1}^n A_{ij}u_j",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "a \\le b \\iff a^2 \\le b^2",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compact-unit-kernel-sphere",
+          "claim": "The nonzero kernel vectors normalized to Euclidean norm one form a nonempty compact set.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F11",
+            "F12",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "supportwise-ratio-maximum",
+          "claim": "For each support S of size at most s, the l1 head-to-tail ratio is continuous and attains a maximum strictly below one on the compact normalized kernel.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "F15",
+            "F15"
+          ]
+        },
+        {
+          "id": "finite-global-cone-margin",
+          "claim": "The finite family of supportwise maxima has a common maximum q in (0,1), yielding a uniform rho between q and one.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "F9"
+          ]
+        },
+        {
+          "id": "homogeneous-extension-to-kernel",
+          "claim": "Homogeneity rescales the uniform ratio bound from the unit sphere to every kernel vector, including zero.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For S=∅, the ratio in step 2.1 is zero on the nonempty unit kernel; the strict NSP makes the tail denominator positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-kernel branch in step 1.1 chooses rho=1/2 and the h=0 case in step 4.1 gives 0≤0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When s=1, the finite support family in step 3.1 still contains the empty set and every singleton, and the same maximum argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In the nonzero-kernel branch, step 2.1 gives q_S<1 for every support, and step 3.1 obtains one strict global margin."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At s=n, NSP with S=[n] forces ker A={0}; the zero-kernel branch of step 1.1 applies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use one existential nonzero kernel witness and maxima of finite/compact sets; the Heine–Borel/extreme-value supplier is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way consequence of strict NSP and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way consequence of strict NSP and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-failed-nsp-two-column-nonunique-basis-pursuit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "\\|h_S\\|_1<\\|h_{S^c}\\|_1",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "(Au)_i:=\\sum_{j=1}^n A_{ij}u_j",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equal-head-tail-witness",
+          "claim": "The nonzero kernel vector has an admissible singleton support where the strict NSP inequality is equality, so the matrix fails NSP.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "two-minimizers-at-one-datum",
+          "claim": "The feasible set for datum one has l1 objective at least one, attained by two distinct vectors.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For S=∅, step 1.1 computes 0<2; the failure occurs at S={1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonzero vector h=(1,-1), as required by the NSP definition; the zero vector is not a witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The order is s=1 and step 1.1 exhibits failure on a singleton support."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves both distinct feasible vectors attain the exact minimum value one, establishing nonuniqueness rather than only a tie above the minimum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the exact noiseless equation Aw=1; no noisy endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only the displayed finite vectors and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits one failure and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example exhibits one failure and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-nontrivial-order-one-nsp-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "\\|h_S\\|_1<\\|h_{S^c}\\|_1",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+          "source_section": "Statement",
+          "quote": "$x^\\dagger$ is the unique minimizer of",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "(Au)_i:=\\sum_{j=1}^n A_{ij}u_j",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "kernel-line-computation",
+          "claim": "Solving the two row equations gives exactly the one-dimensional kernel span{(1,1,-1)}.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5"
+          ]
+        },
+        {
+          "id": "strict-order-one-inequalities",
+          "claim": "The empty support gives 0<3|lambda| and each singleton gives |lambda|<2|lambda|, proving order-one NSP.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "exact-recovery-by-local-theorem",
+          "claim": "The local exact-recovery theorem applies to every 1-sparse target for this matrix.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the empty-support inequality 0<3|lambda| for every nonzero kernel vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 assumes lambda!=0, so the zero kernel vector is correctly excluded by the definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks every singleton support for s=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a nonzero one-dimensional kernel; step 2.1 verifies strict separation for all its nonzero scalar multiples."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This fixed example has n=3 and s=1; it makes no claim at s=0 or s=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit finite-dimensional algebra and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one matrix and does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one matrix and does not state an equivalence."
+        }
+      ]
+    },
+    "ex-ip-gaussian-identity-design-minimax-lower-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "\\|h_S\\|_1<\\|h_{S^c}\\|_1",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+          "source_section": "Statement",
+          "quote": "$x^\\dagger$ is the unique minimizer of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "\\sup_{\\theta\\in\\Theta_{s,d}} \\mathbb E_\\theta\\|T(Z)-\\theta\\|_2^2 \\ge \\frac{\\sigma^2s\\log(ed/s)}{200000n}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "The **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "(Au)_i:=\\sum_{j=1}^n A_{ij}u_j",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-matrix-nsp",
+          "claim": "The identity matrix has zero kernel, so it satisfies NSP vacuously and the local noiseless exact-recovery theorem applies.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "existing-minimax-supplier-instantiation",
+          "claim": "The independent coordinate laws, sparse parameter set, noise scale and estimator exactly match the existing minimax theorem's hypotheses, so its lower bound applies.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The parameter set Theta_{s,d} in the Statement includes theta=0, and step 2.1 applies the theorem to the whole class."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The noisy minimax claim assumes sigma>0; the separate noiseless identity-recovery claim is handled in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest allowed dimension d=2 with s=1 satisfies the theorem's endpoint 1<=s<=d/2 in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that I_d has zero kernel, including the identity-design case where exact recovery is vacuous NSP."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the endpoint s=d/2 because it is explicitly included in the minimax theorem's hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicitly assumed and carried by A1 in step 2.1; this item does not claim a choice-free minimax bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example combines a noiseless recovery observation and a one-way risk lower bound; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example combines a noiseless recovery observation and a one-way risk lower bound; it states no equivalence."
+        }
+      ]
+    }
+  }
+}

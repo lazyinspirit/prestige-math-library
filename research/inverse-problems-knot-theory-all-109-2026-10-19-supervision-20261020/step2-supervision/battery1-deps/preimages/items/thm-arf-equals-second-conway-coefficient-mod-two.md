@@ -1,0 +1,50 @@
+---
+id: thm-arf-equals-second-conway-coefficient-mod-two
+kind: theorem
+title: "The Arf invariant is the second Conway coefficient modulo two"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 17
+deps:
+  - thm-seifert-s-equivalence-and-conway-arf-bridge
+  - def-knot-arf-invariant-from-seifert-form
+  - def-seifert-s-equivalence-and-conway-normalization
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "W. B. Raymond Lickorish, An Introduction to Knot Theory, Graduate Texts in Mathematics 175, Springer (1997)"
+      url: "https://ebooks.karbust.me/Mathematics/W.%20B.%20Raymond%20Lickorish%20-%20An%20Introduction%20to%20Knot%20Theory%20%281997%29%20%5B978-1-4612-0691-0%5D.pdf"
+      locator: "Printed Chapter 10, Definition 10.3, Proposition 10.4 and Theorem 10.7, printed pp. 105–108; complete argument read in full-text PDF copy; publisher chapter record inspected."
+---
+## Statement
+
+Assume full AC and let $K$ be a smooth oriented knot in the standard oriented $3$-sphere. With the normalized Conway polynomial $\nabla_K(z)=1+a_2(K)z^2+a_4(K)z^4+\cdots$ and the Seifert-form definition of $\operatorname{Arf}(K)$,
+$$\operatorname{Arf}(K)=a_2(K)\pmod2.$$
+
+## Statement references
+
+[[thm-seifert-s-equivalence-and-conway-arf-bridge|Surface independence and the Conway–Arf identity]]
+
+[[def-seifert-s-equivalence-and-conway-normalization|The normalized Conway convention]]
+
+## Facts & Assumptions
+
+**Given:** Full AC and a smooth oriented knot $K$.
+
+[A1] Full AC is the ambient hypothesis of the Seifert and Alexander conventions. [[def-axiom-of-choice]]
+
+[F1] The Seifert Arf invariant and normalized Conway coefficient use the conventions stated in their definitions. [[def-knot-arf-invariant-from-seifert-form]], [[def-seifert-s-equivalence-and-conway-normalization]]
+
+[F2] The bridge theorem proves the claimed congruence and surface independence. [[thm-seifert-s-equivalence-and-conway-arf-bridge]]
+
+## Proof
+
+1.1 Apply [F2] to the knot $K$ with the definitions in [F1]. It gives exactly the displayed equality in $\mathbb F_2$; equality of two elements of $\mathbb F_2$ is the stated congruence. [A1, F1, F2, given]
+
+2.1 The bridge theorem already proves independence of the chosen surface and basis, so this corollary adds no new representative choice or normalization. [F1, F2, step 1.1] ∎

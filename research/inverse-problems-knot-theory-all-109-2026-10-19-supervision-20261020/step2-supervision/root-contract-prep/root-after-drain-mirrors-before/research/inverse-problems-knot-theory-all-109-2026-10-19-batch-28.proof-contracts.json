@@ -1,0 +1,756 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+    "ex-ip-landweber-initial-discrepancy-stop",
+    "cex-ip-landweber-outside-local-ball-stalls",
+    "ex-ip-landweber-exact-data-no-finite-stop"
+  ],
+  "contracts": {
+    "thm-ip-nonlinear-landweber-fejer-and-finite-stopping": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.2",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "For $k=0,1,\\ldots,M$, compute",
+          "uses": [
+            "4.1",
+            "5.1",
+            "5.3",
+            "9.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "1.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H",
+          "uses": [
+            "1.2",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "$T^{**}=T$ and $\\|T^*\\|=\\|T\\|$",
+          "uses": [
+            "1.2",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Every inner-product space below is real or complex in this sense, the pairing is linear in the first argument and conjugate-linear in the second",
+          "uses": [
+            "1.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,",
+          "uses": [
+            "2.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "$\\|u+v\\|\\le\\|u\\|+\\|v\\|$",
+          "uses": [
+            "1.1",
+            "4.1",
+            "8.1",
+            "9.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "every Cauchy sequence in $H$",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-series",
+          "source_section": "Definition",
+          "quote": "the sequence $(s_n)$ of partial sums converges",
+          "uses": [
+            "4.3",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "$\\sum a_k$ converges **if and only if** $S$ is bounded above",
+          "uses": [
+            "4.3",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real number.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element",
+          "uses": [
+            "5.2",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$",
+          "uses": [
+            "1.2",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$; no linearity is assumed, and linear maps are allowed as special cases.",
+          "uses": [
+            "8.1",
+            "9.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-frechet-derivative-between-banach-spaces",
+          "source_section": "Definition",
+          "quote": "and the **derivative** is the map $Df : U \\to \\mathcal B(X,Y)$",
+          "uses": [
+            "1.2",
+            "5.3",
+            "8.1",
+            "9.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tcc-and-noise-bound",
+          "claim": "The TCC linearization error and data-noise bound control the residual-plus-linearized-error vector.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hilbert-squared-error-expansion",
+          "claim": "The adjoint identity and the derivative/adjoint norm bounds expand and control the one-step squared error.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A3",
+            "F3",
+            "F4",
+            "F11",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-fejer-inequality",
+          "claim": "Cauchy-Schwarz and the previous two estimates give the explicit squared-error inequality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "threshold-implies-fejer-decrease",
+          "claim": "The strict tau threshold makes the one-step factor nonpositive above threshold; for exact data it is nonpositive for every residual.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-domain-invariance",
+          "claim": "Fejer decrease relative to the inner-ball exact solution keeps every computed iterate in the declared outer ball.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A3",
+            "step 3.1",
+            "F1",
+            "F6",
+            "induction"
+          ]
+        },
+        {
+          "id": "positive-noise-energy-decrease",
+          "claim": "Above the discrepancy threshold the squared error drops by at least a positive multiple of the squared residual.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-first-stop",
+          "claim": "If stopping never occurred, arbitrarily many positive residual contributions would contradict the finite squared-error budget by Archimedeanity.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "step 3.2",
+            "F9",
+            "assume-contra",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stopping-index-count-and-budget",
+          "claim": "Telescoping gives the O(delta^-2) index bound, including the zero-initial-error case, and the finite-budget statuses follow the specified check order.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A2",
+            "step 3.2",
+            "step 4.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-data-residual-summability",
+          "claim": "For exact data the one-step inequality telescopes to a uniform bound on all residual-square partial sums.",
+          "step": "3.3",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-residual-tail",
+          "claim": "The nonnegative-series criterion makes the residual-square series converge, so its tails and terms tend to zero.",
+          "step": "4.3",
+          "inputs": [
+            "step 3.3",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "squared-distance-drop-tail",
+          "claim": "Fejer decrease makes the nonnegative squared-distance drops have bounded partial sums and vanishing tails.",
+          "step": "4.4",
+          "inputs": [
+            "step 3.1",
+            "step 3.3",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "blockwise-residual-linearization",
+          "claim": "A finite minimum-residual index and two TCC remainders bound each adjoint-step inner product by a residual square.",
+          "step": "5.2",
+          "inputs": [
+            "given",
+            "A3",
+            "step 4.1",
+            "F2",
+            "F5",
+            "F10",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "adjoint-sums-bound-inner-products",
+          "claim": "Summing exact Landweber increments and applying the previous inner-product estimate bounds both block inner products by the residual-square tail.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-iterates-cauchy",
+          "claim": "Real Hilbert polarization identities, the two tail bounds, and the triangle inequality make the exact iterates Cauchy.",
+          "step": "7.1",
+          "inputs": [
+            "step 4.4",
+            "step 6.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-limit-solves-equation",
+          "claim": "Completeness yields a strong limit, residual convergence makes it an exact solution, and the iterates' ball bound passes to the limit.",
+          "step": "8.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.3",
+            "step 4.4",
+            "step 7.1",
+            "F6",
+            "F7",
+            "F12",
+            "F13",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-index-noisy-stability",
+          "claim": "Continuity of F and F' and the norm-continuous adjoint map imply convergence of each fixed executed iterate as the data noise vanishes.",
+          "step": "5.3",
+          "inputs": [
+            "A3",
+            "F1",
+            "F3",
+            "F11",
+            "F13",
+            "step 4.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-limit-contradiction-sequence",
+          "claim": "Failure of uniform noisy convergence yields a countable bad-data sequence whose stopping indices have a constant or diverging subsequence.",
+          "step": "9.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "step 8.1",
+            "choose",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "bounded-stop-subsequence",
+          "claim": "A constant stopping index has zero exact residual in the limit, after which the exact iteration is stationary at the exact-data limit.",
+          "step": "9.2",
+          "inputs": [
+            "A2",
+            "step 8.1",
+            "step 5.3",
+            "F1",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unbounded-stop-subsequence",
+          "claim": "For diverging stopping indices, fixed-index stability and Fejer monotonicity relative to the exact-data limit force the stopped noisy iterates close to that limit.",
+          "step": "9.3",
+          "inputs": [
+            "A3",
+            "step 2.1",
+            "step 4.1",
+            "step 8.1",
+            "step 5.3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-noisy-data-limit",
+          "claim": "Both subsequence cases contradict the assumed bad-data distance, proving uniform convergence over the noise ball.",
+          "step": "10.1",
+          "inputs": [
+            "step 9.1",
+            "step 9.2",
+            "step 9.3",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The assumptions supply a nonempty exact-solution ball centered at the initial iterate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement clause 3 and step 4.4 cover delta=0: squared error decreases and no finite discrepancy stop is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.3 allows eta=0; then tau>2 and c_tau=1-2/tau>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1 handles d0=0: the initial residual is at most delta<tau delta, so N=0 and C remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses closed balls; step 5.3 includes their boundary, and the algorithm stops at residual equality by its <= test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 carries AC_omega for adjoints; step 9.1 states its countable bad-data selection, while steps 5.2 and 9.1 use least indices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives implications and convergence conclusions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives implications and convergence conclusions, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-landweber-initial-discrepancy-stop": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "If $r_k^\\delta\\le\\tau\\delta$, return `stopped` with $(k,x_k^\\delta,r_k^\\delta)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-map-is-admissible",
+          "claim": "The identity map has derivative norm one and zero TCC remainder, while the data noise equals its bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "initial-threshold-precedes-budget",
+          "claim": "The initial residual is below the discrepancy threshold, so the algorithm stops before the zero update budget is consulted.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on the nonempty real Hilbert line."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The initial residual is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses eta=0 and tau>2, so the initial residual 1 is strictly below tau delta."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 shows M=0 still returns stopped because the threshold check precedes the budget check."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 attains the noise-bound endpoint: |y_delta-y|=delta=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 compute every datum and the output explicitly, with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct algorithm output, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct algorithm output, not an equivalence."
+        }
+      ]
+    },
+    "cex-ip-landweber-outside-local-ball-stalls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "x_{k+1}^\\delta:=x_k^\\delta+F'(x_k^\\delta)^*(y^\\delta-F(x_k^\\delta))",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+          "source_section": "Statement",
+          "quote": "This is a uniform two-point hypothesis with the derivative based at the first point.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "stationary-start-stalls",
+          "claim": "The polynomial map has an exact solution but zero derivative at the initial point, so all exact-data iterates remain at residual one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "no-local-tcc-at-start",
+          "claim": "Every positive-radius increment ball at the initial point contains a nonzero increment forcing eta at least one, contrary to the theorem's local hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses U=R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At h=0 both TCC sides vanish; step 2.1 uses a nonzero increment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 forces eta>=1, outside the theorem's eta<1/2 regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 has zero derivative at the start but residual one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses h=delta/2, interior to every positive closed TCC ball."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly constructs h=delta/2 for each radius."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal convergence claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal convergence claim, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-landweber-exact-data-no-finite-stop": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "If $k=M$, return `budget_exhausted`",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+          "source_section": "Statement",
+          "quote": "For exact data ($\\delta=0$ and $y^\\delta=y$), the ideal sequence is defined for every $n$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-instance-admissible",
+          "claim": "The half-identity map has derivative norm one-half, zero TCC remainder, and an exact solution in the required ball.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-iterates-never-hit-zero",
+          "claim": "The update multiplies each iterate by three-quarters, leaving a positive residual at every finite index; the theorem supplies convergence and the algorithm reports budget exhaustion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on the nonempty real Hilbert line."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 has positive residual at every finite index while delta=0 makes the threshold zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses eta=0 and tau>2 to meet the local theorem hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The initial error is nonzero and the exact residual does not vanish at any finite step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 has exact data, attaining the noise-bound endpoint 0=delta."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 compute the map, iterates, and residuals explicitly, with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-way stopping boundary, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-way stopping boundary, not an equivalence."
+        }
+      ]
+    }
+  }
+}

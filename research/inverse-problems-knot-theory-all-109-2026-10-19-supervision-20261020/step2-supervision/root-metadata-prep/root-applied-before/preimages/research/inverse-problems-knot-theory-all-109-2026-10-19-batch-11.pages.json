@@ -1,0 +1,312 @@
+[
+  {
+    "order": 3018,
+    "id": "adaptive-spectral-regularization-and-solit",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Adaptive spectral regularization by SOLIT",
+    "companion": "adaptive-spectral-regularization-and-solit-examples",
+    "requires": [
+      "statistical-inverse-experiments-and-white-noise",
+      "gaussian-sequence-models-and-risk-decomposition",
+      "deterministic-source-conditions-and-optimal-recovery",
+      "spectral-regularization-and-parameter-choice"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-gaussian-series-norm-tail-and-fourth-moment",
+        "kind": "lemma",
+        "title": "Gaussian series norm tails and fourth moments",
+        "deps": [
+          "def-countable-choice",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vladimir Spokoiny and Niklas Willrich, Bootstrap tuning in ordered model selection, Appendix D, Gaussian quadratic forms",
+              "url": "https://arxiv.org/pdf/1507.05034"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $(\\xi_j)_{j\\ge1}$ be given real random variables on a probability space such that every finite subfamily is independent and each variable has density $(2\\pi)^{-1/2}e^{-z^2/2}$. Let $a_j\\ge0$ be deterministic with $v:=\\sum_j a_j<\\infty$, and put $u:=\\sup_j a_j$ and $w:=\\sum_j a_j^2$. The nonnegative series $Q:=\\sum_j a_j\\xi_j^2$ is finite almost surely. Define $N:=\\sqrt Q$ on that event and set $N=0$ on its null complement. Then\n$$\\mathbb E N^2=v,\\qquad \\mathbb E N^4=v^2+2w\\le3v^2.$$\nFor every $t>0$,\n$$\\mathbb P\\{N^2>v+2\\sqrt{wt}+2ut\\}\\le e^{-t},\\qquad \\mathbb P\\{N>\\sqrt v+\\sqrt{2ut}\\}\\le e^{-t}.$$\nThe upper quantile $q(t):=\\inf\\{z\\ge0:\\mathbb P(N>z)\\le e^{-t}\\}$ is finite and satisfies\n$$\\mathbb P(N>q(t))\\le e^{-t},\\qquad q(t)\\le\\sqrt v+\\sqrt{2ut}.$$\nThese conclusions include $v=0$, in which case $N=q(t)=0$ almost surely. For a Gaussian series in a fixed orthonormal coordinate system with coordinate variances $a_j$, $N$ is its norm.",
+        "dependency_level": 0,
+        "justified_by": [],
+        "axiom_use": "Countable Choice is assumed; the independent normal coordinates are given, and the proof uses only their finite-dimensional densities and countable monotone limits, with no construction of a new product measure or arbitrary-index choice."
+      },
+      {
+        "id": "def-ip-ordered-filter-grid-and-source-index",
+        "kind": "definition",
+        "title": "Ordered spectral filters, source indices, and variance grids",
+        "statement": "Assume Countable Choice. Let $T:X\\to Y$ be an injective compact linear operator of infinite rank between separable real Hilbert spaces (each with a countable dense subset), and assume $T$ is Hilbert–Schmidt, meaning that for its positive singular values $s_j$ the sum $\\sum_{j\\ge1}s_j^2$ is finite. Put $S=T^*T$, $\\lambda_j=s_j^2$, and $\\lambda_1=\\|S\\|$, with the positive eigenvalues listed with multiplicity in nonincreasing order. Let $\\varphi:[0,\\infty)\\to[0,\\infty)$ be continuous and strictly increasing with $\\varphi(0)=0$, and take its inverse on its range. Assume the paper's convexity condition on the spectral range: $x\\mapsto x\\varphi^{-1}(\\sqrt{x})$ is convex for $0\\le x\\le\\varphi(\\lambda_1)^2$. Define the source class $\\mathcal W_\\varphi(\\rho):=\\{\\varphi(S)w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$ for $\\rho>0$; equivalently, it is the source ball with singular-value index $\\psi(t)=\\varphi(t^2)$.\n\nAn ordered spectral filter is a family of functions $q_\\alpha:[0,\\lambda_1]\\to[0,\\infty)$ indexed by a set $\\mathcal A\\subset(0,\\infty)$ with $0$ as an accumulation point, such that for constants $C_q'<\\infty$ and $C_q''=1$,\n$$\n0\\le\\alpha q_\\alpha(x)\\le C_q',\\qquad 0\\le xq_\\alpha(x)\\le1,\n$$\nand $q_\\alpha(x)\\le q_{\\widetilde\\alpha}(x)$ whenever $\\widetilde\\alpha<\\alpha$, for every $x\\in[0,\\lambda_1]$. The index function $\\varphi$ is a qualification of this filter if for some $C_\\varphi<\\infty$,\n$$\n\\sup_{0\\le x\\le\\lambda_1}\\varphi(x)(1-xq_\\alpha(x))\\le C_\\varphi\\varphi(\\alpha)\\qquad(\\alpha\\in\\mathcal A).\n$$\n\nFor $\\alpha\\in\\mathcal A$, define the variance function\n$$\nV_{T,q}(\\alpha):=\\sum_{j\\ge1}\\lambda_jq_\\alpha(\\lambda_j)^2.\n$$\nFor $\\sigma>0$, a decreasing candidate sequence $(\\alpha_m)_{m\\in\\mathbb N_0}$ in $\\mathcal A$ has **geometric variance growth** if $V_{T,q}(\\alpha_0)>0$ and there are constants $1<\\theta_1\\le\\theta_2<\\infty$ such that\n$$\n\\theta_1\\le\\frac{V_{T,q}(\\alpha_m)}{V_{T,q}(\\alpha_{m-1})}\\le\\theta_2\\qquad(m\\ge1).\n$$\nSet $v_m:=\\sigma^2V_{T,q}(\\alpha_m)$ and\n$$\nu_m:=\\sigma^2\\sup_{j\\ge1}\\lambda_jq_{\\alpha_m}(\\lambda_j)^2,\n$$\nthe operator norm of the estimator-noise covariance in the singular basis. The bound $q_{\\alpha_m}(\\lambda_j)\\le C_q'/\\alpha_m$ and $\\sum_j\\lambda_j<\\infty$ make each $u_m$ and $v_m$ finite. The finite candidate set ends at\n$$\nm_{\\max}:=\\min\\{m\\in\\mathbb N_0:v_m\\ge1\\}.\n$$\nThe geometric lower bound $v_m\\ge v_0\\theta_1^m$ makes this index finite.",
+        "strategy": "State the source class, ordered-filter bounds and qualification; define geometric-variance growth, estimator variance and the finite SOLIT candidate endpoint.",
+        "deps": [
+          "def-ip-index-source-ball",
+          "def-compact-spectral-filter-and-qualification",
+          "thm-singular-value-decomposition-for-compact-operators",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, §§3.1.1–3.2.1",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5 §§5.1–5.2",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+        "kind": "lemma",
+        "title": "Risk decomposition and monotone bias for ordered spectral filters",
+        "statement": "Assume Countable Choice and the positive-noise Gaussian sequence model with $\\sigma>0$, a fixed complete positive singular system $(s_j,v_j,u_j)$ for an injective compact Hilbert–Schmidt operator $T:X\\to Y$, and a truth with coordinates $\\theta_j=\\langle x,v_j\\rangle_X$ in $\\ell^2$. Write $\\lambda_j=s_j^2$ and let $\\xi_j$ be the independent standard-normal noise coordinates. Let $q_\\alpha$ be nonnegative and satisfy $0\\le\\lambda_jq_{\\alpha_m}(\\lambda_j)\\le1$, $q_{\\alpha_m}(\\lambda_j)\\le C_q'/\\alpha_m$, and $q_{\\alpha_{m_1}}(\\lambda_j)\\le q_{\\alpha_{m_2}}(\\lambda_j)$ whenever $m_1<m_2$. For each candidate $m$, form the finite sums\n$$\nX_{m,N}:=\\sum_{j=1}^N\\bigl(\\lambda_jq_{\\alpha_m}(\\lambda_j)\\theta_j+\\sigma s_jq_{\\alpha_m}(\\lambda_j)\\xi_j\\bigr)v_j.\n$$\nThe conclusion below includes the existence of their limit $\\widehat x_m$ in $L^2(\\Omega;X)$. Put $f_m:=\\mathbb E\\widehat x_m$, $B_m:=\\|f_m-x\\|_X$, and $v_m:=\\mathbb E\\|\\widehat x_m-f_m\\|_X^2$. Then $\\widehat x_m$ is a measurable $X$-valued random element with finite second moment and\n$$\n\\mathbb E\\|\\widehat x_m-x\\|_X^2=B_m^2+v_m,\\qquad v_m=\\sigma^2\\sum_{j\\ge1}\\lambda_jq_{\\alpha_m}(\\lambda_j)^2.\n$$\nIf $m_1<m_2$, then $B_{m_2}\\le B_{m_1}$, $\\|f_{m_2}-f_{m_1}\\|_X\\le B_{m_1}$, and\n$$\nv_{m_1,m_2}:=\\mathbb E\\| (\\widehat x_{m_2}-f_{m_2})-(\\widehat x_{m_1}-f_{m_1})\\|_X^2=\\sigma^2\\sum_{j\\ge1}\\lambda_j\\bigl(q_{\\alpha_{m_2}}(\\lambda_j)-q_{\\alpha_{m_1}}(\\lambda_j)\\bigr)^2\\le v_{m_2}.\n$$",
+        "strategy": "Construct the filtered estimator in singular coordinates and prove its L2 existence, risk identity, monotone bias and pairwise variance bound.",
+        "deps": [
+          "def-ip-ordered-filter-grid-and-source-index",
+          "def-ip-gaussian-sequence-inverse-model",
+          "thm-singular-value-decomposition-for-compact-operators",
+          "def-ip-isonormal-white-noise-experiment",
+          "thm-ip-white-noise-spectral-sequence-representation",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, Lemma 3.6 and §§3.1.1–3.2.1",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5 §5.1",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice supplies the fixed compact singular system through the Gaussian sequence model; all series and risk calculations below are conditional on that fixed countable basis and use no further choice."
+      },
+      {
+        "id": "alg-ip-solit-parameter-choice",
+        "kind": "algorithm",
+        "title": "SOLIT parameter choice on a geometric-variance grid",
+        "statement": "Assume Countable Choice. Let $T:X\\to Y$ be an injective compact Hilbert–Schmidt operator of infinite rank between separable real Hilbert spaces, let $S=T^*T$, and let $(s_j,v_j,u_j)$ be a fixed positive singular system with $\\lambda_j=s_j^2$. Let $Z$ be a real isonormal Gaussian process on $Y$, meaning that $g\\mapsto Z(g)$ is linear into $L^2$, is centered, has covariance $\\mathbb E[Z(g)Z(h)]=\\langle g,h\\rangle_Y$, and has independent standard-normal values on every finite orthonormal tuple. In the weak observation experiment $Y_x(g)=\\langle Tx,g\\rangle_Y+\\sigma Z(g)$ with known noise standard deviation $\\sigma>0$, use the ordered filter $q_\\alpha$, the geometric-variance candidates $\\alpha_0>\\cdots>\\alpha_{m_{\\max}}$, and variances $v_m=\\sigma^2\\sum_j\\lambda_jq_{\\alpha_m}(\\lambda_j)^2$ from the preceding definition. For each candidate index $m$, the regularized estimator $\\widehat x_m$ is the $L^2$ limit of its finite singular-coordinate sums; its $j$th coordinate is $\\lambda_jq_{\\alpha_m}(\\lambda_j)\\theta_j+\\sigma s_jq_{\\alpha_m}(\\lambda_j)\\xi_j$, where $\\theta_j=\\langle x,v_j\\rangle_X$ and $\\xi_j=Z(u_j)$.\n\nFor $0\\le m_1<m_2\\le m_{\\max}$, set\n$$\nv_{m_1,m_2}:=\\sigma^2\\sum_{j\\ge1}\\lambda_j\\bigl(q_{\\alpha_{m_2}}(\\lambda_j)-q_{\\alpha_{m_1}}(\\lambda_j)\\bigr)^2\n$$\nand let $N_{m_1,m_2}$ be the norm of the centered estimator difference divided by $\\sigma$. For $x>0$, define its upper quantile by\n$$\nz_{m_1,m_2}(x):=\\inf\\{z\\ge0:\\mathbb P(N_{m_1,m_2}>z)\\le e^{-x}\\}.\n$$\nGiven fixed $\\beta>0$ and $\\gamma>0$, put $x_m:=2(1+\\gamma)\\log(v_{m+1}/v_0)$ and $\\eta_{m_1,m_2}:=\\sigma z_{m_1,m_2}(x_{m_1})+\\beta\\sqrt{v_{m_1,m_2}}$. Accept an index $m_1$ exactly when $\\|\\widehat x_{m_1}-\\widehat x_{m_2}\\|_X\\le\\eta_{m_1,m_2}$ for every $m_2$ with $m_1<m_2\\le m_{\\max}$, and output the smallest accepted index $\\widehat m$ and parameter $\\widehat\\alpha=\\alpha_{\\widehat m}$. The condition for $m_1=m_{\\max}$ is vacuous, so the finite search always returns an index. This rule uses only the observed sequence, the known operator and filter, the noise level, the fixed candidate grid, and $\\beta,\\gamma$; it does not use $x$ or its source index $\\varphi$.",
+        "strategy": "Form the regularized estimates, compare each candidate with every finer candidate using its two-index threshold, and return the smallest accepted index.",
+        "deps": [
+          "def-ip-ordered-filter-grid-and-source-index",
+          "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-isonormal-white-noise-experiment",
+          "thm-ip-white-noise-spectral-sequence-representation",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, §§3.2.1–3.2.2",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Vladimir Spokoiny and Niklas Willrich, Bootstrap tuning in ordered model selection, §§2.1–2.4",
+              "url": "https://arxiv.org/pdf/1507.05034"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "Countable Choice is inherited through the fixed SVD coordinates in the sequence model; the finite selector search and minimum-index choice are otherwise choice-free."
+      },
+      {
+        "id": "thm-ip-solit-oracle-risk-and-rate",
+        "kind": "theorem",
+        "title": "SOLIT oracle risk bound and spectral rates",
+        "statement": "Assume Countable Choice. Let $T:X\\to Y$ be an injective compact Hilbert–Schmidt operator of infinite rank between separable real Hilbert spaces. Write $A:=T^*T$, and list its positive eigenvalues with multiplicity as $\\lambda_1\\ge\\lambda_2\\ge\\cdots>0$, where $\\lambda_1=\\|A\\|$ and $\\sum_j\\lambda_j<\\infty$. Observe the weak Gaussian experiment\n$$Y_x(g)=\\langle Tx,g\\rangle_Y+\\sigma Z(g),\\qquad g\\in Y,$$\nwhere $\\sigma>0$ is known and $Z:Y\\to L^2(\\Omega)$ is centered and linear with covariance $\\mathbb E[Z(g)Z(h)]=\\langle g,h\\rangle_Y$, and has independent standard-normal values on every finite orthonormal tuple.\n\nLet $\\varphi:[0,\\infty)\\to[0,\\infty)$ be continuous and strictly increasing with $\\varphi(0)=0$. Assume $u\\mapsto u\\varphi^{-1}(\\sqrt{u})$ is convex for $0\\le u\\le\\varphi(\\lambda_1)^2$, where $\\varphi^{-1}$ is the inverse on the range of $\\varphi$. For $\\rho>0$, define the source ball\n$$\\mathcal W_\\varphi(\\rho):=\\{\\varphi(A)w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}.$$\nAssume $x\\in\\mathcal W_\\varphi(\\rho)$. Let $q_\\alpha:[0,\\lambda_1]\\to[0,\\infty)$ be an ordered filter indexed by $\\alpha\\in\\mathcal A\\subset(0,\\infty)$, with $0$ an accumulation point of $\\mathcal A$, such that for finite $C_q',C_\\varphi>0$ and every $t\\in[0,\\lambda_1]$ and $\\alpha\\in\\mathcal A$,\n$$0\\le\\alpha q_\\alpha(t)\\le C_q',\\qquad 0\\le tq_\\alpha(t)\\le1,$$\n$q_\\alpha(t)\\le q_{\\widetilde\\alpha}(t)$ whenever $\\widetilde\\alpha<\\alpha$, and\n$$\\sup_{0\\le t\\le\\lambda_1}\\varphi(t)(1-tq_\\alpha(t))\\le C_\\varphi\\varphi(\\alpha).$$\n\nDefine $\\Sigma(t):=\\#\\{j:\\lambda_j\\ge t\\}$. Assume there is a continuous $S:(0,\\lambda_1]\\to[0,\\infty)$ with $\\liminf_{\\alpha\\downarrow0}S(\\alpha)/\\Sigma(\\alpha)>0$, $\\alpha S(\\alpha)\\to0$, and\n$$\\alpha^{-1}\\int_0^\\alpha\\Sigma(t)\\,dt\\le C_SS(\\alpha)$$\nfor some $C_S>0$ for every candidate $\\alpha\\in\\mathcal A\\cap(0,\\lambda_1]$.\n\nLet $\\alpha_0>\\alpha_1>\\cdots$ be candidates in $\\mathcal A\\cap(0,\\lambda_1]$, with the initial candidate $\\alpha_0$ fixed independently of $\\sigma$, and set\n$$v_m:=\\sigma^2\\sum_{j\\ge1}\\lambda_jq_{\\alpha_m}(\\lambda_j)^2,$$\nand assume $v_0>0$ and $1<\\theta_1\\le v_m/v_{m-1}\\le\\theta_2<\\infty$ for $m\\ge1$. Set $m_{\\max}:=\\min\\{m\\in\\mathbb N_0:v_m\\ge1\\}$. Fix a positive singular system $(s_j,v_j,u_j)$ with $Tv_j=s_ju_j$ and $\\lambda_j=s_j^2$, set $\\theta_j=\\langle x,v_j\\rangle_X$ and $\\xi_j=Z(u_j)$, and define $\\widehat x_m$ as the $L^2(\\Omega;X)$ limit with coordinates\n$$\\langle\\widehat x_m,v_j\\rangle_X=\\lambda_jq_{\\alpha_m}(\\lambda_j)\\theta_j+\\sigma s_jq_{\\alpha_m}(\\lambda_j)\\xi_j.$$\nFor $m_1<m_2$, define the pairwise variance\n$$v_{m_1,m_2}:=\\sigma^2\\sum_{j\\ge1}\\lambda_j\\bigl(q_{\\alpha_{m_2}}(\\lambda_j)-q_{\\alpha_{m_1}}(\\lambda_j)\\bigr)^2.$$\nLet $G_{m_1,m_2}:=(\\widehat x_{m_2}-\\mathbb E\\widehat x_{m_2})-(\\widehat x_{m_1}-\\mathbb E\\widehat x_{m_1})$ be the centered estimator difference, and for $a>0$ set\n$$z_{m_1,m_2}(a):=\\inf\\{z\\ge0:\\mathbb P(\\|G_{m_1,m_2}\\|_X/\\sigma>z)\\le e^{-a}\\}.$$\nFor fixed $\\beta,\\gamma>0$, define $\\eta_{m_1,m_2}:=\\sigma z_{m_1,m_2}(2(1+\\gamma)\\log(v_{m_1+1}/v_0))+\\beta\\sqrt{v_{m_1,m_2}}$ for $m_1<m_2$. Let $\\widehat m$ be the smallest $m_1\\in\\{0,\\ldots,m_{\\max}\\}$ such that $\\|\\widehat x_{m_1}-\\widehat x_{m_2}\\|_X\\le\\eta_{m_1,m_2}$ for every $m_2$ with $m_1<m_2\\le m_{\\max}$, and set $\\widehat\\alpha=\\alpha_{\\widehat m}$. Define $m_*$ as the smallest $m$ for which every pair $m\\le m_1<m_2\\le m_{\\max}$ satisfies\n$$\\|\\mathbb E\\widehat x_{m_1}-\\mathbb E\\widehat x_{m_2}\\|_X^2\\le\\beta^2v_{m_1,m_2},$$\nand put $\\mathcal R_{m_*}:=\\mathbb E\\|\\widehat x_{m_*}-x\\|_X^2$. Write $M:=m_{\\max}$, $k:=m_*$, $b_m:=\\|\\mathbb E\\widehat x_m-x\\|_X$, and $R_m:=b_m^2+v_m$, so $R_k=\\mathcal R_{m_*}$. Put $D_0:=0$, and for $k\\ge1$ put\n$$D_k:=(1+\\beta)\\sqrt{v_k}+\\sqrt{4(1+\\gamma)u_k\\log(v_k/v_0)},\\qquad u_m:=\\sigma^2\\sup_j\\lambda_jq_{\\alpha_m}(\\lambda_j)^2.$$\nIf $k<M$, define\n$$p_m:=\\min\\{1,(M-m+1)(v_0/v_m)^{2(1+\\gamma)}\\}\\quad(k<m\\le M),\\qquad P_k:=\\min\\{1,(M-k)(v_0/v_{k+1})^{2(1+\\gamma)}\\},$$\n$$A_k:=\\sqrt3\\sum_{m=k+1}^M v_m\\sqrt{p_m},\\qquad B_k:=2\\sqrt3 R_k(v_0/v_k)^{1+\\gamma}\\sum_{m=k+1}^M\\sqrt{M-m+1}(v_k/v_m)^\\gamma.$$\nIf $k=M$, set $P_k=A_k=B_k=0$. Then the unchanged pairwise-quantile selector satisfies the finite oracle inequality\n$$\\mathbb E\\|\\widehat x_{\\widehat m}-x\\|_X^2\\le(\\sqrt{R_k}+D_k)^2+\\min\\{(b_k\\sqrt{P_k}+\\sqrt{A_k})^2,B_k\\}.$$\nIn particular, put\n$$\\delta:=\\frac1{2(1+\\gamma)},\\qquad K:=\\frac{\\theta_1}{\\theta_1-1}+\\frac1{1-\\theta_1^{-\\gamma}},\\qquad W_M:=\\begin{cases}v_0M^\\delta,&M\\ge1,\\\\0,&M=0.\\end{cases}$$\nThen $A_k\\le\\sqrt3 K W_M$ and\n$$B_k\\le\\frac{2\\sqrt3\\sqrt M}{\\theta_1^\\gamma-1}(v_0/v_k)^{1+\\gamma}R_k,$$\nand a rate-oriented consequence is\n$$\\mathbb E\\|\\widehat x_{\\widehat m}-x\\|_X^2\\le(\\sqrt{R_k}+D_k)^2+2b_k^2+2\\sqrt3 K W_M.$$\nWhen $M=0$ the selected index is identically zero and its risk is exactly $R_0$. When $k=0$, the first term in both displayed oracle bounds is $R_0$ because $D_0=0$; when $k=M$, the late-selection term vanishes. The bounds retain the pairwise quantiles in the stated rule.\n\nFor the rate conclusions as $\\sigma^2\\downarrow0$, assume additionally that $\\lambda_1\\le e^{-1}$. In both rate regimes let $\\varphi(t)=t^\\nu(-\\log t)^{-\\tau}$ for $t\\in(0,\\lambda_1]$, extend it by $\\varphi(0)=0$, take the natural logarithm, and assume the displayed $\\varphi$ satisfies the index-function, convexity, and filter-qualification hypotheses above; here either $\\nu>0,\\tau\\in\\mathbb R$ or $\\nu=0,\\tau>0$.\n\nIf $\\lambda_j\\asymp j^{-a}$ with $a>1$, $S(\\alpha)\\asymp\\alpha^{-1/a}$, and $v_m\\ge c_v\\sigma^2S(\\alpha_m)/\\alpha_m$ for some $c_v>0$, then for some constant $C>0$,\n$$\\sup_{x\\in\\mathcal W_\\varphi(\\rho)}\\mathbb E\\|\\widehat x_{\\widehat m}-x\\|_X^2\\le C(\\sigma^2)^{\\frac{2\\nu}{2\\nu+1/a+1}}(-\\log\\sigma^2)^{-\\frac{2\\tau(1+1/a)}{2\\nu+1+1/a}}.$$\nIf instead $\\lambda_j\\asymp j^{-a}e^{-bj^\\vartheta}$ with $a\\in\\mathbb R$, $b>0$, and $0<\\vartheta\\le\\tfrac12$, assume also $S(\\alpha)\\asymp(-\\log\\alpha)^{1/\\vartheta}$ and $v_m\\ge c_v\\sigma^2S(\\alpha_m)/((-\\log\\alpha_m)\\alpha_m)$ for some $c_v>0$; then for some $C>0$,\n$$\\sup_{x\\in\\mathcal W_\\varphi(\\rho)}\\mathbb E\\|\\widehat x_{\\widehat m}-x\\|_X^2\\le C(\\sigma^2)^{\\frac{2\\nu}{2\\nu+1}}(-\\log\\sigma^2)^{\\frac{2\\nu/\\vartheta-2\\tau}{2\\nu+1}}.$$\nThe severe-rate assertion requires exactly $0<\\vartheta\\le\\tfrac12$; the source does not establish adaptive-minimax optimality of the polynomial-smoothness severe rate. For spectral cut-off filters, the uniform geometric-variance candidate condition may fail when $\\vartheta>1$. When $\\nu=0$, both displayed rates simplify to $(-\\log\\sigma^2)^{-2\\tau}$.",
+        "strategy": "Transcribe the source oracle inequality and mild/severe rate claims with their hypotheses; the Gaussian maximal-risk proof remains escalated.",
+        "deps": [
+          "def-ip-ordered-filter-grid-and-source-index",
+          "alg-ip-solit-parameter-choice",
+          "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "def-ip-index-source-ball",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-isonormal-white-noise-experiment",
+          "thm-ip-white-noise-spectral-sequence-representation",
+          "def-compact-spectral-filter-and-qualification",
+          "def-countable-choice",
+          "lem-ip-gaussian-series-norm-tail-and-fourth-moment",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, Theorems 3.4, 3.8, 4.1 and 4.3",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Vladimir Spokoiny and Niklas Willrich, Bootstrap tuning in ordered model selection, Theorem 2.3 and Appendix A",
+              "url": "https://arxiv.org/pdf/1507.05034"
+            },
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5 §5.2",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited through the fixed compact SVD and coefficient identification; no additional choice is used by the stated estimator or finite selector.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3019,
+    "id": "adaptive-spectral-regularization-and-solit-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Adaptive spectral regularization by SOLIT — Examples and Counterexamples",
+    "companion": "adaptive-spectral-regularization-and-solit",
+    "requires": [
+      "adaptive-spectral-regularization-and-solit"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-solit-antiderivative",
+        "kind": "example",
+        "title": "SOLIT for a Dirichlet second-antiderivative model",
+        "statement": "Assume Countable Choice.\n\nLet $X=Y=L^2((0,1);\\mathbb R)$ and define $T$ by the Green kernel $G(x,t)=\\min(x,t)(1-\\max(x,t))$, so $(Tf)(x)=\\int_0^1G(x,t)f(t)\\,dt$ is the solution of $-u''=f$ with $u(0)=u(1)=0$. Take the truth\n$$\nf^\\dagger(x)=x\\mathbf 1_{[0,1/2]}(x)+(1-x)\\mathbf 1_{[1/2,1]}(x)\n$$\nand exact data\n$$\ng^\\dagger(x)=-\\frac{x(4x^2-3)}{24}\\mathbf 1_{[0,1/2]}(x)+\\frac{(x-1)(4x^2-8x+1)}{24}\\mathbf 1_{[1/2,1]}(x).\n$$\nIn the normalized Dirichlet sine basis $e_j(x)=\\sqrt2\\sin(\\pi jx)$, $T e_j=(\\pi j)^{-2}e_j$, so the eigenvalues of $T^*T$ are $\\lambda_j=(\\pi j)^{-4}$. The positive-noise observation is the weak white-noise experiment $Y_{f^\\dagger}(h)=\\langle Tf^\\dagger,h\\rangle+\\sigma Z(h)$, with known $\\sigma>0$. Use the ordered Tikhonov filter $q_\\alpha(\\lambda)=(\\lambda+\\alpha)^{-1}$ and a geometric-variance candidate sequence. This example makes no simulation or minimax-rate claim.",
+        "strategy": "Verify the Dirichlet Green operator, sine spectrum, ordered Tikhonov filter, geometric-variance grid and exact data image.",
+        "deps": [
+          "alg-ip-solit-parameter-choice",
+          "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "def-ip-ordered-filter-grid-and-source-index",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, §5.3.1",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is inherited from the fixed singular and Fourier bases; the displayed Green-kernel, eigenvalue, and truth-coordinate calculations use no further choice."
+      },
+      {
+        "id": "ex-ip-solit-satellite-gradiometry",
+        "kind": "example",
+        "title": "SOLIT in the mean-zero 2D satellite-gradiometry model",
+        "statement": "Assume Countable Choice.\n\nFor a relative satellite radius $R>1$, identify the mean-zero real Fourier coefficients of a function on the unit circle with $X=\\ell^2(\\mathbb N;\\mathbb R^2)$, where the two coordinates at frequency $n$ are its normalized cosine and sine coefficients. In these coordinates define the 2D satellite-gradiometry operator by\n$$\n(T_R(a_n,b_n))_{n\\ge1}=(t_n a_n,t_n b_n)_{n\\ge1},\\qquad t_n=n(n+1)R^{-n-2}.\n$$\nThis is the Fourier-coordinate map for recovering the mean-zero gravitational potential from the radial second derivative measured at relative satellite radius $R$. Take the truth to be the Fourier coefficient sequence of $f^\\dagger(x)=\\pi/2-|x|$ on $[-\\pi,\\pi]$. Its constant coefficient is zero, so the omitted zero-frequency component is not part of this mean-zero model. The eigenvalues of $T_R^*T_R$ are $\\lambda_n=n^2(n+1)^2R^{-2n-4}$, each with multiplicity two. Use the Tikhonov filter $q_\\alpha(\\lambda)=(\\lambda+\\alpha)^{-1}$ and its continuous geometric-variance candidate grid in the SOLIT rule with known $\\sigma>0$.",
+        "strategy": "Verify the mean-zero gradiometry spectrum, ordered Tikhonov filter and continuous geometric-variance grid.",
+        "deps": [
+          "alg-ip-solit-parameter-choice",
+          "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "def-ip-ordered-filter-grid-and-source-index",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-countable-choice",
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, §5.3.2",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is inherited from the fixed Fourier and singular-system coordinates; the multiplier, compactness, and grid-ratio calculations are choice-free."
+      },
+      {
+        "id": "ex-ip-solit-periodic-heat-equation",
+        "kind": "example",
+        "title": "SOLIT for the periodic heat equation (reported simulation)",
+        "statement": "Assume Countable Choice.\n\nLet the real periodic Fourier coefficient space be $X=Y=\\mathbb R\\oplus\\ell^2(\\mathbb N;\\mathbb R^2)$, with one constant coordinate and cosine–sine coordinate pairs for each positive frequency. For a heat time $\\bar t>0$, define the periodic heat forward operator by\n$$\nT_{\\bar t}(c_0,(a_n,b_n)_{n\\ge1})=(c_0,(e^{-n^2\\bar t}a_n,e^{-n^2\\bar t}b_n)_{n\\ge1}).\n$$\nIts eigenvalues for $T_{\\bar t}^*T_{\\bar t}$ are $1$ on the constant mode and $e^{-2n^2\\bar t}$ on both modes of frequency $n$. Use the truth whose function is $f^\\dagger(x)=\\pi/2-|x|$ on $[-\\pi,\\pi]$, and observe its weak Gaussian white-noise data with known standard deviation $\\sigma>0$. Li and Werner report an empirical SOLIT simulation at $\\bar t=0.1$ using $10^4$ Monte Carlo runs: SOLIT appears close to the oracle, while the minimax behavior is unclear and the empirical adaptation behavior for spectral cut-off is irregular. These are reported simulation findings, not a theorem or a simulation performed for this library.\n\nFor the spectral-cutoff candidate sequence $\\alpha_n=e^{-2n^2\\bar t}$, indexed by $n\\in\\mathbb N_0$, the variance sums $V_n=1+2\\sum_{k=1}^n e^{2k^2\\bar t}$ do not have a uniformly bounded consecutive ratio: $V_n/V_{n-1}\\to\\infty$. Thus this infinite spectral-cutoff sequence does not meet the uniform geometric-variance-grid condition. A continuous Tikhonov filter $q_\\alpha(\\lambda)=(\\lambda+\\alpha)^{-1}$ does admit such a grid because its variance function is continuous, decreases from $+\\infty$ to $0$, and can be sampled at successive fixed variance ratios.",
+        "strategy": "Compute the periodic heat spectrum, verify the Tikhonov filter, show the cutoff grid ratio diverges, and report only the cited simulation.",
+        "deps": [
+          "alg-ip-solit-parameter-choice",
+          "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "def-ip-ordered-filter-grid-and-source-index",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-countable-choice",
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Housen Li and Frank Werner, Adaptive minimax optimality in statistical inverse problems via SOLIT, §§5.3.3 and 6",
+              "url": "https://arxiv.org/pdf/2304.10356"
+            },
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is inherited from the fixed Fourier and singular-system coordinates; the multiplier and variance-grid calculations are choice-free."
+      }
+    ]
+  }
+]

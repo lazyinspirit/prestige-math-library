@@ -1,0 +1,759 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-8",
+  "scope": [
+    "def-ip-gaussian-sequence-inverse-model",
+    "def-ip-statistical-ellipsoid-class",
+    "alg-ip-svd-truncated-estimator",
+    "thm-ip-truncated-estimator-exact-risk",
+    "ex-ip-polynomial-spectrum-risk-profile",
+    "ex-ip-severely-ill-posed-risk-profile",
+    "ex-ip-zero-noise-truncated-risk-limit"
+  ],
+  "contracts": {
+    "def-ip-gaussian-sequence-inverse-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes an infinite-rank operator, so its positive singular index set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-noise boundary is the point mass at theta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the sequence parameter space includes one-coordinate elements of ell2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: theta=0 and epsilon=0 give a deterministic zero sequence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon>0 uses the functional experiment and epsilon=0 is separately defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice is explicit and supplies the upstream compact SVD and coefficient identification."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Countable Choice is used upstream by the compact SVD and complete-basis coefficient identification; the sequence pushforward uses no further choice."
+      ]
+    },
+    "def-ip-statistical-ellipsoid-class": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Q=0 yields the nonempty class containing only the zero sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the boundary radius Q=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one-coordinate sequences satisfy the stated weighted-sum membership condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Q=0 forces every coordinate to vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: positive weights and Q=0 are admitted; no limit of the weights is required."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition introduces a sequence class and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-coordinate ellipsoid membership",
+          "method": "direct finite substitution into the defining weighted sum",
+          "input": {
+            "coordinate": "k",
+            "amplitude": "t",
+            "radius": "Q",
+            "weight": "a_k>0"
+          },
+          "calculation": "For theta=t e_k, the weighted sum has one nonzero term and equals a_k^2 t^2; membership is exactly a_k^2 t^2<=Q^2.",
+          "expected": {
+            "membership": "a_k^2 t^2<=Q^2",
+            "Q_zero": "only t=0"
+          }
+        }
+      ],
+      "axioms_used": []
+    },
+    "alg-ip-svd-truncated-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at D=0 the algorithm returns the zero sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input coordinates produce the zero estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at D=1 the first coordinate is retained and all later coordinates are zeroed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the output always has finite support, including zero input."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: D=0 is explicitly included in the admissible cutoff set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The algorithm reads coordinates by index and selects no objects."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "cutoffs D=0 and D=1",
+          "method": "direct finite evaluation of the coordinate rule",
+          "input": {
+            "sequence": "z=(z_1,z_2,...)"
+          },
+          "calculation": "At D=0 every coordinate is zero; at D=1 the first coordinate is retained and all coordinates j>1 are zero.",
+          "expected": {
+            "D0": "(0,0,...)",
+            "D1": "(z_1,0,0,...)"
+          }
+        }
+      ],
+      "axioms_used": []
+    },
+    "thm-ip-truncated-estimator-exact-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "$Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ip-svd-truncated-estimator",
+          "source_section": "Definition",
+          "quote": "$$\\widehat\\theta_{D,j}(z)=\\begin{cases}z_j,&1\\le j\\le D,\\\\0,&j>D.\\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-1-1",
+          "step": "1.1",
+          "claim": "For positive noise the retained-coordinate error is epsilon times the inverse singular value times the standard-normal coordinate, and the omitted-coordinate error is minus theta; at zero noise the retained error is zero. The squared ell2 error is finite and decomposes into the retained finite sum and deterministic tail.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-2-1",
+          "step": "2.1",
+          "claim": "Taking expectation for positive noise gives the retained variance sum plus the squared tail; the zero-noise branch gives the same formula with zero variance.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-3-1",
+          "step": "3.1",
+          "claim": "Monotonicity of the weights bounds every omitted coordinate weight below by a at D+1, giving a tail bound Q squared divided by a at D+1 squared.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-4-1",
+          "step": "4.1",
+          "claim": "A sequence with only its D+1 coordinate equal to Q divided by a at D+1 belongs to the ellipsoid and attains the tail bound; the variance term is parameter-independent.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-5-1",
+          "step": "5.1",
+          "claim": "The universal upper bound and the attaining sequence give the exact supremum and the D=0 convention.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement sets the retained variance sum to zero at D=0; step 2.1 gives the empty finite sum and step 5.1 applies the stated convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles epsilon=0, and step 4.1 handles Q=0 with the zero attaining sequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At D=1, step 1.1 retains one coordinate and step 3.1 bounds the omitted tail starting at coordinate 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When theta=0, step 2.1 leaves only retained variance; when epsilon=Q=0, step 4.1 gives the zero truth and step 5.1 gives zero risk."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes epsilon=0 and D=0; step 1.1 treats the zero-noise branch and step 5.1 gives the stated endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes Countable Choice; step 1.1 records that it enters through the upstream model coordinates, while the risk algebra is conditional on them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact risk at D=0 and D=1",
+          "method": "finite substitution into the proved risk identity",
+          "input": {
+            "D": [
+              0,
+              1
+            ],
+            "Q": "Q>=0",
+            "a": [
+              "a_1>0",
+              "a_2>=a_1"
+            ],
+            "s": [
+              "s_1>0"
+            ],
+            "epsilon": "epsilon>=0"
+          },
+          "calculation": "At D=0 the variance sum is empty and the risk is Q^2/a_1^2. At D=1 the retained variance is epsilon^2/s_1^2 and the first omitted coordinate gives bias Q^2/a_2^2.",
+          "expected": {
+            "D0": "Q^2/a_1^2",
+            "D1": "Q^2/a_2^2+epsilon^2/s_1^2"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited through the compact SVD and coefficient-basis identification; steps 1.1–3.1 use no additional choice."
+      ]
+    },
+    "ex-ip-polynomial-spectrum-risk-profile": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-truncated-estimator-exact-risk",
+          "source_section": "Statement",
+          "quote": "\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "$Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-polynomial-spectrum-risk-profile-step-1-1",
+          "step": "1.1",
+          "claim": "The polynomial singular values are positive and decrease to zero, while the polynomial weights are positive and nondecreasing, so the theorem hypotheses hold.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-polynomial-spectrum-risk-profile-step-2-1",
+          "step": "2.1",
+          "claim": "Substitution of a at D+1 and inverse squared singular values into the exact-risk theorem gives the displayed formula, including D=0.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At D=0 the variance sum is empty and step 2.1 leaves the first omitted-coordinate bias."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement includes epsilon=0 and Q=0; step 2.1 reduces to the tail term when epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At D=1, step 2.1 substitutes the first retained variance and the second-axis bias."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At Q=0, step 2.1 gives only the retained variance; at epsilon=0 and Q=0 the risk is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires p,r>0 and allows epsilon=0; step 1.1 verifies the spectral and weight conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries the Countable Choice hypothesis used by its exact-risk supplier; step 1.1 fixes the upstream coordinate branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "polynomial spectrum cutoffs D=0 and D=1",
+          "method": "finite substitution into the exact cutoff-risk formula",
+          "input": {
+            "p": "p>0",
+            "r": "r>0",
+            "Q": "Q>=0",
+            "epsilon": "epsilon>=0"
+          },
+          "calculation": "At D=0 the sum is empty and Q^2/(1)^(2r)=Q^2. At D=1 the bias is Q^2/2^(2r) and the only variance summand is epsilon^2 1^(2p)=epsilon^2.",
+          "expected": {
+            "D0": "Q^2",
+            "D1": "Q^2/2^(2r)+epsilon^2"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the SVD model and the exact-risk theorem; the parameter substitution uses no additional choice."
+      ]
+    },
+    "ex-ip-severely-ill-posed-risk-profile": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-truncated-estimator-exact-risk",
+          "source_section": "Statement",
+          "quote": "\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "$Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-severely-ill-posed-risk-profile-step-1-1",
+          "step": "1.1",
+          "claim": "The exponential singular values are positive and decrease to zero, while the polynomial weights are positive and nondecreasing, so the theorem hypotheses hold.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-severely-ill-posed-risk-profile-step-2-1",
+          "step": "2.1",
+          "claim": "Substitution of a at D+1 and inverse squared singular values into the exact-risk theorem gives the displayed formula, including D=0.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At D=0 the variance sum is empty and step 2.1 leaves the first omitted-coordinate bias."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement includes epsilon=0 and Q=0; step 2.1 reduces to the tail term when epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At D=1, step 2.1 substitutes the first retained variance and the second-axis bias."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At Q=0, step 2.1 gives only the retained variance; at epsilon=0 and Q=0 the risk is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires c,r>0 and allows epsilon=0; step 1.1 verifies the spectral and weight conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries the Countable Choice hypothesis used by its exact-risk supplier; step 1.1 fixes the upstream coordinate branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exponential spectrum cutoffs D=0 and D=1",
+          "method": "finite substitution into the exact cutoff-risk formula",
+          "input": {
+            "c": "c>0",
+            "r": "r>0",
+            "Q": "Q>=0",
+            "epsilon": "epsilon>=0"
+          },
+          "calculation": "At D=0 the sum is empty and Q^2/(1)^(2r)=Q^2. At D=1 the bias is Q^2/2^(2r) and the only variance summand is epsilon^2 exp(2c).",
+          "expected": {
+            "D0": "Q^2",
+            "D1": "Q^2/2^(2r)+epsilon^2 exp(2c)"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the SVD model and the exact-risk theorem; the parameter substitution uses no additional choice."
+      ]
+    },
+    "ex-ip-zero-noise-truncated-risk-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "$Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-truncated-estimator-exact-risk",
+          "source_section": "Statement",
+          "quote": "\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-zero-noise-truncated-risk-limit-step-1-1",
+          "step": "1.1",
+          "claim": "At epsilon zero the model observation is exact, and substitution of polynomial weights into the exact-risk theorem gives the finite-cutoff squared tail, which tends to zero for positive r.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-zero-noise-truncated-risk-limit-step-2-1",
+          "step": "2.1",
+          "claim": "For unit weights the ellipsoid is the radius-Q ball in ell2; its tail is at most Q squared and the coordinate vector Q e at D+1 attains it.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At D=0, step 1.1 gives the full tail risk and step 2.1 has an attaining first-coordinate witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement sets epsilon=0; step 1.1 uses the deterministic zero-noise branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact-risk theorem and step 2.1 use the one-coordinate witness e at D+1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example assumes Q>0, so the zero-radius ellipsoid is outside this example scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero-noise endpoint is the point of the Example and is checked in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is inherited from the model and exact-risk theorem; step 1.1 records the fixed coordinate branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two zero-noise risks and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares two zero-noise risks and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-noise cutoffs D=0 and D=1",
+          "method": "finite substitution into the epsilon=0 risk identity",
+          "input": {
+            "Q": "Q>0",
+            "r": "r>0",
+            "epsilon": 0
+          },
+          "calculation": "For weights a_j=j^r, risks at D=0 and D=1 are Q^2 and Q^2/2^(2r). For unit weights both cutoffs give Q^2.",
+          "expected": {
+            "polynomial": {
+              "D0": "Q^2",
+              "D1": "Q^2/2^(2r)"
+            },
+            "unit_weights": {
+              "D0": "Q^2",
+              "D1": "Q^2"
+            }
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the SVD model and exact-risk theorem; the displayed substitutions use no additional choice."
+      ]
+    }
+  }
+}

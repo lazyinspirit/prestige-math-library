@@ -1,0 +1,229 @@
+[
+  {
+    "order": 3042,
+    "id": "posterior-computation-error-and-diagnostics",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Posterior computation and error accounting",
+    "companion": "posterior-computation-error-and-diagnostics-examples",
+    "requires": [
+      "hellinger-posterior-stability-and-discretization",
+      "function-space-mcmc-and-pcn",
+      "stationary-markov-chains-and-ergodic-limits",
+      "statistical-and-computational-error-accounting",
+      "identifiability-and-approximation-bias-in-computational-inference"
+    ],
+    "items": [
+      {
+        "id": "def-ip-posterior-computation-error-budget",
+        "kind": "definition",
+        "title": "Posterior computation error budget",
+        "statement": "Fix a measurable space $(E,\\mathcal E)$ and a bounded measurable functional\n$f:E\\to\\mathbb R$, with $\\|f\\|_\\infty:=\\sup_{x\\in E}|f(x)|<\\infty$. All\ntarget laws below are probability measures on this same space. If a model or\ndiscretization originally uses another state space, specify its measurable\nembedding into $E$ and compare its pushforward law; no identification of\ndifferent state spaces is implicit. A **posterior law** here is the probability\nlaw for the unknown at the specified computation stage, conditional on the same\nfixed observed data. For a probability law $\\mu$, write\n$\\mu(f):=\\int_E f\\,d\\mu$.\n\nName the successive posterior laws as follows: $\\mu_\\star$ is the intended\ntarget; $\\mu_{\\rm model}$ is the posterior under the selected statistical or\nphysical model; $\\mu_{\\rm solver}$ is the posterior after replacing the exact\nforward or PDE solution by the declared numerical solver output; and\n$\\mu_{\\rm disc}$ is the posterior after the declared finite-dimensional\ndiscretization. These labels refer to the exact adjacent laws recorded for the\ncomputation, even when two stages happen to agree.\n\nLet $K$ be the implemented probability kernel on $(E,\\mathcal E)$. An\n**invariant law** $\\pi_K$ for $K$ is a probability measure satisfying\n$$\\int_E K(x,A)\\,\\pi_K(dx)=\\pi_K(A)\\qquad(A\\in\\mathcal E).$$\nChoose and report which invariant law is used if $K$ has more than one. If no\ninvariant law has been established, the invariant-kernel and burn-in terms\nbelow are unavailable; they are not set to zero. Let $(X_n)_{n\\ge0}$ be a\ntime-homogeneous Markov chain with transition kernel $K$ relative to its\nnatural filtration, with initial probability law $\\lambda$. For burn-in length\n$b\\ge0$ and retained sample size $N\\ge1$, set\n$$\\bar f_{b,N}:=\\frac1N\\sum_{j=1}^N f(X_{b+j}),$$\nand let $\\mathbb E_\\lambda$ denote expectation under this initial law and the\nchain's transition randomness.\n\nWhen all stages are present, define the component errors\n$$\\begin{aligned}\\delta_{\\rm model}&:=|\\mu_\\star(f)-\\mu_{\\rm model}(f)|,\\\\ \\delta_{\\rm solver}&:=|\\mu_{\\rm model}(f)-\\mu_{\\rm solver}(f)|,\\\\ \\delta_{\\rm disc}&:=|\\mu_{\\rm solver}(f)-\\mu_{\\rm disc}(f)|,\\\\ \\delta_K&:=|\\mu_{\\rm disc}(f)-\\pi_K(f)|,\\\\ \\delta_{\\rm burn}&:=|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|,\\\\ \\delta_{\\rm MC}&:=|\\mathbb E_\\lambda\\bar f_{b,N}-\\bar f_{b,N}|.\\end{aligned}$$\nThe last component is random and the earlier components are fixed for the\ndeclared data and computation. The **posterior computation error budget** is\n$$\\mathcal B_f:=\\delta_{\\rm model}+\\delta_{\\rm solver}+\\delta_{\\rm disc}+\\delta_K+\\delta_{\\rm burn}+\\delta_{\\rm MC}.$$\nIf a computation stops before one of these stages, report the shorter reference\nchain and its component terms. The term $\\delta_K$ measures the invariant-law\ndiscrepancy induced by the implemented transition rule; it is not a one-step\ndistance between kernels. A one-step kernel error cannot replace it without a\nseparate perturbation theorem with its own hypotheses.\n\nThe successive scalar references are arranged as this directed error chain;\neach arrow is labelled by the absolute difference of its endpoints.\n\n```tikzcd\n\\mu_\\star(f) \\arrow[r, \"\\delta_{\\rm model}\"] &\n\\mu_{\\rm model}(f) \\arrow[r, \"\\delta_{\\rm solver}\"] &\n\\mu_{\\rm solver}(f) \\arrow[r, \"\\delta_{\\rm disc}\"] &\n\\mu_{\\rm disc}(f) \\arrow[r, \"\\delta_K\"] &\n\\pi_K(f) \\arrow[r, \"\\delta_{\\rm burn}\"] &\n\\mathbb E_\\lambda\\bar f_{b,N} \\arrow[r, \"\\delta_{\\rm MC}\"] &\n\\bar f_{b,N}\n```\n\nThe budget is a bookkeeping bound only when its components are supplied with\nestimators or verified bounds; an unavailable component is reported as\nunquantified rather than silently set to zero. In particular, invariance alone\ndoes not provide a burn-in estimate, a mixing rate, or a Monte Carlo error\nestimate.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-statistical-and-computational-error-ledger",
+          "def-time-homogeneous-markov-chain-with-transition-kernel"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes, arXiv:1302.6989v4",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§4.2, Assumptions 4.7 and Theorems 4.8–4.9 (PDF pp. 40–43): posterior changes caused by a potential approximation and the hypotheses needed for a Hellinger rate."
+            },
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§4.2, pCN proposal (4.7)–(4.11), and §6.1, Theorem 6.2: exact invariant-kernel context for function-space posterior computation."
+            },
+            {
+              "title": "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes",
+              "url": "https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf",
+              "locator": "§1.1, equation (1.9) and the following caution (PDF pp. 8–10): stationary-chain variance of a sample mean and limits on CLT conclusions."
+            }
+          ]
+        },
+        "axiom_use": "The reference-chain bookkeeping is choice-free. AC is assumed only through the library's time-homogeneous Markov-chain interface, which supplies conditional-probability classes; the definition makes no chain-existence assertion and selects no sample paths.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-ip-bounded-posterior-functional-error",
+        "kind": "proposition",
+        "title": "Bounded posterior functionals and stationary sample error",
+        "statement": "Let $(E,\\mathcal E)$ be a measurable space, let $\\mu,\\nu$ be probability\nmeasures on it, and let $f:E\\to\\mathbb R$ be measurable with\n$|f|\\le M$ for some $0\\le M<\\infty$. Use the library convention\n$$\\|\\mu-\\nu\\|_{\\rm TV}:=\\sup_{A\\in\\mathcal E}|\\mu(A)-\\nu(A)|.$$\nThen\n$$|\\mu(f)-\\nu(f)|\\le2M\\|\\mu-\\nu\\|_{\\rm TV}.$$\n\nFor the complete posterior computation error budget defined above, the\npathwise total error satisfies\n$$|\\mu_\\star(f)-\\bar f_{b,N}|\\le\\mathcal B_f.$$\nThis is a telescoping bound; it does not estimate any component.\n\nSeparately, let $(X_n)_{n\\ge0}$ be a stationary time-homogeneous Markov chain\nwith transition kernel $K$, invariant law $\\pi_K$, and initial law\n$X_0\\sim\\pi_K$, and use the same bounded functional $f$. Put\n$$\\gamma_k:=\\operatorname{Cov}(f(X_0),f(X_k))\\qquad(k\\ge0).$$\nIf $\\sum_{k=1}^\\infty|\\gamma_k|<\\infty$, then for every burn-in $b\\ge0$ and\nsample size $N\\ge1$,\n$$\\mathbb E\\left[|\\bar f_{b,N}-\\pi_K(f)|^2\\right]=\\frac{1}{N^2}\\left[N\\gamma_0+2\\sum_{k=1}^{N-1}(N-k)\\gamma_k\\right]\\le\\frac{\\gamma_0+2\\sum_{k=1}^\\infty|\\gamma_k|}{N}.$$\nThe sample bound assumes stationarity; for a nonstationary start, the budget\nkeeps $|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|$ as a separate burn-in term.\nThis finite-$N$ variance bound is not a central limit theorem or a confidence\ninterval.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-ip-posterior-computation-error-budget",
+          "def-moments-variance-and-covariance",
+          "def-probability-measure",
+          "def-stationary-process-and-canonical-shift",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-pathwise-error-ledger-decomposition",
+          "thm-total-variation-bounds-for-expectations"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Alison L. Gibbs and Francis Edward Su, On Choosing and Bounding Probability Metrics, International Statistical Review 70(3) (2002)",
+              "url": "https://math.hmc.edu/su/wp-content/uploads/sites/10/2019/06/ON-CHOOSING-AND-BOUNDING-PROBABILITY.pdf",
+              "locator": "§2, total-variation definition and bounded-function dual form (equation (2)); §5 discussion of bounded expected-loss error."
+            },
+            {
+              "title": "David A. Levin, Yuval Peres, and Elizabeth L. Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "§4.1, Proposition 4.5 and full proof (PDF pp. 48–49): finite-state bounded-function dual form and total-variation normalization."
+            },
+            {
+              "title": "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes",
+              "url": "https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf",
+              "locator": "§1.1, equation (1.9) and the following caution (PDF pp. 8–10): exact stationary sample-mean variance and limits on CLT conclusions."
+            },
+            {
+              "title": "Aki Vehtari et al., Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC",
+              "url": "https://arxiv.org/pdf/1903.08008v5",
+              "locator": "§3.2, equations (7)–(9) (PDF pp. 6–7): autocorrelation ESS for one functional and its distinction from MCSE and other functionals."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The expectation comparison and covariance algebra are choice-free. AC is assumed only through the library's time-homogeneous Markov-chain interface; the proposition assumes a stationary chain rather than constructing one.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3043,
+    "id": "posterior-computation-error-and-diagnostics-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Posterior computation and error accounting — Examples and Counterexamples",
+    "companion": "posterior-computation-error-and-diagnostics",
+    "requires": [
+      "posterior-computation-error-and-diagnostics",
+      "mcmc-diagnostics-and-finite-run-limitations"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-exact-invariant-kernel-short-run",
+        "kind": "example",
+        "title": "An exact invariant kernel can be biased over a short run",
+        "statement": "Let $E=\\{-1,+1\\}$, and let the target posterior $\\pi$ assign mass $1/2$ to\neach state. For $0<\\varepsilon<1/2$, define a transition kernel by\n$$K_\\varepsilon(x,\\{x\\})=1-\\varepsilon,\\qquad K_\\varepsilon(x,\\{-x\\})=\\varepsilon.$$\nTake $\\varepsilon=1/1000$, let $(X_n)_{n\\ge0}$ be the time-homogeneous Markov\nchain with kernel $K_\\varepsilon$ relative to its natural filtration and with\n$X_0=+1$, and retain the next $N=100$ draws for the bounded functional\n$f(x)=x$. The target law $\\pi$ is\ninvariant for this exact kernel, but the expected reported average is\n$$\\mathbb E\\left[\\frac1{100}\\sum_{j=1}^{100}X_j\\right]=\\frac{499}{100}\\left(1-\\left(\\frac{499}{500}\\right)^{100}\\right)>0=\\pi(f).$$\nFor the error ledger take each deterministic posterior stage to be $\\pi$;\nthen the invariant-kernel error is zero while the finite-run burn-in error is\npositive.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-ip-posterior-computation-error-budget",
+          "def-measure-kernel-and-probability-kernel",
+          "def-moments-variance-and-covariance",
+          "def-probability-measure",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "prop-ip-bounded-posterior-functional-error"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Levin, Yuval Peres, and Elizabeth L. Wilmer, Markov Chains and Mixing Times, second edition",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "§4.1, Example 4.1 and the total-variation discussion of the two-state chain."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is assumed only by the library time-homogeneous Markov-chain interface. Invariance and the finite-state expectation calculation use no choice.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-low-ess-despite-correct-invariance",
+        "kind": "example",
+        "title": "Correct invariance can coexist with low effective sample size",
+        "statement": "Let the target posterior $\\pi$ be uniform on $E=\\{-1,+1\\}$ and define\n$$K_\\varepsilon(x,\\{x\\})=1-\\varepsilon,\\qquad K_\\varepsilon(x,\\{-x\\})=\\varepsilon,$$\nwith $\\varepsilon=1/100$. Let $(X_n)_{n\\ge0}$ be the time-homogeneous Markov\nchain with kernel $K_\\varepsilon$ relative to its natural filtration, started\nwith $X_0\\sim\\pi$, and take $f(x)=x$. Define its lag-$k$ autocorrelation by\n$$\\rho_f(k):=\\frac{\\operatorname{Cov}(f(X_0),f(X_k))}{\\operatorname{Var}(f(X_0))}.$$\nFor every $k\\ge1$, $\\rho_f(k)=(49/50)^k$. Its integrated autocorrelation\ntime $\\tau_f:=1+2\\sum_{k=1}^\\infty\\rho_f(k)$ is therefore $99$, so the\ntheoretical functional-specific effective sample size of $N=10{,}000$ draws is\n$$\\operatorname{ESS}_f(10{,}000)=\\frac{10{,}000}{99}\\approx101.01.$$\nThe invariant law is exactly the target posterior, while this functional has\nonly about one percent of the nominal independent-sample size. This is the\ntheoretical ESS from the stationary autocorrelation sequence, not an empirical\nfinite-run ESS estimate, and it asserts no central limit theorem.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-functional-specific-effective-sample-size",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-ip-posterior-computation-error-budget",
+          "def-measure-kernel-and-probability-kernel",
+          "def-moments-variance-and-covariance",
+          "def-probability-measure",
+          "def-stationary-process-and-canonical-shift",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "prop-ip-bounded-posterior-functional-error",
+          "thm-invariant-initial-law-makes-the-chain-stationary"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Aki Vehtari et al., Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC",
+              "url": "https://arxiv.org/pdf/1903.08008v5",
+              "locator": "§3.2, equations (7)–(9) and the discussion that ESS is functional-specific and is not a substitute for MCSE."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is assumed through the library Markov-chain and invariant-initial-law interfaces. The finite transition, covariance, and geometric-series calculations use no choice and establish no central limit theorem.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-biased-pde-solver-posterior-error",
+        "kind": "example",
+        "title": "A biased forward solve shifts a Gaussian posterior",
+        "statement": "Let the scalar parameter $u$ have prior density\n$$p_0(u)=(2\\pi)^{-1/2}e^{-u^2/2},$$\nand observe $y=0$ with unit-variance Gaussian noise. The exact forward map is\n$G(u)=u$, while a deliberately biased numerical forward/PDE solver reports\n$\\widetilde G(u)=u+2$. At $y=0$, use likelihoods\n$L(u)=\\exp(-G(u)^2/2)$ and\n$\\widetilde L(u)=\\exp(-\\widetilde G(u)^2/2)$; the common Gaussian density\nconstant cancels when normalizing. Define each fixed-data posterior by\nnormalizing the prior times its stated likelihood. The exact posterior is\n$N(0,1/2)$ and the solver posterior is $N(-1,1/2)$. For the bounded functional\n$f(u)=\\mathbf 1_{(-\\infty,0]}(u)$, their expectations are respectively\n$$\\Pi(f)=\\tfrac12,\\qquad \\widetilde\\Pi(f)=\\Phi_0(\\sqrt2)>\\tfrac12,$$\nwhere\n$$\\Phi_0(t):=\\int_{-\\infty}^{t}(2\\pi)^{-1/2}e^{-z^2/2}\\,dz.$$\nThe discrepancy is in the forward-solver stage of the posterior error budget;\nthis toy solver assumption makes no claim about the bias of any general PDE\ndiscretization.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ip-posterior-computation-error-budget",
+          "def-probability-measure",
+          "def-standard-normal-and-normal-laws",
+          "prop-ip-bounded-posterior-functional-error"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is assumed by the library normal-law interface. Once the prior and likelihood densities are specified, the completion-of-square and expectation calculations are choice-free.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

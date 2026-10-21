@@ -1,0 +1,14 @@
+---
+page: map-estimators-and-cameron-martin-geometry-examples
+title: Small-ball MAP and Cameron–Martin geometry — Examples and Counterexamples
+status: draft
+items: []
+examples:
+  - ex-ip-finite-dimensional-small-ball-map-equals-density-mode
+  - cex-ip-infinite-dimensional-pointwise-density-fallacy
+  - ex-ip-map-differs-from-posterior-mean
+requires:
+  - map-estimators-and-cameron-martin-geometry
+  - local-asymptotic-normality-contiguity-and-efficiency
+page_layout: compact-v1
+---

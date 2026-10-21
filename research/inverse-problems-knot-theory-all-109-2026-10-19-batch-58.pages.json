@@ -1,0 +1,512 @@
+[
+  {
+    "order": 3112,
+    "id": "crossing-signs-writhe-and-linking-number",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Crossing signs, writhe, and linking number",
+    "companion": "crossing-signs-writhe-and-linking-number-examples",
+    "requires": [
+      "geometric-braids-and-artin-generators",
+      "oriented-links-braid-closures-and-markov-equivalence",
+      "oriented-and-mod-two-intersection-numbers",
+      "hecke-markov-traces-and-polynomial-link-invariants",
+      "isotopy-extension-and-embedding-theory-beyond-whitney"
+    ],
+    "items": [
+      {
+        "id": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+        "kind": "definition",
+        "title": "Oriented crossing signs, diagram writhe, and blackboard framing",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-elementary-geometric-half-twist",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the smooth normal-bundle structure used in the\nframing clause. For a knot component $K$, its normal bundle is the fibrewise\nquotient $\\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this\nbundle.\n\nLet $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.\n\nThis convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.\n\nThe **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.\n\nThe **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  \\draw[->] (-1,0) -- (1,0) node[right] {$v_{\\rm over}$};\n  \\draw[->] (0,-1) -- (0,1) node[above] {$v_{\\rm under}$};\n  \\node[above left] at (0,0) {$+1$};\n\\end{tikzpicture}\n```\n\nIn the displayed local chart, the over tangent is the positive horizontal\nvector and the under tangent is the positive vertical vector, so the determinant\nis $+1$. This figure illustrates the determinant rule only; no proof below\ndepends on a picture.",
+        "strategy": "Defines the determinant sign from the oriented projection plane and calibrates it directly against the positive geometric half twist. Writhe and the blackboard normal section are then defined by finite sums and the projected tangent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Definition 3.11 and Proposition 3.12; pp. 26–27"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definition 3.1, Figures 5–6; pp. 3–4"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "lem-linking-number-even-sum-and-reidemeister-invariance",
+        "kind": "lemma",
+        "title": "The mixed crossing sum is even and defines linking number",
+        "deps": [
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-oriented-reidemeister-moves",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-countable-choice",
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a two-component oriented link in $S^3$, with components $K_1,K_2$. Write\n$$S(D):=\\sum_{c\\text{ between }K_1\\text{ and }K_2}\\operatorname{sgn}(c).$$\nThen $S(D)$ is even, and\n$$\\operatorname{lk}_D(K_1,K_2):=\\frac{S(D)}2\\in\\mathbb Z$$\nis unchanged by planar isotopy and by each oriented Reidemeister move of types\nI, II, and III. Thus it has the same value on any two regular diagrams of\nambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly\none component changes its sign, and reversing both components leaves it\nunchanged.",
+        "strategy": "Proves parity by mod-two intersection of the projected component maps with the diagonal, then checks each oriented Reidemeister move and uses the proved finite-move reduction for ambient isotopy.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Proposition 3.12 and its Reidemeister-move discussion; pp. 26–27"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definition 3.1 and the proof following Figures 5–6; pp. 3–4"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-oriented-linking-number-from-diagram",
+        "kind": "algorithm",
+        "title": "Compute oriented linking number from a diagram",
+        "deps": [
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume $\\mathrm{AC}_\\omega$.\n\nThe input is a finite regular oriented link diagram together with its declared\ncomponents. If it does not have exactly two components, return\n`invalid-input`. For a two-component diagram $D$, initialize $s:=0$ and make\none pass over its finite crossing list. At each crossing whose branches lie on\ndifferent components, add\n$$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$\nto $s$, where the determinant is taken in the oriented projection plane; ignore\nself-crossings. Return $s/2$. The even-sum lemma establishes that this output is\nan integer and is the diagram's linking number.",
+        "strategy": "Checks the declared component count, scans the finite crossing list once, accumulates mixed crossing signs, and returns half the sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Definition 3.11, pp. 26–27"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definition 3.1, pp. 3–4"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+        "kind": "theorem",
+        "title": "The diagram linking-number scan terminates and returns the stated integer",
+        "deps": [
+          "alg-oriented-linking-number-from-diagram",
+          "def-regular-oriented-link-diagram",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Countable Choice. On every finite regular oriented diagram\nwith exactly two components, the crossing-scan algorithm halts after one\niteration per crossing and returns the integer half-sum of the mixed crossing\nsigns. On an input with any other number of components it returns\n`invalid-input` after the finite component-count check.",
+        "strategy": "Uses finiteness of the crossing list for termination and the parity lemma for the integer output and exact half-sum formula.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Definition 3.11, pp. 26–27"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definition 3.1 and the explicit half-sum convention, pp. 3–4"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-linking-number-equals-signed-intersection",
+        "kind": "theorem",
+        "title": "Linking number equals signed intersection with a spanning surface",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "def-oriented-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "def-countable-choice",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "def-the-standard-smooth-step-function",
+          "prop-relative-transversality-preserves-a-map-on-a-closed-good-region",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume the Axiom of Choice. Let $K$ and $J$ be disjoint oriented smooth\nembedded circles in the oriented three-sphere, and let $\\Sigma$ be a compact\noriented smooth surface embedded in the three-sphere with boundary $K$, whose\noutward-normal-first boundary orientation is the specified orientation of $K$.\nHere outward-normal-first means that an outward-pointing normal followed by a\npositive boundary tangent gives the orientation of $\\Sigma$. Assume\n$J$ is transverse to $\\Sigma$, and fix a regular oriented diagram $D$ of\n$J\\cup K$. Let $\\eta$ be a positively oriented meridian of $K$ and let\n$m\\in\\mathbb Z$ be the unique integer such that\n$[J]=m[\\eta]$ in $H_1(S^3\\setminus K;\\mathbb Z)$. Define the topological\nlinking number by $\\operatorname{lk}(J,K):=m$. Let\n$\\operatorname{lk}_D(J,K)$ be the half-sum of the signs of the mixed crossings\nof $D$. Orient the normal line of $\\Sigma$ by the ambient orientation. A point\nof $J\\cap\\Sigma$ has sign $+1$ if the oriented curve $J$ crosses from the\nnegative side of $\\Sigma$ to its positive side, and sign $-1$ for the reverse\npassage. Then\n$$\\operatorname{lk}_D(J,K)=\\operatorname{lk}(J,K)=\\sum_{p\\in J\\cap\\Sigma}\\operatorname{sign}_\\Sigma(p).$$\nThe statement is conditional on a supplied spanning surface and regular\ndiagram; it asserts no surface- or diagram-existence theorem.",
+        "strategy": "Identifies the complement homology generator by Alexander duality, shows intersection is a homomorphism taking value one on a positive meridian, and tracks diagram crossing switches locally to identify the diagram sum with the same meridian coefficient.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Theorem 3.13 and the proof by additive invariants, pp. 27–29; the source leaves the Reidemeister move checks and rewiring details informal"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3.1, pp. 5–8",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3.1, Theorem 3.5 and its Alexander-duality, meridian, and intersection argument, pp. 5–7"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-framed-knot-push-off-self-linking-well-defined",
+        "kind": "lemma",
+        "title": "Small framed push-offs define a well-defined self-linking number",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "def-smooth-bundle-metric",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy",
+          "lem-a-smooth-isotopy-of-compact-embedded-submanifolds-extends-to-an-ambient-isotopy",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "def-the-standard-smooth-step-function",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume the Axiom of Countable Choice. Let $K:S^1\\hookrightarrow S^3$ be an\noriented smooth embedded circle and let $s$ be a smooth nowhere-zero section of\nits normal bundle. For any tubular neighbourhood chart that is the inclusion\non the zero section and identifies each vertical normal fibre with the ambient\nnormal quotient by the identity, the curve $K_{\\varepsilon s}$ obtained by\nmapping the graph of $\\varepsilon s$ into $S^3$ is an embedded oriented circle\ndisjoint from $K$ for every sufficiently small $\\varepsilon>0$. The integer\nlinking number of $K$ with $K_{\\varepsilon s}$ is independent of the sufficiently\nsmall radius, of the representative section in its homotopy class, and of the\nnormalized tubular chart. It therefore defines a self-linking integer of the\nframing class $[s]$.",
+        "strategy": "Uses tubular coordinates to make small section graphs into disjoint embedded push-offs; radius, section homotopy, and normalized-chart changes give isotopies of the two-component link.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §§3, 5.1, pp. 3–9 and 17–18",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definitions 3.6–3.7; §5.1, Definition 5.1; pp. 8–9 and 17"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, the definition of linking number and the diagram isotopy discussion, pp. 26–27"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-framed-knot-self-linking-and-seifert-framing",
+        "kind": "definition",
+        "title": "Framed knots, self-linking, and the Seifert framing",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "def-smooth-bundle-metric",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "lem-framed-knot-push-off-self-linking-well-defined",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Countable Choice. For an oriented smooth knot\n$K:S^1\\hookrightarrow S^3$, its normal bundle is\n$\\nu K=TS^3|_K/TK$, oriented so that a positive tangent to $K$ followed by a\npositive basis of a normal fibre gives the ambient orientation. A **framing**\nof $K$ is a homotopy class through smooth nowhere-zero sections of $\\nu K$.\nThe normal bundle is made a smooth vector bundle under this axiom; a framed\nknot includes the section class as data, not a choice made afterwards. For the\nrelative integer use the round metric transferred from the unit sphere in\n$\\mathbb R^4$ by the explicit diffeomorphism\n$$x\\longmapsto\\left(\\frac{2x}{1+\\lVert x\\rVert^2},\\frac{\\lVert x\\rVert^2-1}{1+\\lVert x\\rVert^2}\\right),\\qquad\\infty\\longmapsto(0,0,0,1).$$\nIt induces a smooth bundle metric on $\\nu K$. The resulting winding number is\nindependent of the metric: any two smooth fibre metrics interpolate through\npositive metrics and the corresponding angle maps are homotopic.\n\nGiven a reference framing $[s_0]$ and another framing $[s_1]$, use a bundle\nmetric and the positive quarter-turn $J$ on each oriented normal plane to write\nthe normalized representative of $s_1$ as\n$$s_1(x)=\\cos\\theta(x)s_0(x)+\\sin\\theta(x)Js_0(x).$$\nThe resulting map $S^1\\to S^1$ has a continuous angle lift along a parameter\ninterval $[0,1]$: subdivide into finitely many intervals whose images lie in\nopen semicircles and choose consecutive local arguments agreeing at endpoints.\nSince the map is closed, the lift changes by $2\\pi m$ for some $m\\in\\mathbb Z$;\ndifferent lifts differ by a constant multiple of $2\\pi$, and homotopies keep\n$m$ fixed. This integer $m$ is the **relative framing integer** of $[s_1]$\nwith respect to $[s_0]$. Thus, once a reference framing is supplied, the\nframing classes are an integer torsor; no absolute integer is assigned before\nchoosing a reference.\n\nThe **self-linking number** of a framed knot $(K,[s])$ is the linking number\nof $K$ with a sufficiently small push-off along $s$, oriented parallel to $K$.\nThe push-off and its integer are independent of the representative section,\nsmall radius, and normalized tubular chart by the preceding well-definedness\nresult.\n\nIf a compact oriented surface $\\Sigma$ is supplied with boundary $K$, its\n**Seifert framing relative to $\\Sigma$** is the homotopy class of the inward\nunit conormal to $K$ in $\\Sigma$, viewed as a nonzero normal section to $K$ in\n$S^3$. This definition is relative to the supplied surface; it neither asserts\nthat every knot bounds such a surface nor asserts the self-linking-zero result.",
+        "strategy": "Defines a framing as a homotopy class of nonzero normal sections, defines relative winding against a reference section, and uses the proved push-off result for self-linking.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §§3, 5.1, pp. 3–9 and 17–18",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definitions 3.6–3.8; §5.1, Definition 5.1 and Theorem 5.2, pp. 8–9 and 17"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, discussion of self-linking, writhe, and the Seifert-surface intersection characterization, pp. 27–29"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "lem-blackboard-push-off-has-two-mixed-crossings-per-crossing",
+        "kind": "lemma",
+        "title": "A blackboard push-off doubles each crossing into mixed crossings",
+        "deps": [
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-regular-oriented-link-diagram",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "thm-lebesgue-number-lemma",
+          "lem-framed-knot-push-off-self-linking-well-defined",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Countable Choice. Let $K:S^1\\hookrightarrow\\mathbb R^3$\nbe an oriented smooth embedded knot with regular oriented diagram $D$ in the\n$(x_1,x_2)$-plane, and write $\\gamma=\\pi\\circ K$ for its projected immersion.\nLet $\\widehat T_\\gamma(t)$ be the unit tangent following the projected\norientation, and let $R(u,v)=(-v,u)$ be the positive quarter-turn in the\noriented projection plane. Define\n$$b_D(t):=(R\\widehat T_\\gamma(t),0)\\in\\mathbb R^3.$$\nThis smooth nonzero vector is perpendicular to the spatial tangent of $K$ and\nrepresents the blackboard normal section. Let $\\Phi$ be a tubular chart of $K$\nwhose vertical differential at each zero vector induces the identity on the\nambient normal quotient. For sufficiently small $\\varepsilon>0$ put\n$$K_\\varepsilon(t):=\\Phi\\bigl(K(t),\\varepsilon[b_D(t)]\\bigr),$$\noriented by the parameter orientation of $K$. Then $K_\\varepsilon$ is embedded\nand disjoint from $K$, and the mixed crossings in the projected diagram of\n$K\\cup K_\\varepsilon$ consist of exactly two crossings for each crossing $c$\nof $D$, both with sign $\\operatorname{sgn}(c)$. There are no other mixed\ncrossings.\n\n```tikz\n\\begin{tikzpicture}[scale=2.4,>=stealth]\n  \\def\\e{0.22}\n  \\draw[->] (-0.8,0) -- (0.8,0) node[right] {$O$};\n  \\draw[->] (-0.8,\\e) -- (0.8,\\e) node[right] {$O'$};\n  \\draw[->] (0,-0.8) -- (0,-0.08);\n  \\draw (0,0.08) -- (0,0.14);\n  \\draw[->] (0,0.30) -- (0,0.8) node[above] {$U$};\n  \\draw[->] (-\\e,-0.8) -- (-\\e,-0.08);\n  \\draw (-\\e,0.08) -- (-\\e,0.14);\n  \\draw[->] (-\\e,0.30) -- (-\\e,0.8) node[above] {$U'$};\n  \\node[below right] at (0,0) {$c$};\n  \\node[below left] at (-\\e,0) {$m_1$};\n  \\node[above right] at (0,\\e) {$m_2$};\n  \\node[above left] at (-\\e,\\e) {$c'$};\n\\end{tikzpicture}\n```\n\nIn this positive local chart, $O$ and $U$ are the original over and under\nbranches, and $O'$ and $U'$ are their first-order blackboard offsets in a\nnormalized tubular chart. The\ncrossings $m_1,m_2$ are mixed and positive; $c'$ is a self-crossing of the\npush-off. The diagram is schematic and is not used in the proof.",
+        "strategy": "Uses a normalized tubular chart and the inverse function theorem near each crossing, then compactness away from crossing disks, to prove that exactly two same-sign mixed crossings arise per original crossing.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, discussion of blackboard framing and crossing signs, pp. 27–28"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3 and §3.1, pp. 3–8",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3 and §3.1, blackboard framing and local crossing calculation, pp. 3–7"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-blackboard-framing-self-linking-is-writhe",
+        "kind": "theorem",
+        "title": "Blackboard self-linking equals diagram self-writhe",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "lem-framed-knot-push-off-self-linking-well-defined",
+          "def-framed-knot-self-linking-and-seifert-framing",
+          "lem-blackboard-push-off-has-two-mixed-crossings-per-crossing",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a knot $K$ with blackboard framing $b_D$. The self-linking number of the\nframed knot $(K,b_D)$ equals the diagram writhe:\n$$\\operatorname{sl}(K,b_D)=\\operatorname{wr}(D).$$\nFor a link component $K_i$, the corresponding self-linking number is its\nself-writhe $\\operatorname{wr}_i(D)$. Total writhe of a link still includes\nthe signs of mixed crossings, while the sum of component self-linking numbers\nuses only self-crossings.",
+        "strategy": "Uses the local crossing-count lemma to identify the mixed sum as twice writhe, then the half-sum algorithm and framed self-linking definition give the equality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Proposition 3.9 and its local push-off calculation, pp. 8–9"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, writhe discussion following Proposition 3.12, p. 29"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-linking-number-is-invariant-and-writhe-is-not",
+        "kind": "theorem",
+        "title": "Linking number is invariant and writhe changes under a kink",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-oriented-reidemeister-moves",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "def-framed-knot-self-linking-and-seifert-framing",
+          "thm-blackboard-framing-self-linking-is-writhe",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume the Axiom of Countable Choice. For any two regular oriented diagrams\nof ambient-isotopic two-component links, the algorithmic linking numbers\nagree. Creating a positive type-I kink increases total writhe by $1$ and\ndeleting it decreases writhe by $1$; creating a negative kink decreases writhe\nby $1$ and deleting it increases writhe by $1$. Types II and III leave total\nwrithe unchanged. For a knot\ncomponent, blackboard self-linking changes by the same amount under a type-I\nmove. Consequently writhe and blackboard self-linking are not invariants of\nunframed ambient isotopy, although the integer linking number of two distinct\ncomponents is.",
+        "strategy": "Uses the oriented Reidemeister theorem for link invariance, checks signed writhe contributions under each move, and uses a positive kink to refute invariance of writhe and blackboard self-linking.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Proposition 3.12 and the writhe discussion on p. 29"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Reidemeister invariance discussion following Definition 3.1 and the blackboard-framing discussion, pp. 3–9"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3113,
+    "id": "crossing-signs-writhe-and-linking-number-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Crossing signs, writhe, and linking number — Examples and Counterexamples",
+    "companion": "crossing-signs-writhe-and-linking-number",
+    "requires": [
+      "crossing-signs-writhe-and-linking-number"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-03-worked-cases",
+        "kind": "example",
+        "title": "Hopf and Whitehead link linking-number computations",
+        "deps": [
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "thm-linking-number-is-invariant-and-writhe-is-not",
+          "def-geometric-braid-with-setwise-endpoints",
+          "prop-stacking-of-geometric-braids-is-well-defined",
+          "def-elementary-geometric-half-twist",
+          "def-closure-of-a-geometric-braid",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Read a braid word in the standard geometric braid\ngroup product convention: the rightmost factor is traversed first from bottom\nto top, and the closure joins corresponding top and bottom endpoints. A\npositive Artin half twist has crossing sign $+1$.\n\nThe closure of the positive two-strand braid $\\sigma_1^2$ is the positive Hopf\nlink. Its endpoint permutation is the identity, so it has two components, and\nboth crossings are mixed positive crossings. Hence its linking number is\n$(1+1)/2=1$.\n\nThe standard Whitehead link is the closure of the three-strand braid\n$$\\beta=\\sigma_1\\sigma_2^{-1}\\sigma_1\\sigma_2^{-2}.$$\nIts endpoint permutation is $(1\\ 3)$, so its components are the cycles\n$\\{1,3\\}$ and $\\{2\\}$. In bottom-to-top traversal order the crossing letters\nare $\\sigma_2^{-1},\\sigma_2^{-1},\\sigma_1,\\sigma_2^{-1},\\sigma_1$. The first,\nsecond, third, and fifth crossings are mixed, with signs $-1,-1,+1,+1$; the\nfourth is a self-crossing. The mixed sum is $0$, so the linking number is $0$.\nThe five-crossing braid diagram is a representative, not a claim that the\ndisplayed braid word is the unique presentation.",
+        "strategy": "Computes endpoint-permutation cycles and crossing signs for the positive Hopf closure and the standard Whitehead braid closure; all arithmetic is a finite crossing inventory.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric W. Weisstein, Whitehead Link, Wolfram MathWorld",
+              "url": "https://mathworld.wolfram.com/WhiteheadLink.html",
+              "locator": "Entry's braid-word presentations and statement of linking number zero"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, the crossing-sum convention, pp. 26–27"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definition 3.1, pp. 3–4"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-knot-kt-03-boundary-case",
+        "kind": "counterexample",
+        "title": "Writhe is not an invariant of an unframed knot",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-oriented-reidemeister-moves",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-framed-knot-self-linking-and-seifert-framing",
+          "thm-blackboard-framing-self-linking-is-writhe",
+          "thm-linking-number-is-invariant-and-writhe-is-not",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "The false statement is: for every regular oriented diagram $D$ of an unframed\nknot, the writhe $\\operatorname{wr}(D)$, defined as the sum of its oriented\ncrossing signs, depends only on the ambient-isotopy class of the represented\nknot.",
+        "strategy": "Uses the crossing-free unknot and its positive type-I kink, which have equal unframed knot type and distinct writhe and blackboard self-linking.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, the writhe and Reidemeister-I discussion, pp. 26–27"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "§3, Definitions 3.7–3.9 and the type-I framing change, pp. 8–9"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

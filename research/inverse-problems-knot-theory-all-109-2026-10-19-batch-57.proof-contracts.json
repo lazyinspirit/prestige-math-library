@@ -1,0 +1,972 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-knot-normal-circle-bundle-trivialization",
+    "lem-knot-tubular-exterior-and-boundary",
+    "lem-knot-exterior-has-peripheral-torus",
+    "thm-knot-exterior-homology-and-longitude",
+    "ex-knot-kt-02-worked-cases",
+    "cex-knot-kt-02-boundary-case"
+  ],
+  "contracts": {
+    "lem-knot-normal-circle-bundle-trivialization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, an isotopy can also be arranged to avoid\n$\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $S\\subseteq M$ be an embedded submanifold.\n\nEquip $S$ with the smooth structure supplied by\n[[lem-slice-chart-restrictions-form-a-smooth-atlas]]. The inclusion\n$i:S\\hookrightarrow M$ is then a smooth embedding by\n[[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]], so its\ndifferential is defined. Identify $T_pS$ with the linear subspace\n$di_p(T_pS)\\subseteq T_pM$. Here the notation\n$$TM|_S:=\\coprod_{p\\in S}T_pM,\\qquad T^*M|_S:=\\coprod_{p\\in S}T_p^*M$$\nmeans the fibrewise restriction of these disjoint unions to base points in\n$S$; it does not invoke restriction to an open subset.\n\nThe **normal-bundle set** of $S$ in $M$ is the fibrewise quotient\n\n$$\\nu(S):=\\coprod_{p\\in S}T_pM/T_pS.$$\n\nThe **conormal-bundle set** of $S$ in $M$ is the fibrewise annihilator\n\n$$N^*S:=\\{\\xi\\in T^*M|_S:\\xi|_{T_pS}=0\\text{ for the base point }p\\}.$$\n\nBoth are intrinsic constructions attached to the embedding $S\\hookrightarrow M$.\nThe next proposition supplies their smooth vector-bundle structures.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-normal-plane",
+          "claim": "Use an orientation-preserving identification of the standard three-sphere with the unit sphere in $\\mathbb R^4$. Write the knot as $\\gamma:S^1\\to S^3\\subset\\mathbb R^4$ and set $\\tau(s)=\\gamma'(s)/\\lVert\\gamma'(s)\\rVert$. Since $\\gamma(s)$ is unit and $\\gamma$ is an immersion, $\\gamma(s)$ and $\\tau(s)$ are orthonormal. The plane $P_s=\\{v\\in\\mathbb R^4:\\langle v,\\gamma(s)\\rangle=\\langle v,\\tau(s)\\rangle=0\\}$ is therefore a smooth rank-two subbundle of $TS^3|_K$. Orthogonal projection $v\\mapsto v-\\langle v,\\tau(s)\\rangle\\tau(s)$ has kernel $\\mathbb R\\tau(s)$ and image $P_s$, so it identifies this subbundle smoothly with the quotient $\\nu_K$ of [F2]. Orient $P_s$ by the rule in the statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "frame-on-cut-interval",
+          "claim": "Cut $S^1$ at one point and fix an oriented local frame on an arc about the cut. Compactness of the remaining interval gives a finite subdivision whose closed subintervals each lie in a bundle-trivializing chart. Inductively extend a frame from one subinterval to the next: on a small overlap, the incoming and chart frames differ by a smooth map into $\\mathrm{GL}^+(2,\\mathbb R)$. Shrink the overlap so that this map lies in a neighbourhood of its value at the junction where straight interpolation remains in $\\mathrm{GL}^+$. Then join that constant value to the identity by a path in $\\mathrm{GL}^+$ and use a smooth cutoff to extend the transition across the new subinterval, making the adjusted frame agree on a collar of the junction and be a fixed chart frame away from it. This can be done at each of the finitely many junctions, with the first and last collars expressed in the fixed cut-arc frame by constant matrices. The required paths exist because Gram–Schmidt writes every matrix in $\\mathrm{GL}^+(2,\\mathbb R)$ as a rotation times an upper-triangular matrix with positive diagonal; rotations are path-connected and the positive-diagonal triangular matrices contract linearly to the identity. We obtain a smooth oriented interval frame with constant transition matrices at its endpoint collars.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "close-endpoint-frame",
+          "claim": "Under the endpoint identification, the two endpoint frame germs differ by a constant matrix $A\\in\\mathrm{GL}^+(2,\\mathbb R)$ by step 1.2. Choose a smooth path $B(t)$ from the identity to $A^{-1}$ that is constant on collars of $0$ and $1$, and multiply the interval frame by $B(t)$. The endpoint values and germs now agree under the identification, because the original germs differ by the constant $A$ and $B$ is constant on their collars. The adjusted frame descends smoothly to an oriented frame on $S^1$, giving the required bundle isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "construct",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns an embedding whose domain is the nonempty circle S^1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The normal fibres have rank two by the knot-in-three-space hypotheses; no zero-rank case is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 constructs the rank-two normal plane over each point of the one-dimensional knot."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A smooth embedding is an immersion, so its tangent vector never vanishes; the frame construction has no degenerate tangent case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 explicitly match the frame germs at the cut endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 use finite subdivisions and paths in GL+(2,R), with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a bundle trivialization and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a bundle trivialization and states no equivalence."
+        }
+      ]
+    },
+    "lem-knot-tubular-exterior-and-boundary": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, an isotopy can also be arranged to avoid\n$\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot and let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle. Equip $\\nu(K)$ with a chosen smooth fibre norm $\\|\\cdot\\|$. Let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. For $\\epsilon>0$, define the closed disk subbundle\n$$\nD_\\epsilon\\nu(K):=\\{v\\in\\nu(K):\\|v\\|\\le\\epsilon\\}.\n$$\nChoose $\\epsilon$ so that $D_\\epsilon\\nu(K)\\subseteq\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The fibre norm, tubular map, and radius are part of the chosen tubular data. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-knot-normal-circle-bundle-trivialization",
+          "source_section": "Statement",
+          "quote": "For every smooth oriented embedding $K:S^1\\to S^3$, let $\\nu_K=K^*TS^3/dK(TS^1)$ be the quotient normal bundle. Orient its two-dimensional fibres so that a positive tangent to $K$ followed by a positive basis of the normal fibre gives the fixed orientation of $S^3$. Then $\\nu_K$ admits a smooth orientation-preserving bundle isomorphism $\\nu_K\\cong K\\times\\mathbb R^2$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $i:S\\hookrightarrow M$ be a closed smooth embedded submanifold. Then there are an open neighbourhood $\\Omega\\subseteq\\nu(S)$ of the zero section in the quotient normal bundle and a diffeomorphism $\\Phi:\\Omega\\to U$ onto an open neighbourhood $U$ of $i(S)$ in $M$, with $\\Phi(0_p)=i(p)$ for every $p\\in S$. Thus $S$ has a tubular neighbourhood in $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $i:S\\hookrightarrow M$ be a smooth embedding, and suppose its normal bundle\n$\\nu(S)$ ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]) has\nbeen equipped with its standard smooth-vector-bundle structure. Under\n$\\mathrm{AC}_\\omega$ the existence of this structure is supplied by\n[[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]].\n\nA **tubular neighbourhood of $S$ in $M$** consists of:\n\n1. an open neighbourhood $\\Omega\\subseteq \\nu(S)$ of the zero section, and\n2. a smooth embedding $\\Phi:\\Omega\\to M$\n\nsuch that:\n\n- $\\Phi(0_p)=i(p)$ for every $p\\in S$, and\n- $\\Phi(\\Omega)$ is an open neighbourhood of $i(S)$ in $M$.\n\nEquivalently, $\\Phi$ is a diffeomorphism from $\\Omega$ onto an ambient open\nneighbourhood of $S$, and its restriction to the zero section is the original\ninclusion.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-tube-radius",
+          "claim": "By [F1], $K$ is continuous and $K(S^1)$ is compact because $S^1$ is compact. Since $S^3$ is Hausdorff, $K(S^1)$ is closed; [F1] also identifies it as a smooth embedded submanifold. Thus the closed smooth embedded hypothesis of [F4] holds, and [A1] permits its application. Take a tubular map $\\Phi:\\Omega\\to U\\subset S^3$ defined on an open neighbourhood of the zero section of $\\nu(K)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Use the trivialization [F3] and its product Euclidean norm as the chosen smooth fibre norm in [F2], so $\\Omega$ is open in $S^1\\times\\mathbb R^2$. For each $s\\in S^1$, openness gives an arc $I_s$ about $s$ and a radius $r_s>0$ with $I_s\\times D^2_{r_s}\\subset\\Omega$. Compactness of $S^1$ gives a finite subcover by such arcs; taking $\\epsilon$ smaller than half the least of their radii yields $S^1\\times D^2_{2\\epsilon}\\subset\\Omega$. The closed disk subbundle $S^1\\times D^2_\\epsilon$ therefore lies in $\\Omega$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "compact-exterior-boundary",
+          "claim": "Put $N(K)=\\Phi(S^1\\times D^2_\\epsilon)$. The restricted map is a smooth embedding, so $N(K)$ is a compact embedded solid torus with boundary $T_K=\\Phi(S^1\\times\\partial D^2_\\epsilon)\\cong S^1\\times S^1$. Since $S^3$ is compact and $E_K=S^3\\setminus\\operatorname{int}N(K)$ is closed, $E_K$ is compact. The annulus $S^1\\times\\{z:\\epsilon/2<|z|<2\\epsilon\\}$ maps to a collar of $T_K$; in these coordinates $E_K$ is the side $|z|\\ge\\epsilon$. Thus $E_K$ is a smooth three-manifold with boundary exactly $T_K$, oriented by restriction of the orientation of $S^3$ as in [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "radial-retraction",
+          "claim": "On $S^3\\setminus K$, define $H_t$ to be the identity outside $N(K)$ and, in the punctured disk fibres with $0<|z|\\le\\epsilon$, set $H_t(\\Phi(s,z))=\\Phi(s,((1-t)|z|+t\\epsilon)z/|z|)$ for $0\\le t\\le1$. The formula is continuous for $z\\ne0$ and is the identity at $|z|=\\epsilon$, so it glues continuously to the identity outside $N(K)$. It fixes every point of $E_K$, stays in $S^3\\setminus K$, and at $t=1$ sends every point of the punctured tube to $T_K\\subset E_K$. Hence $H_t$ is a strong deformation retraction of $S^3\\setminus K$ onto $E_K$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The knot domain is S^1 and hence nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses epsilon strictly positive and uses the disk radii epsilon and 2 epsilon."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a finite cover of the one-dimensional core S^1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 excludes z=0 because it lies on K and defines the homotopy on every punctured fibre."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 checks that the radial homotopy is the identity at radius epsilon and glues continuously to the exterior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and step 1.1 record the exact AC_omega hypothesis used for the tubular-neighbourhood theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an existence and retraction lemma, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is an existence and retraction lemma, not an equivalence."
+        }
+      ]
+    },
+    "lem-knot-exterior-has-peripheral-torus": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot and let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle. Equip $\\nu(K)$ with a chosen smooth fibre norm $\\|\\cdot\\|$. Let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. For $\\epsilon>0$, define the closed disk subbundle\n$$\nD_\\epsilon\\nu(K):=\\{v\\in\\nu(K):\\|v\\|\\le\\epsilon\\}.\n$$\nChoose $\\epsilon$ so that $D_\\epsilon\\nu(K)\\subseteq\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The fibre norm, tubular map, and radius are part of the chosen tubular data. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-knot-meridian-and-preferred-longitude",
+          "source_section": "Definition",
+          "quote": "Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\\partial E_K$, and let $p:T_K\\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\\lambda$ in $T_K$ for which $p|_\\lambda:\\lambda\\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\\lambda]=0$ in $H_1(E_K;\\mathbb Z)$, where $i:T_K\\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\\mu$ and any degree-one parallel curve. If a subgroup $P\\le\\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\\in\\pi_1(E_K,x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-knot-tubular-exterior-and-boundary",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every smooth oriented knot $K$ in $S^3$, there are an oriented normal-bundle trivialization, a tubular map $\\Phi$ defined on an open neighbourhood containing $S^1\\times D^2_{2\\epsilon}$ for some $\\epsilon>0$, and a closed tubular neighbourhood $N(K)=\\Phi(S^1\\times D^2_\\epsilon)$. This $N(K)$ is diffeomorphic to $S^1\\times D^2$, its boundary $T_K$ is diffeomorphic to $S^1\\times S^1$, and its exterior $E_K=S^3\\setminus\\operatorname{int}N(K)$ is a compact smooth oriented three-manifold with boundary $T_K$. The open complement $S^3\\setminus K$ strongly deformation retracts onto $E_K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cellular-homology-computes-singular-homology",
+          "source_section": "Statement",
+          "quote": "For every CW complex $X$, abelian group $G$, and $n\\geq0$, the cellular complex has an\nisomorphism $H_n^{\\mathrm{cell}}(X;G)\\cong H_n(X;G)$, natural with respect to\ncellular maps.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cellular-homology",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a CW complex, $G$ an abelian group, and $n\\geq0$.\nThe **cellular homology** of $X$ with coefficients in $G$ is\n$H_n^{\\mathrm{cell}}(X;G)=\\ker d_n/\\operatorname{im}d_{n+1}$ for the cellular\ngroups of [[def-oriented-cellular-chain-group]], with differentials defined in\n[[def-cellular-boundary-from-three-consecutive-skeleta]].  These maps form a\nchain complex by [[lem-the-cellular-boundary-squares-to-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cellular-boundary-from-three-consecutive-skeleta",
+          "source_section": "Definition",
+          "quote": "For $n\\geq1$, define $d_n:C_n^{\\mathrm{cell}}(X;G)\\to C_{n-1}^{\\mathrm{cell}}(X;G)$ as the connecting map $H_n(X^n,X^{n-1};G)\\to H_{n-1}(X^{n-1};G)$ from [[thm-long-exact-sequence-of-a-pair-in-singular-homology]], followed by the quotient map to $H_{n-1}(X^{n-1},X^{n-2};G)$. Set $d_0=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a CW complex. For $n\\geq1$, in the integral cellular chain groups with the chosen cell orientations,\n$$d_ne^n_\\alpha=\\sum_\\beta[e^n_\\alpha:e^{n-1}_\\beta]e^{n-1}_\\beta.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "torus-product-cw",
+          "claim": "In product coordinates on $T_K=S^1\\times S^1$, the meridian $\\mu$ is the second factor loop and the section $\\sigma$ is the first factor loop. Give the torus its standard product CW structure: take the quotient of a square by identifying opposite edges, with one vertex, the two oriented factor loops as its $1$-cells, and the open square as its $2$-cell attached by the commutator $\\mu\\sigma\\mu^{-1}\\sigma^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "zero-cellular-boundaries",
+          "claim": "The cellular chain groups in dimensions $2,1,0$ are $\\mathbb Z,\\mathbb Z^2,\\mathbb Z$. The differential $d_1$ is zero because each $1$-cell starts and ends at the only vertex. By [F7], each coefficient of $d_2$ is the degree of the attaching map after collapsing the other $1$-cell. The commutator traverses each factor once in each orientation, so both degrees are zero. Thus by [F5] and [F6], $H_1^{\\mathrm{cell}}(T_K;\\mathbb Z)=\\mathbb Z^2$ with the factor loops as basis.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "singular-basis",
+          "claim": "By [F4], the same two classes form a basis of singular $H_1(T_K;\\mathbb Z)$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses include a knot parametrized by the nonempty circle S^1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 computes both cellular differentials as zero in degree one for the torus CW structure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 specifies the one-vertex, two-one-cell product CW structure."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The product boundary is the nondegenerate torus S^1 x S^1 under the stated tubular-neighbourhood hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 account for the identified square edges and the commutator attaching map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the AC_omega premise; step 1.1 uses it through the tubular-exterior supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma computes a homology basis and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma computes a homology basis and states no equivalence."
+        }
+      ]
+    },
+    "thm-knot-exterior-homology-and-longitude": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, an isotopy can also be arranged to avoid\n$\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $S\\subseteq M$ be an embedded submanifold.\n\nEquip $S$ with the smooth structure supplied by\n[[lem-slice-chart-restrictions-form-a-smooth-atlas]]. The inclusion\n$i:S\\hookrightarrow M$ is then a smooth embedding by\n[[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]], so its\ndifferential is defined. Identify $T_pS$ with the linear subspace\n$di_p(T_pS)\\subseteq T_pM$. Here the notation\n$$TM|_S:=\\coprod_{p\\in S}T_pM,\\qquad T^*M|_S:=\\coprod_{p\\in S}T_p^*M$$\nmeans the fibrewise restriction of these disjoint unions to base points in\n$S$; it does not invoke restriction to an open subset.\n\nThe **normal-bundle set** of $S$ in $M$ is the fibrewise quotient\n\n$$\\nu(S):=\\coprod_{p\\in S}T_pM/T_pS.$$\n\nThe **conormal-bundle set** of $S$ in $M$ is the fibrewise annihilator\n\n$$N^*S:=\\{\\xi\\in T^*M|_S:\\xi|_{T_pS}=0\\text{ for the base point }p\\}.$$\n\nBoth are intrinsic constructions attached to the embedding $S\\hookrightarrow M$.\nThe next proposition supplies their smooth vector-bundle structures.",
+          "uses": []
+        },
+        {
+          "fact": "F3",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot and let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle. Equip $\\nu(K)$ with a chosen smooth fibre norm $\\|\\cdot\\|$. Let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. For $\\epsilon>0$, define the closed disk subbundle\n$$\nD_\\epsilon\\nu(K):=\\{v\\in\\nu(K):\\|v\\|\\le\\epsilon\\}.\n$$\nChoose $\\epsilon$ so that $D_\\epsilon\\nu(K)\\subseteq\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The fibre norm, tubular map, and radius are part of the chosen tubular data. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-knot-meridian-and-preferred-longitude",
+          "source_section": "Definition",
+          "quote": "Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\\partial E_K$, and let $p:T_K\\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\\lambda$ in $T_K$ for which $p|_\\lambda:\\lambda\\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\\lambda]=0$ in $H_1(E_K;\\mathbb Z)$, where $i:T_K\\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\\mu$ and any degree-one parallel curve. If a subgroup $P\\le\\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\\in\\pi_1(E_K,x)$.",
+          "uses": [
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-knot-tubular-exterior-and-boundary",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every smooth oriented knot $K$ in $S^3$, there are an oriented normal-bundle trivialization, a tubular map $\\Phi$ defined on an open neighbourhood containing $S^1\\times D^2_{2\\epsilon}$ for some $\\epsilon>0$, and a closed tubular neighbourhood $N(K)=\\Phi(S^1\\times D^2_\\epsilon)$. This $N(K)$ is diffeomorphic to $S^1\\times D^2$, its boundary $T_K$ is diffeomorphic to $S^1\\times S^1$, and its exterior $E_K=S^3\\setminus\\operatorname{int}N(K)$ is a compact smooth oriented three-manifold with boundary $T_K$. The open complement $S^3\\setminus K$ strongly deformation retracts onto $E_K$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-homology-of-spheres",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\widetilde H_k(S^n;G)$ is $G$ for $k=n$ and $0$ otherwise.\nFor $S^0$, $\\widetilde H_0(S^0;G)\\cong G$ and all other reduced groups vanish.\nThus $H_0(S^n;G)\\cong G$ for $n\\ge1$, whereas\n$H_0(S^0;G)\\cong G\\oplus G$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to Y$ are homotopic continuous maps, then for every $n\\geq 0$ and\nevery abelian group $G$ the induced homomorphisms on singular homology agree:\n$$H_n(f_\\#)=H_n(g_\\#):H_n^{\\mathrm{sing}}(X;G)\\to H_n^{\\mathrm{sing}}(Y;G).$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-knot-exterior-has-peripheral-torus",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For a smooth oriented knot with a chosen product tubular neighbourhood $N(K)\\cong S^1\\times D^2$, let $\\mu$ be the positive fibre meridian and let $\\sigma$ be the product section $s\\mapsto(s,1)$ of $T_K=\\partial N(K)\\cong S^1\\times S^1$. Then $T_K=\\partial E_K$ is a torus and $[\\mu],[\\sigma]$ form a basis of $H_1(T_K;\\mathbb Z)$. The curve $\\sigma$ is a product section; this statement does not assert that it is the preferred zero-homology longitude.",
+          "uses": [
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-mayer-vietoris-sequence-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For an open cover $X=U\\cup V$, the sequence\n$$\\cdots\\to H_n(U\\cap V;G)\\to H_n(U;G)\\oplus H_n(V;G)\\to H_n(X;G)\\xrightarrow{\\delta}H_{n-1}(U\\cap V;G)\\to\\cdots$$\nis exact, with middle map $(u,v)\\mapsto u+v$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "choice-branch",
+          "claim": "Under countable choice [A1], [F5] supplies a product tubular map and a closed product disk tube with the stated norm and radius data for every smooth oriented knot.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "circle-cohomology",
+          "claim": "Write $D_r^2=\\{z\\in\\mathbb R^2:|z|\\le r\\}$ in the product coordinates and set $U=\\Phi(S^1\\times\\{|z|<3\\epsilon/2\\})$ and $V=S^3\\setminus\\Phi(S^1\\times D^2_{\\epsilon/2})$. The set $U$ is open because its source is open in the tubular domain and $\\Phi$ maps that domain diffeomorphically onto an open set. The removed disk image is compact, hence closed in Hausdorff $S^3$, so $V$ is open. They cover $S^3$, and $U\\cap V=\\Phi(S^1\\times\\{\\epsilon/2<|z|<3\\epsilon/2\\})$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "alexander-duality",
+          "claim": "Radial homotopies retract $U$ onto $N(K)$ by replacing each fibre radius $r$ with $(1-t)r+t\\min(r,\\epsilon)$, fixing the zero vector; retract $V$ onto $E_K$ by replacing $r$ with $(1-t)r+t\\max(r,\\epsilon)$ for $\\epsilon/2<r<2\\epsilon$ and fixing points outside the product tube; and retract $U\\cap V$ onto $T_K$ by replacing $r$ with $(1-t)r+t\\epsilon$. Each formula remains within its domain, agrees with the identity at the relevant boundary, and fixes its target. Thus these are deformation retractions.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "retract-to-exterior",
+          "claim": "On the overlap, composing its inclusion into $U$ with the first retraction gives radius $\\min(r,\\epsilon)$, while retracting first to $T_K$ and including into $N(K)$ gives radius $\\epsilon$; linear interpolation stays in $N(K)$. For the inclusion into $V$, the corresponding radii are $\\max(r,\\epsilon)$ and $\\epsilon$, and their interpolation stays in $E_K$. Hence, after the deformation-retraction identifications, the two maps in Mayer–Vietoris are the maps induced by $T_K\\hookrightarrow N(K)$ and $T_K\\hookrightarrow E_K$. By [F7], homotopic maps induce the same homomorphism on homology.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "collar-mv-cover",
+          "claim": "By [F9], the Mayer–Vietoris sequence for the open cover of step 1.2 has the segment $$H_2(S^3;\\mathbb Z)\\to H_1(U\\cap V;\\mathbb Z)\\to H_1(U;\\mathbb Z)\\oplus H_1(V;\\mathbb Z)\\to H_1(S^3;\\mathbb Z).$$ The outer groups vanish by [F6], so the middle map is an isomorphism. Under the identifications of step 3.1, it is induced by the two boundary inclusions.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "surjective-mv-map",
+          "claim": "By [F8], $H_1(T_K;\\mathbb Z)\\cong\\mathbb Z^2$ with basis $([\\mu],[\\sigma])$. The product tube $N(K)\\cong S^1\\times D^2$ retracts to its core $S^1$ by contraction in each disk fibre, so homotopy invariance [F7] and [F6] give $H_1(N(K);\\mathbb Z)\\cong\\mathbb Z$. Put $H=H_1(E_K;\\mathbb Z)$. Steps 2.1, 3.1, 4.1 give $\\mathbb Z^2\\cong\\mathbb Z\\oplus H$. The isomorphism embeds $H$ as a subgroup of $\\mathbb Z^2$. Every subgroup of $\\mathbb Z^2$ is free of rank at most two: projection to one coordinate has cyclic image; if nonzero, choose a preimage of its positive generator to split it off, and the kernel is a subgroup of $\\mathbb Z$; if zero, the subgroup already lies in $\\mathbb Z$. Since the complementary $\\mathbb Z$ has rank one and the total rank is two, $H$ has rank one. Therefore $H\\cong\\mathbb Z$.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 4.1",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "meridian-generator",
+          "claim": "Choose $c$ to be the first component of the Mayer–Vietoris image of $[\\sigma]$; it is a generator of $H_1(N(K);\\mathbb Z)$ because the product section projects with degree one to the core of the product tube [F5, F8]. Choose a generator $h$ of $H_1(E_K;\\mathbb Z)$, which exists by step 5.1. The meridian maps to zero in the $N(K)$ component because it bounds its fibre disk. In the bases $([\\mu],[\\sigma])$ and $(c,h)$, the Mayer–Vietoris isomorphism of step 4.1 has first column $(0,a)$ for some integer $a$ and second column whose first coordinate is $1$. Its determinant is therefore $\\pm a$; since the map is an isomorphism over $\\mathbb Z$, $a=\\pm1$. Thus $[\\mu]$ generates $H_1(E_K;\\mathbb Z)$.",
+          "step": "6.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F8",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kernel-longitude",
+          "claim": "Let $k\\in\\mathbb Z$ be the unique integer with $i_*[\\sigma]=k[\\mu]$, and put $[\\lambda]=[\\sigma]-k[\\mu]$. Then $i_*[\\lambda]=0$, $p_*[\\lambda]=1$, and the change from the basis $([\\mu],[\\sigma])$ to $([\\mu],[\\lambda])$ has determinant $1$. In the new basis, $i_*(a[\\mu]+b[\\lambda])=a[\\mu]$, so the kernel is exactly $\\mathbb Z[\\lambda]$, a primitive rank-one direct summand. Every degree-one class is $[\\sigma]+a[\\mu]$ and maps to zero exactly when $a=-k$, proving uniqueness. The curve $t\\mapsto(e^{2\\pi it},e^{-2\\pi ikt})$ is embedded in $S^1\\times S^1$ because its first coordinate is injective on $S^1$; it represents $[\\lambda]$ and is a preferred longitude.",
+          "step": "7.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "step 6.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "K is an embedding of the nonempty S1 and1.1 supplies its actual positive-radius tube; the current proof uses the open-cover Mayer–Vietoris calculation2.1–4.1, not a nonexistent1.2 Alexander-duality step.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "K is an embedding of the nonempty S1 and1.1 supplies its actual positive-radius tube; the current proof uses the open-cover Mayer–Vietoris calculation2.1–4.1, not a nonexistent1.2 Alexander-duality step.",
+            "item_sha256": "ad3ab5568fdb29454f30cd514ac6b48e0c2ff111da9d9126f9703bbbe23c89b6",
+            "row_sha256": "32f92f61e684d9a40892729de9a5528b142aa17c8f60486ab7e8973cd1de758d",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 386
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 5.1 uses H1(S^3)=0, and step 6.1 checks the meridian's zero component in H1(N)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.4, and 2.5 establish the cyclic H1 and the unique degree-one longitude class."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 6.1 treats the meridian as the fibre-disk boundary and shows its image in H1(N) vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 constructs the open collar cover and checks the radial homotopies at the torus boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 distinguish full AC and the derived AC_omega interface required by the suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states homology and kernel conclusions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states homology and kernel conclusions, not an equivalence."
+        }
+      ]
+    },
+    "ex-knot-kt-02-worked-cases": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot and let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle. Equip $\\nu(K)$ with a chosen smooth fibre norm $\\|\\cdot\\|$. Let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. For $\\epsilon>0$, define the closed disk subbundle\n$$\nD_\\epsilon\\nu(K):=\\{v\\in\\nu(K):\\|v\\|\\le\\epsilon\\}.\n$$\nChoose $\\epsilon$ so that $D_\\epsilon\\nu(K)\\subseteq\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The fibre norm, tubular map, and radius are part of the chosen tubular data. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-knot-meridian-and-preferred-longitude",
+          "source_section": "Definition",
+          "quote": "Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\\partial E_K$, and let $p:T_K\\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\\lambda$ in $T_K$ for which $p|_\\lambda:\\lambda\\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\\lambda]=0$ in $H_1(E_K;\\mathbb Z)$, where $i:T_K\\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\\mu$ and any degree-one parallel curve. If a subgroup $P\\le\\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\\in\\pi_1(E_K,x)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $S\\subseteq M$ be an embedded submanifold.\n\nEquip $S$ with the smooth structure supplied by\n[[lem-slice-chart-restrictions-form-a-smooth-atlas]]. The inclusion\n$i:S\\hookrightarrow M$ is then a smooth embedding by\n[[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]], so its\ndifferential is defined. Identify $T_pS$ with the linear subspace\n$di_p(T_pS)\\subseteq T_pM$. Here the notation\n$$TM|_S:=\\coprod_{p\\in S}T_pM,\\qquad T^*M|_S:=\\coprod_{p\\in S}T_p^*M$$\nmeans the fibrewise restriction of these disjoint unions to base points in\n$S$; it does not invoke restriction to an open subset.\n\nThe **normal-bundle set** of $S$ in $M$ is the fibrewise quotient\n\n$$\\nu(S):=\\coprod_{p\\in S}T_pM/T_pS.$$\n\nThe **conormal-bundle set** of $S$ in $M$ is the fibrewise annihilator\n\n$$N^*S:=\\{\\xi\\in T^*M|_S:\\xi|_{T_pS}=0\\text{ for the base point }p\\}.$$\n\nBoth are intrinsic constructions attached to the embedding $S\\hookrightarrow M$.\nThe next proposition supplies their smooth vector-bundle structures.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $i:S\\hookrightarrow M$ be a smooth embedding, and suppose its normal bundle\n$\\nu(S)$ ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]) has\nbeen equipped with its standard smooth-vector-bundle structure. Under\n$\\mathrm{AC}_\\omega$ the existence of this structure is supplied by\n[[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]].\n\nA **tubular neighbourhood of $S$ in $M$** consists of:\n\n1. an open neighbourhood $\\Omega\\subseteq \\nu(S)$ of the zero section, and\n2. a smooth embedding $\\Phi:\\Omega\\to M$\n\nsuch that:\n\n- $\\Phi(0_p)=i(p)$ for every $p\\in S$, and\n- $\\Phi(\\Omega)$ is an open neighbourhood of $i(S)$ in $M$.\n\nEquivalently, $\\Phi$ is a diffeomorphism from $\\Omega$ onto an ambient open\nneighbourhood of $S$, and its restriction to the zero section is the original\ninclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-knot-exterior-has-peripheral-torus",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For a smooth oriented knot with a chosen product tubular neighbourhood $N(K)\\cong S^1\\times D^2$, let $\\mu$ be the positive fibre meridian and let $\\sigma$ be the product section $s\\mapsto(s,1)$ of $T_K=\\partial N(K)\\cong S^1\\times S^1$. Then $T_K=\\partial E_K$ is a torus and $[\\mu],[\\sigma]$ form a basis of $H_1(T_K;\\mathbb Z)$. The curve $\\sigma$ is a product section; this statement does not assert that it is the preferred zero-homology longitude.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-knot-exterior-homology-and-longitude",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $K:S^1\\to S^3$ be a smooth oriented embedding and write its quotient normal bundle as $\\nu_K=K^*TS^3/dK(TS^1)$. Choose an orientation-preserving trivialization $\\nu_K\\cong S^1\\times\\mathbb R^2$ and a tubular map $\\Phi:\\Omega\\to S^3$, meaning a smooth embedding from an open neighbourhood $\\Omega\\subseteq\\nu_K$ of the zero section onto an open neighbourhood of $K(S^1)$ with $\\Phi(s,0)=K(s)$, such that in these product coordinates $\\Omega$ contains $S^1\\times D^2_{2\\epsilon}$ for some $\\epsilon>0$. Here $D^2_r=\\{z\\in\\mathbb R^2:\\|z\\|\\le r\\}$ uses the product Euclidean norm induced by the chosen trivialization. Set $N(K)=\\Phi(S^1\\times D^2_\\epsilon)$, $E_K=S^3\\setminus\\operatorname{int}N(K)$, $T_K=\\partial E_K$, and let $i:T_K\\hookrightarrow E_K$ be inclusion, $p:T_K\\to S^1$ the product projection, and $\\mu$ the positive boundary of a normal disk, using the normal-plane orientation determined by the orientations of $K$ and $S^3$. A class is primitive if it is not $m$ times another class for any integer $|m|>1$. Then $H_1(E_K;\\mathbb Z)\\cong\\mathbb Z$ is generated by $[\\mu]$. The kernel of $i_*:H_1(T_K;\\mathbb Z)\\to H_1(E_K;\\mathbb Z)$ is a primitive rank-one direct summand generated by a unique class $[\\lambda]$ with $p_*[\\lambda]=1\\in H_1(S^1;\\mathbb Z)$. It has a simple closed representative, is the preferred longitude, and $([\\mu],[\\lambda])$ is a basis of $H_1(T_K;\\mathbb Z)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unknot-tubular-model",
+          "claim": "The map $\\Phi(t,w)=(e^{2\\pi it}\\sqrt{1-|w|^2},w)$ extends to the open normal disk bundle $S^1\\times\\{|w|<1\\}$ and is a diffeomorphism onto $\\{z_1\\ne0\\}\\subset S^3$, with inverse $(z_1,z_2)\\mapsto(z_1/|z_1|,z_2)$. It fixes the zero section and its derivative in $w$ identifies the $z_2$ plane with the normal quotient in [F3], so [F4] makes it a tubular map. Restricting to the closed disk $D^2_{1/\\sqrt2}$ with the norm $|w|$ gives the specified $N(U)\\cong S^1\\times D^2_{1/\\sqrt2}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "unknot-exterior-product",
+          "claim": "The map $(w,e^{i\\theta})\\mapsto(w,e^{i\\theta}\\sqrt{1-|w|^2})$ from $D^2_{1/\\sqrt2}\\times S^1$ to $E_U$ is a smooth diffeomorphism, with inverse $(z_1,z_2)\\mapsto(z_1,z_2/|z_2|)$ since $|z_2|\\ge1/\\sqrt2$. Hence $E_U$ is a solid torus.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unknot-marking",
+          "claim": "At $(1,0)$, the ordered outward radial vector, positive tangent to $U$, and the positive coordinate vectors in the $z_2$ plane give the standard orientation of $\\mathbb C^2$. Therefore the positive meridian is the loop varying the phase of $z_2$. The loop $t\\mapsto(e^{2\\pi it}/\\sqrt2,e^{i\\theta_0}/\\sqrt2)$ is the product section of $\\partial N(U)$, has degree one over $U$, and bounds the disk $D^2_{1/\\sqrt2}\\times\\{e^{i\\theta_0}\\}$ in the displayed exterior coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "unknot-homology-marking",
+          "claim": "By [F6], $[\\mu]$ generates $H_1(E_U;\\mathbb Z)$ and the degree-one kernel class is the preferred longitude. The section in step 2.1 is in the kernel because it bounds the stated disk, so it is $[\\lambda]$ by uniqueness. Since [F5] gives $([\\mu],[\\sigma])$ as a basis and this section is $\\sigma$, the pair $([\\mu],[\\lambda])$ is a basis.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is the standard unknot parametrized by the nonempty circle S^1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 proves that the longitude class maps to zero because its displayed section bounds a disk."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 identifies the single infinite cyclic homology generator for this one-component unknot."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use phase coordinates only where the corresponding complex coordinate is bounded away from zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 include the closed disk boundary, which is the common torus boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example states full AC and steps 1.1 and 2.2 use its countable-choice consequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit model and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit model and makes no equivalence claim."
+        }
+      ]
+    },
+    "cex-knot-kt-02-boundary-case": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot and let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle. Equip $\\nu(K)$ with a chosen smooth fibre norm $\\|\\cdot\\|$. Let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. For $\\epsilon>0$, define the closed disk subbundle\n$$\nD_\\epsilon\\nu(K):=\\{v\\in\\nu(K):\\|v\\|\\le\\epsilon\\}.\n$$\nChoose $\\epsilon$ so that $D_\\epsilon\\nu(K)\\subseteq\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The fibre norm, tubular map, and radius are part of the chosen tubular data. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-knot-meridian-and-preferred-longitude",
+          "source_section": "Definition",
+          "quote": "Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\\partial E_K$, and let $p:T_K\\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\\lambda$ in $T_K$ for which $p|_\\lambda:\\lambda\\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\\lambda]=0$ in $H_1(E_K;\\mathbb Z)$, where $i:T_K\\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\\mu$ and any degree-one parallel curve. If a subgroup $P\\le\\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\\in\\pi_1(E_K,x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-knot-exterior-has-peripheral-torus",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For a smooth oriented knot with a chosen product tubular neighbourhood $N(K)\\cong S^1\\times D^2$, let $\\mu$ be the positive fibre meridian and let $\\sigma$ be the product section $s\\mapsto(s,1)$ of $T_K=\\partial N(K)\\cong S^1\\times S^1$. Then $T_K=\\partial E_K$ is a torus and $[\\mu],[\\sigma]$ form a basis of $H_1(T_K;\\mathbb Z)$. The curve $\\sigma$ is a product section; this statement does not assert that it is the preferred zero-homology longitude.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-knot-exterior-homology-and-longitude",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $K:S^1\\to S^3$ be a smooth oriented embedding and write its quotient normal bundle as $\\nu_K=K^*TS^3/dK(TS^1)$. Choose an orientation-preserving trivialization $\\nu_K\\cong S^1\\times\\mathbb R^2$ and a tubular map $\\Phi:\\Omega\\to S^3$, meaning a smooth embedding from an open neighbourhood $\\Omega\\subseteq\\nu_K$ of the zero section onto an open neighbourhood of $K(S^1)$ with $\\Phi(s,0)=K(s)$, such that in these product coordinates $\\Omega$ contains $S^1\\times D^2_{2\\epsilon}$ for some $\\epsilon>0$. Here $D^2_r=\\{z\\in\\mathbb R^2:\\|z\\|\\le r\\}$ uses the product Euclidean norm induced by the chosen trivialization. Set $N(K)=\\Phi(S^1\\times D^2_\\epsilon)$, $E_K=S^3\\setminus\\operatorname{int}N(K)$, $T_K=\\partial E_K$, and let $i:T_K\\hookrightarrow E_K$ be inclusion, $p:T_K\\to S^1$ the product projection, and $\\mu$ the positive boundary of a normal disk, using the normal-plane orientation determined by the orientations of $K$ and $S^3$. A class is primitive if it is not $m$ times another class for any integer $|m|>1$. Then $H_1(E_K;\\mathbb Z)\\cong\\mathbb Z$ is generated by $[\\mu]$. The kernel of $i_*:H_1(T_K;\\mathbb Z)\\to H_1(E_K;\\mathbb Z)$ is a primitive rank-one direct summand generated by a unique class $[\\lambda]$ with $p_*[\\lambda]=1\\in H_1(S^1;\\mathbb Z)$. It has a simple closed representative, is the preferred longitude, and $([\\mu],[\\lambda])$ is a basis of $H_1(T_K;\\mathbb Z)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "slope-class",
+          "claim": "By [F1] and [F2], the exterior inclusion and the meridian and longitude classes have the stated meanings. In the basis from [F3], the degree-one property in [F4] writes $[\\lambda]=[\\sigma]+q[\\mu]$ for a unique integer $q$. The curve $\\gamma(t)=(e^{2\\pi it},e^{2\\pi i(q+1)t})$ is embedded because its first coordinate is injective on $S^1$, and it represents $[\\sigma]+(q+1)[\\mu]=[\\lambda]+[\\mu]$. Its projection to the oriented core has degree $+1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "primitive-slope",
+          "claim": "In the basis $([\\mu],[\\lambda])$ from [F4], the class $[\\lambda]+[\\mu]$ has coordinates $(1,1)$. If it were $m d$ for an integer $|m|>1$, both coordinates would be divisible by $m$, which is impossible; hence it is primitive.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonzero-exterior-image",
+          "claim": "The inclusion sends $[\\lambda]+[\\mu]$ to $[\\mu]$ because $[\\lambda]\\in\\ker i_*$. The latter is a generator of $H_1(E_K;\\mathbb Z)\\cong\\mathbb Z$, so this image is nonzero. The primitive degree-one class constructed above therefore contradicts the refuted assertion.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample statement quantifies over knots with domain S^1, which is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 computes a nonzero exterior image, distinguishing the counterexample from a zero class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 verifies degree +1 over the core for the constructed slope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 proves the curve is embedded by its first coordinate, so the slope is not degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The formula in step 1.1 is periodic in the S^1 parameter and defines a closed curve."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses full AC and its AC_omega consequence required by the peripheral-basis supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal assertion and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal assertion and states no equivalence."
+        }
+      ]
+    }
+  }
+}

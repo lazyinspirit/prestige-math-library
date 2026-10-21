@@ -1,0 +1,1540 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-compact-support-fourier-laplace-is-entire",
+    "lem-ip-schwartz-radon-well-defined",
+    "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+    "cor-ip-limited-angle-compact-support-uniqueness",
+    "lem-ip-fourier-slice-identity-on-schwartz",
+    "prop-ip-limited-angle-data-no-holder-stability",
+    "prop-ip-limited-angle-fourier-visibility",
+    "ex-ip-compact-support-limited-angle-uniqueness",
+    "ex-ip-invisible-wedge-null-function",
+    "ex-ip-high-frequency-limited-angle-instability",
+    "op-ip-stable-limited-angle-reconstruction"
+  ],
+  "contracts": {
+    "lem-ip-compact-support-fourier-laplace-is-entire": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-2d-radon-transform",
+          "source_section": "Definition",
+          "quote": "Write $C_c^\\infty(\\mathbb R^2;\\mathbb C)$ for the complex-valued smooth functions of compact support on the Euclidean plane. For $u\\in C_c^\\infty(\\mathbb R^n;\\mathbb C)$, $n=1$ or $2$, use the compact-support Riemann Fourier transform\n$$\\widehat u(\\xi)=\\int_{\\mathbb R^n}u(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\nFor $\\theta=(\\theta_1,\\theta_2)\\in S^1:=\\{x\\in\\mathbb R^2:|x|=1\\}$ put $\\theta^\\perp=(-\\theta_2,\\theta_1)$. The line with normal $\\theta$ and signed offset $s$ is $\\{x\\in\\mathbb R^2:x\\cdot\\theta=s\\}$. Its **Euclidean Radon transform** is\n$$Rf(\\theta,s):=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt,\\qquad f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C),\\ (\\theta,s)\\in S^1\\times\\mathbb R.$$\nThe line integral is a compact-support Riemann integral.\nThe full data set uses every oriented normal $\\theta\\in S^1$ and every $s\\in\\mathbb R$; the same unoriented line is represented by $(\\theta,s)$ and $(-\\theta,-s)$.\nFor a one-dimensional function $h\\in C_c^\\infty(\\mathbb R;\\mathbb C)$, define\n$$|D_s|h(s):=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat h(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nFor $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ define the Riesz potential notation used here by\n$$|D|^{-1}f(x):=\\int_{\\mathbb R^2}e^{2\\pi i x\\cdot\\xi}\\frac{\\widehat f(\\xi)}{2\\pi|\\xi|}\\,d\\xi.$$\nThe quotient in the last integral is assigned value $0$ at $\\xi=0$. These integrals are absolutely convergent on the stated classes: compact-support integration by parts gives rapid decay of $\\widehat f$ and $\\widehat h$, while $\\widehat f$ is bounded near $0$ and $|\\xi|^{-1}$ is locally integrable in two dimensions. Here the multiplier for $|D_s|$ is $2\\pi|\\sigma|$, corresponding to the $e^{-2\\pi i s\\sigma}$ Fourier convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-differentiability-holomorphic-and-entire",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and let $f:U\\to\\mathbb C$. The function $f$ is **complex differentiable at $a$** if the limit\n\n$$ \\lim_{\\substack{h\\to0\\\\ h\\ne0,\\ a+h\\in U}}\\frac{f(a+h)-f(a)}{h} $$\n\nexists in the metric of [[def-complex-metric-convergence-and-continuity]]. Its value is the **complex derivative** of $f$ at $a$, denoted $f'(a)$. The increments are nonzero and remain in the domain; because $U$ is open, all sufficiently small increments are allowed.\n\nThe function $f$ is **holomorphic on $U$** when it is complex differentiable at every point of $U$. A function holomorphic on all of $\\mathbb C$ is **entire**. The word analytic is reserved for the local power-series notion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ip-compact-support-fourier-laplace-is-entire-1.1",
+          "claim": "Choose a nondegenerate closed rectangle $B$ containing $\\operatorname{supp}f$. For every $z\\in\\mathbb C^2$, the integrand $x\\mapsto f(x)e^{-2\\pi i x\\cdot z}$ is continuous on $B$, so [F2] makes its real and imaginary parts Riemann integrable. It vanishes outside $\\operatorname{supp}f$; hence enlarging $B$ changes the integral only by adding regions on which the integrand is zero. This proves existence and independence of the containing rectangle.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "lem-ip-compact-support-fourier-laplace-is-entire-1.2",
+          "claim": "Fix $j\\in\\{1,2\\}$, fix the other complex coordinate, and let $h\\in\\mathbb C\\setminus\\{0\\}$. By [F4], the coordinate difference quotient is the integral over $B$ of $f(x)e^{-2\\pi i x\\cdot z}(e^{-2\\pi i x_jh}-1)/h$. The coordinate $x_j$ is bounded on $B$; [F3] therefore makes $(e^{-2\\pi i x_jh}-1)/h$ converge uniformly on $B$ to $-2\\pi i x_j$ as $h\\to0$. Multiplication by the fixed bounded continuous factor $f(x)e^{-2\\pi i x\\cdot z}$ preserves uniform convergence, and [F4] passes the real and imaginary integrals to their limits. Thus the coordinate derivative exists and is the displayed integral. Since the other coordinate and the point were arbitrary, every coordinate slice is complex differentiable everywhere.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-ip-compact-support-fourier-laplace-is-entire-2.1",
+          "claim": "By [F5], each coordinate slice is entire. At real $z=\\xi$, the defining integral is exactly the compact-support Fourier integral of [F1], so $F(\\xi)=\\widehat f(\\xi)$. This proves all claims without using a Lebesgue/Riemann identification theorem or Countable Choice.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 defines the zero integrand on any containing rectangle, so the integral is zero and independent of the rectangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 includes the real frequency zero in the restriction to the compact-support Fourier transform."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 proves the complex difference quotient for every h tending to zero, with no one-sided endpoint restriction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly chooses a nondegenerate rectangle containing the compact support."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "lem-ip-schwartz-radon-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-schwartz-radon-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta=(\\theta_1,\\theta_2)\\in S^1$, $s\\in\\mathbb R$, and $\\theta^\\perp=(-\\theta_2,\\theta_1)$, define $R_{\\mathcal S}f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$, where the absolutely convergent integral is with respect to one-dimensional Lebesgue measure. Here $\\mathcal S(\\mathbb R^2)$ is the space of smooth complex functions for which every seminorm $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|$, for multi-indices $\\alpha,\\beta$, is finite. The parameter $\\theta$ is the unit normal to the line, so $(\\theta,s)$ and $(-\\theta,-s)$ represent the same unoriented line. Under the Axiom of Countable Choice, the Lebesgue integral in this definition agrees on compactly supported smooth inputs with the compact-support Riemann line integral, so the normalization is the same.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval and let $f:X\\times I\\to\\mathbb C$\nbe such that:\n\n1. for every $t\\in I$, the function $x\\mapsto f(x,t)$ is integrable;\n2. for almost every $x$, the map $t\\mapsto f(x,t)$ is differentiable on $I$;\n3. for every $t\\in I$, the function\n   $$x\\mapsto \\frac{\\partial f}{\\partial t}(x,t),$$\n   extended by zero where the derivative is undefined, is measurable;\n4. there are a measurable null set $N$ and a nonnegative measurable function\n   $g$ with\n   $$\\int g\\,d\\mu<+\\infty$$\n   and\n   $$\\left|\\frac{\\partial f}{\\partial t}(x,t)\\right|\\le g(x)$$\n   for every $t\\in I$ and every $x\\in X\\setminus N$.\n\nThen\n$$F(t):=\\int f(x,t)\\,d\\mu(x)$$\nis differentiable on $I$, and\n$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$\nwith the same zero extension in the last integral.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ip-schwartz-radon-well-defined-1.1",
+          "claim": "Fix a derivative multi-index $\\beta$ and an integer $N\\ge1$, and choose an integer $m\\ge N$. Since $(1+|x|)^N\\le(1+|x_1|)^m(1+|x_2|)^m$, expanding the right side and using the finite Schwartz seminorms in [F1] gives a finite $C_{\\beta,N}(f)$ with $|\\partial^\\beta f(x)|\\le C_{\\beta,N}(f)(1+|x|)^{-N}$. For $x=s\\theta+t\\theta^\\perp$, orthogonality gives $|x|=(s^2+t^2)^{1/2}\\ge(|s|+|t|)/\\sqrt2$, so the line integrand is bounded by a constant times $(1+|s|+|t|)^{-N}$. Taking $N>1$ makes this majorant integrable in $t$, proving absolute convergence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ip-schwartz-radon-well-defined-2.1",
+          "claim": "Let $D_\\theta=\\theta\\cdot\\nabla$. The chain rule [F4] gives $\\partial_s^k f(s\\theta+t\\theta^\\perp)=(D_\\theta^k f)(s\\theta+t\\theta^\\perp)$. Expanding $D_\\theta^k$ gives finitely many partial derivatives with coefficients bounded uniformly for $\\theta\\in S^1$. For the target decay order $N$, apply step 1.1 with spatial decay order $N+2$ to each such derivative. Integrating $(1+|s|+|t|)^{-N-2}$ in $t$ gives $\\left|\\int_{\\mathbb R}(D_\\theta^k f)(s\\theta+t\\theta^\\perp)\\,dt\\right|\\le C'_{k,N}(1+|s|)^{-N-1}\\le C'_{k,N}(1+|s|)^{-N}$, uniformly in $\\theta$ and $s$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ip-schwartz-radon-well-defined-3.1",
+          "claim": "Fix $s_0\\in\\mathbb R$ and a bounded open interval $I$ containing $s_0$. For each $k\\ge0$, set $g_k(t,s)=(D_\\theta^k f)(s\\theta+t\\theta^\\perp)$. Every slice $g_k(\\cdot,s)$ is integrable by step 1.1; it is differentiable in $s$ with derivative $g_{k+1}$ by [F4], and this derivative is measurable. Step 1.1 with spatial decay order $3$ bounds $|g_{k+1}(t,s)|\\le C(1+|t|)^{-3}$ uniformly for $s\\in I$, an integrable majorant. Thus [F3] proves $\\frac{d}{ds}\\int g_k(t,s)\\,dt=\\int g_{k+1}(t,s)\\,dt$. To see each resulting derivative is continuous, if $s=s'$ the difference is zero; otherwise apply [F5] to real and imaginary parts on the segment joining $s$ and $s'$. The same majorant gives $|g_k(t,s)-g_k(t,s')|\\le C|s-s'|(1+|t|)^{-3}$, and integration proves local continuity. Repeating for all $k$ and using the estimates in step 2.1 shows the offset function is Schwartz.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lem-ip-schwartz-radon-well-defined claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 apply to f=0 and give zero line integrals and zero derivatives."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 give bounds for every real offset s, with no finite-interval endpoint omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses an integer decay order m at least N; step 3.1 fixes an interval around an arbitrary s0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "lem-ip-limited-angle-radon-data-is-l2-on-compact-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-schwartz-radon-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta=(\\theta_1,\\theta_2)\\in S^1$, $s\\in\\mathbb R$, and $\\theta^\\perp=(-\\theta_2,\\theta_1)$, define $R_{\\mathcal S}f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$, where the absolutely convergent integral is with respect to one-dimensional Lebesgue measure. Here $\\mathcal S(\\mathbb R^2)$ is the space of smooth complex functions for which every seminorm $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|$, for multi-indices $\\alpha,\\beta$, is finite. The parameter $\\theta$ is the unit normal to the line, so $(\\theta,s)$ and $(-\\theta,-s)$ represent the same unoriented line. Under the Axiom of Countable Choice, the Lebesgue integral in this definition agrees on compactly supported smooth inputs with the compact-support Riemann line integral, so the normalization is the same.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support-1.1",
+          "claim": "Choose $R>0$ with $\\operatorname{supp}f\\subseteq\\overline B_R(0)$. If $|t|>R$, then $|s\\theta+t\\theta^\\perp|\\ge|t|>R$ and the integrand in [F1] is zero. On any compact set of $(\\theta,s)$, uniform continuity of $f$ on the compact image of $(s,\\theta,t)$ for $|t|\\le R$ shows that the line integrals vary continuously: the difference of two such integrals is at most $2R$ times the uniform difference of their integrands. Hence the data function is continuous and measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support-1.2",
+          "claim": "Put $D=\\operatorname{diam}(\\Omega)$ and $T_{\\theta,s}=\\{t\\in\\mathbb R:s\\theta+t\\theta^\\perp\\in\\Omega\\}$. Any two points of $T_{\\theta,s}$ differ by at most $D$, so this open set is contained in an interval of length at most $D$. Cauchy--Schwarz [F2] on $T_{\\theta,s}$, where the constant function $1$ has squared integral at most $D$, gives $|R_{\\mathcal S}f(\\theta,s)|^2\\le D\\int_{\\mathbb R}|f(s\\theta+t\\theta^\\perp)|^2\\,dt$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support-2.1",
+          "claim": "The function $(\\theta,s,t)\\mapsto|f(s\\theta+t\\theta^\\perp)|^2$ is bounded and vanishes unless $|s|,|t|\\le R$, so it is integrable on the finite-measure set $\\Theta\\times[-R,R]^2$. Apply [F4] to exchange the iterated integrals, and for each $\\theta$ apply [F3] to the orthogonal diffeomorphism $(s,t)\\mapsto s\\theta+t\\theta^\\perp$, whose absolute Jacobian is one. This gives $\\int_\\Theta\\int_{\\mathbb R^2}|f(s\\theta+t\\theta^\\perp)|^2\\,ds\\,dt\\,d\\theta=|\\Theta|\\,\\|f\\|_{L^2(\\mathbb R^2)}^2$. Integrating step 1.2 yields the claimed bound and square-integrability.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "A1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lem-ip-limited-angle-radon-data-is-l2-on-compact-support claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 gives the inequality for the zero function, and step 2.1 gives zero data norm."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 integrate over the full real offset axis and include the compact-support boundary where the integrand vanishes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses a radius R containing the compact support."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "cor-ip-limited-angle-compact-support-uniqueness": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "thm-ip-fourier-slice-identity",
+          "source_section": "Statement",
+          "quote": "For every $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$, every unit normal $\\theta\\in S^1$, and every $\\sigma\\in\\mathbb R$, the compact-support Fourier transform of the line data in the offset variable equals the restriction of the two-dimensional Fourier transform to the line in frequency space with direction $\\theta$:\n$$\\widehat{Rf}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-compact-support-fourier-laplace-is-entire",
+          "source_section": "Statement",
+          "quote": "Let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ and, for $z=(z_1,z_2)\\in\\mathbb C^2$, define $F(z)=\\int_{\\mathbb R^2}f(x)e^{-2\\pi i(x_1z_1+x_2z_2)}\\,dx$ using the compact-support Riemann integral on any rectangle containing $\\operatorname{supp}f$. This value is independent of the containing rectangle. Each coordinate slice of $F$ is entire, with $\\frac{\\partial F}{\\partial z_j}(z)=\\int_{\\mathbb R^2}(-2\\pi ix_j)f(x)e^{-2\\pi i x\\cdot z}\\,dx$ for $j=1,2$, and the restriction of $F$ to $\\mathbb R^2$ is the compact-support Fourier transform in the stated line-normal convention. The proof uses no Countable Choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-identity-theorem-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "If two holomorphic functions on a complex domain agree on a set with an accumulation point in the domain, then they agree everywhere on the domain.\n\nPrecisely, let $\\Omega\\subseteq\\mathbb C$ be a complex domain (A complex domain is a nonempty connected open subset of $\\mathbb C$), let $f,g:\\Omega\\to\\mathbb C$ be holomorphic, and suppose that some $a\\in\\Omega$ is an accumulation point of $\\{z\\in\\Omega:f(z)=g(z)\\}$. Then $f=g$ on $\\Omega$. The requirement $a\\in\\Omega$ is essential.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a nonempty compact metric space and let $A\\subseteq C(K,\\mathbb R)$ be a unital subalgebra which separates points. Then $A$ is dense in $C(K,\\mathbb R)$ for the supremum metric.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cor-ip-limited-angle-compact-support-uniqueness-1.1",
+          "claim": "The hypothesis and the compact-support Fourier-slice identity [F2] give $\\widehat f(\\sigma\\theta)=0$ for every $\\theta\\in\\Theta$ and $\\sigma\\in\\mathbb R$. By [F1], this includes the nonempty open positive-radius sector generated by $J$; choose a product of open real intervals $I_1\\times I_2$ inside that sector. For each real $\\xi_2\\in I_2$, the entire function $z_1\\mapsto\\widehat f(z_1,\\xi_2)$ vanishes on $I_1$, so [F5] makes it zero for every complex $z_1$. Then for every real $\\xi_1$ the entire second-coordinate slice vanishes on $I_2$, and [F5] makes it zero everywhere. Thus $\\widehat f$ vanishes on all of $\\mathbb R^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "cor-ip-limited-angle-compact-support-uniqueness-2.1",
+          "claim": "Let $K=\\operatorname{supp}f$. If $K=\\varnothing$, then $f=0$. Otherwise, fix a rectangle $B$ whose interior contains $K$ and interpret all integrals below as compact-support Riemann integrals over $B$. Repeated use of the coordinate derivative formula in [F3] shows $\\int_B x^\\alpha f(x)\\,dx=0$ for every multi-index $\\alpha$, since all real-frequency derivatives of $\\widehat f$ vanish at the origin. The real polynomials restricted to $K$ form a unital subalgebra separating points, because the coordinate functions distinguish distinct points. By [F6], approximate $\\operatorname{Re}\\overline f$ and $\\operatorname{Im}\\overline f$ uniformly on $K$ by real polynomials; combine these approximations into complex polynomials $p_j$. Every moment is zero, so $\\int_Bfp_j=0$. Also $f=0$ outside $K$, so $\\int_B|f|^2=\\left|\\int_Bf(\\overline f-p_j)\\right|\\le\\sqrt2\\,\\operatorname{vol}(B)\\|f\\|_{C(B)}\\|p_j-\\overline f\\|_{C(K)}\\to0$, using the real Riemann integral bound [F4] on both components. If $f$ were nonzero at a point, continuity would bound $|f|^2$ below by a positive number on a nondegenerate box inside $B$, forcing its nonnegative Riemann integral to be positive. Thus $f=0$ everywhere. This proof uses neither Fourier inversion nor Countable Choice.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 handles K=empty separately and concludes f=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 begins from zero data and derives zero Fourier values throughout the measured sector."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses every real sigma, including sigma=0; step 2.1 uses open frequency intervals for the identity theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses a product of open intervals inside the nonempty polar sector; step 2.1 chooses a containing rectangle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "lem-ip-fourier-slice-identity-on-schwartz": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-schwartz-radon-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta=(\\theta_1,\\theta_2)\\in S^1$, $s\\in\\mathbb R$, and $\\theta^\\perp=(-\\theta_2,\\theta_1)$, define $R_{\\mathcal S}f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$, where the absolutely convergent integral is with respect to one-dimensional Lebesgue measure. Here $\\mathcal S(\\mathbb R^2)$ is the space of smooth complex functions for which every seminorm $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|$, for multi-indices $\\alpha,\\beta$, is finite. The parameter $\\theta$ is the unit normal to the line, so $(\\theta,s)$ and $(-\\theta,-s)$ represent the same unoriented line. Under the Axiom of Countable Choice, the Lebesgue integral in this definition agrees on compactly supported smooth inputs with the compact-support Riemann line integral, so the normalization is the same.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-schwartz-radon-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $f\\in\\mathcal S(\\mathbb R^2)$ and every $\\theta\\in S^1$, the defining line integral for $R_{\\mathcal S}f(\\theta,s)$ converges absolutely for every $s\\in\\mathbb R$, and $s\\mapsto R_{\\mathcal S}f(\\theta,s)$ belongs to $\\mathcal S(\\mathbb R)$. For each pair of nonnegative integers $k,N$, its $k$th derivative is bounded by $C_{k,N}(1+|s|)^{-N}$ with a finite constant $C_{k,N}$ independent of $s$ and $\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fourier-transform-on-l-one-of-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and $f\\in L^1(\\mathbb R^n;\\mathbb C)$, with the componentwise integral and quotient conventions of [[def-complex-lp-and-euclidean-test-function-conventions]], [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-l-one-of-a-measure]]. Define\n$$\\widehat f(\\xi)=\\mathcal Ff(\\xi):=\\int_{\\mathbb R^n}f(x)\\exp(-2\\pi i x\\cdot\\xi)\\,dx,\\qquad \\xi\\in\\mathbb R^n.$$\nHere $x\\cdot\\xi=\\sum_{j=1}^n x_j\\xi_j$, Lebesgue measure is used, and the exponential is [[def-complex-exponential]]. Its unit modulus follows from [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. The integral is evaluated using any measurable representative. Absolute convergence and representative independence are the obligations discharged by [[lem-l-one-fourier-transform-is-well-defined]]. The output is a function defined at every frequency, not merely an almost-everywhere class. At frequency zero the formula reads $\\widehat f(0)=\\int f$. No choice selection of representatives for a family of classes is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $f\\in\\mathcal S(\\mathbb R^n)$, then $x^\\alpha\\partial^\\beta f\\in L^p$ for every $1\\le p\\le\\infty$ and every $\\alpha,\\beta$. Its norm is bounded by a finite sum of Schwartz seminorms.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ip-fourier-slice-identity-on-schwartz-1.1",
+          "claim": "The Schwartz seminorms and the estimate proved in [[lem-ip-schwartz-radon-well-defined]] give $|f(s\\theta+t\\theta^\\perp)|\\le C_N(1+|s|+|t|)^{-N}$ for every $N$, after changing the constant. For $N>2$ this is integrable on $\\mathbb R^2$ in $(s,t)$. The offset integral is absolutely convergent, and [F6] applied to the absolutely integrable function $f(s\\theta+t\\theta^\\perp)e^{-2\\pi i\\sigma s}$ yields $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)=\\int_{\\mathbb R^2}f(s\\theta+t\\theta^\\perp)e^{-2\\pi i\\sigma s}\\,ds\\,dt$. The Lebesgue Fourier-transform definitions in [F3] are applicable by [F8].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-ip-fourier-slice-identity-on-schwartz-1.2",
+          "claim": "Choose a smooth radial cutoff $\\chi_R$ equal to one on the radius-$R$ ball and supported in the radius-$2R$ ball, using [F4], and put $f_R=\\chi_Rf$. Then $f_R\\in C_c^\\infty(\\mathbb R^2)$. The matrix with columns $\\theta,\\theta^\\perp$ is a positively oriented orthogonal matrix, so its determinant is one. Apply the Lebesgue change-of-variables formula [F7] to the integrable compactly supported function $x\\mapsto f_R(x)e^{-2\\pi i\\sigma x\\cdot\\theta}$ and the map $(s,t)\\mapsto s\\theta+t\\theta^\\perp$; its pullback integral is $\\int_{\\mathbb R^2}f_R(s\\theta+t\\theta^\\perp)e^{-2\\pi i\\sigma s}\\,ds\\,dt=\\widehat{f_R}(\\sigma\\theta)$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F7",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-ip-fourier-slice-identity-on-schwartz-2.1",
+          "claim": "As $R\\to\\infty$, $f_R(x)\\to f(x)$ and $|f_R(x)|\\le |f(x)|$. The function $f$ is integrable by [F8], and the same Schwartz estimate in $(s,t)$ gives an integrable majorant for $f_R(s\\theta+t\\theta^\\perp)$. Dominated convergence [F5] passes both integrals in step 1.2 to their limits; step 1.1 identifies the data-side limit with $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)$, while the spatial-side limit is $\\widehat f(\\sigma\\theta)$. This proves the formula.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F8",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lem-ip-fourier-slice-identity-on-schwartz claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 proves the identity for every real sigma, including sigma=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 passes the full integrals to their limits by dominated convergence; no offset or frequency endpoint is removed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 chooses a compact radial cutoff for each R and step 1.1 applies Fubini to integrable sections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "prop-ip-limited-angle-data-no-holder-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-visible-covector-for-limited-angle-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty proper open set of line normals, assume $\\theta\\in\\Theta$ if and only if $-\\theta\\in\\Theta$, and assume $S^1\\setminus\\overline{\\Theta}$ contains a nonempty open arc. The measured line with normal $\\theta$ and signed offset $s$ is $\\ell_{\\theta,s}=\\{y\\in\\mathbb R^2:y\\cdot\\theta=s\\}$. Identify the nonzero cotangent vectors of the Euclidean plane with pairs $(x,\\xi)\\in\\mathbb R^2\\times(\\mathbb R^2\\setminus\\{0\\})$. Such a covector is visible from $\\Theta$ when $\\xi/|\\xi|\\in\\Theta$, and invisible when $\\xi/|\\xi|\\notin\\Theta$. The associated measured Fourier wedge is\n\n$$W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-schwartz-radon-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta=(\\theta_1,\\theta_2)\\in S^1$, $s\\in\\mathbb R$, and $\\theta^\\perp=(-\\theta_2,\\theta_1)$, define $R_{\\mathcal S}f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$, where the absolutely convergent integral is with respect to one-dimensional Lebesgue measure. Here $\\mathcal S(\\mathbb R^2)$ is the space of smooth complex functions for which every seminorm $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|$, for multi-indices $\\alpha,\\beta$, is finite. The parameter $\\theta$ is the unit normal to the line, so $(\\theta,s)$ and $(-\\theta,-s)$ represent the same unoriented line. Under the Axiom of Countable Choice, the Lebesgue integral in this definition agrees on compactly supported smooth inputs with the compact-support Riemann line integral, so the normalization is the same.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For complex $C^1$ functions $u,v$ on $[a,b]$, $a<b$, Lebesgue integration gives $\\int_a^b u'v=u(b)v(b)-u(a)v(a)-\\int_a^b uv'$ and $\\int_a^b u'=u(b)-u(a)$. If instead $u,v\\in C^1(\\mathbb R;\\mathbb C)$, $u'v,uv'\\in L^1(\\mathbb R)$ and $u(x)v(x)\\to0$ as $x\\to\\pm\\infty$, then $\\int_{\\mathbb R}u'v=-\\int_{\\mathbb R}uv'$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of Half-open boxes in $\\mathbb{R}^n$ and their volume, and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ (Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be a nonempty bounded open set, let $\\Theta\\subset S^1$ be measurable, and use arc-length measure $d\\theta$ on $S^1$. For every $f\\in C_c^\\infty(\\Omega;\\mathbb C)$, the function $(\\theta,s)\\mapsto R_{\\mathcal S}f(\\theta,s)$ belongs to $L^2(\\Theta\\times\\mathbb R,d\\theta\\,ds)$ and satisfies $\\|R_{\\mathcal S}f\\|_{L^2(\\Theta\\times\\mathbb R)}^2\\le \\operatorname{diam}(\\Omega)\\,|\\Theta|\\,\\|f\\|_{L^2(\\mathbb R^2)}^2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prop-ip-limited-angle-data-no-holder-stability-1.1",
+          "claim": "Choose $0<r<R$ and apply [F3] to obtain a bump supported in $B_R(x_0)$ and equal to one on a smaller ball; translation of the concentric bump places it inside $K$. Its $L^2$ norm is finite and positive because it is bounded with compact support and equals one on a ball containing a nondegenerate box, whose measure is positive by [F10]. Rescale it to a real-valued $\\psi$ with $\\|\\psi\\|_2=1$. Choose $\\lambda>0$ so that $\\lambda(1+\\|\\nabla\\psi\\|_2+2\\pi)\\le M$, and put $u_N(x)=\\lambda N^{-1}e^{2\\pi iNv\\cdot x}\\psi(x)$. Then all supports equal $\\operatorname{supp}\\psi\\Subset\\operatorname{int}K$ and $\\|u_N\\|_2=\\lambda N^{-1}$. By [F7]–[F9], $\\partial_j u_N=\\lambda N^{-1}e^{2\\pi iNv\\cdot x}(\\partial_j\\psi+2\\pi iNv_j\\psi)$, so $\\|\\nabla u_N\\|_2\\le\\lambda N^{-1}\\|\\nabla\\psi\\|_2+2\\pi\\lambda\\|v\\|\\,\\|\\psi\\|_2\\le\\lambda(\\|\\nabla\\psi\\|_2+2\\pi)$. Therefore $\\|u_N\\|_{H^1}\\le M$; set $a_M=\\lambda$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "prop-ip-limited-angle-data-no-holder-stability-1.2",
+          "claim": "Put $a=v\\cdot\\theta^\\perp$, so $|a|\\ge c>0$. The line formula gives $R_{\\mathcal S}u_N(\\theta,s)=\\lambda N^{-1}e^{2\\pi iNs(v\\cdot\\theta)}\\int_{\\mathbb R}e^{2\\pi iNat}\\psi(s\\theta+t\\theta^\\perp)\\,dt$. For each integer $m\\ge1$, integrate the last integral by parts $m$ times over an interval containing the support of its integrand. The boundary terms vanish because $\\psi$ and all its derivatives vanish near the endpoints. Applying [F6] repeatedly gives $\\left|\\int_{\\mathbb R}e^{2\\pi iNat}\\psi(s\\theta+t\\theta^\\perp)\\,dt\\right|\\le(2\\pi N|a|)^{-m}\\int_{\\mathbb R}|(\\theta^\\perp\\cdot\\nabla)^m\\psi(s\\theta+t\\theta^\\perp)|\\,dt$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F8",
+            "F9",
+            "A1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "prop-ip-limited-angle-data-no-holder-stability-2.1",
+          "claim": "Let $D=\\operatorname{diam}(\\operatorname{supp}\\psi)$. The set of $t$ values on a fixed line meeting this support has measure at most $D$. Cauchy--Schwarz [F4] bounds the square of the last integral in step 1.2 by $D\\int_{\\mathbb R}|(\\theta^\\perp\\cdot\\nabla)^m\\psi(s\\theta+t\\theta^\\perp)|^2\\,dt$. Integrate in $s$ and apply [F5] to the orthogonal change of variables $(s,t)\\mapsto s\\theta+t\\theta^\\perp$, whose absolute Jacobian is one. Expanding $(\\theta^\\perp\\cdot\\nabla)^m$ gives an $L^2$ bound independent of $\\theta$, since there are finitely many derivatives and all coefficients are bounded by one. Since $|a|\\ge c$ and $|\\Theta|\\le2\\pi$, step 1.2 yields a finite constant $C_m>0$, independent of $N$, with $\\|R_\\Theta u_N\\|_D\\le C_mN^{-m-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "prop-ip-limited-angle-data-no-holder-stability-3.1",
+          "claim": "Fix $\\alpha>0$ and choose an integer $m\\ge1$ with $\\alpha(m+1)>1$. The square-integrability bound [F11] makes the data norm finite for every member of the fixed-support class. If a uniform Hölder estimate with constant $C\\ge0$ held on the class in the Statement, steps 1.1 and 2.1 would give $\\lambda N^{-1}\\le C(C_mN^{-m-1})^\\alpha$ for every $N\\ge1$. Multiplication by $N$ makes the right side $CC_m^\\alpha N^{1-\\alpha(m+1)}$, which tends to zero as $N\\to\\infty$, contradicting $\\lambda>0$. Therefore no such estimate exists.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F11",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prop-ip-limited-angle-data-no-holder-stability claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 compares the positive L2 norm of the sequence with its data decay and rules out every positive exponent."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.3 include N=1 in the fixed-support H1 and data bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 hold for every integer N>=1 and every integer m>=1, including their first values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 constructs a bump inside the positive-radius ball and chooses lambda>0 for each M>0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "prop-ip-limited-angle-fourier-visibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-visible-covector-for-limited-angle-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty proper open set of line normals, assume $\\theta\\in\\Theta$ if and only if $-\\theta\\in\\Theta$, and assume $S^1\\setminus\\overline{\\Theta}$ contains a nonempty open arc. The measured line with normal $\\theta$ and signed offset $s$ is $\\ell_{\\theta,s}=\\{y\\in\\mathbb R^2:y\\cdot\\theta=s\\}$. Identify the nonzero cotangent vectors of the Euclidean plane with pairs $(x,\\xi)\\in\\mathbb R^2\\times(\\mathbb R^2\\setminus\\{0\\})$. Such a covector is visible from $\\Theta$ when $\\xi/|\\xi|\\in\\Theta$, and invisible when $\\xi/|\\xi|\\notin\\Theta$. The associated measured Fourier wedge is\n\n$$W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-schwartz-radon-transform",
+          "source_section": "Definition",
+          "quote": "For $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta=(\\theta_1,\\theta_2)\\in S^1$, $s\\in\\mathbb R$, and $\\theta^\\perp=(-\\theta_2,\\theta_1)$, define $R_{\\mathcal S}f(\\theta,s)=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt$, where the absolutely convergent integral is with respect to one-dimensional Lebesgue measure. Here $\\mathcal S(\\mathbb R^2)$ is the space of smooth complex functions for which every seminorm $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|$, for multi-indices $\\alpha,\\beta$, is finite. The parameter $\\theta$ is the unit normal to the line, so $(\\theta,s)$ and $(-\\theta,-s)$ represent the same unoriented line. Under the Axiom of Countable Choice, the Lebesgue integral in this definition agrees on compactly supported smooth inputs with the compact-support Riemann line integral, so the normalization is the same.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-fourier-slice-identity-on-schwartz",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta\\in S^1$, and $\\sigma\\in\\mathbb R$, the one-dimensional Fourier transform in the offset variable, using the phase $e^{-2\\pi i s\\sigma}$, satisfies $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta)$, where the two-dimensional transform uses the phase $e^{-2\\pi i x\\cdot\\xi}$. On compactly supported smooth inputs the formula has the same line parameterization and normalization as the Euclidean Radon transform.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-fourier-slice-identity",
+          "source_section": "Statement",
+          "quote": "For every $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$, every unit normal $\\theta\\in S^1$, and every $\\sigma\\in\\mathbb R$, the compact-support Fourier transform of the line data in the offset variable equals the restriction of the two-dimensional Fourier transform to the line in frequency space with direction $\\theta$:\n$$\\widehat{Rf}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-ip-limited-angle-compact-support-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty open set of unit line normals and let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$. If the line integral $Rf(\\theta,s)$ is zero for every $\\theta\\in\\Theta$ and $s\\in\\mathbb R$, then $f$ is zero everywhere. The assertion holds without Countable Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prop-ip-limited-angle-fourier-visibility-1.1",
+          "claim": "For each $\\theta\\in\\Theta$ and $\\sigma\\in\\mathbb R$, [F3] gives the Fourier-slice identity. If the restricted data vanish, their one-dimensional Fourier transforms vanish, so $\\widehat f(\\sigma\\theta)=0$. Every point of $W_\\Theta$ has this form, hence $\\widehat f$ vanishes on $W_\\Theta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "prop-ip-limited-angle-fourier-visibility-2.1",
+          "claim": "Now assume $f\\in C_c^\\infty$ and its restricted data are zero. By [F2] and the stated Countable Choice assumption, those data use the compact-support Riemann line-integral convention. The compact-support Fourier-slice identity [F4] gives $\\widehat f(\\sigma\\theta)=0$ for every $\\theta\\in\\Theta$ and $\\sigma\\in\\mathbb R$, so the transform vanishes on the measured wedge. The compact-support uniqueness result [F5] then yields $f=0$ everywhere through its separate choice-free analytic-continuation proof.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prop-ip-limited-angle-fourier-visibility claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 applies the Fourier-slice identity at every real sigma, including zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 includes sigma=0 in the formula; the measured wedge itself excludes the origin by definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no nonempty existential construction whose choice case is omitted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Neither the Fourier visibility assertion nor the compact-support uniqueness conclusion is stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither the Fourier visibility assertion nor the compact-support uniqueness conclusion is stated as an iff."
+        }
+      ]
+    },
+    "ex-ip-compact-support-limited-angle-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-visible-covector-for-limited-angle-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty proper open set of line normals, assume $\\theta\\in\\Theta$ if and only if $-\\theta\\in\\Theta$, and assume $S^1\\setminus\\overline{\\Theta}$ contains a nonempty open arc. The measured line with normal $\\theta$ and signed offset $s$ is $\\ell_{\\theta,s}=\\{y\\in\\mathbb R^2:y\\cdot\\theta=s\\}$. Identify the nonzero cotangent vectors of the Euclidean plane with pairs $(x,\\xi)\\in\\mathbb R^2\\times(\\mathbb R^2\\setminus\\{0\\})$. Such a covector is visible from $\\Theta$ when $\\xi/|\\xi|\\in\\Theta$, and invisible when $\\xi/|\\xi|\\notin\\Theta$. The associated measured Fourier wedge is\n\n$$W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-compact-support-fourier-laplace-is-entire",
+          "source_section": "Statement",
+          "quote": "Let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ and, for $z=(z_1,z_2)\\in\\mathbb C^2$, define $F(z)=\\int_{\\mathbb R^2}f(x)e^{-2\\pi i(x_1z_1+x_2z_2)}\\,dx$ using the compact-support Riemann integral on any rectangle containing $\\operatorname{supp}f$. This value is independent of the containing rectangle. Each coordinate slice of $F$ is entire, with $\\frac{\\partial F}{\\partial z_j}(z)=\\int_{\\mathbb R^2}(-2\\pi ix_j)f(x)e^{-2\\pi i x\\cdot z}\\,dx$ for $j=1,2$, and the restriction of $F$ to $\\mathbb R^2$ is the compact-support Fourier transform in the stated line-normal convention. The proof uses no Countable Choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-fourier-slice-identity",
+          "source_section": "Statement",
+          "quote": "For every $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$, every unit normal $\\theta\\in S^1$, and every $\\sigma\\in\\mathbb R$, the compact-support Fourier transform of the line data in the offset variable equals the restriction of the two-dimensional Fourier transform to the line in frequency space with direction $\\theta$:\n$$\\widehat{Rf}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-ip-limited-angle-compact-support-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty open set of unit line normals and let $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$. If the line integral $Rf(\\theta,s)$ is zero for every $\\theta\\in\\Theta$ and $s\\in\\mathbb R$, then $f$ is zero everywhere. The assertion holds without Countable Choice.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-compact-support-limited-angle-uniqueness-1.1",
+          "claim": "The ball $B_1(0)$ contains a smaller concentric ball, so [F2] supplies a bump with the stated support and plateau. It is nonzero because it equals one on the nonempty inner ball.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "ex-ip-compact-support-limited-angle-uniqueness-1.2",
+          "claim": "If $h$ has the same restricted data as $\\psi$, linearity of the line integral gives $R(h-\\psi)(\\theta,s)=0$ for every measured pair. By [F4], the Fourier transforms of $h$ and $\\psi$ agree on $W_\\Theta$; [F3] identifies these values as restrictions of their coordinate-entire Fourier-Laplace transforms. Applying [F5] to the compactly supported difference $h-\\psi$ gives $h-\\psi=0$ everywhere.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "ex-ip-compact-support-limited-angle-uniqueness-2.1",
+          "claim": "If the data of $\\psi$ were zero, [F5] would imply $\\psi=0$, contradicting its value one on $\\overline B_{1/2}(0)$. Thus its restricted data are nonzero while uniquely determining it in the stated compact-support class.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 applies uniqueness to h-psi, including the zero difference when h=psi."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 shows zero data for the nonzero bump would contradict compact-support uniqueness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no closed finite parameter interval with separate endpoint hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses the smooth bump supplier to choose the specified plateau bump."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "ex-ip-invisible-wedge-null-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-visible-covector-for-limited-angle-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty proper open set of line normals, assume $\\theta\\in\\Theta$ if and only if $-\\theta\\in\\Theta$, and assume $S^1\\setminus\\overline{\\Theta}$ contains a nonempty open arc. The measured line with normal $\\theta$ and signed offset $s$ is $\\ell_{\\theta,s}=\\{y\\in\\mathbb R^2:y\\cdot\\theta=s\\}$. Identify the nonzero cotangent vectors of the Euclidean plane with pairs $(x,\\xi)\\in\\mathbb R^2\\times(\\mathbb R^2\\setminus\\{0\\})$. Such a covector is visible from $\\Theta$ when $\\xi/|\\xi|\\in\\Theta$, and invisible when $\\xi/|\\xi|\\notin\\Theta$. The associated measured Fourier wedge is\n\n$$W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S$, and\n$$\\mathcal F(\\partial^\\alpha f)(\\xi)=(2\\pi i\\xi)^\\alpha\\widehat f(\\xi),\\qquad \\partial^\\beta\\widehat f=\\mathcal F((-2\\pi ix)^\\beta f).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fourier-transform-on-l-one-of-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and $f\\in L^1(\\mathbb R^n;\\mathbb C)$, with the componentwise integral and quotient conventions of [[def-complex-lp-and-euclidean-test-function-conventions]], [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-l-one-of-a-measure]]. Define\n$$\\widehat f(\\xi)=\\mathcal Ff(\\xi):=\\int_{\\mathbb R^n}f(x)\\exp(-2\\pi i x\\cdot\\xi)\\,dx,\\qquad \\xi\\in\\mathbb R^n.$$\nHere $x\\cdot\\xi=\\sum_{j=1}^n x_j\\xi_j$, Lebesgue measure is used, and the exponential is [[def-complex-exponential]]. Its unit modulus follows from [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. The integral is evaluated using any measurable representative. Absolute convergence and representative independence are the obligations discharged by [[lem-l-one-fourier-transform-is-well-defined]]. The output is a function defined at every frequency, not merely an almost-everywhere class. At frequency zero the formula reads $\\widehat f(0)=\\int f$. No choice selection of representatives for a family of classes is part of this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $f\\in\\mathcal S(\\mathbb R^n)$, then $x^\\alpha\\partial^\\beta f\\in L^p$ for every $1\\le p\\le\\infty$ and every $\\alpha,\\beta$. Its norm is bounded by a finite sum of Schwartz seminorms.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ip-fourier-slice-identity-on-schwartz",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every $f\\in\\mathcal S(\\mathbb R^2)$, $\\theta\\in S^1$, and $\\sigma\\in\\mathbb R$, the one-dimensional Fourier transform in the offset variable, using the phase $e^{-2\\pi i s\\sigma}$, satisfies $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta)$, where the two-dimensional transform uses the phase $e^{-2\\pi i x\\cdot\\xi}$. On compactly supported smooth inputs the formula has the same line parameterization and normalization as the Euclidean Radon transform.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-ip-schwartz-radon-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $f\\in\\mathcal S(\\mathbb R^2)$ and every $\\theta\\in S^1$, the defining line integral for $R_{\\mathcal S}f(\\theta,s)$ converges absolutely for every $s\\in\\mathbb R$, and $s\\mapsto R_{\\mathcal S}f(\\theta,s)$ belongs to $\\mathcal S(\\mathbb R)$. For each pair of nonnegative integers $k,N$, its $k$th derivative is bounded by $C_{k,N}(1+|s|)^{-N}$ with a finite constant $C_{k,N}$ independent of $s$ and $\\theta$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. For $1\\le p<\\infty$, the rule\n   $$\\|[f]\\|_p:=\\|f\\|_p\\qquad([f]\\in L^p(\\mu))$$\n   is well defined on the quotient classes.\n2. For $p=\\infty$, the rule\n   $$\\|[f]\\|_\\infty:=\\|f\\|_\\infty\\qquad([f]\\in L^\\infty(\\mu))$$\n   is well defined.\n3. In either case, with the quotient vector-space operations of\n   Coset equality, well-defined quotient operations, and the canonical projection with kernel $W$, the resulting pair\n   $(L^p(\\mu),\\|\\cdot\\|_p)$ is a normed space in the sense of\n   A norm on a real vector space, the induced metric, and the dictionary with the metric axioms.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$, $(Y,d_Y)$, and $(Q,d_Q)$ be metric spaces, let $U\\subseteq X$ be a nonempty admissible truth class, let $F:U\\to Y$ be a forward map, and let $q:U\\to Q$ assign each truth its target class. Let $x_0,x_1\\in U$, let $\\delta\\ge0$, and suppose a single datum $y\\in Y$ satisfies\n\n$$d_Y(y,F(x_0))\\le\\delta\\quad\\text{and}\\quad d_Y(y,F(x_1))\\le\\delta.$$\n\nFor every deterministic data-only estimator, meaning every function $\\widehat q:Y\\to Q$, the two target-class losses at that datum satisfy\n\n$$\\max\\{d_Q(\\widehat q(y),q(x_0)),d_Q(\\widehat q(y),q(x_1))\\}\\ge\\frac12d_Q(q(x_0),q(x_1)).$$\n\nIn particular, if $F(x_0)=F(x_1)$ but $q(x_0)\\ne q(x_1)$, no data-only estimator exactly recovers both truths. The quantitative bound also holds whenever the radius-$\\delta$ data balls around the two forward data share the observed datum $y$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-invisible-wedge-null-function-1.1",
+          "claim": "The sector $V$ is a nonempty open subset of $\\mathbb R^2$ because $(r,\\omega)\\mapsto r\\omega$ maps the open parameter set $(1,2)\\times J$ to an open polar-coordinate sector. It therefore contains a ball; [F2] supplies a nonzero $q\\in C_c^\\infty(V)$. This establishes the required bump choice.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "ex-ip-invisible-wedge-null-function-1.2",
+          "claim": "By the Fourier definition [F5], the function in the Example is $f(x)=\\widehat q(-x)$. Since $q$ is smooth with compact support, every Schwartz seminorm of $q$ is bounded, so $q\\in\\mathcal S$. By [F3] its transform is Schwartz, and reflection preserves each Schwartz seminorm up to sign, hence $f$ is Schwartz; [F7] gives $f\\in L^2\\cap L^1$. The reflection substitution [F6] and inversion [F4] give $\\widehat f(\\eta)=\\int\\widehat q(-x)e^{-2\\pi i x\\cdot\\eta}\\,dx=\\int\\widehat q(y)e^{2\\pi i y\\cdot\\eta}\\,dy=q(\\eta)$. Since $q\\ne0$, this identity implies $f$ is nonzero as an $L^1$ and $L^2$ class.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-invisible-wedge-null-function-1.3",
+          "claim": "For $\\theta\\in\\Theta$ and $\\sigma\\ne0$, the point $\\sigma\\theta$ is outside the support of $q$ because every frequency in $V$ has direction in $J$ and $\\overline J$ is disjoint from $\\overline\\Theta$; also $q(0)=0$ since $V$ avoids the origin. Thus [F8] gives $\\widehat{R_{\\mathcal S}f}(\\theta,\\sigma)=q(\\sigma\\theta)=0$ for all real $\\sigma$. By [F9], the offset function is Schwartz, so Fourier inversion [F4] in one dimension gives $R_{\\mathcal S}f(\\theta,s)=0$ for every $s$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "ex-ip-invisible-wedge-null-function-2.1",
+          "claim": "Let the parameter and target metric spaces both be $L^2(\\mathbb R^2)$ with distance $d(g,h)=\\|g-h\\|_2$, let the admissible truth class be $U=\\{0,f\\}$, and let the target map $q:U\\to L^2(\\mathbb R^2)$ be inclusion. Give the data space $Y=L^2(\\Theta\\times\\mathbb R)$ its norm metric and define $F:U\\to Y$ by the restricted line integrals. The normed-space result [F10] and the metric axioms [F12] give the parameter, target, and data metrics used here. Theorem [F11] applies directly to this truth class and target map. Step 1.3 gives $F(0)=F(f)=0$, while step 1.2 gives $d(q(0),q(f))=\\|f\\|_2>0$. Apply [F11] with shared datum $0$ and radius $0$ to any deterministic estimator $\\Phi:Y\\to L^2(\\mathbb R^2)$; its maximum target loss is at least $\\|f\\|_2/2$. This proves the asserted lower bound on the stated two-truth class.",
+          "step": "2.1",
+          "inputs": [
+            "F10",
+            "F11",
+            "F12",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ex-ip-invisible-wedge-null-function claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.3 treats sigma=0 separately because the annular sector avoids the origin, and establishes zero data for every measured pair."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item fixes the Euclidean dimension and has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate domains are excluded by the item's stated openness, positive-radius, compact-support, or full-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3 covers all real sigma, including zero, before applying one-dimensional Fourier inversion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses a ball and a smooth compactly supported nonzero frequency bump inside the blind sector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "ex-ip-high-frequency-limited-angle-instability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-visible-covector-for-limited-angle-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta\\subset S^1$ be a nonempty proper open set of line normals, assume $\\theta\\in\\Theta$ if and only if $-\\theta\\in\\Theta$, and assume $S^1\\setminus\\overline{\\Theta}$ contains a nonempty open arc. The measured line with normal $\\theta$ and signed offset $s$ is $\\ell_{\\theta,s}=\\{y\\in\\mathbb R^2:y\\cdot\\theta=s\\}$. Identify the nonzero cotangent vectors of the Euclidean plane with pairs $(x,\\xi)\\in\\mathbb R^2\\times(\\mathbb R^2\\setminus\\{0\\})$. Such a covector is visible from $\\Theta$ when $\\xi/|\\xi|\\in\\Theta$, and invisible when $\\xi/|\\xi|\\notin\\Theta$. The associated measured Fourier wedge is\n\n$$W_\\Theta=\\{\\sigma\\theta:\\theta\\in\\Theta,\\ \\sigma\\in\\mathbb R\\setminus\\{0\\}\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of Half-open boxes in $\\mathbb{R}^n$ and their volume, and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ (Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-ip-limited-angle-data-no-holder-stability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be a bounded open set containing a closed ball $K=\\overline B_R(x_0)$ of positive radius, and let $\\Theta\\subset S^1$ be a nonempty open antipodally symmetric set. Write $\\theta^\\perp=(-\\theta_2,\\theta_1)$ and, for a Schwartz function $g$, define $R_{\\mathcal S}g(\\theta,s)=\\int_{\\mathbb R}g(s\\theta+t\\theta^\\perp)\\,dt$; use the same integral for smooth functions supported in $K$. Suppose a unit vector $v\\in S^1$ satisfies $c:=\\inf_{\\theta\\in\\Theta}|v\\cdot\\theta^\\perp|>0$. For each smooth complex function $u$ supported in $K$, define $\\|u\\|_{H^1}:=(\\|u\\|_2^2+\\|\\partial_1u\\|_2^2+\\|\\partial_2u\\|_2^2)^{1/2}$ using Lebesgue measure on $\\mathbb R^2$, and set $\\|R_\\Theta u\\|_D:=(\\int_\\Theta\\int_{\\mathbb R}|R_{\\mathcal S}u(\\theta,s)|^2\\,ds\\,d\\theta)^{1/2}$, where $ds$ is Lebesgue measure and $d\\theta$ is arc-length measure. For every $M>0$ there are $a_M>0$, functions $u_N\\in C_c^\\infty(\\operatorname{int}K;\\mathbb C)$ for all integers $N\\ge1$, and constants $C_m>0$ for all integers $m\\ge1$, such that all $u_N$ have one fixed compact support and $\\|u_N\\|_{H^1}\\le M$, $\\|u_N\\|_2=a_MN^{-1}$, and $\\|R_\\Theta u_N\\|_D\\le C_mN^{-m-1}$. Consequently, for every fixed $M>0$, no $\\alpha>0$ and $C\\ge0$ satisfy $\\|u\\|_2\\le C\\|R_\\Theta u\\|_D^\\alpha$ for every smooth $u$ supported in $K$ with $\\|u\\|_{H^1}\\le M$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-high-frequency-limited-angle-instability-1.1",
+          "claim": "The set $\\Theta$ is the inverse image of the open interval $(-1/2,1/2)$ under the continuous coordinate map $\\theta\\mapsto\\theta_1$, so it is open; changing $\\theta$ to $-\\theta$ preserves $|\\theta_1|$, so it is antipodally symmetric. Its complement contains arcs around $(1,0)$ and $(-1,0)$. For every $\\theta\\in\\Theta$, $|\\theta_2|=\\sqrt{1-\\theta_1^2}>\\sqrt3/2$, hence the infimum is at least $\\sqrt3/2$; approaching either boundary $|\\theta_1|=1/2$ shows the infimum is exactly $\\sqrt3/2$. By [F1] this is $\\inf_{\\theta\\in\\Theta}|v\\cdot\\theta^\\perp|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-high-frequency-limited-angle-instability-1.2",
+          "claim": "A translated or rescaled bump from [F2] has compact support in $B_1(0)$ and equals one on a smaller ball. That inner ball contains a nondegenerate box, which has positive measure by [F3]; compact support makes its $L^2$ norm finite, and the plateau makes the norm positive. Divide by this norm to obtain the required real $\\psi$ with $\\|\\psi\\|_2=1$. Since $K=\\overline B_1(0)$ lies inside $\\Omega=B_2(0)$, its support is contained in the fixed set $K$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "ex-ip-high-frequency-limited-angle-instability-2.1",
+          "claim": "The formula in the Example is the modulation family in [F4]. The chosen $\\lambda_M$ satisfies $\\lambda_M(1+\\|\\nabla\\psi\\|_2+2\\pi)=M/2\\le M$, and the geometric verification in step 1.1 supplies the positive lower bound required there. Thus the family has the stated fixed support, $H^1$ and $L^2$ bounds, and rapid restricted-data decay.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-high-frequency-limited-angle-instability-3.1",
+          "claim": "If a uniform Hölder estimate with exponent $\\alpha>0$ and constant $C\\ge0$ held on the fixed-support class, choose an integer $m\\ge1$ with $\\alpha(m+1)>1$. Step 2.1 would imply $\\lambda_MN^{-1}\\le C(C_mN^{-m-1})^\\alpha$, so $\\lambda_M\\le CC_m^\\alpha N^{1-\\alpha(m+1)}\\to0$, contradicting $\\lambda_M>0$. Therefore no such estimate holds.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ex-ip-high-frequency-limited-angle-instability claim concerns its stated nonempty analytic or geometric inputs; the empty object case is either excluded by the hypotheses or is not a separate input family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero truth satisfies any homogeneous stability inequality trivially; the example's obstruction is the nonzero modulated sequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 applies the sequence bounds for every N>=1, including N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 computes the exact infimum sqrt(3)/2 as theta_1 approaches either excluded aperture endpoint."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 uses all integer m>=1 and all N>=1, including their first values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 constructs and normalizes a plateau bump in the specified support ball."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication or existence claim, not a biconditional."
+        }
+      ]
+    },
+    "op-ip-stable-limited-angle-reconstruction": {
+      "open_problem_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The statement defines the fixed H1 source class, data space, deterministic estimator infimum, noise radius, L2 loss, and requested matching asymptotic bounds without a hidden algorithmic quantifier."
+        },
+        "status": {
+          "verdict": "pass",
+          "evidence": "The item records the known compact-support uniqueness and local no-Hölder lower bound, and leaves the general all-domain, all-aperture deterministic minimax order open as of the checked 2026-10-19 source set."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Salo §2.1 pp. 4–5 and Krishnan–Quinto §§1.3.2, 1.5.1 pp. 13–14, 34–35 were read in full; Mazzucchelli–Salo–Tzou §§1.1–1.3 pp. 1–5 was read for context only and is not used as a minimax proof."
+        }
+      },
+      "citations": [],
+      "derivations": []
+    }
+  }
+}

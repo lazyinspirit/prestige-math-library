@@ -1,0 +1,225 @@
+[
+  {
+    "order": 3022,
+    "id": "network-tomography-and-experiment-design",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Active network tomography and identifiability by design",
+    "companion": "network-tomography-and-experiment-design-examples",
+    "requires": [
+      "statistical-inverse-experiments-and-white-noise",
+      "statistical-experiments-models-and-identifiability",
+      "em-algorithm-and-latent-variable-likelihood-ascent"
+    ],
+    "items": [
+      {
+        "id": "def-ip-tree-probing-experiment",
+        "kind": "definition",
+        "page": "network-tomography-and-experiment-design",
+        "dependency_level": 0,
+        "title": "Finite-tree multicast loss experiments",
+        "deps": [
+          "def-statistical-experiment"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Cáceres, N. Duffield, J. Horowitz, and D. Towsley, Multicast-Based Inference of Network-Internal Loss Characteristics, IEEE Transactions on Information Theory 45 (1999), 2462–2480",
+              "url": "https://www.kiskeya.net/ramon/work/pubs/toit99.pdf",
+              "locator": "§§2.1–2.3, PDF pp. 3–5: logical multicast-tree conventions, independent link-level Bernoulli losses, and receiver-outcome likelihood"
+            },
+            {
+              "title": "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44",
+              "url": "https://arxiv.org/pdf/0708.1079",
+              "locator": "§§1–2, PDF pp. 1–4: known rooted logical tree, link-level Bernoulli variables, and path-product observations"
+            }
+          ]
+        },
+        "definition": "A finite rooted directed tree $T=(V,E)$ has root $o$, with all edges directed away from $o$, and a nonempty set $R$ of leaves other than $o$. Every nonroot internal vertex has at least two children. For a vertex $v$, its children are the vertices joined to $v$ by an outgoing edge; $P(o,v)$ is the unique edge set on the path from $o$ to $v$. The root may have any finite number of children.\n\nA finite probe design is a nonempty finite family $\\mathcal C=((C_d,N_d))_{d=1}^D$, where each receiver set $C_d$ is a nonempty subset of $R$ and each probe count $N_d$ is a positive integer. A singleton receiver set is a unicast scheme; a receiver set of size at least two is a multicast scheme. Its used edge set is $E_d=\\bigcup_{r\\in C_d}P(o,r)$.\n\nFor a link-success parameter vector $p=(p_e)_{e\\in E}\\in(0,1)^E$, each design $d$ and probe $j\\in\\{1,\\ldots,N_d\\}$ has mutually independent link-success variables $X_{e,d,j}\\in\\{0,1\\}$ for $e\\in E_d$, with $\\Pr_p(X_{e,d,j}=1)=p_e$. The same $p_e$ applies in every design and probe (temporal homogeneity). The observed receiver indicator is\n$$\nY_{r,d,j}=\\prod_{e\\in P(o,r)}X_{e,d,j}\\qquad(r\\in C_d).\n$$\n\nFor $y\\in\\{0,1\\}^{C_d}$ let\n$$\n\\Omega_{d,y}=\\left\\{x\\in\\{0,1\\}^{E_d}: y_r=\\prod_{e\\in P(o,r)}x_e\\text{ for every }r\\in C_d\\right\\},\\qquad w_{p,d}(x)=\\prod_{e\\in E_d}p_e^{x_e}(1-p_e)^{1-x_e}.\n$$\nThe one-probe outcome law is\n$$\nP_{p,d}(y)=\\sum_{x\\in\\Omega_{d,y}}w_{p,d}(x).\n$$\nThese probabilities sum to one because the sets $\\Omega_{d,y}$ partition the finite link-state space and $\\sum_{x\\in\\{0,1\\}^{E_d}}w_{p,d}(x)=\\prod_{e\\in E_d}(p_e+(1-p_e))=1$. The complete experiment observes $N_d$ independent outcomes with law $P_{p,d}$ for each design, independently across designs. If the data are summarized by counts, $n_{d,y}\\in\\mathbb N_0$ is the number of probes in design $d$ with outcome $y$, and $\\sum_y n_{d,y}=N_d$.\n\nThis is a finite statistical experiment: its parameter space is $(0,1)^E$ and its sampling law is the finite product of the stated receiver-outcome laws.",
+        "status": "draft",
+        "statement": "A finite rooted directed tree $T=(V,E)$ has root $o$, with all edges directed away from $o$, and a nonempty receiver set $R$ consisting of every leaf other than $o$. Every nonroot internal vertex has at least two children. For a vertex $v$, its children are the vertices joined to $v$ by an outgoing edge; $P(o,v)$ is the unique edge set on the path from $o$ to $v$. The root may have any finite number of children.\n\nA finite probe design is a nonempty finite family $\\mathcal C=((C_d,N_d))_{d=1}^D$, where each receiver set $C_d$ is a nonempty subset of $R$ and each probe count $N_d$ is a positive integer. A singleton receiver set is a unicast scheme; a receiver set of size at least two is a multicast scheme. Its used edge set is $E_d=\\bigcup_{r\\in C_d}P(o,r)$.\n\nFor a link-success parameter vector $p=(p_e)_{e\\in E}\\in(0,1)^E$, each design $d$ and probe $j\\in\\{1,\\ldots,N_d\\}$ has mutually independent link-success variables $X_{e,d,j}\\in\\{0,1\\}$ for $e\\in E_d$, with $\\Pr_p(X_{e,d,j}=1)=p_e$. The same $p_e$ applies in every design and probe (temporal homogeneity). The observed receiver indicator is\n$$\nY_{r,d,j}=\\prod_{e\\in P(o,r)}X_{e,d,j}\\qquad(r\\in C_d).\n$$\n\nFor $y\\in\\{0,1\\}^{C_d}$ let\n$$\n\\Omega_{d,y}=\\left\\{x\\in\\{0,1\\}^{E_d}: y_r=\\prod_{e\\in P(o,r)}x_e\\text{ for every }r\\in C_d\\right\\},\\qquad w_{p,d}(x)=\\prod_{e\\in E_d}p_e^{x_e}(1-p_e)^{1-x_e}.\n$$\nThe one-probe outcome law is\n$$\nP_{p,d}(y)=\\sum_{x\\in\\Omega_{d,y}}w_{p,d}(x).\n$$\nThese probabilities sum to one because the sets $\\Omega_{d,y}$ partition the finite link-state space and $\\sum_{x\\in\\{0,1\\}^{E_d}}w_{p,d}(x)=\\prod_{e\\in E_d}(p_e+(1-p_e))=1$. The complete experiment observes $N_d$ independent outcomes with law $P_{p,d}$ for each design, independently across designs. If the data are summarized by counts, $n_{d,y}\\in\\mathbb N_0$ is the number of probes in design $d$ with outcome $y$, and $\\sum_y n_{d,y}=N_d$.\n\nThis is a finite statistical experiment: its parameter space is $(0,1)^E$ and its sampling law is the finite product of the stated receiver-outcome laws."
+      },
+      {
+        "id": "def-ip-network-tomography-design-criterion",
+        "kind": "definition",
+        "page": "network-tomography-and-experiment-design",
+        "dependency_level": 1,
+        "title": "Split and coverage condition for a multicast design",
+        "deps": [
+          "def-ip-tree-probing-experiment"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448",
+              "url": "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf",
+              "locator": "§3.2, Proposition 1, PDF p. 4 (printed p. 1434)"
+            },
+            {
+              "title": "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44",
+              "url": "https://arxiv.org/pdf/0708.1079",
+              "locator": "§3.1, PDF pp. 4–5 (printed pp. 28–29)"
+            }
+          ]
+        },
+        "definition": "For a finite-tree probe design $\\mathcal C=((C_d,N_d))_{d=1}^D$, a receiver $r\\in R$ is **covered** if $r\\in C_d$ for some $d$. For a nonroot internal vertex $v$, a design $C_d$ **splits** $v$ if there are distinct children $c,c'$ of $v$ and receivers $r,s\\in C_d$ such that $r$ lies in the subtree rooted at $c$ and $s$ lies in the subtree rooted at $c'$. The design satisfies the **split/coverage condition** if every receiver is covered and every nonroot internal vertex is split by at least one design.",
+        "status": "draft",
+        "statement": "For a finite-tree probe design $\\mathcal C=((C_d,N_d))_{d=1}^D$, a receiver $r\\in R$ is **covered** if $r\\in C_d$ for some $d$. For a nonroot internal vertex $v$, a design $C_d$ **splits** $v$ if there are distinct children $c,c'$ of $v$ and receivers $r,s\\in C_d$ such that $r$ lies in the subtree rooted at $c$ and $s$ lies in the subtree rooted at $c'$. The design satisfies the **split/coverage condition** if every receiver is covered and every nonroot internal vertex is split by at least one design."
+      },
+      {
+        "id": "alg-ip-link-loss-em",
+        "kind": "algorithm",
+        "page": "network-tomography-and-experiment-design",
+        "dependency_level": 1,
+        "title": "EM for active tree link-loss tomography",
+        "deps": [
+          "def-ip-tree-probing-experiment",
+          "alg-expectation-maximization"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448",
+              "url": "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf",
+              "locator": "§4.2, PDF pp. 5–6 (printed pp. 1434–1435): latent link successes, conditional expectations, and expected-success/probe-count update"
+            },
+            {
+              "title": "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44",
+              "url": "https://arxiv.org/pdf/0708.1079",
+              "locator": "§3.2, PDF pp. 5–6 (printed pp. 29–30): flexicast multinomial outcomes and the EM E/M steps"
+            }
+          ]
+        },
+        "definition": "**Inputs.** Use a finite-tree multicast loss experiment with observed counts $n_{d,y}$, where $n_{d,y}\\in\\mathbb N_0$, $\\sum_{y\\in\\{0,1\\}^{C_d}}n_{d,y}=N_d$, and $p_e$ is the success probability for edge $e$. Supply an initial vector $p^{(0)}\\in(0,1)^E$, a likelihood tolerance $\\tau\\ge0$, and an iteration cap $M\\in\\mathbb N_{>0}$. The data are admissible only when every pattern with positive count has $\\Omega_{d,y}\\ne\\varnothing$ and every link is traversed by at least one probe, that is,\n$$\nN_e:=\\sum_{d:e\\in E_d}N_d>0\\qquad(e\\in E).\n$$\n\nFor a current vector $p$, set $Z_{d,y}(p):=P_{p,d}(y)=\\sum_{x\\in\\Omega_{d,y}}w_{p,d}(x)$. When $Z_{d,y}(p)>0$ define\n$$\nm_{e,d,y}(p):=\\frac{\\sum_{x\\in\\Omega_{d,y}}x_e w_{p,d}(x)}{Z_{d,y}(p)}\\qquad(e\\in E_d).\n$$\nThe observed log likelihood is\n$$\n\\ell(p):=\\sum_{d=1}^D\\sum_{y:n_{d,y}>0}n_{d,y}\\log Z_{d,y}(p),\n$$\nwith $\\ell(p)=-\\infty$ if any positive-count pattern has zero probability.\n\n**Output.** Return the finite iterate list and one status: `invalid-input`, `zero-likelihood-current`, `zero-likelihood-candidate`, `likelihood-tolerance-met`, or `iteration-cap-reached`.\n\n**Procedure.**\n\n1. Validate the count constraints, pattern feasibility, interior initial vector, nonnegative tolerance, positive iteration cap, and $N_e>0$ for each link. If any check fails, return the initial vector and status `invalid-input`.\n\n2. Initialize the list with $p^{(0)}$. At each current iterate $p^{(t)}$, compute $Z_{d,y}(p^{(t)})$ for every positive-count pattern. If any is zero, return the last valid iterate with status `zero-likelihood-current`.\n\n3. For each link $e$, compute its expected number of latent successes\n$$\n\\widehat S_e^{(t)}=\\sum_{d:e\\in E_d}\\sum_{y:n_{d,y}>0}n_{d,y}m_{e,d,y}(p^{(t)}).\n$$\nSet\n$$\np_e^{(t+1)}=\\widehat S_e^{(t)}/N_e\\qquad(e\\in E).\n$$\nThis finite sum is the E-step conditional expectation of the complete-data success count; the displayed ratio is the M-step update instruction. Coordinates equal to $0$ or $1$ are allowed after an update.\n\n4. Compute $\\ell(p^{(t+1)})$. If any positive-count pattern has zero probability, return the last valid iterate $p^{(t)}$ with status `zero-likelihood-candidate`. Otherwise append $p^{(t+1)}$. If $|\\ell(p^{(t+1)})-\\ell(p^{(t)})|\\le\\tau$, return the list with status `likelihood-tolerance-met`. If not, continue from $p^{(t+1)}$ until $M$ updates have been made, then return the list with status `iteration-cap-reached`.\n\nAll state sums are finite, and the finite link-state conditional probabilities are calculated directly; the generic measure-space/KL branch of the EM procedure is not invoked. The status records only the stopping rule that fired; it asserts neither parameter convergence nor a global optimum.",
+        "status": "draft",
+        "statement": "**Inputs.** Use a finite-tree multicast loss experiment with observed counts $n_{d,y}$, where $n_{d,y}\\in\\mathbb N_0$, $\\sum_{y\\in\\{0,1\\}^{C_d}}n_{d,y}=N_d$, and $p_e$ is the success probability for edge $e$. Supply an initial vector $p^{(0)}\\in(0,1)^E$, a likelihood tolerance $\\tau\\ge0$, and an iteration cap $M\\in\\mathbb N_{>0}$. The data are admissible only when every pattern with positive count has $\\Omega_{d,y}\\ne\\varnothing$ and every link is traversed by at least one probe, that is,\n$$\nN_e:=\\sum_{d:e\\in E_d}N_d>0\\qquad(e\\in E).\n$$\n\nFor algorithm calculations, extend the finite law to candidate vectors in the closed cube as follows. For $a\\in[0,1]$ and $z\\in\\{0,1\\}$, let $b(a,z)=a$ if $z=1$ and $b(a,z)=1-a$ if $z=0$. For $p\\in[0,1]^E$, set\n$$\nw^{\\mathrm{cl}}_{p,d}(x):=\\prod_{e\\in E_d}b(p_e,x_e),\\qquad Z_{d,y}(p):=P^{\\mathrm{cl}}_{p,d}(y):=\\sum_{x\\in\\Omega_{d,y}}w^{\\mathrm{cl}}_{p,d}(x).\n$$\nThe sets $\\Omega_{d,y}$ partition the link-state space and $\\sum_{x\\in\\{0,1\\}^{E_d}} w^{\\mathrm{cl}}_{p,d}(x)=\\prod_{e\\in E_d}((1-p_e)+p_e)=1$, so $P^{\\mathrm{cl}}_{p,d}$ is a probability law for every $p\\in[0,1]^E$.\nFor $p\\in(0,1)^E$, $P^{\\mathrm{cl}}_{p,d}(y)=P_{p,d}(y)$ from the tree-experiment definition. This closed-cube extension is used only to evaluate candidate iterates; the experiment's parameter space remains $(0,1)^E$. When $Z_{d,y}(p)>0$ define\n$$\nm_{e,d,y}(p):=\\frac{\\sum_{x\\in\\Omega_{d,y}}x_e w^{\\mathrm{cl}}_{p,d}(x)}{Z_{d,y}(p)}\\qquad(e\\in E_d).\n$$\nThe algorithm's observed log likelihood on the closed cube is\n$$\n\\ell(p):=\\sum_{d=1}^D\\sum_{y:n_{d,y}>0}n_{d,y}\\log Z_{d,y}(p),\n$$\nwith $\\ell(p)=-\\infty$ if any positive-count pattern has zero probability.\n\n**Output.** Return the finite iterate list and one status: `invalid-input`, `zero-likelihood-current`, `zero-likelihood-candidate`, `likelihood-tolerance-met`, or `iteration-cap-reached`. For admissible input, the list begins with $p^{(0)}$ and every later iterate lies in $[0,1]^E$. If an input check fails, the list is the one-element list $(p^{(0)})$ containing the supplied initial vector.\n\n**Procedure.**\n\n1. Validate the count constraints, pattern feasibility, interior initial vector, nonnegative tolerance, positive iteration cap, and $N_e>0$ for each link. If any check fails, return the one-element iterate list $(p^{(0)})$ and status `invalid-input`.\n\n2. Initialize the list with $p^{(0)}$. At each current iterate $p^{(t)}$, compute $Z_{d,y}(p^{(t)})$ for every positive-count pattern. If any is zero, return the current iterate list, ending in $p^{(t)}$, with status `zero-likelihood-current`.\n\n3. For each link $e$, compute its expected number of latent successes\n$$\n\\widehat S_e^{(t)}=\\sum_{d:e\\in E_d}\\sum_{y:n_{d,y}>0}n_{d,y}m_{e,d,y}(p^{(t)}).\n$$\nSet\n$$\np_e^{(t+1)}=\\widehat S_e^{(t)}/N_e\\qquad(e\\in E).\n$$\nThis finite sum is the E-step conditional expectation of the complete-data success count; the displayed ratio is the M-step update instruction and lies in $[0,1]$ for each edge. Coordinates equal to $0$ or $1$ are allowed after an update.\n\n4. Compute $\\ell(p^{(t+1)})$. If any positive-count pattern has zero probability, return the current iterate list, ending in the last valid iterate $p^{(t)}$, with status `zero-likelihood-candidate`. Otherwise append $p^{(t+1)}$. If $|\\ell(p^{(t+1)})-\\ell(p^{(t)})|\\le\\tau$, return the list with status `likelihood-tolerance-met`. If not, continue from $p^{(t+1)}$ until $M$ updates have been made, then return the list with status `iteration-cap-reached`.\n\nAll state sums are finite, and the finite link-state conditional probabilities are calculated directly; the generic measure-space/KL branch of the EM procedure is not invoked. The status records only the stopping rule that fired; it asserts neither parameter convergence nor a global optimum."
+      },
+      {
+        "id": "thm-ip-flexicast-link-loss-identifiability",
+        "kind": "theorem",
+        "page": "network-tomography-and-experiment-design",
+        "dependency_level": 2,
+        "title": "Link-loss identifiability from split and coverage",
+        "deps": [
+          "def-ip-tree-probing-experiment",
+          "def-ip-network-tomography-design-criterion",
+          "def-identifiability-of-an-estimand"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448",
+              "url": "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf",
+              "locator": "§3.2 Proposition 1 and Appendix A.1, PDF pp. 4 and 15–17 (printed pp. 1434 and 1445–1447)"
+            },
+            {
+              "title": "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44",
+              "url": "https://arxiv.org/pdf/0708.1079",
+              "locator": "§3.1, PDF pp. 4–5 (printed pp. 28–29), reported split/coverage criterion and its exact model scope"
+            }
+          ]
+        },
+        "statement": "Let $T=(V,E)$ and $\\mathcal C=((C_d,N_d))_{d=1}^D$ be a finite-tree multicast loss experiment with parameter space $(0,1)^E$, independent link successes, and the same link probabilities in every probe. Let $\\mathsf L(p):=\\bigotimes_{d=1}^D P_{p,d}^{\\otimes N_d}$ be the full repeated-probe sampling law determined by the one-probe outcome laws $P_{p,d}$. Then $\\mathsf L$ is injective if and only if $\\mathcal C$ satisfies the split/coverage condition.",
+        "proof_strategy": "direct",
+        "status": "draft"
+      }
+    ]
+  },
+  {
+    "order": 3023,
+    "id": "network-tomography-and-experiment-design-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Active network tomography and identifiability by design — Examples and Counterexamples",
+    "companion": "network-tomography-and-experiment-design",
+    "requires": [
+      "network-tomography-and-experiment-design"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-independent-normal-delays-have-nonidentifiable-link-means",
+        "kind": "example",
+        "page": "network-tomography-and-experiment-design-examples",
+        "dependency_level": 0,
+        "title": "Additive Gaussian tree delays do not identify link means",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "def-identifiability-of-an-estimand"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44",
+              "url": "https://arxiv.org/pdf/0708.1079",
+              "locator": "§1, Example 3, PDF p. 2 (printed p. 26): two-leaf additive Gaussian delay model and nonidentifiable means"
+            }
+          ]
+        },
+        "statement": "Assume AC for the library's standard-normal-law convention. Let a rooted tree have root $o$, one shared link $e_0=(o,v)$, and two branch links $e_1=(v,r_1)$ and $e_2=(v,r_2)$ to leaf receivers. On each probe, the three link delays are independent with laws $X_i\\sim N(\\mu_i,1)$, $i=0,1,2$, and the observed path delays are $Y_1=X_0+X_1$ and $Y_2=X_0+X_2$. The distinct link-mean vectors $\\mu=(0,0,0)$ and $\\mu'=(1,-1,-1)$ induce the same joint law of $(Y_1,Y_2)$; hence the three link means are not identifiable. The same equality holds for any number of independent repeated probes with these fixed link laws.\n\nThe diagram labels the shared and branch links by their delay variables; the two lower vertices are the receivers.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[circle,draw] (o) at (0,1.5) {$o$};\n  \\node[circle,draw] (v) at (2,1.5) {$v$};\n  \\node[circle,draw] (r1) at (4,2.5) {$r_1$};\n  \\node[circle,draw] (r2) at (4,0.5) {$r_2$};\n  \\draw[->] (o) -- node[above] {$X_0$} (v);\n  \\draw[->] (v) -- node[above] {$X_1$} (r1);\n  \\draw[->] (v) -- node[below] {$X_2$} (r2);\n\\end{tikzpicture}\n```",
+        "proof_strategy": "direct",
+        "status": "draft"
+      },
+      {
+        "id": "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery",
+        "kind": "example",
+        "page": "network-tomography-and-experiment-design-examples",
+        "dependency_level": 1,
+        "title": "Unicast products lose link identifiability; multicast restores it",
+        "deps": [
+          "def-ip-tree-probing-experiment"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44",
+              "url": "https://arxiv.org/pdf/0708.1079",
+              "locator": "§1, Examples 1–2, PDF pp. 1–2 (printed pp. 25–26)"
+            },
+            {
+              "title": "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448",
+              "url": "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf",
+              "locator": "§3.2, two-leaf design discussion, PDF p. 4 (printed p. 1434)"
+            }
+          ]
+        },
+        "statement": "Let a rooted tree have root $o$, one shared link $e_0=(o,v)$, and two branch links $e_1=(v,r_1)$ and $e_2=(v,r_2)$ to leaf receivers $r_1,r_2$. Their success probabilities are $p_0,p_1,p_2\\in(0,1)$. Compare separate unicast designs to $r_1$ and $r_2$ with a multicast design that sends each probe to both receivers and records both outcomes. For any fixed positive probe counts, the distinct parameter vectors $(1/2,1/2,1/4)$ and $(1/3,3/4,3/8)$ give the same separate-unicast laws but different multicast laws. In fact, the multicast law identifies all three link probabilities for every interior parameter vector.\n\nThe diagram labels each edge by its link-success probability; the two lower vertices are the receivers.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[circle,draw] (o) at (0,1.5) {$o$};\n  \\node[circle,draw] (v) at (2,1.5) {$v$};\n  \\node[circle,draw] (r1) at (4,2.5) {$r_1$};\n  \\node[circle,draw] (r2) at (4,0.5) {$r_2$};\n  \\draw[->] (o) -- node[above] {$p_0$} (v);\n  \\draw[->] (v) -- node[above] {$p_1$} (r1);\n  \\draw[->] (v) -- node[below] {$p_2$} (r2);\n\\end{tikzpicture}\n```",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "status": "draft"
+      }
+    ]
+  }
+]

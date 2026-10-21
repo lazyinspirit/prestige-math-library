@@ -1,0 +1,36 @@
+---
+page: milnor-invariants-and-link-peripheral-nilpotent-quotients
+title: Milnor invariants and link peripheral nilpotent quotients
+status: draft
+items:
+  - lem-classifying-maps-are-natural-under-group-homomorphisms
+  - lem-h2-classifying-map-is-surjective
+  - lem-regular-link-diagram-admits-normalized-height-realization
+  - lem-simply-connected-hypersurface-complement-adds-free-generator
+  - thm-homological-lhs-spectral-sequence-for-group-extensions
+  - thm-five-term-homology-sequence-for-group-extensions
+  - thm-stallings-integral-lower-central-isomorphism
+  - def-lower-central-series-and-magnus-expansion-for-links
+  - lem-link-diagram-upper-region-free-meridians
+  - lem-link-nilpotent-quotient-generated-by-component-meridians
+  - lem-magnus-commutator-degree-and-truncation
+  - lem-magnus-conjugation-coefficients-use-shorter-subwords
+  - thm-string-link-nilpotent-peripheral-identifications
+  - def-milnor-integer-and-residue-invariants
+  - thm-link-wirtinger-presentation-correctness
+  - alg-truncated-milnor-invariants-from-based-diagram
+  - lem-link-nilpotent-peripheral-presentation-from-diagram
+  - lem-milnor-basing-indeterminacy-and-self-crossing-scope
+  - thm-truncated-milnor-computation-terminates-and-is-correct
+  - thm-milnor-invariants-isotopy-and-link-homotopy-scope
+examples: []
+requires:
+  - wirtinger-presentations-and-knot-groups
+  - knot-exteriors-and-peripheral-systems
+  - crossing-signs-writhe-and-linking-number
+  - multivariable-alexander-modules-and-chain-models
+  - relative-smooth-triangulation-and-bundle-fitting
+  - group-homology-transfer-and-low-degree-exact-sequences
+order: 3210
+page_layout: compact-v1
+---

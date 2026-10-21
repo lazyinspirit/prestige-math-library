@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-7",
+  "scope": [
+    "def-ip-isonormal-white-noise-experiment",
+    "thm-ip-white-noise-spectral-sequence-representation",
+    "ex-ip-white-noise-direct-functionals",
+    "ex-ip-white-noise-coefficient-sequence",
+    "ex-ip-white-noise-finite-truncation-tail"
+  ],
+  "contracts": {
+    "def-ip-isonormal-white-noise-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition boundary: for H={0}, linearity gives Z(0)=0 and the cylinder sample is the one-point deterministic experiment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition boundary: a zero signal Kx=0 is allowed and leaves only the isonormal noise process."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition boundary: a one-dimensional nonzero Hilbert space has its single unit-coordinate law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition boundary: the case H={0} is explicitly deterministic."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition boundary: the noise level is required to satisfy epsilon>0; no zero-noise branch is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition assumes a supplied probability space and process and constructs no sequence of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition introduces the experiment and proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition introduces the experiment and proves no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-ip-white-noise-spectral-sequence-representation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-isonormal-white-noise-experiment",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a separable real Hilbert space, where separable means having a countable dense subset, and let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. A real isonormal Gaussian process on $H$ is a family $Z(g)$ of real random variables with finite second moments, indexed by $g\\in H$, such that $g\\mapsto[Z(g)]$ is linear into $L^2(\\mathbb P)$, $\\mathbb E Z(g)=0$, and $\\mathbb E[Z(g)Z(h)]=\\langle g,h\\rangle_H$. It is also required that for every finite orthonormal tuple $(e_1,\\ldots,e_m)$ the variables $Z(e_1),\\ldots,Z(e_m)$ are independent and each has density $\\varphi(t)=(2\\pi)^{-1/2}e^{-t^2/2}$. For any finite list of vectors, expressing them in an orthonormal basis of their finite-dimensional span shows that their process values have the corresponding linear-image Gaussian law. Here $L^2(\\mathbb P)$ identifies square-integrable random variables that agree almost surely. When $H\\ne\\{0\\}$, all unit-vector marginals have the same law; write $N(a,\\sigma^2)$ for the law of $a+\\sigma Z(e)$ for any unit vector $e\\in H$ and $\\sigma\\ge0$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "source_section": "Definition",
+          "quote": "**Closed linear span and completeness.** The **span** of an indexed family is\nthe set of all finite linear combinations $\\sum_{i\\in F}c_ie_i$ with $F\\subseteq I$\nfinite and scalars $c_i$; it is the smallest linear subspace of $H$ containing\nevery $e_i$ ([[def-linear-subspace]]). Its closure in the induced norm is the\n**closed linear span** of the family, the smallest closed linear subspace of $H$\ncontaining every $e_i$. The family is **complete**, or is a **complete\northonormal system**, when its closed linear span is all of $H$. A\n**Hilbert basis**, or **orthonormal basis**, of $H$ is a complete orthonormal\nfamily in $H$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-negative-sobolev-space-for-white-noise",
+          "source_section": "Definition",
+          "quote": "For $\\delta>0$, define $H(\\delta)=H^{-1/2,\\delta}_2$ to be the space of coefficient sequences $c=(c_{lk})$ with norm",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-white-noise-is-borel-gaussian-on-negative-sobolev-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $(\\psi_{lk})$ be the wavelet or trigonometric basis from [[def-negative-sobolev-space-for-white-noise]]. Let $Z_{lk}$ be mutually independent real random variables with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. Define the formal white-noise coefficient sequence $W=(Z_{lk})$. For every $\\delta>1/2$, this sequence is almost surely an element of $H(\\delta)$ and is a Borel Gaussian random element there. Its law $N$ is a Borel probability on $H(\\delta)$. For an infinite-dimensional basis, white noise is not an $L^2([0,1])$-valued random element. Here Gaussian means that each continuous real linear functional has a centered law $N(0,v)$ in the density convention of [[lem-density-normal-laws-and-square-summable-gaussian-series]]; in particular, for $L(c)=\\sum_jd_jc_j$ its variance is $\\sum_jd_j^2$ whenever this pairing is continuous on $H(\\delta)$.",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-first-borel-cantelli",
+          "source_section": "Statement",
+          "quote": "Let $(E_k)_{k\\in\\mathbb N}$ be measurable sets in a measure space. If the nonnegative extended sum satisfies\n\n$$\\sum_{k=0}^{\\infty}\\mu(E_k)<+\\infty,$$\n\nthen\n\n$$\\mu\\left(\\limsup_{k\\to\\infty}E_k\\right)=0.$$\n\nNo independence hypothesis and no finiteness hypothesis on the whole space are required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f_n : X \\to \\overline{\\mathbb{R}}$ be measurable for every $n \\in \\mathbb{N}$.\nThen the functions\n\n$$\\sup_n f_n,\\qquad \\inf_n f_n,\\qquad \\limsup_n f_n,\\qquad \\liminf_n f_n$$\n\nare measurable. The set\n\n$$\\{\\, x : \\lim_n f_n(x) \\text{ exists in } \\overline{\\mathbb{R}} \\,\\}$$\n\nis measurable. In particular, if $f_n \\to f$ pointwise, then $f$ is measurable.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then\n$\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-1-1",
+          "claim": "For $N$ let $V_N=\\operatorname{span}\\{u_j:j\\in J,\\ j\\le N\\}$ and let $P_Ng=\\sum_{j\\in J,\\ j\\le N}\\langle g,u_j\\rangle_Hu_j$. Orthonormality gives $g-P_Ng\\perp V_N$. For any $v\\in H$, expanding the inner product of $v=P_Nv+(v-P_Nv)$ gives $\\|v\\|^2=\\|P_Nv\\|^2+\\|v-P_Nv\\|^2$, so $\\|P_Nv\\|\\le\\|v\\|$. Given $\\eta>0$, density of the finite span in [F2] gives $w\\in V_M$ with $\\|g-w\\|<\\eta$; for $N\\ge M$, $P_Nw=w$, so $\\|g-P_Ng\\|\\le\\|g-w\\|+\\|P_N(w-g)\\|\\le2\\|g-w\\|<2\\eta$. Thus $P_Ng\\to g$ in norm, with the finite-basis case eventually equal to $g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-1-2",
+          "claim": "For distinct indices $j_1,\\ldots,j_m$, [F1] gives independent standard-normal variables $Z(u_{j_1}),\\ldots,Z(u_{j_m})$. Since $\\epsilon>0$, the affine map $z\\mapsto\\mu_{j_r}+\\epsilon z$ and its inverse are continuous, so $Y_x(u_{j_r})$ and its noise coordinate generate the same sigma-algebra; independence therefore transfers. The affine-image definition of $N$ gives each law $N(\\mu_{j_r},\\epsilon^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-1-3",
+          "claim": "Put $c_j=\\langle g,u_j\\rangle_H$. The linearity clause in [F1] applied to the finite sum defining $P_Ng$ gives $Z(P_Ng)=\\sum_{j\\in J,\\ j\\le N}c_jZ(u_j)$; linearity of the inner product gives $\\langle Kx,P_Ng\\rangle_H=\\sum_{j\\in J,\\ j\\le N}c_j\\mu_j$. Combining these identities yields $Y_x(P_Ng)=\\sum_{j\\in J,\\ j\\le N}c_jY_x(u_j)$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-1-4",
+          "claim": "In the carrier case covered by [F4]–[F5], [F1] supplies independent coordinates with the common standard-normal density and [A1] supplies the countable-choice hypothesis of [F5]. Hence [F5] makes the noise coefficient sequence a Borel Gaussian random element of $H(\\delta)$; [F4] puts each deterministic signal $Kx$ in the same space. Their sum $Kx+\\epsilon W$ is therefore an $H(\\delta)$-valued Borel random element, and every continuous linear functional of it is a translate and positive rescaling of the corresponding centered Gaussian functional.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-1-5",
+          "claim": "In the infinite-dimensional function-space case, if $Kx+\\epsilon W$ were an $H$-valued sample on an event of probability one, then $W=((Kx+\\epsilon W)-Kx)/\\epsilon$ would also be $H$-valued there, since $Kx\\in H$ and $\\epsilon>0$. This contradicts [F5], so the sample is not $H$-valued.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-2-1",
+          "claim": "With $r_N=g-P_Ng$, linearity gives $Y_x(g)-Y_x(P_Ng)=\\langle Kx,r_N\\rangle_H+\\epsilon Z(r_N)$. Centering and the covariance identity in [F1] give $\\mathbb E Z(r_N)=0$ and $\\mathbb E[Z(r_N)^2]=\\|r_N\\|_H^2$; expanding the square therefore shows that the squared mean-square error is $|\\langle Kx,r_N\\rangle_H|^2+\\epsilon^2\\|r_N\\|_H^2$. By [F3] and step 1.1, both terms tend to zero, proving the asserted mean-square reconstruction. For any finite list of test vectors, the sum of their finitely many squared errors also tends to zero, so the coordinate reconstructions converge jointly in product mean square.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-2-2",
+          "claim": "By step 1.1, for each $g$ and $k\\ge1$ the set of integers $N\\ge k$ with $\\|g-P_Ng\\|_H\\le2^{-k}$ is nonempty. Its least element $N_k(g)$ is uniquely defined, with no choice and no dependence on $x$, $Kx$ or the observations. For fixed $g,k$, $a_{g,k}$ is a finite linear combination of coordinate evaluations on $\\mathbb R^J$, hence is measurable. By [F8], its limsup and liminf are measurable; their equality set, intersected with the set where their common value is finite, is the measurable real-convergence set $A_g$. Defining $T(z)(g)$ to equal that limit on $A_g$ and zero on its complement is measurable: for a Borel set $B\\subseteq\\mathbb R$ its preimage is $A_g\\cap\\{\\limsup_k a_{g,k}\\in B\\}$, together with $A_g^c$ if $0\\in B$. Thus every evaluation of $T$ is measurable, which makes $T$ measurable into $\\mathcal C_H$. Each coordinate of $S$ is a field evaluation, so $S$ is measurable into $\\mathcal C_J$ as well.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F8",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-3-1",
+          "claim": "Fix $x$ and $g$. By steps 1.3 and 2.1, the real random variable $D_k=a_{g,k}(S(Y_x))-Y_x(g)$ satisfies $\\mathbb E|D_k|^2\\le(\\|Kx\\|_H^2+\\epsilon^2)4^{-k}$. For every positive integer $r$, [F6] applied to $|D_k|^2$ at threshold $r^{-2}$ gives $\\mathbb P\\{|D_k|\\ge1/r\\}\\le r^2(\\|Kx\\|_H^2+\\epsilon^2)4^{-k}$. The right-hand side is summable in $k$, so [F7] makes $|D_k|<1/r$ eventually almost surely for each $r$. The union over $r\\ge1$ of these null exceptional events is null: disjointifying the union and using countable additivity bounds its probability by the sum of zeros. Off that union $D_k\\to0$, proving $T(S(Y_x))(g)=Y_x(g)$ almost surely. All limits here concern the explicitly specified representatives at a fixed $x,g$; the $L^2$ equalities used to compute the error hold almost surely and therefore give exactly the same second moments.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F7",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-4-1",
+          "claim": "The coordinate law $Q_x=S_*P_x$ and the reconstructed law $T_*Q_x$ are probability measures by [F10]; they use only pushforwards of the given process, with no new product-existence assumption. For any finite list $g_1,\\ldots,g_n$, intersect the finitely many probability-one events in step 3.1. On that intersection the reconstructed and original evaluation vectors agree, so $T_*Q_x$ and $P_x$ agree on every finite cylinder $\\{y:(y(g_1),\\ldots,y(g_n))\\in B\\}$ for Borel $B\\subseteq\\mathbb R^n$. These cylinders form a generating pi-system for $\\mathcal C_H$, and both measures have total mass one, so [F9] gives $T_*Q_x=P_x$ on $\\mathcal C_H$. This proves equality of laws without any uncountable intersection of probability-one events.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F9",
+            "F10",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "thm-ip-white-noise-spectral-sequence-representation-step-5-1",
+          "claim": "For every basis index $j$, $N_k(u_j)\\ge k\\ge j$ once $k\\ge j$, so orthonormality gives $a_{u_j,k}(z)=z_j$ then, for every $z\\in\\mathbb R^J$. Consequently $T(z)(u_j)=z_j$ and $S\\circ T=\\operatorname{id}_{\\mathbb R^J}$ everywhere. If $J=\\varnothing$, completeness forces $H=\\{0\\}$, every sum defining $a_{0,k}$ is zero, and $T$ returns the zero field; linearity gives $Y_x(0)=0$ almost surely. If $J$ is nonempty and finite, $P_N=I$ after its last index, so the same construction reduces to the finite linear reconstruction and all preceding arguments apply. Thus the maps in the Statement establish both sampling-law identities in every allowed dimension. The least-index construction spends no choice principle; the only countable-choice use remains step 1.4.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.4",
+            "step 2.2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For J empty, H={0}; the coefficient space is a singleton and T returns the zero field. Step 5.1 proves the sampling-law identities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For Kx=0, step 1.2 gives centered coordinate laws; the bound in step 3.1 and both reconstruction-law identities still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional finite basis, P_N=I after its only index; step 5.1 gives the finite measurable reconstruction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For zero residual g-P_Ng, step 2.1 gives zero mean-square error. Step 5.1 handles exact basis-coordinate reconstruction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires epsilon>0. Its optional negative-Sobolev clause and step 1.4 require delta>1/2 and the specified basis; no endpoint carrier claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Least N>=k with residual <=2^-k exists by step 1.1 and is uniquely selected in step 2.2. The fixed-basis cylinder clause is choice-free; countable choice is used only in step 1.4."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "S is measurable by step 2.2 and S_*P_x=Q_x by definition; step 4.1 identifies the coordinate pushforward probability law."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.2, 3.1 and 4.1 prove measurable parameter-independent T and T_*Q_x=P_x on the cylinder sigma-algebra; step 5.1 proves S composed with T is identity everywhere."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "countable choice (AC_omega), only for the optional negative-Sobolev Borel-carrier clause"
+      ]
+    },
+    "ex-ip-white-noise-direct-functionals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-isonormal-white-noise-experiment",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a separable real Hilbert space, where separable means having a countable dense subset, and let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. A real isonormal Gaussian process on $H$ is a family $Z(g)$ of real random variables with finite second moments, indexed by $g\\in H$, such that $g\\mapsto[Z(g)]$ is linear into $L^2(\\mathbb P)$, $\\mathbb E Z(g)=0$, and $\\mathbb E[Z(g)Z(h)]=\\langle g,h\\rangle_H$. It is also required that for every finite orthonormal tuple $(e_1,\\ldots,e_m)$ the variables $Z(e_1),\\ldots,Z(e_m)$ are independent and each has density $\\varphi(t)=(2\\pi)^{-1/2}e^{-t^2/2}$. For any finite list of vectors, expressing them in an orthonormal basis of their finite-dimensional span shows that their process values have the corresponding linear-image Gaussian law. Here $L^2(\\mathbb P)$ identifies square-integrable random variables that agree almost surely. When $H\\ne\\{0\\}$, all unit-vector marginals have the same law; write $N(a,\\sigma^2)$ for the law of $a+\\sigma Z(e)$ for any unit vector $e\\in H$ and $\\sigma\\ge0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-white-noise-direct-functionals-step-1-1",
+          "claim": "Since $e_1,e_2$ are orthonormal, [F1] gives independent standard-normal noises $Z(e_1),Z(e_2)$. Each observation is an invertible affine function of its noise coordinate because $\\epsilon>0$, so it has the same generated sigma-algebra; the affine-image definition of $N$ gives the two asserted laws and preserves independence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "ex-ip-white-noise-direct-functionals-step-2-1",
+          "claim": "Linearity of the process gives $Y_x(g)=aY_x(e_1)+bY_x(e_2)$ as an equality of its almost-sure equivalence classes. The mean is $am_1+bm_2$, and the covariance identity in [F1] gives variance $\\epsilon^2\\|ae_1+be_2\\|^2=\\epsilon^2(a^2+b^2)$. If $a=b=0$, then $g=0$ and linearity gives $Y_x(0)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two specified coordinate directions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When a=b=0, g=0 and linearity gives Y_x(0)=0. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Setting one of a,b to zero leaves the corresponding one-coordinate mean and variance. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero functional has zero variance and is the constant zero. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite coordinate calculation uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes specified functionals and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes specified functionals and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-ip-white-noise-coefficient-sequence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-white-noise-spectral-sequence-representation",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a separable real Hilbert space with a fixed complete orthonormal basis $(u_j)$, indexed by $J=\\{1,\\ldots,m\\}$ for $m\\in\\mathbb N_0$ or by $J=\\mathbb N_{>0}$; the empty basis covers $H=\\{0\\}$. Let $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$ be the isonormal white-noise experiment with $\\epsilon>0$, and write $\\mu_j=\\langle Kx,u_j\\rangle_H$. For every parameter $x$ and every basis index $j$, the observations $Y_x(u_j)$ are independent and have laws $N(\\mu_j,\\epsilon^2)$, where $N$ is the scalar normal law defined in the experiment.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-white-noise-coefficient-sequence-step-1-1",
+          "claim": "Apply [F1] with $Kx=\\theta$ and $u_j=e_j$ to obtain the independent coordinate laws $N(\\theta_j,\\epsilon^2)$ for every $j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "ex-ip-white-noise-coefficient-sequence-step-2-1",
+          "claim": "Independence of every finite subfamily means that for each $N$ the joint law of $(Y_1,\\ldots,Y_N)$ is the product of those $N$ marginal normal laws. The sample-space assertion is the coordinate-statistic map into $\\mathbb R^{\\mathbb N}$, and no step identifies it with an element of $\\ell^2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The coefficient index set is N and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At theta=0 the coordinate means vanish and each coordinate remains N(0,epsilon^2). See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first-coordinate truncation has the single marginal law stated in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes epsilon>0 and makes no degenerate-noise claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint in this sequence model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses the fixed standard basis and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example specializes a sequence representation and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example specializes a sequence representation and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-ip-white-noise-finite-truncation-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-isonormal-white-noise-experiment",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a separable real Hilbert space, where separable means having a countable dense subset, and let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. A real isonormal Gaussian process on $H$ is a family $Z(g)$ of real random variables with finite second moments, indexed by $g\\in H$, such that $g\\mapsto[Z(g)]$ is linear into $L^2(\\mathbb P)$, $\\mathbb E Z(g)=0$, and $\\mathbb E[Z(g)Z(h)]=\\langle g,h\\rangle_H$. It is also required that for every finite orthonormal tuple $(e_1,\\ldots,e_m)$ the variables $Z(e_1),\\ldots,Z(e_m)$ are independent and each has density $\\varphi(t)=(2\\pi)^{-1/2}e^{-t^2/2}$. For any finite list of vectors, expressing them in an orthonormal basis of their finite-dimensional span shows that their process values have the corresponding linear-image Gaussian law. Here $L^2(\\mathbb P)$ identifies square-integrable random variables that agree almost surely. When $H\\ne\\{0\\}$, all unit-vector marginals have the same law; write $N(a,\\sigma^2)$ for the law of $a+\\sigma Z(e)$ for any unit vector $e\\in H$ and $\\sigma\\ge0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-white-noise-spectral-sequence-representation",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a separable real Hilbert space with a fixed complete orthonormal basis $(u_j)$, indexed by $J=\\{1,\\ldots,m\\}$ for $m\\in\\mathbb N_0$ or by $J=\\mathbb N_{>0}$; the empty basis covers $H=\\{0\\}$. Let $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$ be the isonormal white-noise experiment with $\\epsilon>0$, and write $\\mu_j=\\langle Kx,u_j\\rangle_H$. For every parameter $x$ and every basis index $j$, the observations $Y_x(u_j)$ are independent and have laws $N(\\mu_j,\\epsilon^2)$, where $N$ is the scalar normal law defined in the experiment.\n\nFor $g\\in H$, set $P_Ng=\\sum_{j\\in J,\\ j\\le N}\\langle g,u_j\\rangle_Hu_j$, with $P_N=I$ once all vectors of a finite basis have been included. Then\n\n$$Y_x(g)=L^2(\\mathbb P)\\text{-}\\lim_{N\\to\\infty}\\sum_{j\\in J,\\ j\\le N}\\langle g,u_j\\rangle_HY_x(u_j).$$\n\nThus every finite collection of observation functionals is reconstructed from the coefficient sequence in mean square. This does not assert almost-sure convergence of the full sequence of partial sums, a simultaneous path identity for all test vectors, or an $H$-valued observation.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-white-noise-finite-truncation-tail-step-1-1",
+          "claim": "Since $g=P_Ng+r_N$ and the process is linear by [F1], $Y_x(g)=Y_x(P_Ng)+Y_x(r_N)$. Applying [F2] to $P_Ng$, whose later finite projections equal $P_Ng$, gives $Y_x(P_Ng)=\\sum_{j\\le N}\\langle g,u_j\\rangle_HY_x(u_j)$; the definition gives $Y_x(r_N)=\\langle h,r_N\\rangle_H+\\epsilon Z(r_N)$. This proves the displayed decomposition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-white-noise-finite-truncation-tail-step-2-1",
+          "claim": "The residual $r_N$ is orthogonal to $u_1,\\ldots,u_N$. If $r_N\\ne0$, adjoining $r_N/\\|r_N\\|_H$ to these vectors gives a finite orthonormal tuple, so [F1] makes $Z(r_N/\\|r_N\\|_H)$ independent of the first $N$ coordinate noises; linearity gives $Z(r_N)=\\|r_N\\|_H Z(r_N/\\|r_N\\|_H)$ as an equality of its almost-sure equivalence classes. Since $\\epsilon>0$, this noise and the tail observation are invertible affine functions of one another, so the tail observation is independent of the first $N$ coordinates. The covariance identity gives its variance $\\epsilon^2\\|r_N\\|_H^2$ and its mean is $\\langle h,r_N\\rangle_H$. If $r_N=0$, both are zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a specified complete basis and cutoff N."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If r_N=0, then both its signal and noise tail vanish. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-coordinate basis and N=1, the projection is the identity and the tail vanishes. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-residual case has zero tail variance; otherwise the residual variance is epsilon^2 times its squared norm. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or limiting endpoint in the finite decomposition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite orthogonal decomposition uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a decomposition and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a decomposition and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    }
+  }
+}

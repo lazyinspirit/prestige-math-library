@@ -1,0 +1,538 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-tcc-residual-derivative-comparison",
+    "thm-ip-tcc-local-minimum-norm-identifiability",
+    "cex-ip-smooth-map-fails-tcc",
+    "ex-ip-local-tcc-neighborhood"
+  ],
+  "contracts": {
+    "lem-ip-tcc-residual-derivative-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fr\u00e9chet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "upper-derivative-residual-bound",
+          "claim": "Put $d:=F(x+h)-F(x)$ and $e:=d-F'(x)h$. By [F1], $\\|e\\|_Y\\le\\eta\\|d\\|_Y$. Since $F'(x)h=d-e$, [F2] gives $\\|F'(x)h\\|_Y\\le\\|d\\|_Y+\\|e\\|_Y\\le(1+\\eta)\\|d\\|_Y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "lower-derivative-residual-bound",
+          "claim": "Since $d=F'(x)h+e$, [F2] gives $\\|d\\|_Y\\le\\|F'(x)h\\|_Y+\\|e\\|_Y\\le\\|F'(x)h\\|_Y+\\eta\\|d\\|_Y$ by [F1]. Rearranging yields $(1-\\eta)\\|d\\|_Y\\le\\|F'(x)h\\|_Y$; combining this with step 1.1 proves both inequalities.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The implication assumes a specified base point and an admissible increment in its ball."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At h=0 both residuals vanish, so steps 1.1 and 2.1 give equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint eta=0 is allowed and the estimates in steps 1.1 and 2.1 remain valid; eta=1 is excluded by the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the data residual vanishes, step 1.1 forces the derivative image to vanish as well."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The TCC and conclusion both include increments with norm exactly delta, as stated and used in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof fixes an arbitrary admissible h and makes no selection; steps 1.1 and 2.1 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a pair of inequalities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a pair of inequalities, not an equivalence."
+        }
+      ]
+    },
+    "thm-ip-tcc-local-minimum-norm-identifiability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ip-tcc-residual-derivative-comparison",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fr\u00e9chet differentiable at $x\\in U$. Suppose that for some $\\delta>0$ with $\\overline B_\\delta(x)\\subseteq U$ and some $0\\le\\eta<1$, the local tangential cone condition at $x$ holds on radius $\\delta$ with constant $\\eta$. Then for every $h\\in X$ with $\\|h\\|_X\\le\\delta$,\n\n$$\n(1-\\eta)\\,\\|F(x+h)-F(x)\\|_Y\\le\\|F'(x)h\\|_Y\\le(1+\\eta)\\,\\|F(x+h)-F(x)\\|_Y.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-ip-x0-minimum-norm-solution",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be a nonempty open set, let $F:U\\to Y$ be a forward map, let $y\\in Y$, and let $x_0\\in X$. A point $x^\\dagger\\in U$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ on $U$ if $F(x^\\dagger)=y$ and\n\n$$\\|x^\\dagger-x_0\\|\\le\\|x-x_0\\|\\qquad\\text{for every }x\\in U\\text{ with }F(x)=y.$$\n\nThis definition asserts no existence or uniqueness; it describes the minimizing property of a supplied exact solution. The minimum is global over the exact solution set on $U$, with distance measured from the specified reference point $x_0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fr\u00e9chet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-solution-difference-in-linearized-kernel",
+          "claim": "Choose any $x\\in\\overline B_\\delta(x^\\dagger)$ with $F(x)=y$ and $x\\ne x^\\dagger$, and put $h:=x-x^\\dagger$. Applying [F1] at $x^\\dagger$ gives $\\|F'(x^\\dagger)h\\|_Y\\le(1+\\eta)\\|F(x)-F(x^\\dagger)\\|_Y=0$. Hence $F'(x^\\dagger)h=0$, so [F2] gives $h\\in\\ker(F'(x^\\dagger))$; also $h\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strictly-larger-local-solution-distance",
+          "claim": "By [A3] and [F3], $x^\\dagger-x_0$ is orthogonal to $h$. Applying [F4] to $x^\\dagger-x_0$ and $h$ yields $\\|x-x_0\\|_X^2=\\|x^\\dagger-x_0\\|_X^2+\\|h\\|_X^2>\\|x^\\dagger-x_0\\|_X^2$, since [F5] and $h\\ne0$ imply $\\|h\\|_X>0$. The norms are nonnegative, so the strict inequality of squares gives the strict norm inequality. With [A1], this proves uniqueness of the $x_0$-minimum-norm solution among the local exact solutions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "A3",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a supplied exact solution x-dagger, so an empty exact-solution set is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If x0=x-dagger, step 2.1 still gives a strict positive distance for every distinct local solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At eta=0 the comparison in step 1.1 remains valid; the excluded endpoint eta=1 is not admitted by the TCC hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the derivative kernel is {0}, step 1.1 rules out any distinct local exact solution; otherwise step 2.1 gives its strictly larger distance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed ball includes norm delta, and step 1.1 applies the TCC comparison to that boundary increment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes an arbitrary local solution; it does not select a family of solutions or use choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way local uniqueness implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way local uniqueness implication, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently reviewed Statement, all Given/F1\u2013F5/A1\u2013A3 clauses, Proof 1.1\u20132.1, Remarks, and every direct supplier. The residual-comparison lemma was independently checked by writing d=F(x+h)-F(x), e=d-F'(x)h and applying the norm triangle inequality twice. For any competing exact local solution, h=x-xdagger has norm<=delta, so its zero data residual forces F'(xdagger)h=0. Orthogonal-complement membership then gives <xdagger-x0,h>=0. Pythagoras yields squared distance equal to ||xdagger-x0||^2+||h||^2, strictly larger for h!=0. Nonnegative norms preserve the strict order on taking square roots. The supplied global minimizing solution also minimizes on the local ball; the proof asserts no new global existence or injectivity. Checked x0=xdagger, h=0 exclusion, trivial kernel (no competitors), zero derivative, zero-dimensional Hilbert spaces, eta=0 and closed-ball boundary. No projection theorem or axiom of choice is required: fixing an arbitrary competitor is universal instantiation. Clason printed pp.87\u201388, (9.6), (9.7), complete Theorem 9.9 and proof, supplies the matching one-basepoint argument. Kaltenbacher\u2013Sch\u00f6pfer\u2013Schuster printed pp.7\u20138, \u00a72.3 equation (9) and complete Proposition 1/proof, was read as related background only: it assumes a uniform two-point condition and uniformly smooth/convex Banach setup, and its existence result is not imported here. No diagram or missing prerequisite; current proof sound. Published presentation findings are separately routed and do not alter the mathematical interfaces."
+      }
+    },
+    "cex-ip-smooth-map-fails-tcc": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-frechet-derivative-between-banach-spaces",
+          "source_section": "Definition",
+          "quote": "On this page the scalar field is the field $\\mathbb R$ of real numbers: $X$, $Y$\nand $Z$ always denote real Banach spaces ([[def-banach-space]]) and $U\n\\subseteq X$ always denotes an open subset of $X$, in the metric topology of the\nnorm ([[def-metric-topology]]).\n\nLet $f : U \\to Y$ be a map and let $x \\in U$. For a bounded linear operator\n$T \\in \\mathcal B(X,Y)$ ([[def-bounded-linear-operator]],\n[[def-space-of-bounded-linear-operators]]) write\n\n$$r(h) := f(x+h) - f(x) - Th \\qquad (h \\in X,\\ x+h \\in U).$$\n\nThen $f$ is **Fr\u00e9chet differentiable at $x$** when there is\n$T \\in \\mathcal B(X,Y)$ with\n\n$$\\lim_{\\substack{h \\to 0 \\\\ h \\ne 0}} \\frac{\\|f(x+h)-f(x)-Th\\|}{\\|h\\|} = 0 ,$$\n\nthe limit being taken over those $h$ with $x + h \\in U$. Such an operator $T$ is\na **Fr\u00e9chet derivative of $f$ at $x$**, written $T = Df(x)$, and $\\|T\\|$ is its\noperator norm ([[def-operator-norm]]). When $f$ is Fr\u00e9chet differentiable at\nevery point of $U$, $f$ is **differentiable on $U$** and the **derivative** is\nthe map $Df : U \\to \\mathcal B(X,Y)$, $x \\mapsto Df(x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fr\u00e9chet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Identify $\\mathbb R$ with the one-coordinate Euclidean space $\\mathbb R^1$ by its sole coordinate; [F1] gives inner product $st$ and [F2] gives norm $|t|$. Every Cauchy sequence for this norm converges by [F3], so [F4] makes $\\mathbb R$ a real Hilbert space. The polynomial $F(t)=t^2$ is infinitely differentiable; moreover $|F(h)-F(0)-0h|/|h|=|h|\\to0$ as $h\\to0$, so [F5] gives $F'(0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\delta>0$, choose $h=\\delta/2$, which is nonzero and satisfies $|h|\\le\\delta$. Substitution in [F6] gives $h^2\\le\\eta h^2$, hence $1\\le\\eta$ after division by $h^2>0$, contradicting $\\eta<1$. Therefore no such TCC radius and constant exist.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses the nonempty real line as its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At h=0 the TCC inequality is equality; step 2.1 uses a nonzero h to refute every radius."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 shows eta must satisfy eta>=1, exactly the threshold excluded by the definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The derivative is zero at the basepoint by step 1.1, while every nonzero increment has positive residual h-squared."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses h=delta/2, an interior point of the closed TCC ball for every delta>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the witness increment explicitly as delta/2; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal implication and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal implication and contains no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently reviewed Counterexample 1.1\u20132.1, Facts F1\u2013F6, every direct supplier and the finite/inner-product Cauchy\u2013Schwarz and real-completeness proofs used for the Hilbert line. R^1 identifies canonically with R; its induced norm is absolute value and Cauchy completeness requires no choice. For F(t)=t^2, the derivative at t is multiplication by 2t, its derivative is constant 2, and all higher derivatives vanish; at 0 the displayed remainder ratio is |h|. For every delta>0 the explicit h=delta/2 is admissible and nonzero, so TCC implies 1<=eta, contradicting eta<1. h=0 alone gives equality and does not refute TCC; eta=1 is excluded, radius zero is excluded, all positive radii are covered. Clason equation (9.6), printed p.87, was checked for the exact one-basepoint closed-increment condition; this scalar construction is independently proved, not imported from that source. No diagrams, hidden selection, or unresolved mathematical prerequisite. Published reader findings are presentation defects recorded separately for owner maintenance; their actual mathematical interfaces remain sound."
+      }
+    },
+    "ex-ip-local-tcc-neighborhood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-frechet-derivative-between-banach-spaces",
+          "source_section": "Definition",
+          "quote": "On this page the scalar field is the field $\\mathbb R$ of real numbers: $X$, $Y$\nand $Z$ always denote real Banach spaces ([[def-banach-space]]) and $U\n\\subseteq X$ always denotes an open subset of $X$, in the metric topology of the\nnorm ([[def-metric-topology]]).\n\nLet $f : U \\to Y$ be a map and let $x \\in U$. For a bounded linear operator\n$T \\in \\mathcal B(X,Y)$ ([[def-bounded-linear-operator]],\n[[def-space-of-bounded-linear-operators]]) write\n\n$$r(h) := f(x+h) - f(x) - Th \\qquad (h \\in X,\\ x+h \\in U).$$\n\nThen $f$ is **Fr\u00e9chet differentiable at $x$** when there is\n$T \\in \\mathcal B(X,Y)$ with\n\n$$\\lim_{\\substack{h \\to 0 \\\\ h \\ne 0}} \\frac{\\|f(x+h)-f(x)-Th\\|}{\\|h\\|} = 0 ,$$\n\nthe limit being taken over those $h$ with $x + h \\in U$. Such an operator $T$ is\na **Fr\u00e9chet derivative of $f$ at $x$**, written $T = Df(x)$, and $\\|T\\|$ is its\noperator norm ([[def-operator-norm]]). When $f$ is Fr\u00e9chet differentiable at\nevery point of $U$, $f$ is **differentiable on $U$** and the **derivative** is\nthe map $Df : U \\to \\mathcal B(X,Y)$, $x \\mapsto Df(x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fr\u00e9chet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivative-at-the-basepoint",
+          "claim": "For $h\\in\\mathbb R$, $F(1+h)-F(1)=3h+h^2$, so $F(1+h)-F(1)-3h=h^2$. Since $|h^2|/|h|=|h|\\to0$, [F4] gives $F'(1)h=3h$; the polynomial is smooth.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-cone-ratio-bound",
+          "claim": "For $|h|\\le1/4$, the TCC remainder is $|h|^2$ and the data difference has magnitude $|3h+h^2|=|h||3+h|$. If $h\\ne0$, then $|3+h|\\ge3-|h|\\ge11/4$, so $|h|/|3+h|\\le(1/4)/(11/4)=1/11<1/10$. Thus $|h|^2\\le(1/10)|3h+h^2|$; for $h=0$ both sides vanish. Since $\\overline B_{1/4}(1)\\subset\\mathbb R$ and $F(1)=2$, this verifies the stated local TCC neighborhood.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the nonempty real-line domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks h=0 separately, where both sides of the TCC inequality vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The chosen eta=1/10 lies strictly below one, as required by the definition and verified in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the nonzero derivative 3 at the basepoint; the only vanishing data increment considered at the basepoint is h=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At |h|=1/4, step 2.1 bounds the ratio by 1/11<1/10, so the closed-ball boundary is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 handles every real h in the interval directly and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-way inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-way inequality, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently reviewed Example, Verification 1.1\u20132.1, all F1\u2013F5 supplier interfaces and their actual current proofs/definitions. The real Hilbert-line identification uses the same verified absolute-value norm and choice-free real completeness as the preceding counterexample. For F(t)=t+t^2 the derivative at t is 1+2t, the second derivative is 2 and all higher derivatives vanish; F(1)=2 and F(1+h)-F(1)=3h+h^2 with derivative remainder h^2. For every 0<|h|<=1/4, |3+h|>=11/4 and |h|/|3+h|<=1/11<1/10. Both endpoints are included, the denominator is nonzero away from h=0, and at h=0 both sides vanish. The closed ball is contained in the full open domain R; eta=1/10 satisfies 0<=eta<1. Clason equation (9.6), printed p.87, matches the precise local TCC used here; the polynomial example is independently verified. No existence theorem, choice axiom, iff, or diagram premise is used. Published presentation findings do not invalidate these supplier claims and remain routed for owner maintenance. No mathematical repair required."
+      }
+    }
+  }
+}

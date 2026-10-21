@@ -1,0 +1,1830 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-dihedral-operation-is-a-quandle",
+    "thm-dihedral-fox-colorings-terminate-and-are-correct",
+    "thm-quandle-colorings-are-reidemeister-invariant",
+    "lem-rack-kink-map-is-bijective",
+    "thm-rack-colorings-are-framed-invariants",
+    "thm-finite-table-coloring-termination-and-correctness",
+    "thm-fundamental-quandle-and-adjoint-group-from-wirtinger",
+    "ex-knot-kt-08-worked-cases",
+    "cex-knot-kt-08-boundary-case"
+  ],
+  "contracts": {
+    "lem-dihedral-operation-is-a-quandle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quandle-and-knot-coloring",
+          "source_section": "Definition",
+          "quote": "A **quandle** is a set $Q$ with a binary operation $*:Q\\times Q\\to Q$ such that:\n\n1. $x*x=x$ for every $x\\in Q$;\n2. for every $y\\in Q$, the right translation $R_y:Q\\to Q$, $R_y(x)=x*y$, is a bijection;\n3. $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in Q$.\n\nWrite $x\\mathbin{\\bar *}y:=R_y^{-1}(x)$ for the unique element satisfying\n$(x\\mathbin{\\bar *}y)*y=x$. Let $D$ be a regular oriented link diagram. An\n**arc** of $D$ is a connected strand segment cut at each crossing where that\nstrand passes under; an overstrand continues through its crossing. Orient the\nprojection plane. Along an oriented overarc with tangent $t$, let $n$ be the\nunit normal in the plane for which $(t,n)$ is positively oriented. At each\ncrossing, call the underarc from which $n$ points the source underarc and the\nunderarc toward which $n$ points the target underarc. A **quandle coloring**\nof $D$ by $Q$ is an assignment $c$ of an element of $Q$ to every arc such\nthat, at each crossing, if the source, over, and target colors are $a,b,d$,\nthen $d=a*b$. Equivalently, when the source and target are named in the\nopposite order, $a=d\\mathbin{\\bar *}b$. Write $\\operatorname{Col}_Q(D)$ for\nthe set of all such assignments.\n\nThe local convention is shown below. The overarc is oriented from southwest\nto northeast, so its positive normal points northwest; the underarc is\noriented from southeast to northwest. Thus $x$ is the source color, $y$ is\nthe overarc color, and $z=x*y$ is the target color. The gap marks the\nunderpassing strand.\n\n```tikz\n\\begin{tikzpicture}[scale=1]\n  \\draw[->] (1.15,-1.15) -- (0.18,-0.18);\n  \\draw[->] (-0.18,0.18) -- (-1.15,1.15);\n  \\draw[->,line width=1.2pt] (-1.15,-1.15) -- (1.15,1.15);\n  \\node at (0.92,-0.82) {$x$};\n  \\node at (-0.82,-0.82) {$y$};\n  \\node at (-0.82,0.92) {$z$};\n  \\node at (0.35,0.35) {$z=x*y$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Addition and multiplication of residue classes are well-defined because congruence modulo $p$ is preserved by sums and products. If $\\bar r\\ne0$ in $\\mathbb Z/p\\mathbb Z$, choose an integer representative $r$ not divisible by $p$. Since $p$ is prime, $\\gcd(r,p)=1$; Bézout's identity gives integers $u,v$ with $ur+vp=1$, so $\\bar u\\bar r=1$. Hence the residue classes form a field. For fixed $b$, the right translation is $R_b(a)=2b-a$ and satisfies $R_b(R_b(a))=2b-(2b-a)=a$. It is therefore a bijection.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Idempotency holds because $a*a=2a-a=a$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For all $a,b,c$, $(a*b)*c=2c-(2b-a)=a-2b+2c$, while $(a*c)*(b*c)=2(2c-b)-(2c-a)=a-2b+2c$. Thus right self-distributivity holds; together with step 1.1 and step 1.2, [F1] gives the quandle axioms.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 covers every residue operation; no nonempty interval is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is in the item’s stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 are universal and include every field element."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 proves inverses for every nonzero residue under the stated prime hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "p is an odd prime, hence p≥3; p=2 and nonprime moduli are outside the stated field input. The displayed identities apply at the smallest allowed p=3 as well.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "p is an odd prime, hence p≥3; p=2 and nonprime moduli are outside the stated field input. The displayed identities apply at the smallest allowed p=3 as well.",
+            "item_sha256": "e9470f0b9215d80785e212f5a3e31fe9e03c527c4b9fbd03669ea231fde35513",
+            "row_sha256": "2e5b3f43471d24f7decb475caafc0ab5593efb57f2a72642d51fed330b232dc0",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 382
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s finite algebraic procedure or local proof makes no selection from a family of nonempty sets and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item’s statement is not an iff assertion and contains no converse direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item’s statement is not an iff assertion and contains no converse direction to check."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Dihedral operation table over F3",
+          "method": "exact finite calculation",
+          "input": {
+            "prime": 3,
+            "operation": "x*y = 2y-x mod 3",
+            "table": [
+              [
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0
+              ],
+              [
+                1,
+                0,
+                2
+              ]
+            ]
+          },
+          "calculation": "Each of the three columns is a permutation and the diagonal is (0,1,2). For every triple, (x*y)*z = x-2y+2z = (x*z)*(y*z) modulo 3, so all 27 triples satisfy self-distributivity.",
+          "expected": {
+            "right_translation_columns": "permutations of {0,1,2}",
+            "idempotent": true,
+            "right_self_distributive": true
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-dihedral-fox-colorings-terminate-and-are-correct": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-dihedral-fox-colorings",
+          "source_section": "Definition",
+          "quote": "Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,\nfixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set\n$\\operatorname{Col}_p(D)$ of assignments of residues in $\\mathbb F_p$ to the\narcs satisfying the Fox crossing equations, together with\n$|\\operatorname{Col}_p(D)|$.\n\n1. Create one variable $x_j$ for each arc in the supplied order, and process\n   crossings in the supplied order.\n2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append\n   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\\mathbb F_p$.\n   At a crossing, add the coefficients of any repeated arc in that row.\n3. Set the next pivot-row index to $r=1$ and process columns from left to\n   right. If $r>c$, mark this and every remaining column free and stop. If\n   $r\\le c$, search rows $r,\\ldots,c$ in order for the first nonzero entry in\n   the current column. If none exists, mark this column free and continue\n   without changing $r$. Otherwise swap the selected row into row $r$, divide\n   row $r$ by its nonzero entry in this column, and add multiples of row $r$\n   to every other row to clear this column. Record this column as a pivot\n   column with pivot row $r$, then increase $r$ by one. After the scan, every\n   column not recorded as a pivot column is free.\n4. List the free columns in increasing order and enumerate every tuple in\n   $\\mathbb F_p^f$ in lexicographic order using the residue representatives\n   $0,\\ldots,p-1$, where $f$ is the number of free columns. If $f=0$, process\n   the empty tuple once. For each tuple, assign its coordinates to the free\n   variables. For each pivot row, set its pivot variable equal to the negative\n   of the sum of the row's free-column coefficients times those assigned free\n   variables. Append the resulting assignment in the supplied arc order.\n   Return all appended assignments and their number.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.\n\nA **regular oriented link diagram** $D$ consists of the image $\\pi(L)$ together\nwith\n\n(a) the **over/under datum** at every double point: which of the two branches\n    lies above the other, read from the forgotten third coordinate (the branch\n    with the larger $x_3$-coordinate at the crossing is drawn over); and\n(b) the **orientations of the strands**, induced by the orientation of $L$.\n\nThus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.\n\n**Finiteness is part of the definition.** Condition (2) is the clause that\nmakes the finitely many double points available for the slicing arguments used\nin the Reidemeister and Markov proofs; a projection with infinitely many double\npoints, accumulations, or tangential double points is not regular and is not\nused below. The definition fixes the ambient plane, the projection and the\nover/under convention once and for all.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each crossing contributes one linear equation in the $a$ arc variables, so the algorithm forms a $c\\times a$ matrix over $\\mathbb F_p$. Addition and multiplication of residue classes are well-defined because congruence modulo $p$ is preserved by sums and products. If a residue $r$ is nonzero, then $\\gcd(r,p)=1$, so integers $u,v$ satisfy $ur+vp=1$ and $u$ is the inverse of $r$ modulo $p$. The field hypothesis in [A1] therefore supplies every division used by the pivot instructions in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every row operation in [F1] preserves the solution set of the homogeneous system. A row swap is reversible by the same swap; multiplying a row by a nonzero scalar is reversible by multiplying by its inverse; and adding a multiple of one row to another is reversible by subtracting the same multiple. Each transformed system is therefore equivalent to the preceding one.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The algorithm visits each of the $a$ columns once. Each pivot search inspects at most $c$ rows, for at most $ca$ entry tests in total. Every pivot clears its column in at most $c-1$ other rows, so at most $a(c-1)\\le ca$ row-entry elimination scans occur. A pivot increases the unused-row index, and there are at most $a$ columns, so there are at most $a$ pivots. The loops are finite and the chosen first nonzero entry makes the procedure deterministic.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At termination, each pivot column has a single $1$ in its pivot row and zeros in every other row; earlier pivot columns stay cleared because each later pivot row is zero in those columns. Each nonpivot column is free. The pivot equations uniquely determine the pivot variables from arbitrary free-variable values, and every such assignment satisfies the reduced system. By step 2.1 the reduced system has exactly the original solution set, so the returned assignments are exactly the Fox colorings.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "There are exactly $p^f$ choices of the $f$ free variables, and each determines one distinct solution. If $a=0$, then $f=0$ and the empty diagram has its unique empty assignment; if $c=0$, every arc variable is free and all $p^a$ assignments are returned. The stated pivot and scan bounds follow from step 2.2.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 proves the empty diagram has its unique empty assignment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 treats c=0 and returns all p^a assignments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1 counts p^f solutions for all f, including f=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 treats a=0 and c=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 4.1 includes a=0 with the unique empty assignment and c=0 with all p^a assignments; Proof 2.2 bounds the final pivot and scan counts by a and ca.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof 4.1 includes a=0 with the unique empty assignment and c=0 with all p^a assignments; Proof 2.2 bounds the final pivot and scan counts by a and ca.",
+            "item_sha256": "9b6793382ca418c6b8b79f6b7d8ee2cf2da6b05e9b8cdc4b2dfd8617bf681419",
+            "row_sha256": "7ba353863d6443684f21920e87c29ecd9aecce7be0c5983c46e731cbba2a00a2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 385
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item’s finite algebraic procedure or local proof makes no selection from a family of nonempty sets and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 shows every generated free-variable assignment solves the original system."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 shows every solution is uniquely determined by its free variables."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Three-crossing trefoil system over F3",
+          "method": "exact finite row reduction",
+          "input": {
+            "prime": 3,
+            "matrix": [
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ]
+            ]
+          },
+          "calculation": "The matrix has rank 1; its reduced row is [1,1,1]. Two variables are free, and each of the 3^2 assignments determines one solution, for 9 colorings.",
+          "expected": {
+            "rank": 1,
+            "free_variables": 2,
+            "solutions": 9
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-quandle-colorings-are-reidemeister-invariant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quandle-and-knot-coloring",
+          "source_section": "Definition",
+          "quote": "A **quandle** is a set $Q$ with a binary operation $*:Q\\times Q\\to Q$ such that:\n\n1. $x*x=x$ for every $x\\in Q$;\n2. for every $y\\in Q$, the right translation $R_y:Q\\to Q$, $R_y(x)=x*y$, is a bijection;\n3. $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in Q$.\n\nWrite $x\\mathbin{\\bar *}y:=R_y^{-1}(x)$ for the unique element satisfying\n$(x\\mathbin{\\bar *}y)*y=x$. Let $D$ be a regular oriented link diagram. An\n**arc** of $D$ is a connected strand segment cut at each crossing where that\nstrand passes under; an overstrand continues through its crossing. Orient the\nprojection plane. Along an oriented overarc with tangent $t$, let $n$ be the\nunit normal in the plane for which $(t,n)$ is positively oriented. At each\ncrossing, call the underarc from which $n$ points the source underarc and the\nunderarc toward which $n$ points the target underarc. A **quandle coloring**\nof $D$ by $Q$ is an assignment $c$ of an element of $Q$ to every arc such\nthat, at each crossing, if the source, over, and target colors are $a,b,d$,\nthen $d=a*b$. Equivalently, when the source and target are named in the\nopposite order, $a=d\\mathbin{\\bar *}b$. Write $\\operatorname{Col}_Q(D)$ for\nthe set of all such assignments.\n\nThe local convention is shown below. The overarc is oriented from southwest\nto northeast, so its positive normal points northwest; the underarc is\noriented from southeast to northwest. Thus $x$ is the source color, $y$ is\nthe overarc color, and $z=x*y$ is the target color. The gap marks the\nunderpassing strand.\n\n```tikz\n\\begin{tikzpicture}[scale=1]\n  \\draw[->] (1.15,-1.15) -- (0.18,-0.18);\n  \\draw[->] (-0.18,0.18) -- (-1.15,1.15);\n  \\draw[->,line width=1.2pt] (-1.15,-1.15) -- (1.15,1.15);\n  \\node at (0.92,-0.82) {$x$};\n  \\node at (-0.82,-0.82) {$y$};\n  \\node at (-0.82,0.92) {$z$};\n  \\node at (0.35,0.35) {$z=x*y$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quandle-and-knot-coloring",
+          "source_section": "Definition",
+          "quote": "A **quandle** is a set $Q$ with a binary operation $*:Q\\times Q\\to Q$ such that:\n\n1. $x*x=x$ for every $x\\in Q$;\n2. for every $y\\in Q$, the right translation $R_y:Q\\to Q$, $R_y(x)=x*y$, is a bijection;\n3. $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in Q$.\n\nWrite $x\\mathbin{\\bar *}y:=R_y^{-1}(x)$ for the unique element satisfying\n$(x\\mathbin{\\bar *}y)*y=x$. Let $D$ be a regular oriented link diagram. An\n**arc** of $D$ is a connected strand segment cut at each crossing where that\nstrand passes under; an overstrand continues through its crossing. Orient the\nprojection plane. Along an oriented overarc with tangent $t$, let $n$ be the\nunit normal in the plane for which $(t,n)$ is positively oriented. At each\ncrossing, call the underarc from which $n$ points the source underarc and the\nunderarc toward which $n$ points the target underarc. A **quandle coloring**\nof $D$ by $Q$ is an assignment $c$ of an element of $Q$ to every arc such\nthat, at each crossing, if the source, over, and target colors are $a,b,d$,\nthen $d=a*b$. Equivalently, when the source and target are named in the\nopposite order, $a=d\\mathbin{\\bar *}b$. Write $\\operatorname{Col}_Q(D)$ for\nthe set of all such assignments.\n\nThe local convention is shown below. The overarc is oriented from southwest\nto northeast, so its positive normal points northwest; the underarc is\noriented from southeast to northwest. Thus $x$ is the source color, $y$ is\nthe overarc color, and $z=x*y$ is the target color. The gap marks the\nunderpassing strand.\n\n```tikz\n\\begin{tikzpicture}[scale=1]\n  \\draw[->] (1.15,-1.15) -- (0.18,-0.18);\n  \\draw[->] (-0.18,0.18) -- (-1.15,1.15);\n  \\draw[->,line width=1.2pt] (-1.15,-1.15) -- (1.15,1.15);\n  \\node at (0.92,-0.82) {$x$};\n  \\node at (-0.82,-0.82) {$y$};\n  \\node at (-0.82,0.92) {$z$};\n  \\node at (0.35,0.35) {$z=x*y$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "An **oriented Reidemeister move** is one of the following local replacements of\na regular oriented link diagram ([[def-regular-oriented-link-diagram]]),\nperformed inside a small closed disk while the diagram outside the disk is left\nunchanged, and understood up to planar isotopy outside the disk\n([[def-planar-isotopy-of-link-diagrams]]). All sign and orientation variants of\neach local picture are included.\n\n**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.\n\nA local R2 or R3 picture is **braid-like** when, after a local coordinate\nchange and deformation, all participating strands run in the same positive\nlongitudinal direction. This is a local condition and does not require a\nglobally chosen braid axis. R1 is kept as a separate kink move.\n\nThe strands keep their orientations throughout every move. The union of the\nthree move types, together with planar isotopy, generates the equivalence\nrelation on diagrams used in the Reidemeister equivalence theorem below; the\nmoves are sometimes called R1, R2, R3 as above. Since every move changes the\ndiagram only inside a disk, it has a type and a finite list of local\norientation/sign variants, and each variant is realized by an ambient isotopy\nas the next items show. The complete list of variants is required because the\nMarkov and Alexander constructions below act on oriented diagrams and count\nsigned crossings.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "An R1 kink adds one underarc color $y$ to the unchanged boundary arc color $x$. Depending on the local orientation, the crossing equation is $y=x*x$ or $x=y*x$. In the first case idempotency gives the unique extension $y=x$; in the second case $x=x*x$ and right invertibility give the unique solution $y=x$. Removing the kink is the inverse bijection.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At an R2 move, fix the color $y$ on the strand passing over the other strand. The understrand's color changes by $R_y$ at one crossing and by $R_y^{-1}$ at the other; these maps are inverse bijections by [F1]. Thus every boundary coloring extends uniquely across the two-crossing side, and the inverse R2 move gives the inverse map.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the braid-like R3 orientation, the local crossing map is $B(x,y)=(y,x*y)$ and its inverse is $B^{-1}(u,v)=(v\\mathbin{\\bar *}u,u)$. Starting from $(x,y,z)$, the two sides of R3 give respectively $(z,y*z,(x*y)*z)$ and $(z,y*z,(x*z)*(y*z))$; these are equal by right self-distributivity. For every $z$, $R_z(x*y)=(x*y)*z=(x*z)*(y*z)$, so $R_z$ preserves $*$. If $u=a\\mathbin{\\bar *}b$, then $u*b=a$; applying the bijection $R_z$ gives $R_z(u)*R_z(b)=R_z(a)$, and uniqueness of right division yields $R_z(u)=R_z(a)\\mathbin{\\bar *}R_z(b)$. Hence $R_z$ preserves $\\bar *$ too, and its inverse preserves both operations. Thus for either operation $\\star_1,\\star_2\\in\\{*,\\bar *\\}$, $(x\\star_1 y)\\star_2 z=(x\\star_2 z)\\star_1(y\\star_2 z)$. These four identities give the R3 relation for every choice of crossing direction, and the bijective crossing maps give the corresponding extension bijections. A planar isotopy simply transports each arc label.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the converse, the R1 extension property gives $x*x=x$ for every $x$: on the kink side, the boundary color $x$ can extend only when this equality holds.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "In an R2 tangle with over-color $y$, the under-color map is $R_y$. Unique extension for every incoming color makes $R_y$ a function defined everywhere; unique extension in the reverse direction means each target color has exactly one preimage. Hence $R_y$ is bijective for every $y$.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "In the braid-like R3 tangle, arbitrary boundary colors $x,y,z$ yield the outputs $(x*y)*z$ and $(x*z)*(y*z)$. Unique extension to the same boundary coloring forces these outputs to agree for all triples, which is right self-distributivity.",
+          "step": "1.6",
+          "inputs": [
+            "given",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus the local axioms are necessary and sufficient for the stated local extension property. Under $\\mathrm{AC}_\\omega$, [F3] connects diagrams of the same oriented link by finitely many such moves; composing the local bijections gives a bijection of coloring sets. A finite quandle has finitely many assignments on a finite diagram, so the bijection preserves their counts. Countable choice is used only through [F3]; the move-by-move calculations in steps 1.1–2.3 are choice-free.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "step 1.6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the statement: the empty diagram has one empty assignment, preserved by planar isotopy."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 give bijections; a zero-crossing diagram has no local equations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 apply to every element of Q, including a singleton quandle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 preserve empty local coloring sets by the unique empty bijection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 give unique extensions for each boundary coloring."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 uses ACω only for finite-move equivalence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1–1.3 prove the quandle axioms imply the local extension property."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "steps 1.4–1.6 derive the three axioms from local extension bijections."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_frontmatter": "AC_omega is given for the ambient-isotopy conclusion; the local R1/R2/R3 calculations are choice-free."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-rack-kink-map-is-bijective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rack-fundamental-quandle-and-adjoint-group",
+          "source_section": "Definition",
+          "quote": "A **rack** is a set $R$ with a binary operation $*:R\\times R\\to R$ such\nthat for every $y\\in R$ the right translation $R_y(x)=x*y$ is a bijection\nand $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in R$. A **quandle** is a rack\nsatisfying $x*x=x$ for every $x$. For either structure, write\n$x\\mathbin{\\bar *}y=R_y^{-1}(x)$.\n\nFor a regular oriented link diagram $D$, let $A(D)$ be its finite set of\nmaximal under-arcs. Form the set of finite terms recursively: each symbol\n$x_a$ for $a\\in A(D)$ is a term, and if $s,t$ are terms then $s*t$ and\n$s\\mathbin{\\bar *}t$ are terms. Let $\\sim$ be the intersection of all\nequivalence relations on these terms that are compatible with both operations\nand contain the quandle identities: idempotency, right invertibility, and\nright self-distributivity, together with the crossing relations.\nAt a crossing with source and target under-arcs $u,v$ and overarc $o$, the\ncrossing relation is $x_v=x_u*x_o$; reversing source and target gives the\nequivalent relation with $\\bar *$. The quotient term set $Q(D)$ is the\n**diagram quandle**, or the diagram presentation of the **fundamental\nquandle**. Its independence of diagram is proved in the Theorem.\n\nFor any quandle $Q$, its **adjoint group** $\\operatorname{Adj}(Q)$ is the\ngroup presentation with generators $e_q$ for all $q\\in Q$ and relators\n$e_{q*r}=e_r^{-1}e_qe_r$ for all $q,r\\in Q$. A group presentation\n$\\langle X\\mid S\\rangle$ means the quotient of the free group on $X$ by the\nnormal closure of the relator words $S$.\n\nThe diagram presentation and the adjoint group are algebraic constructions;\nthis definition makes no completeness or knot-classification assertion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Self-distributivity gives $(w*x)*x=(w*x)*(x*x)$ for every $w,x$. Thus $R_x(R_x(w))=R_{x*x}(R_x(w))$. Since $R_x$ is surjective, the two permutations agree: $R_{x*x}=R_x$, or $R_{\\pi(x)}=R_x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $z\\in R$ and put $x=R_z^{-1}(z)$, which exists by [F1]. Then $x*z=z$. Self-distributivity says $R_z\\circ R_x=R_{x*z}\\circ R_z=R_z\\circ R_z$. Cancel the bijection $R_z$ on the left to obtain $R_x=R_z$. Therefore $\\pi(x)=R_x(x)=R_z(x)=x*z=z$, so $\\pi$ is surjective and the displayed formula gives a preimage of every $z$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\pi(x)=\\pi(y)$, then step 1.1 gives $R_x=R_{\\pi(x)}=R_{\\pi(y)}=R_y$. Hence $R_y(x)=R_x(x)=\\pi(x)=\\pi(y)=R_y(y)$. Since $R_y$ is injective, $x=y$. Thus $\\pi$ is injective as well as surjective, and step 1.2's formula is its inverse. If $R$ is empty, the unique map $R\\to R$ is bijective and the conclusion is vacuous.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly states that the unique empty-rack self-map is bijective, so the conclusion is vacuous in that case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A rack has no distinguished zero element in the Statement; no zero-parameter specialization is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2 and 2.1 apply to the singleton rack, whose only right translation and kink map are identities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 do not assume idempotency or finiteness; they give a genuine inverse for a non-idempotent rack as well as a quandle."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is an algebraic bijection on a rack, with no interval or diagram endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 defines the inverse point by the unique value R_z^-1(z); existence is pointwise uniqueness, not a chosen family of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts bijectivity and an inverse formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Its injectivity and surjectivity are separately proved in steps 1.2 and 2.1, without asserting an iff theorem."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "constant-action-rack-kink-inverse",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "calculation": "On Z/3 set x*y=x+1; all 27 triples satisfy self-distributivity, right translations are the 3-cycle, and pi^-1(z)=z-1.",
+          "result": {
+            "axiom_triples_checked": 27,
+            "self_distributivity": true,
+            "pi": [
+              1,
+              2,
+              0
+            ],
+            "pi_inverse": [
+              2,
+              0,
+              1
+            ],
+            "opposite_pair": [
+              0,
+              1,
+              2
+            ],
+            "single_curl_fixed_colors": 0,
+            "zero_or_compensated_unknot_colors": 3
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "Self-distributivity gives $(w*x)*x=(w*x)*(x*x)$ for every $w,x$. Thus $R_x(R_x(w))=R_{x*x}(R_x(w))$. Since $R_x$ is surjective, the two permutations agree: $R_{x*x}=R_x$, or $R_{\\pi(x)}=R_x$."
+        }
+      ],
+      "finite_smoke": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–2.1 give equality R_pi(x)=R_x, the explicit preimage R_z^-1(z), injectivity and the empty-rack case. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "thm-rack-colorings-are-framed-invariants": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rack-fundamental-quandle-and-adjoint-group",
+          "source_section": "Definition",
+          "quote": "A **rack** is a set $R$ with a binary operation $*:R\\times R\\to R$ such\nthat for every $y\\in R$ the right translation $R_y(x)=x*y$ is a bijection\nand $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in R$. A **quandle** is a rack\nsatisfying $x*x=x$ for every $x$. For either structure, write\n$x\\mathbin{\\bar *}y=R_y^{-1}(x)$.\n\nFor a regular oriented link diagram $D$, let $A(D)$ be its finite set of\nmaximal under-arcs. Form the set of finite terms recursively: each symbol\n$x_a$ for $a\\in A(D)$ is a term, and if $s,t$ are terms then $s*t$ and\n$s\\mathbin{\\bar *}t$ are terms. Let $\\sim$ be the intersection of all\nequivalence relations on these terms that are compatible with both operations\nand contain the quandle identities: idempotency, right invertibility, and\nright self-distributivity, together with the crossing relations.\nAt a crossing with source and target under-arcs $u,v$ and overarc $o$, the\ncrossing relation is $x_v=x_u*x_o$; reversing source and target gives the\nequivalent relation with $\\bar *$. The quotient term set $Q(D)$ is the\n**diagram quandle**, or the diagram presentation of the **fundamental\nquandle**. Its independence of diagram is proved in the Theorem.\n\nFor any quandle $Q$, its **adjoint group** $\\operatorname{Adj}(Q)$ is the\ngroup presentation with generators $e_q$ for all $q\\in Q$ and relators\n$e_{q*r}=e_r^{-1}e_qe_r$ for all $q,r\\in Q$. A group presentation\n$\\langle X\\mid S\\rangle$ means the quotient of the free group on $X$ by the\nnormal closure of the relator words $S$.\n\nThe diagram presentation and the adjoint group are algebraic constructions;\nthis definition makes no completeness or knot-classification assertion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rack-kink-map-is-bijective",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a rack, with right translations $R_y(x)=x*y$. The kink map\n$\\pi:R\\to R$, $\\pi(x)=x*x$, is a bijection. Its inverse is\n$\\pi^{-1}(z)=R_z^{-1}(z)$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "An **oriented Reidemeister move** is one of the following local replacements of\na regular oriented link diagram ([[def-regular-oriented-link-diagram]]),\nperformed inside a small closed disk while the diagram outside the disk is left\nunchanged, and understood up to planar isotopy outside the disk\n([[def-planar-isotopy-of-link-diagrams]]). All sign and orientation variants of\neach local picture are included.\n\n**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.\n\nA local R2 or R3 picture is **braid-like** when, after a local coordinate\nchange and deformation, all participating strands run in the same positive\nlongitudinal direction. This is a local condition and does not require a\nglobally chosen braid axis. R1 is kept as a separate kink move.\n\nThe strands keep their orientations throughout every move. The union of the\nthree move types, together with planar isotopy, generates the equivalence\nrelation on diagrams used in the Reidemeister equivalence theorem below; the\nmoves are sometimes called R1, R2, R3 as above. Since every move changes the\ndiagram only inside a disk, it has a type and a finite list of local\norientation/sign variants, and each variant is realized by an ambient isotopy\nas the next items show. The complete list of variants is required because the\nMarkov and Alexander constructions below act on oriented diagrams and count\nsigned crossings.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the smooth normal-bundle structure used in the\nframing clause. For a knot component $K$, its normal bundle is the fibrewise\nquotient $\\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this\nbundle.\n\nLet $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.\n\nThis convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.\n\nThe **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.\n\nThe **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  \\draw[->] (-1,0) -- (1,0) node[right] {$v_{\\rm over}$};\n  \\draw[->] (0,-1) -- (0,1) node[above] {$v_{\\rm under}$};\n  \\node[above left] at (0,0) {$+1$};\n\\end{tikzpicture}\n```\n\nIn the displayed local chart, the over tangent is the positive horizontal\nvector and the under tangent is the positive vertical vector, so the determinant\nis $+1$. This figure illustrates the determinant rule only; no proof below\ndepends on a picture.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-blackboard-framing-self-linking-is-writhe",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a knot $K$ with blackboard framing $b_D$. The self-linking number of the\nframed knot $(K,b_D)$ equals the diagram writhe:\n$$\\operatorname{sl}(K,b_D)=\\operatorname{wr}(D).$$\nFor a link component $K_i$, the corresponding self-linking number is its\nself-writhe $\\operatorname{wr}_i(D)$. Total writhe of a link still includes\nthe signs of mixed crossings, while the sum of component self-linking numbers\nuses only self-crossings.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At an R2 move, hold the overarc color $y$ fixed. The underarc label is changed by $R_y$ at one crossing and by $R_y^{-1}$ at the other, so the two boundary colorings determine one another uniquely. Reversing the move gives the inverse correspondence.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a braid-like R3 move, use the crossing map $B(x,y)=(y,x*y)$. Its inverse is $B^{-1}(u,v)=(v\\mathbin{\\bar *}u,u)$ by right invertibility. The two sides send $(x,y,z)$ respectively to $(z,y*z,(x*y)*z)$ and $(z,y*z,(x*z)*(y*z))$; the last coordinates agree by rack self-distributivity. For every $z$, $R_z(x*y)=(x*y)*z=(x*z)*(y*z)$, so $R_z$ preserves $*$. If $u=a\\mathbin{\\bar *}b$, then $u*b=a$; applying $R_z$ gives $R_z(u)*R_z(b)=R_z(a)$, and uniqueness of right division yields $R_z(u)=R_z(a)\\mathbin{\\bar *}R_z(b)$. Thus $R_z$ and its inverse preserve both operations. For either operation $\\star_1,\\star_2\\in\\{*,\\bar *\\}$, this gives $(x\\star_1 y)\\star_2 z=(x\\star_2 z)\\star_1(y\\star_2 z)$, the corresponding mixed R3 equation. The bijective crossing maps then give the extension bijection for every orientation variant. A planar isotopy transports arc labels.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Write the under-tangent as $a v_{\\rm over}+b n_o$. Its determinant sign is the sign of $b$, so at a positive crossing the oriented underpass goes from source to target. In a positive curl with incoming label $x$ and outgoing label $y$, either the overarc is the incoming arc and $y=x*x$, or it is the outgoing arc and $y=x*y$. In the latter case self-distributivity gives $R_yR_x=R_{x*y}R_y=R_yR_y$, hence $R_x=R_y$; therefore $y=x*y=x*x=\\pi(x)$. Conversely $y=\\pi(x)$ solves the equation since $R_{\\pi(x)}=R_x$ by the kink-map proof. Thus both positive curl shapes have unique transport $y=\\pi(x)$. In a negative curl the same equations are read backwards and give $y=\\pi^{-1}(x)$. This checks both choices of which boundary arc is the overarc, independently of a picture.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For a single unframed curl with boundary color $x$, extension requires $x=\\pi(x)$; if $\\pi$ is the identity, this condition holds uniquely for every $x$. Conversely, if every boundary color extends uniquely, every $x$ is fixed by $\\pi$, so $x*x=x$ for all $x$ and the rack is a quandle.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "The kink shift propagates through any crossing. Self-distributivity gives $\\pi(x*y)=(x*y)*(x*y)=(x*x)*y$, hence $\\pi R_y=R_y\\pi$. It also gives $(x*y)*y=(x*y)*(y*y)$ for every $x$. Since $R_y$ is surjective, this implies $R_{\\pi(y)}=R_y$. By [F2], $\\pi$ is bijective, so these identities hold for its inverse as well: $\\pi^kR_y^{\\delta}=R_y^{\\delta}\\pi^k$ and $R_{\\pi^{\\ell}(y)}^{\\delta}=R_y^{\\delta}$ for all $k,\\ell\\in\\mathbb Z$ and $\\delta\\in\\{1,-1\\}$. In particular, if a crossing obeys $x_t=R_y(x_s)$, independently shifting its two under-colors by the same $\\pi^k$ and its over-color by $\\pi^{\\ell}$ preserves it, because $R_{\\pi^{\\ell}(y)}(\\pi^k x_s)=\\pi^kR_y(x_s)=\\pi^k x_t$. The reversed crossing relation is preserved by the same calculation with $R_y^{-1}$.",
+          "step": "1.5",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A compensated pair creates two curls on the same oriented component, or removes their inverse configuration. If its blackboard framing is preserved, [F4] forces the two created crossing signs to sum to zero; the same holds when opposite signed framing changes are specified directly. Choose either of the two component intervals between the sites and traverse it in the component orientation, writing $\\epsilon\\in\\{1,-1\\}$ for the sign of its first curl; the second has sign $-\\epsilon$. Starting from an old coloring, retain every color off this interval and replace every old color on it by $\\pi^{\\epsilon}$ of that color, splitting an old under-arc at the two sites if needed. Insert the unique local curl labels from step1.3. At the first site the transport changes the old incoming label to its $\\pi^{\\epsilon}$-shift; at the second the transport $\\pi^{-\\epsilon}$ restores the old outgoing label. Thus the prescribed labels agree along every new maximal under-arc.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At any old crossing, the selected component interval contains both local halves of the underpassing branch or neither, since its endpoints are away from crossings. Thus the source and target under-colors have the same shift exponent $k\\in\\{0,\\epsilon\\}$. Independently the overpassing branch has shift exponent $\\ell\\in\\{0,\\epsilon\\}$. Step1.5 preserves the crossing relation for all four possibilities, including a self-crossing at which the interval contains exactly one of the two visits. The old crossing relations therefore all hold after the recoloring. Conversely, start with any coloring of the twice-curled diagram, undo the $\\pi^{\\epsilon}$ shift on that same marked component interval, and remove the two uniquely determined curl portions using step1.3; step1.5 again preserves every intervening relation. The endpoint transports now cancel in the inverse order. These constructions are inverse on every arc label, so give the required bijection for arbitrarily separated opposite curls, not only adjacent curls. The removal move uses the inverse bijection.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.3",
+            "step 1.5",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1–1.2 give the R2, R3 and planar-isotopy bijections; steps 2.1, 3.1 give the compensation bijection. A finite rack admits only finitely many assignments on a finite diagram, so the cardinalities are preserved. Step 1.4 proves exactly when the individual unframed R1 bijection is available. The algebraic assertions use no choice; only the smooth framing interpretation uses [A1].",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.4",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the empty rack, the label statements in steps 1.1 through 1.4 are vacuous and the empty kink map is the identity; step 4.1 gives the resulting coloring-set bijections."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves zero net signed kink change has identity composite pi pi^-1; a crossing-free input has no extra crossing constraints on its labels under the coloring Definition used in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.4 checks a single R1 curl exactly: every boundary label extends uniquely if and only if pi is the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 1.4 allow a genuinely non-idempotent rack: a positive curl transports by pi and need not preserve a closed color, while step 2.1 still gives the inverse-pair bijection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 computes both choices of which boundary arc is over, and step 2.1 returns the same boundary label after the compensated pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use AC_omega only for the supplied smooth-framing/self-linking interpretation; the local R2/R3/kink algebra in steps 1.1 through 1.4 is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.4 proves unique extension across a single unframed curl for every color implies x*x=x, equivalently pi=id."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.4 proves pi=id makes every boundary color extend uniquely, supplying the reverse direction of the R1 characterization."
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "axioms": [
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "non-idempotent-single-versus-opposite-curls",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ],
+          "calculation": "For x*y=x+1 on Z/3, pi has no fixed color, but pi^-1 pi is identity. Thus the one-arc unknot has3 colorings, a single curl0 and an opposite pair3.",
+          "result": {
+            "axiom_triples_checked": 27,
+            "self_distributivity": true,
+            "pi": [
+              1,
+              2,
+              0
+            ],
+            "pi_inverse": [
+              2,
+              0,
+              1
+            ],
+            "opposite_pair": [
+              0,
+              1,
+              2
+            ],
+            "single_curl_fixed_colors": 0,
+            "zero_or_compensated_unknot_colors": 3
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "Write the under-tangent as $a v_{\\rm over}+b n_o$. Its determinant sign is the sign of $b$, so at a positive crossing the oriented underpass goes from source to target. In a positive curl with incoming label $x$ and outgoing label $y$, eith"
+        }
+      ],
+      "finite_smoke": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–3.1 prove R2/R3, both positive-curl cases and inverse negative transport, the R1 iff condition and framing-preserving opposite-kink compensation through the actual self-linking supplier. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_obligations": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      },
+      "resolved_previous_contract_findings": [
+        {
+          "original": {
+            "id": "KT-03 framing change versus rack kink action",
+            "status": "owner-escalation",
+            "suppliers": [
+              "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+              "def-framed-knot-self-linking-and-seifert-framing"
+            ],
+            "proposed_supplier": "thm-linking-number-is-invariant-and-writhe-is-not",
+            "required_hypotheses": "Establish that the designated framing-preserving R1 compensation changes the blackboard framing by opposite signed units and that its rack boundary maps are π and π⁻¹ in either order.",
+            "affected_claims": [
+              "statement R1-compensation clause",
+              "proof steps 1.4 and 3.1"
+            ],
+            "evidence": "Both definitions are present and inspected. They fix the determinant crossing sign and the normal-section framing class, but do not state the R1 compatibility. The candidate batch-58 theorem states the self-linking change under a type-I move; importing it adds a cross-batch edge and raises this item to level 8."
+          },
+          "current_status": "resolved-by-owner-local-proof",
+          "resolution": "Steps1.1–3.1 prove R2/R3, both positive-curl cases and inverse negative transport, the R1 iff condition and framing-preserving opposite-kink compensation through the actual self-linking supplier."
+        }
+      ]
+    },
+    "thm-finite-table-coloring-termination-and-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-rack-quandle-coloring-from-table",
+          "source_section": "Definition",
+          "quote": "Input an integer $m\\ge1$, a table $T\\in\\{1,\\ldots,m\\}^{m\\times m}$ with\nentry $T[x,y]$ intended to be $x*y$, a mode \"rack\" or \"quandle\", a finite\nregular oriented link diagram $D$ with $a$ arcs and $c$ crossings, and fixed\nfinite orderings of its arcs and crossings. If the table is not $m\\times m$,\nreturn invalid-table-shape with its row lengths. If an entry is outside\n$\\{1,\\ldots,m\\}$, return invalid-table-entry with its row, column, and value.\nOtherwise perform these checks in order:\n\n1. For each $y=1,\\ldots,m$, check whether the column\n   $(T[1,y],\\ldots,T[m,y])$ is a permutation of $\\{1,\\ldots,m\\}$. If not,\n   return right-translation-not-bijective with $y$, a repeated value and a\n   missing value.\n2. For each ordered triple $(x,y,z)$ in lexicographic order, check\n   $T[T[x,y],z]=T[T[x,z],T[y,z]]$. If not, return\n   self-distributivity-fails with $(x,y,z)$ and both table values.\n3. In quandle mode, check $T[x,x]=x$ for each $x$ in increasing order. If\n   not, return idempotency-fails with $x$ and $T[x,x]$.\n\nIf the selected axioms pass, enumerate the $m^a$ functions from the supplied\nordered arcs of $D$ to $\\{1,\\ldots,m\\}$ in lexicographic order. Retain an assignment\nexactly when it satisfies the crossing rule in the rack/quandle Definition,\nusing the inverse column permutation when the rule calls for the right\ndivision. Return the retained assignments and their number. No correctness or\ncomplexity claim is part of this algorithm's Definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rack-fundamental-quandle-and-adjoint-group",
+          "source_section": "Definition",
+          "quote": "A **rack** is a set $R$ with a binary operation $*:R\\times R\\to R$ such\nthat for every $y\\in R$ the right translation $R_y(x)=x*y$ is a bijection\nand $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in R$. A **quandle** is a rack\nsatisfying $x*x=x$ for every $x$. For either structure, write\n$x\\mathbin{\\bar *}y=R_y^{-1}(x)$.\n\nFor a regular oriented link diagram $D$, let $A(D)$ be its finite set of\nmaximal under-arcs. Form the set of finite terms recursively: each symbol\n$x_a$ for $a\\in A(D)$ is a term, and if $s,t$ are terms then $s*t$ and\n$s\\mathbin{\\bar *}t$ are terms. Let $\\sim$ be the intersection of all\nequivalence relations on these terms that are compatible with both operations\nand contain the quandle identities: idempotency, right invertibility, and\nright self-distributivity, together with the crossing relations.\nAt a crossing with source and target under-arcs $u,v$ and overarc $o$, the\ncrossing relation is $x_v=x_u*x_o$; reversing source and target gives the\nequivalent relation with $\\bar *$. The quotient term set $Q(D)$ is the\n**diagram quandle**, or the diagram presentation of the **fundamental\nquandle**. Its independence of diagram is proved in the Theorem.\n\nFor any quandle $Q$, its **adjoint group** $\\operatorname{Adj}(Q)$ is the\ngroup presentation with generators $e_q$ for all $q\\in Q$ and relators\n$e_{q*r}=e_r^{-1}e_qe_r$ for all $q,r\\in Q$. A group presentation\n$\\langle X\\mid S\\rangle$ means the quotient of the free group on $X$ by the\nnormal closure of the relator words $S$.\n\nThe diagram presentation and the adjoint group are algebraic constructions;\nthis definition makes no completeness or knot-classification assertion.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.\n\nA **regular oriented link diagram** $D$ consists of the image $\\pi(L)$ together\nwith\n\n(a) the **over/under datum** at every double point: which of the two branches\n    lies above the other, read from the forgotten third coordinate (the branch\n    with the larger $x_3$-coordinate at the crossing is drawn over); and\n(b) the **orientations of the strands**, induced by the orientation of $L$.\n\nThus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.\n\n**Finiteness is part of the definition.** Condition (2) is the clause that\nmakes the finitely many double points available for the slicing arguments used\nin the Reidemeister and Markov proofs; a projection with infinitely many double\npoints, accumulations, or tangential double points is not regular and is not\nused below. The definition fixes the ambient plane, the projection and the\nover/under convention once and for all.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The shape check inspects the $m$ row lengths. The range check inspects the finite $m^2$ entries. Each column-permutation check inspects $m$ entries, so all columns use $m^2$ inspections. Thus these checks use at most $2m^2+m$ inspections and terminate after finitely many tests, returning the first specified witness if one fails.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The triple loop visits exactly $m^3$ ordered triples and checks the right self-distributive identity of [F2]. In quandle mode the diagonal loop visits $m$ entries and checks exactly $T[x,x]=x$. Thus, after table format is valid, the algorithm accepts exactly the tables satisfying the selected rack axioms, with idempotency required precisely in quandle mode.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a column passes its permutation check, it defines a bijective right translation and its inverse column is completely determined. The assignment loop enumerates every one of the $m^a$ functions from the ordered arc set to the table elements once. At each crossing it tests exactly the relation from [F2], using that inverse column if required; hence an assignment is retained if and only if it is a coloring.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Every loop has a finite range, so the procedure terminates; it returns the exact failure witness at the first failed check or the complete coloring set and count when all checks pass. For the empty diagram the unique empty assignment is tested once, and for a diagram with zero crossings every one of the $m^a$ assignments passes.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly tests the unique empty assignment when the diagram has no arcs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 states that with zero crossings every one of the m^a assignments passes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 and 3.1 specialize to m=1: the single column/triple/diagonal check passes and each ordered arc set has exactly one assignment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers shape/range failures and step 2.1 distinguishes failed column, triple and diagonal conditions; the procedure returns its first specified witness rather than using an invalid table."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 checks that every finite loop terminates, including its final table, triple and assignment index; there is no unexamined terminal row."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use supplied finite orderings and deterministic inverses of permutation columns; no choice principle is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that an accepted table satisfies exactly the selected axioms; step 3.1 proves every retained assignment is a coloring."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 also proves a table satisfying the selected axioms is accepted; step 3.1 proves every coloring appears once in the exhaustive enumeration."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "singleton-quandle-one-arc-unknot",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "calculation": "For m=1,T=[[1]], check the one column, one triple and diagonal. The one-arc zero-crossing diagram has one enumerated assignment.",
+          "result": "Valid quandle; count1",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "The shape check inspects the $m$ row lengths. The range check inspects the finite $m^2$ entries. Each column-permutation check inspects $m$ entries, so all columns use $m^2$ inspections. Thus these checks use at most $2m^2+m$ inspections an"
+        }
+      ],
+      "finite_smoke": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–4.1 verify finite validation, exact rack/quandle acceptance, exhaustive coloring enumeration and empty/zero-crossing boundaries. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "thm-fundamental-quandle-and-adjoint-group-from-wirtinger": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rack-fundamental-quandle-and-adjoint-group",
+          "source_section": "Definition",
+          "quote": "A **rack** is a set $R$ with a binary operation $*:R\\times R\\to R$ such\nthat for every $y\\in R$ the right translation $R_y(x)=x*y$ is a bijection\nand $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in R$. A **quandle** is a rack\nsatisfying $x*x=x$ for every $x$. For either structure, write\n$x\\mathbin{\\bar *}y=R_y^{-1}(x)$.\n\nFor a regular oriented link diagram $D$, let $A(D)$ be its finite set of\nmaximal under-arcs. Form the set of finite terms recursively: each symbol\n$x_a$ for $a\\in A(D)$ is a term, and if $s,t$ are terms then $s*t$ and\n$s\\mathbin{\\bar *}t$ are terms. Let $\\sim$ be the intersection of all\nequivalence relations on these terms that are compatible with both operations\nand contain the quandle identities: idempotency, right invertibility, and\nright self-distributivity, together with the crossing relations.\nAt a crossing with source and target under-arcs $u,v$ and overarc $o$, the\ncrossing relation is $x_v=x_u*x_o$; reversing source and target gives the\nequivalent relation with $\\bar *$. The quotient term set $Q(D)$ is the\n**diagram quandle**, or the diagram presentation of the **fundamental\nquandle**. Its independence of diagram is proved in the Theorem.\n\nFor any quandle $Q$, its **adjoint group** $\\operatorname{Adj}(Q)$ is the\ngroup presentation with generators $e_q$ for all $q\\in Q$ and relators\n$e_{q*r}=e_r^{-1}e_qe_r$ for all $q,r\\in Q$. A group presentation\n$\\langle X\\mid S\\rangle$ means the quotient of the free group on $X$ by the\nnormal closure of the relator words $S$.\n\nThe diagram presentation and the adjoint group are algebraic constructions;\nthis definition makes no completeness or knot-classification assertion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-knot-planar-code",
+          "source_section": "Definition",
+          "quote": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-knot-wirtinger-presentation-from-code",
+          "source_section": "Definition",
+          "quote": "Define a procedure $\\mathsf{Wirtinger}(D,a_0)$ on a finite planar code $D$ for one oriented knot and a designated under-arc $a_0$ as follows. First check all incidence, valence, branch-pairing, crossing over/under, edge-orientation, and one-component conditions in the code. For each pair of rational line segments in the drawing certificate, compute the determinant of their direction vectors. If it is nonzero, solve the two-coordinate linear intersection equations and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Accept an intersection only when it is a shared declared bend or crossing vertex with the recorded incidence, and at a crossing verify that the two branch direction vectors have nonzero determinant. Reject self-intersections and all unrecorded intersections. If any check fails, return `invalid-input`. Otherwise traverse the oriented knot once starting at $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. For each crossing $v$, read its oriented over-tangent and positive in-plane normal. Let $a_s$ be the under-side from which that normal points and $a_t$ the side toward which it points, and read the over-arc $a_o$. Append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. Equivalently, if the incoming under-tangent follows that normal, append $x_o^{-1}x_{\\rm in}x_ox_{\\rm out}^{-1}$; otherwise append $x_ox_{\\rm in}x_o^{-1}x_{\\rm out}^{-1}$. The orientation of a positive meridian is fixed locally by requiring the knot tangent followed by the normal-disk orientation to give the ambient orientation. Once a complement basepoint and basing paths to the meridians are fixed, interpret $x_i$ as the corresponding based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and this one relator per crossing.",
+          "uses": [
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-knot-wirtinger-presentation-correctness",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset S^3$ be a smooth oriented knot, let $D$ be a valid finite planar code for a regular diagram of $K$, choose a basepoint $b$ in the complement, and designate a starting under-arc. The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing. For the based meridians determined by the diagram's common upper-collar paths from $b$, the homomorphism from the presented group to $\\pi_1(S^3\\setminus K,b)$ that sends each generator to its corresponding based positive meridian is an isomorphism. Changing the designated starting under-arc only relabels the same finite cyclic arc set and gives an isomorphic presentation. If all basing paths are changed by prepending the same based loop, every generator image is conjugated by the same element, so the isomorphism type is unchanged.",
+          "uses": [
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-knot-planar-code",
+          "source_section": "Definition",
+          "quote": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under R1, the new underarc generator $y$ satisfies either $y=x*x$ or $x=y*x$ for the unchanged arc color $x$. In the first case idempotency gives $y=x$; in the second, $x=x*x$ and right invertibility give the unique solution $y=x$. Thus the new generator is eliminated. Under R2, each added underarc generator is uniquely solved from its neighboring arc and the overarc by $*$ or $\\bar *$; the reverse move gives the inverse substitution. Thus these moves are quandle Tietze transformations.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under R3, assigning boundary colors $x,y,z$ gives the two possible iterated labels $(x*y)*z$ and $(x*z)*(y*z)$; these agree by right self-distributivity. With the over-colors fixed, each under-color substitution is invertible by right invertibility, so the reverse replacements give inverse substitutions. The same calculation for reversed crossings follows by applying the inverse right translations, which preserve both operations by self-distributivity.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the knot-group comparison assume $L=K$. Let $\\Gamma$ be the finite planar graph obtained by taking the crossings as vertices and the strand pieces between consecutive crossings as edges. Choose disjoint small disks about the crossing vertices, each meeting $D$ only in its two transverse branches, and disjoint tubular strips around the compact edge pieces outside those disks. At a crossing, oriented local coordinates straighten the branches to two transverse axes. Choose a nearby rational point and two rational direction vectors, still transverse and in the same cyclic order as the original branches; the four rational half-segments give the coded crossing and its over/under choice. Extend each edge strip a short distance into its endpoint disks through the corresponding disjoint branch sectors, and choose rational bend ports there. In each strip choose a simple rational polygonal path that is a graph in strip coordinates and joins its ports; choose it fine enough that rounding its bends gives a small normal graph over the original edge. If there are no crossings, choose a simple rational polygon in a tubular annulus of the projected circle. Since there are finitely many compact edge pieces, nonincident pieces have positive separation, and each crossing is transverse; density of $\\mathbb Q^2$ and a sufficiently fine finite subdivision therefore let all vertices and bends be rational while preserving the one-circle tracing, crossing cyclic orders, orientations, and over/under data, with no other intersections. The resulting record is a valid code by [F4]; smoothing its bends in disjoint disks gives a smooth regular diagram with the same crossing data by [F6]. To compare it with $D$, move each crossing point to its nearby rational point by an isotopy supported in its disk and the short branch sectors, fixed at the outer ends of the strips, and interpolate its four half-branches, within their disjoint sectors, through transverse direction pairs to the rational branches. This is an isotopy preserving the cyclic order and over/under choice. After these local adjustments, each rounded edge replacement is a sufficiently small normal graph $r=f(s)$ over the original edge in its strip, with $f=0$ at the ports. Choose the approximation so $|f|\\,\\|\\chi'\\|_\\infty<1$ for a cutoff $\\chi$ that is $1$ near the edge and $0$ near the strip boundary. Then $(s,r)\\mapsto(s,r+t\\chi(r)f(s))$, $0\\le t\\le1$, is a diffeomorphism in each strip, fixed at its boundary, and gives an ambient isotopy of that edge. These finitely many disk and strip isotopies paste to a compactly supported ambient isotopy of the plane. Its product with the identity in height carries a lift of $D$ to a realization of the code diagram, so the code represents the same knot $K$. The induced bijection on under-arcs preserves source, target, and overarc at each crossing because the positive over-normal and branch orientations are preserved. This finite construction uses no choice axiom.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "The conjugation operation on $W(D)$ is idempotent because $g*g=g^{-1}gg=g$. Its right translation by $h$ is conjugation by $h^{-1}$, with inverse conjugation by $h$. It is right self-distributive because both $(g*h)*k$ and $(g*k)*(h*k)$ reduce to $k^{-1}h^{-1}ghk$. Thus $\\operatorname{Conj}(W(D))$ is a quandle. Its generators $g_a$ satisfy the crossing equations by the relators of $W(D)$, so recursive evaluation of terms gives a quandle homomorphism $f:Q(D)\\to\\operatorname{Conj}(W(D))$. Define $\\psi$ on adjoint generators by $\\psi(e_q)=f(q)$. Since $f(q*r)=f(r)^{-1}f(q)f(r)$, every adjoint relator maps to the identity; [F2] therefore makes $\\psi$ a group homomorphism.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the knot-group comparison define $\\phi:W(D)\\to\\operatorname{Adj}(Q(D))$ on generators by $\\phi(g_a)=e_{x_a}$. The code from step 1.3 has the same under-arcs and crossing relations as $D$, so the constructor's relators in [F5] are exactly those of $W(D)$. At each crossing, $x_v=x_u*x_o$ in $Q(D)$, and the adjoint relation gives $e_{x_v}=e_{x_o}^{-1}e_{x_u}e_{x_o}$. Thus every relator of $W(D)$ maps to the identity; [F2] makes the homomorphism from the free group on its arc generators descend to $W(D)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "construct",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], diagrams of $L$ are related by a finite sequence of these moves, and step 1.1 and step 1.2 identify the corresponding quandle presentations at each move. Their composites give an isomorphism between the two diagram quandles. Countable choice is used only for [F3]; these local presentation transformations use no choice.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The composites $\\psi\\phi$ fix each $g_a$. The other composite fixes each generator $e_q$: every $q\\in Q(D)$ is represented by a term in the arc generators using $*$ and $\\bar *$, and the adjoint relations give $e_{u*v}=e_v^{-1}e_ue_v$ and $e_{u\\bar *v}=e_ve_ue_v^{-1}$, so induction on the term gives $\\phi\\psi(e_q)=e_q$. Hence $\\phi$ and $\\psi$ are inverse isomorphisms. By [F5] and step 1.3, $W(D)$ is the group of the Wirtinger constructor for a code of $K$, and is isomorphic to $\\pi_1(S^3\\setminus K)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.3",
+            "step 2.1",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly assumes a nonempty oriented link; the empty-link term algebra is not asserted here."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero-crossing knot, steps 1.3, 2.1 and 3.1 use the actual one-arc empty-relator constructor and inverse group maps, so the unknot adjoint group is cyclic as supplied by F5."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The knot-group clause is expressly restricted to one component in step 1.3; step 3.1 proves its isomorphism on the meridian generators."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 establishes quandle independence also for a link with several components, while step 1.3 explicitly restricts the group comparison to L=K; the knot-only constructor is not silently applied to a multi-component link."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 fix external boundary colors/generators and give inverse local R1/R2/R3 substitutions on the affected arcs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 explicitly confines AC_omega to the global Reidemeister supplier; steps 1.3, 2.1 and 3.1 use finite terms and explicit generator maps without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts isomorphisms, not an iff criterion; both homomorphism composites are nevertheless checked on all generators in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse knot-classification assertion; step 3.1 proves inverse maps, not completeness of the quandle."
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "axioms": [
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-arc-adjoint-relator-check",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.3",
+            "1.4",
+            "3.1"
+          ],
+          "calculation": "A free quandle on one generator is the singleton by idempotency and inverse identities; its adjoint relation e=e^-1 e e is tautological.",
+          "result": "Both explicit maps fix the sole meridian generator; the resulting group is free cyclic, not a finite-group computation.",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "For the knot-group comparison assume $L=K$. By"
+        }
+      ],
+      "finite_smoke": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–2.1 establish link diagram independence under AC_omega; steps1.3,1.4,3.1 prove the two actual inverse group maps and repaired Wirtinger identification for a knot. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_obligations": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      },
+      "resolved_previous_contract_findings": [
+        {
+          "original": {
+            "id": "KT-01 Wirtinger interface",
+            "status": "owner-escalation",
+            "suppliers": [
+              "alg-knot-wirtinger-presentation-from-code",
+              "thm-knot-wirtinger-presentation-correctness"
+            ],
+            "required_hypotheses": "The constructor must assign positive meridians to the same code under-arcs and produce g_v = g_o⁻¹ g_u g_o for the declared source/target convention; correctness must prove W(D) ≅ π₁(S³\\K).",
+            "affected_claims": [
+              "statement group identification",
+              "proof steps 1.4–2.1"
+            ],
+            "evidence": "The batch-56 manifest lists these items at dependency levels 3 and 4; their carrier files are absent. The def-knot-planar-code body matches maximal-under-arc data but cannot settle the missing algebraic interface."
+          },
+          "current_status": "resolved-by-owner-local-proof",
+          "resolution": "Steps1.1–2.1 establish link diagram independence under AC_omega; steps1.3,1.4,3.1 prove the two actual inverse group maps and repaired Wirtinger identification for a knot."
+        }
+      ]
+    },
+    "ex-knot-kt-08-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-dihedral-fox-colorings",
+          "source_section": "Definition",
+          "quote": "Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,\nfixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set\n$\\operatorname{Col}_p(D)$ of assignments of residues in $\\mathbb F_p$ to the\narcs satisfying the Fox crossing equations, together with\n$|\\operatorname{Col}_p(D)|$.\n\n1. Create one variable $x_j$ for each arc in the supplied order, and process\n   crossings in the supplied order.\n2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append\n   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\\mathbb F_p$.\n   At a crossing, add the coefficients of any repeated arc in that row.\n3. Set the next pivot-row index to $r=1$ and process columns from left to\n   right. If $r>c$, mark this and every remaining column free and stop. If\n   $r\\le c$, search rows $r,\\ldots,c$ in order for the first nonzero entry in\n   the current column. If none exists, mark this column free and continue\n   without changing $r$. Otherwise swap the selected row into row $r$, divide\n   row $r$ by its nonzero entry in this column, and add multiples of row $r$\n   to every other row to clear this column. Record this column as a pivot\n   column with pivot row $r$, then increase $r$ by one. After the scan, every\n   column not recorded as a pivot column is free.\n4. List the free columns in increasing order and enumerate every tuple in\n   $\\mathbb F_p^f$ in lexicographic order using the residue representatives\n   $0,\\ldots,p-1$, where $f$ is the number of free columns. If $f=0$, process\n   the empty tuple once. For each tuple, assign its coordinates to the free\n   variables. For each pivot row, set its pivot variable equal to the negative\n   of the sum of the row's free-column coefficients times those assigned free\n   variables. Append the resulting assignment in the supplied arc order.\n   Return all appended assignments and their number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$ and every finite regular oriented link diagram $D$,\nthe algorithm in the Definition terminates and returns exactly\n$\\operatorname{Col}_p(D)$. If its reduced system has $f$ free variables, it\nreturns $p^f$ colorings. It uses at most $a$ pivot steps and at most $ca$\nrow-entry elimination scans for a diagram with $a$ arcs and $c$ crossings.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-quandle-colorings-are-reidemeister-invariant",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a quandle and color regular oriented link diagrams by the normal-to-overarc\nrule in the Definition. Every oriented Reidemeister move and planar isotopy induces\na canonical bijection between the two coloring sets. Consequently, under\n$\\mathrm{AC}_\\omega$, diagrams of ambient-isotopic oriented links have bijective\ncoloring sets; if $Q$ is finite, their coloring counts are equal. Conversely,\nsuppose a set with a binary operation uses this crossing rule and every oriented\nlocal R1, R2, and R3 replacement gives a unique coloring extension in both\ndirections for every boundary coloring. Then the operation is idempotent, every\nright translation is bijective, and the operation is right self-distributive.\nThis converse requires local extension bijections, not equality of total\ncoloring counts alone. No claim that a coloring count classifies knots is made.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $D_T$, [F1] gives the three equations $2a-b-c=0$, $2b-c-a=0$, and $2c-a-b=0$. Modulo $3$, each left-hand side equals $2(a+b+c)$, so the system is equivalent to $a+b+c=0$. Choose $a,b$ freely and set $c=-a-b$; there are $3^2=9$ solutions. Exactly the three choices $a=b=c$ are constant, leaving six nonconstant colorings.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], these nine solutions are exactly the outputs of the Fox algorithm. The one-arc diagram $D_U$ has no crossing equations, so its single arc receives any of the three colors and it has three colorings.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The Reidemeister coloring theorem [F3] applies under [A1], so the counts just computed depend only on the represented knot types. The trefoil and unknot therefore have Fox $3$-coloring counts $9$ and $3$, respectively; the invariant distinguishes them, without making a completeness claim.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empty object is excluded by the item’s stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 treats the crossing-free unknot diagram."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 handles its single arc."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate case beyond the item’s stated hypotheses occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "These are closed diagrams, not boundary tangles: the specified cyclic crossing equations determine all arc incidences. The one-arc zero-crossing unknot has no equations and three color choices in 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "These are closed diagrams, not boundary tangles: the specified cyclic crossing equations determine all arc incidences. The one-arc zero-crossing unknot has no equations and three color choices in 2.1.",
+            "item_sha256": "5ace1c7e25cea760b1f9106bdaac41969a2defaba2afcbb3614f803ed8511c9c",
+            "row_sha256": "abb12c53c067812c6d23afb02cfb4c041a70ec99b71373574db8d68a5bf78c3b",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 382
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 invokes ambient-isotopy invariance under ACω."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item’s statement is not an iff assertion and contains no converse direction to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item’s statement is not an iff assertion and contains no converse direction to check."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "3.1"
+          ],
+          "declared_in_frontmatter": "AC_omega is given for the ambient-isotopy invariance of the computed finite coloring counts."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Trefoil and unknot Fox 3-colorings",
+          "method": "exact finite linear algebra",
+          "input": {
+            "prime": 3,
+            "trefoil_matrix": [
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ]
+            ],
+            "unknot_arcs": 1,
+            "unknot_crossings": 0
+          },
+          "calculation": "The trefoil matrix has rank 1 and two free variables, hence 9 solutions; exactly 3 are constant. The crossing-free one-arc unknot has 3 assignments.",
+          "expected": {
+            "trefoil_colorings": 9,
+            "constant_trefoil_colorings": 3,
+            "nonconstant_trefoil_colorings": 6,
+            "unknot_colorings": 3
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-knot-kt-08-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-dihedral-fox-colorings",
+          "source_section": "Definition",
+          "quote": "Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,\nfixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set\n$\\operatorname{Col}_p(D)$ of assignments of residues in $\\mathbb F_p$ to the\narcs satisfying the Fox crossing equations, together with\n$|\\operatorname{Col}_p(D)|$.\n\n1. Create one variable $x_j$ for each arc in the supplied order, and process\n   crossings in the supplied order.\n2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append\n   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\\mathbb F_p$.\n   At a crossing, add the coefficients of any repeated arc in that row.\n3. Set the next pivot-row index to $r=1$ and process columns from left to\n   right. If $r>c$, mark this and every remaining column free and stop. If\n   $r\\le c$, search rows $r,\\ldots,c$ in order for the first nonzero entry in\n   the current column. If none exists, mark this column free and continue\n   without changing $r$. Otherwise swap the selected row into row $r$, divide\n   row $r$ by its nonzero entry in this column, and add multiples of row $r$\n   to every other row to clear this column. Record this column as a pivot\n   column with pivot row $r$, then increase $r$ by one. After the scan, every\n   column not recorded as a pivot column is free.\n4. List the free columns in increasing order and enumerate every tuple in\n   $\\mathbb F_p^f$ in lexicographic order using the residue representatives\n   $0,\\ldots,p-1$, where $f$ is the number of free columns. If $f=0$, process\n   the empty tuple once. For each tuple, assign its coordinates to the free\n   variables. For each pivot row, set its pivot variable equal to the negative\n   of the sum of the row's free-column coefficients times those assigned free\n   variables. Append the resulting assignment in the supplied arc order.\n   Return all appended assignments and their number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$ and every finite regular oriented link diagram $D$,\nthe algorithm in the Definition terminates and returns exactly\n$\\operatorname{Col}_p(D)$. If its reduced system has $f$ free variables, it\nreturns $p^f$ colorings. It uses at most $a$ pivot steps and at most $ca$\nrow-entry elimination scans for a diagram with $a$ arcs and $c$ crossings.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-quandle-colorings-are-reidemeister-invariant",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a quandle and color regular oriented link diagrams by the normal-to-overarc\nrule in the Definition. Every oriented Reidemeister move and planar isotopy induces\na canonical bijection between the two coloring sets. Consequently, under\n$\\mathrm{AC}_\\omega$, diagrams of ambient-isotopic oriented links have bijective\ncoloring sets; if $Q$ is finite, their coloring counts are equal. Conversely,\nsuppose a set with a binary operation uses this crossing rule and every oriented\nlocal R1, R2, and R3 replacement gives a unique coloring extension in both\ndirections for every boundary coloring. Then the operation is idempotent, every\nright translation is bijective, and the operation is right self-distributive.\nThis converse requires local extension bijections, not equality of total\ncoloring counts alone. No claim that a coloring count classifies knots is made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fundamental-quandle-and-adjoint-group-from-wirtinger",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For a nonempty oriented link $L$, the diagram quandle presentations from any two regular oriented diagrams of $L$ are isomorphic by the local quandle Tietze transformations for R1, R2 and R3. If $L=K$ has one component and $D$ is its diagram, let\n$$W(D)=\\langle g_a\\ (a\\in A(D))\\mid g_v=g_o^{-1}g_ug_o\\text{ at every crossing with source }u,\\text{ target }v,\\text{ and overarc }o\\rangle.$$\nThen the positive-meridian Wirtinger constructor uses these same under-arcs and crossing relations, and\n$$\\operatorname{Adj}(Q(D))\\cong W(D)\\cong\\pi_1(S^3\\setminus K).$$\nNo completeness or knot-classification assertion is made.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the trefoil system over $\\mathbb F_5$ consists of the crossing equations in the Counterexample. Subtract the second equation $2b-c-a=0$ from the first $2a-b-c=0$. This gives $3(a-b)=0$; since $3^{-1}=2$ in $\\mathbb F_5$, $a=b$. Substitution into the first equation then gives $c=a$. Conversely, every constant triple solves all three equations, so there are exactly five solutions, all constant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The unknot diagram has one arc and no crossings, so its single arc may receive any of the five residues; it has exactly five colorings, all constant. By [F2] these are the algorithmic Fox counts.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Over $\\mathbb F_3$, the same trefoil equations reduce to the single condition $a+b+c=0$, giving nine solutions, while the unknot has three. By [F3] and [A1] these counts are ambient-isotopy invariants; because they differ, the two knots are not ambient-isotopic. Thus they disprove the refuted statement at $p=5$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For completeness compute the groups in the same diagrams. The crossing-free diagram gives $G_U=\\langle x\\mid\\ \\rangle\\cong\\mathbb Z$. Label the trefoil meridians so its three crossing relations are $c=aba^{-1}$, $a=bcb^{-1}$ and $b=cac^{-1}$ (the last is the first crossing in the cyclic order used for its Fox system). Eliminating $c$ from the first two gives $aba=bab$; under that relation the third follows since $cac^{-1}=ab ab^{-1}a^{-1}=b$. Thus [F4] gives $G_T\\cong\\langle a,b\\mid aba=bab\\rangle$. The assignments $a\\mapsto(12)$ and $b\\mapsto(23)$ satisfy this relation, because both triple products equal $(13)$, and generate $S_3$. This defines a surjection onto a nonabelian group, so $G_T$ is nonabelian and cannot be isomorphic to $G_U$. This group computation supplements, and agrees with, the Fox-count distinction.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Counterexample fixes two nonempty knot diagrams; it makes no empty-link classification claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 has one unknot variable and zero crossing constraints, giving five Fox5 colorings; step 2.1 gives three Fox3 colorings."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly enumerates the one-arc unknot color choices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the all-constant Fox5 boundary (five solutions); step 2.1 shows a different prime separates the diagrams, and step 3.1 independently separates their groups."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The diagrams are closed; no endpoint coloring is an input boundary for this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses AC_omega for ambient-isotopy invariance, and step 3.1 uses the supplied knot-group identification under the same stated hypothesis; the finite modular arithmetic itself is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is one implication from equality of a single prime count, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not assert a reverse classification criterion for Fox counts."
+        }
+      ],
+      "unresolved_supplier_checks": [],
+      "axioms": [
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Fox3-and-Fox5-counts",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "calculation": "Exhaust all 3^3 and 5^3 trefoil triples and test the three Fox equations; one-arc unknot has p colorings.",
+          "result": {
+            "3": {
+              "total": 9,
+              "constant": 3
+            },
+            "5": {
+              "total": 5,
+              "constant": 5
+            }
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "By"
+        },
+        {
+          "name": "trefoil-nonabelian-group-witness",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "3.1"
+          ],
+          "calculation": "The local trefoil braid presentation maps onto S3 via adjacent transpositions.",
+          "result": {
+            "a": [
+              2,
+              1,
+              3
+            ],
+            "b": [
+              1,
+              3,
+              2
+            ],
+            "aba": [
+              3,
+              2,
+              1
+            ],
+            "bab": [
+              3,
+              2,
+              1
+            ],
+            "all_generated": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                1,
+                3,
+                2
+              ],
+              [
+                2,
+                1,
+                3
+              ],
+              [
+                2,
+                3,
+                1
+              ],
+              [
+                3,
+                1,
+                2
+              ],
+              [
+                3,
+                2,
+                1
+              ]
+            ]
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "For completeness compute the groups in the same diagrams. The crossing-free diagram gives $G_U=\\langle x\\mid\\ \\rangle\\cong\\mathbb Z$. Label the trefoil meridians so its three crossing relations are $c=aba^{-1}$, $a=bcb^{-1}$ and $b=cac^{-1}"
+        }
+      ],
+      "finite_smoke": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–2.1 prove the Fox5 equality/Fox3 separation; final step3.1 now also proves the required cyclic versus nonabelian group comparison. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_obligations": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      },
+      "resolved_previous_contract_findings": [
+        {
+          "original": {
+            "id": "KT-01 knot-group boundary comparison",
+            "status": "owner-escalation",
+            "suppliers": [
+              "thm-fundamental-quandle-and-adjoint-group-from-wirtinger",
+              "alg-knot-wirtinger-presentation-from-code",
+              "thm-knot-wirtinger-presentation-correctness"
+            ],
+            "required_hypotheses": "Verify the Wirtinger interface, compute the unknot and trefoil groups, and prove they are nonisomorphic; the Fox-count argument alone does not establish this extra design comparison.",
+            "affected_claims": [
+              "planned group distinction mentioned in the item Remark"
+            ],
+            "evidence": "The constructor and correctness carrier files are absent. The current Remark defers the comparison; no group computation or nonisomorphism proof is asserted."
+          },
+          "current_status": "resolved-by-owner-local-proof",
+          "resolution": "Steps1.1–2.1 prove the Fox5 equality/Fox3 separation; final step3.1 now also proves the required cyclic versus nonabelian group comparison."
+        }
+      ]
+    }
+  }
+}

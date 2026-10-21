@@ -1,0 +1,9 @@
+# Eight proof-free scope selections
+
+The exact eight IDs supplied by carrier qualify for scope-only reconciliation. Each current canonical source has kind `definition`, no `Proof`/`Refutation`/`Counterexample`/`Verification` heading under the actual imported native `isProofBearing` predicate, is not an open problem, belongs to the fixed1471 frontier, is selected in its batch contract scope, and has no contract entry. Per-ID literal headings and predicate results are in `exact-scope-reconciliation-proposal.json`.
+
+The actual native strict grammar does not filter the selected list by kind: `proof-contract.mjs` checks every selected ID and reports an absent entry. The native merger unions those scope selections unchanged. Conversely, `proof-contract-coverage.mjs` and `level-coverage.mjs` require contracts only for actual supplied-argument items via `isProofBearing`. Open problems have a separate formulation/status/source contract path and are expressly excluded from this proposal. No native rule inspected requires a fabricated proof contract for these eight proof-free Definitions.
+
+The minimal proposal removes five optional selections from batch67 and three from batch97, leaving ALL1471 frontier items, all109 manifests and every existing contract entry exactly intact. It appends an explicit scope-reconciliation metadata note and preserves the complete old document/scope in `batch-67-before.json` and `batch-97-before.json`. Exact full after-document proposals are also saved; no canonical document was written.
+
+Root should apply only the listed scope delta and metadata note to the actual documents after the final writer drain/109 adoption. Do not overwrite newly regenerated entry mirrors with these preliminary whole-document snapshots. This proposal adds no proof entry, review, mathematical acceptance, coverage or native transition, and does not alter any counter, digest, gate or obligation.

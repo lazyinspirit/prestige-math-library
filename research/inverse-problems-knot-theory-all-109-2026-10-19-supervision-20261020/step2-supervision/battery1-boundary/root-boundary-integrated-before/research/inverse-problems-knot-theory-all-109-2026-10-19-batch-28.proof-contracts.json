@@ -1,0 +1,756 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+    "ex-ip-landweber-initial-discrepancy-stop",
+    "cex-ip-landweber-outside-local-ball-stalls",
+    "ex-ip-landweber-exact-data-no-finite-stop"
+  ],
+  "contracts": {
+    "thm-ip-nonlinear-landweber-fejer-and-finite-stopping": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with a derivative map $F':U\\to\\mathcal B(X,Y)$ that is continuous in operator norm. This is the real-Hilbert forward-map convention. Assume Countable Choice, so every bounded derivative $F'(x)$ has the Hilbert adjoint $F'(x)^*:Y\\to X$ characterized by $\\langle F'(x)u,v\\rangle_Y=\\langle u,F'(x)^*v\\rangle_X$.\n\nAn **admissible local instance** consists of an initial point $x_0\\in U$, a radius $r>0$, an exact solution $x^\\dagger\\in\\overline B_r(x_0):=\\{x\\in X:\\|x-x_0\\|_X\\le r\\}$ with exact datum $y=F(x^\\dagger)$, a noise level $\\delta\\ge0$, noisy datum $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, a constant $0\\le\\eta<1/2$, a discrepancy parameter $\\tau>2(1+\\eta)/(1-2\\eta)$, and a finite update budget $M\\in\\mathbb N_0$. The closed outer ball $\\overline B_{2r}(x_0)$ is contained in $U$; $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$; and the uniform two-point tangential-cone inequality\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nholds for every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is the uniform family of the one-basepoint local tangential-cone inequality; the shared constant and pair domain are part of the admissibility hypothesis. The exact solution and the bounds are analysis data and need not be available to the computational loop.\n\n**Inputs:** $F$, $x_0$, $y^\\delta$, $\\delta$, $\\tau$, and $M$ from an admissible local instance.\n\n**Output:** Either `stopped` with an index $k$, iterate $x_k^\\delta$, and residual $\\|y^\\delta-F(x_k^\\delta)\\|_Y$, or `budget_exhausted` with the last iterate and its residual.\n\n**Procedure:** Set $x_0^\\delta:=x_0$. For $k=0,1,\\ldots,M$, compute $r_k^\\delta:=\\|y^\\delta-F(x_k^\\delta)\\|_Y$. If $r_k^\\delta\\le\\tau\\delta$, return `stopped` with $(k,x_k^\\delta,r_k^\\delta)$. If $k=M$, return `budget_exhausted` with $(k,x_k^\\delta,r_k^\\delta)$. Otherwise set\n\n$$\nx_{k+1}^\\delta:=x_k^\\delta+F'(x_k^\\delta)^*(y^\\delta-F(x_k^\\delta))\n$$\n\nand continue at the next index. Each update is evaluated at a current point in $U$, where the derivative and its Hilbert adjoint are defined.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "5.3",
+            "9.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "1.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy–Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.2",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+          "uses": [
+            "1.2",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1",
+            "4.1",
+            "8.1",
+            "9.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field (The real numbers) and\na **sequence of reals** is a function $a : \\mathbb{N} \\to \\mathbb{R}$\n(Sequences of reals: bounded, eventually, frequently, tails, subsequences), written $(a_k)$; recall that $\\mathbb{N}$ contains $0$.\n\n**Partial sums.** Let $(a_k)$ be a sequence of reals. Its **sequence of partial\nsums** is\n\n$$s_n \\;:=\\; \\sum_{k < n} a_k \\qquad (n \\in \\mathbb{N}),$$\n\nthe finite sum of Finite sums and finite products, by recursion. In particular $s_0 = 0$, the empty sum, and\n$s_{n+1} = s_n + a_n$ for every $n$, those being exactly the two recursion clauses\nthat define the finite sum. Note that $s_n$ is the sum of the $n$ terms\n$a_0, \\dots, a_{n-1}$, so the index $n$ counts terms rather than naming the last\none.\n\n**Convergence, the sum, divergence.** The **series** of $(a_k)$, written\n$\\sum a_k$, **converges** when the sequence $(s_n)$ of partial sums converges\n(Limits and Cauchy sequences of reals), and then the **sum of the series** is\n\n$$\\sum_{k=0}^{\\infty} a_k \\;:=\\; \\lim_{n} s_n .$$\n\nThe series **diverges** when $(s_n)$ does not converge. A convergent sequence of\nreals has exactly one limit (A sequence has at most one limit), so the displayed symbol names\na single real number and nothing further has to be checked for it to be\nwell defined.\n\n**Series with a general starting index.** Let $m \\in \\mathbb{N}$ and let $a$ be a\nfunction on $\\{\\, k \\in \\mathbb{N} : k \\ge m \\,\\}$, which we call a **family from\n$m$** and write $(a_k)_{k \\ge m}$. The series\n\n$$\\sum_{k \\ge m} a_k$$\n\nis by definition the series of the sequence $b_j := a_{j + m}$,\n$j \\in \\mathbb{N}$, which is a genuine sequence of reals; it converges exactly\nwhen that series converges, and its sum is then written\n$\\sum_{k = m}^{\\infty} a_k$. Its partial sums are\n\n$$\\sum_{k=m}^{n-1} a_k \\;=\\; \\sum_{j < n-m} a_{m+j} \\qquad (n \\ge m),$$\n\nin the notation of Finite sums and finite products, by recursion, the value at $n = m$ being the empty sum\n$0$. A sequence on $\\mathbb{N}$ is the case $m = 0$, and the two readings of\n$\\sum a_k$ agree there, since $b_j = a_j$.\n\n**This clause is not a convenience.** Sequences in this library are functions on\n$\\mathbb{N}$ and $\\mathbb{N}$ contains $0$ (Sequences of reals: bounded, eventually, frequently, tails, subsequences), while many of the\nclassical series are built from expressions that are undefined at the index $0$:\n$1/k$, $1/k^{p}$ and $|a_k|^{1/k}$ all require $k \\ge 1$. Writing such a series as\n$\\sum_{k \\ge 1} a_k$ names an honest object, whereas writing it as a sequence on\n$\\mathbb{N}$ would require a value at an index where the defining expression has\nnone. Every statement on this page says which starting index it uses.\n\n**Tail series.** For $N \\in \\mathbb{N}$, the **$N$-th tail series** of\n$\\sum a_k$ is $\\sum_{k \\ge N} a_k$, that is the series of the $N$-th tail\n$a^{(N)}$ of Sequences of reals: bounded, eventually, frequently, tails, subsequences, whose terms are $a^{(N)}_j = a_{j+N}$. The\n$0$-th tail series is the series itself.",
+          "uses": [
+            "4.3",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with $a_k \\ge 0$ for every $k \\in \\mathbb{N}$,\nlet $s_n = \\sum_{k<n} a_k$ be its partial sums and let\n$S = \\{\\, s_n : n \\in \\mathbb{N} \\,\\}$ be the range of $(s_n)$ (Series, partial sums, convergence and the sum, divergence, and the tail series).\nThen:\n\n1. $(s_n)$ is nondecreasing (Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences) and $s_n \\ge 0$ for every\n   $n$;\n2. $\\sum a_k$ converges **if and only if** $S$ is bounded above\n   (Lower bound, bounded below, bounded set), and in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; \\sup S ,$$\n   so in particular $s_n \\le \\sum_{k=0}^{\\infty} a_k$ for every $n$;\n3. if $S$ is not bounded above then $s_n \\to +\\infty$\n   (Divergence to $+\\infty$ and to $-\\infty$) and $\\sum a_k$ diverges.\n\nThis is the theorem that makes the nonnegative theory work: for terms of one\nsign, convergence is a boundedness question and no candidate limit is ever\nneeded. Every comparison test on this page is an application of it.",
+          "uses": [
+            "4.3",
+            "4.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ (Complete ordered field (least-upper-bound property)) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n(Ordered field). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "5.2",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces and let $U\\subseteq X$ be a nonempty open set in the norm topology. A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$; no linearity is assumed, and linear maps are allowed as special cases. For $y\\in Y$, its exact solution set is\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nA point $x^\\dagger\\in U$ generates the exact datum $y=F(x^\\dagger)$. When $F$ is Fréchet differentiable at $x\\in U$, write $F'(x):X\\to Y$ for its unique bounded real-linear derivative.",
+          "uses": [
+            "8.1",
+            "9.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-frechet-derivative-between-banach-spaces",
+          "source_section": "Definition",
+          "quote": "On this page the scalar field is the field $\\mathbb R$ of real numbers: $X$, $Y$\nand $Z$ always denote real Banach spaces ([[def-banach-space]]) and $U\n\\subseteq X$ always denotes an open subset of $X$, in the metric topology of the\nnorm ([[def-metric-topology]]).\n\nLet $f : U \\to Y$ be a map and let $x \\in U$. For a bounded linear operator\n$T \\in \\mathcal B(X,Y)$ ([[def-bounded-linear-operator]],\n[[def-space-of-bounded-linear-operators]]) write\n\n$$r(h) := f(x+h) - f(x) - Th \\qquad (h \\in X,\\ x+h \\in U).$$\n\nThen $f$ is **Fréchet differentiable at $x$** when there is\n$T \\in \\mathcal B(X,Y)$ with\n\n$$\\lim_{\\substack{h \\to 0 \\\\ h \\ne 0}} \\frac{\\|f(x+h)-f(x)-Th\\|}{\\|h\\|} = 0 ,$$\n\nthe limit being taken over those $h$ with $x + h \\in U$. Such an operator $T$ is\na **Fréchet derivative of $f$ at $x$**, written $T = Df(x)$, and $\\|T\\|$ is its\noperator norm ([[def-operator-norm]]). When $f$ is Fréchet differentiable at\nevery point of $U$, $f$ is **differentiable on $U$** and the **derivative** is\nthe map $Df : U \\to \\mathcal B(X,Y)$, $x \\mapsto Df(x)$.",
+          "uses": [
+            "1.2",
+            "5.3",
+            "8.1",
+            "9.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tcc-and-noise-bound",
+          "claim": "Fix a current point $u$ and any exact solution $z$ in the outer ball, and set $e=u-z$, $R=F(u)-y^\\delta$, and $w=F(u)-F(z)-F'(u)e$. The uniform TCC gives $\\|w\\|_Y\\le\\eta\\|F(u)-F(z)\\|_Y$. Since $y=F(z)$, $y^\\delta-F(u)+F'(u)e=y^\\delta-y-w$, so by the noise bound and the triangle inequality, $\\|y^\\delta-F(u)+F'(u)e\\|_Y\\le\\delta+\\eta\\|F(u)-y\\|_Y\\le(1+\\eta)\\delta+\\eta\\|R\\|_Y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hilbert-squared-error-expansion",
+          "claim": "The update has $e^+=e+A^*(y^\\delta-F(u))$. Expanding its squared norm and using the adjoint identity yields $\\|e^+\\|_X^2-\\|e\\|_X^2=2\\langle y^\\delta-F(u),Ae\\rangle_Y+\\|A^*(y^\\delta-F(u))\\|_X^2$. Since [F13] makes $A$ a bounded operator, [F11] gives $\\|A^*(y^\\delta-F(u))\\|_X\\le\\|A^*\\|\\,\\|R\\|_Y=\\|A\\|\\,\\|R\\|_Y\\le\\|R\\|_Y$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A3",
+            "F3",
+            "F4",
+            "F11",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-fejer-inequality",
+          "claim": "Write $Ae=-(y^\\delta-F(u))+(y^\\delta-F(u)+Ae)$. By [F5] and step 1.2, $\\|e^+\\|_X^2-\\|e\\|_X^2\\le-\\|R\\|_Y^2+2\\|R\\|_Y\\,\\|y^\\delta-F(u)+Ae\\|_Y$. Substituting step 1.1 gives the stated one-step estimate $\\|e^+\\|_X^2-\\|e\\|_X^2\\le\\|R\\|_Y\\bigl(2(1+\\eta)\\delta-(1-2\\eta)\\|R\\|_Y\\bigr)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "threshold-implies-fejer-decrease",
+          "claim": "If $\\delta>0$ and $\\|R\\|_Y>\\tau\\delta$, then $2(1+\\eta)\\delta-(1-2\\eta)\\|R\\|_Y<0$ by the strict lower bound on $\\tau$, so the squared error decreases. For exact data $\\delta=0$, the same bound is $-(1-2\\eta)\\|R\\|_Y^2\\le0$ for every residual, including zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-noise-energy-decrease",
+          "claim": "Put $c_\\tau:=1-2\\eta-2(1+\\eta)/\\tau$, which is positive by the strict hypothesis on $\\tau$. For each $n<N(\\delta,y^\\delta)$, the residual is greater than $\\tau\\delta$; step 2.1 then gives $\\|x_{n+1}^\\delta-x^\\dagger\\|_X^2-\\|x_n^\\delta-x^\\dagger\\|_X^2\\le-c_\\tau(R_n^\\delta)^2$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-data-residual-summability",
+          "claim": "For exact data, step 2.1 gives $\\|x_{n+1}-x^\\dagger\\|_X^2-\\|x_n-x^\\dagger\\|_X^2\\le-(1-2\\eta)\\|F(x_n)-y\\|_Y^2$ for every $n$. Summing the first $K$ inequalities telescopes and yields $(1-2\\eta)\\sum_{n<K}\\|F(x_n)-y\\|_Y^2\\le d_0^2-\\|x_K-x^\\dagger\\|_X^2\\le d_0^2$.",
+          "step": "3.3",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-domain-invariance",
+          "claim": "The initial point satisfies $\\|x_0-x^\\dagger\\|_X=d_0\\le r$. At every update before the noisy stop, or at every exact-data update, step 3.1 keeps $\\|x_n^\\delta-x^\\dagger\\|_X\\le d_0$; consequently $\\|x_n^\\delta-x_0\\|_X\\le\\|x_n^\\delta-x^\\dagger\\|_X+d_0\\le2r$. Induction therefore keeps every iterate needed by the recurrence in the declared outer ball and proves Fejér decrease relative to $x^\\dagger$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A3",
+            "step 3.1",
+            "F1",
+            "F6",
+            "induction"
+          ]
+        },
+        {
+          "id": "finite-first-stop",
+          "claim": "Suppose $\\delta>0$ and the discrepancy test never succeeds. Summing step 3.2 over the first $K$ updates telescopes, while every residual exceeds $\\tau\\delta$, so $K\\tau^2\\delta^2<\\sum_{n<K}(R_n^\\delta)^2\\le d_0^2/c_\\tau$ for every natural $K$. The Archimedean property in [F9] supplies a natural $K>d_0^2/(c_\\tau\\tau^2\\delta^2)$, contradicting this bound. Hence the first stopping index is finite.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "step 3.2",
+            "F9",
+            "assume-contra",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-residual-tail",
+          "claim": "The partial sums of the nonnegative residual-square series are bounded by step 3.3. By [F8] the series converges, its tails tend to zero, and its terms tend to zero; thus $\\|F(x_n)-y\\|_Y\\to0$ and the claimed infinite-series bound holds.",
+          "step": "4.3",
+          "inputs": [
+            "step 3.3",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "squared-distance-drop-tail",
+          "claim": "Let $e_j:=x_j-x^\\dagger$, $a_j:=\\|e_j\\|_X^2$, and $\\rho_j:=\\|F(x_j)-y\\|_Y$. The sequence $a_j$ is nonincreasing by step 3.1. Hence $\\Delta_j:=a_j-a_{j+1}\\ge0$, and the partial sums satisfy $\\sum_{j<K}\\Delta_j=a_0-a_K\\le a_0$. Applying [F8] again shows that the tail sums $D_n:=\\sum_{j\\ge n}\\Delta_j$ tend to zero.",
+          "step": "4.4",
+          "inputs": [
+            "step 3.1",
+            "step 3.3",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stopping-index-count-and-budget",
+          "claim": "If $d_0>0$, the same telescoping through the finite first index gives $N(\\delta,y^\\delta)\\tau^2\\delta^2<d_0^2/c_\\tau$, hence $N(\\delta,y^\\delta)<C\\delta^{-2}$. If $d_0=0$, then $x_0=x^\\dagger$ and the initial residual is at most $\\delta<\\tau\\delta$, so $N=0$ and the same bound holds for the stated positive $C$. By [F1], a budget reaching $N$ returns the first stop, while a shorter budget returns `budget_exhausted`.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A2",
+            "step 3.2",
+            "step 4.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "blockwise-residual-linearization",
+          "claim": "Fix $m\\ge n$ and choose $k\\in\\{n,\\ldots,m\\}$ minimizing the finite set of residuals $\\rho_j$; [F10] supplies a least index among minimizers. For $n\\le j<m$, put $A_j=F'(x_j)$, $w_j=F(x_j)-y-A_je_j$, and $v_{j,k}=F(x_j)-F(x_k)-A_j(x_j-x_k)$. The uniform TCC gives $\\|w_j\\|_Y\\le\\eta\\rho_j$ and $\\|v_{j,k}\\|_Y\\le\\eta\\|F(x_j)-F(x_k)\\|_Y\\le\\eta(\\rho_j+\\rho_k)\\le2\\eta\\rho_j$. Since $A_je_k=\\bigl(F(x_j)-y-w_j\\bigr)+\\bigl(F(x_k)-F(x_j)+v_{j,k}\\bigr)=F(x_k)-y-w_j+v_{j,k}$, Cauchy–Schwarz gives $|\\langle y-F(x_j),A_je_k\\rangle_Y|\\le\\rho_j(\\rho_k+\\|w_j\\|_Y+\\|v_{j,k}\\|_Y)\\le(1+3\\eta)\\rho_j^2$.",
+          "step": "5.2",
+          "inputs": [
+            "given",
+            "A3",
+            "step 4.1",
+            "F2",
+            "F5",
+            "F10",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-index-noisy-stability",
+          "claim": "For any fixed finite number of executed updates, the noisy iterates converge to the exact iterates as $\\delta\\to0$ along data sequences whose discrepancy stop occurs no earlier. Indeed, the update map $(x,z)\\mapsto x+F'(x)^*(z-F(x))$ is continuous: $F$ is continuous by Fréchet differentiability, $F'$ is continuous by hypothesis, and [F3] together with [F11] gives operator-norm continuity of the adjoint action. Induction from the common initial point proves the fixed-index assertion.",
+          "step": "5.3",
+          "inputs": [
+            "A3",
+            "F1",
+            "F3",
+            "F11",
+            "F13",
+            "step 4.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "adjoint-sums-bound-inner-products",
+          "claim": "The exact update gives $e_{j+1}-e_j=A_j^*(y-F(x_j))$. Summing this identity and using [F3] shows $\\langle e_k-e_m,e_k\\rangle_X\\le(1+3\\eta)\\sum_{j=k}^{m-1}\\rho_j^2\\le(1+3\\eta)\\sum_{j\\ge n}\\rho_j^2$, and likewise $\\langle e_k-e_n,e_k\\rangle_X\\le(1+3\\eta)\\sum_{j=n}^{k-1}\\rho_j^2\\le(1+3\\eta)\\sum_{j\\ge n}\\rho_j^2$.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-iterates-cauchy",
+          "claim": "Real inner-product expansion gives $\\|e_m-e_k\\|_X^2=2\\langle e_k-e_m,e_k\\rangle_X+a_m-a_k\\le2(1+3\\eta)\\sum_{j\\ge n}\\rho_j^2$, since $a_m\\le a_k$. It also gives $\\|e_k-e_n\\|_X^2=2\\langle e_k-e_n,e_k\\rangle_X+a_n-a_k\\le2(1+3\\eta)\\sum_{j\\ge n}\\rho_j^2+D_n$, because $a_n-a_k=\\sum_{j=n}^{k-1}\\Delta_j\\le D_n$.",
+          "step": "7.1",
+          "inputs": [
+            "step 4.4",
+            "step 6.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-limit-solves-equation",
+          "claim": "By the triangle inequality, $\\|e_m-e_n\\|_X\\le\\sqrt{2(1+3\\eta)\\sum_{j\\ge n}\\rho_j^2}+\\sqrt{2(1+3\\eta)\\sum_{j\\ge n}\\rho_j^2+D_n}$, which tends to zero uniformly in $m\\ge n$ by steps 4.3 and 4.4. Thus $(e_n)$ is Cauchy. Completeness of $X$ gives $x_n\\to\\bar x$. By Fréchet differentiability at $\\bar x$, $F(x_n)-F(\\bar x)=F'(\\bar x)(x_n-\\bar x)+o(\\|x_n-\\bar x\\|_X)$, so boundedness of $F'(\\bar x)$ implies $F(x_n)\\to F(\\bar x)$; step 4.3 gives $F(\\bar x)=y$. step 4.1 and the triangle inequality give $\\|x_n-x_0\\|_X\\le2r$, so passage to the limit gives $\\bar x\\in\\overline B_{2r}(x_0)$.",
+          "step": "8.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.3",
+            "step 4.4",
+            "step 7.1",
+            "F6",
+            "F7",
+            "F12",
+            "F13",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-limit-contradiction-sequence",
+          "claim": "Suppose the uniform noisy-data conclusion fails. Then some $\\varepsilon>0$ and, for every $j$, a positive $\\delta_j<1/j$ and admissible datum $y_j$ can be selected so that the stopped iterate is at least $\\varepsilon/2$ from $\\bar x$; [A1] supplies this countable selection from the nonempty bad-data sets. Let $N_j=N(\\delta_j,y_j)$. Passing to a subsequence, either $N_j$ is a fixed integer or $N_j\\to\\infty$: a bounded sequence of natural indices has a value occurring infinitely often, and an unbounded one has an increasing subsequence chosen recursively by least indices.",
+          "step": "9.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "step 8.1",
+            "choose",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "bounded-stop-subsequence",
+          "claim": "In the fixed-index case, write $N_j=N$. Step 5.3 gives $x_N^{\\delta_j}\\to x_N$. Fréchet differentiability at $x_N$ and boundedness of $F'(x_N)$ imply $F(x_N^{\\delta_j})\\to F(x_N)$. The discrepancy test and noise bound give $\\|F(x_N^{\\delta_j})-y\\|_Y\\le\\tau\\delta_j+\\delta_j$, so $F(x_N)=y$. The exact update at $x_N$ is then zero, so $x_n=x_N$ for every $n\\ge N$ and therefore $x_N=\\bar x$. Step 5.3 now gives $x_N^{\\delta_j}\\to\\bar x$, contradicting the selected distance lower bound.",
+          "step": "9.2",
+          "inputs": [
+            "A2",
+            "step 8.1",
+            "step 5.3",
+            "F1",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unbounded-stop-subsequence",
+          "claim": "In the case $N_j\\to\\infty$, choose $L$ with $\\|x_L-\\bar x\\|_X<\\varepsilon/4$ by step 8.1. For all sufficiently large $j$, $N_j\\ge L$ and step 5.3 gives $\\|x_L^{\\delta_j}-x_L\\|_X<\\varepsilon/4$. Each noisy iterate before its stop stays in the outer ball by step 4.1, and $\\bar x$ lies there by step 8.1; applying the one-step estimate of step 2.1 with the exact solution $\\bar x$ makes the noisy iterates Fejér monotone relative to $\\bar x$ up to $N_j$. Hence $\\|x_{N_j}^{\\delta_j}-\\bar x\\|_X\\le\\|x_L^{\\delta_j}-\\bar x\\|_X<\\varepsilon/2$, again contradicting the selected lower bound.",
+          "step": "9.3",
+          "inputs": [
+            "A3",
+            "step 2.1",
+            "step 4.1",
+            "step 8.1",
+            "step 5.3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-noisy-data-limit",
+          "claim": "Both subsequence cases contradict the failure assumption in step 9.1. Therefore the supremum over all data satisfying $\\|y^\\delta-y\\|_Y\\le\\delta$ tends to zero as $\\delta\\downarrow0$.",
+          "step": "10.1",
+          "inputs": [
+            "step 9.1",
+            "step 9.2",
+            "step 9.3",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The assumptions supply a nonempty exact-solution ball centered at the initial iterate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement clause 3 and step 4.4 cover delta=0: squared error decreases and no finite discrepancy stop is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.3 allows eta=0; then tau>2 and c_tau=1-2/tau>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1 handles d0=0: the initial residual is at most delta<tau delta, so N=0 and C remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses closed balls; step 5.3 includes their boundary, and the algorithm stops at residual equality by its <= test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 carries AC_omega for adjoints; step 9.1 states its countable bad-data selection, while steps 5.2 and 9.1 use least indices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives implications and convergence conclusions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives implications and convergence conclusions, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-landweber-initial-discrepancy-stop": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with a derivative map $F':U\\to\\mathcal B(X,Y)$ that is continuous in operator norm. This is the real-Hilbert forward-map convention. Assume Countable Choice, so every bounded derivative $F'(x)$ has the Hilbert adjoint $F'(x)^*:Y\\to X$ characterized by $\\langle F'(x)u,v\\rangle_Y=\\langle u,F'(x)^*v\\rangle_X$.\n\nAn **admissible local instance** consists of an initial point $x_0\\in U$, a radius $r>0$, an exact solution $x^\\dagger\\in\\overline B_r(x_0):=\\{x\\in X:\\|x-x_0\\|_X\\le r\\}$ with exact datum $y=F(x^\\dagger)$, a noise level $\\delta\\ge0$, noisy datum $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, a constant $0\\le\\eta<1/2$, a discrepancy parameter $\\tau>2(1+\\eta)/(1-2\\eta)$, and a finite update budget $M\\in\\mathbb N_0$. The closed outer ball $\\overline B_{2r}(x_0)$ is contained in $U$; $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$; and the uniform two-point tangential-cone inequality\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nholds for every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is the uniform family of the one-basepoint local tangential-cone inequality; the shared constant and pair domain are part of the admissibility hypothesis. The exact solution and the bounds are analysis data and need not be available to the computational loop.\n\n**Inputs:** $F$, $x_0$, $y^\\delta$, $\\delta$, $\\tau$, and $M$ from an admissible local instance.\n\n**Output:** Either `stopped` with an index $k$, iterate $x_k^\\delta$, and residual $\\|y^\\delta-F(x_k^\\delta)\\|_Y$, or `budget_exhausted` with the last iterate and its residual.\n\n**Procedure:** Set $x_0^\\delta:=x_0$. For $k=0,1,\\ldots,M$, compute $r_k^\\delta:=\\|y^\\delta-F(x_k^\\delta)\\|_Y$. If $r_k^\\delta\\le\\tau\\delta$, return `stopped` with $(k,x_k^\\delta,r_k^\\delta)$. If $k=M$, return `budget_exhausted` with $(k,x_k^\\delta,r_k^\\delta)$. Otherwise set\n\n$$\nx_{k+1}^\\delta:=x_k^\\delta+F'(x_k^\\delta)^*(y^\\delta-F(x_k^\\delta))\n$$\n\nand continue at the next index. Each update is evaluated at a current point in $U$, where the derivative and its Hilbert adjoint are defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-map-is-admissible",
+          "claim": "The map is continuously Fréchet differentiable with $F'(x)h=h$, so $\\|F'(x)\\|=1$. Its TCC remainder vanishes for every pair, hence the uniform TCC holds with $\\eta=0$; $\\overline B_{2r}(0)\\subset\\mathbb R$ and $x^\\dagger=0\\in\\overline B_r(0)$ for any $r>0$. Also $|y^\\delta-y|=1=\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "initial-threshold-precedes-budget",
+          "claim": "At the initial point, $\\|y^\\delta-F(x_0)\\|=|1-0|=1\\le\\tau\\delta$. By [F1] the procedure returns `stopped` at $k=0$ with iterate $x_0=0$ and residual $1$ before the $M=0$ budget condition is checked.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on the nonempty real Hilbert line."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The initial residual is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses eta=0 and tau>2, so the initial residual 1 is strictly below tau delta."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 shows M=0 still returns stopped because the threshold check precedes the budget check."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 attains the noise-bound endpoint: |y_delta-y|=delta=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 compute every datum and the output explicitly, with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct algorithm output, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct algorithm output, not an equivalence."
+        }
+      ]
+    },
+    "cex-ip-landweber-outside-local-ball-stalls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with a derivative map $F':U\\to\\mathcal B(X,Y)$ that is continuous in operator norm. This is the real-Hilbert forward-map convention. Assume Countable Choice, so every bounded derivative $F'(x)$ has the Hilbert adjoint $F'(x)^*:Y\\to X$ characterized by $\\langle F'(x)u,v\\rangle_Y=\\langle u,F'(x)^*v\\rangle_X$.\n\nAn **admissible local instance** consists of an initial point $x_0\\in U$, a radius $r>0$, an exact solution $x^\\dagger\\in\\overline B_r(x_0):=\\{x\\in X:\\|x-x_0\\|_X\\le r\\}$ with exact datum $y=F(x^\\dagger)$, a noise level $\\delta\\ge0$, noisy datum $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, a constant $0\\le\\eta<1/2$, a discrepancy parameter $\\tau>2(1+\\eta)/(1-2\\eta)$, and a finite update budget $M\\in\\mathbb N_0$. The closed outer ball $\\overline B_{2r}(x_0)$ is contained in $U$; $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$; and the uniform two-point tangential-cone inequality\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nholds for every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is the uniform family of the one-basepoint local tangential-cone inequality; the shared constant and pair domain are part of the admissibility hypothesis. The exact solution and the bounds are analysis data and need not be available to the computational loop.\n\n**Inputs:** $F$, $x_0$, $y^\\delta$, $\\delta$, $\\tau$, and $M$ from an admissible local instance.\n\n**Output:** Either `stopped` with an index $k$, iterate $x_k^\\delta$, and residual $\\|y^\\delta-F(x_k^\\delta)\\|_Y$, or `budget_exhausted` with the last iterate and its residual.\n\n**Procedure:** Set $x_0^\\delta:=x_0$. For $k=0,1,\\ldots,M$, compute $r_k^\\delta:=\\|y^\\delta-F(x_k^\\delta)\\|_Y$. If $r_k^\\delta\\le\\tau\\delta$, return `stopped` with $(k,x_k^\\delta,r_k^\\delta)$. If $k=M$, return `budget_exhausted` with $(k,x_k^\\delta,r_k^\\delta)$. Otherwise set\n\n$$\nx_{k+1}^\\delta:=x_k^\\delta+F'(x_k^\\delta)^*(y^\\delta-F(x_k^\\delta))\n$$\n\nand continue at the next index. Each update is evaluated at a current point in $U$, where the derivative and its Hilbert adjoint are defined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at $x\\in U$. For $\\delta>0$ such that the closed ball\n\n$$\\overline B_\\delta(x):=\\{x+h:h\\in X,\\ \\|h\\|_X\\le\\delta\\}$$\n\nis contained in $U$, the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and\n\n$$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with $F':U\\to\\mathcal B(X,Y)$ continuous in operator norm. Fix $x_0\\in U$ and $r>0$ such that $\\overline B_{2r}(x_0)\\subseteq U$, and suppose an exact solution $x^\\dagger\\in\\overline B_r(x_0)$ satisfies $y=F(x^\\dagger)$. Assume $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$ and that, for some $0\\le\\eta<1/2$,\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nfor every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is a uniform two-point hypothesis with the derivative based at the first point. Assume Countable Choice so that the bounded derivatives have Hilbert adjoints. For $\\delta\\ge0$ and $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, set $x_0^\\delta=x_0$ and define the ideal Landweber sequence by\n\n$$\nx_{n+1}^\\delta=x_n^\\delta+F'(x_n^\\delta)^*(y^\\delta-F(x_n^\\delta)).\n$$\n\nLet $\\tau>2(1+\\eta)/(1-2\\eta)$. For $\\delta>0$, let $N(\\delta,y^\\delta)$ denote the first $n\\in\\mathbb N_0$ with $\\|y^\\delta-F(x_n^\\delta)\\|_Y\\le\\tau\\delta$, if it exists. Put $d_0=\\|x_0-x^\\dagger\\|_X$ and $c_\\tau=1-2\\eta-2(1+\\eta)/\\tau>0$. Then the following hold.\n\n1. For every update before the first discrepancy stop, writing $R_n^\\delta=\\|y^\\delta-F(x_n^\\delta)\\|_Y$, the squared-error estimate is\n\n   $$\n   \\|x_{n+1}^\\delta-x^\\dagger\\|_X^2-\\|x_n^\\delta-x^\\dagger\\|_X^2\\le R_n^\\delta\\bigl(2(1+\\eta)\\delta-(1-2\\eta)R_n^\\delta\\bigr).\n   $$\n\n   In particular, the iterates are Fejér monotone relative to $x^\\dagger$ up to the stop: their distance to $x^\\dagger$ does not increase. Here Fejér monotonicity means exactly this nonincrease of distance to the stated solution.\n\n2. If $\\delta>0$, the first discrepancy index exists and\n\n   $$\n   N(\\delta,y^\\delta)<C\\delta^{-2},\\qquad C:=1+\\frac{d_0^2}{c_\\tau\\tau^2}.\n   $$\n\n   A run of the finite-budget algorithm with budget $M\\ge N(\\delta,y^\\delta)$ returns `stopped` at this first index; if $M<N(\\delta,y^\\delta)$, it returns `budget_exhausted` at $M$.\n\n3. For exact data ($\\delta=0$ and $y^\\delta=y$), the ideal sequence is defined for every $n$, satisfies\n\n   $$\n   (1-2\\eta)\\sum_{n=0}^{\\infty}\\|F(x_n)-y\\|_Y^2\\le d_0^2,\n   $$\n\n   and converges strongly to some $\\bar x\\in\\overline B_{2r}(x_0)$ with $F(\\bar x)=y$. No finite stopping index is claimed in the exact-data case.\n\n4. For noisy data ($\\delta>0$), the ideal stopped iterates converge uniformly over the admissible noise ball to that same exact-data limit:\n\n   $$\n   \\lim_{\\delta\\downarrow0}\\ \\sup_{\\|y^\\delta-y\\|_Y\\le\\delta}\\|x_{N(\\delta,y^\\delta)}^\\delta-\\bar x\\|_X=0.\n   $$\n\n   For finite-budget runs this conclusion concerns outputs only when their budgets reach the first discrepancy indices. The theorem asserts neither a convergence rate nor that $\\bar x$ is an $x_0$-minimum-norm solution.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "stationary-start-stalls",
+          "claim": "For every $x,h\\in\\mathbb R$, $F(x+h)-F(x)-2xh=h^2$, so $F$ is Fréchet differentiable with $F'(x)h=2xh$. Thus $F(1)=0=y$ is an exact solution and $F'(x_0)=F'(0)=0$. The Landweber update in [F1] gives $x_1=0$; induction gives $x_n=0$ and residual $|y-F(x_n)|=1$ for every $n$. The exact-data iterates therefore do not converge to a solution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "no-local-tcc-at-start",
+          "claim": "For any proposed local radius $\\delta>0$, choose $h=\\delta/2>0$. At $x_0=0$, $F(h)-F(0)=h^2$ and $F'(0)h=0$, so [F2] would require $h^2\\le\\eta h^2$. Since $h^2>0$, this forces $\\eta\\ge1$. Thus no local TCC ball at this initial point has a constant $\\eta<1/2$, violating the theorem's retained local hypothesis [F3].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses U=R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At h=0 both TCC sides vanish; step 2.1 uses a nonzero increment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 forces eta>=1, outside the theorem's eta<1/2 regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 has zero derivative at the start but residual one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses h=delta/2, interior to every positive closed TCC ball."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly constructs h=delta/2 for each radius."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal convergence claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal convergence claim, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-landweber-exact-data-no-finite-stop": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-nonlinear-landweber-discrepancy",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with a derivative map $F':U\\to\\mathcal B(X,Y)$ that is continuous in operator norm. This is the real-Hilbert forward-map convention. Assume Countable Choice, so every bounded derivative $F'(x)$ has the Hilbert adjoint $F'(x)^*:Y\\to X$ characterized by $\\langle F'(x)u,v\\rangle_Y=\\langle u,F'(x)^*v\\rangle_X$.\n\nAn **admissible local instance** consists of an initial point $x_0\\in U$, a radius $r>0$, an exact solution $x^\\dagger\\in\\overline B_r(x_0):=\\{x\\in X:\\|x-x_0\\|_X\\le r\\}$ with exact datum $y=F(x^\\dagger)$, a noise level $\\delta\\ge0$, noisy datum $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, a constant $0\\le\\eta<1/2$, a discrepancy parameter $\\tau>2(1+\\eta)/(1-2\\eta)$, and a finite update budget $M\\in\\mathbb N_0$. The closed outer ball $\\overline B_{2r}(x_0)$ is contained in $U$; $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$; and the uniform two-point tangential-cone inequality\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nholds for every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is the uniform family of the one-basepoint local tangential-cone inequality; the shared constant and pair domain are part of the admissibility hypothesis. The exact solution and the bounds are analysis data and need not be available to the computational loop.\n\n**Inputs:** $F$, $x_0$, $y^\\delta$, $\\delta$, $\\tau$, and $M$ from an admissible local instance.\n\n**Output:** Either `stopped` with an index $k$, iterate $x_k^\\delta$, and residual $\\|y^\\delta-F(x_k^\\delta)\\|_Y$, or `budget_exhausted` with the last iterate and its residual.\n\n**Procedure:** Set $x_0^\\delta:=x_0$. For $k=0,1,\\ldots,M$, compute $r_k^\\delta:=\\|y^\\delta-F(x_k^\\delta)\\|_Y$. If $r_k^\\delta\\le\\tau\\delta$, return `stopped` with $(k,x_k^\\delta,r_k^\\delta)$. If $k=M$, return `budget_exhausted` with $(k,x_k^\\delta,r_k^\\delta)$. Otherwise set\n\n$$\nx_{k+1}^\\delta:=x_k^\\delta+F'(x_k^\\delta)^*(y^\\delta-F(x_k^\\delta))\n$$\n\nand continue at the next index. Each update is evaluated at a current point in $U$, where the derivative and its Hilbert adjoint are defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with $F':U\\to\\mathcal B(X,Y)$ continuous in operator norm. Fix $x_0\\in U$ and $r>0$ such that $\\overline B_{2r}(x_0)\\subseteq U$, and suppose an exact solution $x^\\dagger\\in\\overline B_r(x_0)$ satisfies $y=F(x^\\dagger)$. Assume $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$ and that, for some $0\\le\\eta<1/2$,\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nfor every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is a uniform two-point hypothesis with the derivative based at the first point. Assume Countable Choice so that the bounded derivatives have Hilbert adjoints. For $\\delta\\ge0$ and $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, set $x_0^\\delta=x_0$ and define the ideal Landweber sequence by\n\n$$\nx_{n+1}^\\delta=x_n^\\delta+F'(x_n^\\delta)^*(y^\\delta-F(x_n^\\delta)).\n$$\n\nLet $\\tau>2(1+\\eta)/(1-2\\eta)$. For $\\delta>0$, let $N(\\delta,y^\\delta)$ denote the first $n\\in\\mathbb N_0$ with $\\|y^\\delta-F(x_n^\\delta)\\|_Y\\le\\tau\\delta$, if it exists. Put $d_0=\\|x_0-x^\\dagger\\|_X$ and $c_\\tau=1-2\\eta-2(1+\\eta)/\\tau>0$. Then the following hold.\n\n1. For every update before the first discrepancy stop, writing $R_n^\\delta=\\|y^\\delta-F(x_n^\\delta)\\|_Y$, the squared-error estimate is\n\n   $$\n   \\|x_{n+1}^\\delta-x^\\dagger\\|_X^2-\\|x_n^\\delta-x^\\dagger\\|_X^2\\le R_n^\\delta\\bigl(2(1+\\eta)\\delta-(1-2\\eta)R_n^\\delta\\bigr).\n   $$\n\n   In particular, the iterates are Fejér monotone relative to $x^\\dagger$ up to the stop: their distance to $x^\\dagger$ does not increase. Here Fejér monotonicity means exactly this nonincrease of distance to the stated solution.\n\n2. If $\\delta>0$, the first discrepancy index exists and\n\n   $$\n   N(\\delta,y^\\delta)<C\\delta^{-2},\\qquad C:=1+\\frac{d_0^2}{c_\\tau\\tau^2}.\n   $$\n\n   A run of the finite-budget algorithm with budget $M\\ge N(\\delta,y^\\delta)$ returns `stopped` at this first index; if $M<N(\\delta,y^\\delta)$, it returns `budget_exhausted` at $M$.\n\n3. For exact data ($\\delta=0$ and $y^\\delta=y$), the ideal sequence is defined for every $n$, satisfies\n\n   $$\n   (1-2\\eta)\\sum_{n=0}^{\\infty}\\|F(x_n)-y\\|_Y^2\\le d_0^2,\n   $$\n\n   and converges strongly to some $\\bar x\\in\\overline B_{2r}(x_0)$ with $F(\\bar x)=y$. No finite stopping index is claimed in the exact-data case.\n\n4. For noisy data ($\\delta>0$), the ideal stopped iterates converge uniformly over the admissible noise ball to that same exact-data limit:\n\n   $$\n   \\lim_{\\delta\\downarrow0}\\ \\sup_{\\|y^\\delta-y\\|_Y\\le\\delta}\\|x_{N(\\delta,y^\\delta)}^\\delta-\\bar x\\|_X=0.\n   $$\n\n   For finite-budget runs this conclusion concerns outputs only when their budgets reach the first discrepancy indices. The theorem asserts neither a convergence rate nor that $\\bar x$ is an $x_0$-minimum-norm solution.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-instance-admissible",
+          "claim": "The derivative is $F'(x)h=h/2$, so $\\|F'(x)\\|=1/2\\le1$, and the linearization remainder is identically zero. Thus the uniform TCC holds with $\\eta=0$. With $r=1$, $x^\\dagger=0\\in\\overline B_r(1)$ and $\\overline B_{2r}(1)\\subset\\mathbb R$, so the local hypotheses hold.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-iterates-never-hit-zero",
+          "claim": "The update is $x_{n+1}=x_n+(1/2)(-x_n/2)=(3/4)x_n$; induction gives $x_n=(3/4)^n>0$ and residual $|F(x_n)-y|=(1/2)(3/4)^n>0$ for every finite $n$. Hence the discrepancy test with threshold $\\tau\\delta=0$ never succeeds at a finite index. By [F2], the exact-data sequence converges to a solution; the only solution of $F(x)=0$ is $0$. Therefore any finite-budget run reaches $M$ with positive residual and returns `budget_exhausted` by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on the nonempty real Hilbert line."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 has positive residual at every finite index while delta=0 makes the threshold zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses eta=0 and tau>2 to meet the local theorem hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The initial error is nonzero and the exact residual does not vanish at any finite step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 has exact data, attaining the noise-bound endpoint 0=delta."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 compute the map, iterates, and residuals explicitly, with no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-way stopping boundary, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-way stopping boundary, not an equivalence."
+        }
+      ]
+    }
+  }
+}

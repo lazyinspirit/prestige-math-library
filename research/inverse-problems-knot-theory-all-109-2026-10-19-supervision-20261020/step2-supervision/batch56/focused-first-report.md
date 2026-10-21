@@ -1,0 +1,23 @@
+# Batch56 supplier-first focused FIRST check
+
+This is a root-supervision mathematical disposition, not a native review/repair report or counter. Canonical sources and native artifacts remained read-only. The fixed1471 frontier is unchanged.
+
+## Actual hold and scope
+
+Read current native review-0.json and successful repair-1.json and the PREPARED repair-1.input.json consumer_scope at research/inverse-problems-knot-theory-all-109-2026-10-19-scope-review/batch-56/. The prepared scope contains74 affected IDs. The successful repair reports6 of these, omitting68. The current collector reviews1/repairs0 is not changed here. This report supplies substantive per-consumer dispositions for all74 in consumer-dispositions.json; root/owner retain native resolution/integration.
+
+## Supplier-first results
+
+1. Algorithm property placement: the actual Definition retains every validation instruction, rational segment test, one-component traversal, positive-meridian symbol and relator. It removes only the adjective/property wording and termination proof. Correctness proof1.1 now proves termination itself from finite records, exact rational arithmetic, cyclic tracing and a finite crossing pass. Its original theorem Statement remains intact. PASS.
+2. Crossing cover, c=0: the explicit clamp sends q to a positive scalar multiple of q, so it cannot reach (0,1) from the punctured product. Its interpolation stays inside the open square and fixes the compact target. Sup-norm cube radial retraction fixes identified end faces, so descends to the product quotient. The finite CW disk-collapse/attached-interval argument retains the meridian and sphere. The two specified wedge-open sets retract to S1 and S2 and have contractible connected overlap, giving pi1=Z by van Kampen. PASS.
+3. Crossing cover, c>0 delta: the cone triangulation makes attaching disks and radial star edges a genuine finite CW subcomplex C in the central ball. C and the ball are contractible; the cited CW homotopy-equivalence inclusion theorem gives a strong deformation retraction, after which disk contractions agree with product one-handle contractions. The positive normal-disk chart orients each loop by the same tangent-then-normal convention as local conjugacy, so the actual positive meridians form the intended basis. No change to the ordered annular attachments or source-target relators. PASS.
+4. Infinity collar: the new proof establishes path-connectedness without requiring an already given code, then inversion sends V to a convex open ball, with explicit based straight-line loop contractions. Its punctured part has the stated puncture-preserving radial sphere retraction; the basepoint track is handled by actual basepoint-change isomorphisms. Van Kampen and final basepoint transport prove the full unchanged inclusion-isomorphism Statement. The cone-image volume-zero argument uses explicit finite Lipschitz grid covers and countably indexed truncations, not a claim that a previously coded knot supplies unrestricted path-connectedness. PASS.
+5. Worked-example diagram change: inspected literal TikZ coordinates/directions. In each figure-eight panel the horizontal overstrand is continuous and the under-diagonal is gapped. Rightward over-normal gives upper target and lower source. The labels and under-directions yield exactly transitions x2->x3 atR1, x1->x2 atR2, x3->x4 atR3 and x4->x1 atR4, with the same R1–R4 equations. No group/presentation changes. PASS.
+
+The planar-code Definition and tube Statement were read as unchanged interfaces. Resolved tube/conjugacy and outside knot prerequisites were not re-proved or broadly reopened. Actual prepared consumer claims and the relevant supplier-use/Facts/argument occurrences were checked along their listed paths; unrelated accepted argument segments were not audited.
+
+## Consumer outcome and minimal proposal
+
+All74 prepared affected uses are compatible with the repaired suppliers and unchanged code, presentation, meridian/peripheral and validity interfaces. Every entry of consumer-dispositions.json records its particular mathematical use and why no edit is necessary, including the68 omitted consumers. The four assigned repaired supplier/property obligations pass this FIRST focused check. No additional substantive mathematical defect was confirmed.
+
+No canonical before/after patch is proposed: no consumer or supplier text change is necessary for this hold. Root should integrate these actual dispositions under the existing owner/native resolution, not fabricate another engine review or alter native counters here. No new native report, stamp, hash, metadata, validator, gate, commit or publication was made. This report itself grants no native readiness or gate acceptance.

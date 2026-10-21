@@ -1,0 +1,613 @@
+[
+  {
+    "order": 3152,
+    "id": "root-of-unity-skein-tqft-for-three-manifolds",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Root-of-unity skein TQFT for 3-manifolds",
+    "companion": "root-of-unity-skein-tqft-for-three-manifolds-examples",
+    "requires": [
+      "three-manifold-surgery-presentations-and-kirby-moves",
+      "skein-modules-for-links-in-three-manifolds"
+    ],
+    "items": [
+      {
+        "id": "def-sl-two-root-of-unity-skein-parameter",
+        "kind": "definition",
+        "title": "The BHMV root-of-unity skein parameter",
+        "deps": [
+          "def-kauffman-bracket-skein-module-of-a-three-manifold"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), §§1–3",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 2–3",
+              "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §§2.1 and 5.1–5.4",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: the parameter and finite label set are specified from one fixed root of unity.",
+        "statement": "Fix an even integer $p\\ge4$ and a primitive $2p$-th root of unity $A\\in\\mathbb C$. Put\n\n$$\n\\zeta=A^2,\\qquad q=-\\zeta,\\qquad r=p/2,\\qquad\n\\delta=-A^2-A^{-2}=q+q^{-1}.\n$$\n\nThe coefficient field after specialization is $\\mathbb C$, and the Kauffman bracket loop coefficient is $\\delta$ in the framed-link relation $[L\\sqcup O]=\\delta[L]$. Define the quantum integers by $[0]=0$, $[1]=1$, and $[j+1]=\\delta[j]-[j-1]$ for $j\\ge1$. Since $q^2=A^4$ has order $r\\ge2$, these quantum integers also satisfy\n\n$$\n[j]=\\frac{q^j-q^{-j}}{q-q^{-1}}=(-1)^{j-1}\\frac{A^{2j}-A^{-2j}}{A^2-A^{-2}}.\n$$\n\nThe BHMV simple-label convention is the finite set\n\n$$\n\\mathcal J_p=\\{0,1,\\ldots,r-2\\}.\n$$\n\nThe pivotal loop and coefficient conventions throughout this page are the displayed $\\delta$ and $\\mathbb C$; no zero quantum integer is inverted."
+      },
+      {
+        "id": "lem-jones-wenzl-idempotents-exist-below-root-order",
+        "kind": "lemma",
+        "title": "Jones–Wenzl projectors exist up to the first zero quantum integer",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "lem-temperley-lieb-closure-trace-component-identities",
+          "def-temperley-lieb-negligible-morphisms"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapter 3",
+              "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+            },
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §3",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §5.3",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: all calculations are finite Laurent-polynomial and complex-field computations.",
+        "statement": "Let $p\\ge4$ be even, let $A$ be a primitive $2p$-th root of unity, and use the quantum integers and Temperley–Lieb loop value $\\delta=-A^2-A^{-2}$ specified above. Write $r=p/2$. The standard Jones–Wenzl recursion defines nonzero idempotents $p_n$ for $0\\le n\\le r-1$; their unnormalized closure traces are $[n+1]$. In particular, $p_{r-1}$ has trace zero and is negligible, while the next standard recursive formula for $p_r$ is undefined because its denominator is $[r]=0$. This statement concerns that recursion and does not assert that no differently constructed normalized idempotent can exist at rank $r$."
+      },
+      {
+        "id": "def-semisimplified-temperley-lieb-fusion-category",
+        "kind": "definition",
+        "title": "Semisimplified Temperley–Lieb quotient at the BHMV root",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "def-temperley-lieb-diagram-category",
+          "thm-temperley-lieb-diagram-category-laws",
+          "def-temperley-lieb-negligible-morphisms",
+          "lem-temperley-lieb-negligible-morphisms-form-tensor-ideal"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), §§3–4",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Razvan Gelca, Topological Quantum Field Theory with Corners Based on the Kauffman Bracket, §§2–4",
+              "url": "https://www.math.ttu.edu/~rgelca/bra3.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §§5.1–5.4",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: the quotient, finite additive envelope, and idempotent completion are algebraic constructions.",
+        "statement": "Fix an even integer $p\\ge4$, a primitive $2p$-th root $A\\in\\mathbb C$, $r=p/2$, and loop value $\\delta=-A^2-A^{-2}$. Let $\\mathcal T_\\delta$ be the complex Temperley–Lieb diagram category with objects the nonnegative integers and morphisms finite linear combinations of perfect matchings of bottom and top boundary points with no intersecting arcs. Compose by stacking and remove each closed component with factor $\\delta$. Define $\\mathcal N_\\delta(m,n)$ to be the subspace of morphisms $f:m\\to n$ such that $\\operatorname{Tr}_m(g\\circ f)=0$ for every reverse morphism $g:n\\to m$, where $\\operatorname{Tr}$ is the unnormalized diagram-closure trace. Form the quotient category with the same objects and morphism spaces $\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n)/\\mathcal N_\\delta(m,n)$. Its additive envelope adjoins finite formal direct sums, with matrix morphisms and matrix composition. Its idempotent completion adjoins objects $(X,e)$ for idempotents $e\\in\\operatorname{End}(X)$ with $e^2=e$, and morphisms $(X,e)\\to(Y,f)$ are morphisms $a:X\\to Y$ satisfying $a=fae$. Juxtaposition, planar cup-cap duality, and the induced trace descend to this completed quotient. This definition makes no assertion that it is semisimple, that its simple objects have a specified label set, or that any braid, twist, or modularity identities hold."
+      },
+      {
+        "id": "lem-root-jones-wenzl-recursion-and-negligible-ideal",
+        "kind": "lemma",
+        "title": "Root Jones–Wenzl recursion and its negligible ideal",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "lem-jones-wenzl-idempotents-exist-below-root-order",
+          "def-temperley-lieb-negligible-morphisms",
+          "lem-temperley-lieb-negligible-morphisms-form-tensor-ideal",
+          "def-temperley-lieb-diagram-category",
+          "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "lem-temperley-lieb-closure-trace-component-identities",
+          "def-semisimplified-temperley-lieb-fusion-category",
+          "thm-temperley-lieb-root-negligible-quotient-is-semisimple",
+          "thm-temperley-lieb-rank-one-pivotal-ribbon-conversion"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §§5.1–5.4",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            },
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 3–7",
+              "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: only finite Temperley–Lieb diagrams and linear algebra over C are used.",
+        "statement": "Fix even $p\\ge4$, a primitive $2p$-th root $A$, and $r=p/2$. In the Temperley–Lieb diagram category over $\\mathbb C$ with loop value $\\delta=-A^2-A^{-2}$, call $f:m\\to n$ negligible when $\\operatorname{Tr}_m(g\\circ f)=0$ for every reverse morphism $g:n\\to m$, where $\\operatorname{Tr}$ is the unnormalized diagram-closure trace. A tensor ideal is a family of linear subspaces of the morphism spaces closed under composition on either side and tensor product on either side by arbitrary morphisms. The negligible morphisms form a tensor ideal. This ideal is generated, as a tensor ideal, by the Jones–Wenzl projector $p_{r-1}$, defined by the standard recursion through its first zero quantum integer; in particular the quotient has precisely the surviving projector labels $0,\\ldots,r-2$."
+      },
+      {
+        "id": "lem-root-fusion-rules-and-simple-object-completeness",
+        "kind": "lemma",
+        "title": "Root fusion rules and completeness of the simple objects",
+        "deps": [
+          "def-semisimplified-temperley-lieb-fusion-category",
+          "lem-root-jones-wenzl-recursion-and-negligible-ideal",
+          "lem-jones-wenzl-idempotents-exist-below-root-order",
+          "def-sl-two-root-of-unity-skein-parameter",
+          "thm-temperley-lieb-rank-one-pivotal-ribbon-conversion",
+          "thm-temperley-lieb-rank-one-tilting-quotient-fusion-category",
+          "thm-su2-root-unity-ribbon-category-is-modular",
+          "def-modular-ribbon-category-and-hopf-link-data"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§3–4",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Razvan Gelca, Topological Quantum Field Theory with Corners Based on the Kauffman Bracket, §§3–4",
+              "url": "https://www.math.ttu.edu/~rgelca/bra3.pdf"
+            },
+            {
+              "title": "Stephen F. Sawin, Quantum Groups at Roots of Unity and Modularity, §§1–5",
+              "url": "https://arxiv.org/pdf/math/0308281"
+            },
+            {
+              "title": "K. Iohara, G. I. Lehrer, and R. B. Zhang, The Jones Quotients of the Temperley-Lieb Algebras, §§2–3",
+              "url": "https://arxiv.org/pdf/1702.08128"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: all root, fusion, parity, and finite-sine calculations are finite algebraic arguments.",
+        "statement": "Let $p\\ge4$ be even, $A\\in\\mathbb C$ a primitive $2p$-th root, and $r=p/2$. In the BHMV Temperley–Lieb quotient with loop value $\\delta=-A^2-A^{-2}$ and planar pivotal trace, the complete simple-label set is $\\{0,1,\\ldots,r-2\\}$, represented by the surviving Jones–Wenzl projectors $p_a$ obtained from the standard recursion using unit denominators $[2],\\ldots,[a]$. Every simple is self-dual. Its fusion multiplicities are\n\n$$\nN_{ab}^{c}=1\n\\quad\\Longleftrightarrow\\quad\n|a-b|\\le c\\le\\min(a+b,\\,2r-4-a-b)\n\\ \\text{and }a+b+c\\text{ is even},\n$$\n\nand are zero otherwise. With the BHMV overcrossing map $c_i=A1_i+A^{-1}U_i$, where $U_i$ is the cup-cap generator, the full-framing ribbon structure has planar quantum dimensions $d_a=[a+1]$ and simple-object twists $\\theta_a=(-1)^aA^{a(a+2)}$. Here the quantum integers use the fixed BHMV recurrence. The unnormalized Hopf-link matrix, whose $(a,b)$ entry is the pivotal trace of the double braiding on $p_a\\otimes p_b$, is nondegenerate. Here modular means that this finite semisimple ribbon category has an invertible unnormalized Hopf-link matrix."
+      },
+      {
+        "id": "def-extended-skein-cobordism-anomaly-data",
+        "kind": "definition",
+        "title": "Weighted Lagrangian extension and root anomaly data",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "def-semisimplified-temperley-lieb-fusion-category",
+          "lem-root-fusion-rules-and-simple-object-completeness",
+          "def-weighted-lagrangian-ribbon-bordism",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§1–2 and Appendix B",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Walker, On Witten's 3-Manifold Invariants, §§1 and 18",
+              "url": "https://canyon23.net/math/1991TQFTNotes.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is a declared prerequisite of the weighted Lagrangian bordism interface; choosing the displayed roots for one fixed p and A is a finite pointwise choice, with no familywise choice used in this definition.",
+        "statement": "For the fixed root parameter, let $\\mathcal C_p$ denote the semisimplified Temperley–Lieb category with labels $0,\\ldots,r-2$, pivotal dimensions $d_j=[j+1]$, and Hopf-link data inherited from the Kauffman bracket. Put $\\mathcal D_p^2=\\sum_{j=0}^{r-2}d_j^2$ and choose $\\mathcal D_p\\in\\mathbb C$ with that square. Choose $\\kappa\\in\\mathbb C$ satisfying $\\kappa^6=A^{-6-(p+1)p/2}$. The root-specific extended data are the weighted Lagrangian ribbon bordisms whose objects are closed oriented labeled surfaces with a Lagrangian subspace of real first homology and whose morphisms are collared oriented labeled ribbon bordisms with integer weights. If $M_1:\\Sigma_0\\to\\Sigma_1$ and $M_2:\\Sigma_1\\to\\Sigma_2$ have relations $\\Lambda_{M_1},\\Lambda_{M_2}$ and boundary Lagrangians $\\lambda_0,\\lambda_1,\\lambda_2$, define\n\n$$\nK_1=\\Lambda_{M_1}(\\lambda_0),\\qquad\nK_0=\\lambda_1,\\qquad\nK_2=\\Lambda_{M_2}^{\\,t}(\\lambda_2),\n\\qquad\nn(M_2\\circ M_1)=n_2+n_1+\\mu(K_1,K_0,K_2),\n$$\n\nusing the Wall-signature Maslov convention. The category composition, units, and anomaly weight are those specified by this formula and the weighted Lagrangian bordism definition; no ordinary oriented anomaly-free functor is part of this Definition."
+      },
+      {
+        "id": "lem-root-skein-surgery-kirby-color-invariance",
+        "kind": "lemma",
+        "title": "Root Kirby-color handle-slide and blow-up invariance",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "def-semisimplified-temperley-lieb-fusion-category",
+          "lem-root-fusion-rules-and-simple-object-completeness",
+          "def-extended-skein-cobordism-anomaly-data"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Three-Manifold Invariants Derived from the Kauffman Bracket, Topology 31 (1992), §§2–4",
+              "url": "https://www.sciencedirect.com/science/article/pii/004093839290002Y"
+            },
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 8 and 12",
+              "url": "https://www.jstor.org/stable/j.ctt1bgzb7v"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+              "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+            },
+            {
+              "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+              "url": "https://arxiv.org/pdf/0912.4706v3",
+              "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free in the finite color calculations; full AC is carried separately by the surgery-presentation theorem that consumes this result.",
+        "statement": "Fix even $p\\ge4$, a primitive $2p$-th root $A$, the BHMV semisimplified category, and its quantum dimensions $d_j$ and twists $\\theta_j$ for $0\\le j\\le r-2$. Put $\\Omega_p=\\sum_{j=0}^{r-2}d_jp_j$, $\\Delta_+=\\sum_jd_j^2\\theta_j$, and $\\Delta_-=\\sum_jd_j^2\\theta_j^{-1}$. The Statement asserts that both $\\Delta_+$ and $\\Delta_-$ are nonzero. For a finite integral framed link $L$ in the oriented three-sphere, color each surgery component by $\\Omega_p$ and normalize the bracket evaluation by $\\Delta_+^{b_+(L)}\\Delta_-^{b_-(L)}$, where $b_\\pm(L)$ are the positive and negative indices of the framing matrix. With the stated BHMV root and weighted anomaly convention, the resulting value is unchanged under framed isotopy, handle slides, and addition or deletion of a split $\\pm1$-framed unknot.",
+        "strategy": "Apply the precisely stated external inputs and retain the reviewed finite local specializations at the literal original claim; source hypotheses and reading limits remain explicit.",
+        "owner_metadata_note": {
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json",
+          "proof_boundary": "External theorem proof imported; existing resolved local proofs preserved."
+        }
+      },
+      {
+        "id": "def-skein-tqft-state-space-and-handlebody-pairing",
+        "kind": "definition",
+        "title": "Skein TQFT state space and handlebody pairing",
+        "deps": [
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "def-sl-two-root-of-unity-skein-parameter",
+          "def-semisimplified-temperley-lieb-fusion-category",
+          "def-extended-skein-cobordism-anomaly-data",
+          "lem-root-skein-surgery-kirby-color-invariance",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§1–2",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §§1.2 and 3.1–3.3",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, Chapter 6",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            },
+            {
+              "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+              "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+            },
+            {
+              "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+              "url": "https://arxiv.org/pdf/0912.4706v3",
+              "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is retained through the surgery-presentation supplier used to define the closed pairing invariant.",
+        "statement": "Fix a closed oriented marked surface $\\Sigma$ with its Lagrangian and weighted anomaly data, and fix a marked handlebody $H$ with boundary $\\Sigma$ and a complementary marked handlebody $H'$ so that their gluing is the standard oriented three-sphere. Specialize the framed-link Kauffman bracket skein module of $H$ to the coefficient field and root fixed above. For $x\\in\\mathcal K_A(H)$ and $y\\in\\mathcal K_A(H')$, define the handlebody pairing $B_\\Sigma(x,y)$ by gluing the two framed skeins and evaluating the resulting closed marked three-manifold with the normalized root surgery invariant. Define\n\n$$\n\\operatorname{Rad}(B_\\Sigma)=\\{x\\in\\mathcal K_A(H):B_\\Sigma(x,y)=0\\text{ for every }y\\in\\mathcal K_A(H')\\},\n\\qquad\nV_p(\\Sigma)=\\mathcal K_A(H)/\\operatorname{Rad}(B_\\Sigma).\n$$\n\nThis is the radical-quotient handlebody state-space construction for the specified marking and anomaly data. Independence of the marking, finite generation, nondegeneracy, and the gluing maps are separate mathematical obligations.\n\n**External normalization input.** In this Definition the closed marked evaluation is the BHMV TQFT normalization, not merely the raw signature-normalized closed invariant $\\theta_p$ of the Kirby lemma. BHMV §2 pp.897–898 and Gilmer–Masbaum §11 pp.23–25 give\n$$Z_p(M,w)=\\eta^{b_0(M)+b_1(M)}(\\kappa^3)^w\\theta_p(M),\\qquad \\Delta_\\pm=\\eta^{-1}\\kappa^{\\pm3}.$$\nThus $Z_p(S^3,0)=\\eta$ and $Z_p(S^2\\times S^1,0)=1$. These nonzero normalizations and the registered Wall-sign weight are part of the pairing. BHMV Proposition1.9, p.891, identifies EXACTLY this radical quotient computed with two complementary handlebodies with its universal state space. This external identification supplies well-definedness of the presented model; its finite basis and gluing are the separate following lemmas. The selected $\\kappa$ remains a sixth root, with one weight step acting by its cube. The source itself is only used at these located statements/constructions, not as a claimed locally reconstructed universal-construction proof.\n\n**Source hypotheses for this identification.** The normalized BHMV closed invariant is multiplicative and involutive, so BHMV Proposition 1.1 gives its cobordism-generated quantization functor at this fixed root; extend its coefficients to $\\mathbb C$ as stated above. BHMV Theorem 1.7 supplies both hypotheses needed for Proposition 1.9: its Kauffman bracket relations let that proposition replace the free bordism module by the specialized skein module, and its surgery axioms give the surjectivity and radical-kernel description. The corresponding weighted Lagrangian version is the BHMV skein TQFT with integral weights and Lagrangians in place of $p_1$-structures, as described by Gilmer–Masbaum in §11; their one-weight square-root multiplier is matched to the selected BHMV sixth root by $\\kappa_{\\mathrm{GM}}=\\kappa^3$. In that section Lemma 11.1 states the weighted surgery axiom and Remark 11.3 applies it to the handlebody skein presentation; the source refers the Lemma 11.1 proof to the BHMV argument rather than repeating it. These are imported source inputs, not a locally reconstructed proof, and they do not add another quotient or change the state-space interface.",
+        "strategy": "Apply the precisely stated external inputs and retain the reviewed finite local specializations at the literal original claim; source hypotheses and reading limits remain explicit.",
+        "owner_metadata_note": {
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json",
+          "proof_boundary": "External theorem proof imported; existing resolved local proofs preserved."
+        }
+      },
+      {
+        "id": "lem-root-handlebody-spine-state-space-finite-generation",
+        "kind": "lemma",
+        "title": "Finite generation by admissible handlebody-spine states",
+        "deps": [
+          "def-skein-tqft-state-space-and-handlebody-pairing",
+          "lem-root-fusion-rules-and-simple-object-completeness",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§4–5",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 4–7",
+              "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, Chapter 6",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            },
+            {
+              "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+              "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+            },
+            {
+              "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+              "url": "https://arxiv.org/pdf/0912.4706v3",
+              "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+            }
+          ]
+        },
+        "axiom_use": "Finite choice only is needed for a fixed finite spine; full AC is inherited from the declared state-space/surgery interface.",
+        "statement": "Let $H$ be a handlebody with a fixed finite trivalent spine $G$, and let every edge carry one of the labels $0,\\ldots,r-2$. Call a labeling admissible when the three labels at each trivalent vertex satisfy the root fusion rule. In the radical-quotient state space of $H$, the states represented by admissible labeled spines span, and the set of such labelings is finite. This statement asserts spanning, not linear independence.",
+        "strategy": "Apply the precisely stated external inputs and retain the reviewed finite local specializations at the literal original claim; source hypotheses and reading limits remain explicit.",
+        "owner_metadata_note": {
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json",
+          "proof_boundary": "External theorem proof imported; existing resolved local proofs preserved."
+        }
+      },
+      {
+        "id": "lem-root-handlebody-pairing-nondegeneracy-and-gluing",
+        "kind": "lemma",
+        "title": "Handlebody pairing nondegeneracy and gluing",
+        "deps": [
+          "def-skein-tqft-state-space-and-handlebody-pairing",
+          "lem-root-handlebody-spine-state-space-finite-generation",
+          "def-extended-skein-cobordism-anomaly-data",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§1 and 4–5",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 6–7",
+              "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+              "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+            },
+            {
+              "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+              "url": "https://arxiv.org/pdf/0912.4706v3",
+              "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is inherited from the marked surgery-presentation and weighted-bordism interfaces.",
+        "statement": "For the fixed root parameter, the normalized double-handlebody pairing on the admissible spine states of a marked handlebody is nondegenerate after quotienting by its radical. The inverse pairing defines the sewing map for gluing along a closed marked surface, and these maps satisfy the stated weighted Lagrangian anomaly correction.",
+        "strategy": "Apply the precisely stated external inputs and retain the reviewed finite local specializations at the literal original claim; source hypotheses and reading limits remain explicit.",
+        "owner_metadata_note": {
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json",
+          "proof_boundary": "External theorem proof imported; existing resolved local proofs preserved."
+        }
+      },
+      {
+        "id": "thm-root-of-unity-skein-tqft-gluing-and-surgery-invariance",
+        "kind": "theorem",
+        "title": "Root-of-unity skein TQFT gluing and surgery invariance",
+        "deps": [
+          "def-extended-skein-cobordism-anomaly-data",
+          "def-skein-tqft-state-space-and-handlebody-pairing",
+          "lem-root-handlebody-pairing-nondegeneracy-and-gluing",
+          "lem-root-skein-surgery-kirby-color-invariance",
+          "def-weighted-lagrangian-ribbon-bordism",
+          "thm-kirby-moves-classify-framed-link-presentations",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 11,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), Theorem 1.4 and §§1–5",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 7 and 12",
+              "url": "https://www.jstor.org/stable/j.ctt1bgzb7v"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §§1.2 and 3",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+              "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+            },
+            {
+              "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+              "url": "https://arxiv.org/pdf/0912.4706v3",
+              "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is used through finite framed-link surgery presentations and the Kirby-move classification supplier; all color sums are finite.",
+        "statement": "Assume full AC. Fix even $p\\ge4$, a primitive $2p$-th root $A$, and the BHMV Kauffman bracket convention with $\\delta=-A^2-A^{-2}$. On the weighted Lagrangian extended bordism category built from the root semisimplified Temperley–Lieb data, the normalized Kirby-color surgery maps define a finite-dimensional skein TQFT: the handlebody state spaces are the radical quotients of their skein modules, gluing is given by the inverse normalized handlebody pairing, and the resulting closed value is unchanged under isotopy, framed handle slides, and split $\\pm1$-blow-ups. Forgetting the weight and Lagrangian extension yields only the projective ordinary-oriented data unless a separate anomaly-cancellation result is proved.",
+        "strategy": "Apply the precisely stated external inputs and retain the reviewed finite local specializations at the literal original claim; source hypotheses and reading limits remain explicit.",
+        "owner_metadata_note": {
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json",
+          "proof_boundary": "External theorem proof imported; existing resolved local proofs preserved."
+        }
+      }
+    ]
+  },
+  {
+    "order": 3153,
+    "id": "root-of-unity-skein-tqft-for-three-manifolds-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Root-of-unity skein TQFT for 3-manifolds — Examples and Counterexamples",
+    "companion": "root-of-unity-skein-tqft-for-three-manifolds",
+    "requires": [
+      "root-of-unity-skein-tqft-for-three-manifolds"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-32-boundary-case",
+        "kind": "counterexample",
+        "title": "The next Jones–Wenzl recursion denominator vanishes at p=6",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "lem-jones-wenzl-idempotents-exist-below-root-order",
+          "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 2–3",
+              "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §5.3",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: the counterexample is a finite calculation in the field of complex numbers.",
+        "statement": "For every even $p\\ge4$ and every primitive $2p$-th root $A$, the standard Jones–Wenzl recursion for the BHMV Kauffman bracket can be continued to every strand number by cancelling any zero quantum-integer denominator against a zero numerator."
+      },
+      {
+        "id": "ex-knot-kt-32-worked-cases",
+        "kind": "example",
+        "title": "Worked root-of-unity fusion and torus-state cases",
+        "deps": [
+          "def-sl-two-root-of-unity-skein-parameter",
+          "lem-jones-wenzl-idempotents-exist-below-root-order",
+          "def-semisimplified-temperley-lieb-fusion-category",
+          "lem-root-fusion-rules-and-simple-object-completeness",
+          "def-extended-skein-cobordism-anomaly-data",
+          "def-skein-tqft-state-space-and-handlebody-pairing",
+          "lem-root-handlebody-spine-state-space-finite-generation",
+          "lem-root-handlebody-pairing-nondegeneracy-and-gluing",
+          "lem-root-skein-surgery-kirby-color-invariance",
+          "thm-root-of-unity-skein-tqft-gluing-and-surgery-invariance",
+          "thm-skein-module-of-solid-torus-has-core-multicurve-basis",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "literature-derived"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §4",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+            },
+            {
+              "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §§5.3–5.4",
+              "url": "https://arxiv.org/pdf/1502.06845v1"
+            },
+            {
+              "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+              "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+            },
+            {
+              "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+              "url": "https://arxiv.org/pdf/0912.4706v3",
+              "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is inherited only through the solid-torus skein-basis interface; the finite root and fusion calculations themselves are choice-free.",
+        "statement": "Use the BHMV convention $A$ primitive of order $2p$, $p$ even, $r=p/2$, and labels $0,\\ldots,r-2$. At $p=4$ the label set is $\\{0\\}$ and the torus state space has dimension $1$. At $p=6$ the label set is $\\{0,1\\}$, the fusion rule is $1\\otimes1\\cong0$, and the torus state space has dimension $2$.",
+        "strategy": "Apply the precisely stated external inputs and retain the reviewed finite local specializations at the literal original claim; source hypotheses and reading limits remain explicit.",
+        "owner_metadata_note": {
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json",
+          "proof_boundary": "External theorem proof imported; existing resolved local proofs preserved."
+        }
+      }
+    ]
+  }
+]

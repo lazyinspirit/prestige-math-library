@@ -1,0 +1,547 @@
+[
+  {
+    "order": 3102,
+    "id": "real-phase-retrieval-and-complement-property",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Real phase retrieval and phaseless ambiguity",
+    "companion": "real-phase-retrieval-and-complement-property-examples",
+    "requires": [
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares",
+      "hilbert-space-geometry-and-riesz-representation",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "inverse-problems-identifiability-and-stability",
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "linear-algebra-methods-in-combinatorics"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-vandermonde-determinant",
+        "kind": "lemma",
+        "title": "The Vandermonde determinant for real moment-curve vectors",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-invertible-matrix-theorem",
+          "def-linear-independence",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "cor-factor-theorem-over-a-commutative-ring",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "thm-universal-property-of-a-polynomial-ring",
+          "thm-reals-field",
+          "def-natural-numbers",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.013A, Chapter B §1, The Vandermonde Determinant",
+              "url": "https://ocw.mit.edu/ans7870/18/18.013a/textbook/HTML/chapter_b/contents.html"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$ be an integer, let $t_1,\\ldots,t_d$ be commuting indeterminates over $\\mathbb R$, and let $V_d$ be the $d\\times d$ matrix with $(i,j)$ entry $t_j^{i-1}$. Then\n$$\\det V_d=\\prod_{1\\le p<q\\le d}(t_q-t_p).$$\nConsequently, for any distinct real numbers $s_1,\\ldots,s_d$, the $d$ vectors\n$$(1,s_j,s_j^2,\\ldots,s_j^{d-1})^{\\mathsf T},\\qquad 1\\le j\\le d,$$\nare linearly independent."
+      },
+      {
+        "id": "def-ip-real-frame-phase-retrieval",
+        "kind": "definition",
+        "title": "Real phase retrieval via finite real measurements",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-identifiability-and-stability-modulus",
+          "def-max-min",
+          "def-ordered-field",
+          "def-euclidean-inner-product",
+          "lem-metrics-on-rn"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-ip-real-phase-retrieval-quotient-metric"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), arXiv:math/0412411",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            },
+            {
+              "title": "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015)",
+              "url": "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, allowing zero measurement vectors and not assuming that $\\Phi$ spans. Here $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$; measurement labels are one-based, while coordinates in $\\mathbb R^d$ use the library's zero-based convention $k<d$. Write $\\mathbb R^{[m]}=\\{y:[m]\\to\\mathbb R\\}$. Use the Euclidean inner product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$ and norm $\\|u\\|_2=\\sqrt{\\langle u,u\\rangle}$. Define the signal equivalence relation $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and write $q(x)=[x]$. Its quotient distance is\n$$d_{\\pm}([x],[z]):=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\n\nUse data space $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ with metric\n$$\\rho_m(b,c)=\\begin{cases}\\sqrt{\\sum_{k<m}(b_{k+1}-c_{k+1})^2},&m\\ge1,\\\\0,&m=0.\\end{cases}$$\nThe fixed relabeling $i\\mapsto i-1$ identifies $[m]$-indexed data with the library's zero-based $\\mathbb R^m$; $Y_0$ is a singleton. Define the real analysis map $T_\\Phi:\\mathbb R^d\\to\\mathbb R^{[m]}$ by\n$$T_\\Phi x=(\\langle a_i,x\\rangle)_{i\\in[m]}.$$\nThe amplitude map is $\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]}$, while the intensity map is\n$$\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}\\in Y_m.$$\nA finite real measurement family performs **phase retrieval** when $\\mathcal I_\\Phi:Q_d\\to Y_m$ is injective, equivalently when the induced amplitude map is injective. The quotient distance, both induced maps, and the data metric are well defined as verified below.\n\nThe diagram records the identity $\\mathcal I_\\Phi\\circ q=S\\circ T_\\Phi$, where $S(y)=(y_i^2)_{i\\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements, amplitudes, and intensities; no proof relies on the diagram.\n\n```tikzcd\n\\mathbb R^d \\arrow[r,\"T_\\Phi\"] \\arrow[d,\"q\"'] & \\mathbb R^{[m]} \\arrow[d,\"S\"] \\\\\nQ_d \\arrow[r,\"\\mathcal I_\\Phi\"'] & [0,\\infty)^m\n```"
+      },
+      {
+        "id": "lem-ip-real-phase-retrieval-quotient-metric",
+        "kind": "lemma",
+        "title": "The real sign quotient and its induced measurement maps",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "def-metric-space",
+          "def-max-min",
+          "def-ordered-field",
+          "def-euclidean-inner-product",
+          "lem-metrics-on-rn",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "lem-of-square-positive",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2, quotient metric discussion",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            },
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006)",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a family in $\\mathbb R^d$. Define $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and put\n$$d_{\\pm}([x],[z])=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\nLet $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ carry the metric induced from zero-based Euclidean $\\mathbb R^m$ by the fixed relabeling $i\\mapsto i-1$ when $m\\ge1$, and the zero metric on the singleton $Y_0$ when $m=0$. Define\n$$\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]},\\qquad\n\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}.$$\nThen $\\sim$ is an equivalence relation, $d_{\\pm}$ is a metric on $Q_d$, $Y_m$ is a metric space, and both displayed measurement maps are well defined. Moreover, $\\mathcal I_\\Phi$ is coordinatewise the square of $\\mathcal M_\\Phi$, so the two maps are injective simultaneously."
+      },
+      {
+        "id": "def-ip-frame-complement-property",
+        "kind": "definition",
+        "title": "Complement property for a real finite measurement family",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), §2",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2, §2.1",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. For $S\\subseteq[m]$, write\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S):=\\operatorname{span}_{\\mathbb R}\\{a_i:i\\in S\\},$$\nwith $\\operatorname{span}_{\\mathbb R}(\\Phi_{\\varnothing})=\\{0\\}$. The family $\\Phi$ has the **complement property** if for every $S\\subseteq[m]$,\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S)=\\mathbb R^d\n\\quad\\text{or}\\quad\n\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})=\\mathbb R^d.$$\nThe definition applies to labeled families, including repeated or zero vectors."
+      },
+      {
+        "id": "def-ip-real-full-spark-measurement-family",
+        "kind": "definition",
+        "title": "Full-spark real measurement families",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "def-linear-independence"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), §3.2",
+              "url": "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+            },
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), Corollary 2.6",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $m\\ge d$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. The family is **full spark** if for every list of distinct labels $i_1,\\ldots,i_d\\in[m]$, the vectors $a_{i_1},\\ldots,a_{i_d}$ are linearly independent over $\\mathbb R$."
+      },
+      {
+        "id": "alg-ip-finite-sign-enumeration-phase-retrieval",
+        "kind": "algorithm",
+        "title": "Finite sign enumeration for real phase retrieval",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b",
+          "thm-singular-value-decomposition",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-euclidean-inner-product",
+          "lem-metrics-on-rn",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "thm-reals-field",
+          "def-ordered-field",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006)",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            }
+          ]
+        },
+        "statement": "Input a real measurement matrix $A$ with $m$ rows indexed by $[m]=\\{1,\\ldots,m\\}$ and $d$ columns indexed by $k<d$, where $d\\ge1$ and $m\\ge0$. Use row $i-1$ of the ordinary zero-based $m\\times d$ matrix for measurement label $i$. Input nonnegative intensities $b:[m]\\to[0,\\infty)$, a mode in $\\{\\mathrm{exact},\\mathrm{noisy}\\}$, a feasibility tolerance $\\varepsilon\\ge0$, a maximum sign-pattern count $P\\in\\mathbb Z_{\\ge0}$, and a linear-solve budget $L\\in\\mathbb Z_{\\ge0}$. Put $r_i=\\sqrt{b_i}$.\n\nFor $m=0$, let $\\mathcal S_m$ contain only the empty sign vector. For $m\\ge1$, let\n$$\\mathcal S_m=\\{s:[m]\\to\\{-1,+1\\}:s_1=+1\\},$$\nordered lexicographically with $+1$ before $-1$ and labels in increasing order. This gives one representative from each pair $\\{s,-s\\}$. A signed right-hand side is $y_s=(s_i r_i)_{i\\in[m]}$, interpreted in the same zero-based row order as $A$.\n\nIf $P=0$ or $L=0$, return no candidates with status budget-exhausted. Otherwise compute one SVD of $A$, form its unique Moore–Penrose inverse $A^+$ and kernel $\\ker A$, then process at most the first $P$ patterns in $\\mathcal S_m$ and perform at most $L$ signed least-squares solves. Stop when either budget is exhausted. For each processed pattern $s$, compute the minimum-Euclidean-norm least-squares solution $x_s=A^+y_s$ and signed residual $e_s=\\|Ax_s-y_s\\|_2$. The budget $L$ counts right-hand-side solves after the one SVD factorization.\n\n* In exact mode, record the affine family $x_s+\\ker A$ when $e_s\\le\\varepsilon$, together with $e_s$. Mark it exact-feasible if $e_s=0$ and tolerance-feasible if $0<e_s\\le\\varepsilon$. If $\\varepsilon=0$ and all patterns are processed, return the union of the exact-feasible families modulo $x\\sim -x$, or report infeasible if this union is empty. For $\\varepsilon>0$, report only the tolerance-qualified least-squares families; this is a tolerance screen, not a list of every vector whose residual is at most $\\varepsilon$.\n* In noisy mode, initialize the incumbent as unset. For the first processed pattern, store $x_s$ and $J(x_s)$. For each later processed pattern, replace the incumbent by $x_s$ exactly when $J(x_s)$ is strictly smaller than the incumbent value; on a tie, keep the earlier pattern. Thus the incumbent has smallest $J$ among all processed candidates.\n  Compute each visited candidate's squared amplitude residual\n  $$J(x_s)=\\sum_{i\\in[m]}(|(Ax_s)_i|-r_i)^2$$\n  before applying that update. The feasibility tolerance is not used in this mode.\n* Return the candidates and a status. Exact mode returns exact-feasible/infeasible only when $\\varepsilon=0$ and all patterns are processed; positive tolerance returns tolerance-feasible/no-tolerance-fit when all patterns are processed. Noisy mode returns a completed best candidate when all patterns are processed. If either budget stops enumeration before all patterns are processed, return budget-exhausted with any candidates found. A budget-exhausted result makes no claim about unvisited patterns.\n* There are $1$ canonical pattern for $m=0$ and $2^{m-1}$ for $m\\ge1$. Full enumeration is exponential in $m$. No statistical optimality or intensity-noise guarantee is part of this algorithm."
+      },
+      {
+        "id": "thm-ip-real-phase-retrieval-complement-property",
+        "kind": "theorem",
+        "title": "Real phase retrieval is equivalent to the complement property",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "lem-ip-real-phase-retrieval-quotient-metric",
+          "def-ip-frame-complement-property",
+          "def-euclidean-inner-product",
+          "def-real-and-complex-inner-product-space",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-standard-bilinear-form-on-a-coordinate-space",
+          "def-linear-subspace",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-basis",
+          "thm-dimension-of-a-linear-subspace",
+          "def-dimension",
+          "lem-standard-basis-of-f-n",
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map",
+          "thm-linear-kernel-image-and-injectivity",
+          "def-rank-and-nullity",
+          "thm-rank-nullity",
+          "thm-reals-field",
+          "thm-reals-ordered-field"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), Theorem 2.8",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2, Theorem 2.2 and proof",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            },
+            {
+              "title": "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), Theorem 3.2",
+              "url": "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $m\\ge0$, $[m]=\\{1,\\ldots,m\\}$ with $[0]=\\varnothing$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. Use the standard dot product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$, identify $x,z\\in\\mathbb R^d$ when $z=x$ or $z=-x$, and write $[x]$ for the resulting class. Define $\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}$, a formula independent of the representative because replacing $x$ by $-x$ leaves every square unchanged. For $S\\subseteq[m]$, let $\\operatorname{span}_{\\mathbb R}(\\Phi_S)$ be the set of finite real linear combinations of its vectors, with the empty span equal to $\\{0\\}$. Then $\\mathcal I_\\Phi$ is injective on the global-sign classes if and only if for every $S\\subseteq[m]$ at least one of $\\operatorname{span}_{\\mathbb R}(\\Phi_S)$ and $\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})$ equals $\\mathbb R^d$."
+      },
+      {
+        "id": "thm-ip-finite-sign-enumeration-correctness",
+        "kind": "theorem",
+        "title": "Correctness and amplitude-residual objective of finite sign enumeration",
+        "deps": [
+          "alg-ip-finite-sign-enumeration-phase-retrieval",
+          "def-ip-real-frame-phase-retrieval",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b",
+          "thm-singular-value-decomposition",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-euclidean-inner-product",
+          "lem-metrics-on-rn",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "def-ordered-field",
+          "thm-reals-field",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), §2",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2, §§1–2.1",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            }
+          ]
+        },
+        "statement": "Let $A\\in\\mathbb R^{m\\times d}$, $d\\ge1$, $m\\ge0$, with rows labeled $i=1,\\ldots,m$ and signal coordinates labeled $k<d$, and let $b:[m]\\to[0,\\infty)$. Denote row $i-1$ by $a_i$ and put $\\Phi=(a_i)_{i\\in[m]}$. Define $[x]$ using $x\\sim -x$ and $\\mathcal I_\\Phi([x])=((Ax)_i^2)_{i\\in[m]}$. Put $r_i=\\sqrt{b_i}$. Use the sign set consisting of the empty pattern when $m=0$ and otherwise the patterns $s:[m]\\to\\{-1,+1\\}$ with $s_1=+1$, ordered lexicographically with $+1$ before $-1$. For each pattern put $y_s=(s_i r_i)_{i\\in[m]}$, let $x_s=A^+y_s$ be the minimum-norm least-squares solution, and let $e_s=\\|Ax_s-y_s\\|_2$. Here $A^+$ is the unique Moore–Penrose inverse and $\\ker A=\\{v:Av=0\\}$. The algorithm processes patterns in order subject to a maximum pattern count $P\\in\\mathbb Z_{\\ge0}$ and signed-solve budget $L\\in\\mathbb Z_{\\ge0}$; an early stop returns status budget-exhausted. In exact mode with tolerance $\\varepsilon=0$, after every pattern is processed it returns the union of the exact families $x_s+\\ker A$ modulo global sign, or reports infeasible if that union is empty. For every processed pattern, $x_s$ minimizes $\\|Ax-y_s\\|_2$, and the complete set of signed least-squares minimizers is $x_s+\\ker A$; this set solves $Ax=y_s$ exactly if and only if its residual $e_s$ is zero. The complete exact-mode output is exactly $\\{[x]:\\mathcal I_\\Phi([x])=b\\}$. In noisy mode the algorithm scores $J(x)=\\sum_{i\\in[m]}(|(Ax)_i|-r_i)^2$ and, after every canonical pattern is processed, returns a candidate minimizing $J$ over all $x\\in\\mathbb R^d$. When a budget stops enumeration early, the returned candidates describe only processed patterns and give no completeness or global-minimum guarantee. For $m=0$, the single pattern has the unique empty right-hand side and $J(x)=0$ for every $x$."
+      },
+      {
+        "id": "cor-ip-full-spark-sharp-real-phase-measurement-count",
+        "kind": "corollary",
+        "title": "The sharp real phase-retrieval count for full-spark measurements",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "def-ip-frame-complement-property",
+          "def-ip-real-full-spark-measurement-family",
+          "thm-ip-real-phase-retrieval-complement-property",
+          "lem-ip-vandermonde-determinant",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "lem-standard-basis-of-f-n",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "def-linear-subspace",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map",
+          "thm-rank-nullity",
+          "def-dimension",
+          "thm-reals-field"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), Corollaries 2.6–2.7",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), Corollary 3.3",
+              "url": "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.013A, Chapter B §1, Vandermonde determinant",
+              "url": "https://ocw.mit.edu/ans7870/18/18.013a/textbook/HTML/chapter_b/contents.html"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, with $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$. Write $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$. If $m\\le2d-2$, then there are $x,z\\in\\mathbb R^d$ with $z\\ne x$ and $z\\ne-x$ but $\\langle a_i,x\\rangle^2=\\langle a_i,z\\rangle^2$ for every $i\\in[m]$. If $m\\ge2d-1$ and every list of $d$ distinct measurement labels indexes linearly independent vectors, then equality of all these squared measurements implies $z=x$ or $z=-x$. For every $d\\ge1$, this count is attained at $m=2d-1$: for any distinct real numbers $t_1,\\ldots,t_m$, the vectors $a_i=(1,t_i,t_i^2,\\ldots,t_i^{d-1})^{\\mathsf T}$ satisfy the stated independence condition and hence the squared measurements determine the signal up to global sign."
+      }
+    ]
+  },
+  {
+    "order": 3103,
+    "id": "real-phase-retrieval-and-complement-property-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Real phase retrieval and phaseless ambiguity — Examples and Counterexamples",
+    "companion": "real-phase-retrieval-and-complement-property",
+    "requires": [
+      "real-phase-retrieval-and-complement-property"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-fourier-translation-reflection-ambiguity",
+        "kind": "example",
+        "title": "Translation and reflection ambiguities for a finite Fourier magnitude map",
+        "deps": [
+          "thm-complex-numbers-form-a-field",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2, Proposition 3.3",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            }
+          ]
+        },
+        "statement": "Let $C_3=\\mathbb Z/3\\mathbb Z$, put $\\omega=(-1-i\\sqrt3)/2$, and for a real signal $f:C_3\\to\\mathbb R$ define its unnormalised discrete Fourier transform by $\\widehat f(k)=\\sum_{n=0}^{2}f(n)\\omega^{kn}$ for the representatives $k=0,1,2$. Its Fourier magnitude data are $(|\\widehat f(k)|)_{k=0}^{2}$. Define translation by $(\\tau_1 f)(n)=f(n-1)$ and reflection by $(Rf)(n)=f(-n)$, with indices in $C_3$. For $f(0)=1$, $f(1)=2$, and $f(2)=0$, both $\\tau_1f$ and $Rf$ have the same Fourier magnitude data as $f$, while neither equals $f$ or $-f$."
+      },
+      {
+        "id": "cex-ip-real-failed-complement-partition",
+        "kind": "counterexample",
+        "title": "A two-vector real family with a failed partition and an ambiguous pair",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "lem-ip-real-phase-retrieval-quotient-metric",
+          "def-ip-frame-complement-property",
+          "def-linear-combination-and-span",
+          "def-linear-subspace",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), the partition construction in the converse proof of Theorem 2.8",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), Theorem 3.2 proof",
+              "url": "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+            }
+          ]
+        },
+        "statement": "In $\\mathbb R^2$ with $u\\cdot v=u_1v_1+u_2v_2$, take the real measurement family $\\Phi=(a_1,a_2)$ with $a_1=(1,0)$ and $a_2=(0,1)$, and define its intensity data by $I_\\Phi(x)=((a_1\\cdot x)^2,(a_2\\cdot x)^2)$. The partition $S=\\{1\\}$ has neither side spanning $\\mathbb R^2$. The signals $x=(1,1)$ and $z=(-1,1)$ satisfy neither $z=x$ nor $z=-x$, but $I_\\Phi(x)=I_\\Phi(z)$."
+      },
+      {
+        "id": "ex-ip-sign-enumeration-budget-exhaustion",
+        "kind": "example",
+        "title": "A one-pattern sign budget misses the best amplitude fit",
+        "deps": [
+          "alg-ip-finite-sign-enumeration-phase-retrieval",
+          "thm-ip-finite-sign-enumeration-correctness"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "scraped": [],
+          "references": []
+        },
+        "statement": "Let $d=1$, $m=2$, $A=(1,-1)^{\\mathsf T}$, and $b=(1,4)$, so $r=(1,2)$. In noisy sign enumeration, fix the first sign to $+1$, order the remaining signs with $+1$ before $-1$, and use $P=L=1$. The algorithm processes only $(+1,+1)$, returns $x=-1/2$ with $J(x)=\\sum_{i=1}^2(|(Ax)_i|-r_i)^2=5/2$, and reports budget-exhausted. The unprocessed pattern $(+1,-1)$ has least-squares candidate $x=3/2$ with $J(x)=1/2$."
+      },
+      {
+        "id": "ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame",
+        "kind": "example",
+        "title": "A two-dimensional three-vector full-spark real frame",
+        "deps": [
+          "def-ip-real-frame-phase-retrieval",
+          "def-ip-real-full-spark-measurement-family",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "def-linear-subspace",
+          "cor-ip-full-spark-sharp-real-phase-measurement-count"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, full-spark phase retrieval threshold, Corollary 2.6",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            },
+            {
+              "title": "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), Corollary 3.3",
+              "url": "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+            }
+          ]
+        },
+        "statement": "In $\\mathbb R^2$ take $\\Phi=(a_1,a_2,a_3)$ with $a_1=(1,0)$, $a_2=(0,1)$, and $a_3=(1,1)$. Its intensity map on classes modulo $x\\sim -x$ is $[x]\\mapsto(x_1^2,x_2^2,(x_1+x_2)^2)$. Every pair is linearly independent, so every pair spans $\\mathbb R^2$; consequently, for every partition one side spans $\\mathbb R^2$. Equality of the displayed triples therefore forces two signals to be equal up to a global sign."
+      },
+      {
+        "id": "cex-ip-complex-complement-property-insufficient",
+        "kind": "counterexample",
+        "title": "The complement property is not sufficient for complex phase retrieval",
+        "deps": [
+          "thm-ip-real-phase-retrieval-complement-property",
+          "cor-ip-full-spark-sharp-real-phase-measurement-count",
+          "thm-complex-numbers-form-a-field",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-linear-combination-and-span",
+          "def-linear-subspace"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Philipp Grohs, Sarah Koppensteiner, and Martin Rathmair, Phase Retrieval: Uniqueness and Stability, arXiv:1901.07911v2, complex-field discussion in §2.1",
+              "url": "https://arxiv.org/pdf/1901.07911v2"
+            },
+            {
+              "title": "Radu Balan, Pete Casazza, and Dan Edidin, On signal reconstruction without phase, Applied and Computational Harmonic Analysis 20(3) (2006), discussion following Theorem 2.8",
+              "url": "https://arxiv.org/pdf/math/0412411"
+            }
+          ]
+        },
+        "statement": "In $\\mathbb C^2$ use $a_1=(1,0)$, $a_2=(0,1)$, and $a_3=(1,1)$, and define $\\langle a,x\\rangle=\\overline{a^{(1)}}x_1+\\overline{a^{(2)}}x_2$ for $a=(a^{(1)},a^{(2)})$. Identify signals by global phase, $x\\approx z$ when $z=\\lambda x$ for some $\\lambda\\in\\mathbb C$ with $|\\lambda|=1$, and use intensity data $(|\\langle a_j,x\\rangle|^2)_{j=1}^3$. Here the complex complement property means that every subset of the three labels or its complement spans $\\mathbb C^2$. Each pair spans $\\mathbb C^2$, so the family has this property; nevertheless, $x=(1,i)$ and $z=(1,-i)$ have equal intensity data and are not related by a global phase. Thus the real complement-property criterion and its real full-spark count cannot be transferred to complex phase retrieval."
+      }
+    ]
+  }
+]

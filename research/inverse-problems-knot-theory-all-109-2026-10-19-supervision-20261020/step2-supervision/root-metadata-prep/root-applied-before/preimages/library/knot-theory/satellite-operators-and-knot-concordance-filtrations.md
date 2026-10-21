@@ -1,0 +1,69 @@
+---
+page: satellite-operators-and-knot-concordance-filtrations
+title: Satellite operators and concordance filtrations
+status: draft
+items:
+  - lem-boundary-homology-cokernels-surject-under-excisive-bordism-gluing
+  - lem-explicit-integral-seifert-matrices-realize-arbitrarily-small-signature-bumps
+  - lem-finite-disk-band-knot-longitudes-lie-in-the-second-derived-subgroup
+  - lem-finite-free-chain-evaluation-over-ore-domains
+  - lem-finite-standard-skew-seifert-matrices-have-choice-free-disk-band-realizations
+  - lem-killing-deep-derived-normal-subgroups-preserves-mixed-derived-quotients
+  - lem-normal-cover-local-homology-detects-mixed-derived-kernels-without-choice
+  - lem-ore-localization-is-flat-and-detects-module-torsion
+  - lem-primitive-laurent-annihilators-preserve-nonzero-values-under-rational-and-prime-reduction
+  - lem-principal-boundary-chain-evaluation-over-division-fractions
+  - lem-subgroup-group-ring-extension-is-faithfully-flat-and-preserves-fraction-quotients
+  - lem-cdr-smooth-s4-complement-is-standard-ball
+  - lem-choice-free-low-degree-coefficient-bockstein-on-compact-manifolds
+  - lem-explicit-disk-band-knots-realize-arbitrarily-small-signature-bumps
+  - lem-finite-prime-families-have-explicit-separating-knot-signature-bumps
+  - thm-compact-manifolds-have-finite-presentation-complexes-without-choice
+  - thm-compact-betti-one-manifolds-have-primitive-alexander-annihilators-without-choice
+  - thm-ptfa-augmentation-detects-projective-injectivity-without-choice
+  - def-cdr-satellite-concordance-categories
+  - lem-ptfa-finite-projective-basechange-preserves-euler-characteristic
+  - lem-ptfa-subgroup-scalar-extension-preserves-blanchfield-self-pairings
+  - lem-standard-infection-cobordisms-have-boundary-generated-second-homology
+  - lem-zero-localized-intersection-rank-forces-finite-boundary-union-kernel-isotropy
+  - thm-integral-classical-blanchfield-self-values-survive-rational-and-prime-reduction-without-choice
+  - thm-unimodular-intersection-pairs-force-boundary-blanchfield-kernel-isotropy
+  - lem-concordance-annulus-induces-zero-surgery-cobordism
+  - def-satellite-induced-concordance-operator
+  - lem-ptfa-localization-kills-first-homology-of-betti-one-manifolds
+  - lem-standard-infection-cobordism-adjunction-kills-the-companion-longitude
+  - thm-cdr-concordance-categories-form-abelian-groups
+  - thm-ptfa-localized-boundary-intersection-rank-is-no-larger-than-ordinary-rank
+  - lem-finite-winding-zero-infection-towers-preserve-required-derived-quotients
+  - lem-satellite-connected-sum-substitution
+  - lem-satellite-operator-preserves-concordance
+  - lem-strong-winding-stable-under-companion-insertion
+  - thm-integral-pair-data-yield-blanchfield-bordisms-after-standard-infections
+  - thm-winding-zero-infection-preserves-classical-blanchfield-pairings
+  - lem-cdr-zero-surgery-pattern-homology-cobordism
+  - op-cha-kim-smooth-graded-quotients-for-topologically-slice-images
+  - thm-amenable-von-neumann-l2-flatness
+  - thm-l2-signature-theorem-for-closed-four-manifolds
+  - lem-amenable-D-R-l2-dimension-estimate
+  - lem-cdr-weak-injectivity-and-auxiliary-pattern-reduction
+  - lem-higher-order-blanchfield-pairings-are-nonsingular
+  - lem-l2-rho-invariant-bordism-independence
+  - thm-cheeger-gromov-uniform-rho-bound
+  - lem-cha-kim-integral-solvability-and-blanchfield-bordism
+  - thm-amenable-signature-vanishing-for-solvable-bordisms
+  - thm-cochran-davis-ray-strong-winding-injectivity
+  - lem-cha-kim-higher-order-rho-bound-and-coprime-separation
+  - thm-cha-kim-winding-zero-iterates-infinite-rank
+examples: []
+requires:
+  - twisted-alexander-polynomials-and-reidemeister-torsion
+  - satellite-knots-and-jsj-tori
+  - smooth-and-topological-knot-concordance
+  - algebraic-knot-concordance-and-metabolic-forms
+  - fox-milnor-factorization-and-slice-obstructions
+  - freedman-theorem-and-topological-sliceness
+  - casson-gordon-invariants-and-sliceness-obstructions
+  - eilenberg-watts-theorem-and-natural-transformations
+order: 3182
+page_layout: compact-v1
+---

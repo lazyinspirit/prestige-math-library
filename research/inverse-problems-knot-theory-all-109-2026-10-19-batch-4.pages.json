@@ -1,0 +1,154 @@
+[
+  {
+    "order": 3004,
+    "id": "operator-approximation-and-regularization-error",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Data, operator, discretization, and solve errors",
+    "companion": "operator-approximation-and-regularization-error-examples",
+    "requires": [
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "numerical-inverse-problems-and-regularization-error",
+      "spectral-regularization-and-parameter-choice"
+    ],
+    "items": [
+      {
+        "id": "def-ip-error-budget-for-computed-inversion",
+        "kind": "definition",
+        "title": "Error budget for computed Tikhonov inversion",
+        "deps": [
+          "def-ip-compact-linear-inverse-model"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2, Chapter 8",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Per Christian Hansen, Introduction to Inverse Problems, Chapter 5: Regularization Parameter Choice",
+              "url": "https://people.compute.dtu.dk/pcha/DIP/chap5.pdf"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Chapter 3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/ip_function_spaces.html"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, let\n$A:X\\to Y$ be a compact linear forward map (the closure of $A(B)$ is compact\nin $Y$ for every bounded set $B\\subseteq X$), and let $A_h:X\\to Y$ be a\nbounded linear discretized map with finite-dimensional range. For a datum\n$b\\in Y$, let $\\lambda>0$ be the coefficient of $\\|x\\|_X^2$ in the Tikhonov\nobjective $\\|Ax-b\\|_Y^2+\\lambda\\|x\\|_X^2$. Supply adjoints $A^*:Y\\to X$ and\n$A_h^*:Y\\to X$ satisfying\n$\\langle Ax,y\\rangle_Y=\\langle x,A^*y\\rangle_X$ and\n$\\langle A_hx,y\\rangle_Y=\\langle x,A_h^*y\\rangle_X$, where the inner products\nare linear in their first arguments. Assume the shifted normal operators\n$A^*A+\\lambda I_X$ and $A_h^*A_h+\\lambda I_X$ are bijective, and define\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nFor a truth $x^\\dagger\\in X$, data perturbation $e\\in Y$, and $\\delta\\ge0$\nwith $\\|e\\|\\le\\delta$, put\n$$y=Ax^\\dagger,\\qquad y_\\delta=y+e,\\qquad y_{h,\\delta}=A_hx^\\dagger+e,\\qquad d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}.$$\nFor any returned output $\\widetilde x_h\\in X$, define its exact discrete\nnormal-equation residual by\n$$r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}.$$\nThe five-channel error budget is the ordered tuple\n$(b_{\\mathrm{bias}},b_{\\mathrm{data}},b_{\\mathrm{operator}},b_{\\mathrm{pre}},b_{\\mathrm{solve}})$, where\n$$\\begin{aligned}b_{\\mathrm{bias}}&=x^\\dagger-R_\\lambda y,\\qquad b_{\\mathrm{data}}=R_\\lambda y-R_\\lambda y_\\delta,\\\\b_{\\mathrm{operator}}&=(R_\\lambda-R_{\\lambda,h})y_{h,\\delta},\\qquad b_{\\mathrm{pre}}=R_\\lambda d_h,\\\\b_{\\mathrm{solve}}&=R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h.\\end{aligned}$$\nThe five entries are, in order, the truth-bias, data-perturbation,\nregularized-operator, pre-inversion, and algebraic-solve error vectors.\nThe scalar total budget is the sum of the five channel norms. The raw\npre-inversion forward residual is $d_h$; its reconstruction contribution is\n$b_{\\mathrm{pre}}$. The operator channel measures the difference between the\nregularized exact and discretized operators. The solve channel measures the\nreturned output's difference from the exact discrete Tikhonov output. The\ndefinition supplies no rate or arithmetic residual certificate."
+      },
+      {
+        "id": "prop-ip-regularized-output-error-splits-by-source",
+        "kind": "proposition",
+        "title": "Regularized output error splits into source-specific terms",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-ip-error-budget-for-computed-inversion",
+          "def-operator-norm",
+          "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+          "lem-hilbert-tikhonov-noise-amplification-bound",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "thm-tikhonov-forward-discretization-and-stopping-coupling"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2, Chapter 8",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Per Christian Hansen, Introduction to Inverse Problems, Chapter 5: Regularization Parameter Choice",
+              "url": "https://people.compute.dtu.dk/pcha/DIP/chap5.pdf"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Chapter 3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/ip_function_spaces.html"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice, meaning every sequence of nonempty sets has a choice\nfunction. Let $X,Y$ be real or complex Hilbert spaces over the same scalar\nfield, let $A:X\\to Y$ be compact and linear (the closure of $A(B)$ is compact\nin $Y$ for every bounded set $B\\subseteq X$), and let $A_h:X\\to Y$ be bounded\nand linear with finite-dimensional range. Let $A^*:Y\\to X$ and $A_h^*:Y\\to X$\nbe their Hilbert adjoints, characterized by\n$\\langle Ax,z\\rangle_Y=\\langle x,A^*z\\rangle_X$ and\n$\\langle A_hx,z\\rangle_Y=\\langle x,A_h^*z\\rangle_X$, with both inner\nproducts linear in the first argument. Let $\\lambda>0$, $x^\\dagger\\in X$,\n$e\\in Y$, $\\delta\\ge0$ with $\\|e\\|_Y\\le\\delta$, and\n$\\widetilde x_h\\in X$. Put\n$$y=Ax^\\dagger,\\qquad y_\\delta=y+e,\\qquad y_{h,\\delta}=A_hx^\\dagger+e,\\qquad d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}.$$\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*,$$\nwhere $I_X$ is the identity operator on $X$, and\n$$r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}.$$\nDefine\n$$\\begin{aligned}b_{\\mathrm{bias}}&=x^\\dagger-R_\\lambda y,&b_{\\mathrm{data}}&=R_\\lambda y-R_\\lambda y_\\delta,\\\\b_{\\mathrm{operator}}&=(R_\\lambda-R_{\\lambda,h})y_{h,\\delta},&b_{\\mathrm{pre}}&=R_\\lambda d_h,\\\\b_{\\mathrm{solve}}&=R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h.\\end{aligned}$$\nThen the exact error identity and its triangle bound are\n$$x^\\dagger-\\widetilde x_h=b_{\\mathrm{bias}}+b_{\\mathrm{data}}+b_{\\mathrm{pre}}+b_{\\mathrm{operator}}+b_{\\mathrm{solve}},$$\n$$\\|x^\\dagger-\\widetilde x_h\\|\\le \\|b_{\\mathrm{bias}}\\|+\\|b_{\\mathrm{data}}\\|+\\|b_{\\mathrm{pre}}\\|+\\|b_{\\mathrm{operator}}\\|+\\|b_{\\mathrm{solve}}\\|,$$\nand the four displayed term estimates give\n$$\\|x^\\dagger-\\widetilde x_h\\|\\le \\|b_{\\mathrm{bias}}\\|+\\frac{\\delta}{2\\sqrt\\lambda}+\\frac{\\|d_h\\|}{2\\sqrt\\lambda}+\\|b_{\\mathrm{operator}}\\|+\\frac{\\|r_{h,h}\\|}{\\lambda}.$$\nIf $\\|R_\\lambda-R_{\\lambda,h}\\|_{Y\\to X}\\le\\eta_{\\lambda,h}$, where the\ninduced operator norm for a bounded linear map $T:Y\\to X$ is\n$$\\|T\\|_{Y\\to X}:=\\sup_{u\\in Y,\\,\\|u\\|_Y\\le1}\\|Tu\\|_X,$$\nthen\n$\\|b_{\\mathrm{operator}}\\|\\le\\eta_{\\lambda,h}\\|y_{h,\\delta}\\|_Y$. If a\nresidual evaluation separately supplies $\\widehat r_{h,h}\\in X$ and\n$\\rho_{h,h}\\ge0$ with\n$\\|\\widehat r_{h,h}-r_{h,h}\\|_X\\le\\rho_{h,h}$, then the final solve term is at\nmost $(\\|\\widehat r_{h,h}\\|_X+\\rho_{h,h})/\\lambda$. These pointwise bounds assert\nno convergence rate as the data, regularization parameter, or discretization\nchanges."
+      }
+    ]
+  },
+  {
+    "order": 3005,
+    "id": "operator-approximation-and-regularization-error-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Data, operator, discretization, and solve errors — Examples and Counterexamples",
+    "companion": "operator-approximation-and-regularization-error",
+    "requires": [
+      "operator-approximation-and-regularization-error"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-mesh-sequence-small-singular-values",
+        "kind": "example",
+        "title": "Vanishing data errors with persistent small-singular-value reconstruction error",
+        "deps": [
+          "def-ip-error-budget-for-computed-inversion",
+          "lem-finite-rank-operators-are-compact"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2, Chapter 8",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Per Christian Hansen, Introduction to Inverse Problems, Chapter 5: Regularization Parameter Choice",
+              "url": "https://people.compute.dtu.dk/pcha/DIP/chap5.pdf"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Chapter 3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/ip_function_spaces.html"
+            }
+          ]
+        },
+        "statement": "For every integer $n\\ge1$, let $X_n=Y_n=\\mathbb R^n$ with the Euclidean\ninner product and let\n$$A_n=A_{h,n}=\\operatorname{diag}(1,1/2,\\ldots,1/n).$$\nSet $x_n^\\dagger=0$, exact data $y_n=A_nx_n^\\dagger=0$, noise\n$e_n=(0,\\ldots,0,1/n)$, noise bound $\\delta_n=1/n$, and regularization\ncoefficient $\\lambda_n=n^{-4}$. The observed data are\n$y_{n,\\delta}=y_n+e_n$, and the returned output is the exact Tikhonov output\n$$\\widetilde x_n=(A_n^*A_n+\\lambda_n I)^{-1}A_n^*y_{n,\\delta}.$$\nThe smallest singular value of $A_n$ is $1/n$, while\n$\\|e_n\\|=\\delta_n\\to0$. Nevertheless\n$$\\|\\widetilde x_n-x_n^\\dagger\\|=\\frac{n^2}{n^2+1}\\longrightarrow1.$$\nAt each resolution the discrete operator equals the forward operator and the\ndiscretized datum is formed exactly before adding noise, so the operator,\npre-inversion, and algebraic-solve channels vanish; only data perturbation\nremains. Thus vanishing noise alone does not force vanishing reconstruction\nerror when the retained singular values shrink and $\\lambda_n$ is chosen as\nabove."
+      },
+      {
+        "id": "ex-ip-iterative-tikhonov-solve-stopped-with-residual",
+        "kind": "example",
+        "title": "Early stopping leaves a nonzero Tikhonov normal residual",
+        "deps": [
+          "def-ip-error-budget-for-computed-inversion",
+          "lem-finite-rank-operators-are-compact"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $X=Y=\\mathbb R$ with the usual inner product, let $A=A_h=I$, let\n$x^\\dagger=0$, $y=y_{h,\\delta}=0$, $e=0$, and set $\\lambda=1$. The exact\nTikhonov output is $R_{\\lambda,h}y_{h,\\delta}=0$, and its normal equation is\n$2x=0$. Apply one Richardson step with step size $1/4$ from $x_0=1/2$:\n$$\\widetilde x_h=x_1=x_0-\\frac14(2x_0)=\\frac14.$$\nThe returned output has exact normal-equation residual\n$$r_{h,h}=2\\widetilde x_h=\\frac12\\ne0,$$\nand reconstruction error $|x^\\dagger-\\widetilde x_h|=1/4$. The bias, data,\noperator, and pre-inversion channels are zero; only the algebraic solve channel\nis nonzero."
+      }
+    ]
+  }
+]

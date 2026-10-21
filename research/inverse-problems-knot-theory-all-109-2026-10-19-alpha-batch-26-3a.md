@@ -1,0 +1,55 @@
+# Batch 26 Step 3a adjudication
+
+Run: `inverse-problems-knot-theory-all-109-2026-10-19`; group: `batch-26`.
+
+## Scope and current evidence
+
+Read the dispatch, generated order, scope, reader report/findings and refuter report. Exactly one decision is owed: `refuter:26:1`; there are no touched/page/reader/foreign-gate obligations. Seven risk reviews are owed in the generated order. Active status was recomputed from `.autopilot/`; the run is at Step 3a and batch 26 awaits adjudication. Git history was inspected; old handoffs supply no authority.
+
+## Completed review checkpoints
+
+- Level 2 `lem-ip-nonlinear-exact-solution-set-is-weakly-closed`: Statement and steps 1.1–2.1 are sound. Constant output plus sequential graph closure proves precisely sequential closure, including the vacuous empty exact set. Suppliers: `def-ip-weakly-closed-nonlinear-forward-map`, `def-weak-convergence-of-nets-and-sequences`. Complete risk review recorded; no edit or additional decision owed.
+- Level 2 `thm-ip-nonlinear-tikhonov-minimizer-exists`: steps 1.1–6.1 are sound. A finite nonnegative infimum and DC selection give a minimizing sequence; alpha positivity bounds both inputs and outputs; two nested weak subsequences and graph closure identify an admissible limit; the two norm liminf inequalities give the minimum. Checked actual infimum, epsilon, DC/countable-choice, reflexivity, weak-subsequence and HB lower-semicontinuity suppliers. Complete risk review recorded; no edit or additional decision owed.
+- Level 2 `ex-ip-nonlinear-tikhonov-has-two-global-minimizers`: verification 1.1–2.1 is sound. The real identity functional proves the graph condition, and the completed square has equality exactly at the two stated points. Checked its real-Hilbert, completeness, weak-convergence and forward-map definitions. Complete risk review recorded; no edit or additional decision owed.
+
+
+- Level 3 `thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution`: Statement and steps 1.1–4.1 verified against the actual direct-method and coercivity/sequential-lsc definitions. Nonempty sequentially closed exact set is sufficient; convexity is not needed. Distance sublevels are bounded, including empty negative sublevels, and HB gives lsc. DC gives countable choice for reflexivity. Complete risk review; no edit/decision owed.
+- Level 3 `thm-ip-nonlinear-tikhonov-weak-cluster-stability`: Statement and steps 1.1–5.1 verified. Uniform comparison bounds both sequences. Further output extraction works for any already weakly convergent input subsequence, preserving its limit, and comparison with every fixed competitor proves minimality. Complete risk review; no edit/decision owed.
+- Level 3 `ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map`: `refuter:26:1` is **confirmed_nonfatal**. The formula was true, and normalization is immediate, but the strict distinct/nonzero coefficient convention was left implicit. Verification 1.1 now treats the empty zero representation at s=0 and the single level at s=1 explicitly, and uses the singleton levels only otherwise. Constant approximation supplies the Bochner integral. Verification 1.2 and 2.1 are sound: the identity functional and polynomial factorization identify the graph limit, and the reviewed minimizer theorem applies. The Example, metadata, dependencies and provenance remain unchanged. The contract derivation and zero/one/degenerate boundary evidence were synchronized. Complete risk review; repair confidence 1. Local checks pass; the decision references the single closed ledger row `ipkt109-b26-3a-simple-level-normalization`.
+
+
+- Level 4 `thm-ip-nonlinear-tikhonov-vanishing-noise-convergence`: all four proof steps checked against the previously reviewed local existence/minimum-norm results and actual choice, compactness, weak-convergence and norm-lsc suppliers. Comparison with an exact minimum-distance solution bounds the input by the noise/parameter ratio and makes the residual tend to zero. Strong output convergence plus graph closure proves exactness, and the liminf/limsup distance squeeze proves minimum norm for every input weak subsequential limit. Zero noise and R=0 work; positive parameters and exact solvability remain explicit. Complete risk review; no edit/decision owed.
+
+## Finding and historical comparison
+
+`refuter:26:1` is the sole owed decision, recorded with route `flagged`, verdict `confirmed_nonfatal`, repair confidence 1, and defect `ipkt109-b26-3a-simple-level-normalization` (closed/fixed). Normalization was an immediate omitted detail, not a false computation or a substantial missing prerequisite. No additional decision is invented for unchanged unflagged items or risk-only obligations.
+
+All ten pre/post item/contract/manifest fingerprint entries are identical. Before this repair every current owned item raw SHA256 matched its post-reader item entry. The canonical sorted JSON digest of the Bochner example's post-reader fingerprint is `87aa2510a1d4920db6dd7a7a99afcab87d132158d13b093f65e2eda814382600`, exactly the finding's observed digest. There is no missing historical preimage issue: the unchanged observed source was inspected before editing. No reader repair requires acceptance/amendment/reversion. This proof-only clarification changes no public interface, dependency, title, source attribution, provenance or manifest row; it has no prior judge record to invalidate.
+
+## Sources and prerequisites
+
+Read the current source interfaces for every declared dependency of the ten owned items. In particular, the published bounded-sequence lemma explicitly assumes UL/DC/HB; Hilbert reflexivity assumes countable choice; norm lsc assumes HB; the direct-method theorem accepts a nonempty weakly **sequentially** closed admissible set. Checked their relevant written arguments and hypotheses; this is not a whole-library audit of all transitive suppliers. The infimum/epsilon lemmas and DC-to-countable-choice construction license the selections actually made. The current simple-integral definition explicitly permits the empty representation, requires distinct nonzero coefficients, and notes merging repeated levels. Bochner integrability for integrable simple functions is witnessed by constant sequences. No new external input or choice axiom was introduced.
+
+Read [Clason, *Regularization of Inverse Problems*, v2](https://arxiv.org/pdf/2001.00617v2), Chapter 9 weak-closure convention (PDF p.83), Chapter 10 opening/equation (10.1) and complete relevant Theorems 10.1–10.3 arguments (PDF pp.91–95, printed pp.89–93; extracted lines 7917–8462). The source domain/graph and positive-parameter premises agree with the authored convention. It gives stronger convergence conclusions in places; the local claims assert only the independently proved weak subsequential conclusions. No source uniqueness clause is silently imported. The exact [Wirth WS21 PDF](https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf) timed out, so its claimed numbering was not independently verified here. No reading of that version or its complete proof is claimed; local proofs and the readable primary comparison suffice. Web PDF screenshots failed with cache-miss errors; extracted PDF text was read. A local text-extraction attempt could not run because `pdftotext` is unavailable.
+
+## Consumers, presentation and scope
+
+For owned consumers, independently checked the batch-1 general forward-map interface on a nonempty admissible domain and the batch-25 open-domain definition on U=R in both examples. The weak-domain minimum-norm definition states the same distance condition as its open-domain cross-reference without importing openness. Preserved the four cross-batch records and their limited historical evidence. No derivative or tangential-cone conclusion is used. A run-specific consumer note is appended to `briefs/tasks/frontier-dependency-ledger.md`; no outside repair or withdrawal is required. The Example/Statement/Definition sections are uninterrupted, and each reference occupies its own following paragraph. Both pages remain frontmatter-only with `page_layout: compact-v1` and unchanged inventories/status. There are no TikZ/tikzcd diagrams in this batch, and none is needed for these analytic proofs. No published defect was established or published carrier edited; the published-consumer ledger needs no new entry.
+
+## Local checks and handoff
+
+- Initial risk report without `--require-reviewed`: 0 errors, all seven HIGH/CRITICAL items routed. Specific complete reviews are recorded in the owning batch contract in generated order.
+- `node tools/tsx-run.mjs tools/precheck.mts items/ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map.md`: 1 checked, 0 failing.
+- `node tools/rendercheck.mjs items/ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map.md`: 1 file clean; actual KaTeX and YAML parsers used.
+- `node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-26.proof-contracts.json --strict`: 0 errors, 0 warnings, 7/7 checked.
+- After the final item edit, `node tools/proof-layout.mjs items/ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map.md`: 1 item, 3 steps, 0 defects. The edited step remains one paragraph with valid trailing tags; all existing mathematics and supplier links are preserved.
+- Final `risk-report.mjs` with `--require-reviewed`: 0 errors, seven reviewed items.
+- Serialized `defect-ledger.mjs append --file /tmp/ipkt-b26-ledger-row.json`: appended exactly one row and regenerated the ledger view.
+- Exact appended-row schema check via `defect-ledger.mjs validate --run inverse-problems-knot-theory-all-109-2026-10-19 --ledger /tmp/ipkt-b26-ledger-check.jsonl`: 1 row, 0 errors. Decision coverage assertion: 1/1 owed; exactly one matching fixed row; 7/7 complete risk reviews.
+- Focused `git diff --check`: exit 0.
+
+## Outside-scope mechanical alert
+
+The broader `node tools/defect-ledger.mjs validate --run inverse-problems-knot-theory-all-109-2026-10-19` checked 84 run rows and exited 1 with six schema diagnostics in existing batch-11 rows: `ipkt109-b11-3a-published-ftc-pointwise-strength` has unsupported subclass `overstrong-statement`, location `Statement final clause; Proof 2.1–3.1`, and disposition `recorded-published-owner-alert`; `ipkt109-b11-3a-selector-measurability` has unsupported location `Proof 1.1`; `ipkt109-b11-3a-gradiometry-multiplicity` and `ipkt109-b11-3a-heat-attribution` have unsupported location `Example and Verification`. These are outside batch 26 and remain untouched. Owner must route schema normalization to their owner before the ordinary run ledger gate. This is a mechanical failure, so no defect-ledger row was invented for it. Batch 26's exact appended row validates independently; the broad run validator is not claimed to pass.
+
+No batch-26 mathematical blocker or prerequisite escalation remains. The outside mechanical alert above is still open for its owner. These are local checks only; the engine owns decision stamping, the gate battery and stage transitions. No judge, publication, commit or dispatch was initiated.

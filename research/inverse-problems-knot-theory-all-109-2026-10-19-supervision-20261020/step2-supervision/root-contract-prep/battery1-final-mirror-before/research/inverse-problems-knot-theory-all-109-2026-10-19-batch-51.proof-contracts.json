@@ -1,0 +1,769 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-51",
+  "scope": [
+    "def-ip-benchmark-risk-and-compute-budget",
+    "rem-ip-inversebench-scoped-findings",
+    "ex-ip-inversebench-first-born-scattering",
+    "ex-ip-inversebench-multicoil-mri",
+    "ex-ip-inversebench-black-hole-imaging",
+    "ex-ip-inversebench-full-waveform-inversion",
+    "ex-ip-inversebench-navier-stokes",
+    "ex-ip-inversebench-prior-shift",
+    "ex-ip-inversebench-solver-invalid-iterate"
+  ],
+  "contracts": {
+    "def-ip-benchmark-risk-and-compute-budget": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition defines or reports a protocol and makes no empty-input theorem claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition makes no zero-input theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no singleton-input theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No construction requiring a choice principle is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "rem-ip-inversebench-scoped-findings": {
+      "risk": "low",
+      "kind": "remark",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark defines or reports a protocol and makes no empty-input theorem claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark makes no zero-input theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark makes no singleton-input theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No construction requiring a choice principle is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-first-born-scattering": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed pair $(j,m)$, all coefficients multiplying $z_r$ in the displayed finite sum are fixed independently of $z$. Therefore the signal part is a real-linear function of the real vector $z$; adding the specified noise yields the stated measurement model.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The listed spaces, fixed forward routine, observation noise, and finite train/validation/test split instantiate the benchmark fields in [F1]. The scope matches the source/code resolution in [F2]; no conclusion is drawn from the paper's contrast-dependent printed expression.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite contrast grid, transmitter/receiver sets, and source data splits are explicitly supplied in the Example statement; the algebra uses only the stated finite sum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-multicoil-mri": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $P$, $F$, and each $S_j$ fixed, $PFS_j$ is a linear map on $\\mathbb C^n$; therefore the displayed observation equation is a linear multi-coil measurement model for each $j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The declared raw-data noise, ESPIRiT-estimated sensitivity maps, fixed forward operators, magnitude-MVUE ground-truth convention, evaluation metrics, tuning split, and held-out test images instantiate the benchmark fields in [F1]. The sample counts and empirical scope agree with [F2]; no risk or calibration claim is inferred.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The coil-indexed operators and finite train/tuning/test lists are specified in the Example statement; no selection from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-black-hole-imaging": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitution of the ideal Fourier visibility into the displayed gain/phase/noise equation gives the paper's complex observation model; applying the displayed argument and log-amplitude functions gives the stated closure data.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The source-specific image sizes and finite train/validation/test split, together with the observation and closure maps, specify the benchmark fields in [F1]. The empirical scope is exactly the one recorded in [F2]; no uniqueness or posterior-calibration theorem is used.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite telescope/image model and finite dataset sizes are explicitly stated in the Example statement; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-full-waveform-inversion": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed velocity map and source signal, solving the displayed acoustic equation and applying the receiver restriction $P$ defines the stated forward observation; the velocity map is the parameter being inferred.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The discretization, time step, boundary treatment, source/receiver depths and layout, noise setting, and finite sample counts specify the solver and population fields required by [F1]. The claim is restricted to the empirical setup recorded in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite grid, source/receiver geometry, and dataset split are explicit in the Example statement; no arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-navier-stokes": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By definition of the forward solution map $L$, an initial vorticity $z=w_0$ determines the final vorticity field; applying the sampling operator $P$ and adding the stated observation noise gives exactly $y=PL(z)+n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The stated forcing and initial-field law, grid, pseudo-spectral solver, noise model, and finite data split fill the solver/population fields of [F1]. The empirical scope in [F2] is retained, and no closed-form-gradient or convergence claim is added.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The periodic domain, discrete grid, and finite sample counts are all explicit in the Example statement; no arbitrary choice is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-prior-shift": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-inverse-risk-under-train-and-test-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf Y,\\mathcal Y)$ and $(Q,\\mathcal Q)$ be measurable data and target spaces, with $\\mathcal Q$ the Borel sigma-algebra of the target metric space. Let $P$ be a probability measure on the product space $(\\mathsf Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$, and let $\\ell:Q\\times Q\\to[0,+\\infty]$ be product-measurable, where $\\ell(t,a)$ is the loss for target $t$ and action $a$. For a point reconstruction rule $g:(\\mathsf Y,\\mathcal Y)\\to(Q,\\mathcal Q)$ measurable with respect to the stated sigma-algebras, its risk under $P$ is the extended nonnegative integral\n$$R_P(g):=\\int_{\\mathsf Y\\times Q}\\ell(t,g(y))\\,P(dy,dt).$$\nFor a randomized reconstruction rule given by a probability kernel $K$ from $\\mathsf Y$ to $Q$, define\n$$R_P(K):=\\int_{\\mathsf Y\\times Q}\\!\\left(\\int_Q\\ell(t,a)\\,K(y,da)\\right)P(dy,dt).$$\nThe inner integral is measurable in $(y,t)$ by kernel integration; a deterministic rule is the special case $K_y=\\delta_{g(y)}$. When $P_{\\rm train}$ and $P_{\\rm test}$ are specified joint laws on the same input-target space, the corresponding training-law risk and test-law risk are $R_{P_{\\rm train}}(K)$ and $R_{P_{\\rm test}}(K)$. Either value may be $+\\infty$. This definition imposes no inequality between the two risks: any such comparison requires an additional assumption relating the joint laws or the rule's behavior under them.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-operator-and-prior-mismatch",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(\\mathsf Y,d_Y)$ be metric spaces, let $U\\subseteq X$ be a nonempty class of admissible truths, and let $q:U\\to Q$ assign each truth its recovery target in a metric space $(Q,d_Q)$. Let $\\mathfrak A$ index forward maps $F_A:U\\to\\mathsf Y$; in this definition an **operator** means such a forward map, and linearity is not assumed. A specified set $\\mathcal C\\subseteq U\\times\\mathfrak A$ records which truth/operator pairs are admissible; no full-product assumption is made. Equip $\\mathsf Y$ with a sigma-algebra $\\mathcal Y$ and an addition operation such that every translation $\\tau_z(e)=z+e$ is measurable. A **noise law** is a probability measure $\\nu$ on $(\\mathsf Y,\\mathcal Y)$. For each admissible pair $(x,A)\\in\\mathcal C$, the observation random element on the probability space $(\\mathsf Y,\\mathcal Y,\\nu)$ is $e\\mapsto F_A(x)+e$, and its sampling law is\n$$P_{x,A,\\nu}(B)=\\nu\\bigl(\\{e\\in\\mathsf Y:F_A(x)+e\\in B\\}\\bigr),\\qquad B\\in\\mathcal Y.$$\nThe translation measurability assumption makes this law a probability measure.\n\nFor a true specification $(x_\\star,A_\\star,\\nu_\\star)$ with $(x_\\star,A_\\star)\\in\\mathcal C$ and a specified working operator $\\widetilde A\\in\\mathfrak A$ and noise law $\\widetilde\\nu$, there is **operator mismatch at the truth** when $F_{A_\\star}(x_\\star)\\ne F_{\\widetilde A}(x_\\star)$, and there is **noise-law mismatch** when $\\nu_\\star\\ne\\widetilde\\nu$. A **working statistical model** is a metric index space $(\\Xi,d_\\Xi)$, a family $(Q_\\xi)_{\\xi\\in\\Xi}$ of sampling laws on the same data space, and a prior probability measure $\\Pi$ on a sigma-algebra containing every open metric ball. The statistical model is **misspecified** for true observation law $P_\\star=P_{x_\\star,A_\\star,\\nu_\\star}$ when $P_\\star\\notin\\{Q_\\xi:\\xi\\in\\Xi\\}$. If a true model index $\\xi_\\star\\in\\Xi$ is specified, there is a **prior-support mismatch** at $\\xi_\\star$ when some open ball $B_\\Xi(\\xi_\\star,r)$, $r>0$, has $\\Pi(B_\\Xi(\\xi_\\star,r))=0$. These are distinct properties; an operator or noise-law mismatch need not by itself make the statistical model misspecified or exclude the true index from the prior's support. This definition makes no assertion about posterior existence or convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The MRI training and held-out test splits come from the same named fastMRI knee collection, so they provide an operational within-source comparison; [F1] does not identify their underlying probability laws.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The black-hole digit and nine-cell scattering cases deliberately change the test-source family from the source used to train each prior. The reported output tendencies are finite observations under [F4], and [F2]–[F3] preclude promoting them to a general test-risk or robustness bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The named task splits and OOD stress-test cases are finite supplied datasets in the Example statement; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-solver-invalid-iterate": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\operatorname{adm}_{\\mathcal S}(\\widetilde v)=\\mathrm{false}$, the proposed iterate fails the selected solver's declared admissibility test; it is therefore not an admissible input for that solver call.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], the benchmark records this call as failure and does not replace it with a numerical data-fit score. The statement uses only the solver's own test and asserts no universal CFL constant.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The stated smaller-step/larger-step DAPS behavior is the paper's reported FWI observation for its numerical PDE setup, as recorded by [F3]; no inference is made from it to other solvers or parameter ranges.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a specified nonempty finite dataset and makes no empty-case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example makes no zero-input boundary theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example makes no singleton-input boundary theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The candidate, solver-specific predicate, and its false result are supplied explicitly in the Example statement; no search or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

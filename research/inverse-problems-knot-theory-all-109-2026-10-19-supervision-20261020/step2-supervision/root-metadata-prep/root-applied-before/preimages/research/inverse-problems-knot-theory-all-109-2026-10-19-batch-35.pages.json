@@ -1,0 +1,224 @@
+[
+  {
+    "order": 3066,
+    "id": "manifold-and-physical-constraint-inversion",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Physical constraints and manifold-valued inversion",
+    "companion": "manifold-and-physical-constraint-inversion-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "nonlinear-inverse-problems-and-tangential-cone-conditions",
+      "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+      "constrained-variational-problems-and-variational-inequalities",
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "def-ip-admissible-constraint-class",
+        "kind": "definition",
+        "title": "Admissible constraint classes and restricted identifiability",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 3 §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §1.2",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
+            }
+          ]
+        },
+        "statement": "Let $X$ and $Y$ be real vector spaces, let $U\\subseteq X$ be nonempty, and let $A:X\\to Y$ be linear. The corresponding inverse-problem model has admissible truths $U$ and forward map $A|_U$. An **admissible constraint class** is a nonempty subset $C\\subseteq U$; its constrained forward map is the restriction $A|_C:C\\to Y$. The class $C$ is **identifiable for $A$** if $A|_C$ is injective, meaning $Ax=Ax'$ for $x,x'\\in C$ implies $x=x'$. Define the difference set and kernel by\n\n$$C-C:=\\{x-x':x,x'\\in C\\},\\qquad \\ker A:=\\{x\\in X:Ax=0_Y\\}.$$"
+      },
+      {
+        "id": "prop-ip-constraints-can-remove-kernel-ambiguity",
+        "kind": "proposition",
+        "title": "A constraint removes kernel ambiguity exactly when its differences avoid the kernel",
+        "deps": [
+          "def-ip-admissible-constraint-class",
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 3 §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §1.2",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
+            }
+          ]
+        },
+        "statement": "Let $X$ and $Y$ be real vector spaces, let $A:X\\to Y$ be linear, and let $C\\subseteq X$ be nonempty. The restriction $A|_C:C\\to Y$ is injective if and only if\n\n$$ (C-C)\\cap\\ker A=\\{0\\}. $$\n\nThis condition characterizes exact uniqueness on $C$; it gives no stability bound for perturbed data."
+      },
+      {
+        "id": "alg-ip-stiefel-constrained-regularized-gradient",
+        "kind": "algorithm",
+        "title": "Finite-budget regularized gradient on a Stiefel constraint",
+        "deps": [
+          "def-ip-nonlinear-forward-map",
+          "def-stiefel-grassmann-optimization-conventions",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+          "def-stiefel-qr-polar-retractions",
+          "thm-stiefel-retractions-are-first-order"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "P.-A. Absil, R. Mahony, and R. Sepulchre, Optimization Algorithms on Matrix Manifolds, Chapter 3 (2008)",
+              "url": "https://assets.press.princeton.edu/chapters/absil/Absil_Chap3.pdf",
+              "locator": "Example 3.6.2: real Stiefel tangent space, induced Frobenius metric, and orthogonal projection."
+            },
+            {
+              "title": "P.-A. Absil, R. Mahony, and R. Sepulchre, Optimization Algorithms on Matrix Manifolds, Chapter 4 (2008)",
+              "url": "https://assets.press.princeton.edu/chapters/absil/Absil_Chap4.pdf",
+              "locator": "Example 4.1.3: polar and QR retractions on the real Stiefel manifold."
+            },
+            {
+              "title": "Nicolas Boumal, An Introduction to Optimization on Smooth Manifolds (2023 prepublication)",
+              "url": "https://www.nicolasboumal.net/book/IntroOptimManifolds_Boumal_2023.pdf",
+              "locator": "§§3.8 and 7.3: embedded-manifold gradients, Stiefel tangent/projection formulas, and the polar retraction."
+            }
+          ]
+        },
+        "statement": "For integers $1\\le p\\le n$, define the real Stiefel constraint set\n\n$$\\operatorname{St}(n,p):=\\{X\\in\\mathbb R^{n\\times p}:X^{\\mathsf T}X=I_p\\}.$$\n\nEquip $\\mathbb R^{n\\times p}$ with the Frobenius inner product $\\langle U,V\\rangle_F=\\operatorname{tr}(U^{\\mathsf T}V)$ and norm $\\|U\\|_F=\\sqrt{\\langle U,U\\rangle_F}$. Let $H=\\mathbb R^{n\\times p}$, let $Y$ be a real Hilbert space, let $U\\subseteq H$ be open and contain $\\operatorname{St}(n,p)$, and let $F:U\\to Y$ be continuously Fréchet differentiable. Given data $y\\in Y$, a reference matrix $X_{\\rm ref}\\in H$, and $\\lambda\\ge0$, define the residual and regularized objective by\n\n$$r(X):=\\|F(X)-y\\|_Y,\\qquad \\Phi(X):=\\tfrac12\\|F(X)-y\\|_Y^2+\\tfrac\\lambda2\\|X-X_{\\rm ref}\\|_F^2.$$\n\nSupply an ambient gradient oracle $G:U\\to H$ satisfying $D\\Phi(X)[Z]=\\langle G(X),Z\\rangle_F$ for every $X\\in U$ and $Z\\in H$, an initial frame $X_0\\in\\operatorname{St}(n,p)$, a residual tolerance $\\tau\\ge0$, a finite integer budget $K\\ge0$, and a step schedule $\\alpha_0,\\ldots,\\alpha_{K-1}$ with every $\\alpha_k>0$. For a square matrix $M$, put $\\operatorname{sym}(M):=(M+M^{\\mathsf T})/2$. The procedure is:\n\n1. Set the current frame to $X_0$ and the schedule index to $k=0$. If $r(X)\\le\\tau$, return $(X,r(X),\\texttt{target-met})$.\n2. While $k<K$, compute $G(X)$ and the Stiefel gradient $g:=G(X)-X\\operatorname{sym}(X^{\\mathsf T}G(X))$. If $g=0$, return $(X,r(X),\\texttt{stationary})$.\n3. Set $\\eta:=-\\alpha_k g$ and form the polar-retracted candidate\n\n   $$X_{\\rm trial}:=(X+\\eta)\\bigl((X+\\eta)^{\\mathsf T}(X+\\eta)\\bigr)^{-1/2}.$$\n\n4. Evaluate $\\Phi(X_{\\rm trial})$ and $r(X_{\\rm trial})$. If $\\Phi(X_{\\rm trial})>\\Phi(X)$, return $(X,r(X),\\texttt{objective-rejected})$. Otherwise accept $X_{\\rm trial}$ as the current frame. If its residual is at most $\\tau$, return $(X,r(X),\\texttt{target-met})$; otherwise increment $k$ by one and repeat the loop.\n5. When $k=K$, return $(X,r(X),\\texttt{budget-exhausted})$.\n\nThis procedure is restricted to the stated finite-dimensional real Stiefel constraint and the displayed polar retraction. It gives no convergence, global-optimality, or noisy-data stability guarantee, and it makes no finite-precision claim. It does not apply to positivity constraints or other nonlinear manifolds without a separately specified compatible retraction and proof."
+      },
+      {
+        "id": "lem-ip-stiefel-gradient-finite-budget-return-and-feasibility",
+        "kind": "lemma",
+        "title": "The Stiefel gradient procedure returns a feasible iterate within its finite budget",
+        "deps": [
+          "alg-ip-stiefel-constrained-regularized-gradient",
+          "thm-stiefel-grassmann-tangent-projections",
+          "def-stiefel-qr-polar-retractions",
+          "thm-stiefel-retractions-are-first-order"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "P.-A. Absil, R. Mahony, and R. Sepulchre, Optimization Algorithms on Matrix Manifolds, Chapter 4 (2008)",
+              "url": "https://assets.press.princeton.edu/chapters/absil/Absil_Chap4.pdf"
+            },
+            {
+              "title": "Nicolas Boumal, An Introduction to Optimization on Smooth Manifolds (2023 prepublication)",
+              "url": "https://www.nicolasboumal.net/book/IntroOptimManifolds_Boumal_2023.pdf"
+            }
+          ]
+        },
+        "statement": "For every input satisfying the finite-budget Stiefel gradient procedure, it returns after at most $K$ trial evaluations with an output frame $X_{\\rm out}\\in\\operatorname{St}(n,p)$. Every accepted update has nonincreasing objective value, and the returned status is `target-met` exactly when $r(X_{\\rm out})\\le\\tau$; every other returned status has $r(X_{\\rm out})>\\tau$."
+      }
+    ]
+  },
+  {
+    "order": 3067,
+    "id": "manifold-and-physical-constraint-inversion-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Physical constraints and manifold-valued inversion — Examples and Counterexamples",
+    "companion": "manifold-and-physical-constraint-inversion",
+    "requires": [
+      "manifold-and-physical-constraint-inversion"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-pde-inadmissible-state-rejected-before-solve",
+        "kind": "example",
+        "title": "A negative finite-difference PDE state is rejected before solving",
+        "deps": [
+          "def-ip-admissible-constraint-class",
+          "def-linear-map"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "verification",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Discretize $-u''=f$ on $(0,1)$ with $u(0)=u(1)=0$ using grid points $x_i=i/3$ for $i=0,1,2,3$ and the two interior values $u_i=u(x_i)$, $z=(u_1,u_2)$. Put $h=1/3$ and define the centered stencil at $i=1,2$ by $D_hu_i=(2u_i-u_{i-1}-u_{i+1})/h^2$, with boundary values $u_0=u_3=0$. The resulting finite-difference system is $A_hz=f_h$, where $A_h=h^{-2}\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}$ and $f_h=(f(x_1),f(x_2))$. Impose the physical constraint $C=\\{(z_1,z_2)\\in\\mathbb R^2:z_1\\ge0,\\ z_2\\ge0\\}$ for nonnegative nodal concentration. An input validator that checks both coordinates before invoking the linear solver rejects the candidate $z=(-1,1)$ before solving because its first coordinate is negative."
+      },
+      {
+        "id": "ex-ip-constraint-eliminates-a-kernel-direction",
+        "kind": "example",
+        "title": "A line constraint removes one kernel direction",
+        "deps": [
+          "def-ip-admissible-constraint-class",
+          "prop-ip-constraints-can-remove-kernel-ambiguity"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "verification",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $A:\\mathbb R^2\\to\\mathbb R$ be $A(s,t)=s$, and restrict the truth class to $C_0=\\{(t,0):t\\in\\mathbb R\\}$. Every scalar datum $y\\in\\mathbb R$ has exactly one admissible preimage, and $(C_0-C_0)\\cap\\ker A=\\{0\\}$; this constraint removes the vertical null direction."
+      },
+      {
+        "id": "ex-ip-halfspace-constraint-leaves-continuous-kernel-ambiguity",
+        "kind": "example",
+        "title": "A half-space constraint leaves a continuous kernel ambiguity",
+        "deps": [
+          "def-ip-admissible-constraint-class",
+          "prop-ip-constraints-can-remove-kernel-ambiguity"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "verification",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $A:\\mathbb R^2\\to\\mathbb R$ be $A(s,t)=s$, and restrict the truth class to the half-space $C_+=\\{(s,t)\\in\\mathbb R^2:t\\ge0\\}$. For every datum $y\\in\\mathbb R$, the constrained fiber is $\\{(y,t):t\\ge0\\}$, a continuous half-line of admissible truths; moreover $(C_+-C_+)\\cap\\ker A=\\{(0,t):t\\in\\mathbb R\\}\\ne\\{0\\}$."
+      }
+    ]
+  }
+]

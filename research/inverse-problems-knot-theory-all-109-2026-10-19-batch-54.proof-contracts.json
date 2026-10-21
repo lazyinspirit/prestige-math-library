@@ -1,0 +1,2067 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "54",
+  "pair": "bayesian-inverse-experimental-design-and-information-gain",
+  "scope": [
+    "def-ip-design-indexed-inverse-experiment",
+    "def-ip-expected-information-gain",
+    "thm-ip-eig-is-joint-relative-entropy",
+    "thm-ip-linear-gaussian-information-gain-logdet",
+    "alg-ip-finite-candidate-information-design",
+    "thm-ip-finite-candidate-information-design-correctness",
+    "cex-ip-eig-cannot-identify-wrong-forward-operator",
+    "ex-ip-eig-high-prior-variance-direction",
+    "ex-ip-eig-repeated-correlated-noise",
+    "ex-ip-eig-singular-prior-support"
+  ],
+  "contracts": {
+    "def-ip-design-indexed-inverse-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: No design index requires no posterior evaluation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Zero predictive evidence receives no posterior formula and has zero predictive mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A singleton finite design set satisfies the same kernel definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A point-mass prior and deterministic dominated kernel remain probability measures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Only 0<p_d(y)<∞ receives a posterior; both endpoints are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: All priors, kernels, and density versions are supplied; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies dominated kernels and the Bayes formula on positive finite evidence fibers; it is not an iff characterization of every posterior law.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Definition specifies dominated kernels and the Bayes formula on positive finite evidence fibers; it is not an iff characterization of every posterior law.",
+            "item_sha256": "ea5421cb533cb6d5a0ee8a1d20c187550d23637338ac2765f3ca7efeb298fe75",
+            "row_sha256": "8c415797f7b26b4c45f329cd11953662af4c3cc2c1a2776d824259c381dca5a8",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 355
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse recovers a unique design, prior or likelihood from the posterior, and zero/infinite-evidence fibers are explicitly not assigned this formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No converse recovers a unique design, prior or likelihood from the posterior, and zero/infinite-evidence fibers are explicitly not assigned this formula.",
+            "item_sha256": "ea5421cb533cb6d5a0ee8a1d20c187550d23637338ac2765f3ca7efeb298fe75",
+            "row_sha256": "943e2487cb3cc6cdf411ea55b2cd575f834910c294b3c6d000818dc96c5c9938",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 356
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for definition; not independent review or acceptance."
+      },
+      "supplier_interfaces": [
+        {
+          "supplier": "def-finite-cardinality",
+          "section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "use": "A finite set has a finite cardinality."
+        },
+        {
+          "supplier": "def-measurable-space",
+          "section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "use": "A measurable space consists of a set and a sigma-algebra."
+        },
+        {
+          "supplier": "def-probability-measure",
+          "section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "use": "A probability measure has total mass one."
+        },
+        {
+          "supplier": "def-finite-sigma-finite-and-semifinite-measures",
+          "section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "use": "Sigma-finiteness is witnessed by a countable cover with finite measure."
+        },
+        {
+          "supplier": "def-measure-kernel-and-probability-kernel",
+          "section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "use": "A probability kernel has measurable evaluations and probability-measure rows."
+        },
+        {
+          "supplier": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "use": "Joint measurability is with respect to the product sigma-algebra."
+        },
+        {
+          "supplier": "def-measurable-function-between-measurable-spaces",
+          "section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "use": "A measurable function has measurable preimages."
+        },
+        {
+          "supplier": "thm-bayes-formula-for-dominated-kernels",
+          "section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "use": "A specified dominated sampling density yields the predictive density and the posterior kernel on positive finite evidence fibers."
+        },
+        {
+          "supplier": "def-bayesian-posterior-as-regular-conditional-law",
+          "section": "Definition",
+          "quote": "Let a proper Bayesian model be given, and let $J$ be its joint prior-predictive probability on $(\\Theta\\times\\mathsf Y,\\mathcal T\\otimes\\mathcal Y)$, supplied by [[lem-prior-and-model-kernel-define-joint-law]]. More generally, let $(\\Omega,\\mathcal F,Q)$ be any probability space carrying parameter and data random elements $X:\\Omega\\to\\Theta$ and $Y:\\Omega\\to\\mathsf Y$ whose joint law is $J$ ([[def-probability-measure]], [[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]]). A **posterior regular conditional distribution (posterior RCD)** is a regular conditional distribution of $X$ given $\\sigma(Y)$, in the sense of [[def-regular-conditional-distribution]]. It is a kernel indexed by the sample point $\\omega\\in\\Omega$. The canonical realization is $\\Omega=\\Theta\\times\\mathsf Y$ with $Q=J$ and coordinate maps $X(\\theta,y)=\\theta$, $Y(\\theta,y)=y$.\n\nA **data-indexed posterior kernel** is a probability kernel $\\Pi_{\\cdot}$ from $(\\mathsf Y,\\mathcal Y)$ to $(\\Theta,\\mathcal T)$ ([[def-measure-kernel-and-probability-kernel]]) for which $\\omega\\mapsto\\Pi_{Y(\\omega)}$ is a conditional law of $X$ given $Y$ ([[def-conditional-law-given-a-random-element]]). Equivalently, for every $A\\in\\mathcal T$ and $B\\in\\mathcal Y$,\n$$Q(X\\in A,\\ Y\\in B)=\\int_B\\Pi_y(A)\\,Q_Y(dy),$$\nwhere $Q_Y$ is the data marginal (equal to $J_Y$). This kernel is indexed by data values, not sample points.\n\nThe definition asserts no existence of either conditional kernel. Values of a data-indexed version on a measurable $J_Y$-null set are not fixed by the conditional-law identities; replacing them there by a fixed probability preserves those identities. A dominated-density construction is a separate route: [[thm-bayes-formula-for-dominated-kernels]] requires a proper prior, a sigma-finite data measure, and a specified jointly measurable sampling density, and fills fibres whose marginal density is zero or infinite with the prior. It does not require the data space to be standard Borel.",
+          "use": "A posterior is a regular conditional law of the parameter given the observations."
+        }
+      ]
+    },
+    "def-ip-expected-information-gain": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: There is no EIG value when the design set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The integrand is zero off the positive-finite evidence set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A singleton design receives the same extended integral."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: For a point-mass prior, posterior equals prior and KL is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The range includes +∞; zero/infinite evidence fibers are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The preceding experiment supplies posterior fibers explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "EIG is defined as an evidence-weighted KL integral, not an equivalence criterion for posterior identifiability. No additional forward equivalence is a conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "EIG is defined as an evidence-weighted KL integral, not an equivalence criterion for posterior identifiability. No additional forward equivalence is a conclusion.",
+            "item_sha256": "44efd0b7b1bcf832c05ba1c82a8d6e21da1150a75b80b0f25564669a187e67c2",
+            "row_sha256": "4b6cf2c6cf5f2d90f73d698b3bd0aee9c0d09f819f25f98637875f3368fa5b3f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 356
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "EIG is defined as an evidence-weighted KL integral, not an equivalence criterion for posterior identifiability. In particular no reverse implication is authorized.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "EIG is defined as an evidence-weighted KL integral, not an equivalence criterion for posterior identifiability. In particular no reverse implication is authorized.",
+            "item_sha256": "44efd0b7b1bcf832c05ba1c82a8d6e21da1150a75b80b0f25564669a187e67c2",
+            "row_sha256": "245c7cf55ba69b127eda66307d7db083bd698a07879f67a0e110ed7cdbe070ac",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 357
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [],
+          "reason": "AC is inherited only through the library's general Radon–Nikodym-based Kullback–Leibler divergence convention. The explicit dominated densities and the extended nonnegative integral add no stronger choice principle."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for definition; not independent review or acceptance."
+      },
+      "supplier_interfaces": [
+        {
+          "supplier": "def-ip-design-indexed-inverse-experiment",
+          "section": "Definition",
+          "quote": "Let $D$ be a finite set of design indices, let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces, let $\\mu_0$ be a probability measure on $(\\Theta,\\mathcal T)$, and let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$. For each $d\\in D$, let $Q_d$ be a probability kernel from $\\Theta$ to $\\mathsf Y$ with a specified nonnegative jointly measurable density $p_d(y\\mid\\theta)$ relative to $\\nu$, so\n$$Q_d(\\theta,B)=\\int_B p_d(y\\mid\\theta)\\,\\nu(dy)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nDefine the prior-predictive density $p_d(y)=\\int_\\Theta p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)$. For each datum $y$ with $0<p_d(y)<\\infty$, define the posterior probability measure\n$$\\mu_d^y(A)=\\frac{\\int_A p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)}{p_d(y)}\\qquad(A\\in\\mathcal T).$$\nThe dominated-kernel Bayes formula makes $p_d\\,d\\nu$ the observation law and identifies $\\mu_d^y$ as a posterior version on these positive finite evidence fibers. No posterior formula is assigned on fibers with zero or infinite evidence; their prior-predictive probability is zero.",
+          "use": "The predictive density and posterior probability measure on positive finite evidence fibers."
+        },
+        {
+          "supplier": "def-kullback-leibler-divergence",
+          "section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "use": "The directional relative entropy is an extended integral with a finite negative part."
+        },
+        {
+          "supplier": "def-axiom-of-choice",
+          "section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "use": "The general Radon–Nikodym convention used by the library KL definition assumes AC."
+        },
+        {
+          "supplier": "thm-kullback-leibler-is-nonnegative",
+          "section": "Statement",
+          "quote": "Assume AC and use the directional convention of\n[[def-kullback-leibler-divergence]]. For probability measures $P,Q$ on one\nmeasurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$ if and only if $P=Q$.\n\nThere is also the following normalized-density identity. Let\n$(\\mathsf X,\\mathcal A,\\mu)$ be a sigma-finite measure space: it is a set\nwith a sigma-algebra and measure ([[def-measure-space]]), and there is a\ncountable measurable cover by sets of finite $\\mu$-measure\n([[def-finite-sigma-finite-and-semifinite-measures]]). Let\n$\\gamma:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable function with\n$Z:=\\int\\gamma\\,d\\mu\\in(0,\\infty)$, and put $\\pi=\\gamma/Z$. Let\n$q:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable probability density,\nso $\\int q\\,d\\mu=1$, and suppose $q=0$ $\\mu$-almost everywhere on\n$\\{\\gamma=0\\}$. Assume\n$$\\int q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty,$$\nwhere each term with $q=0$ is defined to be zero. Then\n$$\\log Z =\\int q(\\log\\gamma-\\log q)\\,d\\mu +D(q\\,\\mu\\|\\pi\\,\\mu).$$\nIn particular, the first integral is at most $\\log Z$. This identity concerns\nnormalized densities only; it does not assert posterior existence for an\nunspecified statistical model.",
+          "use": "KL divergence between probability measures is nonnegative."
+        },
+        {
+          "supplier": "def-kullback-leibler-divergence",
+          "section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "use": "The library KL definition controls the negative part and defines its extended integral without an $\\infty-\\infty$ ambiguity."
+        }
+      ]
+    },
+    "thm-ip-eig-is-joint-relative-entropy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-design-indexed-inverse-experiment",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a finite set of design indices, let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces, let $\\mu_0$ be a probability measure on $(\\Theta,\\mathcal T)$, and let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$. For each $d\\in D$, let $Q_d$ be a probability kernel from $\\Theta$ to $\\mathsf Y$ with a specified nonnegative jointly measurable density $p_d(y\\mid\\theta)$ relative to $\\nu$, so\n$$Q_d(\\theta,B)=\\int_B p_d(y\\mid\\theta)\\,\\nu(dy)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nDefine the prior-predictive density $p_d(y)=\\int_\\Theta p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)$. For each datum $y$ with $0<p_d(y)<\\infty$, define the posterior probability measure\n$$\\mu_d^y(A)=\\frac{\\int_A p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)}{p_d(y)}\\qquad(A\\in\\mathcal T).$$\nThe dominated-kernel Bayes formula makes $p_d\\,d\\nu$ the observation law and identifies $\\mu_d^y$ as a posterior version on these positive finite evidence fibers. No posterior formula is assigned on fibers with zero or infinite evidence; their prior-predictive probability is zero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ generating $\\mathcal A$, and let $\\mu,\\nu$ be measures on $(X,\\mathcal A)$ that agree on $\\mathcal P$. Suppose there is an increasing sequence $(P_n)$ in $\\mathcal P$ with\n\n$$X=\\bigcup_nP_n,\\qquad \\mu(P_n)=\\nu(P_n)<+\\infty\\quad(n\\in\\mathbb N).$$\n\nThen $\\mu=\\nu$ on $\\mathcal A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n(Probability measures and probability spaces). Absolute continuity $P\\ll Q$ has the convention\nof Absolute continuity of a signed or complex measure with respect to a positive measure. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n(The Axiom of Choice) as in Likelihood ratio as a Radon–Nikodym derivative and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\nA sigma-finite positive measure has a nonnegative Radon–Nikodym density version.\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n(The natural logarithm as the inverse of the exponential function, Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm). These are\nmeasurable sets by Extended-real-valued measurable functions. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\nLikelihood-ratio change of measure, the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm (The natural logarithm as the inverse of the exponential function).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\nThe integral logarithm $L$ is the published natural logarithm and\nThe integral logarithm $L(x):=\\int_1^x\\frac{dt}{t}$ for $x>0$. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and\nSums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function, so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\nExtended-real-valued measurable functions. Its signed integral is\ndefined by the positive and negative parts\n(The positive and negative parts of a function,\nThe nonnegative Lebesgue integral).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\nThe real exponential function and the number $e$ by a power series and\nThe exponential function is strictly increasing, $1/e=\\exp(-1)$ by\nThe exponential is positive and satisfies $\\exp(-x)=1/\\exp(x)$, and $\\log(1/e)=-1$ by\nOrder, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n(Sums, scalar multiples, products and quotients: $(f+g)'(c) = f'(c) + g'(c)$, $(\\alpha f)'(c) = \\alpha f'(c)$, $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$, and $(f/g)'(c) = \\bigl(f'(c)g(c) - f(c)g'(c)\\bigr)/g(c)^{2}$ when $g(c) \\ne 0$, The integral logarithm satisfies $L'(x)=1/x$ for $x>0$ and $L(1)=0$,\nThe integral logarithm $L$ is the published natural logarithm, The mean value theorem, as the case $g(x) = x$ of Cauchy's: for $f$ continuous on $[a,b]$ with $a < b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of Likelihood-ratio change of measure,\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the directional convention of\nKullback–Leibler divergence. For probability measures $P,Q$ on one\nmeasurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$ if and only if $P=Q$.\n\nThere is also the following normalized-density identity. Let\n$(\\mathsf X,\\mathcal A,\\mu)$ be a sigma-finite measure space: it is a set\nwith a sigma-algebra and measure (Measure spaces), and there is a\ncountable measurable cover by sets of finite $\\mu$-measure\n(Finite, sigma-finite, and semifinite measures). Let\n$\\gamma:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable function with\n$Z:=\\int\\gamma\\,d\\mu\\in(0,\\infty)$, and put $\\pi=\\gamma/Z$. Let\n$q:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable probability density,\nso $\\int q\\,d\\mu=1$, and suppose $q=0$ $\\mu$-almost everywhere on\n$\\{\\gamma=0\\}$. Assume\n$$\\int q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty,$$\nwhere each term with $q=0$ is defined to be zero. Then\n$$\\log Z =\\int q(\\log\\gamma-\\log q)\\,d\\mu +D(q\\,\\mu\\|\\pi\\,\\mu).$$\nIn particular, the first integral is at most $\\log Z$. This identity concerns\nnormalized densities only; it does not assert posterior existence for an\nunspecified statistical model.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F3], Tonelli gives $\\int_{\\mathsf Y}p_d(y)\\,\\nu(dy)=\\int_\\Theta\\int_{\\mathsf Y}p_d(y\\mid\\theta)\\,\\nu(dy)\\,\\mu_0(d\\theta)=1$. Thus $P_{Y\\mid d}$ is a probability measure and $p_d(y)<\\infty$ for $\\nu$-almost every $y$. By [F2], its mass on $\\{p_d=0\\}\\cup\\{p_d=\\infty\\}$ is zero, and the posterior formula in [F1] is the conditional-law version on $G_d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The joint law $P_d$ has density $p_d(y\\mid\\theta)$ relative to $\\mu_0\\otimes\\nu$ by [F2]. For a measurable rectangle $A\\times B$, $Q_d(A\\times B)=\\mu_0(A)\\int_Bp_d(y)\\,\\nu(dy)=\\int_{A\\times B}p_d(y)\\,d(\\mu_0\\otimes\\nu)$, so [F4] makes $p_d(y)$ the density of $Q_d$ on the full product sigma-algebra. On $G_d$ define $r_d(\\theta,y)=p_d(y\\mid\\theta)/p_d(y)$, and set it to zero elsewhere and on any product-null set where $p_d(y\\mid\\theta)=\\infty$. The latter set is null because the joint density has total integral one. On $\\{p_d=0\\}$, [F1] gives $\\int_\\Theta p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)=0$, so [F5] makes the joint density zero for $\\mu_0$-almost every $\\theta$ on that fiber. The $\\{p_d=\\infty\\}$ fibers are $\\nu$-null by step 1.1. Consequently, for every product-measurable set $C$, $\\int_C r_d\\,dQ_d=\\int_Cp_d(y\\mid\\theta)\\,d(\\mu_0\\otimes\\nu)=P_d(C)$, so $r_d=dP_d/dQ_d$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $y\\in G_d$, [F1] makes $r_d(\\cdot,y)$ a probability density relative to $\\mu_0$, so [F6] gives $D(\\mu_d^y\\|\\mu_0)=\\int r_d(\\theta,y)\\log r_d(\\theta,y)\\,\\mu_0(d\\theta)$ and bounds the fiber's negative part by $1/e$. Weighting by $p_d(y)$ and using step 1.1 bounds the full negative part by $\\frac1e\\int_{G_d}p_d(y)\\,\\nu(dy)=1/e$. Tonelli [F3] on the positive and negative parts separately, together with the product density in step 2.1, therefore gives $\\operatorname{EIG}(d)=\\int r_d\\log r_d\\,dQ_d$ with finite negative part and possibly infinite positive part.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substituting the fiber identity from step 3.1 into the definition of EIG and using the separate Tonelli exchanges from that step gives $\\operatorname{EIG}(d)=\\int r_d\\log r_d\\,dQ_d$. By [F6] and step 2.1, this is $D(P_d\\|Q_d)$; [F7] gives nonnegativity. The finite negative part from step 3.1 rules out an $\\infty-\\infty$ subtraction, proving the stated extended identity.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes a design d; an empty design set has no theorem instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Proof 1.1 and 2.1 discard zero and infinite predictive-density fibers as null."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes one arbitrary design and permits general measurable spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The density-ratio argument includes degenerate prior and posterior laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof 3.1 bounds the negative part by 1/e and allows an infinite positive part."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof 2.1–3.1 constructs the ratio from given densities and separates Tonelli on signs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Expected information gain equals a specified joint KL extended integral; it is not an iff finiteness or identifiability statement. The forward-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Expected information gain equals a specified joint KL extended integral; it is not an iff finiteness or identifiability statement. The forward-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "839c98191c291948961c96726f04edfbfa96efe015395c2d1259290cce817475",
+            "row_sha256": "55562597a6313504f657b421615233b09c99a535b500793cbb7439998395d710",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 375
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Expected information gain equals a specified joint KL extended integral; it is not an iff finiteness or identifiability statement. The reverse-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Expected information gain equals a specified joint KL extended integral; it is not an iff finiteness or identifiability statement. The reverse-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "839c98191c291948961c96726f04edfbfa96efe015395c2d1259290cce817475",
+            "row_sha256": "29dceed20c735704f861b9f679028c3c866c05c9118d3089f5409c659fc3257d",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 376
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1",
+            "4.1"
+          ],
+          "reason": "Assume AC only through the library's KL definition of a Radon–Nikodym derivative. The posterior density and all Tonelli, null-fiber, and integral exchanges in the proof use the supplied dominated densities and are choice-free."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for theorem; not independent review or acceptance."
+      }
+    },
+    "thm-ip-linear-gaussian-information-gain-logdet": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-eig-is-joint-relative-entropy",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a design $d$ in a design-indexed dominated inverse experiment, with prior $\\mu_0$, likelihood density $p_d(y\\mid\\theta)$ relative to the common sigma-finite measure $\\nu$, predictive density $p_d(y)$, and posterior $\\mu_d^y$ on $G_d=\\{y:0<p_d(y)<\\infty\\}$. Let $P_d$ be the joint law of $(\\theta,Y)$, so on measurable rectangles\n$$P_d(A\\times B)=\\int_B\\int_Ap_d(y\\mid\\theta)\\,\\mu_0(d\\theta)\\,\\nu(dy),$$\nlet $P_{Y\\mid d}(B)=\\int_Bp_d(y)\\,\\nu(dy)$, and let $Q_d=\\mu_0\\otimes P_{Y\\mid d}$. Then\n$$\\operatorname{EIG}(d)=D(P_d\\|Q_d)\\in[0,+\\infty].$$\nOn $G_d$, the Radon–Nikodym density $dP_d/dQ_d$ is $p_d(y\\mid\\theta)/p_d(y)$ almost everywhere. The identity is valid as an extended integral: its negative part is finite, its positive part may be infinite, and no subtraction of two infinite entropies occurs.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-finite-linear-gaussian-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n,m\\ge1$, $m_0\\in\\mathbb R^n$, and let\n$C_0\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TC_0v\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$A\\in\\mathbb R^{m\\times n}$ and let\n$\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite, meaning\n$u^T\\Gamma u>0$ for every nonzero $u\\in\\mathbb R^m$. Suppose\n$X$ and $\\eta$ are independent random vectors with laws\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$, and set\n$Y=AX+\\eta$. Define $\\mu_0(E)=\\mathbb P(X\\in E)$ for Borel\n$E\\subseteq\\mathbb R^n$, and set\n$S=AC_0A^T+\\Gamma$. Then $S$ is positive definite. For each\n$y\\in\\mathbb R^m$, define\n$$ \\Phi_y(x)=\\tfrac12(y-Ax)^T\\Gamma^{-1}(y-Ax),\\qquad Z(y)=\\int_{\\mathbb R^n}e^{-\\Phi_y(x)}\\,\\mu_0(dx). $$\nFor every $y$, $0<Z(y)<\\infty$, so the normalized potential update\n$$ \\Pi^y(E)=\\frac{\\int_E e^{-\\Phi_y(x)}\\,\\mu_0(dx)}{Z(y)} \\quad(E\\in\\mathcal B(\\mathbb R^n)) $$\nis a probability measure and equals the conditional-law version obtained by\nconditioning the observation model at $y$. Its Gaussian formula, defined for\nevery $y$, is\n$$ N_n\\!\\left( m_0+C_0A^TS^{-1}(y-Am_0),\\ C_0-C_0A^TS^{-1}AC_0 \\right). $$\nLet $P_Y(B)=\\mathbb P(Y\\in B)$ for Borel $B\\subseteq\\mathbb R^m$.\nConditional-law versions are unique only $P_Y$-almost surely. The displayed\nmean and covariance formulas invert only $S$, not $C_0$; $C_0$ and the\nposterior covariance may be singular. The prior support is\n$m_0+\\operatorname{Ran}(C_0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every nonzero $v\\in\\mathbb R^m$, $v^TSv=(A^Tv)^TC(A^Tv)+v^T\\Gamma v>0$ because $C\\succeq0$ and $\\Gamma\\succ0$. Thus $S\\succ0$ and both observation covariances have positive determinants. The same conclusion is recorded in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], $(\\theta,\\eta)$ is jointly Gaussian, so its linear image $Y=A\\theta+\\eta$ is Gaussian with mean $Am_0$ and covariance $S$. Conditional on $\\theta$, $Y$ is a translate of $\\eta$ and has covariance $\\Gamma$. Since both $S$ and $\\Gamma$ are positive definite, [F4] gives the positive conditional and predictive densities needed in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $z=Y-Am_0$ and $e=Y-A\\theta=\\eta$. By [F4], the log likelihood ratio in [F1] is $\\log\\frac{p(Y\\mid\\theta)}{p_Y(Y)}=\\frac12\\log\\frac{\\det S}{\\det\\Gamma}-\\frac12e^T\\Gamma^{-1}e+\\frac12z^TS^{-1}z$. The two quadratic terms have finite expectations: expanding each finite sum and using $\\mathbb E[ee^T]=\\Gamma$ and $\\mathbb E[zz^T]=S$ gives $\\mathbb E[e^T\\Gamma^{-1}e]=\\operatorname{tr}(\\Gamma^{-1}\\Gamma)=m$ and $\\mathbb E[z^TS^{-1}z]=\\operatorname{tr}(S^{-1}S)=m$. Their expectations cancel, so [F1] yields $\\operatorname{EIG}=\\frac12\\log(\\det S/\\det\\Gamma)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $W=\\Gamma^{-1/2}$. Since $\\Gamma^{1/2}W=I_m$, matrix multiplication gives $S=\\Gamma^{1/2}(I_m+WACA^TW)\\Gamma^{1/2}$. The middle matrix is positive definite because $ACA^T\\succeq0$. By [F5], $\\det S=\\det(\\Gamma^{1/2})^2\\det(I_m+WACA^TW)=\\det\\Gamma\\,\\det(I_m+WACA^TW)$. Substitution in step 3.1 proves the formula. No inverse or determinant of $C$ was used, so singular $C$ is included; centering by $m_0$ in $z$ proves the mean cancellation.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes n,m≥1 and one Gaussian observation model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Proof 1.1–3.1 gives EIG zero when C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits n=m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits singular positive-semidefinite C and never inverts C."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Gamma is positive definite, so both observation densities are nonsingular."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof 2.1–3.1 uses the supplied independent Gaussian vectors and finite moments."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward-direction disposition: The Gaussian information gain equals the displayed log determinant; this is a numerical identity, not an iff identifiability statement. Read: Statement; Proof1–3 predictive covariance, conditional density and whitening; singular C allowed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Forward-direction disposition: The Gaussian information gain equals the displayed log determinant; this is a numerical identity, not an iff identifiability statement.",
+            "item_sha256": "5a973653a44f69bd29e6d1d418df668788675bb6d023a8fa747c04891fdbc985",
+            "row_sha256": "343c253bdc573a6dccae070539bb2342a255b9de81c22a94ae5ba2da5410393e",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 377
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse-direction disposition: The Gaussian information gain equals the displayed log determinant; this is a numerical identity, not an iff identifiability statement. Read: Statement; Proof1–3 predictive covariance, conditional density and whitening; singular C allowed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Reverse-direction disposition: The Gaussian information gain equals the displayed log determinant; this is a numerical identity, not an iff identifiability statement.",
+            "item_sha256": "5a973653a44f69bd29e6d1d418df668788675bb6d023a8fa747c04891fdbc985",
+            "row_sha256": "1b65559b5c8ce2cf7ed0ec85135e5171f536b91df8e644927abf52b689f38e51",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 378
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.2"
+          ],
+          "reason": "AC is inherited from the library KL convention, finite Gaussian and conditional-law interfaces. The expectation and finite matrix algebra in the local proof use no stronger choice principle and never require an inverse of the possibly singular state covariance."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for theorem; not independent review or acceptance."
+      }
+    },
+    "alg-ip-finite-candidate-information-design": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: An empty candidate list returns all-inadmissible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: C=0 gives information score zero before cost."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A one-candidate feasible list returns that candidate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Singular C is permitted and ties preserve the first index."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Budget equality c_d=B is included; rho<1 is required for a certificate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The given finite ordered list is scanned directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure defines admissibility, budget filtering and certified optimization over a finite ordered list; no if-and-only-if theorem is asserted. Exact certificates distinguish non-positive-definiteness from numerical failure, and the interval condition is a sufficient exact-first-maximizer certificate, not a claimed necessary test.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The procedure defines admissibility, budget filtering and certified optimization over a finite ordered list; no if-and-only-if theorem is asserted. Exact certificates distinguish non-positive-definiteness from numerical failure, and the interval condition is a sufficient exact-first-maximizer certificate, not a claimed necessary test.",
+            "item_sha256": "6ec6eca1516337fa8226037b582b2f01bd7250fc1e66b74a63b195d4a21dbb9c",
+            "row_sha256": "fb822fe2f8e173bb15288b93edf817f564027b469d7942f17a86aedfbcc6ae7d",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 353
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The procedure defines admissibility, budget filtering and certified optimization over a finite ordered list; no if-and-only-if theorem is asserted. Exact certificates distinguish non-positive-definiteness from numerical failure, and the interval condition is a sufficient exact-first-maximizer certificate, not a claimed necessary test.",
+            "role": "root-adopted owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 353
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure defines admissibility, budget filtering and certified optimization over a finite ordered list; no if-and-only-if theorem is asserted. Exact certificates distinguish non-positive-definiteness from numerical failure, and the interval condition is a sufficient exact-first-maximizer certificate, not a claimed necessary test.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The procedure defines admissibility, budget filtering and certified optimization over a finite ordered list; no if-and-only-if theorem is asserted. Exact certificates distinguish non-positive-definiteness from numerical failure, and the interval condition is a sufficient exact-first-maximizer certificate, not a claimed necessary test.",
+            "item_sha256": "6ec6eca1516337fa8226037b582b2f01bd7250fc1e66b74a63b195d4a21dbb9c",
+            "row_sha256": "8f65746e24c3ada716a1184038ef9750b7520f0ba4047eab67afbdb2709429bc",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 354
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The procedure defines admissibility, budget filtering and certified optimization over a finite ordered list; no if-and-only-if theorem is asserted. Exact certificates distinguish non-positive-definiteness from numerical failure, and the interval condition is a sufficient exact-first-maximizer certificate, not a claimed necessary test.",
+            "role": "root-adopted owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 354
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [],
+          "reason": "The finite scan and its deterministic tie rule are choice-free. The exact utility inherits AC from the EIG/KL convention; no arbitrary selection among the finite candidates is made."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for algorithm; not independent review or acceptance."
+      },
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-ip-linear-gaussian-information-gain-logdet",
+          "section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+          "use": "The exact linear-Gaussian EIG is a log determinant, including singular state covariance."
+        },
+        {
+          "supplier": "def-ip-design-indexed-inverse-experiment",
+          "section": "Definition",
+          "quote": "Let $D$ be a finite set of design indices, let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces, let $\\mu_0$ be a probability measure on $(\\Theta,\\mathcal T)$, and let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$. For each $d\\in D$, let $Q_d$ be a probability kernel from $\\Theta$ to $\\mathsf Y$ with a specified nonnegative jointly measurable density $p_d(y\\mid\\theta)$ relative to $\\nu$, so\n$$Q_d(\\theta,B)=\\int_B p_d(y\\mid\\theta)\\,\\nu(dy)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nDefine the prior-predictive density $p_d(y)=\\int_\\Theta p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)$. For each datum $y$ with $0<p_d(y)<\\infty$, define the posterior probability measure\n$$\\mu_d^y(A)=\\frac{\\int_A p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)}{p_d(y)}\\qquad(A\\in\\mathcal T).$$\nThe dominated-kernel Bayes formula makes $p_d\\,d\\nu$ the observation law and identifies $\\mu_d^y$ as a posterior version on these positive finite evidence fibers. No posterior formula is assigned on fibers with zero or infinite evidence; their prior-predictive probability is zero.",
+          "use": "Each candidate's Gaussian model is a singleton design in the dominated-experiment convention."
+        },
+        {
+          "supplier": "def-ip-expected-information-gain",
+          "section": "Definition",
+          "quote": "Assume the Axiom of Choice for the library's Kullback–Leibler divergence convention. For a design $d$ in a design-indexed dominated inverse experiment, let $G_d=\\{y:0<p_d(y)<\\infty\\}$ be its positive finite evidence fibers. The **expected information gain** is\n$$\\operatorname{EIG}(d):=\\int_{G_d}D(\\mu_d^y\\|\\mu_0)\\,p_d(y)\\,\\nu(dy)\\in[0,+\\infty],$$\nwhere the integrand is defined to be zero outside $G_d$. Here $D(P\\|Q)$ is the directional Kullback–Leibler divergence of probability measures, with natural logarithms.",
+          "use": "EIG is the extended prior-predictive posterior-to-prior KL integral."
+        },
+        {
+          "supplier": "thm-non-negative-square-root-exists-and-is-unique",
+          "section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "use": "A positive-semidefinite prior covariance has a positive-semidefinite square root for the Gram representation."
+        },
+        {
+          "supplier": "def-cholesky-factorisation-with-positive-diagonal",
+          "section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "use": "Cholesky factors are lower triangular with positive diagonal."
+        },
+        {
+          "supplier": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "use": "Every symmetric positive-definite matrix has a unique positive-diagonal Cholesky factor."
+        },
+        {
+          "supplier": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite and let\n$A=LL^*$ be its Cholesky factorisation with positive diagonal.\n\n1. For every right-hand side $b\\in\\mathbb C^n$, the system $Ax=b$ is solved by\n   first solving $Ly=b$ and then solving $L^*x=y$.\n2. The two triangular solves cost $2n^2+O(n)$ scalar operations altogether, and\n   the dense Cholesky factorisation costs\n   $$\\frac{1}{3}n^3+O(n^2)$$\n   scalar operations, compared with\n   $$\\frac{2}{3}n^3+O(n^2)$$\n   for dense LU factorisation without exploiting symmetry.",
+          "use": "Cholesky triangular solves evaluate positive-definite systems without forming an inverse."
+        },
+        {
+          "supplier": "thm-determinant-of-a-triangular-matrix",
+          "section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "use": "The determinant of a triangular matrix is the product of its diagonal entries."
+        },
+        {
+          "supplier": "def-determinant-of-a-square-matrix",
+          "section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "use": "The log-determinant score uses the usual determinant of a finite square matrix."
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "use": "The logarithm in the score is the natural logarithm."
+        },
+        {
+          "supplier": "alg-rounded-cholesky-with-failure-status",
+          "section": "Definition",
+          "quote": "Input a Hermitian positive-definite matrix $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, whose real and imaginary components are in the floating-point system, using the convention of [[def-cholesky-factorisation-with-positive-diagonal]]; real matrices are included. Initialize every entry of $\\widehat L$ to zero. Process columns $j=1,\\ldots,n$ in increasing order. For the diagonal, initialize $s=0$ and, for $k=1,\\ldots,j-1$ in increasing order, compute\n$$r_k=\\operatorname{fl}(\\Re(\\widehat l_{jk})^2),\\quad t_k=\\operatorname{fl}(\\Im(\\widehat l_{jk})^2),\\quad q_k=\\operatorname{fl}(r_k+t_k),\\quad s=\\operatorname{fl}(s+q_k),$$\nin that order. Then compute $p_j=\\operatorname{fl}(a_{jj}-s)$. If an operation fails, or if $p_j$ is not positive and normal, return `failure` with pivot $j$ and the first failing operation location. Otherwise compute $\\widehat l_{jj}=\\operatorname{fl}(\\sqrt{p_j})$; if it is not positive and normal, return `failure` at pivot $j$.\n\nFor each $i=j+1,\\ldots,n$ in increasing order, initialize the complex accumulator $c_{ij}=0$. For $k=1,\\ldots,j-1$ in increasing order, compute the complex product $w_{ik}=\\widehat l_{ik}\\overline{\\widehat l_{jk}}$ using exactly the six real operations of the complex-product convention in [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], then update\n$$\\Re(c_{ij})\\gets\\operatorname{fl}(\\Re(c_{ij})+\\Re(w_{ik})),\\qquad \\Im(c_{ij})\\gets\\operatorname{fl}(\\Im(c_{ij})+\\Im(w_{ik})).$$\nAfter this dot product, compute $r_{ij}=a_{ij}-c_{ij}$ by one rounded real subtraction for each component, then compute each component of $\\widehat l_{ij}=r_{ij}/\\widehat l_{jj}$ by one rounded real division. The empty dot product is zero. On any failure return `failure` with pivot $j$ and its first failing operation location (stage, column, row, inner index, component, and operation where applicable), with the diagonal and row loops ordered as stated. If all columns finish, return `success(\\widehat L)`. By [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]], exact positive definiteness ensures an exact factor exists, but does not ensure the rounded algorithm succeeds.",
+          "use": "The floating-point factorization reports success or its first pivot/operation failure."
+        },
+        {
+          "supplier": "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "section": "Statement",
+          "quote": "Let $R\\in\\mathbb R^{n\\times n}$ be upper triangular with stored floating-point entries and nonzero diagonal, and let $y\\in\\mathbb R^n$ have stored floating-point entries, where $n\\ge1$ and $(n+3)u<1$. Use the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] at unit roundoff $u$. Compute descending substitution by the sequential rounded dot $s_i=\\operatorname{fl}(\\sum_{j>i}R_{ij}\\widehat x_j)$ (empty sum zero), $t_i=\\operatorname{fl}(y_i-s_i)$, and $\\widehat x_i=\\operatorname{fl}(t_i/R_{ii})$. Assume each exact intermediate is zero or normal and each rounded result is finite, so every operation succeeds under that model. Then there is upper triangular $\\Delta R$ with\n$$(R+\\Delta R)\\widehat x=y,\\qquad |\\Delta R|\\le\\gamma_{n+3}|R|,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|R\\|_F.$$\nIn particular $\\widehat x=0$ forces $y=0$. Forward substitution has the transposed conclusion.",
+          "use": "Successful rounded triangular solves have the stated componentwise backward error."
+        },
+        {
+          "supplier": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A=A^*$ be positive definite in $\\mathbb C^{n\\times n}$. Suppose the rounded Cholesky algorithm succeeds with $\\widehat L$. Put $m=20n+20$ and $g=\\gamma_m=\\frac{m u}{1-m u}$; assume $m u<1/5$. For $E=\\widehat L\\widehat L^*-A$, which is Hermitian, and with $|M|$ denoting entrywise absolute value for matrices,\n$$|E|\\le100g\\,|\\widehat L|\\,|\\widehat L|^*\\quad\\hbox{entrywise},\\qquad \\|E\\|_F\\le100g\\|\\widehat L\\|_F^2,\\qquad \\|E\\|_2\\le100g\\|\\widehat L\\|_F^2.$$\nThus $c_n(u)u=\\frac{100m u}{1-m u}$. If also $100\\sqrt n\\,g\\le1/2$, then\n$$\\|E\\|_F\\le200\\sqrt n\\,g\\|A\\|_F,\\qquad \\|E\\|_2\\le200\\sqrt n\\,g\\|A\\|_F.$$\nThese bounds apply on success only; positive definiteness does not guarantee rounded success.",
+          "use": "Successful rounded Cholesky gives the stated factorization residual bounds."
+        },
+        {
+          "supplier": "lem-information-matrix-perturbation-bound",
+          "section": "Statement",
+          "quote": "Use the finite observation designs of [[def-nonlinear-experimental-design-and-local-identifiability]]. Suppose uniformly over $x\\in\\mathcal X$ that $\\|J_x\\|_2\\le K$, $\\|J_{h,x}-J_x\\|_2\\le\\eta$, and $\\|W_x\\|_2\\le w$, where $K,\\eta,w\\ge0$. For every approximate design $\\xi$,\n$$\\|M_h(\\xi)-M(\\xi)\\|_2\\le\\delta:=w(2K\\eta+\\eta^2),$$\nwhere $M_h(\\xi)=\\sum_x\\xi_xJ_{h,x}^TW_xJ_{h,x}$. If $M(\\xi)$ satisfies $v^TM(\\xi)v\\ge\\alpha\\|v\\|_2^2$ for every $v$ with some $\\alpha>\\delta$, then\n$$v^TM_h(\\xi)v\\ge(\\alpha-\\delta)\\|v\\|_2^2$$\nfor every $v$, so the computed information matrix remains positive definite.",
+          "use": "Uniform factor and solve errors imply the stated information-matrix perturbation bound."
+        },
+        {
+          "supplier": "def-nonlinear-experimental-design-and-local-identifiability",
+          "section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nBecause the support is finite, $F_\\xi$ is $C^1$ with derivative $J_\\xi(\\theta)$: the finite collection of component first-order remainders has a stacked Euclidean norm that is still $o(\\|h\\|_2)$, and the stacked derivative is continuous because each $DF_x$ is continuous.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.",
+          "use": "A one-point approximate design with a linear sensitivity map and weight matrix $W=I$ satisfies the finite-design setting."
+        },
+        {
+          "supplier": "lem-logdet-information-perturbation-bound",
+          "section": "Statement",
+          "quote": "Let $p\\ge1$ and let $A,B\\in\\mathbb R^{p\\times p}$ be symmetric. Put $E=B-A$ and $A_t=(1-t)A+tB$ for $0\\le t\\le1$. Suppose there is $\\alpha>0$ such that $v^T A_t v\\ge\\alpha\\|v\\|_2^2$ for every $v\\in\\mathbb R^p$ and every $t\\in[0,1]$. Then $A_t$ is positive definite and\n$$|\\log\\det B-\\log\\det A|\\le\\frac{p\\|E\\|_2}{\\alpha}.$$",
+          "use": "A positive eigenvalue floor controls log-determinant perturbation."
+        },
+        {
+          "supplier": "thm-ip-linear-gaussian-information-gain-logdet",
+          "section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+          "use": "The exact log-determinant formula applies to the linear-Gaussian model stated there."
+        },
+        {
+          "supplier": "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "section": "Statement",
+          "quote": "Let $R\\in\\mathbb R^{n\\times n}$ be upper triangular with stored floating-point entries and nonzero diagonal, and let $y\\in\\mathbb R^n$ have stored floating-point entries, where $n\\ge1$ and $(n+3)u<1$. Use the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] at unit roundoff $u$. Compute descending substitution by the sequential rounded dot $s_i=\\operatorname{fl}(\\sum_{j>i}R_{ij}\\widehat x_j)$ (empty sum zero), $t_i=\\operatorname{fl}(y_i-s_i)$, and $\\widehat x_i=\\operatorname{fl}(t_i/R_{ii})$. Assume each exact intermediate is zero or normal and each rounded result is finite, so every operation succeeds under that model. Then there is upper triangular $\\Delta R$ with\n$$(R+\\Delta R)\\widehat x=y,\\qquad |\\Delta R|\\le\\gamma_{n+3}|R|,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|R\\|_F.$$\nIn particular $\\widehat x=0$ forces $y=0$. Forward substitution has the transposed conclusion.",
+          "use": "A rounded triangular-solve certificate is a backward-error statement and requires conditioning to produce a forward bound."
+        }
+      ]
+    },
+    "thm-ip-finite-candidate-information-design-correctness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ip-finite-candidate-information-design",
+          "source_section": "Definition",
+          "quote": "Assume AC for the library KL/EIG convention. Input a prior covariance $C\\in\\mathbb R^{n\\times n}$ with $n\\ge1$ symmetric positive semidefinite, a finite ordered list of raw candidate records $(A_d,\\Gamma_d,c_d)_{d=1}^N$, and a real budget $B$. Each stored $A_d$ and $\\Gamma_d$ is a finite real matrix, with its dimensions part of the input, and each declared cost $c_d$ is finite and real. A candidate is dimension-valid when $A_d$ has at least one row and exactly $n$ columns and $\\Gamma_d$ is a symmetric square matrix whose dimension equals the row count of $A_d$; for a dimension-valid candidate write that common positive dimension as $m_d$. The prior mean is immaterial to the score.\n\nInterpret each admissible candidate $d$ (dimension-valid with $\\Gamma_d$ positive definite) as a separate singleton-design dominated inverse experiment with prior $\\theta\\sim N_n(m_0,C)$ for any $m_0\\in\\mathbb R^n$, observation space $\\mathbb R^{m_d}$ with Lebesgue measure, and observation $Y_d=A_d\\theta+\\eta_d$, where $\\eta_d\\sim N_{m_d}(0,\\Gamma_d)$ is independent of $\\theta$. Here $\\operatorname{EIG}(d)$ is the expected information gain from the preceding definition for that singleton experiment. Different candidates may have different $m_d$ because each is evaluated on its own observation space. The score is independent of $m_0$.\n\nIn exact-real arithmetic, process the list in order. Mark a candidate inadmissible if it is not dimension-valid or if its noise covariance $\\Gamma_d$ is not positive definite. For each remaining candidate with $c_d\\le B$, compute the Cholesky factor $\\Gamma_d=L_dL_d^T$ with positive diagonal, solve $L_dV_d=A_d$ by forward substitution, and form the symmetric positive-semidefinite matrix $Z_d=V_dCV_d^T$. Set $H_d=I_{m_d}+Z_d$ and compute its Cholesky factor $H_d=R_dR_d^T$. Assign the utility\n$$U_d=\\sum_{j=1}^{m_d}\\log (R_d)_{jj}-c_d=\\tfrac12\\log\\det(H_d)-c_d.$$\nInitialize the stored best candidate as unset. For each admissible candidate meeting the budget, set it if unset; otherwise replace it exactly when the new utility is strictly greater than the stored utility. After the scan, return the stored candidate. This update rule preserves the first index in any tie. If every candidate is inadmissible, return `all-inadmissible`; if at least one candidate is admissible but none meets the budget, return `budget-exhausted`.\n\nIn floating-point mode, treat each finite stored floating-point matrix entry, cost, budget, and tolerance as the exact real number represented by that value; no uncertainty in these input data is included. Use failure-aware Cholesky and triangular-solve procedures, and take a certificate provider as part of the floating-point input. Each provider result is a finite, independently checkable certificate; if the provider cannot certify a required fact, it returns `unresolved`.\n\nProcess the candidates in list order. Test dimensions and symmetry exactly, marking a dimension-invalid candidate inadmissible. For each dimension-valid noise matrix $\\Gamma_d$, call `CertifyPositiveDefiniteness(\\Gamma_d)`. It returns `positive-definite` only with a checkable positive-definiteness certificate, `not-positive-definite` only with a checkable certificate, or `unresolved`. For example, an exact factorization $\\Gamma_d=L L^T$ with $L$ lower triangular and positive diagonal certifies positive definiteness, while a nonzero vector $v$ with $v^T\\Gamma_dv\\le0$ certifies that it is not positive definite. A failed rounded Cholesky factorization is not a certificate of non-positive-definiteness. If any required status is unresolved, return `numerically-unresolved`. After all statuses are certified, return `all-inadmissible` if none is admissible. Compare each admissible stored cost to the stored budget exactly; if none meets it, return `budget-exhausted`.\n\nFor each feasible candidate $d$ in inherited order, call `CertifyScore(d)`. It first runs failure-aware rounded Cholesky on $\\Gamma_d$ and, on success, failure-aware forward substitution on each column of $A_d$ in order; any operation failure or unmet range hypothesis returns `unresolved`. After forming a certified positive-semidefinite $\\widehat Z_d$, it forms a stored matrix $\\widehat H_d$ and certifies both that $\\widehat H_d$ is symmetric positive definite and that $\\|\\widehat H_d-(I_{m_d}+\\widehat Z_d)\\|_2\\le\\sigma_d$ for a rational bound $\\sigma_d\\ge0$. It then runs failure-aware rounded Cholesky on $\\widehat H_d$; a failed definiteness check, factorization, or formation bound returns `unresolved`. The call then returns either `certified` with finite stored values $\\widehat U_d$, $\\widehat Z_d$, and $\\widehat R_d$, nonnegative rational upper bounds $\\delta_d,\\rho_d,\\lambda_d$, and certificates for all of the following, or `unresolved`:\n\n- $\\widehat Z_d$ is symmetric positive semidefinite and $\\|\\widehat Z_d-Z_d\\|_2\\le\\delta_d$, where $Z_d$ uses the exact Cholesky factor of the represented $\\Gamma_d$. This bound includes rounding in forming the Cholesky factor and triangular solve for $\\Gamma_d$, the covariance square root, and the matrix products.\n- $\\widehat R_d$ is a successful lower-triangular Cholesky factor with positive diagonal. If $\\widetilde\\rho_d$ is a certified upper bound for $\\|\\widehat R_d\\widehat R_d^T-\\widehat H_d\\|_2$, choose a rational $\\rho_d\\ge\\widetilde\\rho_d+\\sigma_d$ with $\\rho_d<1$; then $\\|\\widehat R_d\\widehat R_d^T-(I_{m_d}+\\widehat Z_d)\\|_2\\le\\rho_d$.\n- $\\left|\\widehat U_d-\\left(\\frac12\\log\\det(\\widehat R_d\\widehat R_d^T)-c_d\\right)\\right|\\le\\lambda_d$. Evaluate the exact expression as $\\sum_j\\log((\\widehat R_d)_{jj})-c_d$ using the triangular determinant identity; $\\lambda_d$ covers rounded logarithms, their summation, and cost evaluation.\n\nThe matrix radius may be certified by the published information-matrix perturbation bound in its single-design, unit-weight $W=I_n$ case. Factor $C$ as $C^{1/2}C^{1/2}$ and set $J_d=C^{1/2}V_d^T$; for a computed solve $\\widehat V_d$, set $\\widehat J_d=C^{1/2}\\widehat V_d^T$. Then $Z_d=J_d^TJ_d$ and $\\widehat Z_d=\\widehat J_d^T\\widehat J_d$. The lemma's finite-design hypotheses hold for the one-point sensitivity maps $z\\mapsto J_dz$ and $z\\mapsto\\widehat J_dz$ from $\\mathbb R^{m_d}$ to $\\mathbb R^n$, with weight $W=I_n$ and design weight $1$. If $\\|J_d\\|_2\\le K_d$ and $\\|\\widehat J_d-J_d\\|_2\\le\\eta_d$, then $\\delta_d$ may be any verified bound at least $2K_d\\eta_d+\\eta_d^2$, enlarged by any separate matrix-formation residual. A rounded triangular-substitution bound may be used only after checking its $(m_d+3)u<1$ and normal-range, finite-operation hypotheses for every right-hand side. Convert its backward-error bound to the required forward matrix bound using verified conditioning; a solve backward-error bound alone does not certify $\\eta_d$. For the published rounded-Cholesky normwise bound, verify success and its operationwise model, put $q=20m_d+20$ and $g=qu/(1-qu)$, and check $qu<1/5$ before using $100g\\|\\widehat R_d\\|_F^2$ as a residual bound; if using its relative bound, also check $100\\sqrt{m_d}g\\le1/2$. The log-determinant perturbation bound is applied on the two symmetric matrix segments with eigenvalue floors $1$ and $1-\\rho_d$. A missing or failed certificate returns `numerically-unresolved` and no optimum claim.\n\nSet $\\varepsilon_d=\\frac{m_d}{2}\\left(\\delta_d+\\frac{\\rho_d}{1-\\rho_d}\\right)+\\lambda_d$ and form the exact rational interval $[\\widehat U_d-\\varepsilon_d,\\widehat U_d+\\varepsilon_d]$. Given a finite nonnegative stored tolerance $\\tau$, compute $M=\\max_{d\\text{ feasible}}\\widehat U_d$ and return the first feasible candidate with $\\widehat U_d\\ge M-\\tau$. Certify the comparisons exactly on the represented floating-point values and rational bounds; if any comparison needed for this branch or for its interval certificate is undecided, return `numerically-unresolved`. The returned candidate's true utility gap is at most $\\tau+2\\max_d\\varepsilon_d$. If its lower interval endpoint exceeds every earlier candidate's upper endpoint and is at least every later candidate's upper endpoint, certify it as the first exact maximizer. The algorithm makes no bit-complexity claim for exact-real comparisons.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-linear-gaussian-information-gain-logdet",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite and let\n$A=LL^*$ be its Cholesky factorisation with positive diagonal.\n\n1. For every right-hand side $b\\in\\mathbb C^n$, the system $Ax=b$ is solved by\n   first solving $Ly=b$ and then solving $L^*x=y$.\n2. The two triangular solves cost $2n^2+O(n)$ scalar operations altogether, and\n   the dense Cholesky factorisation costs\n   $$\\frac{1}{3}n^3+O(n^2)$$\n   scalar operations, compared with\n   $$\\frac{2}{3}n^3+O(n^2)$$\n   for dense LU factorisation without exploiting symmetry.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nBecause the support is finite, $F_\\xi$ is $C^1$ with derivative $J_\\xi(\\theta)$: the finite collection of component first-order remainders has a stacked Euclidean norm that is still $o(\\|h\\|_2)$, and the stacked derivative is continuous because each $DF_x$ is continuous.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-information-matrix-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Use the finite observation designs of [[def-nonlinear-experimental-design-and-local-identifiability]]. Suppose uniformly over $x\\in\\mathcal X$ that $\\|J_x\\|_2\\le K$, $\\|J_{h,x}-J_x\\|_2\\le\\eta$, and $\\|W_x\\|_2\\le w$, where $K,\\eta,w\\ge0$. For every approximate design $\\xi$,\n$$\\|M_h(\\xi)-M(\\xi)\\|_2\\le\\delta:=w(2K\\eta+\\eta^2),$$\nwhere $M_h(\\xi)=\\sum_x\\xi_xJ_{h,x}^TW_xJ_{h,x}$. If $M(\\xi)$ satisfies $v^TM(\\xi)v\\ge\\alpha\\|v\\|_2^2$ for every $v$ with some $\\alpha>\\delta$, then\n$$v^TM_h(\\xi)v\\ge(\\alpha-\\delta)\\|v\\|_2^2$$\nfor every $v$, so the computed information matrix remains positive definite.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-logdet-information-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge1$ and let $A,B\\in\\mathbb R^{p\\times p}$ be symmetric. Put $E=B-A$ and $A_t=(1-t)A+tB$ for $0\\le t\\le1$. Suppose there is $\\alpha>0$ such that $v^T A_t v\\ge\\alpha\\|v\\|_2^2$ for every $v\\in\\mathbb R^p$ and every $t\\in[0,1]$. Then $A_t$ is positive definite and\n$$|\\log\\det B-\\log\\det A|\\le\\frac{p\\|E\\|_2}{\\alpha}.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A=A^*$ be positive definite in $\\mathbb C^{n\\times n}$. Suppose the rounded Cholesky algorithm succeeds with $\\widehat L$. Put $m=20n+20$ and $g=\\gamma_m=\\frac{m u}{1-m u}$; assume $m u<1/5$. For $E=\\widehat L\\widehat L^*-A$, which is Hermitian, and with $|M|$ denoting entrywise absolute value for matrices,\n$$|E|\\le100g\\,|\\widehat L|\\,|\\widehat L|^*\\quad\\hbox{entrywise},\\qquad \\|E\\|_F\\le100g\\|\\widehat L\\|_F^2,\\qquad \\|E\\|_2\\le100g\\|\\widehat L\\|_F^2.$$\nThus $c_n(u)u=\\frac{100m u}{1-m u}$. If also $100\\sqrt n\\,g\\le1/2$, then\n$$\\|E\\|_F\\le200\\sqrt n\\,g\\|A\\|_F,\\qquad \\|E\\|_2\\le200\\sqrt n\\,g\\|A\\|_F.$$\nThese bounds apply on success only; positive definiteness does not guarantee rounded success.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "source_section": "Statement",
+          "quote": "Let $R\\in\\mathbb R^{n\\times n}$ be upper triangular with stored floating-point entries and nonzero diagonal, and let $y\\in\\mathbb R^n$ have stored floating-point entries, where $n\\ge1$ and $(n+3)u<1$. Use the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] at unit roundoff $u$. Compute descending substitution by the sequential rounded dot $s_i=\\operatorname{fl}(\\sum_{j>i}R_{ij}\\widehat x_j)$ (empty sum zero), $t_i=\\operatorname{fl}(y_i-s_i)$, and $\\widehat x_i=\\operatorname{fl}(t_i/R_{ii})$. Assume each exact intermediate is zero or normal and each rounded result is finite, so every operation succeeds under that model. Then there is upper triangular $\\Delta R$ with\n$$(R+\\Delta R)\\widehat x=y,\\qquad |\\Delta R|\\le\\gamma_{n+3}|R|,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|R\\|_F.$$\nIn particular $\\widehat x=0$ forces $y=0$. Forward substitution has the transposed conclusion.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a valid candidate, $\\Gamma_d=L_dL_d^T$ and $V_d=L_d^{-1}A_d$, so $Z_d=V_dCV_d^T$ is symmetric positive semidefinite. Hence $H_d=I_{m_d}+Z_d$ is positive definite and has the Cholesky factor used by the exact algorithm.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In floating-point mode, when $\\widehat Z_d=\\widehat J_d^T\\widehat J_d$ and $Z_d=J_d^TJ_d$, [F6] supplies $\\delta_d\\ge2K_d\\eta_d+\\eta_d^2$ from certified bounds $\\|J_d\\|_2\\le K_d$ and $\\|\\widehat J_d-J_d\\|_2\\le\\eta_d$; any rounded matrix-formation residual is included in the supplied $\\delta_d$. Both $I+Z_d$ and $I+\\widehat Z_d$ have eigenvalues at least $1$, and every matrix on their segment does too. Applying [F7] gives $|\\log\\det(I+\\widehat Z_d)-\\log\\det(I+Z_d)|\\le m_d\\delta_d$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Put $E_d=\\widehat R_d\\widehat R_d^T-(I+\\widehat Z_d)$. Every matrix $I+\\widehat Z_d+tE_d$ has quadratic form at least $(1-t\\rho_d)\\|v\\|_2^2\\ge(1-\\rho_d)\\|v\\|_2^2$, since $I+\\widehat Z_d\\succeq I$ and $\\|E_d\\|_2\\le\\rho_d<1$. Applying [F7] on this segment yields $|\\log\\det(\\widehat R_d\\widehat R_d^T)-\\log\\det(I+\\widehat Z_d)|\\le m_d\\rho_d/(1-\\rho_d)$. Under the successful rounded-factorization hypotheses, [F8] provides such a residual radius. [F9] supplies only a backward-error constraint for triangular solves; any forward matrix error used in $\\delta_d$ must additionally account for conditioning.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $Q_d=A_dCA_d^T$ and $W_d=\\Gamma_d^{-1/2}$. The square-root identity [F5] gives $\\Gamma_d+Q_d=\\Gamma_d^{1/2}(I_{m_d}+W_dQ_dW_d)\\Gamma_d^{1/2}$. By [F4], $\\det(\\Gamma_d+Q_d)=\\det(\\Gamma_d^{1/2})^2\\det(I_{m_d}+W_dQ_dW_d)=\\det(\\Gamma_d)\\det(I_{m_d}+W_dQ_dW_d)$. Also step 1.1 gives $\\Gamma_d+Q_d=L_dH_dL_d^T$, so [F3]–[F4] give $\\det(\\Gamma_d+Q_d)=\\det(\\Gamma_d)\\det(H_d)$ with $\\det(\\Gamma_d)=(\\det L_d)^2>0$. Dividing proves $\\det(I_{m_d}+W_dQ_dW_d)=\\det(H_d)$. By [F2], the exact EIG is $\\tfrac12\\log\\det(H_d)$. By [F3], $\\det(H_d)=\\det(R_dR_d^T)=(\\prod_j(R_d)_{jj})^2$; all Cholesky diagonal entries are positive, so [F10] gives $\\tfrac12\\log\\det(H_d)=\\sum_j\\log(R_d)_{jj}$. Thus the algorithm's exact score equals $U_d$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "The certificate's $\\lambda_d$ bounds the remaining rounded log, summation, and cost evaluation. Combining it with steps 1.2, 1.3, the log-determinant perturbation [F7], and the factor $1/2$ in the EIG formula gives $|\\widehat U_d-U_d|\\le\\varepsilon_d$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the exact scan, after the first feasible candidate the stored candidate is the first maximum of that one-element prefix. When the next candidate is processed, [F1] says a strictly larger score replaces it; an equal or smaller score leaves it in place, preserving the earliest maximizing index. Repeating this finite comparison through the ordered feasible list proves the final stored candidate is the first global maximizer. The validity and budget tests likewise make `all-inadmissible` and `budget-exhausted` exactly the two stated empty-feasible-set cases.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $d^*$ maximize exact utility and let $\\widehat d$ be the selected computed $\\tau$-maximizer. By [F1] and the hypothesis, $\\widehat U_{\\widehat d}\\ge\\max_d\\widehat U_d-\\tau$. Then $U_{d^*}\\le\\widehat U_{d^*}+\\varepsilon_{d^*}\\le\\max_d\\widehat U_d+\\varepsilon_{d^*}$, while $U_{\\widehat d}\\ge\\widehat U_{\\widehat d}-\\varepsilon_{\\widehat d}\\ge\\max_d\\widehat U_d-\\tau-\\varepsilon_{\\widehat d}$. Subtracting gives the stated gap bound.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "If the selected interval's lower endpoint exceeds each earlier upper endpoint and is at least each later upper endpoint, then every earlier exact utility is strictly smaller and every later exact utility is no larger. Thus the selected candidate is the first exact maximizer.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement distinguishes V empty from V nonempty with F empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Proof 1.1–2.1 gives H=I when C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Proof 3.1 initializes the best candidate on a one-element feasible list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows singular C and states the first-index tie rule."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires rho<1 and includes cost equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof 3.1 and 3.2 prove maxima by finite comparisons and inequalities."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure returns the first exact maximizer among admissible candidates, or its stated status, with a sufficient interval certificate when available. It does not give a necessary certificate for every maximizer.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The procedure returns the first exact maximizer among admissible candidates, or its stated status, with a sufficient interval certificate when available. It does not give a necessary certificate for every maximizer.",
+            "item_sha256": "0892823f177bc7bce43ca3d7667aa41fbb2417262ecad238027b97d758f69c17",
+            "row_sha256": "5e0db53c81980233c7dc2202135c7175b47fdafaf436b5ebca0e97a050e6bf90",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 377
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An admissible maximizer need not satisfy every optional finite numerical certificate test. The correctness claim must not be read as that unproved converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "An admissible maximizer need not satisfy every optional finite numerical certificate test. The correctness claim must not be read as that unproved converse.",
+            "item_sha256": "0892823f177bc7bce43ca3d7667aa41fbb2417262ecad238027b97d758f69c17",
+            "row_sha256": "0d955db42ea397b1ad41e0d48053f77f85649c89dbaad14bc3096ca0eb9e7afd",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 378
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.2"
+          ],
+          "reason": "The finite comparison and its tie rule are choice-free. The utility inherits the Axiom of Choice from the EIG/KL convention; the numerical error bounds use only the declared finite-dimensional error interfaces."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for theorem; not independent review or acceptance."
+      }
+    },
+    "cex-ip-eig-cannot-identify-wrong-forward-operator": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-eig-is-joint-relative-entropy",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a design $d$ in a design-indexed dominated inverse experiment, with prior $\\mu_0$, likelihood density $p_d(y\\mid\\theta)$ relative to the common sigma-finite measure $\\nu$, predictive density $p_d(y)$, and posterior $\\mu_d^y$ on $G_d=\\{y:0<p_d(y)<\\infty\\}$. Let $P_d$ be the joint law of $(\\theta,Y)$, so on measurable rectangles\n$$P_d(A\\times B)=\\int_B\\int_Ap_d(y\\mid\\theta)\\,\\mu_0(d\\theta)\\,\\nu(dy),$$\nlet $P_{Y\\mid d}(B)=\\int_Bp_d(y)\\,\\nu(dy)$, and let $Q_d=\\mu_0\\otimes P_{Y\\mid d}$. Then\n$$\\operatorname{EIG}(d)=D(P_d\\|Q_d)\\in[0,+\\infty].$$\nOn $G_d$, the Radon–Nikodym density $dP_d/dQ_d$ is $p_d(y\\mid\\theta)/p_d(y)$ almost everywhere. The identity is valid as an extended integral: its negative part is finite, its positive part may be infinite, and no subtraction of two infinite entropies occurs.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-expected-information-gain",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the library's Kullback–Leibler divergence convention. For a design $d$ in a design-indexed dominated inverse experiment, let $G_d=\\{y:0<p_d(y)<\\infty\\}$ be its positive finite evidence fibers. The **expected information gain** is\n$$\\operatorname{EIG}(d):=\\int_{G_d}D(\\mu_d^y\\|\\mu_0)\\,p_d(y)\\,\\nu(dy)\\in[0,+\\infty],$$\nwhere the integrand is defined to be zero outside $G_d$. Here $D(P\\|Q)$ is the directional Kullback–Leibler divergence of probability measures, with natural logarithms.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the directional convention of\nKullback–Leibler divergence. For probability measures $P,Q$ on one\nmeasurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$ if and only if $P=Q$.\n\nThere is also the following normalized-density identity. Let\n$(\\mathsf X,\\mathcal A,\\mu)$ be a sigma-finite measure space: it is a set\nwith a sigma-algebra and measure (Measure spaces), and there is a\ncountable measurable cover by sets of finite $\\mu$-measure\n(Finite, sigma-finite, and semifinite measures). Let\n$\\gamma:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable function with\n$Z:=\\int\\gamma\\,d\\mu\\in(0,\\infty)$, and put $\\pi=\\gamma/Z$. Let\n$q:\\mathsf X\\to[0,\\infty)$ be a finite-valued measurable probability density,\nso $\\int q\\,d\\mu=1$, and suppose $q=0$ $\\mu$-almost everywhere on\n$\\{\\gamma=0\\}$. Assume\n$$\\int q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty,$$\nwhere each term with $q=0$ is defined to be zero. Then\n$$\\log Z =\\int q(\\log\\gamma-\\log q)\\,d\\mu +D(q\\,\\mu\\|\\pi\\,\\mu).$$\nIn particular, the first integral is at most $\\log Z$. This identity concerns\nnormalized densities only; it does not assert posterior existence for an\nunspecified statistical model.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n(Probability measures and probability spaces). Absolute continuity $P\\ll Q$ has the convention\nof Absolute continuity of a signed or complex measure with respect to a positive measure. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n(The Axiom of Choice) as in Likelihood ratio as a Radon–Nikodym derivative and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\nA sigma-finite positive measure has a nonnegative Radon–Nikodym density version.\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n(The natural logarithm as the inverse of the exponential function, Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm). These are\nmeasurable sets by Extended-real-valued measurable functions. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\nLikelihood-ratio change of measure, the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm (The natural logarithm as the inverse of the exponential function).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\nThe integral logarithm $L$ is the published natural logarithm and\nThe integral logarithm $L(x):=\\int_1^x\\frac{dt}{t}$ for $x>0$. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and\nSums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function, so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\nExtended-real-valued measurable functions. Its signed integral is\ndefined by the positive and negative parts\n(The positive and negative parts of a function,\nThe nonnegative Lebesgue integral).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\nThe real exponential function and the number $e$ by a power series and\nThe exponential function is strictly increasing, $1/e=\\exp(-1)$ by\nThe exponential is positive and satisfies $\\exp(-x)=1/\\exp(x)$, and $\\log(1/e)=-1$ by\nOrder, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n(Sums, scalar multiples, products and quotients: $(f+g)'(c) = f'(c) + g'(c)$, $(\\alpha f)'(c) = \\alpha f'(c)$, $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$, and $(f/g)'(c) = \\bigl(f'(c)g(c) - f(c)g'(c)\\bigr)/g(c)^{2}$ when $g(c) \\ne 0$, The integral logarithm satisfies $L'(x)=1/x$ for $x>0$ and $L(1)=0$,\nThe integral logarithm $L$ is the published natural logarithm, The mean value theorem, as the case $g(x) = x$ of Cauchy's: for $f$ continuous on $[a,b]$ with $a < b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of Likelihood-ratio change of measure,\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the actual model, $a\\theta=1$ for both possible pairs. Hence $P(Y\\in\\{1,2\\}\\mid H=(1,1))=P(Y\\in\\{1,2\\}\\mid H=(2,\\frac12))=1$, and both conditional laws assign probability $\\frac12$ to each of $1$ and $2$. Thus $H$ and $Y$ are independent, so [F1] and [F3] give actual-pair EIG $D(P_{H,Y}\\|P_H\\otimes P_Y)=0$. The two distinct pairs have identical observation laws and are not identifiable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the nominal model, $\\theta=1$ gives $Y\\in\\{1,2\\}$ equiprobably and $\\theta=2$ gives $Y\\in\\{2,3\\}$ equiprobably. Therefore the predictive probabilities are $P(Y=1)=\\frac14$, $P(Y=2)=\\frac12$, and $P(Y=3)=\\frac14$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The joint probabilities are $P(\\theta=1,Y=1)=\\frac14$, $P(\\theta=1,Y=2)=\\frac14$, $P(\\theta=2,Y=2)=\\frac14$, and $P(\\theta=2,Y=3)=\\frac14$. Dividing by the marginals in step 1.2 gives posterior $\\delta_1$ at $Y=1$, the original uniform prior at $Y=2$, and $\\delta_2$ at $Y=3$. By [F5], the corresponding KL values are $\\log2$, $0$, and $\\log2$. Thus [F2] gives nominal EIG $\\frac14\\log2+\\frac12\\cdot0+\\frac14\\log2=\\frac12\\log2>0$ by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1] and [F3] as applied in step 1.1, the actual-pair EIG is zero although the pairs are distinct and observationally identical; by step 2.1 the nominal fixed-operator EIG is positive. Thus the claimed implication fails.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Counterexample supplies two actual pairs and two nominal parameter values."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample: Verification 1.1 computes actual-pair EIG zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Two distinct pairs are necessary to witness non-identifiability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample: The two actual pairs induce identical observation laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample: All probabilities on the finite supports are well-defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample: Verification 1.1–3.1 enumerates the finite laws exactly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample has positive nominal fixed-operator EIG and nonidentifiable actual parameter/operator pairs. It refutes that implication, not a converse implication from identifiability. There is no separate iff-forward obligation beyond this asserted scope.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The counterexample has positive nominal fixed-operator EIG and nonidentifiable actual parameter/operator pairs. It refutes that implication, not a converse implication from identifiability. There is no separate iff-forward obligation beyond this asserted scope.",
+            "item_sha256": "ef86cb2a9918b6705a8bd2b2953c3a43d0c49699a4a183aacf6b73434277fd78",
+            "row_sha256": "93fe6dcb079061b3038a97f50bbf25adafd3dac91a13b16ed978c4a07297ceba",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 355
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample has positive nominal fixed-operator EIG and nonidentifiable actual parameter/operator pairs. It refutes that implication, not a converse implication from identifiability. In particular, no reverse classification implication is part of this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The counterexample has positive nominal fixed-operator EIG and nonidentifiable actual parameter/operator pairs. It refutes that implication, not a converse implication from identifiability. In particular, no reverse classification implication is part of this item.",
+            "item_sha256": "ef86cb2a9918b6705a8bd2b2953c3a43d0c49699a4a183aacf6b73434277fd78",
+            "row_sha256": "de5f647ca2462155aa3654083c02055f276965c4fdf6a022d8dfce49c2e881c6",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 356
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "2.2"
+          ],
+          "reason": "AC is inherited from the library EIG/KL convention."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Actual and nominal finite observation laws",
+          "method": "Exact finite probability enumeration",
+          "input": {
+            "actual_pairs": [
+              "(theta,a)=(1,1)",
+              "(theta,a)=(2,1/2)"
+            ],
+            "noise": "Uniform({0,1})",
+            "nominal_theta": "Uniform({1,2})",
+            "observation_space": [
+              1,
+              2,
+              3
+            ]
+          },
+          "calculation": "Actual pair laws are both (1/2,1/2) on {1,2}. Nominal joint masses are 1/4 on (1,1),(1,2),(2,2),(2,3); predictive masses are (1/4,1/2,1/4); posterior KL values are (log(2),0,log(2)).",
+          "expected": {
+            "actual_pair_EIG": 0,
+            "nominal_EIG": "(1/2) log(2)>0",
+            "identifiability": false
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for counterexample; not independent review or acceptance."
+      }
+    },
+    "ex-ip-eig-high-prior-variance-direction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-linear-gaussian-information-gain-logdet",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $d_1$, $A_1CA_1^T=9$ and $\\Gamma_1=1$, so [F1] gives $\\operatorname{EIG}(d_1)=\\frac12\\log(1+9)=\\frac12\\log 10$. For $d_2$, $A_2CA_2^T=1$ and $\\Gamma_2=1$, so [F1] gives $\\operatorname{EIG}(d_2)=\\frac12\\log(1+1)=\\frac12\\log 2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The costs are equal and $10>2>0$, so strict increase of the logarithm [F2] gives $\\operatorname{EIG}(d_1)>\\operatorname{EIG}(d_2)$. Thus $d_1$ is the unique maximizer among the two candidates.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example explicitly supplies two sensors."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both prior variances are positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1 evaluates each scalar sensor."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "C=diag(9,1) is positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Both noise variances are one and both costs are zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The two candidates are explicitly enumerated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two scalar Gaussian designs have ordered numerical EIG values; higher variance is not asserted a necessary/sufficient rule for arbitrary designs. No additional forward equivalence is a conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The two scalar Gaussian designs have ordered numerical EIG values; higher variance is not asserted a necessary/sufficient rule for arbitrary designs. No additional forward equivalence is a conclusion.",
+            "item_sha256": "89e88617f968491f7e9d8675fc5ff00e2aed13082b23cc7b0c8878033eb0333e",
+            "row_sha256": "e405db45e71fea4c83e4c7be23fd87f3f5d5149dd6059ba653ae8d4f35d1382a",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 358
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two scalar Gaussian designs have ordered numerical EIG values; higher variance is not asserted a necessary/sufficient rule for arbitrary designs. In particular no reverse implication is authorized.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The two scalar Gaussian designs have ordered numerical EIG values; higher variance is not asserted a necessary/sufficient rule for arbitrary designs. In particular no reverse implication is authorized.",
+            "item_sha256": "89e88617f968491f7e9d8675fc5ff00e2aed13082b23cc7b0c8878033eb0333e",
+            "row_sha256": "4b0df633b73428fb6ad4cd61ebbd9739e576b0a2835993fd7d577b2425f8beca",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is inherited from the finite Gaussian EIG and library KL interfaces."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Two exact one-coordinate sensor scores",
+          "method": "Exact finite matrix calculation",
+          "input": {
+            "C": "diag(9,1)",
+            "A1": "(1,0)",
+            "A2": "(0,1)",
+            "noise_variance": 1,
+            "costs": [
+              0,
+              0
+            ]
+          },
+          "calculation": "A1 C A1^T=9 and A2 C A2^T=1; the log determinants are log(10) and log(2).",
+          "expected": {
+            "EIG_d1": "(1/2) log(10)",
+            "EIG_d2": "(1/2) log(2)",
+            "unique_maximizer": "d1"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for example; not independent review or acceptance."
+      }
+    },
+    "ex-ip-eig-repeated-correlated-noise": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-linear-gaussian-information-gain-logdet",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vectors $(1,1)^T$ and $(1,-1)^T$ are eigenvectors of $\\Gamma_\\rho$ with eigenvalues $1+\\rho$ and $1-\\rho$. Both are positive for $-1<\\rho<1$, so $\\Gamma_\\rho\\succ0$. The predictive covariance is $S_\\rho=ACA^T+\\Gamma_\\rho=\\begin{pmatrix}2&1+\\rho\\\\1+\\rho&2\\end{pmatrix}$ Thus $\\det S_\\rho=4-(1+\\rho)^2$ and $\\det\\Gamma_\\rho=1-\\rho^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], $\\operatorname{EIG}(\\rho)=\\frac12\\log(\\det S_\\rho/\\det\\Gamma_\\rho)=\\frac12\\log\\left(\\frac{4-(1+\\rho)^2}{1-\\rho^2}\\right)$. Factoring numerator and denominator gives $\\frac{4-(1+\\rho)^2}{1-\\rho^2}=\\frac{(3+\\rho)(1-\\rho)}{(1-\\rho)(1+\\rho)}=1+\\frac{2}{1+\\rho}$, proving the formula.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $\\rho=\\frac12$, the ratio is $7/3$; at $\\rho=0$, it is $3$. Since $7/3<3$, [F2] gives the strict EIG comparison in the Example.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes a two-observation vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "rho=0 is explicitly evaluated in 3.1, giving log(3)/2; it is an included independent-noise case, despite the fixed prior variance being 1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "rho=0 is explicitly evaluated in 3.1, giving log(3)/2; it is an included independent-noise case, despite the fixed prior variance being 1.",
+            "item_sha256": "df6cd9ad1d0c0fc64da9bfdaadcabbb0b158eae9ed6f48cb97300b9352ad6591",
+            "row_sha256": "2bfc4fd2219cf54a29282c6cb2afc457a20c374b502b4545c6e4a5c0cf063e27",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 328
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There are two observations and two correlation settings."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1 proves Gamma_rho positive definite exactly for -1<rho<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The singular endpoints rho=±1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1–3.1 calculates eigenvalues and determinants directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes EIG as a function of rho and compares two values, not an iff criterion for identifiability or independence. There is no separate iff-forward obligation beyond this asserted scope.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example computes EIG as a function of rho and compares two values, not an iff criterion for identifiability or independence. There is no separate iff-forward obligation beyond this asserted scope.",
+            "item_sha256": "df6cd9ad1d0c0fc64da9bfdaadcabbb0b158eae9ed6f48cb97300b9352ad6591",
+            "row_sha256": "82a35efaf844ae6a00bd2cc494d2b30be57e8c88313520ceb87ce03148862b44",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 326
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes EIG as a function of rho and compares two values, not an iff criterion for identifiability or independence. In particular, no reverse classification implication is part of this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example computes EIG as a function of rho and compares two values, not an iff criterion for identifiability or independence. In particular, no reverse classification implication is part of this item.",
+            "item_sha256": "df6cd9ad1d0c0fc64da9bfdaadcabbb0b158eae9ed6f48cb97300b9352ad6591",
+            "row_sha256": "b6306b4df63079b28944b939f28638f6299350722ac82d9eb5d8173e8ff3b7d2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 327
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.2"
+          ],
+          "reason": "AC is inherited from the finite Gaussian EIG and library KL interfaces."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Correlated repeated measurements determinant ratio",
+          "method": "Exact eigenvalue and determinant calculation",
+          "input": {
+            "C": 1,
+            "A": "(1,1)^T",
+            "Gamma_rho": "[[1,rho],[rho,1]]",
+            "rho_values": [
+              "0",
+              "1/2"
+            ]
+          },
+          "calculation": "Eigenvalues are 1+rho and 1-rho; det(S_rho)/det(Gamma_rho)=1+2/(1+rho).",
+          "expected": {
+            "EIG_rho_half": "(1/2) log(7/3)",
+            "EIG_rho_zero": "(1/2) log(3)",
+            "strict_order": "EIG(1/2)<EIG(0)"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for example; not independent review or acceptance."
+      }
+    },
+    "ex-ip-eig-singular-prior-support": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-ip-singular-gaussian-support-and-pseudoinverse",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $m\\in\\mathbb R^n$, and let\n$C\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TCv\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$X$ be a random vector with law $N_n(m,C)$, and define\n$\\mu_X(E)=\\mathbb P(X\\in E)$ for Borel $E\\subseteq\\mathbb R^n$. Write\n$\\operatorname{Ran}(C)=\\{Cv:v\\in\\mathbb R^n\\}$, and put\n$r=\\dim\\operatorname{Ran}(C)$. For a Borel probability $\\mu$ on\n$\\mathbb R^n$, define its topological support by\n$$ \\operatorname{supp}(\\mu)=\\{x:\\mu(B(x,\\varepsilon))>0\\text{ for every }\\varepsilon>0\\}, $$\nwhere $B(x,\\varepsilon)$ is the open Euclidean ball. If $r>0$, there are\n$U\\in\\mathbb R^{n\\times r}$ and a symmetric positive-definite\n$\\Lambda\\in\\mathbb R^{r\\times r}$ with $U^TU=I_r$ such that\n$$ C=U\\Lambda U^T,\\qquad \\operatorname{Ran}(C)=\\operatorname{Ran}(U),\\qquad C^\\dagger=U\\Lambda^{-1}U^T. $$\nMoreover, $X$ has the same law as $m+U\\Lambda^{1/2}Z$, where\n$Z\\sim N_r(0,I_r)$, and\n$$ \\operatorname{supp}(\\mu_X)=m+\\operatorname{Ran}(C). $$\nHere $C^\\dagger$ is the unique matrix satisfying\n$CC^\\dagger C=C$, $C^\\dagger CC^\\dagger=C^\\dagger$, and such that\n$CC^\\dagger$ and $C^\\dagger C$ are symmetric. If $r=0$, then\n$C=0$, $X=m$ almost surely, $C^\\dagger=0$, and the support is $\\{m\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-linear-gaussian-information-gain-logdet",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The range of $C$ is $\\operatorname{span}\\{(1,0)^T\\}$, so [F1] gives the stated support. Also $A_\\perp C A_\\perp^T=0$ and $A_\\parallel C A_\\parallel^T=1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Applying [F2] with noise covariance $1$ gives $\\operatorname{EIG}(A_\\perp)=\\frac12\\log(1+0)=0$ and $\\operatorname{EIG}(A_\\parallel)=\\frac12\\log(1+1)=\\frac12\\log2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Since $2>1$, [F3] gives $\\log2>\\log1=0$. The second coordinate therefore contributes no information under the prior, while the first-coordinate measurement has strictly positive EIG. No inverse or determinant of $C$ is taken.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example supplies two coordinate operators."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Verification 2.1 computes EIG zero for A_perp."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Each operator has one observed coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: C=diag(1,0) is singular with support span(e1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Observation noise variance is one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1–3.1 evaluates both supplied operators."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two explicit designs for the singular prior covariance diag(1,0), one informative and one supported in its null direction. It does not assert singular priors always have zero information.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example compares two explicit designs for the singular prior covariance diag(1,0), one informative and one supported in its null direction. It does not assert singular priors always have zero information.",
+            "item_sha256": "7f02d6baf0c613168bad1a1faccd29c2f47b9aaff0096df1c4f92dfde2e40b11",
+            "row_sha256": "e6ce61ee8a1ff09139e9b8d31974f1b25087356d925a5a14f5894b98a031b76f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Zero information for the exhibited perpendicular design is not claimed to characterize all singular covariances or all uninformative experiments. It is one calculated design-specific case.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Zero information for the exhibited perpendicular design is not claimed to characterize all singular covariances or all uninformative experiments. It is one calculated design-specific case.",
+            "item_sha256": "7f02d6baf0c613168bad1a1faccd29c2f47b9aaff0096df1c4f92dfde2e40b11",
+            "row_sha256": "8898bce30bea3e3b56d125866d422cce1a85c6a3294d2e0f26666e1a425c0a4d",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 360
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "reason": "AC is inherited from the finite Gaussian and EIG/KL interfaces."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Singular prior support and exact scores",
+          "method": "Exact rank-one covariance calculation",
+          "input": {
+            "C": "diag(1,0)",
+            "support": "span((1,0)^T)",
+            "noise_variance": 1,
+            "A_perp": "(0,1)",
+            "A_parallel": "(1,0)"
+          },
+          "calculation": "A_perp C A_perp^T=0 and A_parallel C A_parallel^T=1.",
+          "expected": {
+            "EIG_perp": 0,
+            "EIG_parallel": "(1/2) log(2)"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-54-author",
+        "notes": "Author-side Step 1 contract for example; not independent review or acceptance."
+      }
+    }
+  }
+}

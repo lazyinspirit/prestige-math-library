@@ -1,0 +1,57 @@
+---
+id: lem-connected-plane-multigraph-euler-formula
+kind: lemma
+title: "Euler formula for connected plane multigraphs"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-plane-graph-face-and-boundary
+  - thm-euler-formula-for-connected-plane-graphs
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "R. Diestel, Graph Theory, 6th ed., Theorem 4.2.9"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch4.pdf"
+      locator: "Chapter 4, §4.2, Theorem 4.2.9, pp. 101–102"
+dependency_level: 0
+---
+
+## Statement
+
+Let $G$ be a finite nonempty connected plane multigraph drawn in $\mathbb R^2$: vertices
+are distinct points; each edge is a polygonal arc joining its endpoints; edge
+interiors are pairwise disjoint and avoid every vertex; and loops and parallel
+edges are allowed. A loop is an edge whose two endpoints are the same vertex,
+with its interior otherwise embedded. A face is a connected component of the
+complement of the drawing. If $V,E,F$ are the numbers of vertices, edges, and
+faces, respectively, then
+
+$$V-E+F=2.$$
+
+## Statement references
+
+[[def-plane-graph-face-and-boundary]] — finite simple plane graphs and their face convention.
+
+[[thm-euler-formula-for-connected-plane-graphs]] — Euler's formula for connected simple plane graphs.
+
+[Diestel, *Graph Theory*, Theorem 4.2.9](https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch4.pdf) — connected plane graph Euler formula.
+
+## Facts & Assumptions
+
+**Given:** A finite connected polygonal plane multigraph $G$, allowing loops and parallel edges, with faces the components of the complement of its point-set drawing.
+
+[F1] A plane graph in the library's simple-graph convention is a finite simple graph drawn with polygonal edges whose interiors are pairwise disjoint and avoid vertices; its faces are the complementary regions ([[def-plane-graph-face-and-boundary]]).
+
+[F2] For a connected plane graph with vertex, edge, and face counts $V',E',F'$, one has $V'-E'+F'=2$ ([[thm-euler-formula-for-connected-plane-graphs]]).
+
+## Proof
+
+1.1 For each edge $e$ choose two distinct interior points at one-third and two-thirds of its polygonal parametrization, using the finitely many edge parametrizations in the code. Subdivide $e$ at those points into three edges and declare the two points new vertices. If $e$ is a loop at $v$, its replacement is the path $v-x_e-y_e-v$ with three distinct vertices along the loop; it has no loop edge. New vertices are unique to their original edge, so replacement edges from different original edges cannot be parallel, and the three edges replacing one original edge have different endpoint pairs. Thus the subdivided graph $G'$ is simple. Subdivision preserves connectedness and leaves the point-set drawing unchanged, so its faces are exactly those of $G$. With $E$ original edges, $V'=V+2E$ and $E'=3E$, hence $V'-E'=V-E$. If $E=0$, nonempty connectedness forces $V=1$, and the same construction leaves the one-vertex simple plane graph unchanged. By [F1], $G'$ is a connected plane graph in the library's simple-graph convention in either case. [given, F1, construct]
+
+2.1 Apply [F2] to $G'$. Since $F'=F$ and $V'-E'=V-E$ by step 1.1, the equality $V'-E'+F'=2$ gives $V-E+F=2$. [given, F2, step 1.1, algebra] ∎

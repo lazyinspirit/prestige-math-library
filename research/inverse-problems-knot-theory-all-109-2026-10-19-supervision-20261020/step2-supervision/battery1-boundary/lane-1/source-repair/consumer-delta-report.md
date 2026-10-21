@@ -1,0 +1,14 @@
+# Exact indexing correction and affected uses
+
+Author: `/root/floer_duality_repair`, one owner-focused FIRST proposal. Canonical sources were read only; root owns independent FINAL and guarded application.
+
+The repository natural-number coordinate set includes 0. For `x=e_0`, the old basis lemma truncations over `1<=j<=N` are all zero. The proposed statement and proof use `j<N` and the complementary tail `j>=N`. For N=0 the initial sum is empty and equals 0. Finite subsets lie in an initial segment, so the existing finite-tail axiom proves convergence without choosing an infinite family. Completeness, orthonormality and the all-coordinate norm conclusion stay unchanged.
+
+Literal-reference searches across `items/` and `library/` found exactly two item consumers. Both were read in full at their actual indexing-dependent statements, Facts and verification/proof paragraphs; this is an indexing-delta inspection, not an audit of their Gaussian, RKHS, support, independence or strong-law suppliers.
+
+- `ex-ip-trace-class-gaussian-has-full-support`: old literal e_j at coordinate j and sums j>=1 leave coordinate0 identically zero; thus the claimed full support and positive-eigenvalue completeness fail under that convention. The proposal explicitly reindexes the complete basis by e_j supported at j-1 and declares all x_j to be its coefficients. The weights, covariance, weighted RKHS, density/properness and support arguments in verification1.1–5.1 then retain exactly their formulas. F10 records the bijective reindexing. No axiom changes.
+- `cex-ip-infinite-dimensional-random-walk-reverse-flow-singular`: read Statement refuted, F2/F3/F11/F13 and proof1.1–3.2. Although singularity can also hold on a proper coordinate hyperplane, the current completeness/density and coordinate-law identification uses do not justify calling the old positive-only family a complete basis of all-N H. The same explicit positive reindexing fixes those uses. Every u_j and v_j in the separator is henceforth its declared basis coefficient; SLLN, beta>0 and all original probability arguments are unchanged. No axiom changes.
+
+No other item literally consumes the supplier or these two consumers. The three matching library files only list the item IDs in frontmatter; relevant reference neighborhoods were read and contain no coordinate formula or assumption depending on this delta. They require no proposed edit. This does not claim discovery of implicit unlinked uses, nor an audit of every Gaussian example in the corpus.
+
+`guarded-proposal.json` and `source.patch` contain the three exact before/proposed sources. Apply only to matching preimages; no hash or validator run was performed. The lane boundary row for the basis must not be upheld against the uncorrected source. Its proposed checked empty-truncation disposition is conditional on application of this source correction.

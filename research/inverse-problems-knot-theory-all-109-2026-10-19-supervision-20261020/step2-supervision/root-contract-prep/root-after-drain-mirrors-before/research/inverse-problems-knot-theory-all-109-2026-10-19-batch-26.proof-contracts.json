@@ -1,0 +1,1365 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-nonlinear-exact-solution-set-is-weakly-closed",
+    "thm-ip-nonlinear-tikhonov-minimizer-exists",
+    "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution",
+    "thm-ip-nonlinear-tikhonov-weak-cluster-stability",
+    "thm-ip-nonlinear-tikhonov-vanishing-noise-convergence",
+    "ex-ip-nonlinear-tikhonov-has-two-global-minimizers",
+    "ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map"
+  ],
+  "contracts": {
+    "lem-ip-nonlinear-exact-solution-set-is-weakly-closed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "A constant net converges weakly to its value, including in the zero space.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-output-limit",
+          "claim": "The forward images of an exact-solution sequence are the constant sequence at the datum, hence converge weakly to that datum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "limit-remains-exact",
+          "claim": "Sequential graph closure identifies the weak limit as a point of the same exact solution set.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the exact solution set is empty, the universal closure assertion is vacuous; steps 1.1–2.1 require no selected element."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For datum y=0 the constant image sequence still converges weakly to its value, and steps 1.1–2.1 apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the exact solution set is a singleton, any weak limit from a sequence in it is returned to that set by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If X={0}, every nonempty subset is {0}; the graph-closure implication in step 2.1 still gives the conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, radius, or endpoint occurs in this sequence-closure lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 fix an arbitrary sequence and use no family of choices or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way closure implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way closure implication, not an equivalence."
+        }
+      ]
+    },
+    "thm-ip-nonlinear-tikhonov-minimizer-exists": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "every filter on a set is contained in an ultrafilter on that set",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every complete real or complex inner-product space",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Then $(u_j)$ has a subsequence converging weakly to a point of $X$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then $$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-infimum",
+          "source_section": "Definition",
+          "quote": "a **greatest lower bound**, or **infimum**, of $S$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Then $S$ has a greatest lower bound in $\\mathbb{R}",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-inf-epsilon",
+          "source_section": "Statement",
+          "quote": "$$\\ell = \\inf S \\quad \\Longleftrightarrow \\quad \\text{for every } \\varepsilon > 0 \\text{ there exists } s \\in S \\text{ with } s < \\ell + \\varepsilon.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "the **nonlinear Tikhonov functional** is the map",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$;",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-infimum",
+          "claim": "Nonnegativity and a finite competitor make the objective-value infimum a finite real.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5"
+          ]
+        },
+        {
+          "id": "minimising-sequence",
+          "claim": "The infimum epsilon property gives a sequence whose objective values converge to the infimum; DC supplies the countable selection.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "penalty-coercivity",
+          "claim": "The positive penalty bounds the parameter sequence, and the data term bounds its forward images.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "joint-weak-subsequence",
+          "claim": "Hilbert reflexivity and the weak subsequence result produce a common weakly convergent subsequence in X and Y.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "graph-identification",
+          "claim": "Sequential graph closure places the weak limit in D and identifies its image.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "lower-limit-attainment",
+          "claim": "Weak lower semicontinuity makes the graph limit attain the infimum.",
+          "step": "6.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes D is nonempty, so an empty admissible domain is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If X or Y is the zero Hilbert space, the bounds in step 3.1 and weak-limit argument in steps 4.1–6.1 still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The value alpha=1 is allowed; step 3.1 uses only alpha>0, while alpha=0 is excluded by the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton domain or constant forward map still yields a nonempty minimizing sequence and the same limit argument in steps 1.1–6.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints or radius occur in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses DC=>countable choice, and step 4.1 uses UL/DC/HB; the proof assumes no full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence assertion, not an equivalence."
+        }
+      ]
+    },
+    "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "every filter on a set is contained in an ultrafilter on that set",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-ip-nonlinear-exact-solution-set-is-weakly-closed",
+          "source_section": "Statement",
+          "quote": "is weakly sequentially closed in $X",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Every complete real or complex inner-product space",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-direct-method-in-a-reflexive-banach-space",
+          "source_section": "Statement",
+          "quote": "Then $I$ attains its infimum on $A$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then $$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "source_section": "Definition",
+          "quote": "every sublevel set",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-x0-minimum-norm-solution-on-weak-domain",
+          "source_section": "Definition",
+          "quote": "a point $x^\\dagger\\in D$ is an **$x_0$-minimum-norm solution**",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-set-direct-method-input",
+          "claim": "The exact solution set is nonempty and weakly sequentially closed, and the reference-distance functional is proper and coercive on it.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "weak-lower-semicontinuity",
+          "claim": "HB lower semicontinuity of the norm gives the required lower semicontinuity of the squared-distance functional.",
+          "step": "2.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "minimum-attained",
+          "claim": "The real Hilbert domain is reflexive under DC-derived countable choice, so the direct method gives a minimizer on the exact solution set.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "minimum-norm-conclusion",
+          "claim": "Minimizing the squared distance is equivalent to minimizing distance on nonnegative reals.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes that the exact solution set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If x0 itself is exact, the functional has minimum zero and the direct-method application in steps 1.1–4.1 includes it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the exact solution set has one element, that element is the minimum-norm solution by the definition in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If X={0}, every nonempty exact solution set is a singleton, and steps 1.1–4.1 apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint appears in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The application uses UL, DC, and HB; DC supplies CC for Hilbert reflexivity in step 3.1, with no full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence in one direction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence in one direction, not an equivalence."
+        }
+      ]
+    },
+    "thm-ip-nonlinear-tikhonov-weak-cluster-stability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "every filter on a set is contained in an ultrafilter on that set",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "attains a global minimum on $D$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Every complete real or complex inner-product space",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Then $(u_j)$ has a subsequence converging weakly to a point of $X$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then $$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$;",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "the **nonlinear Tikhonov functional** is the map",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "perturbed-minimizers-selected",
+          "claim": "Existence for each perturbed datum and DC-derived countable choice yield a sequence of global minimizers.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "uniform-sublevel-bounds",
+          "claim": "Comparison with a fixed feasible point bounds the minimizing sequence and its forward images.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "weak-cluster-subsequence",
+          "claim": "Reflexivity and the bounded-sequence lemma give weakly convergent subsequences in both Hilbert spaces.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F3",
+            "F4",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "perturbed-graph-identification",
+          "claim": "Strong convergence of the data lets weak graph closure identify the limiting forward image.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "limiting-minimizer",
+          "claim": "Lower semicontinuity and comparison with every fixed competitor show that every weak cluster point minimizes the limiting functional.",
+          "step": "5.1",
+          "inputs": [
+            "A3",
+            "F5",
+            "F7",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require a nonempty domain D."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If y_n=y for all n, step 2.1 still bounds any chosen sequence of minimizers and steps 3.1–5.1 apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The argument permits alpha=1 and every alpha>0; positivity is used in the penalty bound of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a singleton domain or zero Hilbert space, the minimizing sequence is bounded and every cluster point minimizes by step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, radius, or endpoint is part of the stability statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses DC=>CC for countably many minimizer sets; step 3.1 uses UL/DC/HB. No full AC is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way stability theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way stability theorem, not an equivalence."
+        }
+      ]
+    },
+    "thm-ip-nonlinear-tikhonov-vanishing-noise-convergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "every filter on a set is contained in an ultrafilter on that set",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Every complete real or complex inner-product space",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Then $(u_j)$ has a subsequence converging weakly to a point of $X$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution",
+          "source_section": "Statement",
+          "quote": "there exists $x^\\dagger\\in S_F(y)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "attains a global minimum on $D$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then $$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$;",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "the **nonlinear Tikhonov functional** is the map",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-ip-x0-minimum-norm-solution-on-weak-domain",
+          "source_section": "Definition",
+          "quote": "a point $x^\\dagger\\in D$ is an **$x_0$-minimum-norm solution**",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-minimum-norm-competitor",
+          "claim": "The exact-solution theorem supplies a least-distance exact solution; existence for each alpha/data pair and DC supply a minimizer sequence.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "vanishing-noise-bounds",
+          "claim": "Comparison with the exact minimum-norm solution bounds the penalty and residual terms.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-weak-cluster",
+          "claim": "The parameter conditions bound the minimizers; residual convergence and graph closure make the weak limit exact.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "F7",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "minimum-norm-cluster",
+          "claim": "Weak lower semicontinuity and the penalty bound show the exact weak limit has minimum distance to x0.",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "F6",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty exact-solution set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If delta_n=0 for every n, the residual estimate in step 2.1 remains valid and steps 3.1–4.1 give an exact minimum-norm limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each alpha_n must be positive and tend to zero; alpha_n=1 may occur at an initial index, while step 2.1 uses the stated ratio limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the exact-solution set is a singleton, step 4.1 identifies its sole point as every weak cluster point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint or finite-radius boundary in the parameter statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses DC=>CC to select minimizers; step 3.1 uses UL/DC/HB for weak subsequences. No full AC is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a one-way convergence conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a one-way convergence conclusion, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-nonlinear-tikhonov-has-two-global-minimizers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "The **induced length**, or inner-product norm, of $v$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "A **weakly convergent sequence** is this definition with $I=\\mathbb N$ in its usual order.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "the **nonlinear Tikhonov functional** is the map",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "closed-nonlinear-quadratic-map",
+          "claim": "The polynomial map is nonlinear and its graph is sequentially weak-to-weak closed on R.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "objective-specialization",
+          "claim": "The general Tikhonov definition specializes to the stated scalar objective.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-minimizer-set",
+          "claim": "Completing the square in u=t^2 shows the objective minimum is attained exactly at the two stated points.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty real-line domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 the objective is finite but exceeds 3/8; step 2.1 excludes it from the minimizer set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The fixed parameter alpha=1 is positive, so the example lies at the allowed unit-parameter value in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes the full real-line domain and has no variable domain-degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use explicit real algebra and make no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "every filter on a set is contained in an ultrafilter on that set",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "A **measure** on $(X,\\mathcal A)$ is a function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure-space",
+          "source_section": "Definition",
+          "quote": "A **measure space** is a triple $(X,\\mathcal A,\\mu)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-banach-valued-simple-function-and-integral",
+          "source_section": "Definition",
+          "quote": "Its integral over $E\\in\\mathcal A$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bochner-integrable-function",
+          "source_section": "Definition",
+          "quote": "A strongly measurable function $f:\\Omega\\to X$ is **Bochner integrable** if there is a sequence of integrable $X$-valued simple functions $(s_n)$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-banach-valued-simple-integral-is-well-defined",
+          "source_section": "Statement",
+          "quote": "The integral of an integrable Banach-valued simple function is independent of its disjoint measurable representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "A **real** or **complex inner-product space**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "A **weakly convergent sequence** is this definition with $I=\\mathbb N$ in its usual order.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "attains a global minimum on $D$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "the **nonlinear Tikhonov functional** is the map",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-bochner-map",
+          "claim": "The finite measure makes each scalar-valued simple function integrable, and its simple integral is the stated polynomial; the polynomial is nonlinear.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-graph-closure",
+          "claim": "Weak convergence in R implies ordinary convergence, and polynomial continuity identifies every weak graph limit.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tikhonov-existence-application",
+          "claim": "The map fits both the open-domain nonlinear interface and the weak-closed-domain existence theorem, so the associated functional attains a global minimum.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-point measure space and a nonempty real-line domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At s=0 the simple function is zero and remains Bochner integrable; the graph argument in step 1.2 still holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite measure has total mass one and the existence conclusion permits alpha=1 as a positive parameter in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At s=0 the integrand is the zero simple function, covered by step 1.1; the domain itself remains R."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or radius occurs in the finite-space example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The integral and graph checks in steps 1.1–1.2 make no choices; step 2.1 uses only the explicitly stated UL/DC/HB branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a map and an existence consequence; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a map and an existence consequence; it is not an equivalence."
+        }
+      ]
+    }
+  }
+}

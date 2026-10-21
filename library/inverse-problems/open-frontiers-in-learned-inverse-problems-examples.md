@@ -1,0 +1,22 @@
+---
+page: open-frontiers-in-learned-inverse-problems-examples
+title: Open frontiers in calibrated and robust learned inversion — Examples and Counterexamples
+status: draft
+items: []
+examples:
+  - ex-ip-score-coverage-baseline-gaussian-sequence
+  - ex-ip-score-coverage-unbounded-truth-prior-bias
+  - ex-ip-operator-shift-stable-scalar-risk
+  - ex-ip-operator-shift-vanishing-singular-value
+  - ex-ip-diffusion-two-mode-finite-sample-weights
+  - ex-ip-diffusion-finite-budget-misses-rare-mode
+  - ex-ip-neural-inverse-mesh-truncation-modulus
+  - ex-ip-neural-inverse-finite-samples-need-class-control
+  - ex-ip-integrated-score-error-misses-euler-grid-times
+  - ex-ip-robust-ellipsoid-minimax-shift-rate
+  - ex-ip-ideal-score-error-allows-unbounded-euler-wasserstein
+  - ex-ip-coordinate-free-fno-inverse-risk-obstruction
+requires:
+  - open-frontiers-in-learned-inverse-problems
+page_layout: compact-v1
+---

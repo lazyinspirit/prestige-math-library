@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-tree-probing-experiment",
+    "def-ip-network-tomography-design-criterion",
+    "alg-ip-link-loss-em",
+    "thm-ip-flexicast-link-loss-identifiability",
+    "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery",
+    "ex-ip-independent-normal-delays-have-nonidentifiable-link-means"
+  ],
+  "contracts": {
+    "def-ip-tree-probing-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The Definition requires a nonempty receiver leaf set and a nonempty finite design family."},
+        {"case": "zero", "status": "not_applicable", "reason": "The Definition restricts every link-success probability to (0,1)."},
+        {"case": "one", "status": "not_applicable", "reason": "The Definition restricts every link-success probability to (0,1)."},
+        {"case": "degenerate", "status": "checked", "evidence": "In the one-edge root-to-leaf Definition case, the observed receiver indicator is exactly the single Bernoulli link variable."},
+        {"case": "endpoints", "status": "checked", "evidence": "The Definition requires N_d to be a positive integer for every finite design and records counts summing to N_d."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The Definition uses only finite tree, design, and link-state sets; the finite normalization product uses no choice principle."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The Definition introduces the model and asserts no biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The Definition introduces the model and asserts no converse."}
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-13",
+        "notes": "The observation is the full receiver vector for each declared receiver set. Independence across probes and temporal homogeneity are explicit model assumptions; later dependence models are outside this definition."
+      }
+    },
+    "def-ip-network-tomography-design-criterion": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The Definition inherits the nonempty receiver-set assumption from the tree experiment."},
+        {"case": "zero", "status": "not_applicable", "reason": "The combinatorial Definition contains no probability parameter."},
+        {"case": "one", "status": "not_applicable", "reason": "The combinatorial Definition contains no probability parameter."},
+        {"case": "degenerate", "status": "checked", "evidence": "In the one-edge root-to-leaf Definition case, coverage is the only nonvacuous condition because there is no nonroot internal vertex."},
+        {"case": "endpoints", "status": "checked", "evidence": "The Definition quantifies over every declared receiver set C_d, including singleton schemes, and splits only by membership in distinct child subtrees."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The Definition is a finite set-membership condition and uses no choice principle."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The Definition only names the split/coverage condition; no implication is claimed."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The Definition only names the split/coverage condition; no converse is claimed."}
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-13",
+        "notes": "This item defines the condition only. The identifiability equivalence is a separate theorem with its own local proof."
+      }
+    },
+    "alg-ip-link-loss-em": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The Definition requires a nonempty finite tree experiment and a nonempty finite design family."},
+        {"case": "zero", "status": "checked", "evidence": "The Definition permits an update coordinate to equal zero and then checks whether any positive-count pattern has zero probability before the next E-step."},
+        {"case": "one", "status": "checked", "evidence": "The Definition permits an update coordinate to equal one and applies the same observed-pattern likelihood check."},
+        {"case": "degenerate", "status": "checked", "evidence": "For the one-edge root-to-leaf Definition case, the expected-success/probe-count update reduces to the observed success fraction."},
+        {"case": "endpoints", "status": "checked", "evidence": "The Definition allows tolerance tau=0 and requires a positive finite iteration cap; the cap status is returned after at most M updates."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The Definition evaluates finite sums over compatible link configurations and finite count arrays; it does not invoke the generic EM finite-KL branch or AC."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The algorithm Definition is a procedure and asserts no biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The algorithm Definition is a procedure and asserts no converse."}
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-13",
+        "notes": "Validation covers counts, feasible patterns, interior initialization, positive link coverage, and positive observed-pattern probabilities. Statuses are stopping reasons only. No registered finite-smoke ID applies; no convergence or global-optimum property is claimed."
+      }
+    },
+    "thm-ip-flexicast-link-loss-identifiability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-tree-probing-experiment",
+          "source_section": "Definition",
+          "quote": "For a link-success parameter vector $p=(p_e)_{e\\in E}\\in(0,1)^E$, each design $d$ and probe $j\\in\\{1,\\ldots,N_d\\}$ has mutually independent link-success variables $X_{e,d,j}\\in\\{0,1\\}$ for $e\\in E_d$, with $\\Pr_p(X_{e,d,j}=1)=p_e$. The same $p_e$ applies in every design and probe (temporal homogeneity). The observed receiver indicator is $$ Y_{r,d,j}=\\prod_{e\\in P(o,r)}X_{e,d,j}\\qquad(r\\in C_d). $$",
+          "uses": ["1.1", "1.2", "1.3", "2.1", "3.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-network-tomography-design-criterion",
+          "source_section": "Definition",
+          "quote": "For a finite-tree probe design $\\mathcal C=((C_d,N_d))_{d=1}^D$, a receiver $r\\in R$ is **covered** if $r\\in C_d$ for some $d$. For a nonroot internal vertex $v$, a design $C_d$ **splits** $v$ if there are distinct children $c,c'$ of $v$ and receivers $r,s\\in C_d$ such that $r$ lies in the subtree rooted at $c$ and $s$ lies in the subtree rooted at $c'$. The design satisfies the **split/coverage condition** if every receiver is covered and every nonroot internal vertex is split by at least one design.",
+          "uses": ["1.1", "1.2", "1.3", "2.1", "4.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "The model is **identifiable** when its identity target $\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently when $\\mathsf P$ is injective.",
+          "uses": ["3.1", "4.1"]
+        }
+      ],
+      "derivations": [
+        {"id": "leaf-success-marginals", "claim": "Covered leaf probabilities q_r are determined from one-probe marginals of the full experiment law.", "step": "1.1", "inputs": ["given", "F1", "F2", "algebra"]},
+        {"id": "split-pair-recovers-branch-point", "claim": "At each split internal vertex, q_v is determined by a split-pair joint success and its two marginals.", "step": "2.1", "inputs": ["given", "F1", "F2", "step 1.1", "choose", "algebra"]},
+        {"id": "edge-ratios-prove-injectivity", "claim": "The recovered vertex path probabilities determine each link probability by q_v/q_u.", "step": "3.1", "inputs": ["given", "F1", "F3", "step 1.1", "step 2.1", "algebra"]},
+        {"id": "uncovered-leaf-is-invisible", "claim": "An uncovered receiver's terminal edge can vary without changing any observed law.", "step": "1.2", "inputs": ["given", "F1", "F2", "construct", "algebra"]},
+        {"id": "unsplit-node-rescaling", "claim": "If no design splits an internal vertex, a small incoming/outgoing rescaling preserves every per-design law while changing parameters.", "step": "1.3", "inputs": ["given", "F1", "F2", "choose", "construct", "algebra"]},
+        {"id": "necessity-and-equivalence", "claim": "Failure of either coverage or splitting prevents injectivity, completing the reverse implication.", "step": "4.1", "inputs": ["F2", "F3", "step 1.2", "step 1.3", "step 3.1", "algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The Statement requires a nonempty finite receiver set."},
+        {"case": "zero", "status": "not_applicable", "reason": "The Statement restricts all success probabilities to (0,1), so p_e=0 is outside its scope."},
+        {"case": "one", "status": "not_applicable", "reason": "The Statement restricts all success probabilities to (0,1), so p_e=1 is outside its scope."},
+        {"case": "degenerate", "status": "checked", "evidence": "In the one-edge root-to-leaf Statement case, coverage gives q_r=m_r and there is no nonroot internal split condition; Step 3.1 recovers p_e=q_r."},
+        {"case": "endpoints", "status": "checked", "evidence": "The Statement requires N_d>=1 for every design; Step 1.1 uses a one-probe marginal and the full repeated law has that marginal."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–4.1 use finite vertices, receiver sets, and link-state laws; no arbitrary choice principle is used."},
+        {"case": "iff-forward", "status": "checked", "evidence": "Steps 1.1, 2.1, and 3.1 prove split/coverage implies injectivity."},
+        {"case": "iff-reverse", "status": "checked", "evidence": "Steps 1.2, 1.3, and 4.1 prove that failure of coverage or splitting implies noninjectivity."}
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-13",
+        "notes": "The local proof uses observable success moments and covers arbitrary finite root outdegree. Strict positivity is needed for the split-pair denominator and strict upper bounds permit the unsplit rescaling. No source-only proof or finite-smoke substitution is used."
+      }
+    },
+    "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-tree-probing-experiment",
+          "source_section": "Definition",
+          "quote": "$$ Y_{r,d,j}=\\prod_{e\\in P(o,r)}X_{e,d,j}\\qquad(r\\in C_d). $$",
+          "uses": ["1.1", "1.2", "2.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tree-probing-experiment",
+          "source_section": "Definition",
+          "quote": "A singleton receiver set is a unicast scheme; a receiver set of size at least two is a multicast scheme.",
+          "uses": ["1.1", "1.2"]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-tree-probing-experiment",
+          "source_section": "Definition",
+          "quote": "The complete experiment observes $N_d$ independent outcomes with law $P_{p,d}$ for each design, independently across designs.",
+          "uses": ["1.1", "1.2"]
+        }
+      ],
+      "derivations": [
+        {"id": "same-unicast-products", "claim": "The two interior parameter vectors give the same success probability on each separate unicast path and therefore the same independent unicast sample laws.", "step": "1.1", "inputs": ["given", "F1", "F2", "F3", "algebra"]},
+        {"id": "multicast-law-distinguishes", "claim": "Their joint multicast success probabilities differ, so the multicast outcome laws differ.", "step": "1.2", "inputs": ["given", "F1", "F2", "F3", "algebra"]},
+        {"id": "multicast-ratios-recover-links", "claim": "The multicast two-marginal/joint-success ratios recover the shared and branch probabilities for every interior vector.", "step": "2.1", "inputs": ["given", "F1", "algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The Example fixes a nonempty three-edge tree and two receivers."},
+        {"case": "zero", "status": "not_applicable", "reason": "The Example restricts each link-success probability to (0,1)."},
+        {"case": "one", "status": "not_applicable", "reason": "The Example restricts each link-success probability to (0,1)."},
+        {"case": "degenerate", "status": "checked", "evidence": "The Example uses the minimal two-receiver tree with one shared edge and two branch edges; Step 1.1 checks both path products."},
+        {"case": "endpoints", "status": "checked", "evidence": "The Example states any fixed positive probe counts; Step 1.1 shows equality for every such count by equality of the Bernoulli factors."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–1.3 use exact rational arithmetic on finite Bernoulli laws and no choice principle."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The Example contrasts two laws and makes no iff claim."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The Example contrasts two laws and makes no converse claim."}
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-13",
+        "notes": "The unicast streams are separate independent probes; multicast observes the same-probe joint receiver vector. The fractions are exact. No registered finite-smoke ID applies and the example does not substitute for the general theorem."
+      }
+    },
+    "ex-ip-independent-normal-delays-have-nonidentifiable-link-means": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$.",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "The model is **identifiable** when its identity target $\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently when $\\mathsf P$ is injective.",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {"id": "couple-link-delays", "claim": "A shared set of independent standard-normal variables gives valid independent link-delay vectors for both mean choices.", "step": "1.1", "inputs": ["given", "A1", "F1", "construct"]},
+        {"id": "equal-path-sums", "claim": "Under that coupling the two observed path-delay vectors are equal pointwise.", "step": "2.1", "inputs": ["given", "F1", "step 1.1", "algebra"]},
+        {"id": "nonidentifiable-means", "claim": "Distinct link-mean vectors with equal observation laws violate identifiability of the identity target.", "step": "3.1", "inputs": ["given", "F2", "step 2.1", "algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The Example fixes a three-edge tree and two leaf receivers."},
+        {"case": "zero", "status": "not_applicable", "reason": "The Example fixes each link-delay variance at one and has no zero-probability parameter."},
+        {"case": "one", "status": "not_applicable", "reason": "The Example fixes each link-delay variance at one and has no Bernoulli endpoint."},
+        {"case": "degenerate", "status": "checked", "evidence": "The two mean vectors differ by (1,-1,-1), which cancels in both path sums in Step 2.1."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The normal mean parameter ranges over R and the variance is fixed at one; no interval endpoint is claimed."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 explicitly assumes AC only through the cited normal-law Definition; the coupling itself makes no further choice."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The Example proves one nonidentifiability witness, not an iff statement."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The Example proves one nonidentifiability witness, not a converse."}
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-13",
+        "notes": "A direct coupling proves equality of the joint law without invoking a Gaussian-sum theorem. The AC dependency is isolated to the existing normal-law convention. No registered finite-smoke ID applies."
+      }
+    }
+  }
+}

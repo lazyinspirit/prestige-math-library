@@ -1,0 +1,1240 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-discrete-linear-input-state-output-experiment",
+    "alg-ip-exact-block-hankel-realization",
+    "thm-ip-finite-observability-identifies-initial-state",
+    "thm-ip-state-similarity-preserves-input-output-data",
+    "thm-ip-hankel-realization-recovers-controllable-observable-system",
+    "cex-ip-continuous-time-frequency-aliasing",
+    "ex-ip-unobservable-state-mode",
+    "ex-ip-similar-state-space-realizations-same-data",
+    "ex-ip-forward-euler-observation-model-error",
+    "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation"
+  ],
+  "contracts": {
+    "def-ip-discrete-linear-input-state-output-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at q=1 the input index range 0 <= k < q-1 is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: d=0 is explicitly included with empty matrix shapes and a singleton state space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: q=1 gives one output sample and an empty input list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the d=0 convention assigns the unique zero state and empty matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: output indices include k=0 and k=q-1; the last transition input is k=q-2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only finite real vectors and matrices are specified; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines an experiment and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines an experiment and states no if-and-only-if claim."
+        }
+      ]
+    },
+    "alg-ip-exact-block-hankel-realization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the d=0 branch supplies empty factors and empty output matrices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: rank zero is handled by the explicit empty-factorization branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: q=1 uses H0=M0 and H1=M1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a rank mismatch returns inconsistent-rank-data and a failed exact operation returns failed-solve."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: H1's last block uses M_{2q-1}, which is included in the input list."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice is declared as the inherited SVD hypothesis; no full AC or DC is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and states no if-and-only-if theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and states no if-and-only-if theorem."
+        }
+      ]
+    },
+    "thm-ip-finite-observability-identifies-initial-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are\n\n$$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$\n\nBoth dimensions are defined. The kernel is a linear subspace of the\nfinite-dimensional space $V$, so it is finite-dimensional by\n[[thm-linear-kernel-image-and-injectivity]] and\n[[thm-dimension-of-a-linear-subspace]]. The image is finite-dimensional because\n[[lem-kernel-basis-extension-gives-image-basis]] constructs a finite basis of\nit from a basis of $V$. Thus rank and nullity are natural numbers, including\nwhen $V$ is the zero space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-rank-equals-number-of-nonzero-singular-values",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. Then $\\operatorname{rank} T$ equals the number of positive\nsingular values of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-full-column-rank-pseudoinverse-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let\n$A\\in M_{m\\times n}(\\mathbb F)$ have full column rank $n$. Then $A^*A$ is\ninvertible and\n\n$$A^+=(A^*A)^{-1}A^*.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite real or complex matrix. Then $AA^+$ is the orthogonal\nprojection onto $\\operatorname{im}A$, and $A^+A$ is the orthogonal projection\nonto $\\operatorname{im}A^*$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, and let $b\\in\\mathbb F^m$. Then $A^+b$ is\na least-squares solution of $Ax=b$, and among all least-squares solutions it\nis the unique one of minimum Euclidean norm.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\dots,x_n$ be pairwise orthogonal vectors in a real or complex inner-product space, that is $\\langle x_i,x_j\\rangle=0$ whenever $i\\ne j$ ([[def-orthogonality-and-orthogonal-complement]]). Then\n\n$$\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2 ,$$\n\nthe empty sum on the right being $0$ at $n=0$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "expand-forced-response",
+          "claim": "For each $0\\le k<q$, the recurrence gives $x_k=A^kx_0+\\sum_{j=0}^{k-1}A^{k-1-j}Bu_j$, with the sum empty at $k=0$. At $k=0$ this is $x_0=A^0x_0$. If it holds at $k<q-1$, substitution into $x_{k+1}=Ax_k+Bu_k$ and the power recursion give the formula at $k+1$, using associativity and distributivity from [F2]. Multiplying by $C$ and subtracting $f_k$ gives $y_k-f_k=CA^kx_0$, so stacking yields $z=O_qx_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "least-singular-value-lower-bound",
+          "claim": "Suppose $d\\ge1$ and $O_q$ has full column rank. By [F5] and [F6], an SVD has exactly $d$ positive singular values $s_1\\ge\\cdots\\ge s_d=\\sigma_{\\min}(O_q)>0$. Writing $w$ in the right singular basis gives $\\|O_qw\\|_2^2=\\sum_{j=1}^d s_j^2|w_j|^2\\ge\\sigma_{\\min}(O_q)^2\\|w\\|_2^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kernel-rank-injectivity",
+          "claim": "Two states $x,x'\\in\\mathbb R^d$ produce the same corrected stack exactly when $O_q(x-x')=0$. Thus injectivity is equivalent to $\\ker O_q=\\{0\\}$. By [F3] and [F4], this is equivalent to $\\operatorname{rank}O_q=d$. When $d=0$, the map has a singleton domain and the empty matrix has rank zero, so the same equivalence holds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "projected-error-bound",
+          "claim": "By [F7] and [F8], $O_q^+$ is the unique Moore--Penrose inverse. Set $\\widehat x_0=O_q^+(z+e)$; [F11] identifies it as the minimum-norm least-squares estimate, and [F9] with $z=O_qx_0$ gives $w:=\\widehat x_0-x_0=O_q^+e$. Hence $O_qw=O_qO_q^+e$. By [F10], this is an orthogonal projection of $e$; the decomposition $e=O_qO_q^+e+(e-O_qO_q^+e)$ has orthogonal summands, so [F12] gives $\\|O_qw\\|_2\\le\\|e\\|_2$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "divide-by-positive-singular-value",
+          "claim": "Combining steps 1.2 and 2.2 gives $\\sigma_{\\min}(O_q)\\|\\widehat x_0-x_0\\|_2\\le\\|O_q(\\widehat x_0-x_0)\\|_2\\le\\|e\\|_2$. Division by the positive singular value proves the claimed sensitivity bound; step 2.1 proves the injectivity assertion.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 cover the zero-dimensional state space; q=1 has an empty input list in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies d=0, where rank O_q=0 and the state map is injective."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes to q=1 with f_0=0 and O_1=C."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats rank-deficient and full-column-rank cases through the kernel."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the final observed sample k=q-1 and forced response from inputs through q-2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses Countable Choice only through the finite SVD supplier; the kernel/rank argument in step 2.1 is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves injectivity implies ker O_q={0} and then rank O_q=d."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves rank O_q=d implies ker O_q={0} and hence injectivity."
+        }
+      ]
+    },
+    "thm-ip-state-similarity-preserves-input-output-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is $\\operatorname{GL}_n(F)$ is a group under matrix multiplication, including the trivial group $\\operatorname{GL}_0(F)$. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "induct-transformed-state",
+          "claim": "At $k=0$, the transformed initial state is $\\widehat x_0=T^{-1}x_0$. If $\\widehat x_k=T^{-1}x_k$ for $k<q-1$, then [F1] and the definitions give $\\widehat x_{k+1}=\\widehat A\\widehat x_k+\\widehat B u_k=T^{-1}AT T^{-1}x_k+T^{-1}Bu_k=T^{-1}(Ax_k+Bu_k)=T^{-1}x_{k+1}$; [F2] cancels $TT^{-1}$ and [F3] permits regrouping. Induction proves $\\widehat x_k=T^{-1}x_k$ for $0\\le k<q$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compare-outputs",
+          "claim": "For every such $k$, the transformed output is $\\widehat y_k=\\widehat C\\widehat x_k=CTT^{-1}x_k=Cx_k=y_k$ by [F1] and [F2]. Since the horizon, initial state, and inputs were arbitrary, this holds for every common finite input experiment.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to q=1, when the input list is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid for d=0 using the unique empty inverse and empty state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies equality at every sample, including the single sample q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the stated invertibility of T, without requiring A to be invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves output equality through the last sample k=q-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite induction and matrix algebra use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication about coordinate changes, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication about coordinate changes, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-ip-hankel-realization-recovers-controllable-observable-system": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are\n\n$$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$\n\nBoth dimensions are defined. The kernel is a linear subspace of the\nfinite-dimensional space $V$, so it is finite-dimensional by\n[[thm-linear-kernel-image-and-injectivity]] and\n[[thm-dimension-of-a-linear-subspace]]. The image is finite-dimensional because\n[[lem-kernel-basis-extension-gives-image-basis]] constructs a finite basis of\nit from a basis of $V$. Thus rank and nullity are natural numbers, including\nwhen $V$ is the zero space.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-ip-exact-block-hankel-realization",
+          "source_section": "Definition",
+          "quote": "Fix integers $d\\ge0$, $m,p\\ge1$, and $q\\ge1$. The input is a list of exact\nMarkov matrices\n$$M_0,\\ldots,M_{2q-1}\\in M_{p\\times m}(\\mathbb R).$$\nUse the exact-real linear-algebra model: an exact rank test returns the rank of\na finite real matrix; a thin rank-$d$ singular-value decomposition of a\nrank-$d$ matrix $H_0$ returns $H_0=U_d\\Sigma_dV_d^{\\mathsf T}$ with\n$\\Sigma_d$ diagonal and strictly positive, and an exact Moore--Penrose routine\nreturns a matrix satisfying the four Penrose equations. A routine failure or a\nreturned object that fails its stated exact identities is reported explicitly.\nThis specification makes no finite-bit computability or complexity claim for\narbitrary real inputs.\n\nForm the $q$-by-$q$ block Hankel matrices\n$$H_0=[M_{i+j}]_{0\\le i,j<q},\\qquad H_1=[M_{i+j+1}]_{0\\le i,j<q},$$\neach of shape $qp$ by $qm$. Execute the following steps.\n\n1. Apply the exact rank test to $H_0$. If it fails, return\n   `failed-solve`; if its value is not $d$, return `inconsistent-rank-data`.\n\n2. If $d=0$, use the empty factorization $H_0=\\widehat O\\widehat R$ with\n   $\\widehat O$ of shape $qp$ by $0$ and $\\widehat R$ of shape $0$ by $qm$.\n   If $d>0$, obtain the thin rank-$d$ SVD in the declared exact model and set\n   $$\\widehat O:=U_d\\Sigma_d^{1/2},\\qquad \\widehat R:=\\Sigma_d^{1/2}V_d^{\\mathsf T}.$$\n   Verify $H_0=\\widehat O\\widehat R$, $\\operatorname{rank}\\widehat O=d$,\n   and $\\operatorname{rank}\\widehat R=d$; if any operation or verification\n   fails, return `failed-solve`.\n\n3. Compute the exact Moore--Penrose inverses $\\widehat O^+$ and\n   $\\widehat R^+$ and verify their four Penrose equations. If a computation or\n   verification fails, return `failed-solve`.\n\n4. Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$. Return `success` with $(\\widehat A,\\widehat B,\\widehat C)$. For $d=0$,\n   these are the corresponding empty matrices.\n\nThe routine can report `failed-solve` for a failed or invalid exact-operation\nbackend. The existence theorems for finite-matrix SVDs and Moore--Penrose\ninverses ensure that the exact mathematical operations requested in steps 2–3\nexist; this definition alone asserts no noisy rank selection or stable\nparameter recovery.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is $\\operatorname{GL}_n(F)$ is a group under matrix multiplication, including the trivial group $\\operatorname{GL}_0(F)$. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-ip-state-similarity-preserves-input-output-data",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers. Suppose a noiseless\nexperiment has matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$,\ninitial state $x_0\\in\\mathbb R^d$, and common inputs\n$(u_k)_{0\\le k<q-1}$. For any invertible $T\\in M_d(\\mathbb R)$ define\n$$\\widehat A=T^{-1}AT,\\qquad \\widehat B=T^{-1}B,\\qquad \\widehat C=CT,\\qquad \\widehat x_0=T^{-1}x_0.$$\nThe experiment with $(\\widehat A,\\widehat B,\\widehat C,\\widehat x_0)$ and the\nsame inputs has the same output $y_k$ at every sample $0\\le k<q$. The equality\nholds for every horizon and every common input sequence.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-dimensional-boundary",
+          "claim": "If $d=0$, then $B$ has no rows and $C$ has no columns, so $M_k=0$ for every $k$ and $H_0=H_1=0$. Its rank is zero, and the algorithm's exact empty factorization and empty pseudoinverses return the unique empty matrices. Taking $T=I_0$ gives the asserted similarity. Henceforth suppose $d\\ge1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hankel-factor-identities",
+          "claim": "For $0\\le i,j<q$, the $(i,j)$ block of $H_0$ is $M_{i+j}=CA^{i+j}B=(CA^i)(A^jB)$ by [F1] and [F2], and the corresponding block of $H_1$ is $M_{i+j+1}=(CA^i)A(A^jB)$. Thus $H_0=O_qR_q$ and $H_1=O_qAR_q$. Because $R_q$ has rank $d$ and codomain $\\mathbb R^d$, it is surjective; because $O_q$ has rank $d$ and domain $\\mathbb R^d$, it is injective. Therefore $\\operatorname{im}H_0=\\operatorname{im}O_q$ and $\\operatorname{rank}H_0=d$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-rank-and-column-space",
+          "claim": "The exact rank test in the algorithm therefore returns $d$. The SVD factorization and pseudoinverses exist by [F6], and the stated successful-call hypothesis ensures that the algorithm returns factors $H_0=\\widehat O\\widehat R$ with each factor of rank $d$ and returns `success`. In particular $\\widehat R$ is surjective, so $\\operatorname{im}H_0=\\operatorname{im}\\widehat O$. Combining this with step 1.2 gives $\\operatorname{im}\\widehat O=\\operatorname{im}O_q$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "basis-change-between-factors",
+          "claim": "The columns of $O_q$ and $\\widehat O$ are bases of the same $d$-dimensional image by step 2.1. Thus there is a unique $d\\times d$ matrix $T$ with $\\widehat O=O_qT$. If $Tv=0$, then $\\widehat Ov=O_qTv=0$; since $\\widehat O$ has rank $d$, its kernel is zero, so $v=0$. Rank-nullity [F3] and [F4] makes the square matrix $T$ surjective as well as injective; hence $T$ is invertible by [F8]. From $O_qR_q=H_0=O_qT\\widehat R$ and injectivity of $O_q$, $R_q=T\\widehat R$, so $\\widehat R=T^{-1}R_q$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "factor-matrix-transition",
+          "claim": "Substituting $O_q=\\widehat O T^{-1}$ and $R_q=T\\widehat R$ into the identity in step 1.2 gives $H_1=\\widehat O(T^{-1}AT)\\widehat R$. Since $\\widehat O$ has full column rank, $\\widehat O^+\\widehat O=I_d$: the equation $\\widehat O\\widehat O^+\\widehat O=\\widehat O$ from [F7] and injectivity imply this identity. Since $\\widehat R$ has full row rank, $\\widehat R\\widehat R^+=I_d$: [F7] gives $\\widehat R\\widehat R^+\\widehat R=\\widehat R$, and surjectivity implies the identity. The algorithm's formula then yields $\\widehat A=\\widehat O^+H_1\\widehat R^+=T^{-1}AT$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "extract-input-output-blocks",
+          "claim": "The first $m$ columns of $R_q$ form $B$, and the first $p$ rows of $O_q$ form $C$. Taking those blocks in $\\widehat R=T^{-1}R_q$ and $\\widehat O=O_qT$ gives $\\widehat B=T^{-1}B$ and $\\widehat C=CT$. Hence the triple returned by the algorithm satisfies all three similarity identities.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "input-output-conclusion",
+          "claim": "By [F9], the similarity identities imply identical outputs for every finite common-input experiment when initial states are related by $T^{-1}$. With zero initial state and an impulse input, this gives $\\widehat C\\widehat A^k\\widehat B=CA^kB$ for every $k\\ge0$. This is exact realization modulo state similarity; it asserts no stability under perturbed Markov data.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes q>=1 and m,p>=1, so there is no empty data horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles d=0 and the empty SVD factors explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 applies to q=1 and blocks M0,M1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the rank d data pass the exact test and the factored observability image agrees; outside that hypothesis the algorithm reports inconsistent-rank-data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the final block M_{2q-1} in H1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses Countable Choice only for the finite SVD interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient exact-realization result under full-rank assumptions, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient exact-realization result under full-rank assumptions, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-ip-continuous-time-frequency-aliasing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $h>0$, $\\omega_1=2\\pi/h>0=\\omega_0$, so the frequencies are distinct. By [F1], the $k$th samples occur at $t_k=kh$. The two continuous outputs are $\\cos(\\omega_0t_k)=\\cos 0=1$ and $\\cos(\\omega_1t_k)=\\cos(2\\pi k)=1$ by [F2]. Thus their entire noiseless sample sequences agree.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The distinct admissible frequencies in step 1.1 have identical complete noiseless data. Therefore the data do not uniquely determine the frequency, which refutes the stated claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns the entire nonempty sample sequence indexed by N_0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero frequency omega_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives equal outputs already at the first sample k=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 compares two distinct frequencies whose complete sampled sequences agree."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample uses all k in N_0 and has no finite endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The periodicity calculation is finite and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a uniqueness statement and is not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a uniqueness statement and is not an if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-unobservable-state-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-finite-observability-identifies-initial-state",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers,\nand consider a real discrete input-state-output experiment with known matrices\n$A,B,C$, known inputs $u_0,\\ldots,u_{q-2}$, and unknown initial state $x_0$. For\n$0\\le k<q$, set\n$$f_0:=0,\\qquad f_k:=\\sum_{j=0}^{k-1}CA^{k-1-j}Bu_j\\quad(k\\ge1),$$\nand define the finite observability matrix $$O_q:=\\begin{bmatrix}C\\\\CA\\\\ \\vdots\\\\CA^{q-1}\\end{bmatrix}.$$ The corrected noiseless output stack is $$z:=\\begin{bmatrix}y_0-f_0\\\\y_1-f_1\\\\ \\vdots\\\\y_{q-1}-f_{q-1}\\end{bmatrix}=O_qx_0.$$\nThe map $x_0\\mapsto z$ is injective if and only if\n$\\operatorname{rank}O_q=d$. If $d=0$, both injectivity and the rank condition\nhold for the singleton state space. If $d\\ge1$ and $O_q$ has full column rank,\nlet $\\sigma_{\\min}(O_q)>0$ be its least singular value. For any additive stacked\nobservation error $e\\in\\mathbb R^{qp}$, the minimum-norm least-squares estimate\nof $x_0$ from $z+e$ is $\\widehat x_0=O_q^+(z+e)$, and it satisfies\n$$\\|\\widehat x_0-x_0\\|_2\\le\\frac{\\|e\\|_2}{\\sigma_{\\min}(O_q)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-unobservable-mode",
+          "claim": "The first initial state remains zero because $B=0$, so its outputs are all zero. For the difference $e_2=(0,1)^{\\mathsf T}$, $Ae_2=2e_2$; induction gives $A^ke_2=2^ke_2$ for each $k\\ge0$. Since $Ce_2=0$, every output difference is $CA^ke_2=0$. Thus the two distinct initial states produce identical outputs at all samples.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "check-observability-rank",
+          "claim": "For each $j\\ge0$, $CA^j=[1,0]$, so $O_q$ consists of $q$ copies of $[1,0]$ and has rank $1$. Since $1<d=2$, [F2] implies that the initial-state output map is noninjective for every $q\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "interpret-data-ambiguity",
+          "claim": "The initial states in step 1.1 are different but have the same complete observed sequence, so no data-only rule can recover both states exactly in this experiment.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes q>=1 and has no zero-length observation horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the zero output sequence for both initial states."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies at k=0, and step 2.1 covers q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes rank O_q=1<2 for the unobservable mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves equality for every sample in the finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the theorem under its Countable Choice assumption; the coordinate calculation in step 1.1 uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates nonidentifiability and states no if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example illustrates nonidentifiability and states no if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-similar-state-space-realizations-same-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-state-similarity-preserves-input-output-data",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers. Suppose a noiseless\nexperiment has matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$,\ninitial state $x_0\\in\\mathbb R^d$, and common inputs\n$(u_k)_{0\\le k<q-1}$. For any invertible $T\\in M_d(\\mathbb R)$ define\n$$\\widehat A=T^{-1}AT,\\qquad \\widehat B=T^{-1}B,\\qquad \\widehat C=CT,\\qquad \\widehat x_0=T^{-1}x_0.$$\nThe experiment with $(\\widehat A,\\widehat B,\\widehat C,\\widehat x_0)$ and the\nsame inputs has the same output $y_k$ at every sample $0\\le k<q$. The equality\nholds for every horizon and every common input sequence.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-coordinate-change",
+          "claim": "Direct multiplication gives $TT^{-1}=T^{-1}T=I_2$, so $T$ is invertible. Multiplying the displayed matrices gives $T^{-1}AT=\\widehat A$, $T^{-1}B=\\widehat B$, $CT=\\widehat C$, and $T^{-1}x_0=\\widehat x_0$. Also $\\widehat A\\ne A$ and $\\widehat C\\ne C$, so these are distinct coordinate descriptions.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-similarity-theorem",
+          "claim": "The hypotheses of [F2] hold by step 1.1, so every finite common-input experiment has the same output sequence in both descriptions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "conclude-distinct-models",
+          "claim": "Steps 1.1 and 2.1 exhibit distinct realization matrices and initial coordinates with identical data, as claimed.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 applies for q=1 with an empty input list."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes state dimension d=2 and does not use a zero state space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves equality including the single-sample horizon."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies a nonidentity invertible coordinate change with distinct A and C matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives equality through every finite-horizon endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The explicit matrix calculation and similarity theorem are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a construction, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a construction, not an if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-forward-euler-observation-model-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of Integer powers $a^m$, and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ (Finite sums and finite products, by recursion). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ (Integer powers $a^m$), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let\n$T:X\\to Y$ be a bounded linear operator\n([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of\nfinite length ([[def-linear-basis]]). Then $T$ is compact\n([[def-compact-linear-operator]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-error-budget-for-computed-inversion",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, let\n$A:X\\to Y$ be a compact linear forward map (the closure of $A(B)$ is compact\nin $Y$ for every bounded set $B\\subseteq X$), and let $A_h:X\\to Y$ be a\nbounded linear discretized map with finite-dimensional range. For a datum\n$b\\in Y$, let $\\lambda>0$ be the coefficient of $\\|x\\|_X^2$ in the Tikhonov\nobjective $\\|Ax-b\\|_Y^2+\\lambda\\|x\\|_X^2$. Supply adjoints $A^*:Y\\to X$ and\n$A_h^*:Y\\to X$ satisfying\n$\\langle Ax,y\\rangle_Y=\\langle x,A^*y\\rangle_X$ and\n$\\langle A_hx,y\\rangle_Y=\\langle x,A_h^*y\\rangle_X$, where the inner products\nare linear in their first arguments. Assume the shifted normal operators\n$A^*A+\\lambda I_X$ and $A_h^*A_h+\\lambda I_X$ are bijective, and define\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nFor a truth $x^\\dagger\\in X$, data perturbation $e\\in Y$, and $\\delta\\ge0$\nwith $\\|e\\|\\le\\delta$, put\n$$y=Ax^\\dagger,\\qquad y_\\delta=y+e,\\qquad y_{h,\\delta}=A_hx^\\dagger+e,\\qquad d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}.$$\nFor any returned output $\\widetilde x_h\\in X$, define its exact discrete\nnormal-equation residual by\n$$r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}.$$\nThe five-channel error budget is the ordered tuple\n$(b_{\\mathrm{bias}},b_{\\mathrm{data}},b_{\\mathrm{operator}},b_{\\mathrm{pre}},b_{\\mathrm{solve}})$, where\n$$\\begin{aligned}b_{\\mathrm{bias}}&=x^\\dagger-R_\\lambda y,\\qquad b_{\\mathrm{data}}=R_\\lambda y-R_\\lambda y_\\delta,\\\\b_{\\mathrm{operator}}&=(R_\\lambda-R_{\\lambda,h})y_{h,\\delta},\\qquad b_{\\mathrm{pre}}=R_\\lambda d_h,\\\\b_{\\mathrm{solve}}&=R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h.\\end{aligned}$$\nThe five entries are, in order, the truth-bias, data-perturbation,\nregularized-operator, pre-inversion, and algebraic-solve error vectors.\nThe scalar total budget is the sum of the five channel norms. The raw\npre-inversion forward residual is $d_h$; its reconstruction contribution is\n$b_{\\mathrm{pre}}$. The operator channel measures the difference between the\nregularized exact and discretized operators. The solve channel measures the\nreturned output's difference from the exact discrete Tikhonov output. The\ndefinition supplies no rate or arithmetic residual certificate.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "solve-ode-endpoint-map",
+          "claim": "The function $z_\\theta(t)=\\theta t^2/2$ has $z_\\theta(0)=0$ and, by [F1], derivative $\\dot z_\\theta(t)=\\theta t$. It therefore gives the exact endpoint map $A(\\theta)=z_\\theta(1)=\\theta/2$. At $\\theta=1$ the exact observation is $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "verify-error-budget-hypotheses",
+          "claim": "By [F2]–[F4], $X=Y=\\mathbb R$ with the standard inner product is a real Hilbert space. The maps $A(\\theta)=\\theta/2$ and $A_h(\\theta)=0$ are linear and bounded by [F5], with bounds $1/2$ and $0$; their ranges have bases $(1)$ and the empty basis, respectively. Hence $A$ is compact by [F6], and $A_h$ has finite-dimensional range. The adjoints are multiplication by $1/2$ and $0$, since $\\langle A\\theta,y\\rangle=\\theta y/2=\\langle\\theta,y/2\\rangle$ and $\\langle A_h\\theta,y\\rangle=0$. For $\\lambda=1$, the shifted normal operators are multiplication by $5/4$ and $1$, so both are bijective. All hypotheses of [F7] are satisfied.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-euler-endpoint",
+          "claim": "The stated forward-Euler formula at $(t_0,z_0)=(0,0)$ gives $z_1=0+1\\cdot\\theta\\cdot0=0$, so $A_h(\\theta)=0$ and $A_h(1)=0$. Thus the two endpoint maps differ even though the observation perturbation is zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identify-pre-inversion-error",
+          "claim": "Set $x^\\dagger=1$, $e=0$, $\\delta=0$, and $\\lambda=1$. Then [F7] gives $d_h=(A-A_h)x^\\dagger=1/2-0=1/2$. This is a nonzero discretization contribution with no observation noise.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 uses zero observation error e=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 establish the zero Euler map A_h and its zero-dimensional range."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes exactly one forward-Euler step of size h=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies A_h=0 is bounded with finite-dimensional range and the shifted normal map is invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare exact and numerical outputs at t=1 from the common initial value at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar ODE solution and finite-dimensional operator checks use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete error computation, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete error computation, not an if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed\nsampling interval. A real **discrete linear input-state-output experiment** of\nstate dimension $d$, input dimension $m$, output dimension $p$, and horizon\n$q$ consists of matrices $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$, an\ninitial state $x_0\\in\\mathbb R^d$, and known inputs\n$(u_k)_{0\\le k<q-1}$ in $\\mathbb R^m$. The states are defined by\n$$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$\nand the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for\n$0\\le k<q$. When observations are perturbed, the observed outputs are\n$\\widetilde y_k=y_k+\\eta_k$ for deterministic error vectors\n$\\eta_k\\in\\mathbb R^p$; the exact-data convention is $\\eta_k=0$ for all $k$.\nNo probability law is assigned to the errors. A numerical or discretization\nerror that changes the forward map is distinct from this additive observation\nerror.\n\nFor an impulse-response experiment with zero initial state, first input\n$u_0=v\\in\\mathbb R^m$, and later inputs zero, the **Markov parameters** are\n$$M_k:=CA^kB\\in M_{p\\times m}(\\mathbb R)\\qquad(k\\ge0),$$\nso the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers\nuse $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its\nsingle zero vector and the matrices have the corresponding empty shapes.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-singular-values-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. Because\n\n$$\\langle T^*Tv,v\\rangle=\\langle Tv,Tv\\rangle\\ge0$$\n\nfor every $v\\in V$, and because $(T^*T)^*=T^*T$ by Adjoints satisfy $(S+T)^*=S^*+T^*$, $(\\lambda T)^*=\\overline\\lambda T^*$, $(ST)^*=T^*S^*$, and $T^{**}=T$,\nthe operator $T^*T$ is non-negative. Let\n\n$$|T|:=\\sqrt{T^*T},$$\n\nthe unique non-negative square root from\nA non-negative operator has a unique non-negative square root. The **singular values**\nof $T$ are the eigenvalues of $|T|$, listed with multiplicity in weakly\ndecreasing order.\n\nIn particular, this definition applies to endomorphisms by taking $W=V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ip-exact-block-hankel-realization",
+          "source_section": "Definition",
+          "quote": "Fix integers $d\\ge0$, $m,p\\ge1$, and $q\\ge1$. The input is a list of exact\nMarkov matrices\n$$M_0,\\ldots,M_{2q-1}\\in M_{p\\times m}(\\mathbb R).$$\nUse the exact-real linear-algebra model: an exact rank test returns the rank of\na finite real matrix; a thin rank-$d$ singular-value decomposition of a\nrank-$d$ matrix $H_0$ returns $H_0=U_d\\Sigma_dV_d^{\\mathsf T}$ with\n$\\Sigma_d$ diagonal and strictly positive, and an exact Moore--Penrose routine\nreturns a matrix satisfying the four Penrose equations. A routine failure or a\nreturned object that fails its stated exact identities is reported explicitly.\nThis specification makes no finite-bit computability or complexity claim for\narbitrary real inputs.\n\nForm the $q$-by-$q$ block Hankel matrices\n$$H_0=[M_{i+j}]_{0\\le i,j<q},\\qquad H_1=[M_{i+j+1}]_{0\\le i,j<q},$$\neach of shape $qp$ by $qm$. Execute the following steps.\n\n1. Apply the exact rank test to $H_0$. If it fails, return\n   `failed-solve`; if its value is not $d$, return `inconsistent-rank-data`.\n\n2. If $d=0$, use the empty factorization $H_0=\\widehat O\\widehat R$ with\n   $\\widehat O$ of shape $qp$ by $0$ and $\\widehat R$ of shape $0$ by $qm$.\n   If $d>0$, obtain the thin rank-$d$ SVD in the declared exact model and set\n   $$\\widehat O:=U_d\\Sigma_d^{1/2},\\qquad \\widehat R:=\\Sigma_d^{1/2}V_d^{\\mathsf T}.$$\n   Verify $H_0=\\widehat O\\widehat R$, $\\operatorname{rank}\\widehat O=d$,\n   and $\\operatorname{rank}\\widehat R=d$; if any operation or verification\n   fails, return `failed-solve`.\n\n3. Compute the exact Moore--Penrose inverses $\\widehat O^+$ and\n   $\\widehat R^+$ and verify their four Penrose equations. If a computation or\n   verification fails, return `failed-solve`.\n\n4. Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$. Return `success` with $(\\widehat A,\\widehat B,\\widehat C)$. For $d=0$,\n   these are the corresponding empty matrices.\n\nThe routine can report `failed-solve` for a failed or invalid exact-operation\nbackend. The existence theorems for finite-matrix SVDs and Moore--Penrose\ninverses ensure that the exact mathematical operations requested in steps 2–3\nexist; this definition alone asserts no noisy rank selection or stable\nparameter recovery.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-hankel-realization-recovers-controllable-observable-system",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers,\nand let $A\\in M_{d\\times d}(\\mathbb R)$,\n$B\\in M_{d\\times m}(\\mathbb R)$, and $C\\in M_{p\\times d}(\\mathbb R)$ define\na discrete linear input-state-output experiment. Let\n$$M_k:=CA^kB\\qquad(0\\le k\\le2q-1),$$\n$$O_q:=\\begin{bmatrix}C\\\\CA\\\\ \\vdots\\\\CA^{q-1}\\end{bmatrix},\\qquad R_q:=\\begin{bmatrix}B&AB&\\cdots&A^{q-1}B\\end{bmatrix}.$$\nAssume $\\operatorname{rank}O_q=\\operatorname{rank}R_q=d$, the finite-horizon\nobservability and controllability conditions. Assume that every exact rank,\nSVD, and Moore--Penrose call made by the block-Hankel realization algorithm\ncompletes and passes its stated exact checks. Then the algorithm returns\n`success` with matrices $(\\widehat A,\\widehat B,\\widehat C)$, and there is an\ninvertible $T\\in M_d(\\mathbb R)$ such that\n$$\\widehat A=T^{-1}AT,\\qquad \\widehat B=T^{-1}B,\\qquad \\widehat C=CT.$$\nFor $d=0$, this means the unique zero-dimensional realization and the unique\ninvertible map on the zero space.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-small-hankel-system",
+          "claim": "For the first system, $M_0=CB=\\varepsilon$ and $M_1=CAB=0$ by [F1]. Thus the $q=1$ blocks are $H_0=[\\varepsilon]$ and $H_1=[0]$ by [F3], and [F2] gives the singular value of $H_0$ as $\\sqrt{\\varepsilon^2}=\\varepsilon$. Here $O_1=[1]$ and $R_1=[\\varepsilon]$ both have rank $1$. By [F4] and the given successful-call hypothesis, the exact algorithm succeeds and its scalar transition is similar to $A=0$; scalar similarity leaves that transition equal to $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "perturbed-data-alternate-system",
+          "claim": "For the perturbed data, the scalar system with $\\widetilde A=1/\\sqrt\\varepsilon$, $\\widetilde B=\\varepsilon$, and $\\widetilde C=1$ has $\\widetilde M_0=\\varepsilon$ and $\\widetilde M_1=\\sqrt\\varepsilon$ by [F1]; [F3] identifies these as its $q=1$ Hankel blocks. Its $O_1=[1]$ and $R_1=[\\varepsilon]$ again have rank $1$, so [F4] and the given successful-call hypothesis imply that the exact algorithm returns a scalar transition similar to $\\widetilde A$. A one-dimensional similarity does not change a scalar, hence $\\widetilde A$ is returned.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unbounded-sensitivity-sequence",
+          "claim": "Take $\\varepsilon_n=1/n^2$ for positive integers $n$. The perturbation size is $\\sqrt{\\varepsilon_n}=1/n\\to0$, while the change in transition value is $1/\\sqrt{\\varepsilon_n}=n\\to\\infty$ and the singular value of $H_0$ is $1/n^2\\to0$. This is an exact finite example of unbounded sensitivity as the Hankel singular value approaches zero; it makes no claim of noisy rank-selection correctness.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses q=d=m=p=1 and two Markov parameters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The premise epsilon>0 is essential; epsilon=0 would fail the full-rank hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the one-state, one-input, one-output horizon q=1 boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 takes epsilon_n down to the rank-loss boundary while retaining epsilon_n>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 compare the two complete q=1 Markov blocks M0 and M1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the exact theorem with its Countable Choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a sensitivity witness, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a sensitivity witness, not an if-and-only-if result."
+        }
+      ]
+    }
+  }
+}

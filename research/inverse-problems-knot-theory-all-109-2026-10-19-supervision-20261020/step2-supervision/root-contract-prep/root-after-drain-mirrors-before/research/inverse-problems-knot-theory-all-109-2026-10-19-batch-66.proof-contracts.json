@@ -1,0 +1,1836 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-square-integer-cokernel-finiteness-and-order",
+    "lem-cyclic-cover-linking-form-inverse-matrix",
+    "def-cyclic-branched-cover-of-a-knot",
+    "lem-cyclic-branched-cover-homology-is-alexander-module-coinvariants",
+    "lem-branched-cover-surgery-presentation-from-seifert-surface",
+    "lem-cyclic-branched-cover-seifert-block-matrix",
+    "lem-double-branched-cover-homology-from-seifert-matrix",
+    "lem-cyclic-cover-order-root-product-and-rational-sphere-test",
+    "thm-knot-determinant-is-order-of-double-cover-homology",
+    "thm-knot-cyclic-cover-order-from-alexander-polynomial",
+    "ex-knot-kt-11-worked-cases",
+    "cex-knot-kt-11-boundary-case"
+  ],
+  "contracts": {
+    "lem-square-integer-cokernel-finiteness-and-order": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $n=0$, the codomain and image are both the zero group, so the cokernel is trivial and has order $1=|\\det A|$. Now suppose $n>0$. Multiplication on the left or right by an integer matrix with determinant $\\pm1$ preserves the isomorphism type of the cokernel and preserves the absolute determinant: left multiplication changes the basis of the target, and right multiplication changes the basis of the domain.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Among all matrices obtained from $A$ by such row and column operations, choose one whose least nonzero absolute entry is as small as possible; by swaps and a sign change, place that positive entry $d$ in position $(1,1)$. If any entry in its first row or column is not divisible by $d$, Euclidean division and a row or column subtraction produce a nonzero remainder strictly between $0$ and $d$, which contradicts the minimality of $d$. Clear the first row and column by subtracting multiples of the first column and row. If an entry $b$ in the remaining submatrix were not divisible by $d$, add its row to the first row, write $b=kd+r$ with $0<r<d$, and subtract $k$ times the first column from its column; swapping that column with the first would again give a smaller nonzero pivot. Hence $d$ divides the remaining submatrix.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Apply the same finite pivot procedure to the remaining submatrix. Induction gives a diagonal matrix $\\operatorname{diag}(d_1,\\ldots,d_r,0,\\ldots,0)$ with each $d_i>0$, obtained by unimodular row and column operations. Its cokernel is $\\bigoplus_{i=1}^r\\mathbb Z/d_i\\mathbb Z\\oplus\\mathbb Z^{n-r}$. Thus it is finite exactly when $r=n$, equivalently when $\\det A\\ne0$; then its order is $\\prod_i d_i=|\\det A|$. The operations in step 1.1 preserve both conclusions for the original matrix. [given, step 1.1, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement or proof explicitly treats the empty matrix or genus-zero case in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 cover rank-deficient matrices, including the zero matrix, and show infinite cokernel when the determinant vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement has no one-object parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is assumed or used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-cyclic-cover-linking-form-inverse-matrix": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, an isotopy can also be arranged to avoid\n$\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix the usual orientation of $S^n$. If $K$ is a nonempty proper compact weakly locally contractible subspace of $S^n$ and $R$ is a commutative unital ring, there are isomorphisms\n$$\\widetilde H_i(S^n\\setminus K;R)\\cong\\widetilde H^{n-i-1}(K;R)$$\nfor every integer $i$. They are natural for inclusions of such compact subsets, with the reverse inclusions of their complements, and with the fixed sphere orientation.\n\nFor the nonempty spaces here, reduced homology in degree zero is the augmentation kernel, reduced cohomology in degree zero is the quotient by constant classes, positive reduced groups are ordinary groups, and negative reduced groups are zero. AC is inherited from Poincaré duality and the neighborhood-retract theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $L=K_1\\cup\\cdots\\cup K_r\\subset S^3$ be an\noriented link (a finite disjoint union of oriented smoothly embedded circles,\n[[def-oriented-link-in-s-three-and-ambient-isotopy]]) with $r\\ge1$ components,\nand let $X_L:=S^3\\setminus L$. Then $X_L$ is a connected smooth $3$-manifold\nwithout boundary, and in particular is path-connected, locally path-connected\nand semilocally simply connected; moreover $X_L$ has the homotopy type of a\nfinite CW complex\n([[def-cw-complex-with-closure-finiteness-and-weak-topology]]). Consequently the\ncovering-space classification\n([[thm-classification-of-connected-covering-spaces]]) applies to $X_L$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-one-variable-alexander-module-of-an-oriented-link",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $L=K_1\\cup\\cdots\\cup K_r\\subset S^3$ be an\noriented link with $r\\ge1$ components and complement $X_L$,\n([[def-oriented-link-in-s-three-and-ambient-isotopy]]), and let\n$$\\varphi:H_1(X_L;\\mathbb Z)\\longrightarrow\\mathbb Z$$\nbe the **total linking homomorphism**, defined as the composite\n$$H_1(X_L;\\mathbb Z)\\xrightarrow[\\ \\sim\\ ]{\\mathrm{Alex}}\\widetilde H^1(L;\\mathbb Z)\\cong\\bigoplus_{i=1}^rH^1(K_i;\\mathbb Z)\\xrightarrow{\\text{sum}}\\mathbb Z,$$\nwhere the first arrow is Alexander duality\n([[thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere]]),\neach $H^1(K_i;\\mathbb Z)\\cong\\mathbb Z$ is the orientation-induced\nidentification, and the last map sums the $r$ coordinates. By\n[[prop-the-first-hurewicz-map-in-degree-one-is-abelianization]] the map $\\varphi$\nmay again be written $\\pi_1(X_L)\\to H_1(X_L)\\xrightarrow{\\varphi}\\mathbb Z$; we\ndenote both composites by $\\varphi$ and set $K:=\\ker\\varphi$.\n\nThe **one-variable Alexander module** of $L$ is\n$$A_L:=H_1(\\widetilde{X_L};\\mathbb Z),$$\nthe first singular homology of the connected infinite cyclic cover\n$p:\\widetilde{X_L}\\to X_L$ classified by $K$\n([[thm-classification-of-connected-covering-spaces]],\n[[lem-subgroup-quotient-of-universal-cover]],\n[[def-covering-map-and-evenly-covered-neighbourhoods]]), equipped with its\nstructure of module over $\\Lambda=\\mathbb Z[t^{\\pm1}]$\n([[def-the-laurent-polynomial-ring]]) in which $t$ acts by the deck\ntransformation corresponding to the positive generator of\n$\\operatorname{Deck}(\\widetilde{X_L}/X_L)\\cong\\mathbb Z$.\n\n**Caveats.** The cover is the one classified by $K=\\ker\\varphi$; since $K$ is\nnormal the cover is regular and its deck group is\n$\\pi_1(X_L)/K\\cong\\mathbb Z$\n([[def-regular-covering]], [[thm-regular-covering-characterizations]], [[cor-deck-group-of-a-regular-covering]],\n[[def-deck-transformation-and-deck-group]]). The module $A_L$ is ordinary\nintegral homology of the cover, with the deck action as its module structure;\nno twisting by a representation of the link group is used. The total linking\nhomomorphism satisfies $\\varphi(\\mu_i)=1$ for a meridian $\\mu_i$ of any one\ncomponent, so $r\\ge1$ is needed for $\\varphi$ to be interesting and $A_L$\ndepends on the orientations of all components through this map.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mayer-vietoris-sequence-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For an open cover $X=U\\cup V$, the sequence\n$$\\cdots\\to H_n(U\\cap V;G)\\to H_n(U;G)\\oplus H_n(V;G)\\to H_n(X;G)\\xrightarrow{\\delta}H_{n-1}(U\\cap V;G)\\to\\cdots$$\nis exact, with middle map $(u,v)\\mapsto u+v$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Radial motion in each punctured normal disk gives a deformation retraction from $S^3\\setminus J$ to $X$. By [F1], Alexander duality identifies $H_1(S^3\\setminus J;\\mathbb Z)$ with $\\widetilde H^1(J;\\mathbb Z)=\\bigoplus_iH^1(J_i;\\mathbb Z)\\cong\\mathbb Z^n$. The inclusion of the compact exterior induces the same homology isomorphism by the retraction in [F2]. Thus $H_1(X;\\mathbb Z)\\cong\\mathbb Z^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The boundary of a small positive normal disk to $J_i$ maps to the $i$-th Alexander-duality coordinate generator: it meets $J_i$ once positively and misses every other component. Hence $[\\mu_1],\\ldots,[\\mu_n]$ are the coordinate basis, with the positive orientation normalized as in [F3]. The $i$-th coordinate of $[\\lambda_i]$ is zero by its zero self-linking convention, and for $j\\ne i$ its $j$-th coordinate is the defined linking number $\\operatorname{lk}_{S^3}(J_i,J_j)$. Therefore $[\\delta_i]=[\\lambda_i+f_i\\mu_i]=\\sum_jA_{ij}[\\mu_j]$.",
+          "step": "2.1",
+          "inputs": [
+            "\\mu_1",
+            "\\mu_n",
+            "F3",
+            "\\lambda_i",
+            "\\delta_i",
+            "\\lambda_i+f_i\\mu_i",
+            "\\mu_j",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "In Mayer–Vietoris for the filling, the map $H_1(\\partial V_i)\\to H_1(V_i)$ is onto and its kernel is generated by the meridian-disk boundary $\\delta_i$. The map $H_0(\\bigsqcup_i\\partial V_i)\\to H_0(X)\\oplus H_0(\\bigsqcup_iV_i)$ is injective: in coordinates it sends $(a_1,\\ldots,a_n)$ to $(\\sum_i a_i,-a_1,\\ldots,-a_n)$. Exactness therefore gives $H_1(Y;\\mathbb Z)=\\mathbb Z^n/A\\mathbb Z^n$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "Since $A$ is invertible over $\\mathbb Q$, for every $x\\in\\mathbb Z^n$ some positive integer $m$ clears the denominators of $A^{-1}x$, so $mx\\in A\\mathbb Z^n$ and each class is torsion. If $F,F'$ bound $mC,m'C$, pass to a common multiple $M$; the difference $(M/m)F-(M/m')F'$ is a 2-cycle $Z$. If $r[D]=0$, write $rD=\\partial G$; the chain boundary identity gives $r(Z\\mathbin{\\cdot}D)=Z\\mathbin{\\cdot}\\partial G=\\partial Z\\mathbin{\\cdot}G=0$, hence $Z\\mathbin{\\cdot}D=0$. Thus the quotient is independent of the chosen bounding chain and multiple modulo integers. Replacing either cycle representative by a homologous one adds an integer by the same boundary identity.",
+          "step": "4.1",
+          "inputs": [
+            "D",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "claim": "Let $B$ be the slope-coordinate matrix $[\\delta]=B[\\mu]$ in $H_1(X;\\mathbb Q)$; step 2.1 gives $B=A$. In the reverse filling, the slope-coordinate matrix is $B^{-1}$. Let $\\widetilde J_i$ denote the core of the attached solid torus, oriented so the boundary longitude $\\ell_i$ mapping to it satisfies $\\delta_i\\mathbin{\\cdot}\\ell_i=1$. Since $\\delta_i\\mathbin{\\cdot}\\mu_i=-1$, the image of $\\mu_i$ in that solid torus is $-[\\widetilde J_i]$. Define $H_{ij}=\\operatorname{lk}_Y(\\widetilde J_i,\\widetilde J_j)$ for $i\\ne j$, and let $H_{ii}$ be the reverse-surgery framing determined by the slope $\\mu_i$. For $i\\ne j$, clear denominators in $[\\mu_i]=\\sum_k(B^{-1})_{ik}[\\delta_k]$ and cap each $\\delta_k$ by its meridian disk. The chain in $X$ realizing this homology relation misses every core; with $\\delta_k\\mathbin{\\cdot}\\ell_k=+1$, the capped disk in $V_k$ meets the oriented core $\\widetilde J_j$ once positively if $k=j$ and not at all otherwise. Hence $(B^{-1})_{ij}=\\operatorname{lk}_Y(\\mu_i,\\widetilde J_j)=-H_{ij}$. The reverse diagonal framing is the reverse slope coefficient divided by $\\delta_i\\mathbin{\\cdot}\\mu_i=-1$, so $H_{ii}=-(B^{-1})_{ii}$. Therefore $H=-B^{-1}=-A^{-1}$.",
+          "step": "4.2",
+          "inputs": [
+            "\\delta",
+            "\\mu",
+            "\\widetilde J_i",
+            "\\mu_i",
+            "\\delta_k",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "claim": "Each old meridian $\\mu_i$ represents $-\\widetilde J_i$ in its attached solid torus. Hence for distinct indices their linking equals the core-linking entry $H_{ij}$; for a self-pairing, a parallel meridian maps to the parallel core specified by the reverse framing, also giving $H_{ii}$. Thus $\\lambda_Y([\\mu_i],[\\mu_j])=-(A^{-1})_{ij}$. The chain formula is additive in both cycles, by taking common multiples and summing bounding chains, so its matrix on the meridian basis gives $\\lambda_Y([x],[y])=-x^TA^{-1}y\\pmod{\\mathbb Z}$. If $x$ is replaced by $x+Az$, the value changes by $-z^Ty$; if $y$ is replaced by $y+Az$, it changes by $-x^Tz$, both integers because $A$ is symmetric and integral. [step 3.1, step 4.1, step 4.2, algebra] ∎",
+          "step": "5.1",
+          "inputs": [
+            "\\mu_i",
+            "\\mu_j",
+            "x",
+            "y",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty object or empty-matrix branch occurs in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The singular-matrix case is explicitly excluded by det(A) nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1, the one-component framed-link case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "def-cyclic-branched-cover-of-a-knot": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty object or empty-matrix branch occurs in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "not-applicable",
+      "proof_status_evidence": "This definition has no proof phase; its complete construction and hypotheses are stated directly.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-cyclic-branched-cover-homology-is-alexander-module-coinvariants": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cyclic-branched-cover-of-a-knot",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the standard oriented $3$-sphere, choose its compact exterior $E_K$ with boundary torus $T_K$, and let $\\mu$ and $\\lambda$ be its positive meridian and preferred longitude. The exterior homology theorem gives $H_1(E_K;\\mathbb Z)=\\mathbb Z[\\mu]$. Let $\\phi:\\pi_1(E_K)\\to\\mathbb Z$ be the composite of abelianization with the homomorphism $[\\mu]\\mapsto1$. For an integer $q\\ge2$, let $\\phi_q$ be the composite $\\pi_1(E_K)\\xrightarrow{\\phi}\\mathbb Z\\to\\mathbb Z/q\\mathbb Z$, and let $p_q:E_q\\to E_K$ be the connected cover classified by $\\ker\\phi_q$. On $T_K$, the homomorphism sends $[\\mu]\\mapsto1$ and $[\\lambda]\\mapsto0$, so the preimage of $T_K$ is a connected torus cover whose fundamental group corresponds to $\\langle\\mu^q,\\lambda\\rangle$. Let $\\widetilde\\mu$ be the closed lift of $\\mu^q$. Attach a solid torus to $E_q$ with its meridian identified with $\\widetilde\\mu$; the resulting oriented closed $3$-manifold is the $q$-fold cyclic branched cover $\\Sigma_q(K)$. In tubular coordinates near $K$, the extended map to $S^3$ has local form $(s,w)\\mapsto(s,w^q)$, and the deck group $\\mathbb Z/q\\mathbb Z$ acts by $w\\mapsto e^{2\\pi i/q}w$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-knot-tubular-exterior-and-boundary",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every smooth oriented knot $K$ in $S^3$, there are an oriented normal-bundle trivialization, a tubular map $\\Phi$ defined on an open neighbourhood containing $S^1\\times D^2_{2\\epsilon}$ for some $\\epsilon>0$, and a closed tubular neighbourhood $N(K)=\\Phi(S^1\\times D^2_\\epsilon)$. This $N(K)$ is diffeomorphic to $S^1\\times D^2$, its boundary $T_K$ is diffeomorphic to $S^1\\times S^1$, and its exterior $E_K=S^3\\setminus\\operatorname{int}N(K)$ is a compact smooth oriented three-manifold with boundary $T_K$. The open complement $S^3\\setminus K$ strongly deformation retracts onto $E_K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-one-variable-alexander-module-of-an-oriented-link",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $L=K_1\\cup\\cdots\\cup K_r\\subset S^3$ be an\noriented link with $r\\ge1$ components and complement $X_L$,\n([[def-oriented-link-in-s-three-and-ambient-isotopy]]), and let\n$$\\varphi:H_1(X_L;\\mathbb Z)\\longrightarrow\\mathbb Z$$\nbe the **total linking homomorphism**, defined as the composite\n$$H_1(X_L;\\mathbb Z)\\xrightarrow[\\ \\sim\\ ]{\\mathrm{Alex}}\\widetilde H^1(L;\\mathbb Z)\\cong\\bigoplus_{i=1}^rH^1(K_i;\\mathbb Z)\\xrightarrow{\\text{sum}}\\mathbb Z,$$\nwhere the first arrow is Alexander duality\n([[thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere]]),\neach $H^1(K_i;\\mathbb Z)\\cong\\mathbb Z$ is the orientation-induced\nidentification, and the last map sums the $r$ coordinates. By\n[[prop-the-first-hurewicz-map-in-degree-one-is-abelianization]] the map $\\varphi$\nmay again be written $\\pi_1(X_L)\\to H_1(X_L)\\xrightarrow{\\varphi}\\mathbb Z$; we\ndenote both composites by $\\varphi$ and set $K:=\\ker\\varphi$.\n\nThe **one-variable Alexander module** of $L$ is\n$$A_L:=H_1(\\widetilde{X_L};\\mathbb Z),$$\nthe first singular homology of the connected infinite cyclic cover\n$p:\\widetilde{X_L}\\to X_L$ classified by $K$\n([[thm-classification-of-connected-covering-spaces]],\n[[lem-subgroup-quotient-of-universal-cover]],\n[[def-covering-map-and-evenly-covered-neighbourhoods]]), equipped with its\nstructure of module over $\\Lambda=\\mathbb Z[t^{\\pm1}]$\n([[def-the-laurent-polynomial-ring]]) in which $t$ acts by the deck\ntransformation corresponding to the positive generator of\n$\\operatorname{Deck}(\\widetilde{X_L}/X_L)\\cong\\mathbb Z$.\n\n**Caveats.** The cover is the one classified by $K=\\ker\\varphi$; since $K$ is\nnormal the cover is regular and its deck group is\n$\\pi_1(X_L)/K\\cong\\mathbb Z$\n([[def-regular-covering]], [[thm-regular-covering-characterizations]], [[cor-deck-group-of-a-regular-covering]],\n[[def-deck-transformation-and-deck-group]]). The module $A_L$ is ordinary\nintegral homology of the cover, with the deck action as its module structure;\nno twisting by a representation of the link group is used. The total linking\nhomomorphism satisfies $\\varphi(\\mu_i)=1$ for a meridian $\\mu_i$ of any one\ncomponent, so $r\\ge1$ is needed for $\\varphi$ to be interesting and $A_L$\ndepends on the orientations of all components through this map.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "source_section": "Statement",
+          "quote": "For every path-connected topological space $X$ and $x_0\\in X$, the Hurewicz map\n$$h:\\pi_1(X,x_0)\\longrightarrow H_1(X;\\mathbb Z)$$\nis surjective and has kernel $[\\pi_1(X,x_0),\\pi_1(X,x_0)]$. Hence it induces a natural isomorphism\n$$\\pi_1(X,x_0)^{\\mathrm{ab}}\\cong H_1(X;\\mathbb Z).$$\nThe proof is choice-free and requires no CW, separation, local path-connectivity or local simple-connectivity assumption.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-classification-of-connected-covering-spaces",
+          "source_section": "Statement",
+          "quote": "Let $B$ be nonempty, path-connected, locally path-connected, and semilocally simply connected, fix $b_0\\in B$, and put $G=\\pi_1(B,b_0)$.\n\n1. The assignment $$[p:(E,e_0)\\to(B,b_0)]\\longmapsto p_*\\pi_1(E,e_0)$$ is a bijection from based-isomorphism classes of based connected coverings of $B$ to subgroups of $G$.\n2. After forgetting the chosen point in the fibre, the assignment to the conjugacy class of $p_*\\pi_1(E,e_0)$ is a bijection from isomorphism classes of connected coverings of $B$ to conjugacy classes of subgroups of $G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-mayer-vietoris-sequence-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For an open cover $X=U\\cup V$, the sequence\n$$\\cdots\\to H_n(U\\cap V;G)\\to H_n(U;G)\\oplus H_n(V;G)\\to H_n(X;G)\\xrightarrow{\\delta}H_{n-1}(U\\cap V;G)\\to\\cdots$$\nis exact, with middle map $(u,v)\\mapsto u+v$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-singular-homology-is-invariant-under-deformation-retracts",
+          "source_section": "Statement",
+          "quote": "If $A$ is a deformation retract of a topological space $X$, then for every\n$n\\geq 0$ and every abelian group $G$ the inclusion $i:A\\hookrightarrow X$\ninduces an isomorphism\n$$H_n^{\\mathrm{sing}}(i_\\#):H_n^{\\mathrm{sing}}(A;G)\\to H_n^{\\mathrm{sing}}(X;G).$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F2], inclusion of the compact exterior into the open complement induces an isomorphism on fundamental groups and identifies the positive meridian classes. The total-linking homomorphism in [F3] therefore corresponds to $\\phi$; by [F4], $A_K$ is isomorphic to $N^{\\mathrm{ab}}$ with the action induced by conjugation by a positive meridian, up to replacing that action by its inverse according to the left-versus-right lift convention.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Put $G_q=\\ker(\\phi\\bmod q)$. For $g\\in G_q$, write $\\phi(g)=qk$ and set $n=g s^{-qk}\\in N$. Then $g=n s^{qk}$, and the expression is unique because $\\phi(s^{qk})=qk$. Thus $G_q$ is the split extension of $N$ by the infinite cyclic group generated by $s^q$, acting on $N$ by conjugation. By [F5] and [F1], $G_q$ is the fundamental group of $E_q$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Abelianizing this split extension kills the commutators in $N$ and the relations $s^qns^{-q}=n$ for $n\\in N$. By [F3], those relations impose $(t^q-1)A_K=0$ on $N^{\\mathrm{ab}}$; if the inverse deck convention is used, $t^{-q}-1=-t^{-q}(t^q-1)$ generates the same submodule. The homomorphism $G_q\\to\\mathbb Z$, $g\\mapsto\\phi(g)/q$, splits by $1\\mapsto s^q$, so $H_1(E_q;\\mathbb Z)\\cong A_K/(t^q-1)A_K\\oplus\\mathbb Z[s^q]$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "s^q",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "The boundary of $E_q$ is a torus cover with basis the lift $\\widetilde\\mu$ of $\\mu^q$ and a lifted longitude. Thicken $E_q$ and the filling solid torus by collars to form an open cover. By [F6], its Mayer–Vietoris map presents $H_1(\\Sigma_q(K))$ as $H_1(E_q)$ modulo $[\\widetilde\\mu]$: the longitude lift maps to the core generator of the attached solid torus and eliminates that generator, while the filling meridian maps to zero there. The class $[\\widetilde\\mu]$ is $[s^q]$, the generator of the displayed free summand in step 3.1. Quotienting by it gives the stated isomorphism. [F1, F6, step 3.1, construct] ∎",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "\\widetilde\\mu",
+            "s^q",
+            "F1",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty object or empty-matrix branch occurs in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "lem-branched-cover-surgery-presentation-from-seifert-surface": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-oriented-seifert-surface",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot in the standard oriented three-sphere $S^3$. A **Seifert surface** for $K$ is a connected compact smooth oriented embedded surface $F\\subset S^3$ with boundary set equal to $K$. Orient each boundary component so that an outward-pointing conormal in $F$, followed by a positive boundary tangent, is a positive basis of $TF$; the oriented boundary of $F$ must agree with the given orientation of $K$. For such a surface, its genus $g(F)$ is the unique nonnegative integer satisfying $\\chi(F)=2-2g(F)-b$, where $b$ is the number of boundary components; here $b=1$, so $\\chi(F)=1-2g(F)$. The compact-surface normal-form result supplies this integer under the stated choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice-principle-for-foliation-pair]]). Let $S$ be an oriented Hausdorff $C^2$ surface without boundary, possibly disconnected. Then:\n\n1. Every compact subset $K\\subset S$ lies in the interior of a compact finitely cellulated $C^2$ subsurface $N$. If $K$ is contained in one connected component of $S$, $N$ can be chosen connected. A specified finite embedded regular $C^2$ graph contained in $\\operatorname{Int}N$ can be included in its one-skeleton.\n2. Every connected closed compact subsurface has an oriented genus normal form: the sphere for $g=0$, or the polygon word $\\prod_{i=1}^g a_i b_i a_i^{-1}b_i^{-1}$ for $g\\ge1$, with $\\chi=2-2g$. A connected compact subsurface with $b>0$ boundary circles has a free fundamental group; capping its boundaries defines genus $g$ and gives $\\chi=2-2g-b$ and free rank $2g+b-1$.\n3. The fundamental group of every connected component of $S$ is torsion-free.\n4. Every regular embedded $C^2$ nullhomotopic circle $c$ bounds an embedded compact disk region in $S$. Here a disk region is a compact subsurface homeomorphic to the closed disk, with boundary exactly $c$; its inherited surface structure and boundary are $C^2$. It is unique unless the **connected component containing $c$** is a sphere; in that component the two complementary disk regions are the two possibilities.\n\nThe normal forms in clause 2 are homeomorphism normal forms. No general differentiable smoothing theorem or arbitrary-surface triangulation-existence theorem is a premise of this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-knot-seifert-pairing-and-matrix",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $K:S^1\\hookrightarrow S^3$ be a smooth oriented knot in the standard oriented three-sphere, and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface with boundary $K$, oriented so that its boundary orientation is the given orientation of $K$. Let $g$ be the nonnegative integer determined by $\\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of the first singular homology group $H_1(F;\\mathbb Z)$, represented by integral one-cycles on $F$. Orient the normal line of $F$ by requiring $(n,u,v)$ to be positively oriented in $S^3$ whenever $(u,v)$ is a positive tangent basis of $F$. The positive push-off $a_i^+$ is the cycle carried to a sufficiently small positive normal level in a bicollar of $F$.\n\nFor disjoint oriented closed curves $J,L\\subset S^3$, orient a meridian $\\mu_L$ of $L$ so that a positive tangent to $L$ followed by a positive basis of its normal disk gives the ambient orientation. The linking number $\\operatorname{lk}(J,L)$ is the integer determined by $[J]=\\operatorname{lk}(J,L)[\\mu_L]$ in $H_1(S^3\\setminus L;\\mathbb Z)$, using the Alexander-duality identification that sends $[\\mu_L]$ to $1$. Extend linking additively over integral one-cycles. The Seifert pairing is $\\theta_F(x,y)=\\operatorname{lk}(x^+,y)$, and its matrix in the chosen basis is $V=(V_{ij})_{i,j=1}^{2g}$, where $V_{ij}=\\theta_F(a_i,a_j)=\\operatorname{lk}(a_i^+,a_j)$. The surface and basis are part of the data; this definition asserts no knot-only matrix invariant.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cyclic-branched-cover-of-a-knot",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the standard oriented $3$-sphere, choose its compact exterior $E_K$ with boundary torus $T_K$, and let $\\mu$ and $\\lambda$ be its positive meridian and preferred longitude. The exterior homology theorem gives $H_1(E_K;\\mathbb Z)=\\mathbb Z[\\mu]$. Let $\\phi:\\pi_1(E_K)\\to\\mathbb Z$ be the composite of abelianization with the homomorphism $[\\mu]\\mapsto1$. For an integer $q\\ge2$, let $\\phi_q$ be the composite $\\pi_1(E_K)\\xrightarrow{\\phi}\\mathbb Z\\to\\mathbb Z/q\\mathbb Z$, and let $p_q:E_q\\to E_K$ be the connected cover classified by $\\ker\\phi_q$. On $T_K$, the homomorphism sends $[\\mu]\\mapsto1$ and $[\\lambda]\\mapsto0$, so the preimage of $T_K$ is a connected torus cover whose fundamental group corresponds to $\\langle\\mu^q,\\lambda\\rangle$. Let $\\widetilde\\mu$ be the closed lift of $\\mu^q$. Attach a solid torus to $E_q$ with its meridian identified with $\\widetilde\\mu$; the resulting oriented closed $3$-manifold is the $q$-fold cyclic branched cover $\\Sigma_q(K)$. In tubular coordinates near $K$, the extended map to $S^3$ has local form $(s,w)\\mapsto(s,w^q)$, and the deck group $\\mathbb Z/q\\mathbb Z$ acts by $w\\mapsto e^{2\\pi i/q}w$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1] and [F2], cut $B^4$ along the thickening of the pushed-in disk-band surface, producing cut copies $B_1^4,\\ldots,B_q^4$. First glue these copies only along the disk $0$-handle of the branch surface. A disk thickening is a $3$-ball in the boundary of each cut $4$-ball; joining the two face balls for consecutive copies is the standard boundary-connected-sum operation, so the resulting $4$-manifold is again a $4$-ball with one $0$-handle. For each surface band, the positive face of copy $k$ glued to the negative face of copy $k+1$ joins the two band-core arcs; its regular neighborhood is a $2$-handle $D^2\\times D^2$ attached along $S^1\\times D^2$. There are $q-1$ such seams and $2g$ bands, so the construction gives $2g(q-1)$ $2$-handles and no other handles.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For band $a_i$ and seam $k$, the attaching circle $C_{i,k}$ is obtained by joining its oriented core arc in the positive face of copy $k$ to the core arc in the negative face of copy $k+1$, with endpoints joined through the common disk $0$-handle. In the collar of $F$, closing either face arc through that disk gives the corresponding positive or negative push-off of the closed core cycle $a_i$. Simultaneously moving $a_i^-$ and $a_j$ through the product collar to $a_i$ and $a_j^+$ preserves linking, so symmetry of linking and [F3] give $\\operatorname{lk}(a_i^-,a_j)=\\operatorname{lk}(a_j^+,a_i)=V_{ji}$. For two handles at the same seam, the positive-face and negative-face contributions are therefore $V_{ij}$ and $V_{ji}$, giving $V_{ij}+V_{ji}$; for the self-entry this is framing $2V_{ii}$. For handles at consecutive seams, only their common sheet contributes, and the reflection reverses one normal direction, giving $-\\operatorname{lk}(a_j^+,a_i)=-V_{ji}$ in the upper block; symmetry gives $-V_{ij}$ in the lower block. If the seams are separated by at least one unused seam, the attaching circles lie in disjoint sheet neighborhoods, so their linking is zero. These cases exhaust all pairs and give exactly $M_q(V)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "In a normal disk to the branch surface, the $q$ cut sheets form the standard cyclic degree-$q$ branched disk; its map is $w\\mapsto w^q$. Away from the branch locus, a positive meridian moves through the $q$ sheets cyclically, so the boundary exterior cover is the connected cover classified by the homomorphism $\\pi_1(E_K)\\to\\mathbb Z/q$ sending $\\mu$ to $1$. Its meridian boundary is the closed lift of $\\mu^q$, which bounds the filling disk. By [F4] and uniqueness of the classified connected cover, the boundary with its branch marking is $\\Sigma_q(K)$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "For $q=2$ there is one seam, so the block matrix has only its diagonal block $V+V^T$, as stated. [step 2.1, given, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement or proof explicitly treats the empty matrix or genus-zero case in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 treats q=2; step 1.1 gives zero handles when g=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        },
+        {
+          "axiom": "AC_omega",
+          "supplier": "thm-choice-implies-dependent-implies-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "lem-cyclic-branched-cover-seifert-block-matrix": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cyclic-branched-cover-of-a-knot",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the standard oriented $3$-sphere, choose its compact exterior $E_K$ with boundary torus $T_K$, and let $\\mu$ and $\\lambda$ be its positive meridian and preferred longitude. The exterior homology theorem gives $H_1(E_K;\\mathbb Z)=\\mathbb Z[\\mu]$. Let $\\phi:\\pi_1(E_K)\\to\\mathbb Z$ be the composite of abelianization with the homomorphism $[\\mu]\\mapsto1$. For an integer $q\\ge2$, let $\\phi_q$ be the composite $\\pi_1(E_K)\\xrightarrow{\\phi}\\mathbb Z\\to\\mathbb Z/q\\mathbb Z$, and let $p_q:E_q\\to E_K$ be the connected cover classified by $\\ker\\phi_q$. On $T_K$, the homomorphism sends $[\\mu]\\mapsto1$ and $[\\lambda]\\mapsto0$, so the preimage of $T_K$ is a connected torus cover whose fundamental group corresponds to $\\langle\\mu^q,\\lambda\\rangle$. Let $\\widetilde\\mu$ be the closed lift of $\\mu^q$. Attach a solid torus to $E_q$ with its meridian identified with $\\widetilde\\mu$; the resulting oriented closed $3$-manifold is the $q$-fold cyclic branched cover $\\Sigma_q(K)$. In tubular coordinates near $K$, the extended map to $S^3$ has local form $(s,w)\\mapsto(s,w^q)$, and the deck group $\\mathbb Z/q\\mathbb Z$ acts by $w\\mapsto e^{2\\pi i/q}w$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-branched-cover-surgery-presentation-from-seifert-surface",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ bound a connected compact oriented Seifert surface $F$ of genus $g$. Choose a disk-band decomposition of $F$ with one disk and $2g$ bands, and use its band-core basis $a_1,\\ldots,a_{2g}$ to form the positive-push Seifert matrix $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. For $q\\ge2$, define the symmetric block matrix $M_q(V)$ of size $2g(q-1)$ by specifying its $2g\\times2g$ blocks, indexed by $1\\le k,\\ell\\le q-1$:\n$$(M_q(V))_{k\\ell}=\\begin{cases}V+V^T,&k=\\ell,\\\\-V^T,&\\ell=k+1,\\\\-V,&k=\\ell+1,\\\\0,&|k-\\ell|\\ge2.\\end{cases}$$\nPush the interior of $F$ into $B^4$ while keeping $K$ on $S^3=\\partial B^4$, cut $B^4$ along a thickened copy of the pushed-in surface, and take $q$ copies. For $i=1,\\ldots,q-1$, glue the positive face of copy $i$ to the negative face of copy $i+1$ by reflecting the normal coordinate; do not glue the last positive face to the first negative face. Call the resulting $q$-fold cyclic branched cover $W_q(F)$. It has one $0$-handle and $2g(q-1)$ $2$-handles, and its framed attaching link has linking matrix $M_q(V)$. The boundary branched cover, with the boundary marking induced by the covering map, is $\\Sigma_q(K)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-branched-cover-surgery-presentation-from-seifert-surface",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ bound a connected compact oriented Seifert surface $F$ of genus $g$. Choose a disk-band decomposition of $F$ with one disk and $2g$ bands, and use its band-core basis $a_1,\\ldots,a_{2g}$ to form the positive-push Seifert matrix $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. For $q\\ge2$, define the symmetric block matrix $M_q(V)$ of size $2g(q-1)$ by specifying its $2g\\times2g$ blocks, indexed by $1\\le k,\\ell\\le q-1$:\n$$(M_q(V))_{k\\ell}=\\begin{cases}V+V^T,&k=\\ell,\\\\-V^T,&\\ell=k+1,\\\\-V,&k=\\ell+1,\\\\0,&|k-\\ell|\\ge2.\\end{cases}$$\nPush the interior of $F$ into $B^4$ while keeping $K$ on $S^3=\\partial B^4$, cut $B^4$ along a thickened copy of the pushed-in surface, and take $q$ copies. For $i=1,\\ldots,q-1$, glue the positive face of copy $i$ to the negative face of copy $i+1$ by reflecting the normal coordinate; do not glue the last positive face to the first negative face. Call the resulting $q$-fold cyclic branched cover $W_q(F)$. It has one $0$-handle and $2g(q-1)$ $2$-handles, and its framed attaching link has linking matrix $M_q(V)$. The boundary branched cover, with the boundary marking induced by the covering map, is $\\Sigma_q(K)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-poincare-lefschetz-duality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be a compact $R$-oriented $n$-manifold with boundary $A$, for a commutative unital ring $R$. Cap with its relative fundamental class gives isomorphisms, for every integer $p$,\n$$S_p:H^p(M;R)\\xrightarrow{\\sim}H_{n-p}(M,A;R),\\qquad T_p:H^p(M,A;R)\\xrightarrow{\\sim}H_{n-p}(M;R).$$\nHere both maps send a class $a$ to $a\\cap[M,A]$ in the displayed target. Empty boundary recovers Poincaré duality. Disconnected and empty manifolds are included. AC is inherited only from the exhaustion and local universal-coefficient arguments in Poincaré duality.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For $A\\subseteq X$ there is an exact sequence\n$$\\cdots\\to H_n(A;G)\\to H_n(X;G)\\to H_n(X,A;G)\\xrightarrow{\\delta}H_{n-1}(A;G)\\to H_{n-1}(X;G)\\to\\cdots.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-knot-seifert-pairing-and-matrix",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $K:S^1\\hookrightarrow S^3$ be a smooth oriented knot in the standard oriented three-sphere, and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface with boundary $K$, oriented so that its boundary orientation is the given orientation of $K$. Let $g$ be the nonnegative integer determined by $\\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of the first singular homology group $H_1(F;\\mathbb Z)$, represented by integral one-cycles on $F$. Orient the normal line of $F$ by requiring $(n,u,v)$ to be positively oriented in $S^3$ whenever $(u,v)$ is a positive tangent basis of $F$. The positive push-off $a_i^+$ is the cycle carried to a sufficiently small positive normal level in a bicollar of $F$.\n\nFor disjoint oriented closed curves $J,L\\subset S^3$, orient a meridian $\\mu_L$ of $L$ so that a positive tangent to $L$ followed by a positive basis of its normal disk gives the ambient orientation. The linking number $\\operatorname{lk}(J,L)$ is the integer determined by $[J]=\\operatorname{lk}(J,L)[\\mu_L]$ in $H_1(S^3\\setminus L;\\mathbb Z)$, using the Alexander-duality identification that sends $[\\mu_L]$ to $1$. Extend linking additively over integral one-cycles. The Seifert pairing is $\\theta_F(x,y)=\\operatorname{lk}(x^+,y)$, and its matrix in the chosen basis is $V=(V_{ij})_{i,j=1}^{2g}$, where $V_{ij}=\\theta_F(a_i,a_j)=\\operatorname{lk}(a_i^+,a_j)$. The surface and basis are part of the data; this definition asserts no knot-only matrix invariant.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-seifert-pairing-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented embedded circle in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary $K$, and let $a_1,\\ldots,a_{2g}$ be the ordered integral basis and positive normal push-off convention used to define the Seifert matrix $V$ above. Every class of $H_1(F;\\mathbb Z)$ has a representative that is a finite integral sum of pairwise disjoint smooth oriented embedded circles in $F$. For such representatives $x$ and $y$, the sum of the pairwise linking numbers between the positive push-off of $x$ and $y$ depends only on $[x]$ and $[y]$, is independent of the sufficiently small positive push-off, and equals the bilinear extension of $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. The linking number of two disjoint oriented circle components is symmetric. In particular, the Seifert pairing is a well-defined bilinear map $H_1(F;\\mathbb Z)\\times H_1(F;\\mathbb Z)\\to\\mathbb Z$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The handle decomposition in [F2] has cellular chain groups $C_2(W;\\mathbb Z)=\\mathbb Z^m$, $C_1(W;\\mathbb Z)=0$, and $C_0(W;\\mathbb Z)=\\mathbb Z$. Hence $H_2(W;\\mathbb Z)=\\mathbb Z^m$, $H_1(W;\\mathbb Z)=0$, and $H^2(W;\\mathbb Z)=\\mathbb Z^m$. By [F3], $H_2(W,Y;\\mathbb Z)=\\mathbb Z^m$ as well.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "In the handle bases, the map $j:H_2(W;\\mathbb Z)\\to H_2(W,Y;\\mathbb Z)$ sends each absolute handle class to its intersection coordinates with the relative dual handle classes. A diagonal coordinate is the handle framing, and an off-diagonal coordinate is the linking of the corresponding attaching circles; by [F2] this matrix is $M_q(V)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The pair sequence [F4] contains $H_2(W;\\mathbb Z)\\xrightarrow{j}H_2(W,Y;\\mathbb Z)\\longrightarrow H_1(Y;\\mathbb Z)\\longrightarrow H_1(W;\\mathbb Z)=0$. By [F1], $Y=\\partial W=\\Sigma_q(K)$. Exactness and step 2.1 therefore give $H_1(\\Sigma_q(K);\\mathbb Z)\\cong\\operatorname{coker}(M_q(V))$ in the disk-band basis.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "For any other ordered integral basis, [F5] gives $V'=P^TVP$ with $P$ unimodular. Let $P_q=\\operatorname{diag}(P,\\ldots,P)$ with $q-1$ diagonal blocks. Blockwise substitution in the definition shows $M_q(V')=P_q^TM_q(V)P_q$. Left and right multiplication by unimodular integer matrices preserve the isomorphism class of the cokernel, so the presentation holds in the stated basis. For $q=2$ the block matrix has the single block $V+V^T$, and for $g=0$ it is empty. [F5, step 3.1, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement or proof explicitly treats the empty matrix or genus-zero case in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement treats q=2 and g=0 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "lem-double-branched-cover-homology-from-seifert-matrix": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cyclic-branched-cover-of-a-knot",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the standard oriented $3$-sphere, choose its compact exterior $E_K$ with boundary torus $T_K$, and let $\\mu$ and $\\lambda$ be its positive meridian and preferred longitude. The exterior homology theorem gives $H_1(E_K;\\mathbb Z)=\\mathbb Z[\\mu]$. Let $\\phi:\\pi_1(E_K)\\to\\mathbb Z$ be the composite of abelianization with the homomorphism $[\\mu]\\mapsto1$. For an integer $q\\ge2$, let $\\phi_q$ be the composite $\\pi_1(E_K)\\xrightarrow{\\phi}\\mathbb Z\\to\\mathbb Z/q\\mathbb Z$, and let $p_q:E_q\\to E_K$ be the connected cover classified by $\\ker\\phi_q$. On $T_K$, the homomorphism sends $[\\mu]\\mapsto1$ and $[\\lambda]\\mapsto0$, so the preimage of $T_K$ is a connected torus cover whose fundamental group corresponds to $\\langle\\mu^q,\\lambda\\rangle$. Let $\\widetilde\\mu$ be the closed lift of $\\mu^q$. Attach a solid torus to $E_q$ with its meridian identified with $\\widetilde\\mu$; the resulting oriented closed $3$-manifold is the $q$-fold cyclic branched cover $\\Sigma_q(K)$. In tubular coordinates near $K$, the extended map to $S^3$ has local form $(s,w)\\mapsto(s,w^q)$, and the deck group $\\mathbb Z/q\\mathbb Z$ acts by $w\\mapsto e^{2\\pi i/q}w$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cyclic-branched-cover-seifert-block-matrix",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot, let $F$ be a connected compact oriented Seifert surface of genus $g$, and choose any ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$ with positive-push Seifert matrix $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. For an integer $q\\ge2$, let $M_q(V)$ be the symmetric block matrix of size $2g(q-1)$ whose $2g\\times2g$ block in position $(k,\\ell)$, for $1\\le k,\\ell\\le q-1$, is $V+V^T$ if $k=\\ell$, $-V^T$ if $\\ell=k+1$, $-V$ if $k=\\ell+1$, and $0$ if $|k-\\ell|\\ge2$. Then\n$$\nH_1(\\Sigma_q(K);\\mathbb Z)\\cong\\operatorname{coker}(M_q(V)).\n$$\nFor $q=2$ this presentation matrix is $V+V^T$; when $g=0$ the empty matrix has trivial cokernel.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The block indices in $M_q(V)$ run from $1$ to $q-1$. At $q=2$ there is only one index, so there are no adjacent blocks and $M_2(V)$ consists of the single diagonal block $V+V^T$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Substitute $q=2$ in [F2]. By [F1], the resulting manifold is the double branched cover $\\Sigma_2(K)$; hence its first homology is the cokernel of $V+V^T$. If $g=0$, the block has size zero and the cokernel is the zero group by the empty-matrix convention. The required AC hypothesis is inherited through [F1]. [A1, F1, F2, step 1.1, given] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "A1",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement or proof explicitly treats the empty matrix or genus-zero case in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "lem-cyclic-cover-order-root-product-and-rational-sphere-test": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cyclic-branched-cover-homology-is-alexander-module-coinvariants",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot, let $X_K=S^3\\setminus K$, and let $q\\ge2$. Let $A_K=H_1(\\widetilde X_K;\\mathbb Z)$ be the one-variable Alexander module with the positive-meridian deck action $t$. Then, as abelian groups,\n$$\nH_1(\\Sigma_q(K);\\mathbb Z)\\cong A_K/(t^q-1)A_K.\n$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-seifert-matrix-presents-knot-alexander-module",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary orientation equal to that of $K$, let $g$ satisfy $\\chi(F)=1-2g$, and choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$. Use the positive normal convention $(n,u,v)>0$ and define $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $A_K=H_1(\\widetilde X_K;\\mathbb Z)$ be the one-variable Alexander module of the knot complement $X_K=S^3\\setminus K$, where the cover is classified by the total-linking homomorphism and $t$ acts by the deck transformation corresponding to the positive meridian. Then there is an isomorphism of $\\Lambda=\\mathbb Z[t^{\\pm1}]$-modules\n$$\nA_K\\cong\\operatorname{coker}\\bigl(V-tV^T:\\Lambda^{2g}\\to\\Lambda^{2g}\\bigr).\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-seifert-matrix-skew-part-is-surface-intersection",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented embedded circle in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary $K$, and let $a_1,\\ldots,a_{2g}$ be any ordered integral basis of $H_1(F;\\mathbb Z)$ with Seifert matrix $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $J_F$ be the matrix of the algebraic intersection form on $F$, with a transverse intersection of oriented curves $u,v$ counted positively exactly when their ordered tangent vectors form a positive basis of $TF$. Then $V-V^T=J_F$. The matrix $J_F$ is skew-symmetric and unimodular; when $a_1,\\ldots,a_{2g}$ is a standard handle basis, it is a direct sum of blocks $\\begin{psmallmatrix}0&1\\\\-1&0\\end{psmallmatrix}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $K\\subset S^3$ be a smooth oriented knot, and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface whose oriented boundary is $K$, with $\\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$ and use the positive normal convention $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $A_K$ be the first homology of the infinite cyclic cover of $S^3\\setminus K$ classified by total linking, with $t$ acting by the positive-meridian deck transformation. Let $\\Delta_K(t)$ be the generator of the zeroth elementary ideal $E_0(A_K)$ in $\\Lambda=\\mathbb Z[t^{\\pm1}]$, and write $p\\doteq q$ when $p$ and $q$ differ by a unit $\\pm t^k$ of $\\Lambda$. Then for every such $F$ and basis,\n\n$$\\det(V-tV^T)\\doteq\\Delta_K(t).$$\n\nThe determinant is $1$ for the empty $0\\times0$ matrix when $g=0$. This formula concerns the polynomial $\\Delta_K$; the existing knot-normalized fraction $D_K=\\Delta_K/(1-t)$ is a separate invariant.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-square-integer-cokernel-finiteness-and-order",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a nonnegative integer and let $A$ be an $n\\times n$ matrix with integer entries. Define $\\operatorname{coker}(A)=\\mathbb Z^n/A\\mathbb Z^n$. Then $\\operatorname{coker}(A)$ is finite if and only if $\\det A\\ne0$, and in that case its order is $|\\det A|$. For the empty $0\\times0$ matrix, take $\\det A=1$ and $\\operatorname{coker}(A)=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Quotienting the module presentation in [F2] by $(t^q-1)A_K$ gives $A_K/(t^q-1)A_K\\cong\\operatorname{coker}(V-tV^T:R_q^{2g}\\to R_q^{2g})$ as abelian groups. The group $R_q^{2g}$ is free abelian of rank $2gq$ on $t^ka_i$ for $0\\le k<q$ and $1\\le i\\le2g$, so this map is represented by a square integer matrix $Q_q$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "After tensoring with $\\mathbb C$, multiplication by $t$ on $R_q\\otimes\\mathbb C$ is diagonalizable: its eigenvalues are the $q$ distinct roots $\\zeta_q^j$ for $0\\le j<q$, each with one-dimensional eigenspace. On the corresponding $2g$-dimensional summand, $Q_q$ acts by $V-\\zeta_q^jV^T$. Therefore $\\det Q_q=\\prod_{j=0}^{q-1}\\det(V-\\zeta_q^jV^T)$. The $j=0$ factor is $\\det(V-V^T)=\\pm1$ by [F3]. Thus $\\det Q_q\\ne0$ exactly when every factor with $1\\le j<q$ is nonzero, and its absolute value is the product of the absolute values of those factors.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "By [F1], the group in question is $\\operatorname{coker}(Q_q)$. Applying [F5] shows it is finite exactly when $\\det Q_q\\ne0$, with order $|\\det Q_q|$; if any nontrivial-root factor vanishes, the square integer cokernel has positive free rank and is infinite.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "By [F4], $D(t)=\\pm t^k\\Delta_K(t)$ for some integer $k$. At every root of unity, $|\\pm(\\zeta_q^j)^k|=1$, so $|D(\\zeta_q^j)|=|\\Delta_K(\\zeta_q^j)|$. Hence the determinant-root criterion and product from step 3.1 give exactly the Alexander-polynomial criterion and order in the Statement, including the empty-matrix case $g=0$. [F4, step 2.1, step 3.1, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement or proof explicitly treats the empty matrix or genus-zero case in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats all nontrivial exponents 1≤j<q, including j=1 and j=q−1; step 4.1 includes g=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "thm-knot-determinant-is-order-of-double-cover-homology": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-double-branched-cover-homology-from-seifert-matrix",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot, let $F$ be a connected compact oriented Seifert surface of genus $g$, and let $V$ be its positive-push Seifert matrix in any ordered integral basis of $H_1(F;\\mathbb Z)$. Then\n$$\nH_1(\\Sigma_2(K);\\mathbb Z)\\cong\\operatorname{coker}(V+V^T).\n$$\nFor $g=0$, the matrix is empty and the cokernel is trivial.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-square-integer-cokernel-finiteness-and-order",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a nonnegative integer and let $A$ be an $n\\times n$ matrix with integer entries. Define $\\operatorname{coker}(A)=\\mathbb Z^n/A\\mathbb Z^n$. Then $\\operatorname{coker}(A)$ is finite if and only if $\\det A\\ne0$, and in that case its order is $|\\det A|$. For the empty $0\\times0$ matrix, take $\\det A=1$ and $\\operatorname{coker}(A)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $K\\subset S^3$ be a smooth oriented knot, and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface whose oriented boundary is $K$, with $\\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$ and use the positive normal convention $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $A_K$ be the first homology of the infinite cyclic cover of $S^3\\setminus K$ classified by total linking, with $t$ acting by the positive-meridian deck transformation. Let $\\Delta_K(t)$ be the generator of the zeroth elementary ideal $E_0(A_K)$ in $\\Lambda=\\mathbb Z[t^{\\pm1}]$, and write $p\\doteq q$ when $p$ and $q$ differ by a unit $\\pm t^k$ of $\\Lambda$. Then for every such $F$ and basis,\n\n$$\\det(V-tV^T)\\doteq\\Delta_K(t).$$\n\nThe determinant is $1$ for the empty $0\\times0$ matrix when $g=0$. This formula concerns the polynomial $\\Delta_K$; the existing knot-normalized fraction $D_K=\\Delta_K/(1-t)$ is a separate invariant.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, so that the Alexander module $A_L$ of an oriented\nnonempty link $L$ is defined and finitely presented over\n$\\Lambda=\\mathbb Z[t^{\\pm1}]$\n([[def-one-variable-alexander-module-of-an-oriented-link]],\n[[lem-the-alexander-module-of-a-link-complement-is-finitely-presented]]). Let\n$r$ be the number of components of $L$. Define the **one-variable Alexander\npolynomial** $\\Delta_L(t)\\in\\Lambda$ to be a greatest common divisor of the zeroth\nelementary ideal $E_0(A_L)$\n([[def-elementary-ideals-of-a-finitely-presented-module]]), i.e. a generator of\nthe smallest principal ideal of $\\Lambda$ containing $E_0(A_L)$\n([[lem-the-laurent-polynomial-ring-is-noetherian-and-a-unique-factorisation-domain]],\n[[def-unique-factorisation-domain]]); it is well defined up to multiplication\nby a unit $\\pm t^k$ of $\\Lambda$\n([[lem-units-and-powers-of-the-laurent-polynomial-ring]]). The **Alexander\ninvariant** is the normalisation\n$$D_L(t):=\\begin{cases}\\Delta_L(t),&r>1,\\\\[2pt] \\dfrac{\\Delta_L(t)}{1-t},&r=1,\\end{cases}$$\nunderstood for a knot as an element of the fraction field of $\\Lambda$ when\n$(1-t)\\nmid\\Delta_L(t)$; for the integer-valued link formulas of this page the\ndistinction matters and is stated with each use.\n\n**Caveats.** The ideal $E_0(A_L)$ is a well-defined invariant of $L$ because\n$A_L$ is finitely presented and elementary ideals are independent of the\npresentation\n([[lem-elementary-ideals-are-independent-of-the-presentation]]); a greatest\ncommon divisor in a unique factorisation domain is well defined up to units, and\nthe units of $\\Lambda$ are $\\pm t^k$. For every link the absolute one-variable Alexander module admits a square\npresentation, so $E_0(A_L)$ is principal, generated by its determinant (the\nstandard link fact recorded in [F3]). For a knot ($r=1$), every gcd\nrepresentative satisfies $\\Delta_L(1)=\\pm1$. These standard presentation and\nnormalisation facts are recorded here; the gcd definition itself uses only\nfinite presentability and unique factorisation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-square-seifert-presentation-and-alexander-normalization",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $K\\subset S^3$ be a smooth oriented knot, let $F\\subset S^3$ be a connected compact smooth oriented embedded surface with oriented boundary $K$, and let $\\chi(F)=1-2g$ with $g\\ge0$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$, use the positive normal convention, and set $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $\\Lambda=\\mathbb Z[t^{\\pm1}]$, let $A_K$ be the first homology of the infinite cyclic cover classified by total linking with $t$ acting by the positive-meridian deck transformation, and let $\\Delta_K$ be a generator of the zeroth elementary ideal $E_0(A_K)$. Then the square matrix $M(t)=V-tV^T$ generates that ideal:\n\n$$E_0(A_K)=(\\det M(t)).$$\n\nFor $g=0$, the matrix is empty and its determinant is $1$. In every genus, $\\det(V-V^T)=\\pm1$, so every generator $\\Delta_K$ satisfies $\\Delta_K(1)=\\pm1$. The ideal and determinant assertions are compatible with integral basis changes and with orientation-preserving ambient isotopies of knot-surface pairs.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1], the double-cover homology is presented by the square integer matrix $V+V^T=V-(-1)V^T$. Its determinant is $D(-1)$. By [F2], the homology is finite exactly when $D(-1)\\ne0$, and then its order is $|D(-1)|$. The hypothesis needed by [F1] is the Axiom of Choice in [A1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F3], $D(-1)=\\pm(-1)^k\\Delta_K(-1)$ for some integer $k$, so $|D(-1)|=|\\Delta_K(-1)|$ and the zero tests agree. This proves the finiteness criterion and order formula.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Write $\\Delta_K(t)=\\sum_{r=m}^n c_rt^r$ with integers $c_r$ and finitely many terms. Since $(-1)^r\\equiv1\\pmod2$ for every integer $r$, including negative $r$, [F4] gives $\\Delta_K(-1)\\equiv\\sum_rc_r=\\Delta_K(1)\\equiv1\\pmod2$. Thus $\\Delta_K(-1)$ is odd and nonzero; step 1.1 then gives finiteness for every knot. [F4, step 1.1, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty object or empty-matrix branch occurs in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "thm-knot-cyclic-cover-order-from-alexander-polynomial": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cyclic-cover-order-root-product-and-rational-sphere-test",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot, let $F$ be a connected compact oriented Seifert surface of genus $g$, and let $V$ be its positive-push Seifert matrix in an ordered integral basis of $H_1(F;\\mathbb Z)$. Write $\\Delta_K(t)$ for the Alexander polynomial normalized up to multiplication by $\\pm t^k$, and let $q\\ge2$ with $\\zeta_q$ a primitive $q$-th root of unity. Then $H_1(\\Sigma_q(K);\\mathbb Z)$ is finite if and only if $\\Delta_K(\\zeta_q^j)\\ne0$ for every $1\\le j<q$, and, when it is finite,\n$$\n|H_1(\\Sigma_q(K);\\mathbb Z)|=\\prod_{j=1}^{q-1}|\\Delta_K(\\zeta_q^j)|.\n$$\nThe same criterion and order hold when $\\Delta_K(t)$ is replaced by $\\det(V-tV^T)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, so that the Alexander module $A_L$ of an oriented\nnonempty link $L$ is defined and finitely presented over\n$\\Lambda=\\mathbb Z[t^{\\pm1}]$\n([[def-one-variable-alexander-module-of-an-oriented-link]],\n[[lem-the-alexander-module-of-a-link-complement-is-finitely-presented]]). Let\n$r$ be the number of components of $L$. Define the **one-variable Alexander\npolynomial** $\\Delta_L(t)\\in\\Lambda$ to be a greatest common divisor of the zeroth\nelementary ideal $E_0(A_L)$\n([[def-elementary-ideals-of-a-finitely-presented-module]]), i.e. a generator of\nthe smallest principal ideal of $\\Lambda$ containing $E_0(A_L)$\n([[lem-the-laurent-polynomial-ring-is-noetherian-and-a-unique-factorisation-domain]],\n[[def-unique-factorisation-domain]]); it is well defined up to multiplication\nby a unit $\\pm t^k$ of $\\Lambda$\n([[lem-units-and-powers-of-the-laurent-polynomial-ring]]). The **Alexander\ninvariant** is the normalisation\n$$D_L(t):=\\begin{cases}\\Delta_L(t),&r>1,\\\\[2pt] \\dfrac{\\Delta_L(t)}{1-t},&r=1,\\end{cases}$$\nunderstood for a knot as an element of the fraction field of $\\Lambda$ when\n$(1-t)\\nmid\\Delta_L(t)$; for the integer-valued link formulas of this page the\ndistinction matters and is stated with each use.\n\n**Caveats.** The ideal $E_0(A_L)$ is a well-defined invariant of $L$ because\n$A_L$ is finitely presented and elementary ideals are independent of the\npresentation\n([[lem-elementary-ideals-are-independent-of-the-presentation]]); a greatest\ncommon divisor in a unique factorisation domain is well defined up to units, and\nthe units of $\\Lambda$ are $\\pm t^k$. For every link the absolute one-variable Alexander module admits a square\npresentation, so $E_0(A_L)$ is principal, generated by its determinant (the\nstandard link fact recorded in [F3]). For a knot ($r=1$), every gcd\nrepresentative satisfies $\\Delta_L(1)=\\pm1$. These standard presentation and\nnormalisation facts are recorded here; the gcd definition itself uses only\nfinite presentability and unique factorisation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The hypotheses of [F1] hold for this $K,q$, and the selected primitive root $\\zeta_q$. Hence it gives the stated nonvanishing criterion and product formula for this root.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "If $\\zeta_q'$ is another primitive $q$-th root, then $\\zeta_q'=\\zeta_q^r$ for some integer $r$ relatively prime to $q$. Multiplication by $r$ permutes the nonzero residue classes modulo $q$, so the nonvanishing conditions and the product over $j=1,\\ldots,q-1$ are unchanged. [F1, F2, step 1.1, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty object or empty-matrix branch occurs in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "ex-knot-kt-11-worked-cases": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-double-branched-cover-homology-from-seifert-matrix",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot, let $F$ be a connected compact oriented Seifert surface of genus $g$, and let $V$ be its positive-push Seifert matrix in any ordered integral basis of $H_1(F;\\mathbb Z)$. Then\n$$\nH_1(\\Sigma_2(K);\\mathbb Z)\\cong\\operatorname{coker}(V+V^T).\n$$\nFor $g=0$, the matrix is empty and the cokernel is trivial.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-square-integer-cokernel-finiteness-and-order",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a nonnegative integer and let $A$ be an $n\\times n$ matrix with integer entries. Define $\\operatorname{coker}(A)=\\mathbb Z^n/A\\mathbb Z^n$. Then $\\operatorname{coker}(A)$ is finite if and only if $\\det A\\ne0$, and in that case its order is $|\\det A|$. For the empty $0\\times0$ matrix, take $\\det A=1$ and $\\operatorname{coker}(A)=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For the trefoil, $V_T+V_T^T=\\begin{pmatrix}-2&1\\\\1&-2\\end{pmatrix}$. Swap its columns, add twice the first row to the second, then add twice the first column to the second; the result is $\\operatorname{diag}(1,-3)$. Each operation is unimodular, so [F1]–[F2] give $H_1(\\Sigma_2(T))\\cong\\mathbb Z/3\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "For the figure-eight knot, $V_8+V_8^T=\\begin{pmatrix}-2&1\\\\1&2\\end{pmatrix}$. Swap its columns, subtract twice the first row from the second, then add twice the first column to the second; the result is $\\operatorname{diag}(1,5)$. Thus its cokernel is $\\mathbb Z/5\\mathbb Z$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For the unknot, the standard spanning disk has genus zero, so its Seifert matrix is empty and [F1] gives trivial first homology. To identify the whole cover, write $S^3=\\{(z,w)\\in\\mathbb C^2:|z|^2+|w|^2=1\\}$ and define $f(z,w)=\\bigl(z\\sqrt{1+|w|^2},w^2\\bigr)$. The image lies in $S^3$ because $|z|^2(1+|w|^2)+|w|^4=1$. Off $w=0$, each target point has exactly two preimages, corresponding to the two square roots of its second coordinate; on $w=0$ it has one. The involution $(z,w)\\mapsto(z,-w)$ is the deck transformation, and in tubular coordinates about $w=0$ the transverse map is $w\\mapsto w^2$. Hence $f$ is the connected double branched cover of $S^3$ over the unknot, so the cover is $S^3$. [F1, given, construct, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement or proof explicitly treats the empty matrix or genus-zero case in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example includes the genus-one trefoil and figure-eight cases in steps 1.1–1.2 and the genus-zero unknot in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [
+        {
+          "case": "right-handed trefoil",
+          "result": "coker(V_T+V_T^T) is Z/3",
+          "evidence": "Step 1.1 gives unimodular equivalence to diag(1,-3)."
+        },
+        {
+          "case": "figure-eight knot",
+          "result": "coker(V_8+V_8^T) is Z/5",
+          "evidence": "Step 1.2 gives unimodular equivalence to diag(1,5)."
+        },
+        {
+          "case": "unknot",
+          "result": "Sigma_2(unknot) is S^3",
+          "evidence": "Step 2.1 verifies the explicit smooth degree-two branched map."
+        }
+      ],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    },
+    "cex-knot-kt-11-boundary-case": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $K\\subset S^3$ be a smooth oriented knot, and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface whose oriented boundary is $K$, with $\\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$ and use the positive normal convention $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $A_K$ be the first homology of the infinite cyclic cover of $S^3\\setminus K$ classified by total linking, with $t$ acting by the positive-meridian deck transformation. Let $\\Delta_K(t)$ be the generator of the zeroth elementary ideal $E_0(A_K)$ in $\\Lambda=\\mathbb Z[t^{\\pm1}]$, and write $p\\doteq q$ when $p$ and $q$ differ by a unit $\\pm t^k$ of $\\Lambda$. Then for every such $F$ and basis,\n\n$$\\det(V-tV^T)\\doteq\\Delta_K(t).$$\n\nThe determinant is $1$ for the empty $0\\times0$ matrix when $g=0$. This formula concerns the polynomial $\\Delta_K$; the existing knot-normalized fraction $D_K=\\Delta_K/(1-t)$ is a separate invariant.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, so that the Alexander module $A_L$ of an oriented\nnonempty link $L$ is defined and finitely presented over\n$\\Lambda=\\mathbb Z[t^{\\pm1}]$\n([[def-one-variable-alexander-module-of-an-oriented-link]],\n[[lem-the-alexander-module-of-a-link-complement-is-finitely-presented]]). Let\n$r$ be the number of components of $L$. Define the **one-variable Alexander\npolynomial** $\\Delta_L(t)\\in\\Lambda$ to be a greatest common divisor of the zeroth\nelementary ideal $E_0(A_L)$\n([[def-elementary-ideals-of-a-finitely-presented-module]]), i.e. a generator of\nthe smallest principal ideal of $\\Lambda$ containing $E_0(A_L)$\n([[lem-the-laurent-polynomial-ring-is-noetherian-and-a-unique-factorisation-domain]],\n[[def-unique-factorisation-domain]]); it is well defined up to multiplication\nby a unit $\\pm t^k$ of $\\Lambda$\n([[lem-units-and-powers-of-the-laurent-polynomial-ring]]). The **Alexander\ninvariant** is the normalisation\n$$D_L(t):=\\begin{cases}\\Delta_L(t),&r>1,\\\\[2pt] \\dfrac{\\Delta_L(t)}{1-t},&r=1,\\end{cases}$$\nunderstood for a knot as an element of the fraction field of $\\Lambda$ when\n$(1-t)\\nmid\\Delta_L(t)$; for the integer-valued link formulas of this page the\ndistinction matters and is stated with each use.\n\n**Caveats.** The ideal $E_0(A_L)$ is a well-defined invariant of $L$ because\n$A_L$ is finitely presented and elementary ideals are independent of the\npresentation\n([[lem-elementary-ideals-are-independent-of-the-presentation]]); a greatest\ncommon divisor in a unique factorisation domain is well defined up to units, and\nthe units of $\\Lambda$ are $\\pm t^k$. For every link the absolute one-variable Alexander module admits a square\npresentation, so $E_0(A_L)$ is principal, generated by its determinant (the\nstandard link fact recorded in [F3]). For a knot ($r=1$), every gcd\nrepresentative satisfies $\\Delta_L(1)=\\pm1$. These standard presentation and\nnormalisation facts are recorded here; the gcd definition itself uses only\nfinite presentability and unique factorisation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-knot-cyclic-cover-order-from-alexander-polynomial",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot and let $q\\ge2$. If $\\zeta_q$ is any primitive $q$-th root of unity, then $H_1(\\Sigma_q(K);\\mathbb Z)$ is finite exactly when $\\Delta_K(\\zeta_q^j)\\ne0$ for every $1\\le j<q$, and in that case\n$$\n|H_1(\\Sigma_q(K);\\mathbb Z)|=\\prod_{j=1}^{q-1}|\\Delta_K(\\zeta_q^j)|.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-square-seifert-presentation-and-alexander-normalization",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. Let $K\\subset S^3$ be a smooth oriented knot, let $F\\subset S^3$ be a connected compact smooth oriented embedded surface with oriented boundary $K$, and let $\\chi(F)=1-2g$ with $g\\ge0$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$, use the positive normal convention, and set $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $\\Lambda=\\mathbb Z[t^{\\pm1}]$, let $A_K$ be the first homology of the infinite cyclic cover classified by total linking with $t$ acting by the positive-meridian deck transformation, and let $\\Delta_K$ be a generator of the zeroth elementary ideal $E_0(A_K)$. Then the square matrix $M(t)=V-tV^T$ generates that ideal:\n\n$$E_0(A_K)=(\\det M(t)).$$\n\nFor $g=0$, the matrix is empty and its determinant is $1$. In every genus, $\\det(V-V^T)=\\pm1$, so every generator $\\Delta_K$ satisfies $\\Delta_K(1)=\\pm1$. The ideal and determinant assertions are compatible with integral basis changes and with orientation-preserving ambient isotopies of knot-surface pairs.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-knot-determinant-is-order-of-double-cover-homology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot with Alexander polynomial $\\Delta_K(t)$ normalized up to multiplication by $\\pm t^k$. Then $H_1(\\Sigma_2(K);\\mathbb Z)$ is finite if and only if $\\Delta_K(-1)\\ne0$, and in that case\n$$\n|H_1(\\Sigma_2(K);\\mathbb Z)|=|\\Delta_K(-1)|.\n$$\nMoreover, $\\Delta_K(-1)$ is odd, so the first homology of every double branched cover is finite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Direct calculation gives $\\det(V_T-tV_T^T)=\\det\\begin{pmatrix}t-1&-t\\\\1&t-1\\end{pmatrix}=t^2-t+1$. By [F1], this represents the trefoil Alexander polynomial up to $\\pm t^k$. Since $\\zeta_6^2-\\zeta_6+1=0$, the Alexander polynomial vanishes at this nontrivial sixth root.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Applying [F2] with $q=6$ shows that $H_1(\\Sigma_6(T);\\mathbb Z)$ is infinite, contradicting the refuted universal claim. For the boundary comparison, [F3] gives $\\Delta_T(-1)$ odd and nonzero, so $H_1(\\Sigma_2(T);\\mathbb Z)$ is finite. Thus the failure occurs at a higher cyclic cover even though the double-cover case is always finite. The two supplier theorems use the Axiom of Choice in [A1]. [A1, F2, F3, step 1.1, given] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty object or empty-matrix branch occurs in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly applies to a knot, which has one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, endpoint, or analogous endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC; A1 records its proof use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66-author",
+        "notes": "Author self-audit of the claim, proof steps, supplier hypotheses and boundary branches. This is not independent approval; independent review remains a later workflow stage."
+      },
+      "finite_checks": [
+        {
+          "case": "trefoil q=6",
+          "result": "H_1 is infinite because the Alexander determinant vanishes at zeta_6",
+          "evidence": "Steps 1.1–2.1 compute t^2-t+1 and apply the cyclic order theorem."
+        },
+        {
+          "case": "trefoil q=2 boundary",
+          "result": "H_1 is finite because Delta_T(-1) is odd and nonzero",
+          "evidence": "Step 2.1 applies the double-cover theorem and normalization."
+        }
+      ],
+      "proof_status": "complete",
+      "proof_status_evidence": "Every numbered proof step is mapped to its actual argument and inputs.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ]
+    }
+  }
+}

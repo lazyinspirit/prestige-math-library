@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 785ce8a929d8 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ c1a4bfbb52ee by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 20353 |
-| now mechanically prevented | 381 |
+| defects caught before publication | 20996 |
+| now mechanically prevented | 384 |
 | escaped to publication | 7 |
-| still open | 118 |
+| still open | 120 |
 
 ## bayesian-computational-statistics-62 — 219 row(s)
 
@@ -976,6 +976,56 @@
 | invalid-inference | 1 |  |
 | citation-missing | 1 |  |
 
+## inverse-problems-knot-theory-all-109-2026-10-19 — 94 row(s)
+
+| subclass | 3a-adjudicate |
+|---|---|
+| ill-formed | 47 |
+| citation-inaccurate | 21 |
+| citation-misattributed | 8 |
+| reader-repair | 5 |
+| false-or-overstrong-title | 3 |
+| missing-hypothesis | 2 |
+| unlicensed-inference | 2 |
+| ill-typed-construction | 1 |
+| unsupported-inference | 1 |
+| overstrong-statement | 1 |
+| citation-missing | 1 |
+| arithmetic-error | 1 |
+| false-or-overstrong-statement | 1 |
+
+## machine-learning-all-101-2026-10-19 — 549 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate |
+|---|---|---|
+| ill-formed | 161 |  |
+| citation-inaccurate | 117 | 23 |
+| invalid-inference | 10 | 48 |
+| missing-hypothesis | 33 |  |
+| unlicensed-inference | 27 |  |
+| citation-missing | 18 |  |
+| citation-misattributed | 17 |  |
+| undefined-notation | 13 |  |
+| unsupported-inference | 13 |  |
+| false-or-overstrong-statement | 12 |  |
+| ill-typed-claim | 9 |  |
+| reader-repair | 8 |  |
+| false-or-overstrong-title | 8 |  |
+| ill-typed-construction | 6 |  |
+| other | 3 | 3 |
+| missing-choice-scope | 5 |  |
+| hypothesis-missing | 2 |  |
+| missing-case | 2 |  |
+| false-claim | 2 |  |
+| contract-mismatch | 2 |  |
+| arithmetic-error | 1 |  |
+| missing-map | 1 |  |
+| overstrong-title-or-statement | 1 |  |
+| citation-inflated | 1 |  |
+| frontmatter-schema | 1 |  |
+| invalid-witness | 1 |  |
+| overstrong-claim | 1 |  |
+
 ## mathematical-statistics-foundations-37 — 177 row(s)
 
 | subclass | 3a-adjudicate | 5-adjudicate | 5.2-impact |
@@ -1557,3 +1607,5 @@
 - `nm81-b48-dual-coxeter-compact-existence-open` non-ml-math-remaining-81-2026-10-18 · missing-hypothesis · def-dual-coxeter-number-for-normalized-form
 - `nmm81-b61-pivotal-left-partial-trace` non-ml-math-remaining-81-2026-10-18 · unsupported-inference · lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace
 - `math81-b77-3a-fibonacci-positive-pivot-prerequisite` non-ml-math-remaining-81-2026-10-18 · unsupported-inference · ex-fibonacci-golden-chain-projectors-and-noninvertibility
+- `ml101-b68-reverse-generator-domination` machine-learning-all-101-2026-10-19 · unlicensed-inference · lem-reversed-kernels-and-generator-identity
+- `ipkt109-b11-3a-published-ftc-pointwise-strength` inverse-problems-knot-theory-all-109-2026-10-19 · overstrong-statement · thm-first-fundamental-theorem-of-calculus-for-l-one

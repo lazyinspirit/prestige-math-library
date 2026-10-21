@@ -1,0 +1,13 @@
+---
+page: smooth-sliceness-and-four-ball-genus-obstructions-examples
+title: Smooth sliceness and four-ball genus obstructions — Examples and Counterexamples
+status: draft
+items: []
+examples:
+  - ex-knot-kt-26-worked-cases
+  - cex-knot-kt-26-boundary-case
+requires:
+  - smooth-sliceness-and-four-ball-genus-obstructions
+order: 3181
+page_layout: compact-v1
+---

@@ -1,0 +1,12 @@
+---
+page: twisted-alexander-polynomials-and-reidemeister-torsion-examples
+title: "Twisted Alexander polynomials and Reidemeister torsion — Examples and Counterexamples"
+status: draft
+requires:
+  - twisted-alexander-polynomials-and-reidemeister-torsion
+items: []
+examples:
+  - cex-knot-kt-10-boundary-case
+  - ex-knot-kt-10-worked-cases
+page_layout: compact-v1
+---

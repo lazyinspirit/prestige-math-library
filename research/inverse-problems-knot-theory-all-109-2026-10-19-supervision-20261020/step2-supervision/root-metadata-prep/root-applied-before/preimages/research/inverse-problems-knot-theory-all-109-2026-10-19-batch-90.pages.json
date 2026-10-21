@@ -1,0 +1,584 @@
+[
+  {
+    "order": 3160,
+    "id": "khovanov-homology-and-jones-categorification",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Khovanov homology and Jones categorification",
+    "companion": "khovanov-homology-and-jones-categorification-examples",
+    "requires": [
+      "chain-complexes-and-homology",
+      "chain-homotopy-and-the-homotopy-category",
+      "kauffman-bracket-state-sum-and-jones-polynomial",
+      "isotopy-extension-and-embedding-theory-beyond-whitney"
+    ],
+    "items": [
+      {
+        "id": "lem-marked-knot-cut-tangles-have-relative-reidemeister-movies",
+        "kind": "lemma",
+        "title": "Cut tangles of marked knots have relative Reidemeister movies",
+        "deps": [
+          "def-countable-choice",
+          "thm-isotopy-extension",
+          "lem-a-smooth-isotopy-of-links-can-be-put-in-general-position",
+          "lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times",
+          "thm-parametric-transversality",
+          "thm-transverse-preimage-theorem",
+          "def-oriented-reidemeister-moves",
+          "def-planar-isotopy-of-link-diagrams"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Khovanov, A categorification of the Jones polynomial, §8.3, printed p. 49, and §8.4, printed pp. 50–51",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Queffelec, Reidemeister's theorem using transversality, §§2–3",
+              "url": "https://arxiv.org/pdf/2406.18203v1"
+            }
+          ]
+        },
+        "statement": "Assume countable choice. Let $(D,p)$ and $(D',p')$ be finite regular diagrams of the same oriented smooth knot, with marks away from crossings. Remove a small open arc about each mark and regard each complementary diagram as a one-interval tangle diagram in a disk, using the complementary disk in the projection sphere. Identify their two boundary endpoints and short oriented product collars. The resulting proper arcs can be realized in one standard smooth three-ball so that they are smoothly isotopic with those endpoints and collars fixed. Their diagrams are connected by a finite sequence of planar isotopies and oriented Reidemeister moves supported away from those collars. This holds when the two diagrams coincide and only the mark has moved along the knot.",
+        "dependency_level": 0,
+        "axiom_use": "ACω is used in isotopy extension and the relative finite-jet transversality argument; the Alexander scaling on the compact arc uses no choice."
+      },
+      {
+        "id": "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+        "kind": "definition",
+        "title": "Khovanov Frobenius algebra and cube of resolutions",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-cochain-complex-in-an-abelian-category"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $D$ be a nonempty finite regular oriented link diagram in an oriented $3$-sphere, with finite crossing set $C(D)$. Fix a unit viewing normal $n$ and orient the projection plane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the ambient $3$-space. At a crossing $c$, define its sign as the sign of $\\det_P(v_{\\rm over},v_{\\rm under})$, where the two nonzero projected tangent vectors follow the oriented over- and under-strands. Let $n_+$ and $n_-$ be the numbers of positive and negative crossings.\n\nSet $\\mathcal A=\\mathbb Z[X]/(X^2)$, with $\\deg(1)=1$ and $\\deg(X)=-1$. Its unit, multiplication, counit, and comultiplication are\n$$\n\\eta(1)=1,\\qquad m(1\\otimes1)=1,\\quad m(1\\otimes X)=m(X\\otimes1)=X,\\quad m(X\\otimes X)=0,\n$$\n$$\n\\epsilon(1)=0,\\quad\\epsilon(X)=1,\\qquad \\Delta(1)=1\\otimes X+X\\otimes1,\\quad\\Delta(X)=X\\otimes X.\n$$\nThus $m$ and $\\Delta$ have quantum degree $-1$, while $\\eta$ and $\\epsilon$ have degree $+1$.\n\nChoose a total order $c_1<\\cdots<c_n$ on $C(D)$. A resolution state is a function $v:C(D)\\to\\{0,1\\}$; at $v(c)=0$ use the A-smoothing and at $v(c)=1$ use the B-smoothing from the Kauffman source chart. Write $|v|=\\sum_c v(c)$, let $D_v$ be the crossingless resolution, and let $k(v)$ be its number of circles. Assign the state module $\\mathcal A^{\\otimes k(v)}$. For an edge $v\\to v+e_j$ changing crossing $c_j$ from $0$ to $1$, use $m$ if the local smoothing merges two circles and $\\Delta$ if it splits one circle, tensored with the identity on all other factors, and multiply this map by $(-1)^{\\sum_{i<j}v(c_i)}$. The resulting direct sum has cohomological degree\n$$i(v)=|v|-n_-$$\nand the generator with circle labels $1$ or $X$ has quantum degree\n$$j(v)=|v|+n_+-2n_-+\\sum_{\\text{circle labels }a}\\deg(a).$$\nThis defines the normalized integral Khovanov cube and its candidate degree-zero cochain differential; the assertion that the differential squares to zero is a separate lemma.\n\nThe Frobenius identity that controls a merge-split face is represented by the two equal composites below. The diagram records the maps only; the proof verifies the equality on the basis $\\{1,X\\}^{\\otimes2}$ and does not rely on the drawing.\n\n```tikzcd\n\\mathcal A\\otimes\\mathcal A \\arrow[r,\"m\"] \\arrow[d,\"\\Delta\\otimes\\mathrm{id}\"'] & \\mathcal A \\arrow[d,\"\\Delta\"] \\\\\n\\mathcal A\\otimes\\mathcal A\\otimes\\mathcal A \\arrow[r,\"\\mathrm{id}\\otimes m\"'] & \\mathcal A\\otimes\\mathcal A\n```",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§2.2–2.3 and 4.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§2–3",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§3–4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-khovanov-chain-complex-from-diagram",
+        "kind": "algorithm",
+        "title": "Khovanov chain complex from a diagram",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions"
+        ],
+        "dependency_level": 2,
+        "statement": "**Input:** a nonempty finite regular oriented link diagram $D$ and a total order $c_1<\\cdots<c_n$ on its crossing set. A diagram object is supplied as mathematical input; this procedure does not parse a serialized string.\n\n**Output:** the normalized bigraded Khovanov cochain module $C^{i,j}(D)$ and its candidate differential $d:C^{i,j}(D)\\to C^{i+1,j}(D)$, constructed by the following finite instructions.\n\n1. Enumerate every state $v:C(D)\\to\\{0,1\\}$ once. Form the crossingless resolution by using the A-smoothing at $v(c)=0$ and the B-smoothing at $v(c)=1$.\n2. For each state, create one tensor factor of the integral Frobenius algebra for each resolution circle and place the resulting tensor product in cohomological degree $|v|-n_-$ and quantum degree $|v|+n_+-2n_-+\\sum\\deg(a)$ for its circle labels $a$.\n3. For each state and each crossing $c_j$ with $v(c_j)=0$, create the edge to $v+e_j$. Apply multiplication if that smoothing change merges two circles, comultiplication if it splits one circle, the identity on other tensor factors, and the sign $(-1)^{\\sum_{i<j}v(c_i)}$. Sum the edge maps out of every state to obtain $d$.\n4. Return the finite direct sum of the state modules with these degrees and maps. The square-zero property is the separate local lemma named by `justified_by`.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§3.3–4.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §3",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-khovanov-cube-differential-squares-to-zero"
+        ]
+      },
+      {
+        "id": "lem-khovanov-cube-differential-squares-to-zero",
+        "kind": "lemma",
+        "title": "The Khovanov cube differential squares to zero",
+        "deps": [
+          "alg-khovanov-chain-complex-from-diagram",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $D$ be a finite regular oriented link diagram, order its crossings as $c_1<\\cdots<c_n$, and form the direct sum of state modules $\\mathcal A^{\\otimes k(v)}$ over all functions $v:C(D)\\to\\{0,1\\}$. Here $\\mathcal A=\\mathbb Z[X]/(X^2)$, each crossing is changed from its A-smoothing at $0$ to its B-smoothing at $1$, and the edge map is the multiplication $m$ for a merge or comultiplication $\\Delta$ for a split, multiplied by $(-1)^{\\sum_{i<j}v(c_i)}$ on the edge at $c_j$. Then the sum $d$ of all edge maps satisfies $d^2=0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§3.3–4.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §3",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-reduced-khovanov-cohomology-of-a-knot",
+        "kind": "definition",
+        "title": "Reduced Khovanov cohomology of a knot",
+        "deps": [
+          "alg-khovanov-chain-complex-from-diagram",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "def-cochain-complex-in-an-abelian-category",
+          "lem-khovanov-cube-differential-squares-to-zero"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $(D,p)$ be a finite regular oriented diagram of a knot with a basepoint $p$ away from the crossings, and let $C(D)$ be its normalized integral Khovanov cochain complex. At each resolution state, let $X_p$ act by multiplication by $X$ on the tensor factor for the circle containing $p$, and by the identity on every other circle factor. The basepoint action is the direct sum of these statewise maps. Define the reduced cochain complex by\n$$\\widetilde C(D,p):=C(D)/\\operatorname{im}(X_p),$$\nwith the same cohomological grading and with reduced quantum degree $\\widetilde j=j-1$ for the class represented by a state whose basepoint circle is labelled $1$. Its cohomology is the reduced integral Khovanov cohomology $\\widetilde{Kh}^{i,\\widetilde j}(D,p)$. The unknot is normalized so that its reduced group lies in bidegree $(0,0)$.\n\nEquivalently, cut the based knot at $p$ to a one-interval tangle. Put $M=\\mathbb Z$ in quantum degree $0$ with $X\\cdot1=0$. A resolution with $k$ closed circles and the distinguished interval is assigned $\\mathcal A^{\\otimes k}\\otimes M$. An edge that merges a circle into the interval uses $m_M(1\\otimes1)=1$ and $m_M(X\\otimes1)=0$; an edge that splits the interval uses $\\Delta_M(1)=X\\otimes1$, where the circle factor is written first and the interval factor second. Edges not meeting the interval use $m$ or $\\Delta$. This based tangle cube is the quotient complex above, with the stated quantum shift.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§8.1–8.4",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §6.3.4",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§4–5",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-khovanov-chain-complex-from-diagram-procedure-properties",
+        "kind": "theorem",
+        "title": "The Khovanov diagram procedure terminates and returns a finite cochain complex",
+        "deps": [
+          "alg-khovanov-chain-complex-from-diagram",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "def-cochain-complex-in-an-abelian-category"
+        ],
+        "dependency_level": 4,
+        "statement": "For a finite regular oriented link diagram $D$ with $n$ ordered crossings, the procedure that enumerates all $2^n$ smoothing states, assigns one copy of $\\mathcal A=\\mathbb Z[X]/(X^2)$ per resolution circle, places a generator in degrees $i=|v|-n_-$ and $j=|v|+n_+-2n_-+\\sum\\deg(a)$, and sums the signed merge or split edge maps terminates after finitely many operations. Its output is a finite direct sum of finite-rank free abelian groups with a differential of bidegree $(1,0)$ satisfying $d^2=0$; hence it is a bounded bigraded cochain complex.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§3.3–4.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §3",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-graded-euler-characteristic-jones-normalization",
+        "kind": "lemma",
+        "title": "The graded Euler characteristics have the Jones normalization",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "alg-khovanov-chain-complex-from-diagram",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "def-cochain-complex-in-an-abelian-category",
+          "thm-khovanov-chain-complex-from-diagram-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $D$ be a finite regular oriented diagram of a link with $n_+$ positive crossings, $n_-$ negative crossings, writhe $w=n_+-n_-$, and $n=n_++n_-$. For each resolution state $v$, let $k(v)$ be its number of circles and let $D_v$ use the A-smoothing at coordinates $0$ and B-smoothing at coordinates $1$. Put $\\delta=-A^2-A^{-2}$ and define the normalized bracket\n$$f_D(A):=(-A^3)^{-w}\\sum_{v:C(D)\\to\\{0,1\\}} A^{n-2|v|}\\delta^{k(v)-1}.$$\nFor integral unreduced Khovanov cohomology, define $\\chi_q(Kh(D))=\\sum_{i,j}(-1)^i\\operatorname{rank}_{\\mathbb Z}Kh^{i,j}(D)q^j$. For reduced cohomology use its basepoint quantum grading $\\widetilde j$ and define $\\widetilde\\chi_q=\\sum_{i,\\widetilde j}(-1)^i\\operatorname{rank}_{\\mathbb Z}\\widetilde{Kh}^{i,\\widetilde j}(D,p)q^{\\widetilde j}$. Under $q=-A^{-2}$ and $t=q^2=A^{-4}$,\n$$\\chi_q(Kh(D))=(q+q^{-1})f_D(A),\\qquad \\widetilde\\chi_q(D,p)=f_D(A).$$\nThus the unreduced unknot factor is $q+q^{-1}$ and the reduced unknot factor is $1$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§2.2–2.4 and 7.1–7.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§2–3",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§3–4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-signed-local-cancellation-models",
+        "kind": "lemma",
+        "title": "Signed local cancellation models for the Khovanov Reidemeister moves",
+        "deps": [
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "def-chain-homotopy",
+          "def-chain-homotopy-equivalence"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bar-Natan, On Khovanov's categorification of the Jones polynomial, §§3.5.2–3.5.5, printed pp. 347–350",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Khovanov, A categorification of the Jones polynomial, §§5 and 8.1–8.4, especially Proposition 38",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            }
+          ]
+        },
+        "statement": "The integral signed Khovanov cubes have the local graded cancellation models described below. They are chain homotopy equivalences over every fixed exterior resolution, commute with exterior saddle differentials, and commute with multiplication by $X$ at every marked point outside the local disk. Consequently they also give chain homotopy equivalences after taking the reduced quotient. For the crossing with A-smoothing the identity matching and B-smoothing the cap-cup matching, the two three-crossing braid cubes with words $121$ and $212$ retract to the same three-term complex. The two-crossing inverse-pair cube retracts to the identity matching in local cohomological degree one and quantum shift upward by one. All retractions are integral; their homotopies and the two cancellations in the three-crossing cube are specified in the proof.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-khovanov-reidemeister-chain-homotopies",
+        "kind": "lemma",
+        "title": "Khovanov complexes are chain homotopy equivalent under Reidemeister moves",
+        "deps": [
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "lem-khovanov-signed-local-cancellation-models",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-chain-homotopy",
+          "def-chain-homotopy-equivalence",
+          "def-mapping-cone-of-a-chain-map"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $D,D'$ be finite regular oriented link diagrams related by a planar isotopy or one oriented Reidemeister move. Let $\\bar C(D)$ be the integral signed state cube before the writhe shifts, with cohomological degree $|v|$ and quantum degree $|v|+\\sum\\deg(a)$, and normalize it by $C(D)=\\bar C(D)[n_-]\\{2n_--n_+\\}$ to obtain the state degrees $i=|v|-n_-$ and $j=|v|+n_+-2n_-+\\sum\\deg(a)$. Before normalization, a positive type-I curl gives $\\bar C(D_+)\\simeq\\bar C(D)\\{1\\}$, a negative type-I curl gives $\\bar C(D_-)\\simeq\\bar C(D)[-1]\\{-2\\}$, a type-II move gives $\\bar C(D_{II})\\simeq\\bar C(D)[-1]\\{-1\\}$, and a type-III move gives an unshifted equivalence. Consequently the normalized complexes are bigraded chain homotopy equivalent. If $D,D'$ are based knot diagrams and the move disk is disjoint from the basepoint, the same chain homotopy equivalence descends to their reduced quotient complexes, equivalently to the cut-tangle complexes with interval module $M=\\mathbb Z$, $X\\cdot1=0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§5.1–5.4 and 8.1–8.4",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§3.5.1–3.5.5",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§4–5",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.6–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-khovanov-homology-is-an-oriented-link-invariant",
+        "kind": "theorem",
+        "title": "Khovanov homology is an oriented link invariant",
+        "deps": [
+          "def-countable-choice",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "thm-khovanov-chain-complex-from-diagram-procedure-properties",
+          "lem-khovanov-reidemeister-chain-homotopies",
+          "def-chain-homotopy",
+          "def-chain-homotopy-equivalence"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume the Axiom of Countable Choice. For every nonempty oriented link $L$, the bigraded integral groups $Kh^{i,j}(L):=H^i(C^{*,j}(D))$, where $D$ is any finite regular oriented diagram of $L$ and $C(D)$ is the normalized Khovanov cochain complex, are independent of the choice of $D$ up to bigraded isomorphism.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§5.1–5.4",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§3.5.1–3.5.5",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§4–5",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.6–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω exactly through the oriented Reidemeister-equivalence theorem; the local chain homotopies and induced cohomology maps are choice-free."
+      },
+      {
+        "id": "thm-reduced-khovanov-basepoint-and-reidemeister-invariance",
+        "kind": "theorem",
+        "title": "Reduced Khovanov cohomology is invariant under based moves and basepoint transport",
+        "deps": [
+          "def-countable-choice",
+          "lem-marked-knot-cut-tangles-have-relative-reidemeister-movies",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "lem-khovanov-reidemeister-chain-homotopies",
+          "thm-isotopy-extension",
+          "lem-a-smooth-isotopy-of-links-can-be-put-in-general-position",
+          "lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times",
+          "def-chain-homotopy",
+          "def-chain-homotopy-equivalence"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume the Axiom of Countable Choice. Let $K$ be an oriented knot and let $(D,p)$ and $(D',p')$ be finite regular oriented diagrams of $K$ with basepoints away from all crossings. Then the reduced integral groups $\\widetilde{Kh}^{i,\\widetilde j}(D,p)$ and $\\widetilde{Kh}^{i,\\widetilde j}(D',p')$ are isomorphic for every $(i,\\widetilde j)$. In particular, they are invariant under Reidemeister moves supported away from the basepoint and under transport of the basepoint along the knot.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§8.1–8.4",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§3.5.1–3.5.5",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §6.3.4",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω through ambient isotopy extension and oriented Reidemeister equivalence; the local based chain homotopies and quotient argument are choice-free."
+      },
+      {
+        "id": "thm-khovanov-euler-characteristic-is-jones",
+        "kind": "theorem",
+        "title": "Khovanov Euler characteristics equal the Jones polynomial",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-khovanov-graded-euler-characteristic-jones-normalization",
+          "thm-bracket-state-sum-matches-library-jones-specialization",
+          "thm-khovanov-homology-is-an-oriented-link-invariant",
+          "thm-reduced-khovanov-basepoint-and-reidemeister-invariance",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume the Axiom of Choice. Let $V_L(t)$ be the library Jones polynomial of a nonempty oriented link $L$, normalized by $V_{\\bigcirc}(t)=1$. For every diagram $D$ of $L$, put $q=-A^{-2}$ and $t=q^2=A^{-4}$. Then the integral rank Euler characteristics satisfy\n$$\\sum_{i,j}(-1)^i\\operatorname{rank}_{\\mathbb Z}Kh^{i,j}(L)q^j=(q+q^{-1})V_L(t).$$\nIf $L=K$ is a knot with any basepoint $p$ away from the crossings, then\n$$\\sum_{i,\\widetilde j}(-1)^i\\operatorname{rank}_{\\mathbb Z}\\widetilde{Kh}^{i,\\widetilde j}(K,p)q^{\\widetilde j}=V_K(t).$$\nThe unreduced factor $q+q^{-1}$ and reduced factor $1$ are the respective unknot normalizations.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§2.4 and 7.1–7.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§3.1 and 3.5",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§3–4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC only for the library Hecke/Jones comparison; the local Euler state sum is choice-free and uses ACω only through link invariance."
+      }
+    ],
+    "examples": []
+  },
+  {
+    "order": 3161,
+    "id": "khovanov-homology-and-jones-categorification-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Khovanov homology and Jones categorification — Examples and Counterexamples",
+    "companion": "khovanov-homology-and-jones-categorification",
+    "requires": [
+      "khovanov-homology-and-jones-categorification"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-37-boundary-case",
+        "kind": "counterexample",
+        "title": "Omitting Khovanov normalization breaks Reidemeister I and the Jones Euler characteristic",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "alg-khovanov-chain-complex-from-diagram",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "def-oriented-reidemeister-moves",
+          "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy",
+          "thm-khovanov-chain-complex-from-diagram-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "statement": "For every finite regular oriented diagram $D$, form the integral Khovanov state cube but omit the cohomological shift $-n_-$ and quantum shift $n_+-2n_-$. The false claim is that the resulting raw cohomology groups are invariant under oriented Reidemeister moves and that their graded rank Euler characteristic equals the Jones polynomial with the usual unreduced unknot factor $q+q^{-1}$, under $q=-A^{-2}$ and $t=q^2=A^{-4}$.",
+        "strategy": "Compare the crossingless unknot with positive and negative one-crossing kinks using their exact two-state Euler sums and the writhe corrections.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§2.2–2.4 and 5.1–5.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§3.1 and 3.5.1",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§3–4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The two finite raw cube calculations are choice-free; no Jones-invariance or choice hypothesis is needed to exhibit the failure."
+      },
+      {
+        "id": "ex-knot-kt-37-worked-cases",
+        "kind": "example",
+        "title": "Unknot Khovanov and reduced Khovanov groups",
+        "deps": [
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "alg-khovanov-chain-complex-from-diagram",
+          "def-reduced-khovanov-cohomology-of-a-knot"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $U$ be the crossingless diagram of the oriented unknot, and choose any basepoint $p$ on its unique circle. For the normalized integral Khovanov cochain complex, $Kh^{0,1}(U)\\cong\\mathbb Z$, $Kh^{0,-1}(U)\\cong\\mathbb Z$, and all other unreduced groups vanish. For the reduced quotient convention that kills the based-circle $X$ label and lowers the quantum degree of the surviving label $1$ by one, $\\widetilde{Kh}^{0,0}(U,p)\\cong\\mathbb Z$ and all other reduced groups vanish. Consequently the unreduced and reduced rank Euler polynomials are $q+q^{-1}$ and $1$, respectively.",
+        "strategy": "Run the zero-crossing cube directly, compute its differential and homology, and apply the reduced quotient definition and quantum shift.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§2.2, 4.2, and 7.2",
+              "url": "https://arxiv.org/pdf/math/9908171v2"
+            },
+            {
+              "title": "Dror Bar-Natan, On Khovanov's categorification of the Jones polynomial, Algebraic & Geometric Topology 2 (2002), §§3.1 and 3.5",
+              "url": "https://arxiv.org/pdf/math/0201043"
+            },
+            {
+              "title": "Louis H. Kauffman, An Introduction to Khovanov Homology, arXiv:1107.1524v2 (2022), §§3–4",
+              "url": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf"
+            },
+            {
+              "title": "Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.5–3.7 and 6.3.4",
+              "url": "https://arxiv.org/pdf/2501.03115v1"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The zero-crossing state calculations are choice-free; invariance statements use ACω, and the Jones comparison uses full AC only through its declared bridge."
+      }
+    ],
+    "examples": [
+      "cex-knot-kt-37-boundary-case",
+      "ex-knot-kt-37-worked-cases"
+    ]
+  }
+]

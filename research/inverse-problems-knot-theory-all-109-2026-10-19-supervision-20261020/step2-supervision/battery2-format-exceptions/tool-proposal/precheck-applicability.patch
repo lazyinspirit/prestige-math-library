@@ -1,0 +1,29 @@
+--- a/tools/precheck.mts
++++ b/tools/precheck.mts
+@@ -8,6 +8,8 @@
+ import { join } from 'path';
+ import { pathToFileURL } from 'url';
+ import { precheckSource } from './paths.mjs';
++import { isProofBearing } from './proof-bearing.mjs';
++import { maskNonProse } from './proof-layout-core.mjs';
+ 
+ // The normative checker lives in the app repo, whose location is resolved at run
+ // time rather than hardcoded (tools/paths.mjs). A static import cannot take a
+@@ -32,7 +34,16 @@
+ function checkableText(md: string): string | null {
+   md = phaseText(md);
+   const fa = md.split(/\n## Facts & Assumptions\n/);
+-  if (fa.length >= 2) return fa[fa.length - 1].replace(/^## .*$/gm, '').trim();
++  if (fa.length >= 2) {
++    const text = fa[fa.length - 1].replace(/^## .*$/gm, '').trim();
++    // Facts alone are declarations, not a supplied argument (SCHEMA.md).
++    // Keep checking explicit proof phases, even empty ones, and actual numbered
++    // phases under headings such as Well-definedness, regardless of item kind.
++    const numbered = /^\s*(?:\*\*)?\d+\.\d+(?:\*\*)?(?=\s)/m.test(maskNonProse(text));
++    const permitsNoProof = /^kind:\s*['"]?(?:definition|algorithm|remark|example)['"]?\s*$/m.test(md);
++    if (permitsNoProof && !isProofBearing(md) && !numbered) return null;
++    return text;
++  }
+   const m = md.split(BODY_MARKER);
+   if (m.length >= 3) return m[m.length - 1].trim();
+   return null;

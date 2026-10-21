@@ -1,0 +1,66 @@
+---
+id: lem-ip-bv-zero-gradient-constant-on-connected-domain
+kind: lemma
+title: A zero distributional gradient is constant on a connected domain
+status: draft
+origin: pipeline
+deps:
+  - def-countable-choice
+  - def-distributional-derivative
+  - def-connected-space
+  - def-l-one-approximate-identity-on-rn
+  - def-mollifier-family-generated-by-a-unit-mass-smooth-bump
+  - lem-smooth-bump-between-concentric-euclidean-balls
+  - lem-rat-embeds-dense
+  - prop-mollifier-families-are-l-one-approximate-identities
+  - thm-l-one-approximate-identities-converge-in-l-p
+  - thm-product-of-countable
+  - thm-rationals-countable
+  - thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
+      url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 0
+---
+
+## Statement
+
+Assume Countable Choice. Let $\Omega\subseteq\mathbb R^n$ be open and connected. If $u\in L^1_{\mathrm{loc}}(\Omega)$ satisfies $\partial_i u=0$ as a distribution for every coordinate $i$, then there is a constant $c\in\mathbb R$ such that $u=c$ almost everywhere on $\Omega$.
+
+## Statement references
+
+[[def-distributional-derivative|A distributional derivative is defined by testing against compactly supported smooth functions.]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, an open connected $\Omega\subseteq\mathbb R^n$, and $u\in L^1_{\mathrm{loc}}(\Omega)$ with zero distributional gradient.
+
+[A1] Countable Choice is assumed for the local mollifier approximation. ([[def-countable-choice]])
+
+[F1] A smooth compactly supported cutoff exists between nested balls. ([[lem-smooth-bump-between-concentric-euclidean-balls]])
+
+[F2] Zero distributional derivative means $\int u\,\partial_i\phi=0$ for every compactly supported smooth test function. ([[def-distributional-derivative]])
+
+[F3] Mollification makes a locally integrable function smooth and differentiates by convolution on compactly contained subdomains. ([[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]])
+
+[F4] A nonnegative mollifier family converges to the identity in $L^1(\mathbb R^n)$. ([[def-l-one-approximate-identity-on-rn]], [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[prop-mollifier-families-are-l-one-approximate-identities]], [[thm-l-one-approximate-identities-converge-in-l-p]])
+
+[F5] A connected space admits no separation into two disjoint nonempty relatively open subsets. ([[def-connected-space]])
+
+[F6] Rational balls form a countable base of Euclidean topology. ([[lem-rat-embeds-dense]], [[thm-rationals-countable]], [[thm-product-of-countable]])
+
+## Proof
+
+**Given:** The open connected set $\Omega$ and $u\in L^1_{\mathrm{loc}}(\Omega)$ with zero distributional gradient.
+
+1.1 Let $B\Subset\Omega$ be any open ball and choose concentric balls $B\Subset B'\Subset B''\Subset\Omega$. By [F1] take $\chi\in C_c^\infty(B'')$ equal to one on $B'$, and extend $w:=\chi u$ by zero to $\mathbb R^n$. For sufficiently small $\varepsilon$, every mollifier centered at a point of $B$ is supported in $B'$. For such a point $x$, differentiating the convolution gives $\partial_i(w*\rho_\varepsilon)(x)=-\int_{B'}u(y)\partial_{y_i}\rho_\varepsilon(x-y)\,dy=0$ by the distributional identity [F2]. Thus $w*\rho_\varepsilon$ is constant on the convex ball $B$ by the one-dimensional fundamental theorem along each segment. [A1, F1, F2, F3, given, construct]
+
+2.1 Since $w=u$ on $B'$, the approximate-identity property [F4] gives $w*\rho_{\varepsilon_j}\to u$ in $L^1(B)$ for a sequence $\varepsilon_j\downarrow0$. Write each constant from step 1.1 as $c_j$. The $L^1(B)$ convergence makes $(c_j)$ Cauchy because $|B||c_j-c_k|\le\|c_j-u\|_{L^1(B)}+\|c_k-u\|_{L^1(B)}$. Its limit $c_B$ satisfies $u=c_B$ almost everywhere on $B$. [A1, F4, step 1.1, choose, algebra]
+
+3.1 If $\Omega=\varnothing$, any constant satisfies the conclusion. Otherwise fix one ball and let $c$ be its almost-everywhere value. Let $S$ be the set of points of $\Omega$ having a neighborhood on which $u=c$ almost everywhere. It is nonempty and open. If $x\in\overline S\cap\Omega$, choose a ball $B\Subset\Omega$ containing $x$ and a point of $S$; step 2.1 makes $u$ almost everywhere constant on $B$, and its positive-measure intersection with a neighborhood from $S$ forces that constant to be $c$. Thus $x\in S$, so $S$ is relatively closed. Connectedness [F5] gives $S=\Omega$. By the countable rational base [F6], choose a countable cover of $\Omega$ by rational balls contained in these neighborhoods; the union of their exceptional null sets is null, hence $u=c$ almost everywhere on all of $\Omega$. [F5, F6, step 2.1, given, construct] ∎

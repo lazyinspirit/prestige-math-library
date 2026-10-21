@@ -1,0 +1,17 @@
+# Lane11 boundary disposition — owner-focused FIRST
+
+Reviewer: `/root/top_smooth_pair_cobordism`. Root independent FINAL, guarded integration and final input binding remain required. This report grants no native Alpha credit or new whole-proof acceptance.
+
+The proposal covers all **387 original flagged rows across77 current items**, plus the one additional Arf `one` case routed by the strict-contract supplement: **388 unique id/case rows**. The actual supplement contains8 lane11 records:7 duplicate original cases and1 additional case. Each duplicate retains both the original input `before_row` and the supplement's old-row guard.
+
+The388 proposed dispositions comprise **183 checked** and **205 not_applicable** cases. Every row has a concrete reason/evidence and a shared per-item reading extent. There are no remaining mathematical integration holds in this lane. Not-applicable decisions distinguish absent converses, fixed data without interval endpoints, excluded degenerate objects and supplied finite input conventions; they do not assert a generic blanket exclusion.
+
+Two actual source defects were reported during reading: the identity-representation denominator was written0−1=0 instead of1−1=0, and Neumann uniqueness normalized the second solution rather than the difference of two solutions. Root independently accepted and applied both exact corrections, preserving their Statements. The current changed passages were read after integration. The root receipt is `../root-four-qualifier-and-proof-repairs.json`. The final proposal removes only these applied holds; original reading notes and the guarded source-correction packet remain historical evidence.
+
+Representative substantive checks include empty closed manifolds in the L2 theorem, the crossing-free exterior branch, zero tilde differential in the2x2 grid, both directions of determinant/cokernel finiteness, explicit epsilon nonadditivity, and the nonempty contraction/discrepancy domains. The Landweber positive-noise stopping set is proved nonempty; exact data retain the separate infinite-sequence statement. The slice-ribbon converse is not silently asserted.
+
+The formatter's `battery1-format/ready-report.json` row-map keys have **zero intersections** with these77 lane11 sources; therefore no lane11 proof references require that particular formatter remapping. Stale original locators in routed L2/grid/epsilon/exterior cases are replaced by the actual read proof locations while their original guards remain intact.
+
+Reading limits are recorded item by item in `consolidated-reading-notes.json` and repeated in proposal rows. Items1–57 were read through their supplied statements/Facts and displayed arguments (or their definitions when no argument was supplied). Several later two-converse-only cases used the actual claim/Facts and specified opening/final argument rows; their narrower extents are expressly recorded. Items70–77 were read through the complete displayed argument or definition. No referenced supplier proof bodies were reaudited, and no new primary-source reading is claimed.
+
+Outputs: `proposal.json`, `consolidated-reading-notes.json`, manual chunk notes and `guarded-source-corrections.json`. Only research files were written. No canonical source, contract, hash, readiness, native counter, engine state, validator or gate action was taken. The local consistency check counted388 unique rows/77 items and required a concrete explanation of at least40 characters for each row; this is proposal completeness checking, not a workflow gate.

@@ -1,0 +1,1375 @@
+{
+  "version": 1,
+  "scope": [
+    "def-colored-framed-knot-evaluation-from-ribbon-category",
+    "def-quantum-sl2-fundamental-ribbon-module",
+    "alg-ribbon-evaluation-from-colored-braid-word",
+    "thm-ribbon-evaluation-independent-of-colored-braid-representative",
+    "thm-twist-correction-removes-framing",
+    "thm-ribbon-evaluation-from-colored-braid-word-procedure-properties",
+    "lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket",
+    "cex-knot-kt-33-boundary-case",
+    "ex-knot-kt-33-worked-cases"
+  ],
+  "contracts": {
+    "def-colored-framed-knot-evaluation-from-ribbon-category": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-multicolored-ribbon-coupon-evaluation",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $\\mathcal C$ be a ribbon category with chosen left duals. Consider finite oriented framed ribbon graphs with boundary collars, bands colored by arbitrary objects of $\\mathcal C$, and coupons colored by arbitrary morphisms between the tensor products of their incident signed objects. There is a unique monoidal evaluation assigning each coupon its declared morphism, crossings the braiding or its correctly typed inverse, cups/caps the chosen duality maps and their ribbon-induced opposite variants, and full twists $\\theta^{\\pm1}$. It is invariant under every boundary-relative framed graph isotopy and preserves composition, tensor product and the empty graph. In a strict model it is strict monoidal; transport gives the corresponding strong monoidal evaluation in $\\mathcal C$.\n\nMore precisely, for a signed list $A=(Y_1^{\\epsilon_1},\\ldots,Y_p^{\\epsilon_p})$, put $|A|=\\bigotimes_sY_s^{\\epsilon_s}$, with $Y^-=Y^*$. For a coupon $f:|A|\\to|B|$, its strand passages and full rotation are the complete composites\n\n$$c_{|B|,Z}(f\\otimes1_Z)=(1_Z\\otimes f)c_{|A|,Z},\\qquad c_{Z,|B|}(1_Z\\otimes f)=(f\\otimes1_Z)c_{Z,|A|},\\qquad\\theta_{|B|}f\\theta_{|A|}^{-1}=f.$$\n\nTheir tensor-list expansions, all inverse-crossing versions and the explicit dual-mate formulas supply every coupon move; the claim includes zero-input/output coupons and all band orientations. No assumption that all colors are tensor powers of one object is imposed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], the evaluator in [F1] exists. The colored framed link is a ribbon graph with no boundary endpoints, so it assigns a morphism from the tensor unit to itself. This is an element of $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)$, with no field-valued conclusion unless that endomorphism ring has been identified with a field.",
+          "inputs": [
+            "F1",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If two representatives are framed colored isotopic, [F1] gives equal evaluator morphisms; the empty graph has value $1_{\\mathbf 1}$ by the same fact. Therefore the displayed assignment is well-defined on framed colored isotopy classes and has the stated empty-link value.",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty graph or empty-word boundary is handled by the stated evaluator."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: def-colored-framed-knot-evaluation-from-ribbon-category has no zero-valued input parameter beyond its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the exact choice axiom dependency is declared and used only at the stated construction or classification step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: def-colored-framed-knot-evaluation-from-ribbon-category asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: def-colored-framed-knot-evaluation-from-ribbon-category asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "empty link",
+          "method": "empty graph evaluation",
+          "input": {
+            "boundary": "empty"
+          },
+          "calculation": "The evaluator preserves the empty graph.",
+          "expected": {
+            "value": "1_1"
+          }
+        }
+      ]
+    },
+    "def-quantum-sl2-fundamental-ribbon-module": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(I,A,D,P,P^{\\vee},q)$ be a symmetrizable Cartan datum for a quantum group ([[def-symmetrizable-cartan-datum-for-a-quantum-group]]) and put $q_i=q^{d_i}$. Write $K_i:=K_{d_i h_i}$ and $K_i^{-1}:=K_{-d_i h_i}$. Let $V$ be the $\\mathbb Q(q)$-vector space with basis the symbols $\\{E_i,F_i\\}_{i\\in I}\\cup\\{K_h\\}_{h\\in P^{\\vee}}$, and let $T:=T(V)$ be its free unital associative $\\mathbb Q(q)$-algebra ([[def-tensor-algebra-of-a-vector-space]], [[thm-universal-property-of-the-tensor-algebra]]). Let $I_{\\mathrm{DJ}}$ be the two-sided ideal of $T$ generated by ([[def-generated-and-principal-ideals]]) the following relations:\n\n$$K_0-1,\\qquad K_hK_{h'}-K_{h+h'}\\qquad(h,h'\\in P^{\\vee});$$\n\n$$K_hE_i-q^{\\langle\\alpha_i,h\\rangle}E_iK_h,\\qquad K_hF_i-q^{-\\langle\\alpha_i,h\\rangle}F_iK_h\\qquad(h\\in P^{\\vee},\\ i\\in I);$$\n\n$$E_iF_j-F_jE_i-\\delta_{ij}\\frac{K_i-K_i^{-1}}{q_i-q_i^{-1}}\\qquad(i,j\\in I);$$\n\n$$\\mathrm{Serre}^+_{ij}:=\\sum_{r=0}^{1-a_{ij}}(-1)^r\\binom{1-a_{ij}}{r}_iE_i^{1-a_{ij}-r}E_jE_i^r,\\qquad \\mathrm{Serre}^-_{ij}:=\\sum_{r=0}^{1-a_{ij}}(-1)^r\\binom{1-a_{ij}}{r}_iF_i^{1-a_{ij}-r}F_jF_i^r\\qquad(i\\ne j),$$\n\nwhere the Gaussian binomials are those of [[def-quantum-integers-factorials-and-divided-powers-at-q-i]]. The **Drinfeld-Jimbo quantized enveloping algebra** is\n\n$$U_q(\\mathfrak g):=T/I_{\\mathrm{DJ}}$$\n\n([[def-quotient-ring]]), with $E_i,F_i,K_h$ denoting the images of the generators. In this quotient, $K_i^{-1}$ is the two-sided inverse of $K_i$.\n\nIt is graded by the root lattice $Q=\\bigoplus_{i\\in I}\\mathbb Z\\alpha_i$ ([[def-kac-moody-root-lattice-height-and-positive-cone]]), with $\\deg E_i=\\alpha_i$, $\\deg F_i=-\\alpha_i$ and $\\deg K_h=0$; thus $U_q(\\mathfrak g)=\\bigoplus_{\\beta\\in Q}U_q(\\mathfrak g)[\\beta]$.\n\nFor every unital associative $\\mathbb Q(q)$-algebra $B$, any assignment of elements $E_i',F_i',K_h'\\in B$ satisfying these relations extends uniquely to a $\\mathbb Q(q)$-algebra homomorphism $U_q(\\mathfrak g)\\to B$ ([[thm-quotient-ring-universal-property]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra",
+          "source_section": "Statement",
+          "quote": "Let $T$ and $I_{\\mathrm{DJ}}$ be the free $\\mathbb Q(q)$-algebra and defining ideal of [[def-drinfeld-jimbo-quantized-enveloping-algebra]], and write $K_i=K_{d_i h_i}$. Let $\\Delta:T\\to T\\otimes_{\\mathbb Q(q)}T$ and $\\varepsilon:T\\to\\mathbb Q(q)$ be the algebra homomorphisms determined by\n\n$$\\Delta(K_h)=K_h\\otimes K_h,\\quad \\Delta(E_i)=E_i\\otimes K_i^{-1}+1\\otimes E_i,\\quad \\Delta(F_i)=F_i\\otimes1+K_i\\otimes F_i,\\quad \\varepsilon(K_h)=1,\\quad\\varepsilon(E_i)=\\varepsilon(F_i)=0.$$\n\nLet $S:T\\to T$ be the $\\mathbb Q(q)$-linear algebra anti-homomorphism determined by\n\n$$S(K_h)=K_{-h},\\qquad S(E_i)=-E_iK_i,\\qquad S(F_i)=-K_i^{-1}F_i.$$\n\nThen\n\n$$\\Delta(I_{\\mathrm{DJ}})\\subseteq I_{\\mathrm{DJ}}\\otimes T+T\\otimes I_{\\mathrm{DJ}},\\qquad \\varepsilon(I_{\\mathrm{DJ}})=0,\\qquad S(I_{\\mathrm{DJ}})\\subseteq I_{\\mathrm{DJ}}.$$\n\nHence these maps descend to $U_q(\\mathfrak g)=T/I_{\\mathrm{DJ}}$ and make it a Hopf algebra over $\\mathbb Q(q)$ ([[def-bialgebra-counit-and-antipode]]): $\\Delta$ is coassociative, $\\varepsilon$ is a counit, and\n\n$$m(S\\otimes\\operatorname{id})\\Delta=\\eta\\circ\\varepsilon=m(\\operatorname{id}\\otimes S)\\Delta.$$\n\nThe antipode $S$ is unique for this multiplication, unit, coproduct and counit ([[lem-an-antipode-is-unique]]), and its square satisfies\n\n$$S^2(E_i)=q_i^{-2}E_i,\\qquad S^2(F_i)=q_i^{2}F_i,\\qquad S^2(K_h)=K_h.$$",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-twist-and-ribbon-structure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a braided rigid monoidal category with braiding $c$, and\nfix left duals $X^\\vee$ for all objects together with the dual-morphism\noperation of [[def-the-dual-of-a-morphism]].\n\nA **twist** on $\\mathcal C$ is a natural automorphism\n$\\theta\\in\\operatorname{Aut}(\\operatorname{id}_{\\mathcal C})$ such that\n\n$$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$$\n\nfor all objects $X,Y$ and $\\theta_{\\mathbf 1}=1_{\\mathbf 1}$.\n\nA **ribbon structure** is a twist satisfying the dual-compatibility condition\n\n$$(\\theta_X)^\\vee=\\theta_{X^\\vee}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-absolutely-simple-object",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $\\mathcal C$ be a $k$-linear category\n([[def-k-linear-category-and-k-linear-functor]]). Since composition in\n$\\mathcal C$ is $k$-bilinear, $\\operatorname{End}_{\\mathcal C}(X)$ is a\n$k$-algebra with unit $\\operatorname{id}_X$ for every object $X$.\n\nAn object $X$ of $\\mathcal C$ is **absolutely simple** when the $k$-algebra\n$\\operatorname{End}_{\\mathcal C}(X)$ is one-dimensional over $k$, that is,\n\n$$\\operatorname{End}_{\\mathcal C}(X)=k\\cdot\\operatorname{id}_X,\\qquad \\operatorname{id}_X\\ne0 .$$\n\nEquivalently, the evaluation map\n\n$$k\\longrightarrow\\operatorname{End}_{\\mathcal C}(X),\\qquad \\lambda\\longmapsto\\lambda\\operatorname{id}_X ,$$\n\nis an isomorphism of $k$-algebras. These two formulations agree: the evaluation\nmap is $k$-linear and multiplicative with $1\\mapsto\\operatorname{id}_X$, and it\nis injective because $\\lambda\\operatorname{id}_X=0$ with $\\operatorname{id}_X\\ne0$ forces\n$\\lambda=0$; surjectivity is exactly\n$\\operatorname{End}_{\\mathcal C}(X)=k\\cdot\\operatorname{id}_X$. In particular a\nnonzero endomorphism space $k\\cdot\\operatorname{id}_X$ has dimension one, so an\nabsolutely simple object is not a zero object; if $\\mathcal C$ has a zero object\nthen $X\\ne0$ automatically.\n\nIn a $k$-linear abelian category, a simple object with\n$\\operatorname{End}(X)=k$ satisfies this condition ([[def-simple-object]]).\nThe converse need not hold: the representation $k\\xrightarrow{1}k$ of the\ntwo-vertex quiver has only scalar endomorphisms but has the proper nonzero\nsubrepresentation $0\\to k$. Thus the definition records the scalar\nendomorphism condition without asserting simplicity in an arbitrary abelian\ncategory.\nEvery simple object of a locally finite $k$-linear abelian category over an\nalgebraically closed field $k$ is absolutely simple. Indeed, a nonzero\nendomorphism of a simple object has zero kernel and full image, hence is\nan isomorphism; its endomorphism algebra $D$ is therefore a division algebra.\nLocal finiteness makes $D$ finite-dimensional\n([[def-locally-finite-k-linear-abelian-category]]). For $a\\in D$, a polynomial\nover $k$ annihilates $a$ by linear dependence of its powers; it splits into\nlinear factors, and a division algebra has no zero divisors, so one factor\n$a-\\lambda\\operatorname{id}_X$ vanishes. Thus $D=k$. This definition\nfixes no semisimplicity and no algebraic-closedness hypothesis; it records them\nonly as the standard situation in which absolute simplicity is automatic.\n\nIf $X$ is absolutely simple, every automorphism of $X$ is a scalar\n$\\lambda\\operatorname{id}_X$ with $\\lambda\\in k^{\\times}$: it is an invertible\nendomorphism, hence by absolute simplicity equals some\n$\\lambda\\operatorname{id}_X$, and $\\lambda$ is invertible with inverse\n$\\lambda^{-1}$ because $\\lambda\\operatorname{id}_X$ is invertible.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-left-dual-and-right-dual-object",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory and let $X$ be an object of $\\mathcal C$.\n\nA **left dual** of $X$ is an object $X^\\vee$ together with morphisms\n\n$$\\operatorname{ev}_X:X^\\vee\\otimes X\\to\\mathbf 1,\\qquad \\operatorname{coev}_X:\\mathbf 1\\to X\\otimes X^\\vee$$\n\nsuch that the composites\n\n$$X\\xrightarrow{\\lambda_X^{-1}}\\mathbf 1\\otimes X\\xrightarrow{\\operatorname{coev}_X\\otimes1_X}(X\\otimes X^\\vee)\\otimes X\\xrightarrow{\\alpha_{X,X^\\vee,X}}X\\otimes(X^\\vee\\otimes X)\\xrightarrow{1_X\\otimes\\operatorname{ev}_X}X\\otimes\\mathbf 1\\xrightarrow{\\rho_X}X$$\n\nand\n\n$$X^\\vee\\xrightarrow{\\rho_{X^\\vee}^{-1}}X^\\vee\\otimes\\mathbf 1\\xrightarrow{1_{X^\\vee}\\otimes\\operatorname{coev}_X}X^\\vee\\otimes(X\\otimes X^\\vee)\\xrightarrow{\\alpha^{-1}_{X^\\vee,X,X^\\vee}}(X^\\vee\\otimes X)\\otimes X^\\vee\\xrightarrow{\\operatorname{ev}_X\\otimes1_{X^\\vee}}\\mathbf 1\\otimes X^\\vee\\xrightarrow{\\lambda_{X^\\vee}}X^\\vee$$\n\nare identity morphisms.\n\nA **right dual** of $X$ is an object ${}^\\vee X$ together with morphisms\n\n$$\\operatorname{ev}'_X:X\\otimes{}^\\vee X\\to\\mathbf 1,\\qquad \\operatorname{coev}'_X:\\mathbf 1\\to{}^\\vee X\\otimes X$$\n\nsuch that the mirror composites\n\n$$X\\xrightarrow{\\rho_X^{-1}}X\\otimes\\mathbf 1\\xrightarrow{1_X\\otimes\\operatorname{coev}'_X}X\\otimes({}^\\vee X\\otimes X)\\xrightarrow{\\alpha^{-1}_{X,{}^\\vee X,X}}(X\\otimes{}^\\vee X)\\otimes X\\xrightarrow{\\operatorname{ev}'_X\\otimes1_X}\\mathbf 1\\otimes X\\xrightarrow{\\lambda_X}X$$\n\nand\n\n$${}^\\vee X\\xrightarrow{\\lambda_{{}^\\vee X}^{-1}}\\mathbf 1\\otimes{}^\\vee X\\xrightarrow{\\operatorname{coev}'_X\\otimes1_{{}^\\vee X}}({}^\\vee X\\otimes X)\\otimes{}^\\vee X\\xrightarrow{\\alpha_{{}^\\vee X,X,{}^\\vee X}}{}^\\vee X\\otimes(X\\otimes{}^\\vee X)\\xrightarrow{1_{{}^\\vee X}\\otimes\\operatorname{ev}'_X}{}^\\vee X\\otimes\\mathbf 1\\xrightarrow{\\rho_{{}^\\vee X}}{}^\\vee X$$\n\nare identity morphisms.\n\nThis page uses EGNO's convention: the word \"left\" refers to the side on which\nthe dual object sits in the evaluation map.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The displayed $E,F,K_K$ satisfy the $\\mathfrak{sl}_2$ relations: conjugating $E$ by $K_K$ multiplies its only nonzero entry by $q_K^2$, conjugating $F$ multiplies its only nonzero entry by $q_K^{-2}$, and $EF-FE=\\operatorname{diag}(1,-1)=(K_K-K_K^{-1})/(q_K-q_K^{-1})$, with nonzero denominator since $q_K-q_K^{-1}=\\omega^{-4}-\\omega^4\\ne0$ in $k'$. Replacing $(q_K,K_K)$ by $(q_L,K_L)=(q_K^{-1},K_K^{-1})$ leaves the commutator quotient unchanged and gives the stated library toral relations. The coproduct conversion in the Definition is exactly [F2] after this substitution.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Any $U_{q_K}(\\mathfrak{sl}_2)$-endomorphism of $V$ commutes with $K_K$, whose distinct eigenvalues force it to be diagonal in $(v_+,v_-)$. Commuting with $E(v_-)=v_+$ forces the two diagonal entries to agree. Thus $\\operatorname{End}(V)=k'\\operatorname{id}_V$, which is [F7]'s absolute-simplicity condition.",
+          "inputs": [
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "In Korinman's convention the positive braiding is $P D(1+(q_K-q_K^{-1})E\\otimes F)$, where $P$ is the flip and $D=\\operatorname{diag}(A,A^{-1},A^{-1},A)$ in the displayed tensor basis. Since $E^2=F^2=0$, $(E\\otimes F)^2=0$ and the source $q$-exponential truncates after its linear term. Applying this operator to the four basis vectors gives, in order, $A v_+\\otimes v_+$, $A^{-1}v_-\\otimes v_+$, $A^{-1}v_+\\otimes v_-+(A-A^{-3})v_-\\otimes v_+$, and $A v_-\\otimes v_-$. These are exactly the columns of the displayed matrix; [F6] supplies the half-ribbon completion in which this finite action is a braiding.",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "The bilinear map $B$ and vector $U(1)$ are $U_{q_K}(\\mathfrak{sl}_2)$ intertwiners. The $K_K$-weights in each nonzero pairing and coevaluation term multiply to $1$. For the only nonzero $E$-pairing, $\\Delta(E)(v_-\\otimes v_-)=q_K^{-1}v_+\\otimes v_-+v_-\\otimes v_+$, whose $B$-value is $q_K^{-1}-q_K^{-1}=0$; the other basis inputs give zero or a multiple of $v_+\\otimes v_+$, also killed by $B$. For $F$, the only nonzero check is $\\Delta(F)(v_+\\otimes v_+)=v_-\\otimes v_++q_K^{-1}v_+\\otimes v_-$, whose $B$-value is $-q_K^{-1}+q_K^{-1}=0$. On coevaluation, $\\Delta(E)$ sends $-q_Kv_+\\otimes v_-+v_-\\otimes v_+$ to $-q_Kv_+\\otimes v_++q_Kv_+\\otimes v_+=0$, and $\\Delta(F)$ sends it to $-q_Kv_-\\otimes v_-+q_Kv_-\\otimes v_-=0$; the $K_K$-weight is zero. Since these checks hold on the generators and $\\Delta,\\varepsilon$ are algebra maps, they establish invariance of $B$ and $U$ for every algebra element. The Hopf identity $\\sum x_{(1)}\\otimes x_{(2)}S(x_{(3)})=x\\otimes1$ then gives $B(xv,w)=\\sum B(x_{(1)}v,x_{(2)}S(x_{(3)})w)=\\sum\\varepsilon(x_{(1)})B(v,S(x_{(2)})w)=B(v,S(x)w)$. Thus $\\phi(v)=B(v,-)$ intertwines the stated contragredient action. Its matrix from $V$ to $V^*$ has nonzero determinant $A^{-2}$, so it is an isomorphism. Transporting the standard coevaluation $1\\mapsto v_+\\otimes v_+^*+v_-\\otimes v_-^*$ by $\\phi^{-1}$ gives exactly the displayed $U$. The snake composites are identities: $(B\\otimes1)(1\\otimes U)$ returns $v_+$ and $v_-$ with coefficients $B(v_+,v_-)=1$ and $(-A^2)B(v_-,v_+)=1$, respectively, while $(1\\otimes B)(U\\otimes1)$ returns them with coefficients $(-A^2)B(v_-,v_+)=1$ and $B(v_+,v_-)=1$. By [F8], these are the defining left-dual identities. The closed loop is $B(U(1))=-A^2-A^{-2}=\\delta$. Thus these maps give the stated self-duality and quantum dimension.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Squaring $C$ gives $C^2=-\\omega^6I=-A^{-3}I$, hence $C^{-1}=-A^3C$ and $\\Omega^2=C^{-2}=-A^3I$. Thus the ribbon twist is the scalar stated in the Definition. Korinman's half-ribbon theorem identifies this as the Kauffman-bracket ribbon element rather than the usual one, fixing the sign convention for the closure trace.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: def-quantum-sl2-fundamental-ribbon-module has a nonempty module or procedure input and makes no empty-link claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: def-quantum-sl2-fundamental-ribbon-module has no zero-valued input parameter beyond its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: def-quantum-sl2-fundamental-ribbon-module defines a module rather than an open tangle with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the finite algebraic and matrix calculations use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: def-quantum-sl2-fundamental-ribbon-module asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: def-quantum-sl2-fundamental-ribbon-module asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "generator, duality, and twist matrices",
+          "method": "exact finite matrix multiplication",
+          "input": {
+            "parameter": "A",
+            "basis": [
+              "v+",
+              "v-"
+            ]
+          },
+          "calculation": "K E K^-1=q^2 E; K F K^-1=q^-2 F; B(U(1))=-A^2-A^-2; C^2=-A^-3 I.",
+          "expected": {
+            "quantum_dimension": "-A^2-A^-2",
+            "twist": "-A^3 I"
+          }
+        }
+      ]
+    },
+    "alg-ribbon-evaluation-from-colored-braid-word": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-colored-framed-knot-evaluation-from-ribbon-category",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\mathcal C$ be a ribbon category with chosen left duals and tensor unit $\\mathbf 1$. A **finite oriented framed link colored in $\\mathcal C$** is a finite disjoint union $L$ of oriented smoothly embedded circles in $S^3$, a homotopy class of nowhere-zero normal vector field on each component, and an assignment of an object of $\\mathcal C$ to each component. A framed colored isotopy carries orientations, framings, and component colors. If $F_{\\mathcal C}$ is the ribbon-tangle evaluation functor, define\n$$\\operatorname{RT}_{\\mathcal C}(L):=F_{\\mathcal C}(L)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1).$$\nThis value depends only on the framed colored isotopy class. It is not automatically a field scalar; if $\\mathcal C$ is $k$-linear and $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$, it is a scalar in $k$. The empty link is assigned $1_{\\mathbf 1}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-multicolored-ribbon-coupon-evaluation",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $\\mathcal C$ be a ribbon category with chosen left duals. Consider finite oriented framed ribbon graphs with boundary collars, bands colored by arbitrary objects of $\\mathcal C$, and coupons colored by arbitrary morphisms between the tensor products of their incident signed objects. There is a unique monoidal evaluation assigning each coupon its declared morphism, crossings the braiding or its correctly typed inverse, cups/caps the chosen duality maps and their ribbon-induced opposite variants, and full twists $\\theta^{\\pm1}$. It is invariant under every boundary-relative framed graph isotopy and preserves composition, tensor product and the empty graph. In a strict model it is strict monoidal; transport gives the corresponding strong monoidal evaluation in $\\mathcal C$.\n\nMore precisely, for a signed list $A=(Y_1^{\\epsilon_1},\\ldots,Y_p^{\\epsilon_p})$, put $|A|=\\bigotimes_sY_s^{\\epsilon_s}$, with $Y^-=Y^*$. For a coupon $f:|A|\\to|B|$, its strand passages and full rotation are the complete composites\n\n$$c_{|B|,Z}(f\\otimes1_Z)=(1_Z\\otimes f)c_{|A|,Z},\\qquad c_{Z,|B|}(1_Z\\otimes f)=(f\\otimes1_Z)c_{Z,|A|},\\qquad\\theta_{|B|}f\\theta_{|A|}^{-1}=f.$$\n\nTheir tensor-list expansions, all inverse-crossing versions and the explicit dual-mate formulas supply every coupon move; the claim includes zero-input/output coupons and all band orientations. No assumption that all colors are tensor powers of one object is imposed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-the-categorical-trace-of-a-morphism-into-the-double-dual",
+          "source_section": "Definition",
+          "quote": "Fix a rigid monoidal category with chosen left duals. For a morphism\n$a:X\\to X^{\\vee\\vee}$, the **left categorical trace** of $a$ is the endomorphism\nof the unit\n\n$$\\operatorname{Tr}_L(a):\\mathbf 1\\xrightarrow{\\operatorname{coev}_X}X\\otimes X^\\vee\\xrightarrow{a\\otimes1_{X^\\vee}}X^{\\vee\\vee}\\otimes X^\\vee\\xrightarrow{\\operatorname{ev}_{X^\\vee}}\\mathbf 1.$$\n\nFor a morphism $b:X^{\\vee\\vee}\\to X$, the **right categorical trace** of $b$ is\n\n$$\\operatorname{Tr}_R(b):\\mathbf 1\\xrightarrow{\\operatorname{coev}_{X^\\vee}}X^\\vee\\otimes X^{\\vee\\vee}\\xrightarrow{1_{X^\\vee}\\otimes b}X^\\vee\\otimes X\\xrightarrow{\\operatorname{ev}_X}\\mathbf 1.$$\n\nSo a bare endomorphism $X\\to X$ is not yet an input to categorical trace; one\nfirst needs a comparison between $X$ and a double dual.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations\n\n$$\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\qquad(1\\le i\\le n-2),$$\n\n$$\\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\qquad(1\\le i,j\\le n-1,\\ |i-j|>1).$$\n\nEquivalently,\n\n$$B_n=\\langle \\sigma_1,\\dots,\\sigma_{n-1}\\mid \\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\ (1\\le i\\le n-2),\\ \\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\ (1\\le i,j\\le n-1,\\ |i-j|>1)\\rangle,$$\n\ninterpreted in the sense of [[def-group-presentation]] and\n[[def-relators-relations-and-finite-presentations]].\n\nFor $n=0$ and $n=1$, there are no generators, and $B_n$ is the trivial group\ngiven by the empty presentation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **permutation** of $X$ is a bijection $f : X \\to X$\n([[def-injection-surjection-bijection]]). The **symmetric group of $X$** is the\nset of all permutations of $X$,\n\n$$\\operatorname{Sym}(X) \\;:=\\; \\{\\, f : X \\to X \\;:\\; f \\text{ is a bijection} \\,\\},$$\n\nequipped with **composition** as its operation,\n\n$$(f \\circ g)(x) \\;=\\; f(g(x)) \\qquad (x \\in X),$$\n\nand with the identity map $\\mathrm{id}_X$, given by $\\mathrm{id}_X(x) = x$, as\ndistinguished element.\n\nComposition of two bijections of $X$ is again a bijection of $X$\n([[def-injection-surjection-bijection]]), so $\\operatorname{Sym}(X)$ is closed\nunder $\\circ$ and $\\circ$ is a binary operation on it\n([[def-binary-operation]]); and $\\mathrm{id}_X$ is a bijection of $X$, so it is an\nelement of $\\operatorname{Sym}(X)$, and it is a two-sided identity for\ncomposition ([[def-identity-element]]) because\n$f \\circ \\mathrm{id}_X = f = \\mathrm{id}_X \\circ f$ holds pointwise for every\n$f$. That $(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ is a group is\n[[lem-symmetric-group-is-a-group]].\n\n**Cycle notation for a finite list of distinct points.** For distinct elements\n$x_0, x_1, \\dots, x_{k-1}$ of $X$ with $k \\ge 2$, the symbol\n$(x_0\\,x_1\\,\\cdots\\,x_{k-1})$ denotes the permutation sending $x_i$ to\n$x_{i+1}$ for $i < k-1$, sending $x_{k-1}$ to $x_0$, and fixing every element of\n$X$ outside $\\{x_0,\\dots,x_{k-1}\\}$. It is a bijection, because the map\ndescribed sends the set $\\{x_0,\\dots,x_{k-1}\\}$ onto itself by a rule with an\nevident inverse (send each $x_{i+1}$ back to $x_i$ and $x_0$ back to $x_{k-1}$)\nand fixes the complement pointwise. A **transposition** is such a symbol with\n$k = 2$, that is $(a\\,b)$ with $a \\ne b$: it exchanges $a$ and $b$ and fixes\neverything else, and it satisfies $(a\\,b) \\circ (a\\,b) = \\mathrm{id}_X$.\n\nA product of cycle symbols means their composite, so $(a\\,b)(c\\,d)$ is\n$(a\\,b) \\circ (c\\,d)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $s_i=(i\\ i+1)\\in\\operatorname{Sym}(\\{1,\\ldots,n\\})$. For $|i-j|>1$, $s_i$ and $s_j$ have disjoint supports and commute. For adjacent indices, both $s_i s_{i+1}s_i$ and $s_{i+1}s_i s_{i+1}$ equal $(i\\ i+2)$, so the assignment $\\sigma_i\\mapsto s_i$ sends every Artin relator to the identity and [F4] gives the homomorphism $\\pi$. At each position $i$, the positive matrix has source tensor factors $V_{a_i}\\otimes V_{a_{i+1}}$ and target factors $V_{a_{i+1}}\\otimes V_{a_i}$ by [F2]; the negative matrix is its typed inverse. Updating the color tuple by this same swap tracks the colors at the endpoints of each successive letter. The closure arcs pair equal strand positions, so the final tuple equals the initial tuple exactly when every paired endpoint has the same color; in that case the composite has source and target $W$ and the closure contraction is defined.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Induct on the number of letters already read. Before the first letter the running matrix is the identity action of the empty word. Each update composes with precisely the corresponding local braiding or inverse, so the induction hypothesis gives the action of the longer prefix. After the finite word is exhausted the result is $M_\\beta$, the morphism represented by the input colored braid.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F3], $\\operatorname{Tr}(J_WM_\\beta)$ is the matrix expression for closing that endomorphism with the supplied ribbon pivotal duality maps. The multicolored evaluator in [F2] assigns these same maps to the closure arcs, so this scalar is $F_{\\mathcal C}(\\widehat\\beta^{\\mathrm{fr}})=\\operatorname{RT}_{\\mathcal C}(\\widehat\\beta^{\\mathrm{fr}})$ by [F1]. Each of the finitely many letter updates uses finitely many exact field operations; effectiveness makes every update terminate, proving both correctness and termination.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: alg-ribbon-evaluation-from-colored-braid-word has a nonempty module or procedure input and makes no empty-link claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-valued or zero-length boundary case is included in the explicit calculation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the finite algebraic and matrix calculations use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: alg-ribbon-evaluation-from-colored-braid-word asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: alg-ribbon-evaluation-from-colored-braid-word asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-strand empty word",
+          "method": "zero-iteration matrix calculation",
+          "input": {
+            "n": 1,
+            "word": []
+          },
+          "calculation": "No crossing updates occur and one pivotal trace is contracted.",
+          "expected": {
+            "updates": 0,
+            "value": "Tr(J_W)"
+          }
+        }
+      ]
+    },
+    "thm-ribbon-evaluation-independent-of-colored-braid-representative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-colored-framed-knot-evaluation-from-ribbon-category",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\mathcal C$ be a ribbon category with chosen left duals and tensor unit $\\mathbf 1$. A **finite oriented framed link colored in $\\mathcal C$** is a finite disjoint union $L$ of oriented smoothly embedded circles in $S^3$, a homotopy class of nowhere-zero normal vector field on each component, and an assignment of an object of $\\mathcal C$ to each component. A framed colored isotopy carries orientations, framings, and component colors. If $F_{\\mathcal C}$ is the ribbon-tangle evaluation functor, define\n$$\\operatorname{RT}_{\\mathcal C}(L):=F_{\\mathcal C}(L)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1).$$\nThis value depends only on the framed colored isotopy class. It is not automatically a field scalar; if $\\mathcal C$ is $k$-linear and $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$, it is a scalar in $k$. The empty link is assigned $1_{\\mathbf 1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-multicolored-ribbon-coupon-evaluation",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $\\mathcal C$ be a ribbon category with chosen left duals. Consider finite oriented framed ribbon graphs with boundary collars, bands colored by arbitrary objects of $\\mathcal C$, and coupons colored by arbitrary morphisms between the tensor products of their incident signed objects. There is a unique monoidal evaluation assigning each coupon its declared morphism, crossings the braiding or its correctly typed inverse, cups/caps the chosen duality maps and their ribbon-induced opposite variants, and full twists $\\theta^{\\pm1}$. It is invariant under every boundary-relative framed graph isotopy and preserves composition, tensor product and the empty graph. In a strict model it is strict monoidal; transport gives the corresponding strong monoidal evaluation in $\\mathcal C$.\n\nMore precisely, for a signed list $A=(Y_1^{\\epsilon_1},\\ldots,Y_p^{\\epsilon_p})$, put $|A|=\\bigotimes_sY_s^{\\epsilon_s}$, with $Y^-=Y^*$. For a coupon $f:|A|\\to|B|$, its strand passages and full rotation are the complete composites\n\n$$c_{|B|,Z}(f\\otimes1_Z)=(1_Z\\otimes f)c_{|A|,Z},\\qquad c_{Z,|B|}(1_Z\\otimes f)=(f\\otimes1_Z)c_{Z,|A|},\\qquad\\theta_{|B|}f\\theta_{|A|}^{-1}=f.$$\n\nTheir tensor-list expansions, all inverse-crossing versions and the explicit dual-mate formulas supply every coupon move; the claim includes zero-input/output coupons and all band orientations. No assumption that all colors are tensor powers of one object is imposed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], each braid closure is a framed colored link with empty boundary. By [F1], its value is the endomorphism of the tensor unit assigned by the multicolored framed-tangle evaluator, and its component labels are exactly the colors carried around the permutation cycles.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The isotopy hypothesis is a framed graph isotopy that preserves the labels. By [F2], the two closed tangles have equal evaluation morphisms. Applying [F1] identifies those morphisms with the two braid-closure values, proving equality in $\\operatorname{End}_{\\mathcal C}(\\mathbf1)$. This statement concerns framed isotopy; an ordinary Markov stabilization that changes framing is not an additional move here.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty graph or empty-word boundary is handled by the stated evaluator."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: thm-ribbon-evaluation-independent-of-colored-braid-representative has no zero-valued input parameter beyond its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the exact choice axiom dependency is declared and used only at the stated construction or classification step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: thm-ribbon-evaluation-independent-of-colored-braid-representative asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: thm-ribbon-evaluation-independent-of-colored-braid-representative asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identical framed closure",
+          "method": "identity framed isotopy",
+          "input": {
+            "beta": "e",
+            "betaPrime": "e"
+          },
+          "calculation": "Both inputs are the same closed colored tangle.",
+          "expected": {
+            "values": "equal"
+          }
+        }
+      ]
+    },
+    "thm-twist-correction-removes-framing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ribbon-evaluation-of-an-x-colored-closed-braid",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a ribbon category with chosen left duals, twist $\\theta$\n([[def-twist-and-ribbon-structure]]) and Drinfeld morphism\n$u_X\\colon X\\to X^{\\vee\\vee}$ of\n[[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Put\n\n$$j_X:=u_X\\,\\theta_X\\ \\colon\\ X\\longrightarrow X^{\\vee\\vee}.$$\n\nThen $j$ is a natural isomorphism: it is the composite of the natural\nisomorphism $u$ with the natural automorphism $\\theta$ of the identity. It is\n**monoidal** up to the monoidal comparison $d_{X,Y}\\colon\nX^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\to(X\\otimes Y)^{\\vee\\vee}$ of the double-dual\nfunctor,\n\n$$j_{X\\otimes Y}=d_{X,Y}\\circ(j_X\\otimes j_Y),$$\n\nwhich is precisely the statement that $u\\theta$ is the pivotal comparison\ninduced by the ribbon structure; the identity follows from the tensor relation\n$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}$ for\nthe Drinfeld morphism together with the twist axiom\n$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$ and\nthe naturality of $\\theta$. Iterating the comparison identifies\n$j_{X^{\\otimes n}}$ with the corresponding composite of the $j_X$ and the\ncoherence isomorphisms of the tensor power.\n\nLet $n\\ge1$ and $\\beta\\in B_n$\n([[def-braid-group-by-the-artin-presentation]]), and let\n$\\rho_n\\colon B_n\\to\\operatorname{Aut}_{\\mathcal C}(X^{\\otimes n})$ be the\ncanonical braid action\n([[cor-an-object-of-a-braided-category-carries-canonical-braid-actions]]). The\n**ribbon evaluation** of the $X$-colored closed braid is the value\n\n$$t_n(\\beta):=\\operatorname{Tr}_L\\!\\left(j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)\\right)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1),$$\n\nin the sense of\n[[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]: the composite\n$j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)$ is a morphism\n$X^{\\otimes n}\\to(X^{\\otimes n})^{\\vee\\vee}$, which is exactly the input type of\nthe left categorical trace. When $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$\nthe value $t_n(\\beta)$ is a scalar. For $n=1$ the group $B_1$ is trivial and\n$t_1(e)=\\operatorname{Tr}_L(j_X)$, the left dimension of $X$.\n\nFor $n=0$ put $t_0(e)=1_{\\mathbf 1}$, the evaluation of the empty\nclosed tangle. This is a separate convention; no generator or dual pairing\nis needed for the empty diagram.\n\nThe identification of $t_n(\\beta)$ with the evaluation\n$F_X(\\widehat\\beta^{\\mathrm{fr}})$ of the blackboard-framed closure of $\\beta$\nunder the functor of\n[[thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor]] is\nthe content of the closure-comparison lemma of this page; it must be proved\nbefore the trace is used as a link evaluation, and it is not assumed here. The\nfunctor $F_X$ is constructed under countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), while the definition of $t_n$ above is choice-free\nand uses neither that functor nor that principle; only the comparison, not the\ntrace, carries the choice cost.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-basic-properties-of-the-categorical-trace",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a rigid monoidal category, let $a:X\\to X^{\\vee\\vee}$ and $b:Y\\to Y^{\\vee\\vee}$, and suppress the monoidal and chosen-dual comparison maps. For $s\\in\\operatorname{End}(\\mathbf1)$ write $\\ell_Z(s)$ and $r_Z(s)$ for its left and right actions on $Z$, transported from $s\\otimes1_Z$ and $1_Z\\otimes s$ by the unit constraints.\n\n1. $\\operatorname{Tr}_L(a)=\\operatorname{Tr}_R(a^\\vee)$.\n2. If the category is additive, then\n   $\\operatorname{Tr}_L(a\\oplus b)=\\operatorname{Tr}_L(a)+\\operatorname{Tr}_L(b)$.\n3. The general tensor formula is\n   $\\operatorname{Tr}_L(a\\otimes b)=\\operatorname{Tr}_L(r_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))a)$.\n   If $r_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))=\\ell_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))$, this becomes\n   $\\operatorname{Tr}_L(a\\otimes b)=\\operatorname{Tr}_L(a)\\operatorname{Tr}_L(b)$.\n   In particular multiplicativity holds when every unit scalar has equal left and right actions on every object. This condition holds in a braided category, and also in a $k$-linear monoidal category with $k$-bilinear tensor product and $\\operatorname{End}(\\mathbf1)=k$.\n4. For every endomorphism $c:X\\to X$,\n   $\\operatorname{Tr}_L(ac)=\\operatorname{Tr}_L(c^{\\vee\\vee}a)$.\n\nThe corresponding right-trace duality, additivity and cyclicity statements hold. For right-trace inputs $p:X^{\\vee\\vee}\\to X$ and $q:Y^{\\vee\\vee}\\to Y$, the general tensor formula is\n\n$$\\operatorname{Tr}_R(p\\otimes q)=\\operatorname{Tr}_R(q\\ell_{Y^{\\vee\\vee}}(\\operatorname{Tr}_R(p))).$$\n\nIt reduces to multiplicativity under the analogous equality of scalar actions, in particular under either sufficient condition above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-scalar-twist-controls-the-two-markov-stabilizations",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $k$ be a field and $\\mathcal C$ a\n$k$-linear ribbon category, with $k$-bilinear tensor product and\n$\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$, let $X\\in\\mathcal C$ be\nabsolutely simple ([[def-absolutely-simple-object]]) so that the twist acts as\n$\\theta_X=\\lambda\\operatorname{id}_X$ for a unique $\\lambda\\in k^{\\times}$\n([[def-twist-and-ribbon-structure]]), and let $t$ be the ribbon evaluation of\n[[def-ribbon-evaluation-of-an-x-colored-closed-braid]]. Fix the convention of\n[[lem-ribbon-trace-equals-the-framed-closure-evaluation]] that a positive\nstabilization closes to the positive curl with\n$F_X(\\varphi_X^{+})=\\theta_X$. Then for every $n\\ge1$ and $\\beta\\in B_n$, with\n$\\iota_n$ the standard inclusion of\n[[def-markov-conjugation-and-stabilization-moves]],\n\n$$t_{n+1}(\\iota_n(\\beta)\\,\\sigma_n)=\\lambda\\,t_n(\\beta),\\qquad t_{n+1}(\\iota_n(\\beta)\\,\\sigma_n^{-1})=\\lambda^{-1}\\,t_n(\\beta).$$\n\nWith the opposite drawing convention, in which the positive stabilization\ncloses to the inverse curl, the two scalars are exchanged; the pair of formulas\nmust always be fixed by the local curl picture. No semisimplicity or dimension\nhypothesis is used beyond absolute simplicity of $X$ and\n$\\operatorname{End}(\\mathbf 1)=k$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-exponent-sum-and-writhe-of-a-braid",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$ let $B_n$ be the braid group of the Artin presentation\n([[def-braid-group-by-the-artin-presentation]]), with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$. The assignment\n\n$$\\sigma_i\\longmapsto 1\\qquad(1\\le i\\le n-1)$$\n\nhas equal values on the two sides of every defining relator of that\npresentation: a braid relator $\\sigma_i\\sigma_{i+1}\\sigma_i=\n\\sigma_{i+1}\\sigma_i\\sigma_{i+1}$ has three letters on each side, and a\ndistant-commutativity relator $\\sigma_i\\sigma_j=\\sigma_j\\sigma_i$ has two\nletters on each side. Hence [[thm-von-dyck]] gives a unique homomorphism\n\n$$w_n\\colon B_n\\longrightarrow\\mathbb Z,\\qquad w_n(\\sigma_i^{\\pm1})=\\pm1 .$$\n\nIt is the **exponent sum**, or **writhe**, of a braid. If\n$\\beta=\\sigma_{i_1}^{\\epsilon_1}\\cdots\\sigma_{i_k}^{\\epsilon_k}$ is an Artin\nword for $\\beta$ with $\\epsilon_l\\in\\{\\pm1\\}$, then\n$w_n(\\beta)=\\sum_l\\epsilon_l$: the number of positive letters minus the number\nof negative letters. For $n=0,1$ set $w_n=0$ on the trivial group $B_n$.\n\nThe homomorphisms $w_n$ assemble to a function\n$w\\colon\\bigsqcup_{n\\ge0}B_n\\to\\mathbb Z$. Let\n$\\iota_n\\colon B_n\\to B_{n+1}$, $\\iota_n(\\sigma_i)=\\sigma_i$, be the standard\ninclusion, which is well defined because the defining relators of $B_n$ are\namong those of $B_{n+1}$. Then\n\n$$w_{n+1}(\\iota_n(\\beta))=w_n(\\beta),\\qquad w_{n+1}(\\iota_n(\\beta)\\sigma_n^{\\pm1})=w_n(\\beta)\\pm1 ,$$\n\nfor all $n\\ge1$ and $\\beta\\in B_n$: the first identity holds because both sides\nare additive over an Artin word for $\\beta$ and agree on generators, and the\nsecond adds the single letter $\\sigma_n^{\\pm1}$. Consequently $w$ is invariant\nunder conjugation,\n\n$$w(\\gamma\\beta\\gamma^{-1})=w(\\beta)$$\n\nfor all braids $\\gamma,\\beta$ for which the product is defined, since\n$w(\\gamma\\beta\\gamma^{-1})=w(\\gamma)+w(\\beta)-w(\\gamma)$.\n\nThe exponent sum is invariant under conjugation, while under stabilization it\nshifts by $\\pm1$; it is not a complete invariant of braids. For instance in\n$B_3$ the braids $\\sigma_1\\sigma_2$ and $\\sigma_2\\sigma_1$ have equal exponent\nsum $2$ and are distinct: their images under $\\sigma_i\\mapsto(i\\ i+1)$\nare the two different three-cycles. This generator assignment respects the\nArtin relations by direct permutation multiplication, so it extends by\n[[thm-von-dyck]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-markovs-closed-braid-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\beta,\\beta'$ be braids. Then\n$\\widehat\\beta$ and $\\widehat{\\beta'}$ are equivalent oriented links if and\nonly if $\\beta$ and $\\beta'$ are Markov equivalent, that is, related by a finite\nsequence of conjugations in a fixed braid group, stabilizations\n$\\beta\\mapsto\\beta\\sigma_n^{\\pm1}$ into the next braid group, and their\ninverses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-absolutely-simple-object",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $\\mathcal C$ be a $k$-linear category\n([[def-k-linear-category-and-k-linear-functor]]). Since composition in\n$\\mathcal C$ is $k$-bilinear, $\\operatorname{End}_{\\mathcal C}(X)$ is a\n$k$-algebra with unit $\\operatorname{id}_X$ for every object $X$.\n\nAn object $X$ of $\\mathcal C$ is **absolutely simple** when the $k$-algebra\n$\\operatorname{End}_{\\mathcal C}(X)$ is one-dimensional over $k$, that is,\n\n$$\\operatorname{End}_{\\mathcal C}(X)=k\\cdot\\operatorname{id}_X,\\qquad \\operatorname{id}_X\\ne0 .$$\n\nEquivalently, the evaluation map\n\n$$k\\longrightarrow\\operatorname{End}_{\\mathcal C}(X),\\qquad \\lambda\\longmapsto\\lambda\\operatorname{id}_X ,$$\n\nis an isomorphism of $k$-algebras. These two formulations agree: the evaluation\nmap is $k$-linear and multiplicative with $1\\mapsto\\operatorname{id}_X$, and it\nis injective because $\\lambda\\operatorname{id}_X=0$ with $\\operatorname{id}_X\\ne0$ forces\n$\\lambda=0$; surjectivity is exactly\n$\\operatorname{End}_{\\mathcal C}(X)=k\\cdot\\operatorname{id}_X$. In particular a\nnonzero endomorphism space $k\\cdot\\operatorname{id}_X$ has dimension one, so an\nabsolutely simple object is not a zero object; if $\\mathcal C$ has a zero object\nthen $X\\ne0$ automatically.\n\nIn a $k$-linear abelian category, a simple object with\n$\\operatorname{End}(X)=k$ satisfies this condition ([[def-simple-object]]).\nThe converse need not hold: the representation $k\\xrightarrow{1}k$ of the\ntwo-vertex quiver has only scalar endomorphisms but has the proper nonzero\nsubrepresentation $0\\to k$. Thus the definition records the scalar\nendomorphism condition without asserting simplicity in an arbitrary abelian\ncategory.\nEvery simple object of a locally finite $k$-linear abelian category over an\nalgebraically closed field $k$ is absolutely simple. Indeed, a nonzero\nendomorphism of a simple object has zero kernel and full image, hence is\nan isomorphism; its endomorphism algebra $D$ is therefore a division algebra.\nLocal finiteness makes $D$ finite-dimensional\n([[def-locally-finite-k-linear-abelian-category]]). For $a\\in D$, a polynomial\nover $k$ annihilates $a$ by linear dependence of its powers; it splits into\nlinear factors, and a division algebra has no zero divisors, so one factor\n$a-\\lambda\\operatorname{id}_X$ vanishes. Thus $D=k$. This definition\nfixes no semisimplicity and no algebraic-closedness hypothesis; it records them\nonly as the standard situation in which absolute simplicity is automatic.\n\nIf $X$ is absolutely simple, every automorphism of $X$ is a scalar\n$\\lambda\\operatorname{id}_X$ with $\\lambda\\in k^{\\times}$: it is an invertible\nendomorphism, hence by absolute simplicity equals some\n$\\lambda\\operatorname{id}_X$, and $\\lambda$ is invertible with inverse\n$\\lambda^{-1}$ because $\\lambda\\operatorname{id}_X$ is invertible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $\\gamma\\in B_n$. Put $j=j_{X^{\\otimes n}}$ and $\\rho=\\rho_n$. By [F1], $t_n(\\gamma\\beta\\gamma^{-1})=\\operatorname{Tr}_L(j\\rho(\\gamma)\\rho(\\beta)\\rho(\\gamma)^{-1})$. Apply [F2] with $a=j\\rho(\\gamma)$ and $c=\\rho(\\beta)\\rho(\\gamma)^{-1}$. Naturality of $j$ at $\\rho(\\gamma)^{-1}$ gives $(\\rho(\\gamma)^{-1})^{\\vee\\vee}j=j\\rho(\\gamma)^{-1}$, and a second use of [F2] then gives $t_n(\\gamma\\beta\\gamma^{-1})=t_n(\\beta)$. The exponent sum is also unchanged by [F4], so $J_X$ is invariant under conjugation.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a positive or negative stabilization, [F3] multiplies $t_n$ by $\\lambda^{\\pm1}$ and [F4] changes $w$ by $\\pm1$. Hence $\\lambda^{-w(\\iota_n\\beta\\sigma_n^{\\pm1})}t_{n+1}(\\iota_n\\beta\\sigma_n^{\\pm1})=\\lambda^{-w(\\beta)\\mp1}\\lambda^{\\pm1}t_n(\\beta)=\\lambda^{-w(\\beta)}t_n(\\beta)$. The scalar is available because [A1] makes the invertible twist a unique $\\lambda\\in k^\\times$; the positive sign is fixed by [F3]. Thus $J_X$ is invariant under both stabilizations and their inverses.",
+          "inputs": [
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F5], any two braids with equivalent oriented unframed closures are connected by finitely many conjugations, stabilizations, and destabilizations. Steps 1.1 and 1.2 preserve $J_X$ under each such move, so the corrected value depends only on the oriented unframed link type. The Axiom of Choice [A2] is used in [F5] and supplies the countable-choice hypothesis of [F3] by [F6]; no choice is used in the finite trace or scalar calculations.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "A2",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: thm-twist-correction-removes-framing has a nonempty module or procedure input and makes no empty-link claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: thm-twist-correction-removes-framing has no zero-valued input parameter beyond its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the exact choice axiom dependency is declared and used only at the stated construction or classification step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: thm-twist-correction-removes-framing asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: thm-twist-correction-removes-framing asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two stabilization cancellations",
+          "method": "symbolic scalar calculation",
+          "input": {
+            "w": "w",
+            "lambda": "lambda"
+          },
+          "calculation": "lambda^(-(w+1))*lambda=lambda^-w and lambda^(-(w-1))*lambda^-1=lambda^-w.",
+          "expected": {
+            "positive": true,
+            "negative": true
+          }
+        }
+      ]
+    },
+    "thm-ribbon-evaluation-from-colored-braid-word-procedure-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ribbon-evaluation-from-colored-braid-word",
+          "source_section": "Definition",
+          "quote": "An **effective field** is a field whose elements have finite encodings and whose exact addition, subtraction, multiplication, equality test, and inversion of nonzero elements are terminating procedures. Input a finite-dimensional strict matrix realization of a $k$-linear ribbon category with $\\operatorname{End}(\\mathbf1)=k$, finite-dimensional color objects with fixed bases, exact matrices for every braiding and inverse braiding used, duality and twist data, and the induced pivotal matrix $J_W$ for the tensor word $W=V_{a_1}\\otimes\\cdots\\otimes V_{a_n}$. Also input a finite braid word $\\beta$ on $n\\ge1$ strands and the top color tuple $(a_1,\\ldots,a_n)$. The matrices are assumed to satisfy the stated ribbon-category axioms; an implementation does not infer those axioms from arbitrary matrices.\n\nUse the strand-position permutation homomorphism $\\pi:B_n\\to\\operatorname{Sym}(\\{1,\\ldots,n\\})$ given by $\\pi(\\sigma_i)=(i\\ i+1)$. Read the braid letters in composition order, updating the current color tuple at each crossing by swapping its adjacent colors. For a positive letter $\\sigma_i$, use the matrix of\n$$1\\otimes\\cdots\\otimes c_{V_{a_i},V_{a_{i+1}}}\\otimes\\cdots\\otimes1,$$\nand for a negative letter use its inverse. Let the blackboard-framed closure join the bottom and top endpoint at each position by the identity pairing. Reject the input if the final color tuple differs from the initial tuple: the tuple records the colors at the paired endpoints, so equality is exactly the condition that the closure carries a consistent color on every component. Starting with the identity matrix, multiply the typed crossing matrices in word order to obtain $M_\\beta:W\\to W$, then return\n$$\\operatorname{Tr}(J_WM_\\beta)\\in k.$$\nThis is the exact ribbon evaluation of the blackboard-framed colored braid closure in the given matrix realization. No algorithm is asserted for arbitrary abstract ribbon categories without effective finite matrix data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "After $j$ updates, induction on $j$ shows that the running matrix is the composite of the first $j$ typed crossing maps in composition order. The base case $j=0$ is the identity of $W$; the update rule in [F1] composes exactly the next generator or its inverse, proving the induction step. There are precisely $m$ letters, so there are precisely $m$ updates.",
+          "inputs": [
+            "F1",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At $j=m$, [F1] identifies the matrix with $M_\\beta$. Its final-color check makes it an endomorphism of $W$, and the output contraction is the categorical pivotal trace of that endomorphism, hence the defined closure evaluation. Every update is one finite matrix multiplication and the last contraction is finite; the effective-field procedures terminate, so the algorithm terminates and has the asserted value.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: thm-ribbon-evaluation-from-colored-braid-word-procedure-properties has a nonempty module or procedure input and makes no empty-link claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-valued or zero-length boundary case is included in the explicit calculation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the finite algebraic and matrix calculations use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: thm-ribbon-evaluation-from-colored-braid-word-procedure-properties asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: thm-ribbon-evaluation-from-colored-braid-word-procedure-properties asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-length word",
+          "method": "finite loop bound",
+          "input": {
+            "letters": 0
+          },
+          "calculation": "The loop performs zero updates and the final trace is finite.",
+          "expected": {
+            "updates": 0,
+            "terminates": true
+          }
+        }
+      ]
+    },
+    "lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quantum-sl2-fundamental-ribbon-module",
+          "source_section": "Definition",
+          "quote": "Let $\\omega$ be an indeterminate, set $A=\\omega^{-2}$, and put $k'=\\mathbb Q(\\omega)$, $q_K=A^2$, and $q_L=A^{-2}$. Work over the scalar extension to $k'$ of the library Hopf algebra at $q_L$; $U_{q_K}$ in Korinman's convention is identified by $q_L=q_K^{-1}$ and $K_L=K_K^{-1}$. Use its generic two-dimensional module $V$ over $k'$ with ordered basis $(v_+,v_-)$ and generator matrices\n$$E=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix},\\qquad F=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix},\\qquad K_K=\\begin{pmatrix}q_K&0\\\\0&q_K^{-1}\\end{pmatrix}.$$\nEquivalently, for the library parameter $q_L=q_K^{-1}$ use $K_L=K_K^{-1}=\\operatorname{diag}(q_L,q_L^{-1})$ and the library coproduct convention $\\Delta(E)=E\\otimes K_L^{-1}+1\\otimes E$, $\\Delta(F)=F\\otimes1+K_L\\otimes F$. This parameter and Cartan-generator conversion is part of the definition; the two $q$ symbols are not identified.\n\nThe object $V$ is absolutely simple in the $k'$-linear representation category.\n\nEquip $V$ with the Kauffman-bracket half-ribbon structure. The half-ribbon operator $\\Omega$ is specified by\n$$C:=\\operatorname{Mat}_{(v_+,v_-)}(\\Omega^{-1})=\\begin{pmatrix}0&\\omega\\\\-\\omega^5&0\\end{pmatrix},$$\nand its associated twist is $\\theta_V=\\Omega^2=-A^3\\operatorname{id}_V$. In the ordered basis $(v_+\\otimes v_+,v_+\\otimes v_-,v_-\\otimes v_+,v_-\\otimes v_-)$, the positive braiding is\n$$c_{V,V}=\\begin{pmatrix}A&0&0&0\\\\0&0&A^{-1}&0\\\\0&A^{-1}&A-A^{-3}&0\\\\0&0&0&A\\end{pmatrix}.$$\nIts ribbon quantum dimension is $\\delta=-A^2-A^{-2}$. The half-ribbon and universal $R$-matrix are those of the topological half-ribbon representation category; the selected ribbon element is the Kauffman-bracket one, not the usual $U_q(\\mathfrak{sl}_2)$ ribbon element.\n\nLet $v_+^*,v_-^*$ be the ordinary dual basis. The left-dual action on $V^*$ is the contragredient action $(x\\cdot f)(v)=f(S(x)v)$ for the antipode $S$ of the stated library Hopf convention. Identify the displayed copy of $V$ with this left dual $V^\\vee$ by $v_+\\mapsto v_-^*$ and $v_-\\mapsto -A^{-2}v_+^*$. In this identification the evaluation and coevaluation maps are\n$$B(v_+\\otimes v_-)=1,\\quad B(v_-\\otimes v_+)=-A^{-2},\\quad B(v_+\\otimes v_+)=B(v_-\\otimes v_-)=0,$$\n$$U(1)=-A^2v_+\\otimes v_-+v_-\\otimes v_+.$$\nThese are the explicit duality maps used in the closure trace.\n\nThe positive Artin generator is drawn with braid height increasing upward; the left input strand ends on the right, and the right input strand passes over it:\n\n```tikz\n\\begin{tikzpicture}[baseline=(current bounding box.center),scale=.8]\n  \\draw[->] (0,1) -- (.46,.08);\n  \\draw[->] (.54,-.08) -- (1,-1);\n  \\draw[->] (1,1) .. controls (.72,.5) and (.28,-.5) .. (0,-1);\n  \\node at (-.2,1) {$i$};\n  \\node at (1.2,1) {$i+1$};\n\\end{tikzpicture}\n```\n\nThe uninterrupted strand in the drawing is the overpassing strand. This is the crossing convention for the displayed matrix; the proof below uses its matrix entries and the half-ribbon source formulas, not the drawing.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quantum-sl2-fundamental-ribbon-module",
+          "source_section": "Definition",
+          "quote": "Let $\\omega$ be an indeterminate, set $A=\\omega^{-2}$, and put $k'=\\mathbb Q(\\omega)$, $q_K=A^2$, and $q_L=A^{-2}$. Work over the scalar extension to $k'$ of the library Hopf algebra at $q_L$; $U_{q_K}$ in Korinman's convention is identified by $q_L=q_K^{-1}$ and $K_L=K_K^{-1}$. Use its generic two-dimensional module $V$ over $k'$ with ordered basis $(v_+,v_-)$ and generator matrices\n$$E=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix},\\qquad F=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix},\\qquad K_K=\\begin{pmatrix}q_K&0\\\\0&q_K^{-1}\\end{pmatrix}.$$\nEquivalently, for the library parameter $q_L=q_K^{-1}$ use $K_L=K_K^{-1}=\\operatorname{diag}(q_L,q_L^{-1})$ and the library coproduct convention $\\Delta(E)=E\\otimes K_L^{-1}+1\\otimes E$, $\\Delta(F)=F\\otimes1+K_L\\otimes F$. This parameter and Cartan-generator conversion is part of the definition; the two $q$ symbols are not identified.\n\nThe object $V$ is absolutely simple in the $k'$-linear representation category.\n\nEquip $V$ with the Kauffman-bracket half-ribbon structure. The half-ribbon operator $\\Omega$ is specified by\n$$C:=\\operatorname{Mat}_{(v_+,v_-)}(\\Omega^{-1})=\\begin{pmatrix}0&\\omega\\\\-\\omega^5&0\\end{pmatrix},$$\nand its associated twist is $\\theta_V=\\Omega^2=-A^3\\operatorname{id}_V$. In the ordered basis $(v_+\\otimes v_+,v_+\\otimes v_-,v_-\\otimes v_+,v_-\\otimes v_-)$, the positive braiding is\n$$c_{V,V}=\\begin{pmatrix}A&0&0&0\\\\0&0&A^{-1}&0\\\\0&A^{-1}&A-A^{-3}&0\\\\0&0&0&A\\end{pmatrix}.$$\nIts ribbon quantum dimension is $\\delta=-A^2-A^{-2}$. The half-ribbon and universal $R$-matrix are those of the topological half-ribbon representation category; the selected ribbon element is the Kauffman-bracket one, not the usual $U_q(\\mathfrak{sl}_2)$ ribbon element.\n\nLet $v_+^*,v_-^*$ be the ordinary dual basis. The left-dual action on $V^*$ is the contragredient action $(x\\cdot f)(v)=f(S(x)v)$ for the antipode $S$ of the stated library Hopf convention. Identify the displayed copy of $V$ with this left dual $V^\\vee$ by $v_+\\mapsto v_-^*$ and $v_-\\mapsto -A^{-2}v_+^*$. In this identification the evaluation and coevaluation maps are\n$$B(v_+\\otimes v_-)=1,\\quad B(v_-\\otimes v_+)=-A^{-2},\\quad B(v_+\\otimes v_+)=B(v_-\\otimes v_-)=0,$$\n$$U(1)=-A^2v_+\\otimes v_-+v_-\\otimes v_+.$$\nThese are the explicit duality maps used in the closure trace.\n\nThe positive Artin generator is drawn with braid height increasing upward; the left input strand ends on the right, and the right input strand passes over it:\n\n```tikz\n\\begin{tikzpicture}[baseline=(current bounding box.center),scale=.8]\n  \\draw[->] (0,1) -- (.46,.08);\n  \\draw[->] (.54,-.08) -- (1,-1);\n  \\draw[->] (1,1) .. controls (.72,.5) and (.28,-.5) .. (0,-1);\n  \\node at (-.2,1) {$i$};\n  \\node at (1.2,1) {$i+1$};\n\\end{tikzpicture}\n```\n\nThe uninterrupted strand in the drawing is the overpassing strand. This is the crossing convention for the displayed matrix; the proof below uses its matrix entries and the half-ribbon source formulas, not the drawing.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ribbon-evaluation-of-an-x-colored-closed-braid",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a ribbon category with chosen left duals, twist $\\theta$\n([[def-twist-and-ribbon-structure]]) and Drinfeld morphism\n$u_X\\colon X\\to X^{\\vee\\vee}$ of\n[[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Put\n\n$$j_X:=u_X\\,\\theta_X\\ \\colon\\ X\\longrightarrow X^{\\vee\\vee}.$$\n\nThen $j$ is a natural isomorphism: it is the composite of the natural\nisomorphism $u$ with the natural automorphism $\\theta$ of the identity. It is\n**monoidal** up to the monoidal comparison $d_{X,Y}\\colon\nX^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\to(X\\otimes Y)^{\\vee\\vee}$ of the double-dual\nfunctor,\n\n$$j_{X\\otimes Y}=d_{X,Y}\\circ(j_X\\otimes j_Y),$$\n\nwhich is precisely the statement that $u\\theta$ is the pivotal comparison\ninduced by the ribbon structure; the identity follows from the tensor relation\n$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}$ for\nthe Drinfeld morphism together with the twist axiom\n$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$ and\nthe naturality of $\\theta$. Iterating the comparison identifies\n$j_{X^{\\otimes n}}$ with the corresponding composite of the $j_X$ and the\ncoherence isomorphisms of the tensor power.\n\nLet $n\\ge1$ and $\\beta\\in B_n$\n([[def-braid-group-by-the-artin-presentation]]), and let\n$\\rho_n\\colon B_n\\to\\operatorname{Aut}_{\\mathcal C}(X^{\\otimes n})$ be the\ncanonical braid action\n([[cor-an-object-of-a-braided-category-carries-canonical-braid-actions]]). The\n**ribbon evaluation** of the $X$-colored closed braid is the value\n\n$$t_n(\\beta):=\\operatorname{Tr}_L\\!\\left(j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)\\right)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1),$$\n\nin the sense of\n[[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]: the composite\n$j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)$ is a morphism\n$X^{\\otimes n}\\to(X^{\\otimes n})^{\\vee\\vee}$, which is exactly the input type of\nthe left categorical trace. When $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$\nthe value $t_n(\\beta)$ is a scalar. For $n=1$ the group $B_1$ is trivial and\n$t_1(e)=\\operatorname{Tr}_L(j_X)$, the left dimension of $X$.\n\nFor $n=0$ put $t_0(e)=1_{\\mathbf 1}$, the evaluation of the empty\nclosed tangle. This is a separate convention; no generator or dual pairing\nis needed for the empty diagram.\n\nThe identification of $t_n(\\beta)$ with the evaluation\n$F_X(\\widehat\\beta^{\\mathrm{fr}})$ of the blackboard-framed closure of $\\beta$\nunder the functor of\n[[thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor]] is\nthe content of the closure-comparison lemma of this page; it must be proved\nbefore the trace is used as a link evaluation, and it is not assumed here. The\nfunctor $F_X$ is constructed under countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), while the definition of $t_n$ above is choice-free\nand uses neither that functor nor that principle; only the comparison, not the\ntrace, carries the choice cost.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "Let $A$ be an indeterminate and let $\\mathbb Z[A^{\\pm1}]$ be the Laurent\npolynomial ring in $A$. A **nonempty unoriented regular link diagram** is the\nfinite planar projection and over/under data of a regular oriented link diagram\nafter its strand arrows are forgotten. Its finite crossing set is denoted\n$C(D)$, and at least one closed component is required. The empty link diagram is\noutside this definition.\n\nAt a crossing use the following local chart: the over-strand runs from the\nsouthwest endpoint to the northeast endpoint and is drawn continuously over the\nunder-strand, which runs from northwest to southeast with a gap at the\nintersection. In this chart the **A-smoothing** joins the two top endpoints and\njoins the two bottom endpoints; the **B-smoothing** joins the two left endpoints\nand joins the two right endpoints. These labels are attached to this displayed\nchart and are transported by orientation-preserving changes of local\ncoordinates.\n\n```tikz\n\\begin{tikzpicture}[scale=0.72, line cap=round, line join=round]\n  \\begin{scope}\n    \\draw[thick] (-1,1)--(-0.14,0.14);\n    \\draw[thick] (0.14,-0.14)--(1,-1);\n    \\draw[very thick] (-1,-1)--(1,1);\n    \\node at (0,-1.45) {crossing};\n  \\end{scope}\n  \\begin{scope}[xshift=3.4cm]\n    \\draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);\n    \\draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);\n    \\node at (0,-1.45) {$A$-smoothing, weight $A$};\n  \\end{scope}\n  \\begin{scope}[xshift=6.8cm]\n    \\draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);\n    \\draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);\n    \\node at (0,-1.45) {$B$-smoothing, weight $A^{-1}$};\n  \\end{scope}\n\\end{tikzpicture}\n```\n\nFor a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the smooth normal-bundle structure used in the\nframing clause. For a knot component $K$, its normal bundle is the fibrewise\nquotient $\\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this\nbundle.\n\nLet $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.\n\nThis convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.\n\nThe **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.\n\nThe **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  \\draw[->] (-1,0) -- (1,0) node[right] {$v_{\\rm over}$};\n  \\draw[->] (0,-1) -- (0,1) node[above] {$v_{\\rm under}$};\n  \\node[above left] at (0,0) {$+1$};\n\\end{tikzpicture}\n```\n\nIn the displayed local chart, the over tangent is the positive horizontal\nvector and the under tangent is the positive vertical vector, so the determinant\nis $+1$. This figure illustrates the determinant rule only; no proof below\ndepends on a picture.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-hecke-bracket-trace-dictionary-and-local-descent",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an indeterminate, $R_A=\\mathbb Z[A^{\\pm1},(A^{-4}+1)^{-1}]$,\n$q=A^{-2}$, $t=q^2=A^{-4}$, $\\delta=-(q+q^{-1})=-A^2-A^{-2}$, and\n$z_0=-1/(t+1)$. For a nonempty regular diagram $D$, define\n$\\langle D\\rangle$ by summing its crossing smoothings with weights $A$ and\n$A^{-1}$ and the factor $\\delta^{k-1}$ for a state with $k$ circles. Let\n$B_n$ be the $n$-strand Artin braid group with positive geometric generators\n$\\sigma_i$ (label $i$ passes below the midpoint and label $i+1$ passes above),\ndrawn with braid parameter increasing from bottom to top; let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$. Let $H(n)$ be\nthe type-A Hecke algebra with generators $T_i$, quadratic relation\n$T_i^2=(v-1)T_i+v$, braid relations, and distant commutation; let $\\pi_n$\nsend $\\sigma_i$ to $T_i$. Its normalized Markov trace $\\operatorname{tr}_n$\nsatisfies $\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Let\n$\\mathrm{TL}_n$ be the noncrossing pairing algebra with loop value $\\delta$,\nand let $\\operatorname{Tr}_n(D)=\\delta^{c(D)}$ be the unnormalized trace,\nwhere $c(D)$ is the number of circles after joining corresponding top and\nbottom endpoints outside the rectangle; set\n$\\tau_n=\\delta^{-n}\\operatorname{Tr}_n$. For $\\beta\\in B_n$,\n$n\\ge1$, orient its closure in the braid direction. Under the specialization\n$v\\mapsto t$, $z\\mapsto z_0$ of the Hecke tower, one has\n$$\\langle\\widehat\\beta\\rangle\n =\\delta^{n-1}(-A)^{e(\\beta)}\\operatorname{tr}_n(\\pi_n(\\beta))\\big|_{v=t,\\,z=z_0}.$$\nThe identity gives bracket value $1$ on the one-strand identity closure. Its\npositive and negative Markov stabilizations multiply the raw bracket by\n$-A^3$ and $-A^{-3}$, respectively.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-exponent-sum-of-a-braid",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $B_n=\\langle\\sigma_1,\\dots,\\sigma_{n-1}\\mid\\text{Artin\nrelators}\\rangle$ be the braid group of the Artin presentation\n([[def-braid-group-by-the-artin-presentation]]); recall that $B_0$ and $B_1$\nare trivial. The **exponent sum** is the unique homomorphism\n\n$$e_n:B_n\\longrightarrow\\mathbb Z,\\qquad e_n(\\sigma_i)=1\\quad(1\\le i\\le n-1),$$\n\nwhere $\\mathbb Z$ is the additive group of integers. It is well defined because\nevery defining relator of the Artin presentation has exponent sum $0$: the\nbraid relator $\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}$\nhas both sides of exponent sum $3$, and each far-commutation relator has both\nsides of exponent sum $2$, so the assignment $\\sigma_i\\mapsto1$ kills all\nrelators, and [[thm-von-dyck]] applies. It is surjective for $n\\ge2$ and it is\nthe trivial map on the trivial group $B_1$. For every Artin word\n$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_k}^{\\varepsilon_k}$ one has\n$e_n(\\beta)=\\sum_{r=1}^k\\varepsilon_r$ independently of the word, and\n$e_n(\\beta^{-1})=-e_n(\\beta)$. **Caveat:** $e_n$ is the composite of the\nabelianisation $B_n\\to B_n^{\\mathrm{ab}}$ with a surjection onto the free cyclic\ngroup $\\mathbb Z$ (for $n\\ge2$): since the target is abelian, every commutator is sent to $0$, so $e_n$ factors through $B_n/[B_n,B_n]$ ([[def-abelianisation-of-a-group]]). No normal form, Garside structure or\nfaithfulness statement is used anywhere.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "\nThe **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\mathcal C$ be a\nribbon category ([[def-twist-and-ribbon-structure]]) with\nchosen left duals ([[def-left-dual-and-right-dual-object]]), braiding $c$\n([[def-braiding]]) and twist $\\theta$, and let $X\\in\\mathcal C$. Write\n$X_{+1}:=X$ and $X_{-1}:=X^{\\vee}$. In a strict model of $\\mathcal C$\n([[thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one]])\nthere is a unique strict monoidal functor\n\n$$F_X\\colon\\mathcal T\\longrightarrow\\mathcal C$$\n\nfrom the framed oriented tangle category $\\mathcal T$ with\n\n$$F_X(+)=X,\\qquad F_X(-)=X^{\\vee},$$\n\n$$F_X\\bigl(X^{+}_{\\varepsilon,\\varepsilon'}\\bigr)=c_{X_\\varepsilon,X_{\\varepsilon'}},\\qquad F_X\\bigl(X^{-}_{\\varepsilon,\\varepsilon'}\\bigr)=(c_{X_{\\varepsilon'},X_\\varepsilon})^{-1},\\qquad F_X(\\cup_{+1})=\\operatorname{coev}_X,\\qquad F_X(\\cap_{+1})=\\operatorname{ev}_X,\\qquad F_X(\\varphi^{\\pm1}_{+1})=\\theta_X^{\\pm1},$$\n\nwhere the cup and cap are the coevaluation and evaluation maps attached to the\nchosen left duals and the signs are the blackboard conventions of\n[[def-the-framed-oriented-tangle-category]]. The remaining elementary tangles\nof $\\mathcal T$, those carrying a negative sign at a cup, cap or twist, receive\nthe values forced by these data through the relations. Explicitly put\n$j_X=u_X\\theta_X:X\\to X^{\\vee\\vee}$, with $u$ as in\n[[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Then\n\n$$F_X(\\cup_-)=(1_{X^\\vee}\\otimes j_X^{-1})\\operatorname{coev}_{X^\\vee},\\qquad F_X(\\cap_-)=\\operatorname{ev}_{X^\\vee}(j_X\\otimes1_{X^\\vee}),\\qquad F_X(\\varphi_-^{\\pm1})=\\theta_{X^\\vee}^{\\pm1}.$$\n\nThese are the right coevaluation and evaluation on $X$ induced by the ribbon\nstructure; they need no identification $X^{\\vee\\vee}=X$ on objects. For a general ribbon\ncategory the same assignment determines a strong monoidal functor, unique up to\nthe canonical coherence isomorphisms of the strictification. Isotopic framed\ntangles are equal morphisms of $\\mathcal T$, so $F_X$ is an invariant of framed\ntangles. Uniqueness needs no choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-ribbon-trace-equals-the-framed-closure-evaluation",
+          "source_section": "Statement",
+          "quote": "$$t_n(\\beta)=F_X(\\widehat\\beta^{\\mathrm{fr}})\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1),$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In the ordered basis of [F1], direct subtraction gives $e:=A(c_{V,V}-AI)=\\begin{pmatrix}0&0&0&0\\\\0&-A^2&1&0\\\\0&1&-A^{-2}&0\\\\0&0&0&0\\end{pmatrix}$. Writing $U(1)=-A^2v_+\\otimes v_-+v_-\\otimes v_+$ and $B(v_+\\otimes v_-)=1$, $B(v_-\\otimes v_+)=-A^{-2}$ shows entrywise that $e=UB$. Hence $B(U(1))=-A^2-A^{-2}=\\delta$ and $e^2=\\delta e$. The explicit snake equalities in [F2] give the adjacent tensor relations: $e_{12}e_{23}e_{12}=UB\\otimes1$ because the middle composites $(1\\otimes B)(U\\otimes1)$ and then $(B\\otimes1)(1\\otimes U)$ are identities; the reversed calculation gives $e_{23}e_{12}e_{23}=e_{23}$. Distant placements commute because they act on disjoint tensor factors.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In source-chart coordinates $(u,v)$ and braid-box coordinates $(x,t)$, the orientation-preserving quarter-turn $(x,t)=(-v,u)$ sends the source over direction $(1,1)$ to $(-1,1)$. This is the positive-braid over direction: [F5]'s vector $(1,-2h)$ in ordered coordinates $(t,x)$ is $(-2h,1)$ in $(x,t)$. The source chart's top endpoint pair $v=1$ maps to the braid box's left pair $x=-1$, and its bottom pair $v=-1$ maps to the right pair $x=1$; each pair is a through strand at fixed braid position. The source chart's left and right pairs map to the braid box's bottom and top pairs, respectively, so the B-smoothing is the top cap and bottom cup $e_i$. Thus the A/B crossing expansion is $C_i=AI+A^{-1}e_i$. Its inverse is $C_i^{-1}=A^{-1}I+Ae_i$, since their product is $I+(A^2+A^{-2}+\\delta)e_i=I$. By [A1] and [F8]–[F9], the categorical ribbon trace is the framed tangle evaluation of this braid closure, and that evaluator is monoidal with the stated crossing and duality maps. Expanding a braid word into the two smoothing choices therefore gives the bracket weights in [F4]. Because the closure has $n\\ge1$ strands, each complete smoothing is a nonempty closed 1-manifold, hence a union of at least one circle. Its categorical value is $\\delta^{|S|}$ by monoidality in [F8] and the loop value [F2], whereas the bracket state sum uses $\\delta^{|S|-1}$; the extra single factor is independent of the state. Thus $t_n(\\beta)=\\delta\\langle\\widehat\\beta\\rangle$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The matrix trace $t_n$ in [F3] closes the tensor-word braid with the duality maps $B,U$ of [F2]. Substituting each crossing into the trace expansion from step 2.1 therefore gives the first identity in the Statement. The Hecke formula [F6] then yields $t_n(\\beta)=\\delta^n(-A)^{e(\\beta)}\\operatorname{tr}_n(\\pi_n(\\beta))\\big|_{v=t,z=z_0}$. By [F7], $e(\\beta)=w(\\beta)$. The twist in [F1] is $\\lambda=-A^3$, so multiplying $t_n=\\delta\\langle\\widehat\\beta\\rangle$ by $\\lambda^{-w(\\beta)}$ gives the second displayed identity. The only choice assumption is [A1], used in step 2.1 to invoke the published trace-to-closure identification; no stronger choice principle or division by $\\delta$ is used. Since $A$ is indeterminate, the specialization is taken in the rational-function field where $t+1\\ne0$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty graph or empty-word boundary is handled by the stated evaluator."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket has no zero-valued input parameter beyond its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "ACω is declared and used only in step 2.1 for the published trace-to-closure identification; the matrix and state-sum calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Temperley-Lieb generator and one-strand closure",
+          "method": "exact matrix and one-state bracket",
+          "input": {
+            "e": "A(c-AI)",
+            "n": 1,
+            "word": []
+          },
+          "calculation": "e^2=delta e; the bracket is 1 and the pivotal loop is δ.",
+          "expected": {
+            "delta": "-A^2-A^-2",
+            "t1": "delta"
+          }
+        }
+      ]
+    },
+    "cex-knot-kt-33-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ribbon-evaluation-of-an-x-colored-closed-braid",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a ribbon category with chosen left duals, twist $\\theta$\n([[def-twist-and-ribbon-structure]]) and Drinfeld morphism\n$u_X\\colon X\\to X^{\\vee\\vee}$ of\n[[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Put\n\n$$j_X:=u_X\\,\\theta_X\\ \\colon\\ X\\longrightarrow X^{\\vee\\vee}.$$\n\nThen $j$ is a natural isomorphism: it is the composite of the natural\nisomorphism $u$ with the natural automorphism $\\theta$ of the identity. It is\n**monoidal** up to the monoidal comparison $d_{X,Y}\\colon\nX^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\to(X\\otimes Y)^{\\vee\\vee}$ of the double-dual\nfunctor,\n\n$$j_{X\\otimes Y}=d_{X,Y}\\circ(j_X\\otimes j_Y),$$\n\nwhich is precisely the statement that $u\\theta$ is the pivotal comparison\ninduced by the ribbon structure; the identity follows from the tensor relation\n$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}$ for\nthe Drinfeld morphism together with the twist axiom\n$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$ and\nthe naturality of $\\theta$. Iterating the comparison identifies\n$j_{X^{\\otimes n}}$ with the corresponding composite of the $j_X$ and the\ncoherence isomorphisms of the tensor power.\n\nLet $n\\ge1$ and $\\beta\\in B_n$\n([[def-braid-group-by-the-artin-presentation]]), and let\n$\\rho_n\\colon B_n\\to\\operatorname{Aut}_{\\mathcal C}(X^{\\otimes n})$ be the\ncanonical braid action\n([[cor-an-object-of-a-braided-category-carries-canonical-braid-actions]]). The\n**ribbon evaluation** of the $X$-colored closed braid is the value\n\n$$t_n(\\beta):=\\operatorname{Tr}_L\\!\\left(j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)\\right)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1),$$\n\nin the sense of\n[[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]: the composite\n$j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)$ is a morphism\n$X^{\\otimes n}\\to(X^{\\otimes n})^{\\vee\\vee}$, which is exactly the input type of\nthe left categorical trace. When $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$\nthe value $t_n(\\beta)$ is a scalar. For $n=1$ the group $B_1$ is trivial and\n$t_1(e)=\\operatorname{Tr}_L(j_X)$, the left dimension of $X$.\n\nFor $n=0$ put $t_0(e)=1_{\\mathbf 1}$, the evaluation of the empty\nclosed tangle. This is a separate convention; no generator or dual pairing\nis needed for the empty diagram.\n\nThe identification of $t_n(\\beta)$ with the evaluation\n$F_X(\\widehat\\beta^{\\mathrm{fr}})$ of the blackboard-framed closure of $\\beta$\nunder the functor of\n[[thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor]] is\nthe content of the closure-comparison lemma of this page; it must be proved\nbefore the trace is used as a link evaluation, and it is not assumed here. The\nfunctor $F_X$ is constructed under countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), while the definition of $t_n$ above is choice-free\nand uses neither that functor nor that principle; only the comparison, not the\ntrace, carries the choice cost.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-twist-correction-removes-framing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and let $\\mathcal C$ be a $k$-linear ribbon category with $k$-bilinear tensor product and $\\operatorname{End}_{\\mathcal C}(\\mathbf1)=k$. Let $X$ be absolutely simple, so its twist is $\\theta_X=\\lambda\\operatorname{id}_X$ for a unique $\\lambda\\in k^\\times$. For $n\\ge1$ and $\\beta\\in B_n$, let $t_n(\\beta)$ be the value of the blackboard-framed $X$-colored closure and let $w(\\beta)$ be the exponent sum, with positive Artin generator and positive stabilization conventions fixed as in the supplied ribbon-trace formulas. Then\n$$J_X(\\widehat\\beta):=\\lambda^{-w(\\beta)}t_n(\\beta)$$\ndepends only on the oriented unframed link type of $\\widehat\\beta$ when every component has color $X$. This statement makes no normalization by the categorical dimension.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-markovs-closed-braid-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\beta,\\beta'$ be braids. Then\n$\\widehat\\beta$ and $\\widehat{\\beta'}$ are equivalent oriented links if and\nonly if $\\beta$ and $\\beta'$ are Markov equivalent, that is, related by a finite\nsequence of conjugations in a fixed braid group, stabilizations\n$\\beta\\mapsto\\beta\\sigma_n^{\\pm1}$ into the next braid group, and their\ninverses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-twist-and-ribbon-structure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a braided rigid monoidal category with braiding $c$, and\nfix left duals $X^\\vee$ for all objects together with the dual-morphism\noperation of [[def-the-dual-of-a-morphism]].\n\nA **twist** on $\\mathcal C$ is a natural automorphism\n$\\theta\\in\\operatorname{Aut}(\\operatorname{id}_{\\mathcal C})$ such that\n\n$$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$$\n\nfor all objects $X,Y$ and $\\theta_{\\mathbf 1}=1_{\\mathbf 1}$.\n\nA **ribbon structure** is a twist satisfying the dual-compatibility condition\n\n$$(\\theta_X)^\\vee=\\theta_{X^\\vee}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-left-dual-and-right-dual-object",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory and let $X$ be an object of $\\mathcal C$.\n\nA **left dual** of $X$ is an object $X^\\vee$ together with morphisms\n\n$$\\operatorname{ev}_X:X^\\vee\\otimes X\\to\\mathbf 1,\\qquad \\operatorname{coev}_X:\\mathbf 1\\to X\\otimes X^\\vee$$\n\nsuch that the composites\n\n$$X\\xrightarrow{\\lambda_X^{-1}}\\mathbf 1\\otimes X\\xrightarrow{\\operatorname{coev}_X\\otimes1_X}(X\\otimes X^\\vee)\\otimes X\\xrightarrow{\\alpha_{X,X^\\vee,X}}X\\otimes(X^\\vee\\otimes X)\\xrightarrow{1_X\\otimes\\operatorname{ev}_X}X\\otimes\\mathbf 1\\xrightarrow{\\rho_X}X$$\n\nand\n\n$$X^\\vee\\xrightarrow{\\rho_{X^\\vee}^{-1}}X^\\vee\\otimes\\mathbf 1\\xrightarrow{1_{X^\\vee}\\otimes\\operatorname{coev}_X}X^\\vee\\otimes(X\\otimes X^\\vee)\\xrightarrow{\\alpha^{-1}_{X^\\vee,X,X^\\vee}}(X^\\vee\\otimes X)\\otimes X^\\vee\\xrightarrow{\\operatorname{ev}_X\\otimes1_{X^\\vee}}\\mathbf 1\\otimes X^\\vee\\xrightarrow{\\lambda_{X^\\vee}}X^\\vee$$\n\nare identity morphisms.\n\nA **right dual** of $X$ is an object ${}^\\vee X$ together with morphisms\n\n$$\\operatorname{ev}'_X:X\\otimes{}^\\vee X\\to\\mathbf 1,\\qquad \\operatorname{coev}'_X:\\mathbf 1\\to{}^\\vee X\\otimes X$$\n\nsuch that the mirror composites\n\n$$X\\xrightarrow{\\rho_X^{-1}}X\\otimes\\mathbf 1\\xrightarrow{1_X\\otimes\\operatorname{coev}'_X}X\\otimes({}^\\vee X\\otimes X)\\xrightarrow{\\alpha^{-1}_{X,{}^\\vee X,X}}(X\\otimes{}^\\vee X)\\otimes X\\xrightarrow{\\operatorname{ev}'_X\\otimes1_X}\\mathbf 1\\otimes X\\xrightarrow{\\lambda_X}X$$\n\nand\n\n$${}^\\vee X\\xrightarrow{\\lambda_{{}^\\vee X}^{-1}}\\mathbf 1\\otimes{}^\\vee X\\xrightarrow{\\operatorname{coev}'_X\\otimes1_{{}^\\vee X}}({}^\\vee X\\otimes X)\\otimes{}^\\vee X\\xrightarrow{\\alpha_{{}^\\vee X,X,{}^\\vee X}}{}^\\vee X\\otimes(X\\otimes{}^\\vee X)\\xrightarrow{1_{{}^\\vee X}\\otimes\\operatorname{ev}'_X}{}^\\vee X\\otimes\\mathbf 1\\xrightarrow{\\rho_{{}^\\vee X}}{}^\\vee X$$\n\nare identity morphisms.\n\nThis page uses EGNO's convention: the word \"left\" refers to the side on which\nthe dual object sits in the evaluation map.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-a-braided-rigid-category-has-a-drinfeld-morphism",
+          "source_section": "Statement",
+          "quote": "In a braided rigid monoidal category there is a natural isomorphism\n\n$$u_X:X\\to X^{\\vee\\vee},$$\n\ncalled the **Drinfeld morphism** (or **Drinfeld isomorphism**), defined by\n\n$$X\\xrightarrow{1_X\\otimes\\operatorname{coev}_{X^\\vee}}X\\otimes X^\\vee\\otimes X^{\\vee\\vee}\\xrightarrow{c_{X,X^\\vee}\\otimes1_{X^{\\vee\\vee}}}X^\\vee\\otimes X\\otimes X^{\\vee\\vee}\\xrightarrow{\\operatorname{ev}_X\\otimes1_{X^{\\vee\\vee}}}X^{\\vee\\vee}.$$\n\nWrite\n\n$$d_{X,Y}:X^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\xrightarrow{\\sim}(X\\otimes Y)^{\\vee\\vee}$$\n\nfor the monoidal comparison of the double-dual functor. Then\n\n$$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}.$$\n\nThus $u$ need not be monoidal: the double braiding is precisely its\nmonoidality obstruction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ribbon-evaluation-of-an-x-colored-closed-braid",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a ribbon category with chosen left duals, twist $\\theta$\n([[def-twist-and-ribbon-structure]]) and Drinfeld morphism\n$u_X\\colon X\\to X^{\\vee\\vee}$ of\n[[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Put\n\n$$j_X:=u_X\\,\\theta_X\\ \\colon\\ X\\longrightarrow X^{\\vee\\vee}.$$\n\nThen $j$ is a natural isomorphism: it is the composite of the natural\nisomorphism $u$ with the natural automorphism $\\theta$ of the identity. It is\n**monoidal** up to the monoidal comparison $d_{X,Y}\\colon\nX^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\to(X\\otimes Y)^{\\vee\\vee}$ of the double-dual\nfunctor,\n\n$$j_{X\\otimes Y}=d_{X,Y}\\circ(j_X\\otimes j_Y),$$\n\nwhich is precisely the statement that $u\\theta$ is the pivotal comparison\ninduced by the ribbon structure; the identity follows from the tensor relation\n$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}$ for\nthe Drinfeld morphism together with the twist axiom\n$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$ and\nthe naturality of $\\theta$. Iterating the comparison identifies\n$j_{X^{\\otimes n}}$ with the corresponding composite of the $j_X$ and the\ncoherence isomorphisms of the tensor power.\n\nLet $n\\ge1$ and $\\beta\\in B_n$\n([[def-braid-group-by-the-artin-presentation]]), and let\n$\\rho_n\\colon B_n\\to\\operatorname{Aut}_{\\mathcal C}(X^{\\otimes n})$ be the\ncanonical braid action\n([[cor-an-object-of-a-braided-category-carries-canonical-braid-actions]]). The\n**ribbon evaluation** of the $X$-colored closed braid is the value\n\n$$t_n(\\beta):=\\operatorname{Tr}_L\\!\\left(j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)\\right)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1),$$\n\nin the sense of\n[[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]: the composite\n$j_{X^{\\otimes n}}\\circ\\rho_n(\\beta)$ is a morphism\n$X^{\\otimes n}\\to(X^{\\otimes n})^{\\vee\\vee}$, which is exactly the input type of\nthe left categorical trace. When $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$\nthe value $t_n(\\beta)$ is a scalar. For $n=1$ the group $B_1$ is trivial and\n$t_1(e)=\\operatorname{Tr}_L(j_X)$, the left dimension of $X$.\n\nFor $n=0$ put $t_0(e)=1_{\\mathbf 1}$, the evaluation of the empty\nclosed tangle. This is a separate convention; no generator or dual pairing\nis needed for the empty diagram.\n\nThe identification of $t_n(\\beta)$ with the evaluation\n$F_X(\\widehat\\beta^{\\mathrm{fr}})$ of the blackboard-framed closure of $\\beta$\nunder the functor of\n[[thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor]] is\nthe content of the closure-comparison lemma of this page; it must be proved\nbefore the trace is used as a link evaluation, and it is not assumed here. The\nfunctor $F_X$ is constructed under countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), while the definition of $t_n$ above is choice-free\nand uses neither that functor nor that principle; only the comparison, not the\ntrace, carries the choice cost.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $\\mathcal C$ have objects finite-dimensional rational vector spaces $U$ equipped with a linear involution $S_U$ ($S_U^2=1$), and morphisms commuting with the involutions. Use $S_{U\\otimes W}=S_U\\otimes S_W$, the ordinary flip braiding, standard vector-space duality, and define $\\theta_U=S_U$. This is a ribbon category: the twist is natural because every morphism commutes with $S$; its tensor rule is $S_{U\\otimes W}=S_U\\otimes S_W$ and the double flip is the identity; and on the dual, $S_{U^*}=(S_U^{-1})^T=S_U^T=(\\theta_U)^*$, giving ribbon dual compatibility. The unit is $\\mathbb Q$ with trivial involution, so $\\operatorname{End}(\\mathbf1)=\\mathbb Q$. By [F7], the Drinfeld morphism in this symmetric vector-space category is the canonical double-dual identification: on $v\\in U$ and $f\\in U^*$ its evaluation is $u_U(v)(f)=f(v)$. Thus the ribbon-induced pivotal map $j_U=u_U\\theta_U$ is the canonical double-dual identification composed with $S_U$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Take $X=\\mathbb Q e_+\\oplus\\mathbb Q e_-$ with $S_X=\\operatorname{diag}(1,-1)$. It is decomposable and its twist is invertible but nonscalar. For the identity $e\\in B_1$, [F1] gives $t_1(e)=\\operatorname{Tr}(S_X)=1+(-1)=0$. For $\\sigma_1\\in B_2$, the braid action is the flip $P$. By [F8], under the canonical vector-space double-dual comparison, $j_{X\\otimes X}$ has matrix $S_X\\otimes S_X$, so the trace of $(S_X\\otimes S_X)P$ is $2$: the basis tensors $e_+\\otimes e_+$ and $e_-\\otimes e_-$ contribute diagonal entries $1$, while the two mixed basis tensors are exchanged and contribute no diagonal entries.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The braid $\\sigma_1$ is the positive Markov stabilization of the identity braid in $B_1$, so [F3] says their oriented unframed closures are equivalent. Their exponent sums are $w(e)=0$ and $w(\\sigma_1)=1$. For any proposed $\\lambda\\in\\mathbb Q^\\times$, the corrected values are $0$ and $2\\lambda^{-1}$, which are unequal because $2\\ne0$ and $\\lambda$ is invertible. This contradicts the false claim. The counterexample has precisely the missing hypothesis identified by [F2]: its invertible twist is not scalar on the decomposable color.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: cex-knot-kt-33-boundary-case has a nonempty module or procedure input and makes no empty-link claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-valued or zero-length boundary case is included in the explicit calculation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the exact choice axiom dependency is declared and used only at the stated construction or classification step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: cex-knot-kt-33-boundary-case asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: cex-knot-kt-33-boundary-case asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "C2 decomposable-color stabilization",
+          "method": "exact matrix trace",
+          "input": {
+            "S": "diag(1,-1)"
+          },
+          "calculation": "Tr(S)=0 and Tr((S tensor S)P)=2.",
+          "expected": {
+            "t1": 0,
+            "t2": 2,
+            "all_scalar_corrections_fail": true
+          }
+        }
+      ]
+    },
+    "ex-knot-kt-33-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-colored-framed-knot-evaluation-from-ribbon-category",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\mathcal C$ be a ribbon category with chosen left duals and tensor unit $\\mathbf 1$. A **finite oriented framed link colored in $\\mathcal C$** is a finite disjoint union $L$ of oriented smoothly embedded circles in $S^3$, a homotopy class of nowhere-zero normal vector field on each component, and an assignment of an object of $\\mathcal C$ to each component. A framed colored isotopy carries orientations, framings, and component colors. If $F_{\\mathcal C}$ is the ribbon-tangle evaluation functor, define\n$$\\operatorname{RT}_{\\mathcal C}(L):=F_{\\mathcal C}(L)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1).$$\nThis value depends only on the framed colored isotopy class. It is not automatically a field scalar; if $\\mathcal C$ is $k$-linear and $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$, it is a scalar in $k$. The empty link is assigned $1_{\\mathbf 1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ribbon-evaluation-from-colored-braid-word",
+          "source_section": "Definition",
+          "quote": "An **effective field** is a field whose elements have finite encodings and whose exact addition, subtraction, multiplication, equality test, and inversion of nonzero elements are terminating procedures. Input a finite-dimensional strict matrix realization of a $k$-linear ribbon category with $\\operatorname{End}(\\mathbf1)=k$, finite-dimensional color objects with fixed bases, exact matrices for every braiding and inverse braiding used, duality and twist data, and the induced pivotal matrix $J_W$ for the tensor word $W=V_{a_1}\\otimes\\cdots\\otimes V_{a_n}$. Also input a finite braid word $\\beta$ on $n\\ge1$ strands and the top color tuple $(a_1,\\ldots,a_n)$. The matrices are assumed to satisfy the stated ribbon-category axioms; an implementation does not infer those axioms from arbitrary matrices.\n\nUse the strand-position permutation homomorphism $\\pi:B_n\\to\\operatorname{Sym}(\\{1,\\ldots,n\\})$ given by $\\pi(\\sigma_i)=(i\\ i+1)$. Read the braid letters in composition order, updating the current color tuple at each crossing by swapping its adjacent colors. For a positive letter $\\sigma_i$, use the matrix of\n$$1\\otimes\\cdots\\otimes c_{V_{a_i},V_{a_{i+1}}}\\otimes\\cdots\\otimes1,$$\nand for a negative letter use its inverse. Let the blackboard-framed closure join the bottom and top endpoint at each position by the identity pairing. Reject the input if the final color tuple differs from the initial tuple: the tuple records the colors at the paired endpoints, so equality is exactly the condition that the closure carries a consistent color on every component. Starting with the identity matrix, multiply the typed crossing matrices in word order to obtain $M_\\beta:W\\to W$, then return\n$$\\operatorname{Tr}(J_WM_\\beta)\\in k.$$\nThis is the exact ribbon evaluation of the blackboard-framed colored braid closure in the given matrix realization. No algorithm is asserted for arbitrary abstract ribbon categories without effective finite matrix data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ribbon-evaluation-from-colored-braid-word-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every valid input of the colored-braid evaluation algorithm, where the braid word has $m$ letters and the total tensor-product dimension is $D$, the procedure terminates after exactly $m$ crossing-matrix updates and one finite pivotal-trace contraction. It returns the ribbon-category evaluation of that framed colored braid closure in the given matrix realization. The stated bound concerns the number of matrix updates; each update is a finite exact matrix multiplication over the effective field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a finite set and let $\\sigma\\in\\operatorname{Sym}(X)$, with cycle\nnotation and composition as in [[def-symmetric-group]].\n\nThe **support** and **fixed-point set** of $\\sigma$ are\n\n$$\\operatorname{supp}(\\sigma):=\\{x\\in X:\\sigma(x)\\ne x\\},\\qquad \\operatorname{Fix}(\\sigma):=\\{x\\in X:\\sigma(x)=x\\}.$$\n\nA cycle $(a_0\\,a_1\\,\\ldots\\,a_{k-1})$ has **length** $k$ and support\n$\\{a_0,\\ldots,a_{k-1}\\}$. Two cycles are **disjoint** when their supports are\ndisjoint. A **disjoint-cycle decomposition** of $\\sigma$ is an expression for\n$\\sigma$ as a product of pairwise disjoint cycles of length at least $2$.\nOne-cycles are omitted, and the empty product is the identity permutation.\n\nWhen $|X|=n$, the **cycle type** of $\\sigma$ is the list of natural numbers\n$c_1(\\sigma),\\ldots,c_n(\\sigma)$, where $c_k(\\sigma)$ is the number of\n$k$-element orbits of the action generated by $\\sigma$. Thus $c_1(\\sigma)$ is\nthe number of fixed points. Equivalently, the cycle type records the lengths of\nall cycles after each fixed point is inserted as a one-cycle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-a-braided-rigid-category-has-a-drinfeld-morphism",
+          "source_section": "Statement",
+          "quote": "In a braided rigid monoidal category there is a natural isomorphism\n\n$$u_X:X\\to X^{\\vee\\vee},$$\n\ncalled the **Drinfeld morphism** (or **Drinfeld isomorphism**), defined by\n\n$$X\\xrightarrow{1_X\\otimes\\operatorname{coev}_{X^\\vee}}X\\otimes X^\\vee\\otimes X^{\\vee\\vee}\\xrightarrow{c_{X,X^\\vee}\\otimes1_{X^{\\vee\\vee}}}X^\\vee\\otimes X\\otimes X^{\\vee\\vee}\\xrightarrow{\\operatorname{ev}_X\\otimes1_{X^{\\vee\\vee}}}X^{\\vee\\vee}.$$\n\nWrite\n\n$$d_{X,Y}:X^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\xrightarrow{\\sim}(X\\otimes Y)^{\\vee\\vee}$$\n\nfor the monoidal comparison of the double-dual functor. Then\n\n$$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}.$$\n\nThus $u$ need not be monoidal: the double braiding is precisely its\nmonoidality obstruction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-disjoint-cycle-decomposition",
+          "source_section": "Statement",
+          "quote": "Every permutation of a finite set is a product of pairwise disjoint cycles,\nuniquely up to reordering the factors and cyclically rotating the entries within\neach cycle. The identity permutation has the empty disjoint-cycle decomposition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], the closed-link value is the ribbon-tangle evaluation, and [F3] identifies the algorithm output with that value. In the flip category, each positive braid generator swaps two adjacent tensor factors and each negative generator does the same swap, so the braid action on $V^{\\otimes n}$ is the permutation of factors given by $\\pi(\\beta)$. The twist is identity. Let $w_1,\\ldots,w_{d^n}$ be the tensor basis of $W=V^{\\otimes n}$ and $w_1^*,\\ldots,w_{d^n}^*$ its ordinary dual basis. Substitution in [F5]'s formula gives $u_W(w_r)(w_s^*)=1$ when $r=s$ and $0$ otherwise, so the ribbon-induced pivotal map is the canonical double-dual identification. Thus [F2]–[F3] reduce the value to the ordinary matrix trace of that permutation operator.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix a basis $e_1,\\ldots,e_d$ of $V$. A basis tensor $e_{i_1}\\otimes\\cdots\\otimes e_{i_n}$ is fixed by the factor permutation exactly when its indices are constant on each orbit of $\\pi(\\beta)$; by [F4], these orbits are exactly the cycles counted by $c(\\pi(\\beta))$, including fixed points. There are $d$ independent choices for each cycle, hence exactly $d^{c(\\pi(\\beta))}$ fixed basis tensors. A permutation matrix has trace equal to its number of fixed basis vectors, proving the formula.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The identity in $B_1$ has one permutation cycle, the identity in $B_2$ has two, and $\\sigma_1$ has the transposition permutation with one cycle. Substitution into the formula gives $d$, $d^2$, and $d$, respectively; the latter closure is a single component because its endpoint permutation has one cycle. These calculations include $d=0$ because every listed cycle count is positive.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: ex-knot-kt-33-worked-cases has a nonempty module or procedure input and makes no empty-link claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: ex-knot-kt-33-worked-cases has no zero-valued input parameter beyond its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-object, one-strand, or one-generator case is covered directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the stated hypotheses and endpoint or duality conditions cover the degenerate boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the closed-link or color-preserving endpoint condition is checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the finite algebraic and matrix calculations use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: ex-knot-kt-33-worked-cases asserts no if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: ex-knot-kt-33-worked-cases asserts no if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-strand identity and flip",
+          "method": "fixed tensor-basis count",
+          "input": {
+            "d": 3,
+            "n": 2
+          },
+          "calculation": "The identity fixes 9 basis tensors; the transposition fixes the 3 diagonal tensors.",
+          "expected": {
+            "unlink": 9,
+            "flipClosure": 3
+          }
+        }
+      ]
+    }
+  }
+}

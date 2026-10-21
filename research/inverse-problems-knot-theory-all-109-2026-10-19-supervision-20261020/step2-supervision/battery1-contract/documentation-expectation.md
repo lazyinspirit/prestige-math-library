@@ -1,0 +1,7 @@
+# Tool/documentation expectation
+
+The proposed empty-use rule is exact-set fidelity, not a waiver: `uses` must be an array; [] is valid only when no numbered proof step explicitly uses that Fact. Every actual use must still be mapped, unsupported or missing claimed steps still fail, and all current source/section/quote/dependency checks remain. A declarative Definition can therefore retain real contextual Fact citations without inventing a nonexistent proof step. The generator must refresh those citations even without proof rows, while refusing to silently delete historical obligations.
+
+The reviewed-local exception must call the already adopted `reviewedLocalLemmaAcceptance` implementation. It retains the exact eight-ID/run/role/actual review/evidence/body binding in CLAUDE13 and SCHEMA; no general generated-lemma waiver or source-retagging is introduced. The checker must continue through exact quote validation for eligible suppliers, and report invalid bindings rather than ignoring them. Root alone executes actual body/hash recertification after integrating repairs.
+
+The minimal tool patch contains inline comments for both rules and the no-step historical-proof guard. Existing CLAUDE13/SCHEMA already document the bounded exception. A concise workflow note, if root wants an operator-facing addition, can use the preceding two paragraphs. This research note does not itself modify authoritative documentation or declare new review coverage. Full native gates remain required; isolated proposal tests are not the133-gate battery.

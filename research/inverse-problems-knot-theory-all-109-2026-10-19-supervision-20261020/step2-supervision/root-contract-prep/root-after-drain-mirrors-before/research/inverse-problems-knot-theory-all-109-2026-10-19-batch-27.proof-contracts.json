@@ -1,0 +1,694 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-index-function-young-conjugate-bound",
+    "lem-ip-banach-fenchel-duality-for-regularization",
+    "thm-ip-vsc-nonlinear-regularization-rate",
+    "cex-ip-vsc-unit-coefficient-does-not-control-bregman-error",
+    "ex-ip-power-index-bregman-rate",
+    "ex-ip-logarithmic-index-bregman-rate"
+  ],
+  "contracts": {
+    "lem-ip-index-function-young-conjugate-bound": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "bregman-conjugate-supremum",
+          "claim": "Rearranging the assumed inequality and applying the defining supremum gives the Bregman-error bound.",
+          "step": "1.1",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "residual-conjugate-supremum",
+          "claim": "Splitting off half the residual coefficient and applying the defining supremum gives the residual bound.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is a pointwise implication for specified nonnegative scalars, not a set-existence assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When r=0 and d=0, the premise forces e=0 because psi(0)=0; step 1.1 gives the bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof permits any positive c1, c2, C3 and alpha, including value one; steps 1.1 and 2.1 use only positivity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed endpoint d=0 is retained in the rearrangements of steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain endpoints r=e=d=0 are admitted and the two supremum estimates in steps 1.1 and 2.1 remain defined by A1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof applies to the given scalars and makes no selection; steps 1.1 and 2.1 use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives two inequalities and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives two inequalities and contains no equivalence."
+        }
+      ]
+    },
+    "lem-ip-banach-fenchel-duality-for-regularization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fenchel-young-inequality",
+          "claim": "The conjugate supremum includes the evaluation at x, yielding Fenchel–Young.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "subgradient-implies-equality",
+          "claim": "The supporting inequality bounds every conjugate term by the term at x, and the supremum contains that term.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "equality-implies-subgradient",
+          "claim": "Equality forces every term in the supremum to obey the supporting inequality, which is the subgradient definition.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified x in dom R and a specified dual functional."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The supremum argument in step 1.1 also applies when the pairing or either vector is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-interval or threshold parameter in the Fenchel–Young equivalence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If R*(xi)=+infinity the inequality is extended-real true and equality to the finite pairing is false; steps 1.1–3.1 cover finite equality exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The conjugate supremum includes z=x, and the supporting condition quantifies over every z in X in steps 1.1–1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the given x and xi only and makes no auxiliary selection; steps 1.1, 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "If xi is in the subdifferential, step 2.1 proves equality in the Fenchel–Young inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "If equality holds, step 3.1 rearranges each supremum term into the defining supporting inequality."
+        }
+      ]
+    },
+    "thm-ip-vsc-nonlinear-regularization-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}",
+          "uses": [
+            "3.1",
+            "6.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)",
+          "uses": [
+            "3.1",
+            "6.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right)",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$; no linearity is assumed, and linear maps are allowed as special cases.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-x0-minimum-norm-solution",
+          "source_section": "Definition",
+          "quote": "A point $x^\\dagger\\in U$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ on $U$ if $F(x^\\dagger)=y$ and $$\\|x^\\dagger-x_0\\|\\le\\|x-x_0\\|\\qquad\\text{for every }x\\in U\\text{ with }F(x)=y.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "J_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "N(u + v) \\le N(u) + N(v)",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$\\langle v,v\\rangle=\\|v\\|^2$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sublevel-entry",
+          "claim": "Comparison against the exact solution bounds the penalty increase by O(rho), placing the supplied approximate minimizer in the VSC sublevel.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A3"
+          ]
+        },
+        {
+          "id": "data-residual-to-exact-residual",
+          "claim": "The norm triangle inequality and convexity of t^p yield the lower exact-residual contribution in the objective comparison.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "absorb-vsc-subgradient",
+          "claim": "The Bregman identity and VSC absorb the selected-subgradient term with coefficient 1-beta.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "apply-conjugate-estimates",
+          "claim": "The conjugate lemma bounds the Bregman error and exact residual power separately.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-bregman-and-data-rates",
+          "claim": "The parameter coupling converts the conjugate bounds to O(rho) and O(delta^p), then the triangle inequality gives O(delta) noisy residual.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "F8",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "optional-penalty-and-norm-rates",
+          "claim": "The VSC supplies a lower penalty-difference bound while minimality supplies the upper bound; the additional compatibility converts Bregman error to norm power.",
+          "step": "6.1",
+          "inputs": [
+            "A4",
+            "A5",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "hilbert-subgradient-and-index",
+          "claim": "The quadratic expansion identifies the selected bounded subgradient, exact Bregman distance, and the square-root VSC index for p=2.",
+          "step": "1.2",
+          "inputs": [
+            "A6",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "hilbert-conjugate-coupling",
+          "claim": "Completing the square computes H and verifies alpha H(c_p/alpha) and the fixed-scale conjugate condition when alpha is comparable to delta.",
+          "step": "2.2",
+          "inputs": [
+            "A3",
+            "A6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "hilbert-norm-rate",
+          "claim": "The Bregman identity turns the general O(delta) Bregman bound into O(sqrt(delta)) solution error, retaining the O(delta) data residual.",
+          "step": "7.1",
+          "inputs": [
+            "A6",
+            "step 5.1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The result is conditional on the explicitly supplied approximate minimizer and exact solution; it asserts no existence when these are absent."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Noise levels are positive in the asymptotic coupling; the theorem is stated as delta decreases to zero through positive values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint p=1 is included and handled separately in step 2.1, while beta=1 is excluded by the statement and cannot be absorbed in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The estimates allow zero exact residual T_delta=0; steps 3.1–5.1 remain valid because H is finite and D is nonnegative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameter endpoints beta=0 and p=1 are allowed, R0 is strictly above R(xdagger), and the proof treats p=1 in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The approximate minimizer and Hilbert global minimizer are supplied by the hypotheses; the proof steps 1.1, 1.2, 2.1, 2.2, 3.1, 4.1, 5.1, 6.1 and 7.1 select no element or subsequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives rate implications and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives rate implications and contains no equivalence."
+        }
+      ]
+    },
+    "cex-ip-vsc-unit-coefficient-does-not-control-bregman-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "a coefficient $0\\le\\beta<1$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-boundary-vsc-model",
+          "claim": "Convexity and the supporting inequality give the chosen subgradient; the resulting Bregman function verifies the boundary source inequality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "flat-minimizer-rate-failure",
+          "claim": "The objective vanishes on every nonnegative scalar, so the selected global minimizer has fixed Bregman distance and violates O(delta).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample specifies a nonempty scalar model and an explicit minimizer family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "As delta tends to zero through positive values, step 2.1 keeps the Bregman distance equal to one and disproves the asserted rate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary coefficient beta_1=1 is exactly the excluded endpoint in the VSC definition, and step 1.1 verifies the inequality there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero forward map creates the flat objective, and step 2.1 verifies every nonnegative scalar is a global minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The source inequality holds for every real x, including the endpoints of the sublevel R(x)<=1, by step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The concrete family x_delta=1 is explicitly supplied and no minimizer is selected by choice in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-power-index-bregman-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-vsc-nonlinear-regularization-rate",
+          "source_section": "Statement",
+          "quote": "Then for all sufficiently small $\\delta$, $x_\\alpha^{\\delta,\\varepsilon}\\in L_{R_0}$ and $$D_R^{\\xi^\\dagger}(x_\\alpha^{\\delta,\\varepsilon},x^\\dagger)=O(\\rho_\\delta),\\qquad \\|F(x_\\alpha^{\\delta,\\varepsilon})-y^\\delta\\|_Y=O(\\delta).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "define $H(q):=g^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$ for $q>0$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "power-conjugate-maximizer",
+          "claim": "Differentiation gives the unique global maximizer of As^mu-qs and substitution gives the exact power conjugate.",
+          "step": "1.1",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "power-coupling-and-rates",
+          "claim": "The chosen alpha has the required conjugate and penalty-index scaling, so the rate theorem yields the Bregman and residual conclusions.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is conditional on the stated VSC and supplied approximate minimizer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For every fixed C0>0, psi(C0 delta^p) tends to zero at the same order as H(c_p/alpha), as shown in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exponent endpoint mu=1 is excluded, mu=0 is excluded, and p=1 is allowed; step 1.1 uses 0<mu<1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A>0 and 0<mu<1 make the interior maximizer positive and finite in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The global maximization checks s=0 and the limit as s tends to infinity in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The power conjugate maximizer is unique and explicitly determined in step 1.1; the rate theorem assumes its minimizer is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        }
+      ]
+    },
+    "ex-ip-logarithmic-index-bregman-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Banach spaces, let $F:D(F)\\subseteq X\\to Y$, let $x^\\dagger\\in D(F)$ with exact datum $y=F(x^\\dagger)$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex with $x^\\dagger\\in\\operatorname{dom}R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "define $H(q):=g^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$ for $q>0$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-vsc-nonlinear-regularization-rate",
+          "source_section": "Statement",
+          "quote": "Assume that for constants $c_-,c_+,C_H>0$ independent of $\\delta$, $$c_-\\delta^p\\le\\alpha(\\delta)\\rho_\\delta\\le c_+\\delta^p,\\qquad H(c_p/(2\\alpha(\\delta)))\\le C_H\\rho_\\delta$$ for all sufficiently small $\\delta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "log-index-concavity",
+          "claim": "The explicit first and second derivatives and the downward derivative jump at t0 prove that the capped logarithmic index is continuous, nondecreasing, positive off zero and concave.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "log-conjugate-asymptotic",
+          "claim": "The unique critical point solves q=nu/(s L^(nu+1)); its value yields H(q) asymptotic to (log q)^(-nu).",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "log-parameter-coupling-and-rates",
+          "claim": "The logarithmic alpha yields the conjugate coupling, fixed-scale comparability and penalty-index condition, after which the rate theorem and Bregman compatibility give the claimed rates.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is conditional on the stated VSC and supplied approximate minimizer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The index is continuously extended by psi(0)=0 in step 1.1 and the noise limit is taken through positive delta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The cutoff t0 joins the logarithmic branch to a constant with a downward derivative jump, as checked in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For sufficiently large q the unique maximizer lies in (0,t0), and its positive value is computed in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares the interior maximizer with s=0 and the constant branch s>=t0; step 1.1 checks continuity at t=0 and t=t0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The critical point s_q is unique; the rate theorem is conditional on the supplied minimizer, so no choice is made in steps 1.1, 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        }
+      ]
+    }
+  }
+}

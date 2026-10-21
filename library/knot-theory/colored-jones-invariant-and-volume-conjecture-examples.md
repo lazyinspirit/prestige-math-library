@@ -1,0 +1,13 @@
+---
+page: colored-jones-invariant-and-volume-conjecture-examples
+title: Colored Jones and the volume conjecture — Examples and Counterexamples
+status: draft
+requires:
+  - colored-jones-invariant-and-volume-conjecture
+items: []
+examples:
+  - cex-knot-kt-36-boundary-case
+  - ex-knot-kt-36-worked-cases
+order: 3185
+page_layout: compact-v1
+---

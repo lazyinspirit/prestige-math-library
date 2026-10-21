@@ -1,0 +1,22 @@
+---
+page: limited-angle-tomography-and-invisible-singularities
+title: "Limited-angle visibility and instability"
+status: draft
+requires:
+  - inverse-problems-identifiability-and-stability
+  - radon-transform-and-fourier-slice-reconstruction
+  - tempered-distributions-and-the-fourier-transform
+items:
+  - lem-ip-compact-support-fourier-laplace-is-entire
+  - def-ip-visible-covector-for-limited-angle-data
+  - def-ip-schwartz-radon-transform
+  - lem-ip-schwartz-radon-well-defined
+  - lem-ip-limited-angle-radon-data-is-l2-on-compact-support
+  - cor-ip-limited-angle-compact-support-uniqueness
+  - prop-ip-limited-angle-data-no-holder-stability
+  - lem-ip-fourier-slice-identity-on-schwartz
+  - prop-ip-limited-angle-fourier-visibility
+  - op-ip-stable-limited-angle-reconstruction
+examples: []
+page_layout: compact-v1
+---

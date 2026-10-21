@@ -1,0 +1,13 @@
+---
+page: grid-homology-and-combinatorial-knot-floer-theory-examples
+title: Grid homology and combinatorial knot Floer theory — Examples and Counterexamples
+status: draft
+items: []
+examples:
+  - ex-knot-kt-39-worked-cases
+  - cex-knot-kt-39-boundary-case
+requires:
+  - grid-homology-and-combinatorial-knot-floer-theory
+order: 3163
+page_layout: compact-v1
+---

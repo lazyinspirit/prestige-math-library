@@ -1,0 +1,21 @@
+---
+page: nonlinear-tikhonov-existence-and-stability
+title: Nonlinear Tikhonov existence and stability
+status: draft
+items:
+  - def-ip-weakly-closed-nonlinear-forward-map
+  - def-ip-nonlinear-tikhonov-functional
+  - def-ip-x0-minimum-norm-solution-on-weak-domain
+  - lem-ip-nonlinear-exact-solution-set-is-weakly-closed
+  - thm-ip-nonlinear-tikhonov-minimizer-exists
+  - thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution
+  - thm-ip-nonlinear-tikhonov-weak-cluster-stability
+  - thm-ip-nonlinear-tikhonov-vanishing-noise-convergence
+examples: []
+requires:
+  - nonlinear-inverse-problems-and-tangential-cone-conditions
+  - weak-and-weak-star-topologies
+  - the-direct-method-and-euler-lagrange-equations
+  - banach-valued-integration-and-the-radon-nikodym-property
+page_layout: compact-v1
+---

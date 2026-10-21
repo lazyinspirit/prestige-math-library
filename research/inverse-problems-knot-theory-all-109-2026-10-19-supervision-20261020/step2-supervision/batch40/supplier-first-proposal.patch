@@ -1,0 +1,54 @@
+--- a/items/lem-ip-simple-manifold-no-return-extension.md
++++ b/items/lem-ip-simple-manifold-no-return-extension.md
+@@ -29,6 +29,7 @@
+   - thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces
+   - thm-newton-leibniz-with-interior-derivative
+   - thm-closed-subspace-of-a-compact-space-is-compact
++  - thm-compact-implies-the-other-compactness-forms
+ dependency_level: 2
+ provenance:
+   statement: literature-derived
+@@ -97,9 +98,11 @@
+ [F19] [[thm-closed-subspace-of-a-compact-space-is-compact]]: a closed subset of a compact topological space is compact.
+ 
+ 
++[F20] [[thm-compact-implies-the-other-compactness-forms]]: every compact metric space is sequentially compact, in ZF. Here use the intrinsic metric $d_g$ on the connected $M$ and restrict it to $\partial M$. Its topology is the manifold topology: on a smaller coordinate half-ball, the upper bound in [F9] controls lengths of straight coordinate segments (the half-ball is convex), while the lower bound makes a path leaving the half-ball have a fixed positive length; these are the two neighborhood inclusions. By [F16], [F19], and [F11], the boundary with this restricted metric is compact. Thus every sequence of boundary points has a subsequence converging to a boundary point, with convergence also in manifold coordinates. Applying this twice retains one common subsequence for two boundary-point sequences. No assertion that arbitrary compact topological spaces are sequentially compact is used.
++
+ ## Proof
+ 
+-1.1 Use [F2] to attach the smooth cylinder $[0,\infty)\times\partial M$ to $M$ along its boundary. By [F3], the metric coefficients extend smoothly across each boundary point to the double. Compactness of $\partial M$ gives a finite such cover; [F4] patches these local extensions by a smooth partition of unity. After shrinking the collar, the patched tensor remains positive definite, since it agrees with $g$ on $M$ and positive definiteness is open. Solve the geodesic ODE for the extended metric from each boundary point in the outward unit-normal direction. At $(x,0)$ the derivative of $(x,s)\mapsto\exp_x(s\nu_{\mathrm{out}}(x))$ sends $(w,a)$ to $w+a\nu_{\mathrm{out}}(x)$, an isomorphism; [F15] therefore gives local inverse charts along the zero section. A finite subcover gives a common domain where this map is a local diffeomorphism. If no uniform collar width made it injective, there would be distinct pairs $(x_j,s_j)$ and $(y_j,t_j)$ with equal images and $0\le s_j,t_j\downarrow0$; compactness gives subsequences converging to $(x,0)$ and $(y,0)$, equality of the images forces $x=y$, and both pairs then lie in one local inverse chart at $(x,0)$, a contradiction. Thus a uniform outward normal collar exists. [A1, F2, F3, F4, F5, F6, F15, F16, given, construct]
++1.1 Use [F2] to attach the smooth cylinder $[0,\infty)\times\partial M$ to $M$ along its boundary. By [F3], the metric coefficients extend smoothly across each boundary point to the double. Compactness of $\partial M$ gives a finite such cover; [F4] patches these local extensions by a smooth partition of unity. After shrinking the collar, the patched tensor remains positive definite, since it agrees with $g$ on $M$ and positive definiteness is open. Solve the geodesic ODE for the extended metric from each boundary point in the outward unit-normal direction. At $(x,0)$ the derivative of $(x,s)\mapsto\exp_x(s\nu_{\mathrm{out}}(x))$ sends $(w,a)$ to $w+a\nu_{\mathrm{out}}(x)$, an isomorphism; [F15] therefore gives local inverse charts along the zero section. A finite subcover gives a common domain where this map is a local diffeomorphism. If no uniform collar width made it injective, there would be distinct pairs $(x_j,s_j)$ and $(y_j,t_j)$ with equal images and $0\le s_j,t_j\downarrow0$; [F20], first for $(x_j)$ and then for $(y_j)$ along the resulting subsequence, gives a common subsequence converging to $(x,0)$ and $(y,0)$, equality of the images forces $x=y$, and both pairs then lie in one local inverse chart at $(x,0)$, a contradiction. Thus a uniform outward normal collar exists. [A1, F2, F3, F4, F5, F6, F15, F16, F20, given, construct]
+ 
+ 2.1 In this normal collar, use $s$ for outward normal distance and write the extended metric as $ds^2+\widetilde h_s$, where $\widetilde h_s$ is a smooth family of metrics on $\partial M$. The Gauss-lemma orthogonality follows by differentiating $G(\partial_s,J)$ along a variation field $J$ of normal geodesics: $D_s\partial_s=0$, $[\partial_s,J]=0$, and metric compatibility give $\partial_sG(\partial_s,J)=\tfrac12J(G(\partial_s,\partial_s))=0$, while the initial value is zero. Also $G(\partial_s,\partial_s)=1$. For tangent fields $X,Y$ transported along this collar, metric compatibility and torsion freeness yield $\partial_s\widetilde h_s(X,Y)=G(\nabla_X\partial_s,Y)+G(X,\nabla_Y\partial_s)$; hence $\tfrac12\partial_s\widetilde h_s|_{s=0}$ is the second fundamental form for the outward normal. By [F1], $\partial_s\widetilde h_s$ is positive definite at $s=0$, and compactness makes it positive definite for $0\le s<2\varepsilon$ for some $\varepsilon>0$. [F1, F5, F6, step 1.1, algebra]
+ 
+--- a/items/lem-ip-simple-geodesic-polar-extension.md
++++ b/items/lem-ip-simple-geodesic-polar-extension.md
+@@ -28,6 +28,8 @@
+   - cor-the-tangent-space-of-an-n-manifold-has-dimension-n
+   - thm-gram-schmidt-orthonormalisation
+   - cor-euclidean-closed-balls-and-spheres-are-compact
++  - thm-closed-subspace-of-a-compact-space-is-compact
++  - cor-bolzano-weierstrass-in-rn
+   - prop-topological-manifolds-are-locally-compact-and-locally-path-connected
+   - thm-connected-and-locally-path-connected-implies-path-connected
+ provenance:
+@@ -88,7 +90,7 @@
+ 
+ [F6] [[thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields]] identifies $d(\exp_{x_0})_v(w)$ with $J(1)$ for the Jacobi field along $t\mapsto\exp_{x_0}(tv)$ satisfying $J(0)=0$ and $D_tJ(0)=w$. Its Countable Choice hypothesis is included in the statement.
+ 
+-[F7] [[cor-the-tangent-space-of-an-n-manifold-has-dimension-n]] gives $\dim T_{x_0}M=n$, and [[thm-gram-schmidt-orthonormalisation]] gives an orthonormal basis for $g_{x_0}$. These coordinates identify the unit sphere and closed unit ball in $T_{x_0}M$ with the Euclidean unit sphere and closed unit ball, which are compact by [[cor-euclidean-closed-balls-and-spheres-are-compact]]. In particular, any sequence of inward unit directions has a convergent subsequence whose limit lies in the closed inward hemisphere.
++[F7] [[cor-the-tangent-space-of-an-n-manifold-has-dimension-n]] gives $\dim T_{x_0}M=n$, and [[thm-gram-schmidt-orthonormalisation]] gives an orthonormal basis for $g_{x_0}$. These coordinates identify the unit sphere and closed unit ball in $T_{x_0}M$ with the Euclidean unit sphere and closed unit ball, which are compact by [[cor-euclidean-closed-balls-and-spheres-are-compact]]. The boundary-tangent unit sphere is the closed subset $\{\omega:g(\omega,\nu_{out})=0\}$ of that compact unit sphere, so it is compact by [[thm-closed-subspace-of-a-compact-space-is-compact]]. This is the sphere used for the uniform bound in step 1.1. Every sequence of inward unit directions has bounded coordinates in $\mathbb R^n$; [[cor-bolzano-weierstrass-in-rn]] gives a convergent subsequence. Continuity of the finite-coordinate quadratic norm and of $\omega\mapsto g(\omega,\nu_{out})$ puts its limit on the unit sphere in the closed inward hemisphere. Thus the subsequence conclusion used in step 2.1 is supplied separately from topological compactness.
+ 
+ 
+ ## Proof
+--- a/items/ex-ip-40-ray-limit-error-accounting.md
++++ b/items/ex-ip-40-ray-limit-error-accounting.md
+@@ -37,7 +37,7 @@
+ $$\int_Q a\,u_{1,\lambda}^{\mathrm{app}}u_{2,\lambda}^{\mathrm{app}}\,dV_gdt\longrightarrow \int_0^L a(t_0+s,\gamma(s))\,ds.$$
+ Set $u_{j,\lambda}=u_{j,\lambda}^{\mathrm{app}}+R_{j,\lambda}$. Then
+ $$\left|\int_Q a\,u_{1,\lambda}u_{2,\lambda}\,dV_gdt-\int_Q a\,u_{1,\lambda}^{\mathrm{app}}u_{2,\lambda}^{\mathrm{app}}\,dV_gdt\right|=O(\lambda^{-1/2}),$$
+-and hence the exact-solution product has the same ray-integral limit. In the real self-adjoint wave application, extend the ray beyond the measurement domain so the endpoint cutoff residuals lie outside it, and use the physical-time normalization of the Gaussian-beam construction. Its transported mass is then the stated unweighted ray measure, and its zero-boundary forward or terminal energy correction supplies the stated $L^2$ remainder order.
++and hence the exact-solution product has the same ray-integral limit. The real self-adjoint wave application is to beams satisfying the following additional supplier conditions: the observed ray has a compact embedded phase-space extension with immersed base projection; its two endpoint cutoff neighborhoods lie outside the measurement cylinder; and the approximate forward beam vanishes near $t=0$, while the approximate terminal beam vanishes near $t=T$. These temporal vanishing conditions are separate from the location of the spatial endpoint residuals. Use physical time along the unit-speed spatial ray and the normalization $|\partial_t\phi|=1$, with initial transported mass one. Then the Gaussian-beam lemma gives the unweighted ray measure and residual $O(\lambda^{-N})$ throughout $Q$. Apply the wave energy wellposedness theorem with zero boundary data and zero initial data for the forward correction, or zero terminal data for the terminal correction, to the negative residual. Since $\|Pu_{j,\lambda}^{\mathrm{app}}\|_{L^1_tL^2_x}\le\sqrt T\|Pu_{j,\lambda}^{\mathrm{app}}\|_{L^2(Q)}$, its energy estimate gives an $L^2(Q)$ correction $O(\lambda^{-N})$, hence the assumed $O(\lambda^{-1/2})$ order after choosing $N\ge1$. The exact waves retain the actual approximate boundary traces. This application asserts no temporal vanishing merely from an extension outside the measurement domain; the generic error estimate above only needs its explicitly stated norm and product-limit hypotheses.
+ 
+ ## Example references
+ 

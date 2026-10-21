@@ -1,0 +1,86 @@
+---
+page: casson-gordon-invariants-and-sliceness-obstructions
+title: Casson–Gordon invariants and sliceness obstructions
+status: draft
+requires:
+  - cyclic-branched-covers-and-knot-determinants
+  - levine-tristram-signatures-and-arf-invariant
+  - smooth-and-topological-knot-concordance
+  - algebraic-knot-concordance-and-metabolic-forms
+  - twisted-alexander-polynomials-and-reidemeister-torsion
+  - amenable-groups-and-folner-criteria
+  - compact-laplace-type-operators-and-hodge-representatives
+  - direct-integral-decomposition-and-type-i-groups
+  - the-hirzebruch-signature-theorem
+  - group-cohomology-as-a-derived-functor
+  - group-homology-transfer-and-low-degree-exact-sequences
+  - modular-categories-verlinde-and-tqft
+items:
+  - def-bounding-chain-torsion-linking-pairing
+  - def-finite-linking-form-and-metabolizer
+  - def-oriented-bordism-group-of-a-space
+  - def-poly-torsion-free-abelian-group
+  - lem-choice-free-local-coefficient-duality-on-a-coordinate-ball
+  - lem-choice-free-wall-chain-finiteness-from-explicit-domination
+  - lem-compact-connected-manifold-fundamental-group-has-finite-generators-in-zf
+  - lem-compact-manifold-twisted-singular-chains-admit-one-vertex-reduction
+  - lem-compact-support-local-coefficient-mayer-vietoris-and-cap-ladder
+  - lem-finite-order-smooth-line-bundles-have-torsion-reduced-bundle-class
+  - lem-finite-von-neumann-module-dimension-and-dense-quotients
+  - lem-finitely-generated-torsion-free-abelian-freeness-without-choice
+  - lem-folner-group-ring-domains-have-ore-fractions
+  - thm-compact-manifolds-are-retracts-of-finite-polyhedra-without-choice
+  - thm-explicit-mitoses-give-functorial-integrally-acyclic-group-envelopes
+  - def-smooth-slice-disk-exterior
+  - lem-finite-smooth-surface-presentations-have-prescribed-collar-matches
+  - lem-l2-cellular-duality-and-weak-exactness
+  - lem-linking-pairing-on-rational-homology-sphere-is-nonsingular
+  - lem-oriented-bordism-classes-over-a-space-form-an-abelian-group
+  - lem-ptfa-groups-have-finite-folner-sets
+  - lem-torsion-free-abelian-extensions-preserve-group-ring-domains
+  - lem-von-neumann-inertia-and-coisotropic-reduction
+  - thm-compact-oriented-manifold-local-coefficient-duality-in-zf
+  - thm-compact-twisted-signature-operators-give-additive-bundle-indices
+  - thm-finite-atlas-manifold-compact-support-duality-in-zf
+  - thm-finite-geometric-complex-chains-dominate-compact-manifold-chains-in-zf
+  - def-zero-surgery-on-a-knot
+  - lem-involutive-twisted-chain-duals-realize-local-coefficient-duality
+  - lem-ptfa-integral-and-field-group-rings-have-compatible-ore-involutions
+  - lem-rational-homology-ball-boundary-kernel-is-linking-metabolizer
+  - lem-slice-disk-exterior-has-homology-of-a-circle
+  - thm-casson-gordon-third-bordism-group-finite
+  - thm-compact-collared-manifold-local-coefficient-lefschetz-duality-in-zf
+  - thm-ptfa-group-rings-are-ore-domains
+  - def-infinite-cyclic-cover-of-a-slice-disk-exterior
+  - lem-equivariant-intersection-pairings-are-preserved-by-collared-bordism-gluing
+  - lem-finite-disk-band-surfaces-give-cyclic-zero-surgery-bounding-manifolds
+  - lem-relative-unitary-equivariant-intersection-pairing-is-hermitian
+  - lem-prime-power-cyclic-cover-homology-of-slice-disk-exterior
+  - thm-topological-finite-projective-l2-duality-and-boundary-gluing
+  - def-cyclic-zero-surgery-cover
+  - def-finite-order-character-of-a-branched-cover
+  - def-integral-half-solutions-strebel-and-l2-signatures
+  - def-q-fold-branched-cover-of-a-slice-disk
+  - thm-topological-five-bordisms-preserve-ordinary-and-l2-signatures
+  - def-blanchfield-pairing-and-higher-order-rho-invariant
+  - lem-finite-cyclic-von-neumann-signatures-are-character-averages
+  - lem-prime-power-branched-cover-of-slice-disk-is-rational-homology-ball
+  - lem-signature-additivity-under-gluing
+  - lem-zero-surgery-cyclic-cover-homology-splitting
+  - thm-smooth-group-signature-defects-are-independent-and-uniformly-bounded
+  - def-torsion-linking-form-and-casson-gordon-bordism
+  - lem-slice-disk-induces-branched-cover-metabolizer
+  - thm-canonical-finite-cyclic-knot-defects-equal-seifert-signature-averages
+  - lem-casson-gordon-bordism-admissibility
+  - lem-casson-gordon-characters-and-linking-metabolizers
+  - thm-finite-cyclic-smooth-bounding-signature-defects-are-independent
+  - lem-casson-gordon-twisted-intersection-form-is-nonsingular
+  - lem-casson-gordon-bordism-independence-and-nonsingularity
+  - def-casson-gordon-signature-defect
+  - lem-casson-gordon-signature-defect-and-vanishing
+  - lem-prime-power-branched-cover-homology-is-finite
+  - thm-casson-gordon-slice-obstruction
+examples: []
+order: 3144
+page_layout: compact-v1
+---

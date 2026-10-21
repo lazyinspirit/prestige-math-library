@@ -1,0 +1,380 @@
+[
+  {
+    "order": 3048,
+    "id": "nonlinear-tikhonov-existence-and-stability",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Nonlinear Tikhonov existence and stability",
+    "companion": "nonlinear-tikhonov-existence-and-stability-examples",
+    "requires": [
+      "nonlinear-inverse-problems-and-tangential-cone-conditions",
+      "weak-and-weak-star-topologies",
+      "the-direct-method-and-euler-lagrange-equations",
+      "banach-valued-integration-and-the-radon-nikodym-property"
+    ],
+    "items": [
+      {
+        "id": "def-ip-weakly-closed-nonlinear-forward-map",
+        "kind": "definition",
+        "title": "Weakly closed nonlinear forward maps on Hilbert spaces",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-hilbert-space",
+          "def-weak-topology-on-a-normed-space",
+          "def-weak-convergence-of-nets-and-sequences"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 10",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Chapter 10",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases."
+      },
+      {
+        "id": "def-ip-nonlinear-tikhonov-functional",
+        "kind": "definition",
+        "title": "The nonlinear Tikhonov functional",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-hilbert-space"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, equation (10.1)",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Definition 83",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness."
+      },
+      {
+        "id": "def-ip-x0-minimum-norm-solution-on-weak-domain",
+        "kind": "definition",
+        "title": "$x_0$-minimum-norm solutions on weakly closed domains",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-hilbert-space"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 10",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Definition 83 and Theorem 85",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, meaning closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy this graph condition: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. For $x_0\\in X$ and $y\\in Y$, a point $x^\\dagger\\in D$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ when $F(x^\\dagger)=y$ and\n\n$$\n\\|x^\\dagger-x_0\\|_X\\le\\|x-x_0\\|_X\\qquad\\text{for every }x\\in D\\text{ with }F(x)=y.\n$$\n\nThis definition asserts neither existence nor uniqueness. The minimum is global over the exact solution set in $D$ and uses distance from the specified reference point $x_0$."
+      },
+      {
+        "id": "lem-ip-nonlinear-exact-solution-set-is-weakly-closed",
+        "kind": "lemma",
+        "title": "The exact solution set of a weakly closed map is weakly sequentially closed",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-weak-convergence-of-nets-and-sequences"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 10",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Chapter 10",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, meaning closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy this graph condition: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$. Weak convergence means convergence under every bounded real-linear functional. For $y\\in Y$, the exact solution set $S_F(y):=\\{x\\in D:F(x)=y\\}$ is weakly sequentially closed in $X$: every sequence in $S_F(y)$ that converges weakly to $x$ has $x\\in S_F(y)$."
+      },
+      {
+        "id": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+        "kind": "theorem",
+        "title": "Existence of a global nonlinear Tikhonov minimizer",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-ip-nonlinear-tikhonov-functional",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-infimum",
+          "thm-infimum-property",
+          "lem-inf-epsilon"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Theorem 10.1",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Theorem 85(a)",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the ultrafilter lemma, dependent choice, and the real Hahn–Banach dominated-extension principle. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, and let $F:D\\to Y$ be a map such that for every sequence $(x_n)$ in $D$ and every $x\\in X,z\\in Y$, $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$. Here $D$ is closed in the coarsest topology making every bounded real-linear functional continuous, and weak convergence means convergence under every such functional. For any $\\alpha>0$, $x_0\\in X$, and $y\\in Y$, the nonlinear Tikhonov functional\n\n$$\nJ_{\\alpha,y,x_0}(x)=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D)\n$$\n\nattains a global minimum on $D$; that is, there exists $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. No exact solution of $F(x)=y$ is required."
+      },
+      {
+        "id": "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution",
+        "kind": "theorem",
+        "title": "Existence of an $x_0$-minimum-norm exact solution",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-ip-x0-minimum-norm-solution-on-weak-domain",
+          "lem-ip-nonlinear-exact-solution-set-is-weakly-closed",
+          "thm-direct-method-in-a-reflexive-banach-space",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-dependent-choice-implies-countable-choice"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 10",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Theorem 85(b)",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the ultrafilter lemma, dependent choice, and HB. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy: for every sequence $x_n\\in D$ and $x\\in X,z\\in Y$, if $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$, then $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. If $S_F(y):=\\{x\\in D:F(x)=y\\}$ is nonempty for some $y\\in Y$, then for every $x_0\\in X$ there exists $x^\\dagger\\in S_F(y)$ such that $\\|x^\\dagger-x_0\\|_X\\le\\|x-x_0\\|_X$ for every $x\\in S_F(y)$."
+      },
+      {
+        "id": "thm-ip-nonlinear-tikhonov-weak-cluster-stability",
+        "kind": "theorem",
+        "title": "Weak-cluster stability for fixed-parameter nonlinear Tikhonov regularization",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-ip-nonlinear-tikhonov-functional",
+          "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-dependent-choice-implies-countable-choice"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Theorem 10.2",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Theorem 86",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the ultrafilter lemma, dependent choice, and HB. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. Fix $\\alpha>0$, $x_0\\in X$, and $y\\in Y$, and let data $y_n\\in Y$ satisfy $\\|y_n-y\\|_Y\\to0$. There exists a sequence $(x_n)$ of global minimizers of $J_{\\alpha,y_n,x_0}$ on $D$. Every such sequence has a subsequence $x_{n_k}$ with $x_{n_k}\\rightharpoonup x$, and every such weak limit $x$ minimizes $J_{\\alpha,y,x_0}$ on $D$. No uniqueness of the limiting minimizer is asserted."
+      },
+      {
+        "id": "thm-ip-nonlinear-tikhonov-vanishing-noise-convergence",
+        "kind": "theorem",
+        "title": "Vanishing-noise convergence to an $x_0$-minimum-norm exact solution",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-ip-nonlinear-tikhonov-functional",
+          "def-ip-x0-minimum-norm-solution-on-weak-domain",
+          "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-dependent-choice-implies-countable-choice"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Theorem 10.3",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Theorem 87",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the ultrafilter lemma, dependent choice, and HB. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. Fix $x_0\\in X$ and suppose $S_F(y^\\dagger):=\\{x\\in D:F(x)=y^\\dagger\\}$ is nonempty. Let $\\delta_n\\ge0$, $\\delta_n\\to0$, $\\alpha_n>0$, $\\alpha_n\\to0$, and $\\delta_n^2/\\alpha_n\\to0$, and let $y_n\\in Y$ satisfy $\\|y_n-y^\\dagger\\|_Y\\le\\delta_n$. There exists a sequence $(x_n)$ of global minimizers of $J_{\\alpha_n,y_n,x_0}$ on $D$; every such sequence has a subsequence $x_{n_k}\\rightharpoonup x$, and every such weak limit $x$ is an $x_0$-minimum-norm solution of $F(x)=y^\\dagger$ on $D$. No uniqueness or full-sequence convergence is asserted."
+      }
+    ]
+  },
+  {
+    "order": 3049,
+    "id": "nonlinear-tikhonov-existence-and-stability-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Nonlinear Tikhonov existence and stability — Examples and Counterexamples",
+    "companion": "nonlinear-tikhonov-existence-and-stability",
+    "requires": [
+      "nonlinear-tikhonov-existence-and-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-nonlinear-tikhonov-has-two-global-minimizers",
+        "kind": "example",
+        "title": "A nonlinear Tikhonov functional can have two global minimizers",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-ip-nonlinear-tikhonov-functional",
+          "def-ip-nonlinear-forward-map",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "thm-reals-cauchy-complete",
+          "def-weak-convergence-of-nets-and-sequences"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 10, nonuniqueness discussion",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Benedikt Wirth, Inverse Problems, Remark 84",
+              "url": "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X=Y=\\mathbb R$ with the usual inner product, let $U=\\mathbb R$, and define $F:U\\to Y$ by $F(t)=t^2$. Take $x_0=0$, $y=1$, and $\\alpha=1$. The domain $U$ is weakly closed and, whenever $t_n$ converges weakly to $t$ and $F(t_n)$ converges weakly to $z$, one has $z=F(t)$; weak convergence means convergence under every bounded real-linear functional. The Tikhonov functional is\n\n$$\nJ(t)=\\frac12(t^2-1)^2+\\frac12t^2\\qquad(t\\in\\mathbb R).\n$$\n\nIt has exactly two distinct global minimizers, $t=1/\\sqrt2$ and $t=-1/\\sqrt2$."
+      },
+      {
+        "id": "ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map",
+        "kind": "example",
+        "title": "A Bochner-integral forward map with weakly closed graph",
+        "deps": [
+          "def-ip-weakly-closed-nonlinear-forward-map",
+          "def-ip-nonlinear-tikhonov-functional",
+          "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "def-ip-nonlinear-forward-map",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "thm-reals-cauchy-complete",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-measure-space",
+          "def-measure",
+          "def-banach-space",
+          "def-banach-valued-simple-function-and-integral",
+          "def-bochner-integrable-function",
+          "lem-banach-valued-simple-integral-is-well-defined"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Assume the ultrafilter lemma, dependent choice, and HB. Give $\\Omega=\\{0,1\\}$ its full sigma-algebra and probability measure $\\mu(A)=|A|/2$. For each $s\\in\\mathbb R$, let $g_s:\\Omega\\to\\mathbb R$ be the simple function $g_s(0)=s$, $g_s(1)=s^2$, and define $F(s)=\\int_\\Omega g_s\\,d\\mu=(s+s^2)/2$. With $X=Y=D=\\mathbb R$ and the usual real Hilbert structure, $D$ is weakly closed and $F$ is nonlinear; if $s_n\\rightharpoonup s$ and $F(s_n)\\rightharpoonup z$, then $z=F(s)$, where weak convergence in $\\mathbb R$ means convergence under every bounded real-linear functional. For every $\\alpha>0$, $x_0,y\\in\\mathbb R$, its Tikhonov functional\n\n$$\nJ_{\\alpha,y,x_0}(s)=\\frac12|F(s)-y|^2+\\frac{\\alpha}{2}|s-x_0|^2\n$$\n\nhas a global minimizer on $\\mathbb R$."
+      }
+    ]
+  }
+]

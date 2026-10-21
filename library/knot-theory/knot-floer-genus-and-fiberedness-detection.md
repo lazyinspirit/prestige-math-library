@@ -1,0 +1,22 @@
+---
+page: knot-floer-genus-and-fiberedness-detection
+title: Knot Floer genus and fibering detection
+status: draft
+items:
+  - def-balanced-taut-sutured-manifold-and-product-region
+  - lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere
+  - def-sutured-floer-chain-complex
+  - def-knot-relative-spinc-structure
+  - def-top-alexander-grading-of-knot-floer-homology
+  - lem-ni-holomorphic-disk-and-jsj-analytic-inputs
+  - thm-knot-floer-detects-seifert-genus
+  - lem-ni-fiberedness-sutured-floer-and-gabai-inputs
+  - thm-fibered-knot-has-rank-one-top-knot-floer-homology
+  - thm-rank-one-top-knot-floer-detects-fiberedness
+requires:
+  - satellite-knots-and-jsj-tori
+  - grid-homology-and-combinatorial-knot-floer-theory
+examples: []
+order: 3186
+page_layout: compact-v1
+---

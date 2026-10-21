@@ -1,0 +1,475 @@
+[
+  {
+    "order": 3040,
+    "id": "function-space-mcmc-and-pcn",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Function-space pCN and invariant posterior kernels",
+    "companion": "function-space-mcmc-and-pcn-examples",
+    "requires": [
+      "function-space-priors-and-random-regularity",
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "general-state-mcmc-kernels-and-reversibility",
+      "mcmc-ergodicity-and-mixing",
+      "finite-window-spatial-point-process-likelihoods"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates",
+        "kind": "lemma",
+        "title": "Borel laws on a separable Hilbert space are determined by basis coordinates",
+        "statement": "Assume the Axiom of Countable Choice. Let $H$ be a real Hilbert space with a\nfinite or countable complete orthonormal basis $(e_j)_{j\\in J}$. For each finite\n$F\\subseteq J$, define the coordinate map\n$\\pi_F:H\\to\\mathbb R^F$ by\n$\\pi_F(x)=(\\langle x,e_j\\rangle)_{j\\in F}$. If $\\nu$ and $\\nu'$ are Borel\nprobability measures on $H$ and\n$\\nu(\\pi_F^{-1}(B))=\\nu'(\\pi_F^{-1}(B))$ for every finite $F\\subseteq J$ and\nevery Borel $B\\subseteq\\mathbb R^F$, then $\\nu=\\nu'$.",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-borel-probability-law-on-a-polish-space",
+          "def-countable",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-norm-and-normed-space",
+          "def-probability-measure",
+          "def-separable-space",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-subset-of-countable",
+          "lem-q-and-irrationals-dense-r",
+          "cor-inner-product-induces-a-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-metric-open-set-algebra",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-countable-union-of-countable",
+          "thm-product-of-countable",
+          "thm-rationals-countable"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used through the supplied Parseval theorem and to show that the rational span of the finite or countable basis is countable; the remaining Borel-generation and finite-measure uniqueness arguments use no choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, §2.1, Theorems 2.3–2.4",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§2.1, Theorems 2.3–2.4, printed pp. 50–51: countable orthonormal bases and Parseval's identity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-ip-prior-preserving-crank-nicolson",
+        "kind": "algorithm",
+        "title": "Prior-preserving Crank–Nicolson sampler",
+        "statement": "Assume the Axiom of Choice. Let $H$ be a separable real Hilbert space, let\n$\\mu_0$ be a centered Borel Gaussian probability measure on $H$, let\n$D\\subseteq H$ be Borel with $\\mu_0(D)=1$, and let\n$\\Phi_D:D\\to(-\\infty,+\\infty]$ be Borel. Assume the evidence\n$$\nZ:=\\int_D e^{-\\Phi_D(u)}\\,\\mu_0(du)\n$$\nsatisfies $0<Z<\\infty$. Extend the potential to all of $H$ by setting\n$\\bar\\Phi(u)=\\Phi_D(u)$ for $u\\in D$ and $\\bar\\Phi(u)=+\\infty$ for\n$u\\notin D$, and define the target probability\n$\\mu(du)=Z^{-1}e^{-\\bar\\Phi(u)}\\mu_0(du)$. For a scale $\\beta\\in[0,1]$,\nwrite $\\rho=\\sqrt{1-\\beta^2}$. At state $u\\in H$, draw $\\xi\\sim\\mu_0$\nindependently and propose $v=\\rho u+\\beta\\xi$. Set the acceptance probability\nto $0$ if either $\\bar\\Phi(u)$ or $\\bar\\Phi(v)$ is $+\\infty$, and otherwise set\n$$\n\\alpha(u,v)=\\min\\{1,\\exp(\\bar\\Phi(u)-\\bar\\Phi(v))\\}.\n$$\nDraw an independent uniform random variable on $[0,1]$ and move to $v$ if it\nis at most $\\alpha(u,v)$; otherwise remain at $u$. The resulting one-step\ntransition rule is the prior-preserving Crank–Nicolson, or pCN, rule\n$P_\\beta$. States with infinite potential are absorbing under this total\ndefinition; they have $\\mu$-measure zero.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-ip-prior-on-a-forward-domain",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [
+          "lem-ip-pcn-transition-kernel-is-measurable"
+        ],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "axiom_use": "AC is assumed by the library's centered Borel Gaussian interface. The proposal and acceptance instructions add no further choice use.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§4.2, equation (4.7); §6.1, Theorem 6.2; §6.2, Theorem 6.4."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2020/LectureNotes2020.pdf",
+              "locator": "Chapter 8, §8.2, Definition 8.2.3, Proposition 8.2.4, and Example 8.2.7."
+            },
+            {
+              "title": "M. Hairer, A. M. Stuart, and S. J. Vollmer, Spectral gaps for a Metropolis–Hastings algorithm in infinite dimensions, Annals of Applied Probability 24(6) (2014)",
+              "url": "https://hairer.org/papers/spectralgapmcmc.pdf",
+              "locator": "§2.1, Algorithm 1 and its Gaussian-reference target convention."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ip-pcn-transition-kernel-is-measurable",
+        "kind": "lemma",
+        "title": "The pCN accept-reject procedure defines a probability kernel",
+        "statement": "Under the inputs and instructions of the prior-preserving Crank–Nicolson\nalgorithm, for every $\\beta\\in[0,1]$ its proposal rule is a Borel probability\nkernel and its accept-reject transition $P_\\beta$ is a Borel probability\nkernel on $H$.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-borel-sigma-algebra",
+          "def-measure-kernel-and-probability-kernel",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-norm-and-normed-space",
+          "def-separable-space",
+          "def-second-countable-space",
+          "def-real-exponential-function-and-e",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-rat-embeds-dense",
+          "lem-subset-of-countable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-exponential-is-strictly-increasing",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-metric-open-set-algebra",
+          "thm-product-of-countable",
+          "thm-rationals-countable"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice is used to prove kernel measurability or the pointwise probability property once the algorithm inputs are supplied.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§4.2, equation (4.7); §6.1, Theorem 6.2."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2020/LectureNotes2020.pdf",
+              "locator": "Chapter 8, §8.2, Definition 8.2.3 and Proposition 8.2.4."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ip-pcn-reference-pair-law-is-symmetric",
+        "kind": "lemma",
+        "title": "The pCN Gaussian reference pair law is symmetric",
+        "statement": "Assume the Axiom of Choice. Let $H$ be a separable real Hilbert space and let\n$\\mu_0$ be a centered Borel Gaussian probability measure on $H$. Let $U$ and\n$\\xi$ be independent random elements with law $\\mu_0$. For\n$\\beta\\in[0,1]$, set $\\rho=\\sqrt{1-\\beta^2}$ and\n$V=\\rho U+\\beta\\xi$. The joint Borel law of $(U,V)$ on $H\\times H$ is\nunchanged by the coordinate swap $(u,v)\\mapsto(v,u)$.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-countable-choice",
+          "def-dual-space-of-a-normed-space",
+          "def-hilbert-space",
+          "def-law-or-distribution-of-a-random-element",
+          "def-moments-variance-and-covariance",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-norm-and-normed-space",
+          "def-separable-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-second-countable-space",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-measurable-functions-preserve-independence",
+          "lem-rat-embeds-dense",
+          "lem-subset-of-countable",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-countable-iff-surjection-from-n",
+          "lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-metric-open-set-algebra",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-product-of-countable",
+          "thm-rationals-countable",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is used through the Borel Gaussian and multivariate normal interfaces and implies the Countable Choice needed by the coordinate-law supplier. No stronger choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§6.1, Theorem 6.2 and proof that the prior flow is symmetric for the Crank–Nicolson choice."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2020/LectureNotes2020.pdf",
+              "locator": "Chapter 8, §8.2, Example 8.2.7 and pCN reference-preserving proposal."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-ip-pcn-small-step-acceptance-under-potential-bounds",
+        "kind": "theorem",
+        "title": "pCN stationary mean acceptance tends to one at small scale",
+        "statement": "Assume the Axiom of Choice. Let $H$ be a separable real Hilbert space and let\n$\\mu_0$ be a centered Borel Gaussian probability measure on $H$. Let\n$\\Phi:H\\to[0,\\infty)$ be finite-valued and Borel measurable. Suppose that\nthere are constants $p,K>0$ such that\n$$0\\le\\Phi(u)\\le K(1+\\|u\\|^p)\\qquad(u\\in H),$$\nand for every $R>0$ there is a finite $L_R$ such that\n$$|\\Phi(u)-\\Phi(v)|\\le L_R\\|u-v\\|\\quad\\text{whenever }\\max\\{\\|u\\|,\\|v\\|\\}<R.$$\nSet $Z=\\int_H e^{-\\Phi(u)}\\,\\mu_0(du)$ and\n$\\mu(du)=Z^{-1}e^{-\\Phi(u)}\\mu_0(du)$. For $\\beta\\in[0,1]$, let\n$U\\sim\\mu$ and $\\xi\\sim\\mu_0$ be independent, put\n$V_\\beta=\\sqrt{1-\\beta^2}U+\\beta\\xi$, and define\n$$\\alpha_\\beta=\\min\\{1,\\exp(\\Phi(U)-\\Phi(V_\\beta))\\}.$$\nThen $0<Z<\\infty$, $\\mu$ is a probability measure, and the stationary mean\nacceptance satisfies\n$$\\lim_{\\beta\\downarrow0}\\mathbb E[\\alpha_\\beta]=1.$$",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-hilbert-space",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-ip-prior-on-a-forward-domain",
+          "def-law-or-distribution-of-a-random-element",
+          "def-separable-space",
+          "def-second-countable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-independent-random-elements",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-norm-and-normed-space",
+          "def-integral-over-a-measurable-set",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-rat-embeds-dense",
+          "lem-subset-of-countable",
+          "thm-dominated-convergence",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-exponential-is-strictly-increasing",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "thm-ip-function-space-posterior-propriety",
+          "thm-metric-open-set-algebra",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-product-of-countable",
+          "thm-rationals-countable"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the centered Borel Gaussian and pCN interfaces. The posterior-propriety supplier and the limit argument add no further choice use.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§6.2, Assumptions 6.1(1)–(2) and Theorem 6.4; the small-scale acceptance limit is proved locally here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-ip-pcn-posterior-invariance",
+        "kind": "theorem",
+        "title": "The pCN accept-reject kernel preserves the posterior",
+        "statement": "Assume the Axiom of Choice and the inputs of the prior-preserving\nCrank–Nicolson algorithm: a separable real Hilbert space $H$, centered Borel\nGaussian reference probability $\\mu_0$, full-mass Borel domain $D$, Borel\npotential $\\Phi_D:D\\to(-\\infty,+\\infty]$, positive finite evidence $Z$, and\nscale $\\beta\\in[0,1]$. Let $\\mu$ be the normalized target on $H$ obtained by\nextending $\\Phi_D$ by $+\\infty$ off $D$, and let $P_\\beta$ be the algorithm's\naccept-reject transition. Then $P_\\beta$ is reversible with respect to $\\mu$:\nits joint flow\n$$\\Lambda_\\beta(C):=\\int_H P_\\beta(u,C_u)\\,\\mu(du),\\qquad C_u:=\\{v\\in H:(u,v)\\in C\\},$$\nis unchanged by $(u,v)\\mapsto(v,u)$ for every Borel\n$C\\subseteq H\\times H$. Consequently, $\\mu$ is invariant:\n$$\\int_H P_\\beta(u,A)\\,\\mu(du)=\\mu(A)\\qquad(A\\in\\mathcal B(H)).$$\nThis conclusion gives invariance only; it does not assert uniqueness,\nconvergence, mixing, an effective-sample-size bound, mesh-independent cost,\nor correctness of an approximate forward solver.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "def-hilbert-space",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-ip-prior-on-a-forward-domain",
+          "def-law-or-distribution-of-a-random-element",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-norm-and-normed-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-separable-space",
+          "def-second-countable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-independent-random-elements",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-ip-pcn-reference-pair-law-is-symmetric",
+          "lem-ip-pcn-transition-kernel-is-measurable",
+          "lem-subset-of-countable",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "thm-change-of-variables-for-expectation",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-general-state-reversibility-implies-invariance",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-metric-open-set-algebra",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-product-of-countable",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the pCN Gaussian-reference algorithm. The symmetric-flow argument uses no further choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§4.2, equation (4.7); §6.1, Theorem 6.2; prior-preserving pCN detailed-balance correction."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2020/LectureNotes2020.pdf",
+              "locator": "Chapter 8, §8.2, Definition 8.2.3 and Proposition 8.2.4, complete Metropolis–Hastings detailed-balance proof."
+            },
+            {
+              "title": "G. O. Roberts and J. S. Rosenthal, General State Space Markov Chains and MCMC Algorithms, Probability Surveys 1 (2004)",
+              "url": "https://www.probability.ca/jeff/ftpdir/probsurv.pdf",
+              "locator": "§2, Definition and Proposition 1, detailed balance and invariance on a general measurable state space."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 3041,
+    "id": "function-space-mcmc-and-pcn-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Function-space pCN and invariant posterior kernels — Examples and Counterexamples",
+    "companion": "function-space-mcmc-and-pcn",
+    "requires": [
+      "function-space-mcmc-and-pcn",
+      "detection-and-quantification-limits",
+      "cost-constrained-gaussian-and-feedback-channels",
+      "finite-window-spatial-point-process-likelihoods"
+    ],
+    "items": [
+      {
+        "id": "cex-ip-infinite-dimensional-random-walk-reverse-flow-singular",
+        "kind": "counterexample",
+        "title": "Infinite-dimensional Gaussian random-walk reverse flow is singular",
+        "statement": "Assume the Axiom of Choice and fix $\\beta\\in(0,1]$. Let\n$H=\\ell^2(\\mathbb N,\\mathbb R)$ with its canonical basis $(e_j)$. Take\nmutually independent standard normal variables $(X_j,Y_j)_{j\\ge1}$ and set\n$$U=\\sum_{j\\ge1}2^{-j/2}X_je_j,\\qquad \\xi=\\sum_{j\\ge1}2^{-j/2}Y_je_j.$$\nThese series converge almost surely in $H$ and define independent centered\nBorel Gaussian random elements with the same law $\\mu_0$. Define the Gaussian\nrandom-walk proposal $V=U+\\beta\\xi$, its probability kernel\n$$Q_\\beta(u,B)=\\mu_0(\\{z\\in H:u+\\beta z\\in B\\}),$$\nits forward flow $\\eta(du,dv)=\\mu_0(du)Q_\\beta(u,dv)$, and its transpose\n$\\eta^\\top(C)=\\eta(\\{(u,v):(v,u)\\in C\\})$. Then $\\eta$ and $\\eta^\\top$ are\nmutually singular: a Borel set $A_\\beta\\subseteq H\\times H$ satisfies\n$$\\eta(A_\\beta)=1,\\qquad \\eta^\\top(A_\\beta)=0.$$\nFor the same reference law and scale, the pCN proposal flow is symmetric.",
+        "deps": [
+          "cor-countable-independent-copies-exist",
+          "cor-iid-finite-variance-strong-law",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure-kernel-and-probability-kernel",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-norm-and-normed-space",
+          "def-separable-space",
+          "def-second-countable-space",
+          "def-standard-normal-and-normal-laws",
+          "lem-ip-coordinate-vectors-form-a-basis-of-ell-two",
+          "lem-ip-gaussian-series-prior-regularity",
+          "lem-ip-pcn-reference-pair-law-is-symmetric",
+          "lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates",
+          "lem-measurable-functions-preserve-independence",
+          "lem-normal-location-scale-mean-and-variance",
+          "lem-rat-embeds-dense",
+          "lem-subset-of-countable",
+          "lem-standard-normal-fourth-moment",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-change-of-variables-for-expectation",
+          "thm-countable-union-of-countable",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-metric-open-set-algebra",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-borel-product-of-second-countable-spaces",
+          "thm-product-of-countable",
+          "thm-rationals-countable"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_use": "AC supplies dependent and countable choice for the iid Gaussian sequence and the Gaussian-series law; the strong-law and separating-event arguments add no choice use.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§4.2, equation (4.3), and §6.1, Theorem 6.3; a coordinate strong-law separator is proved locally here."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2020/LectureNotes2020.pdf",
+              "locator": "Chapter 8, §8.2, Examples 8.2.6–8.2.7, random-walk and pCN proposals."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-ip-pcn-normal-posterior-invariant",
+        "kind": "example",
+        "title": "A Gaussian pCN kernel leaves a normal posterior invariant",
+        "statement": "Let $H=\\mathbb R$, give the unknown parameter $u$ the prior law\n$\\mu_0=N(0,1)$, and observe one datum $Y=0$ from the model\n$Y\\mid u\\sim N(u,1)$. The Gaussian conjugate update gives posterior\n$\\mu=N(0,1/2)$. Use the potential $\\Phi(u)=u^2/2$ in the pCN algorithm. For\n$\\beta\\in[0,1]$, write $\\rho=\\sqrt{1-\\beta^2}$, propose\n$v=\\rho u+\\beta\\xi$ with $\\xi\\sim N(0,1)$ independent of the current\nstate, and accept with probability\n$$\\alpha(u,v)=\\min\\{1,\\exp((u^2-v^2)/2)\\}.$$\nThe resulting pCN probability kernel leaves $N(0,1/2)$ invariant for every\n$\\beta\\in[0,1]$.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-location-scale-density",
+          "thm-ip-pcn-posterior-invariance",
+          "thm-normal-normal-conjugate-update"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the normal-law and pCN interfaces; no additional choice is used in the calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.05, Spring 2022, Class 15: Conjugate priors: Beta and normal",
+              "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/mit18_05_s22_class15-prep.pdf",
+              "locator": "§§6–7, pp. 5–7: normal-normal updating with known observation variance, precision-weighted posterior parameters, and a worked completion-of-square example."
+            },
+            {
+              "title": "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)",
+              "url": "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf",
+              "locator": "§4.2, equation (4.7), pCN proposal and potential-ratio acceptance."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

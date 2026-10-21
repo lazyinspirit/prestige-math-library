@@ -1,0 +1,7 @@
+The conventional interpretation is sound: the theorem’s own `def-l-one-of-a-measure` explicitly defines integrable **representatives**, while the quotient definition explains why point evaluation needs that convention stated. An explicit clarification is recommended; it adds no regularity premise.
+
+The literal current conclusion says “at every such point.” Read as every differentiability point, this is false: for an interior c, f=1_{c} has identically zero primitive, so F′(c)=0≠f(c). The sound full claim is equality on a full-measure set for every fixed measurable integrable representative. The original proof already constructs this set.
+
+Three exact guarded spans are proposed: Statement, Given, and Proof3.1. All29direct consumer interfaces were checked at their relevant clauses, including SOLIT/F10/Verification1.2 and Grönwall/F9/Proof2.1. They use only the unchanged a.e. conclusion; sine normalization has only a dependency link. No consumer source repair is required. The graph contains895structural descendants,118inside the1471frontier (2direct/116indirect). Their interfaces are preserved at the29-node direct-use cut; no895-proof audit is claimed. Exact selected-use passages and the graph inventory are saved separately.
+
+Native finding and source history remain untouched. Root decides and integrates after writer drain; conditional Statement quote mirrors are inventoried. No canonical writes, digests, native decisions or gates were performed.

@@ -1,0 +1,23 @@
+---
+page: twisted-alexander-polynomials-and-reidemeister-torsion
+title: "Twisted Alexander polynomials and Reidemeister torsion"
+status: draft
+requires:
+  - wirtinger-presentations-and-knot-groups
+  - knot-exteriors-and-peripheral-systems
+  - multivariable-alexander-modules-and-chain-models
+items:
+  - def-knot-twisted-chain-complex-and-reidemeister-torsion
+  - def-knot-wada-quotient-for-deficiency-one-presentation
+  - lem-twisted-acyclicity-from-torsion-module
+  - lem-twisted-torsion-cell-basis-change-ambiguity
+  - lem-twisted-fox-jacobian-is-cellular-boundary
+  - lem-knot-twisted-exterior-acyclicity-from-torsion-module
+  - thm-wada-deleted-minor-equals-twisted-reidemeister-torsion
+  - alg-twisted-burau-determinant-for-colored-braid-closure
+  - thm-twisted-burau-axis-torsion-product
+  - thm-knot-wada-quotient-equals-reidemeister-torsion
+  - thm-twisted-burau-determinant-formula-under-extension-hypotheses
+examples: []
+page_layout: compact-v1
+---

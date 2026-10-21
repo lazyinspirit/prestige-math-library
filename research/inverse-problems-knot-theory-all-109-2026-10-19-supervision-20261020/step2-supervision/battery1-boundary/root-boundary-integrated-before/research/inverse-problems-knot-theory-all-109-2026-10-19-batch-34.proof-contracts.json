@@ -1,0 +1,1670 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "34",
+  "scope": [
+    "lem-ip-bpdn-objectives-proper-closed-convex",
+    "def-ip-best-s-term-l1-error",
+    "def-ip-robust-nullspace-property",
+    "lem-ip-robust-nsp-block-tail-estimate",
+    "lem-ip-bpdn-minimizer-exists",
+    "lem-ip-bpdn-dual-certificates",
+    "lem-ip-best-s-term-l1-sparse-vector-formulation",
+    "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error",
+    "alg-ip-basis-pursuit-denoising",
+    "thm-ip-robust-nsp-noisy-recovery-bound",
+    "ex-ip-34-scope-and-boundary-cases"
+  ],
+  "contracts": {
+    "lem-ip-bpdn-objectives-proper-closed-convex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "**Clause 1 is about an arbitrary norm; clauses 2 to 4 are about\n$\\mathbb{R}^{n}$ with $n \\ge 1$.**\n\n1. **Finite and reverse triangle inequalities.** Let $V$ be a vector space over\n   $\\mathbb{R}$ and $N$ a norm on it ([[def-norm-and-normed-space]]). For every\n   $p \\in \\mathbb{N}$ and every list $u : p \\to V$\n   ([[def-linear-combination-and-span]]),\n   $$N\\Bigl(\\sum_{j<p} u_j\\Bigr) \\;\\le\\; \\sum_{j<p} N(u_j),$$\n   and for all $u, w \\in V$,\n   $$\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).$$\n\nNow let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^{n}$ carry the norms of\n[[def-p-norms-on-rn]] and write $\\iota$ for the canonical natural\n([[def-canonical-natural]]).\n\n2. **Every norm is dominated by the $1$-norm.** Let $N$ be a norm on\n   $\\mathbb{R}^{n}$ and put $C := \\max\\{\\, N(e_k) : k<n \\,\\}$, a maximum over a\n   nonempty finite set of reals ([[lem-standard-basis-of-f-n]],\n   [[lem-finite-set-has-max]]). Then $C \\ge 0$ and\n   $$N(x) \\;\\le\\; C\\,\\lVert x\\rVert_1 \\qquad \\text{for every } x \\in \\mathbb{R}^{n}.$$\n3. **The comparison chain.** For every $x \\in \\mathbb{R}^{n}$,\n   $$\\lVert x\\rVert_\\infty \\;\\le\\; \\lVert x\\rVert_2 \\;\\le\\; \\lVert x\\rVert_1 \\;\\le\\; \\iota(n)\\,\\lVert x\\rVert_\\infty , \\qquad \\lVert x\\rVert_1 \\;\\le\\; \\sqrt{\\iota(n)}\\;\\lVert x\\rVert_2 .$$\n   In particular $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and\n   $\\lVert\\cdot\\rVert_\\infty$ are pairwise equivalent norms on $\\mathbb{R}^{n}$,\n   with the constants displayed ([[def-equivalent-norms]]).\n4. **Every norm is Lipschitz for the Euclidean metric.** With $N$ and $C$ as in\n   clause 2, $N : (\\mathbb{R}^{n}, d_2) \\to (\\mathbb{R}, d_{\\mathbb{R}})$ is\n   Lipschitz with constant $C\\sqrt{\\iota(n)}$\n   ([[def-lipschitz-holder-contraction]], [[lem-metrics-on-rn]],\n   [[lem-real-line-is-a-metric-space]]), hence uniformly continuous and\n   continuous ([[thm-metric-regularity-hierarchy]], [[def-metric-continuity]]).\n\n**Where $n \\ge 1$ enters.** Clauses 2 and 4 need the maximum defining $C$ to\nexist, and clause 3 mentions $\\lVert\\cdot\\rVert_\\infty$; at $n = 0$ each is a\nmaximum over the empty index set and does not exist, exactly as in\n[[lem-metrics-on-rn]] and [[def-p-norms-on-rn]]. Clause 1 carries no hypothesis\non the dimension and no hypothesis on the space.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-proper-closed-convex-function-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ and let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$. Its effective domain is $\\operatorname{dom}g=\\{x:g(x)<+\\infty\\}$. The function is **proper** if $\\operatorname{dom}g\\ne\\varnothing$; it is **convex** if\n$$g((1-\\theta)x+\\theta y)\\le(1-\\theta)g(x)+\\theta g(y)\\qquad(x,y\\in\\mathbb R^n,\\ 0\\le\\theta\\le1),$$\nusing the endpoint convention $0\\cdot(+\\infty)=0$ of [[def-convex-and-strictly-convex-functionals-on-a-banach-space]]. It is **closed** (equivalently, lower semicontinuous in the extended-real convex-analysis convention used here) if its epigraph\n$$\\operatorname{epi}g=\\{(x,s)\\in\\mathbb R^n\\times\\mathbb R:g(x)\\le s\\}$$\nis closed in $\\mathbb R^{n+1}$. The proximal-gradient items on this page assume $g$ is proper, closed and convex.\n\nThis page's closed-epigraph convention is explicit: it does not silently use an equivalence between sequential lower semicontinuity and topological closedness that would require an additional choice principle in the library's generic sequential convention. In finite dimensions this is the standard closed proper convex input to proximal algorithms.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real vector space and $K\\subseteq X$. The set $K$ is **convex** if $\\lambda u+(1-\\lambda)v\\in K$ for all $u,v\\in K$ and $\\lambda\\in[0,1]$. Fix a nonempty convex $K$ and an extended-real functional $I:K\\to(-\\infty,+\\infty]$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]), with the sums and positive-weight products of [[def-extended-reals]]. For convex combinations only, additionally define $0\\cdot(+\\infty)=0$; this is a local convention, since that product is left undefined in the general extended-real arithmetic. Then $I$ is **convex** if\n$$I\\big(\\lambda u+(1-\\lambda)v\\big)\\le\\lambda I(u)+(1-\\lambda)I(v),\\qquad u,v\\in K,\\ \\lambda\\in[0,1],$$\nand **strictly convex** if the inequality is strict whenever $u\\ne v$, $I(u),I(v)<+\\infty$ and $\\lambda\\in(0,1)$. A convex functional has convex sublevel sets: for every $t\\in\\mathbb R$ the set $\\{u\\in K:I(u)\\le t\\}$ is convex. Only real coefficients are used: on a complex vector space these notions are read on the underlying real structure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-indicator-function-of-closed-convex-set",
+          "source_section": "Definition",
+          "quote": "For any set $C\\subseteq\\mathbb R^n$, its extended-real indicator is\n$$\\iota_C(x)=\\begin{cases}0,&x\\in C,\\\\+\\infty,&x\\notin C.\\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field (Field) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n(The natural numbers $\\mathbb{N}$ (von Neumann), The recursion theorem):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set (The natural numbers $\\mathbb{N}$ (von Neumann)), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in Field, and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $f$ is finite everywhere because it is a finite sum of absolute values, and $f(0)=0$, so its effective domain is nonempty. For $0\\le\\theta\\le1$, the triangle inequality and homogeneity in [F1] give $f((1-\\theta)x+\\theta z)\\le f((1-\\theta)x)+f(\\theta z)=(1-\\theta)f(x)+\\theta f(z).$ Thus $f$ is proper and convex by [F2,F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $(x,t)\\in\\mathbb R^{n+1}$ outside $\\operatorname{epi}f$, the gap $d=f(x)-t$ is positive. Put $L=\\sqrt{n}+1>0$. If $(x',t')$ has product Euclidean distance $D<d/(2L)$ from $(x,t)$, then coordinate-square domination gives $\\|x'-x\\|_2\\le D$ and $|t'-t|\\le D$. By [F1], $f(x')-t'\\ge f(x)-t-|f(x')-f(x)|-|t'-t|\\ge d-(\\sqrt{n}+1)D>d/2>0.$ So the complement of $\\operatorname{epi}f$ is open and its epigraph is closed. The scalar $L$ is positive by [F8]; the coordinate-square domination follows by comparing a partial sum with the full nonnegative sum and using [F9].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The residual ball $C$ contains $y$ because $\\epsilon\\ge0$. If $u,v\\in C$ and $0\\le\\theta\\le1$, homogeneity and the triangle inequality in [F1] give $\\|(1-\\theta)u+\\theta v-y\\|_2\\le(1-\\theta)\\|u-y\\|_2+\\theta\\|v-y\\|_2\\le\\epsilon,$ so $C$ is convex. If $u\\notin C$, the gap $d=\\|u-y\\|_2-\\epsilon>0$ and the reverse triangle inequality show that every $v$ with $\\|v-u\\|_2<d/2$ also lies outside $C$. Thus $C$ is closed.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], $\\operatorname{epi}g=C\\times[0,\\infty)$. If $(u,t)$ is outside this epigraph, either $u\\notin C$ or $t<0$. In the first case step 1.3 supplies an open ball about $u$ disjoint from $C$, hence a product neighborhood disjoint from the epigraph; in the second case an interval about $t$ contained in $(-\\infty,0)$ supplies such a product neighborhood. Therefore $\\operatorname{epi}g$ is closed. Since $C$ is nonempty by step 1.3, $g$ is proper. If both endpoints lie in $C$, their convex combination lies in $C$ by step 1.3 and $g$ is zero there; if either endpoint has value $+\\infty$ with positive coefficient, the convexity inequality has right side $+\\infty$. Endpoint coefficients reduce to equality at the endpoint with coefficient one. Thus $g$ is convex, and [F2] proves that both functions have the asserted proper, closed, convex properties.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.3",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires m,n>=1, so zero-dimensional spaces are outside the domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At x=0 and u=y both functions are finite, including when epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof applies to n=1 and m=1 because all sums and Euclidean coordinates are finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The residual set remains nonempty for epsilon=0 since it contains y; the closedness proof treats a zero gap only for points already in the set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses theta in [0,1], and step 2.1 treats endpoint coefficients separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 construct the needed points 0 and y directly; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 4 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "def-ip-best-s-term-l1-error": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "not-applicable",
+      "proof_status_evidence": "The definition has no proof phase; its domains, quantifiers, notation, and edge conventions are explicit in the uninterrupted statement.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "def-ip-robust-nullspace-property": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition statement explicitly gives this boundary or scope."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "not-applicable",
+      "proof_status_evidence": "The definition has no proof phase; its domains, quantifiers, notation, and edge conventions are explicit in the uninterrupted statement.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-ip-robust-nsp-block-tail-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field (Field) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n(The natural numbers $\\mathbb{N}$ (von Neumann), The recursion theorem):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set (The natural numbers $\\mathbb{N}$ (von Neumann)), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in Field, and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $q=0$, then $S^c=\\varnothing$ and the conclusion is $0\\le\\|h_S\\|_2$. If $q\\ge1$, write $r=|T_1|\\le s$. The order gives $T_1=\\{j_{s+1},\\ldots,j_{s+r}\\}$ and $S=\\{j_1,\\ldots,j_s\\}$, with $|h_{j_{s+k}}|\\le|h_{j_k}|$ for every $1\\le k\\le r$. Termwise squaring and finite-sum monotonicity therefore give $\\|h_{T_1}\\|_2^2=\\sum_{k=1}^r|h_{j_{s+k}}|^2\\le\\sum_{k=1}^r|h_{j_k}|^2\\le\\sum_{k=1}^s|h_{j_k}|^2=\\|h_S\\|_2^2.$ Both norms are nonnegative, so [F5] gives $\\|h_{T_1}\\|_2\\le\\|h_S\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $2\\le r\\le q$, the preceding block $T_{r-1}$ has size $s$. Its last ordered coordinate has magnitude no greater than any earlier entry, hence no greater than the average magnitude on $T_{r-1}$. Every entry of $T_r$ is no greater than that last entry. Put $c=\\|h_{T_{r-1}}\\|_1/s$. Then each entry of $T_r$ has magnitude at most $c$. If $k_r=|T_r|$, termwise comparison gives\n$$\\|h_{T_r}\\|_2^2=\\sum_{j\\in T_r}|h_j|^2\\le k_r c^2\\le s c^2=\\frac{\\|h_{T_{r-1}}\\|_1^2}{s},$$\nusing $k_r\\le s$ as natural numbers: padding the sum of $k_r$ copies of the nonnegative number $c^2$ by the remaining nonnegative copies gives the sum of $s$ copies, by [F4]; [F6,F7] interpret these counts as real scalars. Since both sides are nonnegative, [F5] gives $\\|h_{T_r}\\|_2\\le\\frac{\\|h_{T_{r-1}}\\|_1}{\\sqrt{s}}.$ The blocks are disjoint and finite. By [F6], [F7], the triangle inequality, step 1.1, and this block bound, $\\|h_{S^c}\\|_2=\\Big\\|\\sum_{r=1}^q h_{T_r}\\Big\\|_2\\le\\sum_{r=1}^q\\|h_{T_r}\\|_2\\le\\|h_S\\|_2+\\frac1{\\sqrt{s}}\\sum_{r=1}^{q-1}\\|h_{T_r}\\|_1\\le\\|h_S\\|_2+\\frac{\\|h_{S^c}\\|_1}{\\sqrt{s}}.$ This proves the claimed estimate, including a final block smaller than $s$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the q=0 case S^c=empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For h=0 every term and both sides are zero in steps 1.1-2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The argument allows n=s=1, where q=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When s=n, the complement is empty and step 1.1 applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The final block may have any size from 1 through s; step 2.1 includes a short final block."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The coordinate order and tie-break are deterministic; blocks are explicitly specified in the Statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 2 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-ip-bpdn-minimizer-exists": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "**Clause 1 is about an arbitrary norm; clauses 2 to 4 are about\n$\\mathbb{R}^{n}$ with $n \\ge 1$.**\n\n1. **Finite and reverse triangle inequalities.** Let $V$ be a vector space over\n   $\\mathbb{R}$ and $N$ a norm on it ([[def-norm-and-normed-space]]). For every\n   $p \\in \\mathbb{N}$ and every list $u : p \\to V$\n   ([[def-linear-combination-and-span]]),\n   $$N\\Bigl(\\sum_{j<p} u_j\\Bigr) \\;\\le\\; \\sum_{j<p} N(u_j),$$\n   and for all $u, w \\in V$,\n   $$\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).$$\n\nNow let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^{n}$ carry the norms of\n[[def-p-norms-on-rn]] and write $\\iota$ for the canonical natural\n([[def-canonical-natural]]).\n\n2. **Every norm is dominated by the $1$-norm.** Let $N$ be a norm on\n   $\\mathbb{R}^{n}$ and put $C := \\max\\{\\, N(e_k) : k<n \\,\\}$, a maximum over a\n   nonempty finite set of reals ([[lem-standard-basis-of-f-n]],\n   [[lem-finite-set-has-max]]). Then $C \\ge 0$ and\n   $$N(x) \\;\\le\\; C\\,\\lVert x\\rVert_1 \\qquad \\text{for every } x \\in \\mathbb{R}^{n}.$$\n3. **The comparison chain.** For every $x \\in \\mathbb{R}^{n}$,\n   $$\\lVert x\\rVert_\\infty \\;\\le\\; \\lVert x\\rVert_2 \\;\\le\\; \\lVert x\\rVert_1 \\;\\le\\; \\iota(n)\\,\\lVert x\\rVert_\\infty , \\qquad \\lVert x\\rVert_1 \\;\\le\\; \\sqrt{\\iota(n)}\\;\\lVert x\\rVert_2 .$$\n   In particular $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and\n   $\\lVert\\cdot\\rVert_\\infty$ are pairwise equivalent norms on $\\mathbb{R}^{n}$,\n   with the constants displayed ([[def-equivalent-norms]]).\n4. **Every norm is Lipschitz for the Euclidean metric.** With $N$ and $C$ as in\n   clause 2, $N : (\\mathbb{R}^{n}, d_2) \\to (\\mathbb{R}, d_{\\mathbb{R}})$ is\n   Lipschitz with constant $C\\sqrt{\\iota(n)}$\n   ([[def-lipschitz-holder-contraction]], [[lem-metrics-on-rn]],\n   [[lem-real-line-is-a-metric-space]]), hence uniformly continuous and\n   continuous ([[thm-metric-regularity-hierarchy]], [[def-metric-continuity]]).\n\n**Where $n \\ge 1$ enters.** Clauses 2 and 4 need the maximum defining $C$ to\nexist, and clause 3 mentions $\\lVert\\cdot\\rVert_\\infty$; at $n = 0$ each is a\nmaximum over the empty index set and does not exist, exactly as in\n[[lem-metrics-on-rn]] and [[def-p-norms-on-rn]]. Clause 1 carries no hypothesis\non the dimension and no hypothesis on the space.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field (Field) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n(The natural numbers $\\mathbb{N}$ (von Neumann), The recursion theorem):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set (The natural numbers $\\mathbb{N}$ (von Neumann)), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in Field, and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $M_A=(\\sum_{i=1}^m\\sum_{j=1}^n A_{ij}^2)^{1/2}$. For $u,v\\in\\mathbb R^n$, rowwise Cauchy–Schwarz [F4] and finite-sum monotonicity [F5] give $\\|A(u-v)\\|_2^2=\\sum_{i=1}^m\\left(\\sum_{j=1}^n A_{ij}(u_j-v_j)\\right)^2\\le M_A^2\\|u-v\\|_2^2.$ By [F6], $\\|A(u-v)\\|_2\\le M_A\\|u-v\\|_2$. The reverse triangle inequality [F3] now gives $\\big|\\|Au-y\\|_2-\\|Av-y\\|_2\\big|\\le\\|A(u-v)\\|_2\\le M_A\\|u-v\\|_2.$ If $M_A=0$, the displayed bound gives $\\|A(u-v)\\|_2=0$ for every $u,v$; positive definiteness in [F3] gives $A(u-v)=0$, so the residual function is constant and nonemptiness gives $F=\\mathbb R^n$. If $M_A>0$ and $z\\notin F$, the positive gap $d=\\|Az-y\\|_2-\\epsilon$ shows that every $u$ with $\\|u-z\\|_2<d/(2M_A)$ also lies outside $F$. Thus $F$ is closed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix one $z_0\\in F$ and set $K=F\\cap\\{z:\\|z\\|_1\\le\\|z_0\\|_1\\}$. This set is nonempty because it contains $z_0$. If $\\|z\\|_1>\\|z_0\\|_1$, the positive gap $d=\\|z\\|_1-\\|z_0\\|_1$ and [F3] show that every $u$ with $\\|u-z\\|_2<d/(2\\sqrt{n})$ still has $\\|u\\|_1>\\|z_0\\|_1$; the denominator is positive by [F9]. Thus the second factor is closed, and $K$ is closed by step 1.1. It is bounded since [F3] gives $\\|z\\|_2\\le\\|z\\|_1\\le\\|z_0\\|_1$ for every $z\\in K$. By [F7], $K$ is compact.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The function $z\\mapsto\\|z\\|_1$ is continuous by [F3], so [F7] gives a minimizer on the nonempty compact set $K$. Every feasible point outside $K$ has $\\|z\\|_1>\\|z_0\\|_1$, while the minimum on $K$ is at most $\\|z_0\\|_1$. Hence this minimum is global on $F$. The proof selects only one witness $z_0$ and uses the stated ZF compactness theorem; no choice axiom is used.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The theorem is conditional on nonempty F; the empty feasible set is excluded in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof includes M_A=0 at step 1.1 and epsilon=0 in the closedness argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The Heine-Borel supplier hypothesis n>=1 is stated and preserved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 separately handles M_A=0; steps 2.1-3.1 then prove attainment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Radius epsilon=0 is allowed throughout and gives a closed residual set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes one z0 from nonempty F; the proof explicitly records that this is a single witness, not a choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 3 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-ip-bpdn-dual-certificates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $f:\\mathbb R^n\\to(-\\infty,+\\infty]$. Its **Fenchel conjugate** is the\nextended-real function on the same Euclidean space\n$$f^*(s):=\\sup_{x\\in\\mathbb R^n}\\{\\langle s,x\\rangle-f(x)\\}.$$\nWhen $f(x)=+\\infty$, the corresponding term is $-\\infty$ and does not increase\nthe supremum. Its effective domain is\n$\\operatorname{dom}f^*=\\{s:f^*(s)<+\\infty\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces (Real and complex inner product spaces, with the inner product linear in the first argument) over the same field and let $T:V\\to W$ be linear (Linear map between vector spaces over the same field). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "In the supremum defining $g^*(p)$, only $u$ in the residual ball contributes. Write $u=y+v$ with $\\|v\\|_2\\le\\epsilon$. For $p\\in\\mathbb R^m$, define $g^*(p):=\\sup_{u\\in\\mathbb R^m}\\{\\langle p,u\\rangle-g(u)\\}$. Then $g^*(p)=\\langle p,y\\rangle+\\sup_{\\|v\\|_2\\le\\epsilon}\\langle p,v\\rangle.$ By [F6], the last supremum is at most $\\epsilon\\|p\\|_2$. If $p=0$ or $\\epsilon=0$, $v=0$ attains this value. Otherwise $v=\\epsilon p/\\|p\\|_2$ is feasible and gives $\\langle p,v\\rangle=\\epsilon\\|p\\|_2$. This proves the conjugate formula, including the zero cases.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F8",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $z$ be any feasible vector and put $q=A^*p$. The condition $\\|q\\|_\\infty\\le1$ means $|q_j|\\le1$ for every coordinate. Hence each term $|z_j|+q_jz_j$ is nonnegative, and [F7] gives $\\|z\\|_1+\\langle q,z\\rangle=\\sum_j(|z_j|+q_jz_j)\\ge0.$ By [F4], $\\|z\\|_1\\ge-\\langle p,Az\\rangle$. Feasibility and [F6] give $|\\langle p,Az-y\\rangle|\\le\\epsilon\\|p\\|_2$, so $\\|z\\|_1\\ge-\\langle p,Az\\rangle\\ge-\\langle p,y\\rangle-\\epsilon\\|p\\|_2.$ If $x$ is feasible and attains equality with the last quantity, it has objective no larger than any feasible $z$, proving the optimality certificate.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "If $p\\ne0$, $A^*p=0$, and $|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2$, then for every $z\\in\\mathbb R^n$, [F4] gives $|\\langle p,Az-y\\rangle|=|\\langle A^*p,z\\rangle-\\langle p,y\\rangle|=|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2.$ By [F6], this forces $\\|Az-y\\|_2>\\epsilon$. Thus no $z$ is feasible, proving the infeasibility certificate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The certificate is stated for m,n>=1; zero-dimensional max norms are outside its scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats p=0, and the same step separately treats epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formulas and proofs apply when m=n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At epsilon=0, step 1.1 reduces the support-function maximization to v=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The inequality certificate uses the exact closed residual-ball boundary, including equality at radius epsilon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The conjugate maximizer is explicitly constructed; no nonempty-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 3 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-ip-best-s-term-l1-sparse-vector-formulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-best-s-term-l1-error",
+          "source_section": "Definition",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$. Use one-based labels $[n]=\\{1,\\ldots,n\\}$, identifying label $j$ with library coordinate $j-1$. For $T\\subseteq[n]$, let $x_{T^c}$ retain the coordinates outside $T$ and vanish on $T$, where $T^c=[n]\\setminus T$. Define the best $s$-term $\\ell^1$ approximation error by\n$$\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so the displayed minimum exists and is attained.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Let $z$ be any vector with $|\\operatorname{supp}(z)|\\le s$, and put $T=\\operatorname{supp}(z)$. For every $j\\in T^c$, $z_j=0$, so $|x_j-z_j|=|x_j|$. The terms over $T$ are nonnegative; splitting the finite sum by [F2,F3] gives $\\|x-z\\|_1=\\sum_{j\\in T}|x_j-z_j|+\\sum_{j\\in T^c}|x_j|\\ge\\|x_{T^c}\\|_1\\ge\\sigma_s(x)_1,$ where the final inequality follows from [F1] because $|T|\\le s$. Thus every admissible sparse vector has error at least $\\sigma_s(x)_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F1], choose a minimizing set $T_0\\subseteq[n]$ with $|T_0|\\le s$. Define $z_0=(x_{T_0})$, equal to $x$ on $T_0$ and zero on $T_0^c$. Define $z_0$ coordinatewise by $(z_0)_j=x_j$ for $j\\in T_0$ and $(z_0)_j=0$ otherwise. Then $\\operatorname{supp}(z_0)\\subseteq T_0$, so it is admissible, and direct coordinate summation gives $\\|x-z_0\\|_1=\\|x_{T_0^c}\\|_1=\\sigma_s(x)_1.$ Together with step 1.1 this proves equality and attainment. The proof chooses one witness from a finite nonempty set and uses no choice axiom.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats empty support T explicitly; step 2.1 permits T0 to be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For x=0, the empty truncation z0=0 has zero error in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof applies when n=s=1; the admissible set family is finite and nonempty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case |supp(z)|=0 is included by the empty-set branch in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cardinality condition is inclusive |supp(z)|<=s and includes equality in steps 1.1-2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a single minimizing member of a finite nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 2 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-best-s-term-l1-error",
+          "source_section": "Definition",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$. Use one-based labels $[n]=\\{1,\\ldots,n\\}$, identifying label $j$ with library coordinate $j-1$. For $T\\subseteq[n]$, let $x_{T^c}$ retain the coordinates outside $T$ and vanish on $T$, where $T^c=[n]\\setminus T$. Define the best $s$-term $\\ell^1$ approximation error by\n$$\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so the displayed minimum exists and is attained.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $T=\\varnothing$, its retained mass is zero and is no larger than the nonnegative sum on $S$. Otherwise write the ranks of the elements of $T$ in increasing order as $r_1<\\cdots<r_k$, where $k=|T|\\le s$. Then $r_\\ell\\ge\\ell$, so the specified ordering gives $|x_{j_{r_\\ell}}|\\le|x_{j_\\ell}|$ for each $\\ell$. Summing these inequalities and adding the remaining nonnegative terms among the first $s$ coordinates yields $\\|x_T\\|_1\\le\\|x_S\\|_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Since $T$ and $S$ each partition the full coordinate set into retained and omitted coordinates, [F2] gives $\\|x_{T^c}\\|_1=\\|x\\|_1-\\|x_T\\|_1$ and $\\|x_{S^c}\\|_1=\\|x\\|_1-\\|x_S\\|_1$. Step 1.1 therefore implies $\\|x_{S^c}\\|_1\\le\\|x_{T^c}\\|_1$. Applying this inequality to every admissible $T$, while $S$ itself is admissible, shows that the finite minimum in [F1] equals $\\|x_{S^c}\\|_1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats T=empty separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For x=0 all coordinate magnitudes tie, and the deterministic order still gives equal retained masses in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The ordered list argument works for n=s=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When s=n, S=[n] and the omitted tail is empty; the statement's formula remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The order is total and ties are resolved by increasing index in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The deterministic tie-break fixes S; no choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 2 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "alg-ip-basis-pursuit-denoising": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Inputs require m,n>=1 and reject mismatched dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: N=0 is expressly tested; A=0 is allowed when the strict step-size inequality holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The procedure accepts m=n=1 with conforming data and solver/checker programs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The strict step-size boundary alpha beta ||A||_2^2=1 is rejected; the valid regime is strict."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The sweep cap includes N=0; epsilon=0 and exact certificate equalities are allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Solver/checker programs are supplied explicitly; each is deterministic and finite by input contract."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete verification contains 3 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "owner_metadata_note": {
+        "algorithm_proof_phase_reconciliation": {
+          "kind": "root-final-based-algorithm-proof-phase-reconciliation",
+          "prepared_by": "/root/instanton_original_review",
+          "adoption": "Proposed metadata for root integration after writer drain; this proposal is not a new root or native acceptance.",
+          "basis": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/batch34/root-final-adoption.json",
+          "root_final_scope": "Keep entire substantive Definition/procedure/refs unchanged, archive exact full Facts/Verification tail verbatim, and bind all substantive mathematical conclusions to five existing canonical result Statements through justified_by. No new logical dependency/result. Algorithm no longer has a proof phase; provenance proof is truthfully not-applicable and stale proof_strategy removed.",
+          "current_algorithm": "Pure procedure; no numbered Proof/Verification remains. Its Definition and permitted inputs/returns remain unchanged.",
+          "historical_contract_archive": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/root-contract-prep/algorithm-migration/batch-34-full-contract-before.json",
+          "historical_numbered_row_dispositions": [
+            {
+              "old_step": "1.1",
+              "destination_rows": [
+                {
+                  "id": "lem-ip-bpdn-objectives-proper-closed-convex",
+                  "steps": [
+                    "1.1",
+                    "1.2",
+                    "1.3",
+                    "2.1"
+                  ],
+                  "content": "Properness, convexity and closedness of f and residual indicator g."
+                },
+                {
+                  "id": "lem-fenchel-conjugate-is-proper-closed-convex",
+                  "steps": [
+                    "1.1",
+                    "1.2",
+                    "2.1"
+                  ],
+                  "content": "Properness/closedness/convexity of conjugate gstar."
+                },
+                {
+                  "id": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+                  "steps": [
+                    "2.1",
+                    "2.2"
+                  ],
+                  "content": "Global proximal minimizer existence and uniqueness."
+                },
+                {
+                  "id": "lem-ip-bpdn-minimizer-exists",
+                  "steps": [
+                    "1.1",
+                    "2.1",
+                    "3.1"
+                  ],
+                  "content": "Closed feasible set, compact sublevel and global feasible attainment."
+                }
+              ],
+              "input_not_theorem": "Accepted exact solver output is a minimizer only under the unchanged supplied solver/checker soundness input. No finite exact evaluator is asserted."
+            },
+            {
+              "old_step": "1.2",
+              "destination_rows": [],
+              "destination_definitions": [
+                "alg-ip-basis-pursuit-denoising",
+                "alg-pdhg-primal-dual-hybrid-gradient"
+              ],
+              "content": "Actual recurrence, failure/exhaustion propagation, finite caps and no-certificate/no-convergence qualifications remain as unchanged procedure instructions. This explanatory old row is archived, not falsely claimed verbatim relocated to a theorem."
+            },
+            {
+              "old_step": "2.1",
+              "destination_rows": [
+                {
+                  "id": "lem-ip-bpdn-dual-certificates",
+                  "steps": [
+                    "1.2",
+                    "2.1"
+                  ],
+                  "content": "Exact success/optimality and strict annihilator infeasibility tests. Their conclusions cannot conflict because one gives a feasible x and the other excludes all feasible z."
+                }
+              ]
+            }
+          ],
+          "destination_proofs_retained": true,
+          "obligations_deleted": false,
+          "boundary_risk_history": "All old boundary, finite-check, risk, axiom, status, resolution-history and other nonmirror fields are retained verbatim. Their historical step references must be read through this migration map; no fresh boundary/risk review is fabricated.",
+          "legacy_proof_status": "Existing proof_status/proof_status_evidence are retained as historical records, not a claim that the algorithm still has a proof phase; actual source provenance is proof:not-applicable. Root owns any later status normalization.",
+          "new_math_acceptance": false,
+          "native_history_or_counters_changed": false
+        }
+      }
+    },
+    "thm-ip-robust-nsp-noisy-recovery-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-robust-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$, let $A\\in\\mathbb R^{m\\times n}$, and let $0<\\rho<1$ and $\\tau>0$. In real scalar expressions, a natural number denotes its canonical real image. Use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, identifying coordinate label $j$ with library coordinate $j-1$. For $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S$ agree with $h$ on $S$ and vanish on $S^c=[n]\\setminus S$. The matrix $A$ satisfies the **$\\ell^2$ robust nullspace property of order $s$ with constants $(\\rho,\\tau)$** if\n$$\\|h_S\\|_2\\le \\frac{\\rho}{\\sqrt{s}}\\|h_{S^c}\\|_1+\\tau\\|Ah\\|_2$$\nfor every $h\\in\\mathbb R^n$ and every $S\\subseteq[n]$ with $|S|\\le s$. This condition applies to all vectors, including vectors with $Ah\\ne0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-best-s-term-l1-error",
+          "source_section": "Definition",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$. Use one-based labels $[n]=\\{1,\\ldots,n\\}$, identifying label $j$ with library coordinate $j-1$. For $T\\subseteq[n]$, let $x_{T^c}$ retain the coordinates outside $T$ and vanish on $T$, where $T^c=[n]\\setminus T$. Define the best $s$-term $\\ell^1$ approximation error by\n$$\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so the displayed minimum exists and is attained.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-best-s-term-l1-sparse-vector-formulation",
+          "source_section": "Statement",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$ use the one-based labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. For $T\\subseteq[n]$, $x_{T^c}$ agrees with $x$ off $T$ and is zero on $T$. Define $\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}$. Define $\\operatorname{supp}(z):=\\{j\\in[n]:z_j\\ne0\\}$ using the one-based labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. Then\n$$\\sigma_s(x)_1=\\min\\{\\|x-z\\|_1:z\\in\\mathbb R^n,\\ |\\operatorname{supp}(z)|\\le s\\},$$\nand this sparse-vector minimum is attained.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error",
+          "source_section": "Statement",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$ use the one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. Order the coordinates by decreasing $|x_j|$, breaking ties by increasing $j$, and let $S$ be the first $s$ indices. For every $U\\subseteq[n]$, let $x_U$ agree with $x$ on $U$ and vanish on $U^c$. Then for every $T\\subseteq[n]$ with $|T|\\le s$,\n$$\\|x_T\\|_1\\le\\|x_S\\|_1\\quad\\text{and}\\quad\\|x_{S^c}\\|_1\\le\\|x_{T^c}\\|_1.$$\nConsequently $\\sigma_s(x)_1=\\|x_{S^c}\\|_1$, so the best $s$-term tail error is attained by retaining the first $s$ coordinates in the specified order.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-robust-nsp-block-tail-estimate",
+          "source_section": "Statement",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $h\\in\\mathbb R^n$ use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. In real scalar expressions, a natural number denotes its canonical real image. Order the coordinates by decreasing $|h_j|$, breaking ties by increasing $j$. Let $S$ consist of the first $s$ indices, and partition $S^c$ in this same order into consecutive nonempty blocks $T_1,\\ldots,T_q$ of size $s$, with only the last block possibly smaller; if $S^c=\\varnothing$, take $q=0$. Then\n$$\\|h_{S^c}\\|_2\\le \\|h_S\\|_2+\\frac{\\|h_{S^c}\\|_1}{\\sqrt{s}}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ip-bpdn-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $A\\in\\mathbb R^{m\\times n}$ act in the standard finite coordinate bases, with labels $j=1,\\ldots,n$ corresponding to library coordinates $j-1$, $y\\in\\mathbb R^m$, and $\\epsilon\\ge0$. If\n$$F:=\\{z\\in\\mathbb R^n:\\|Az-y\\|_2\\le\\epsilon\\}$$\nis nonempty, then $z\\mapsto\\|z\\|_1$ attains a minimum on $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field (Field) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n(The natural numbers $\\mathbb{N}$ (von Neumann), The recursion theorem):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set (The natural numbers $\\mathbb{N}$ (von Neumann)), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in Field, and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "alg-ip-basis-pursuit-denoising",
+          "source_section": "Definition",
+          "quote": "Inputs are integers $m,n\\ge1$, a matrix $A\\in\\mathbb R^{m\\times n}$ in the standard finite coordinate bases, a vector $y\\in\\mathbb R^m$, a radius $\\epsilon\\ge0$, positive real step sizes $\\alpha,\\beta$, an initial primal-dual state $x^0\\in\\mathbb R^n$, $p^0\\in\\mathbb R^m$, a nonnegative integer sweep cap $N$, positive integer proximal-call caps $C_f,C_{g^*}$, and deterministic finite solver programs with Boolean certificate checkers for the two proximal calls. Each solver/checker record must be complete and well-formed. Admissible solver/checker pairs satisfy the soundness condition that an accepted output is an exact minimizer of its stated proximal subproblem; this is an input assumption, not a finite proof search performed by the procedure.\n\nSet $f(x)=\\|x\\|_1$ and $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$, with $g(u)=+\\infty$ otherwise. Define the Fenchel conjugate by $g^*(p)=\\sup_{u\\in\\mathbb R^m}(\\langle p,u\\rangle-g(u))$. For a proper closed convex function $q$ and $t>0$, $\\operatorname{prox}_{tq}(v)$ denotes the unique minimizer of $q(w)+\\|w-v\\|_2^2/(2t)$. Let $A^*$ be the Euclidean adjoint and let $\\|A\\|_2=\\sup_{\\|v\\|_2\\le1}\\|Av\\|_2$. The target is\n$$\\min_{z\\in\\mathbb R^n}\\|z\\|_1\\quad\\text{subject to}\\quad\\|Az-y\\|_2\\le\\epsilon.$$\n\nReturn **invalid-input** if dimensions or vectors do not match, if $\\epsilon<0$, if $N$ is not a nonnegative integer, if either proximal cap is not a positive integer, if either step size is nonpositive, if either solver/checker record is missing or malformed, or if the exact strict check $\\alpha\\beta\\|A\\|_2^2<1$ fails. For admissible inputs initialize $\\bar x^0=x^0$ and perform the exact primal-dual hybrid-gradient recurrence for at most $N$ sweeps:\n$$p^{k+1}=\\operatorname{prox}_{\\beta g^*}(p^k+\\beta A\\bar x^k),\\qquad x^{k+1}=\\operatorname{prox}_{\\alpha f}(x^k-\\alpha A^*p^{k+1}),\\qquad \\bar x^{k+1}=2x^{k+1}-x^k.$$\nUse the supplied solver/checker pairs and caps for the corresponding proximal calls. Propagate any **invalid-input**, **prox-call-failed**, or **prox-cap-exhausted** status and the state returned by the primal-dual procedure. If all $N$ sweeps complete, let $(x,p)$ be the final primal-dual state and perform these exact tests in order:\n\n- If $p\\ne0$, $A^*p=0$, and $|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2$, return **infeasible**.\n- Otherwise, if $\\|Ax-y\\|_2\\le\\epsilon$, $\\|A^*p\\|_\\infty\\le1$, and $\\|x\\|_1=-\\langle p,y\\rangle-\\epsilon\\|p\\|_2$, return **success** with $x$.\n- If neither certificate passes, return **budget-exhausted** with the final state.\n\nFor $N=0$, test the initial state. The certificate tests use exact real comparisons. The procedure makes no guarantee that a finite run finds a certificate and makes no convergence or finite-termination claim.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-ip-bpdn-dual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $A\\in\\mathbb R^{m\\times n}$ act by matrix multiplication in the standard finite coordinate bases, with row and column labels $1$ through their dimensions corresponding to library coordinates $0$ through one less, let $y\\in\\mathbb R^m$, and let $\\epsilon\\ge0$. Define $g:\\mathbb R^m\\to\\{0,+\\infty\\}$ by $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$ and $g(u)=+\\infty$ otherwise. For $p\\in\\mathbb R^m$, define $g^*(p):=\\sup_{u\\in\\mathbb R^m}\\{\\langle p,u\\rangle-g(u)\\}$. Then\n$$g^*(p)=\\langle p,y\\rangle+\\epsilon\\|p\\|_2\\qquad(p\\in\\mathbb R^m).$$\nLet $A^*:\\mathbb R^m\\to\\mathbb R^n$ be the Euclidean adjoint, characterized by $\\langle A^*p,z\\rangle=\\langle p,Az\\rangle$ for all $p,z$. If $x\\in\\mathbb R^n$ satisfies $\\|Ax-y\\|_2\\le\\epsilon$ and a vector $p\\in\\mathbb R^m$ satisfies $\\|A^*p\\|_\\infty\\le1$ and\n$$\\|x\\|_1=-\\langle p,y\\rangle-\\epsilon\\|p\\|_2,$$\nthen $x$ minimizes $\\|z\\|_1$ over that residual ball. If instead $p\\ne0$, $A^*p=0$, and $|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2$, then the residual ball is disjoint from the range of $A$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The truth $x^\\dagger$ is feasible because $\\|Ax^\\dagger-y\\|_2=\\|e\\|_2\\le\\epsilon$. Thus the feasible set is nonempty, and [F5] supplies at least one minimizer. Fix any minimizer $\\widehat x$ and put $h=\\widehat x-x^\\dagger$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Order the coordinates of $x^\\dagger$ by decreasing magnitude, breaking ties by increasing index, and let $T$ be the first $s$ indices. By [F2,F3], $\\|x^\\dagger_{T^c}\\|_1=\\sigma_s(x^\\dagger)_1=:\\sigma$. Minimality of $\\widehat x$ and the triangle inequality give $\\|x^\\dagger_T+h_T\\|_1+\\|x^\\dagger_{T^c}+h_{T^c}\\|_1\\le\\|x^\\dagger_T\\|_1+\\|x^\\dagger_{T^c}\\|_1.$ Applying $\\|a+b\\|_1\\ge\\|b\\|_1-\\|a\\|_1$ to the two disjoint restrictions yields $\\|x^\\dagger_T\\|_1-\\|h_T\\|_1+\\|h_{T^c}\\|_1-\\|x^\\dagger_{T^c}\\|_1\\le\\|x^\\dagger_T\\|_1+\\|x^\\dagger_{T^c}\\|_1.$ After cancellation this is $\\|h_{T^c}\\|_1-\\|h_T\\|_1\\le2\\sigma$, hence the cone estimate $\\|h_{T^c}\\|_1\\le\\|h_T\\|_1+2\\sigma$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Independently order $h$ by decreasing magnitude with the same deterministic tie break and let $S$ be its first $s$ indices. Since $T$ has size $s$, [F3] gives $\\|h_T\\|_1\\le\\|h_S\\|_1$ and $\\|h_{S^c}\\|_1\\le\\|h_{T^c}\\|_1$. Step 1.2 therefore yields $\\|h_{S^c}\\|_1\\le\\|h_S\\|_1+2\\sigma.$ The data relation and feasibility give $Ah=(A\\widehat x-y)+e$, so the triangle inequality gives $\\|Ah\\|_2\\le2\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $u=\\|h_S\\|_2\\ge0$. Applying [F1] to this $S$, then using step 2.1 and Cauchy–Schwarz on its $s$ coordinates, gives $u\\le\\frac{\\rho}{\\sqrt{s}}\\|h_{S^c}\\|_1+\\tau\\|Ah\\|_2 \\le\\rho u+\\frac{2\\rho\\sigma}{\\sqrt{s}}+2\\tau\\epsilon.$ Since $1-\\rho>0$, rearranging proves $u\\le\\frac{2\\rho}{1-\\rho}\\frac{\\sigma}{\\sqrt{s}}+\\frac{2\\tau}{1-\\rho}\\epsilon.$",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F4] to $h$ and its chosen largest-coordinate set $S$. Step 2.1 and [F7] show $\\|h_{S^c}\\|_2\\le u+\\frac{\\|h_{S^c}\\|_1}{\\sqrt{s}} \\le u+\\frac{\\sqrt{s}\\,u+2\\sigma}{\\sqrt{s}} =2u+\\frac{2\\sigma}{\\sqrt{s}}.$ By the triangle inequality on $h=h_S+h_{S^c}$, $\\|h\\|_2\\le3u+2\\sigma/\\sqrt{s}$. Substitute step 3.1 and simplify: $\\|h\\|_2\\le\\left(\\frac{6\\rho}{1-\\rho}+2\\right)\\frac{\\sigma}{\\sqrt{s}}+\\frac{6\\tau}{1-\\rho}\\epsilon =\\frac{2(1+2\\rho)}{1-\\rho}\\frac{\\sigma}{\\sqrt{s}}+\\frac{6\\tau}{1-\\rho}\\epsilon.$",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Disjoint coordinates and step 2.1 give $\\|h\\|_1\\le\\|h_S\\|_1+\\|h_{S^c}\\|_1\\le2\\sqrt{s}\\,u+2\\sigma$ by [F7]. Substituting step 3.1 yields $\\|h\\|_1\\le\\left(\\frac{4\\rho}{1-\\rho}+2\\right)\\sigma+\\frac{4\\tau}{1-\\rho}\\sqrt{s}\\,\\epsilon =\\frac{2(1+\\rho)}{1-\\rho}\\sigma+\\frac{4\\tau}{1-\\rho}\\sqrt{s}\\,\\epsilon.$ This proves both bounds for the arbitrary minimizer fixed at step 1.1.",
+          "step": "4.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If the finite procedure returns success, [F11] gives the same exact feasibility and certificate conditions, and [F12] makes its vector a minimizer. Steps 1.2, 2.1, 3.1, 4.1, and 4.2 therefore apply to that vector as well. No step uses uniqueness or identifies a support.",
+          "step": "5.1",
+          "inputs": [
+            "F11",
+            "F12",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The theorem requires n>=1 and 1<=s<=n, so empty dimensions and s=0 are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof permits epsilon=0 and sigma_s=0; steps 4.1-6.1 remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof includes s=1 and n=1; all coordinate sets are finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If h=0, the cone and block estimates hold with both sides zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The condition is strict 0<rho<1 and tau>0; the denominator 1-rho is therefore positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The truth is a feasible witness and the proof fixes an arbitrary minimizer; no choice function or uniqueness claim is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete proof contains 7 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "ex-ip-34-scope-and-boundary-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-robust-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$, let $A\\in\\mathbb R^{m\\times n}$, and let $0<\\rho<1$ and $\\tau>0$. In real scalar expressions, a natural number denotes its canonical real image. Use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, identifying coordinate label $j$ with library coordinate $j-1$. For $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S$ agree with $h$ on $S$ and vanish on $S^c=[n]\\setminus S$. The matrix $A$ satisfies the **$\\ell^2$ robust nullspace property of order $s$ with constants $(\\rho,\\tau)$** if\n$$\\|h_S\\|_2\\le \\frac{\\rho}{\\sqrt{s}}\\|h_{S^c}\\|_1+\\tau\\|Ah\\|_2$$\nfor every $h\\in\\mathbb R^n$ and every $S\\subseteq[n]$ with $|S|\\le s$. This condition applies to all vectors, including vectors with $Ah\\ne0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-best-s-term-l1-error",
+          "source_section": "Definition",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$. Use one-based labels $[n]=\\{1,\\ldots,n\\}$, identifying label $j$ with library coordinate $j-1$. For $T\\subseteq[n]$, let $x_{T^c}$ retain the coordinates outside $T$ and vanish on $T$, where $T^c=[n]\\setminus T$. Define the best $s$-term $\\ell^1$ approximation error by\n$$\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so the displayed minimum exists and is attained.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error",
+          "source_section": "Statement",
+          "quote": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$ use the one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. Order the coordinates by decreasing $|x_j|$, breaking ties by increasing $j$, and let $S$ be the first $s$ indices. For every $U\\subseteq[n]$, let $x_U$ agree with $x$ on $U$ and vanish on $U^c$. Then for every $T\\subseteq[n]$ with $|T|\\le s$,\n$$\\|x_T\\|_1\\le\\|x_S\\|_1\\quad\\text{and}\\quad\\|x_{S^c}\\|_1\\le\\|x_{T^c}\\|_1.$$\nConsequently $\\sigma_s(x)_1=\\|x_{S^c}\\|_1$, so the best $s$-term tail error is attained by retaining the first $s$ coordinates in the specified order.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-robust-nsp-noisy-recovery-bound",
+          "source_section": "Statement",
+          "quote": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$. Use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$, and interpret natural numbers in real scalar expressions as their canonical real images. Let $A\\in\\mathbb R^{m\\times n}$ and suppose that for some $0<\\rho<1$ and $\\tau>0$,\n$$\\|h_S\\|_2\\le\\frac{\\rho}{\\sqrt{s}}\\|h_{S^c}\\|_1+\\tau\\|Ah\\|_2$$\nfor every $h\\in\\mathbb R^n$ and every $S\\subseteq[n]$ with $|S|\\le s$, where for any vector $v\\in\\mathbb R^n$, $v_S$ agrees with $v$ on $S$ and vanishes on $S^c=[n]\\setminus S$. Let $x^\\dagger\\in\\mathbb R^n$, $\\epsilon\\ge0$, and $e\\in\\mathbb R^m$ satisfy $y=Ax^\\dagger+e$ and $\\|e\\|_2\\le\\epsilon$. Define\n$$\\sigma_s(x^\\dagger)_1:=\\min\\{\\|x^\\dagger_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so this minimum is attained; it also equals the minimum of $\\|x^\\dagger-z\\|_1$ over vectors $z$ with at most $s$ nonzero coordinates. Then the basis-pursuit denoising problem\n$$\\min_{z\\in\\mathbb R^n}\\|z\\|_1\\quad\\text{subject to}\\quad\\|Az-y\\|_2\\le\\epsilon$$\nhas a minimizer. Every minimizer $\\widehat x$ satisfies\n$$\\|\\widehat x-x^\\dagger\\|_2\\le C_1\\frac{\\sigma_s(x^\\dagger)_1}{\\sqrt{s}}+C_2\\epsilon,\\qquad \\|\\widehat x-x^\\dagger\\|_1\\le C_3\\sigma_s(x^\\dagger)_1+C_4\\sqrt{s}\\,\\epsilon,$$\nwhere\n$$C_1=\\frac{2(1+2\\rho)}{1-\\rho},\\quad C_2=\\frac{6\\tau}{1-\\rho},\\quad C_3=\\frac{2(1+\\rho)}{1-\\rho},\\quad C_4=\\frac{4\\tau}{1-\\rho}.$$\nIf the certified finite basis-pursuit denoising procedure returns **success**, its returned vector is a minimizer and satisfies these same bounds. Only reconstruction error is bounded; the theorem asserts neither uniqueness nor support recovery.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $A=I_2$ and any $h,S$ in the first two cases, coordinate restriction gives $\\|h_S\\|_2\\le\\|h\\|_2$, and $Ah=h$. Since $\\rho\\|h_{S^c}\\|_1\\ge0$, the robust inequality holds with $\\rho=1/2,\\tau=1$. The best-term lemma gives $\\sigma_1(1,0)_1=0$ and $\\sigma_1(1,1/5)_1=1/5$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "In case 1, $y-x^\\dagger=e$ and $\\|e\\|_2=1/10=\\epsilon$. The theorem constants evaluate to $(8,12,6,8)$; with $\\sigma_1=0$ its bounds are $\\|\\widehat x-x^\\dagger\\|_2\\le12/10=6/5$ and $\\|\\widehat x-x^\\dagger\\|_1\\le8/10=4/5$. In case 2, $\\|e\\|_2=1/100=\\epsilon$ and $y=x^\\dagger+e$. The theorem gives $8(1/5)+12(1/100)=43/25,\\qquad 6(1/5)+8(1/100)=32/25,$ for the two respective bounds.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "In case 3, feasibility at radius zero is $z_1=0$. Its objective is then $|z_2|$, whose unique minimum is zero at $z=(0,0)$. For $h=(0,1)$ and $S=\\{2\\}$, $\\|h_S\\|_2=1$, $\\|h_{S^c}\\|_1=0$, and $A_0h=0$, so the robust inequality would require $1\\le0$; it fails for every $0<\\rho<1$ and every $\\tau>0$. The reconstruction error and best one-term tail have the stated values.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The three examples use positive finite dimensions as stated in the Example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Case 3 uses epsilon=0 and zero noise; Cases 1-2 use nonzero bounded noise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: All cases use s=1 and compute the best one-term error explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Case 3 is a degenerate design with a nontrivial one-sparse nullspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Case 3 tests the exact residual radius endpoint epsilon=0; Cases 1-2 attain the noise bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The feasible minimizer in case 3 is computed directly; the theorem supplies existence in cases 1-2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no forward implication in an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no reverse implication in an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "bounded noise",
+          "status": "verified",
+          "calculation": "rho=1/2,tau=1 gives C=(8,12,6,8); sigma=0 and epsilon=1/10 give l2<=6/5 and l1<=4/5."
+        },
+        {
+          "case": "compressible truth",
+          "status": "verified",
+          "calculation": "sigma=1/5,epsilon=1/100 gives l2<=8/5+12/100=43/25 and l1<=6/5+8/100=32/25."
+        },
+        {
+          "case": "nullspace counterexample",
+          "status": "verified",
+          "calculation": "A0(0,1)=0 while the order-1 robust NSP would require 1<=0."
+        }
+      ],
+      "axioms": [],
+      "proof_status": "complete",
+      "proof_status_evidence": "The complete verification contains 3 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    }
+  }
+}

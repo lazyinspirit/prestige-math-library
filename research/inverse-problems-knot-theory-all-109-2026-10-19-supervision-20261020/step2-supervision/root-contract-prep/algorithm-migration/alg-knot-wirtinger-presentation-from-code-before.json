@@ -1,0 +1,130 @@
+{
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "def-knot-planar-code",
+      "source_section": "Definition",
+      "quote": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right.",
+      "uses": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "lem-wirtinger-local-meridian-conjugacy",
+      "source_section": "Statement",
+      "quote": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+      "uses": [
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-group-presentation",
+      "source_section": "Definition",
+      "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+      "uses": [
+        "2.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "claim": "Every validation pass and the oriented traversal operate on finite vertex, edge, and half-edge sets. Coherent opposite-half-edge pairing makes the traversal return to its starting arc after finitely many steps; the explicit one-component check rejects a record with more than one cycle. Thus validation and labeling terminate, and the labels are exactly the maximal under-arcs in [F1].",
+      "step": "1.1",
+      "inputs": [
+        "given",
+        "F1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "claim": "The crossing scan visits each crossing exactly once. The positive normal names its source and target without conflating them with incoming and outgoing. By [F2], its relator is exactly $x_o^{-1}x_sx_ox_t^{-1}$; solving that relation for outgoing gives the two equivalent incoming/outgoing formulas in the procedure. No other relation is appended. The resulting generator and relator lists are finite, so [F3] defines the returned presentation; its generator assignment is the meridian assignment stated in the procedure.",
+      "step": "2.1",
+      "inputs": [
+        "F1",
+        "F2",
+        "F3",
+        "step 1.1",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "The Definition accepts a designated under-arc of one oriented knot; the empty link has no such input."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Steps 1.1 and 2.1 handle the crossing-free one-arc code: one generator and no crossing relators."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Step 1.1 labels the sole maximal under-arc when there is only one; step 2.1 still appends exactly one relation per actual crossing, including a repeated arc."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "The Definition rejects incidence, branch-pairing, nontransverse or unrecorded segment intersections; step 1.1 verifies the finite validation and traversal."
+    },
+    {
+      "case": "endpoints",
+      "status": "not_applicable",
+      "reason": "The input is a closed knot code with paired half-edges; open strand endpoints are rejected by the Definition, not a boundary parameter of the procedure."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Step 1.1 traverses supplied finite ordered data and step 2.1 reads a fixed local chart; no indexed family of nonempty sets is selected."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "This algorithm specifies output and local construction, not an iff theorem."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "This algorithm has no converse implication; presentation correctness is proved by the separate theorem."
+    }
+  ],
+  "finite_checks": [
+    {
+      "name": "crossing-free-one-generator-output",
+      "method": "manual exact finite/symbolic calculation",
+      "anchor_steps": [
+        "1.1",
+        "2.1"
+      ],
+      "calculation": "One under-arc and zero crossing records give one generator and no relators. A one-arc curl gives x^-1 x x x^-1, freely reducing to the identity.",
+      "result": "<x|> in both cases",
+      "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+      "assertion": "Every validation pass and the oriented traversal operate on finite vertex, edge, and half-edge sets. Coherent opposite-half-edge pairing makes the traversal return to its starting arc after finitely many steps; the explicit one-component ch"
+    }
+  ],
+  "axiom_uses": [],
+  "risk_review": {
+    "status": "complete",
+    "reviewer": "/root/knot_wirtinger_rack_repair",
+    "notes": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. Focused current repair review only; independent native review and all gates remain owed."
+  },
+  "proof_status": "complete-local-proof",
+  "proof_status_evidence": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. This records the current owner repair, not native author completion, independent review or gate credit.",
+  "unresolved_supplier_checks": [],
+  "unresolved_obligations": [],
+  "finite_smoke": [],
+  "owner_resolution_evidence": {
+    "reviewer": "/root/knot_wirtinger_rack_repair",
+    "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+    "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+    "native_execution_coverage_adopted": false
+  }
+}

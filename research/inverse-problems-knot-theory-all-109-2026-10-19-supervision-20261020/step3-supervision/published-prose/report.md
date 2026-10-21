@@ -1,0 +1,3 @@
+Three confirmed grammatical defects have exact guarded prose-only corrections in guarded-proposal.json. All mathematical spans and reference links remain byte-identical in order; every frontmatter byte remains unchanged. Full metric axioms, finite real codomain, separate nonnegativity justification, extended nonnegative measurable risk, Gaussian probability/affine/zero-variance cases are preserved. Both assigned consumer interfaces were checked and need no change.
+
+No canonical edits, ownership claims, hashes, gates, stamps or controls were performed. Root must run the ordinary published-repair ownership and recording protocol before application; historical machine-learning repair receipts remain history, not current repair coverage.

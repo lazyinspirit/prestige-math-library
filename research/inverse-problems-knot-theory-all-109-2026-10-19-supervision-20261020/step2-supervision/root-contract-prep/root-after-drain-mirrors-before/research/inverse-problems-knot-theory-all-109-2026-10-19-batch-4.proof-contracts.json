@@ -1,0 +1,489 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-error-budget-for-computed-inversion",
+    "prop-ip-regularized-output-error-splits-by-source",
+    "ex-ip-mesh-sequence-small-singular-values",
+    "ex-ip-iterative-tikhonov-solve-stopped-with-residual"
+  ],
+  "contracts": {
+    "def-ip-error-budget-for-computed-inversion": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition is for supplied Hilbert spaces and a supplied truth x-dagger in X; an empty parameter space supplies no such input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits zero noise, zero forward residual, zero operator difference, and zero solve error; each corresponding channel is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition requires no dimension greater than one and applies to one-dimensional Hilbert spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition includes the zero operator when its shifted normal operator is bijective; for lambda>0 the zero normal operator is lambda times the identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition allows delta=0 and requires lambda>0; lambda=0 is outside its domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition assumes supplied adjoints and shifted inverses and makes no choice-axiom assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition introduces an error-budget object and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition introduces an error-budget object and states no equivalence."
+        }
+      ]
+    },
+    "prop-ip-regularized-output-error-splits-by-source": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-error-budget-for-computed-inversion",
+          "source_section": "Definition",
+          "quote": "The five entries are, in order, the truth-bias, data-perturbation, regularized-operator, pre-inversion, and algebraic-solve error vectors.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "No rate for $d_h$, no operator perturbation estimate, and no floating-point residual bound is implicit.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hilbert-tikhonov-noise-amplification-bound",
+          "source_section": "Statement",
+          "quote": "Then for every $g\\in Y$, $$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Then $B_\\lambda:X\\to X$ is bijective and $$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+          "source_section": "Statement",
+          "quote": "For any returned $\\widehat x$, let $\\widehat r$ and $\\rho\\ge0$ certify $\\|\\widehat r-r\\|_2\\le\\rho$ for the intended residual $r=(A^*A+\\lambda I)\\widehat x-A^*y$. One concrete certificate is supplied by [[lem-rounded-linear-and-normal-residual-certificates]] using its successful sequential-dot evaluation, exact norms or certified upper bounds, and $0<u<1$ with $(\\max(m,n)-1)u<1$. These dimension restrictions concern evaluation on the original $m\\times n$ matrix, including for complex data; if evaluating on the realified $2m\\times2n$ matrix instead, require $(\\max(2m,2n)-1)u<1$. Arithmetic success alone does not imply these restrictions. Then $$\\|\\widehat x-x_\\lambda\\|_2\\le\\frac{\\|\\widehat r\\|_2+\\rho}{\\lambda}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$;",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tikhonov-forward-discretization-and-stopping-coupling",
+          "source_section": "Statement",
+          "quote": "For a sequence of discretizations and outputs, if $\\lambda_j\\to0$, $$\\frac{\\delta_j+\\eta_j\\|x^\\dagger\\|}{\\sqrt{\\lambda_j}}\\to0,\\qquad \\|(R_{\\lambda_j}-R_{\\lambda_j,h_j})y_{h_j,\\delta_j}\\|\\to0,\\qquad \\frac{\\|r_{h_j,h_j}\\|}{\\lambda_j}\\to0,$$ then $\\widetilde x_{h_j}\\to x^\\dagger$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "budget-channel-telescoping",
+          "claim": "The shared noise cancels in the discretized datum difference, and the five budget vectors telescope to the exact reconstruction error.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "triangle-budget-bound",
+          "claim": "The norm of the exact reconstruction error is at most the sum of the five channel norms.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "data-preinversion-and-solve-bounds",
+          "claim": "The data and pre-inversion channels are controlled by the Tikhonov data bound, and the solve channel is controlled by the shifted normal inverse applied to the exact normal residual.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-operator-bound",
+          "claim": "An assumed regularized-operator norm bound controls the operator channel by that bound times the discretized datum norm.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-residual-evaluation",
+          "claim": "A certified residual evaluation replaces the exact solve residual norm by the evaluated residual norm plus its certification allowance.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "no-inferred-sequence-rate",
+          "claim": "The pointwise budget does not assert convergence for a sequence; the cited sequence theorem has additional hypotheses.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement supplies Hilbert spaces and vectors x-dagger and e; an empty space or absent data vector is outside the stated hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid when the noise, pre-inversion residual, operator difference, and solve residual are zero; the identity then leaves only the truth-bias term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses no dimension lower bound and applies to one-dimensional real or complex Hilbert spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 also applies when A and A-h are zero and the returned output is zero; positive lambda keeps both shifted normal operators bijective."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 permits delta=0 and uses lambda>0; lambda=0 is excluded from the inverse and denominator hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records the sole axiom branch as Countable Choice for the Hilbert adjoint and normal inverse suppliers; no full Choice or dependent choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a pointwise identity and inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a pointwise identity and inequality, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-mesh-sequence-small-singular-values": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-error-budget-for-computed-inversion",
+          "source_section": "Definition",
+          "quote": "The five entries are, in order, the truth-bias, data-perturbation, regularized-operator, pre-inversion, and algebraic-solve error vectors.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let $T:X\\to Y$ be a bounded linear operator ([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of finite length ([[def-linear-basis]]). Then $T$ is compact ([[def-compact-linear-operator]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-model-compactness",
+          "claim": "Every matrix in the resolution sequence is a bounded finite-rank operator and so is compact, meeting the error-budget model hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "last-coordinate-regularized-output",
+          "claim": "The Tikhonov normal equation on the last coordinate yields the output coefficient n squared divided by n squared plus one.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "only-data-channel-persists",
+          "claim": "All budget channels except data perturbation vanish and the exact reconstruction error tends to one while the data error tends to zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pointwise-noise-bound-not-convergent",
+          "claim": "The scalar noise allowance grows like n/2 and therefore does not force the actual reconstruction error to vanish.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example is indexed by integers n>=1 and uses nonempty finite-dimensional spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the exact zero-noise perturbation branch would return zero; the stated sequence uses the nonzero last-coordinate noise 1/n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 at n=1 gives output magnitude 1/2, agreeing with n^2/(n^2+1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 has all singular values positive, with the smallest exactly 1/n; no null direction or singular matrix is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 gives the n-to-infinity limit: delta_n tends to zero, lambda_n remains positive and tends to zero, and the reconstruction error tends to one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use explicit finite real matrices and coordinate calculations; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a concrete sequence and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a concrete sequence and contains no equivalence."
+        }
+      ]
+    },
+    "ex-ip-iterative-tikhonov-solve-stopped-with-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-error-budget-for-computed-inversion",
+          "source_section": "Definition",
+          "quote": "For any returned output $\\widetilde x_h\\in X$, define its exact discrete normal-equation residual by $$r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}.$$ The five-channel error budget is the ordered tuple $(b_{\\mathrm{bias}},b_{\\mathrm{data}},b_{\\mathrm{operator}},b_{\\mathrm{pre}},b_{\\mathrm{solve}})$, where",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let $T:X\\to Y$ be a bounded linear operator ([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of finite length ([[def-linear-basis]]). Then $T$ is compact ([[def-compact-linear-operator]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "scalar-model-compactness",
+          "claim": "The scalar identity is bounded with a one-element range basis and is therefore compact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-richardson-residual",
+          "claim": "The stated Richardson step returns one quarter and has exact normal residual one half.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "solve-channel-isolates-stopping-error",
+          "claim": "All error-budget channels except the algebraic solve channel vanish; its norm is the reconstruction error one quarter.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses the nonempty real line as its parameter and data space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 use zero truth and zero data; stopping early alone creates the nonzero solve channel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is the one-dimensional, one-iteration calculation stated in the Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the bijective identity operator, zero data, and a positive shifted normal operator; the nonzero residual is solely from early stopping."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses lambda=1>0, delta=0, and exactly one iteration; no zero-parameter limit is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 are explicit scalar computations and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a concrete scalar iteration and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a concrete scalar iteration and contains no equivalence."
+        }
+      ]
+    }
+  }
+}

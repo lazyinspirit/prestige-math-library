@@ -1,0 +1,559 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-operator-and-prior-mismatch",
+    "thm-ip-no-uniform-recovery-under-unrestricted-operator-mismatch",
+    "ex-ip-restricted-operator-class-positive-modulus",
+    "ex-ip-identical-laws-under-operator-mismatch"
+  ],
+  "contracts": {
+    "def-ip-operator-and-prior-mismatch": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the truth class U is required to be nonempty; no law is asserted for a pair outside C."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: operator and noise-law mismatch use explicit equality versus inequality, while model and prior-support mismatch are separately stated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: every translated observation law is a probability measure under the stated translation-measurability assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: matching operator or noise law does not imply misspecification or prior-support mismatch; the properties are distinguished."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: prior-support mismatch quantifies over every radius r>0 and makes no posterior-existence claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all objects and laws are specified; no selection or choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no if-and-only-if characterization is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no converse characterization is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Independent batch-14 Step3a review: U is explicitly nonempty; C may be a proper subset or empty, but each asserted law is conditional on an admissible pair. Every F_A is defined on all U, so the working forward value is typed even when its pair is inadmissible. The assumed measurable translations give a measurable observation and the pushforward lemma gives total mass one. Operator/noise mismatch, exclusion from the working family, and a zero-prior open ball are distinct predicates; no posterior existence or robustness follows. No choice, limit interchange or diagram is used. Read all nine actual dependency interfaces and the pushforward proof; source context is not an imported theorem. Published metric explanatory grammar is independently tracked under reader:14:1 and does not affect these axioms.",
+        "reviewer": "alpha-batch-14"
+      }
+    },
+    "thm-ip-no-uniform-recovery-under-unrestricted-operator-mismatch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-operator-and-prior-mismatch",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(\\mathsf Y,d_Y)$ be metric spaces, let $U\\subseteq X$ be a nonempty class of admissible truths, and let $q:U\\to Q$ assign each truth its recovery target in a metric space $(Q,d_Q)$. Let $\\mathfrak A$ index forward maps $F_A:U\\to\\mathsf Y$; in this definition an **operator** means such a forward map, and linearity is not assumed. A specified set $\\mathcal C\\subseteq U\\times\\mathfrak A$ records which truth/operator pairs are admissible; no full-product assumption is made. Equip $\\mathsf Y$ with a sigma-algebra $\\mathcal Y$ and an addition operation such that every translation $\\tau_z(e)=z+e$ is measurable. A **noise law** is a probability measure $\\nu$ on $(\\mathsf Y,\\mathcal Y)$. For each admissible pair $(x,A)\\in\\mathcal C$, the observation random element on the probability space $(\\mathsf Y,\\mathcal Y,\\nu)$ is $e\\mapsto F_A(x)+e$, and its sampling law is\n$$P_{x,A,\\nu}(B)=\\nu\\bigl(\\{e\\in\\mathsf Y:F_A(x)+e\\in B\\}\\bigr),\\qquad B\\in\\mathcal Y.$$\nThe translation measurability assumption makes this law a probability measure.\n\nFor a true specification $(x_\\star,A_\\star,\\nu_\\star)$ with $(x_\\star,A_\\star)\\in\\mathcal C$ and a specified working operator $\\widetilde A\\in\\mathfrak A$ and noise law $\\widetilde\\nu$, there is **operator mismatch at the truth** when $F_{A_\\star}(x_\\star)\\ne F_{\\widetilde A}(x_\\star)$, and there is **noise-law mismatch** when $\\nu_\\star\\ne\\widetilde\\nu$. A **working statistical model** is a metric index space $(\\Xi,d_\\Xi)$, a family $(Q_\\xi)_{\\xi\\in\\Xi}$ of sampling laws on the same data space, and a prior probability measure $\\Pi$ on a sigma-algebra containing every open metric ball. The statistical model is **misspecified** for true observation law $P_\\star=P_{x_\\star,A_\\star,\\nu_\\star}$ when $P_\\star\\notin\\{Q_\\xi:\\xi\\in\\Xi\\}$. If a true model index $\\xi_\\star\\in\\Xi$ is specified, there is a **prior-support mismatch** at $\\xi_\\star$ when some open ball $B_\\Xi(\\xi_\\star,r)$, $r>0$, has $\\Pi(B_\\Xi(\\xi_\\star,r))=0$. These are distinct properties; an operator or noise-law mismatch need not by itself make the statistical model misspecified or exclude the true index from the prior's support. This definition makes no assertion about posterior existence or convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and let $p : X \\times X \\to \\mathbb{R}$ satisfy the reflexivity\naxiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of\nMetric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric. Then:\n\n1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \\ge 0$ for all\n   $x, y \\in X$.\n2. If $p$ satisfies the strong triangle inequality (M3'), then\n   $p(x,y) \\ge 0$ for all $x, y \\in X$.\n\nIn particular every metric, every pseudometric and every ultrametric\n(Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) takes only nonnegative values. Nonnegativity is therefore\na theorem about the axiom list this library uses, not a fourth axiom, and no\nstatement on this page needs to assume it separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment (Statistical experiments), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra (Measurable spaces and measurable sets), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space (Randomized procedures as probability kernels). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\nA randomized procedure has a measurable action law, so the outer nonnegative integral\nis defined by Expectation of a nonnegative or integrable random variable.\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n(Extended-real-valued measurable functions). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\nThe integral of a nonnegative simple function.\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple (Nonnegative simple measurable functions).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n(Nonnegative simple measurable functions) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure (Measures on sigma-algebras) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-procedure-action-law-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a randomized procedure for the experiment\n$\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nwith action space $(\\mathsf D,\\mathcal G)$. Give $[0,+\\infty]$ its Borel\nsigma-algebra. For every nonnegative $\\mathcal G/\\mathcal B([0,+\\infty])$-\nmeasurable function $g:\\mathsf D\\to[0,+\\infty]$, the function\n$$h_g(x)=\\int_{\\mathsf D}g(a)\\,K(x,da)$$\nis $\\mathcal A$-measurable. In particular, $x\\mapsto K(x,B)$ is measurable\nfor every action event $B\\in\\mathcal G$. For each $\\theta\\in\\Theta$, the\nset function\n$$Q_\\theta(B)=\\int_{\\mathcal X}K(x,B)\\,P_\\theta(dx),\\qquad B\\in\\mathcal G,$$\nis a probability measure on $(\\mathsf D,\\mathcal G)$, and for every such $g$,\n$$\\int_{\\mathsf D}g\\,dQ_\\theta=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}g(a)\\,K(x,da)\\right)P_\\theta(dx).$$\nwith nonnegative extended values allowed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment (Statistical experiments), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra (Measurable spaces and measurable sets), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space (Randomized procedures as probability kernels). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\nA randomized procedure has a measurable action law, so the outer nonnegative integral\nis defined by Expectation of a nonnegative or integrable random variable.\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "integrate-target-triangle",
+          "claim": "By [F2], $q_i=q(x_i)$ are points of $Q$. For every $y\\in\\mathsf Y$ and $a\\in Q$, [F3] gives $\\Delta=d_Q(q_0,q_1)\\le d_Q(q_0,a)+d_Q(a,q_1)$. Integrating this pointwise inequality against the probability measure $\\delta(y,\\cdot)$, using nonnegativity in [F4], monotonicity in [F7], total mass one in [F8], the constant integral identity in [F9], symmetry in [F3] to write $d_Q(a,q_1)=d_Q(q_1,a)$, the probability-kernel property in [F5], and additivity in [F6], yields $\\Delta\\le\\int_Q d_Q(q_0,a)\\,\\delta(y,da)+\\int_Q d_Q(q_1,a)\\,\\delta(y,da)$. The integrands are measurable by Given and nonnegative by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrate-common-law-and-max",
+          "claim": "The inner loss functions of $y$ are measurable by [F10], so we may integrate step 1.1 under the common law $P$. By [F11], these outer integrals are $R_0(\\delta)$ and $R_1(\\delta)$. Monotonicity and additivity give $\\Delta P(\\mathsf Y)\\le R_0(\\delta)+R_1(\\delta)$. By [F1], $P$ is a sampling law; by [F8] and [F9], the left side is $\\Delta$. Each risk is nonnegative by [F4] and [F11]. If $\\max\\{R_0,R_1\\}<\\Delta/2$, both risks are finite and their sum is less than $\\Delta$, contradicting the preceding inequality. Hence $\\max\\{R_0(\\delta),R_1(\\delta)\\}\\ge\\Delta/2$, including the case of an infinite risk.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes two admissible specifications and makes no claim for an empty specification family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 remain valid for \u0394=0; nonnegative risks give the claimed lower bound 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use that each decision kernel and the common sampling law have total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equal-law case is the theorem hypothesis; step 2.1 uses one common law and one shared kernel."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats extended risks: if either risk is infinite, the conclusion holds immediately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use pointwise triangle inequality and integration only; no selection or choice axiom occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way lower bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no converse or attainability criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Independent Step3a review of Statement, Facts and both proof steps and actual suppliers: the two specified truths give points of Q, so Delta is finite and nonnegative even for otherwise empty/degenerate ambient choices. The same pointwise probability kernel is used under both specifications. Each nonnegative metric-loss section is assumed measurable; the actual action-law lemma simple-approximation proof makes its kernel integral measurable without joint parameter measurability. Symmetry and triangle inequality give Delta <= both losses summed. Constant integration and nonnegative additivity/monotonicity apply first to delta(y,.) and then to the common probability P; no Fubini, subtraction of infinities, sigma-finiteness, selection or choice is needed. If either risk is infinite the bound holds; if both were below Delta/2 they would be finite and violate the sum bound; Delta=0 is covered by nonnegativity. Deterministic measurable estimators give point-mass kernels. Published metric and risk grammar findings are nonfatal and separately routed; explicit axioms/formula and measurability lemma support the actual uses. Contextual minimax sources are not imported as arbitrary-space theorems. No diagram or missing prerequisite.",
+        "reviewer": "alpha-batch-14"
+      }
+    },
+    "ex-ip-restricted-operator-class-positive-modulus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-operator-and-prior-mismatch",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(\\mathsf Y,d_Y)$ be metric spaces, let $U\\subseteq X$ be a nonempty class of admissible truths, and let $q:U\\to Q$ assign each truth its recovery target in a metric space $(Q,d_Q)$. Let $\\mathfrak A$ index forward maps $F_A:U\\to\\mathsf Y$; in this definition an **operator** means such a forward map, and linearity is not assumed. A specified set $\\mathcal C\\subseteq U\\times\\mathfrak A$ records which truth/operator pairs are admissible; no full-product assumption is made. Equip $\\mathsf Y$ with a sigma-algebra $\\mathcal Y$ and an addition operation such that every translation $\\tau_z(e)=z+e$ is measurable. A **noise law** is a probability measure $\\nu$ on $(\\mathsf Y,\\mathcal Y)$. For each admissible pair $(x,A)\\in\\mathcal C$, the observation random element on the probability space $(\\mathsf Y,\\mathcal Y,\\nu)$ is $e\\mapsto F_A(x)+e$, and its sampling law is\n$$P_{x,A,\\nu}(B)=\\nu\\bigl(\\{e\\in\\mathsf Y:F_A(x)+e\\in B\\}\\bigr),\\qquad B\\in\\mathcal Y.$$\nThe translation measurability assumption makes this law a probability measure.\n\nFor a true specification $(x_\\star,A_\\star,\\nu_\\star)$ with $(x_\\star,A_\\star)\\in\\mathcal C$ and a specified working operator $\\widetilde A\\in\\mathfrak A$ and noise law $\\widetilde\\nu$, there is **operator mismatch at the truth** when $F_{A_\\star}(x_\\star)\\ne F_{\\widetilde A}(x_\\star)$, and there is **noise-law mismatch** when $\\nu_\\star\\ne\\widetilde\\nu$. A **working statistical model** is a metric index space $(\\Xi,d_\\Xi)$, a family $(Q_\\xi)_{\\xi\\in\\Xi}$ of sampling laws on the same data space, and a prior probability measure $\\Pi$ on a sigma-algebra containing every open metric ball. The statistical model is **misspecified** for true observation law $P_\\star=P_{x_\\star,A_\\star,\\nu_\\star}$ when $P_\\star\\notin\\{Q_\\xi:\\xi\\in\\Xi\\}$. If a true model index $\\xi_\\star\\in\\Xi$ is specified, there is a **prior-support mismatch** at $\\xi_\\star$ when some open ball $B_\\Xi(\\xi_\\star,r)$, $r>0$, has $\\Pi(B_\\Xi(\\xi_\\star,r))=0$. These are distinct properties; an operator or noise-law mismatch need not by itself make the statistical model misspecified or exclude the true index from the prior's support. This definition makes no assertion about posterior existence or convergence.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-identifiability-and-stability-modulus",
+          "source_section": "Definition",
+          "quote": "Use metric spaces $(X,d_X)$ and $(Y,d_Y)$, a nonempty admissible truth class $U\\subseteq X$, a forward map $F:U\\to Y$, and a metric solution-class space $(Q,d_Q)$ with class map $q:U\\to Q$ as follows: $q$ has image all of $Q$, and $q(x)=q(x')$ exactly when $x$ and $x'$ are equivalent for recovery. The library's metric axioms imply nonnegative metric values.\n\nThe forward map $F$ is **identifiable modulo the recovery equivalence on $U$** if\n\n$$x,x'\\in U\\text{ and }F(x)=F(x')\\quad\\Longrightarrow\\quad q(x)=q(x').$$\n\nIt is nonidentifiable modulo that equivalence if some two admissible truths have equal data and distinct target classes.\n\nA **deterministic data-only estimator** is a function $\\widehat q:Y\\to Q$. It is exact on $U$ if $\\widehat q(F(x))=q(x)$ for every $x\\in U$. The diagram below commutes exactly under this condition; it states the defining equality of functions and is not a proof device.\n\n```tikzcd\nU \\arrow[r,\"F\"] \\arrow[dr,\"q\"'] & Y \\arrow[d,\"\\widehat q\"] \\\\\n& Q\n```\n\nA **uniform stability modulus on $U$** is a nondecreasing function $\\omega:[0,\\infty)\\to[0,\\infty)$, with $\\omega(0)=0$ and $\\lim_{t\\downarrow0}\\omega(t)=0$, such that\n\n$$d_Q(q(x),q(x'))\\le\\omega\\bigl(d_Y(F(x),F(x'))\\bigr)\\qquad(x,x'\\in U).$$\n\nIdentifiability concerns equality of exact data; the modulus is a separate quantitative bound for all truth pairs. The estimator definition specifies no regularization procedure or convergence guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ (Absolute value in an ordered field). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length, Open ball, closed ball and sphere in a metric space)\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-class-metric-and-target",
+          "claim": "By [F1], $\\mathcal C$ is the specified admissible set of operator-labelled configurations. By [F3], $d_1$ is a metric on $\\mathbb R^2$; restricting its three metric axioms to $\\mathcal C$ makes the restriction a metric. Each $x\\in U$ belongs to exactly one of $[1,2]$ and $[4,5]$, so it occurs in exactly one admissible pair. Thus $\\pi_U$ and $q_{\\mathcal C}=q_U\\circ\\pi_U$ are bijections onto $U=Q$, and equality is the stated recovery equivalence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "verify-same-label-modulus",
+          "claim": "If $c=(x,1)$ and $c'=(x',1)$, then $|q_{\\mathcal C}(c)-q_{\\mathcal C}(c')|=|G(c)-G(c')|$. If $c=(x,2)$ and $c'=(x',2)$, then $|q_{\\mathcal C}(c)-q_{\\mathcal C}(c')|=\\tfrac12|G(c)-G(c')|\\le|G(c)-G(c')|$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "verify-cross-label-modulus",
+          "claim": "For $c=(x,1)$ with $1\\le x\\le2$ and $c'=(x',2)$ with $4\\le x'\\le5$, we have $|x'-x|\\le4$ and $|2x'-x|\\ge 2\\cdot4-2=6$, so $|q_{\\mathcal C}(c)-q_{\\mathcal C}(c')|\\le|G(c)-G(c')|$. The reversed ordering follows by symmetry of absolute value.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conclude-exact-modulus",
+          "claim": "Steps 1.2 and 1.3 cover every pair in $\\mathcal C$, so $|q_{\\mathcal C}(c)-q_{\\mathcal C}(c')|\\le|G(c)-G(c')|$ for all $c,c'$. The function $\\omega(t)=t$ is nondecreasing, satisfies $\\omega(0)=0$, and has $\\lim_{t\\downarrow0}\\omega(t)=0$; by [F2] it is the stated uniform stability modulus.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "check": "Same-label endpoint check for a=1: x=1 and x\u2032=2 give target and data gaps 1.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "check": "Same-label endpoint check for a=2: x=4 and x\u2032=5 give target gap 1 and data gap 2.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "check": "Nearest cross-label endpoints (2,1) and (4,2) give target gap 2 and data gap 6.",
+          "evidence": "Step 1.3."
+        },
+        {
+          "check": "Farthest cross-label endpoints (1,1) and (5,2) give target gap 4 and data gap 9.",
+          "evidence": "Step 1.3."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: the stated union C is nonempty and both intervals contain admissible configurations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes t=0; if the data gap is zero, the proved inequality forces the target gap to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks both operator labels, and step 1.3 checks the cross-label cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes coincident configurations, where both distances are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20131.3 use the closed interval endpoints in the same-label and cross-label inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use explicit intervals and two labels; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes a modulus bound and asserts no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes no converse characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Independent Step3a review: both intervals are nonempty and disjoint, so every truth has exactly one allowed label and the configuration-to-target map is bijective onto Q=U, realizing equality recovery. Each F_a is defined on all U, while G is restricted to C, exactly as the mismatch supplier permits. The d1 metric on R^2 restricts to C; the actual metric proofs and modulus Definition were read. Same-label target/data ratios are 1 and 1/2. For opposite labels, endpoints give target distance <=4 and data distance >=6; reversing the order uses symmetry. These cases include equal pairs, all endpoints and every pair of C. Omega(t)=t on all nonnegative reals is nondecreasing, zero at zero and tends to zero there. The example asserts no unrestricted-product or noisy stability bound. No AC or limit exchange is used. The supplier diagram has correctly directed F:U->Y, q:U->Q and estimator:Y->Q and expresses exactly estimator composed with F equals q; no diagram-based proof is required.",
+        "reviewer": "alpha-batch-14"
+      }
+    },
+    "ex-ip-identical-laws-under-operator-mismatch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-operator-and-prior-mismatch",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(\\mathsf Y,d_Y)$ be metric spaces, let $U\\subseteq X$ be a nonempty class of admissible truths, and let $q:U\\to Q$ assign each truth its recovery target in a metric space $(Q,d_Q)$. Let $\\mathfrak A$ index forward maps $F_A:U\\to\\mathsf Y$; in this definition an **operator** means such a forward map, and linearity is not assumed. A specified set $\\mathcal C\\subseteq U\\times\\mathfrak A$ records which truth/operator pairs are admissible; no full-product assumption is made. Equip $\\mathsf Y$ with a sigma-algebra $\\mathcal Y$ and an addition operation such that every translation $\\tau_z(e)=z+e$ is measurable. A **noise law** is a probability measure $\\nu$ on $(\\mathsf Y,\\mathcal Y)$. For each admissible pair $(x,A)\\in\\mathcal C$, the observation random element on the probability space $(\\mathsf Y,\\mathcal Y,\\nu)$ is $e\\mapsto F_A(x)+e$, and its sampling law is\n$$P_{x,A,\\nu}(B)=\\nu\\bigl(\\{e\\in\\mathsf Y:F_A(x)+e\\in B\\}\\bigr),\\qquad B\\in\\mathcal Y.$$\nThe translation measurability assumption makes this law a probability measure.\n\nFor a true specification $(x_\\star,A_\\star,\\nu_\\star)$ with $(x_\\star,A_\\star)\\in\\mathcal C$ and a specified working operator $\\widetilde A\\in\\mathfrak A$ and noise law $\\widetilde\\nu$, there is **operator mismatch at the truth** when $F_{A_\\star}(x_\\star)\\ne F_{\\widetilde A}(x_\\star)$, and there is **noise-law mismatch** when $\\nu_\\star\\ne\\widetilde\\nu$. A **working statistical model** is a metric index space $(\\Xi,d_\\Xi)$, a family $(Q_\\xi)_{\\xi\\in\\Xi}$ of sampling laws on the same data space, and a prior probability measure $\\Pi$ on a sigma-algebra containing every open metric ball. The statistical model is **misspecified** for true observation law $P_\\star=P_{x_\\star,A_\\star,\\nu_\\star}$ when $P_\\star\\notin\\{Q_\\xi:\\xi\\in\\Xi\\}$. If a true model index $\\xi_\\star\\in\\Xi$ is specified, there is a **prior-support mismatch** at $\\xi_\\star$ when some open ball $B_\\Xi(\\xi_\\star,r)$, $r>0$, has $\\Pi(B_\\Xi(\\xi_\\star,r))=0$. These are distinct properties; an operator or noise-law mismatch need not by itself make the statistical model misspecified or exclude the true index from the prior's support. This definition makes no assertion about posterior existence or convergence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-no-uniform-recovery-under-unrestricted-operator-mismatch",
+          "source_section": "Statement",
+          "quote": "Let $(Q,d_Q)$ be a metric target space and let $\\mathcal G$ be a sigma-algebra on $Q$. Let $\\tau_i=(x_i,A_i,\\nu_i)$, $i\\in\\{0,1\\}$, be two admissible truth/operator/noise specifications on one measurable data space $(\\mathsf Y,\\mathcal Y)$, with sampling laws $P_i$ and targets $q_i=q(x_i)$. Assume the metric-loss sections $a\\mapsto d_Q(q_i,a)$ are $\\mathcal G$-measurable. Let $\\delta$ be one randomized decision rule from $(\\mathsf Y,\\mathcal Y)$ to $(Q,\\mathcal G)$, used under both specifications, and define its expected metric risk by\n$$R_i(\\delta)=\\int_{\\mathsf Y}\\left(\\int_Q d_Q(q_i,a)\\,\\delta(y,da)\\right)P_i(dy).$$\nIf $P_0=P_1$ and $\\Delta=d_Q(q_0,q_1)$, then\n$$\\max\\{R_0(\\delta),R_1(\\delta)\\}\\ge\\frac{\\Delta}{2}.$$\nEach risk is an extended nonnegative integral; deterministic measurable estimators are included as point-mass decision kernels. This theorem makes no assertion when the observation laws differ, and quantitative robustness requires a separately established stability modulus.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ (Absolute value in an ordered field). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length, Open ball, closed ball and sphere in a metric space)\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-identical-translated-laws",
+          "claim": "Every translation of $\\mathbb R$ is measurable for its power-set sigma-algebra, since every preimage is a subset of $\\mathbb R$. For every $B\\in\\mathcal Y$, the law formulas from [F1] give $P_{1,A_0,\\nu}(B)=\\nu(\\{e:1+e\\in B\\})=P_{2,A_1,\\nu}(B)$ because $A_0(1)=1=A_1(2)$. Thus the two sampling laws are equal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "verify-measurable-loss-sections",
+          "claim": "For each $t\\in\\{1,2\\}$ and each Borel set $B\\subseteq[0,+\\infty]$, the preimage $\\{a\\in\\mathbb R:|t-a|\\in B\\}$ is a subset of $\\mathbb R$ and hence belongs to the action sigma-algebra $\\mathcal P(\\mathbb R)$. Thus both loss sections are measurable. The target separation is $|q(1)-q(2)|=|1-2|=1$ by [F3]. Applying [F2] to step 1.1 gives maximum expected absolute loss at least $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "check": "Forward-signal check: A0(1)=1 and A1(2)=1, so the two translates coincide.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "Target-gap check: |1\u22122|=1 and the theorem threshold is 1/2.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: it explicitly specifies two admissible truth/operator pairs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes target points 1 and 2, so their separation is exactly 1; it asserts no zero-separation instance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the common translated signal 1 and target separation 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits distinct truth/operator specifications with identical sampling laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval endpoints or limiting case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly names both specifications, and the law equality is pointwise; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a one-way consequence of equal laws, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to the lower-bound theorem is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "The power-set data sigma-algebra makes translations measurable, and the power-set action sigma-algebra makes the loss sections measurable before the theorem is applied.",
+        "reviewer": "alpha-batch-14"
+      }
+    }
+  }
+}

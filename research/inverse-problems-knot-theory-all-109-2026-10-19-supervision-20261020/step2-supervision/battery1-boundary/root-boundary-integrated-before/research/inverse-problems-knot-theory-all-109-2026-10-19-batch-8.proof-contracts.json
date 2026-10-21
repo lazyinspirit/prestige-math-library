@@ -1,0 +1,758 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-8",
+  "scope": [
+    "def-ip-gaussian-sequence-inverse-model",
+    "def-ip-statistical-ellipsoid-class",
+    "alg-ip-svd-truncated-estimator",
+    "thm-ip-truncated-estimator-exact-risk",
+    "ex-ip-polynomial-spectrum-risk-profile",
+    "ex-ip-severely-ill-posed-risk-profile",
+    "ex-ip-zero-noise-truncated-risk-limit"
+  ],
+  "contracts": {
+    "def-ip-gaussian-sequence-inverse-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes an infinite-rank operator, so its positive singular index set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-noise boundary is the point mass at theta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the sequence parameter space includes one-coordinate elements of ell2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: theta=0 and epsilon=0 give a deterministic zero sequence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon>0 uses the functional experiment and epsilon=0 is separately defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice is explicit and supplies the upstream compact SVD and coefficient identification."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Countable Choice is used upstream by the compact SVD and complete-basis coefficient identification; the sequence pushforward uses no further choice."
+      ]
+    },
+    "def-ip-statistical-ellipsoid-class": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Q=0 yields the nonempty class containing only the zero sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the boundary radius Q=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one-coordinate sequences satisfy the stated weighted-sum membership condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Q=0 forces every coordinate to vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: positive weights and Q=0 are admitted; no limit of the weights is required."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition introduces a sequence class and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-coordinate ellipsoid membership",
+          "method": "direct finite substitution into the defining weighted sum",
+          "input": {
+            "coordinate": "k",
+            "amplitude": "t",
+            "radius": "Q",
+            "weight": "a_k>0"
+          },
+          "calculation": "For theta=t e_k, the weighted sum has one nonzero term and equals a_k^2 t^2; membership is exactly a_k^2 t^2<=Q^2.",
+          "expected": {
+            "membership": "a_k^2 t^2<=Q^2",
+            "Q_zero": "only t=0"
+          }
+        }
+      ],
+      "axioms_used": []
+    },
+    "alg-ip-svd-truncated-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at D=0 the algorithm returns the zero sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input coordinates produce the zero estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at D=1 the first coordinate is retained and all later coordinates are zeroed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the output always has finite support, including zero input."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: D=0 is explicitly included in the admissible cutoff set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The algorithm reads coordinates by index and selects no objects."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "cutoffs D=0 and D=1",
+          "method": "direct finite evaluation of the coordinate rule",
+          "input": {
+            "sequence": "z=(z_1,z_2,...)"
+          },
+          "calculation": "At D=0 every coordinate is zero; at D=1 the first coordinate is retained and all coordinates j>1 are zero.",
+          "expected": {
+            "D0": "(0,0,...)",
+            "D1": "(z_1,0,0,...)"
+          }
+        }
+      ],
+      "axioms_used": []
+    },
+    "thm-ip-truncated-estimator-exact-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real Hilbert spaces and let $K:X\\to Y$ be a compact linear operator of infinite rank, viewed as an inverse model with exact datum $Kx$. Here compact means that the image of every bounded subset has compact closure. Write $N(K)=\\{x\\in X:Kx=0\\}$ and $H_0=\\overline{\\operatorname{ran}K}$. Fix a positive singular system $(s_j,v_j,u_j)_{j\\in\\mathbb N}$ for $K$, where $\\mathbb N=\\{1,2,3,\\ldots\\}$, $s_1\\ge s_2\\ge\\cdots>0$, $s_j\\to0$, $Kv_j=s_ju_j$, $(v_j)$ is a complete orthonormal basis of $N(K)^\\perp$, and $(u_j)$ is a complete orthonormal basis of $H_0$. A complete orthonormal basis is an orthonormal family whose closed linear span is the whole indicated subspace. These are the compact SVD conventions; in particular, this model concerns minimum-norm representatives in $N(K)^\\perp$ and does not estimate a kernel component.\n\nFor a truth $x\\in N(K)^\\perp$, let $\\theta_j=\\langle x,v_j\\rangle_X$. The complete-basis coefficient map identifies $N(K)^\\perp$ bijectively and isometrically with $\\ell^2(\\mathbb N,\\mathbb R)$, so every $\\theta\\in\\ell^2(\\mathbb N,\\mathbb R)$ is a model parameter. For $\\epsilon>0$, take the functional white-noise experiment on the separable Hilbert space $H_0$ with observations $Y_x(g)=\\langle Kx,g\\rangle_Y+\\epsilon W(g)$, where $W$ is centered, has covariance $\\mathbb E[W(g)W(h)]=\\langle g,h\\rangle_Y$, and has independent standard-normal values on every finite orthonormal tuple. The countable complete basis makes $H_0$ separable. Define $\\xi_j=W(u_j)$ and $Z_j=Y_x(u_j)/s_j$. The sequence sample space is $\\mathbb R^{\\mathbb N}$ with the product Borel sigma-algebra, meaning the sigma-algebra generated by its coordinate projections. The coordinate law is the pushforward of the functional experiment under $y\\mapsto(y(u_j)/s_j)_{j\\in\\mathbb N}$; this map is measurable because each coordinate is a cylinder evaluation followed by scalar multiplication. The compact SVD expansion gives $\\langle Kx,u_j\\rangle_Y=s_j\\theta_j$, and the positive-noise white-noise coordinate theorem gives the independent standard-normal coordinates $\\xi_j$. Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$\n\nFor the zero-noise boundary $\\epsilon=0$, define the sequence experiment separately by the point mass at $\\theta$, so $Z_j=\\theta_j$. This boundary is not an instance of the positive-noise functional experiment.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "Let $Q\\in[0,\\infty)$ and let $a=(a_j)_{j\\in\\mathbb N}$ be a nondecreasing sequence of positive real numbers, so $0<a_1\\le a_2\\le\\cdots$. The statistical ellipsoid of radius $Q$ and weights $a$ in the Gaussian sequence inverse model is\n$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$\nNo assumption that $a_j\\to\\infty$ is included. In particular, this definition does not assert that the ellipsoid is compact in $\\ell^2$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ip-svd-truncated-estimator",
+          "source_section": "Definition",
+          "quote": "Input a normalized sequence observation $z=(z_j)_{j\\in\\mathbb N}\\in\\mathbb R^{\\mathbb N}$ from the Gaussian sequence inverse model and a cutoff $D\\in\\mathbb N_0$, where $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. Output the finite-support estimate $\\widehat\\theta_D(z)\\in\\ell^2(\\mathbb N,\\mathbb R)$ defined by\n$$\\widehat\\theta_{D,j}(z)=\\begin{cases}z_j,&1\\le j\\le D,\\\\0,&j>D.\\end{cases}$$\nFor $D=0$ the output is the zero sequence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], the model coordinates in [F1] are fixed by the countable-choice SVD branch. If $\\epsilon>0$, [F1] and [F3] give $\\widehat\\theta_{D,j}(Z)-\\theta_j=\\epsilon s_j^{-1}\\xi_j$ for $j\\le D$ and $-\\theta_j$ for $j>D$, hence $\\|\\widehat\\theta_D(Z)-\\theta\\|_{\\ell^2}^2=\\epsilon^2\\sum_{j=1}^{D}s_j^{-2}\\xi_j^2+\\sum_{j>D}\\theta_j^2$. If $\\epsilon=0$, the retained error is zero and the omitted error is $-\\theta_j$, so the squared error is $\\sum_{j>D}\\theta_j^2$. In both cases the error is in $\\ell^2$ because the estimator has finite support and $\\theta\\in\\ell^2$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-2-1",
+          "step": "2.1",
+          "claim": "For $\\epsilon>0$, taking expectation in the finite random sum of [step 1.1] and using $\\mathbb E\\xi_j^2=1$ from [F1] gives $R_\\theta(D)=\\epsilon^2\\sum_{j=1}^{D}s_j^{-2}+\\sum_{j>D}\\theta_j^2$. For $\\epsilon=0$, the deterministic error in [step 1.1] gives the same formula with the first term zero. The deterministic tail is finite because $\\theta\\in\\ell^2$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-3-1",
+          "step": "3.1",
+          "claim": "For every $\\theta\\in\\Theta_a(Q)$, monotonicity gives $a_j\\ge a_{D+1}$ for $j>D$, so $\\sum_{j>D}\\theta_j^2=\\sum_{j>D}a_j^2\\theta_j^2a_j^{-2}\\le a_{D+1}^{-2}\\sum_{j>D}a_j^2\\theta_j^2\\le Q^2/a_{D+1}^2$. Thus [step 2.1] is bounded above by the asserted right-hand side.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-4-1",
+          "step": "4.1",
+          "claim": "The sequence with $\\theta^\\star_{D+1}=Q/a_{D+1}$ and all other coordinates zero belongs to $\\ell^2$ and satisfies $\\sum_{j\\ge1}a_j^2(\\theta^\\star_j)^2=Q^2$, including $Q=0$. Its tail squared norm is exactly $Q^2/a_{D+1}^2$, so it attains the upper bound from [step 3.1]. The finite-coordinate variance term in [step 2.1] is independent of $\\theta$, hence the same sequence attains the full worst-case risk.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-ip-truncated-estimator-exact-risk-step-5-1",
+          "step": "5.1",
+          "claim": "Taking the supremum in [step 2.1], using the universal upper bound [step 3.1] and the attaining sequence [step 4.1], yields the exact equality and the stated zero-cutoff convention.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement sets the retained variance sum to zero at D=0; step 2.1 gives the empty finite sum and step 5.1 applies the stated convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles epsilon=0, and step 4.1 handles Q=0 with the zero attaining sequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At D=1, step 1.1 retains one coordinate and step 3.1 bounds the omitted tail starting at coordinate 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When theta=0, step 2.1 leaves only retained variance; when epsilon=Q=0, step 4.1 gives the zero truth and step 5.1 gives zero risk."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes epsilon=0 and D=0; step 1.1 treats the zero-noise branch and step 5.1 gives the stated endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes Countable Choice; step 1.1 records that it enters through the upstream model coordinates, while the risk algebra is conditional on them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact risk at D=0 and D=1",
+          "method": "finite substitution into the proved risk identity",
+          "input": {
+            "D": [
+              0,
+              1
+            ],
+            "Q": "Q>=0",
+            "a": [
+              "a_1>0",
+              "a_2>=a_1"
+            ],
+            "s": [
+              "s_1>0"
+            ],
+            "epsilon": "epsilon>=0"
+          },
+          "calculation": "At D=0 the variance sum is empty and the risk is Q^2/a_1^2. At D=1 the retained variance is epsilon^2/s_1^2 and the first omitted coordinate gives bias Q^2/a_2^2.",
+          "expected": {
+            "D0": "Q^2/a_1^2",
+            "D1": "Q^2/a_2^2+epsilon^2/s_1^2"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited through the compact SVD and coefficient-basis identification; steps 1.1–3.1 use no additional choice."
+      ]
+    },
+    "ex-ip-polynomial-spectrum-risk-profile": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-truncated-estimator-exact-risk",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $\\epsilon\\ge0$. In the Gaussian sequence inverse model with positive singular numbers $(s_j)_{j\\in\\mathbb N}$, let $Q\\ge0$ and let $(a_j)_{j\\in\\mathbb N}$ be positive and nondecreasing. For each $\\theta\\in\\Theta_a(Q)$, define the squared sequence risk of the cutoff estimator at $D\\in\\mathbb N_0$ by\n$$R_\\theta(D):=\\mathbb E_\\theta\\!\\left[\\|\\widehat\\theta_D(Z)-\\theta\\|_{\\ell^2}^2\\right].$$\nThen its exact worst-case squared sequence risk is\n$$\\sup_{\\theta\\in\\Theta_a(Q)}R_\\theta(D)=\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2},$$\nwhere the sum is $0$ for $D=0$. The supremum is attained by the one-coordinate truth $\\theta^\\star=(Q/a_{D+1})e_{D+1}$, with $\\theta^\\star=0$ when $Q=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real Hilbert spaces and let $K:X\\to Y$ be a compact linear operator of infinite rank, viewed as an inverse model with exact datum $Kx$. Here compact means that the image of every bounded subset has compact closure. Write $N(K)=\\{x\\in X:Kx=0\\}$ and $H_0=\\overline{\\operatorname{ran}K}$. Fix a positive singular system $(s_j,v_j,u_j)_{j\\in\\mathbb N}$ for $K$, where $\\mathbb N=\\{1,2,3,\\ldots\\}$, $s_1\\ge s_2\\ge\\cdots>0$, $s_j\\to0$, $Kv_j=s_ju_j$, $(v_j)$ is a complete orthonormal basis of $N(K)^\\perp$, and $(u_j)$ is a complete orthonormal basis of $H_0$. A complete orthonormal basis is an orthonormal family whose closed linear span is the whole indicated subspace. These are the compact SVD conventions; in particular, this model concerns minimum-norm representatives in $N(K)^\\perp$ and does not estimate a kernel component.\n\nFor a truth $x\\in N(K)^\\perp$, let $\\theta_j=\\langle x,v_j\\rangle_X$. The complete-basis coefficient map identifies $N(K)^\\perp$ bijectively and isometrically with $\\ell^2(\\mathbb N,\\mathbb R)$, so every $\\theta\\in\\ell^2(\\mathbb N,\\mathbb R)$ is a model parameter. For $\\epsilon>0$, take the functional white-noise experiment on the separable Hilbert space $H_0$ with observations $Y_x(g)=\\langle Kx,g\\rangle_Y+\\epsilon W(g)$, where $W$ is centered, has covariance $\\mathbb E[W(g)W(h)]=\\langle g,h\\rangle_Y$, and has independent standard-normal values on every finite orthonormal tuple. The countable complete basis makes $H_0$ separable. Define $\\xi_j=W(u_j)$ and $Z_j=Y_x(u_j)/s_j$. The sequence sample space is $\\mathbb R^{\\mathbb N}$ with the product Borel sigma-algebra, meaning the sigma-algebra generated by its coordinate projections. The coordinate law is the pushforward of the functional experiment under $y\\mapsto(y(u_j)/s_j)_{j\\in\\mathbb N}$; this map is measurable because each coordinate is a cylinder evaluation followed by scalar multiplication. The compact SVD expansion gives $\\langle Kx,u_j\\rangle_Y=s_j\\theta_j$, and the positive-noise white-noise coordinate theorem gives the independent standard-normal coordinates $\\xi_j$. Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$\n\nFor the zero-noise boundary $\\epsilon=0$, define the sequence experiment separately by the point mass at $\\theta$, so $Z_j=\\theta_j$. This boundary is not an instance of the positive-noise functional experiment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "Let $Q\\in[0,\\infty)$ and let $a=(a_j)_{j\\in\\mathbb N}$ be a nondecreasing sequence of positive real numbers, so $0<a_1\\le a_2\\le\\cdots$. The statistical ellipsoid of radius $Q$ and weights $a$ in the Gaussian sequence inverse model is\n$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$\nNo assumption that $a_j\\to\\infty$ is included. In particular, this definition does not assert that the ellipsoid is compact in $\\ell^2$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-polynomial-spectrum-risk-profile-step-1-1",
+          "step": "1.1",
+          "claim": "By [A1], the upstream sequence coordinates are fixed. Since $p>0$, $s_j=j^{-p}$ is positive and decreases to $0$, and $r>0$ makes $a_j=j^r$ positive and nondecreasing; thus the exact-risk theorem's spectrum and ellipsoid hypotheses hold.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-polynomial-spectrum-risk-profile-step-2-1",
+          "step": "2.1",
+          "claim": "Substituting $a_{D+1}=(D+1)^r$ and $s_j^{-2}=j^{2p}$ into [F1] gives the displayed risk, including $D=0$ by its empty-sum convention.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At D=0 the variance sum is empty and step 2.1 leaves the first omitted-coordinate bias."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement includes epsilon=0 and Q=0; step 2.1 reduces to the tail term when epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At D=1, step 2.1 substitutes the first retained variance and the second-axis bias."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At Q=0, step 2.1 gives only the retained variance; at epsilon=0 and Q=0 the risk is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires p,r>0 and allows epsilon=0; step 1.1 verifies the spectral and weight conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries the Countable Choice hypothesis used by its exact-risk supplier; step 1.1 fixes the upstream coordinate branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "polynomial spectrum cutoffs D=0 and D=1",
+          "method": "finite substitution into the exact cutoff-risk formula",
+          "input": {
+            "p": "p>0",
+            "r": "r>0",
+            "Q": "Q>=0",
+            "epsilon": "epsilon>=0"
+          },
+          "calculation": "At D=0 the sum is empty and Q^2/(1)^(2r)=Q^2. At D=1 the bias is Q^2/2^(2r) and the only variance summand is epsilon^2 1^(2p)=epsilon^2.",
+          "expected": {
+            "D0": "Q^2",
+            "D1": "Q^2/2^(2r)+epsilon^2"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the SVD model and the exact-risk theorem; the parameter substitution uses no additional choice."
+      ]
+    },
+    "ex-ip-severely-ill-posed-risk-profile": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-truncated-estimator-exact-risk",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $\\epsilon\\ge0$. In the Gaussian sequence inverse model with positive singular numbers $(s_j)_{j\\in\\mathbb N}$, let $Q\\ge0$ and let $(a_j)_{j\\in\\mathbb N}$ be positive and nondecreasing. For each $\\theta\\in\\Theta_a(Q)$, define the squared sequence risk of the cutoff estimator at $D\\in\\mathbb N_0$ by\n$$R_\\theta(D):=\\mathbb E_\\theta\\!\\left[\\|\\widehat\\theta_D(Z)-\\theta\\|_{\\ell^2}^2\\right].$$\nThen its exact worst-case squared sequence risk is\n$$\\sup_{\\theta\\in\\Theta_a(Q)}R_\\theta(D)=\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2},$$\nwhere the sum is $0$ for $D=0$. The supremum is attained by the one-coordinate truth $\\theta^\\star=(Q/a_{D+1})e_{D+1}$, with $\\theta^\\star=0$ when $Q=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real Hilbert spaces and let $K:X\\to Y$ be a compact linear operator of infinite rank, viewed as an inverse model with exact datum $Kx$. Here compact means that the image of every bounded subset has compact closure. Write $N(K)=\\{x\\in X:Kx=0\\}$ and $H_0=\\overline{\\operatorname{ran}K}$. Fix a positive singular system $(s_j,v_j,u_j)_{j\\in\\mathbb N}$ for $K$, where $\\mathbb N=\\{1,2,3,\\ldots\\}$, $s_1\\ge s_2\\ge\\cdots>0$, $s_j\\to0$, $Kv_j=s_ju_j$, $(v_j)$ is a complete orthonormal basis of $N(K)^\\perp$, and $(u_j)$ is a complete orthonormal basis of $H_0$. A complete orthonormal basis is an orthonormal family whose closed linear span is the whole indicated subspace. These are the compact SVD conventions; in particular, this model concerns minimum-norm representatives in $N(K)^\\perp$ and does not estimate a kernel component.\n\nFor a truth $x\\in N(K)^\\perp$, let $\\theta_j=\\langle x,v_j\\rangle_X$. The complete-basis coefficient map identifies $N(K)^\\perp$ bijectively and isometrically with $\\ell^2(\\mathbb N,\\mathbb R)$, so every $\\theta\\in\\ell^2(\\mathbb N,\\mathbb R)$ is a model parameter. For $\\epsilon>0$, take the functional white-noise experiment on the separable Hilbert space $H_0$ with observations $Y_x(g)=\\langle Kx,g\\rangle_Y+\\epsilon W(g)$, where $W$ is centered, has covariance $\\mathbb E[W(g)W(h)]=\\langle g,h\\rangle_Y$, and has independent standard-normal values on every finite orthonormal tuple. The countable complete basis makes $H_0$ separable. Define $\\xi_j=W(u_j)$ and $Z_j=Y_x(u_j)/s_j$. The sequence sample space is $\\mathbb R^{\\mathbb N}$ with the product Borel sigma-algebra, meaning the sigma-algebra generated by its coordinate projections. The coordinate law is the pushforward of the functional experiment under $y\\mapsto(y(u_j)/s_j)_{j\\in\\mathbb N}$; this map is measurable because each coordinate is a cylinder evaluation followed by scalar multiplication. The compact SVD expansion gives $\\langle Kx,u_j\\rangle_Y=s_j\\theta_j$, and the positive-noise white-noise coordinate theorem gives the independent standard-normal coordinates $\\xi_j$. Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$\n\nFor the zero-noise boundary $\\epsilon=0$, define the sequence experiment separately by the point mass at $\\theta$, so $Z_j=\\theta_j$. This boundary is not an instance of the positive-noise functional experiment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "Let $Q\\in[0,\\infty)$ and let $a=(a_j)_{j\\in\\mathbb N}$ be a nondecreasing sequence of positive real numbers, so $0<a_1\\le a_2\\le\\cdots$. The statistical ellipsoid of radius $Q$ and weights $a$ in the Gaussian sequence inverse model is\n$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$\nNo assumption that $a_j\\to\\infty$ is included. In particular, this definition does not assert that the ellipsoid is compact in $\\ell^2$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-severely-ill-posed-risk-profile-step-1-1",
+          "step": "1.1",
+          "claim": "By [A1], the upstream sequence coordinates are fixed. Since $c>0$, $s_j=e^{-cj}$ is positive and decreases to $0$, and $r>0$ makes $a_j=j^r$ positive and nondecreasing; thus the exact-risk theorem's spectrum and ellipsoid hypotheses hold.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-severely-ill-posed-risk-profile-step-2-1",
+          "step": "2.1",
+          "claim": "Substituting $a_{D+1}=(D+1)^r$ and $s_j^{-2}=e^{2cj}$ into [F1] gives the displayed risk, including $D=0$ by its empty-sum convention.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At D=0 the variance sum is empty and step 2.1 leaves the first omitted-coordinate bias."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement includes epsilon=0 and Q=0; step 2.1 reduces to the tail term when epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At D=1, step 2.1 substitutes the first retained variance and the second-axis bias."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At Q=0, step 2.1 gives only the retained variance; at epsilon=0 and Q=0 the risk is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires c,r>0 and allows epsilon=0; step 1.1 verifies the spectral and weight conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries the Countable Choice hypothesis used by its exact-risk supplier; step 1.1 fixes the upstream coordinate branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a risk and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exponential spectrum cutoffs D=0 and D=1",
+          "method": "finite substitution into the exact cutoff-risk formula",
+          "input": {
+            "c": "c>0",
+            "r": "r>0",
+            "Q": "Q>=0",
+            "epsilon": "epsilon>=0"
+          },
+          "calculation": "At D=0 the sum is empty and Q^2/(1)^(2r)=Q^2. At D=1 the bias is Q^2/2^(2r) and the only variance summand is epsilon^2 exp(2c).",
+          "expected": {
+            "D0": "Q^2",
+            "D1": "Q^2/2^(2r)+epsilon^2 exp(2c)"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the SVD model and the exact-risk theorem; the parameter substitution uses no additional choice."
+      ]
+    },
+    "ex-ip-zero-noise-truncated-risk-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real Hilbert spaces and let $K:X\\to Y$ be a compact linear operator of infinite rank, viewed as an inverse model with exact datum $Kx$. Here compact means that the image of every bounded subset has compact closure. Write $N(K)=\\{x\\in X:Kx=0\\}$ and $H_0=\\overline{\\operatorname{ran}K}$. Fix a positive singular system $(s_j,v_j,u_j)_{j\\in\\mathbb N}$ for $K$, where $\\mathbb N=\\{1,2,3,\\ldots\\}$, $s_1\\ge s_2\\ge\\cdots>0$, $s_j\\to0$, $Kv_j=s_ju_j$, $(v_j)$ is a complete orthonormal basis of $N(K)^\\perp$, and $(u_j)$ is a complete orthonormal basis of $H_0$. A complete orthonormal basis is an orthonormal family whose closed linear span is the whole indicated subspace. These are the compact SVD conventions; in particular, this model concerns minimum-norm representatives in $N(K)^\\perp$ and does not estimate a kernel component.\n\nFor a truth $x\\in N(K)^\\perp$, let $\\theta_j=\\langle x,v_j\\rangle_X$. The complete-basis coefficient map identifies $N(K)^\\perp$ bijectively and isometrically with $\\ell^2(\\mathbb N,\\mathbb R)$, so every $\\theta\\in\\ell^2(\\mathbb N,\\mathbb R)$ is a model parameter. For $\\epsilon>0$, take the functional white-noise experiment on the separable Hilbert space $H_0$ with observations $Y_x(g)=\\langle Kx,g\\rangle_Y+\\epsilon W(g)$, where $W$ is centered, has covariance $\\mathbb E[W(g)W(h)]=\\langle g,h\\rangle_Y$, and has independent standard-normal values on every finite orthonormal tuple. The countable complete basis makes $H_0$ separable. Define $\\xi_j=W(u_j)$ and $Z_j=Y_x(u_j)/s_j$. The sequence sample space is $\\mathbb R^{\\mathbb N}$ with the product Borel sigma-algebra, meaning the sigma-algebra generated by its coordinate projections. The coordinate law is the pushforward of the functional experiment under $y\\mapsto(y(u_j)/s_j)_{j\\in\\mathbb N}$; this map is measurable because each coordinate is a cylinder evaluation followed by scalar multiplication. The compact SVD expansion gives $\\langle Kx,u_j\\rangle_Y=s_j\\theta_j$, and the positive-noise white-noise coordinate theorem gives the independent standard-normal coordinates $\\xi_j$. Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$\n\nFor the zero-noise boundary $\\epsilon=0$, define the sequence experiment separately by the point mass at $\\theta$, so $Z_j=\\theta_j$. This boundary is not an instance of the positive-noise functional experiment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-statistical-ellipsoid-class",
+          "source_section": "Definition",
+          "quote": "Let $Q\\in[0,\\infty)$ and let $a=(a_j)_{j\\in\\mathbb N}$ be a nondecreasing sequence of positive real numbers, so $0<a_1\\le a_2\\le\\cdots$. The statistical ellipsoid of radius $Q$ and weights $a$ in the Gaussian sequence inverse model is\n$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j=1}^{\\infty}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$\nNo assumption that $a_j\\to\\infty$ is included. In particular, this definition does not assert that the ellipsoid is compact in $\\ell^2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-truncated-estimator-exact-risk",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $\\epsilon\\ge0$. In the Gaussian sequence inverse model with positive singular numbers $(s_j)_{j\\in\\mathbb N}$, let $Q\\ge0$ and let $(a_j)_{j\\in\\mathbb N}$ be positive and nondecreasing. For each $\\theta\\in\\Theta_a(Q)$, define the squared sequence risk of the cutoff estimator at $D\\in\\mathbb N_0$ by\n$$R_\\theta(D):=\\mathbb E_\\theta\\!\\left[\\|\\widehat\\theta_D(Z)-\\theta\\|_{\\ell^2}^2\\right].$$\nThen its exact worst-case squared sequence risk is\n$$\\sup_{\\theta\\in\\Theta_a(Q)}R_\\theta(D)=\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2},$$\nwhere the sum is $0$ for $D=0$. The supremum is attained by the one-coordinate truth $\\theta^\\star=(Q/a_{D+1})e_{D+1}$, with $\\theta^\\star=0$ when $Q=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-zero-noise-truncated-risk-limit-step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], the sequence model coordinates are fixed. Using [F1] and substituting $\\epsilon=0$ and $a_{D+1}=(D+1)^r$ in [F3] gives $Q^2/(D+1)^{2r}$; since $r>0$, this tends to $0$ as $D\\to\\infty$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-zero-noise-truncated-risk-limit-step-2-1",
+          "step": "2.1",
+          "claim": "Under [A1], [F3] applies to the unit-weight ellipsoid. The ellipsoid condition in [F2] is $\\|\\theta\\|_2^2\\le Q^2$, so the squared tail is at most $Q^2$. The vector $\\theta=Qe_{D+1}$ belongs to the ellipsoid and its entire squared norm lies beyond $D$, so it attains $Q^2$. This is also the $\\epsilon=0$, $a_{D+1}=1$ case of [F3].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At D=0, step 1.1 gives the full tail risk and step 2.1 has an attaining first-coordinate witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement sets epsilon=0; step 1.1 uses the deterministic zero-noise branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact-risk theorem and step 2.1 use the one-coordinate witness e at D+1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example assumes Q>0, so the zero-radius ellipsoid is outside this example scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero-noise endpoint is the point of the Example and is checked in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is inherited from the model and exact-risk theorem; step 1.1 records the fixed coordinate branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two zero-noise risks and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares two zero-noise risks and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-noise cutoffs D=0 and D=1",
+          "method": "finite substitution into the epsilon=0 risk identity",
+          "input": {
+            "Q": "Q>0",
+            "r": "r>0",
+            "epsilon": 0
+          },
+          "calculation": "For weights a_j=j^r, risks at D=0 and D=1 are Q^2 and Q^2/2^(2r). For unit weights both cutoffs give Q^2.",
+          "expected": {
+            "polynomial": {
+              "D0": "Q^2",
+              "D1": "Q^2/2^(2r)"
+            },
+            "unit_weights": {
+              "D0": "Q^2",
+              "D1": "Q^2"
+            }
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the SVD model and exact-risk theorem; the displayed substitutions use no additional choice."
+      ]
+    }
+  }
+}

@@ -1,0 +1,697 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-ip-discrete-grid-l-curve-parameter-choice",
+    "def-ip-noise-level-free-parameter-rule",
+    "thm-ip-bakushinskii-veto",
+    "cex-ip-noise-underestimation-truncated-svd",
+    "ex-ip-stable-restricted-class-bakushinskii"
+  ],
+  "contracts": {
+    "def-ip-noise-level-free-parameter-rule": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition concerns a total rule on the model data space, not an empty index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes z=0 in the data domain and requires the output alpha(z) to remain positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no one-dimensional parameter-space assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition requires alpha(z)>0 for every observed datum, including z=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no limit or endpoint behavior of the parameter family."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition takes a given function alpha and asserts no existence-by-choice result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ]
+    },
+    "thm-ip-bakushinskii-veto": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$ to have domain $$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$ and, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and $z\\in R(K)^\\perp$, set $$K^\\dagger y:=\\widetilde K^{-1}r.$$ Thus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the orthogonal-range component is mapped to zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-noise-level-free-parameter-rule",
+          "source_section": "Definition",
+          "quote": "It is **noise-level-free** (also called **heuristic**) when the value $\\alpha(z)$ for an observed datum $z\\in Y$ uses only $K$, the fixed family, and $z$; it does not take the exact datum or a noise bound $\\delta$ as input.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $y\\in D(K^\\dagger)$, the output $T(y)=R_{\\alpha(y)}y$ is independent of $\\delta$. The exact datum $y$ belongs to every ball of radius $\\delta>0$, so its error is at most $E_y(\\delta)$ for every $\\delta$. The assumed limit therefore forces $T(y)=K^\\dagger y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $y\\in D(K^\\dagger)$ and $\\varepsilon>0$, choose $r>0$ with $E_y(r)<\\varepsilon$. Every $z\\in D(K^\\dagger)$ satisfying $\\|z-y\\|_Y\\le r$ lies in that noise ball, and step 1.1 makes the reconstruction at $z$ equal $K^\\dagger z$. Hence $\\|K^\\dagger z-K^\\dagger y\\|_X<\\varepsilon$, proving continuity at $y$ and contradicting the hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Moore–Penrose domain contains zero, and the theorem assumes a discontinuous inverse; no empty-domain case is possible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to every exact datum, including y=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement asserts no one-dimensional singular-system classification; discontinuity is an explicit hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A degenerate continuous inverse cannot satisfy the theorem's discontinuity hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use every positive delta and the limit as delta decreases to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement records Countable Choice in A1; the continuity argument itself makes no sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-discrete-grid-l-curve-parameter-choice": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-discrete-l-curve-parameter-choice",
+          "source_section": "Definition",
+          "quote": "Input a real matrix $A\\in\\mathbb R^{m\\times n}$, data $b\\in\\mathbb R^m$,\nand a strictly increasing finite grid $0<\\lambda_1<\\cdots<\\lambda_q$ with\n$q\\ge3$. For each grid point, compute the unique Tikhonov minimizer\n$$x_j=(A^TA+\\lambda_j I)^{-1}A^Tb,$$\nand the residual $r_j=\\|Ax_j-b\\|$ and solution norm $s_j=\\|x_j\\|$.\nDiscard any index with $r_j=0$ or $s_j=0$. If fewer than three indices\nremain, return failure status `insufficient-valid-points`.\n\nFor consecutive retained indices $i_0<i_1<i_2$, set\n$p_k=(\\log r_{i_k},\\log s_{i_k})\\in\\mathbb R^2$, $u=p_1-p_0$,\nand $v=p_2-p_1$. Define their discrete curvature by\n$$\\kappa=\\begin{cases} \\dfrac{2|\\det(u,v)|}{\\|u\\|\\,\\|v\\|\\,\\|u+v\\|},&\\|u\\|\\,\\|v\\|\\,\\|u+v\\|>0,\\\\ 0,&\\text{otherwise}. \\end{cases}$$\nAssign this curvature to the middle retained index. Among the resulting\n$q'-2$ values, return the original grid parameter whose curvature is largest;\nif there is a tie, return the tied parameter with the smallest original index.\nNo uniform-grid spacing is assumed in log parameter. This is a finite-grid\nheuristic and carries no universal optimality claim.\n\nThe output is either a selected $\\lambda_j$ with its discrete curvature and\nindex, or the stated failure status. Every step uses a finite loop over the\ninput grid.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $A=I_2$ and $b=e_1$, the selector's Tikhonov formula gives $x_\\lambda=(1+\\lambda)^{-1}e_1$, residual $\\lambda/(1+\\lambda)$, and solution norm $1/(1+\\lambda)$. The three grid points therefore have positive residual and solution coordinates $(1/10,9/10)$, $(1/2,1/2)$, and $(9/10,1/10)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The logarithmic points have increments $u=(\\log 5,-\\log(9/5))$ and $v=(\\log(9/5),-\\log 5)$. Their determinant is $-\\log^2 5+\\log^2(9/5)\\ne0$, their norms are positive, and $u+v=(\\log9,-\\log9)\\ne0$, so the algorithm's discrete curvature is well-defined and positive.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Exactly three indices remain, so the only consecutive triple assigns its curvature to the middle index 2. That is the only candidate for the largest curvature; the returned parameter is $\\lambda_2=1$ and no tie-break is needed.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "A=I2, b=e1, grid (1/9,1,9)",
+          "calculation": "Residuals are (1/10,1/2,9/10), solution norms are (9/10,1/2,1/10), and the sole curvature triple has nonzero determinant.",
+          "result": "The algorithm returns the middle grid parameter lambda=1."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example supplies a nonempty grid of exactly three positive parameters."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes strictly positive residual and solution norms at every supplied grid value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the single curvature candidate arising from exactly three valid grid points."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the curvature numerator and all denominator factors are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the middle index and states that the smallest-index tie-break is not invoked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The grid is finite and the selector is deterministic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ]
+    },
+    "cex-ip-noise-underestimation-truncated-svd": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define $Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "$e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and $0$ elsewhere.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space $$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$ with its canonical inner product and norm from [[def-square-summable-family-on-an-arbitrary-index-set]], is complete and therefore is a real Hilbert space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "A $\\mathbb K$-linear map $T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a real constant $C \\ge 0$ such that $$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "An **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let $T:X\\to Y$ be a bounded linear operator ([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of finite length ([[def-linear-basis]]). Then $T$ is compact ([[def-compact-linear-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Then $V$ is a **Banach space** when this metric space is complete in the sense of [[def-complete-metric-space]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a normed space, let $Y$ be a Banach space ([[def-banach-space]]), and let $T_n:X\\to Y$, $n\\in\\mathbb N$, be compact operators ([[def-compact-linear-operator]]) with $\\|T_n-T\\|\\to0$ for a bounded linear operator $T:X\\to Y$ ([[def-bounded-linear-operator]], [[def-operator-norm]], [[def-metric-convergence]]). Then $T$ is compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$ to have domain $$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$ and, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and $z\\in R(K)^\\perp$, set $$K^\\dagger y:=\\widetilde K^{-1}r.$$ Thus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the orthogonal-range component is mapped to zero.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-ip-noise-level-free-parameter-rule",
+          "source_section": "Definition",
+          "quote": "It is **noise-level-free** (also called **heuristic**) when the value $\\alpha(z)$ for an observed datum $z\\in Y$ uses only $K$, the fixed family, and $z$; it does not take the exact datum or a noise bound $\\delta$ as input.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Coordinatewise linearity makes K and its truncations linear. The weighted coordinate bound makes them bounded. The operator norm of their difference is at most 1/(N+1), and each truncation has a finite ordered basis for its range.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite-rank lemma makes each K_N compact. The real ell^2 codomain is Banach, and Countable Choice permits the norm-limit theorem to show K is compact and satisfies the compact-model interface.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coordinate equations characterize R(K) as the sequences y for which (j y_j) is square-summable, show R(K)^perp={0}, and give K^dagger y=(j y_j). The finite truncations R_alpha y therefore converge to K^dagger y for every y in the inverse domain.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F11",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For exact datum zero, z_j=e_j/j has noise level delta_j=1/j but alpha(z_j)=1/j^2, so its cutoff includes coordinate j and returns e_j. The error is one along a null noise sequence, refuting the stated universal convergence.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F11",
+            "F12",
+            "F14",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "j=1",
+          "calculation": "delta_1=1, alpha(z_1)=1, floor(1/alpha)=1, and R_alpha(z_1)=e_1.",
+          "result": "The error from exact datum zero is 1."
+        },
+        {
+          "case": "j=2",
+          "calculation": "delta_2=1/2, alpha(z_2)=1/4, floor(1/alpha)=4, and R_alpha(z_2)=e_2.",
+          "result": "The error from exact datum zero is 1."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement defines the empty truncated sum when floor(1/alpha)=0, and step 3.1 gives a finite bounded output for each alpha."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 tests the exact zero datum and the rule's value alpha(0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes j=1, for which the cutoff returns e_1 and the error is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies infinitely many linearly independent range vectors e_j/j."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 gives delta_j=1/j and error 1 along a sequence tending to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is explicit and is used in step 2.1 for the norm-limit compactness supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a convergence claim and makes no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a convergence claim and makes no equivalence."
+        }
+      ]
+    },
+    "ex-ip-stable-restricted-class-bakushinskii": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$ to have domain $$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$ and, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and $z\\in R(K)^\\perp$, set $$K^\\dagger y:=\\widetilde K^{-1}r.$$ Thus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the orthogonal-range component is mapped to zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "For a compact operator $K:X\\to Y$ between real or complex Hilbert spaces over the same scalar field, write $N(K):=\\{x\\in X:Kx=0\\}$. For a set $M$ with $0\\in M\\subseteq N(K)^\\perp$ and $\\delta\\ge0$, define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ip-source-ball-modulus-of-continuity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and $\\nu,\\rho>0$. For every $\\delta\\ge0$, $\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. For every positive singular value $s_j$ with right singular vector $v_j$, equality holds at $\\delta_j=\\rho s_j^{\\nu+1}$, witnessed by $x_j=\\rho s_j^\\nu v_j$. If $K$ has infinite rank, these $\\delta_j$ form a null sequence; if $K$ has finite positive rank, equality is asserted only at its finitely many positive singular values; if $K=0$, the source ball and modulus are $\\{0\\}$ and $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-bakushinskii-veto",
+          "source_section": "Statement",
+          "quote": "If $E_y(\\delta)\\to0$ as $\\delta\\downarrow0$ for every $y\\in D(K^\\dagger)$, then $K^\\dagger$ is continuous on $D(K^\\dagger).$ Thus, when $K^\\dagger$ is discontinuous, no such noise-level-free rule yields worst-case convergence over each exact datum's full admissible error balls.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The source-ball theorem supplies a null equality-radius sequence. Hence s_j tends to zero. The data y_j=K v_j=s_j u_j tend to zero, while the minimum-norm pseudoinverse returns v_j of norm one, proving discontinuity at zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The power-source definition and modulus theorem with nu=1 give epsilon_K(M_rho,delta)<=sqrt(rho delta) and equality at each delta_j=rho s_j^2, witnessed by x_j=rho s_j v_j. Since these radii tend to zero, the modulus tends to zero on this restricted class; this is not the universal condition ruled out by the veto theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "one singular direction with s=1 and rho=2",
+          "calculation": "At delta=rho*s^2=2, the witness x=rho*s*v has norm 2 and data norm 2; the upper bound sqrt(rho*delta) is also 2.",
+          "result": "The singular-direction equality formula is consistent in this finite one-coordinate model."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes infinite rank, so its positive singular system is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 include delta=0; the source-ball modulus bound is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to every positive singular direction, including a chosen single direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The zero and finite-rank cases are excluded by the infinite-rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle the null sequence delta_j and the full delta>=0 range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records Countable Choice for the singular-system supplier used in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a conditional modulus bound and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a conditional modulus bound and makes no equivalence claim."
+        }
+      ]
+    }
+  }
+}

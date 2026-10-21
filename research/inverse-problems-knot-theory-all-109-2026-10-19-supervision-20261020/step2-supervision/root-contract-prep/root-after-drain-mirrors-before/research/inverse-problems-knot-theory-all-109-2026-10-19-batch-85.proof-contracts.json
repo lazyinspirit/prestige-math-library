@@ -1,0 +1,1844 @@
+{
+  "version": 1,
+  "scope": [
+    "def-sl-two-root-of-unity-skein-parameter",
+    "lem-jones-wenzl-idempotents-exist-below-root-order",
+    "def-semisimplified-temperley-lieb-fusion-category",
+    "lem-root-jones-wenzl-recursion-and-negligible-ideal",
+    "lem-root-fusion-rules-and-simple-object-completeness",
+    "def-extended-skein-cobordism-anomaly-data",
+    "lem-root-skein-surgery-kirby-color-invariance",
+    "def-skein-tqft-state-space-and-handlebody-pairing",
+    "lem-root-handlebody-spine-state-space-finite-generation",
+    "lem-root-handlebody-pairing-nondegeneracy-and-gluing",
+    "thm-root-of-unity-skein-tqft-gluing-and-surgery-invariance",
+    "cex-knot-kt-32-boundary-case",
+    "ex-knot-kt-32-worked-cases"
+  ],
+  "contracts": {
+    "def-sl-two-root-of-unity-skein-parameter": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly covers p=4, where r=2 and δ=0, without inverting a zero quantum integer."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes [1]=1 and the recurrence base case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition states no zero quantum integer is inverted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition fixes labels 0 through r−2 and the root order r=p/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=4",
+          "check": "A primitive eighth root gives r=2, δ=0, [1]=1 and [2]=0; no division by [2] is part of the definition."
+        },
+        {
+          "case": "p=6",
+          "check": "A primitive twelfth root gives r=3; for A=e^{πi/6}, δ=−1, [2]=−1 and [3]=0."
+        }
+      ],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "Corrected the closed form: [j]=(q^j−q^(−j))/(q−q^(−1)); the earlier extra sign on the q-form was inconsistent with the recurrence."
+      }
+    },
+    "lem-jones-wenzl-idempotents-exist-below-root-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sl-two-root-of-unity-skein-parameter",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$ and a primitive $2p$-th root of unity $A\\in\\mathbb C$. Put\n\n$$\n\\zeta=A^2,\\qquad q=-\\zeta,\\qquad r=p/2,\\qquad\n\\delta=-A^2-A^{-2}=q+q^{-1}.\n$$\n\nThe coefficient field after specialization is $\\mathbb C$, and the Kauffman bracket loop coefficient is $\\delta$ in the framed-link relation $[L\\sqcup O]=\\delta[L]$. Define the quantum integers by $[0]=0$, $[1]=1$, and $[j+1]=\\delta[j]-[j-1]$ for $j\\ge1$. Since $q^2=A^4$ has order $r\\ge2$, these quantum integers also satisfy\n\n$$\n[j]=\\frac{q^j-q^{-j}}{q-q^{-1}}=(-1)^{j-1}\\frac{A^{2j}-A^{-2j}}{A^2-A^{-2}}.\n$$\n\nThe BHMV simple-label convention is the finite set\n\n$$\n\\mathcal J_p=\\{0,1,\\ldots,r-2\\}.\n$$\n\nThe pivotal loop and coefficient conventions throughout this page are the displayed $\\delta$ and $\\mathbb C$; no zero quantum integer is inverted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit and let $\\delta\\in R$. Use the quantum integers $[0]=0$, $[1]=1$, $[r+1]=\\delta[r]-[r-1]$ of [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $p_0=1_0$ and $p_1=1_1$. For $r\\ge1$, if $p_r$ is defined and $[r+1]$ is a unit, put\n\n$$P_r=p_r\\otimes1_1\\in\\mathrm{TL}_{r+1}(R,\\delta),\\qquad p_{r+1}=P_r-\\frac{[r]}{[r+1]}P_rU_rP_r,$$\n\nwhere $U_r$ is the cap-cup generator on the final two of the $r+1$ strands in [[def-temperley-lieb-diagram-category]]. Thus $p_n$ is defined by this recursion only when every $[2],\\ldots,[n]$ is a unit. The definition makes no assertion that failure of a denominator condition prevents every other normalized projector from existing.\n\n```tikz\n\\begin{tikzpicture}[x=0.9cm,y=0.9cm]\n  \\draw (0,0) -- (0,1.8);\n  \\draw (1,0) -- (1,1.8);\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,1.25) {$p_r$};\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,0.45) {$p_r$};\n  \\draw (2,0) -- (2,1.8);\n  \\draw (3,0) .. controls (3,0.55) and (2.75,0.75) .. (2.5,0.9);\n  \\draw (2,0) .. controls (2,0.55) and (2.25,0.75) .. (2.5,0.9);\n  \\draw (2.5,0.9) .. controls (2.75,1.05) and (3,1.25) .. (3,1.8);\n  \\draw (2.5,0.9) .. controls (2.25,1.05) and (2,1.25) .. (2,1.8);\n\\end{tikzpicture}\n```\n\nThe box labels stand for the corresponding idempotents and the right-hand cup-cap is $U_r$; the picture is only a convention aid. All algebraic identities are proved from the labeled matching composition and the relations of [[lem-temperley-lieb-generators-satisfy-local-relations]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-closure-trace-component-identities",
+          "source_section": "Statement",
+          "quote": "For any commutative ring $R$, loop value $\\delta\\in R$, and $n\\ge0$, the unnormalized trace of [[def-temperley-lieb-closure-trace-and-partial-trace]] satisfies\n\n$$\\operatorname{Tr}_n(xy)=\\operatorname{Tr}_n(yx),\\qquad \\operatorname{Tr}_{n+1}(x\\otimes1)=\\delta\\operatorname{Tr}_n(x)$$\n\nfor $x,y\\in\\mathrm{TL}_n(R,\\delta)$. For $n\\ge1$ and $x\\in\\mathrm{TL}_n(R,\\delta)$, it also satisfies\n\n$$\\operatorname{Tr}_{n+1}((x\\otimes1)U_n)=\\operatorname{Tr}_n(x),$$\n\nwhere $U_n$ is the cup-cap generator on the last two strands of $\\mathrm{TL}_{n+1}$. For $n\\ge1$, $x\\in\\mathrm{TL}_{n-1}$ and $h\\in\\mathrm{TL}_n$,\n\n$$\\operatorname{Tr}_n\\bigl(h(x\\otimes1)\\bigr)=\\operatorname{Tr}_{n-1}\\bigl(\\operatorname{ptr}_n(h)x\\bigr).$$\n\nNo division by $\\delta$ occurs.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-temperley-lieb-negligible-morphisms",
+          "source_section": "Definition",
+          "quote": "Work over $\\mathbb C$ with a fixed loop parameter $\\delta$. Let $\\mathcal T_\\delta$ be the strict Temperley–Lieb diagram category of [[def-temperley-lieb-diagram-category]]: its objects are $n\\in\\mathbb N$, and its morphism space $\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n)$ is the complex span of the noncrossing matching diagrams with $m$ bottom and $n$ top boundary points, composed by stacking and loop removal.\n\nFor a basis endomorphism $D:n\\to n$, let $c(D)$ be the number of components after joining each top point to the corresponding bottom point outside the rectangle. Define the unnormalized closure trace by\n$$\\operatorname{Tr}_n(D)=\\delta^{c(D)},$$\nand extend linearly. This definition is valid for every $\\delta\\in\\mathbb C$, including $\\delta=0$.\n\nFor $m,n\\in\\mathbb N$, the subspace of **negligible morphisms** is\n$$\\mathcal N_\\delta(m,n)= \\{f\\in\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n): \\operatorname{Tr}_m(g\\circ f)=0\\text{ for every }g\\in\\operatorname{Hom}_{\\mathcal T_\\delta}(n,m)\\}.$$\nThis definition specifies subspaces only. Their closure under composition and tensor product, and hence the quotient category, are supplied separately.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $q^2$ has exact order $r$, for $1\\le j<r$ one has $q^{2j}\\ne1$. Also $q-q^{-1}\\ne0$, because $q^2\\ne1$. Thus $q^j-q^{-j}\\ne0$ and $[j]\\ne0$ for every $1\\le j<r$. At $j=r$, $q^{2r}=1$, so $q^r=q^{-r}$ and $[r]=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For $p\\ge6$, one has $r\\ge3$, so every denominator $[2],\\ldots,[r-1]$ is nonzero and therefore invertible in $\\mathbb C$. By [F2] and [F3], the recursion defines nonzero idempotents through $p_{r-1}$ and gives $\\operatorname{Tr}_{r-1}(p_{r-1})=[r]=0$. For $p=4$, $r=2$ and $p_{r-1}=p_1=1_1$ is the initial projector; its closure is $\\delta=[2]=0$, so the same conclusion holds without using a rank-two denominator.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For any $g\\in\\mathrm{TL}_{r-1}$, [F3] gives $p_{r-1}gp_{r-1}=\\lambda p_{r-1}$ for some $\\lambda\\in\\mathbb C$. Cyclicity [F4] gives $\\operatorname{Tr}(gp_{r-1})=\\operatorname{Tr}(p_{r-1}gp_{r-1})=\\lambda\\operatorname{Tr}(p_{r-1})=0$. Thus $p_{r-1}$ is negligible by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "The recursive formula for $p_r$ requires the inverse of $[r]$, which does not exist because $[r]=0$. Therefore that formula has no value at this step; in particular, assigning a value by cancelling a zero denominator is not part of the recursion. This leaves open the separate existence question for normalized idempotents constructed by other methods.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 treats the p=4 case δ=0 separately and uses the initial p1 projector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 treats p1 as the initial projector when r=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 proves [r]=0 and [j]≠0 for 1≤j<r."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 identifies the first undefined recursion at the denominator [r]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=4",
+          "check": "r=2: p1 is initial, Tr(p1)=[2]=0, and the p2 recursion would divide by [2]=0."
+        },
+        {
+          "case": "p=6",
+          "check": "r=3: [2]=−1 is invertible, p2 exists, Tr(p2)=[3]=0, and the next recursion uses [3]=0."
+        }
+      ],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "Separate p=4 because p1 is initial and the p2 recursion denominator is zero; the claim does not rule out nonrecursive projectors."
+      }
+    },
+    "def-semisimplified-temperley-lieb-fusion-category": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows the BHMV value δ=0 and uses the unnormalized trace with no division by δ."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition states the complete parameter range p≥4 and r=p/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "Definition is limited to quotient/additive/idempotent completion; semisimplicity and ribbon claims are established in later items."
+      }
+    },
+    "lem-root-jones-wenzl-recursion-and-negligible-ideal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-jones-wenzl-idempotents-exist-below-root-order",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge4$ be even, let $A$ be a primitive $2p$-th root of unity, and use the quantum integers and Temperley–Lieb loop value $\\delta=-A^2-A^{-2}$ specified above. Write $r=p/2$. The standard Jones–Wenzl recursion defines nonzero idempotents $p_n$ for $0\\le n\\le r-1$; their unnormalized closure traces are $[n+1]$. In particular, $p_{r-1}$ has trace zero and is negligible, while the next standard recursive formula for $p_r$ is undefined because its denominator is $[r]=0$. This statement concerns that recursion and does not assert that no differently constructed normalized idempotent can exist at rank $r$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-negligible-morphisms",
+          "source_section": "Definition",
+          "quote": "Work over $\\mathbb C$ with a fixed loop parameter $\\delta$. Let $\\mathcal T_\\delta$ be the strict Temperley–Lieb diagram category of [[def-temperley-lieb-diagram-category]]: its objects are $n\\in\\mathbb N$, and its morphism space $\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n)$ is the complex span of the noncrossing matching diagrams with $m$ bottom and $n$ top boundary points, composed by stacking and loop removal.\n\nFor a basis endomorphism $D:n\\to n$, let $c(D)$ be the number of components after joining each top point to the corresponding bottom point outside the rectangle. Define the unnormalized closure trace by\n$$\\operatorname{Tr}_n(D)=\\delta^{c(D)},$$\nand extend linearly. This definition is valid for every $\\delta\\in\\mathbb C$, including $\\delta=0$.\n\nFor $m,n\\in\\mathbb N$, the subspace of **negligible morphisms** is\n$$\\mathcal N_\\delta(m,n)= \\{f\\in\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n): \\operatorname{Tr}_m(g\\circ f)=0\\text{ for every }g\\in\\operatorname{Hom}_{\\mathcal T_\\delta}(n,m)\\}.$$\nThis definition specifies subspaces only. Their closure under composition and tensor product, and hence the quotient category, are supplied separately.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-negligible-morphisms-form-tensor-ideal",
+          "source_section": "Statement",
+          "quote": "Let $\\delta\\in\\mathbb C$. The subspaces $\\mathcal N_\\delta(m,n)$ of [[def-temperley-lieb-negligible-morphisms]] are closed under composition on either side by arbitrary Temperley–Lieb morphisms and under tensoring on either side by arbitrary Temperley–Lieb morphisms. Thus they form a tensor ideal.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-temperley-lieb-closure-trace-component-identities",
+          "source_section": "Statement",
+          "quote": "For any commutative ring $R$, loop value $\\delta\\in R$, and $n\\ge0$, the unnormalized trace of [[def-temperley-lieb-closure-trace-and-partial-trace]] satisfies\n\n$$\\operatorname{Tr}_n(xy)=\\operatorname{Tr}_n(yx),\\qquad \\operatorname{Tr}_{n+1}(x\\otimes1)=\\delta\\operatorname{Tr}_n(x)$$\n\nfor $x,y\\in\\mathrm{TL}_n(R,\\delta)$. For $n\\ge1$ and $x\\in\\mathrm{TL}_n(R,\\delta)$, it also satisfies\n\n$$\\operatorname{Tr}_{n+1}((x\\otimes1)U_n)=\\operatorname{Tr}_n(x),$$\n\nwhere $U_n$ is the cup-cap generator on the last two strands of $\\mathrm{TL}_{n+1}$. For $n\\ge1$, $x\\in\\mathrm{TL}_{n-1}$ and $h\\in\\mathrm{TL}_n$,\n\n$$\\operatorname{Tr}_n\\bigl(h(x\\otimes1)\\bigr)=\\operatorname{Tr}_{n-1}\\bigl(\\operatorname{ptr}_n(h)x\\bigr).$$\n\nNo division by $\\delta$ occurs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-temperley-lieb-rank-one-pivotal-ribbon-conversion",
+          "source_section": "Statement",
+          "quote": "Use all $\\ell\\ge3$, $q=e^{\\pi i/\\ell}$, $s=e^{\\pi i/(2\\ell)}$, $\\delta=q+q^{-1}$ and the full tilting category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]]. Put $V=\\Delta(1)$ and let $P_0$ be its trivial-channel projector in $V\\otimes V=\\Delta(2)\\oplus\\Delta(0)$. The maps\n\n$$\\rho_n:\\mathrm{TL}_n(\\mathbb C,\\delta)\\longrightarrow\\operatorname{End}_{\\mathcal T_\\ell}(V^{\\otimes n}),\\qquad U_i\\longmapsto\\delta P_{0,i,i+1}$$\n\nare well defined. Their composite with the negligible quotient has kernel exactly the embedded boundary ideal $I_n=(p_{\\ell-1})$ and induces\n\n$$\\mathrm{TL}_n(\\mathbb C,\\delta)/I_n\\ \\cong\\ \\operatorname{End}_{\\mathcal T_\\ell/\\mathcal N_\\ell}(V^{\\otimes n}).$$\n\nEquivalently the target is the full centralizer on a chosen sum of the retained tilting summands. The unreduced map does **not** kill $p_{\\ell-1}$: its image is the nonzero simple $\\Delta(\\ell-1)$.\n\nThe precise categorical comparison is with the additive Karoubi negligible quotient of $\\mathrm{TL}(-\\delta)$, equipped with its ordinary diagram braiding $c=s1+s^{-1}e$ and with planar pivotal structure multiplied by tensor parity $(-1)^n$. This is ribbon-equivalent to $\\mathcal T_\\ell/\\mathcal N_\\ell$. Its endomorphism algebras are identified with positive-loop TL algebras by $U_i=-e_i$. Its pivotal dimensions are $[a+1]_q$, and its twists on retained labels are $s^{a(a+2)}$. The quantum self-duality cup/cap have loop $-\\delta$ and Frobenius–Schur sign $-1$, whereas the parity-corrected pivotal closure has value $+\\delta$ on $V$. Thus no equivalence of the unmodified positive-loop unoriented **pivotal** TL category is asserted.\n\nOn the highest-weight-$2$ and trivial prequotient channels, the quantum crossing eigenvalues are $s,-s^{-3}$; the Hecke element $T_i=qU_i-1=-s c_i^{-1}$ has eigenvalues $-1,q^2$. The highest-weight-$2$ channel is retained only when $\\ell\\ge4$. Pivotal traces, twists and all framed ribbon closures agree under the stated corrected comparison. Assume countable choice only when invoking the cited free framed-tangle evaluation theorem; the local matrix and path arguments use no choice axiom.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-temperley-lieb-root-negligible-quotient-is-semisimple",
+          "source_section": "Statement",
+          "quote": "Let $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, $\\delta=q+q^{-1}$ and $\\tau_n=\\delta^{-n}\\operatorname{Tr}_n$. Put\n\n$$\\operatorname{Rad}(\\tau_n)=\\{x\\in\\mathrm{TL}_n:\\tau_n(xy)=0\\text{ for every }y\\in\\mathrm{TL}_n\\}.$$\n\nLet $I_n$ be the two-sided ideal generated by $p_{\\ell-1}\\otimes1_{n-\\ell+1}$ for $n\\ge\\ell-1$, and $I_n=0$ below that rank. Then $I_n=\\operatorname{Rad}(\\tau_n)$, and $\\mathrm{TL}_n/I_n$ is the direct sum of full matrix algebras with multiplicities given by length-$n$ paths from $0$ of heights $0,\\ldots,\\ell-2$. The additive idempotent-complete negligible quotient has simple labels $0,\\ldots,\\ell-2$, represented by $p_a$, and\n\n$$a\\otimes b\\cong\\bigoplus_{\\substack{|a-b|\\le c\\le\\min(a+b,2\\ell-4-a-b)\\\\c\\equiv a+b\\ (2)}}c.$$\n\nAt $n=\\ell-1$ the unreduced algebra is semisimple, while its trace radical is the nonzero one-dimensional block generated by $p_{\\ell-1}$. Trace radical and Jacobson radical are therefore distinct at this first boundary.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By the boundary-projector result, $p_{r-1}$ is an idempotent with trace zero. The diagram category [F2] supplies the endomorphism algebra $\\mathrm{TL}_{r-1}$ and its closure trace. For any $g\\in\\mathrm{TL}_{r-1}$, [F6] gives $p_{r-1}gp_{r-1}=\\lambda p_{r-1}$ for some $\\lambda\\in\\mathbb C$. Cyclicity [F5] gives $\\operatorname{Tr}_{r-1}(g\\circ p_{r-1})=\\operatorname{Tr}_{r-1}(p_{r-1}gp_{r-1})=\\lambda\\operatorname{Tr}_{r-1}(p_{r-1})=0$. Thus $p_{r-1}$ itself is negligible by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F4], the negligible morphisms form a tensor ideal. Since [F3] and step 1.1 place $p_{r-1}$ in that ideal, the tensor ideal it generates is contained in the negligible ideal.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Put $A_0=e^{\\pi i/(2r)}$. For $r\\ge3$, $A_0$ is a primitive $4r$-th root, $q_0=A_0^2=e^{\\pi i/r}$, and $-A_0^2-A_0^{-2}=-(q_0+q_0^{-1})$. Thus the negative-loop category in [F7] is exactly the BHMV Temperley–Lieb category at $A_0$; its quotient kernel is the ideal generated by $p_{r-1}$, and [F8] gives the complete label list.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "claim": "If $r=2$, the loop value is zero and $p_1=1_1$ has zero trace by step 1.1. The tensor ideal it generates contains every identity $1_n$ for $n\\ge1$, while the object $0$ has endomorphism algebra $\\mathbb C$ with trace $1$. Hence the quotient is equivalent to finite-dimensional vector spaces with the single simple label $0$; its negligible ideal is exactly the ideal generated by $p_1$.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For arbitrary primitive $A$, write $A=A_0^k$ with $\\gcd(k,4r)=1$. The cyclotomic automorphism $\\sigma_k$ of $\\mathbb Q(A_0)$ sends $A_0$ to $A$, sends $\\delta(A_0)$ to $\\delta(A)$, and sends every coefficient of each recursively defined projector and every closure-trace pairing matrix to its specialized coefficient at $A$. For each fixed pair of object labels, the matching set is finite by [F2], so the Hom spaces and trace-pairing matrices are finite-dimensional. The field automorphism preserves the ranks and kernels of all these matrices, the exact boundary ideal, and the quotient's simple labels. This completes the canonical-to-arbitrary-root transport and the proof.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.3 preserves the object 0 and its scalar endomorphism algebra in the p=4 quotient."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.3 handles the p=4 zero-loop case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 applies to the initial boundary projector p1 when r=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.3 verifies the degenerate zero-loop quotient separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.2 handles r≥3 and step 2.3 handles the endpoint r=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=4",
+          "check": "The proof separately shows p1=1_1 generates all positive-object identities while Hom(0,0)=C remains."
+        },
+        {
+          "case": "canonical p=6",
+          "check": "The converter and root path theorem apply with r=3 and surviving labels 0,1."
+        }
+      ],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "Canonical root proof uses the exact published diagram-to-tilting conversion and root quotient theorem; arbitrary primitive roots are transported by the cyclotomic automorphism."
+      }
+    },
+    "lem-root-fusion-rules-and-simple-object-completeness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sl-two-root-of-unity-skein-parameter",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$ and a primitive $2p$-th root of unity $A\\in\\mathbb C$. Put\n\n$$\n\\zeta=A^2,\\qquad q=-\\zeta,\\qquad r=p/2,\\qquad\n\\delta=-A^2-A^{-2}=q+q^{-1}.\n$$\n\nThe coefficient field after specialization is $\\mathbb C$, and the Kauffman bracket loop coefficient is $\\delta$ in the framed-link relation $[L\\sqcup O]=\\delta[L]$. Define the quantum integers by $[0]=0$, $[1]=1$, and $[j+1]=\\delta[j]-[j-1]$ for $j\\ge1$. Since $q^2=A^4$ has order $r\\ge2$, these quantum integers also satisfy\n\n$$\n[j]=\\frac{q^j-q^{-j}}{q-q^{-1}}=(-1)^{j-1}\\frac{A^{2j}-A^{-2j}}{A^2-A^{-2}}.\n$$\n\nThe BHMV simple-label convention is the finite set\n\n$$\n\\mathcal J_p=\\{0,1,\\ldots,r-2\\}.\n$$\n\nThe pivotal loop and coefficient conventions throughout this page are the displayed $\\delta$ and $\\mathbb C$; no zero quantum integer is inverted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-root-jones-wenzl-recursion-and-negligible-ideal",
+          "source_section": "Statement",
+          "quote": "Fix even $p\\ge4$, a primitive $2p$-th root $A$, and $r=p/2$. In the Temperley–Lieb diagram category over $\\mathbb C$ with loop value $\\delta=-A^2-A^{-2}$, call $f:m\\to n$ negligible when $\\operatorname{Tr}_m(g\\circ f)=0$ for every reverse morphism $g:n\\to m$, where $\\operatorname{Tr}$ is the unnormalized diagram-closure trace. A tensor ideal is a family of linear subspaces of the morphism spaces closed under composition on either side and tensor product on either side by arbitrary morphisms. The negligible morphisms form a tensor ideal. This ideal is generated, as a tensor ideal, by the Jones–Wenzl projector $p_{r-1}$, defined by the standard recursion through its first zero quantum integer; in particular the quotient has precisely the surviving projector labels $0,\\ldots,r-2$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-temperley-lieb-rank-one-pivotal-ribbon-conversion",
+          "source_section": "Statement",
+          "quote": "Use all $\\ell\\ge3$, $q=e^{\\pi i/\\ell}$, $s=e^{\\pi i/(2\\ell)}$, $\\delta=q+q^{-1}$ and the full tilting category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]]. Put $V=\\Delta(1)$ and let $P_0$ be its trivial-channel projector in $V\\otimes V=\\Delta(2)\\oplus\\Delta(0)$. The maps\n\n$$\\rho_n:\\mathrm{TL}_n(\\mathbb C,\\delta)\\longrightarrow\\operatorname{End}_{\\mathcal T_\\ell}(V^{\\otimes n}),\\qquad U_i\\longmapsto\\delta P_{0,i,i+1}$$\n\nare well defined. Their composite with the negligible quotient has kernel exactly the embedded boundary ideal $I_n=(p_{\\ell-1})$ and induces\n\n$$\\mathrm{TL}_n(\\mathbb C,\\delta)/I_n\\ \\cong\\ \\operatorname{End}_{\\mathcal T_\\ell/\\mathcal N_\\ell}(V^{\\otimes n}).$$\n\nEquivalently the target is the full centralizer on a chosen sum of the retained tilting summands. The unreduced map does **not** kill $p_{\\ell-1}$: its image is the nonzero simple $\\Delta(\\ell-1)$.\n\nThe precise categorical comparison is with the additive Karoubi negligible quotient of $\\mathrm{TL}(-\\delta)$, equipped with its ordinary diagram braiding $c=s1+s^{-1}e$ and with planar pivotal structure multiplied by tensor parity $(-1)^n$. This is ribbon-equivalent to $\\mathcal T_\\ell/\\mathcal N_\\ell$. Its endomorphism algebras are identified with positive-loop TL algebras by $U_i=-e_i$. Its pivotal dimensions are $[a+1]_q$, and its twists on retained labels are $s^{a(a+2)}$. The quantum self-duality cup/cap have loop $-\\delta$ and Frobenius–Schur sign $-1$, whereas the parity-corrected pivotal closure has value $+\\delta$ on $V$. Thus no equivalence of the unmodified positive-loop unoriented **pivotal** TL category is asserted.\n\nOn the highest-weight-$2$ and trivial prequotient channels, the quantum crossing eigenvalues are $s,-s^{-3}$; the Hecke element $T_i=qU_i-1=-s c_i^{-1}$ has eigenvalues $-1,q^2$. The highest-weight-$2$ channel is retained only when $\\ell\\ge4$. Pivotal traces, twists and all framed ribbon closures agree under the stated corrected comparison. Assume countable choice only when invoking the cited free framed-tangle evaluation theorem; the local matrix and path arguments use no choice axiom.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-temperley-lieb-rank-one-tilting-quotient-fusion-category",
+          "source_section": "Statement",
+          "quote": "For every $\\ell\\ge3$, let $\\mathcal T_\\ell$ be the full finite-dimensional integrable type-1 tilting category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]], and $\\mathcal N_\\ell$ its negligible ideal. The quotient with the same objects and morphism spaces $\\operatorname{Hom}_{\\mathcal T_\\ell}(X,Y)/\\mathcal N_\\ell(X,Y)$ is a finite semisimple ribbon category. Its simple objects are exactly $T(0),\\ldots,T(\\ell-2)$, of pivotal dimensions $[a+1]_q$, and\n\n$$[T(a)][T(b)]=\\sum_{\\substack{|a-b|\\le c\\le\\min(a+b,2\\ell-4-a-b)\\\\c\\equiv a+b\\ (2)}}[T(c)]\\qquad(0\\le a,b\\le\\ell-2).$$\n\nHere a fusion category means a $\\mathbb C$-linear rigid semisimple monoidal category with simple unit and finitely many simple isomorphism classes. The quotient is spherical with the specified positive pivotal dimensions and inherits the full ribbon structure, including even $\\ell$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-su2-root-unity-ribbon-category-is-modular",
+          "source_section": "Statement",
+          "quote": "Let $\\ell\\ge3$, $q=e^{\\pi i/\\ell}$, and let $\\mathcal C_\\ell$ be the standard ribbon semisimplification of finite-dimensional integrable type-1 tilting modules for Lusztig's divided-power $U_q(\\mathfrak{sl}_2)$, using the positive-trace quantum ribbon convention. Then $\\mathcal C_\\ell$ is modular, with simples $a=0,\\ldots,\\ell-2$, dimensions $d_a=\\sin((a+1)\\pi/\\ell)/\\sin(\\pi/\\ell)$, twists $\\theta_a=q^{a(a+2)/2}$, and\n\n$$s_{ab}=\\frac{\\sin((a+1)(b+1)\\pi/\\ell)}{\\sin(\\pi/\\ell)},\\qquad S_{ab}=\\sqrt{\\frac2\\ell}\\sin\\frac{(a+1)(b+1)\\pi}{\\ell}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-modular-ribbon-category-and-hopf-link-data",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a complex finite semisimple rigid tensor category with simple unit $\\mathbf 1$ and a finite set $I$ of isomorphism classes of simple objects. Fix a braiding $c$ and a ribbon twist $\\theta$. The induced pivotal map is $j_X=u_X\\theta_X:X\\to X^{\\vee\\vee}$, where $u$ is the Drinfeld morphism of [[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Throughout this pair we use the associated spherical pivotal structure: $j$ is part of the data, and sphericality means $\\dim_j(X)=\\dim_j(X^\\vee)$ for every object, as in [[def-spherical-structure]]. Its trace is $\\operatorname{tr}_j(f)=\\operatorname{Tr}_L(j_Xf)$ for $f\\in\\operatorname{End}(X)$.\n\nWrite $0$ for the unit label and $i^*$ for the dual of $i$. Put $N_{ij}^k=\\dim_{\\mathbb C}\\operatorname{Hom}(k,i\\otimes j)$, $d_i=\\operatorname{tr}_j(1_i)$, and $s_{ij}=\\operatorname{tr}_j(c_{j,i}c_{i,j})$. Define $D^2=\\sum_{i\\in I}d_i^2$. The unnormalized Hopf-link matrix is $s=(s_{ij})$. The ribbon fusion category is **modular** when $s$ is invertible. When $D^2\\ne0$, either square root $D$ defines the normalized matrix $S=s/D$; for a modular category, [[lem-modular-hopf-matrix-squared]] proves this nonvanishing. No positivity of the general $d_i$ or of $D$ is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-semisimplified-temperley-lieb-fusion-category",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$, a primitive $2p$-th root $A\\in\\mathbb C$, $r=p/2$, and loop value $\\delta=-A^2-A^{-2}$. Let $\\mathcal T_\\delta$ be the complex Temperley–Lieb diagram category with objects the nonnegative integers and morphisms finite linear combinations of perfect matchings of bottom and top boundary points with no intersecting arcs. Compose by stacking and remove each closed component with factor $\\delta$. Define $\\mathcal N_\\delta(m,n)$ to be the subspace of morphisms $f:m\\to n$ such that $\\operatorname{Tr}_m(g\\circ f)=0$ for every reverse morphism $g:n\\to m$, where $\\operatorname{Tr}$ is the unnormalized diagram-closure trace. Form the quotient category with the same objects and morphism spaces $\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n)/\\mathcal N_\\delta(m,n)$. Its additive envelope adjoins finite formal direct sums, with matrix morphisms and matrix composition. Its idempotent completion adjoins objects $(X,e)$ for idempotents $e\\in\\operatorname{End}(X)$ with $e^2=e$, and morphisms $(X,e)\\to(Y,f)$ are morphisms $a:X\\to Y$ satisfying $a=fae$. Juxtaposition, planar cup-cap duality, and the induced trace descend to this completed quotient. This definition makes no assertion that it is semisimple, that its simple objects have a specified label set, or that any braid, twist, or modularity identities hold.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $r=2$, then $p=4$, $\\delta=0$, and the sole proposed retained label is $0$. The boundary projector is $p_1=1_1$ and has zero trace. The tensor ideal it generates contains $1_n=1_1\\otimes1_{n-1}$ for every $n\\ge1$. Therefore every morphism with a positive source or target is zero in the quotient, because it factors through the corresponding identity. The endomorphism space of object $0$ is $\\mathbb C$, and its trace is the identity, so it is non-negligible. The quotient's additive idempotent completion is thus finite-dimensional vector spaces with one self-dual simple $0$. Its fusion is $0\\otimes0=0$, its unit twist is $1$, and its Hopf-link matrix is the $1\\times1$ matrix $(1)$, which is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Suppose $r\\ge3$ and first take the canonical root $A_0=e^{\\pi i/(2r)}$, so $q_0=A_0^2=e^{\\pi i/r}$ and the BHMV loop is $-(q_0+q_0^{-1})$. By [F3], the diagram quotient with its parity-corrected pivotal structure is ribbon-equivalent to the positive-pivotal quotient of [F4]–[F5]. Thus the quotient has exactly the labels $0,\\ldots,r-2$, the displayed truncated fusion multiplicities, self-dual simples, and a nondegenerate Hopf-link matrix for that corrected pivotal structure.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "On the semisimple quotient define $\\varepsilon_{p_a}=(-1)^a\\,1_{p_a}$. This is a monoidal natural automorphism: each retained summand $p_c$ of $p_a\\otimes p_b$ has $c\\equiv a+b\\pmod2$ by [F4], so $\\varepsilon_{p_c}=\\varepsilon_{p_a}\\varepsilon_{p_b}$; it is dual-compatible because every $p_a$ is self-dual. The planar pivotal structure is $\\varepsilon$ times the parity-corrected one of [F3]. Multiplying a pivotal structure $j$ by a dual-compatible monoidal automorphism $\\varepsilon$ changes the twist $u^{-1}j$ to $\\varepsilon\\theta$, preserves balancing by monoidality, and preserves dual compatibility; hence the planar convention is also ribbon. Its dimensions are $d_a=(-1)^a d_a^+$, which equal the BHMV recurrence value $[a+1]$: the sequence $v_j=(-1)^{j-1}[j]_{q_0}$ has $v_0=0$, $v_1=1$ and satisfies $v_{j+1}=-(q_0+q_0^{-1})v_j-v_{j-1}$, so uniqueness of the recurrence gives $v_j=[j]$ for the BHMV loop. Its simple twists are $\\theta_a=(-1)^a\\theta_a^+=(-1)^aA_0^{a(a+2)}$. Its unnormalized Hopf-link entries are $s_{ab}=\\varepsilon_a\\varepsilon_b s_{ab}^+$, since the pivotal trace on $p_a\\otimes p_b$ is multiplied by $\\varepsilon_a\\varepsilon_b$. Therefore its Hopf-link matrix is obtained from the invertible matrix in [F5] by multiplying row $a$ and column $b$ by $(-1)^a$ and $(-1)^b$, so it remains invertible. The criterion in [F6] proves modularity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For any primitive $A$, write $A=A_0^k$ with $\\gcd(k,4r)=1$. The automorphism of the cyclotomic field $\\mathbb Q(A_0)$ sending $A_0$ to $A$ transports the finite diagram coefficients, the recursively defined projectors, the braiding and twist matrices, and the Hopf-link matrix. By [F7], every fixed Hom space is finite-dimensional, so this transport preserves all ranks and nonzero determinants. The fusion multiplicities are dimensions of these finite Hom spaces and so are unchanged under the field automorphism and extension to $\\mathbb C$. Thus the canonical-root result applies to every primitive $2p$-th root with the exact stated BHMV convention; in particular $\\theta_a=(-1)^aA^{a(a+2)}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 computes the r=2, δ=0 quotient as Vec."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 identifies the unit simple when r=2; step 1.2 uses the unit label in the positive-pivotal quotient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles the zero-loop case, and step 2.1 transfers the parity-corrected pivotal data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 handle the lowest level and the truncated upper-label rule."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.2 imports the exact truncated multiplicity rule; step 2.1 preserves it under the pivotal sign change."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 imports both directions of the truncated multiplicity criterion; step 2.1 preserves it under the pivotal sign change."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=4",
+          "check": "The quotient has one simple label 0, fusion 0⊗0=0, twist 1, and S=(1)."
+        },
+        {
+          "case": "p=6",
+          "check": "For A=e^{πi/6}, labels are 0,1, d1=−1, θ1=−i, and 1⊗1=0; the parity-modified S has determinant −1."
+        }
+      ],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "Parity changes planar dimensions and twists by (-1)^a; it conjugates the Hopf matrix by the diagonal parity matrix and therefore preserves nondegeneracy."
+      }
+    },
+    "def-extended-skein-cobordism-anomaly-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate zero-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent endpoint case is required by this carrier beyond its stated parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "This is a local definition of the weighted Lagrangian root data and a pointwise choice of normalization roots. It does not assert equivalence with BHMV p1-structure anomaly data; that conversion remains an obligation of the surgery/TQFT theorem."
+      }
+    },
+    "lem-root-skein-surgery-kirby-color-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sl-two-root-of-unity-skein-parameter",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$ and a primitive $2p$-th root of unity $A\\in\\mathbb C$. Put\n\n$$\n\\zeta=A^2,\\qquad q=-\\zeta,\\qquad r=p/2,\\qquad\n\\delta=-A^2-A^{-2}=q+q^{-1}.\n$$\n\nThe coefficient field after specialization is $\\mathbb C$, and the Kauffman bracket loop coefficient is $\\delta$ in the framed-link relation $[L\\sqcup O]=\\delta[L]$. Define the quantum integers by $[0]=0$, $[1]=1$, and $[j+1]=\\delta[j]-[j-1]$ for $j\\ge1$. Since $q^2=A^4$ has order $r\\ge2$, these quantum integers also satisfy\n\n$$\n[j]=\\frac{q^j-q^{-j}}{q-q^{-1}}=(-1)^{j-1}\\frac{A^{2j}-A^{-2j}}{A^2-A^{-2}}.\n$$\n\nThe BHMV simple-label convention is the finite set\n\n$$\n\\mathcal J_p=\\{0,1,\\ldots,r-2\\}.\n$$\n\nThe pivotal loop and coefficient conventions throughout this page are the displayed $\\delta$ and $\\mathbb C$; no zero quantum integer is inverted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-semisimplified-temperley-lieb-fusion-category",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$, a primitive $2p$-th root $A\\in\\mathbb C$, $r=p/2$, and loop value $\\delta=-A^2-A^{-2}$. Let $\\mathcal T_\\delta$ be the complex Temperley–Lieb diagram category with objects the nonnegative integers and morphisms finite linear combinations of perfect matchings of bottom and top boundary points with no intersecting arcs. Compose by stacking and remove each closed component with factor $\\delta$. Define $\\mathcal N_\\delta(m,n)$ to be the subspace of morphisms $f:m\\to n$ such that $\\operatorname{Tr}_m(g\\circ f)=0$ for every reverse morphism $g:n\\to m$, where $\\operatorname{Tr}$ is the unnormalized diagram-closure trace. Form the quotient category with the same objects and morphism spaces $\\operatorname{Hom}_{\\mathcal T_\\delta}(m,n)/\\mathcal N_\\delta(m,n)$. Its additive envelope adjoins finite formal direct sums, with matrix morphisms and matrix composition. Its idempotent completion adjoins objects $(X,e)$ for idempotents $e\\in\\operatorname{End}(X)$ with $e^2=e$, and morphisms $(X,e)\\to(Y,f)$ are morphisms $a:X\\to Y$ satisfying $a=fae$. Juxtaposition, planar cup-cap duality, and the induced trace descend to this completed quotient. This definition makes no assertion that it is semisimple, that its simple objects have a specified label set, or that any braid, twist, or modularity identities hold.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-root-fusion-rules-and-simple-object-completeness",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge4$ be even, $A\\in\\mathbb C$ a primitive $2p$-th root, and $r=p/2$. In the BHMV Temperley–Lieb quotient with loop value $\\delta=-A^2-A^{-2}$ and planar pivotal trace, the complete simple-label set is $\\{0,1,\\ldots,r-2\\}$, represented by the surviving Jones–Wenzl projectors $p_a$ obtained from the standard recursion using unit denominators $[2],\\ldots,[a]$. Every simple is self-dual. Its fusion multiplicities are\n\n$$\nN_{ab}^{c}=1\n\\quad\\Longleftrightarrow\\quad\n|a-b|\\le c\\le\\min(a+b,\\,2r-4-a-b)\n\\ \\text{and }a+b+c\\text{ is even},\n$$\n\nand are zero otherwise. With the BHMV overcrossing map $c_i=A1_i+A^{-1}U_i$, where $U_i$ is the cup-cap generator, the full-framing ribbon structure has planar quantum dimensions $d_a=[a+1]$ and simple-object twists $\\theta_a=(-1)^aA^{a(a+2)}$. Here the quantum integers use the fixed BHMV recurrence. The unnormalized Hopf-link matrix, whose $(a,b)$ entry is the pivotal trace of the double braiding on $p_a\\otimes p_b$, is nondegenerate. Here modular means that this finite semisimple ribbon category has an invertible unnormalized Hopf-link matrix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-extended-skein-cobordism-anomaly-data",
+          "source_section": "Definition",
+          "quote": "For the fixed root parameter, let $\\mathcal C_p$ denote the semisimplified Temperley–Lieb category with labels $0,\\ldots,r-2$, pivotal dimensions $d_j=[j+1]$, and Hopf-link data inherited from the Kauffman bracket. Put $\\mathcal D_p^2=\\sum_{j=0}^{r-2}d_j^2$ and choose $\\mathcal D_p\\in\\mathbb C$ with that square. Choose $\\kappa\\in\\mathbb C$ satisfying $\\kappa^6=A^{-6-(p+1)p/2}$. The root-specific extended data are the weighted Lagrangian ribbon bordisms whose objects are closed oriented labeled surfaces with a Lagrangian subspace of real first homology and whose morphisms are collared oriented labeled ribbon bordisms with integer weights. If $M_1:\\Sigma_0\\to\\Sigma_1$ and $M_2:\\Sigma_1\\to\\Sigma_2$ have relations $\\Lambda_{M_1},\\Lambda_{M_2}$ and boundary Lagrangians $\\lambda_0,\\lambda_1,\\lambda_2$, define\n\n$$\nK_1=\\Lambda_{M_1}(\\lambda_0),\\qquad\nK_0=\\lambda_1,\\qquad\nK_2=\\Lambda_{M_2}^{\\,t}(\\lambda_2),\n\\qquad\nn(M_2\\circ M_1)=n_2+n_1+\\mu(K_1,K_0,K_2),\n$$\n\nusing the Wall-signature Maslov convention. The category composition, units, and anomaly weight are those specified by this formula and the weighted Lagrangian bordism definition; no ordinary oriented anomaly-free functor is part of this Definition.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The label set is finite, so $\\Omega_p$ is a finite linear combination of colored projectors. The normalized surgery expression is therefore a finite complex number whenever the displayed Gauss sums are nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], both Gauss sums are units, since $\\eta$ and $\\kappa$ are units. Framed isotopy preserves the ribbon bracket. The imported Kirby-color identity preserves its value under a handle slide, while the framing matrix changes by an integral congruence and hence has unchanged positive and negative indices. A split signed-unit unknot multiplies the numerator by $\\Delta_\\varepsilon$ and increases exactly the corresponding index by one. The denominator therefore cancels that factor. Deletion is the inverse operation. This proves the displayed surgery invariance with the exact normalization of the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The weighted interpretation is [F6]: the signature unit is $\\nu=\\kappa^3$, with the source's Maslov sign converted to the registered Wall order. The distinct additional $\\eta^{b_0+b_1}$ normalization is retained when these closed values enter the TQFT pairing; no anomaly-free ordinary-oriented functor follows. The finite color and cancellation calculations add no choice assumption.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 names the nonzero Gauss-sum evaluation as an unresolved boundary check; the item is escalated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 constructs the finite color sum over labels 0 through r−2; move invariance remains escalated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=4",
+          "check": "The only color is 0, so Ω=0-projector, Δ+=Δ−=1; this does not prove the all-p move identities."
+        },
+        {
+          "case": "p=6",
+          "check": "For A=e^{πi/6}, Δ+=1−i and Δ−=1+i are nonzero; the general Gauss-sum identity and move calculations remain escalated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "open_obligations": [
+            "Derive handle-slide invariance from the root Hopf-link orthogonality identities.",
+            "Evaluate Δ+ and Δ− for all allowed p and prove nonvanishing.",
+            "Match the ±1 blow-up factors to the registered weighted anomaly."
+          ],
+          "notes": "Proof currently constructs the finite candidate only; source citations do not fill these local calculations."
+        }
+      },
+      "proof_status_evidence": "Historical status metadata integrated from exact final supplemental root adoption and independent final report; imported dependencies retain their declared source boundaries. No new proof review or readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal hypotheses, with preserved prior proof portions and explicitly imported established dependencies at final reviewed source boundaries.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Three-Manifold Invariants Derived from the Kauffman Bracket, Topology 31 (1992), §§2–4",
+                "url": "https://www.sciencedirect.com/science/article/pii/004093839290002Y"
+              },
+              {
+                "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 8 and 12",
+                "url": "https://www.jstor.org/stable/j.ctt1bgzb7v"
+              },
+              {
+                "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1",
+                "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+              },
+              {
+                "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+                "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+              },
+              {
+                "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+                "url": "https://arxiv.org/pdf/0912.4706v3",
+                "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "literature-derived"
+          },
+          "axiom_use": "Choice-free in the finite color calculations; full AC is carried separately by the surgery-presentation theorem that consumes this result."
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-85.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "def-skein-tqft-state-space-and-handlebody-pairing": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition specifies a radical quotient for a marked surface and makes no empty-surface normalization claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate zero-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent endpoint case is required by this carrier beyond its stated parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly retains the full-AC presentation interface; its use is not proved in this construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "open_obligations": [
+            "Supply a presentation-independent closed surgery invariant before defining BΣ for arbitrary marked splittings.",
+            "State and prove the dependence on marking and the complement choices."
+          ],
+          "notes": "The radical quotient construction is clear once the closed pairing exists; the current surgery supplier is incomplete."
+        }
+      },
+      "proof_status_evidence": "Historical status metadata integrated from exact final supplemental root adoption and independent final report; imported dependencies retain their declared source boundaries. No new proof review or readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal hypotheses, with preserved prior proof portions and explicitly imported established dependencies at final reviewed source boundaries.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§1–2",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+              },
+              {
+                "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §§1.2 and 3.1–3.3",
+                "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+              },
+              {
+                "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, Chapter 6",
+                "url": "https://arxiv.org/pdf/1502.06845v1"
+              },
+              {
+                "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+                "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+              },
+              {
+                "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+                "url": "https://arxiv.org/pdf/0912.4706v3",
+                "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "not-applicable"
+          },
+          "axiom_use": "Full AC is retained through the surgery-presentation supplier used to define the closed pairing invariant."
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-85.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "lem-root-handlebody-spine-state-space-finite-generation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-skein-tqft-state-space-and-handlebody-pairing",
+          "source_section": "Definition",
+          "quote": "Fix a closed oriented marked surface $\\Sigma$ with its Lagrangian and weighted anomaly data, and fix a marked handlebody $H$ with boundary $\\Sigma$ and a complementary marked handlebody $H'$ so that their gluing is the standard oriented three-sphere. Specialize the framed-link Kauffman bracket skein module of $H$ to the coefficient field and root fixed above. For $x\\in\\mathcal K_A(H)$ and $y\\in\\mathcal K_A(H')$, define the handlebody pairing $B_\\Sigma(x,y)$ by gluing the two framed skeins and evaluating the resulting closed marked three-manifold with the normalized root surgery invariant. Define\n\n$$\n\\operatorname{Rad}(B_\\Sigma)=\\{x\\in\\mathcal K_A(H):B_\\Sigma(x,y)=0\\text{ for every }y\\in\\mathcal K_A(H')\\},\n\\qquad\nV_p(\\Sigma)=\\mathcal K_A(H)/\\operatorname{Rad}(B_\\Sigma).\n$$\n\nThis is the radical-quotient handlebody state-space construction for the specified marking and anomaly data. Independence of the marking, finite generation, nondegeneracy, and the gluing maps are separate mathematical obligations.\n\n**External normalization input.** In this Definition the closed marked evaluation is the BHMV TQFT normalization, not merely the raw signature-normalized closed invariant $\\theta_p$ of the Kirby lemma. BHMV §2 pp.897–898 and Gilmer–Masbaum §11 pp.23–25 give\n$$Z_p(M,w)=\\eta^{b_0(M)+b_1(M)}(\\kappa^3)^w\\theta_p(M),\\qquad \\Delta_\\pm=\\eta^{-1}\\kappa^{\\pm3}.$$\nThus $Z_p(S^3,0)=\\eta$ and $Z_p(S^2\\times S^1,0)=1$. These nonzero normalizations and the registered Wall-sign weight are part of the pairing. BHMV Proposition1.9, p.891, identifies EXACTLY this radical quotient computed with two complementary handlebodies with its universal state space. This external identification supplies well-definedness of the presented model; its finite basis and gluing are the separate following lemmas. The selected $\\kappa$ remains a sixth root, with one weight step acting by its cube. The source itself is only used at these located statements/constructions, not as a claimed locally reconstructed universal-construction proof.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-root-fusion-rules-and-simple-object-completeness",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge4$ be even, $A\\in\\mathbb C$ a primitive $2p$-th root, and $r=p/2$. In the BHMV Temperley–Lieb quotient with loop value $\\delta=-A^2-A^{-2}$ and planar pivotal trace, the complete simple-label set is $\\{0,1,\\ldots,r-2\\}$, represented by the surviving Jones–Wenzl projectors $p_a$ obtained from the standard recursion using unit denominators $[2],\\ldots,[a]$. Every simple is self-dual. Its fusion multiplicities are\n\n$$\nN_{ab}^{c}=1\n\\quad\\Longleftrightarrow\\quad\n|a-b|\\le c\\le\\min(a+b,\\,2r-4-a-b)\n\\ \\text{and }a+b+c\\text{ is even},\n$$\n\nand are zero otherwise. With the BHMV overcrossing map $c_i=A1_i+A^{-1}U_i$, where $U_i$ is the cup-cap generator, the full-framing ribbon structure has planar quantum dimensions $d_a=[a+1]$ and simple-object twists $\\theta_a=(-1)^aA^{a(a+2)}$. Here the quantum integers use the fixed BHMV recurrence. The unnormalized Hopf-link matrix, whose $(a,b)$ entry is the pivotal trace of the double braiding on $p_a\\otimes p_b$, is nondegenerate. Here modular means that this finite semisimple ribbon category has an invertible unnormalized Hopf-link matrix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The edge set of $G$ is finite and each edge has only $r-1$ candidate labels by [F2]. Therefore the set of all labelings, and hence its subset of admissible labelings, is finite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to the supplied handlebody marking and spine, using [F1] for the identical radical-quotient model and [F2] for its root labels. Every vector is a linear combination of the admissible spine states. Together with the finite count in step1.1 this proves the full Statement. Linear independence, although present in the imported theorem, is not needed for this spanning conclusion. No infinite skein reduction or additional choice campaign is performed.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 counts labels for a fixed finite graph; the spanning assertion remains escalated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 includes all labels from 0 through r−2 in a finite set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "fixed G",
+          "check": "If G has E edges, there are at most (r−1)^E labelings; this proves finiteness only, not spanning."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "open_obligations": [
+            "Prove that cutting along the spine meridian disks and applying root recoupling spans every class in the radical quotient.",
+            "Check independence under spine changes if the claim is intended to be marking-independent."
+          ],
+          "notes": "Step 1.1 proves finiteness of labelings only; step 2.1 records the unproved spanning argument."
+        }
+      },
+      "proof_status_evidence": "Historical status metadata integrated from exact final supplemental root adoption and independent final report; imported dependencies retain their declared source boundaries. No new proof review or readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal hypotheses, with preserved prior proof portions and explicitly imported established dependencies at final reviewed source boundaries.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§4–5",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+              },
+              {
+                "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 4–7",
+                "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+              },
+              {
+                "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, Chapter 6",
+                "url": "https://arxiv.org/pdf/1502.06845v1"
+              },
+              {
+                "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+                "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+              },
+              {
+                "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+                "url": "https://arxiv.org/pdf/0912.4706v3",
+                "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "literature-derived"
+          },
+          "axiom_use": "Finite choice only is needed for a fixed finite spine; full AC is inherited from the declared state-space/surgery interface."
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-85.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "lem-root-handlebody-pairing-nondegeneracy-and-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-skein-tqft-state-space-and-handlebody-pairing",
+          "source_section": "Definition",
+          "quote": "Fix a closed oriented marked surface $\\Sigma$ with its Lagrangian and weighted anomaly data, and fix a marked handlebody $H$ with boundary $\\Sigma$ and a complementary marked handlebody $H'$ so that their gluing is the standard oriented three-sphere. Specialize the framed-link Kauffman bracket skein module of $H$ to the coefficient field and root fixed above. For $x\\in\\mathcal K_A(H)$ and $y\\in\\mathcal K_A(H')$, define the handlebody pairing $B_\\Sigma(x,y)$ by gluing the two framed skeins and evaluating the resulting closed marked three-manifold with the normalized root surgery invariant. Define\n\n$$\n\\operatorname{Rad}(B_\\Sigma)=\\{x\\in\\mathcal K_A(H):B_\\Sigma(x,y)=0\\text{ for every }y\\in\\mathcal K_A(H')\\},\n\\qquad\nV_p(\\Sigma)=\\mathcal K_A(H)/\\operatorname{Rad}(B_\\Sigma).\n$$\n\nThis is the radical-quotient handlebody state-space construction for the specified marking and anomaly data. Independence of the marking, finite generation, nondegeneracy, and the gluing maps are separate mathematical obligations.\n\n**External normalization input.** In this Definition the closed marked evaluation is the BHMV TQFT normalization, not merely the raw signature-normalized closed invariant $\\theta_p$ of the Kirby lemma. BHMV §2 pp.897–898 and Gilmer–Masbaum §11 pp.23–25 give\n$$Z_p(M,w)=\\eta^{b_0(M)+b_1(M)}(\\kappa^3)^w\\theta_p(M),\\qquad \\Delta_\\pm=\\eta^{-1}\\kappa^{\\pm3}.$$\nThus $Z_p(S^3,0)=\\eta$ and $Z_p(S^2\\times S^1,0)=1$. These nonzero normalizations and the registered Wall-sign weight are part of the pairing. BHMV Proposition1.9, p.891, identifies EXACTLY this radical quotient computed with two complementary handlebodies with its universal state space. This external identification supplies well-definedness of the presented model; its finite basis and gluing are the separate following lemmas. The selected $\\kappa$ remains a sixth root, with one weight step acting by its cube. The source itself is only used at these located statements/constructions, not as a claimed locally reconstructed universal-construction proof.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-root-handlebody-spine-state-space-finite-generation",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a handlebody with a fixed finite trivalent spine $G$, and let every edge carry one of the labels $0,\\ldots,r-2$. Call a labeling admissible when the three labels at each trivalent vertex satisfy the root fusion rule. In the radical-quotient state space of $H$, the states represented by admissible labeled spines span, and the set of such labelings is finite. This statement asserts spanning, not linear independence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-extended-skein-cobordism-anomaly-data",
+          "source_section": "Definition",
+          "quote": "For the fixed root parameter, let $\\mathcal C_p$ denote the semisimplified Temperley–Lieb category with labels $0,\\ldots,r-2$, pivotal dimensions $d_j=[j+1]$, and Hopf-link data inherited from the Kauffman bracket. Put $\\mathcal D_p^2=\\sum_{j=0}^{r-2}d_j^2$ and choose $\\mathcal D_p\\in\\mathbb C$ with that square. Choose $\\kappa\\in\\mathbb C$ satisfying $\\kappa^6=A^{-6-(p+1)p/2}$. The root-specific extended data are the weighted Lagrangian ribbon bordisms whose objects are closed oriented labeled surfaces with a Lagrangian subspace of real first homology and whose morphisms are collared oriented labeled ribbon bordisms with integer weights. If $M_1:\\Sigma_0\\to\\Sigma_1$ and $M_2:\\Sigma_1\\to\\Sigma_2$ have relations $\\Lambda_{M_1},\\Lambda_{M_2}$ and boundary Lagrangians $\\lambda_0,\\lambda_1,\\lambda_2$, define\n\n$$\nK_1=\\Lambda_{M_1}(\\lambda_0),\\qquad\nK_0=\\lambda_1,\\qquad\nK_2=\\Lambda_{M_2}^{\\,t}(\\lambda_2),\n\\qquad\nn(M_2\\circ M_1)=n_2+n_1+\\mu(K_1,K_0,K_2),\n$$\n\nusing the Wall-signature Maslov convention. The category composition, units, and anomaly weight are those specified by this formula and the weighted Lagrangian bordism definition; no ordinary oriented anomaly-free functor is part of this Definition.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a fixed finite spine, each admissible coloring gives a finite colored graph state. Gluing a pair of handlebodies evaluates the resulting closed colored graph using the specified root bracket and anomaly normalization.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], the radical quotients for the two orientations are finite-dimensional dual spaces and their normalized pairing is perfect. This is stronger than left nondegeneracy by the definition of a radical alone. Choose bases $v_i,w_j$ and let $B_{ij}$ be their pairing matrix. Its inverse gives the coevaluation tensor $\\sum_{i,j}(B^{-1})_{ji}v_i\\otimes w_j$; contraction with $B$ on either side is the identity. This finite linear-algebra identity is exactly the sewing contraction in the imported gluing theorem and is independent of the chosen dual bases.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The imported weighted gluing in [F5] gives the prescribed anomaly factor, with weight law [F3]. Its parameter is the cube of the selected sixth root, not an independently chosen square root with an unchecked sign. The real-Lagrangian transport in [F5] respects composition because the intervening reference cylinders cancel. Thus the inverse-pairing sewing maps satisfy precisely the registered weighted law. No unweighted anomaly cancellation or positivity of every complex-root Hermitian form is asserted.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 records the missing root pairing matrix calculation, so nondegeneracy is escalated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 fixes the admissible labels and pairing for a marked finite spine; the global matrix proof remains open."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "open_obligations": [
+            "Evaluate and prove invertibility of the full admissible-spine pairing matrix.",
+            "Prove its inverse gives the sewing map and is compatible with the Lagrangian anomaly correction."
+          ],
+          "notes": "The required theta/tetrahedral and mapping-class identities are not supplied by the partial proof."
+        }
+      },
+      "proof_status_evidence": "Historical status metadata integrated from exact final supplemental root adoption and independent final report; imported dependencies retain their declared source boundaries. No new proof review or readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal hypotheses, with preserved prior proof portions and explicitly imported established dependencies at final reviewed source boundaries.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §§1 and 4–5",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+              },
+              {
+                "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 6–7",
+                "url": "https://api.pageplace.de/preview/DT0400.9781400882533_A27764847/preview-9781400882533_A27764847.pdf"
+              },
+              {
+                "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3",
+                "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+              },
+              {
+                "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+                "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+              },
+              {
+                "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+                "url": "https://arxiv.org/pdf/0912.4706v3",
+                "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "literature-derived"
+          },
+          "axiom_use": "Full AC is inherited from the marked surgery-presentation and weighted-bordism interfaces."
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-85.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "thm-root-of-unity-skein-tqft-gluing-and-surgery-invariance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-kirby-moves-classify-framed-link-presentations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $D_0$ and $D_1$ be finite integral framed-link surgery diagrams in the standard oriented $3$-sphere, with surgery results $M_0$ and $M_1$. Then $M_0$ and $M_1$ are orientation-preservingly diffeomorphic if and only if $D_0$ and $D_1$ are related by a finite sequence of ambient isotopies, framed handle slides, and additions or deletions of split $\\pm1$-framed unknots.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-root-skein-surgery-kirby-color-invariance",
+          "source_section": "Statement",
+          "quote": "Fix even $p\\ge4$, a primitive $2p$-th root $A$, the BHMV semisimplified category, and its quantum dimensions $d_j$ and twists $\\theta_j$ for $0\\le j\\le r-2$. Put $\\Omega_p=\\sum_{j=0}^{r-2}d_jp_j$, $\\Delta_+=\\sum_jd_j^2\\theta_j$, and $\\Delta_-=\\sum_jd_j^2\\theta_j^{-1}$. The Statement asserts that both $\\Delta_+$ and $\\Delta_-$ are nonzero. For a finite integral framed link $L$ in the oriented three-sphere, color each surgery component by $\\Omega_p$ and normalize the bracket evaluation by $\\Delta_+^{b_+(L)}\\Delta_-^{b_-(L)}$, where $b_\\pm(L)$ are the positive and negative indices of the framing matrix. With the stated BHMV root and weighted anomaly convention, the resulting value is unchanged under framed isotopy, handle slides, and addition or deletion of a split $\\pm1$-framed unknot.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-root-handlebody-pairing-nondegeneracy-and-gluing",
+          "source_section": "Statement",
+          "quote": "For the fixed root parameter, the normalized double-handlebody pairing on the admissible spine states of a marked handlebody is nondegenerate after quotienting by its radical. The inverse pairing defines the sewing map for gluing along a closed marked surface, and these maps satisfy the stated weighted Lagrangian anomaly correction.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-weighted-lagrangian-ribbon-bordism",
+          "source_section": "Definition",
+          "quote": "Assume full AC ([[def-axiom-of-choice]]), inherited from the surface intersection and boundary-kernel duality suppliers.\n\nAn object is a closed oriented surface $\\Sigma$ with a fixed finite collection of marked points carrying simple labels of the complex modular ribbon fusion category and pairwise disjoint oriented embedded interval germs through those points (the ribbon-end arcs), together with a Lagrangian subspace $\\lambda\\subset H_1(\\Sigma;\\mathbb R)$ for the signed intersection form. An elementary morphism is an oriented compact smooth 3-bordism $M:\\Sigma_0\\to\\Sigma_1$ with product collars and fixed boundary parametrizations, a properly embedded colored ribbon graph whose ends match the marked labels and, in the fixed product collars, are exactly the products of those ribbon-end arcs with the collar interval, and an integer weight $n\\in\\mathbb Z$. Boundary parametrizations preserve these oriented arc germs. Reversing a boundary orientation dualizes its labels and reverses its oriented ribbon-end arcs. Composition glues the identical product ribbon germs through the common parametrized surface, with no interpolating twist.\n\nFor any closed oriented surface $\\Sigma$, the intersection convention is $\\omega_\\Sigma([\\alpha],[\\beta])=$ the signed intersection number in which the tangent to $\\alpha$ followed by the tangent to $\\beta$ gives the surface orientation. For a bordism $M:\\Sigma_0\\to\\Sigma_1$, write $j_r$ for the inclusion maps into $H_1(M;\\mathbb R)$ and set\n\n$$\\Lambda_M=\\{(x_0,x_1)\\in H_1(\\Sigma_0;\\mathbb R)\\oplus H_1(\\Sigma_1;\\mathbb R):j_0x_0=j_1x_1\\}.$$\n\nGive the product the form $-\\omega_{\\Sigma_0}\\oplus\\omega_{\\Sigma_1}$. The boundary-kernel lemma applied to $\\partial M$ gives the relation with $j_0x_0=-j_1x_1$; changing the sign of the second coordinate is symplectic and gives exactly $\\Lambda_M$. Hence $\\Lambda_M$ is Lagrangian ([[lem-3-manifold-boundary-kernel-is-lagrangian]]).\n\nFor composable bordisms $M_1:\\Sigma_0\\to\\Sigma_1$ and $M_2:\\Sigma_1\\to\\Sigma_2$, put $A=\\Lambda_{M_1}$ and $B=\\Lambda_{M_2}$. For a relation $R\\subseteq\\overline V\\oplus W$, write $R(L)=\\{w:\\exists v\\in L,(v,w)\\in R\\}$ and $R^t(Q)=\\{v:\\exists w\\in Q,(v,w)\\in R\\}$. These use the inclusion maps into each individual bordism. The three Lagrangians for composition lie in the middle surface:\n\n$$K_1=A(\\lambda_0),\\qquad K_0=\\lambda_1,\\qquad K_2=B^t(\\lambda_2)\\quad\\subseteq H_1(\\Sigma_1;\\mathbb R).$$\n\nThey are Lagrangian by [[lem-lagrangian-relation-sends-lagrangian-to-lagrangian]], applied also to the transposed relation. With the Wall-form sign fixed in [[lem-maslov-index-four-lagrangian-cocycle]], define\n\n$$n(M_2\\circ M_1)=n_2+n_1+\\mu(K_1,K_0,K_2).$$\n\nFor mapping cylinders of symplectic maps $f_1,f_2$, the index is $\\mu(f_1\\lambda_0,\\lambda_1,f_2^{-1}\\lambda_2)=\\mu(f_2f_1\\lambda_0,f_2\\lambda_1,\\lambda_2)$. This is Walker's prescribed sign and order. For arbitrary bordisms, replacing the individual relations by homology maps into the glued manifold is not part of the definition.\n\nIdentity bordisms are cylinders with the product ribbons on the specified arcs and weight zero. Disjoint union takes the disjoint union of geometric data, the direct sum of the surface Lagrangians, and the sum of weights. The empty surface is the monoidal unit. Bordisms are identified by orientation-preserving diffeomorphisms respecting collars, parametrizations, ribbon data and weights; smoothing glued collars is understood up to these identifications. Associativity and the weight, unit and disjoint-union laws follow from the relation identity in [[lem-maslov-correction-composes-for-lagrangian-relations]] and the proof below. This defines the weighted category before any RT functor is asserted. The equality between its correction and a surgery-signature defect remains a separate obligation of [[thm-weighted-rt-tqft-and-factorization]]; no unweighted TQFT is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed surgery presentation, the color set is finite and the state-space pairing is defined by a finite bracket evaluation. This constructs a candidate linear map for each presented weighted bordism.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Any two presented closed surgery links are related by [F1], and [F2] preserves their values under every move. For bordisms, use the BHMV additional $\\eta^{b_0+b_1}$ normalization specified in the state-space Definition, not the raw closed invariant alone. The finite state spaces, perfect pairing and actual surgery/sewing maps are [F3], whose external BHMV/Gilmer–Masbaum input supplies the TQFT construction at the exact even root and complex specialization. The inverse-pairing contraction composes these maps, with the integer Wall/Maslov weight law [F4]. This proves finite-dimensionality, gluing and presentation invariance of the stated weighted theory.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Forgetting the weight removes the scalar that corrects the Maslov/signature defect. Therefore the imported construction descends only projectively to ordinary oriented data without a further anomaly-cancellation input. No such additional theorem is asserted here. Full AC remains the declared branch of the presentation/marked category interfaces; finite color sums add no stronger assumption.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 constructs a candidate map for a fixed presentation; the empty-bordism normalization is not separately verified and remains under the theorem escalation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 leaves both Gauss-sum and blow-up checks unresolved."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The carrier has no separate one-parameter boundary claim beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The carrier has no additional degenerate-configuration claim beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the finite label set, while the move and gluing identities remain escalated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Theorem includes the full-AC hypothesis in A1; step 1.1 uses that fixed assumption to construct the presentation-level candidate map."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "fixed surgery link",
+          "check": "The label sum is finite; handle-slide, blow-up, pairing, and anomaly identities remain unproved in this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "open_obligations": [
+            "Prove local Kirby-color invariance and all Gauss-sum normalizations.",
+            "Prove handlebody pairing nondegeneracy, gluing, and functoriality in the registered weighted category.",
+            "Resolve p1-to-Lagrangian anomaly conversion."
+          ],
+          "notes": "Theorem statement is retained in full; its proof establishes only candidate-map construction."
+        }
+      },
+      "proof_status_evidence": "Historical status metadata integrated from exact final supplemental root adoption and independent final report; imported dependencies retain their declared source boundaries. No new proof review or readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal hypotheses, with preserved prior proof portions and explicitly imported established dependencies at final reviewed source boundaries.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), Theorem 1.4 and §§1–5",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+              },
+              {
+                "title": "Louis H. Kauffman and Sostenes L. Lins, Temperley-Lieb Recoupling Theory and Invariants of 3-Manifolds, Chapters 7 and 12",
+                "url": "https://www.jstor.org/stable/j.ctt1bgzb7v"
+              },
+              {
+                "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §§1.2 and 3",
+                "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+              },
+              {
+                "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+                "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+              },
+              {
+                "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+                "url": "https://arxiv.org/pdf/0912.4706v3",
+                "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "literature-derived"
+          },
+          "axiom_use": "Full AC is used through finite framed-link surgery presentations and the Kirby-move classification supplier; all color sums are finite."
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-85.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "cex-knot-kt-32-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sl-two-root-of-unity-skein-parameter",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$ and a primitive $2p$-th root of unity $A\\in\\mathbb C$. Put\n\n$$\n\\zeta=A^2,\\qquad q=-\\zeta,\\qquad r=p/2,\\qquad\n\\delta=-A^2-A^{-2}=q+q^{-1}.\n$$\n\nThe coefficient field after specialization is $\\mathbb C$, and the Kauffman bracket loop coefficient is $\\delta$ in the framed-link relation $[L\\sqcup O]=\\delta[L]$. Define the quantum integers by $[0]=0$, $[1]=1$, and $[j+1]=\\delta[j]-[j-1]$ for $j\\ge1$. Since $q^2=A^4$ has order $r\\ge2$, these quantum integers also satisfy\n\n$$\n[j]=\\frac{q^j-q^{-j}}{q-q^{-1}}=(-1)^{j-1}\\frac{A^{2j}-A^{-2j}}{A^2-A^{-2}}.\n$$\n\nThe BHMV simple-label convention is the finite set\n\n$$\n\\mathcal J_p=\\{0,1,\\ldots,r-2\\}.\n$$\n\nThe pivotal loop and coefficient conventions throughout this page are the displayed $\\delta$ and $\\mathbb C$; no zero quantum integer is inverted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit and let $\\delta\\in R$. Use the quantum integers $[0]=0$, $[1]=1$, $[r+1]=\\delta[r]-[r-1]$ of [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $p_0=1_0$ and $p_1=1_1$. For $r\\ge1$, if $p_r$ is defined and $[r+1]$ is a unit, put\n\n$$P_r=p_r\\otimes1_1\\in\\mathrm{TL}_{r+1}(R,\\delta),\\qquad p_{r+1}=P_r-\\frac{[r]}{[r+1]}P_rU_rP_r,$$\n\nwhere $U_r$ is the cap-cup generator on the final two of the $r+1$ strands in [[def-temperley-lieb-diagram-category]]. Thus $p_n$ is defined by this recursion only when every $[2],\\ldots,[n]$ is a unit. The definition makes no assertion that failure of a denominator condition prevents every other normalized projector from existing.\n\n```tikz\n\\begin{tikzpicture}[x=0.9cm,y=0.9cm]\n  \\draw (0,0) -- (0,1.8);\n  \\draw (1,0) -- (1,1.8);\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,1.25) {$p_r$};\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,0.45) {$p_r$};\n  \\draw (2,0) -- (2,1.8);\n  \\draw (3,0) .. controls (3,0.55) and (2.75,0.75) .. (2.5,0.9);\n  \\draw (2,0) .. controls (2,0.55) and (2.25,0.75) .. (2.5,0.9);\n  \\draw (2.5,0.9) .. controls (2.75,1.05) and (3,1.25) .. (3,1.8);\n  \\draw (2.5,0.9) .. controls (2.25,1.05) and (2,1.25) .. (2,1.8);\n\\end{tikzpicture}\n```\n\nThe box labels stand for the corresponding idempotents and the right-hand cup-cap is $U_r$; the picture is only a convention aid. All algebraic identities are proved from the labeled matching composition and the relations of [[lem-temperley-lieb-generators-satisfy-local-relations]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Here $r=3$, $q=-A^2$ has $q^2$ of order three, and $q+q^{-1}=-1$. Thus $\\delta=-1$, $[2]=\\delta=-1$, and $[3]=\\delta[2]-[1]=(-1)(-1)-1=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The recursion for $p_3$ requires division by $[3]$. Since $[3]=0$ in $\\mathbb C$, no multiplicative inverse exists, so this recursive expression is undefined. In particular, cancellation cannot assign it a value. The calculation refutes the asserted universal continuation; it makes no claim that a projector at rank three cannot be constructed by a different method.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 computes [3]=0 at p=6."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the initial value [1]=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 shows the next recursion denominator is zero and has no inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 fixes r=3 and step 2.1 checks the next rank."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=6",
+          "check": "r=3, δ=−1, [2]=−1, [3]=δ[2]−[1]=0, so p3 requires division by zero."
+        }
+      ],
+      "risk_review": {
+        "status": "ready-candidate",
+        "open_obligations": [],
+        "notes": "The counterexample refutes only cancellation of a zero denominator in the standard recursion; it does not rule out other projector constructions."
+      }
+    },
+    "ex-knot-kt-32-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sl-two-root-of-unity-skein-parameter",
+          "source_section": "Definition",
+          "quote": "Fix an even integer $p\\ge4$ and a primitive $2p$-th root of unity $A\\in\\mathbb C$. Put\n\n$$\n\\zeta=A^2,\\qquad q=-\\zeta,\\qquad r=p/2,\\qquad\n\\delta=-A^2-A^{-2}=q+q^{-1}.\n$$\n\nThe coefficient field after specialization is $\\mathbb C$, and the Kauffman bracket loop coefficient is $\\delta$ in the framed-link relation $[L\\sqcup O]=\\delta[L]$. Define the quantum integers by $[0]=0$, $[1]=1$, and $[j+1]=\\delta[j]-[j-1]$ for $j\\ge1$. Since $q^2=A^4$ has order $r\\ge2$, these quantum integers also satisfy\n\n$$\n[j]=\\frac{q^j-q^{-j}}{q-q^{-1}}=(-1)^{j-1}\\frac{A^{2j}-A^{-2j}}{A^2-A^{-2}}.\n$$\n\nThe BHMV simple-label convention is the finite set\n\n$$\n\\mathcal J_p=\\{0,1,\\ldots,r-2\\}.\n$$\n\nThe pivotal loop and coefficient conventions throughout this page are the displayed $\\delta$ and $\\mathbb C$; no zero quantum integer is inverted.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-jones-wenzl-idempotents-exist-below-root-order",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge4$ be even, let $A$ be a primitive $2p$-th root of unity, and use the quantum integers and Temperley–Lieb loop value $\\delta=-A^2-A^{-2}$ specified above. Write $r=p/2$. The standard Jones–Wenzl recursion defines nonzero idempotents $p_n$ for $0\\le n\\le r-1$; their unnormalized closure traces are $[n+1]$. In particular, $p_{r-1}$ has trace zero and is negligible, while the next standard recursive formula for $p_r$ is undefined because its denominator is $[r]=0$. This statement concerns that recursion and does not assert that no differently constructed normalized idempotent can exist at rank $r$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-root-fusion-rules-and-simple-object-completeness",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge4$ be even, $A\\in\\mathbb C$ a primitive $2p$-th root, and $r=p/2$. In the BHMV Temperley–Lieb quotient with loop value $\\delta=-A^2-A^{-2}$ and planar pivotal trace, the complete simple-label set is $\\{0,1,\\ldots,r-2\\}$, represented by the surviving Jones–Wenzl projectors $p_a$ obtained from the standard recursion using unit denominators $[2],\\ldots,[a]$. Every simple is self-dual. Its fusion multiplicities are\n\n$$\nN_{ab}^{c}=1\n\\quad\\Longleftrightarrow\\quad\n|a-b|\\le c\\le\\min(a+b,\\,2r-4-a-b)\n\\ \\text{and }a+b+c\\text{ is even},\n$$\n\nand are zero otherwise. With the BHMV overcrossing map $c_i=A1_i+A^{-1}U_i$, where $U_i$ is the cup-cap generator, the full-framing ribbon structure has planar quantum dimensions $d_a=[a+1]$ and simple-object twists $\\theta_a=(-1)^aA^{a(a+2)}$. Here the quantum integers use the fixed BHMV recurrence. The unnormalized Hopf-link matrix, whose $(a,b)$ entry is the pivotal trace of the double braiding on $p_a\\otimes p_b$, is nondegenerate. Here modular means that this finite semisimple ribbon category has an invertible unnormalized Hopf-link matrix.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-skein-module-of-solid-torus-has-core-multicurve-basis",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and let $R=\\mathbb Z[A^{\\pm1}]$. Identify\nthe solid torus with $\\mathcal A\\times[-1,1]$, where $\\mathcal A$ is a planar\nannulus. A simple closed curve is called essential if it does not bound a disk\nin $\\mathcal A$. Every framed link in this product admits a regular annular\ndiagram and an integer framing correction from its blackboard framing. Let\n$z$ be one blackboard-framed annular core curve, and for $n\\geq1$ let $z^n$\ndenote $n$ parallel copies of that curve, with $z^0$ the empty link. In the polynomial\nring $R[z]$, $z$ is also the formal variable sent to the core class $[z]$.\nThen the classes $[z^n]$, $n\\geq0$, form an $R$-basis of\n$\\mathcal K_A(\\mathcal A\\times[-1,1])$. Equivalently, the map\n$J:R[z]\\to\\mathcal K_A(\\mathcal A\\times[-1,1])$ sending $z^n$ to $[z^n]$ is\nan $R$-module isomorphism.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-root-handlebody-pairing-nondegeneracy-and-gluing",
+          "source_section": "Statement",
+          "quote": "For the fixed root parameter, the normalized double-handlebody pairing on the admissible spine states of a marked handlebody is nondegenerate after quotienting by its radical. The inverse pairing defines the sewing map for gluing along a closed marked surface, and these maps satisfy the stated weighted Lagrangian anomaly correction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $p=4$, $r=2$ and $r-2=0$, so the displayed label set is exactly $\\{0\\}$. At $p=6$, $r=3$ and $r-2=1$, so it is exactly $\\{0,1\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $p=6$, $\\delta=-1$, $p_2=1_2+U_1$, and $e_0=-U_1$ is an idempotent isomorphic to the tensor unit. Since $p_2$ is negligible by [F2], the decomposition $1_2=p_2+e_0$ gives $1\\otimes1\\cong0$ in the quotient. This verifies the stated fusion calculation.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6] the torus dimension is the number of these basis labels, namely $r-1$. Step1.1 gives one label for $p=4$ and two labels for $p=6$, so the dimensions are $1$ and $2$. Together with the retained local fusion calculation in step2.1 this proves every Example clause. No polynomial skein basis before radical quotient is confused with the finite TQFT basis.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier makes no claim about an empty input or empty object in this boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats p=4, r=2, and its singleton label set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 treats the p=6 label 1 and step 2.1 verifies 1⊗1=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 uses the zero-trace boundary projector p2 at p=6."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 computes the terminal labels for p=4 and p=6."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite algebraic construction does not require selecting from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not formulated as an if-and-only-if equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "p=4",
+          "check": "r=2 gives labels {0}."
+        },
+        {
+          "case": "p=6",
+          "check": "r=3 gives labels {0,1}; δ=−1, U1^2=−U1, e0=−U1 is idempotent, and 1⊗1=0 after quotient."
+        },
+        {
+          "case": "torus dimension",
+          "check": "Dimensions 1 and 2 are not finite checks until spanning and pairing nondegeneracy are proved; retained as escalated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "open_obligations": [
+            "Prove the torus state-space is spanned by the two retained core states at p=6.",
+            "Prove nondegeneracy of the torus pairing at p=4 and p=6."
+          ],
+          "notes": "The finite p=4 label and p=6 fusion calculations are proved; claimed torus dimensions remain unverified."
+        }
+      },
+      "proof_status_evidence": "Historical status metadata integrated from exact final supplemental root adoption and independent final report; imported dependencies retain their declared source boundaries. No new proof review or readiness credit.",
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal hypotheses, with preserved prior proof portions and explicitly imported established dependencies at final reviewed source boundaries.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-14-scope-adoption-registry.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/kirby-six-source-binding-check.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, §4",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf"
+              },
+              {
+                "title": "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §§5.3–5.4",
+                "url": "https://arxiv.org/pdf/1502.06845v1"
+              },
+              {
+                "title": "BHMV, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), exact external inputs",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/bhmv.pdf",
+                "locator": "Section 2 pp.897–898; Proposition 1.9 p.891; Theorem 1.4 p.887; Corollary 4.10 and Theorem 4.11 p.909"
+              },
+              {
+                "title": "Gilmer–Masbaum, Maslov index, Lagrangians, Mapping Class Groups and TQFT, arXiv:0912.4706v3",
+                "url": "https://arxiv.org/pdf/0912.4706v3",
+                "locator": "Section 2 pp.4–6, equation (1), and Section 11 pp.23–25"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "ai-generated",
+            "proof": "literature-derived"
+          },
+          "axiom_use": "Full AC is inherited only through the solid-torus skein-basis interface; the finite root and fusion calculations themselves are choice-free."
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-85.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    }
+  }
+}

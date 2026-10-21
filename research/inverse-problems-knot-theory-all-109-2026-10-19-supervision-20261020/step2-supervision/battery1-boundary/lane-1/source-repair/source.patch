@@ -1,0 +1,57 @@
+--- a/items/lem-ip-coordinate-vectors-form-a-basis-of-ell-two.md
++++ b/items/lem-ip-coordinate-vectors-form-a-basis-of-ell-two.md
+@@ -30,7 +30,7 @@
+ 
+ ## Statement
+ 
+-Let $H=\ell^2(\mathbb N,\mathbb R)$ with its canonical real inner product, and for each $j\in\mathbb N$ let $e_j$ be the sequence whose $j$th coordinate is $1$ and whose other coordinates are $0$. Then $(e_j)_{j\in\mathbb N}$ is a complete orthonormal basis of $H$. For every $x=(x_j)\in H$, the truncations $\sum_{j=1}^N x_je_j$ converge in $H$ to $x$, and $\|x\|_2^2=\sum_{j\in\mathbb N}|x_j|^2$.
++Let $H=\ell^2(\mathbb N,\mathbb R)$ with its canonical real inner product, and for each $j\in\mathbb N$ let $e_j$ be the sequence whose $j$th coordinate is $1$ and whose other coordinates are $0$. Then $(e_j)_{j\in\mathbb N}$ is a complete orthonormal basis of $H$. For every $x=(x_j)\in H$, the truncations $\sum_{j<N} x_je_j$ converge in $H$ to $x$ as $N\to\infty$ (the $N=0$ sum is empty and equals $0$), and $\|x\|_2^2=\sum_{j\in\mathbb N}|x_j|^2$.
+ 
+ ## Statement references
+ 
+@@ -60,4 +60,4 @@
+ 
+ 1.1 For all $i,j$, the canonical inner product gives $\langle e_i,e_j\rangle=\delta_{ij}$, so the coordinate family is orthonormal. [F1, F2, given, algebra]
+ 
+-2.1 Let $x=(x_j)\in H$ and $\varepsilon>0$. By [F1], choose $N$ so that $\sum_{j>N}|x_j|^2<\varepsilon^2$. The coordinate formula gives $\|x-\sum_{j=1}^N x_je_j\|_2^2=\sum_{j>N}|x_j|^2<\varepsilon^2$. Thus finite linear combinations of the $e_j$ are dense in $H$; by [F3], the orthonormal family is a complete orthonormal basis. The same tail estimate proves the stated truncation convergence, and the norm identity is [F1]. [F1, F3, step 1.1, given, algebra] ∎
++2.1 Let $x=(x_j)\in H$ and $\varepsilon>0$. By [F1], a finite set of coordinates has complement square-sum less than $\varepsilon^2$. Every finite subset of $\mathbb N$ is contained in $\{j:j<N\}$ for some $N\in\mathbb N$, so choose $N$ such that $\sum_{j\ge N}|x_j|^2<\varepsilon^2$. The coordinate formula gives $\|x-\sum_{j<N} x_je_j\|_2^2=\sum_{j\ge N}|x_j|^2<\varepsilon^2$. Thus finite linear combinations of the $e_j$ are dense in $H$; by [F3], the orthonormal family is a complete orthonormal basis. The same tail estimate proves the stated truncation convergence, and the norm identity is [F1]. [F1, F3, step 1.1, given, algebra] ∎
+--- a/items/ex-ip-trace-class-gaussian-has-full-support.md
++++ b/items/ex-ip-trace-class-gaussian-has-full-support.md
+@@ -44,7 +44,7 @@
+ 
+ ## Example
+ 
+-Assume the Axiom of Choice and countable choice. In $H=\ell^2$, define $e_j$ to be the sequence with value $1$ at coordinate $j$ and $0$ at every other coordinate. Let $\xi_j$ be independent $N(0,1)$ variables and set
++Assume the Axiom of Choice and countable choice. In $H=\ell^2(\mathbb N,\mathbb R)$, use the positively indexed complete coordinate basis $(e_j)_{j\ge1}$: $e_j$ has value $1$ at coordinate $j-1$ and $0$ at every other coordinate. Throughout this example, $x_j=\langle x,e_j\rangle$ denotes the coefficient in this positively indexed basis. Let $\xi_j$ be independent $N(0,1)$ variables and set
+ $$W=\sum_{j\ge1}j^{-1}\xi_j e_j.$$
+ Take the parameter and data spaces both to be $H$ with their Borel sigma-algebras, the admissible truth set and forward domain to be $U=D=H$, and the forward map to be the identity. The law $\mu$ of $W$ is a centered Borel Gaussian prior on $D$. Its covariance is diagonal with positive eigenvalues $j^{-2}$, whose finite sum $\sum_{j\ge1}j^{-2}$ makes it trace class, meaning that the sum of these nonnegative eigenvalues is finite. Its covariance reproducing-kernel Hilbert space is the dense proper subspace of $H$
+ $$\left\{x\in\ell^2:\sum_{j\ge1}j^2x_j^2<\infty\right\},$$
+@@ -108,7 +108,7 @@
+ 
+ [F9] The real square-summable sequence space with its canonical inner product is complete and hence Hilbert. [[lem-square-summable-sequences-form-a-hilbert-space]]
+ 
+-[F10] The coordinate vectors of real $\ell^2$ form a complete orthonormal basis and their partial sums converge in norm. [[lem-ip-coordinate-vectors-form-a-basis-of-ell-two]]
++[F10] Reindexing the coordinate vectors by $j\mapsto j-1$ for $j\ge1$, the coordinate vectors of real $\ell^2$ form a complete orthonormal basis and their partial sums converge in norm. [[lem-ip-coordinate-vectors-form-a-basis-of-ell-two]]
+ 
+ [F11] A Polish space is separable and completely metrizable. [[def-polish-space]]
+ 
+--- a/items/cex-ip-infinite-dimensional-random-walk-reverse-flow-singular.md
++++ b/items/cex-ip-infinite-dimensional-random-walk-reverse-flow-singular.md
+@@ -67,7 +67,7 @@
+ ## Statement refuted
+ 
+ Assume the Axiom of Choice and fix $\beta\in(0,1]$. Let
+-$H=\ell^2(\mathbb N,\mathbb R)$ with its canonical basis $(e_j)$. Take
++$H=\ell^2(\mathbb N,\mathbb R)$ with its complete coordinate basis positively indexed as $(e_j)_{j\ge1}$, where $e_j$ has its nonzero coordinate at $j-1$. Write $u_j=\langle u,e_j\rangle$ for coefficients in this basis throughout. Take
+ mutually independent standard normal variables $(X_j,Y_j)_{j\ge1}$ and set
+ $$U=\sum_{j\ge1}2^{-j/2}X_je_j,\qquad \xi=\sum_{j\ge1}2^{-j/2}Y_je_j.$$
+ These series converge almost surely in $H$ and define independent centered
+@@ -96,7 +96,7 @@
+ 
+ [F1] Under Countable Choice and Dependent Choice, a countable independent sequence with the standard normal law exists. [[def-countable-choice]] [[def-dependent-choice]] [[cor-countable-independent-copies-exist]]
+ 
+-[F2] The coordinate vectors form a complete orthonormal basis of $H$, and the norm squared is the sum of coordinate squares. [[lem-ip-coordinate-vectors-form-a-basis-of-ell-two]]
++[F2] After the explicit reindexing $j\mapsto j-1$ for $j\ge1$, the coordinate vectors form a complete orthonormal basis of $H$, and the norm squared is the sum of coordinate squares. [[lem-ip-coordinate-vectors-form-a-basis-of-ell-two]]
+ 
+ [F3] For independent standard normal coordinates and weights $\lambda_j=2^{-j}$, the series $\sum_j\sqrt{\lambda_j}X_je_j$ converges almost surely in $H$ and defines a centered Borel Gaussian random element. Its coordinates are $2^{-j/2}X_j$. [[lem-ip-gaussian-series-prior-regularity]] [[lem-ip-coordinate-vectors-form-a-basis-of-ell-two]]
+ 

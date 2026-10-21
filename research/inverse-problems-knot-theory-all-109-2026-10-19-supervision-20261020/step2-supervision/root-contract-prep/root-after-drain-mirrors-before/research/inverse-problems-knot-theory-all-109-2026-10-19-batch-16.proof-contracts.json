@@ -1,0 +1,1326 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-misfit-evidence-and-posterior-law",
+    "thm-ip-function-space-posterior-propriety",
+    "ex-ip-proper-gaussian-likelihood-posterior-propriety",
+    "ex-ip-zero-evidence-fiber",
+    "ex-ip-improper-prior-finite-evidence"
+  ],
+  "contracts": {
+    "def-ip-misfit-evidence-and-posterior-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: it assumes a supplied probability prior with full mass on D and makes no existence claim when D is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: no normalized update is defined when the evidence is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: when Phi is zero, Z equals the total mass one of the restricted prior and the update is the prior."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a point-mass prior is permitted; on a positive finite likelihood fiber the displayed formula returns that point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly excludes both Z=0 and Z=+infinity from its quotient formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition separates the choice-free fixed-data and dominated branches from the AC standard-Borel existence branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: no if-and-only-if criterion is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: no converse criterion is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The fixed-fiber and data-indexed conventions are explicitly separated; no proof obligation is claimed for this definition."
+      }
+    },
+    "thm-ip-function-space-posterior-propriety": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-prior-on-a-forward-domain",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a specified real separable Banach or Hilbert parameter space with metric $d_X(x,x')=\\|x-x'\\|_X$ and its norm topology. Let $(Y,d_Y)$ be a metric data space equipped with a sigma-algebra $\\Sigma_Y$, let $U\\subseteq X$ be a nonempty admissible truth set, and let $F:U\\to Y$ be a forward map. Choose a Borel set $D\\in\\mathcal B(X)$ with $D\\subseteq U$ such that the restriction $G:=F|_D:D\\to Y$ is measurable for the trace Borel sigma-algebra $\\mathcal B(D):=\\{D\\cap A:A\\in\\mathcal B(X)\\}$. A prior on this forward domain is a Borel probability measure $\\mu$ on $X$ such that $\\mu(D)=1$. Its restriction $\\mu|_D$, defined by $\\mu|_D(A)=\\mu(A)$ for $A\\in\\mathcal B(D)$, is then a probability measure on $D$, and the induced data law is $G_\\#(\\mu|_D)$, defined by $G_\\#(\\mu|_D)(E)=(\\mu|_D)(G^{-1}(E))$ for $E\\in\\Sigma_Y$. A Borel probability on $X$ with $\\mu(D)<1$ is not a prior on this declared forward domain.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable** if some at most countable subset $D\\subseteq X$ is dense in $X$ ([[def-dense-top]], [[def-countable]]). Equivalently, every nonempty open subset of $X$ meets $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-product-of-countable",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are at most countable ([[def-countable]]) then so is\n$A \\times B$.\n\n**No choice principle is used**: the two enumerations are given, and the\nenumeration of the product is written down from them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T,\\Pi)$ be a measure space, let $L_y:\\Theta\\to[0,+\\infty]$\nbe measurable for a fixed datum $y$, and put\n$Z:=\\int_\\Theta L_y\\,d\\Pi$. For a finite positive constant $c$, the set\nfunction\n$$A\\longmapsto c\\int_A L_y\\,d\\Pi$$\nis a probability measure if and only if $0<Z<+\\infty$ and $c=Z^{-1}$. In\nparticular, if $Z=0$ or $Z=+\\infty$, no finite positive scaling makes the\nfiberwise update a probability measure.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, in the sense of [[def-norm-and-normed-space]] for $\\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] for $\\mathbb C$, with\ninduced metric $d(x,y)=\\|x-y\\|$ (in the complex case supplied by [[lem-complex-norm-realification-is-a-real-norm]]). Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. The same real-valued codomain is required of a metric by\n[[def-metric-space]].\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$S \\subseteq X$. The **subspace topology** (also *relative topology*) on $S$ is\n\n$$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$\n\nthe family of **traces** on $S$ of the open sets of $X$. The pair\n$(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of $S$ that lies in\n$\\mathcal{T}_S$ is said to be **open in $S$**, and *relatively open* where the\nambient space needs emphasis.\n\n**$\\mathcal{T}_S$ is a topology, and this is discharged here.** (T1):\n$\\varnothing = \\varnothing \\cap S$ and $S = X \\cap S$ are traces. (T2): if\n$\\mathcal{S}' \\subseteq \\mathcal{T}_S$, choose for each member a set of\n$\\mathcal{T}$ tracing to it — no choice principle is needed, since\n$U' := \\bigcup \\{\\, U \\in \\mathcal{T} : U \\cap S \\subseteq W \\,\\}$ is a canonical\nsuch set for $W \\in \\mathcal{T}_S$, being open by (T2) in $X$ and satisfying\n$U' \\cap S = W$ — and then\n$\\bigcup_i (U_i \\cap S) = (\\bigcup_i U_i) \\cap S \\in \\mathcal{T}_S$ by (T2) in\n$X$. (T3): $(U \\cap S) \\cap (V \\cap S) = (U \\cap V) \\cap S \\in \\mathcal{T}_S$ by\n(T3) in $X$.\n\n**Closed sets of a subspace are the traces of the closed sets.** A set\n$C \\subseteq S$ is closed in $S$ if and only if $C = F \\cap S$ for some closed\n$F \\subseteq X$. Indeed $S \\setminus (U \\cap S) = (X \\setminus U) \\cap S$ and\n$S \\setminus (F \\cap S) = (X \\setminus F) \\cap S$, so complementation inside $S$\nmatches complementation inside $X$ under tracing.\n\n**Bases and subbases trace as well.** If $\\mathcal{B}$ is a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]) then\n$\\mathcal{B}_S := \\{\\, B \\cap S : B \\in \\mathcal{B} \\,\\}$ is a basis for\n$\\mathcal{T}_S$: its members are open in $S$, and for $W = U \\cap S$ open in $S$\nand $x \\in W$ there is $B \\in \\mathcal{B}$ with $x \\in B \\subseteq U$, whence\n$x \\in B \\cap S \\subseteq W$. The same computation with a subbasis $\\mathcal{S}$\nshows that $\\{\\, S_0 \\cap S : S_0 \\in \\mathcal{S} \\,\\}$ is a subbasis for\n$\\mathcal{T}_S$, since tracing commutes with finite intersections and with\nunions.\n\n**The inclusion is continuous.** The inclusion map $\\iota : S \\to X$,\n$\\iota(s) = s$, satisfies $\\iota^{-1}[U] = U \\cap S$ for every $U \\subseteq X$,\nso preimages of open sets are open and $\\iota$ is continuous\n([[thm-continuity-characterisations-top]], clause (b)). Moreover\n$\\mathcal{T}_S$ is the **coarsest** topology on $S$ making $\\iota$ continuous: any\ntopology on $S$ for which $\\iota$ is continuous must contain every\n$\\iota^{-1}[U] = U \\cap S$, hence contain $\\mathcal{T}_S$.\n\n**Characteristic property of a map into a subspace.** Let $(Z, \\mathcal{T}_Z)$ be\na topological space and let $g : Z \\to S$ be a function. Then\n\n$$g \\text{ is continuous as a map } Z \\to (S,\\mathcal{T}_S) \\iff \\iota \\circ g \\text{ is continuous as a map } Z \\to (X,\\mathcal{T}) .$$\n\n*Proof.* For $U \\in \\mathcal{T}$ one has\n$(\\iota \\circ g)^{-1}[U] = g^{-1}[\\iota^{-1}[U]] = g^{-1}[U \\cap S]$. If $g$ is\ncontinuous then each $g^{-1}[U \\cap S]$ is open, so $\\iota \\circ g$ is continuous;\nconversely if $\\iota \\circ g$ is continuous then for any $W = U \\cap S$ open in\n$S$ the set $g^{-1}[W] = (\\iota \\circ g)^{-1}[U]$ is open, so $g$ is continuous.\nBoth directions use only clause (b) of [[thm-continuity-characterisations-top]].\n\n**Restriction of a continuous map.** If $f : X \\to Y$ is continuous and\n$S \\subseteq X$, then $f|_S : S \\to Y$ is continuous, since\n$(f|_S)^{-1}[V] = f^{-1}[V] \\cap S$ is open in $S$ for every open $V \\subseteq Y$\n([[def-continuous-map-top]], [[thm-continuity-characterisations-top]]).\n\n**When relative and ambient agree.** If $S$ is open in $X$ then a subset of $S$\nis open in $S$ if and only if it is open in $X$: a trace $U \\cap S$ is then an\nintersection of two open sets of $X$, and conversely an open subset of $X$\ncontained in $S$ is its own trace. The same statement with \"closed\" throughout\nholds when $S$ is closed in $X$. Both are used in the pasting lemma of the next\nitem, and both fail without the hypothesis: $S$ itself is always open and closed\nin $S$, and need be neither in $X$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-continuous-map-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), let $f : X \\to Y$ be a function and let $x \\in X$.\nNeighbourhoods are as in [[def-neighbourhood-top]].\n\n$f$ is **continuous at $x$** if for every neighbourhood $V$ of $f(x)$ in $Y$ the\npreimage $f^{-1}[V]$ is a neighbourhood of $x$ in $X$.\n\n$f$ is **continuous** if it is continuous at every point of $X$.\n\n**The same condition with open sets only.** $f$ is continuous at $x$ if and only\nif for every open $V \\subseteq Y$ with $f(x) \\in V$ there is an open\n$U \\subseteq X$ with $x \\in U$ and $f[U] \\subseteq V$. Indeed, if $f$ is\ncontinuous at $x$ and $V$ is such an open set, then $V$ is a neighbourhood of\n$f(x)$, so $f^{-1}[V]$ is a neighbourhood of $x$ and contains an open $U \\ni x$,\nwhich satisfies $f[U] \\subseteq V$. Conversely, given the displayed condition and\na neighbourhood $V$ of $f(x)$, fix open $V_0$ with $f(x) \\in V_0 \\subseteq V$ and\nthen open $U \\ni x$ with $f[U] \\subseteq V_0$; then $x \\in U \\subseteq f^{-1}[V_0] \\subseteq f^{-1}[V]$,\nso $f^{-1}[V]$ is a neighbourhood of $x$. Both forms are used below and are the\nsame statement written twice.\n\n**Preimage, not image.** $f^{-1}[V] = \\{\\, x \\in X : f(x) \\in V \\,\\}$\nis the preimage in the sense of [[def-injection-surjection-bijection]] and is\ndefined for every function, invertible or not; no inverse function is being\nasserted to exist. Continuity is a condition on preimages throughout, and the\ncorresponding conditions on images define the *open* and *closed* maps of a later\nitem, which are different notions.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Let $A$ be at most countable ([[def-countable]]) and let $B \\subseteq A$. Then\n$B$ is at most countable.\n\nThe proof establishes the sharper statement about subsets of $\\mathbb{N}$ from\nwhich this follows: **a subset $S \\subseteq \\mathbb{N}$ is finite if it is\nbounded above, and countably infinite if it is not.**\n\n**No choice principle is used.** This is the point of the lemma rather than a\nfootnote to it. The enumeration of an unbounded $S \\subseteq \\mathbb{N}$ is built\nby always taking the *least* element of $S$ above the previous one, and the least\nelement of a nonempty set of naturals is canonical\n([[thm-well-ordering-principle]]): it is determined by $S$, not selected from it.\nReplacing \"least\" by \"some\" would turn the construction into an appeal to\ndependent choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. The same real-valued codomain is required of a metric by\n[[def-metric-space]].\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a countable dense set $C\\subseteq X$ using separability [F3]. The positive rationals $\\mathbb Q_{>0}$ are at most countable by [F5] and [F23], so $C\\times\\mathbb Q_{>0}$ is at most countable by [F4]. It is nonempty because $X$ is a nonempty vector space, $C$ is dense, and $1\\in\\mathbb Q_{>0}$. By [F22], enumerate $C\\times\\mathbb Q_{>0}$ by a surjection from $\\mathbb N$; composing that map with $(c,q)\\mapsto B(c,q)$ shows that $\\mathcal B_0:=\\{B(c,q):c\\in C,\\ q\\in\\mathbb Q_{>0}\\}$ is at most countable. It consists of open sets by [F17], and it is a base: if $x\\in U$ with $U$ open, choose $r>0$ with $B(x,r)\\subseteq U$, choose $c\\in C$ with $d:=\\|x-c\\|_X<r/3$, so $d<r-d$, and then choose a rational $q$ with $d<q<r-d$ by [F6]. The norm triangle inequality [F15] gives $x\\in B(c,q)\\subseteq B(x,r)\\subseteq U$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "F19",
+            "F22",
+            "F23",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any $y\\in\\mathsf Y_0$. The section $\\Phi(\\cdot;y)$ is continuous and real-valued on $D$, so its preimages of open subsets of $\\mathbb R$ are relatively open by [F18, F20] and hence Borel by [F7]. Since the exponential is continuous [F21], $e^{-\\Phi(\\cdot;y)}$ is Borel measurable. By [F24], $u\\mapsto e^{M_1(\\|u\\|_X)}$ is also measurable. The common lower envelope and monotonicity of the exponential [F21] give $0\\le e^{-\\Phi(u;y)}\\le e^{M_1(\\|u\\|_X)}$ for every $u\\in D$. Thus [F10] and the assumed envelope integrability give $Z_\\Phi(y)\\le\\int_D e^{M_1(\\|u\\|_X)}\\,\\mu_{0,D}(du)<\\infty$. Since $y$ was arbitrary, this holds for every $y\\in\\mathsf Y_0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F7",
+            "F10",
+            "F18",
+            "F20",
+            "F21",
+            "F24",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal N:=\\{B\\in\\mathcal B_0:\\mu_0(B)=0\\}$ and $N:=\\bigcup\\mathcal N$. By [F23], $\\mathcal N$ is at most countable. If $\\mathcal N=\\varnothing$, then $N=\\varnothing$ and $\\mu_0(N)=0$ by [F12]. Otherwise [F22] gives a surjection $b:\\mathbb N\\to\\mathcal N$; each $b_n$ is Borel by [F7] and [F17] and has measure zero, so [F8] gives $\\mu_0(N)=\\mu_0(\\bigcup_n b_n)\\le\\sum_n\\mu_0(b_n)=0$. If $x\\notin N$ and $U$ is an open neighborhood of $x$, the base property supplies $B\\in\\mathcal B_0$ with $x\\in B\\subseteq U$; then $\\mu_0(B)>0$, and [F9] gives $\\mu_0(U)\\ge\\mu_0(B)>0$. A point in $N$ lies in a zero-mass open neighborhood. Therefore $X\\setminus N=\\operatorname{supp}\\mu_0$ and $\\mu_0(\\operatorname{supp}\\mu_0)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F12",
+            "F17",
+            "F22",
+            "F23",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\mu_0$ is a probability and $\\mu_0(D)=1$, countable additivity [F13] on $X=D\\sqcup(X\\setminus D)$ gives $\\mu_0(X\\setminus D)=0$. Likewise, $\\mu_0(\\operatorname{supp}\\mu_0)=1$ by step 2.1 and $\\mu_0(X)=1$, so [F13] on the support and its complement gives $\\mu_0(X\\setminus\\operatorname{supp}\\mu_0)=0$. By [F8] their union is null, so $\\mu_0(D\\cap\\operatorname{supp}\\mu_0)=1$. This intersection is nonempty because [F12] gives $\\mu_0(\\varnothing)=0$. Choose $x\\in D\\cap\\operatorname{supp}\\mu_0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F12",
+            "F13",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $y\\in\\mathsf Y_0$. The open interval $(-\\infty,\\Phi(x;y)+1)$ contains $\\Phi(x;y)$; continuity at $x$ [F20] gives a relative-open neighborhood $W$ mapped into this interval. By [F18], write $W=U\\cap D$ for an open $U\\subseteq X$ containing $x$. Thus $\\Phi(u;y)\\le\\Phi(x;y)+1$ on $W$. By the support property $\\mu_0(U)>0$. Since $U\\setminus D\\subseteq X\\setminus D$ and step 3.1 gives $\\mu_0(X\\setminus D)=0$, [F9] gives $\\mu_0(U\\setminus D)=0$; countable additivity [F13] on $U=W\\sqcup(U\\setminus D)$ yields $\\mu_{0,D}(W)=\\mu_0(U)>0$. Positivity of the exponential [F21] then gives $Z_\\Phi(y)\\ge e^{-\\Phi(x;y)-1}\\mu_{0,D}(W)>0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F13",
+            "F18",
+            "F20",
+            "F21",
+            "step 3.1",
+            "given",
+            "choose",
+            "algebra",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For the arbitrary $y$ fixed in step 4.1, steps 1.2 and 4.1 give $0<Z_\\Phi(y)<\\infty$. Applying [F11] to the measurable likelihood section $e^{-\\Phi(\\cdot;y)}$ shows that the normalized update $\\Pi^y$ is a probability measure on $D$. Since $y\\in\\mathsf Y_0$ was arbitrary, this holds for every such datum.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F11",
+            "step 1.2",
+            "step 4.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: a probability prior on a nonempty real Banach parameter space is supplied; no empty-space existence claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 prove strictly positive finite evidence; a zero-evidence fiber violates the stated finite-continuous support-neighborhood hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for the potential Phi=0, Z is the prior mass one and the update is the prior."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: no non-atomicity is assumed; a point-mass prior at x in D still has a positive-mass support neighborhood."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 exclude both zero and infinite evidence under the theorem hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 use one separability witness and one point from a nonempty mass-one set; axiom_use declares the argument choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this is a sufficient propriety criterion, not an iff characterization of the envelope or continuity assumptions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no converse from posterior propriety to an integrable envelope is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The support and neighborhood argument is local and complete; the current IP-15 and IP-01 supplier bodies were inspected. No axiom of choice is used."
+      }
+    },
+    "ex-ip-proper-gaussian-likelihood-posterior-propriety": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ip-function-space-posterior-propriety",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a separable real Banach space with norm $\\|\\cdot\\|_X$, let $D\\subseteq X$ be Borel, and let $\\mu_0$ be a Borel probability on $X$ with $\\mu_0(D)=1$. Here $\\mathcal B(X)$ is generated by the norm-open sets. Give $D$ the relative topology and Borel sigma-algebra $\\mathcal B(D)=\\{D\\cap B:B\\in\\mathcal B(X)\\}$, and let $\\mu_{0,D}$ be the restriction of $\\mu_0$ to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D)$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. Assume $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-infty,+\\infty],\\mathcal B((-infty,+\\infty])\\bigr)$, where $\\mathcal B(\\overline{\\mathbb R})$ is generated by the order topology on the extended real line and $\\mathcal B((-infty,+\\infty])$ is its trace on $(-\\infty,+\\infty]$; thus $+\\infty$ is allowed and $-\\infty$ is excluded. Let $\\mathsf Y_0\\subseteq\\mathsf Y$. Suppose that for every $y\\in\\mathsf Y_0$, the section $u\\mapsto\\Phi(u;y)$ is finite and continuous as a real-valued function on $D$ with its relative topology inherited from the norm topology. Suppose there is one Borel function $M_1:[0,\\infty)\\to[0,\\infty)$, independent of $y\\in\\mathsf Y_0$, such that\n$$\n\\Phi(u;y)\\ge -M_1(\\|u\\|_X)\\quad(u\\in D,\\ y\\in\\mathsf Y_0),\\qquad\n\\int_D e^{M_1(\\|u\\|_X)}\\,\\mu_{0,D}(du)<\\infty.\n$$\nDefine $\\operatorname{supp}\\mu_0:=\\{x\\in X:\\mu_0(U)>0\\text{ for every open neighborhood }U\\text{ of }x\\}$. Then for every $y\\in\\mathsf Y_0$, the evidence $Z_\\Phi(y)$ is finite and strictly positive, and the normalized fiberwise update $\\Pi^y$ is a probability measure on $D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conditional-law-given-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ and $Y:(\\Omega,\\mathcal F,P)\\to(T,\\mathcal T)$ be measurable random elements. A **conditional law of X given Y** is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $\\omega\\mapsto K(Y(\\omega),\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$ in [[def-regular-conditional-distribution]]. Thus for every $A\\in\\mathcal S$ and $H\\in\\sigma(Y)$,\n$$\\int_H K(Y(\\omega),A)\\,dP=P(H\\cap\\{X\\in A\\}).$$\n\nComposition with Y makes each evaluation $\\sigma(Y)$-measurable, and every section remains a probability by [[def-measure-kernel-and-probability-kernel]]. The notation $P(X\\in A\\mid Y=y)=K(y,A)$ refers to a chosen kernel; it is not a ratio involving the possibly zero probability $P(Y=y)$.\n\nWrite $P_Y(B)=P(Y^{-1}(B))$ for the law in [[def-law-or-distribution-of-a-random-element]]. If a specified countable family $\\mathcal C\\subseteq\\mathcal S$ determines probability measures, two conditional laws K,L agree as measures outside a single $\\mathcal T$-measurable $P_Y$-null set. Indeed for each $A\\in\\mathcal C$ the measurable discrepancy $D_A=\\{y:K(y,A)\\ne L(y,A)\\}$ has null inverse image under Y by [[lem-conditional-expectation-is-unique-almost-surely]]. Hence $P_Y(D_A)=0$ by the law definition; the countable union $D$ is null by [[thm-finite-and-countable-subadditivity-of-measures]], and off D the determining property gives equality of measures. This uses a supplied determining family and makes no AC assertion about obtaining one.\n\nValues on a measurable $P_Y$-null subset may be replaced by a specified fixed probability on E without changing these identities. The inverse image of that subset is measurable null, and all event evaluations are bounded, so the modified event integrals agree. Empty-event evaluations remain zero and whole-target evaluations remain one. Existence on standard-Borel spaces is proved separately; the definition alone does not assert a conditional kernel exists.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-prior-on-a-forward-domain",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a specified real separable Banach or Hilbert parameter space with metric $d_X(x,x')=\\|x-x'\\|_X$ and its norm topology. Let $(Y,d_Y)$ be a metric data space equipped with a sigma-algebra $\\Sigma_Y$, let $U\\subseteq X$ be a nonempty admissible truth set, and let $F:U\\to Y$ be a forward map. Choose a Borel set $D\\in\\mathcal B(X)$ with $D\\subseteq U$ such that the restriction $G:=F|_D:D\\to Y$ is measurable for the trace Borel sigma-algebra $\\mathcal B(D):=\\{D\\cap A:A\\in\\mathcal B(X)\\}$. A prior on this forward domain is a Borel probability measure $\\mu$ on $X$ such that $\\mu(D)=1$. Its restriction $\\mu|_D$, defined by $\\mu|_D(A)=\\mu(A)$ for $A\\in\\mathcal B(D)$, is then a probability measure on $D$, and the induced data law is $G_\\#(\\mu|_D)$, defined by $G_\\#(\\mu|_D)(E)=(\\mu|_D)(G^{-1}(E))$ for $E\\in\\Sigma_Y$. A Borel probability on $X$ with $\\mu(D)<1$ is not a prior on this declared forward domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$. For\nevery $a \\in F$ with $a \\neq 0$ we have $a^2 > 0$, where $a^2 = a \\cdot a$. In\nparticular, every nonzero square is positive.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $D=U=\\{0,1\\}$ is Borel and nonempty. The function $\\mu_0(A)=\\tfrac12\\mathbf1_{\\{0\\in A\\}}+\\tfrac12\\mathbf1_{\\{1\\in A\\}}$ is countably additive: in a disjoint sequence of Borel sets each of the two points occurs at most once, so the sum of assigned masses equals the mass of the union. Also $\\mu_0(\\mathbb R)=1$ and $\\mu_0(D)=1$, making it a prior on the stated domain by [F8]. The identity $F:D\\to\\mathbb R$ is measurable because every subset of finite $D$ is Borel, and it satisfies the forward-map interface [F9].",
+          "step": "1.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1] and [F1], each $N(u,1)$ is a probability law with the displayed density; since $D$ is finite, every evaluation $u\\mapsto N(u,1)(B)$ is measurable, so [F10] gives a probability kernel. By [F2] and [F3], Lebesgue measure is sigma-finite. The potential and likelihood are jointly Borel: for each of the two $u$ values their data sections are continuous, each singleton $\\{u\\}$ is Borel in $D$, and each preimage of a Borel set is a finite union of rectangles $\\{u\\}\\times B_u$ in $\\mathcal B(D)\\otimes\\mathcal B(\\mathbb R)$ by [F13]. Thus [F4] gives a proper Bayesian model with the stated prior and sampling kernel.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "F13",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The finite subspace $D=\\{0,1\\}$ is discrete: the open balls of radius $1/2$ about $0$ and $1$ isolate the two points, so every real-valued function on $D$ is continuous. For every $u\\in D$ and $y\\in\\mathbb R$, $\\Phi(u;y)$ is finite. By [F11], $(y-u)^2\\ge0$ and $a\\ge-|a|$ for $a:=\\tfrac12\\log(2\\pi)$, so $\\Phi(u;y)\\ge -C$ where $C:=|a|\\ge0$. The constant envelope $M_1(r)=C$ is Borel, and [F12] gives $\\int_D e^{M_1(\\|u\\|)}\\,\\mu_0(du)=e^C\\mu_0(D)=e^C<\\infty$. Applying [F5] with $\\mathsf Y_0=\\mathbb R$ proves $0<Z(y)<\\infty$ and propriety of the normalized update for every datum.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F8",
+            "F11",
+            "F12",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F14], integrate the likelihood section against the prior. The two atom masses are $1/2$, so $Z(y)=\\tfrac12L(0;y)+\\tfrac12L(1;y)$. Each density value is positive and at most $(2\\pi)^{-1/2}$, so this displayed evidence is strictly positive and finite; integrating over any $A\\subseteq D$ and dividing by it yields the stated posterior weights.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F14",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Apply [F6] with parameter $u\\in D$, prior $\\mu_0$, dominating measure Lebesgue, and the jointly Borel density $L(u;y)$. Its evidence is exactly the $Z(y)$ computed in step 4.1, so the displayed $\\Pi^y$ is a data-indexed posterior-kernel version. By [F7], changing its values on a data-marginal-null set leaves the conditional identities unchanged.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: D={0,1} is nonempty and the prior is explicitly constructed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 show every evidence value is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: the claim is positivity and finiteness; it does not assert evidence equals one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: the sampling variance is fixed at one and no degenerate-noise limit is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: the data space is the whole real line and no endpoint or limiting boundary is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC only for the normal-law interfaces; the IP-16 evidence theorem itself is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: this is a concrete positive-propriety witness, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no converse criterion is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The prior, kernel, density, lower envelope, evidence, and posterior weights are verified locally against actual suppliers."
+      }
+    },
+    "ex-ip-zero-evidence-fiber": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-prior-on-a-forward-domain",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a specified real separable Banach or Hilbert parameter space with metric $d_X(x,x')=\\|x-x'\\|_X$ and its norm topology. Let $(Y,d_Y)$ be a metric data space equipped with a sigma-algebra $\\Sigma_Y$, let $U\\subseteq X$ be a nonempty admissible truth set, and let $F:U\\to Y$ be a forward map. Choose a Borel set $D\\in\\mathcal B(X)$ with $D\\subseteq U$ such that the restriction $G:=F|_D:D\\to Y$ is measurable for the trace Borel sigma-algebra $\\mathcal B(D):=\\{D\\cap A:A\\in\\mathcal B(X)\\}$. A prior on this forward domain is a Borel probability measure $\\mu$ on $X$ such that $\\mu(D)=1$. Its restriction $\\mu|_D$, defined by $\\mu|_D(A)=\\mu(A)$ for $A\\in\\mathcal B(D)$, is then a probability measure on $D$, and the induced data law is $G_\\#(\\mu|_D)$, defined by $G_\\#(\\mu|_D)(E)=(\\mu|_D)(G^{-1}(E))$ for $E\\in\\Sigma_Y$. A Borel probability on $X$ with $\\mu(D)<1$ is not a prior on this declared forward domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. The **counting set function** on $\\mathcal P(X)$ is\n\n$$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$\n\nwhere finite means equinumerous with a natural number ([[def-countable]]) and $+\\infty$ belongs to the extended real line ([[def-extended-reals]]). The two branches are exhaustive and disjoint. The fact that this set function is a measure, and hence deserves the name **counting measure**, is proved in [[prop-counting-measure-is-a-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T,\\Pi)$ be a measure space, let $L_y:\\Theta\\to[0,+\\infty]$\nbe measurable for a fixed datum $y$, and put\n$Z:=\\int_\\Theta L_y\\,d\\Pi$. For a finite positive constant $c$, the set\nfunction\n$$A\\longmapsto c\\int_A L_y\\,d\\Pi$$\nis a probability measure if and only if $0<Z<+\\infty$ and $c=Z^{-1}$. In\nparticular, if $Z=0$ or $Z=+\\infty$, no finite positive scaling makes the\nfiberwise update a probability measure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-law-given-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ and $Y:(\\Omega,\\mathcal F,P)\\to(T,\\mathcal T)$ be measurable random elements. A **conditional law of X given Y** is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $\\omega\\mapsto K(Y(\\omega),\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$ in [[def-regular-conditional-distribution]]. Thus for every $A\\in\\mathcal S$ and $H\\in\\sigma(Y)$,\n$$\\int_H K(Y(\\omega),A)\\,dP=P(H\\cap\\{X\\in A\\}).$$\n\nComposition with Y makes each evaluation $\\sigma(Y)$-measurable, and every section remains a probability by [[def-measure-kernel-and-probability-kernel]]. The notation $P(X\\in A\\mid Y=y)=K(y,A)$ refers to a chosen kernel; it is not a ratio involving the possibly zero probability $P(Y=y)$.\n\nWrite $P_Y(B)=P(Y^{-1}(B))$ for the law in [[def-law-or-distribution-of-a-random-element]]. If a specified countable family $\\mathcal C\\subseteq\\mathcal S$ determines probability measures, two conditional laws K,L agree as measures outside a single $\\mathcal T$-measurable $P_Y$-null set. Indeed for each $A\\in\\mathcal C$ the measurable discrepancy $D_A=\\{y:K(y,A)\\ne L(y,A)\\}$ has null inverse image under Y by [[lem-conditional-expectation-is-unique-almost-surely]]. Hence $P_Y(D_A)=0$ by the law definition; the countable union $D$ is null by [[thm-finite-and-countable-subadditivity-of-measures]], and off D the determining property gives equality of measures. This uses a supplied determining family and makes no AC assertion about obtaining one.\n\nValues on a measurable $P_Y$-null subset may be replaced by a specified fixed probability on E without changing these identities. The inverse image of that subset is measurable null, and all event evaluations are bounded, so the modified event integrals agree. Empty-event evaluations remain zero and whole-target evaluations remain one. Existence on standard-Borel spaces is proved separately; the definition alone does not assert a conditional kernel exists.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-ip-function-space-posterior-propriety",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a separable real Banach space with norm $\\|\\cdot\\|_X$, let $D\\subseteq X$ be Borel, and let $\\mu_0$ be a Borel probability on $X$ with $\\mu_0(D)=1$. Here $\\mathcal B(X)$ is generated by the norm-open sets. Give $D$ the relative topology and Borel sigma-algebra $\\mathcal B(D)=\\{D\\cap B:B\\in\\mathcal B(X)\\}$, and let $\\mu_{0,D}$ be the restriction of $\\mu_0$ to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D)$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. Assume $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-infty,+\\infty],\\mathcal B((-infty,+\\infty])\\bigr)$, where $\\mathcal B(\\overline{\\mathbb R})$ is generated by the order topology on the extended real line and $\\mathcal B((-infty,+\\infty])$ is its trace on $(-\\infty,+\\infty]$; thus $+\\infty$ is allowed and $-\\infty$ is excluded. Let $\\mathsf Y_0\\subseteq\\mathsf Y$. Suppose that for every $y\\in\\mathsf Y_0$, the section $u\\mapsto\\Phi(u;y)$ is finite and continuous as a real-valued function on $D$ with its relative topology inherited from the norm topology. Suppose there is one Borel function $M_1:[0,\\infty)\\to[0,\\infty)$, independent of $y\\in\\mathsf Y_0$, such that\n$$\n\\Phi(u;y)\\ge -M_1(\\|u\\|_X)\\quad(u\\in D,\\ y\\in\\mathsf Y_0),\\qquad\n\\int_D e^{M_1(\\|u\\|_X)}\\,\\mu_{0,D}(du)<\\infty.\n$$\nDefine $\\operatorname{supp}\\mu_0:=\\{x\\in X:\\mu_0(U)>0\\text{ for every open neighborhood }U\\text{ of }x\\}$. Then for every $y\\in\\mathsf Y_0$, the evidence $Z_\\Phi(y)$ is finite and strictly positive, and the normalized fiberwise update $\\Pi^y$ is a probability measure on $D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The half-half set function $\\mu_0$ is a probability: in any disjoint Borel sequence each of $0$ and $1$ occurs in at most one member, so the mass of the union equals the sum of the masses, and $\\mu_0(\\mathbb R)=1$. Since $\\mu_0(D)=1$, it is a prior on $D$ by [F1]. The constant map $F(u)=0$ is a forward map on the nonempty truth set $U=D$ by [F12], and its restriction is measurable because every preimage is $D$ or $\\varnothing$. For each $u\\in D$, $Q(u,\\cdot)=\\delta_0$ is a probability measure by [F4], and every evaluation $u\\mapsto Q(u,B)$ is measurable on finite $D$; hence [F7] makes $Q$ a probability kernel. Thus [F3] gives a proper Bayesian model.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "F12",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With counting measure on $\\mathsf Y$, the density is $L(u,y)=\\mathbf1_{\\{y=0\\}}$ for both parameter values; its sum over $y\\in\\{0,1\\}$ is one, so it represents the stated kernel. The potential and density are jointly measurable: each singleton rectangle $\\{u\\}\\times\\{y\\}$ is measurable, so every subset of finite $D\\times\\mathsf Y$ is a finite union of measurable rectangles by [F13]. Integrating the kernel against the half-half prior gives data law concentrated at $0$, and the same density gives $Z(0)=\\tfrac12+\\tfrac12=1$ and $Z(1)=0$. At $y=1$, [F9] rules out any finite positive scaling of the zero likelihood measure as a probability. The potential equals $+\\infty$ on $D$ at this datum, so the finite-section hypothesis in [F11] fails.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F9",
+            "F11",
+            "F13",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The explicit dominated kernel from [F8] uses the normalized update at $y=0$ and prior filler $\\mu_0$ at $y=1$. The data law gives $\\{1\\}$ probability zero by step 2.1, so [F10] allows replacing that filler by $\\delta_1$ without changing the conditional identities. Both fillers are probability measures on $D$ by [F4], but neither is obtained by normalizing the zero-evidence fiber.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "F10",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the parameter and data spaces are the explicit nonempty finite set {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes Z(1)=0 and states why no normalized update exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 also computes Z(0)=1 and the update on that possible fiber."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the sampling kernel is deterministic and is verified pointwise as a probability kernel."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes both data values in the finite space {0,1}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Example: all spaces and kernels are finite and no family of choices is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: this is a boundary witness, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no converse criterion is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The zero evidence calculation and the distinct normalized-update versus conditional-version conventions are verified."
+      }
+    },
+    "ex-ip-improper-prior-finite-evidence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. The **counting set function** on $\\mathcal P(X)$ is\n\n$$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$\n\nwhere finite means equinumerous with a natural number ([[def-countable]]) and $+\\infty$ belongs to the extended real line ([[def-extended-reals]]). The two branches are exhaustive and disjoint. The fact that this set function is a measure, and hence deserves the name **counting measure**, is proved in [[prop-counting-measure-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-counting-measure-integral-is-nonnegative-series",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb N=\\{0,1,2,\\ldots\\}$ and let $\\#$ be counting measure on\n$(\\mathbb N,\\mathcal P(\\mathbb N))$ ([[def-counting-measure]],\n[[prop-counting-measure-is-a-measure]]). For every measurable\n$f:\\mathbb N\\to[0,+\\infty]$,\n$$\\int_{\\mathbb N} f\\,d\\#=\\sum_{n=0}^{\\infty}f(n),$$\nwhere the right side is the nonnegative extended series of\n[[def-nonnegative-extended-series]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-posterior-evidence-normalizer-and-fiberwise-update",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space, let $\\Pi$ be a\nsigma-finite measure on it, and fix a data value $y$. Let\n$L_y:\\Theta\\to[0,+\\infty]$ be a $\\mathcal T$-measurable function. Define its\n**evidence normalizer** by\n$$Z_\\Pi(y):=\\int_\\Theta L_y(\\theta)\\,\\Pi(d\\theta)\\in[0,+\\infty].$$\nOnly when $0<Z_\\Pi(y)<+\\infty$ define the **fiberwise posterior update** by\n$$\\Pi_y(A):=\\frac{\\int_A L_y(\\theta)\\,\\Pi(d\\theta)}{Z_\\Pi(y)}\\qquad(A\\in\\mathcal T).$$\nThe definition makes no quotient at zero or infinite evidence. A prior is\n**proper** when $\\Pi(\\Theta)=1$, as in\n[[def-bayesian-model-as-prior-and-sampling-kernel]]. We call a sigma-finite\nprior **improper** when $\\Pi(\\Theta)=+\\infty$; the formula also applies to\nother sigma-finite measures. For an improper prior, $Z_\\Pi(y)$ is a fiberwise\nnormalizer only; it does not by itself define a prior-predictive probability or\na conditional law.\n\nWhen the data are described by a dominated experiment, the dominating measure\nand its sigma-finiteness are as in\n[[def-dominated-statistical-experiment]]. A family of pointwise likelihood\nsections is not assumed to be jointly measurable in parameter and data; that\nadditional condition must be supplied separately whenever Tonelli is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-fiberwise-posterior-propriety-iff-finite-positive-evidence",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T,\\Pi)$ be a measure space, let $L_y:\\Theta\\to[0,+\\infty]$\nbe measurable for a fixed datum $y$, and put\n$Z:=\\int_\\Theta L_y\\,d\\Pi$. For a finite positive constant $c$, the set\nfunction\n$$A\\longmapsto c\\int_A L_y\\,d\\Pi$$\nis a probability measure if and only if $0<Z<+\\infty$ and $c=Z^{-1}$. In\nparticular, if $Z=0$ or $Z=+\\infty$, no finite positive scaling makes the\nfiberwise update a probability measure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-bayesian-model-as-prior-and-sampling-kernel",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathsf Y,\\mathcal Y),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). Equip the parameter set with a specified measurable structure $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A **proper Bayesian model** based on this experiment consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ ([[def-probability-measure]]) and a probability kernel $K$ from $(\\Theta,\\mathcal T)$ to $(\\mathsf Y,\\mathcal Y)$ ([[def-measure-kernel-and-probability-kernel]]) that represents the experiment:\n$$K(\\theta,B)=P_\\theta(B)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nThus $\\theta\\mapsto K(\\theta,B)$ is $\\mathcal T$-measurable for every data event $B$, as required for a parameter-measurable model ([[def-parameter-measurable-statistical-model-as-markov-kernel]]). The family of measures in a parametric model alone does not supply this parameter sigma-algebra or measurability condition ([[def-parametric-statistical-model]]).\n\nThe word **proper** means that the prior is a probability measure. A sigma-finite improper prior is not a proper Bayesian model in this definition; fixed-data posterior normalizers for such priors are handled separately.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-ip-function-space-posterior-propriety",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a separable real Banach space with norm $\\|\\cdot\\|_X$, let $D\\subseteq X$ be Borel, and let $\\mu_0$ be a Borel probability on $X$ with $\\mu_0(D)=1$. Here $\\mathcal B(X)$ is generated by the norm-open sets. Give $D$ the relative topology and Borel sigma-algebra $\\mathcal B(D)=\\{D\\cap B:B\\in\\mathcal B(X)\\}$, and let $\\mu_{0,D}$ be the restriction of $\\mu_0$ to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D)$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. Assume $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-infty,+\\infty],\\mathcal B((-infty,+\\infty])\\bigr)$, where $\\mathcal B(\\overline{\\mathbb R})$ is generated by the order topology on the extended real line and $\\mathcal B((-infty,+\\infty])$ is its trace on $(-\\infty,+\\infty]$; thus $+\\infty$ is allowed and $-\\infty$ is excluded. Let $\\mathsf Y_0\\subseteq\\mathsf Y$. Suppose that for every $y\\in\\mathsf Y_0$, the section $u\\mapsto\\Phi(u;y)$ is finite and continuous as a real-valued function on $D$ with its relative topology inherited from the norm topology. Suppose there is one Borel function $M_1:[0,\\infty)\\to[0,\\infty)$, independent of $y\\in\\mathsf Y_0$, such that\n$$\n\\Phi(u;y)\\ge -M_1(\\|u\\|_X)\\quad(u\\in D,\\ y\\in\\mathsf Y_0),\\qquad\n\\int_D e^{M_1(\\|u\\|_X)}\\,\\mu_{0,D}(du)<\\infty.\n$$\nDefine $\\operatorname{supp}\\mu_0:=\\{x\\in X:\\mu_0(U)>0\\text{ for every open neighborhood }U\\text{ of }x\\}$. Then for every $y\\in\\mathsf Y_0$, the evidence $Z_\\Phi(y)$ is finite and strictly positive, and the normalized fiberwise update $\\Pi^y$ is a probability measure on $D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-pigeonhole",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{N}$ be the von Neumann naturals, with $0 = \\varnothing$ and\n$\\sigma(n) = n \\cup \\{n\\}$ ([[def-natural-numbers]]), and let $<$ be the order of\n[[def-nat-order]], so that $m < n \\iff m \\in n$ and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ ([[lem-nat-order-is-membership]]).\nWrite $\\approx$ for equinumerosity ([[def-equinumerous]]). Then:\n\n1. for every $n \\in \\mathbb{N}$ there is **no injection** $\\sigma(n) \\to n$;\n2. if $m < n$ then there is no injection $n \\to m$;\n3. if $n \\approx m$ with $n, m \\in \\mathbb{N}$, then $n = m$;\n4. $\\mathbb{N} \\not\\approx n$ for every $n \\in \\mathbb{N}$;\n5. no natural number is equinumerous with a proper subset of itself: if\n   $A \\subseteq n$ and $n \\approx A$, then $A = n$.\n\nClaim 1 is the pigeonhole principle in its sharpest form, that $n + 1$ pigeons do\nnot fit injectively into $n$ holes; the other four are the consequences the\nlibrary actually quotes. Claim 3 says a finite set is equinumerous with exactly\none natural number, so \"the number of elements\" is well defined. Claim 4 says\n$\\mathbb{N}$ is infinite. Claim 5 says no natural number is Dedekind-infinite.\n\n**Why this is proved here.** The next item on this page defines finiteness as\nequinumerosity with a natural number, and the three size classes it introduces\nare exhaustive by construction but mutually exclusive only because of claim 4.\nSeveral later items also need claim 3 or claim 5. The principle is elementary and\nbelongs with the naturals, but it is about counting rather than about order, so\nit is proved here, immediately before finiteness is defined, from induction and\nthe identification of the order with membership alone. Nothing below uses\nordinals, cardinals, or any later material.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $m\\in\\mathbb N$, the initial set $E_m=\\{0,1,\\ldots,m\\}$ has counting measure $m+1<\\infty$ by [F1] and [F2], and $\\bigcup_mE_m=\\mathbb N$. Thus $\\mu$ is sigma-finite by [F3]. By [F16], $\\mathbb N$ is infinite, so [F1] gives $\\mu(\\mathbb N)=+\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F16",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The counting-integral formula [F6] gives $Z(0)=\\int_{\\mathbb N}\\frac{e^{-n^2/2}}{\\sqrt{2\\pi}}\\,\\mu(dn)=\\frac{1}{\\sqrt{2\\pi}}\\sum_{n=0}^{\\infty}e^{-n^2/2}$. Its $n=0$ term is $1/\\sqrt{2\\pi}>0$ by [F8].",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F6",
+            "F8",
+            "F15",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "AC implies countable choice by [F5], so the normal-density interface [F4] applies: for each $n$, $N(n,1)$ is a probability law with the displayed Gaussian density. Since the parameter sigma-algebra is $\\mathcal P(\\mathbb N)$, every evaluation $n\\mapsto N(n,1)(B)$ is measurable, and the likelihood section $n\\mapsto L_y(n)$ is measurable by [F15]; thus the sampling family satisfies [F13]. The map $F(n)=n$ on the nonempty admissible set $U=\\mathbb N$ satisfies the forward-map interface [F14]. By [F11] this is not a proper Bayesian model with prior $\\mu$, because [step 1.1] shows the prior mass is infinite.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F11",
+            "F13",
+            "F14",
+            "F15",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For every $n\\ge1$, $n^2\\ge n$, so monotonicity of the exponential [F8] gives $e^{-n^2/2}\\le e^{-n/2}$. Let $r=e^{-1/2}$. By [F8], $0<r<1$, and [F7] makes $\\sum_{n=1}^{\\infty}r^n$ finite. Comparison of nonnegative partial sums now bounds the evidence series in step 1.2 by $1+\\sum_{n=1}^{\\infty}r^n<\\infty$. Hence $0<Z(0)<\\infty$.",
+          "step": "2.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F10] to $L_0$ and the sigma-finite measure $\\mu$ gives the probability with singleton masses $L_0(n)/Z(0)=e^{-n^2/2}/\\sum_je^{-j^2/2}$, as stated. Its fixed-data meaning and lack of a prior-predictive probability follow from [F9]; [F11] confirms that no proper Bayesian model is supplied by this prior. The function-space propriety theorem [F12] does not apply because its prior is a probability, whereas [step 1.1] gives $\\mu(\\mathbb N)=+\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the parameter set N contains 0 and the counting measure is explicitly defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the n=0 term gives a strictly positive lower bound for Z(0)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example: evidence is shown positive and finite; no equality Z=1 is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example: the Gaussian observation variance is fixed at one; no zero-variance limit is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: the datum is fixed at zero and no interval endpoint is considered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1–2.2 use explicit countable sets and a geometric bound; the only AC use is stated for the normal-law interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: it is a single finite-evidence witness, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no converse characterization of improper-prior evidence is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The infinite prior is sigma-finite, the positive finite evidence series is proved directly, and no prior-predictive law is asserted."
+      }
+    }
+  }
+}

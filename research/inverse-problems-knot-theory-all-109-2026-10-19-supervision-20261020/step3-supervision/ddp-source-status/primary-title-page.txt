@@ -1,0 +1,52 @@
+Regularisation and Parameter Choice Rules for Composite
+Linear Inverse Problems
+Christina Brandt1, Patrick Horn1
+1 University of Greifswald
+Institute for Mathematics & Computer Science
+Walter-Rathenau-Straße 47, 17487 Greifswald
+Abstract
+In this paper we propose a novel regularisation strategy for structured linear inverse problems of
+the form Ax = F ◦Gx = z. Instead of using the operator A or a complex scheme involving both F
+and G simultaneously, combining already existing and simpler regularisations for F and G allows
+the use of established and optimised programs for high-speed computations. As classical parameter
+choice rules fail in the scenario when no source conditions are known because intermediate error
+bounds may be unavailable, we provide both a-priori and a-posteriori rules with a convergence
+speed analysis given source conditions. We test the proposed method on the pre-clinical medical
+imaging technique of magnetic particle imaging with different choices of regularisation and on a
+convolution problem for an analysis of the convergence speed.
+1
+Introduction
+Considering a linear inverse problem, we are interested in solving the operator equation
+Ax = z,
+(1)
+with a linear map A : X →Z between Hilbert spaces X and Z. However, the right hand side z is not
+readily available but only a noisy version zδ with
+z −zδ ≤δ with noise level δ. The operator is often
+times ill-posed and naive solutions are thus heavily corrupted by the noise. Regularisation methods
+are necessary to stabilise the inversion process. Therefore, the reconstruction error is split in two
+parts resulting in the data error and the approximation error. It is necessary to balance both types of
+error against each other. Classical regularisation approaches include variational or iterative methods.
+Variational methods are based on minimisation of functionals consisting of a data term which ensures
+that the minimising solution solves the operator equation (1) approximately and a regularisation
+term penalising undesired behaviour such as oscillations or enforcing desired behaviour like sharp
+edges, depending on the application. Machine learning can be included in modern approaches, see for
+example [Arr+19] for an overview and further [Zha+22; Hur+24; Can+26; REM17]. Regularisation
+methods include a parameter describing how well the unstable inverse of A is approximated and
+which therefore influence data and approximation error. For high-quality reconstructions it is not
+only important to choose an appropriate regularisation, but also to pick the regularisation parameter
+properly in dependence of the noise level. Additional information about the forward operator can be
+used to choose or design the regularisation, for example by including PDE constraints on the solution
+[Bra+24; AR26; MDR26].
+In this manuscript, we assume that the operator A
+A = G ◦F
+(2)
+is composed of two linear maps F : X →Y and G : Y →Z with an additional Hilbert space Y .
+This type of additional information was already used to design regularisation terms, see for example
+[Bra+24] or [BSW24]. Instead of applying one adapted but complicated regularisation scheme, we
+want to split the regularisation process into multiple regularisation steps which may be easier to
+compute, i.e. we want to design regularisations for the operator equation (1) using regularisations for
+the operators F and G.
+As already mentioned above, not only the choice of regularisation is important, but also the way
+to choose the regularisation parameter. For the most extreme cases, where no error bound exists,
+1
+arXiv:2610.13483v1  [math.NA]  9 Oct 2026

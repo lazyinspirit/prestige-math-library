@@ -1,0 +1,803 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-fourier-slice-identity",
+    "thm-ip-radon-normal-operator",
+    "ex-ip-smooth-radial-phantom",
+    "ex-ip-point-source-distributional-limit",
+    "ex-ip-discretized-complete-data-backprojection"
+  ],
+  "contracts": {
+    "thm-ip-fourier-slice-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-2d-radon-transform",
+          "source_section": "Definition",
+          "quote": "Write $C_c^\\infty(\\mathbb R^2;\\mathbb C)$ for the complex-valued smooth functions of compact support on the Euclidean plane. For $u\\in C_c^\\infty(\\mathbb R^n;\\mathbb C)$, $n=1$ or $2$, use the compact-support Riemann Fourier transform\n$$\\widehat u(\\xi)=\\int_{\\mathbb R^n}u(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\nFor $\\theta=(\\theta_1,\\theta_2)\\in S^1:=\\{x\\in\\mathbb R^2:|x|=1\\}$ put $\\theta^\\perp=(-\\theta_2,\\theta_1)$. The line with normal $\\theta$ and signed offset $s$ is $\\{x\\in\\mathbb R^2:x\\cdot\\theta=s\\}$. Its **Euclidean Radon transform** is\n$$Rf(\\theta,s):=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt,\\qquad f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C),\\ (\\theta,s)\\in S^1\\times\\mathbb R.$$\nThe line integral is a compact-support Riemann integral.\nThe full data set uses every oriented normal $\\theta\\in S^1$ and every $s\\in\\mathbb R$; the same unoriented line is represented by $(\\theta,s)$ and $(-\\theta,-s)$.\nFor a one-dimensional function $h\\in C_c^\\infty(\\mathbb R;\\mathbb C)$, define\n$$|D_s|h(s):=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat h(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nFor $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ define the Riesz potential notation used here by\n$$|D|^{-1}f(x):=\\int_{\\mathbb R^2}e^{2\\pi i x\\cdot\\xi}\\frac{\\widehat f(\\xi)}{2\\pi|\\xi|}\\,d\\xi.$$\nThe quotient in the last integral is assigned value $0$ at $\\xi=0$. These integrals are absolutely convergent on the stated classes: compact-support integration by parts gives rapid decay of $\\widehat f$ and $\\widehat h$, while $\\widehat f$ is bounded near $0$ and $|\\xi|^{-1}$ is locally integrable in two dimensions. Here the multiplier for $|D_s|$ is $2\\pi|\\sigma|$, corresponding to the $e^{-2\\pi i s\\sigma}$ Fourier convention.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\theta$ and define $T(s,t)=s\\theta+t\\theta^\\perp$ and $F(s,t)=f(T(s,t))$. The columns of $T$ are an orthonormal positively oriented basis, so $T$ is a linear diffeomorphism and $K:=T^{-1}(\\operatorname{supp}f)$ is compact. Choose $M>0$ with $K\\subset[-M,M]^2$. Then $F(s,t)=0$ for $|t|>M$, and $Rf(\\theta,s)=\\int_{-M}^{M}F(s,t)\\,dt$; it vanishes unless $s$ belongs to the compact projection of $K$ onto the first coordinate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $f=f_{\\mathrm R}+if_{\\mathrm I}$ and $F_\\nu=f_\\nu\\circ T$ for $\\nu\\in\\{\\mathrm R,\\mathrm I\\}$. Each $f_\\nu$ is real smooth; since $DT$ is constant, repeated applications of [F6] give $\\partial_s^kF_\\nu(s,t)=(\\theta\\cdot\\nabla)^k f_\\nu(T(s,t))$. Thus, for each integer $k\\ge0$, $\\partial_s^kF$ is continuous. On every compact $s$-interval, $\\partial_s^{k+1}F$ is uniformly continuous on the product with $[-M,M]$. For each real component, apply [F5] on $[0,1]$ to $u\\mapsto\\partial_s^kF_\\nu(s+uh,t)$. By [F6] its derivative is $h\\,\\partial_s^{k+1}F_\\nu(s+uh,t)$, continuous and hence integrable by [F2], with the same one-sided derivatives at the endpoints. Combining the two real equalities and dividing by $h$ gives, for sufficiently small nonzero $h$ of either sign,\n$$\\frac{\\partial_s^kF(s+h,t)-\\partial_s^kF(s,t)}{h}=\\int_0^1\\partial_s^{k+1}F(s+uh,t)\\,du.$$\nThe right side converges uniformly for $t\\in[-M,M]$ to $\\partial_s^{k+1}F(s,t)$ as $h\\to0$. Integrating in $t$ therefore proves inductively that $\\frac{d^k}{ds^k}Rf(\\theta,s)=\\int_{-M}^{M}\\partial_s^kF(s,t)\\,dt$ for every $k$, and uniform continuity also makes each derivative continuous in $s$. Thus $Rf(\\theta,\\cdot)\\in C_c^\\infty(\\mathbb R;\\mathbb C)$, so its Fourier transform in [F1] is defined.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $H(s,t)=f(T(s,t))e^{-2\\pi i\\sigma s}$. This is continuous and supported in $K$. Choose a nondegenerate product rectangle containing $K$. By [F2], the real and imaginary parts of $H$ are Riemann integrable there, and all their one-variable sections are continuous and hence Riemann integrable.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], $\\widehat{Rf}(\\theta,\\sigma)$ is the iterated integral of $H$, first in $t$ and then in $s$. Apply the real-valued Riemann-Fubini theorem [F3] separately to $\\operatorname{Re}H$ and $\\operatorname{Im}H$ on the chosen rectangle, then combine the two equalities. Since $H$ vanishes outside that rectangle, this gives\n$$\\widehat{Rf}(\\theta,\\sigma)=\\int_{\\mathbb R^2}f(s\\theta+t\\theta^\\perp)e^{-2\\pi i\\sigma s}\\,ds\\,dt.$$",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F4] to $T$ separately for the real and imaginary parts of the compactly supported Riemann integrand in step 3.1. Since $s=x\\cdot\\theta$ and $|\\det DT|=1$, the integral becomes $\\int_{\\mathbb R^2}f(x)e^{-2\\pi i\\sigma x\\cdot\\theta}\\,dx=\\widehat f(\\sigma\\theta)$ by [F1]. This is the claimed identity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When f=0 both sides vanish by the calculation in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The allowed frequency sigma=0 is included in step 3.1 and causes no division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The constant-one function is not compactly supported on R², so it is outside the statement's domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The formula includes sigma=0 directly in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The offset and frequency domains are the full real line and have no finite endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses only compact-support Riemann integrals, Fubini, and a fixed coordinate change in steps 1.1–1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an equivalence."
+        }
+      ]
+    },
+    "thm-ip-radon-normal-operator": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-2d-radon-transform",
+          "source_section": "Definition",
+          "quote": "Write $C_c^\\infty(\\mathbb R^2;\\mathbb C)$ for the complex-valued smooth functions of compact support on the Euclidean plane. For $u\\in C_c^\\infty(\\mathbb R^n;\\mathbb C)$, $n=1$ or $2$, use the compact-support Riemann Fourier transform\n$$\\widehat u(\\xi)=\\int_{\\mathbb R^n}u(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\nFor $\\theta=(\\theta_1,\\theta_2)\\in S^1:=\\{x\\in\\mathbb R^2:|x|=1\\}$ put $\\theta^\\perp=(-\\theta_2,\\theta_1)$. The line with normal $\\theta$ and signed offset $s$ is $\\{x\\in\\mathbb R^2:x\\cdot\\theta=s\\}$. Its **Euclidean Radon transform** is\n$$Rf(\\theta,s):=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt,\\qquad f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C),\\ (\\theta,s)\\in S^1\\times\\mathbb R.$$\nThe line integral is a compact-support Riemann integral.\nThe full data set uses every oriented normal $\\theta\\in S^1$ and every $s\\in\\mathbb R$; the same unoriented line is represented by $(\\theta,s)$ and $(-\\theta,-s)$.\nFor a one-dimensional function $h\\in C_c^\\infty(\\mathbb R;\\mathbb C)$, define\n$$|D_s|h(s):=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat h(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nFor $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ define the Riesz potential notation used here by\n$$|D|^{-1}f(x):=\\int_{\\mathbb R^2}e^{2\\pi i x\\cdot\\xi}\\frac{\\widehat f(\\xi)}{2\\pi|\\xi|}\\,d\\xi.$$\nThe quotient in the last integral is assigned value $0$ at $\\xi=0$. These integrals are absolutely convergent on the stated classes: compact-support integration by parts gives rapid decay of $\\widehat f$ and $\\widehat h$, while $\\widehat f$ is bounded near $0$ and $|\\xi|^{-1}$ is locally integrable in two dimensions. Here the multiplier for $|D_s|$ is $2\\pi|\\sigma|$, corresponding to the $e^{-2\\pi i s\\sigma}$ Fourier convention.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-fourier-slice-identity",
+          "source_section": "Statement",
+          "quote": "For every $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$, every unit normal $\\theta\\in S^1$, and every $\\sigma\\in\\mathbb R$, the compact-support Fourier transform of the line data in the offset variable equals the restriction of the two-dimensional Fourier transform to the line in frequency space with direction $\\theta$:\n$$\\widehat{Rf}(\\theta,\\sigma)=\\widehat f(\\sigma\\theta).$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-polar-surface-measure-on-the-unit-sphere",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix $n \\ge 1$\nand write\n$$S^{n-1}:=\\{\\omega \\in \\mathbb R^n : |\\omega|=1\\}.$$\nLet\n$$\\Phi:\\mathbb R^n\\setminus\\{0\\}\\longrightarrow(0,\\infty)\\times S^{n-1},\\qquad \\Phi(x)=(|x|,x/|x|).$$\nThis map is continuous. If $E\\subseteq S^{n-1}$ is Borel, then\n$(0,1]\\times E$ is Borel and\n$$\\{r\\omega:\\omega\\in E,\\ 0<r\\le1\\}=\\Phi^{-1}((0,1]\\times E)$$\nis Borel in $\\mathbb R^n\\setminus\\{0\\}$ by\n[[thm-continuous-preimages-of-borel-sets-are-borel]], hence Borel in\n$\\mathbb R^n$ by [[thm-borel-sigma-algebra-of-a-subspace-is-the-trace]]. It is\ntherefore Lebesgue measurable by [[thm-borel-sets-are-lebesgue-measurable]].\nDefine\n$$\\sigma(E):=n\\,\\lambda_n(\\{r\\omega : \\omega \\in E,\\ 0<r\\le 1\\}).$$\n\nThe next theorem proves that this is a Borel measure on $S^{n-1}$ and that it\nis exactly the surface measure needed for polar coordinates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ (Linear map between vector spaces over the same field,\nEvery Euclidean linear map has a unique matrix and satisfies $\\|Lh\\|_2\\le K\\|h\\|_2$ for some $K\\ge0$).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S$, and\n$$\\mathcal F(\\partial^\\alpha f)(\\xi)=(2\\pi i\\xi)^\\alpha\\widehat f(\\xi),\\qquad \\partial^\\beta\\widehat f=\\mathcal F((-2\\pi ix)^\\beta f).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $Q=\\prod_{i=1}^n[a_i,b_i]$ with $n\\ge1$ and $a_i<b_i$. If a bounded Borel real function $f$ on $Q$ is Riemann integrable, then it is Lebesgue integrable and the two integrals agree. The corresponding assertion for complex functions holds componentwise. In particular it applies to smooth compact test integrands and their bounded Borel zero extensions from compact Jordan regions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "regularity-and-absolute-integrability",
+          "claim": "Since $f\\in C_c^\\infty(\\mathbb R^2)$, it is a Schwartz function. Choose $R>0$ with $\\operatorname{supp}f\\subset B_R(0)$. For every $\\theta\\in S^1$ and $s\\in\\mathbb R$, the integrand $f(s\\theta+t\\theta^\\perp)$ vanishes for $|t|>R$, because $|s\\theta+t\\theta^\\perp|^2=s^2+t^2$. Thus the line integral is over the fixed interval $[-R,R]$. On every bounded $s$-interval, $(\\theta,s,t)\\mapsto f(s\\theta+t\\theta^\\perp)$ is uniformly continuous on the compact parameter product with $S^1$ and $[-R,R]$, so its integral is jointly continuous in $(\\theta,s)$. For fixed $\\theta$, write $f=f_{\\mathrm R}+if_{\\mathrm I}$ and $F_\\nu(s,t)=f_\\nu(s\\theta+t\\theta^\\perp)$ for $\\nu\\in\\{\\mathrm R,\\mathrm I\\}$. The inner coordinate map is linear with constant derivative, so repeated use of [F12] gives $\\partial_s^kF_\\nu(s,t)=(\\theta\\cdot\\nabla)^k f_\\nu(s\\theta+t\\theta^\\perp)$ for every $k$. Apply [F11] on $[0,1]$ to each real function $u\\mapsto\\partial_s^kF_\\nu(s+uh,t)$: by [F12] its derivative is $h\\,\\partial_s^{k+1}F_\\nu(s+uh,t)$, which is continuous and Riemann integrable by [F13], including at the endpoints. Dividing the resulting identity by any nonzero $h$ gives the difference quotient as the $u$-integral of $\\partial_s^{k+1}F_\\nu(s+uh,t)$. Uniform continuity on each compact $(s,t)$ rectangle makes this converge uniformly in $t\\in[-R,R]$; integrating and recombining the two real components therefore gives $\\partial_s^k Rf(\\theta,s)=\\int_{-R}^{R}(\\theta\\cdot\\nabla)^k f(s\\theta+t\\theta^\\perp)\\,dt$ for every $k\\ge0$, with each derivative continuous. Also $Rf(\\theta,s)=0$ for $|s|>R$, so $Rf(\\theta,\\cdot)\\in C_c^\\infty(\\mathbb R;\\mathbb C)$ and is Schwartz. For every $x$, joint continuity makes $\\theta\\mapsto Rf(\\theta,x\\cdot\\theta)$ continuous; [F4] makes $\\mu$ finite, so the defining backprojection integral exists. By [F6] and [F7], the Lebesgue Fourier transforms of $f$ and $Rf(\\theta,\\cdot)$ are Schwartz and satisfy pointwise inversion; [F8] identifies them with the compact-support Riemann transforms in [F1]. Also $|\\widehat f(\\xi)|\\le\\int|f|$, and [F4] shows $|\\xi|^{-1}\\widehat f(\\xi)$ is integrable near $0$; outside the unit disk it is dominated by the integrable Schwartz function $|\\widehat f|$. Rapid decay of $\\widehat f$ and finiteness of $\\mu$ make the later signed-frequency integrals absolutely convergent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F11",
+            "F12",
+            "F13",
+            "choose"
+          ]
+        },
+        {
+          "id": "backprojection-fourier-integral",
+          "claim": "Apply [F7] to $Rf(\\theta,\\cdot)$ at $s=x\\cdot\\theta$, then substitute the slice identity [F2] to get $Rf(\\theta,x\\cdot\\theta)=\\int_{\\mathbb R}\\widehat f(\\sigma\\theta)e^{2\\pi i\\sigma x\\cdot\\theta}\\,d\\sigma$. By step 1.1 the resulting double integral over $S^1\\times\\mathbb R$ is absolutely convergent, so [F9] permits either order of integration and gives $R^*Rf(x)=\\int_{S^1}\\int_{\\mathbb R}\\widehat f(\\sigma\\theta)e^{2\\pi i\\sigma x\\cdot\\theta}\\,d\\sigma\\,d\\mu(\\theta)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "normal-operator-polar-reduction",
+          "claim": "The polar definition [F3] and change of variables [F5] imply $\\mu(-E)=\\mu(E)$ for every Borel $E\\subseteq S^1$, since the cone of $-E$ is the image under $-I$ of the cone of $E$ and $|\\det(-I)|=1$. Split the $\\sigma$-integral in step 2.1 at zero, substitute $r=-\\sigma$ on the negative half, and replace $\\theta$ by $-\\theta$ to obtain twice the positive-half integral. Apply [F4] to $h(\\xi)=\\widehat f(\\xi)e^{2\\pi i x\\cdot\\xi}/|\\xi|$, set to zero at $\\xi=0$; for complex $h$, apply the nonnegative formula to positive and negative real and imaginary parts and use [F10]. Thus $R^*Rf(x)=2\\int_{\\mathbb R^2}\\widehat f(\\xi)e^{2\\pi i x\\cdot\\xi}|\\xi|^{-1}d\\lambda_2(\\xi)=4\\pi|D|^{-1}f(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F10",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "filtered-backprojection-polar-reduction",
+          "claim": "By [F1] and [F2], $|D_s|Rf(\\theta,s)=\\int_{\\mathbb R}2\\pi|\\sigma|\\widehat f(\\sigma\\theta)e^{2\\pi i s\\sigma}\\,d\\sigma$. Schwartz decay gives a bound $|\\widehat f(\\sigma\\theta)|\\le C_N(1+|\\sigma|)^{-N}$ uniform in $\\theta$. On each compact parameter set $S^1\\times[-A,A]$, the truncated integrals over bounded $\\sigma$-intervals are continuous in $(\\theta,s)$, while the displayed bound makes their tails uniformly tend to zero; hence the filtered data are jointly continuous. The same bound gives absolute convergence and boundedness, so finiteness of $\\mu$ makes the backprojection integral exist. Fubini [F9], the signed-frequency split in step 3.1, and [F4] give $R^*|D_s|Rf(x)=4\\pi\\int_{\\mathbb R^2}\\widehat f(\\xi)e^{2\\pi i x\\cdot\\xi}d\\lambda_2(\\xi)=4\\pi f(x)$ by [F7].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "normal-and-inverse-identities",
+          "claim": "Step 3.1 is the normal-operator identity, and dividing step 4.1 by $4\\pi$ gives the filtered-backprojection identity. Both hold pointwise for every $x\\in\\mathbb R^2$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For f=0 both displayed identities have zero integrands in steps 2.1 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The inverse-symbol singularity at xi=0 is assigned value zero and is locally integrable by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The constant-one function is not compactly supported on R² and is outside the theorem's domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The ramp multiplier vanishes at zero frequency and the Riesz singularity is integrable there, as shown in step 1.1 and used in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Offsets and frequencies range over all of R and have no finite endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed and identified in step 1.1; no full AC or DC premise is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts identities rather than an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts identities rather than an equivalence."
+        }
+      ]
+    },
+    "ex-ip-smooth-radial-phantom": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-2d-radon-transform",
+          "source_section": "Definition",
+          "quote": "Write $C_c^\\infty(\\mathbb R^2;\\mathbb C)$ for the complex-valued smooth functions of compact support on the Euclidean plane. For $u\\in C_c^\\infty(\\mathbb R^n;\\mathbb C)$, $n=1$ or $2$, use the compact-support Riemann Fourier transform\n$$\\widehat u(\\xi)=\\int_{\\mathbb R^n}u(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\nFor $\\theta=(\\theta_1,\\theta_2)\\in S^1:=\\{x\\in\\mathbb R^2:|x|=1\\}$ put $\\theta^\\perp=(-\\theta_2,\\theta_1)$. The line with normal $\\theta$ and signed offset $s$ is $\\{x\\in\\mathbb R^2:x\\cdot\\theta=s\\}$. Its **Euclidean Radon transform** is\n$$Rf(\\theta,s):=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt,\\qquad f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C),\\ (\\theta,s)\\in S^1\\times\\mathbb R.$$\nThe line integral is a compact-support Riemann integral.\nThe full data set uses every oriented normal $\\theta\\in S^1$ and every $s\\in\\mathbb R$; the same unoriented line is represented by $(\\theta,s)$ and $(-\\theta,-s)$.\nFor a one-dimensional function $h\\in C_c^\\infty(\\mathbb R;\\mathbb C)$, define\n$$|D_s|h(s):=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat h(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nFor $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ define the Riesz potential notation used here by\n$$|D|^{-1}f(x):=\\int_{\\mathbb R^2}e^{2\\pi i x\\cdot\\xi}\\frac{\\widehat f(\\xi)}{2\\pi|\\xi|}\\,d\\xi.$$\nThe quotient in the last integral is assigned value $0$ at $\\xi=0$. These integrals are absolutely convergent on the stated classes: compact-support integration by parts gives rapid decay of $\\widehat f$ and $\\widehat h$, while $\\widehat f$ is bounded near $0$ and $|\\xi|^{-1}$ is locally integrable in two dimensions. Here the multiplier for $|D_s|$ is $2\\pi|\\sigma|$, corresponding to the $e^{-2\\pi i s\\sigma}$ Fourier convention.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-compact-phantom",
+          "claim": "For $u>0$, repeated differentiation gives $\\eta^{(k)}(u)=P_k(1/u)e^{-1/u}$ for a polynomial $P_k$. For every integer $m\\ge0$, $v^me^{-v}\\to0$ as $v\\to\\infty$: if $v>0$, the exponential series gives $e^v\\ge v^{m+1}/(m+1)!$. Hence each right derivative tends to $0$ at $u=0$, and the quotient $\\eta^{(k)}(u)/u$ also tends to $0$ because it is again a polynomial in $1/u$ times $e^{-1/u}$. Induction on $k$ shows the zero extension is smooth on $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "phantom-sinogram",
+          "claim": "The composition $f(x)=\\eta(1-|x|^2)$ is smooth and radial; it vanishes whenever $|x|\\ge1$ and is positive at $x=0$. Thus it is nonzero and has compact support in the closed unit disk.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "phantom-transform-verification",
+          "claim": "For every $\\theta\\in S^1$, orthogonality gives $|s\\theta+t\\theta^\\perp|^2=s^2+t^2$. Substituting into [F1] yields the displayed integral. If $|s|\\ge1$, then $1-s^2-t^2\\le0$ for every $t$, so the line integral is $0$; if $|s|<1$, the integrand vanishes outside $|t|<\\sqrt{1-s^2}$. It depends on $\\theta$ only through the norm identity, so the sinogram is radial-data independent of orientation. The continuous compactly supported integrands are Riemann integrable by [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The sinogram is zero for |s|>=1 by step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The support endpoint values at s=±1 vanish by step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is the fixed nonconstant compactly supported phantom, not the constant-one function."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At |s|=1 the interval in step 3.1 collapses and the integral is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The offset endpoints s=±1 are explicitly included in the zero branch of step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The bump formula and all integrals are explicit and use no choice, as shown in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states an explicit transform, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states an explicit transform, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-point-source-distributional-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-2d-radon-transform",
+          "source_section": "Definition",
+          "quote": "Write $C_c^\\infty(\\mathbb R^2;\\mathbb C)$ for the complex-valued smooth functions of compact support on the Euclidean plane. For $u\\in C_c^\\infty(\\mathbb R^n;\\mathbb C)$, $n=1$ or $2$, use the compact-support Riemann Fourier transform\n$$\\widehat u(\\xi)=\\int_{\\mathbb R^n}u(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\nFor $\\theta=(\\theta_1,\\theta_2)\\in S^1:=\\{x\\in\\mathbb R^2:|x|=1\\}$ put $\\theta^\\perp=(-\\theta_2,\\theta_1)$. The line with normal $\\theta$ and signed offset $s$ is $\\{x\\in\\mathbb R^2:x\\cdot\\theta=s\\}$. Its **Euclidean Radon transform** is\n$$Rf(\\theta,s):=\\int_{\\mathbb R}f(s\\theta+t\\theta^\\perp)\\,dt,\\qquad f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C),\\ (\\theta,s)\\in S^1\\times\\mathbb R.$$\nThe line integral is a compact-support Riemann integral.\nThe full data set uses every oriented normal $\\theta\\in S^1$ and every $s\\in\\mathbb R$; the same unoriented line is represented by $(\\theta,s)$ and $(-\\theta,-s)$.\nFor a one-dimensional function $h\\in C_c^\\infty(\\mathbb R;\\mathbb C)$, define\n$$|D_s|h(s):=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat h(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nFor $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$ define the Riesz potential notation used here by\n$$|D|^{-1}f(x):=\\int_{\\mathbb R^2}e^{2\\pi i x\\cdot\\xi}\\frac{\\widehat f(\\xi)}{2\\pi|\\xi|}\\,d\\xi.$$\nThe quotient in the last integral is assigned value $0$ at $\\xi=0$. These integrals are absolutely convergent on the stated classes: compact-support integration by parts gives rapid decay of $\\widehat f$ and $\\widehat h$, while $\\widehat f$ is bounded near $0$ and $|\\xi|^{-1}$ is locally integrable in two dimensions. Here the multiplier for $|D_s|$ is $2\\pi|\\sigma|$, corresponding to the $e^{-2\\pi i s\\sigma}$ Fourier convention.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unit-mass-radial-bump",
+          "claim": "For $u>0$, repeated differentiation gives $\\eta^{(k)}(u)=P_k(1/u)e^{-1/u}$ for a polynomial $P_k$. The exponential-series bound $e^v\\ge v^{m+1}/(m+1)!$ for $v>0$ shows that each such expression and its difference quotient tend to $0$ as $u\\downarrow0$; induction on $k$ proves that the zero extension is smooth. Hence $\\psi$ is smooth, nonnegative, vanishes for $|x|\\ge1$, and is positive near $x=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "normalized-mollifier",
+          "claim": "By [F2], $\\psi$ is Riemann integrable on a bounding rectangle; $0\\le\\psi\\le1$ and its support lies in $[-1,1]^2$, so [F3] gives $J<\\infty$. On $[-1/4,1/4]^2$ one has $1-|x|^2\\ge7/8$, hence $\\psi\\ge e^{-8/7}$; monotonicity in [F3] gives $J\\ge e^{-8/7}/4>0$. Thus $\\phi$ is defined, radial, smooth, compactly supported, nonnegative, and has integral one.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "scaled-line-data",
+          "claim": "The scaling $t=\\varepsilon u$ in the line integral [F1] gives $R\\phi_\\varepsilon(\\theta,s)=\\varepsilon^{-1}\\rho(s/\\varepsilon)$. Radiality gives $\\phi(s\\theta+t\\theta^\\perp)=\\phi(\\sqrt{s^2+t^2})$, so $\\rho$ is independent of $\\theta$ and vanishes for $|s|>1$. Riemann-Fubini [F4] and the orthogonal change of variables $(s,t)\\mapsto s\\theta+t\\theta^\\perp$, whose absolute Jacobian is $1$, give $\\int_{\\mathbb R}\\rho(s)\\,ds=\\int_{\\mathbb R^2}\\phi(x)\\,dx=1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "test-function-concentration",
+          "claim": "For a test function $h$, the compact-support change of variables [F5] with $s=\\varepsilon u$ gives $\\int_{\\mathbb R}R\\phi_\\varepsilon(\\theta,s)h(s)\\,ds=\\int_{-1}^{1}\\rho(u)h(\\varepsilon u)\\,du$. Uniform continuity of $h$ on $[-1,1]$ implies $\\sup_{|u|\\le1}|h(\\varepsilon u)-h(0)|\\to0$. Since $\\rho\\ge0$ and $\\int\\rho=1$ by step 3.1, the integral tends to $h(0)$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "point-source-distribution",
+          "claim": "The functional $h\\mapsto h(0)$ is the point mass $\\delta_0$ by definition of the Dirac distribution. Step 4.1 proves the asserted distributional limit for every fixed normal $\\theta$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero unit-mass mollifier rather than an empty or zero source."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero test function both sides of the pairing identity in step 4.1 vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The offset test function is compactly supported and the source is a point mass, not the constant-one function."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The limit epsilon down to zero is handled uniformly on |u|<=1 in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The radial profile is supported on [-1,1], including its zero-valued boundary, by step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The bump and rescaling are explicit; steps 1.1–2.1 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a distributional limit, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a distributional limit, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-discretized-complete-data-backprojection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ip-filtered-backprojection-complete-data",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice and let $\\mu$ be the polar surface measure on $S^1$, with $\\mu(E)=2\\lambda_2(\\{r\\theta:\\theta\\in E,\\ 0<r\\le1\\})$ for Borel $E\\subseteq S^1$. The **complete-data filtered-backprojection procedure** takes as input the exact full sinogram $g=Rf$ of some $f\\in C_c^\\infty(\\mathbb R^2;\\mathbb C)$; all oriented normals $\\theta\\in S^1$ and all offsets $s\\in\\mathbb R$ are supplied. It returns the function $f_{\\mathrm{FBP}}:\\mathbb R^2\\to\\mathbb C$ defined by\n$$f_{\\mathrm{FBP}}(x)=\\frac1{4\\pi}\\int_{S^1}q(\\theta,x\\cdot\\theta)\\,d\\mu(\\theta),$$\nwhere the filter output is\n$$q(\\theta,s)=\\int_{\\mathbb R}2\\pi|\\sigma|\\,\\widehat{g(\\theta,\\cdot)}(\\sigma)e^{2\\pi i s\\sigma}\\,d\\sigma.$$\nThe exact instructions are: (1) for each $\\theta$, take the one-dimensional Fourier transform of $g(\\theta,\\cdot)$ with the negative-sign $2\\pi$ convention; (2) multiply that transform by the declared ramp filter $2\\pi|\\sigma|$ and take its inverse Fourier integral to form $q(\\theta,\\cdot)$; (3) evaluate $q(\\theta,\\cdot)$ at $s=x\\cdot\\theta$ and integrate over the full polar surface measure in $\\theta$; (4) divide by $4\\pi$. For this input class the slice identity and Schwartz decay make the filter integral absolutely convergent and the backprojection integral well defined. This definition specifies the continuous full-data procedure; it gives no guarantee for finitely sampled, truncated, or noisy measurements. Exact recovery on the stated class is proved by the normal-operator theorem.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-recursive-radix-two-fast-fourier-transform",
+          "source_section": "Definition",
+          "quote": "Let $m\\in\\mathbb N$ and $N=2^{m}$. The **radix-two fast Fourier transform** $\\operatorname{FFT}_m:\\mathbb C^{\\mathbb Z/N}\\to\\mathbb C^{\\mathbb Z/N}$ is defined by recursion on $m$ as follows. At $m=0$ the group is $\\mathbb Z/1\\mathbb Z$ and $\\operatorname{FFT}_0:=\\mathrm{id}_{\\mathbb C^{\\mathbb Z/1}}$. For $m\\ge1$, given $f\\in\\mathbb C^{\\mathbb Z/2^{m}}$ with even and odd parts $e,o\\in\\mathbb C^{\\mathbb Z/2^{m-1}}$ ([[lem-radix-two-even-odd-dft-factorisation]]), and given $E:=\\operatorname{FFT}_{m-1}(e)$ and $O:=\\operatorname{FFT}_{m-1}(o)$, extend $E$ and $O$ from $\\mathbb Z/2^{m-1}\\mathbb Z$ to $\\mathbb Z$ by $2^{m-1}$-periodicity and set\n\n$$\\operatorname{FFT}_m(f)(k):=E(k)+e^{-2\\pi ik/2^{m}}O(k),\\qquad k\\in\\mathbb Z.$$\n\nThen $\\operatorname{FFT}_m(f)(k+2^{m})=\\operatorname{FFT}_m(f)(k)$ for every $k\\in\\mathbb Z$, because $E$ and $O$ are $2^{m-1}$-periodic and $e^{-2\\pi i(k+2^{m})/2^{m}}=e^{-2\\pi ik/2^{m}}e^{-2\\pi i}=e^{-2\\pi ik/2^{m}}$ ([[thm-complex-exponential-addition-and-real-extension]], [[thm-kernel-and-fibres-of-complex-exponential]]); hence $\\operatorname{FFT}_m(f)$ factors through $\\mathbb Z\\to\\mathbb Z/2^{m}\\mathbb Z$ and $\\operatorname{FFT}_m$ is a well-defined map $\\mathbb C^{\\mathbb Z/2^{m}}\\to\\mathbb C^{\\mathbb Z/2^{m}}$.\n\n**The recursion is legitimate.** Put $\\mathcal F_m:=\\mathbb C^{\\mathbb Z/2^m}$ for each $m\\in\\mathbb N$, and use the tagged state set $A:=\\{(m,g):m\\in\\mathbb N,\\ g:\\mathcal F_m\\to\\mathcal F_m\\}$. For a state $(m,g)\\in A$ and $f\\in\\mathcal F_{m+1}$, let $e,o\\in\\mathcal F_m$ be the even and odd parts supplied by [[lem-radix-two-even-odd-dft-factorisation]], and define $g^+(f)\\in\\mathcal F_{m+1}$ by $g^+(f)([k]_{2^{m+1}}):=g(e)([k]_{2^m})+e^{-2\\pi ik/2^{m+1}}g(o)([k]_{2^m})$ for $k\\in\\mathbb Z$. This is well defined on $[k]_{2^{m+1}}$: replacing $k$ by $k+2^{m+1}$ leaves the recursive values unchanged modulo $2^m$ and multiplies the twiddle by $e^{-2\\pi i}=1$ ([[thm-complex-exponential-addition-and-real-extension]], [[thm-kernel-and-fibres-of-complex-exponential]]). Thus $g^+$ is a total map $\\mathcal F_{m+1}\\to\\mathcal F_{m+1}$, and $T:A\\to A$ defined by $T(m,g):=(m+1,g^+)$ is a total step function. Starting from $a:=(0,\\mathrm{id}_{\\mathcal F_0})$, the recursion theorem [[thm-recursion]] gives a unique $H:\\mathbb N\\to A$ with $H(0)=a$ and $H(m+1)=T(H(m))$. By induction ([[thm-induction-principle]], [[def-natural-numbers]]) the first coordinate of $H(m)$ is $m$; writing $H(m)=(m,\\operatorname{FFT}_m)$ gives $\\operatorname{FFT}_m:\\mathcal F_m\\to\\mathcal F_m$ and exactly the base and combine clauses above. Termination is immediate from recursion on $m$: each recursive call uses level $m-1$, and the base case $m=0$ returns the input. The exponent arithmetic uses $2^{m+1}=2\\cdot2^m$ and, for the rescaling below, $2^{-m/2}=(2^m)^{-1/2}$ ([[lem-power-laws]], [[def-rational-power]], [[lem-rational-power-laws]]).\n\n**What the algorithm computes.** Correctness is proved separately later on this page: $\\operatorname{FFT}_m(f)(k)=X_k(f)$ for every input, where $X$ is the unnormalised transform of [[def-unnormalised-engineering-dft-and-conversion]]; the unitary transform of this page is recovered from the output by the single rescaling $2^{-m/2}$ at length $N=2^{m}$. The operation count is likewise the subject of a later item. At level $m$ the recursion forms the even and odd parts of a length-$2^{m}$ list and performs one combine per output value, reading $E$ and $O$ at their classes and multiplying by the twiddle factors $e^{-2\\pi ik/2^{m}}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radix-two-fft-correctness",
+          "source_section": "Statement",
+          "quote": "Let $m\\in\\mathbb N$, $N=2^{m}$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. Then\n\n$$\\operatorname{FFT}_m(f)(k)=X_k(f)\\qquad\\text{for every }k\\in\\mathbb Z,$$\n\nwhere $X$ is the unnormalised $N$-point discrete Fourier transform of [[def-unnormalised-engineering-dft-and-conversion]]. Equivalently $\\operatorname{FFT}_m(f)=2^{m/2}\\,\\mathcal F_Nf$ for the unitary transform of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]; consequently the algorithm returns the unitary transform after the single rescaling $2^{-m/2}$, and it does so for every input of length $2^{m}$. Correctness is separate from speed: the operation count is the subject of a different theorem, and no floating-point or stability claim is made here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-unnormalised-engineering-dft-and-conversion",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. The **unnormalised (engineering) discrete Fourier transform** of $f$ is the function $X(f):\\mathbb Z\\to\\mathbb C$ defined by\n\n$$X_k(f):=\\sum_{x=0}^{N-1}f([x]_N)\\,e^{-2\\pi ikx/N},\\qquad k\\in\\mathbb Z,$$\n\nthe sum being the finite sum of [[def-finite-sum-in-a-commutative-monoid]] over the representatives $[0]_N,\\dots,[N-1]_N$ of the classes of $\\mathbb Z/N\\mathbb Z$ ([[def-integers-modulo-n]]), with $e^z$ the complex exponential of [[def-complex-exponential]]. Comparing with [[def-unitary-discrete-fourier-transform-on-z-mod-n]],\n\n$$X_k(f)=\\sqrt N\\,(\\mathcal F_Nf)(k),\\qquad (\\mathcal F_Nf)(k)=N^{-1/2}X_k(f),\\qquad k\\in\\mathbb Z,$$\n\nwhere $\\sqrt N=N^{1/2}$ is the rational power of [[def-rational-power]] and the two conversions are inverse to each other by $N^{1/2}N^{-1/2}=1$ ([[lem-rational-power-laws]]). So the two transforms determine each other, and the only difference between them is the constant $\\sqrt N$.\n\n**The transform is defined on classes and is $N$-periodic.** If $[x]_N=[x']_N$ then $x'=x+mN$ for some integer $m$ and $e^{-2\\pi ikx'/N}=e^{-2\\pi ikx/N}e^{-2\\pi ikm}=e^{-2\\pi ikx/N}$, so the summands depend only on classes; and $e^{-2\\pi i(k+N)x/N}=e^{-2\\pi ikx/N}e^{-2\\pi ix}=e^{-2\\pi ikx/N}$ for every integer $x$, both identities following from the addition law and $\\exp(2\\pi i\\,\\cdot)=1$ ([[thm-complex-exponential-addition-and-real-extension]], [[thm-kernel-and-fibres-of-complex-exponential]]). Hence $X(f)$ factors through $\\mathbb Z\\to\\mathbb Z/N\\mathbb Z$ and $X_k(f)$ depends on $k$ only through its class.\n\n**Inverse formulas.** The inversion theorem in its unitary form is the identity $f(x)=N^{-1/2}\\sum_{k=0}^{N-1}(\\mathcal F_Nf)(k)e^{2\\pi ikx/N}$ of [[thm-finite-fourier-inversion]]; substituting $(\\mathcal F_Nf)(k)=N^{-1/2}X_k(f)$ and collecting $N^{-1/2}N^{-1/2}=N^{-1}$ ([[lem-rational-power-laws]]) gives the engineering form\n\n$$f(x)=\\frac1N\\sum_{k=0}^{N-1}X_k(f)\\,e^{2\\pi ikx/N},\\qquad x\\in\\mathbb Z/N\\mathbb Z.$$\n\nThis is the convention in which the radix-two algorithm computes its output. The unitary transform is recovered by the single rescaling $N^{-1/2}=2^{-m/2}$ at length $N=2^m$. The correctness and complexity theorems refer to this unnormalised output; the convolution lemma is stated in the unitary convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-fourier-inversion",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and $f\\in\\mathbb C^{\\mathbb Z/N}$. Then for every $x\\in\\mathbb Z/N\\mathbb Z$\n\n$$f(x)=N^{-1/2}\\sum_{k=0}^{N-1}(\\mathcal F_Nf)(k)\\,e^{2\\pi ikx/N},$$\n\nthe right-hand side being independent of the chosen integer representative of the class $x$. Consequently $\\mathcal F_N$ is bijective with inverse the positive-sign transform\n\n$$(\\mathcal G_Ng)(x):=N^{-1/2}\\sum_{k=0}^{N-1}g(k)\\,e^{2\\pi ikx/N},\\qquad g\\in\\mathbb C^{\\mathbb Z/N},\\ x\\in\\mathbb Z/N\\mathbb Z,$$\n\nand there is no convergence, regularity or support hypothesis anywhere.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-fft-and-ramp",
+          "claim": "The only nonzero detector sample is at $m=2$, so the engineering DFT is $X_k=e^{-2\\pi i k(2)/4}=(-1)^k$. By [F2] and [F3], the length-four radix-two FFT returns $X=(1,-1,1,-1)$. The sampled ramp is $\\lambda=(0,\\pi/2,\\pi,\\pi/2)$, hence its filtered frequency array is $Y=(0,-\\pi/2,\\pi,-\\pi/2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "inverse-filtered-row",
+          "claim": "The inverse formula [F4] gives $Q_m=\\frac14\\sum_{k=0}^3Y_ke^{2\\pi i km/4}$. For $m=0,1,2,3$ the sums are respectively $0,-\\pi,2\\pi,-\\pi$, so $Q=(0,-\\pi/4,\\pi/2,-\\pi/4)$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "single-pixel-quadrature",
+          "claim": "At $x=0$, the detector coordinate is $s=0$, which is bin $m=2$ for every direction. Therefore the declared angular quadrature and backprojection scale give $\\widetilde f(0)=\\frac1{4\\pi}\\frac\\pi4\\sum_{j=0}^7Q_j[2]=\\frac1{4\\pi}\\frac\\pi4(8)(\\pi/2)=\\pi/4$. This verifies the displayed finite output only; no equality with a continuous source value is used.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero four-bin synthetic sinogram row."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero input is not the fixed central-bin array used in the calculation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses length four, not the length-one FFT base case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero ramp at k=0 and the Nyquist bin k=2 are explicitly included in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint detector-bin outputs Q[0]=0 and Q[3]=-pi/4 are included in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite array computation is explicit; Countable Choice is stated only for the continuous backprojection interface in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a finite computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a finite computation, not an equivalence."
+        }
+      ]
+    }
+  }
+}

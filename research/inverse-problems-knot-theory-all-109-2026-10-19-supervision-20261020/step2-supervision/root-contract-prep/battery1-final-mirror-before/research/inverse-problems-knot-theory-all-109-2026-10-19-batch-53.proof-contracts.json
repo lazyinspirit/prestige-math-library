@@ -1,0 +1,2267 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-53",
+  "scope": [
+    "lem-ip-vandermonde-determinant",
+    "def-ip-real-frame-phase-retrieval",
+    "lem-ip-real-phase-retrieval-quotient-metric",
+    "def-ip-frame-complement-property",
+    "def-ip-real-full-spark-measurement-family",
+    "alg-ip-finite-sign-enumeration-phase-retrieval",
+    "thm-ip-real-phase-retrieval-complement-property",
+    "thm-ip-finite-sign-enumeration-correctness",
+    "cor-ip-full-spark-sharp-real-phase-measurement-count",
+    "ex-ip-fourier-translation-reflection-ambiguity",
+    "cex-ip-real-failed-complement-partition",
+    "ex-ip-sign-enumeration-budget-exhaustion",
+    "ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame",
+    "cex-ip-complex-complement-property-insufficient"
+  ],
+  "contracts": {
+    "lem-ip-vandermonde-determinant": {
+      "kind": "lemma",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{R} = \\mathcal{C}/\\mathcal{N}$ ([[def-real-numbers]]) is a field.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-polynomial-ring-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). A function $a\\colon\\mathbb N\\to R$ has **finite support** when there is $N\\in\\mathbb N$ such that $a_i=0$ for every $i>N$. The **polynomial ring** $R[x]$ is the set of all finitely supported functions $a\\colon\\mathbb N\\to R$.\n\nFor $a,b\\in R[x]$ and $n\\in\\mathbb N$, define\n\n$$ (a+b)_n:=a_n+b_n,\\qquad (ab)_n:=\\sum_{i+j=n}a_i b_j. $$\n\nThe convolution sum is a finite sum in the additive commutative monoid of $R$ ([[def-finite-sum-in-a-commutative-monoid]]). Write $0$ for the zero sequence, $1$ for the sequence with coefficient $1_R$ at index $0$ and zero elsewhere, and $x$ for the sequence with coefficient $1_R$ at index $1$ and zero elsewhere. The coefficient sequence supported at $0$ with value $r$ is denoted again by $r$, and a polynomial $a$ is written formally as $\\sum_i a_i x^i$.\n\nThe closure of these operations and the commutative-ring axioms are established by [[lem-polynomial-operations-preserve-finite-support]] and [[thm-polynomial-ring-is-a-commutative-ring]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain, then $R[x]$ is an integral domain.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and every commutative ring $R$, the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-factor-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $a\\in R$, and $f\\in R[x]$. Then $f(a)=0$ if and only if $x-a$ divides $f$ in $R[x]$.\n\nMore precisely, there is a unique $q\\in R[x]$ such that $f=q(x-a)+f(a)$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-universal-property-of-a-polynomial-ring",
+          "source_section": "Statement",
+          "quote": "Let $R,S$ be commutative rings, let $\\varphi\\colon R\\to S$ be a unital ring homomorphism, and let $s\\in S$. There is a unique unital ring homomorphism\n\n$$ \\operatorname{ev}_{\\varphi,s}\\colon R[x]\\to S $$\n\nthat extends $\\varphi$ on constant polynomials and sends $x$ to $s$. It is given by $\\operatorname{ev}_{\\varphi,s}(\\sum_i a_i x^i)=\\sum_i\\varphi(a_i)s^i$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. Define polynomial rings in finitely many commuting indeterminates recursively by\n\n$$ R[x_1,\\ldots,x_0]:=R,\\qquad R[x_1,\\ldots,x_{n+1}]:=R[x_1,\\ldots,x_n][x_{n+1}]. $$\n\nAt each stage the coefficient ring embeds as the constant polynomials ([[thm-polynomial-ring-is-a-commutative-ring]]), so all preceding indeterminates remain present. The new indeterminate commutes with every coefficient by the commutativity built into [[def-polynomial-ring-over-a-commutative-ring]], and consequently all $x_i$ commute. This iterated ring is denoted $R[x_1,\\ldots,x_n]$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-invertible-matrix-theorem",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_n(F)$, the following are equivalent:\n\n1. $A$ is invertible;\n2. $x\\mapsto Ax$ is a linear isomorphism;\n3. $N(A)=\\{0\\}$;\n4. $\\operatorname{rank}(A)=n$;\n5. $A$ has a pivot in every row and every column;\n6. the RREF of $A$ is $I_n$;\n7. for every $b\\in F^n$, the equation $Ax=b$ has exactly one solution.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). As in\n[[def-linear-combination-and-span]], a **finite list** of vectors is a function\n$v : n \\to V$ on a von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), written\n$v_i := v(i)$, and\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nis the finite sum of [[def-monoid-finite-product]] read additively in the abelian\ngroup $(V,+,0_V)$, applied to the list $i \\mapsto \\lambda_i v_i$. No second notion\nof finite sum is introduced here.\n\n### Independence of a list\n\nA finite list $v : n \\to V$ is **linearly independent** when, for every list of\nscalars $\\lambda : n \\to F$,\n\n$$\\sum_{i<n} \\lambda_i v_i = 0_V \\quad \\Longrightarrow \\quad \\lambda_i = 0_F \\text{ for every } i < n,$$\n\nand **linearly dependent** otherwise, that is, when some $\\lambda : n \\to F$ has\n$\\sum_{i<n}\\lambda_i v_i = 0_V$ while $\\lambda_j \\ne 0_F$ for at least one\n$j < n$. Such a $\\lambda$ is called a **witness** to the dependence of $v$.\n\n### Independence of a subset\n\nA subset $S \\subseteq V$ is **linearly independent** when **every injective**\nfinite list $v : n \\to S$ ([[def-injection-surjection-bijection]]) is linearly\nindependent, and **linearly dependent** otherwise, that is, when some injective\nfinite list into $S$ is linearly dependent.\n\n**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective. If the definition above quantified\nover all such lists, then for any $w \\in S$ the list $v : 2 \\to S$ with\n$v_0 = v_1 = w$ and the scalars $\\lambda_0 = 1_F$, $\\lambda_1 = -1_F$ would give\n\n$$\\sum_{i<2}\\lambda_i v_i = (0_V + 1_F w) + (-1_F)w = w + (-w) = 0_V$$\n\nwith $\\lambda_0 = 1_F \\ne 0_F$ ([[def-field]],\n[[lem-vector-space-elementary-consequences]]), so **every** nonempty subset of\n$V$ would be dependent and the notion would be empty. Quantifying over injective\nlists is what makes the subset notion the intended one. It costs nothing for\nlists: [[lem-independent-list-is-injective]] shows that the vanishing condition\nabove already forces a list to be injective, so no injectivity hypothesis has to\nbe carried alongside independence of a list.\n\n### The boundary cases are genuine cases\n\n$\\mathbb{N}$ contains $0$ ([[def-natural-numbers]]), so both of the following are\ninstances of the definitions and neither is a convention.\n\n- **The empty list is independent.** For $n = 0$ the only list of scalars is the\n  empty one, and the condition \"$\\lambda_i = 0_F$ for every $i < 0$\" holds\n  vacuously.\n- **$\\varnothing \\subseteq V$ is independent.** The only function $v : n \\to\n  \\varnothing$ is the empty one, with $n = 0$, and it is independent by the\n  previous point.\n- **$\\{0_V\\}$ is dependent.** The list $v : 1 \\to \\{0_V\\}$ with $v_0 = 0_V$ is\n  injective, and taking $\\lambda_0 = 1_F$ gives\n  $\\sum_{i<1}\\lambda_i v_i = 0_V + 1_F 0_V = 0_V$ by the recursion of\n  [[def-monoid-finite-product]] and $\\lambda 0_V = 0_V$\n  ([[lem-vector-space-elementary-consequences]]), while $1_F \\ne 0_F$ in a field\n  ([[def-field]]). So $\\{0_V\\}$, and hence every subset of $V$ containing $0_V$,\n  is linearly dependent.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n(Inductive set),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by The natural numbers exist: a smallest inductive set (the\nAxiom of Infinity, The Axiom of Infinity: there is a set containing a set with no elements and closed under $y \\mapsto y \\cup \\{y\\}$, supplies one inductive set to\nintersect within, and Separation, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$, makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By induction on $n$, every iterated ring $\\mathbb R[t_1,\\ldots,t_n]$ is an integral domain: the base $\\mathbb R$ is a field, hence a domain, and the successor step is exactly [F1]. In each iteration the new indeterminate has coefficient $1$ in degree $1$, whereas every preceding indeterminate is embedded as a constant polynomial; since $1\\ne0$ in $\\mathbb R$, all the $t_j$ are pairwise distinct.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $d=1$, $V_d=[1]$ and the empty product is $1$, so the formula holds. For the inductive step let $d\\ge2$ and suppose the formula holds in size $d-1$. Put $C=\\mathbb R[t_1,\\ldots,t_{d-1}]$ and $T=t_d$, so the recursive construction identifies $\\mathbb R[t_1,\\ldots,t_d]=C[T]$. Regard $D_d:=\\det V_d$ as a polynomial $f(T)\\in C[T]$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The Leibniz expansion in [F2] shows that only powers $T^0,\\ldots,T^{d-1}$ occur in $f$, and that the coefficient of $T^{d-1}$ is $D_{d-1}:=\\det V_{d-1}$: precisely the terms with exponent $d-1$ in the last column are those permutations fixing the last row, and their remaining signed sum is the Leibniz determinant of $V_{d-1}$. For each $j<d$, substituting $T=t_j$ makes the last column equal column $j$, so alternation in [F2] gives $f(t_j)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The elements $t_1,\\ldots,t_{d-1}$ are distinct in the domain $C$ by step 1.1. Starting with $f$, apply [F3] successively at $t_1,\\ldots,t_{d-1}$. At stage $k$, if $f=\\bigl(\\prod_{j<k}(T-t_j)\\bigr)g_k$, evaluation at $t_k$ gives\n$$0=f(t_k)=\\bigl(\\prod_{j<k}(t_k-t_j)\\bigr)g_k(t_k).$$\nEvery factor $t_k-t_j$ is nonzero, so their product is nonzero in the domain $C$; hence $g_k(t_k)=0$, and [F3] gives $T-t_k\\mid g_k$. Induction over these finitely many stages yields\n$$f(T)=g(T)\\prod_{j<d}(T-t_j)$$\nfor some $g(T)\\in C[T]$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the induction hypothesis, $D_{d-1}=\\prod_{1\\le p<q<d}(t_q-t_p)$, which is nonzero because each difference is nonzero in the domain $C$. Thus the coefficient of $T^{d-1}$ in $f$ is nonzero. The product $\\prod_{j<d}(T-t_j)$ is monic of degree $d-1$. If $g$ had any nonzero coefficient at a positive power, its highest such power times this monic product would give a nonzero coefficient of $f$ above degree $d-1$, contradicting step 2.1. Therefore $g$ is constant, and comparison of the $T^{d-1}$ coefficients gives $g=D_{d-1}$. This proves\n$$D_d=D_{d-1}\\prod_{j<d}(t_d-t_j)=\\prod_{1\\le p<q\\le d}(t_q-t_p).$$\nBy induction the determinant formula holds for every $d\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For distinct real nodes $s_1,\\ldots,s_d$, the evaluation homomorphism in [F3] substitutes them into the formula and gives $\\det V_d(s_1,\\ldots,s_d)=\\prod_{p<q}(s_q-s_p)\\ne0$. By [F4], the square matrix with these moment-curve vectors as columns is invertible, hence has trivial coefficient kernel and linearly independent columns by [F5].",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement covers d=1, where the determinant is 1 and the pair product is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and proof show that the proof makes the determinant vanish when two nodes coincide, matching the zero product factor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement treats the one-column case directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and proof include repeated nodes in the determinant identity; independence is asserted only for distinct nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that the proof factors finitely many pair differences and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The determinant formula and its consequence are not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from independence to the Vandermonde formula is asserted."
+        }
+      ]
+    },
+    "def-ip-real-frame-phase-retrieval": {
+      "kind": "definition",
+      "risk": "low",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition explicitly sets [0]=empty and Y_0 to a singleton."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits zero measurement vectors and the zero signal."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition permits nonspanning families and repeated or zero rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that the quotient minimum ranges over two explicit sign choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        }
+      ]
+    },
+    "lem-ip-real-phase-retrieval-quotient-metric": {
+      "kind": "lemma",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-real-frame-phase-retrieval",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, allowing zero measurement vectors and not assuming that $\\Phi$ spans. Here $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$; measurement labels are one-based, while coordinates in $\\mathbb R^d$ use the library's zero-based convention $k<d$. Write $\\mathbb R^{[m]}=\\{y:[m]\\to\\mathbb R\\}$. Use the Euclidean inner product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$ and norm $\\|u\\|_2=\\sqrt{\\langle u,u\\rangle}$. Define the signal equivalence relation $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and write $q(x)=[x]$. Its quotient distance is\n$$d_{\\pm}([x],[z]):=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\n\nUse data space $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ with metric\n$$\\rho_m(b,c)=\\begin{cases}\\sqrt{\\sum_{k<m}(b_{k+1}-c_{k+1})^2},&m\\ge1,\\\\0,&m=0.\\end{cases}$$\nThe fixed relabeling $i\\mapsto i-1$ identifies $[m]$-indexed data with the library's zero-based $\\mathbb R^m$; $Y_0$ is a singleton. Define the real analysis map $T_\\Phi:\\mathbb R^d\\to\\mathbb R^{[m]}$ by\n$$T_\\Phi x=(\\langle a_i,x\\rangle)_{i\\in[m]}.$$\nThe amplitude map is $\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]}$, while the intensity map is\n$$\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}\\in Y_m.$$\nA finite real measurement family performs **phase retrieval** when $\\mathcal I_\\Phi:Q_d\\to Y_m$ is injective, equivalently when the induced amplitude map is injective. The quotient distance, both induced maps, and the data metric are well defined as verified below.\n\nThe diagram records the identity $\\mathcal I_\\Phi\\circ q=S\\circ T_\\Phi$, where $S(y)=(y_i^2)_{i\\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements, amplitudes, and intensities; no proof relies on the diagram.\n\n```tikzcd\n\\mathbb R^d \\arrow[r,\"T_\\Phi\"] \\arrow[d,\"q\"'] & \\mathbb R^{[m]} \\arrow[d,\"S\"] \\\\\nQ_d \\arrow[r,\"\\mathcal I_\\Phi\"'] & [0,\\infty)^m\n```",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field (Ordered field). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$, with\n$|x|$ the absolute value (Absolute value in an ordered field). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) with positive cone $P$. For\nevery $a \\in F$ with $a \\neq 0$ we have $a^2 > 0$, where $a^2 = a \\cdot a$. In\nparticular, every nonzero square is positive.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ (Field) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field (Ordered field, Complete ordered field (least-upper-bound property)).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The relation $\\sim$ is reflexive because $x=x$, symmetric because $z=x$ implies $x=z$ and $z=-x$ implies $x=-z$, and transitive because multiplying the two signs in $z=\\epsilon x$ and $w=\\delta z$ gives $w=(\\delta\\epsilon)x$ with $\\delta\\epsilon\\in\\{1,-1\\}$. Thus $Q_d$ is the quotient set and $q(x)=[x]$ is onto by the definition of equivalence classes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $m\\ge1$, the relabeling $J:Y_m\\to[0,\\infty)^m$ given by $J(b)_k=b_{k+1}$ is a bijection and $\\rho_m(b,c)=d_2(Jb,Jc)$, so the metric axioms of [F2] restrict to $Y_m$. If $m=0$, $Y_0$ has one element and the zero function separates its only pair and is symmetric and triangular. Hence $Y_m$ is a metric space in both cases.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Replacing representatives by $x'=\\epsilon x$ and $z'=\\delta z$, with $\\epsilon,\\delta\\in\\{1,-1\\}$, changes the pair $(\\|x-z\\|_2,\\|x+z\\|_2)$ only by possibly interchanging its two entries, since $\\|x'-z'\\|_2=\\|x-(\\epsilon\\delta)z\\|_2$ and $\\|x'+z'\\|_2=\\|x+(\\epsilon\\delta)z\\|_2$. By [F7] the minimum is attained, so its value is independent of representatives.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replacing $x$ by $-x$ changes each amplitude coordinate from $|\\langle a_i,x\\rangle|$ to $|-\\langle a_i,x\\rangle|=|\\langle a_i,x\\rangle|$, and changes each intensity coordinate from $\\langle a_i,x\\rangle^2$ to $(-\\langle a_i,x\\rangle)^2=\\langle a_i,x\\rangle^2$. Every intensity coordinate is nonnegative by [F6], so both maps have the stated codomain and are well defined on $Q_d$, including zero rows and the zero signal. For $m=0$ both are the unique map to the empty tuple.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Choose signs $\\epsilon,\\delta\\in\\{1,-1\\}$ attaining the two minima for $d_{\\pm}([x],[y])$ and $d_{\\pm}([y],[z])$; [F7] ensures these minima exist, and the choices are from finite two-element sets. The Euclidean triangle inequality and sign-invariance of the norm give $d_{\\pm}([x],[z])\\le\\|x-\\epsilon\\delta z\\|_2\\le\\|x-\\epsilon y\\|_2+\\|y-\\delta z\\|_2=d_{\\pm}([x],[y])+d_{\\pm}([y],[z])$. Thus the triangle inequality holds.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F2",
+            "F7",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both candidate norms are nonnegative by the nonnegative-root convention [F5], and their minimum is symmetric under interchanging $x$ and $z$. The minimum is zero exactly when $x=z$ or $x=-z$, which is exactly $[x]=[z]$ by [F1] and separation of the Euclidean metric in [F2]. Together with the triangle inequality in step 2.2, this proves that $d_{\\pm}$ is a metric.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 2.2",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each amplitude coordinate is nonnegative and its square is the corresponding intensity coordinate. If two nonnegative amplitudes have the same square, uniqueness of nonnegative square roots [F5] makes the amplitudes equal; conversely equal amplitudes have equal squares. Coordinatewise, the amplitude and intensity maps therefore have the same fibers and are injective simultaneously.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes m=0, the singleton data space, and the unique empty-tuple maps."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and proof include the zero signal, zero rows, and nonnegative zero data coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows d=1 and the quotient-metric argument applies in every positive dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits repeated and zero measurement vectors; well-definedness uses only sign invariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that the proof takes minima and sign choices from finite two-element sets only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The statement claims equal amplitude data and equal intensity data have the same fibers; the proof verifies coordinatewise squaring."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The statement claims equal amplitude data and equal intensity data have the same fibers; uniqueness of nonnegative roots proves the converse."
+        }
+      ]
+    },
+    "def-ip-frame-complement-property": {
+      "kind": "definition",
+      "risk": "low",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition explicitly assigns the empty family span {0} and quantifies over the empty partition when m=0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition explicitly allows repeated and zero measurement vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        }
+      ]
+    },
+    "def-ip-real-full-spark-measurement-family": {
+      "kind": "definition",
+      "risk": "low",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition applies at d=1 when m>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition tests every d-label list, so repeated vector values are allowed but fail independence when they occur in a tested list."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no claim involving this boundary beyond the stated construction."
+        }
+      ]
+    },
+    "alg-ip-finite-sign-enumeration-phase-retrieval": {
+      "kind": "algorithm",
+      "risk": "low",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition supplies the unique empty pattern and zero-dimensional data case m=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition accepts zero intensities and defines their nonnegative roots."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The algorithm makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits zero rows, rank deficiency, and duplicate signed right-hand sides."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition explicitly handles P=0, L=0, epsilon=0, and incomplete enumeration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition uses a finite ordered sign set and one SVD, with no arbitrary choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm makes no claim involving this boundary beyond the stated construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm makes no claim involving this boundary beyond the stated construction."
+        }
+      ]
+    },
+    "thm-ip-real-phase-retrieval-complement-property": {
+      "kind": "theorem",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-real-frame-phase-retrieval",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, allowing zero measurement vectors and not assuming that $\\Phi$ spans. Here $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$; measurement labels are one-based, while coordinates in $\\mathbb R^d$ use the library's zero-based convention $k<d$. Write $\\mathbb R^{[m]}=\\{y:[m]\\to\\mathbb R\\}$. Use the Euclidean inner product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$ and norm $\\|u\\|_2=\\sqrt{\\langle u,u\\rangle}$. Define the signal equivalence relation $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and write $q(x)=[x]$. Its quotient distance is\n$$d_{\\pm}([x],[z]):=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\n\nUse data space $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ with metric\n$$\\rho_m(b,c)=\\begin{cases}\\sqrt{\\sum_{k<m}(b_{k+1}-c_{k+1})^2},&m\\ge1,\\\\0,&m=0.\\end{cases}$$\nThe fixed relabeling $i\\mapsto i-1$ identifies $[m]$-indexed data with the library's zero-based $\\mathbb R^m$; $Y_0$ is a singleton. Define the real analysis map $T_\\Phi:\\mathbb R^d\\to\\mathbb R^{[m]}$ by\n$$T_\\Phi x=(\\langle a_i,x\\rangle)_{i\\in[m]}.$$\nThe amplitude map is $\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]}$, while the intensity map is\n$$\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}\\in Y_m.$$\nA finite real measurement family performs **phase retrieval** when $\\mathcal I_\\Phi:Q_d\\to Y_m$ is injective, equivalently when the induced amplitude map is injective. The quotient distance, both induced maps, and the data metric are well defined as verified below.\n\nThe diagram records the identity $\\mathcal I_\\Phi\\circ q=S\\circ T_\\Phi$, where $S(y)=(y_i^2)_{i\\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements, amplitudes, and intensities; no proof relies on the diagram.\n\n```tikzcd\n\\mathbb R^d \\arrow[r,\"T_\\Phi\"] \\arrow[d,\"q\"'] & \\mathbb R^{[m]} \\arrow[d,\"S\"] \\\\\nQ_d \\arrow[r,\"\\mathcal I_\\Phi\"'] & [0,\\infty)^m\n```",
+          "uses": [
+            "1.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-real-phase-retrieval-quotient-metric",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a family in $\\mathbb R^d$. Define $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and put\n$$d_{\\pm}([x],[z])=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\nLet $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ carry the metric induced from zero-based Euclidean $\\mathbb R^m$ by the fixed relabeling $i\\mapsto i-1$ when $m\\ge1$, and the zero metric on the singleton $Y_0$ when $m=0$. Define\n$$\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]},\\qquad\n\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}.$$\nThen $\\sim$ is an equivalence relation, $d_{\\pm}$ is a metric on $Q_d$, $Y_m$ is a metric space, and both displayed measurement maps are well defined. Moreover, $\\mathcal I_\\Phi$ is coordinatewise the square of $\\mathcal M_\\Phi$, so the two maps are injective simultaneously.",
+          "uses": [
+            "4.1",
+            "6.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-frame-complement-property",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. For $S\\subseteq[m]$, write\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S):=\\operatorname{span}_{\\mathbb R}\\{a_i:i\\in S\\},$$\nwith $\\operatorname{span}_{\\mathbb R}(\\Phi_{\\varnothing})=\\{0\\}$. The family $\\Phi$ has the **complement property** if for every $S\\subseteq[m]$,\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S)=\\mathbb R^d\n\\quad\\text{or}\\quad\n\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})=\\mathbb R^d.$$\nThe definition applies to labeled families, including repeated or zero vectors.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-bilinear-form-on-a-coordinate-space",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$ and a natural number $n$. The **standard bilinear form** on\n$F^n$ is\n\n$$\\langle x,y\\rangle:=\\sum_{i<n}x_iy_i.$$\n\nThe symbol denotes the finite sum in the additive commutative group of the\nfield $F$: it is $0_F$ at $n=0$ and is obtained by successively adding the\nterms $x_iy_i$ for $i<n$.\n\nThis is a symmetric bilinear form in the sense of\n[[def-bilinear-symmetric-skew-and-alternating-forms]], and its matrix in the\nstandard basis of $F^n$ is the identity matrix. Hence it is nondegenerate in the\nsense of [[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]].\n\nWhen $F=\\mathbb{F}_2$, the squaring law $t^2=t$ gives\n\n$$\\langle x,x\\rangle=\\sum_{i<n}x_i.$$\n\nSo over $\\mathbb{F}_2$ the form detects parity and not positivity. It is not an\ninner product there, and the page never treats it as one.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let\n$S \\subseteq V$. Write\n\n$$L(S) \\;:=\\; \\Bigl\\{\\, \\sum_{i<n} \\lambda_i v_i \\;:\\; n \\in \\mathbb{N},\\ \\lambda : n \\to F,\\ v : n \\to S \\,\\Bigr\\}$$\n\nfor the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]). Then\n\n$$\\operatorname{span}(S) \\;=\\; L(S).$$\n\nIn particular $\\operatorname{span}(\\varnothing) = \\{0_V\\}$, and for every\n$S \\subseteq V$ the span of $S$ contains $0_V$ as the empty linear combination.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are\nlinear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are\n\n$$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$\n\nBoth dimensions are defined. The kernel is a linear subspace of the\nfinite-dimensional space $V$, so it is finite-dimensional by\n[[thm-linear-kernel-image-and-injectivity]] and\n[[thm-dimension-of-a-linear-subspace]]. The image is finite-dimensional because\n[[lem-kernel-basis-extension-gives-image-basis]] constructs a finite basis of\nit from a basis of $V$. Thus rank and nullity are natural numbers, including\nwhen $V$ is the zero space.",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "5.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{R} = \\mathcal{C}/\\mathcal{N}$ ([[def-real-numbers]]) is a field.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $\\mathcal I_\\Phi([x])=\\mathcal I_\\Phi([z])$. At every label $i$, equality of the intensity coordinates gives $\\langle a_i,x\\rangle^2=\\langle a_i,z\\rangle^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Factoring the difference of squares over $\\mathbb R$ yields $(\\langle a_i,x-z\\rangle)(\\langle a_i,x+z\\rangle)=0$ for every $i\\in[m]$. This factorization also holds when $x=0$, $z=0$, or $a_i=0$; no nonzero-signal or nonzero-measurement hypothesis is used.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $S=\\{i\\in[m]:\\langle a_i,x-z\\rangle=0\\}$. For $i\\in S$, $a_i\\perp(x-z)$; for $i\\notin S$, the first factor in step 2.1 is nonzero, so $a_i\\perp(x+z)$. By [F5], each vector in either span is a finite linear combination of its generators, and bilinearity extends each orthogonality statement to the whole span.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By the complement property [F3], either $\\operatorname{span}(\\Phi_S)=\\mathbb R^d$ or $\\operatorname{span}(\\Phi_{[m]\\setminus S})=\\mathbb R^d$. In the first case step 3.1 makes $x-z$ orthogonal to every vector of $\\mathbb R^d$, hence to itself; positive definiteness [F4] gives $x-z=0$. In the second case it gives $x+z=0$. Thus $[x]=[z]$ by [F2], proving injectivity.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The forward implication is proved in step 4.1. For the converse, suppose the complement property fails; then some $S\\subseteq[m]$ has the proper subspaces $U=\\operatorname{span}(\\Phi_S)$ and $V=\\operatorname{span}(\\Phi_{[m]\\setminus S})$. We prove that every proper subspace $W\\le\\mathbb R^d$ has a nonzero orthogonal vector. Let $r=\\dim W<d$ by [F6], choose a basis $w_0,\\ldots,w_{r-1}$ of $W$, and define $L_W:\\mathbb R^d\\to\\mathbb R^r$ by $L_W(x)=(\\langle x,w_j\\rangle)_{j<r}$. Bilinearity makes $L_W$ linear. Its kernel is $W^\\perp$: vanishing against the basis implies vanishing against every vector of $W$ because the basis spans $W$ and [F5] expresses each span vector as a finite linear combination; the converse is immediate. By [F7], the image is a subspace of $\\mathbb R^r$, so [F6] gives $\\operatorname{rank}L_W=\\dim(\\operatorname{im}L_W)\\le r$. Rank-nullity [F7] and $\\dim\\mathbb R^d=d$ then give $\\dim W^\\perp=\\dim\\ker L_W=d-\\operatorname{rank}L_W\\ge d-r>0$. By [F6] a zero subspace has dimension zero, so $W^\\perp$ contains a nonzero vector. Apply this argument to $U$ and $V$ and choose nonzero $u\\in U^\\perp$ and $v\\in V^\\perp$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "A1",
+            "construct",
+            "choose",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Set $x=u+v$ and $z=u-v$. Since $v\\ne0$, $x=z$ would imply $2v=0$, impossible by [F8]; since $u\\ne0$, $x=-z$ would imply $2u=0$, also impossible. Hence $[x]\\ne[z]$ by [F2].",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "F2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "If $i\\in S$, then $a_i\\in U$ and $u\\perp a_i$, so $\\langle a_i,x\\rangle=\\langle a_i,v\\rangle$ and $\\langle a_i,z\\rangle=-\\langle a_i,v\\rangle$. If $i\\notin S$, then $a_i\\in V$ and $v\\perp a_i$, so both measurements equal $\\langle a_i,u\\rangle$. If $a_i=0$, it lies in $U$ and both measurements are zero. Squaring shows equality of the intensity coordinates at every label, including when either component of the partition is empty.",
+          "step": "6.2",
+          "inputs": [
+            "step 5.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-3",
+          "claim": "When $m=0$, the only partition has both sides empty, and both spans equal $\\{0\\}\\ne\\mathbb R^d$ by [F5] and $d\\ge1$. The complement property fails, while steps 5.1–6.2 give distinct global-sign classes with the same unique empty data. Thus the zero-measurement case is included.",
+          "step": "6.3",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 5.1",
+            "step 6.1",
+            "step 6.2"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Steps 6.1 and 6.2 give distinct quotient classes with the same intensity data, so $\\mathcal I_\\Phi$ is not injective. Together with step 4.1 and the definition of phase retrieval [F1], this proves the stated equivalence.",
+          "step": "7.1",
+          "inputs": [
+            "step 4.1",
+            "step 6.1",
+            "step 6.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement allows m=0; the empty partition has both spans {0} and the converse construction gives ambiguity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and proof show that the proof factors measurements without dividing by any coordinate, so zero measurements and zero rows are included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows d=1 and m=1; the same finite-dimensional argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement allows repeated or zero vectors; the proof uses only their individual dot products and spans."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that the proof selects finite-dimensional nonzero vectors from positive-dimensional orthogonal complements and assumes no Choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The statement asserts that the complement property implies injectivity modulo sign; the first implication proves it."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The statement asserts the converse; a failed partition yields explicitly constructed distinct classes with equal data."
+        }
+      ]
+    },
+    "thm-ip-finite-sign-enumeration-correctness": {
+      "kind": "theorem",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-finite-sign-enumeration-phase-retrieval",
+          "source_section": "Definition",
+          "quote": "Input a real measurement matrix $A$ with $m$ rows indexed by $[m]=\\{1,\\ldots,m\\}$ and $d$ columns indexed by $k<d$, where $d\\ge1$ and $m\\ge0$. Use row $i-1$ of the ordinary zero-based $m\\times d$ matrix for measurement label $i$. Input nonnegative intensities $b:[m]\\to[0,\\infty)$, a mode in $\\{\\mathrm{exact},\\mathrm{noisy}\\}$, a feasibility tolerance $\\varepsilon\\ge0$, a maximum sign-pattern count $P\\in\\mathbb Z_{\\ge0}$, and a linear-solve budget $L\\in\\mathbb Z_{\\ge0}$. Put $r_i=\\sqrt{b_i}$.\n\nFor $m=0$, let $\\mathcal S_m$ contain only the empty sign vector. For $m\\ge1$, let\n$$\\mathcal S_m=\\{s:[m]\\to\\{-1,+1\\}:s_1=+1\\},$$\nordered lexicographically with $+1$ before $-1$ and labels in increasing order. This gives one representative from each pair $\\{s,-s\\}$. A signed right-hand side is $y_s=(s_i r_i)_{i\\in[m]}$, interpreted in the same zero-based row order as $A$.\n\nIf $P=0$ or $L=0$, return no candidates with status budget-exhausted. Otherwise compute one SVD of $A$, form its unique Moore–Penrose inverse $A^+$ and kernel $\\ker A$, then process at most the first $P$ patterns in $\\mathcal S_m$ and perform at most $L$ signed least-squares solves. Stop when either budget is exhausted. For each processed pattern $s$, compute the minimum-Euclidean-norm least-squares solution $x_s=A^+y_s$ and signed residual $e_s=\\|Ax_s-y_s\\|_2$. The budget $L$ counts right-hand-side solves after the one SVD factorization.\n\n* In exact mode, record the affine family $x_s+\\ker A$ when $e_s\\le\\varepsilon$, together with $e_s$. Mark it exact-feasible if $e_s=0$ and tolerance-feasible if $0<e_s\\le\\varepsilon$. If $\\varepsilon=0$ and all patterns are processed, return the union of the exact-feasible families modulo $x\\sim -x$, or report infeasible if this union is empty. For $\\varepsilon>0$, report only the tolerance-qualified least-squares families; this is a tolerance screen, not a list of every vector whose residual is at most $\\varepsilon$.\n* In noisy mode, initialize the incumbent as unset. For the first processed pattern, store $x_s$ and $J(x_s)$. For each later processed pattern, replace the incumbent by $x_s$ exactly when $J(x_s)$ is strictly smaller than the incumbent value; on a tie, keep the earlier pattern. Thus the incumbent has smallest $J$ among all processed candidates.\n  Compute each visited candidate's squared amplitude residual\n  $$J(x_s)=\\sum_{i\\in[m]}(|(Ax_s)_i|-r_i)^2$$\n  before applying that update. The feasibility tolerance is not used in this mode.\n* Return the candidates and a status. Exact mode returns exact-feasible/infeasible only when $\\varepsilon=0$ and all patterns are processed; positive tolerance returns tolerance-feasible/no-tolerance-fit when all patterns are processed. Noisy mode returns a completed best candidate when all patterns are processed. If either budget stops enumeration before all patterns are processed, return budget-exhausted with any candidates found. A budget-exhausted result makes no claim about unvisited patterns.\n* There are $1$ canonical pattern for $m=0$ and $2^{m-1}$ for $m\\ge1$. Full enumeration is exponential in $m$. No statistical optimality or intensity-noise guarantee is part of this algorithm.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-real-frame-phase-retrieval",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, allowing zero measurement vectors and not assuming that $\\Phi$ spans. Here $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$; measurement labels are one-based, while coordinates in $\\mathbb R^d$ use the library's zero-based convention $k<d$. Write $\\mathbb R^{[m]}=\\{y:[m]\\to\\mathbb R\\}$. Use the Euclidean inner product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$ and norm $\\|u\\|_2=\\sqrt{\\langle u,u\\rangle}$. Define the signal equivalence relation $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and write $q(x)=[x]$. Its quotient distance is\n$$d_{\\pm}([x],[z]):=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\n\nUse data space $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ with metric\n$$\\rho_m(b,c)=\\begin{cases}\\sqrt{\\sum_{k<m}(b_{k+1}-c_{k+1})^2},&m\\ge1,\\\\0,&m=0.\\end{cases}$$\nThe fixed relabeling $i\\mapsto i-1$ identifies $[m]$-indexed data with the library's zero-based $\\mathbb R^m$; $Y_0$ is a singleton. Define the real analysis map $T_\\Phi:\\mathbb R^d\\to\\mathbb R^{[m]}$ by\n$$T_\\Phi x=(\\langle a_i,x\\rangle)_{i\\in[m]}.$$\nThe amplitude map is $\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]}$, while the intensity map is\n$$\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}\\in Y_m.$$\nA finite real measurement family performs **phase retrieval** when $\\mathcal I_\\Phi:Q_d\\to Y_m$ is injective, equivalently when the induced amplitude map is injective. The quotient distance, both induced maps, and the data metric are well defined as verified below.\n\nThe diagram records the identity $\\mathcal I_\\Phi\\circ q=S\\circ T_\\Phi$, where $S(y)=(y_i^2)_{i\\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements, amplitudes, and intensities; no proof relies on the diagram.\n\n```tikzcd\n\\mathbb R^d \\arrow[r,\"T_\\Phi\"] \\arrow[d,\"q\"'] & \\mathbb R^{[m]} \\arrow[d,\"S\"] \\\\\nQ_d \\arrow[r,\"\\mathcal I_\\Phi\"'] & [0,\\infty)^m\n```",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, and let $b\\in\\mathbb F^m$. Then $A^+b$ is\na least-squares solution of $Ax=b$, and among all least-squares solutions it\nis the unique one of minimum Euclidean norm.",
+          "uses": [
+            "1.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ and $b\\in\\mathbb F^m$. A vector $x$ is a\nleast-squares solution of $Ax=b$ if and only if\n\n$$x=A^+b+(I-A^+A)z$$\n\nfor some $z\\in\\mathbb F^n$. If $b\\in\\operatorname{im}A$, then the same family is\nexactly the full solution set of $Ax=b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field (Ordered field). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$, with\n$|x|$ the absolute value (Absolute value in an ordered field). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ (Field) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let\n$S \\subseteq V$. Write\n\n$$L(S) \\;:=\\; \\Bigl\\{\\, \\sum_{i<n} \\lambda_i v_i \\;:\\; n \\in \\mathbb{N},\\ \\lambda : n \\to F,\\ v : n \\to S \\,\\Bigr\\}$$\n\nfor the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]). Then\n\n$$\\operatorname{span}(S) \\;=\\; L(S).$$\n\nIn particular $\\operatorname{span}(\\varnothing) = \\{0_V\\}$, and for every\n$S \\subseteq V$ the span of $S$ contains $0_V$ as the empty linear combination.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a processed pattern $s$. The finite SVD in [F9] exists for $A$; by [F4], $x_s=A^+y_s$ minimizes the signed residual norm. The pseudoinverse identity [F3] gives $A(I-A^+A)=A-AA^+A=0$, so $(I-A^+A)z\\in\\ker A$ for every $z$; conversely, if $k\\in\\ker A$, then $(I-A^+A)k=k$. Thus the affine family in [F5] is exactly $x_s+\\ker A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The least-squares family has an exact solution precisely when its residual minimum is zero: by [F6], $e_s=0$ exactly when $Ax_s-y_s=0$. If this holds, every member of $x_s+\\ker A$ solves the same equation; if it does not, none does, because $x_s$ already minimizes the residual.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Having established the zero-residual criterion in step 2.1, suppose exact mode with $\\varepsilon=0$ processes every pattern. If $Ax=y_s$ for some processed $s$, then $(Ax)_i^2=r_i^2=b_i$ at each label, so $\\mathcal I_\\Phi([x])=b$. Conversely, suppose $\\mathcal I_\\Phi([x])=b$. For every label, $(Ax)_i^2=r_i^2$, so $(Ax)_i=r_i$ or $(Ax)_i=-r_i$ by factoring $((Ax)_i-r_i)((Ax)_i+r_i)=0$ in the real field; when $r_i=0$ both choices give zero. Choose the corresponding $t_i\\in\\{-1,+1\\}$. If $m\\ge1$ and $t_1=-1$, replace $x$ by $-x$ and $t$ by $-t$; the quotient class is unchanged and the new sign pattern has first coordinate $+1$. If $m=0$, use the unique empty pattern. Therefore a canonical pattern $s$ has a signed exact solution in the class $[x]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 2.1 the exact solution from step 3.1 belongs to $x_s+\\ker A$, and that pattern is recorded by the algorithm. Conversely, every recorded family in exact mode with $\\varepsilon=0$ has $e_s=0$ by [F1], so step 2.1 makes each of its members solve $Ax=y_s$ and hence have intensity data $b$. This proves that the returned union modulo sign is exactly the stated inverse image, and it is empty exactly when no such class exists.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The complete exact-mode correspondence is established in step 4.1. For noisy mode, for any sign vector $t:[m]\\to\\{-1,+1\\}$ write $y_t=(t_i r_i)_{i\\in[m]}$. Fix a real $u$ and $r\\ge0$. If $u\\ge0$, then $(u-r)^2=(|u|-r)^2$ and $(u+r)^2-(u-r)^2=4ur\\ge0$. If $u<0$, put $v=-u>0$; then $(u+r)^2=(v-r)^2=(|u|-r)^2$ and $(u-r)^2-(u+r)^2=4vr\\ge0$. Thus the sign matching the sign of $u$ attains the smaller of $(u-r)^2$ and $(u+r)^2$, and every sign choice has squared residual at least $(|u|-r)^2$. Apply this coordinatewise to $u_i=(Ax)_i$ and $r_i$, and sum: every sign vector $t$ satisfies $J(x)\\le\\|Ax-y_t\\|_2^2$, and a sign vector chosen coordinatewise attains equality. For $m=0$, both sides are the empty sum $0$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "algebra",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If the sign vector attaining equality in step 5.1 has first entry $-1$, replace $x$ by $-x$ and $t$ by $-t$. Then the quotient class and $J(x)$ are unchanged, and $A(-x)-y_{-t}=-(Ax-y_t)$, so the squared residual is unchanged and the new vector is canonical. If $m=0$, use the unique empty pattern. Hence for every $x\\in\\mathbb R^d$ there are a representative $\\widetilde x\\in\\{x,-x\\}$ and a canonical pattern $s$ with $\\|A\\widetilde x-y_s\\|_2^2=J(x)$, since $J(\\widetilde x)=J(x)$. Least-squares minimality [F4], comparing $x_s$ to $\\widetilde x$, gives $e_s^2\\le J(x)$.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "For each candidate $x_s$, step 5.1 gives $J(x_s)\\le\\|Ax_s-y_s\\|_2^2=e_s^2$. The noisy-mode update loop in the algorithm leaves an incumbent whose objective is no larger than that of any processed candidate: this holds after the first pattern by initialization and is preserved at each comparison. With complete enumeration every canonical $s$ is processed. Given arbitrary $x$, step 6.1 supplies one such $s$ with $e_s^2\\le J(x)$, so the final incumbent has objective at most $J(x_s)\\le e_s^2\\le J(x)$. It is therefore a global minimizer over all $x$. If a budget leaves patterns unprocessed, this comparison gives no guarantee for a canonical pattern that was not visited.",
+          "step": "7.1",
+          "inputs": [
+            "step 5.1",
+            "step 6.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes m=0, its unique empty pattern, all signals in the exact inverse image, and J=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and proof show that the exact-data proof permits r_i=0 and either sign, with no division by intensities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows d=1 and m=1; the canonical-sign argument still has one pattern."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits rank-deficient matrices, nontrivial kernels, zero rows, and repeated signed targets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement treats epsilon=0 and early stopping at zero pattern or solve budget; completeness claims require full enumeration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that all selections and minima are over finite sign sets; no infinite choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The statement claims the exact output equals the full data inverse image; the proof shows every returned exact family has data b."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The statement claims the exact output equals the full data inverse image; each x with data b is assigned a canonical sign pattern."
+        }
+      ]
+    },
+    "cor-ip-full-spark-sharp-real-phase-measurement-count": {
+      "kind": "corollary",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-real-phase-retrieval-complement-property",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $m\\ge0$, $[m]=\\{1,\\ldots,m\\}$ with $[0]=\\varnothing$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. Use the standard dot product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$, identify $x,z\\in\\mathbb R^d$ when $z=x$ or $z=-x$, and write $[x]$ for the resulting class. Define $\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}$, a formula independent of the representative because replacing $x$ by $-x$ leaves every square unchanged. For $S\\subseteq[m]$, let $\\operatorname{span}_{\\mathbb R}(\\Phi_S)$ be the set of finite real linear combinations of its vectors, with the empty span equal to $\\{0\\}$. Then $\\mathcal I_\\Phi$ is injective on the global-sign classes if and only if for every $S\\subseteq[m]$ at least one of $\\operatorname{span}_{\\mathbb R}(\\Phi_S)$ and $\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})$ equals $\\mathbb R^d$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-frame-complement-property",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. For $S\\subseteq[m]$, write\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S):=\\operatorname{span}_{\\mathbb R}\\{a_i:i\\in S\\},$$\nwith $\\operatorname{span}_{\\mathbb R}(\\Phi_{\\varnothing})=\\{0\\}$. The family $\\Phi$ has the **complement property** if for every $S\\subseteq[m]$,\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S)=\\mathbb R^d\n\\quad\\text{or}\\quad\n\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})=\\mathbb R^d.$$\nThe definition applies to labeled families, including repeated or zero vectors.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-real-full-spark-measurement-family",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge d$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. The family is **full spark** if for every list of distinct labels $i_1,\\ldots,i_d\\in[m]$, the vectors $a_{i_1},\\ldots,a_{i_d}$ are linearly independent over $\\mathbb R$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let\n$S \\subseteq V$. Write\n\n$$L(S) \\;:=\\; \\Bigl\\{\\, \\sum_{i<n} \\lambda_i v_i \\;:\\; n \\in \\mathbb{N},\\ \\lambda : n \\to F,\\ v : n \\to S \\,\\Bigr\\}$$\n\nfor the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]). Then\n\n$$\\operatorname{span}(S) \\;=\\; L(S).$$\n\nIn particular $\\operatorname{span}(\\varnothing) = \\{0_V\\}$, and for every\n$S \\subseteq V$ the span of $S$ contains $0_V$ as the empty linear combination.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). As in\n[[def-linear-combination-and-span]], a **finite list** of vectors is a function\n$v : n \\to V$ on a von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), written\n$v_i := v(i)$, and\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nis the finite sum of [[def-monoid-finite-product]] read additively in the abelian\ngroup $(V,+,0_V)$, applied to the list $i \\mapsto \\lambda_i v_i$. No second notion\nof finite sum is introduced here.\n\n### Independence of a list\n\nA finite list $v : n \\to V$ is **linearly independent** when, for every list of\nscalars $\\lambda : n \\to F$,\n\n$$\\sum_{i<n} \\lambda_i v_i = 0_V \\quad \\Longrightarrow \\quad \\lambda_i = 0_F \\text{ for every } i < n,$$\n\nand **linearly dependent** otherwise, that is, when some $\\lambda : n \\to F$ has\n$\\sum_{i<n}\\lambda_i v_i = 0_V$ while $\\lambda_j \\ne 0_F$ for at least one\n$j < n$. Such a $\\lambda$ is called a **witness** to the dependence of $v$.\n\n### Independence of a subset\n\nA subset $S \\subseteq V$ is **linearly independent** when **every injective**\nfinite list $v : n \\to S$ ([[def-injection-surjection-bijection]]) is linearly\nindependent, and **linearly dependent** otherwise, that is, when some injective\nfinite list into $S$ is linearly dependent.\n\n**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective. If the definition above quantified\nover all such lists, then for any $w \\in S$ the list $v : 2 \\to S$ with\n$v_0 = v_1 = w$ and the scalars $\\lambda_0 = 1_F$, $\\lambda_1 = -1_F$ would give\n\n$$\\sum_{i<2}\\lambda_i v_i = (0_V + 1_F w) + (-1_F)w = w + (-w) = 0_V$$\n\nwith $\\lambda_0 = 1_F \\ne 0_F$ ([[def-field]],\n[[lem-vector-space-elementary-consequences]]), so **every** nonempty subset of\n$V$ would be dependent and the notion would be empty. Quantifying over injective\nlists is what makes the subset notion the intended one. It costs nothing for\nlists: [[lem-independent-list-is-injective]] shows that the vanishing condition\nabove already forces a list to be injective, so no injectivity hypothesis has to\nbe carried alongside independence of a list.\n\n### The boundary cases are genuine cases\n\n$\\mathbb{N}$ contains $0$ ([[def-natural-numbers]]), so both of the following are\ninstances of the definitions and neither is a convention.\n\n- **The empty list is independent.** For $n = 0$ the only list of scalars is the\n  empty one, and the condition \"$\\lambda_i = 0_F$ for every $i < 0$\" holds\n  vacuously.\n- **$\\varnothing \\subseteq V$ is independent.** The only function $v : n \\to\n  \\varnothing$ is the empty one, with $n = 0$, and it is independent by the\n  previous point.\n- **$\\{0_V\\}$ is dependent.** The list $v : 1 \\to \\{0_V\\}$ with $v_0 = 0_V$ is\n  injective, and taking $\\lambda_0 = 1_F$ gives\n  $\\sum_{i<1}\\lambda_i v_i = 0_V + 1_F 0_V = 0_V$ by the recursion of\n  [[def-monoid-finite-product]] and $\\lambda 0_V = 0_V$\n  ([[lem-vector-space-elementary-consequences]]), while $1_F \\ne 0_F$ in a field\n  ([[def-field]]). So $\\{0_V\\}$, and hence every subset of $V$ containing $0_V$,\n  is linearly dependent.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ip-vandermonde-determinant",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be an integer, let $t_1,\\ldots,t_d$ be commuting indeterminates over $\\mathbb R$, and let $V_d$ be the $d\\times d$ matrix with $(i,j)$ entry $t_j^{i-1}$. Then\n$$\\det V_d=\\prod_{1\\le p<q\\le d}(t_q-t_p).$$\nConsequently, for any distinct real numbers $s_1,\\ldots,s_d$, the $d$ vectors\n$$(1,s_j,s_j^2,\\ldots,s_j^{d-1})^{\\mathsf T},\\qquad 1\\le j\\le d,$$\nare linearly independent.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{R} = \\mathcal{C}/\\mathcal{N}$ ([[def-real-numbers]]) is a field.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $I\\subseteq[m]$ have $q$ labels and enumerate them in increasing order as $i_0,\\ldots,i_{q-1}$. Define $T_I:\\mathbb R^q\\to\\mathbb R^d$ by $T_I(c)=\\sum_{j<q}c_j a_{i_j}$. This map is linear by distributivity of finite sums. Its image is a subspace: it contains zero, and if $u=T_I(c)$ and $v=T_I(c')$, then $\\alpha u+\\beta v=T_I(\\alpha c+\\beta c')$. For each $j<q$, the $j$th standard unit vector $e_j$ satisfies $T_I(e_j)=a_{i_j}$, so the smallest-subspace property gives $\\operatorname{span}(\\Phi_I)\\subseteq\\operatorname{im}T_I$. Conversely every $T_I(c)$ is a finite linear combination of the listed measurement vectors, so [F4] gives $\\operatorname{im}T_I\\subseteq\\operatorname{span}(\\Phi_I)$. Thus the image equals the span, also when $q=0$ because both are $\\{0\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $q<d$, rank-nullity and [F5] give $\\dim(\\operatorname{im}T_I)\\le q<d$, so by step 1.1 this span cannot equal $\\mathbb R^d$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $m\\le2d-2$. Choose $S\\subseteq[m]$ with $|S|=\\min(m,d-1)$. Then $|S|\\le d-1$; if $m>d-1$, the bound on $m$ gives $|[m]\\setminus S|=m-d+1\\le d-1$, and if $m\\le d-1$ the complement is empty. Applying step 1.2 to both sides shows that neither side spans, so the complement property fails by [F2]. Hence phase retrieval fails by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The lower count is established in step 2.1. For the sufficient count, suppose $m\\ge2d-1$ and $\\Phi$ is full spark. For any $S\\subseteq[m]$, the two sides cannot both have fewer than $d$ labels, since that would imply $m\\le2d-2$. Thus one side contains $d$ distinct labels. By [F3], their vectors are independent. The coefficient map $T:\\mathbb R^d\\to\\mathbb R^d$ for these $d$ columns has trivial kernel by [F6]; by step 1.1 its image is their span, and rank-nullity [F4] and [F5] give that image dimension $d$. Hence the image, and therefore the span of the chosen vectors, is $\\mathbb R^d$ by [F7]. The containing side also spans $\\mathbb R^d$. Since $S$ was arbitrary, the complement property holds, and [F1] gives phase retrieval.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $m=2d-1$ and choose distinct real nodes $t_1,\\ldots,t_m$. Every $d$-label subfamily is independent by [F8], so the family is full spark by [F3]. Since $m\\ge2d-1$, step 3.1 proves it performs phase retrieval. For $d=1$, the same argument uses one node and the one-entry vector $(1)$; for all $d$, step 2.1 rules out any smaller count.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes m=0; the coefficient map from R^0 has zero image, so the lower-count argument applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and proof show that the lower-count proof is a rank bound for arbitrary columns, including zero or dependent vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and proof show that the construction states the d=1 case with one moment-curve vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and proof show that the lower-bound argument makes no nonzero or independence assumptions on the arbitrary family."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and proof cover the adjacent counts m=2d-2 and m=2d-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that the proof orders finite label sets and selects finite d-element subsets only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a lower-bound failure and a sufficient full-spark condition, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse asserting that every retrieving family is full spark is stated."
+        }
+      ]
+    },
+    "ex-ip-fourier-translation-reflection-ambiguity": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $s=\\sqrt3$. By [F1] and [F2], $\\omega^2=(-1+is)/2$, $\\omega^3=1$, and $|\\omega|^2=1$, hence $|\\omega|=1$. Reindexing the finite sum with $j=n-1$ gives $\\widehat{\\tau_1f}(k)=\\sum_j f(j)\\omega^{k(j+1)}=\\omega^k\\widehat f(k)$. Multiplicativity of the modulus [F1] gives $|\\omega^k|=1$, so every Fourier magnitude is unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $|\\omega|=1$, [F1] gives $\\overline\\omega=\\omega^{-1}$. Reindexing with $j=-n$ gives $\\widehat{Rf}(k)=\\sum_j f(j)\\omega^{-kj}$. Because every $f(j)$ is real, this equals $\\overline{\\sum_j f(j)\\omega^{kj}}=\\overline{\\widehat f(k)}$ by the conjugation laws in [F1], so reflection preserves every Fourier magnitude.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The support of $f$ is $\\{0,1\\}$, that of $\\tau_1f$ is $\\{1,2\\}$, and that of $Rf$ is $\\{0,2\\}$. These differ from $\\{0,1\\}$, so neither transformed signal is $f$; each is nonzero, so neither is $-f$ either. Combined with the invariances in steps 1.1 and 2.1, both transformed signals are distinct from the original up to global sign but have identical Fourier magnitude data.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty cyclic group C_3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example signal has a zero coordinate, and its support still distinguishes both transforms."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The transform has three frequencies and no singleton parameter case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example asserts only the explicit nonzero signal and its two transforms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that the verification reindexes finite sums on C_3 and uses explicitly given signals only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives invariances, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse uniqueness claim is made."
+        }
+      ]
+    },
+    "cex-ip-real-failed-complement-partition": {
+      "kind": "counterexample",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-real-frame-phase-retrieval",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, allowing zero measurement vectors and not assuming that $\\Phi$ spans. Here $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$; measurement labels are one-based, while coordinates in $\\mathbb R^d$ use the library's zero-based convention $k<d$. Write $\\mathbb R^{[m]}=\\{y:[m]\\to\\mathbb R\\}$. Use the Euclidean inner product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$ and norm $\\|u\\|_2=\\sqrt{\\langle u,u\\rangle}$. Define the signal equivalence relation $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and write $q(x)=[x]$. Its quotient distance is\n$$d_{\\pm}([x],[z]):=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\n\nUse data space $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ with metric\n$$\\rho_m(b,c)=\\begin{cases}\\sqrt{\\sum_{k<m}(b_{k+1}-c_{k+1})^2},&m\\ge1,\\\\0,&m=0.\\end{cases}$$\nThe fixed relabeling $i\\mapsto i-1$ identifies $[m]$-indexed data with the library's zero-based $\\mathbb R^m$; $Y_0$ is a singleton. Define the real analysis map $T_\\Phi:\\mathbb R^d\\to\\mathbb R^{[m]}$ by\n$$T_\\Phi x=(\\langle a_i,x\\rangle)_{i\\in[m]}.$$\nThe amplitude map is $\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]}$, while the intensity map is\n$$\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}\\in Y_m.$$\nA finite real measurement family performs **phase retrieval** when $\\mathcal I_\\Phi:Q_d\\to Y_m$ is injective, equivalently when the induced amplitude map is injective. The quotient distance, both induced maps, and the data metric are well defined as verified below.\n\nThe diagram records the identity $\\mathcal I_\\Phi\\circ q=S\\circ T_\\Phi$, where $S(y)=(y_i^2)_{i\\in[m]}$ is coordinatewise squaring. It distinguishes signed linear measurements, amplitudes, and intensities; no proof relies on the diagram.\n\n```tikzcd\n\\mathbb R^d \\arrow[r,\"T_\\Phi\"] \\arrow[d,\"q\"'] & \\mathbb R^{[m]} \\arrow[d,\"S\"] \\\\\nQ_d \\arrow[r,\"\\mathcal I_\\Phi\"'] & [0,\\infty)^m\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-frame-complement-property",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. For $S\\subseteq[m]$, write\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S):=\\operatorname{span}_{\\mathbb R}\\{a_i:i\\in S\\},$$\nwith $\\operatorname{span}_{\\mathbb R}(\\Phi_{\\varnothing})=\\{0\\}$. The family $\\Phi$ has the **complement property** if for every $S\\subseteq[m]$,\n$$\\operatorname{span}_{\\mathbb R}(\\Phi_S)=\\mathbb R^d\n\\quad\\text{or}\\quad\n\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})=\\mathbb R^d.$$\nThe definition applies to labeled families, including repeated or zero vectors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-real-phase-retrieval-quotient-metric",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and $\\Phi=(a_i)_{i\\in[m]}$ be a family in $\\mathbb R^d$. Define $x\\sim z$ by $z=x$ or $z=-x$, let $Q_d=\\mathbb R^d/\\sim$, and put\n$$d_{\\pm}([x],[z])=\\min\\{\\|x-z\\|_2,\\|x+z\\|_2\\}.$$\nLet $Y_m=\\{b:[m]\\to[0,\\infty)\\}$ carry the metric induced from zero-based Euclidean $\\mathbb R^m$ by the fixed relabeling $i\\mapsto i-1$ when $m\\ge1$, and the zero metric on the singleton $Y_0$ when $m=0$. Define\n$$\\mathcal M_\\Phi([x])=(|\\langle a_i,x\\rangle|)_{i\\in[m]},\\qquad\n\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}.$$\nThen $\\sim$ is an equivalence relation, $d_{\\pm}$ is a metric on $Q_d$, $Y_m$ is a metric space, and both displayed measurement maps are well defined. Moreover, $\\mathcal I_\\Phi$ is coordinatewise the square of $\\mathcal M_\\Phi$, so the two maps are injective simultaneously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E_1=\\{(t,0):t\\in\\mathbb R\\}$ and $E_2=\\{(0,t):t\\in\\mathbb R\\}$; coordinatewise addition and scalar multiplication show these are subspaces. Since $a_1\\in E_1$, minimality of the span gives $\\operatorname{span}\\{a_1\\}\\subseteq E_1$, while every $(t,0)=t a_1$ belongs to the span because it is a subspace containing $a_1$. Thus $\\operatorname{span}(\\Phi_{\\{1\\}})=E_1$. The same two inclusions for $a_2$ give $\\operatorname{span}(\\Phi_{\\{2\\}})=E_2$. Both are proper subspaces of $\\mathbb R^2$, so [F2] says the complement property fails.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The vectors $(1,1)$ and $(-1,1)$ are neither equal nor negatives: equality fails in the first coordinate, while equality with the negative fails in the second coordinate. Thus they define distinct signal classes by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their measurements are $((1,1)\\cdot a_1,(1,1)\\cdot a_2)=(1,1)$ and $((-1,1)\\cdot a_1,(-1,1)\\cdot a_2)=(-1,1)$. Squaring coordinatewise gives $(1,1)$ in both cases, so [F1] gives equal intensity data on the distinct classes from step 1.2. Together with the failed partition in step 1.1, this exhibits the required ambiguity when the complement property fails.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two labels."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both measurement vectors and both displayed signals are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is fixed in dimension two with two measurements."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No repeated or zero vector case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample displays every vector, label, partition and signal explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is one counterexample, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is one counterexample, not a biconditional."
+        }
+      ]
+    },
+    "ex-ip-sign-enumeration-budget-exhaustion": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-finite-sign-enumeration-phase-retrieval",
+          "source_section": "Definition",
+          "quote": "Input a real measurement matrix $A$ with $m$ rows indexed by $[m]=\\{1,\\ldots,m\\}$ and $d$ columns indexed by $k<d$, where $d\\ge1$ and $m\\ge0$. Use row $i-1$ of the ordinary zero-based $m\\times d$ matrix for measurement label $i$. Input nonnegative intensities $b:[m]\\to[0,\\infty)$, a mode in $\\{\\mathrm{exact},\\mathrm{noisy}\\}$, a feasibility tolerance $\\varepsilon\\ge0$, a maximum sign-pattern count $P\\in\\mathbb Z_{\\ge0}$, and a linear-solve budget $L\\in\\mathbb Z_{\\ge0}$. Put $r_i=\\sqrt{b_i}$.\n\nFor $m=0$, let $\\mathcal S_m$ contain only the empty sign vector. For $m\\ge1$, let\n$$\\mathcal S_m=\\{s:[m]\\to\\{-1,+1\\}:s_1=+1\\},$$\nordered lexicographically with $+1$ before $-1$ and labels in increasing order. This gives one representative from each pair $\\{s,-s\\}$. A signed right-hand side is $y_s=(s_i r_i)_{i\\in[m]}$, interpreted in the same zero-based row order as $A$.\n\nIf $P=0$ or $L=0$, return no candidates with status budget-exhausted. Otherwise compute one SVD of $A$, form its unique Moore–Penrose inverse $A^+$ and kernel $\\ker A$, then process at most the first $P$ patterns in $\\mathcal S_m$ and perform at most $L$ signed least-squares solves. Stop when either budget is exhausted. For each processed pattern $s$, compute the minimum-Euclidean-norm least-squares solution $x_s=A^+y_s$ and signed residual $e_s=\\|Ax_s-y_s\\|_2$. The budget $L$ counts right-hand-side solves after the one SVD factorization.\n\n* In exact mode, record the affine family $x_s+\\ker A$ when $e_s\\le\\varepsilon$, together with $e_s$. Mark it exact-feasible if $e_s=0$ and tolerance-feasible if $0<e_s\\le\\varepsilon$. If $\\varepsilon=0$ and all patterns are processed, return the union of the exact-feasible families modulo $x\\sim -x$, or report infeasible if this union is empty. For $\\varepsilon>0$, report only the tolerance-qualified least-squares families; this is a tolerance screen, not a list of every vector whose residual is at most $\\varepsilon$.\n* In noisy mode, initialize the incumbent as unset. For the first processed pattern, store $x_s$ and $J(x_s)$. For each later processed pattern, replace the incumbent by $x_s$ exactly when $J(x_s)$ is strictly smaller than the incumbent value; on a tie, keep the earlier pattern. Thus the incumbent has smallest $J$ among all processed candidates.\n  Compute each visited candidate's squared amplitude residual\n  $$J(x_s)=\\sum_{i\\in[m]}(|(Ax_s)_i|-r_i)^2$$\n  before applying that update. The feasibility tolerance is not used in this mode.\n* Return the candidates and a status. Exact mode returns exact-feasible/infeasible only when $\\varepsilon=0$ and all patterns are processed; positive tolerance returns tolerance-feasible/no-tolerance-fit when all patterns are processed. Noisy mode returns a completed best candidate when all patterns are processed. If either budget stops enumeration before all patterns are processed, return budget-exhausted with any candidates found. A budget-exhausted result makes no claim about unvisited patterns.\n* There are $1$ canonical pattern for $m=0$ and $2^{m-1}$ for $m\\ge1$. Full enumeration is exponential in $m$. No statistical optimality or intensity-noise guarantee is part of this algorithm.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-finite-sign-enumeration-correctness",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times d}$, $d\\ge1$, $m\\ge0$, with rows labeled $i=1,\\ldots,m$ and signal coordinates labeled $k<d$, and let $b:[m]\\to[0,\\infty)$. Denote row $i-1$ by $a_i$ and put $\\Phi=(a_i)_{i\\in[m]}$. Define $[x]$ using $x\\sim -x$ and $\\mathcal I_\\Phi([x])=((Ax)_i^2)_{i\\in[m]}$. Put $r_i=\\sqrt{b_i}$. Use the sign set consisting of the empty pattern when $m=0$ and otherwise the patterns $s:[m]\\to\\{-1,+1\\}$ with $s_1=+1$, ordered lexicographically with $+1$ before $-1$. For each pattern put $y_s=(s_i r_i)_{i\\in[m]}$, let $x_s=A^+y_s$ be the minimum-norm least-squares solution, and let $e_s=\\|Ax_s-y_s\\|_2$. Here $A^+$ is the unique Moore–Penrose inverse and $\\ker A=\\{v:Av=0\\}$. The algorithm processes patterns in order subject to a maximum pattern count $P\\in\\mathbb Z_{\\ge0}$ and signed-solve budget $L\\in\\mathbb Z_{\\ge0}$; an early stop returns status budget-exhausted. In exact mode with tolerance $\\varepsilon=0$, after every pattern is processed it returns the union of the exact families $x_s+\\ker A$ modulo global sign, or reports infeasible if that union is empty. For every processed pattern, $x_s$ minimizes $\\|Ax-y_s\\|_2$, and the complete set of signed least-squares minimizers is $x_s+\\ker A$; this set solves $Ax=y_s$ exactly if and only if its residual $e_s$ is zero. The complete exact-mode output is exactly $\\{[x]:\\mathcal I_\\Phi([x])=b\\}$. In noisy mode the algorithm scores $J(x)=\\sum_{i\\in[m]}(|(Ax)_i|-r_i)^2$ and, after every canonical pattern is processed, returns a candidate minimizing $J$ over all $x\\in\\mathbb R^d$. When a budget stops enumeration early, the returned candidates describe only processed patterns and give no completeness or global-minimum guarantee. For $m=0$, the single pattern has the unique empty right-hand side and $J(x)=0$ for every $x$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $m=2$, the canonical sign set is exactly $(+,+),(+,-)$ in the stated order. Both budgets permit one solve, so only $(+,+)$ is processed and the algorithm reports budget-exhausted.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the processed target $y_{++}=(1,2)$, the squared signed residual is $(x-1)^2+(-x-2)^2=2(x+1/2)^2+9/2$, minimized uniquely at $x=-1/2$ by [F2]. Its amplitudes are $(1/2,1/2)$, so $J(-1/2)=(1/2-1)^2+(1/2-2)^2=5/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the unprocessed target $y_{+-}=(1,-2)$, the squared signed residual is $(x-1)^2+(-x+2)^2=2(x-3/2)^2+1/2$, minimized uniquely at $x=3/2$ by [F2]. Its amplitudes are $(3/2,3/2)$, so $J(3/2)=(3/2-1)^2+(3/2-2)^2=1/2<5/2$. Thus the budget-limited incumbent is not the best candidate over all patterns.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two measurements."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both intensity values are strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example fixes d=1 and computes the unique least-squares candidate for each pattern."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses two nonzero rows and distinct signed targets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses P=L=1, stopping before the second of two patterns."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example lists both finite patterns and computes both candidate objectives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two objective values and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares two objective values and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-real-full-spark-measurement-family",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, $m\\ge d$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. The family is **full spark** if for every list of distinct labels $i_1,\\ldots,i_d\\in[m]$, the vectors $a_{i_1},\\ldots,a_{i_d}$ are linearly independent over $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). As in\n[[def-linear-combination-and-span]], a **finite list** of vectors is a function\n$v : n \\to V$ on a von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), written\n$v_i := v(i)$, and\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nis the finite sum of [[def-monoid-finite-product]] read additively in the abelian\ngroup $(V,+,0_V)$, applied to the list $i \\mapsto \\lambda_i v_i$. No second notion\nof finite sum is introduced here.\n\n### Independence of a list\n\nA finite list $v : n \\to V$ is **linearly independent** when, for every list of\nscalars $\\lambda : n \\to F$,\n\n$$\\sum_{i<n} \\lambda_i v_i = 0_V \\quad \\Longrightarrow \\quad \\lambda_i = 0_F \\text{ for every } i < n,$$\n\nand **linearly dependent** otherwise, that is, when some $\\lambda : n \\to F$ has\n$\\sum_{i<n}\\lambda_i v_i = 0_V$ while $\\lambda_j \\ne 0_F$ for at least one\n$j < n$. Such a $\\lambda$ is called a **witness** to the dependence of $v$.\n\n### Independence of a subset\n\nA subset $S \\subseteq V$ is **linearly independent** when **every injective**\nfinite list $v : n \\to S$ ([[def-injection-surjection-bijection]]) is linearly\nindependent, and **linearly dependent** otherwise, that is, when some injective\nfinite list into $S$ is linearly dependent.\n\n**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective. If the definition above quantified\nover all such lists, then for any $w \\in S$ the list $v : 2 \\to S$ with\n$v_0 = v_1 = w$ and the scalars $\\lambda_0 = 1_F$, $\\lambda_1 = -1_F$ would give\n\n$$\\sum_{i<2}\\lambda_i v_i = (0_V + 1_F w) + (-1_F)w = w + (-w) = 0_V$$\n\nwith $\\lambda_0 = 1_F \\ne 0_F$ ([[def-field]],\n[[lem-vector-space-elementary-consequences]]), so **every** nonempty subset of\n$V$ would be dependent and the notion would be empty. Quantifying over injective\nlists is what makes the subset notion the intended one. It costs nothing for\nlists: [[lem-independent-list-is-injective]] shows that the vanishing condition\nabove already forces a list to be injective, so no injectivity hypothesis has to\nbe carried alongside independence of a list.\n\n### The boundary cases are genuine cases\n\n$\\mathbb{N}$ contains $0$ ([[def-natural-numbers]]), so both of the following are\ninstances of the definitions and neither is a convention.\n\n- **The empty list is independent.** For $n = 0$ the only list of scalars is the\n  empty one, and the condition \"$\\lambda_i = 0_F$ for every $i < 0$\" holds\n  vacuously.\n- **$\\varnothing \\subseteq V$ is independent.** The only function $v : n \\to\n  \\varnothing$ is the empty one, with $n = 0$, and it is independent by the\n  previous point.\n- **$\\{0_V\\}$ is dependent.** The list $v : 1 \\to \\{0_V\\}$ with $v_0 = 0_V$ is\n  injective, and taking $\\lambda_0 = 1_F$ gives\n  $\\sum_{i<1}\\lambda_i v_i = 0_V + 1_F 0_V = 0_V$ by the recursion of\n  [[def-monoid-finite-product]] and $\\lambda 0_V = 0_V$\n  ([[lem-vector-space-elementary-consequences]]), while $1_F \\ne 0_F$ in a field\n  ([[def-field]]). So $\\{0_V\\}$, and hence every subset of $V$ containing $0_V$,\n  is linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-ip-full-spark-sharp-real-phase-measurement-count",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, with $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$. Write $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$. If $m\\le2d-2$, then there are $x,z\\in\\mathbb R^d$ with $z\\ne x$ and $z\\ne-x$ but $\\langle a_i,x\\rangle^2=\\langle a_i,z\\rangle^2$ for every $i\\in[m]$. If $m\\ge2d-1$ and every list of $d$ distinct measurement labels indexes linearly independent vectors, then equality of all these squared measurements implies $z=x$ or $z=-x$. For every $d\\ge1$, this count is attained at $m=2d-1$: for any distinct real numbers $t_1,\\ldots,t_m$, the vectors $a_i=(1,t_i,t_i^2,\\ldots,t_i^{d-1})^{\\mathsf T}$ satisfy the stated independence condition and hence the squared measurements determine the signal up to global sign.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $(u,v)\\in\\mathbb R^2$,\n$$ (u,v)=u a_1+v a_2=(u-v)a_1+v a_3=u a_3+(v-u)a_2,$$\nso each pair spans $\\mathbb R^2$ by [F2]. For independence, a vanishing combination of $a_1,a_2$ has coordinates $(\\alpha,\\beta)=(0,0)$; a vanishing combination $\\alpha a_1+\\beta a_3$ has coordinates $(\\alpha+\\beta,\\beta)=(0,0)$, forcing $\\beta=\\alpha=0$; and a vanishing combination $\\alpha a_2+\\beta a_3$ has coordinates $(\\beta,\\alpha+\\beta)=(0,0)$, again forcing $\\alpha=\\beta=0$. Thus every pair is linearly independent, so [F1] gives full spark.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $d=2$ and $m=3=2d-1$. Applying [F3] to step 1.1 proves phase retrieval on the stated global-sign quotient; the intensity coordinates are exactly the three squared inner products displayed in the example.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has three measurements."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All three vectors are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes d=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example checks all three vector pairs, so the full-spark assertion has no unchecked pair."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses exactly m=2d-1 measurements."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example lists all three pairs and their nonzero determinants."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts one injectivity result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about full spark is asserted."
+        }
+      ]
+    },
+    "cex-ip-complex-complement-property-insufficient": {
+      "kind": "counterexample",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-real-phase-retrieval-complement-property",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $m\\ge0$, $[m]=\\{1,\\ldots,m\\}$ with $[0]=\\varnothing$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$. Use the standard dot product $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$, identify $x,z\\in\\mathbb R^d$ when $z=x$ or $z=-x$, and write $[x]$ for the resulting class. Define $\\mathcal I_\\Phi([x])=(\\langle a_i,x\\rangle^2)_{i\\in[m]}$, a formula independent of the representative because replacing $x$ by $-x$ leaves every square unchanged. For $S\\subseteq[m]$, let $\\operatorname{span}_{\\mathbb R}(\\Phi_S)$ be the set of finite real linear combinations of its vectors, with the empty span equal to $\\{0\\}$. Then $\\mathcal I_\\Phi$ is injective on the global-sign classes if and only if for every $S\\subseteq[m]$ at least one of $\\operatorname{span}_{\\mathbb R}(\\Phi_S)$ and $\\operatorname{span}_{\\mathbb R}(\\Phi_{[m]\\setminus S})$ equals $\\mathbb R^d$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-ip-full-spark-sharp-real-phase-measurement-count",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $m\\ge0$, and let $\\Phi=(a_i)_{i\\in[m]}$ be a finite family in $\\mathbb R^d$, with $[m]=\\{1,\\ldots,m\\}$ and $[0]=\\varnothing$. Write $\\langle u,v\\rangle=\\sum_{k<d}u_kv_k$. If $m\\le2d-2$, then there are $x,z\\in\\mathbb R^d$ with $z\\ne x$ and $z\\ne-x$ but $\\langle a_i,x\\rangle^2=\\langle a_i,z\\rangle^2$ for every $i\\in[m]$. If $m\\ge2d-1$ and every list of $d$ distinct measurement labels indexes linearly independent vectors, then equality of all these squared measurements implies $z=x$ or $z=-x$. For every $d\\ge1$, this count is attained at $m=2d-1$: for any distinct real numbers $t_1,\\ldots,t_m$, the vectors $a_i=(1,t_i,t_i^2,\\ldots,t_i^{d-1})^{\\mathsf T}$ satisfy the stated independence condition and hence the squared measurements determine the signal up to global sign.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For arbitrary $(u,v)\\in\\mathbb C^2$, the three identities\n$$ (u,v)=u a_1+v a_2=(u-v)a_1+v a_3=u a_3+(v-u)a_2 $$\nshow that each of the pairs $\\{a_1,a_2\\}$, $\\{a_1,a_3\\}$, and $\\{a_2,a_3\\}$ spans $\\mathbb C^2$: the span is a subspace containing the pair, so it contains the corresponding displayed combination for every $(u,v)$. Any partition of three labels has at least two labels on one side, and a set containing a spanning pair also spans; hence the complex complement property holds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The measurements of $x=(1,i)$ are $(1,i,1+i)$ and those of $z=(1,-i)$ are $(1,-i,1-i)$. By [F3] and [F4], their squared moduli are $(1,1,2)$ in both cases.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $z=\\lambda x$ with $|\\lambda|=1$, the first coordinate forces $\\lambda=1$, while the second would then force $-i=i$, which is false in the field [F3]. Thus $x\\not\\approx z$, and step 1.2 proves noninjectivity despite step 1.1. By [F1] and [F2], this does not contradict either real-field result: the ambient field, phase relation, and measurements differ.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three complex measurements."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All displayed measurements and signals are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes complex dimension two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample checks all three complex spans and both displayed data vectors directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and proof show that every complex vector and pair is displayed; the proof uses only finite complex arithmetic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes sufficiency and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about complex retrieval is asserted."
+        }
+      ]
+    }
+  }
+}

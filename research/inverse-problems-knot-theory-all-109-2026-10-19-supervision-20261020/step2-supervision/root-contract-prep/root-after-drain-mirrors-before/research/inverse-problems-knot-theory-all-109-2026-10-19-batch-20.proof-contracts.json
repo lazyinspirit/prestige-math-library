@@ -1,0 +1,1083 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-conjugate-gaussian-sequence-contraction",
+    "ex-ip-polynomial-singular-value-posterior-contraction",
+    "ex-ip-exponential-singular-value-posterior-contraction",
+    "cex-ip-point-mass-prior-excludes-truth-no-contraction"
+  ],
+  "contracts": {
+    "thm-ip-conjugate-gaussian-sequence-contraction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "The coordinate law is the pushforward of the functional experiment",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-finite-linear-gaussian-posterior",
+          "source_section": "Statement",
+          "quote": "Its Gaussian formula, defined for every",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+          "source_section": "Statement",
+          "quote": "There is a unique probability measure",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "If finite measures",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Then",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-ip-posterior-contraction-rate",
+          "source_section": "Definition",
+          "quote": "A positive function $r_\\epsilon\\to0$ is a posterior contraction rate",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each fixed coordinate $j$, apply [F2] with one-dimensional prior variance $C_0=\\tau_j^2$, observation map $A=s_j$, and noise variance $\\Gamma=\\epsilon^2$. Then $AC_0A^T+\\Gamma=s_j^2\\tau_j^2+\\epsilon^2>0$, and [F2] gives posterior mean $\\tau_j^2s_jY_j/(\\epsilon^2+\\tau_j^2s_j^2)=\\lambda_jY_j/s_j$ and variance $\\tau_j^2-\\tau_j^4s_j^2/(\\epsilon^2+\\tau_j^2s_j^2)=v_j$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For every finite coordinate set $J$, the prior/noise pairs indexed by $J$ are independent of the pairs outside $J$. Applying [F2] to the diagonal finite block gives the product of the scalar laws from step 1.1 as the conditional law of $\\theta_J$ given $Y_J$; independence makes it the same conditional law given the full data. The product Gaussian law $Q_y=\\bigotimes_{j\\ge1}N(\\lambda_jy_j/s_j,v_j)$ exists on $\\mathbb R^{\\mathbb N}$ by [F3]. On finite-coordinate cylinders its evaluations are Borel functions of $y$; the class of Borel sets $B$ for which $y\\mapsto Q_y(B)$ is measurable is a Dynkin system containing the generating cylinder $\\pi$-system, so [F6] makes $Q$ a probability kernel. The same finite-block conditional identity holds on data cylinders, and [F5] applied successively in the data and parameter coordinates extends it to all product-Borel events. Thus $Q_y$ is the prior-predictive conditional law on the product coordinate space.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Put $m_j(y)=\\lambda_jy_j/s_j$ and $Y_0=\\{y:\\sum_jm_j(y)^2<\\infty\\}$. This is Borel because each $m_j$ is coordinate-measurable and $\\ell^2=\\bigcup_{k\\ge1}\\bigcap_{N\\ge1}\\{x:\\sum_{j=1}^Nx_j^2\\le k\\}$. Since $v_j\\le\\tau_j^2$, [F7] gives $\\int\\sum_jx_j^2\\,Q_y(dx)=\\sum_j(m_j(y)^2+v_j)<\\infty$ on $Y_0$, so $Q_y(\\ell^2)=1$ there. Under the prior-predictive law, $\\mathbb E m_j(Y)^2=\\lambda_j^2\\tau_j^2+\\lambda_j^2\\epsilon^2/s_j^2=\\lambda_j\\tau_j^2\\le\\tau_j^2$; under the fixed truth, $m_j(Y)=\\lambda_j\\theta_j^\\dagger+\\lambda_j\\epsilon\\xi_j/s_j$ and $\\mathbb E_{\\theta^\\dagger}m_j(Y)^2=\\lambda_j^2(\\theta_j^\\dagger)^2+\\lambda_j^2\\epsilon^2/s_j^2\\le(\\theta_j^\\dagger)^2+\\tau_j^2$. Applying [F7] to the partial sums shows $Y_0$ has full measure under both laws. Restrict $Q_y$ to $\\ell^2$ on $Y_0$ and set it equal to $\\delta_0$ outside $Y_0$; this is a posterior version on $\\ell^2$ and is defined for fixed-truth-almost every observation.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F6",
+            "F7",
+            "given",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For $y\\in Y_0$, the product posterior has coordinate mean $m_j(y)$ and variance $v_j$, so its expected squared coordinate error is $(m_j(y)-\\theta_j^\\dagger)^2+v_j$. The partial sums of these nonnegative errors increase to $\\|\\theta-\\theta^\\dagger\\|_2^2$; [F7] therefore gives $\\int\\|\\theta-\\theta^\\dagger\\|_2^2\\,\\Pi_\\epsilon(d\\theta\\mid y)=\\sum_j((m_j(y)-\\theta_j^\\dagger)^2+v_j)$, with the value $+\\infty$ allowed.",
+          "inputs": [
+            "F7",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Under the fixed truth, $m_j(Y)-\\theta_j^\\dagger=-(1-\\lambda_j)\\theta_j^\\dagger+\\lambda_j\\epsilon\\xi_j/s_j$. The noise has mean zero and variance one, so its cross term has expectation zero and $\\mathbb E_{\\theta^\\dagger}(m_j(Y)-\\theta_j^\\dagger)^2=(1-\\lambda_j)^2(\\theta_j^\\dagger)^2+\\lambda_j^2\\epsilon^2/s_j^2$. The identity $v_js_j^2/\\epsilon^2=\\lambda_j$ gives $\\lambda_j^2\\epsilon^2/s_j^2=v_j^2s_j^2/\\epsilon^2$. Taking expectations in step 4.1 and applying [F7] to the nonnegative partial sums proves the displayed exact series identity.",
+          "inputs": [
+            "F1",
+            "F7",
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "For each fixed data sequence, apply [F8] to the posterior probability measure with $f(\\theta)=\\|\\theta-\\theta^\\dagger\\|_2^2$ and threshold $R^2>0$. This gives posterior tail mass at most $R^{-2}$ times the posterior second moment. Taking fixed-truth expectation and using step 5.1 yields the stated bound. If $S_\\epsilon(\\theta^\\dagger)\\le C r_\\epsilon^2$, substitute $R=M_\\epsilon r_\\epsilon$ to obtain expected tail mass at most $C/M_\\epsilon^2\\to0$ for every $M_\\epsilon\\to\\infty$; [F9] identifies $r_\\epsilon$ as a posterior contraction rate.",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [
+        {
+          "check": "gaussian-sequence-one-coordinate-posterior",
+          "asserts": "At $s_j=\\tau_j=\\epsilon=1$, the coordinate posterior is $N(Y_j/2,1/2)$ and the prior-predictive law of $Y_j$ is $N(0,2)$."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated model, prior, and parameter ellipsoid are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the identity at the zero truth; its squared-bias contribution is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-value boundary is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem/example assumes strictly positive prior coordinate variances and positive noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes epsilon>0, so epsilon=0 is excluded (Statement)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and Countable Choice are explicit; steps 1.1–1.3 use finite conditioning and countable Gaussian product construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The identity is extended-valued in general and finite under the stated trace condition and ell^2 truth. The posterior product version is explicitly shown to be truth-full; no epsilon=0, non-trace-class, or Gaussian-process Hellinger claim is made."
+      }
+    },
+    "ex-ip-polynomial-singular-value-posterior-contraction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-conjugate-gaussian-sequence-contraction",
+          "source_section": "Statement",
+          "quote": "Its expected posterior squared distance from the truth is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-posterior-contraction-rate",
+          "source_section": "Definition",
+          "quote": "A positive function $r_\\epsilon\\to0$ is a posterior contraction rate",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "The coordinate law is the pushforward of the functional experiment",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then the series $\\sum r^k$ converges",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "a^{r+s}=a^ra^s",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "source_section": "Statement",
+          "quote": "In particular $\\ell^2(I,\\mathbb F)$ is complete, hence a Hilbert space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nuclear-series-characterizes-trace-norm",
+          "source_section": "Statement",
+          "quote": "Then $T$ is trace class",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-positive-trace-class-covariance-defines-hilbert-gaussian",
+          "source_section": "Statement",
+          "quote": "there is a Borel $H$-valued random element $G$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "when a vector X with that law satisfies",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Cov}(U_i,V_j)=0$ for every",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $H=\\ell^2$ with standard basis $(e_j)$ and set $\\tau_j^2=j^{-1-2\\alpha}$. Each dyadic block $2^k\\le j<2^{k+1}$ has at most $2^k$ terms, each at most $2^{-k(1+2\\alpha)}$, so [F5] gives $\\sum_j\\tau_j^2\\le\\sum_{k\\ge0}2^{-2\\alpha k}<\\infty$. Define $\\Gamma e_j=\\tau_j^2e_j$. It is positive and self-adjoint; its truncations $\\Gamma_N$ have finite rank, and $\\|\\Gamma-\\Gamma_N\\|\\le\\sup_{j>N}\\tau_j^2\\le\\sum_{j>N}\\tau_j^2\\to0$, so [F6] makes $\\Gamma$ compact. The expansion $\\Gamma x=\\sum_j\\langle x,\\tau_j^2e_j\\rangle e_j$ has nuclear sum $\\sum_j\\tau_j^2<\\infty$, so [F6] also makes it trace class. By [F7] there is a Borel centered Gaussian random element $G$ in $H$ with covariance $\\Gamma$. For each finite coordinate vector, every linear projection is centered normal by [F7], hence it is jointly Gaussian by [F8]; its covariance matrix is diagonal with entries $\\tau_j^2$. Repeatedly applying [F9] to the first coordinate and the remaining block proves that the coordinates are independent, and [F10] identifies their laws as $N(0,\\tau_j^2)$. Thus the law of $G$ is the stated prior on $\\ell^2$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Put $d=1+2\\alpha+2p$ and $J=\\lceil\\epsilon^{-2/d}\\rceil$. Since $\\epsilon^{-2/d}\\ge1$, one has $\\epsilon^{-2/d}\\le J\\le2\\epsilon^{-2/d}$. The posterior variance satisfies $v_j\\le\\min\\{j^{-1-2\\alpha},\\epsilon^2j^{2p}\\}$. Therefore $\\sum_{j\\ge1}v_j\\le\\epsilon^2\\sum_{j\\le J}j^{2p}+\\sum_{j>J}j^{-1-2\\alpha}\\le\\epsilon^2J^{2p+1}+2J^{-2\\alpha}\\sum_{k\\ge0}2^{-2\\alpha k}\\le C_{\\alpha,p}\\epsilon^{4\\alpha/d}$. The finite sum has at most $J$ terms each at most $J^{2p}$; for the tail, the block $2^kJ<j\\le2^{k+1}J$ has at most $2^{k+1}J$ terms, each at most $(2^kJ)^{-1-2\\alpha}$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Write $b_j=1-\\lambda_j=\\epsilon^2/(\\epsilon^2+j^{-d})\\le\\min\\{1,\\epsilon^2j^d\\}$. The ellipsoid condition gives $\\sum_jb_j^2(\\theta_j^\\dagger)^2\\le L^2\\sup_j b_j^2j^{-2\\beta}$. For $j\\le J$, this supremum is bounded by $\\epsilon^4J^{2d-2\\beta}$ when $\\beta\\le d$, and by $\\epsilon^4$ when $\\beta>d$. For $j>J$, it is at most $J^{-2\\beta}$. The bounds on $J$ in step 1.2 give $\\sum_jb_j^2(\\theta_j^\\dagger)^2\\le C_{\\alpha,\\beta,p,L}\\epsilon^{\\min\\{4\\beta/d,4\\}}$. This treats the equality case $\\beta=d$ in the first branch.",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $v_js_j^2/\\epsilon^2=\\lambda_j\\le1$, one has $v_j^2s_j^2/\\epsilon^2=v_j\\lambda_j\\le v_j$. The exact sum [F1] and steps 1.2–2.1 therefore give $S_\\epsilon(\\theta^\\dagger)\\le C_{\\alpha,\\beta,p,L}\\epsilon^{4\\min\\{\\alpha,\\beta\\}/d}$; here $4\\alpha/d<4$. Setting $r_\\epsilon=\\epsilon^{2\\min\\{\\alpha,\\beta\\}/d}$ makes the expected posterior tail outside $M_\\epsilon r_\\epsilon$ at most $C/M_\\epsilon^2$, which tends to zero for every $M_\\epsilon\\to\\infty$. By [F2], this is the stated contraction rate.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated model, prior, and parameter ellipsoid are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example Statement includes the zero truth; step 2.1 then has zero bias while step 1.2 still bounds variance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-value boundary is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem/example assumes strictly positive prior coordinate variances and positive noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example Statement includes epsilon=1 and takes the rate limit as epsilon decreases to zero; step 1.2 uses 0<epsilon<=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example Statement has positive parameters and a nonempty truth ellipsoid; the declared AC and Countable Choice assumptions enter the posterior theorem in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The posterior rate is derived from the exact moment sum under the stated power ellipsoid. No minimax optimality or polished-tail claim is made."
+      }
+    },
+    "ex-ip-exponential-singular-value-posterior-contraction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-conjugate-gaussian-sequence-contraction",
+          "source_section": "Statement",
+          "quote": "Its expected posterior squared distance from the truth is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-posterior-contraction-rate",
+          "source_section": "Definition",
+          "quote": "A positive function $r_\\epsilon\\to0$ is a posterior contraction rate",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "The coordinate law is the pushforward of the functional experiment",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "\\exp(x)\\to+\\infty\\quad(x\\to+\\infty)",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then the series $\\sum r^k$ converges",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "a^{r+s}=a^ra^s",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1)",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "\\exp(x+y)=\\exp(x)\\exp(y)",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "\\exp(x)>0",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "inverse function of $\\exp$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "Also $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "source_section": "Statement",
+          "quote": "In particular $\\ell^2(I,\\mathbb F)$ is complete, hence a Hilbert space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-separable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **separable**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-nuclear-series-characterizes-trace-norm",
+          "source_section": "Statement",
+          "quote": "Then $T$ is trace class",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-positive-trace-class-covariance-defines-hilbert-gaussian",
+          "source_section": "Statement",
+          "quote": "there is a Borel $H$-valued random element $G$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "when a vector X with that law satisfies",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "source_section": "Statement",
+          "quote": "If $\\operatorname{Cov}(U_i,V_j)=0$ for every",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $H=\\ell^2$ with standard basis $(e_j)$ and set $\\tau_j^2=e^{-2\\alpha j}$. Since $e=\\exp(1)$, real-power definition and logarithm inversion give $e^{-2\\alpha}=\\exp(-2\\alpha)$; strict increase, positivity and $\\exp(0)=1$ imply $0<e^{-2\\alpha}<1$. By the exponent laws, $\\tau_j^2=(e^{-2\\alpha})^j$, so [F6] gives $\\sum_j\\tau_j^2<\\infty$. Define $\\Gamma e_j=\\tau_j^2e_j$. It is positive and self-adjoint; its truncations $\\Gamma_N$ have finite rank, and $\\|\\Gamma-\\Gamma_N\\|\\le\\sup_{j>N}\\tau_j^2\\le\\sum_{j>N}\\tau_j^2\\to0$, so [F7] makes $\\Gamma$ compact. The expansion $\\Gamma x=\\sum_j\\langle x,\\tau_j^2e_j\\rangle e_j$ has nuclear sum $\\sum_j\\tau_j^2<\\infty$, so [F7] also makes it trace class. By [F8] there is a Borel centered Gaussian random element $G$ in $H$ with covariance $\\Gamma$. For each finite coordinate vector, every linear projection is centered normal by [F8], hence it is jointly Gaussian by [F9]; its covariance matrix is diagonal with entries $\\tau_j^2$. Repeatedly applying [F10] to the first coordinate and the remaining block proves that the coordinates are independent, and [F11] identifies their laws as $N(0,\\tau_j^2)$. Thus the law of $G$ is the stated prior on $\\ell^2$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Put $q=\\alpha+p$. For sufficiently small $\\epsilon$, let $J$ be the largest positive integer with $e^{qJ}\\le1/\\epsilon$. Since $q>0$, the exponential is increasing and unbounded, so $J$ exists and $J\\to\\infty$ as $\\epsilon\\downarrow0$. Maximality gives $e^{qJ}\\le1/\\epsilon<e^q e^{qJ}$, hence $e^{-q}/\\epsilon<e^{qJ}\\le1/\\epsilon$. The posterior variance satisfies $v_j\\le\\min\\{e^{-2\\alpha j},\\epsilon^2e^{2pj}\\}$. Reversing the finite geometric sum for $j\\le J$ and summing the tail gives $\\sum_{j\\ge1}v_j\\le C_{\\alpha,p}(\\epsilon^2e^{2pJ}+e^{-2\\alpha J})\\le C'_{\\alpha,p}\\epsilon^{2\\alpha/q}$. For the first term, $e^{2pJ}=(e^{qJ})^{2p/q}\\le\\epsilon^{-2p/q}$. For the second, $e^{qJ}>e^{-q}/\\epsilon$ gives $e^{-2\\alpha J}<e^{2\\alpha}\\epsilon^{2\\alpha/q}$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Write $b_j=1-\\lambda_j=\\epsilon^2/(\\epsilon^2+e^{-2qj})\\le\\min\\{1,\\epsilon^2e^{2qj}\\}$. The truth ellipsoid implies $\\sum_jb_j^2(\\theta_j^\\dagger)^2\\le L^2\\sup_j b_j^2e^{-2\\beta j}$. For $j\\le J$, this is bounded coordinatewise by $\\epsilon^4e^{(4q-2\\beta)j}$; its maximum is at $J$ if $\\beta\\le2q$, and then is at most $\\epsilon^4(e^{qJ})^{4-2\\beta/q}\\le\\epsilon^{2\\beta/q}$. If $\\beta>2q$, the exponent is negative and the maximum is at $j=1$, bounded by a constant times $\\epsilon^4$. For $j>J$, the source weight gives $b_j^2e^{-2\\beta j}\\le e^{-2\\beta J}=(e^{qJ})^{-2\\beta/q}\\le e^{2\\beta}\\epsilon^{2\\beta/q}$. Thus the squared-bias term is at most $C_{\\alpha,\\beta,p,L}\\epsilon^{\\min\\{2\\beta/q,4\\}}$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $v_js_j^2/\\epsilon^2=\\lambda_j\\le1$, one has $v_j^2s_j^2/\\epsilon^2=v_j\\lambda_j\\le v_j$. Combining [F1] with steps 1.2–2.1 gives $S_\\epsilon(\\theta^\\dagger)\\le C_{\\alpha,\\beta,p,L}\\epsilon^{2\\min\\{\\alpha,\\beta\\}/q}$: when $\\beta\\le\\alpha$, the bias exponent is $2\\beta/q$; when $\\beta>\\alpha$, the variance exponent $2\\alpha/q<2$ dominates the bias bound, including the branch $\\beta>2q$. Taking $r_\\epsilon=\\epsilon^{\\min\\{\\alpha,\\beta\\}/q}$, [F1] bounds the expected tail outside $M_\\epsilon r_\\epsilon$ by $C/M_\\epsilon^2\\to0$. By [F2], this is the claimed posterior contraction rate.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated model, prior, and parameter ellipsoid are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example Statement includes the zero truth; step 2.1 then has zero bias while step 1.2 still bounds variance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-value boundary is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem/example assumes strictly positive prior coordinate variances and positive noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example Statement imposes 0<epsilon<1/e^(alpha+p); step 1.2 uses this strict upper bound to ensure the cutoff J exists with J>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example Statement has positive parameters and a nonempty truth ellipsoid; the declared AC and Countable Choice assumptions enter the posterior theorem in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The rate is derived from an explicit posterior-moment bound under the displayed exponential source ellipsoid. Ding–Mathé is cited only for minimax context; no minimax or Gaussian-process contraction theorem is used as a posterior supplier."
+      }
+    },
+    "cex-ip-point-mass-prior-excludes-truth-no-contraction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "The coordinate law is the pushforward of the functional experiment",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-conjugate-gaussian-sequence-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\tau_j>0$ satisfy",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "N(m,0)=\\delta_m",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "then its law has Lebesgue density",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "\\exp(x)>0",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-posterior-contraction-rate",
+          "source_section": "Definition",
+          "quote": "A positive function $r_\\epsilon\\to0$ is a posterior contraction rate",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The prior $\\delta_0=N(0,0)$ is a proper centered Gaussian law. Under its prior-predictive joint law, $\\theta=0$ almost surely, so for every Borel $A\\subseteq\\ell^2$ and product-Borel $B\\subseteq\\mathbb R^{\\mathbb N}$, $\\mathbb P(\\theta\\in A,Y\\in B)=\\mathbf 1_A(0)\\mathbb P_0^\\epsilon(Y\\in B)=\\int_B\\delta_0(A)\\,\\mathbb P_0^\\epsilon(dy)$. Thus the constant kernel $y\\mapsto\\delta_0$ is a posterior version. The prior assigns zero mass to every ball centered at $e_1$ of radius less than $1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Under the fixed truth $e_1$, only the first data coordinate shifts. Relative to the prior-predictive data law, the one-coordinate normal density ratio is $L(y)=\\exp\\!\\left(\\frac{s_1y_1}{\\epsilon^2}-\\frac{s_1^2}{2\\epsilon^2}\\right)$, and it integrates to $1$ under the prior-predictive first-coordinate law. It is positive and finite for every $y$ by [F4]–[F6]. All remaining coordinates have identical independent laws. The two full product-Borel data laws therefore agree as finite measures on the generating cylinder $\\pi$-system after weighting by $L$; [F5] extends the identity to all data events. Since $L>0$, the laws are equivalent, so the posterior version $\\delta_0$ remains the same almost surely under the truth law.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For any candidate rate $r_\\epsilon\\to0$, take $M_\\epsilon=r_\\epsilon^{-1/2}$ for sufficiently small $\\epsilon$. Then $M_\\epsilon\\to\\infty$ and $M_\\epsilon r_\\epsilon=\\sqrt{r_\\epsilon}<1$ eventually. The posterior is concentrated at $0$, whose distance from $e_1$ is $1$, so its mass outside the radius-$M_\\epsilon r_\\epsilon$ ball is exactly $1$ under the truth law. This violates [F7] and refutes the Statement. The example lies outside the positive-coordinate-variance hypotheses in [F2].",
+          "inputs": [
+            "F2",
+            "F7",
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "one-coordinate Gaussian shift likelihood ratio",
+          "method": "exact density ratio for two one-dimensional normals",
+          "input": {
+            "epsilon": 1,
+            "s_1": 1,
+            "truth_coordinate": 1,
+            "prior_truth_coordinate": 0
+          },
+          "calculation": "Under the prior predictive law Y_1~N(0,1); under truth e_1, Y_1~N(1,1); the likelihood ratio is exp(Y_1-1/2), which is strictly positive and integrates to one.",
+          "expected": {
+            "likelihood_ratio": "exp(Y_1-1/2)",
+            "equivalent": true,
+            "posterior_version": "delta_0"
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter space ell^2 and prior-predictive data space are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1 uses the degenerate centered Gaussian prior delta_0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample step 3.1 uses that the truth e_1 has distance exactly one from the posterior support {0}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1 identifies the posterior version as the degenerate point mass delta_0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or zero-noise claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC and Countable Choice; counterexample steps 1.1 and 2.1 use a constant posterior kernel and a one-coordinate shift."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The counterexample refutes only a blanket extension to priors that need not support the truth. The conjugate theorem keeps its strictly positive trace-class prior hypotheses. Equivalence of the fixed-truth and prior-predictive data laws removes posterior-version ambiguity."
+      }
+    }
+  }
+}

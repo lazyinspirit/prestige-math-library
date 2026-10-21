@@ -1,0 +1,68 @@
+--- a/items/thm-ip-fourier-slice-identity.md
++++ b/items/thm-ip-fourier-slice-identity.md
+@@ -8,6 +8,8 @@
+ dependency_level: 1
+ aliases: []
+ deps:
++  - thm-ftc-second-part
++  - thm-chain-rule-for-total-derivatives
+   - def-ip-2d-radon-transform
+   - cor-change-of-variables-for-compactly-supported-functions
+   - thm-continuous-functions-on-compact-jordan-sets-are-integrable
+@@ -51,13 +53,17 @@
+ 
+ [F4] [[cor-change-of-variables-for-compactly-supported-functions]]: an injective $C^1$ change of variables with nonvanishing Jacobian carries a compactly supported Riemann integral to the integral multiplied by the absolute Jacobian.
+ 
++[F5] [[thm-ftc-second-part]]: if a real function $G$ is differentiable on $[a,b]$, including one-sided endpoint derivatives, and $G'$ is Riemann integrable there, then $\int_a^bG'=G(b)-G(a)$.
++
++[F6] [[thm-chain-rule-for-total-derivatives]]: for totally differentiable maps between finite-dimensional real spaces, $D(g\circ T)=Dg(T)\circ DT$. Apply this separately to real and imaginary parts; when $T$ is linear, $DT=T$ is constant, so repeated application gives the corresponding directional derivatives of a smooth composition.
++
+ ## Proof
+ 
+ 1.1 Fix $\theta$ and define $T(s,t)=s\theta+t\theta^\perp$ and $F(s,t)=f(T(s,t))$. The columns of $T$ are an orthonormal positively oriented basis, so $T$ is a linear diffeomorphism and $K:=T^{-1}(\operatorname{supp}f)$ is compact. Choose $M>0$ with $K\subset[-M,M]^2$. Then $F(s,t)=0$ for $|t|>M$, and $Rf(\theta,s)=\int_{-M}^{M}F(s,t)\,dt$; it vanishes unless $s$ belongs to the compact projection of $K$ onto the first coordinate. [given, F1, choose]
+ 
+-1.2 For each integer $k\ge0$, $\partial_s^kF$ is continuous. On every compact $s$-interval, $\partial_s^{k+1}F$ is uniformly continuous on the product with $[-M,M]$. The fundamental theorem of calculus gives, for sufficiently small nonzero $h$,
++1.2 Write $f=f_{\mathrm R}+if_{\mathrm I}$ and $F_\nu=f_\nu\circ T$ for $\nu\in\{\mathrm R,\mathrm I\}$. Each $f_\nu$ is real smooth; since $DT$ is constant, repeated applications of [F6] give $\partial_s^kF_\nu(s,t)=(\theta\cdot\nabla)^k f_\nu(T(s,t))$. Thus, for each integer $k\ge0$, $\partial_s^kF$ is continuous. On every compact $s$-interval, $\partial_s^{k+1}F$ is uniformly continuous on the product with $[-M,M]$. For each real component, apply [F5] on $[0,1]$ to $u\mapsto\partial_s^kF_\nu(s+uh,t)$. By [F6] its derivative is $h\,\partial_s^{k+1}F_\nu(s+uh,t)$, continuous and hence integrable by [F2], with the same one-sided derivatives at the endpoints. Combining the two real equalities and dividing by $h$ gives, for sufficiently small nonzero $h$ of either sign,
+ $$\frac{\partial_s^kF(s+h,t)-\partial_s^kF(s,t)}{h}=\int_0^1\partial_s^{k+1}F(s+uh,t)\,du.$$
+-The right side converges uniformly for $t\in[-M,M]$ to $\partial_s^{k+1}F(s,t)$ as $h\to0$. Integrating in $t$ therefore proves inductively that $\frac{d^k}{ds^k}Rf(\theta,s)=\int_{-M}^{M}\partial_s^kF(s,t)\,dt$ for every $k$, and uniform continuity also makes each derivative continuous in $s$. Thus $Rf(\theta,\cdot)\in C_c^\infty(\mathbb R;\mathbb C)$, so its Fourier transform in [F1] is defined. [F1, step 1.1]
++The right side converges uniformly for $t\in[-M,M]$ to $\partial_s^{k+1}F(s,t)$ as $h\to0$. Integrating in $t$ therefore proves inductively that $\frac{d^k}{ds^k}Rf(\theta,s)=\int_{-M}^{M}\partial_s^kF(s,t)\,dt$ for every $k$, and uniform continuity also makes each derivative continuous in $s$. Thus $Rf(\theta,\cdot)\in C_c^\infty(\mathbb R;\mathbb C)$, so its Fourier transform in [F1] is defined. [F1, F2, F5, F6, step 1.1]
+ 
+ 2.1 Put $H(s,t)=f(T(s,t))e^{-2\pi i\sigma s}$. This is continuous and supported in $K$. Choose a nondegenerate product rectangle containing $K$. By [F2], the real and imaginary parts of $H$ are Riemann integrable there, and all their one-variable sections are continuous and hence Riemann integrable. [F2, step 1.1, choose]
+ 
+@@ -76,3 +82,7 @@
+ [[thm-riemann-fubini-on-product-rectangles]]
+ 
+ [[cor-change-of-variables-for-compactly-supported-functions]]
++
++[[thm-ftc-second-part]]
++
++[[thm-chain-rule-for-total-derivatives]]
+--- a/items/thm-ip-radon-normal-operator.md
++++ b/items/thm-ip-radon-normal-operator.md
+@@ -8,6 +8,9 @@
+ dependency_level: 2
+ aliases: []
+ deps:
++  - thm-ftc-second-part
++  - thm-chain-rule-for-total-derivatives
++  - thm-continuous-functions-on-compact-jordan-sets-are-integrable
+   - def-ip-2d-radon-transform
+   - thm-ip-fourier-slice-identity
+   - def-countable-choice
+@@ -83,9 +86,15 @@
+ 
+ [F10] [[thm-linearity-of-the-lebesgue-integral-on-l-one]]: the Lebesgue integral is complex-linear on $L^1$.
+ 
++[F11] [[thm-ftc-second-part]]: for a real differentiable $G$ on $[a,b]$ with integrable derivative, including one-sided endpoint derivatives, $\int_a^bG'=G(b)-G(a)$.
++
++[F12] [[thm-chain-rule-for-total-derivatives]]: totally differentiable finite-dimensional real maps satisfy $D(g\circ T)=Dg(T)\circ DT$. For a linear $T$, its derivative is constant; repeated application to the real and imaginary parts of a smooth function gives all directional derivatives of their compositions.
++
++[F13] [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]: every continuous real function on a compact Jordan set, in particular $[0,1]$, is Riemann integrable.
++
+ ## Proof
+ 
+-1.1 Since $f\in C_c^\infty(\mathbb R^2)$, it is a Schwartz function. Choose $R>0$ with $\operatorname{supp}f\subset B_R(0)$. For every $\theta\in S^1$ and $s\in\mathbb R$, the integrand $f(s\theta+t\theta^\perp)$ vanishes for $|t|>R$, because $|s\theta+t\theta^\perp|^2=s^2+t^2$. Thus the line integral is over the fixed interval $[-R,R]$. On every bounded $s$-interval, $(\theta,s,t)\mapsto f(s\theta+t\theta^\perp)$ is uniformly continuous on the compact parameter product with $S^1$ and $[-R,R]$, so its integral is jointly continuous in $(\theta,s)$. For fixed $\theta$, the fundamental theorem of calculus makes the difference quotients of each $s$-derivative converge uniformly in $t\in[-R,R]$ on compact $s$-intervals; hence $\partial_s^k Rf(\theta,s)=\int_{-R}^{R}(\theta\cdot\nabla)^k f(s\theta+t\theta^\perp)\,dt$ for every $k\ge0$, with each derivative continuous. Also $Rf(\theta,s)=0$ for $|s|>R$, so $Rf(\theta,\cdot)\in C_c^\infty(\mathbb R;\mathbb C)$ and is Schwartz. For every $x$, joint continuity makes $\theta\mapsto Rf(\theta,x\cdot\theta)$ continuous; [F4] makes $\mu$ finite, so the defining backprojection integral exists. By [F6] and [F7], the Lebesgue Fourier transforms of $f$ and $Rf(\theta,\cdot)$ are Schwartz and satisfy pointwise inversion; [F8] identifies them with the compact-support Riemann transforms in [F1]. Also $|\widehat f(\xi)|\le\int|f|$, and [F4] shows $|\xi|^{-1}\widehat f(\xi)$ is integrable near $0$; outside the unit disk it is dominated by the integrable Schwartz function $|\widehat f|$. Rapid decay of $\widehat f$ and finiteness of $\mu$ make the later signed-frequency integrals absolutely convergent. [given, A1, F1, F4, F6, F7, F8, choose]
++1.1 Since $f\in C_c^\infty(\mathbb R^2)$, it is a Schwartz function. Choose $R>0$ with $\operatorname{supp}f\subset B_R(0)$. For every $\theta\in S^1$ and $s\in\mathbb R$, the integrand $f(s\theta+t\theta^\perp)$ vanishes for $|t|>R$, because $|s\theta+t\theta^\perp|^2=s^2+t^2$. Thus the line integral is over the fixed interval $[-R,R]$. On every bounded $s$-interval, $(\theta,s,t)\mapsto f(s\theta+t\theta^\perp)$ is uniformly continuous on the compact parameter product with $S^1$ and $[-R,R]$, so its integral is jointly continuous in $(\theta,s)$. For fixed $\theta$, write $f=f_{\mathrm R}+if_{\mathrm I}$ and $F_\nu(s,t)=f_\nu(s\theta+t\theta^\perp)$ for $\nu\in\{\mathrm R,\mathrm I\}$. The inner coordinate map is linear with constant derivative, so repeated use of [F12] gives $\partial_s^kF_\nu(s,t)=(\theta\cdot\nabla)^k f_\nu(s\theta+t\theta^\perp)$ for every $k$. Apply [F11] on $[0,1]$ to each real function $u\mapsto\partial_s^kF_\nu(s+uh,t)$: by [F12] its derivative is $h\,\partial_s^{k+1}F_\nu(s+uh,t)$, which is continuous and Riemann integrable by [F13], including at the endpoints. Dividing the resulting identity by any nonzero $h$ gives the difference quotient as the $u$-integral of $\partial_s^{k+1}F_\nu(s+uh,t)$. Uniform continuity on each compact $(s,t)$ rectangle makes this converge uniformly in $t\in[-R,R]$; integrating and recombining the two real components therefore gives $\partial_s^k Rf(\theta,s)=\int_{-R}^{R}(\theta\cdot\nabla)^k f(s\theta+t\theta^\perp)\,dt$ for every $k\ge0$, with each derivative continuous. Also $Rf(\theta,s)=0$ for $|s|>R$, so $Rf(\theta,\cdot)\in C_c^\infty(\mathbb R;\mathbb C)$ and is Schwartz. For every $x$, joint continuity makes $\theta\mapsto Rf(\theta,x\cdot\theta)$ continuous; [F4] makes $\mu$ finite, so the defining backprojection integral exists. By [F6] and [F7], the Lebesgue Fourier transforms of $f$ and $Rf(\theta,\cdot)$ are Schwartz and satisfy pointwise inversion; [F8] identifies them with the compact-support Riemann transforms in [F1]. Also $|\widehat f(\xi)|\le\int|f|$, and [F4] shows $|\xi|^{-1}\widehat f(\xi)$ is integrable near $0$; outside the unit disk it is dominated by the integrable Schwartz function $|\widehat f|$. Rapid decay of $\widehat f$ and finiteness of $\mu$ make the later signed-frequency integrals absolutely convergent. [given, A1, F1, F4, F6, F7, F8, F11, F12, F13, choose]
+ 
+ 2.1 Apply [F7] to $Rf(\theta,\cdot)$ at $s=x\cdot\theta$, then substitute the slice identity [F2] to get $Rf(\theta,x\cdot\theta)=\int_{\mathbb R}\widehat f(\sigma\theta)e^{2\pi i\sigma x\cdot\theta}\,d\sigma$. By step 1.1 the resulting double integral over $S^1\times\mathbb R$ is absolutely convergent, so [F9] permits either order of integration and gives $R^*Rf(x)=\int_{S^1}\int_{\mathbb R}\widehat f(\sigma\theta)e^{2\pi i\sigma x\cdot\theta}\,d\sigma\,d\mu(\theta)$. [F2, F7, F9, step 1.1]
+ 

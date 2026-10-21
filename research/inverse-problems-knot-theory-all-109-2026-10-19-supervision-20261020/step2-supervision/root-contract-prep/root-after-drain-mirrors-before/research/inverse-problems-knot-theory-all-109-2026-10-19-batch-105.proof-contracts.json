@@ -1,0 +1,2921 @@
+{
+  "version": 1,
+  "scope": [
+    "def-crossing-number-of-link",
+    "def-flype-crossing-ball-and-alternating-tangle-data",
+    "def-reduced-alternating-link-diagram",
+    "def-split-link",
+    "def-tait-graph-of-a-link-diagram",
+    "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+    "lem-disconnected-projection-components-separated-by-jordan-curve",
+    "lem-kauffman-smoothing-operators-for-braid-crossings",
+    "lem-connected-projection-has-connected-tait-graphs",
+    "lem-disconnected-link-diagram-represents-a-split-link",
+    "lem-definite-normal-pairing-forces-nonsplit-boundary",
+    "lem-connected-diagram-bracket-span-bound-and-alternating-equality",
+    "lem-alternating-checkerboard-normal-pairing-is-definite",
+    "lem-connected-alternating-link-is-nonsplit",
+    "thm-tait-flyping-theorem",
+    "thm-reduced-alternating-diagram-minimizes-crossings",
+    "lem-alternating-state-adequacy-and-jones-span",
+    "cor-jones-span-detects-crossing-number-for-reduced-alternating-knots",
+    "cex-knot-kt-50-boundary-case",
+    "ex-knot-kt-50-worked-cases"
+  ],
+  "contracts": {
+    "def-crossing-number-of-link": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "of such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "**Finiteness is part of the definition.** Condition (2) is the clause that\nmakes the finitely many double points available for the slicing arguments used\nin the Reidemeister and Markov proofs; a projection with infinitely many double\npoints, accumulations, or tangential double points is not regular and is not\nused below. The definition fixes the ambient plane, the projection and the\nover/under convention once and for all.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-every-oriented-link-admits-a-regular-projection",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every oriented link $L$ contained in\n$\\mathbb R^3$, the directions $u\\in S^2$ for which the orthogonal projection\n$\\pi_u$ is regular are dense in $S^2$. Every such projection has finitely\nmany double points.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $N(K)$ be the displayed set of crossing counts. By [F1], move an oriented representative off $\\infty$ into $\\mathbb R^3$; [F3] and [A1] give it a regular diagram. Forgetting the diagram's strand arrows gives a regular diagram of the same unoriented type, so $N(K)\\ne\\varnothing$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The set $N(K)$ is a nonempty subset of $\\mathbb N$, so [F4] supplies its unique least element. Ambient-isotopic representatives have the same crossing-count set by definition of the underlying unoriented link type. This makes $c(K)$ well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition and step 1.1 include the empty link type, represented by its empty regular diagram with crossing count zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the zero-crossing case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records the declared axiom branch; all other finite constructions are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "ACω",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_frontmatter": "\"Countable choice is used only by the supplier guaranteeing a regular projection for every oriented link; the least-element argument on natural numbers is choice-free.\""
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-split-link": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "of such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Forgetting the component orientations does not change the point set $L$ or the complementary regions of a sphere disjoint from it. Thus the split predicate depends only on the underlying unoriented link type, as required by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Ambient isotopy carries any witnessing sphere and the two components of its complement to a sphere and two complementary components for the image link. The existence or nonexistence of a witness is therefore an ambient-isotopy invariant.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty link has no points on both sides of a sphere and is nonsplit."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-connected-regular-link-diagram-has-checkerboard-coloring": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a complementary region $R_0$. For any other region $R$, choose a path from an interior point of $R_0$ to an interior point of $R$, perturb it to avoid vertices and cross edges transversely, and color $R$ by the parity of the number of crossed edges. The parity is independent of the path: the symmetric difference of two paths is a closed curve modulo two. Every vertex of $P$ has even degree, so its finite edge set decomposes into simple cycles: follow unused edges until returning to the start, split any repeated-vertex trail at that vertex, and repeat with the remaining edges. A generic closed curve crosses each simple cycle an even number of times, because each simple cycle separates $S^2$ and the curve alternates between its two sides. Therefore it crosses $P$ an even number of times.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Crossing one edge changes the parity by one, so adjacent regions receive different colors. The dual adjacency graph of regions is connected because a generic path between any two regions crosses finitely many edges; hence fixing the color of $R_0$ forces every other color. The two choices for the color of $R_0$ give exactly two colorings.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-tait-graph-of-a-link-diagram": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At each crossing the four sectors alternate in color, so there is one unordered pair of opposite black sectors and one unordered pair of opposite white sectors. The crossing therefore determines one edge for each graph, with endpoints the region vertices named in the definition; if both sectors belong to one region, the edge is a loop.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The crossings form a finite set by [F1], so each construction adds finitely many edges to the finite set of region vertices. The definition allows repeated endpoint pairs and equal endpoints, so it also covers parallel edges and loops without extra choices.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-reduced-alternating-link-diagram": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The projection graph, its complementary regions, and the cyclic order of crossing visits along each component are finite data by [F1]. Thus connectedness, alternation, and the stated repeated-region condition are properties determined by the given diagram.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Forgetting all strand orientations preserves the projection graph and the over-under data, so each condition is unchanged by reversing component orientations. The definition therefore applies consistently to the underlying unoriented diagram.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-disconnected-projection-components-separated-by-jordan-curve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose one connected component $P_0$ of $P$. Around each of its finitely many vertices take a small closed disk, and around each edge take a narrow closed strip joining the incident vertex disks; for a crossingless circle take an annular neighborhood. Because the graph is finite and its distinct components are disjoint compact sets, the disks and strips can be chosen so that their union $N$ is a compact connected subsurface of $S^2$, contains $P_0$ in its interior, and misses every other component of $P$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $P$ is disconnected, some other component $P_1$ lies in a component $U$ of $S^2\\setminus N$. This $U$ is a disk: a connected compact subsurface of the sphere has boundary a finite union of disjoint circles, and each component of its complement is a disk. Its boundary $\\gamma=\\partial U$ is a simple closed curve, lies in $S^2\\setminus P$ because $N$ misses $P_1$ and all other projection components, and separates $P_1\\subset U$ from $P_0\\subset N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The construction uses finitely many neighborhoods and applies also when $P_0$ is a crossingless circle; therefore it proves the asserted separation for every disconnected regular projection.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1, 3.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-kauffman-smoothing-operators-for-braid-crossings": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "The words *positive* and *anticlockwise* refer to the fixed orientation of the\nplane of the disc and to the fixed planar projection whose horizontal axis\ncontains $Q$: the moving pair turns through the half turn anticlockwise, the\nlabel $i$ passing below its midpoint and the label $i+1$ above. Together with\nthe first-under-second stacking convention of\n[[prop-stacking-of-geometric-braids-is-well-defined]] this fixes the sign\nconvention for every signed crossing on this page and its companion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "This convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "For a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the braid projection coordinates $(t,x)$, the over-strand has tangent $(1,-2h)$ and the under-strand has tangent $(1,2h)$, so their determinant is $4h>0$, in agreement with [F2]. An orientation-preserving quarter-turn puts the over-strand in the southwest-to-northeast position of [F3]. Under that coordinate change, the chart's top-bottom pairing is the two vertical through arcs, while its left-right pairing is the top cap and bottom cup. The two terms in [F3] are therefore $A I$ and $A^{-1}e_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse half twist reverses which diagonal is over. Reflection of the local crossing interchanges the two pairings while retaining the bracket rule that assigns coefficient $A$ to the chart's $A$-smoothing and $A^{-1}$ to its $B$-smoothing. Consequently the through pairing now has coefficient $A^{-1}$ and the cap-cup pairing has coefficient $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement fixes the boundary endpoints and pairings; step 1.1 uses those same boundary conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-flype-crossing-ball-and-alternating-tangle-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.\n\nA **regular oriented link diagram** $D$ consists of the image $\\pi(L)$ together\nwith\n\n(a) the **over/under datum** at every double point: which of the two branches\n    lies above the other, read from the forgotten third coordinate (the branch\n    with the larger $x_3$-coordinate at the crossing is drawn over); and\n(b) the **orientations of the strands**, induced by the orientation of $L$.\n\nThus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.\n\n**Finiteness is part of the definition.** Condition (2) is the clause that\nmakes the finitely many double points available for the slicing arguments used\nin the Reidemeister and Markov proofs; a projection with infinitely many double\npoints, accumulations, or tangential double points is not regular and is not\nused below. The definition fixes the ambient plane, the projection and the\nover/under convention once and for all.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A sufficiently thin annular neighborhood of the supplied flyping circle contains its distinguished crossing and no other crossing: the crossing set is finite by [F1], and the circle has just the prescribed three intersection points. Transversality lets us narrow this neighborhood so its diagram consists only of the local strands at those points. The specified flyping circle, the chosen fixed disk and the annular crossing determine the local flype replacement: reflect the other disk and reverse each of its crossings, then reconnect its four ends through the modified annular crossing. This also transports any closed tangle components and the component orientations. The move is reversible by the same turnover construction.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each crossing ball is chosen inside a disjoint crossing neighborhood; its upper and lower hemispheres encode exactly the overpass and underpass of [F1]. The sphere intersections in the standard-position condition are finite transverse surfaces and saddle disks by definition, so the stated crossing-ball convention is well-defined for a supplied diagram and Conway sphere.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a crossingless diagram the crossing-ball family is empty and both shifted spheres are the projection sphere; no flyping circle exists because its definition requires a distinguished crossing. A fixed tangle with no crossings is permitted in an entire flype of a diagram with crossings."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis.",
+          "evidence": "The Definition uses quadrilateral saddle disks with two boundary arcs on each hemisphere, four alternating equatorial corners; no bigon is called a saddle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement fixes the boundary endpoints and pairings; step 1.1 uses those same boundary conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Finaldefinitioncycle2 exactoneclause correction; rootcheckedexplicitmodel andsameowner actualconsumertrace. Fullflypingtheorem remains separatelyheld."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-connected-projection-has-connected-tait-graphs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Thus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "source_section": "Statement",
+          "quote": "Let $P\\subset S^2$ be the finite connected 4-valent graph underlying a regular link projection. Its complementary regions have exactly two colorings with two colors such that regions sharing an edge have different colors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tait-graph-of-a-link-diagram",
+          "source_section": "Definition",
+          "quote": "For a link projection on $S^2$, a **checkerboard coloring** assigns one of two colors to each complementary region so that regions sharing an edge have different colors. Given such a coloring, the **black Tait graph** has one vertex for each black region and one edge for each crossing joining the two opposite black sectors at that crossing. The **white Tait graph** is defined by interchanging black and white. Loops and parallel edges are allowed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Associate to each crossing the edge of a chosen Tait graph. Along any projection edge joining crossings, the region of the chosen color on one side is the same at both ends, so the two corresponding Tait edges share that region vertex. Since the projection graph is connected, a path between any two crossings gives a sequence of Tait edges in which consecutive edges share a vertex. Every region vertex is incident to an edge because every face boundary of a connected projection with crossings contains a crossing. Therefore the Tait graph is connected. The same argument applies to the other color.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The only excluded connected projection is a crossingless circle, which is not covered by this statement; it will be treated directly in the bracket-span proof. This closes the claimed case.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-disconnected-link-diagram-represents-a-split-link": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "of such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "**Finiteness is part of the definition.** Condition (2) is the clause that\nmakes the finitely many double points available for the slicing arguments used\nin the Reidemeister and Markov proofs; a projection with infinitely many double\npoints, accumulations, or tangential double points is not regular and is not\nused below. The definition fixes the ambient plane, the projection and the\nover/under convention once and for all.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-split-link",
+          "source_section": "Definition",
+          "quote": "An oriented link $L\\subset S^3$ is **split** if a smoothly embedded sphere $S\\subset S^3\\setminus L$ has link points in both components of $S^3\\setminus S$; otherwise $L$ is **nonsplit**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-disconnected-projection-components-separated-by-jordan-curve",
+          "source_section": "Statement",
+          "quote": "Let $P\\subset S^2$ be the finite projection graph of a regular link diagram. If $P$ is disconnected, there is a simple closed curve $\\gamma\\subset S^2\\setminus P$ such that $P$ has points on both sides of $\\gamma$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the projection graph has finitely many components and the link has compact image. By [F3], choose a simple closed curve $\\gamma$ in the projection sphere missing the projection and separating its points into two nonempty sets; let $\\Delta$ be the closed disk on one side.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Regard $S^2$ as the projection sphere in $S^3$ and take the closed 3-ball over $\\Delta$ truncated at heights $\\pm M$, where $M$ exceeds the absolute height of every point of the compact link. Its rounded boundary consists of the side annulus over $\\gamma$ and the two caps at heights $\\pm M$; it is a sphere. Since $\\gamma$ misses the projection and the caps lie above and below the link, this sphere misses the link. The two sides meet the link because $\\Delta$ and its complement each contain projection points, so [F2] says that the link is split.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-connected-diagram-bracket-span-bound-and-alternating-equality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "For a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "source_section": "Statement",
+          "quote": "Let $P\\subset S^2$ be the finite connected 4-valent graph underlying a regular link projection. Its complementary regions have exactly two colorings with two colors such that regions sharing an edge have different colors.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tait-graph-of-a-link-diagram",
+          "source_section": "Definition",
+          "quote": "For a link projection on $S^2$, a **checkerboard coloring** assigns one of two colors to each complementary region so that regions sharing an edge have different colors. Given such a coloring, the **black Tait graph** has one vertex for each black region and one edge for each crossing joining the two opposite black sectors at that crossing. The **white Tait graph** is defined by interchanging black and white. Loops and parallel edges are allowed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-euler-formula-for-connected-plane-graphs",
+          "source_section": "Statement",
+          "quote": "If a connected plane graph has vertex, edge and face sets $V,E,F$ ([[def-plane-graph-face-and-boundary]]), then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-connected-projection-has-connected-tait-graphs",
+          "source_section": "Statement",
+          "quote": "For a connected regular link projection on $S^2$ with at least one crossing and either checkerboard coloring, both Tait graphs are connected.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $s_A$ and $s_B$ be the numbers of circles in the all-$A$ and all-$B$ states. If a state has $j$ $B$-smoothings, then its weight factor is $A^{c-2j}$. A single smoothing change is a band surgery and changes the circle count by exactly $1$ or $-1$, so a state with $k$ circles has $k\\le s_A+j$. Since the highest degree of $\\delta^{k-1}$ is $2(k-1)$, every state term has degree at most $c-2j+2(k-1)\\le c+2(s_A-1)$. Reversing $A$ and $B$ gives minimum degree at least $-c-2(s_B-1)$. Hence $\\operatorname{span}_A\\langle D\\rangle\\le2c+2(s_A+s_B-2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now suppose $D$ is reduced and alternating with $c>0$. Color its regions by [F3]. At one crossing choose the color name so the $A$-smoothing follows the two black sectors. Moving along a projection arc to the next crossing, alternation switches which branch is over; the chart definition of the $A$-smoothing therefore continues to follow the same color. Connectedness propagates this choice to every crossing. Thus all-$A$ circles are black regions and all-$B$ circles are white regions. By [F4] and [F6], the black Tait graph is connected, has $c$ edges, $s_A$ vertices, and $s_B$ faces. Euler's formula [F5] gives $s_A-c+s_B=2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $c>0$. Put the all-$A$ state on the lower level $S^2\\times\\{0\\}$ and the all-$B$ state on the upper level $S^2\\times\\{1\\}$. Outside the crossing disks, join corresponding state arcs by product rectangles; inside each crossing disk, join the two local smoothings by one saddle cobordism. The resulting compact surface $\\Sigma$ has boundary the $s_A+s_B$ state circles and exactly $c$ index-one saddles, hence $\\chi(\\Sigma)=-c$. Its incidence graph has one vertex for each state circle and one edge for each saddle; connectedness of the projection makes this graph connected, because each projection arc lies on the state circles incident to its endpoint saddles. Thus $\\Sigma$ is connected. Cap each boundary circle by a disk, obtaining a connected closed surface $\\widehat\\Sigma$ with $\\chi(\\widehat\\Sigma)=s_A+s_B-c$. Give it a finite cellulation and take cellular chains $C_i$ over $\\mathbb F_2$, with boundary maps $\\partial_i$. If $r_i=\\operatorname{rank}\\partial_i$ and $h_i=\\dim H_i$, then rank-nullity gives $\\dim C_i=h_i+r_i+r_{i+1}$; alternating the sum over $i=0,1,2$ cancels the $r_i$ terms and yields $\\chi(\\widehat\\Sigma)=h_0-h_1+h_2$. Connectedness gives $h_0=1$. A 2-cycle has equal coefficients on the two faces adjacent to every edge; the dual graph of a connected closed surface is connected, so all face coefficients agree and $h_2=1$. Therefore $\\chi(\\widehat\\Sigma)=2-h_1\\le2$, and $s_A+s_B-c\\le2$. For $c=0$, a connected projection is one circle and $s_A=s_B=1$, giving the same inequality. Combining this bound with step 1.1 proves $\\operatorname{span}_A\\langle D\\rangle\\le4c$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At any crossing, reducedness in [F2] says the two black sectors belong to distinct black regions and the two white sectors belong to distinct white regions. The all-$A$ smoothing circles trace the black regions, so changing one crossing from all-$A$ joins two distinct state circles by a band and merges them; the all-$B$ change similarly merges two distinct white state circles. If a state changes $j\\ge1$ crossings from all-$A$, the first change lowers the circle count to $s_A-1$, and each later change can increase it by at most one; hence its circle count is at most $s_A+j-2$. Its term's degree is therefore at most $c-2j+2(s_A+j-3)=c+2(s_A-3)$, four below the all-$A$ term's top degree $c+2(s_A-1)$. The all-$A$ term has top coefficient $(-1)^{s_A-1}\\ne0$, so it cannot cancel. The same argument at all-$B$ proves a nonzero bottom coefficient. When $c=0$, the single state has bracket $1$, and the same conclusions hold vacuously.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Using $s_A+s_B=c+2$ from step 1.2, the highest degree minus the lowest degree is $\\bigl(c+2(s_A-1)\\bigr)-\\bigl(-c-2(s_B-1)\\bigr)=2c+2(s_A+s_B-2)=4c$. The extreme coefficients are nonzero by step 2.2, so this is the actual bracket span. The $c=0$ case has span $0=4c$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1, 2.2 and 3.1 explicitly treat c=0 and give span 0=4c."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2, 2.1, 2.2, 3.1 use only the supplied finite data, with no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-alternating-state-adequacy-and-jones-span": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-connected-diagram-bracket-span-bound-and-alternating-equality",
+          "source_section": "Statement",
+          "quote": "For a connected regular link diagram $D$ with $c$ crossings, the Laurent-polynomial span of its Kauffman bracket is at most $4c$. If $D$ is reduced and alternating, then changing any one crossing from the all-$A$ state or the all-$B$ state merges two distinct state circles, both extreme coefficients are nonzero, and the bracket span is exactly $4c$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bracket-state-sum-matches-library-jones-specialization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link. At each crossing of a regular diagram $D$ use the\nsource chart with over-strand southwest-to-northeast: A joins top and bottom\nendpoints with coefficient $A$, and B joins left and right endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}),\n\\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)}\n  \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1}\n\\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the input is a connected reduced alternating diagram, so the finite state-merging conclusion in [F2] applies. It establishes both A-adequacy and B-adequacy without invoking the separate Jones axiom branch, and gives $\\operatorname{span}_A\\langle D\\rangle=4c$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $D$ represents a knot $K$. Let $E$ be any $c'$-crossing diagram of the same knot, with its component oriented to represent the chosen orientation of $K$. The projection of a one-component diagram is connected because it is the continuous image of a circle; thus [F2] gives $\\operatorname{span}_A\\langle E\\rangle\\le4c'$. Multiplication by the writhe-normalizing monomial $(-A^3)^{-\\operatorname{wr}(E)}$ shifts all exponents equally and does not change span. By [A1] and [F3], substituting $t=A^{-4}$ divides the exponent span by $4$, so $\\operatorname{span}_t V_K(t)\\le c'$. Applying this to $D$ and using step 1.1 gives $\\operatorname{span}_tV_K(t)=c$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the zero-crossing case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records the declared axiom branch; all other finite constructions are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_frontmatter": "\"The finite A/B adequacy and raw bracket-span claims are choice-free; full AC is used only for the library Jones specialization.\""
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-connected-alternating-link-is-nonsplit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-alternating-checkerboard-normal-pairing-is-definite",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a connected alternating regular link diagram on an oriented projection sphere. Choose either checkerboard color. Put a disk in each region of that color and join the opposite colored sectors at every crossing by a half-twisted band, with the twist chosen so that the boundary follows the over-under diagram. After rounding corners these disks and bands form a compact connected embedded spanning surface $F$ for the represented link. If $D$ has crossings, let $G$ be the corresponding Tait graph and orient its edges arbitrarily. Under the retraction of $F$ onto $G$, write a rational homology class as the unique graph cycle $a=\\sum_{e\\in E(G)}a_e e$. There is a single sign $\\epsilon\\in\\{1,-1\\}$ such that\n$$q(a)=\\epsilon\\sum_{e\\in E(G)}a_e^2=\\operatorname{lk}(c,\\tau c)$$\nfor every oriented rational multicurve $c$ representing $a$, where $\\tau c$ is its normal transfer. Thus $q$ is positive definite or negative definite on $H_1(F;\\mathbb Q)$. For a crossingless connected diagram, use either spanning disk and the zero-dimensional definite form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-definite-normal-pairing-forces-nonsplit-boundary",
+          "source_section": "Statement",
+          "quote": "Let $F\\subset S^3$ be a compact connected smoothly embedded surface with nonempty boundary $L$, supplied with a finite disk-and-band presentation. The surface may be nonorientable. A normal transfer $\\tau c$ of an oriented rational multicurve $c$ in the interior of $F$ is its total inverse image in the boundary of a sufficiently small normal interval neighborhood of $F$, oriented by projection onto $c$. Suppose a quadratic form $q$ on $H_1(F;\\mathbb Q)$ is positive definite or negative definite and satisfies $q([c])=\\operatorname{lk}(c,\\tau c)$ for every such rational multicurve. Then $L$ is nonsplit. Definiteness on the zero vector space is allowed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-split-link",
+          "source_section": "Definition",
+          "quote": "An oriented link $L\\subset S^3$ is **split** if a smoothly embedded sphere $S\\subset S^3\\setminus L$ has link points in both components of $S^3\\setminus S$; otherwise $L$ is **nonsplit**.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] to the supplied connected alternating diagram. The resulting surface $F$ is connected, has the represented link as its entire boundary, and carries the stated definite normal pairing. If the diagram has no crossings, [F1] identifies it as a single circle and [F2] uses a spanning disk, so the same supplied-surface conclusions hold.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The surface from step 1.1 satisfies every hypothesis of [F3], which therefore says that no sphere of the kind in [F4] splits its boundary $L$. Thus $L$ is nonsplit, with no reduction or choice assumption required.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is nonempty: the spanning surface has nonempty boundary, or a connected link diagram is supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof, step 1.1: A connected crossingless diagram uses its spanning disk and zero-dimensional definite form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof, step 2.1: The same definite-surface obstruction applies to a one-component link."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof, step 1.1: Reducedness is not needed by the checkerboard supplier; all connected alternating inputs are retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof, step 2.1: The boundary is the entire represented closed link and cannot lie on both sides of a splitting sphere."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof, step 2.1: The two actual suppliers are choice-free finite-presentation proofs, so no choice assumption is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument supplied by delegated author; independent root/native review remains owed. No full-source or native-review credit is inferred."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "All numbered current source steps reproduced exactly in this donor. Statement of the repaired nonsplitting lemma remains unchanged; the independent flyping theorem is still unresolved.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cor-jones-span-detects-crossing-number-for-reduced-alternating-knots": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-crossing-number-of-link",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $K$ be an unoriented link type in $S^3$. Its **crossing number** $c(K)$ is the least element of\n$$\\{\\,n\\in\\mathbb N:\\text{some regular diagram of }K\\text{ has exactly }n\\text{ crossings}\\,\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-alternating-state-adequacy-and-jones-span",
+          "source_section": "Statement",
+          "quote": "Assume full AC and let $D$ be a connected reduced alternating diagram with $c$ crossings. At every crossing, changing one smoothing from the all-$A$ state or from the all-$B$ state merges two distinct state circles; these are A- and B-adequacy. The Kauffman bracket has $A$-span $4c$. If $D$ represents a knot $K$, then the library Jones polynomial has $t$-span $c$, and every $c'$-crossing diagram of $K$ has $t$-span at most $c'$ under the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F1], the crossing-number definition [F2] applies. Since $D$ is a connected reduced alternating diagram by [F4], [F3] gives $\\operatorname{span}_tV_K(t)=c(D)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every regular diagram $E$ of the same underlying knot type, choose its single-component orientation to match $K$. By [F3], $c(D)\\le c(E)$ because the common Jones span is $c(D)$ and is at most $c(E)$. The diagram $D$ itself is one of the competitors in [F2], so $c(K)\\le c(D)$; the preceding inequality for every $E$ gives $c(D)\\le c(K)$. Thus $c(K)=c(D)$, and step 1.1 gives the asserted Jones span.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the zero-crossing case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records the declared axiom branch; all other finite constructions are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "ACω",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "F1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_frontmatter": "\"Full AC is used by the Jones specialization and implies the countable-choice hypothesis needed to define crossing number; the span comparison itself is choice-free once these objects exist.\""
+        },
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_frontmatter": "\"Full AC is used by the Jones specialization and implies the countable-choice hypothesis needed to define crossing number; the span comparison itself is choice-free once these objects exist.\""
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-reduced-alternating-diagram-minimizes-crossings": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-crossing-number-of-link",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $K$ be an unoriented link type in $S^3$. Its **crossing number** $c(K)$ is the least element of\n$$\\{\\,n\\in\\mathbb N:\\text{some regular diagram of }K\\text{ has exactly }n\\text{ crossings}\\,\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-disconnected-link-diagram-represents-a-split-link",
+          "source_section": "Statement",
+          "quote": "If the underlying projection of a regular link diagram on $S^2$ is disconnected, then the represented link is split.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-connected-alternating-link-is-nonsplit",
+          "source_section": "Statement",
+          "quote": "If a regular link diagram on $S^2$ is connected and alternating, then the represented link is nonsplit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-connected-diagram-bracket-span-bound-and-alternating-equality",
+          "source_section": "Statement",
+          "quote": "For a connected regular link diagram $D$ with $c$ crossings, the Laurent-polynomial span of its Kauffman bracket is at most $4c$. If $D$ is reduced and alternating, then changing any one crossing from the all-$A$ state or the all-$B$ state merges two distinct state circles, both extreme coefficients are nonzero, and the bracket span is exactly $4c$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-normalized-bracket-is-an-oriented-link-invariant",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $A$ be an indeterminate and let $D$\nbe a nonempty regular oriented link diagram in an oriented $3$-sphere. Fix a\nunit viewing normal $n$ and orient the projection plane $P$ so $(u,v)$ is\npositive exactly when $(n,u,v)$ is positive in the ambient $3$-space. At each\ncrossing define $\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},\nv_{\\rm under})$ from the oriented projected tangents and set\n$\\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c)$. At each crossing use the\nlocal source chart in which the over-strand runs southwest to northeast; the\nA-smoothing joins the top endpoints and the bottom endpoints with weight $A$,\nand the B-smoothing joins the left endpoints and the right endpoints with\nweight $A^{-1}$. Labels are transported by orientation-preserving changes of\nlocal coordinates. Let $C(D)$ be the finite crossing set. A state is a map\n$S:C(D)\\to\\{A,B\\}$; let $a(S)$ and $b(S)$ count its A- and B-smoothings, and\nlet $|S|$ be the number of circles after all crossings are smoothed. Set\n$$\\langle D\\rangle=\n\\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nDefine\n$$f_D(A)=(-A^3)^{-\\operatorname{wr}(D)}\\langle D\\rangle,$$\nwhere $\\operatorname{wr}(D)$ is the sum of the determinant signs of its\noriented crossings. If two such diagrams represent ambient-isotopic\noriented links, their $f_D(A)$ values are equal. Thus $f_D$ defines an\ninvariant of nonempty oriented links.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E$ be any regular diagram representing the same underlying unoriented link type as $L$. If its projection were disconnected, [F2] would make $L$ split, contradicting [F3] applied to $D$ and [F6]. Hence every competing diagram $E$ is connected. Orient each component of $E$ so an ambient isotopy to $L$ preserves its orientation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "choose",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], $\\operatorname{span}_A\\langle D\\rangle=4c(D)$ and $\\operatorname{span}_A\\langle E\\rangle\\le4c(E)$. The normalized bracket multiplies each raw bracket by a monomial, which shifts all exponents equally and preserves span. By [A1] and [F5], the normalized bracket values for the oriented diagrams $D$ and $E$ agree. Therefore $4c(D)\\le4c(E)$ and $c(D)\\le c(E)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The diagram $D$ is one of the regular diagrams in the nonempty crossing-count set of [F1], so $c(L)\\le c(D)$. Step 2.1 shows that $c(D)$ is no larger than any member of that set, and therefore $c(D)\\le c(L)$. Combining the inequalities proves $c(D)=c(L)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the zero-crossing case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied finite diagram is arbitrary, and step 1.1 includes the one-crossing instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records the declared axiom branch; all other finite constructions are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "ACω",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_frontmatter": "\"ACω is required for the crossing-number domain and normalized-bracket invariance. The connectedness, state-span and nonsplitting comparisons are choice-free.\""
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cex-knot-kt-50-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "For a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy",
+          "source_section": "Statement",
+          "quote": "Let $D,D'$ be regular oriented diagrams of links $L,L'$. If the diagrams\ndiffer by one oriented Reidemeister move or a planar isotopy, the links are\nequivalent. The local Reidemeister replacement has a realization supported\nin a ball over its move disk, after choosing lifts that agree outside that\nball. Comparing arbitrary realizing links may additionally require changing\ntheir heights away from the move disk.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bracket-state-sum-matches-library-jones-specialization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link. At each crossing of a regular diagram $D$ use the\nsource chart with over-strand southwest-to-northeast: A joins top and bottom\nendpoints with coefficient $A$, and B joins left and right endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}),\n\\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)}\n  \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1}\n\\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-crossing-number-of-link",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $K$ be an unoriented link type in $S^3$. Its **crossing number** $c(K)$ is the least element of\n$$\\{\\,n\\in\\mathbb N:\\text{some regular diagram of }K\\text{ has exactly }n\\text{ crossings}\\,\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two states of a positive kink consist of an $A$-smoothing that leaves the original arc and creates one trivial circle, and a $B$-smoothing that leaves only the original arc. By [F1] their total bracket factor is $A\\delta+A^{-1}=A(-A^2-A^{-2})+A^{-1}=-A^3$, so $\\langle D_+\\rangle=-A^3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The kink has one positive crossing, so [F2] gives $\\operatorname{wr}(D_+)=1$. Its normalized bracket is $f_{D_+}(A)=(-A^3)^{-1}(-A^3)=1$. By [A1] and [F5], the library Jones polynomial is therefore $1$, whose $t$-span is $0$. The one-crossing projection is connected; its unique component visits the crossing once over and once under, so it is alternating; the kink region has the crossing twice on its boundary, so it is not reduced by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the type-I move carries $D_+$ to the crossing-free unknot diagram. Thus the represented link has a diagram with zero crossings. Since crossing counts are nonnegative by [F6], its crossing number is zero, strictly less than the one crossing in $D_+$. This verifies the claimed failure of crossing minimality at a non-reduced alternating diagram.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the crossing-free unknot diagram to verify crossing number zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the one-crossing kink and both visits to its unique crossing."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records the declared axiom branch; all other finite constructions are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_frontmatter": "\"Full AC is used only to identify the library Jones polynomial through the bracket specialization; the kink calculation and crossing-number comparison are choice-free.\""
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive-type-I-kink-two-state-bracket",
+          "method": "exact two-state calculation",
+          "anchor_steps": [
+            "1.1",
+            "2.1"
+          ],
+          "input": {
+            "states": 2,
+            "loop_value": "delta=-A^2-A^-2",
+            "writhe": 1
+          },
+          "calculation": "A*delta+A^-1=A*(-A^2-A^-2)+A^-1=-A^3; writhe normalization multiplies by (-A^3)^-1, giving 1.",
+          "result": {
+            "bracket": "-A^3",
+            "Jones": "1",
+            "Jones_span": 0,
+            "crossing_number": 0
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-knot-kt-50-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-kauffman-smoothing-operators-for-braid-crossings",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma_i$ be the positive geometric Artin braid crossing in a braid rectangle whose parameter increases from bottom to top, with strand $i$ passing below and strand $i+1$ passing above. Use the bracket chart in which the over-strand runs southwest to northeast, the $A$-smoothing joins top to top and bottom to bottom with weight $A$, and the $B$-smoothing joins left to left and right to right with weight $A^{-1}$. Let $I$ be the through pairing and let $e_i$ be the pairing with a top cap and a bottom cup at positions $i,i+1$. Then the positive crossing has bracket operator $A I+A^{-1}e_i$, and the negative crossing has bracket operator $A^{-1}I+A e_i$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "For a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "The words *positive* and *anticlockwise* refer to the fixed orientation of the\nplane of the disc and to the fixed planar projection whose horizontal axis\ncontains $Q$: the moving pair turns through the half turn anticlockwise, the\nlabel $i$ passing below its midpoint and the label $i+1$ above. Together with\nthe first-under-second stacking convention of\n[[prop-stacking-of-geometric-braids-is-well-defined]] this fixes the sign\nconvention for every signed crossing on this page and its companion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-closure-of-a-geometric-braid",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge0$ and let $\\beta=(z_1,\\ldots,z_n)$ be a geometric braid with\nthe fixed real basepoints $q_j=((2j-n-1)/(4(n+1)),0)$ and endpoint\npermutation $\\pi$, as in [[def-geometric-braid-with-setwise-endpoints]].\nIdentify the disk with $\\{x\\in\\mathbb C:|x|<1\\}$ and put\n$$V=(D^\\circ\\times[0,1])/((x,1)\\sim(x,0)).$$\nThe quotient and its topology use [[def-product-topology]] and the circle\n$\\mathbb R/\\mathbb Z$ of [[def-circle-as-real-line-mod-integers]].\nThe interval images\n$$s_j=\\{[(z_j(t),t)]:0\\le t\\le1\\},\\qquad \\operatorname{cl}(\\beta)=\\bigcup_{j=1}^n s_j$$\nare the **closure in the open solid torus**. In general an individual\n$s_j$ is an interval image, not a closed circle: its last point is the\nfirst point of $s_{\\pi(j)}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-jones-span-detects-crossing-number-for-reduced-alternating-knots",
+          "source_section": "Statement",
+          "quote": "Assume full AC. If $D$ is a connected reduced alternating diagram of a knot $K$, then the library Jones polynomial has $t$-span exactly $c(K)=c(D)$, in the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-tait-graph-of-a-link-diagram",
+          "source_section": "Definition",
+          "quote": "For a link projection on $S^2$, a **checkerboard coloring** assigns one of two colors to each complementary region so that regions sharing an edge have different colors. Given such a coloring, the **black Tait graph** has one vertex for each black region and one edge for each crossing joining the two opposite black sectors at that crossing. The **white Tait graph** is defined by interchanging black and white. Loops and parallel edges are allowed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-connected-projection-has-connected-tait-graphs",
+          "source_section": "Statement",
+          "quote": "For a connected regular link projection on $S^2$ with at least one crossing and either checkerboard coloring, both Tait graphs are connected.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-bracket-state-sum-matches-library-jones-specialization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link. At each crossing of a regular diagram $D$ use the\nsource chart with over-strand southwest-to-northeast: A joins top and bottom\nendpoints with coefficient $A$, and B joins left and right endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}),\n\\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)}\n  \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1}\n\\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the closure of $\\sigma_1^3$, the endpoint permutation is the transposition of the two strands, hence one cycle by [F4]. The three positive crossings form a connected projection. Starting on the left bottom strand, the successive crossing visits are under, over, under; after closure the right bottom strand visits over, under, over. Thus the diagram is alternating. Its black Tait graph has two vertices and three parallel edges, while the white dual graph is a triangle. Both graphs have no loops, so no crossing repeats a region on its boundary; the diagram is reduced by [F6].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the four-level braid with levels $\\sigma_2^{-1},\\sigma_1,\\sigma_2^{-1},\\sigma_1$, the successive endpoint orders are $[1,3,2]$, $[3,1,2]$, $[3,2,1]$, and $[2,3,1]$. The resulting endpoint permutation is the cycle $1\\mapsto3\\mapsto2\\mapsto1$, so the closure is one knot component by [F4]. Traversing it from the first bottom strand gives crossing visits under, over; from the third bottom strand gives under, over, under; and from the second gives over, under, over. The full cyclic sequence alternates. The black Tait graph is the theta graph with two parallel edges between $u,v$ and a two-edge path $u-w-v$; it has no loops or bridges. Its dual has no loops because the primal has no bridges. Thus both color pairs at every crossing are distinct and the diagram is reduced by [F6].",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If exactly $k$ of the three positive crossings use the $B$-smoothing, the states and circle counts are: $k=0$: $1$ state with $2$ circles; $k=1$: $3$ states with $1$ circle; $k=2$: $3$ states with $2$ circles; $k=3$: $1$ state with $3$ circles. Stacking through pairings and cup-cap pairings and closing the two top endpoints to the corresponding bottom endpoints gives these counts. By [F1]–[F2], the grouped contributions are $A^3\\delta+3A+3A^{-1}\\delta+A^{-3}\\delta^2=A^{-7}-A^{-3}-A^5$. The writhe is $3$ by [F3], so [F7] gives $V_{3_1}(t)=(-A^3)^{-3}(A^{-7}-A^{-3}-A^5)\\big|_{t=A^{-4}}=t+t^3-t^4$. Its span is $3$, and [F5] gives crossing number $3$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Encode a state by four bits from bottom to top, with $0$ meaning through pairing and $1$ meaning cup-cap pairing. Let $p$ be the number of cup-cap choices at positive crossings and $q$ the number at negative crossings; [F1] gives weight exponent $2(q-p)$. Closing the pairings gives the exhaustive state data $\\begin{array}{c|c|c}\\text{state}&\\text{circles}&\\text{exponent}\\\\0000&3&0\\\\0001&2&-2\\\\0010&2&2\\\\0011&1&0\\\\0100&2&-2\\\\0101&3&-4\\\\0110&1&0\\\\0111&2&-2\\\\1000&2&2\\\\1001&1&0\\\\1010&3&4\\\\1011&2&2\\\\1100&1&0\\\\1101&2&-2\\\\1110&2&2\\\\1111&1&0\\end{array}$. Thus the five one-circle states contribute $5$, the eight two-circle states contribute $4(A^2+A^{-2})\\delta$, and the three three-circle states contribute $(1+A^4+A^{-4})\\delta^2$. Expanding $\\delta=-A^2-A^{-2}$ gives $\\langle D_F\\rangle=5+4(A^2+A^{-2})\\delta+(1+A^4+A^{-4})\\delta^2=A^8-A^4+1-A^{-4}+A^{-8}$. There are two positive and two negative crossings, so writhe is $0$ by [F3]. By [F7], $V_{4_1}(t)=t^{-2}-t^{-1}+1-t+t^2$, whose span is $4$. Applying [F5] gives crossing number $4$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a supplied nonempty diagram, nonempty projection graph, or knot; the empty diagram is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-crossing input occurs in the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked diagrams have exactly three and four crossings; no one-crossing example is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting input is part of this statement; nonregular projections are excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed link diagrams or closed links and has no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records the declared axiom branch; all other finite constructions are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "declared_in_frontmatter": "\"Full AC is used only for the library Jones specialization and the crossing-number corollary; the two finite state enumerations and diagram checks are choice-free.\""
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive-trefoil-eight-state-sum",
+          "method": "exact finite pairing enumeration",
+          "anchor_steps": [
+            "2.1"
+          ],
+          "input": {
+            "crossings": 3,
+            "states": 8,
+            "rows": [
+              {
+                "B_smoothings": 0,
+                "states": 1,
+                "circles": 2,
+                "contribution": "A^3 delta"
+              },
+              {
+                "B_smoothings": 1,
+                "states": 3,
+                "circles": 1,
+                "contribution": "3A"
+              },
+              {
+                "B_smoothings": 2,
+                "states": 3,
+                "circles": 2,
+                "contribution": "3A^-1 delta"
+              },
+              {
+                "B_smoothings": 3,
+                "states": 1,
+                "circles": 3,
+                "contribution": "A^-3 delta^2"
+              }
+            ]
+          },
+          "calculation": "The state rows sum to A^3 delta+3A+3A^-1 delta+A^-3 delta^2=A^-7-A^-3-A^5. Writhe 3 gives t+t^3-t^4.",
+          "result": {
+            "bracket": "A^-7-A^-3-A^5",
+            "Jones": "t+t^3-t^4",
+            "span": 3
+          }
+        },
+        {
+          "name": "figure-eight-sixteen-state-pairing-sum",
+          "method": "exact finite Temperley-Lieb pairing enumeration",
+          "anchor_steps": [
+            "3.1"
+          ],
+          "input": {
+            "bottom_to_top": [
+              "sigma_2^-1",
+              "sigma_1",
+              "sigma_2^-1",
+              "sigma_1"
+            ],
+            "bits": "0=through, 1=cup-cap",
+            "states": 16
+          },
+          "calculation": "For each bit string, stack the four pairings, connect top position j to bottom position j, count the resulting circles, and use exponent 2(q-p). The table in proof step 2.2 groups five one-circle, eight two-circle, and three three-circle states.",
+          "result": {
+            "bracket": "A^8-A^4+1-A^-4+A^-8",
+            "writhe": 0,
+            "Jones": "t^-2-t^-1+1-t+t^2",
+            "span": 4
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument is recorded in the carrier; this author contract is not independent approval."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Every numbered argument step is mapped to its stated facts and earlier steps; no unresolved supplier is represented as complete.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-definite-normal-pairing-forces-nonsplit-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-split-link",
+          "source_section": "Definition",
+          "quote": "An oriented link $L\\subset S^3$ is **split** if a smoothly embedded sphere $S\\subset S^3\\setminus L$ has link points in both components of $S^3\\setminus S$; otherwise $L$ is **nonsplit**.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mayer-vietoris-sequence-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For an open cover $X=U\\cup V$, the sequence\n$$\\cdots\\to H_n(U\\cap V;G)\\to H_n(U;G)\\oplus H_n(V;G)\\to H_n(X;G)\\xrightarrow{\\delta}H_{n-1}(U\\cap V;G)\\to\\cdots$$\nis exact, with middle map $(u,v)\\mapsto u+v$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-homology-of-spheres",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\widetilde H_k(S^n;G)$ is $G$ for $k=n$ and $0$ otherwise.\nFor $S^0$, $\\widetilde H_0(S^0;G)\\cong G$ and all other reduced groups vanish.\nThus $H_0(S^n;G)\\cong G$ for $n\\ge1$, whereas\n$H_0(S^0;G)\\cong G\\oplus G$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-simplicial-and-singular-homology-agree-for-simplicial-complexes",
+          "source_section": "Statement",
+          "quote": "For every simplicial complex $K$ and abelian group $G$, there is a canonical\nnatural isomorphism $H_n^{\\mathrm{simp}}(K;G)\\cong H_n(|K|;G)$ for all $n$.\nWhen the vertex set has a supplied total order, it is induced by the\nsimplicial-to-singular chain map of [[def-simplicial-to-singular-chain-map]],\nextended $G$-linearly. Different supplied orders induce the same homology map.\nFor an arbitrary vertex set, the isomorphism is defined compatibly on its\nfinite subcomplexes and requires no choice principle.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Linking can be computed here using finite rational chains: a rational $1$-cycle $a$ in $S^3$ bounds a rational $2$-chain $C$ by [F3], and $\\operatorname{lk}(a,b)=C\\mathbin{\\cdot}b$ for a disjoint rational cycle $b$. Independence of $C$ follows because the difference of two choices bounds a $3$-chain by [F3], whose intersection with the closed cycle $b$ has total boundary zero. In particular linking is zero if $a$ bounds a chain disjoint from $b$, and is unchanged under a homology of $b$ in the complement of $a$. All chains involved are finite. Curves and surfaces used below can be put in finite general position: subdivide their compact parameter domains finely in finitely many coordinate neighborhoods, approximate by polygonal patches within a tubular neighborhood, perturb the finitely many vertices to avoid the finitely many nontransverse affine incidences, and smooth the patches in smaller neighborhoods. Approximation sufficiently close to the original embedded patches preserves embedding and disjointness from the compact boundary $L$. These operations use finitely many choices, and no simultaneous choices indexed by an infinite family.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "We record elementary finite-surface facts needed below. Cutting the supplied presentation along a finite family of curves gives finite triangulations of its pieces. A connected triangulated surface with boundary has a graph spine: in the dual graph include a vertex for the boundary, choose a finite spanning tree rooted there, and remove triangles successively across their edge facing the already removed parent. The remaining $1$-complex is a deformation retract, and reversing these elementary collapses shows that the surface is a regular neighborhood of that graph. Consequently its rational first homology vanishes exactly when that graph is a tree, in which case its regular neighborhood is a disk, by successively removing leaf edges. Also, a two-sided simple closed curve $\\gamma$ in the interior of $F$ with $[\\gamma]=0$ bounds an orientable subsurface $F_0$ having $\\gamma$ as its only boundary. To see this, triangulate with $\\gamma$ as an edge cycle and take a rational $2$-chain bounding it using [F4]. Across edges outside $\\gamma$ its coefficients agree with orientation signs. They vanish on the component touching $\\partial F$ and jump by one across $\\gamma$, so the nonzero component supplies precisely such an oriented $F_0$. The same coefficient argument shows that $H_1(F_0;\\mathbb Q)\\to H_1(F;\\mathbb Q)$ is injective: any bounding chain for a cycle in $F_0$ has zero coefficients on the connected complementary surface, which touches $\\partial F$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $D$ is a compressing disk for $F$: its interior misses $F$ and its boundary $\\gamma$ does not bound a disk in $F$. Its boundary is two-sided in $F$, since a collar of the disk at $\\gamma$ gives a side of the normal interval bundle there. The normal transfer of a sufficiently close parallel copy of $\\gamma$ misses $D$; in a collar of $\\gamma$, move the parallel copy slightly in the direction tangent to $F$ and transverse to $\\gamma$, and take its normal lifts still closer to that copy. Thus $\\operatorname{lk}(\\gamma,\\tau\\gamma)=0$ by step 1.1. Definiteness forces $[\\gamma]=0$. Step 1.2 supplies the subsurface $F_0$ bounded by $\\gamma$. It is not a disk, and hence $V=H_1(F_0;\\mathbb Q)$ is nonzero and injects into $H_1(F;\\mathbb Q)$. Cap $F_0$ with $D$ and smooth the corner, giving a closed connected orientable embedded surface $\\Sigma$. Capping the unique boundary circle does not change $H_1$, so $H_1(\\Sigma;\\mathbb Q)=V$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "contradiction",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The surface $\\Sigma$ has a two-sided collar. Apply [F2] to that collar and $S^3\\setminus\\Sigma$. Their overlap has two components, each retracting onto $\\Sigma$. By [F3], the map from the overlap's $H_0=\\mathbb Q^2$ into $\\mathbb Q\\oplus H_0(S^3\\setminus\\Sigma;\\mathbb Q)$ is injective and has cokernel $\\mathbb Q$. Hence the complement has exactly two components, and the two collar sides belong to different ones. Let $A$ and $B$ be their closures. Thickening them to open sets, [F2] and [F3] give an isomorphism $V\\to H_1(A;\\mathbb Q)\\oplus H_1(B;\\mathbb Q)$. At least one projection has nonzero kernel: if both were injective, each target would have dimension at least $\\dim V>0$, contradicting that their dimensions sum to $\\dim V$. Thus a nonzero $a\\in V$ bounds a rational $2$-chain on one side, say in $A$. Represent $a$ by an oriented rational multicurve in $\\operatorname{int}F_0$. Both of its normal pushoffs have the same linking with it: the two normal directions are joined by a half-rotation in the normal plane of each oriented curve, giving a homology of the pushoffs in its complement. The pushoff into $\\operatorname{int}B$ misses the bounding chain in $A$, so that linking is zero by step 1.1. The normal transfer therefore has linking zero as well. Step 1.2 makes $a$ nonzero in $H_1(F;\\mathbb Q)$, contradicting definiteness of $q$. Thus $F$ has no compressing disk.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 3.1, $F$ is incompressible. Suppose now that a splitting sphere $S$ exists. Make it transverse to $F$ by the finite perturbation of step 1.1, keeping it disjoint from $L$. Their intersection is a finite union of circles. At least one is essential in $F$: otherwise each bounds a disk in $F$, and removing the interiors of the outermost such disks leaves a connected surface containing every component of $\\partial F=L$, disjoint from $S$. Its boundary would lie entirely on one side of $S$, contrary to [F1]. Choose a circle $\\gamma$ innermost on $S$ among the circles essential in $F$, and let $D$ be the disk it bounds on $S$ with no other essential circle in its interior.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "choose",
+            "contradiction",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Every circle of $\\operatorname{int}D\\cap F$ bounds a disk in $F$. If there are any, choose one $\\beta$ whose disk $E\\subset F$ is innermost among them. Its interior misses $D$: any intersection circle in that interior would itself be inessential in $F$ and would contradict the choice. The essential curve $\\gamma$ cannot lie inside $E$. Replace the disk on $D$ bounded by $\\beta$ by a small parallel copy of $E$, choosing the side that joins the remainder of $D$ and smoothing its boundary. Since $\\operatorname{int}E$ misses $D$, this is again an embedded disk with boundary $\\gamma$. It stays disjoint from $L$ and has strictly fewer intersection circles with $F$; the replacement disk is pushed off $F$ and all circles inside the discarded disk have disappeared. Repeating this finite reduction gives an embedded disk with boundary $\\gamma$ and interior disjoint from $F$. This is a compressing disk, contrary to step 3.1. The splitting sphere cannot exist, so $L$ is nonsplit.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is nonempty: the spanning surface has nonempty boundary, or a connected link diagram is supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof, step 2.1: Zero homology of a compressing curve is handled by its one-boundary subsurface, then the nonzero isotropic class contradiction in step3.1; Statement explicitly permits a zero-dimensional definite form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof, step 4.1: A single splitting sphere forces an essential intersection circle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof, step 1.2: Null-homologous two-sided curves bound an orientable subsurface even when the full surface is nonorientable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof, step 5.1: Disk replacements stay disjoint from the link boundary and retain the essential boundary curve."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof, step 1.1: Only finite chains and finite general-position modifications are used; the supplied finite presentation is retained."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument supplied by delegated author; independent root/native review remains owed. No full-source or native-review credit is inferred."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "All numbered current source steps reproduced exactly in this donor. Statement of the repaired nonsplitting lemma remains unchanged; the independent flyping theorem is still unresolved.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-alternating-checkerboard-normal-pairing-is-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "source_section": "Statement",
+          "quote": "Let $P\\subset S^2$ be the finite connected 4-valent graph underlying a regular link projection. Its complementary regions have exactly two colorings with two colors such that regions sharing an edge have different colors.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tait-graph-of-a-link-diagram",
+          "source_section": "Definition",
+          "quote": "For a link projection on $S^2$, a **checkerboard coloring** assigns one of two colors to each complementary region so that regions sharing an edge have different colors. Given such a coloring, the **black Tait graph** has one vertex for each black region and one edge for each crossing joining the two opposite black sectors at that crossing. The **white Tait graph** is defined by interchanging black and white. Loops and parallel edges are allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-connected-projection-has-connected-tait-graphs",
+          "source_section": "Statement",
+          "quote": "For a connected regular link projection on $S^2$ with at least one crossing and either checkerboard coloring, both Tait graphs are connected.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-simplicial-and-singular-homology-agree-for-simplicial-complexes",
+          "source_section": "Statement",
+          "quote": "For every simplicial complex $K$ and abelian group $G$, there is a canonical\nnatural isomorphism $H_n^{\\mathrm{simp}}(K;G)\\cong H_n(|K|;G)$ for all $n$.\nWhen the vertex set has a supplied total order, it is induced by the\nsimplicial-to-singular chain map of [[def-simplicial-to-singular-chain-map]],\nextended $G$-linearly. Different supplied orders induce the same homology map.\nFor an arbitrary vertex set, the isomorphism is defined compatibly on its\nfinite subcomplexes and requires no choice principle.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose first that there is at least one crossing. Take small disjoint crossing neighborhoods and thin strips along the finitely many projection edges. Each region of the chosen color has a disk core in the complement of these strips; connectedness makes the projection a cellular graph on the sphere, so shrinking its open disk regions gives exactly these disk cores. At every crossing join the two appropriate disk cores by a narrow band with one half-twist; choose its direction so that its boundary strands have the diagram's prescribed overpass and underpass. The neighborhoods are disjoint, so the resulting surface is embedded. Its boundary is the usual height realization of $D$. Collapsing each disk to a vertex and each band to its core retracts $F$ onto the Tait graph $G$. This graph is connected by [F2], so $F$ is connected and has a supplied finite disk-and-band presentation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Measure the signed half-twist of a band relative to the planar framing of its two disk ends; call this incidence sign $\\epsilon_e$. This is the unoriented crossing incidence, not the oriented link crossing sign. At two crossings joined by a projection edge, alternation changes which branch is over, while the chosen-color sector changes sides along that edge. The two changes cancel in the half-twist chart, giving the same incidence sign at the two crossings. Since the projection graph is connected, every band has one common sign $\\epsilon$. Reversing the chosen orientation of a graph edge reverses its cycle coefficient, without changing this incidence sign.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "We compute the normal pairing in the disk-and-band presentation. After clearing rational denominators, represent a cycle by finitely many oriented parallel strands through each band, joined by arcs in the vertex disks; any extraneous arc pairs can be canceled inside those disks. The signed number of strands through band $e$ is its graph coefficient $a_e$. Normal transfer gives two local pushoffs of each strand, exchanged at a one-sided passage. In an untwisted planar disk the contributions of the two normal sides to the mixed-crossing count cancel. In a band with a signed half-turn, each ordered pair of an original strand and a transferred strand contributes $\\epsilon_e$ to the total pairing: one normal side passes from one side of the original strand to the other during the half-turn, and the other normal side makes the complementary passage; the two mixed crossings have the same incidence sign, and the linking count is half their signed sum. Reversing either strand orientation reverses the corresponding contribution. Consequently the contribution of that band is $\\epsilon_e(\\sum_i s_i)(\\sum_j s_j)=\\epsilon_e a_e^2$, where $s_i=\\pm1$ are the strand orientations. This is also a direct computation with the half-twisted strip $(u,v)\\mapsto(u,v\\cos(\\pi u),v\\sin(\\pi u))$, reversing the half-turn for the other sign. The strips' end collars are included in this count; crossings of joining arcs in the planar disks cancel between the two normal sides. Linking here can be computed by the signed mixed-crossing count because a finite oriented smoothing of the first curve gives spanning disks and crossing bands, whose intersections with the second curve give that count. This finite construction uses the supplied drawing and does not use a link-diagram invariance theorem. Summing over all bands and restoring rational coefficients gives $\\operatorname{lk}(c,\\tau c)=\\sum_e\\epsilon_e a_e^2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F3] and the retraction in step 1.1, a homology class has a unique graph cycle vector. Thus $q(a)=\\epsilon\\sum_e a_e^2$ is a well-defined quadratic form on $H_1(F;\\mathbb Q)$, and step 3.1 proves the required normal-transfer formula for every representative. If $a\\ne0$, some edge coefficient is nonzero, so $\\sum_ea_e^2>0$. Therefore $q$ is positive definite if $\\epsilon=1$ and negative definite if $\\epsilon=-1$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If the connected diagram has no crossings, it is a single circle. Either complementary disk is an embedded connected spanning disk with $H_1=0$. Every cycle in that disk bounds there and has zero linking with its normal transfer, so the zero-dimensional form has the asserted formula and definiteness. This also covers the zero-dimensional cycle space of a Tait tree in the preceding case.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 4.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is nonempty: the spanning surface has nonempty boundary, or a connected link diagram is supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof, step 5.1: Crossingless diagrams and zero-dimensional Tait tree cycle spaces use the definite zero form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof, step 3.1: A single half-twisted band contributes exactly its signed squared coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof, step 4.1: Any nonzero graph cycle has a nonzero coefficient; loops and bridges do not invalidate the sum-of-squares argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof, step 1.1: Finite bands are attached in disjoint crossing neighborhoods to realize the supplied closed-link boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof, step 3.1: Finite parallel-strand and disk/band linking calculations require no infinite choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "Complete local argument supplied by delegated author; independent root/native review remains owed. No full-source or native-review credit is inferred."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "All numbered current source steps reproduced exactly in this donor. Statement of the repaired nonsplitting lemma remains unchanged; the independent flyping theorem is still unresolved.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-tait-flyping-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-connected-alternating-link-is-nonsplit",
+          "source_section": "Statement",
+          "quote": "If a regular link diagram on $S^2$ is connected and alternating, then the represented link is nonsplit.",
+          "uses": [
+            "1.1",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reduced-alternating-diagram-minimizes-crossings",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Every connected reduced alternating diagram $D$ of an oriented link $L$ realizes the crossing number of its underlying unoriented link: $c(D)=c(L)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-flype-crossing-ball-and-alternating-tangle-data",
+          "source_section": "Definition",
+          "quote": "A **2-tangle diagram** is a regular diagram in a disk of two properly embedded tangle arcs and possibly finitely many closed tangle components, with four specified endpoints on the disk boundary; the arcs and circles are disjoint in the represented 3-ball, while their projections may have crossings. A **flyping circle** is a simple closed curve in the projection sphere whose intersection with the diagram consists of exactly three points, exactly one of which is a crossing; the circle is transverse to both branches at that crossing and to the diagram at the other two points. A small annular neighborhood of this circle has two complementary tangle disks. A **flype** fixes the tangle in one disk, interchanges which pair of strands crosses in the annular neighborhood, and turns over the tangle in the other disk: its projected tangle is reflected and all its over-under crossing data are reversed. This turnover is a half-turn in three-dimensional space about an axis in the projection sphere. Component orientations are transported by this motion, and the exterior diagram is fixed. The move with the opposite choice of fixed disk is also allowed; a disk containing no crossings is allowed. A flype whose fixed tangle has no crossings is called an **entire flype**. Diagrams are drawn on the oriented projection sphere; a **sphere planar isotopy** is an orientation-preserving smooth isotopy of that sphere carrying the decorated diagram. A plane diagram is obtained by choosing a point of the sphere outside the projection and deleting it. At each crossing of a link diagram, a **crossing ball** is a small 3-ball in which the overpass lies on the upper hemisphere and the underpass lies on the lower hemisphere, with the rest of the link outside that ball. Replacing all crossing disks by upper hemispheres or by lower hemispheres gives the shifted projection spheres $S_+$ and $S_-$. A **saddle disk** in a crossing ball is a properly embedded disk whose boundary meets each of the two hemispheres in two arcs and whose interior passes across the equatorial crossing disk. For a closed embedded surface transverse to the link and to $S_+$ and $S_-$, each component $C$ of its intersection with either shifted sphere has a **bubble word**: read once around $C$, recording $P$ each time it crosses the link and $S$ each time it passes through a crossing ball along a saddle disk. The surface is in **bubble standard position** if every such word is nonempty and no word records the same crossing ball more than once. A **Conway sphere** is an embedded sphere meeting the link transversely in four points; it is in crossing-ball standard position when its intersection with the crossing balls consists of saddle disks and its shifted-sphere intersection curves satisfy the bubble-standard conditions.\n\nThe turnover convention is the one in Kindred's Definition 2.9 and Figure 1. In particular, an entire flype permits viewing the whole diagram from the opposite side of the sphere, as in his Definition 2.11. Closed components inside a tangle disk are carried along with its arcs.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-component-marked-prime-decomposition-comparisons-lift-prime-flype-sequences",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $L$ be a nonsplit oriented smooth link in the three-sphere. Let $S,T$ be two finite systems of pairwise disjoint smooth spheres meeting $L$ transversely twice each, such that capping every region with standard trivial-arc balls gives nontrivial prime links. Here a prime capped link has no twice-punctured sphere splitting with two nontrivial capped factors. Retain the actual cap-ball parameters and boundary collars, the global oriented component names, and any distinguished root point away from the sphere boundaries.\n\nThere is a comparison of the two systems by finitely many sphere surgeries, suppression of trivial capped connectors, and passage to a common refinement. It gives a bijection of the nontrivial capped prime factors and actual oriented capped-factor isotopies. Every factor correspondence preserves its global component names. Each change of attachment description is a transfer of whole parameterized subtree balls along their same named oriented global component, together with interchange of successive subtrees on that component. Every other cap of a suppressed trivial connector is retained in its actual order, including at a connector of valence greater than two. The root point, cap endpoint pairings, and transported boundary collars are retained.\n\nSuppose additionally that connected reduced alternating diagrams $D_0,D_1$ of the same oriented link have supplied the two sphere systems by diagrammatic splitting, together with connected reduced alternating diagrams for their capped prime factors. Identify their links with $L$ by a specified oriented link isotopy, thereby fixing the global component correspondence. Assume the following marked prime input: for every corresponding pair of capped prime diagrams needed in the comparison, a finite sequence of the prescribed flypes and sphere planar isotopies is supplied whose transported oriented component bijection is the one induced by the actual capped-factor isotopy. Then $D_0,D_1$ are related by finitely many of those flypes and sphere planar isotopies, with exactly the prescribed global oriented component correspondence. Cut locations may be corrected by those moves; no prime sequence relative to all attachment punctures is assumed.",
+          "uses": [
+            "1.1",
+            "2.4",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-planar-isotopy-of-link-diagrams",
+          "source_section": "Definition",
+          "quote": "Let $D,D'$ be regular oriented link diagrams\n([[def-regular-oriented-link-diagram]]), regarded as decorated immersed oriented\n$4$-valent planar graphs. Then $D$ and $D'$ are **planar isotopic** when there\nis an orientation-preserving ambient isotopy\n$\\Phi\\colon\\mathbb R^2\\times I\\to\\mathbb R^2$, with $\\Phi_0=\\mathrm{id}$ and\neach $\\Phi_t$ an orientation-preserving diffeomorphism\n([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]), such that\n$\\Phi_1$ carries the decorated graph of $D$ to that of $D'$: it maps the image\ncurve of $D$ bijectively onto that of $D'$, carries the over/under datum of\nevery double point to the over/under datum of the corresponding double point,\nand preserves the strand orientations. A **planar isotopy of diagrams** is a\nfamily $D_t=\\Phi_t(D_0)$ for such a jointly smooth ambient isotopy $\\Phi$,\nwith the decorations transported by $\\Phi_t$. The source curves are immersed,\nnot embedded in the plane at their crossings.\n\nPlanar isotopies are admitted as moves in the Reidemeister theorem: they carry\na regular projection between the exceptional times of a general-position\nisotopy of the link, and no crossing of the diagram is created or destroyed\nalong them. They are listed separately from the three local moves\n([[def-oriented-reidemeister-moves]]), of which R1 and R2 create or destroy crossings, while R3 rearranges three\nexisting crossings and preserves their number.\nComposing planar isotopies and composing them with the local moves gives the\nequivalence relation generated by the moves, and every single move below is\nunderstood up to planar isotopy outside its small disk.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-flype-crossing-ball-and-alternating-tangle-data",
+          "source_section": "Definition",
+          "quote": "A **2-tangle diagram** is a regular diagram in a disk of two properly embedded tangle arcs and possibly finitely many closed tangle components, with four specified endpoints on the disk boundary; the arcs and circles are disjoint in the represented 3-ball, while their projections may have crossings. A **flyping circle** is a simple closed curve in the projection sphere whose intersection with the diagram consists of exactly three points, exactly one of which is a crossing; the circle is transverse to both branches at that crossing and to the diagram at the other two points. A small annular neighborhood of this circle has two complementary tangle disks. A **flype** fixes the tangle in one disk, interchanges which pair of strands crosses in the annular neighborhood, and turns over the tangle in the other disk: its projected tangle is reflected and all its over-under crossing data are reversed. This turnover is a half-turn in three-dimensional space about an axis in the projection sphere. Component orientations are transported by this motion, and the exterior diagram is fixed. The move with the opposite choice of fixed disk is also allowed; a disk containing no crossings is allowed. A flype whose fixed tangle has no crossings is called an **entire flype**. Diagrams are drawn on the oriented projection sphere; a **sphere planar isotopy** is an orientation-preserving smooth isotopy of that sphere carrying the decorated diagram. A plane diagram is obtained by choosing a point of the sphere outside the projection and deleting it. At each crossing of a link diagram, a **crossing ball** is a small 3-ball in which the overpass lies on the upper hemisphere and the underpass lies on the lower hemisphere, with the rest of the link outside that ball. Replacing all crossing disks by upper hemispheres or by lower hemispheres gives the shifted projection spheres $S_+$ and $S_-$. A **saddle disk** in a crossing ball is a properly embedded disk whose boundary meets each of the two hemispheres in two arcs and whose interior passes across the equatorial crossing disk. For a closed embedded surface transverse to the link and to $S_+$ and $S_-$, each component $C$ of its intersection with either shifted sphere has a **bubble word**: read once around $C$, recording $P$ each time it crosses the link and $S$ each time it passes through a crossing ball along a saddle disk. The surface is in **bubble standard position** if every such word is nonempty and no word records the same crossing ball more than once. A **Conway sphere** is an embedded sphere meeting the link transversely in four points; it is in crossing-ball standard position when its intersection with the crossing balls consists of saddle disks and its shifted-sphere intersection curves satisfy the bubble-standard conditions.\n\nThe turnover convention is the one in Kindred's Definition 2.9 and Figure 1. In particular, an entire flype permits viewing the whole diagram from the opposite side of the sphere, as in his Definition 2.11. Closed components inside a tangle disk are carried along with its arcs.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Identify the two represented oriented links with one smooth link $L$ by the given isotopy. It is nonsplit by [F1]. Full AC supplies the choice hypotheses of [F2] and [F5]. The identification retains the actual oriented component correspondence to be used in all capped factors.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If $L$ is the unknot, [F2] forces both diagrams to have zero crossings. A connected crossing-free diagram is one embedded oriented circle on the projection sphere, and the two such circles are carried to one another by a sphere planar isotopy with their orientations transported. This proves the conclusion in this case. Henceforth $L$ is nontrivial and both diagrams have positive crossing count.",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In either diagram cut along a simple circle meeting the diagram transversely in two ordinary points whenever both sides contain crossings. Cap each cut arc by a crossing-free arc in its cap disk, carrying the endpoint pairing and orientation. Both capped shadows are connected: an additional shadow component on either side would already have been a separate component of the original shadow. Their crossing sets partition that of the piece being cut. The capped diagrams are alternating: the proper strand in a two-ended disk has an even number of crossing encounters, since the total number is twice the number of crossings and each closed component contributes an even number; thus its first and last encounters have opposite status. Closing its ends introduces no new encounter.",
+          "inputs": [
+            "given",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "The capped diagrams are reduced. Indeed, a nugatory separator through an old crossing in a capped diagram can be moved off the crossing-free cap disk: each part in that disk lies in one of the two complementary disks of its cap arc and can be pushed to the boundary collar. It would then give a nugatory separator through the same crossing in the original piece, contrary to reducedness. The cut and caps have smooth product collars. In the represented link they are the usual twice-punctured decomposition sphere and its standard trivial-arc cap balls.",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "step": "2.3",
+          "claim": "Repeat these cuts in the capped pieces, retaining their cap-ball parameters and attachment collars. A later cut is moved off the interiors of earlier cap balls using their crossing-free trivial-arc product collars; equivalently shorten each artificial cap into its boundary collar before choosing the next cut. Lifting the resulting finite diagrammatic connected-sum decomposition gives pairwise disjoint decomposition spheres in the original link. Termination is finite: if a piece with $a+b$ crossings is replaced by two pieces with $a,b>0$ crossings, the sum of squared crossing counts falls by $2ab$. The final positive-crossing capped diagrams are therefore connected, reduced, alternating and have no two-point splitting circle with crossings on both sides. Crossing-free trivial connectors are suppressed while retaining all other attachment collars.",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "step": "2.4",
+          "claim": "Every positive-crossing terminal factor is nontrivial by [F2]; otherwise its reduced alternating crossing count would be zero. It is nonsplit by [F1] and prime by [F4]. Thus the two finite systems just constructed, with their actual cap parameters, factor diagrams and oriented component labels, satisfy exactly the decomposition hypotheses of [F5].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Apply the comparison part of [F5] to those two systems in $L$. It provides the corresponding capped prime factors and actual oriented factor isotopies needed by its lift, including all refinements and suppressed trivial connectors. The correspondence transports the fixed global component names and attachment data from step 1.1.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For each corresponding pair of prime factor diagrams needed in that comparison, apply the imported theorem [F3] to the orientation-preserving pair map induced by its actual capped-factor isotopy. This supplies a finite sequence of the prescribed flypes and sphere planar isotopies whose transported oriented component bijection is precisely the one specified by the comparison. These are supplied maps, not arbitrary unlabelled symmetries of the prime factors.",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.3",
+          "claim": "The lift in [F5] now applies with its exact marked prime input supplied by step 3.2. It realizes the attachment transfers and prime sequences by finitely many allowed flypes and sphere planar isotopies, giving $D_0$ to $D_1$ with the fixed oriented component correspondence. Together with the crossing-free case, this proves the stated theorem for connected reduced alternating diagrams, including composite links.",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires connected diagrams representing an oriented link; an empty diagram is outside its input domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the crossing-free unknot diagrams by sphere planar isotopy, using the crossing-minimality input to force zero crossings in both diagrams."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.3 cut only when both sides have positive crossing count, so a terminal piece of minimal positive size receives no artificial split; steps 2.4 and 3.2 use the exact terminal prime hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.3 separately handle the crossing-free case and suppress crossing-free trivial connectors while retaining the actual attachment collars; composite links are included by steps 3.1 through 3.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the oriented component correspondence of the two endpoint diagrams; steps 3.2 and 3.3 retain that correspondence through the prime sequences and their marked lift."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and Given assume full AC; steps 1.1 and 3.2 use the established crossing-minimality and imported prime theorem at those declared hypotheses, with finite decomposition termination in step 2.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is the existence of a finite flype/isotopy sequence for diagrams of the same oriented link, not an asserted biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse invariance of allowed diagram moves is not presented as a separate if-and-only-if obligation in this theorem."
+        }
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/flyping-composite-first-independent-review.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "William W. Menasco and Morwen B. Thistlethwaite, The classification of alternating links, Annals of Mathematics 138 (1993), pp. 113–171, Main Theorem on p. 116; imported marked prime flyping theorem",
+                "url": "https://doi.org/10.2307/2946636"
+              },
+              {
+                "title": "William Menasco, Closed incompressible surfaces in alternating knot and link complements, Topology 23 (1984), pp. 37–44, Theorem 1(b) on p. 37 and proof on pp. 41–42; imported diagrammatic primeness theorem",
+                "url": "https://doi.org/10.1016/0040-9383(84)90023-5"
+              },
+              {
+                "title": "Thomas Kindred, A geometric proof of the flyping theorem, arXiv:2008.06490v3, full alternative proof for prime links",
+                "url": "https://arxiv.org/pdf/2008.06490v3"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "Full AC is retained as the registered branch and implies the countable choice used by crossing minimality. No necessity claim is made.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-105.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    }
+  }
+}

@@ -1,0 +1,445 @@
+[
+  {
+    "order": 3114,
+    "id": "seifert-surfaces-and-knot-genus",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Seifert surfaces and knot genus",
+    "companion": "seifert-surfaces-and-knot-genus-examples",
+    "requires": [
+      "codimension-one-foliations-and-secondary-classes",
+      "crossing-signs-writhe-and-linking-number",
+      "smooth-surgery-traces-and-handle-trading"
+    ],
+    "items": [
+      {
+        "id": "alg-seifert-surface-from-diagram",
+        "kind": "algorithm",
+        "deps": [
+          "def-regular-oriented-link-diagram",
+          "def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "title": "Seifert disk-and-band construction from an oriented knot diagram",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.2, pp.24–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Seifert's algorithm and its disk-and-band construction"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "The all-at-once oriented smoothing and disk-and-band algorithm"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented link diagram with exactly one component, and let $c$ be its number of crossings. Perform the following construction in its projection sphere $S^2$.\n\n1. Choose a point $q\\in S^2$ outside the finite diagram. In pairwise disjoint small disks about the crossings, replace each crossing by the unique noncrossing smoothing compatible with the strand orientations. Let the resulting oriented circles be the Seifert circles and let $s$ be their number.\n2. For each Seifert circle $C$, take the closure of the component of $S^2\\setminus C$ that does not contain $q$. Under the stated choice axiom, each such region is an embedded compact disk. The finite family of disk regions is nested or disjoint. Orient each disk to induce the given orientation of its boundary circle, then place nested disks at distinct nearby heights ordered by inclusion; the resulting disk interiors are pairwise disjoint in $S^3$.\n3. For every original crossing, attach one rectangular band along short boundary intervals on the two smoothing arcs. A half-twist means a single $180$-degree turn of the band across the crossing neighborhood. Choose its direction, endpoint orientations, and over/under order to match the original crossing.\n4. Return the finite disk-and-band construction data together with $(s,c)$.\n\nThe returned data are a finite attached two-dimensional complex. This algorithm's definition alone does not assert that the resulting image is embedded, is a surface, is connected, or has the original knot as boundary; the separate correctness lemma establishes those properties."
+      },
+      {
+        "id": "def-oriented-seifert-surface",
+        "kind": "definition",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "title": "Oriented Seifert surfaces in the three-sphere",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.1, pp.21–22",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Definition 3.1; compact connected oriented spanning surfaces"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "Definition 4.3.1 and the compact-surface genus formula"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot in the standard oriented three-sphere $S^3$. A **Seifert surface** for $K$ is a connected compact smooth oriented embedded surface $F\\subset S^3$ with boundary set equal to $K$. Orient each boundary component so that an outward-pointing conormal in $F$, followed by a positive boundary tangent, is a positive basis of $TF$; the oriented boundary of $F$ must agree with the given orientation of $K$. For such a surface, its genus $g(F)$ is the unique nonnegative integer satisfying $\\chi(F)=2-2g(F)-b$, where $b$ is the number of boundary components; here $b=1$, so $\\chi(F)=1-2g(F)$. The compact-surface normal-form result supplies this integer under the stated choice axiom."
+      },
+      {
+        "id": "lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms",
+        "kind": "lemma",
+        "title": "Smooth Jordan disks and extension of prescribed boundary collars",
+        "deps": [
+          "def-countable-choice",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation",
+          "thm-euler-formula-for-connected-plane-graphs",
+          "lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type",
+          "lem-isotopy-extension-for-a-compact-source-with-boundary"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The bounded region of a smooth embedded\ncircle in the oriented plane, together with its boundary, is a smooth manifold\nwith boundary diffeomorphic to the closed standard disk. Let $D_0,D_1$ be two\nsuch closed regions. Every orientation-preserving smooth boundary\ndiffeomorphism $b:\\partial D_0\\to\\partial D_1$ extends to an\norientation-preserving diffeomorphism $B:D_0\\to D_1$. More precisely, for\nspecified smooth inward collars $c_i:\\partial D_i\\times[0,\\epsilon)\\to D_i$\nwith $c_i(p,0)=p$, the extension may be required to satisfy\n$B(c_0(p,r))=c_1(b(p),r)$ for every sufficiently small $r\\ge0$. In addition, given interior points $p_i\\in D_i$ and an orientation-preserving smooth diffeomorphism $q$ from a neighborhood of $p_0$ onto a neighborhood of $p_1$, the extension can agree with $q$ near $p_0$ while retaining the prescribed boundary collars.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology, Theorem 2.4.2 and Sections 2.6–2.7",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Theorem 2.4.2, printed pp.50–51 (PDF pp.58–59); corner straightening and gluing, printed pp.59–67 (PDF pp.67–75), especially Proposition 2.7.6, printed pp.66–67: boundary sum with a disk preserves the diffeomorphism type. The smooth Jordan reduction and prescribed collar/interior germ constructions are proved locally here."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-oriented-knot-framing-classes-form-z-torsor",
+        "kind": "theorem",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "thm-fundamental-group-of-the-circle"
+        ],
+        "dependency_level": 0,
+        "title": "Normal framing classes relative to a spanning surface are classified by winding",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6, §6, pp.15–17",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "Framing classes as loops in $SO(2)$ and the framing integer"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, Chapter 1, §1.1, Theorem 1.7",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT%2B.pdf",
+              "locator": "Chapter 1, §1.1, Theorem 1.7: the fundamental group of the circle is classified by degree"
+            }
+          ]
+        },
+        "statement": "Let $K$ be a smooth oriented knot in the oriented three-sphere, and let $F$ be a connected compact oriented smooth embedded surface with oriented boundary $K$. Fix the standard round metric on $S^3$. A normal field along $K$ assigns to every point $p\\in K$ a nonzero vector in the plane orthogonal to $T_pK$; two such fields represent the same framing class when they are homotopic through nonzero normal fields. The inward unit vector tangent to $F$ along $K$, together with the positive quarter-turn in each oriented normal plane, gives a reference frame. In this frame the relative normal field is a map $K\\cong S^1\\to S^1$, and its degree gives a bijection from framing classes to $\\mathbb Z$. Adding $n$ positive full twists changes this integer by $n$."
+      },
+      {
+        "id": "lem-seifert-bands-embedded-orientable-boundary-correct",
+        "kind": "lemma",
+        "deps": [
+          "alg-seifert-surface-from-diagram",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-oriented-seifert-surface",
+          "def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "title": "Seifert disks and bands form an embedded oriented spanning surface",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.2, pp.24–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Seifert circles, nested disks, twisted bands, and boundary"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "The disk-height and twisted-band construction; local proof gaps are supplied in this item"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented diagram of a single knot, and let the Seifert algorithm supply its finite disk-and-band construction data. These disks and bands can be realized in $S^3$ as a connected compact smooth oriented embedded surface $F$ with exactly one boundary component, whose oriented boundary is the knot represented by $D$. The bands can be chosen mutually disjoint and disjoint from disk interiors except at their attaching intervals."
+      },
+      {
+        "id": "thm-seifert-surface-from-diagram-procedure-properties",
+        "kind": "theorem",
+        "deps": [
+          "alg-seifert-surface-from-diagram",
+          "def-regular-oriented-link-diagram",
+          "def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "title": "Termination and finite output of the Seifert diagram procedure",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.2, pp.24–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "The finite Seifert algorithm"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "The finite Seifert algorithm described after Definition 4.3.1"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. For every finite regular oriented diagram with exactly one component, the Seifert diagram procedure terminates after one finite smoothing scan and one finite band-record scan. It returns exactly one disk record for each Seifert circle and exactly one band record for each original crossing. Termination alone asserts no embeddedness, boundary equality, or genus minimality."
+      },
+      {
+        "id": "thm-every-oriented-knot-bounds-a-seifert-surface",
+        "kind": "theorem",
+        "deps": [
+          "lem-seifert-bands-embedded-orientable-boundary-correct",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "title": "Every smooth oriented knot in $S^3$ bounds a Seifert surface",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §§3.1–3.2, pp.21–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "The genus definition followed by the constructive Seifert algorithm"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "Every knot bounds an embedded surface and the Seifert algorithm proof route"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Every smooth oriented knot $K\\subset S^3$ bounds a connected compact smooth oriented embedded surface $F\\subset S^3$ whose oriented boundary is $K$."
+      },
+      {
+        "id": "def-oriented-seifert-surface-and-knot-genus",
+        "kind": "definition",
+        "deps": [
+          "def-oriented-seifert-surface",
+          "thm-every-oriented-knot-bounds-a-seifert-surface",
+          "thm-well-ordering-principle",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "title": "Seifert surfaces and smooth knot genus",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.1, pp.21–22",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Definition 3.1 and the note that existence is established by Seifert's algorithm"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "Definition 4.3.4, genus as the least genus of a Seifert surface"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. For an oriented smooth knot $K\\subset S^3$, define\n\n$$\\mathcal G(K):=\\{n\\in\\mathbb N_0: \\text{there is a Seifert surface }F\\text{ for }K\\text{ with }g(F)=n\\}.$$\n\nEvery element of $\\mathcal G(K)$ is the genus of a connected compact oriented surface. The existence theorem makes $\\mathcal G(K)$ nonempty, and the well-ordering of $\\mathbb N_0$ gives its least element. The **smooth knot genus** is $g(K):=\\min\\mathcal G(K)$. This genus is the minimum over embedded spanning surfaces; it is not the number of Seifert circles or the genus of every surface produced from a diagram."
+      },
+      {
+        "id": "thm-seifert-algorithm-boundary-euler-and-genus",
+        "kind": "theorem",
+        "deps": [
+          "alg-seifert-surface-from-diagram",
+          "lem-seifert-bands-embedded-orientable-boundary-correct",
+          "def-oriented-seifert-surface",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "title": "Euler characteristic and genus of a Seifert disk-and-band surface",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.2, pp.25–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Disk and band count, Euler characteristic, and the genus upper bound"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "Disk-band Euler-characteristic count and genus upper bound"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. If a connected compact oriented disk-and-band surface $F$ is built from $s$ disjoint disks by attaching $c$ rectangular bands along boundary intervals and has one boundary component, then $\\chi(F)=s-c$ and $g(F)=(1-s+c)/2$. In particular, if the Seifert algorithm on an oriented knot diagram $D$ has $s$ Seifert circles and $c$ crossings, its output surface has genus $(1-s+c)/2$ and the knot genus satisfies $g(K)\\le (1-s+c)/2$. This is an upper bound from one spanning surface, not a minimality assertion."
+      },
+      {
+        "id": "thm-seifert-zero-framing-and-framing-integer",
+        "kind": "theorem",
+        "deps": [
+          "def-oriented-seifert-surface",
+          "thm-oriented-knot-framing-classes-form-z-torsor",
+          "def-framed-knot-self-linking-and-seifert-framing",
+          "lem-framed-knot-push-off-self-linking-well-defined",
+          "thm-linking-number-equals-signed-intersection",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-countable-choice",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "lem-every-oriented-link-admits-a-regular-projection"
+        ],
+        "dependency_level": 6,
+        "title": "A Seifert framing has zero self-linking",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §3.3, pp.26–29",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Linking number as signed intersection with a spanning surface"
+            },
+            {
+              "title": "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6, §§3, 5–6, pp.5–9 and 15–18",
+              "url": "https://arxiv.org/pdf/1910.10257v6",
+              "locator": "Seifert zero framing, self-linking as a push-off linking number, and framing classes via SO(2)"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K\\subset S^3$ be a smooth oriented knot and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface whose oriented boundary is $K$. The normal framing along $K$ given by the inward unit conormal to $K$ in $F$ has self-linking number zero. Here self-linking is the linking number of $K$ with a sufficiently small disjoint push-off along that framing. In the framing-class parameterization by relative winding from the surface framing, this class has integer zero."
+      }
+    ]
+  },
+  {
+    "order": 3115,
+    "id": "seifert-surfaces-and-knot-genus-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Seifert surfaces and knot genus — Examples and Counterexamples",
+    "companion": "seifert-surfaces-and-knot-genus",
+    "requires": [
+      "seifert-surfaces-and-knot-genus"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-04-worked-cases",
+        "kind": "example",
+        "deps": [
+          "alg-seifert-surface-from-diagram",
+          "def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram",
+          "lem-seifert-bands-embedded-orientable-boundary-correct",
+          "thm-every-oriented-knot-bounds-a-seifert-surface",
+          "def-oriented-seifert-surface",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "thm-seifert-algorithm-boundary-euler-and-genus",
+          "thm-seifert-surface-from-diagram-procedure-properties",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice",
+          "def-elementary-geometric-half-twist",
+          "thm-geometric-braids-form-a-group",
+          "def-closure-of-a-geometric-braid"
+        ],
+        "dependency_level": 5,
+        "title": "Worked Seifert-algorithm counts for the trefoil, figure-eight, and kinked unknot",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §§3.1–3.2, pp.21–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Trefoil genus discussion and the Seifert algorithm / genus upper bound"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "Exercise 4.3.3 and Exercise 4.3.8, trefoil and figure-eight Seifert surfaces"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $D_T$ be the standard closure of the two-strand braid $\\sigma_1^3$, let $D_8$ be the standard closure of the three-strand braid $\\sigma_1\\sigma_2^{-1}\\sigma_1\\sigma_2^{-1}$, and let $D_U$ be the round unknot diagram with one Reidemeister-I kink. Here each $\\sigma_i$ is the elementary geometric half twist of adjacent strands and closure joins the bottom endpoints to the corresponding top endpoint set. These are the standard trefoil, figure-eight, and kinked-unknot diagrams. Their Seifert-algorithm data and output-surface genera are\n\n| Diagram | Seifert circles $s$ | Crossings $c$ | Output genus $g(F)$ |\n|---|---:|---:|---:|\n| Trefoil | 2 | 3 | 1 |\n| Figure-eight | 3 | 4 | 1 |\n| Kinked unknot | 2 | 1 | 0 |\n\nThus the corresponding knot genera are at most $1$, at most $1$, and exactly $0$, respectively. The first two rows compute particular spanning surfaces and do not assert that those surfaces have minimum genus.\n\nThe arrows orient the first diagram, and at each crossing the unbroken strand is the overpass.\n\n```tikz\n\\begin{tikzpicture}[scale=0.82, line cap=round, line join=round]\n  % Close bottom endpoints to top endpoints on the same side.\n  \\draw[thick,->] (0.8,-1.5) .. controls (1.8,-1.5) and (1.8,1.5) .. (0.8,1.5);\n  \\draw[thick,->] (-0.8,-1.5) .. controls (-1.8,-1.5) and (-1.8,1.5) .. (-0.8,1.5);\n  % The right-to-left strand is under at each of the three crossings.\n  \\draw[thick] (0.8,1.5)--(-0.8,0.5);\n  \\draw[thick,white,line width=4pt] (0.12,1.075)--(-0.12,0.925);\n  \\draw[thick] (-0.8,0.5)--(0.8,-0.5);\n  \\draw[thick,white,line width=4pt] (-0.12,0.075)--(0.12,-0.075);\n  \\draw[thick] (0.8,-0.5)--(-0.8,-1.5);\n  \\draw[thick,white,line width=4pt] (0.12,-0.925)--(-0.12,-1.075);\n  % The left-to-right strand passes over at all three crossings.\n  \\draw[thick,->] (-0.8,1.5)--(0.8,0.5);\n  \\draw[thick,->] (0.8,0.5)--(-0.8,-0.5);\n  \\draw[thick,->] (-0.8,-0.5)--(0.8,-1.5);\n  \\node[below] at (0,-1.9) {three-crossing two-strand closure};\n\\end{tikzpicture}\n```\n\nThe picture is a projection schematic: the white gaps mark the underpassing strand, and each closing arc joins a bottom endpoint to the top endpoint on the same side. The smoothing and surface claims below are proved from the finite strand and band data, not from the picture."
+      },
+      {
+        "id": "cex-knot-kt-04-boundary-case",
+        "kind": "counterexample",
+        "deps": [
+          "def-oriented-seifert-surface",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "thm-seifert-algorithm-boundary-euler-and-genus",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "title": "A genus-one spanning surface for the unknot is not minimal",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §§3.1–3.2, pp.21–26",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "Definition 3.1 and the warning that a chosen Seifert surface only gives an upper bound"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.3, pp.21–23",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "Definition 4.3.4 and the upper-bound warning following the genus formula"
+            }
+          ]
+        },
+        "statement": "Every Seifert surface for a fixed knot has minimum genus; equivalently, every admissible spanning surface $F$ for $K$ satisfies $g(F)=g(K)$."
+      }
+    ]
+  }
+]

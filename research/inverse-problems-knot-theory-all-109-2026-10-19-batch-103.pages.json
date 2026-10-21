@@ -1,0 +1,431 @@
+[
+  {
+    "order": 3200,
+    "id": "terminating-computations-for-classical-knot-invariants",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Terminating computations for classical knot invariants",
+    "companion": "terminating-computations-for-classical-knot-invariants-examples",
+    "requires": [
+      "fox-colorings-and-quandle-invariants",
+      "kauffman-bracket-state-sum-and-jones-polynomial",
+      "planar-diagram-codes-and-knot-table-enumeration"
+    ],
+    "items": [
+      {
+        "id": "def-encoded-diagram-size-and-exact-output",
+        "kind": "definition",
+        "title": "Encoded diagram size and exact output",
+        "statement": "Let $D$ be a nonempty finite regular oriented link diagram: a projection of a finite union of oriented circles with finitely many transverse double points, no triple points, and one overpassing branch specified at each double point. Let $c(D)$ be its number of crossings and $m(D)$ its number of components. An arc is a connected strand segment cut at each undercrossing; each component with no undercrossings contributes one closed arc. Write $a(D)$ for the number of arcs. If $q(D)$ components have no undercrossings, then $a(D)=c(D)+q(D)$ and $0\\le q(D)\\le m(D)$.\n\nA supplied finite code for $D$ has code length $L$, the total number of bits in that literal code, including its tags, signs, labels, and separators. The length depends on the chosen encoding. In particular, for one of the tagged Gauss, signed Dowker–Thistlethwaite, or oriented planar-diagram formats, $L$ is the bit length of the supplied valid code in that format. The procedures in this page take typed mathematical diagrams or valid codes as stated; no string parser or malformed-code behavior is included in any operation count.\n\nFor an integer $z$, define its signed-magnitude bit length by $\\ell_{\\mathbb Z}(0)=1$ and $\\ell_{\\mathbb Z}(z)=1+\\lceil\\log_2(|z|+1)\\rceil$ for $z\\ne0$. For a Laurent polynomial $P(A)=\\sum_{j\\in\\mathbb Z}z_jA^j$ with finite support, define its coefficient-bit size as $0$ if $P=0$, and otherwise as $\\max_{j:z_j\\ne0}\\ell_{\\mathbb Z}(z_j)$. Its absolute Laurent degree is $\\max_{j:z_j\\ne0}|j|$, with value $0$ for $P=0$. For a prime $p$, elements of $\\mathbb F_p$ are represented exactly by residues $0,\\ldots,p-1$, and their representation uses $\\lceil\\log_2p\\rceil$ bits.\n\nAn exact output is the complete integer, finite list, or Laurent polynomial with its integer coefficients and exponents. A floating-point approximation is not an exact output. A field-operation count treats each addition, subtraction, multiplication, division by a nonzero element, and equality test in $\\mathbb F_p$ as one operation; this convention does not assert that these operations have constant bit cost as $p$ varies.",
+        "deps": [
+          "def-regular-oriented-link-diagram",
+          "def-quandle-and-knot-coloring",
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-planar-diagram-gauss-and-dowker-codes"
+        ],
+        "dependency_level": 2,
+        "strategy": "Fix the finite input parameters and an explicit arithmetic cost model; define exact polynomial coefficient size and exact discrete output without claiming parsing or floating-point error bounds.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §§1.2–1.3 and 4.1",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§1.2–1.3, printed pp. 5–8; §4.1, printed pp. 30–32."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §§3.3–3.4 and 4.3",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§§3.3–3.4, printed pp. 16–19; §4.3, printed pp. 24–25."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Choice-free: all input diagrams, component sets, arc sets, crossing sets, code records, coefficients, and finite fields are finite."
+      },
+      {
+        "id": "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+        "kind": "lemma",
+        "title": "Dihedral Fox coloring counts are preserved by Reidemeister moves",
+        "statement": "Let $p$ be an odd prime. A Fox $p$-coloring of a finite regular oriented link diagram $D$ assigns an element of $\\mathbb F_p$ to each arc and satisfies $2x_o=x_i+x_j$ at every crossing, where $x_o$ is the overarc color and $x_i,x_j$ are the two underarc colors. If $D'$ is obtained from $D$ by planar isotopy or one oriented Reidemeister move of type R1, R2, or R3, restriction outside the move disk gives a bijection from the Fox $p$-colorings of $D$ to those of $D'$. Consequently the number of Fox $p$-colorings is unchanged along every finite sequence of such moves. The local bijections use no choice principle.",
+        "deps": [
+          "def-quandle-and-knot-coloring",
+          "lem-dihedral-operation-is-a-quandle",
+          "def-oriented-reidemeister-moves"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "strategy": "Prove unique extension across R1, use the involution a↦2b−a for R2, and use the right self-distributive identity for R3; inverse variants use the same involution.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §4.1, pp. 30–32",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§4.1, local R1, R2, and R3 checks for Fox p-colorings."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §3.3, pp. 16–18",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§3.3, Definition 3.3.1 and Theorem 3.3.4, local coloring-set bijections."
+            },
+            {
+              "title": "Józef H. Przytycki, 3-coloring and other elementary invariants of knots, §1, arXiv:math/0608172",
+              "url": "https://arxiv.org/pdf/math/0608172",
+              "locator": "§1, Reidemeister theorem and the local 3-coloring discussion."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "axiom_use": "Choice-free: each local move gives a finite, explicit coloring extension bijection."
+      },
+      {
+        "id": "thm-exact-bracket-output-bit-growth-bound",
+        "kind": "theorem",
+        "title": "Exact bracket output bit-growth bound",
+        "statement": "Let $D$ be a nonempty unoriented regular link diagram with $c$ crossings and $m\\ge1$ components, and let $\\langle D\\rangle=\\sum_j z_jA^j$ be its exact Kauffman bracket. Its Laurent exponents satisfy $|j|\\le 3c+2m-2$, and its signed-magnitude coefficient-bit size, as defined in the encoded diagram size definition, is at most $m+2c+1$. Consequently, a knot diagram ($m=1$) has Laurent degree and coefficient-bit size bounded linearly in $c+1$.\n\nThe state-sum algorithm admits a naive exact implementation taking\n$O(2^c(c+m+1)^4)$ elementary bit steps in the following model. Its typed\ninput gives $c$ and the number $u$ of crossingless components in\nself-delimiting binary: each number is encoded by $b$ ones, a zero, and its\n$b$ ordinary binary digits, with $b\\ge1$ the number of those digits.\nThese fields are followed by the edge-pairing table on the $4c$\nendpoints indexed by crossing and local port. Its entries are ordered by\nendpoint index and each uses $\\max(1,\\lceil\\log_2(4c+1)\\rceil)$ bits.\nAt each crossing the ports are northwest, northeast,\nsoutheast, southwest in the bracket's fixed local chart; the two smoothing\npairings are therefore fixed pairs of port indices. The table is assumed to\nbe the incidence data of the given diagram. Polynomial arithmetic uses dense\narrays of signed binary integer coefficients, and one tape-cell read, write,\nor head move on a fixed finite number of binary work tapes costs one step.\nFor knots this bound is $O(2^c(c+1)^4)$. It is a bound for this explicit\nindexed implementation, not for arbitrary black-box polynomial operations.\nConstructing the indexed input from an arbitrary literal code of length $L$,\nreading other labels or padding, and processing geometric coordinates are\noutside this bound.",
+        "deps": [
+          "def-encoded-diagram-size-and-exact-output",
+          "alg-kauffman-bracket-state-sum",
+          "thm-kauffman-bracket-state-sum-procedure-properties"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "strategy": "Bound the number of state circles by m+c, use the binomial l1 norm of each loop factor, sum over 2^c states, and bound the Laurent exponent interval.",
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2",
+              "locator": "§2, bracket state definition and state summation, PDF pp. 6–9."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §4.3, pp. 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§4.3, Proposition 4.3.4 and proof by resolving crossings in order."
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §5.1, pp. 38–40",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§5.1, bracket skein definition and unlink values."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "axiom_use": "Choice-free: the state set is finite, each loop-factor expansion is a finite binomial sum, and all coefficient bounds use finite addition."
+      },
+      {
+        "id": "thm-knot-linking-number-and-fox-coloring-finite-complexity",
+        "kind": "theorem",
+        "title": "Linking number and Fox coloring finite complexity",
+        "statement": "Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented link diagram with $c$ crossings, $m\\ge1$ components, and $a$ arcs as defined in the encoded diagram size definition. For a two-component diagram, after one constant-size component-count check, the linking-number scan visits exactly the $c$ crossings, makes at most $c$ component/sign tests and $c$ integer additions, and returns the exact integer half-sum of mixed crossing signs; its absolute value is at most $c/2$ and it is invariant under ambient isotopy of the oriented link.\n\nFor any such diagram and any odd prime $p$, the Fox coloring system has one row per crossing and one column per arc over $\\mathbb F_p$. Matrix construction uses at most $2c$ field additions to combine repeated arc coefficients and $ca$ zero-entry writes. If row reduction uses $r$ pivots and has $f=a-r$ free variables, then $r\\le\\min(c,a)$, pivot search uses at most $ca$ entry tests, and row reduction uses at most $ra+2r(c-1)a$ field arithmetic operations. The algorithm returns exactly $p^f$ Fox colorings. Listing the full solution set after reduction uses at most $p^f(2f(a-f)+a)$ field arithmetic and output-write operations. If only the count is required, $p^f$ can instead be computed by repeated squaring using at most $2\\lceil\\log_2(f+1)\\rceil$ integer multiplications, with at most $f\\lceil\\log_2p\\rceil+1$ magnitude bits. The input convention gives $a\\le c+m$, so these bounds depend only on crossings, components, and field size. The coloring count is invariant under ambient isotopy of the oriented link. Field operations count as unit-cost operations; no bit-time bound for those operations or polynomial-time evaluation claim is made.",
+        "deps": [
+          "def-encoded-diagram-size-and-exact-output",
+          "alg-oriented-linking-number-from-diagram",
+          "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "alg-dihedral-fox-colorings",
+          "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "strategy": "Count crossing visits for linking number; for Fox colorings count matrix initialization, pivot searches, normalized pivot rows, elimination entries, and the separately stated output enumeration. Carry ACω only into the ambient-link-invariant clauses.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §3.3, pp. 26–27 and §4.1, pp. 30–32",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.3, Definition 3.11 and Proposition 3.12; §4.1, Fox p-coloring equations and local move checks."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §§3.2–3.4, pp. 14–19",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§3.2, crossing formula and move invariance; §3.3, F3 linear system and Gaussian elimination; §3.4, p-colorings."
+            },
+            {
+              "title": "Józef H. Przytycki, 3-coloring and other elementary invariants of knots, §§0–1, arXiv:math/0608172",
+              "url": "https://arxiv.org/pdf/math/0608172",
+              "locator": "Reidemeister theorem, linking-number convention, and tricoloring."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "axiom_use": "The crossing scan, finite-field elimination, and local Fox move bijections are choice-free. ACω is used only to identify the diagram values as ambient-link invariants through the Reidemeister equivalence theorem."
+      },
+      {
+        "id": "thm-bracket-state-sum-exponential-bound",
+        "kind": "theorem",
+        "title": "Bracket state-sum exponential bound",
+        "statement": "Let $D$ be a nonempty oriented link diagram with $c$ crossings and $m\\ge1$ components. The state-sum portion of the normalized bracket computation visits exactly $2^c$ smoothing states; computing the writhe correction requires one pass over the $c$ crossing signs. Its exact normalized output $f_D(A)=(-A^3)^{-\\operatorname{wr}(D)}\\langle D\\rangle$ has absolute Laurent degree at most $6c+2m-2$ and signed coefficient-bit size at most $m+2c+1$. For a knot diagram, these output bounds are linear in $c+1$.\n\nUsing the indexed endpoint-pairing input and dense signed binary-array\nimplementation of the exact bracket bit-growth theorem, together with the\n$c$ crossing signs supplied as bits, the normalized bracket can be computed in\n$O(2^c(c+m+1)^4)$ elementary bit steps. This is\n$O(2^c(c+1)^4)$ for knots. Input records are assumed to describe the given\ntyped diagram; arbitrary literal-code reading and parsing, extra padding or\nlabels, and geometric-coordinate processing are outside this implementation\nbound. The finite computations are choice-free. Under the Axiom of Countable\nChoice, $f_D$ is an invariant of the ambient-isotopy class of the oriented\nlink. No polynomial-time Jones evaluation is asserted.",
+        "deps": [
+          "def-encoded-diagram-size-and-exact-output",
+          "alg-kauffman-bracket-state-sum",
+          "thm-kauffman-bracket-state-sum-procedure-properties",
+          "thm-exact-bracket-output-bit-growth-bound",
+          "thm-normalized-bracket-is-an-oriented-link-invariant",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "strategy": "Combine the exact 2^c state count with the coefficient and degree estimates, bound |writhe| by c, and separate the choice-free diagram computation from ambient-isotopy invariance.",
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2",
+              "locator": "§2, normalized bracket and state summation, PDF pp. 6–9."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §4.3, pp. 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§4.3, state set, state-sum formula, and the 2^c state count."
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §5.1, pp. 38–41",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§5.1, bracket skein formula, writhe correction, and Reidemeister invariance."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "axiom_use": "The state enumeration, writhe scan, degree shift, and coefficient bound are choice-free. ACω is used only for the normalized-bracket ambient-link-invariance clause through thm-normalized-bracket-is-an-oriented-link-invariant."
+      },
+      {
+        "id": "alg-reidemeister-move-neighbors-from-code",
+        "kind": "algorithm",
+        "title": "Enumerate Reidemeister move neighbors from a knot code",
+        "statement": "**Input:** A valid normalized oriented planar-diagram code $C$ for a connected one-component knot diagram, with $c$ crossings. A positive-crossing-count code records its finite crossing labels, four darts at each crossing, edge pairings, clockwise rotations, strand orientations, over/under pairs, crossing signs, and one outer face. A crossingless code records one oriented circle and its outer face.\n\n**Output:** A finite ordered list of pairs $(E,\\mu)$, where $E$ is a valid normalized one-component knot code and $\\mu$ records either the finite crossing/edge relabeling identifying the unchanged planar-isotopy class or a local disk boundary, move type, and orientation/sign variant witnessing one oriented R1, R2, or R3 move from $C$ to $E$. Different labelings of the same candidate may appear more than once.\n\n**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. To test whether two codes differ by one move, enumerate all finite choices of local edge intervals and crossing subrecords of sizes allowed by R1, R2, or R3; test that the codes agree outside the chosen disk boundary and that the two local records are one of the standard orientation/sign variants of that move. The local-site test uses the exact variants in the oriented Reidemeister-move definition.\n\n**Instructions:**\n\n1. Validate $C$ with the planar-code validation procedure. If it is invalid, return its first invalid-code result.\n2. Set $N:=c+2$ and run the bounded normalized-diagram enumerator with bound $N$. It returns a finite list of reconstructed one-component knot-diagram candidates.\n3. For each candidate, form the finite set of normalized code representatives obtained by assigning crossing labels and edge labels in every permitted order and applying the code's normalization rule.\n4. For each representative $E$, apply the finite comparison rules. Append $E$ with a relabeling certificate if it is the same code class as $C$, or with the successful local-site certificate if a comparison certifies one R1, R2, or R3 move between them. Preserve the enumerator order and retain duplicates.\n5. Return the accumulated list.\n\nThe bound $c+2$ includes every one-move result because R1 changes crossing count by one, R2 by two, and R3 by zero. This procedure lists candidates one move away; it does not decide whether two arbitrary codes are related by any number of moves.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "def-oriented-reidemeister-moves"
+        ],
+        "dependency_level": 5,
+        "strategy": "Enumerate the finite arc/crossing site choices and the finite orientation/sign variants of each local move, perform the finite combinatorial code substitution, and retain exactly candidates accepted by the validator.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §1.2, pp. 5–7",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§1.2, finite Reidemeister move types and variants."
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, finite dart permutations and face cycles."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Choice-free: the crossing bound, code space, label permutations, finite move sites, and orientation/sign variants are all finite."
+      },
+      {
+        "id": "alg-breadth-first-reidemeister-search",
+        "kind": "algorithm",
+        "title": "Breadth-first Reidemeister search",
+        "statement": "**Input:** Two valid normalized oriented planar-diagram codes $C_0,C_1$ for connected one-component knot diagrams.\n\n**Output:** The algorithm returns Found(path) only if it has a finite sequence of code classes from $C_0$ to $C_1$, with a finite local-move certificate for each adjacent pair. It has no negative-output branch. It may run forever if the target code class is never reached.\n\n**Instructions:**\n\n1. Validate both input codes using the planar-code validation procedure. If either is invalid, return that first invalid-code result. For each valid code, form its canonical representative by checking all bijections of its finite crossing labels and edge labels, recomputing the prescribed edge normalization, and selecting the lexicographically least resulting code.\n2. Set the initial frontier to the singleton containing the canonical representative of $C_0$. Initialize a discovered-code set with that representative and an empty predecessor record.\n3. At the beginning of each breadth layer, test every code in the current frontier against the canonical representative of $C_1$. If one matches, follow its stored predecessor records back to $C_0$, reverse the resulting finite list, and return the path with its move certificates.\n4. Otherwise, for each code $C$ in the current frontier, call the Reidemeister-neighbor algorithm. For each returned pair $(E,\\mu)$, canonicalize $E$ by the finite relabeling procedure in step 1. If its canonical representative has not been discovered, add it to the next frontier and store $(C,\\mu)$ as its predecessor record.\n5. Replace the current frontier by the next frontier and repeat from step 3. If a layer is empty, continue with empty layers; do not return “inequivalent.”\n\nCode equality in this procedure means equality of canonical representatives under the finite crossing/edge relabelings of the normalized code convention. Every loop in one layer is finite; the number of layers has no fixed bound.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "alg-reidemeister-move-neighbors-from-code"
+        ],
+        "dependency_level": 6,
+        "strategy": "Maintain finite breadth layers, canonicalize each finite code class by exhaustive relabeling, store one predecessor and move for each first-seen class, and expand every class in the current layer.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §§1.2–1.3",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§1.2–1.3, printed pp. 5–8, Reidemeister equivalence and knot invariants."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §2.3, pp. 10–13",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§2.3, Reidemeister moves, finite move sequences, and the need to search beyond a fixed crossing bound."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Choice-free: each frontier is finite, label canonicalization is a finite search through bijections, and each neighbor list is finite."
+      },
+      {
+        "id": "thm-reidemeister-enumeration-is-only-a-semidecision",
+        "kind": "theorem",
+        "title": "Reidemeister enumeration is only a semidecision",
+        "statement": "Assume the Axiom of Countable Choice. Let $C_0,C_1$ be valid normalized oriented planar-diagram codes for connected one-component knot diagrams. The breadth-first Reidemeister search terminates with a finite move witness whenever the represented oriented knots are ambient-isotopic. If they are inequivalent, the search has no negative-output branch and does not halt with a negative answer; failure to find a path through any fixed finite depth $N$ says only that no path of length at most $N$ has yet been found. This is a semidecision result, not a decision or complexity-class result for knot equivalence.",
+        "deps": [
+          "alg-breadth-first-reidemeister-search",
+          "alg-reidemeister-move-neighbors-from-code",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "thm-valid-code-reconstructs-the-declared-link-diagram",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "strategy": "Show each neighbor layer is finite and complete for one move, then induct on path length; use the oriented Reidemeister theorem for the ambient-isotopy implication and note that the algorithm has no negative branch.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §§1.2–1.3",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§1.2–1.3, printed pp. 5–8, finite Reidemeister sequences and knot invariants."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §2.3, pp. 10–13",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§2.3, Reidemeister theorem, finite move paths, and the unbounded crossing issue."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "axiom_use": "Finite candidate lists, local code comparisons, and breadth layers are choice-free. ACω is used only for valid-code planar-isotopy semantics and the ambient-isotopy-to-finite-Reidemeister-sequence implication."
+      }
+    ]
+  },
+  {
+    "order": 3201,
+    "id": "terminating-computations-for-classical-knot-invariants-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Terminating computations for classical knot invariants — Examples and Counterexamples",
+    "companion": "terminating-computations-for-classical-knot-invariants",
+    "requires": [
+      "terminating-computations-for-classical-knot-invariants"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-48-worked-cases",
+        "kind": "example",
+        "title": "Eight-crossing bracket and trefoil Fox 3-colorings",
+        "statement": "Assume the Axiom of Countable Choice for the final knot-type distinction. A diagram with $c=8$ crossings has $2^8=256$ Kauffman bracket smoothing states. For the trefoil diagram below, label its three Fox arcs $x_1,x_2,x_3$ so the crossing triples are: at $C_1$, over $x_1$ and under $x_2,x_3$; at $C_2$, over $x_2$ and under $x_3,x_1$; at $C_3$, over $x_3$ and under $x_1,x_2$. Thus the crossing equations are $2x_1-x_2-x_3=0$, $2x_2-x_3-x_1=0$, and $2x_3-x_1-x_2=0$. Over $\\mathbb F_3$ the system has nine colorings. The crossingless unknot has one arc and three Fox 3-colorings; because the crossing equation is independent of strand orientations, this count difference distinguishes the underlying knot types.\n\n```tikz\n\\begin{tikzpicture}[scale=0.82,line cap=round,line join=round,>=stealth]\n  % The outside arcs close the three-crossing two-strand braid.\n  \\draw[->,thick] (-1,-3) .. controls (-2.45,-3) and (-2.45,3) .. (-1,3);\n  \\draw[->,thick] (1,-3) .. controls (2.45,-3) and (2.45,3) .. (1,3);\n\n  % C1: the upper-left to lower-right strand is over.\n  \\draw[->,thick] (1,3) -- (0.13,2.13);\n  \\draw[->,thick] (-0.13,1.87) -- (-1,1);\n  \\draw[->,very thick] (-1,3) -- (1,1);\n\n  % C2: the upper-left to lower-right strand is over.\n  \\draw[->,thick] (1,1) -- (0.13,0.13);\n  \\draw[->,thick] (-0.13,-0.13) -- (-1,-1);\n  \\draw[->,very thick] (-1,1) -- (1,-1);\n\n  % C3: the upper-left to lower-right strand is over.\n  \\draw[->,thick] (1,-1) -- (0.13,-1.87);\n  \\draw[->,thick] (-0.13,-2.13) -- (-1,-3);\n  \\draw[->,very thick] (-1,-1) -- (1,-3);\n\n  \\node[above left] at (0,2) {$C_1$};\n  \\node[above left] at (0,0) {$C_2$};\n  \\node[above left] at (0,-2) {$C_3$};\n  \\node at (-0.54,2.52) {$x_1$};\n  \\node at (-0.54,0.52) {$x_2$};\n  \\node at (-0.54,-1.48) {$x_3$};\n\\end{tikzpicture}\n```\n\nThe figure is the closure of a two-strand braid with three identical crossings. Each braid strand is oriented downward, and each outside closure arc is oriented upward. At each crossing the upper-left to lower-right strand is continuous and over; the other strand has a gap at the crossing. The labels $x_1,x_2,x_3$ mark the three arcs between undercrossings, and the crossing incidences used in the statement specify the exact matrix independently of the drawing.",
+        "deps": [
+          "def-encoded-diagram-size-and-exact-output",
+          "def-quandle-and-knot-coloring",
+          "alg-kauffman-bracket-state-sum",
+          "thm-kauffman-bracket-state-sum-procedure-properties",
+          "alg-dihedral-fox-colorings",
+          "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "strategy": "Compute 2^8; reduce the explicitly displayed 3×3 matrix over F3 to one nonzero row; compute nullities for trefoil and unknot; use the move-invariance lemma and Reidemeister theorem for the distinction.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §§1.3 and 4.1, pp. 8 and 30–32",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§1.3, trefoil and unknot 3-color counts; §4.1, linear p-coloring model."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §§3.3 and 4.3, pp. 16–18 and 24–25",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§3.3, unknot and trefoil counts and the F3 matrix method; §4.3, exact state count."
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2",
+              "locator": "§2, bracket state set and 2^c state summation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": [],
+        "axiom_use": "The bracket state count and Fox matrix calculations are choice-free. ACω is used only to interpret a coloring-count difference as a knot-type distinction."
+      },
+      {
+        "id": "cex-knot-kt-48-boundary-case",
+        "kind": "counterexample",
+        "title": "A finite failed move search is not a negative certificate",
+        "statement": "Assume ACω. For every nonnegative integer $N$ and every pair of valid normalized oriented codes for connected one-component knot diagrams, if the breadth-first Reidemeister search finds no move path of length at most $N$, then the represented oriented knot types are inequivalent.",
+        "deps": [
+          "def-oriented-reidemeister-moves",
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "thm-valid-code-reconstructs-the-declared-link-diagram",
+          "alg-breadth-first-reidemeister-search",
+          "thm-reidemeister-enumeration-is-only-a-semidecision",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-quandle-and-knot-coloring",
+          "alg-dihedral-fox-colorings",
+          "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "strategy": "Use 2N+1 explicit type-I additions for equivalence, the maximum crossing-number change of two per move for the lower bound, and the worked Fox 3-color calculation as an independent distinction of unknot and trefoil.",
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, University of Chicago course notes (2025), §§1.2–1.3 and 4.1",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§1.2–1.3, Reidemeister sequences and knot invariants; §4.1, coloring distinction."
+            },
+            {
+              "title": "Justin Roberts, Knots Knotes, Edinburgh course notes (1999), §§2.3 and 3.3",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf",
+              "locator": "§2.3, move sequences and unbounded crossing excursions; §3.3, 3-coloring counts."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "justified_by": [],
+        "axiom_use": "The crossing-distance calculation is choice-free. ACω is used only for the move-to-ambient-knot equivalence and the separate Fox-coloring distinction of the unknot and trefoil."
+      }
+    ]
+  }
+]

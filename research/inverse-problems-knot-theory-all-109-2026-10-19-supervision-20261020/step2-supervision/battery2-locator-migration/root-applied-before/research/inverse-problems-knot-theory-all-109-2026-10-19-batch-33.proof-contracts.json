@@ -1,0 +1,798 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+    "lem-ip-nullspace-property-stability-cone",
+    "ex-ip-failed-nsp-two-column-nonunique-basis-pursuit",
+    "ex-ip-nontrivial-order-one-nsp-matrix",
+    "ex-ip-gaussian-identity-design-minimax-lower-bound"
+  ],
+  "contracts": {
+    "thm-ip-basis-pursuit-exact-recovery-under-nsp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. The same real-valued codomain is required of a metric by\n[[def-metric-space]].\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "feasible-difference-is-kernel",
+          "claim": "Let $S:=\\{j\\in[n]:x_j^\\dagger\\ne0\\}$, so $|S|\\le s$. For any feasible $z\\ne x^\\dagger$, put $h:=z-x^\\dagger$. For each row $i$, [F5] and [F6] give $(Ah)_i=\\sum_{j=1}^n A_{ij}(z_j-x_j^\\dagger)=\\sum_{j=1}^n A_{ij}z_j-\\sum_{j=1}^n A_{ij}x_j^\\dagger=(Az)_i-(Ax^\\dagger)_i=0$, so $h\\in\\ker A$ and $h\\ne0$. Hence [F1] gives $\\|h_S\\|_1<\\|h_{S^c}\\|_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strict-l1-objective-increase",
+          "claim": "By [F3], $\\|\\cdot\\|_1$ is a norm, so [F4] gives its triangle inequality. On $S$, $z_S=x^\\dagger_S+h_S$, hence $\\|x^\\dagger\\|_1=\\|x^\\dagger_S\\|_1=\\|z_S-h_S\\|_1\\le\\|z_S\\|_1+\\|h_S\\|_1$. On $S^c$, $x^\\dagger$ vanishes and $z_{S^c}=h_{S^c}$, so $z=z_S+h_{S^c}$ with disjoint coordinate supports and $\\|z\\|_1=\\|z_S\\|_1+\\|h_{S^c}\\|_1$. By step 1.1, this is strictly greater than $\\|z_S\\|_1+\\|h_S\\|_1\\ge\\|x^\\dagger\\|_1$. Thus every feasible vector distinct from $x^\\dagger$ has strictly larger objective, and $x^\\dagger$, which is feasible, is the unique minimizer.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the zero target, S is empty in step 1.1; the assumed NSP supplies 0<||h||_1 for every distinct feasible difference, and step 2.1 still proves strict minimality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 only considers z distinct from x†; if ker A={0}, no such distinct feasible z exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply without change at s=1, using the stated NSP for every support of size at most one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At s=n, any nonzero h in ker A would contradict NSP with S=[n], since ||h||_1<0; the zero-kernel case is covered by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement is for the exact constraint Az=Ax† and explicitly excludes noisy recovery; step 1.1 uses only an exact feasible difference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 fix an arbitrary feasible z and select no representatives or families; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way sufficiency claim and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way sufficiency claim and states no equivalence."
+        }
+      ]
+    },
+    "lem-ip-nullspace-property-stability-cone": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. The same real-valued codomain is required of a metric by\n[[def-metric-space]].\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "**Clause 1 is about an arbitrary norm; clauses 2 to 4 are about\n$\\mathbb{R}^{n}$ with $n \\ge 1$.**\n\n1. **Finite and reverse triangle inequalities.** Let $V$ be a vector space over\n   $\\mathbb{R}$ and $N$ a norm on it ([[def-norm-and-normed-space]]). For every\n   $p \\in \\mathbb{N}$ and every list $u : p \\to V$\n   ([[def-linear-combination-and-span]]),\n   $$N\\Bigl(\\sum_{j<p} u_j\\Bigr) \\;\\le\\; \\sum_{j<p} N(u_j),$$\n   and for all $u, w \\in V$,\n   $$\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).$$\n\nNow let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^{n}$ carry the norms of\n[[def-p-norms-on-rn]] and write $\\iota$ for the canonical natural\n([[def-canonical-natural]]).\n\n2. **Every norm is dominated by the $1$-norm.** Let $N$ be a norm on\n   $\\mathbb{R}^{n}$ and put $C := \\max\\{\\, N(e_k) : k<n \\,\\}$, a maximum over a\n   nonempty finite set of reals ([[lem-standard-basis-of-f-n]],\n   [[lem-finite-set-has-max]]). Then $C \\ge 0$ and\n   $$N(x) \\;\\le\\; C\\,\\lVert x\\rVert_1 \\qquad \\text{for every } x \\in \\mathbb{R}^{n}.$$\n3. **The comparison chain.** For every $x \\in \\mathbb{R}^{n}$,\n   $$\\lVert x\\rVert_\\infty \\;\\le\\; \\lVert x\\rVert_2 \\;\\le\\; \\lVert x\\rVert_1 \\;\\le\\; \\iota(n)\\,\\lVert x\\rVert_\\infty , \\qquad \\lVert x\\rVert_1 \\;\\le\\; \\sqrt{\\iota(n)}\\;\\lVert x\\rVert_2 .$$\n   In particular $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and\n   $\\lVert\\cdot\\rVert_\\infty$ are pairwise equivalent norms on $\\mathbb{R}^{n}$,\n   with the constants displayed ([[def-equivalent-norms]]).\n4. **Every norm is Lipschitz for the Euclidean metric.** With $N$ and $C$ as in\n   clause 2, $N : (\\mathbb{R}^{n}, d_2) \\to (\\mathbb{R}, d_{\\mathbb{R}})$ is\n   Lipschitz with constant $C\\sqrt{\\iota(n)}$\n   ([[def-lipschitz-holder-contraction]], [[lem-metrics-on-rn]],\n   [[lem-real-line-is-a-metric-space]]), hence uniformly continuous and\n   continuous ([[thm-metric-regularity-hierarchy]], [[def-metric-continuity]]).\n\n**Where $n \\ge 1$ enters.** Clauses 2 and 4 need the maximum defining $C$ to\nexist, and clause 3 mentions $\\lVert\\cdot\\rVert_\\infty$; at $n = 0$ each is a\nmaximum over the empty index set and does not exist, exactly as in\n[[lem-metrics-on-rn]] and [[def-p-norms-on-rn]]. Clause 1 carries no hypothesis\non the dimension and no hypothesis on the space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum (Maximum and minimum of a set).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: The nonempty finite subsets of $\\mathbb{R}$ are exactly the listable ones proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "**Clause 1 is about an arbitrary norm; clauses 2 to 4 are about\n$\\mathbb{R}^{n}$ with $n \\ge 1$.**\n\n1. **Finite and reverse triangle inequalities.** Let $V$ be a vector space over\n   $\\mathbb{R}$ and $N$ a norm on it ([[def-norm-and-normed-space]]). For every\n   $p \\in \\mathbb{N}$ and every list $u : p \\to V$\n   ([[def-linear-combination-and-span]]),\n   $$N\\Bigl(\\sum_{j<p} u_j\\Bigr) \\;\\le\\; \\sum_{j<p} N(u_j),$$\n   and for all $u, w \\in V$,\n   $$\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).$$\n\nNow let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^{n}$ carry the norms of\n[[def-p-norms-on-rn]] and write $\\iota$ for the canonical natural\n([[def-canonical-natural]]).\n\n2. **Every norm is dominated by the $1$-norm.** Let $N$ be a norm on\n   $\\mathbb{R}^{n}$ and put $C := \\max\\{\\, N(e_k) : k<n \\,\\}$, a maximum over a\n   nonempty finite set of reals ([[lem-standard-basis-of-f-n]],\n   [[lem-finite-set-has-max]]). Then $C \\ge 0$ and\n   $$N(x) \\;\\le\\; C\\,\\lVert x\\rVert_1 \\qquad \\text{for every } x \\in \\mathbb{R}^{n}.$$\n3. **The comparison chain.** For every $x \\in \\mathbb{R}^{n}$,\n   $$\\lVert x\\rVert_\\infty \\;\\le\\; \\lVert x\\rVert_2 \\;\\le\\; \\lVert x\\rVert_1 \\;\\le\\; \\iota(n)\\,\\lVert x\\rVert_\\infty , \\qquad \\lVert x\\rVert_1 \\;\\le\\; \\sqrt{\\iota(n)}\\;\\lVert x\\rVert_2 .$$\n   In particular $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and\n   $\\lVert\\cdot\\rVert_\\infty$ are pairwise equivalent norms on $\\mathbb{R}^{n}$,\n   with the constants displayed ([[def-equivalent-norms]]).\n4. **Every norm is Lipschitz for the Euclidean metric.** With $N$ and $C$ as in\n   clause 2, $N : (\\mathbb{R}^{n}, d_2) \\to (\\mathbb{R}, d_{\\mathbb{R}})$ is\n   Lipschitz with constant $C\\sqrt{\\iota(n)}$\n   ([[def-lipschitz-holder-contraction]], [[lem-metrics-on-rn]],\n   [[lem-real-line-is-a-metric-space]]), hence uniformly continuous and\n   continuous ([[thm-metric-regularity-hierarchy]], [[def-metric-continuity]]).\n\n**Where $n \\ge 1$ enters.** Clauses 2 and 4 need the maximum defining $C$ to\nexist, and clause 3 mentions $\\lVert\\cdot\\rVert_\\infty$; at $n = 0$ each is a\nmaximum over the empty index set and does not exist, exactly as in\n[[lem-metrics-on-rn]] and [[def-p-norms-on-rn]]. Clause 1 carries no hypothesis\non the dimension and no hypothesis on the space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compact-unit-kernel-sphere",
+          "claim": "If $\\ker A=\\{0\\}$, choose $\\rho=1/2$. The only $h\\in\\ker A$ is zero, so both sides of the required inequality are zero for every $S$. Now suppose $\\ker A\\ne\\{0\\}$ and define $K:=\\{h\\in\\ker A:\\|h\\|_2=1\\}$. This set is nonempty by normalizing a nonzero kernel vector, since [F5] makes its norm positive. To show $K$ is closed, fix $x\\notin K$. If $Ax\\ne0$, choose a row $i$ with $c:=(Ax)_i\\ne0$ and let $r_i$ be that row as a vector in $\\mathbb R^n$. By [F11], [F12], and [F13], $f_i(u):=(Au)_i=\\langle r_i,u\\rangle$ and $f_i(y)-f_i(x)=\\langle r_i,y-x\\rangle$. By [F4], $|f_i(y)-c|\\le\\|r_i\\|_2\\|y-x\\|_2$. Moreover, $\\|r_i\\|_2>0$: otherwise [F5] gives $r_i=0$, which would imply $c=\\langle r_i,x\\rangle=0$. Thus $\\delta:=|c|/(2\\|r_i\\|_2)>0$, and whenever $\\|y-x\\|_2<\\delta$ we have $|f_i(y)-c|<|c|/2$, so $f_i(y)\\ne0$ and $y\\notin K$. If $Ax=0$, then $\\|x\\|_2\\ne1$; put $\\delta:=|\\|x\\|_2-1|/2>0$. By [F14], $|\\|y\\|_2-\\|x\\|_2|\\le\\|y-x\\|_2$, so $\\|y-x\\|_2<\\delta$ precludes $\\|y\\|_2=1$ and again $y\\notin K$. Hence every point outside $K$ has a ball disjoint from $K$, so $K$ is closed. It is bounded because every $h\\in K$ has $\\|h\\|_2=1$ and [F5] identifies this with its Euclidean distance from $0$. By [F8], $K$ is compact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "supportwise-ratio-maximum",
+          "claim": "Fix $S\\subseteq[n]$ with $|S|\\le s$ and define $P_S,P_{S^c}:\\mathbb R^n\\to\\mathbb R^n$ by $P_Su:=u_S$ and $P_{S^c}u:=u_{S^c}$. For all $u,v\\in\\mathbb R^n$ and every coordinate $j$, $|(P_Su-P_Sv)_j|\\le|u_j-v_j|$; both sides are nonnegative, so the forward implication in [F15] and then [F10] give $\\|P_Su-P_Sv\\|_2^2\\le\\|u-v\\|_2^2$. Both Euclidean norms are nonnegative by [F5], so the converse implication in [F15] yields $\\|P_Su-P_Sv\\|_2\\le\\|u-v\\|_2$. The same argument applies to $P_{S^c}$, making both coordinate projections $1$-Lipschitz, hence continuous for $d_2$. Since $\\|\\cdot\\|_1$ is a norm by [F5] and every norm on $\\mathbb R^n$ is continuous for $d_2$ by [F7], the compositions $a_S(h):=\\|h_S\\|_1$ and $b_S(h):=\\|h_{S^c}\\|_1$ are continuous. For each $h\\in K$, [F1] gives $a_S(h)<b_S(h)$, hence $b_S(h)>0$. To verify continuity of $r_S:=a_S/b_S$ at any $h_0\\in K$, put $a_0:=a_S(h_0)$ and $b_0:=b_S(h_0)>0$. Continuity of $b_S$ gives a neighborhood of $h_0$ in $K$ on which $b_S(h)>b_0/2$. There,\n$$|r_S(h)-r_S(h_0)|\\le\\frac{2}{b_0}|a_S(h)-a_0|+\\frac{2a_0}{b_0^2}|b_S(h)-b_0|,$$\nby splitting the difference of the two quotients. The right side tends to $0$ as $h\\to h_0$, since $a_S$ and $b_S$ are continuous; thus $r_S$ is continuous on $K$. By [F8] it attains a maximum $q_S$ on $K$, and [F1] at a maximizing point gives $0\\le q_S<1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-global-cone-margin",
+          "claim": "There are finitely many sets $S\\subseteq[n]$ with $|S|\\le s$, and this family is nonempty because it contains $\\varnothing$. Therefore [F9] gives $q:=\\max_{|S|\\le s}q_S<1$. Choose any $h\\in K$ and a coordinate $j$ with $h_j\\ne0$; then $S=\\{j\\}$ is admissible because $s\\ge1$, and [F2] gives $r_S(h)>0$, so $q>0$. Set $\\rho:=(1+q)/2$; then $q<\\rho<1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "F1",
+            "F2",
+            "F9",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "homogeneous-extension-to-kernel",
+          "claim": "Let $h\\in\\ker A$. If $h=0$, the required inequality is immediate. Otherwise $\\widetilde h:=h/\\|h\\|_2$ belongs to $K$. For every admissible $S$, [F6] gives $r_S(h)=r_S(\\widetilde h)\\le q<\\rho$, so $\\|h_S\\|_1\\le\\rho\\|h_{S^c}\\|_1$. This proves the estimate with one constant for all $S$ and all kernel vectors.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For S=∅, the ratio in step 2.1 is zero on the nonempty unit kernel; the strict NSP makes the tail denominator positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-kernel branch in step 1.1 chooses rho=1/2 and the h=0 case in step 4.1 gives 0≤0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When s=1, the finite support family in step 3.1 still contains the empty set and every singleton, and the same maximum argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In the nonzero-kernel branch, step 2.1 gives q_S<1 for every support, and step 3.1 obtains one strict global margin."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At s=n, NSP with S=[n] forces ker A={0}; the zero-kernel branch of step 1.1 applies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use one existential nonzero kernel witness and maxima of finite/compact sets; the Heine–Borel/extreme-value supplier is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way consequence of strict NSP and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way consequence of strict NSP and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-failed-nsp-two-column-nonunique-basis-pursuit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equal-head-tail-witness",
+          "claim": "By [F4], $Ah=1-1=0$, and $h\\ne0$. For $S=\\varnothing$, $h_S=(0,0)$ and $h_{S^c}=h$, so [F2] gives $\\|h_S\\|_1=0<2=\\|h_{S^c}\\|_1$. For $S=\\{1\\}$, $h_S=(1,0)$ and $h_{S^c}=(0,-1)$, so [F2] gives $\\|h_S\\|_1=1=\\|h_{S^c}\\|_1$. Thus the required strict inequality fails for this admissible support, as claimed by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-minimizers-at-one-datum",
+          "claim": "By [F4], every vector $w=(w_1,w_2)$ feasible for this datum satisfies $w_1+w_2=1$, so [F3] gives $1=|w_1+w_2|\\le|w_1|+|w_2|$. Both $x^\\dagger$ and $z$ are feasible and have objective value $1$ by [F2]; they are distinct, so both attain the minimum of the displayed objective and it is not unique.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For S=∅, step 1.1 computes 0<2; the failure occurs at S={1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonzero vector h=(1,-1), as required by the NSP definition; the zero vector is not a witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The order is s=1 and step 1.1 exhibits failure on a singleton support."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves both distinct feasible vectors attain the exact minimum value one, establishing nonuniqueness rather than only a tie above the minimum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the exact noiseless equation Aw=1; no noisy endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only the displayed finite vectors and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits one failure and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example exhibits one failure and states no equivalence."
+        }
+      ]
+    },
+    "ex-ip-nontrivial-order-one-nsp-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+          "source_section": "Statement",
+          "quote": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$, and let\n$A\\in\\mathbb R^{m\\times n}$ satisfy the strict nullspace property of order\n$s$. Use one-based coordinate labels $j=1,\\ldots,n$, with coordinate $j$\nidentified with the library's coordinate $j-1$. If $x^\\dagger\\in\\mathbb R^n$\nhas at most $s$ nonzero coordinates, then\n$x^\\dagger$ is the unique minimizer of\n$$\\sum_{j=1}^n|z_j|$$\nover all $z\\in\\mathbb R^n$ satisfying $Az=Ax^\\dagger$. This is a noiseless\nexact-data result; it makes no exact-recovery or support-recovery assertion for\nnoisy observations.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "kernel-line-computation",
+          "claim": "For $h=(u,v,w)$, the row formula [F5] gives $Ah=(u-v,u+w)$, so $Ah=0$ exactly when $v=u$ and $w=-u$. Hence $\\ker A=\\{\\lambda(1,1,-1):\\lambda\\in\\mathbb R\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strict-order-one-inequalities",
+          "claim": "Write a nonzero kernel vector as $h=\\lambda(1,1,-1)$ with $\\lambda\\ne0$. If $S=\\varnothing$, then $\\|h_S\\|_1=0<3|\\lambda|=\\|h_{S^c}\\|_1$. If $S$ is a singleton, then $\\|h_S\\|_1=|\\lambda|<2|\\lambda|=\\|h_{S^c}\\|_1$. These are all sets with $|S|\\le1$, so [F1] holds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-recovery-by-local-theorem",
+          "claim": "Applying [F3] with $s=1$ now gives the claimed unique minimizer for every vector with at most one nonzero coordinate; [F2] identifies the objective formula as the $\\ell_1$ norm by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the empty-support inequality 0<3|lambda| for every nonzero kernel vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 assumes lambda!=0, so the zero kernel vector is correctly excluded by the definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks every singleton support for s=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a nonzero one-dimensional kernel; step 2.1 verifies strict separation for all its nonzero scalar multiples."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This fixed example has n=3 and s=1; it makes no claim at s=0 or s=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit finite-dimensional algebra and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one matrix and does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one matrix and does not state an equivalence."
+        }
+      ]
+    },
+    "ex-ip-gaussian-identity-design-minimax-lower-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+          "source_section": "Statement",
+          "quote": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$, and let\n$A\\in\\mathbb R^{m\\times n}$ satisfy the strict nullspace property of order\n$s$. Use one-based coordinate labels $j=1,\\ldots,n$, with coordinate $j$\nidentified with the library's coordinate $j-1$. If $x^\\dagger\\in\\mathbb R^n$\nhas at most $s$ nonzero coordinates, then\n$x^\\dagger$ is the unique minimizer of\n$$\\sum_{j=1}^n|z_j|$$\nover all $z\\in\\mathbb R^n$ satisfying $Az=Ax^\\dagger$. This is a noiseless\nexact-data result; it makes no exact-recovery or support-recovery assertion for\nnoisy observations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,d\\ge1$, $\\sigma>0$, and let\n$1\\le s\\le d/2$ be integers. Observe $Z\\in\\mathbb R^d$ with independent\ncoordinates $Z_j\\sim N(\\theta_j,\\sigma^2/n)$ for a parameter\n$$\\Theta_{s,d}:=\\{\\theta\\in\\mathbb R^d: |\\{j\\in\\{1,\\ldots,d\\}:\\theta_j\\ne0\\}|\\le s\\}.$$\nFor every Borel estimator $T:\\mathbb R^d\\to\\mathbb R^d$,\n$$\\sup_{\\theta\\in\\Theta_{s,d}} \\mathbb E_\\theta\\|T(Z)-\\theta\\|_2^2 \\ge \\frac{\\sigma^2s\\log(ed/s)}{200000n}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-nullspace-property",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, and let\n$A\\in M_{m\\times n}(\\mathbb R)=\\mathbb R^{m\\times n}$.\nPut $[m]:=\\{1,\\ldots,m\\}$ and $[n]:=\\{1,\\ldots,n\\}$. The library indexes\nvector coordinates and matrix columns by $n=\\{0,\\ldots,n-1\\}$ and matrix rows\nby $m=\\{0,\\ldots,m-1\\}$. Throughout this item use the canonical relabeling\n$j\\mapsto j-1$ from $[n]$ to the library's coordinate and column indices, and\nsimilarly from $[m]$ for rows. Thus write\n$u_j:=u(j-1)$ and $A_{ij}:=A(i-1,j-1)$. For $u\\in\\mathbb R^n$, define\nthe matrix-vector product by\n$$(Au)_i:=\\sum_{j=1}^n A_{ij}u_j \\qquad (i\\in[m]),$$\nand define\n$$\\ker A:=\\{h\\in\\mathbb R^n:Ah=0\\}.$$\nFor $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S\\in\\mathbb R^n$ be the\nvector whose $j$th coordinate is $h_j$ for $j\\in S$ and $0$ for $j\\notin S$;\nwrite $S^c:=[n]\\setminus S$. For $u\\in\\mathbb R^n$, write\n$$\\|u\\|_1:=\\sum_{j=1}^n|u_j|,$$\nthe same $p=1$ norm as the library's finite-dimensional norm under this\ncoordinate relabeling.\nFor $s\\in\\mathbb N$ with $1\\le s\\le n$, the matrix $A$ satisfies the **strict\nnullspace property of order $s$** if\n$$\\|h_S\\|_1<\\|h_{S^c}\\|_1$$\nfor every nonzero $h\\in\\ker A$ and every $S\\subseteq[n]$ with $|S|\\le s$.\nThis condition concerns exact kernel vectors only and says nothing about vectors\nwith $Ah\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-matrix-nsp",
+          "claim": "For each $i\\in[d]$, [F6] and [F7] give $(I_dh)_i=\\sum_{j=1}^d \\delta_{ij}h_j=h_i$ by [F8], so $I_dh=0$ forces $h=0$ and $\\ker I_d=\\{0\\}$. Hence $I_d$ satisfies strict NSP of order $s$ vacuously by [F1], and [F2] gives unique noiseless $\\ell_1$ recovery for every $\\theta\\in\\Theta_{s,d}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "existing-minimax-supplier-instantiation",
+          "claim": "For each $\\theta\\in\\Theta_{s,d}$, $(I_d\\theta)_j=\\theta_j$, so the stated independent observation coordinates have exactly the Gaussian sequence laws in [F3]. The parameter, sample-size, noise, sparsity, estimator, and AC hypotheses in [A1] and [F3] are all among the Given; applying [F3] proves the displayed minimax lower bound in its sum-of-squares form by [F4], where [F5] confirms that the displayed squared error is the squared Euclidean norm.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The parameter set Theta_{s,d} in the Statement includes theta=0, and step 2.1 applies the theorem to the whole class."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The noisy minimax claim assumes sigma>0; the separate noiseless identity-recovery claim is handled in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest allowed dimension d=2 with s=1 satisfies the theorem's endpoint 1<=s<=d/2 in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that I_d has zero kernel, including the identity-design case where exact recovery is vacuous NSP."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the endpoint s=d/2 because it is explicitly included in the minimax theorem's hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicitly assumed and carried by A1 in step 2.1; this item does not claim a choice-free minimax bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example combines a noiseless recovery observation and a one-way risk lower bound; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example combines a noiseless recovery observation and a one-way risk lower bound; it states no equivalence."
+        }
+      ]
+    }
+  }
+}

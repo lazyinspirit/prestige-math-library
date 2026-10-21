@@ -1,0 +1,7 @@
+Permanent regression-test proposal, research-only: new tools/proof-contract-empty-uses.test.mjs (7cases) and appended tools/regen-contract-entries.test.mjs (4newcases plus2existingcases retained). No canonical file changed.
+
+Actual isolated execution passed13tests,0failed,0skipped,exit0. See isolated-test-result.json/stdout/stderr and ready-report.json. The actual unmodified native tools were copied into temporary fixture repositories, accounting explicitly for checker executable-relativeREPO and generator cwd-relativeitems. No VM extraction, source replacement or canonicaltestfixture was needed. Only the existingYAMLruntime was used.
+
+Tests cover truthfulemptyuses, rejectionofomittedcontinuationuses/inventeduses/malformeduses, boundedgenerated-source acceptancewithoutquote waiver, changedbody/out-of-scope rejection, declarative regenerationwithoutfakeproofrows, refusaltoeraseoldproofrows, continuationinputcoverage and routinestepclassificationwithoutduplicate derivations. Synthetictemporarybody hashes/evidence exercise thebindingformat only; no canonical acceptance/review/hash/stamp is created or changed.
+
+Exact before/after and absent-new-file guards are in guarded-test-addition-plan.json/preimages/proposed-after/diffs. Root independentreview and application are still required. Root-only guarded application: node apply-root-approved-tests.mjs --apply-root-approved. It adds only these2testfiles; no productiontool or fixture/state/gate writes, and it does not automatically run tests.

@@ -1,0 +1,547 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-composite-double-regularization",
+    "thm-ip-double-discrepancy-conditional-convergence",
+    "ex-ip-composite-linear-inversion-commuting-diagonal",
+    "cex-ip-composite-pseudoinverse-factorization-fails",
+    "op-ip-optimal-composite-discrepancy-rate"
+  ],
+  "contracts": {
+    "def-ip-composite-double-regularization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition specifies spaces and maps and asserts no behavior for an empty operator domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition allows F or G to be the zero map and still defines the typed composite estimator; it asserts no convergence or pseudoinverse identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition is well-typed for one-dimensional spaces; the intermediate space remains Y and the estimator output remains in X."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No injectivity, surjectivity, or closed-range condition is part of the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no parameter limit or endpoint convergence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition takes given maps and filters and asserts no existence-by-choice result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ]
+    },
+    "thm-ip-double-discrepancy-conditional-convergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-composite-double-regularization",
+          "source_section": "Definition",
+          "quote": "Let $X,Y,Z$ be real or complex Hilbert spaces over one scalar field, let $F:X\\to Y$ and $G:Y\\to Z$ be compact linear maps, and set $A:=G\\circ F:X\\to Z$. For spectral regularization families $R^G_\\alpha:Z\\to Y$ for $G^\\dagger$ and $R^F_\\gamma:Y\\to X$ for $F^\\dagger$, and a parameter rule $(\\alpha,\\gamma):(0,\\infty)\\times Z\\to(0,\\infty)^2$, define $T_\\delta(z^\\delta):=R^F_{\\gamma(\\delta,z^\\delta)}(R^G_{\\alpha(\\delta,z^\\delta)}z^\\delta)$ for $z^\\delta\\in Z$. The order is fixed by the factorization: first regularize $G$, then $F$; no general identity $A^\\dagger=F^\\dagger G^\\dagger$ is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex Hilbert\nspaces over the same scalar field, and let $K:X\\to Y$ be a bounded linear\noperator. Write $R(K):=\\{Kx:x\\in X\\}$ for its range,\n$N(K):=\\{x\\in X:Kx=0\\}$ for its kernel, and\n$M^\\perp:=\\{z:\\langle z,m\\rangle=0\\text{ for every }m\\in M\\}$ for the\northogonal complement of a subspace $M$. The kernel $N(K)$ is closed, so the\nrestriction\n$$\\widetilde K:=K|_{N(K)^\\perp}:N(K)^\\perp\\to R(K)$$\nis a linear bijection. Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$\nto have domain\n$$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$\nand, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and\n$z\\in R(K)^\\perp$, set\n$$K^\\dagger y:=\\widetilde K^{-1}r.$$\nThus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the\northogonal-range component is mapped to zero. Boundedness of $K^\\dagger$ on\nthis domain is not part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]), let\n$T\\in\\mathcal B(H,K)$ be a compact operator\n([[def-compact-linear-operator]]), let $|T|$ and the singular values $s_n(T)$ be\nas in the absolute-value definition\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Let\n$J=\\{1,2,3,\\ldots\\}$ when $\\operatorname{ran}T$ is infinite-dimensional. When\n$\\operatorname{ran}T$ is finite-dimensional, put\n$r:=\\dim\\operatorname{ran}T\\in\\mathbb N$ ([[def-dimension]]) and let\n$J=\\{1,\\dots,r\\}$, interpreted as $\\varnothing$ when $r=0$. Thus $J$ indexes\nexactly the positive singular values counted with multiplicity, which we write\nas $(s_j)_{j\\in J}$ in nonincreasing order. Then:\n\n1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;\n4. the zero-padded sequence $(s_n(T))_{n\\ge1}$ is *not* used to index the\n   orthonormal systems: the systems carry exactly the index set $J$ of the\n   positive singular values, and the terms $s_n(T)=0$ beyond the rank in the\n   finite-rank case are numerical padding only.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy–Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ip-spectral-interpolation-for-power-source-balls",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field, let $\\nu>0$ and $w\\in X$, and put $x=|K|^\\nu w$. Then $\\|x\\|_X\\le\\|Kx\\|_Y^{\\nu/(\\nu+1)}\\|w\\|_X^{1/(\\nu+1)}$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $F$ and $G$ are compact, hence bounded, $A=G\\circ F$ is compact: the image under $F$ of any bounded sequence is bounded, and compactness of $G$ gives a subsequence whose images under $G$ converge. Put $a_j=\\lambda_j\\mu_j$ and $w_j=\\langle w,x_j\\rangle$. The adjoint identity [F6] and the singular-vector equations show $N(F)=\\{x_j:j\\in J\\}^{\\perp}$ and $N(G)=\\{y_j:j\\in J\\}^{\\perp}$: each kernel vector is orthogonal to the indicated family, and conversely a vector orthogonal to the family is orthogonal to the full range of the adjoint, hence is killed by the operator. Since $G$ is injective on $\\overline{R(F)}=\\overline{R(G^*)}$ (its coefficients there are the positive $\\mu_j$), $\\ker A=\\ker F$; hence $(x_j)$ is a basis of $N(A)^\\perp$. By [F1], $Ax_j=a_jz_j$. The adjoint identity [F6] gives $A^*=F^*G^*$, so [F5] yields $A^*z_j=a_jx_j$, $A^*Ax_j=a_j^2x_j$, and $|A|x_j=a_jx_j$. The vectors $z_j$ span $\\overline{R(A)}$, since the range of $A$ is generated by $Ax_j=a_jz_j$ and $a_j>0$. Compact spectral calculus and [F3] therefore give $x^\\dagger=\\sum_{j\\in J}a_j^\\nu w_jx_j$ and $z=Ax^\\dagger=\\sum_{j\\in J}a_j^{\\nu+1}w_jz_j$. The source element is perpendicular to $\\ker A$, so [F4] gives $A^\\dagger z=x^\\dagger$. Thus $y^\\dagger=Fx^\\dagger$ lies in $N(G)^\\perp$ and $x^\\dagger$ lies in $N(F)^\\perp$; since $Gy^\\dagger=z$ and $Fx^\\dagger=y^\\dagger$, the minimum-norm property [F4] gives $G^\\dagger z=y^\\dagger$ and $F^\\dagger y^\\dagger=x^\\dagger$. Finally, $v:=\\sum_j\\lambda_j^{\\nu+1}w_jy_j$ satisfies $y^\\dagger=|G|^\\nu v$ and $\\|v\\|^2=\\sum_j\\lambda_j^{2\\nu+2}|w_j|^2\\le\\|w\\|^2\\le\\rho^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $e_G:=R^G_\\alpha z-y^\\dagger$. On each $y_j$, $I_Y-R^G_\\alpha G$ has multiplier $p^G_\\alpha(\\mu_j^2)$, whose absolute value is at most $S_G$ because $I_Z-GR^G_\\alpha$ has that same multiplier on $z_j$. Thus $e_G=-|G|^\\nu p^G_\\alpha(G^*G)v=|G|^\\nu v'$ with $\\|v'\\|\\le S_G\\|v\\|\\le S_G\\rho$. Also $Ge_G=GR^G_\\alpha z-z$. The difference between the exact and noisy first residuals is $(GR^G_\\alpha-I_Z)(z-z^\\delta)$, of norm at most $S_G\\delta$; the stopping inequality therefore gives $\\|Ge_G\\|\\le(\\tau_G+S_G)\\delta$. Applying [F8] to $e_G=|G|^\\nu v'$ proves $\\|R^G_\\alpha z-y^\\dagger\\|\\le((\\tau_G+S_G)\\delta)^{\\nu/(\\nu+1)}(S_G\\rho)^{1/(\\nu+1)}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $e_A:=x^\\dagger-R^F_\\gamma R^G_\\alpha z$. On the common singular system, $R^F_\\gamma R^G_\\alpha A$ has multiplier $(1-p^F_\\gamma(\\lambda_j^2))(1-p^G_\\alpha(\\mu_j^2))$. The bounds on $FR^F_\\gamma$ and $GR^G_\\alpha$ bound the two factors by $C_F,C_G$; on $N(A)$ the product with $A$ is zero. Therefore $e_A=|A|^\\nu u$ with $u=(I-R^F_\\gamma R^G_\\alpha A)w$ and $\\|u\\|\\le(1+C_FC_G)\\rho$. The same coefficient formula, now on $Z$, gives $\\|AR^F_\\gamma R^G_\\alpha\\|\\le C_FC_G$. The exact composite residual decomposes as $(z-z^\\delta)+(z^\\delta-GR^G_\\alpha z^\\delta)+(GR^G_\\alpha z^\\delta-AR^F_\\gamma R^G_\\alpha z^\\delta)+AR^F_\\gamma R^G_\\alpha(z^\\delta-z)$. These four terms have norms at most $\\delta,\\tau_G\\delta,\\tau_F\\delta,C_FC_G\\delta$, respectively, by the noise bound, the two stopping rules, and the composite operator bound. Since $Ae_A=z-AR^F_\\gamma R^G_\\alpha z$, it follows that $\\|Ae_A\\|\\le(1+\\tau_G+\\tau_F+C_FC_G)\\delta$. Applying [F8] to $e_A=|A|^\\nu u$ proves $\\|e_A\\|\\le C_1\\rho^{1/(\\nu+1)}\\delta^{\\nu/(\\nu+1)}$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Replace $D_H(\\nu+1)$ by $\\max\\{D_H(\\nu+1),0\\}+1$ for $H=F,G$; the qualification bounds remain valid and these constants are positive. Define $q_\\gamma(h):=AR^F_\\gamma R^G_\\alpha h-GR^G_\\alpha h$. Its common-system multiplier on $z_j$ is $-p^F_\\gamma(\\lambda_j^2)(1-p^G_\\alpha(\\mu_j^2))$. Since $a_j^{\\nu+1}=\\lambda_j^{\\nu+1}\\mu_j^{\\nu+1}$, qualification at $s=\\nu+1$, $\\mu_j\\le1$, and $|1-p^G_\\alpha(\\mu_j^2)|\\le C_G$ give $\\|q_\\gamma(z)\\|\\le D_F(\\nu+1)C_G\\rho\\,\\gamma^{(\\nu+1)/2}$. On arbitrary noise coordinates, $|p^F_\\gamma(\\lambda_j^2)|\\le S_F$ and $|1-p^G_\\alpha(\\mu_j^2)|\\le C_G$, so $\\|q_\\gamma(z^\\delta-z)\\|\\le S_FC_G\\delta$. If $\\ell\\ge2$, the preceding noisy discrepancy is greater than $\\tau_F\\delta$; subtracting the noise bound gives $\\|q_{\\gamma_{\\ell-1}}(z)\\|>(\\tau_F-S_FC_G)\\delta$. The exact-data bound just proved then yields $\\gamma_{\\ell-1}>[(\\tau_F-S_FC_G)/(D_F(\\nu+1)C_G)]^{2/(\\nu+1)}(\\delta/\\rho)^{2/(\\nu+1)}$, and $\\gamma_\\ell\\ge\\theta\\gamma_{\\ell-1}$ gives the same lower bound with factor $\\theta$. Hence $\\|R^F_{\\gamma_\\ell}\\|\\le K_F/\\sqrt{\\gamma_\\ell}\\le C''\\rho^{1/(\\nu+1)}\\delta^{-1/(\\nu+1)}$. If $\\ell=1$, then $\\gamma_\\ell=\\gamma_1$ is fixed. The common system and $\\lambda_j,\\mu_j\\le1$ give $\\|A\\|\\le1$, so $0<\\delta<\\|z\\|=\\||A|^{\\nu+1}w\\|\\le\\rho$ for all sufficiently small $\\delta$. Thus $(\\rho/\\delta)^{1/(\\nu+1)}\\ge1$, and $\\|R^F_{\\gamma_1}\\|\\le K_F/\\sqrt{\\gamma_1}\\le C''(\\rho/\\delta)^{1/(\\nu+1)}$ after enlarging $C''$.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $k\\ge2$, the preceding noisy residual is greater than $\\tau_G\\delta$. Its difference from the exact-data residual is $(GR^G_{\\alpha_{k-1}}-I_Z)(z-z^\\delta)$, of norm at most $S_G\\delta$, so $\\|GR^G_{\\alpha_{k-1}}z-z\\|>(\\tau_G-S_G)\\delta$. Expanding $z=G|G|^\\nu v$ in the common basis and applying the qualification bound at $s=\\nu+1$ gives $\\|GR^G_{\\alpha_{k-1}}z-z\\|\\le D_G(\\nu+1)\\rho\\,\\alpha_{k-1}^{(\\nu+1)/2}$. Thus $\\alpha_{k-1}>[(\\tau_G-S_G)/D_G(\\nu+1)]^{2/(\\nu+1)}(\\delta/\\rho)^{2/(\\nu+1)}$, and $\\alpha_k\\ge\\theta\\alpha_{k-1}$ gives the same lower bound for $\\alpha_k$ with the extra factor $\\theta$. Consequently $\\|R^G_{\\alpha_k}(z^\\delta-z)\\|\\le K_G\\delta/\\sqrt{\\alpha_k}\\le C\\rho^{1/(\\nu+1)}\\delta^{\\nu/(\\nu+1)}$, where $C$ is independent of $\\rho,\\delta$. If $k=1$, then $\\alpha_k=\\alpha_1$ is fixed. Since $\\rho>0$, we have $\\delta\\le\\rho$ for all sufficiently small $\\delta$, and hence $\\|R^G_{\\alpha_1}(z^\\delta-z)\\|\\le K_G\\delta/\\sqrt{\\alpha_1}\\le K_G\\alpha_1^{-1/2}\\rho^{1/(\\nu+1)}\\delta^{\\nu/(\\nu+1)}$. Combining this noise bound with step 2.1 and the triangle inequality gives $\\|R^G_{\\alpha_k}z^\\delta-y^\\dagger\\|\\le C'\\rho^{1/(\\nu+1)}\\delta^{\\nu/(\\nu+1)}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The exact/noisy decomposition is $x^\\dagger-R^F_{\\gamma_\\ell}R^G_{\\alpha_k}z^\\delta=e_A+R^F_{\\gamma_\\ell}R^G_{\\alpha_k}(z-z^\\delta)$. By linearity, $\\|R^G_{\\alpha_k}(z-z^\\delta)\\|\\le\\|R^G_{\\alpha_k}z-y^\\dagger\\|+\\|R^G_{\\alpha_k}z^\\delta-y^\\dagger\\|$, and these terms are bounded by steps 2.1 and 3.1. Combining those estimates with the exact composite bias from step 2.2 and the outer norm bound from step 2.3 gives the two terms in the Statement, with constants independent of $\\delta$ and $\\rho$. Since $\\nu>1$, both powers of $\\delta$ are positive, so the error tends to zero for fixed $\\rho$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes nonzero exact data z and a positive common singular system, so the empty-index operator is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes nonzero exact data z; it makes no assertion for zero data, where the stopping-index hypotheses may fail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows a finite common singular system with one positive index; steps 1.1–4.1 are coefficientwise and conditional on both selected indices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits kernel directions, requires a minimum-norm source element and nonzero data, and therefore excludes the zero composite operator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement includes nu=nu0-1 and requires nu>1; the excluded endpoint nu=1 would make the second delta exponent zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes Countable Choice and makes existence of both parameter indices explicit rather than deriving a hidden selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a conditional convergence estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a conditional convergence estimate, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-composite-linear-inversion-commuting-diagonal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-composite-double-regularization",
+          "source_section": "Definition",
+          "quote": "Let $X,Y,Z$ be real or complex Hilbert spaces over one scalar field, let $F:X\\to Y$ and $G:Y\\to Z$ be compact linear maps, and set $A:=G\\circ F:X\\to Z$. For spectral regularization families $R^G_\\alpha:Z\\to Y$ for $G^\\dagger$ and $R^F_\\gamma:Y\\to X$ for $F^\\dagger$, and a parameter rule $(\\alpha,\\gamma):(0,\\infty)\\times Z\\to(0,\\infty)^2$, define $T_\\delta(z^\\delta):=R^F_{\\gamma(\\delta,z^\\delta)}(R^G_{\\alpha(\\delta,z^\\delta)}z^\\delta)$ for $z^\\delta\\in Z$. The order is fixed by the factorization: first regularize $G$, then $F$; no general identity $A^\\dagger=F^\\dagger G^\\dagger$ is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $G^*G=\\operatorname{diag}(9,16)$ and $F^*F=\\operatorname{diag}(4,1)$, the specified Tikhonov maps are $R^G_\\alpha=\\operatorname{diag}(3/(9+\\alpha),4/(16+\\alpha))$ and $R^F_\\gamma=\\operatorname{diag}(2/(4+\\gamma),1/(1+\\gamma))$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying in the required order gives $A=\\operatorname{diag}(6,4)$ and $R^F_\\gamma R^G_\\alpha z=\\operatorname{diag}(6/((4+\\gamma)(9+\\alpha)),4/((1+\\gamma)(16+\\alpha)))z$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "As $\\alpha,\\gamma\\downarrow0$, the diagonal coefficients tend to $1/6$ and $1/4$, so the estimate tends to $A^{-1}z$ for $A=\\operatorname{diag}(6,4)$. Since $AA^{-1}=I=A^{-1}A$, we have $AA^{-1}A=A$, $A^{-1}AA^{-1}=A^{-1}$, and both square products are the self-adjoint identity; [F3]–[F4] therefore give $A^+=A^{-1}$. The same argument gives $F^+=F^{-1}$ and $G^+=G^{-1}$, and $F^{-1}G^{-1}=(GF)^{-1}=A^{-1}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "F=diag(2,1), G=diag(3,4)",
+          "calculation": "A=diag(6,4); R_G_alpha=diag(3/(9+alpha),4/(16+alpha)); R_F_gamma=diag(2/(4+gamma),1/(1+gamma)).",
+          "result": "The composite tends exactly to A^-1=diag(1/6,1/4)=F^+G^+."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonempty two-dimensional spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is a linear matrix identity and therefore also holds for z=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically a two-coordinate diagonal factorization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example uses invertible F, G and A, so it covers the nonsingular commuting boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example verification step 3.1 computes the coordinatewise limit as alpha and gamma decrease to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The computation is finite-dimensional and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    },
+    "cex-ip-composite-pseudoinverse-factorization-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-composite-double-regularization",
+          "source_section": "Definition",
+          "quote": "Let $X,Y,Z$ be real or complex Hilbert spaces over one scalar field, let $F:X\\to Y$ and $G:Y\\to Z$ be compact linear maps, and set $A:=G\\circ F:X\\to Z$. For spectral regularization families $R^G_\\alpha:Z\\to Y$ for $G^\\dagger$ and $R^F_\\gamma:Y\\to X$ for $F^\\dagger$, and a parameter rule $(\\alpha,\\gamma):(0,\\infty)\\times Z\\to(0,\\infty)^2$, define $T_\\delta(z^\\delta):=R^F_{\\gamma(\\delta,z^\\delta)}(R^G_{\\alpha(\\delta,z^\\delta)}z^\\delta)$ for $z^\\delta\\in Z$. The order is fixed by the factorization: first regularize $G$, then $F$; no general identity $A^\\dagger=F^\\dagger G^\\dagger$ is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $FG=\\frac12\\begin{pmatrix}1&1\\\\0&0\\end{pmatrix}$ and $GF=A=\\frac12\\begin{pmatrix}1&0\\\\1&0\\end{pmatrix}$, which are unequal. Each of $F,G,A$ is nonzero with a one-dimensional image, so both factors are rank deficient and noncommuting.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $B=\\begin{pmatrix}1&1\\\\0&0\\end{pmatrix}$. Multiplication gives $AB=G$ and $BA=F$. Since $F$ and $G$ are self-adjoint idempotents, $ABA=(AB)A=GA=G^2F=A$, $BAB=(BA)B=FB=B$, and both $AB$ and $BA$ are self-adjoint. Thus $B$ satisfies all four equations in [F2], so $A^+=B$ by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same equations show $F^+=F$ and $G^+=G$, because each is a self-adjoint idempotent and hence satisfies the four Penrose equations; uniqueness in [F3] identifies them. Therefore $F^+G^+=FG=\\frac12B\\ne B=A^+$. This refutes the universal identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "rank-one projections on R^2",
+          "calculation": "A=GF=(1/2)[[1,0],[1,0]], B=[[1,1],[0,0]], AB=G, and BA=F.",
+          "result": "A^+=B while F^+G^+=FG=B/2, so the product identity fails."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses nonempty two-dimensional Hilbert spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample uses nonzero rank-one projections; the zero-operator boundary is not needed for its universal refutation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is explicitly two-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample uses rank-one factors in dimension two, so both are rank deficient and noncommuting."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite algebraic counterexample has no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are finite-dimensional and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is universal but not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is universal but not an equivalence."
+        }
+      ]
+    },
+    "op-ip-optimal-composite-discrepancy-rate": {
+      "open_problem_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The formulation fixes compact common-singular-system factors, the compatible minimum-norm factorization, source ball, filter qualification, two first-crossing residual rules, nonzero exact data, defined stopping indices, and the deterministic worst-case target exponent."
+        },
+        "status": {
+          "verdict": "pass",
+          "evidence": "Brandt–Horn v1 conclusion §4 (printed p. 17) explicitly leaves DDP rate optimality open; targeted title/arXiv-id searches through 2026-10-19 found no later resolution. The source radius typo is corrected in the local theorem and does not settle the open delta-exponent question."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The full 22-page Brandt–Horn preprint, including Theorem 6 proof and conclusion, and Clason's full lecture notes §§5.1–5.2 were inspected; the latter supports single-stage components only, not an independent composite result."
+        }
+      },
+      "citations": [],
+      "derivations": []
+    }
+  }
+}

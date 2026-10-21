@@ -1,0 +1,13 @@
+Lane 2 FIRST boundary review is complete for all **76 items and 389 distinct cases**: the original 387 rows plus two new strict cases. All seven routed strict supplements are incorporated; five duplicate cases retain their separate historical before rows. Every original before_row is preserved.
+
+Dispositions: 192 checked and 197 specifically not applicable; no conditional rows remain after root adopted the one domain repair. Each row has actual item-specific evidence and a shared item reading extent. This is an assigned-boundary review, not a new whole-proof audit or native Alpha review.
+
+The sole confirmed source defect is in ex-ip-inversebench-black-hole-imaging: argument at a zero triangle product and logarithm with a zero amplitude are undefined. The guarded research proposal in source-repair/guarded-domain-repair.json adds their precise nonzero domains and qualifies Given/Verification 1.1. It preserves the measured model, sources and empirical conclusions, and claims no implementation mask. Root adopted the three exact hunks (source-repair/root-adoption.json). The current changed Example/Given/Verification 1.1 were then read; zero and degenerate rows now have checked after rows against the explicit valid-data domain. Their original gap evidence and guard remain preserved.
+
+The exact item-ID lookup across current item/library Markdown found no direct logical item consumers, hence no indirect item consumers. The owning page is only an examples list; its entire header was read and needs no change. The lookup and consumer extent are recorded in the repair packet. No primary implementation acquisition or new source campaign was performed.
+
+Current Property P uses full AC and the explicit published external F3 interface in proof 3.1. Old strict text about an unproved local case/ACω escalation is retained as history only. Current rho proof has steps 1.1 and 2.1; stale step 3.1 guards are not reused as evidence. The two new strict cases explicitly check the genus-zero empty Hermitian determinant and the genus-one two-by-two Arf expansion.
+
+Seven assigned sources (33 rows) also occur in the final format packet. Their final locators use battery1-format/proposed-after and ready-report.json; the KT09 meridian witness is step 2.1. All original source/contract before guards remain unchanged. Other mathematical arguments in that packet were not re-audited.
+
+Research files only were written. No canonical source/contracts, hashes, gates, validators, run state, stamps or native counters were changed. Root owns independent FINAL, coupled source/boundary application and final rehash.

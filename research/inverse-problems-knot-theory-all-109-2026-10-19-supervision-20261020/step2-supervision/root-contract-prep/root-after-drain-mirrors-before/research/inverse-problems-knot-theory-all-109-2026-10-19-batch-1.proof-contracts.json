@@ -1,0 +1,285 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+    "ex-ip-01-scope-and-boundary-cases"
+  ],
+  "contracts": {
+    "thm-ip-kernel-directions-preclude-unrestricted-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "The loss between two target classes is their metric distance $d_Q$.",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-identifiability-and-stability-modulus",
+          "source_section": "Definition",
+          "quote": "A **deterministic data-only estimator** is a function $\\widehat q:Y\\to Q$. It is exact on $U$ if $\\widehat q(F(x))=q(x)$ for every $x\\in U$.",
+          "uses": ["1.1", "3.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "**(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.",
+          "uses": ["1.2", "3.1"]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "takes only nonnegative values.",
+          "uses": ["2.1", "3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "single-output-at-the-common-datum",
+          "claim": "A fixed estimator assigns the same target class to the one observed datum used for both truths.",
+          "step": "1.1",
+          "inputs": ["F2"]
+        },
+        {
+          "id": "target-metric-triangle",
+          "claim": "The distance between the two target classes is at most the sum of the two losses at the estimator output.",
+          "step": "1.2",
+          "inputs": ["F1", "F3"]
+        },
+        {
+          "id": "half-separation-bound",
+          "claim": "The maximum of the two losses is at least half the target-class separation.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "F4"]
+        },
+        {
+          "id": "exact-nonidentifiability-consequence",
+          "claim": "Equal exact data with distinct target classes force a strictly positive worst-case loss.",
+          "step": "3.1",
+          "inputs": ["F2", "F3", "F4", "step 1.1", "step 2.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires two truths in the nonempty admissible class; an empty class supplies no such pair."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 also gives the trivial zero lower bound when the two target classes coincide."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is valid when the target separation is exactly one and yields a lower bound of one half."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits either error to equal the maximum; no strict triangle inequality or uniqueness of the estimator output is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the zero-noise endpoint by taking y equal to the common exact datum and delta equal to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the given estimator and datum; no representative is selected and no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way quantitative lower bound and contains no forward direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way quantitative lower bound and contains no reverse direction of an equivalence."
+        }
+      ]
+    },
+    "ex-ip-01-scope-and-boundary-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "a vector space over $\\mathbb{R}$ under the pointwise operations",
+          "uses": ["1.2", "3.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "A function $T:V\\to W$ is **linear** when",
+          "uses": ["1.2", "1.3"]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$",
+          "uses": ["1.1", "2.1", "3.1"]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "The loss between two target classes is their metric distance $d_Q$.",
+          "uses": ["2.1", "2.2", "3.1"]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-identifiability-and-stability-modulus",
+          "source_section": "Definition",
+          "quote": "A **uniform stability modulus on $U$** is a nondecreasing function $\\omega:[0,\\infty)\\to[0,\\infty)$, with $\\omega(0)=0$ and $\\lim_{t\\downarrow0}\\omega(t)=0$, such that",
+          "uses": ["1.4", "3.1"]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+          "source_section": "Statement",
+          "quote": "$$\\max\\{d_Q(\\widehat q(y),q(x_0)),d_Q(\\widehat q(y),q(x_1))\\}\\ge\\frac12d_Q(q(x_0),q(x_1)).$$",
+          "uses": ["2.1", "2.2"]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space $$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$ with its canonical inner product and norm from [[def-square-summable-family-on-an-arbitrary-index-set]], is complete and therefore is a real Hilbert space.",
+          "uses": ["1.1", "1.3", "1.4", "2.2"]
+        },
+        {
+          "fact": "F8",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$",
+          "uses": ["1.3"]
+        },
+        {
+          "fact": "F9",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "the family that is $1$ at $i$ and $0$ elsewhere.",
+          "uses": ["1.4", "2.2"]
+        },
+        {
+          "fact": "F10",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$",
+          "uses": ["1.4"]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "if $a > 0$ then $a^n > 0",
+          "uses": ["1.3", "1.4"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "model-metrics",
+          "claim": "The finite coordinate spaces use the stated d1 metrics, while real ell2 carries its canonical norm metric.",
+          "step": "1.1",
+          "inputs": ["F3", "F7", "F10"]
+        },
+        {
+          "id": "projection-kernel",
+          "claim": "The coordinate projection is linear and its kernel contains a nonzero direction.",
+          "step": "1.2",
+          "inputs": ["F1", "F2"]
+        },
+        {
+          "id": "finite-ambiguity-bound",
+          "claim": "The two finite truths have identical data and unit target separation, so the theorem gives loss at least one half.",
+          "step": "2.1",
+          "inputs": ["F3", "F4", "F6", "step 1.2"]
+        },
+        {
+          "id": "diagonal-well-definedness",
+          "claim": "The geometric diagonal map sends square-summable sequences to square-summable sequences and is linear.",
+          "step": "1.3",
+          "inputs": ["F2", "F7", "F8", "F12"]
+        },
+        {
+          "id": "diagonal-injectivity-and-instability",
+          "claim": "Positive diagonal coefficients give injectivity while unit vectors exhibit failure of every uniform stability modulus.",
+          "step": "1.4",
+          "inputs": ["F5", "F7", "F9", "F11", "F12"]
+        },
+        {
+          "id": "diagonal-noisy-recovery-bound",
+          "claim": "The zero datum lies in the required noise balls around zero and a unit coordinate truth, giving the half-unit loss lower bound.",
+          "step": "2.2",
+          "inputs": ["F4", "F6", "F7", "F9", "step 1.4"]
+        },
+        {
+          "id": "constrained-stable-inverse",
+          "claim": "The restricted projection is an isometry and has the identity modulus.",
+          "step": "3.1",
+          "inputs": ["F1", "F3", "F4", "F5", "step 1.2"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 records the metric models; the sequence space and constrained class each contain zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the exact-data radius delta=0 at a pair with equal data and positive separation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.4 checks the n=0 coefficient, which is exactly one, while the geometric decay concerns n tending to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the degenerate constrained truth class that removes the displayed kernel direction and leaves an isometric inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 check respectively zero noise and the positive radii (1/2)^n for every coordinate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.2 construct each truth, coordinate vector, and datum explicitly; the finite-supremum argument uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves specific implications and bounds; it asserts no if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves specific implications and bounds; it asserts no if-and-only-if characterization."
+        }
+      ]
+    }
+  }
+}

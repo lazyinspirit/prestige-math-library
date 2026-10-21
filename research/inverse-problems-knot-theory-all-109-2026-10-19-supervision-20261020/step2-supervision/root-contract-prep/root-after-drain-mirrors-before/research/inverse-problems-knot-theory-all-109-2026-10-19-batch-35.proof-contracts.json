@@ -1,0 +1,486 @@
+{
+  "version": 1,
+  "scope": [
+    "prop-ip-constraints-can-remove-kernel-ambiguity",
+    "lem-ip-stiefel-gradient-finite-budget-return-and-feasibility",
+    "ex-ip-constraint-eliminates-a-kernel-direction",
+    "ex-ip-halfspace-constraint-leaves-continuous-kernel-ambiguity",
+    "ex-ip-pde-inadmissible-state-rejected-before-solve"
+  ],
+  "contracts": {
+    "prop-ip-constraints-can-remove-kernel-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-admissible-constraint-class",
+          "source_section": "Definition",
+          "quote": "An **admissible constraint class** is a nonempty subset $C\\subseteq U$; its constrained forward map is the restriction $A|_C:C\\to Y$. The class $C$ is **identifiable for $A$** if $A|_C$ is injective, meaning $Ax=Ax'$ for $x,x'\\in C$ implies $x=x'$. Define the difference set and kernel by $$C-C:=\\{x-x':x,x'\\in C\\},\\qquad \\ker A:=\\{x\\in X:Ax=0_Y\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "A function $T:V\\to W$ is **linear** when $$T(au+bv)=aT(u)+bT(v)$$ for all $a,b\\in F$ and $u,v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively $$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "kernel-difference-membership-implies-zero",
+          "claim": "A difference that lies in the kernel identifies its two endpoints; injectivity forces the difference to be zero, and nonemptiness supplies zero in the intersection.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "zero-difference-condition-implies-injectivity",
+          "claim": "Equal forward data make the difference of two constrained truths lie in both the difference set and the kernel, so the assumed trivial intersection forces equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If C were empty, A restricted to C would be vacuously injective while C-C and its kernel intersection would be empty; the nonempty hypothesis is essential. See step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a singleton C, C-C={0}; the intersection is {0} and the restricted map is injective. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proposition has no scalar threshold or unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For A=0, ker A=X and the condition reduces to C-C={0}, equivalent to C being a singleton and hence to injectivity of the constant restriction. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or boundary parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects one element from the assumed nonempty C only to witness 0 in C-C; no choice axiom or family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves injectivity implies (C-C)∩ker A={0}."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves (C-C)∩ker A={0} implies injectivity."
+        }
+      ]
+    },
+    "lem-ip-stiefel-gradient-finite-budget-return-and-feasibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ip-stiefel-constrained-regularized-gradient",
+          "source_section": "Definition",
+          "quote": "Set the current frame to $X_0$ and the schedule index to $k=0$. If $r(X)\\le\\tau$, return $(X,r(X),\\texttt{target-met})$. 2. While $k<K$, compute $G(X)$ and the Stiefel gradient $g:=G(X)-X\\operatorname{sym}(X^{\\mathsf T}G(X))$. If $g=0$, return $(X,r(X),\\texttt{stationary})$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-ip-stiefel-constrained-regularized-gradient",
+          "source_section": "Definition",
+          "quote": "Evaluate $\\Phi(X_{\\rm trial})$ and $r(X_{\\rm trial})$. If $\\Phi(X_{\\rm trial})>\\Phi(X)$, return $(X,r(X),\\texttt{objective-rejected})$. Otherwise accept $X_{\\rm trial}$ as the current frame. If its residual is at most $\\tau$, return $(X,r(X),\\texttt{target-met})$; otherwise increment $k$ by one and repeat the loop. 5. When $k=K$, return $(X,r(X),\\texttt{budget-exhausted})$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stiefel-grassmann-tangent-projections",
+          "source_section": "Statement",
+          "quote": "For $X\\in\\operatorname{St}(n,r)$, the tangent space and its Frobenius orthogonal projection are $$T_X\\operatorname{St}(n,r)=\\{Z:X^{\\mathsf T}Z+Z^{\\mathsf T}X=0\\},\\qquad \\Pi_X^{\\rm St}(G)=G-X\\operatorname{sym}(X^{\\mathsf T}G).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stiefel-retractions-are-first-order",
+          "source_section": "Statement",
+          "quote": "On the full-column-rank domains of [[def-stiefel-qr-polar-retractions]], the positive-diagonal QR and polar maps are smooth, take values in $\\operatorname{St}(n,r)$, fix $\\eta=0$, and have differential $D R_X(0)[\\eta]=\\eta$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "projected-gradient-produces-tangent-step",
+          "claim": "The symmetric-part subtraction makes the Stiefel gradient tangent, and positive scalar multiplication preserves tangency.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "polar-updates-preserve-stiefel-feasibility",
+          "claim": "Each trial from a feasible frame is polar-retracted to another feasible frame, so accepted iterates remain feasible by finite induction.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "finite-budget-status-and-objective-control",
+          "claim": "The bounded index loop returns within K trials; every successful status and every accepted objective update match the explicit branch checks.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure requires an initial frame X0 in St(n,p), so an empty feasible set is excluded by its input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the initial residual is zero and tau=0, the first residual check returns target-met without a trial. This is the zero-residual branch in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For p=1 the Stiefel set is the unit sphere; the tangent projection and polar retraction formulas remain defined on its tangent inputs. The Statement permits p=1 and uses the same tangent formula in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero projected gradient returns stationary when the residual test has failed; the procedure makes no minimum claim. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At K=0, the initial residual is tested and the procedure otherwise returns budget-exhausted; every scheduled alpha is strictly positive. See step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The procedure uses only its supplied initial frame and finite schedule and makes no selection from an arbitrary family. The finite procedure in the Statement makes no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a finite-procedure property, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a finite-procedure property, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-constraint-eliminates-a-kernel-direction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-admissible-constraint-class",
+          "source_section": "Definition",
+          "quote": "An **admissible constraint class** is a nonempty subset $C\\subseteq U$; its constrained forward map is the restriction $A|_C:C\\to Y$. The class $C$ is **identifiable for $A$** if $A|_C$ is injective, meaning $Ax=Ax'$ for $x,x'\\in C$ implies $x=x'$. Define the difference set and kernel by $$C-C:=\\{x-x':x,x'\\in C\\},\\qquad \\ker A:=\\{x\\in X:Ax=0_Y\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-ip-constraints-can-remove-kernel-ambiguity",
+          "source_section": "Statement",
+          "quote": "The restriction $A|_C:C\\to Y$ is injective if and only if $$ (C-C)\\cap\\ker A=\\{0\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "axis-difference-and-kernel-intersection",
+          "claim": "The kernel is the vertical axis, the constrained difference set is the horizontal axis, and their intersection is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "unique-admissible-preimage-on-axis",
+          "claim": "The difference-set criterion gives injectivity, and the explicit point (y,0) supplies the unique admissible preimage of each datum y.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "C0 contains (0,0), so the constrained class is nonempty as required. See step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The difference-set/kernel intersection is exactly {(0,0)} by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no scalar threshold parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The ambient operator has a nontrivial vertical kernel, while the line constraint removes every nonzero kernel difference. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval boundary parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For each datum y the preimage (y,0) is explicitly constructed; no choice principle is used. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example uses the criterion to infer injectivity, not the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the zero-intersection condition from step 1.1 to obtain injectivity."
+        }
+      ]
+    },
+    "ex-ip-halfspace-constraint-leaves-continuous-kernel-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-admissible-constraint-class",
+          "source_section": "Definition",
+          "quote": "An **admissible constraint class** is a nonempty subset $C\\subseteq U$; its constrained forward map is the restriction $A|_C:C\\to Y$. The class $C$ is **identifiable for $A$** if $A|_C$ is injective, meaning $Ax=Ax'$ for $x,x'\\in C$ implies $x=x'$. Define the difference set and kernel by $$C-C:=\\{x-x':x,x'\\in C\\},\\qquad \\ker A:=\\{x\\in X:Ax=0_Y\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-ip-constraints-can-remove-kernel-ambiguity",
+          "source_section": "Statement",
+          "quote": "The restriction $A|_C:C\\to Y$ is injective if and only if $$ (C-C)\\cap\\ker A=\\{0\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "halfspace-difference-set-and-kernel",
+          "claim": "Every vector is a difference of two half-space points, so the difference set is R2 and its intersection with the vertical kernel is nontrivial.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "fiber-is-a-continuous-half-line",
+          "claim": "The nonzero intersection contradicts injectivity by the forward implication, and direct solution of A(s,t)=y gives the full half-line fiber.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The half-space contains (0,0), so it is nonempty. See step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The intersection contains (0,1), so the identifiability condition fails. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no scalar threshold parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For each datum y the fiber includes every t>=0, including distinct values 0 and 1. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundary value t=0 is included in C+ and in every fiber; positive t values give the continuing ambiguity. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two-case construction in step 1.1 exhibits witnesses for every (a,b), and the fiber parameter t is explicit; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the contrapositive of injectivity implying a trivial intersection."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example has a nontrivial intersection and therefore does not test the reverse implication."
+        }
+      ]
+    },
+    "ex-ip-pde-inadmissible-state-rejected-before-solve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-admissible-constraint-class",
+          "source_section": "Definition",
+          "quote": "An **admissible constraint class** is a nonempty subset $C\\subseteq U$; its constrained forward map is the restriction $A|_C:C\\to Y$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "A function $T:V\\to W$ is **linear** when $$T(au+bv)=aT(u)+bT(v)$$ for all $a,b\\in F$ and $u,v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-node-dirichlet-stencil-and-linear-map",
+          "claim": "The stated centered stencil and zero boundary values give the displayed 2-by-2 matrix, which acts linearly by matrix multiplication.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "negative-node-rejected-before-system-solve",
+          "claim": "The class contains zero, but the candidate's first coordinate violates its nonnegativity constraint, so the stated validator rejects before solving.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The physical class C contains (0,0). See step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The candidate has first coordinate exactly -1, which is strictly below the admissible lower bound 0. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no scalar threshold parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No solvability or invertibility assertion about A_h is used; rejection depends only on the input constraint. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The PDE boundary values u0=u3=0 are substituted into the two interior stencils; only the two interior coordinates are tested for nonnegativity. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The admissible witness (0,0) and rejected state (-1,1) are explicit; no choice principle is used. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a pre-solve constraint check, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a pre-solve constraint check, not an equivalence."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1391 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-24",
+  "note": "Contracts are generated from the current item statements, labeled facts, verification/proof steps, exact supplier sections, boundary cases, and applicable finite checks. They are author evidence only; no independent review, acceptance, or publication is asserted.",
+  "scope": [
+    "lem-ip-gronwall-with-integrable-coefficient",
+    "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+    "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+    "alg-ip-conditional-flow-matching",
+    "op-ip-function-space-flow-matching-error-theory",
+    "ex-ip-cfm-low-imh-acceptance-with-accurate-means",
+    "ex-ip-likelihood-free-conditional-flow-matching"
+  ],
+  "contracts": {
+    "lem-ip-gronwall-with-integrable-coefficient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-l-one-of-a-measure",
+          "source_section": "Definition",
+          "quote": "For a measure $\\mu$, write\n$$L^1(\\mu):=\\{f:X\\to\\mathbb C:\\ f \\text{ is integrable}\\}.$$\nHere **integrable** is the notion introduced in\n[[def-integrable-real-and-complex-functions-and-their-integrals]].\n\nOn this page $L^1(\\mu)$ is the class of integrable representatives. The later\nBanach-space page will pass to almost-everywhere equivalence classes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "For $f\\in L^1[a,b]$, the function $I_f(x)=\\int_a^x f$ is absolutely continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F:[a,b]\\to\\mathbb R$, the following are equivalent:\n\n1. $F$ is absolutely continuous.\n2. $F'$ exists almost everywhere, $F'\\in L^1[a,b]$, and\n$$F(x)-F(a)=\\int_a^xF'(t)\\,dt\\quad\\text{for every }x\\in[a,b].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "If $F\\in AC[a,b]$ and $h$ is Lipschitz on $F([a,b])$, then $h\\circ F\\in AC[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "If $F,G\\in AC[a,b]$, then $FG\\in AC[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)).\n\nLet $a<b$ and let $f\\in L^1([a,b])$. Define\n$$F(x):=\\int_a^x f(t)\\,dt\\qquad(a\\le x\\le b).$$\nThen $F$ is differentiable for almost every $x\\in(a,b)$ and\n$$F'(x)=f(x)$$\nat every such point.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $a=b$, both hypotheses reduce to $u(a)\\le A$, which is the claimed bound. Hence assume $a<b$ and first consider the forward inequality. Define $C(t)=\\int_a^t\\ell(s)\\,ds$ and $V(t)=A+\\int_a^t\\ell(s)u(s)\\,ds$. Continuity of $u$ on the compact interval makes it bounded, so $\\ell u\\in L^1$. By [F2], both $C$ and $V$ are absolutely continuous, and the hypothesis says $0\\le u(t)\\le V(t)$. The range of $C$ is contained in the compact interval $[0,C(b)]$; [F6] makes $r\\mapsto e^{-r}$ Lipschitz there. Thus $e^{-C}$ is absolutely continuous by [F4], and $W(t):=e^{-C(t)}V(t)$ is absolutely continuous by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\ell,\\ell u\\in L^1[a,b]$, [F9] gives $C'=\\ell$ and $V'=\\ell u$ almost everywhere. By [F3], the absolutely continuous function $W$ has an integrable derivative and is the integral of that derivative after its initial value. Intersecting these full-measure sets, at every remaining point [F7] gives $$W'=e^{-C}(V'-C'V)=e^{-C}\\ell(u-V)\\le0,$$ since $u\\le V$ and $\\ell\\ge0$. Therefore [F3] yields $W(t)-W(a)=\\int_a^tW'(s)\\,ds\\le0$. As $W(a)=A$ and $u(t)\\le V(t)$, we obtain $u(t)\\le V(t)\\le A e^{C(t)}$, the claimed forward estimate.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 1.1, assume $a<b$. Set $\\widetilde u(r)=u(a+b-r)$ and $\\widetilde\\ell(r)=\\ell(a+b-r)$. By [F8], reflection preserves measurability and integrability and gives $\\int_a^r\\widetilde\\ell(q)\\widetilde u(q)\\,dq=\\int_{a+b-r}^b\\ell(s)u(s)\\,ds$. Thus $\\widetilde u(r)\\le A+\\int_a^r\\widetilde\\ell(q)\\widetilde u(q)\\,dq$. The forward result in steps 1.1–2.1 applies to these continuous and integrable functions. Substituting $r=a+b-t$ into its bound gives $u(t)\\le A\\exp(\\int_t^b\\ell(s)\\,ds)$.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma concerns a real interval and scalar functions, not an empty state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 with A=0 gives u(t)=0 from 0≤u≤V and W≤0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no discrete count or one-dimensional index in this scalar integral inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles a=b directly; both integral terms vanish and the hypothesis is u(a)≤A."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 gives the inequality for every t∈[a,b], including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states Countable Choice and Dependent Choice, and step 2.1 uses their AC absolute-continuity FTC consequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way integral inequality estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way integral inequality estimate, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "A=0",
+          "calculation": "Set A=0 in the integrating-factor proof and use 0≤u≤V.",
+          "result": "The bound forces u(t)=0 on the interval."
+        },
+        {
+          "case": "ell=0",
+          "calculation": "Set ell(t)=0 in the displayed forward and backward inequalities.",
+          "result": "Both reduce to u(t)≤A."
+        }
+      ]
+    },
+    "lem-ip-lipschitz-ode-triangular-flow-and-c1-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ip-gronwall-with-integrable-coefficient",
+          "source_section": "Statement",
+          "quote": "Let $a\\le b$, let $A\\ge0$, let $u:[a,b]\\to[0,\\infty)$ be continuous, and let $\\ell:[a,b]\\to[0,\\infty)$ be Lebesgue measurable with $\\int_a^b\\ell(s)\\,ds<\\infty$. If\n$$u(t)\\le A+\\int_a^t\\ell(s)u(s)\\,ds\\qquad(a\\le t\\le b),$$\nthen\n$$u(t)\\le A\\exp\\!\\left(\\int_a^t\\ell(s)\\,ds\\right)\\qquad(a\\le t\\le b).$$\nIf instead $u(t)\\le A+\\int_t^b\\ell(s)u(s)\\,ds$ for every $t\\in[a,b]$, then\n$$u(t)\\le A\\exp\\!\\left(\\int_t^b\\ell(s)\\,ds\\right)\\qquad(a\\le t\\le b).$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-vector-valued-continuous-curve-space-is-complete",
+          "source_section": "Statement",
+          "quote": "Let $J$ be a nonempty compact interval and $n\\ge1$. Continuous $\\mathbb R^n$-valued curves on $J$ are complete in the supremum metric\n\n$$d_\\infty(x,y):=\\sup_{t\\in J}\\|x(t)-y(t)\\|_2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "For $f\\in L^1[a,b]$, the function $I_f(x)=\\int_a^x f$ is absolutely continuous.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space), let\n$(Y,d_Y)$ be any metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to Y$ be\ncontinuous (Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form). Then $f$ is uniformly continuous\n(Uniform continuity of a map of metric spaces: one $\\delta$ serving every point).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n(Every open cover of a compact metric space has a Lebesgue number: a $\\delta > 0$ such that every nonempty subset of diameter less than $\\delta$ lies inside a single member of the cover).",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c1-dependence-of-solutions-on-initial-data",
+          "source_section": "Statement",
+          "quote": "Let $F:D\\subseteq\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and\n$C^1$ in the state variable. Fix data $(t_0,x_0)\\in D$ and a compact time\ninterval $I=[t_0-h,t_0+h]$ on which the corresponding solutions through nearby\ninitial states all exist. Then the solution map\n\n$$\\Phi:I\\times U_0\\to\\mathbb R^n,\\qquad \\Phi(t,y)=x(t;y),$$\n\nis $C^1$ in the initial-state variable $y$ on some neighbourhood $U_0$ of\n$x_0$. For each $y\\in U_0$, the derivative matrix\n$D_y\\Phi(t,y)$ is the solution of the variational equation along $t\\mapsto x(t;y)$.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-determinant-differential-and-jacobis-formula",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix and let $H$ be a direction matrix. Then\n\n$$D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H).$$\n\nIf $A$ is invertible, then\n\n$$D\\det(A)[H]=\\det(A)\\operatorname{tr}(A^{-1}H).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-l-one-of-a-measure",
+          "source_section": "Definition",
+          "quote": "For a measure $\\mu$, write\n$$L^1(\\mu):=\\{f:X\\to\\mathbb C:\\ f \\text{ is integrable}\\}.$$\nHere **integrable** is the notion introduced in\n[[def-integrable-real-and-complex-functions-and-their-integrals]].\n\nOn this page $L^1(\\mu)$ is the class of integrable representatives. The later\nBanach-space page will pass to almost-everywhere equivalence classes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-continuous-map-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), let $f : X \\to Y$ be a function and let $x \\in X$.\nNeighbourhoods are as in [[def-neighbourhood-top]].\n\n$f$ is **continuous at $x$** if for every neighbourhood $V$ of $f(x)$ in $Y$ the\npreimage $f^{-1}[V]$ is a neighbourhood of $x$ in $X$.\n\n$f$ is **continuous** if it is continuous at every point of $X$.\n\n**The same condition with open sets only.** $f$ is continuous at $x$ if and only\nif for every open $V \\subseteq Y$ with $f(x) \\in V$ there is an open\n$U \\subseteq X$ with $x \\in U$ and $f[U] \\subseteq V$. Indeed, if $f$ is\ncontinuous at $x$ and $V$ is such an open set, then $V$ is a neighbourhood of\n$f(x)$, so $f^{-1}[V]$ is a neighbourhood of $x$ and contains an open $U \\ni x$,\nwhich satisfies $f[U] \\subseteq V$. Conversely, given the displayed condition and\na neighbourhood $V$ of $f(x)$, fix open $V_0$ with $f(x) \\in V_0 \\subseteq V$ and\nthen open $U \\ni x$ with $f[U] \\subseteq V_0$; then $x \\in U \\subseteq f^{-1}[V_0] \\subseteq f^{-1}[V]$,\nso $f^{-1}[V]$ is a neighbourhood of $x$. Both forms are used below and are the\nsame statement written twice.\n\n**Preimage, not image.** $f^{-1}[V] = \\{\\, x \\in X : f(x) \\in V \\,\\}$\nis the preimage in the sense of [[def-injection-surjection-bijection]] and is\ndefined for every function, invertible or not; no inverse function is being\nasserted to exist. Continuity is a condition on preimages throughout, and the\ncorresponding conditions on images define the *open* and *closed* maps of a later\nitem, which are different notions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a compact parameter set $K$. Let $C(t)=\\int_0^tL_K(s)ds$. By [F4] and [F12], $C$ is continuous and nondecreasing on $[0,T]$, and [F6] makes it uniformly continuous. Choose a finite partition $0=t_0<\\cdots<t_N=T$ with mesh small enough that $C(t_{i+1})-C(t_i)=\\int_{t_i}^{t_{i+1}}L_K(s)ds\\le1/2$ on each cell. On a cell $J=[t_i,t_{i+1}]$, with initial value $z_i$, consider the closed supremum-norm ball of radius $R=2(1+|z_i|+\\int_Ja_K)$ about the constant curve $z_i$. For $z$ in that ball define $\\mathcal Tz(t)=z_i+\\int_{t_i}^t b(s,z(s),y)\\,ds.$ The integrand is continuous by [F13], so $\\mathcal Tz$ is continuous.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F12",
+            "F13",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $q_J=\\int_JL_K\\le1/2$. The triangle inequality and spatial Lipschitz bound with $x'=0$ give $|b(s,z(s),y)|\\le a_K(s)+L_K(s)|z(s)|$ almost everywhere. Hence $\\|\\mathcal Tz-z_i\\|_\\infty\\le\\int_Ja_K+q_J(|z_i|+R)\\le R,$ so the ball maps into itself. For two curves, [F3] and the Lipschitz bound give $\\|\\mathcal Tz-\\mathcal Tw\\|_\\infty\\le q_J\\|z-w\\|_\\infty$. The ball is nonempty and complete by [F1], so [F2] gives a unique fixed point, which solves the integral equation and hence the ODE on $J$ by [F5]. Applying this construction on the finite partition and using uniqueness at each shared endpoint gives a unique solution on all of $[0,T]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For solutions $x(t),x'(t)$ with the same $y$ and initial values $x_0,x'_0$, subtract their integral equations and use [F3] to obtain $|x(t)-x'(t)|\\le|x_0-x'_0|+\\int_0^t L_K(s)|x(s)-x'(s)|\\,ds.$ The forward clause of the integrable-coefficient Grönwall lemma gives the factor $\\exp(\\int_0^tL_K)$, proving uniqueness and the forward Lipschitz bound. Applying the same existence and uniqueness construction to the reversed drift $\\bar b(s,z,y)=-b(T-s,z,y)$ gives a backward solution from any terminal value; uniqueness shows that its time-zero map is the inverse of $T_y$ and the same estimate gives the inverse Lipschitz bound.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "From the integral equation and [F3], $|x_y(t;x_0)|\\le |x_0|+\\int_0^T a_K+\\int_0^tL_K(s)|x_y(s;x_0)|ds$. The integrable Grönwall estimate therefore gives $|x_y(t;x_0)|\\le(|x_0|+\\int_0^Ta_K)\\exp(\\int_0^TL_K)$, uniformly in $t$ and for $x_0,y$ in compact sets. Thus all such trajectories lie in a common compact state ball. The drift is uniformly continuous on the product of this ball, $[0,T]$, and $K$ by [F6]. Choose a compact $K$ containing a convergent sequence $y_n$ and its limit. For $(x_n,y_n)\\to(x,y)$, subtract the integral equations along $x_{y_n}(\\cdot;x_n)$ and $x_y(\\cdot;x)$; the result is bounded by $|x_n-x|+T\\omega(|y_n-y|)+\\int_0^tL_K(s)|x_{y_n}(s;x_n)-x_y(s;x)|ds$, where $\\omega(r)\\to0$ is a modulus from [F6]. Grönwall proves uniform convergence of the paths. Repeating for the reversed drift proves continuity of the inverse map in initial value and parameter.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "In the C$^1$ clause, fix $y$ and an initial state $x_0$. Steps 2.1 and 4.1 give common existence and continuous dependence for nearby initial states on $[0,T]$. Their trajectories and the line segments joining corresponding states lie in a common compact state ball, so $[0,T]$ times that ball is a compact state tube in the field domain. On this tube $D_xb$ is bounded and uniformly continuous. The difference-quotient argument in [F7] therefore applies on $[0,T]$: the map $x_0\\mapsto x_y(t;x_0)$ is $C^1$ for every $t$, and its derivative is the solution of the variational equation. Apply the same argument to the reversed drift $\\bar b(s,x,y)=-b(T-s,x,y)$; its time-$T$ map is $T_y^{-1}$ by uniqueness in step 3.1. The two maps are consequently $C^1$ inverses, so $T_y$ is a $C^1$ diffeomorphism.",
+          "step": "4.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Write $B(t)=D_xb(t,x_y(t;x_0),y)$ and $A(t)=A_y(t,x_0)$. Step 4.2 applied on each restricted interval $[0,t]$ shows that the time-$t$ flow is a $C^1$ diffeomorphism, so $A(t)$ is invertible for every $t$ (and $A(0)=I_d$). The path $B$ is continuous. By [F5], $G(t):=\\int_0^t\\operatorname{tr}B(s)\\,ds$ is differentiable on $(0,T)$ with $G'(t)=\\operatorname{tr}B(t)$ and has the corresponding one-sided endpoint derivatives. For $0<t<T$, the total-derivative chain rule [F8] and the invertible-matrix formula in [F9], applied to the variational equation $A'=BA$, give $$\\frac{d}{dt}\\det A(t)=D\\det(A(t))[A'(t)]=\\det A(t)\\operatorname{tr}(A(t)^{-1}B(t)A(t))=\\det A(t)\\operatorname{tr}B(t),$$ using cyclicity of trace; continuity extends this identity to the endpoints. By the scalar product and chain rules in [F11], $e^{-G(t)}\\det A(t)$ has derivative zero on $(0,T)$, so the mean-value theorem makes it constant on $[0,T]$. Its value at $t=0$ is $1$; hence $\\det A(t)=\\exp(G(t))$, the asserted Liouville formula.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "step 4.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If $\\eta(dx)=q(x)dx$, then for every Borel $E\\subseteq\\mathbb R^d$, $T_y{}_{\\#}\\eta(E)=\\int_{T_y^{-1}(E)}q(x)dx.$ Apply [F10] to the diffeomorphism $T_y^{-1}$ and the nonnegative measurable integrand $x\\mapsto\\mathbf1_{T_y^{-1}(E)}(x)q(x)$. This rewrites the last integral as $\\int_Eq(T_y^{-1}(z))|\\det DT_y^{-1}(z)|dz$, which proves the stated density formula. The first part of the Statement used no C$^1$ assumption; therefore global Lipschitzness alone yields only the bi-Lipschitz flow conclusion.",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "step 4.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The state and parameter dimensions are explicitly positive and the time horizon T is positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 3.1 and 3.2 cover b≡0: the flow is the identity, L=0, and the determinant formula gives 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits d=m=1; all finite-dimensional flow and determinant formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A zero time horizon and zero state or parameter dimension are excluded by T>0 and d,m≥1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1 records A_y(0,x0)=I_d and the Liouville formula on the full closed interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 declares Countable Choice and Dependent Choice; step 3.1 uses their Grönwall consequence and step 6.1 uses Countable Choice for change of variables."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The flow and density conclusions are implications, not if-and-only-if claims."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The flow and density conclusions are implications, not if-and-only-if claims."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant drift",
+          "calculation": "Take b(t,x,y)=c, aK=|c|, LK=0.",
+          "result": "Ty(x)=x+Tc, its inverse is x−Tc, both Lipschitz factors are 1, and det D Ty=1."
+        },
+        {
+          "case": "one-dimensional C1 flow",
+          "calculation": "Set d=1 and B(t)=∂xb(t,xy(t),y) in the displayed variational equation.",
+          "result": "A(t)=exp(∫0t B(s)ds), agreeing with the stated scalar Liouville formula."
+        }
+      ]
+    },
+    "thm-ip-exact-triangular-transport-disintegrates-to-posterior": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-euclidean-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "For every natural $n\\ge1$, let $\\mathbb R^n$ be the set of functions\n$x:n\\to\\mathbb R$ with its finite-product topology and Borel sigma-algebra\n([[def-product-topology]], [[def-borel-sigma-algebra]]). Then\n$(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ is standard Borel.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in Measures on sigma-algebras and A measurable function between measurable spaces; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\nMeasurable rectangles in a product of measurable spaces.\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n(Measurable spaces and measurable sets). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "source_section": "Statement",
+          "quote": "Let $(S_i,\\Sigma_i)$, $1\\le i\\le n$, be finitely many measurable spaces, with\n$n\\ge1$, and equip $\\prod_{i=1}^nS_i$ with its finite product sigma-algebra.\nIf $f_i:(\\Omega,\\mathcal F)\\to(S_i,\\Sigma_i)$ are measurable, then the tuple\n$f=(f_1,\\ldots,f_n)$ is measurable. If all factors equal one measurable space\n$(S,\\Sigma)$, every coordinate permutation $\\tau_\\pi:S^n\\to S^n$ is\nmeasurable, where $(\\tau_\\pi z)_i=z_{\\pi(i)}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   The product measure of two sigma-finite measure spaces is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $T>0$, let $d,m\\ge1$, and let $b:[0,T]\\times\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d$ be jointly continuous on the product Euclidean domain. Suppose that for every compact $K\\subseteq\\mathbb R^m$ there are nonnegative Lebesgue-measurable $a_K,L_K\\in L^1([0,T])$ such that for almost every $t$, simultaneously for all $y\\in K$ and $x,x'\\in\\mathbb R^d$,\n$$|b(t,0,y)|\\le a_K(t),\\qquad |b(t,x,y)-b(t,x',y)|\\le L_K(t)|x-x'|.$$\nHere $L^1([0,T])$ means the functions have finite Lebesgue integral of their absolute values. Then for every $x_0\\in\\mathbb R^d$ and $y\\in\\mathbb R^m$ there is a unique continuously differentiable solution $x_y(\\cdot;x_0)$ of\n$$\\dot x(t)=b(t,x(t),y),\\qquad x(0)=x_0,$$\non all of $[0,T]$. Its terminal map $T_y(x_0):=x_y(T;x_0)$ is a bijection with jointly continuous forward and inverse maps in $(x_0,y)$, and for all $x_0,x_1$ and $y\\in K$,\n$$|T_y(x_0)-T_y(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|,\\qquad |T_y^{-1}(x_0)-T_y^{-1}(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|.$$\n\nIn the separate C$^1$ clause, suppose additionally that the state derivative $D_xb$ exists and is jointly continuous. Then for fixed $y$, $T_y$ is a bijection and both $T_y$ and its inverse are continuously differentiable. For a measurable map $S$ and a measure $\\mu$, define its image measure by $S_{\\#}\\mu(E):=\\mu(S^{-1}(E))$. The derivative $A_y(t,x_0):=D_{x_0}x_y(t;x_0)$ solves\n$$\\dot A_y(t,x_0)=D_xb(t,x_y(t;x_0),y)A_y(t,x_0),\\qquad A_y(0,x_0)=I_d,$$\nwith Liouville formula\n$$\\det A_y(t,x_0)=\\exp\\!\\left(\\int_0^t\\operatorname{tr}D_xb(s,x_y(s;x_0),y)\\,ds\\right).$$\nConsequently, if a probability measure $\\eta$ on $\\mathbb R^d$ has Lebesgue density $q$, meaning $\\eta(E)=\\int_Eq(x)\\,dx$ for Borel $E$, the image measure $T_y{}_{\\#}\\eta$ has density\n$$z\\longmapsto q(T_y^{-1}(z))\\,|\\det D T_y^{-1}(z)|.$$\nThe global Lipschitz clause alone gives a bi-Lipschitz flow and does not assert a Jacobian density formula.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], [F1], and [F2], the supplied $\\pi_y$ is a disintegration of $\\pi$ given its second coordinate. For Borel $A\\subseteq\\mathbb R^d$, define $\\kappa_y(A):=\\eta(\\{x:T_y(x)\\in A\\})=\\int_{\\mathbb R^d}\\mathbf1_A(T_y(x))\\,\\eta(dx)$. Since $T_y$ is Borel, each $\\kappa_y$ is the image probability measure $T_y{}_{\\#}\\eta$. For fixed $A$, [F4] makes $(y,x)\\mapsto\\mathbf1_A(T_y(x))$ product-measurable; applying [F5] to the constant probability kernel $y\\mapsto\\eta$ makes $y\\mapsto\\kappa_y(A)$ measurable. Thus [F3] shows that $\\kappa$ is a probability kernel.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix Borel $A\\subseteq\\mathbb R^d$ and $B\\subseteq\\mathbb R^m$. By [F6] and the definition of $\\kappa_y$, $\\int_B\\kappa_y(A)\\,\\pi_Y(dy)=(\\eta\\otimes\\pi_Y)(\\{(x,y):T_y(x)\\in A,\\ y\\in B\\})=(\\eta\\otimes\\pi_Y)(T^{-1}(A\\times B))$. The exact joint pushforward identity makes this $\\pi(A\\times B)$, and the disintegration identity in the Statement makes it $\\int_B\\pi_y(A)\\,\\pi_Y(dy)$. Hence $\\kappa$ also disintegrates $\\pi$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the simultaneous almost-everywhere uniqueness in [F2] to the disintegration kernels $\\kappa$ and $\\pi_y$. There is one Borel $\\pi_Y$-null set $N$ such that for every $y\\notin N$, $\\kappa_y=\\pi_y$ as measures on every Borel subset of $\\mathbb R^d$. Since $\\kappa_y=T_y{}_{\\#}\\eta$, this proves the asserted fiber identity.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For a terminal map satisfying the ODE flow hypotheses, [F7] gives joint continuity and bijectivity of every fiber, so the exact pushforward case is covered by steps 1.1–3.1. By [F8], when $\\pi$ is the proper Bayesian parameter/data joint law, the conditional kernel is a posterior version. No step uses the separate C$^1$ clause or its density formula.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d,m≥1 and probability measures on the resulting nonempty Euclidean spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For T(x,y)=(x,y) and π=η⊗πY, steps 1.1–3.1 give the conditional kernel πy=η for πY-almost every y."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits d=m=1; steps 1.1–3.1 use only finite-dimensional Borel products and remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identity fiber is a Borel bijection with exact product pushforward, so steps 1.1–3.1 apply without a density or C1 hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 states equality outside one common πY-null set and makes no assertion on exceptional fibers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC; step 1.1 uses disintegration existence and step 3.1 uses its simultaneous uniqueness conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient exact-pushforward condition and does not claim an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient exact-pushforward condition and does not claim a converse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "identity transport on a product law",
+          "calculation": "Set T(x,y)=(x,y), π=η⊗πY, and use πy(A)=η(A) as a disintegration version.",
+          "result": "The joint pushforward is exact and the theorem recovers πy=η for πY-almost every y."
+        },
+        {
+          "case": "marginal-null exceptional set",
+          "calculation": "Compare the two disintegrations κ and πy using the simultaneous uniqueness clause.",
+          "result": "One πY-null set contains every possible exceptional conditioning value; equality is only asserted off that set."
+        }
+      ]
+    },
+    "alg-ip-conditional-flow-matching": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "source_section": "Statement",
+          "quote": "Assume AC. Real $L^2(\\Omega,\\mathcal G,P|_{\\mathcal G})$ embeds isometrically as a closed subspace of real $L^2(\\Omega,\\mathcal F,P)$. For $X\\in L^2(P)$, $U=E[X\\mid\\mathcal G]$ is its orthogonal projection onto this subspace. It uniquely minimizes $E[(X-Z)^2]$ over $Z\\in L^2(\\mathcal G)$ as an almost-sure class.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-law-given-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ and $Y:(\\Omega,\\mathcal F,P)\\to(T,\\mathcal T)$ be measurable random elements. A **conditional law of X given Y** is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $\\omega\\mapsto K(Y(\\omega),\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$ in [[def-regular-conditional-distribution]]. Thus for every $A\\in\\mathcal S$ and $H\\in\\sigma(Y)$,\n$$\\int_H K(Y(\\omega),A)\\,dP=P(H\\cap\\{X\\in A\\}).$$\n\nComposition with Y makes each evaluation $\\sigma(Y)$-measurable, and every section remains a probability by [[def-measure-kernel-and-probability-kernel]]. The notation $P(X\\in A\\mid Y=y)=K(y,A)$ refers to a chosen kernel; it is not a ratio involving the possibly zero probability $P(Y=y)$.\n\nWrite $P_Y(B)=P(Y^{-1}(B))$ for the law in [[def-law-or-distribution-of-a-random-element]]. If a specified countable family $\\mathcal C\\subseteq\\mathcal S$ determines probability measures, two conditional laws K,L agree as measures outside a single $\\mathcal T$-measurable $P_Y$-null set. Indeed for each $A\\in\\mathcal C$ the measurable discrepancy $D_A=\\{y:K(y,A)\\ne L(y,A)\\}$ has null inverse image under Y by [[lem-conditional-expectation-is-unique-almost-surely]]. Hence $P_Y(D_A)=0$ by the law definition; the countable union $D$ is null by [[thm-finite-and-countable-subadditivity-of-measures]], and off D the determining property gives equality of measures. This uses a supplied determining family and makes no AC assertion about obtaining one.\n\nValues on a measurable $P_Y$-null subset may be replaced by a specified fixed probability on E without changing these identities. The inverse image of that subset is measurable null, and all event evaluations are bounded, so the modified event integrals agree. Empty-event evaluations remain zero and whole-target evaluations remain one. Existence on standard-Borel spaces is proved separately; the definition alone does not assert a conditional kernel exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of Expectation of a nonnegative or integrable random variable. Integrable representatives use The class $L^1(\\mu)$ of integrable functions; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "source_section": "Statement",
+          "quote": "Assume AC. Real $L^2(\\Omega,\\mathcal G,P|_{\\mathcal G})$ embeds isometrically as a closed subspace of real $L^2(\\Omega,\\mathcal F,P)$. For $X\\in L^2(P)$, $U=E[X\\mid\\mathcal G]$ is its orthogonal projection onto this subspace. It uniquely minimizes $E[(X-Z)^2]$ over $Z\\in L^2(\\mathcal G)$ as an almost-sure class.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let X,Y take values in standard-Borel E,T, and let K be a disintegration kernel giving the conditional law of X given Y. For measurable $f:E\\to[0,\\infty]$, put $h(y)=\\int_E f(x)K(y,dx)$. Then h is measurable and\n$$E[f(X)\\mid\\sigma(Y)]=h(Y)\\quad\\text{almost surely}.$$\n\nFor measurable real f with $E|f(X)|<\\infty$, define $D=\\{y:\\int|f(x)|K(y,dx)<\\infty\\}$ and use the signed integral for h on D, zero off D. Then $P_Y(D)=1$, h is real measurable, and the same identity holds.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-euclidean-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "For every natural $n\\ge1$, let $\\mathbb R^n$ be the set of functions\n$x:n\\to\\mathbb R$ with its finite-product topology and Borel sigma-algebra\n([[def-product-topology]], [[def-borel-sigma-algebra]]). Then\n$(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ is standard Borel.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   The product measure of two sigma-finite measure spaces is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $T>0$, let $d,m\\ge1$, and let $b:[0,T]\\times\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d$ be jointly continuous on the product Euclidean domain. Suppose that for every compact $K\\subseteq\\mathbb R^m$ there are nonnegative Lebesgue-measurable $a_K,L_K\\in L^1([0,T])$ such that for almost every $t$, simultaneously for all $y\\in K$ and $x,x'\\in\\mathbb R^d$,\n$$|b(t,0,y)|\\le a_K(t),\\qquad |b(t,x,y)-b(t,x',y)|\\le L_K(t)|x-x'|.$$\nHere $L^1([0,T])$ means the functions have finite Lebesgue integral of their absolute values. Then for every $x_0\\in\\mathbb R^d$ and $y\\in\\mathbb R^m$ there is a unique continuously differentiable solution $x_y(\\cdot;x_0)$ of\n$$\\dot x(t)=b(t,x(t),y),\\qquad x(0)=x_0,$$\non all of $[0,T]$. Its terminal map $T_y(x_0):=x_y(T;x_0)$ is a bijection with jointly continuous forward and inverse maps in $(x_0,y)$, and for all $x_0,x_1$ and $y\\in K$,\n$$|T_y(x_0)-T_y(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|,\\qquad |T_y^{-1}(x_0)-T_y^{-1}(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|.$$\n\nIn the separate C$^1$ clause, suppose additionally that the state derivative $D_xb$ exists and is jointly continuous. Then for fixed $y$, $T_y$ is a bijection and both $T_y$ and its inverse are continuously differentiable. For a measurable map $S$ and a measure $\\mu$, define its image measure by $S_{\\#}\\mu(E):=\\mu(S^{-1}(E))$. The derivative $A_y(t,x_0):=D_{x_0}x_y(t;x_0)$ solves\n$$\\dot A_y(t,x_0)=D_xb(t,x_y(t;x_0),y)A_y(t,x_0),\\qquad A_y(0,x_0)=I_d,$$\nwith Liouville formula\n$$\\det A_y(t,x_0)=\\exp\\!\\left(\\int_0^t\\operatorname{tr}D_xb(s,x_y(s;x_0),y)\\,ds\\right).$$\nConsequently, if a probability measure $\\eta$ on $\\mathbb R^d$ has Lebesgue density $q$, meaning $\\eta(E)=\\int_Eq(x)\\,dx$ for Borel $E$, the image measure $T_y{}_{\\#}\\eta$ has density\n$$z\\longmapsto q(T_y^{-1}(z))\\,|\\det D T_y^{-1}(z)|.$$\nThe global Lipschitz clause alone gives a bi-Lipschitz flow and does not assert a Jacobian density formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\pi$ be a probability measure on $\\mathbb R^d\\times\\mathbb R^m$, where $d,m\\ge1$, and let $\\pi_Y(B):=\\pi(\\mathbb R^d\\times B)$ be its second marginal. Let $\\eta$ be a probability measure on $\\mathbb R^d$, and let $y\\mapsto\\pi_y$ be a probability kernel satisfying\n$$\\pi(A\\times B)=\\int_B\\pi_y(A)\\,\\pi_Y(dy)$$\nfor all Borel $A\\subseteq\\mathbb R^d$ and $B\\subseteq\\mathbb R^m$. Suppose $T:\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d\\times\\mathbb R^m$ is Borel and triangular, $T(x,y)=(T_y(x),y)$, with each $T_y$ a Borel bijection, and define the image measure by $T_{\\#}\\mu(E):=\\mu(T^{-1}(E))$. If\n$$T_{\\#}(\\eta\\otimes\\pi_Y)=\\pi,$$\nthen $T_y{}_{\\#}\\eta=\\pi_y$ as probability measures for $\\pi_Y$-almost every $y$. By disintegration on standard Borel spaces, such a kernel $\\pi_y$ exists and is unique outside one $\\pi_Y$-null set. In a proper Bayesian model, when $\\pi$ is the joint parameter/data law, this conditional kernel is the posterior kernel; the conclusion says an exact triangular transport maps the reference law to the data-conditioned posterior for almost every datum.\n\nFor the triangular terminal flow in the preceding ODE lemma, joint continuity supplies the Borel map and each fiber is a bijection. The theorem requires only the exact joint pushforward identity; it does not require a density or a Jacobian formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-posterior-computation-error-budget",
+          "source_section": "Definition",
+          "quote": "Fix a measurable space $(E,\\mathcal E)$ and a bounded measurable functional\n$f:E\\to\\mathbb R$, with $\\|f\\|_\\infty:=\\sup_{x\\in E}|f(x)|<\\infty$. All\ntarget laws below are probability measures on this same space. If a model or\ndiscretization originally uses another state space, specify its measurable\nembedding into $E$ and compare its pushforward law; no identification of\ndifferent state spaces is implicit. A **posterior law** here is the probability\nlaw for the unknown at the specified computation stage, conditional on the same\nfixed observed data. For a probability law $\\mu$, write\n$\\mu(f):=\\int_E f\\,d\\mu$.\n\nName the successive posterior laws as follows: $\\mu_\\star$ is the intended\ntarget; $\\mu_{\\rm model}$ is the posterior under the selected statistical or\nphysical model; $\\mu_{\\rm solver}$ is the posterior after replacing the exact\nforward or PDE solution by the declared numerical solver output; and\n$\\mu_{\\rm disc}$ is the posterior after the declared finite-dimensional\ndiscretization. These labels refer to the exact adjacent laws recorded for the\ncomputation, even when two stages happen to agree.\n\nLet $K$ be the implemented probability kernel on $(E,\\mathcal E)$. An\n**invariant law** $\\pi_K$ for $K$ is a probability measure satisfying\n$$\\int_E K(x,A)\\,\\pi_K(dx)=\\pi_K(A)\\qquad(A\\in\\mathcal E).$$\nChoose and report which invariant law is used if $K$ has more than one. If no\ninvariant law has been established, the invariant-kernel and burn-in terms\nbelow are unavailable; they are not set to zero. Let $(X_n)_{n\\ge0}$ be a\ntime-homogeneous Markov chain with transition kernel $K$ relative to its\nnatural filtration, with initial probability law $\\lambda$. For burn-in length\n$b\\ge0$ and retained sample size $N\\ge1$, set\n$$\\bar f_{b,N}:=\\frac1N\\sum_{j=1}^N f(X_{b+j}),$$\nand let $\\mathbb E_\\lambda$ denote expectation under this initial law and the\nchain's transition randomness.\n\nWhen all stages are present, define the component errors\n$$\\begin{aligned}\\delta_{\\rm model}&:=|\\mu_\\star(f)-\\mu_{\\rm model}(f)|,\\\\ \\delta_{\\rm solver}&:=|\\mu_{\\rm model}(f)-\\mu_{\\rm solver}(f)|,\\\\ \\delta_{\\rm disc}&:=|\\mu_{\\rm solver}(f)-\\mu_{\\rm disc}(f)|,\\\\ \\delta_K&:=|\\mu_{\\rm disc}(f)-\\pi_K(f)|,\\\\ \\delta_{\\rm burn}&:=|\\pi_K(f)-\\mathbb E_\\lambda\\bar f_{b,N}|,\\\\ \\delta_{\\rm MC}&:=|\\mathbb E_\\lambda\\bar f_{b,N}-\\bar f_{b,N}|.\\end{aligned}$$\nThe last component is random and the earlier components are fixed for the\ndeclared data and computation. The **posterior computation error budget** is\n$$\\mathcal B_f:=\\delta_{\\rm model}+\\delta_{\\rm solver}+\\delta_{\\rm disc}+\\delta_K+\\delta_{\\rm burn}+\\delta_{\\rm MC}.$$\nIf a computation stops before one of these stages, report the shorter reference\nchain and its component terms. The term $\\delta_K$ measures the invariant-law\ndiscrepancy induced by the implemented transition rule; it is not a one-step\ndistance between kernels. A one-step kernel error cannot replace it without a\nseparate perturbation theorem with its own hypotheses.\n\nThe successive scalar references are arranged as this directed error chain;\neach arrow is labelled by the absolute difference of its endpoints.\n\n```tikzcd\n\\mu_\\star(f) \\arrow[r, \"\\delta_{\\rm model}\"] &\n\\mu_{\\rm model}(f) \\arrow[r, \"\\delta_{\\rm solver}\"] &\n\\mu_{\\rm solver}(f) \\arrow[r, \"\\delta_{\\rm disc}\"] &\n\\mu_{\\rm disc}(f) \\arrow[r, \"\\delta_K\"] &\n\\pi_K(f) \\arrow[r, \"\\delta_{\\rm burn}\"] &\n\\mathbb E_\\lambda\\bar f_{b,N} \\arrow[r, \"\\delta_{\\rm MC}\"] &\n\\bar f_{b,N}\n```\n\nThe budget is a bookkeeping bound only when its components are supplied with\nestimators or verified bounds; an unavailable component is reported as\nunquantified rather than silently set to zero. In particular, invariance alone\ndoes not provide a burn-in estimate, a mixing rate, or a Monte Carlo error\nestimate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sampled variables have joint law $\\operatorname{Unif}[0,1]\\otimes\\eta\\otimes\\pi$ by the algorithm's independent-draw specification and [F4]. Since $\\pi$ is the proper Bayesian prior-predictive joint law, [F1] identifies its selected conditional kernel as a posterior version. The moment assumption makes $V=X_1-X_0$ square-integrable, so [F2] identifies its unique population squared-loss regression class and [F3] represents that class measurably in the coordinates $(t,X_t,Y)$. Each empirical loss is a finite sum of finite residuals; for an integrable candidate loss, [F4] gives $\\mathbb E[\\widehat{\\mathcal L}_n(\\theta)]=\\mathcal L(\\theta)$. This establishes the regression target and population meaning of the empirical objective without claiming the finite optimizer attains the population minimum or that the stopping statistic bounds population error.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the fitted field passes the stated regularity check, [F5] supplies the exact mathematical ODE flow and terminal map. If that exact map also satisfies the distinct joint pushforward hypothesis in [F6], the exact transport theorem gives the posterior fiber law. The algorithm instead returns numerical endpoints only when the solver reports success, so its actual finite-budget output remains an approximation unless an error certificate establishes otherwise. By [F7], a missing training or optimizer term in the posterior ledger remains separately reported rather than inferred as zero.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The training sample n and integration count B are positive, so the empirical denominator is nonzero; if every solver call fails the successful-output list can be empty with explicit solver-failed status. [Owner-focused FIRST reviewed location: Complete algorithm Definition; Proof 1.1 and 2.1.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The training sample n and integration count B are positive, so the empirical denominator is nonzero; if every solver call fails the successful-output list can be empty with explicit solver-failed status.",
+            "item_sha256": "6744a82de69e65c953b3b913d3e13ab778456d5da74ce1bbfedb87aeb8f24123",
+            "row_sha256": "ce51782629a76ab4b099b3bae9d23179d075af78b2a875faaed0becd4ca23996",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 379
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 still defines the regression problem when X1−X0=0 almost surely; the zero conditional regressor is the population minimizer if it is in the class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=B=1; the empirical loss is then the single finite squared residual."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The unknown and observation dimensions satisfy d,m≥1; zero-dimensional spaces are not part of this algorithm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement defines Xt=(1−t)X0+tX1, giving X0 at t=0 and X1 at t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 assume AC for conditional expectation and the standard-Borel posterior kernel."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Algorithm defines a finite procedure and makes no if-and-only-if theorem claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Algorithm defines a finite procedure and makes no converse theorem claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "single training triple",
+          "calculation": "Set n=1 in the empirical squared loss.",
+          "result": "The objective is the single squared residual and its expectation equals the population risk for an integrable candidate."
+        },
+        {
+          "case": "path endpoints",
+          "calculation": "Evaluate Xt=(1−t)X0+tX1 at t=0 and t=1.",
+          "result": "The path starts at X0 and ends at X1 with constant conditional velocity X1−X0."
+        }
+      ]
+    },
+    "op-ip-function-space-flow-matching-error-theory": {
+      "open_problem_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The open formulation is uninterrupted and defines the Hilbert-space target, strongly convergent finite-rank embeddings, all error terms, the uniform observation set, and the desired dimension-independent inequality."
+        },
+        "status": {
+          "verdict": "pass",
+          "evidence": "Full current texts of finite-dimensional Bayesian CFM, generic Hilbert-space functional-flow, finite-dimensional conditional-Wasserstein, and inverse-problem CFM sources were inspected. The problem is narrowed to the combined function-space Bayesian-potential and uniform-conditional gap; this is a bounded source review, not an exhaustive absence claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Coverage records each source URL, exact locator, named result, item disposition, and the inspected scope boundary. Full-text retrieval was mechanically stamped after inspection."
+        }
+      },
+      "citations": [],
+      "derivations": []
+    },
+    "ex-ip-cfm-low-imh-acceptance-with-accurate-means": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-metropolis-hastings-density-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be standard Borel\n([[def-standard-borel-space]]) and let $\\lambda$ be a sigma-finite positive\nmeasure ([[def-finite-sigma-finite-and-semifinite-measures]]) on it. Let the\ntarget probability have a finite-valued nonnegative measurable density\n$p:\\mathsf X\\to[0,\\infty)$, and suppose the proposal kernel has a finite-valued\nnonnegative jointly measurable density $q:\\mathsf X\\times\\mathsf X\\to[0,\\infty)$,\nso $\\pi(A)=\\int_Ap\\,d\\lambda$ and\n$Q(x,A)=\\int_Aq(x,y)\\,d\\lambda(y)$ for every $x$ and $A$. Let\n$\\mu(dx,dy)=\\pi(dx)Q(x,dy)$ be the forward proposal flow and let\n$\\mu^{\\mathsf T}$ be its transpose. Put\n$$m(x,y)=p(x)q(x,y),\\qquad m^{\\mathsf T}(x,y)=p(y)q(y,x).$$\nThere is a jointly measurable version $\\alpha_{\\rm cd}$ of\n$d(\\mu\\wedge\\mu^{\\mathsf T})/d\\mu$ given by\n$$\\alpha_{\\rm cd}(x,y)=\\begin{cases}\\min\\left\\{1,\\dfrac{p(y)q(y,x)}{p(x)q(x,y)}\\right\\},&m(x,y)>0,\\\\1,&m(x,y)=0.\\end{cases}$$\nThe version chosen by [[alg-metropolis-hastings-kernel]] agrees with this\ncommon-density version $\\mu$-almost everywhere; values on a forward-flow null\nset do not alter the accepted flow.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metropolis-hastings-density-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be standard Borel\n([[def-standard-borel-space]]) and let $\\lambda$ be a sigma-finite positive\nmeasure ([[def-finite-sigma-finite-and-semifinite-measures]]) on it. Let the\ntarget probability have a finite-valued nonnegative measurable density\n$p:\\mathsf X\\to[0,\\infty)$, and suppose the proposal kernel has a finite-valued\nnonnegative jointly measurable density $q:\\mathsf X\\times\\mathsf X\\to[0,\\infty)$,\nso $\\pi(A)=\\int_Ap\\,d\\lambda$ and\n$Q(x,A)=\\int_Aq(x,y)\\,d\\lambda(y)$ for every $x$ and $A$. Let\n$\\mu(dx,dy)=\\pi(dx)Q(x,dy)$ be the forward proposal flow and let\n$\\mu^{\\mathsf T}$ be its transpose. Put\n$$m(x,y)=p(x)q(x,y),\\qquad m^{\\mathsf T}(x,y)=p(y)q(y,x).$$\nThere is a jointly measurable version $\\alpha_{\\rm cd}$ of\n$d(\\mu\\wedge\\mu^{\\mathsf T})/d\\mu$ given by\n$$\\alpha_{\\rm cd}(x,y)=\\begin{cases}\\min\\left\\{1,\\dfrac{p(y)q(y,x)}{p(x)q(x,y)}\\right\\},&m(x,y)>0,\\\\1,&m(x,y)=0.\\end{cases}$$\nThe version chosen by [[alg-metropolis-hastings-kernel]] agrees with this\ncommon-density version $\\mu$-almost everywhere; values on a forward-flow null\nset do not alter the accepted flow.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The source labels its proposal model as a conditional-flow-matching MLP. The four rates in [F1] are all below $12\\%$, while the fourth is $5.47\\%$ and the first is $0.66\\%$. Thus the table itself records low acceptance across all four truths for this baseline configuration; these are the reported finite-experiment rates, not an asymptotic bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], posterior means and 95\\% bands are nevertheless close to the DRAM reference in relative $L^2$. By [F3], the first observation lies far into the empirical prior-predictive tail, which accompanies the lowest rate. Under [A1], [F4] identifies the rates as those of the paper's density-based independent-MH correction. Hence this is a concrete reported case where close mean and band summaries coexist with low independent-MH acceptance; it does not prove that every low-acceptance flow has accurate summaries or that these summaries establish full-distribution accuracy.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reported experiment contains four ground truths and a positive observation count."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-noise, zero-acceptance, or zero-variance boundary experiment is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item reports four fixed truths, not a one-dimensional parameter boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item reports one fixed finite-dimensional experiment and no degenerate state-space limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item reports fixed empirical settings and no endpoint or limiting-parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, and A1 identifies the density-based independent-MH supplier that uses it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a reported empirical example, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a reported empirical example, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "reported Table 1 row",
+          "calculation": "Read the MLP, nhidden=800 row for Fig. 6.",
+          "result": "At m=256, γ²=10−5 and nKL=128, the four rates are 0.66%, 11.21%, 5.97%, 5.47%."
+        }
+      ]
+    },
+    "ex-ip-likelihood-free-conditional-flow-matching": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-metropolis-hastings-density-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be standard Borel\n([[def-standard-borel-space]]) and let $\\lambda$ be a sigma-finite positive\nmeasure ([[def-finite-sigma-finite-and-semifinite-measures]]) on it. Let the\ntarget probability have a finite-valued nonnegative measurable density\n$p:\\mathsf X\\to[0,\\infty)$, and suppose the proposal kernel has a finite-valued\nnonnegative jointly measurable density $q:\\mathsf X\\times\\mathsf X\\to[0,\\infty)$,\nso $\\pi(A)=\\int_Ap\\,d\\lambda$ and\n$Q(x,A)=\\int_Aq(x,y)\\,d\\lambda(y)$ for every $x$ and $A$. Let\n$\\mu(dx,dy)=\\pi(dx)Q(x,dy)$ be the forward proposal flow and let\n$\\mu^{\\mathsf T}$ be its transpose. Put\n$$m(x,y)=p(x)q(x,y),\\qquad m^{\\mathsf T}(x,y)=p(y)q(y,x).$$\nThere is a jointly measurable version $\\alpha_{\\rm cd}$ of\n$d(\\mu\\wedge\\mu^{\\mathsf T})/d\\mu$ given by\n$$\\alpha_{\\rm cd}(x,y)=\\begin{cases}\\min\\left\\{1,\\dfrac{p(y)q(y,x)}{p(x)q(x,y)}\\right\\},&m(x,y)>0,\\\\1,&m(x,y)=0.\\end{cases}$$\nThe version chosen by [[alg-metropolis-hastings-kernel]] agrees with this\ncommon-density version $\\mu$-almost everywhere; values on a forward-flow null\nset do not alter the accepted flow.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metropolis-hastings-density-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\mathsf X,\\mathcal X)$ be standard Borel\n([[def-standard-borel-space]]) and let $\\lambda$ be a sigma-finite positive\nmeasure ([[def-finite-sigma-finite-and-semifinite-measures]]) on it. Let the\ntarget probability have a finite-valued nonnegative measurable density\n$p:\\mathsf X\\to[0,\\infty)$, and suppose the proposal kernel has a finite-valued\nnonnegative jointly measurable density $q:\\mathsf X\\times\\mathsf X\\to[0,\\infty)$,\nso $\\pi(A)=\\int_Ap\\,d\\lambda$ and\n$Q(x,A)=\\int_Aq(x,y)\\,d\\lambda(y)$ for every $x$ and $A$. Let\n$\\mu(dx,dy)=\\pi(dx)Q(x,dy)$ be the forward proposal flow and let\n$\\mu^{\\mathsf T}$ be its transpose. Put\n$$m(x,y)=p(x)q(x,y),\\qquad m^{\\mathsf T}(x,y)=p(y)q(y,x).$$\nThere is a jointly measurable version $\\alpha_{\\rm cd}$ of\n$d(\\mu\\wedge\\mu^{\\mathsf T})/d\\mu$ given by\n$$\\alpha_{\\rm cd}(x,y)=\\begin{cases}\\min\\left\\{1,\\dfrac{p(y)q(y,x)}{p(x)q(x,y)}\\right\\},&m(x,y)>0,\\\\1,&m(x,y)=0.\\end{cases}$$\nThe version chosen by [[alg-metropolis-hastings-kernel]] agrees with this\ncommon-density version $\\mu$-almost everywhere; values on a forward-flow null\nset do not alter the accepted flow.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $T>0$, let $d,m\\ge1$, and let $b:[0,T]\\times\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d$ be jointly continuous on the product Euclidean domain. Suppose that for every compact $K\\subseteq\\mathbb R^m$ there are nonnegative Lebesgue-measurable $a_K,L_K\\in L^1([0,T])$ such that for almost every $t$, simultaneously for all $y\\in K$ and $x,x'\\in\\mathbb R^d$,\n$$|b(t,0,y)|\\le a_K(t),\\qquad |b(t,x,y)-b(t,x',y)|\\le L_K(t)|x-x'|.$$\nHere $L^1([0,T])$ means the functions have finite Lebesgue integral of their absolute values. Then for every $x_0\\in\\mathbb R^d$ and $y\\in\\mathbb R^m$ there is a unique continuously differentiable solution $x_y(\\cdot;x_0)$ of\n$$\\dot x(t)=b(t,x(t),y),\\qquad x(0)=x_0,$$\non all of $[0,T]$. Its terminal map $T_y(x_0):=x_y(T;x_0)$ is a bijection with jointly continuous forward and inverse maps in $(x_0,y)$, and for all $x_0,x_1$ and $y\\in K$,\n$$|T_y(x_0)-T_y(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|,\\qquad |T_y^{-1}(x_0)-T_y^{-1}(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|.$$\n\nIn the separate C$^1$ clause, suppose additionally that the state derivative $D_xb$ exists and is jointly continuous. Then for fixed $y$, $T_y$ is a bijection and both $T_y$ and its inverse are continuously differentiable. For a measurable map $S$ and a measure $\\mu$, define its image measure by $S_{\\#}\\mu(E):=\\mu(S^{-1}(E))$. The derivative $A_y(t,x_0):=D_{x_0}x_y(t;x_0)$ solves\n$$\\dot A_y(t,x_0)=D_xb(t,x_y(t;x_0),y)A_y(t,x_0),\\qquad A_y(0,x_0)=I_d,$$\nwith Liouville formula\n$$\\det A_y(t,x_0)=\\exp\\!\\left(\\int_0^t\\operatorname{tr}D_xb(s,x_y(s;x_0),y)\\,ds\\right).$$\nConsequently, if a probability measure $\\eta$ on $\\mathbb R^d$ has Lebesgue density $q$, meaning $\\eta(E)=\\int_Eq(x)\\,dx$ for Borel $E$, the image measure $T_y{}_{\\#}\\eta$ has density\n$$z\\longmapsto q(T_y^{-1}(z))\\,|\\det D T_y^{-1}(z)|.$$\nThe global Lipschitz clause alone gives a bi-Lipschitz flow and does not assert a Jacobian density formula.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\pi$ be a probability measure on $\\mathbb R^d\\times\\mathbb R^m$, where $d,m\\ge1$, and let $\\pi_Y(B):=\\pi(\\mathbb R^d\\times B)$ be its second marginal. Let $\\eta$ be a probability measure on $\\mathbb R^d$, and let $y\\mapsto\\pi_y$ be a probability kernel satisfying\n$$\\pi(A\\times B)=\\int_B\\pi_y(A)\\,\\pi_Y(dy)$$\nfor all Borel $A\\subseteq\\mathbb R^d$ and $B\\subseteq\\mathbb R^m$. Suppose $T:\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d\\times\\mathbb R^m$ is Borel and triangular, $T(x,y)=(T_y(x),y)$, with each $T_y$ a Borel bijection, and define the image measure by $T_{\\#}\\mu(E):=\\mu(T^{-1}(E))$. If\n$$T_{\\#}(\\eta\\otimes\\pi_Y)=\\pi,$$\nthen $T_y{}_{\\#}\\eta=\\pi_y$ as probability measures for $\\pi_Y$-almost every $y$. By disintegration on standard Borel spaces, such a kernel $\\pi_y$ exists and is unique outside one $\\pi_Y$-null set. In a proper Bayesian model, when $\\pi$ is the joint parameter/data law, this conditional kernel is the posterior kernel; the conclusion says an exact triangular transport maps the reference law to the data-conditioned posterior for almost every datum.\n\nFor the triangular terminal flow in the preceding ODE lemma, joint continuity supplies the Borel map and each fiber is a bijection. The theorem requires only the exact joint pushforward identity; it does not require a density or a Jacobian formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-euclidean-space-is-standard-borel",
+          "source_section": "Statement",
+          "quote": "For every natural $n\\ge1$, let $\\mathbb R^n$ be the set of functions\n$x:n\\to\\mathbb R$ with its finite-product topology and Borel sigma-algebra\n([[def-product-topology]], [[def-borel-sigma-algebra]]). Then\n$(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ is standard Borel.",
+          "uses": []
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every training quantity in [F1] is formed from $X_0$, $(X_1,Y)$, independent time, the interpolant and its endpoint difference. These are all available under the specified sampling interface, so no likelihood value is needed to form a CFM training example.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The density-based MH acceptance ratio in [F2] contains the unnormalized posterior target. By [F3] its likelihood contribution is the ratio of likelihoods, which sampling access alone does not supply in general; [F4]'s proposal density does not supply it either. This is an interface limitation rather than an impossibility in every specified model: if the likelihood is independent of the parameter, its ratio is one wherever the forward flow is positive, and the prior and proposal ratios suffice. Thus additional knowledge of an evaluable ratio can permit this correction even without separate likelihood evaluations.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[F5] is a separate route: if the exact joint transport identity is established, the disintegration theorem gives the posterior fiber law on its full-measure set; a fixed query datum must lie in that set unless equality is separately established there. The present example makes no claim that finite training establishes the identity, and supplying a likelihood estimator would change the MH interface.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a proper prior-predictive joint sampler and a positive-dimensional parameter space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement restricts its ratio claim to positive forward proposal-flow pairs; the published MH supplier specifies a null-flow convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-sample or one-dimensional boundary calculation is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes a finite-dimensional dominated model with a C1 flow proposal and makes no degenerate-space claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example gives no limiting time, prior, or likelihood parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 assume AC for the conditional-posterior and density-based MH interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states an input-availability implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states an input-availability implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "density-interface check",
+          "calculation": "In the independent proposal ratio, hold p0 and qy available while removing access to L(x;y).",
+          "result": "The proposal factor is computable, but the unnormalized target factor p0(x)L(x;y) is not."
+        }
+      ]
+    }
+  }
+}

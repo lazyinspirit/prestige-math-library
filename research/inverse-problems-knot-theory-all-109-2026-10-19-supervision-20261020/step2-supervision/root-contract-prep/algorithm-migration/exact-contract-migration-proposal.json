@@ -1,0 +1,623 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "kind": "read-only two-algorithm root contract migration proposal",
+  "prepared_by": "/root/instanton_original_review",
+  "root_adoption_required": true,
+  "all_current_sources_unchanged": true,
+  "canonical_writes": false,
+  "changes": [
+    {
+      "id": "alg-ip-basis-pursuit-denoising",
+      "batch": 34,
+      "canonical_contract": "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-34.proof-contracts.json",
+      "before": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "lem-ip-bpdn-objectives-proper-closed-convex",
+            "source_section": "Statement",
+            "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $y\\in\\mathbb R^m$, and let $\\epsilon\\ge0$. Define $f:\\mathbb R^n\\to\\mathbb R$ by $f(x)=\\|x\\|_1$, and define $g:\\mathbb R^m\\to(-\\infty,+\\infty]$ by $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$ and $g(u)=+\\infty$ otherwise. Then $f$ and $g$ are proper (finite somewhere), closed (their epigraphs are closed), and convex (they satisfy the extended-real convex-combination inequality) on their respective finite-dimensional Euclidean spaces.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "def-proper-closed-convex-function-on-rn",
+            "source_section": "Definition",
+            "quote": "Let $n\\in\\mathbb N$ and let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$. Its effective domain is $\\operatorname{dom}g=\\{x:g(x)<+\\infty\\}$. The function is **proper** if $\\operatorname{dom}g\\ne\\varnothing$; it is **convex** if\n$$g((1-\\theta)x+\\theta y)\\le(1-\\theta)g(x)+\\theta g(y)\\qquad(x,y\\in\\mathbb R^n,\\ 0\\le\\theta\\le1),$$\nusing the endpoint convention $0\\cdot(+\\infty)=0$ of [[def-convex-and-strictly-convex-functionals-on-a-banach-space]]. It is **closed** (equivalently, lower semicontinuous in the extended-real convex-analysis convention used here) if its epigraph\n$$\\operatorname{epi}g=\\{(x,s)\\in\\mathbb R^n\\times\\mathbb R:g(x)\\le s\\}$$\nis closed in $\\mathbb R^{n+1}$. The proximal-gradient items on this page assume $g$ is proper, closed and convex.\n\nThis page's closed-epigraph convention is explicit: it does not silently use an equivalence between sequential lower semicontinuity and topological closedness that would require an additional choice principle in the library's generic sequential convention. In finite dimensions this is the standard closed proper convex input to proximal algorithms.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+            "source_section": "Definition",
+            "quote": "Let $f:\\mathbb R^n\\to(-\\infty,+\\infty]$. Its **Fenchel conjugate** is the\nextended-real function on the same Euclidean space\n$$f^*(s):=\\sup_{x\\in\\mathbb R^n}\\{\\langle s,x\\rangle-f(x)\\}.$$\nWhen $f(x)=+\\infty$, the corresponding term is $-\\infty$ and does not increase\nthe supremum. Its effective domain is\n$\\operatorname{dom}f^*=\\{s:f^*(s)<+\\infty\\}$.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "lem-fenchel-conjugate-is-proper-closed-convex",
+            "source_section": "Statement",
+            "quote": "If $f:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper, closed and convex, then its\nconjugate $f^*$ from [[def-fenchel-conjugate-on-finite-dimensional-euclidean-space]]\nis also proper, closed and convex. The affine-minorant result cited below is\nused only to prove properness; closedness and convexity follow directly from\nthe supremum formula.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-induced-matrix-p-norm",
+            "source_section": "Definition",
+            "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+            "uses": [
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "alg-pdhg-primal-dual-hybrid-gradient",
+            "source_section": "Definition",
+            "quote": "Let $X=\\mathbb R^n$, $Y=\\mathbb R^m$, let $f:X\\to(-\\infty,+\\infty]$ and\n$g:Y\\to(-\\infty,+\\infty]$ be proper closed convex, and let $K:X\\to Y$ be\nlinear. Its unique adjoint $K^*:Y\\to X$ exists by\n[[thm-adjoint-exists-and-is-unique-in-finite-dimension]], including zero-dimensional\nspaces. Identify $K$ with its matrix in the standard Euclidean bases when using\nthe induced matrix norm below. The primal problem is $\\min_x f(x)+g(Kx)$, with saddle function\n$$\\Phi(x,y)=f(x)+\\langle Kx,y\\rangle-g^*(y),$$\nwhere $g^*$ is defined by [[def-fenchel-conjugate-on-finite-dimensional-euclidean-space]].\nThe saddle function $\\Phi$ is evaluated on\n$\\operatorname{dom}f\\times\\operatorname{dom}g^*$, where both function values\nare finite; no undefined extended-real subtraction is used outside this domain.\nAssume $\\tau,\\sigma>0$ and\n$\\tau\\sigma\\|K\\|_2^2<1$, where $\\|K\\|_2$ is the induced Euclidean operator\nnorm of [[def-induced-matrix-p-norm]]. Starting from $x^0,y^0$ and\n$\\bar x^0=x^0$, the exact recurrence is\n$$y^{k+1}=\\operatorname{prox}_{\\sigma g^*}(y^k+\\sigma K\\bar x^k),\\qquad x^{k+1}=\\operatorname{prox}_{\\tau f}(x^k-\\tau K^*y^{k+1}),\\qquad \\bar x^{k+1}=2x^{k+1}-x^k.$$\nIn positive-dimensional spaces the proximal maps are everywhere single-valued\nby [[thm-proximal-operator-existence-resolvent-firm-nonexpansive]]; in a\nzero-dimensional space its sole input and output are the zero vector, so that\nproximal call is single-valued directly. The proper closed convexity of $g^*$\nfollows from [[lem-fenchel-conjugate-is-proper-closed-convex]]. These are\nmathematical existence statements, not finite evaluators.\n\nThe finite procedure also takes positive integer caps $C_y,C_x$ and supplied\ndeterministic solver programs $S_y,S_x$ and Boolean certificate-checker\nprograms $V_y,V_x$, with their complete instructions and data representations.\nEach program uses discrete steps that terminate. On input $(h,t,v)$, a\nsolver may halt with **failed** or a candidate-certificate pair $(w,e)$.\nThe supplied checker is admissible only if\n$V(h,t,v,w,e)=\\mathrm{true}$ implies that $h(w)$ is finite and $w$ minimizes\n$h(z)+\\|z-v\\|_2^2/(2t)$ over all $z$ in its Euclidean space.\nThis is a soundness condition on supplied programs; it does not promise\nthat an arbitrary proximal map has an exact finite evaluator or that a\ncertificate is always found. Proper closed convexity and the strict\nstep-size condition remain admissibility assumptions on the mathematical data.\n\nInitialize $\\bar x^0=x^0$. At each sweep retain the old state\n$(x^k,y^k,\\bar x^k)$. Return **invalid-input** for mismatched dimensions,\nnonpositive $\\tau$ or $\\sigma$, or caps that are not positive integers.\nFirst call $S_y$ on $(g^*,\\sigma,y^k+\\sigma K\\bar x^k)$, then, if it\nreturns $(w,e)$, call $V_y$ on those inputs and that pair. Allow at most\n$C_y$ program steps in total for the solver and checker. After each step\ninspect for termination: an explicit failure, malformed output, or false\nchecker result returns **prox-call-failed** with **call = dual**; a true\nresult stores $w$ as tentative $y^{k+1}$. Accept a true result on the last\nallowed step. If the budget is used without such a result or failure,\nreturn **prox-cap-exhausted** with **call = dual**. After dual success,\napply the identical rule with $S_x,V_x,C_x$ to\n$(f,\\tau,x^k-\\tau K^*y^{k+1})$, recording **call = primal** on failure\nor exhaustion. Every failure returns the unchanged old state. Only after\nboth calls succeed, commit $x^{k+1},y^{k+1}$ and\n$\\bar x^{k+1}=2x^{k+1}-x^k$, and return **success** with this state.\nA requested finite run repeats this sweep for an input nonnegative integer\nnumber of sweeps and stops at its first nonsuccess status. No convergence\nclaim is made for a failed run.",
+            "uses": [
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "lem-ip-bpdn-minimizer-exists",
+            "source_section": "Statement",
+            "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $A\\in\\mathbb R^{m\\times n}$ act in the standard finite coordinate bases, with labels $j=1,\\ldots,n$ corresponding to library coordinates $j-1$, $y\\in\\mathbb R^m$, and $\\epsilon\\ge0$. If\n$$F:=\\{z\\in\\mathbb R^n:\\|Az-y\\|_2\\le\\epsilon\\}$$\nis nonempty, then $z\\mapsto\\|z\\|_1$ attains a minimum on $F$.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "lem-ip-bpdn-dual-certificates",
+            "source_section": "Statement",
+            "quote": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $A\\in\\mathbb R^{m\\times n}$ act by matrix multiplication in the standard finite coordinate bases, with row and column labels $1$ through their dimensions corresponding to library coordinates $0$ through one less, let $y\\in\\mathbb R^m$, and let $\\epsilon\\ge0$. Define $g:\\mathbb R^m\\to\\{0,+\\infty\\}$ by $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$ and $g(u)=+\\infty$ otherwise. For $p\\in\\mathbb R^m$, define $g^*(p):=\\sup_{u\\in\\mathbb R^m}\\{\\langle p,u\\rangle-g(u)\\}$. Then\n$$g^*(p)=\\langle p,y\\rangle+\\epsilon\\|p\\|_2\\qquad(p\\in\\mathbb R^m).$$\nLet $A^*:\\mathbb R^m\\to\\mathbb R^n$ be the Euclidean adjoint, characterized by $\\langle A^*p,z\\rangle=\\langle p,Az\\rangle$ for all $p,z$. If $x\\in\\mathbb R^n$ satisfies $\\|Ax-y\\|_2\\le\\epsilon$ and a vector $p\\in\\mathbb R^m$ satisfies $\\|A^*p\\|_\\infty\\le1$ and\n$$\\|x\\|_1=-\\langle p,y\\rangle-\\epsilon\\|p\\|_2,$$\nthen $x$ minimizes $\\|z\\|_1$ over that residual ball. If instead $p\\ne0$, $A^*p=0$, and $|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2$, then the residual ball is disjoint from the range of $A$.",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "def-p-norms-on-rn",
+            "source_section": "Definition",
+            "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "def-euclidean-inner-product",
+            "source_section": "Definition",
+            "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+            "source_section": "Statement",
+            "quote": "Every linear map $T:V\\to W$ between finite-dimensional real or complex inner product spaces has a unique adjoint $T^*:W\\to V$.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+            "source_section": "Statement",
+            "quote": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex in the epigraph convention of [[def-proper-closed-convex-function-on-rn]]. For every $t>0$ and $v\\in\\mathbb R^n$, the set $\\operatorname{prox}_{tg}(v)$ is a singleton. Its unique element $u$ satisfies the resolvent equivalence\n$$u=\\operatorname{prox}_{tg}(v)\\quad\\Longleftrightarrow\\quad (v-u)/t\\in\\partial g(u).$$\nFor any $v_1,v_2$ and $u_i=\\operatorname{prox}_{tg}(v_i)$,\n$$\\|u_1-u_2\\|_2^2\\le\\langle u_1-u_2,v_1-v_2\\rangle.$$\nIn particular the proximal map is nonexpansive.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F9",
+            "source": "def-proximal-mapping",
+            "source_section": "Definition",
+            "quote": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex, and let $t>0$. For $v\\in\\mathbb R^n$, define the set-valued proximal mapping\n$$\\operatorname{prox}_{tg}(v)=\\left\\{u\\in\\mathbb R^n:g(u)+\\frac{\\|u-v\\|_2^2}{2t}\\le g(w)+\\frac{\\|w-v\\|_2^2}{2t}\\text{ for every }w\\in\\mathbb R^n\\right\\}.$$\nThe existence and uniqueness theorem on this page proves that this set is a singleton for every admissible $g,t,v$; its unique member is also denoted $\\operatorname{prox}_{tg}(v)$.",
+            "uses": [
+              "1.2"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1.1",
+            "claim": "By [F1] and [F2], $f$ and $g$ meet the primal proper-closed-convex preconditions. If the residual ball is nonempty, [F6] also guarantees that the target minimum is attained; this does not imply that the finite procedure finds a certificate. By [F3], their dual conjugate input $g^*$ also meets them. The solver/checker pairs are assumed to meet exactly [A1], so every accepted proximal update is a true minimizer of its stated subproblem.",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "A1",
+              "F1",
+              "F2",
+              "F3",
+              "F6",
+              "F8"
+            ]
+          },
+          {
+            "id": "step-1.2",
+            "claim": "The exact data and step-size check place the update in the regime of [F5]; the displayed assignments are its recurrence with $K=A$. The finite wrapper propagates each proximal failure or exhaustion and only examines a state after all requested sweeps complete. If all tests fail, returning budget-exhausted states only that this capped run found no supplied certificate; it asserts neither infeasibility nor convergence.",
+            "step": "1.2",
+            "inputs": [
+              "given",
+              "A1",
+              "F4",
+              "F5",
+              "F9",
+              "construct"
+            ]
+          },
+          {
+            "id": "step-2.1",
+            "claim": "If the first certificate test passes, [F7] proves that no vector is feasible, so **infeasible** is correct. If the second test passes, [F7] proves that the returned feasible vector minimizes the objective, so **success** is correct. The tests are disjoint because an infeasibility certificate says the residual ball contains no image $Az$, whereas a success certificate supplies one; therefore the stated priority cannot return two incompatible conclusions.",
+            "step": "2.1",
+            "inputs": [
+              "F7",
+              "given",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "Statement: Inputs require m,n>=1 and reject mismatched dimensions."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Statement: N=0 is expressly tested; A=0 is allowed when the strict step-size inequality holds."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Statement: The procedure accepts m=n=1 with conforming data and solver/checker programs."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Statement: The strict step-size boundary alpha beta ||A||_2^2=1 is rejected; the valid regime is strict."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Statement: The sweep cap includes N=0; epsilon=0 and exact certificate equalities are allowed."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Statement: Solver/checker programs are supplied explicitly; each is deterministic and finite by input contract."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "This item states no forward implication in an if-and-only-if claim."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "This item states no reverse implication in an if-and-only-if claim."
+          }
+        ],
+        "finite_checks": [],
+        "axioms": [],
+        "proof_status": "complete",
+        "proof_status_evidence": "The complete verification contains 3 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+        "unresolved_supplier_checks": [],
+        "unresolved_obligations": []
+      },
+      "after": {
+        "citations": [],
+        "derivations": [],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "Statement: Inputs require m,n>=1 and reject mismatched dimensions."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Statement: N=0 is expressly tested; A=0 is allowed when the strict step-size inequality holds."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Statement: The procedure accepts m=n=1 with conforming data and solver/checker programs."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Statement: The strict step-size boundary alpha beta ||A||_2^2=1 is rejected; the valid regime is strict."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Statement: The sweep cap includes N=0; epsilon=0 and exact certificate equalities are allowed."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Statement: Solver/checker programs are supplied explicitly; each is deterministic and finite by input contract."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "This item states no forward implication in an if-and-only-if claim."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "This item states no reverse implication in an if-and-only-if claim."
+          }
+        ],
+        "finite_checks": [],
+        "axioms": [],
+        "proof_status": "complete",
+        "proof_status_evidence": "The complete verification contains 3 numbered steps; all supplier facts are mapped to exact excerpts and each standard boundary has a disposition.",
+        "unresolved_supplier_checks": [],
+        "unresolved_obligations": [],
+        "owner_metadata_note": {
+          "algorithm_proof_phase_reconciliation": {
+            "kind": "root-final-based-algorithm-proof-phase-reconciliation",
+            "prepared_by": "/root/instanton_original_review",
+            "adoption": "Proposed metadata for root integration after writer drain; this proposal is not a new root or native acceptance.",
+            "basis": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/batch34/root-final-adoption.json",
+            "root_final_scope": "Keep entire substantive Definition/procedure/refs unchanged, archive exact full Facts/Verification tail verbatim, and bind all substantive mathematical conclusions to five existing canonical result Statements through justified_by. No new logical dependency/result. Algorithm no longer has a proof phase; provenance proof is truthfully not-applicable and stale proof_strategy removed.",
+            "current_algorithm": "Pure procedure; no numbered Proof/Verification remains. Its Definition and permitted inputs/returns remain unchanged.",
+            "historical_contract_archive": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/root-contract-prep/algorithm-migration/batch-34-full-contract-before.json",
+            "historical_numbered_row_dispositions": [
+              {
+                "old_step": "1.1",
+                "destination_rows": [
+                  {
+                    "id": "lem-ip-bpdn-objectives-proper-closed-convex",
+                    "steps": [
+                      "1.1",
+                      "1.2",
+                      "1.3",
+                      "2.1"
+                    ],
+                    "content": "Properness, convexity and closedness of f and residual indicator g."
+                  },
+                  {
+                    "id": "lem-fenchel-conjugate-is-proper-closed-convex",
+                    "steps": [
+                      "1.1",
+                      "1.2",
+                      "2.1"
+                    ],
+                    "content": "Properness/closedness/convexity of conjugate gstar."
+                  },
+                  {
+                    "id": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+                    "steps": [
+                      "2.1",
+                      "2.2"
+                    ],
+                    "content": "Global proximal minimizer existence and uniqueness."
+                  },
+                  {
+                    "id": "lem-ip-bpdn-minimizer-exists",
+                    "steps": [
+                      "1.1",
+                      "2.1",
+                      "3.1"
+                    ],
+                    "content": "Closed feasible set, compact sublevel and global feasible attainment."
+                  }
+                ],
+                "input_not_theorem": "Accepted exact solver output is a minimizer only under the unchanged supplied solver/checker soundness input. No finite exact evaluator is asserted."
+              },
+              {
+                "old_step": "1.2",
+                "destination_rows": [],
+                "destination_definitions": [
+                  "alg-ip-basis-pursuit-denoising",
+                  "alg-pdhg-primal-dual-hybrid-gradient"
+                ],
+                "content": "Actual recurrence, failure/exhaustion propagation, finite caps and no-certificate/no-convergence qualifications remain as unchanged procedure instructions. This explanatory old row is archived, not falsely claimed verbatim relocated to a theorem."
+              },
+              {
+                "old_step": "2.1",
+                "destination_rows": [
+                  {
+                    "id": "lem-ip-bpdn-dual-certificates",
+                    "steps": [
+                      "1.2",
+                      "2.1"
+                    ],
+                    "content": "Exact success/optimality and strict annihilator infeasibility tests. Their conclusions cannot conflict because one gives a feasible x and the other excludes all feasible z."
+                  }
+                ]
+              }
+            ],
+            "destination_proofs_retained": true,
+            "obligations_deleted": false,
+            "boundary_risk_history": "All old boundary, finite-check, risk, axiom, status, resolution-history and other nonmirror fields are retained verbatim. Their historical step references must be read through this migration map; no fresh boundary/risk review is fabricated.",
+            "legacy_proof_status": "Existing proof_status/proof_status_evidence are retained as historical records, not a claim that the algorithm still has a proof phase; actual source provenance is proof:not-applicable. Root owns any later status normalization.",
+            "new_math_acceptance": false,
+            "native_history_or_counters_changed": false
+          }
+        }
+      },
+      "root_final_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/batch34/root-final-adoption.json",
+      "historical_full_contract_archive": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/root-contract-prep/algorithm-migration/batch-34-full-contract-before.json"
+    },
+    {
+      "id": "alg-knot-wirtinger-presentation-from-code",
+      "batch": 56,
+      "canonical_contract": "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-56.proof-contracts.json",
+      "before": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "def-knot-planar-code",
+            "source_section": "Definition",
+            "quote": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right.",
+            "uses": [
+              "1.1",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-wirtinger-local-meridian-conjugacy",
+            "source_section": "Statement",
+            "quote": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "def-group-presentation",
+            "source_section": "Definition",
+            "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+            "uses": [
+              "2.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "claim": "Every validation pass and the oriented traversal operate on finite vertex, edge, and half-edge sets. Coherent opposite-half-edge pairing makes the traversal return to its starting arc after finitely many steps; the explicit one-component check rejects a record with more than one cycle. Thus validation and labeling terminate, and the labels are exactly the maximal under-arcs in [F1].",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "F1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "claim": "The crossing scan visits each crossing exactly once. The positive normal names its source and target without conflating them with incoming and outgoing. By [F2], its relator is exactly $x_o^{-1}x_sx_ox_t^{-1}$; solving that relation for outgoing gives the two equivalent incoming/outgoing formulas in the procedure. No other relation is appended. The resulting generator and relator lists are finite, so [F3] defines the returned presentation; its generator assignment is the meridian assignment stated in the procedure.",
+            "step": "2.1",
+            "inputs": [
+              "F1",
+              "F2",
+              "F3",
+              "step 1.1",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "not_applicable",
+            "reason": "The Definition accepts a designated under-arc of one oriented knot; the empty link has no such input."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Steps 1.1 and 2.1 handle the crossing-free one-arc code: one generator and no crossing relators."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Step 1.1 labels the sole maximal under-arc when there is only one; step 2.1 still appends exactly one relation per actual crossing, including a repeated arc."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "The Definition rejects incidence, branch-pairing, nontransverse or unrecorded segment intersections; step 1.1 verifies the finite validation and traversal."
+          },
+          {
+            "case": "endpoints",
+            "status": "not_applicable",
+            "reason": "The input is a closed knot code with paired half-edges; open strand endpoints are rejected by the Definition, not a boundary parameter of the procedure."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Step 1.1 traverses supplied finite ordered data and step 2.1 reads a fixed local chart; no indexed family of nonempty sets is selected."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "This algorithm specifies output and local construction, not an iff theorem."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "This algorithm has no converse implication; presentation correctness is proved by the separate theorem."
+          }
+        ],
+        "finite_checks": [
+          {
+            "name": "crossing-free-one-generator-output",
+            "method": "manual exact finite/symbolic calculation",
+            "anchor_steps": [
+              "1.1",
+              "2.1"
+            ],
+            "calculation": "One under-arc and zero crossing records give one generator and no relators. A one-arc curl gives x^-1 x x x^-1, freely reducing to the identity.",
+            "result": "<x|> in both cases",
+            "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+            "assertion": "Every validation pass and the oriented traversal operate on finite vertex, edge, and half-edge sets. Coherent opposite-half-edge pairing makes the traversal return to its starting arc after finitely many steps; the explicit one-component ch"
+          }
+        ],
+        "axiom_uses": [],
+        "risk_review": {
+          "status": "complete",
+          "reviewer": "/root/knot_wirtinger_rack_repair",
+          "notes": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. Focused current repair review only; independent native review and all gates remain owed."
+        },
+        "proof_status": "complete-local-proof",
+        "proof_status_evidence": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. This records the current owner repair, not native author completion, independent review or gate credit.",
+        "unresolved_supplier_checks": [],
+        "unresolved_obligations": [],
+        "finite_smoke": [],
+        "owner_resolution_evidence": {
+          "reviewer": "/root/knot_wirtinger_rack_repair",
+          "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+          "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+          "native_execution_coverage_adopted": false
+        }
+      },
+      "after": {
+        "citations": [],
+        "derivations": [],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "not_applicable",
+            "reason": "The Definition accepts a designated under-arc of one oriented knot; the empty link has no such input."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Steps 1.1 and 2.1 handle the crossing-free one-arc code: one generator and no crossing relators."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Step 1.1 labels the sole maximal under-arc when there is only one; step 2.1 still appends exactly one relation per actual crossing, including a repeated arc."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "The Definition rejects incidence, branch-pairing, nontransverse or unrecorded segment intersections; step 1.1 verifies the finite validation and traversal."
+          },
+          {
+            "case": "endpoints",
+            "status": "not_applicable",
+            "reason": "The input is a closed knot code with paired half-edges; open strand endpoints are rejected by the Definition, not a boundary parameter of the procedure."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Step 1.1 traverses supplied finite ordered data and step 2.1 reads a fixed local chart; no indexed family of nonempty sets is selected."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "This algorithm specifies output and local construction, not an iff theorem."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "This algorithm has no converse implication; presentation correctness is proved by the separate theorem."
+          }
+        ],
+        "finite_checks": [
+          {
+            "name": "crossing-free-one-generator-output",
+            "method": "manual exact finite/symbolic calculation",
+            "anchor_steps": [
+              "1.1",
+              "2.1"
+            ],
+            "calculation": "One under-arc and zero crossing records give one generator and no relators. A one-arc curl gives x^-1 x x x^-1, freely reducing to the identity.",
+            "result": "<x|> in both cases",
+            "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+            "assertion": "Every validation pass and the oriented traversal operate on finite vertex, edge, and half-edge sets. Coherent opposite-half-edge pairing makes the traversal return to its starting arc after finitely many steps; the explicit one-component ch"
+          }
+        ],
+        "axiom_uses": [],
+        "risk_review": {
+          "status": "complete",
+          "reviewer": "/root/knot_wirtinger_rack_repair",
+          "notes": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. Focused current repair review only; independent native review and all gates remain owed."
+        },
+        "proof_status": "complete-local-proof",
+        "proof_status_evidence": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. This records the current owner repair, not native author completion, independent review or gate credit.",
+        "unresolved_supplier_checks": [],
+        "unresolved_obligations": [],
+        "finite_smoke": [],
+        "owner_resolution_evidence": {
+          "reviewer": "/root/knot_wirtinger_rack_repair",
+          "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+          "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+          "native_execution_coverage_adopted": false
+        },
+        "owner_metadata_note": {
+          "algorithm_proof_phase_reconciliation": {
+            "kind": "root-final-based-algorithm-proof-phase-reconciliation",
+            "prepared_by": "/root/instanton_original_review",
+            "adoption": "Proposed metadata for root integration after writer drain; this proposal is not a new root or native acceptance.",
+            "basis": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/batch56/root-final-adoption.json",
+            "root_final_scope": "Actual native successful but collector-invalid repair retains original report/counters. FIRST checked repaired termination/property placement, crossing-cover zero-case and finiteCW contraction, infinity collar, actual diagram transitions and all prepared affected uses.",
+            "current_algorithm": "Pure procedure; no numbered Proof/Verification remains. Its Definition and permitted inputs/returns remain unchanged.",
+            "historical_contract_archive": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/root-contract-prep/algorithm-migration/batch-56-full-contract-before.json",
+            "historical_numbered_row_dispositions": [
+              {
+                "old_step": "1.1",
+                "destination_rows": [
+                  {
+                    "id": "thm-knot-wirtinger-presentation-correctness",
+                    "steps": [
+                      "1.1"
+                    ],
+                    "content": "Explicit finite incidence and rational segment tests, cyclic finite traversal, finite crossing pass and returned finite presentation; includes crossing-free one-generator case."
+                  }
+                ]
+              },
+              {
+                "old_step": "2.1",
+                "destination_rows": [
+                  {
+                    "id": "thm-knot-wirtinger-presentation-correctness",
+                    "steps": [
+                      "1.1",
+                      "2.1",
+                      "3.1"
+                    ],
+                    "content": "Exactly one positive-normal source/target conjugacy relator per crossing, actual local meridian relation, quotient normal closure and based-meridian assignment."
+                  }
+                ]
+              }
+            ],
+            "destination_proofs_retained": true,
+            "obligations_deleted": false,
+            "boundary_risk_history": "All old boundary, finite-check, risk, axiom, status, resolution-history and other nonmirror fields are retained verbatim. Their historical step references must be read through this migration map; no fresh boundary/risk review is fabricated.",
+            "legacy_proof_status": "Existing proof_status/proof_status_evidence are retained as historical records, not a claim that the algorithm still has a proof phase; actual source provenance is proof:not-applicable. Root owns any later status normalization.",
+            "new_math_acceptance": false,
+            "native_history_or_counters_changed": false
+          }
+        }
+      },
+      "root_final_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/batch56/root-final-adoption.json",
+      "historical_full_contract_archive": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/root-contract-prep/algorithm-migration/batch-56-full-contract-before.json"
+    }
+  ],
+  "limits": "Clear only algorithm citation/derivation/routine collections, add explicit root-final reconciliation map. Preserve all destination theorem proofs, fixed frontier, native history, all risk/boundary/history fields. No fabricated review, gate, digest, state or counter operation."
+}

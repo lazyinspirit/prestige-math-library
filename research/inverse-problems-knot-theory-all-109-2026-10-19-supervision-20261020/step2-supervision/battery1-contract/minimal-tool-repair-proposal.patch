@@ -1,0 +1,68 @@
+--- tools/proof-contract.mjs
++++ tools/proof-contract.mjs
+@@ -18,6 +18,7 @@
+   SOURCE_SECTIONS, factParagraphs, numberedProofSteps, sourceSectionText, splitFrontmatter,
+ } from './facts-block.mjs';
+ import { frontmatterList } from './frontmatter-list.mjs';
++import { parseFrontmatter, reviewedLocalLemmaAcceptance } from './content-policy-lib.mjs';
+ 
+ const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+ const STANDARD_BOUNDARIES = [
+@@ -137,7 +138,7 @@
+     const sourceItem = loadItem(source);
+     if (!sourceItem) {
+       error('citation-source-missing', `${fact} cites missing item ${source}`, id);
+-    } else if (sourceItem.statementProvenance === 'ai-generated') {
++    } else if (sourceItem.statementProvenance === 'ai-generated' && !acceptedReviewedLocalSource(sourceItem)) {
+       error('citation-ai-generated-statement', `${fact} cites ${source}, whose provenance.statement is ai-generated`, id);
+     } else if (!SOURCE_SECTIONS.has(section)) {
+       error('citation-section', `${fact} -> ${source} needs a valid source_section`, id);
+@@ -146,7 +147,10 @@
+     } else if (!normalise(sourceSectionText(sourceItem.body, section) ?? '').includes(normalise(quote))) {
+       error('citation-quote-mismatch', `${fact} quote does not occur in ${source}'s ${section}`, id);
+     }
+-    if (!Array.isArray(uses) || !uses.length) {
++    // An exact empty set is legitimate when this Fact has no numbered proof
++    // uses (including declarative definitions). Never invent a use to avoid it.
++    // The comparison below still rejects every omitted actual proof use.
++    if (!Array.isArray(uses)) {
+       error('citation-uses', `${fact} -> ${source} needs every proof step that cites ${fact}`, id);
+     } else {
+       const actualUses = [...steps.values()]
+@@ -301,6 +305,7 @@
+   const { fm, body } = split(source);
+   return {
+     id,
++    fm,
+     kind: scalar(fm, 'kind'),
+     body,
+     deps: list(fm, 'deps'),
+@@ -310,6 +315,15 @@
+   };
+ }
+ 
++// Use the same exact run/eight-ID/evidence/body binding as content-policy.
++// This is not a blanket generated-statement waiver; quote checks still run.
++function acceptedReviewedLocalSource(item) {
++  const result = reviewedLocalLemmaAcceptance(parseFrontmatter(item.fm), item.body, REPO);
++  for (const message of result.errors)
++    error('citation-local-proof-acceptance-invalid', `${item.id}: ${message}`, item.id);
++  return result.eligible;
++}
++
+ // Declarations, not `const` aliases: the main loop above runs at module load,
+ // before these lines, and a `const` would still be in its temporal dead zone.
+ function split(source) { return splitFrontmatter(source); }
+--- tools/regen-contract-entries.mjs
++++ tools/regen-contract-entries.mjs
+@@ -69,8 +69,8 @@
+   const md = readFileSync(itemPath(id), 'utf8');
+   const facts = parseFacts(md);
+   const steps = parseSteps(md);
+-  if (!steps.length) {
+-    console.error(`SKIP ${id}: no steps parsed`);
++  if (!steps.length && ((contracts[id].derivations?.length ?? 0) || (contracts[id].routine_steps?.length ?? 0))) {
++    console.error(`SKIP ${id}: old proof rows but no current steps; explicit root migration required`);
+     skipped++; continue;
+   }
+ 

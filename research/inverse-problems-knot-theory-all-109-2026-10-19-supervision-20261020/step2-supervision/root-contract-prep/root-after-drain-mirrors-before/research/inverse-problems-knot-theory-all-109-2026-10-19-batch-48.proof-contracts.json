@@ -1,0 +1,691 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-unrolled-finite-domain-and-output-are-borel",
+    "def-ip-unrolled-regularization-architecture",
+    "prop-ip-finite-unrolling-does-not-imply-regularization-convergence",
+    "ex-ip-truncated-landweber-versus-learned-unrolling",
+    "cex-ip-finite-training-fit-fails-under-operator-shift"
+  ],
+  "contracts": {
+    "def-ip-unrolled-regularization-architecture": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition identifies the base input set and defines its admissible finite-recursion subdomain; it asserts no nonempty-domain existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition specifies the depth-zero boundary as the initialization map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition's depth-one case is a single data-consistency update followed by its declared block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition allows arbitrary declared maps and asserts no invertibility, uniqueness, or nonzero-operator hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition distinguishes N=0 and N>=1 and defines the last update at k=N-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition makes no selection or existence claim; all maps and parameters are explicitly supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        }
+      ],
+      "proof_status": "not-applicable-definition",
+      "unresolved_obligations": [],
+      "finite_checks": []
+    },
+    "prop-ip-finite-unrolling-does-not-imply-regularization-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-unrolled-regularization-architecture",
+          "source_section": "Definition",
+          "quote": "The deployed map is\n\n$$\\Phi_{\\theta,N}(A,y)=\\bigl(U_{\\theta_{N-1}}^{A,y}\\circ\\cdots\\circ U_{\\theta_0}^{A,y}\\bigr)(I_\\theta(A,y)).$$",
+          "uses": [
+            "1.1",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-differentiate-finite-fixed-point-iteration",
+          "source_section": "Definition",
+          "quote": "This procedure differentiates the $K$-step map actually specified by $G,z_0,K$; it does not substitute the derivative of an exact fixed point.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-learned-reconstruction-estimator",
+          "source_section": "Definition",
+          "quote": "A finite **unrolled learned update** consists of an integer $K\\geq1$, a Borel initialization $u_0:Y\\to Q$, and Borel maps $T_{\\phi,k}:Q\\times Y\\to Q$ for $0\\leq k<K$, with $u_{k+1}(y)=T_{\\phi,k}(u_k(y),y)$. Its output $u_K(y)$ is a point reconstruction rule.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-inverse-risk-under-train-and-test-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf Y,\\mathcal Y)$ and $(Q,\\mathcal Q)$ be measurable data and target spaces, with $\\mathcal Q$ the Borel sigma-algebra of the target metric space. Let $P$ be a probability measure on the product space $(\\mathsf Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$, and let $\\ell:Q\\times Q\\to[0,+\\infty]$ be product-measurable, where $\\ell(t,a)$ is the loss for target $t$ and action $a$. For a Borel point reconstruction rule $g:\\mathsf Y\\to Q$, its risk under $P$ is the extended nonnegative integral\n$$R_P(g):=\\int_{\\mathsf Y\\times Q}\\ell(t,g(y))\\,P(dy,dt).$$\nFor a randomized reconstruction rule given by a probability kernel $K$ from $\\mathsf Y$ to $Q$, define\n$$R_P(K):=\\int_{\\mathsf Y\\times Q}\\!\\left(\\int_Q\\ell(t,a)\\,K(y,da)\\right)P(dy,dt).$$\nThe inner integral is measurable in $(y,t)$ by kernel integration; a deterministic rule is the special case $K_y=\\delta_{g(y)}$. When $P_{\\rm train}$ and $P_{\\rm test}$ are specified joint laws on the same input-target space, the corresponding training-law risk and test-law risk are $R_{P_{\\rm train}}(K)$ and $R_{P_{\\rm test}}(K)$. Either value may be $+\\infty$. This definition imposes no inequality between the two risks: any such comparison requires an additional assumption relating the joint laws or the rule's behavior under them.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Induction over the N declared updates gives the initialization followed by their finite composition.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The repeated scalar update T(x)=2x has every finite value T^k(1)=2^k and diverges as k tends to infinity.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Under the stated C1 hypotheses, the cited AD procedure differentiates the finite initialization-and-update graph.",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "For the affine contraction, every state at theta=0 is zero, its fixed-point residual is zero, and the exact fixed point is z-star(theta)=theta.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "step": "1.5",
+          "claim": "The specified one-layer scalar architecture has formula Phi(a,y)=ay at theta=1 and predicts 1 on the singleton training input.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The scalar map is a Borel point rule and its empirical squared training risk is zero.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 1.5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "The finite derivative is 1-q^K, which differs from the exact fixed-point derivative 1 for 0<q<1.",
+          "inputs": [
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On the shifted scalar operator the residual and Dirac squared test risk grow without bound while the training loss stays zero.",
+          "inputs": [
+            "F4",
+            "step 1.5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Given clause specifies a nonempty finite training set for the risk claim; step 1.2 checks finite iterates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.1 explicitly check zero fixed-point residual and zero training loss."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses one training sample and one unrolled layer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 1.5 use 0<q<1 and nonzero scalar operator and truth."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.4 uses strict 0<q<1 and step 3.1 uses strict t>1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use explicit finite scalar operations and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Proposition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Proposition asserts no equivalence."
+        }
+      ],
+      "proof_status": "locally-proved",
+      "unresolved_obligations": [],
+      "finite_checks": [
+        "T^k(1)=2^k for every finite k.",
+        "For 0<q<1, the contraction witness has residual zero, finite derivative 1-q^K, and exact fixed-point derivative 1.",
+        "At t=2, the zero-training-loss shifted-operator witness has prediction 4, residual 6, and squared test risk 9; both quantities grow as t tends to infinity."
+      ]
+    },
+    "ex-ip-truncated-landweber-versus-learned-unrolling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-landweber-iteration-with-discrepancy-stopping",
+          "source_section": "Definition",
+          "quote": "Define the associated infinite mathematical path by $x_0=0$ and $$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad k\\ge0.$$ For the finite procedure, evaluate only the prefix through index $N$, in increasing order, and return at its first stopping condition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-unrolled-regularization-architecture",
+          "source_section": "Definition",
+          "quote": "The deployed map is\n\n$$\\Phi_{\\theta,N}(A,y)=\\bigl(U_{\\theta_{N-1}}^{A,y}\\circ\\cdots\\circ U_{\\theta_0}^{A,y}\\bigr)(I_\\theta(A,y)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The scalar multiplication map is nonzero compact with norm a and adjoint multiplication by a; the chosen step satisfies the published Landweber interface assumptions.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The exact Landweber recurrence yields the finite formula and a strictly positive residual at every finite k, so it stops only at budget exhaustion.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Repeated substitution gives the learned finite-depth formula, which agrees with Landweber exactly when every learned layer parameter equals omega.",
+          "inputs": [
+            "F3",
+            "F2",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The scalar space and nonzero operator use a>0, and the example has x-star nonzero by Given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The noise bound is delta=0 and the residual remains strictly positive at every finite k in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example permits N=1, where step 1.2 gives x_1=omega a^2 x-star."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies a>0, while Given excludes x-star=0 so no immediate discrepancy stop occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The step-size condition is strict 0<omega a^2<1 and is checked in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is declared only for the cited Landweber interface in step 1.1; the scalar induction itself uses no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no equivalence."
+        }
+      ],
+      "proof_status": "locally-proved",
+      "unresolved_obligations": [],
+      "finite_checks": [
+        "For x-star=1, a=1, omega=1/2, N=2, the exact prefix is x_2=3/4 and the residual is 1/4; the learned formula agrees for both layer parameters equal to 1/2."
+      ]
+    },
+    "cex-ip-finite-training-fit-fails-under-operator-shift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-unrolled-regularization-architecture",
+          "source_section": "Definition",
+          "quote": "For an integer depth $N\\ge1$, an unrolled regularization architecture consists of a Borel initialization map $I_\\theta:\\mathcal D\\to X$, parameters $\\theta=(\\theta_0,\\ldots,\\theta_{N-1})$ and real step parameters $\\tau_0,\\ldots,\\tau_{N-1}$ held fixed at deployment, and Borel update maps $B_{\\theta_k}:D_k\\to X$ with $D_k\\subseteq\\mathcal D\\times X$ Borel. Set $x_0=I_\\theta(A,y)$ and, for $k=0,\\ldots,N-1$, set\n\n$$x_{k+1}=B_{\\theta_k}\\bigl((A,y),x_k+\\tau_k c(A,y,x_k)\\bigr).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-learned-reconstruction-estimator",
+          "source_section": "Definition",
+          "quote": "A finite **unrolled learned update** consists of an integer $K\\geq1$, a Borel initialization $u_0:Y\\to Q$, and Borel maps $T_{\\phi,k}:Q\\times Y\\to Q$ for $0\\leq k<K$, with $u_{k+1}(y)=T_{\\phi,k}(u_k(y),y)$. Its output $u_K(y)$ is a point reconstruction rule.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-inverse-risk-under-train-and-test-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf Y,\\mathcal Y)$ and $(Q,\\mathcal Q)$ be measurable data and target spaces, with $\\mathcal Q$ the Borel sigma-algebra of the target metric space. Let $P$ be a probability measure on the product space $(\\mathsf Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$, and let $\\ell:Q\\times Q\\to[0,+\\infty]$ be product-measurable, where $\\ell(t,a)$ is the loss for target $t$ and action $a$. For a Borel point reconstruction rule $g:\\mathsf Y\\to Q$, its risk under $P$ is the extended nonnegative integral\n$$R_P(g):=\\int_{\\mathsf Y\\times Q}\\ell(t,g(y))\\,P(dy,dt).$$\nFor a randomized reconstruction rule given by a probability kernel $K$ from $\\mathsf Y$ to $Q$, define\n$$R_P(K):=\\int_{\\mathsf Y\\times Q}\\!\\left(\\int_Q\\ell(t,a)\\,K(y,da)\\right)P(dy,dt).$$\nThe inner integral is measurable in $(y,t)$ by kernel integration; a deterministic rule is the special case $K_y=\\delta_{g(y)}$. When $P_{\\rm train}$ and $P_{\\rm test}$ are specified joint laws on the same input-target space, the corresponding training-law risk and test-law risk are $R_{P_{\\rm train}}(K)$ and $R_{P_{\\rm test}}(K)$. Either value may be $+\\infty$. This definition imposes no inequality between the two risks: any such comparison requires an additional assumption relating the joint laws or the rule's behavior under them.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Zero initialization, identity block, and layer step theta realize the one-step map F_theta(a,y)=theta*a*y and it is a Borel point rule.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The singleton training loss is (theta-1)^2 and vanishes at theta=1.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Under the shifted operator t, the same learned parameter predicts t^2 and has residual t(t^2-1).",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The Dirac test risk is (t^2-1)^2 and both it and the residual become unbounded with t, refuting a uniform finite bound.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement refuted fixes a singleton nonempty training set and every Q_t has one test point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 obtains zero training loss, while steps 3.1\u20134.1 give positive shifted residual and risk for t>1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one layer and the Statement refuted uses one training sample."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 forces theta=1 at zero training loss; step 3.1 uses nonzero operator and truth."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1\u20134.1 use strict t>1 and take t arbitrarily large."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 use explicit scalar arithmetic and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Counterexample refutes a uniform bound and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Counterexample refutes a uniform bound and asserts no equivalence."
+        }
+      ],
+      "proof_status": "locally-proved",
+      "unresolved_obligations": [],
+      "finite_checks": [
+        "At t=2, theta=1 gives F=4, residual=6, and squared test risk=9, while the singleton training loss is zero."
+      ]
+    },
+    "lem-ip-unrolled-finite-domain-and-output-are-borel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when",
+          "uses": [
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In these finite-dimensional spaces the product Borel sigma-algebra equals the Borel sigma-algebra of the product topology.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The base set E_0 and initial map x_0 are Borel.",
+          "inputs": [
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Assuming E_k and x_k Borel, the pairing p to (p,x_k(p)) is measurable by the rectangle generators.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "ih",
+            "assume-hyp",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The finite-dimensional data-consistency correction is continuous, and its composition with the paired state map is Borel.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The next recursively defined domain is a Borel subset of the base data domain.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Restricting the update input to D_k and composing with B_k gives a Borel next state map.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Finite induction proves Borelness at each depth and identifies E_N as exactly the domain where every update is defined.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement permits empty Omega; the base set and every recursively defined E_k are then empty by steps 1.2 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the boundary tau_k=0 because the correction remains a continuous polynomial map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1, steps 3.1 and 4.1 give E_1 and x_1 after one update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If an update domain D_k is empty, step 3.1 gives E_{k+1}=empty, which is Borel."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 establishes N=0, and step 5.1 covers every finite N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses finite induction on the explicit layer index and makes no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts no equivalence."
+        }
+      ],
+      "proof_status": "locally-proved",
+      "unresolved_obligations": [],
+      "finite_checks": [
+        "At N=0, E_0=Omega and x_0=I is Borel.",
+        "At N=1, E_1 is the preimage of D_0 under the Borel corrected-input map and x_1 is its Borel composition with B_0.",
+        "When D_k is empty, E_{k+1} is empty; when tau_k=0, the correction map remains continuous."
+      ]
+    }
+  }
+}

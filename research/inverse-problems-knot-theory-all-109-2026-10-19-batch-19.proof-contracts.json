@@ -1,0 +1,1549 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-banach-gaussian-cm-shift-ball-bound",
+    "lem-ip-gaussian-shift-small-ball-ratio",
+    "def-ip-small-ball-map-estimator",
+    "thm-ip-gaussian-small-ball-map-functional",
+    "ex-ip-finite-dimensional-small-ball-map-equals-density-mode",
+    "cex-ip-infinite-dimensional-pointwise-density-fallacy",
+    "ex-ip-map-differs-from-posterior-mean"
+  ],
+  "contracts": {
+    "lem-ip-banach-gaussian-cm-shift-ball-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let $B$ be a real\nseparable Banach space with its norm Borel sigma-algebra. A map\n$W:\\Omega\\to B$ is a **centered Borel Gaussian random element** if it is\nBorel-measurable and, for every $\\ell\\in B^*$, the real random variable\n$\\ell(W)$ has a centered (possibly zero-variance) normal law. Its law is the\nBorel probability $\\mu=P\\circ W^{-1}$. When the word *tight* is used, it means\nthat for every $\\delta>0$ there is a norm-compact $K\\subseteq B$ with\n$\\mu(K)>1-\\delta$.\n\nThis definition concerns a random element in $B$. A Gaussian process on an\narbitrary index set with only a cylinder-space law does not satisfy it unless\na Borel $B$-valued realization is separately constructed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-banach-gaussian-covariance-operator-and-rkhs",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $W$ be a centered Borel Gaussian random element in a real separable\nBanach space $B$, with law $\\mu$. For $\\ell\\in B^*$ define\n$$C\\ell=E[\\ell(W)W]\\in B,\\qquad Q(\\ell,m)=E[\\ell(W)m(W)]\\quad(\\ell,m\\in B^*).$$\nThe **Cameron–Martin reproducing-kernel Hilbert space** $H$ is the completion\nof $B^*/N$ in the inner product induced by $Q$, where\n$N=\\{\\ell\\in B^*:Q(\\ell,\\ell)=0\\}$. The canonical map sends the class of\n$\\ell$ to $C\\ell$ and extends continuously to an injective map $i:H\\to B$;\nwe identify $H$ with its image in $B$ and use the completed Hilbert norm\n$\\|\\cdot\\|_H$. The preceding construction is well-defined by\n[[thm-banach-gaussian-covariance-rkhs-is-well-defined]].\n\nThe term *RKHS* here denotes this covariance-induced Hilbert space of shifts\ninside $B$; it is not the space of all continuous functions on an arbitrary\nindex set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume AC. Under the hypotheses and notation of\n[[def-banach-gaussian-covariance-operator-and-rkhs]], each $C\\ell$ exists as a\nBochner integral; $Q$ is a finite positive-semidefinite bilinear form;\n$N=\\{\\ell:Q(\\ell,\\ell)=0\\}$ is its nullspace; and the induced map from the\ncompletion of $B^*/N$ to $B$ is continuous and injective. Thus the definition\nidentifies a Hilbert space of shifts in $B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-separable-banach-has-countable-norming-family",
+          "source_section": "Statement",
+          "quote": "Assume HB and countable choice. Let $B$ be a real separable Banach space. There is a sequence\n$(\\ell_j)_{j\\ge1}\\subseteq B^*$ with $\\|\\ell_j\\|=1$ such that\n$$\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|\\qquad(x\\in B).$$\nIf $B=\\{0\\}$, the conclusion is interpreted using the zero functional and the\nsupremum is $0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gaussian-centering-for-bounded-symmetric-quasiconvex-loss",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\sim N_d(m,\\Sigma)$ with positive-definite covariance\n$\\Sigma$. Let $L:\\mathbb R^d\\to[0,M]$ be Borel measurable and symmetric,\n$L(-x)=L(x)$, and quasi-convex, meaning each sublevel set\n$\\{x:L(x)\\le t\\}$ is convex. Then for every $a\\in\\mathbb R^d$,\n$$E L(X-a)\\ge E L(X-m).$$\nThus the Gaussian center $m$ minimizes expected loss. The result includes\nquasi-convex losses whose sublevel sets are not closed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the norming family from [F3]. Fix $r>0$, $h\\in E$, and $n\\ge1$. Write $Y_n=(\\ell_1(W),\\ldots,\\ell_n(W))$, let $\\Sigma_n$ be its covariance matrix, and put $a_n=(\\ell_1(ih),\\ldots,\\ell_n(ih))$. The vector $Y_n$ is centered Gaussian by [F1]. If $c\\in\\ker\\Sigma_n$, then $\\sum_{j\\le n}c_j\\ell_j(W)$ has variance zero and hence is zero almost surely. For $\\ell_c=\\sum_{j\\le n}c_j\\ell_j$, this gives $C\\ell_c=0$ and $[\\ell_c]=0$ in $E$; therefore [F2] gives $c\\cdot a_n=\\ell_c(ih)=\\langle h,[\\ell_c]\\rangle_E=0$. Thus $a_n\\perp\\ker\\Sigma_n$, so $a_n\\in S_n:=\\operatorname{ran}(\\Sigma_n)$, the support subspace of $Y_n$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the finite-dimensional space $S_n$, the restriction of $Y_n$ is a nondegenerate Gaussian vector. Let $Q_n=[-r,r]^n$ and $D_n=Q_n\\cap S_n$, a closed symmetric convex set. Since $a_n\\in S_n$, the event $Y_n-a_n\\in Q_n$ is the translate by $a_n$ of $D_n$ inside $S_n$. An invertible linear change of coordinates turns the centered law on $S_n$ into a nondegenerate Gaussian law and preserves symmetry and convexity of $D_n$. Apply [F4] to the bounded loss $1_{D_n^c}$ in those coordinates: its sublevel sets are $D_n$ and the whole space, so it is symmetric and quasi-convex. This yields $$ \\mathbb P(Y_n-a_n\\in Q_n)\\le\\mathbb P(Y_n\\in Q_n). $$ If $S_n=\\{0\\}$, then $Y_n=a_n=0$ almost surely and the same inequality is equality.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $A_n(h)=\\{\\max_{j\\le n}|\\ell_j(W-ih)|\\le r\\}$. Step 2.1 says $\\mathbb P(A_n(h))\\le\\mathbb P(A_n(0))$. The sets $A_n(h)$ decrease with $n$, and [F3] gives $\\bigcap_n A_n(h)=\\{\\|W-ih\\|_B\\le r\\}$; likewise $\\bigcap_n A_n(0)=\\{\\|W\\|_B\\le r\\}$. Apply [F5] to both decreasing sequences and pass to their limits in the finite-dimensional inequalities. This proves the stated ball-mass bound.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: If B={0}, the supplier norming lemma allows the zero functional; the only Cameron-Martin shift is zero and the claimed inequality is equality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For h=0, both displayed ball probabilities are identical."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No probability-equals-one assertion is made; r is any positive radius."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles S_n={0} explicitly; singular finite projections are restricted to ran(Sigma_n)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Closed balls use the boundary-inclusive condition ||x-ih||<=r throughout."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes AC, HB and countable choice; these are the finite-centering and norming-family hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a one-way centered-ball upper bound, not an iff equality criterion;2.1 even permits equality in the degenerate zero support subspace.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The result is a one-way centered-ball upper bound, not an iff equality criterion;2.1 even permits equality in the degenerate zero support subspace.",
+            "item_sha256": "1ace1134790c88dd6c9de9478b6bd108111ae522a0fc0f1058e093012b2a79eb",
+            "row_sha256": "c01ede8979f46f5818ebfad104c75a3a7d3b1c5f1b4087bf7f975b18b71267df",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 364
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The ball-mass inequality is not claimed to characterize Cameron–Martin membership of an arbitrary shift; h is already supplied in E.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The ball-mass inequality is not claimed to characterize Cameron–Martin membership of an arbitrary shift; h is already supplied in E.",
+            "item_sha256": "1ace1134790c88dd6c9de9478b6bd108111ae522a0fc0f1058e093012b2a79eb",
+            "row_sha256": "886f5b09e22ea121b237d1367a78ebbf6f905640f7342ad61f0958ba6abd43ce",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_smooth_pair_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/proposal.json",
+                "field": "rows",
+                "index": 363
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-11/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Independently checked Proof 1.1–3.1 and every direct supplier interface: covariance null vectors annihilate the Cameron–Martin shift, hence the shift lies in ran(Sigma_n); restricted covariance is positive definite and the symmetric convex complement indicator meets the bounded-loss supplier. The zero support space is treated separately. Countable norming coordinates recover closed balls and continuity from above applies to finite probabilities. AC/HB/countable choice are explicit, including B={0}, h=0 and singular projections. Giné–Nickl §2.4.1 Theorems 2.4.4–2.4.5 (PDF p.65) and their proofs independently checked. Reader changed references only; reverse substitution from the manifest exactly reproduces the pre-reader SHA256, and current raw SHA256 equals post-reader."
+      }
+    },
+    "lem-ip-gaussian-shift-small-ball-ratio": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let $B$ be a real\nseparable Banach space with its norm Borel sigma-algebra. A map\n$W:\\Omega\\to B$ is a **centered Borel Gaussian random element** if it is\nBorel-measurable and, for every $\\ell\\in B^*$, the real random variable\n$\\ell(W)$ has a centered (possibly zero-variance) normal law. Its law is the\nBorel probability $\\mu=P\\circ W^{-1}$. When the word *tight* is used, it means\nthat for every $\\delta>0$ there is a norm-compact $K\\subseteq B$ with\n$\\mu(K)>1-\\delta$.\n\nThis definition concerns a random element in $B$. A Gaussian process on an\narbitrary index set with only a cylinder-space law does not satisfy it unless\na Borel $B$-valued realization is separately constructed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-banach-gaussian-covariance-operator-and-rkhs",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $W$ be a centered Borel Gaussian random element in a real separable\nBanach space $B$, with law $\\mu$. For $\\ell\\in B^*$ define\n$$C\\ell=E[\\ell(W)W]\\in B,\\qquad Q(\\ell,m)=E[\\ell(W)m(W)]\\quad(\\ell,m\\in B^*).$$\nThe **Cameron–Martin reproducing-kernel Hilbert space** $H$ is the completion\nof $B^*/N$ in the inner product induced by $Q$, where\n$N=\\{\\ell\\in B^*:Q(\\ell,\\ell)=0\\}$. The canonical map sends the class of\n$\\ell$ to $C\\ell$ and extends continuously to an injective map $i:H\\to B$;\nwe identify $H$ with its image in $B$ and use the completed Hilbert norm\n$\\|\\cdot\\|_H$. The preceding construction is well-defined by\n[[thm-banach-gaussian-covariance-rkhs-is-well-defined]].\n\nThe term *RKHS* here denotes this covariance-induced Hilbert space of shifts\ninside $B$; it is not the space of all continuous functions on an arbitrary\nindex set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume AC. Under the hypotheses and notation of\n[[def-banach-gaussian-covariance-operator-and-rkhs]], each $C\\ell$ exists as a\nBochner integral; $Q$ is a finite positive-semidefinite bilinear form;\n$N=\\{\\ell:Q(\\ell,\\ell)=0\\}$ is its nullspace; and the induced map from the\ncompletion of $B^*/N$ to $B$ is continuous and injective. Thus the definition\nidentifies a Hilbert space of shifts in $B$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cameron-martin-translation-for-separable-banach-gaussian-law",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $W$ be a centered Borel Gaussian random\nelement in a real separable\nBanach space $B$, with law $\\mu$ and covariance RKHS $H\\subseteq B$. For\n$h\\in H$, let $z_h$ be the $L^2(\\mu)$-limit of the coordinate functions\n$\\ell(x)$ representing a sequence of classes $[\\ell]\\to i^{-1}h$ in the\ncompletion $H$. The limit has a Borel-measurable version and does not depend\non the approximating sequence. If $\\mu_h$ denotes the law of $W+h$, then\n$$\\frac{d\\mu_h}{d\\mu}(x) =\\exp\\!\\left(z_h(x)-\\frac12\\|h\\|_H^2\\right).$$\nIn particular, $\\mu_h$ and $\\mu$ are equivalent. If $h=C\\ell$ for\n$\\ell\\in B^*$, then $z_h(x)=\\ell(x)$ $\\mu$-almost surely and\n$\\|h\\|_H^2=E[\\ell(W)^2]$; these formulas are independent of the choice of\nrepresentative $\\ell$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By The standard normal density has total mass one and The indefinite integral of a nonnegative measurable function is a measure, gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. The law of a random element is a probability measure makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in The Dirac set function at a point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every Borel probability on a Polish space S is tight.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian\nlaw on a real separable Banach\nspace $B$, and let $H\\subseteq B$ be its covariance RKHS. Define\n$\\operatorname{supp}\\mu$ to be the set of $x\\in B$ for which every open\nneighborhood has positive $\\mu$-measure. Then\n$$\\operatorname{supp}\\mu=\\overline H^{\\,B}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ip-banach-gaussian-cm-shift-ball-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, the Hahn–Banach theorem, and countable choice. Let $B$ be a real separable Banach space, and let $W$ be a centered Borel Gaussian random element with Borel law $\\mu$. Let $C:B^*\\to B$ be its covariance operator, let $E$ be the completion of $B^*/\\ker C$ with inner product $\\langle[\\ell],[m]\\rangle_E=m(C\\ell)$, and let $i:E\\to B$ be the canonical injection extending $[\\ell]\\mapsto C\\ell$. For every $h\\in E$ and $r>0$,\n$$ \\mu\\bigl(\\{x\\in B:\\|x-ih\\|_B\\le r\\}\\bigr)\\le \\mu\\bigl(\\{x\\in B:\\|x\\|_B\\le r\\}\\bigr). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-separable-banach-has-countable-norming-family",
+          "source_section": "Statement",
+          "quote": "Assume HB and countable choice. Let $B$ be a real separable Banach space. There is a sequence\n$(\\ell_j)_{j\\ge1}\\subseteq B^*$ with $\\|\\ell_j\\|=1$ such that\n$$\\|x\\|=\\sup_{j\\ge1}|\\ell_j(x)|\\qquad(x\\in B).$$\nIf $B=\\{0\\}$, the conclusion is interpreted using the zero functional and the\nsupremum is $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A_r=\\overline B_B(0,r)$. By [F4], $\\mu(A_r)>0$ because it contains the open ball of radius $r$ about the support point $0$. Let $(\\ell_j)$ be the norming family from [F6], and define $A_{r,n}=\\bigcap_{j\\le n}\\{|\\ell_j(W)|\\le r\\}$. The sets decrease to $A_r$. For fixed $n$, the vector $(z_s,\\ell_1(W),\\ldots,\\ell_n(W))$ is centered Gaussian: [F3] makes $z_s$ an $L^2$ limit of continuous-linear Gaussian coordinates, so adjoining the finitely many displayed coordinates gives a centered Gaussian limit. Its law is invariant under simultaneous sign reversal, and $A_{r,n}$ is invariant under that reversal. Hence $$ \\mathbb E[e^{z_s}\\mathbf1_{A_{r,n}}]=\\mathbb E[e^{-z_s}\\mathbf1_{A_{r,n}}], \\qquad \\mathbb E[z_s\\mathbf1_{A_{r,n}}]=0. $$ The variables $e^{\\pm z_s}$ are integrable by the Gaussian moment formula in [F3]. Dominated convergence as $n\\to\\infty$ therefore gives conditional symmetry and conditional mean zero on $A_r$. Thus $$ 1\\le \\mathbb E_\\mu[e^{-z_s}\\mid A_r]\\le e^{\\|s\\|_E^2/2}. $$ For the lower bound, conditional Jensen applies. For the upper bound, [F3] applied to $-s$ gives $$ \\mathbb E_\\mu[e^{-z_s}\\mathbf 1_{A_r}] =e^{\\|s\\|_E^2/2}\\,\\mu(\\overline B_B(is,r)), $$ and [F5] bounds the last probability by $\\mu(A_r)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $h\\in E$, choose $\\ell_n\\in B^*$ with $h_n:=C\\ell_n\\to h$ in $E$, possible by the completion in [F2], and put $s_n=h-h_n$. The Cameron–Martin formula [F3], applied to the translate by $-h$, gives $$ \\frac{\\mu(\\overline B_B(ih,r))}{\\mu(A_r)} =e^{-\\|h\\|_E^2/2}\\,\\mathbb E_\\mu[e^{-z_h}\\mid A_r]. $$ Since $z_{h_n}=\\ell_n(W)$ almost surely and $z_h=z_{h_n}+z_{s_n}$, the bound $|\\ell_n(W)|\\le r\\|\\ell_n\\|_{B^*}$ on $A_r$ and step 1.1 imply $$ e^{-r\\|\\ell_n\\|_{B^*}} \\le \\mathbb E_\\mu[e^{-z_h}\\mid A_r] \\le e^{r\\|\\ell_n\\|_{B^*}}e^{\\|s_n\\|_E^2/2}. $$ For fixed $n$, let $r\\downarrow0$; then let $n\\to\\infty$, so $\\|s_n\\|_E\\to0$. The two bounds show $\\mathbb E_\\mu[e^{-z_h}\\mid A_r]\\to1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying step 2.1 separately to $h_1$ and $h_2$ yields $$ \\frac{\\mu(\\overline B_B(ih_1,r))}{\\mu(\\overline B_B(ih_2,r))} =e^{(\\|h_2\\|_E^2-\\|h_1\\|_E^2)/2} \\frac{\\mathbb E[e^{-z_{h_1}}\\mid A_r]}{\\mathbb E[e^{-z_{h_2}}\\mid A_r]}. $$ Both conditional expectations tend to $1$, so the ratio has the stated limit. Positivity of the denominator follows from [F4], since each closed ball contains the corresponding open neighborhood of a support point.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The zero Banach space has E={0}; the only ratio is 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For h1=h2, both balls agree and the limit is 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No ball probability is asserted to equal one; all radii are positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When E={0}, the support theorem gives positive centered balls and the ratio statement reduces to identical centers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The ball convention is closed, with ||x-z||<=r; support positivity holds for each r>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC, HB and countable choice are explicit in the statement and Facts & Assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A Cameron-Martin shift pair has the displayed small-ball ratio limit; observing this ratio is not asserted sufficient for membership in E. No additional forward equivalence is a conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "A Cameron-Martin shift pair has the displayed small-ball ratio limit; observing this ratio is not asserted sufficient for membership in E. No additional forward equivalence is a conclusion.",
+            "item_sha256": "cabd9cd954255c06f1ebc73fd07732d2471fbf549fb7153bf212e0934373272d",
+            "row_sha256": "7ce9b3b2c391374d22bab40a2b5f42eef7809ebefb264b289ebaed05881c7bf1",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 367
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A Cameron-Martin shift pair has the displayed small-ball ratio limit; observing this ratio is not asserted sufficient for membership in E. In particular no reverse implication is authorized.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "A Cameron-Martin shift pair has the displayed small-ball ratio limit; observing this ratio is not asserted sufficient for membership in E. In particular no reverse implication is authorized.",
+            "item_sha256": "cabd9cd954255c06f1ebc73fd07732d2471fbf549fb7153bf212e0934373272d",
+            "row_sha256": "aa9111beb320dc2a72e2447e375e00b6ee03ec2dc031b39dd69d123be82d07ea",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 366
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked all three steps against actual Cameron–Martin translation, support, tightness, norming-family, covariance and scalar/multivariate Gaussian interfaces. The sign in the translation formula correctly uses -h. Finite joint Gaussian symmetry passes through L2 coordinate approximation and dominated convergence; e^x>=1+x also proves the conditional Jensen lower bound directly. The centered shift inequality bounds residual exponential moments uniformly in radius. Fixing n before r tends to zero, then sending n to infinity, closes the squeeze without assuming continuity of z_h in the Banach norm. Support gives every denominator positive, also for zero/degenerate Gaussian laws. Read Dashti et al. §3 Theorem 3.2 complete proof and Kekkonen–Korolev §7.5 Theorem 7.5.3 statement: these use open balls; the current independent proof establishes closed balls. Reader delta is SHA256-bound citation metadata only."
+      }
+    },
+    "def-ip-small-ball-map-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition is for a supplied separable Banach space and probability measure."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition does not make a zero-probability claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No equality of a small-ball probability to one is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition applies to any Borel probability; no degenerate case is analyzed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The closed-ball radius convention is part of the definition; no endpoint theorem is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All choice assumptions used by the item are stated explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence theorem is asserted by the definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence theorem is asserted by the definition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Reviewed the complete uninterrupted Definition and all linked/declarative supplier interfaces, including the covariance/RKHS definition. Closed norm balls are Borel; 0<sup_x m_r(x)<=1 follows from the explicit dense countable cover and countable subadditivity without choosing maximizing centers. A probability cannot live on an empty Banach space; the singleton case gives ratio one. Relative modes explicitly require eventual positive denominators and compare each fixed k; no interchange with a supremum is asserted. AC is confined to the covariance notation; the global definition is choice-free. Checked Dashti Definition 3.1 and notes §7.5 convention, accounting for this carrier’s closed balls and supremum rather than an assumed attained maximum. SHA256 comparison proves only source metadata changed."
+      }
+    },
+    "thm-ip-gaussian-small-ball-map-functional": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-prior-on-a-forward-domain",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a specified real separable Banach or Hilbert parameter space with metric $d_X(x,x')=\\|x-x'\\|_X$ and its norm topology. Let $(Y,d_Y)$ be a metric data space equipped with a sigma-algebra $\\Sigma_Y$, let $U\\subseteq X$ be a nonempty admissible truth set, and let $F:U\\to Y$ be a forward map. Choose a Borel set $D\\in\\mathcal B(X)$ with $D\\subseteq U$ such that the restriction $G:=F|_D:D\\to Y$ is measurable for the trace Borel sigma-algebra $\\mathcal B(D):=\\{D\\cap A:A\\in\\mathcal B(X)\\}$. A prior on this forward domain is a Borel probability measure $\\mu$ on $X$ such that $\\mu(D)=1$. Its restriction $\\mu|_D$, defined by $\\mu|_D(A)=\\mu(A)$ for $A\\in\\mathcal B(D)$, is then a probability measure on $D$, and the induced data law is $G_\\#(\\mu|_D)$, defined by $G_\\#(\\mu|_D)(E)=(\\mu|_D)(G^{-1}(E))$ for $E\\in\\Sigma_Y$. A Borel probability on $X$ with $\\mu(D)<1$ is not a prior on this declared forward domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-function-space-posterior-propriety",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a separable real Banach space with norm $\\|\\cdot\\|_X$, let $D\\subseteq X$ be Borel, and let $\\mu_0$ be a Borel probability on $X$ with $\\mu_0(D)=1$. Here $\\mathcal B(X)$ is generated by the norm-open sets. Give $D$ the relative topology and Borel sigma-algebra $\\mathcal B(D)=\\{D\\cap B:B\\in\\mathcal B(X)\\}$, and let $\\mu_{0,D}$ be the restriction of $\\mu_0$ to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D)$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. Assume $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B(\\overline{\\mathbb R})$ is generated by the order topology on the extended real line and $\\mathcal B((-\\infty,+\\infty])$ is its trace on $(-\\infty,+\\infty]$; thus $+\\infty$ is allowed and $-\\infty$ is excluded. Let $\\mathsf Y_0\\subseteq\\mathsf Y$. Suppose that for every $y\\in\\mathsf Y_0$, the section $u\\mapsto\\Phi(u;y)$ is finite and continuous as a real-valued function on $D$ with its relative topology inherited from the norm topology. Suppose there is one Borel function $M_1:[0,\\infty)\\to[0,\\infty)$, independent of $y\\in\\mathsf Y_0$, such that\n$$\\Phi(u;y)\\ge -M_1(\\|u\\|_X)\\quad(u\\in D,\\ y\\in\\mathsf Y_0),\\qquad \\int_D e^{M_1(\\|u\\|_X)}\\,\\mu_{0,D}(du)<\\infty.$$\nDefine $\\operatorname{supp}\\mu_0:=\\{x\\in X:\\mu_0(U)>0\\text{ for every open neighborhood }U\\text{ of }x\\}$. Then for every $y\\in\\mathsf Y_0$, the evidence $Z_\\Phi(y)$ is finite and strictly positive, and the normalized fiberwise update $\\Pi^y$ is a probability measure on $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $W$ be a centered Borel Gaussian random\nelement in a real separable Banach space $B$. There is a constant $a>0$ such\nthat\n$$E\\exp(a\\|W\\|^2)<\\infty.$$\nIn particular, $E\\|W\\|^2<\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every Borel probability on a Polish space S is tight.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+          "source_section": "Statement",
+          "quote": "Assume AC and countable choice. Let $\\mu$ be a centered tight Borel Gaussian\nlaw on a real separable Banach\nspace $B$, and let $H\\subseteq B$ be its covariance RKHS. Define\n$\\operatorname{supp}\\mu$ to be the set of $x\\in B$ for which every open\nneighborhood has positive $\\mu$-measure. Then\n$$\\operatorname{supp}\\mu=\\overline H^{\\,B}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-banach-gaussian-covariance-operator-and-rkhs",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $W$ be a centered Borel Gaussian random element in a real separable\nBanach space $B$, with law $\\mu$. For $\\ell\\in B^*$ define\n$$C\\ell=E[\\ell(W)W]\\in B,\\qquad Q(\\ell,m)=E[\\ell(W)m(W)]\\quad(\\ell,m\\in B^*).$$\nThe **Cameron–Martin reproducing-kernel Hilbert space** $H$ is the completion\nof $B^*/N$ in the inner product induced by $Q$, where\n$N=\\{\\ell\\in B^*:Q(\\ell,\\ell)=0\\}$. The canonical map sends the class of\n$\\ell$ to $C\\ell$ and extends continuously to an injective map $i:H\\to B$;\nwe identify $H$ with its image in $B$ and use the completed Hilbert norm\n$\\|\\cdot\\|_H$. The preceding construction is well-defined by\n[[thm-banach-gaussian-covariance-rkhs-is-well-defined]].\n\nThe term *RKHS* here denotes this covariance-induced Hilbert space of shifts\ninside $B$; it is not the space of all continuous functions on an arbitrary\nindex set.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume AC. Under the hypotheses and notation of\n[[def-banach-gaussian-covariance-operator-and-rkhs]], each $C\\ell$ exists as a\nBochner integral; $Q$ is a finite positive-semidefinite bilinear form;\n$N=\\{\\ell:Q(\\ell,\\ell)=0\\}$ is its nullspace; and the induced map from the\ncompletion of $B^*/N$ to $B$ is continuous and injective. Thus the definition\nidentifies a Hilbert space of shifts in $B$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-banach-gaussian-rkhs-unit-ball-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mu$ be a centered tight Borel Gaussian law on a real separable Banach\nspace $B$, and let $H\\subset B$ be its covariance RKHS. The closed Hilbert\nunit ball\n$$H_1=\\{h\\in H:\\|h\\|_H\\le1\\}$$\nis compact in the Banach norm.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-ip-gaussian-shift-small-ball-ratio",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, the Hahn–Banach theorem, and countable choice. Let $B$ be a real separable Banach space, and let $W$ be a centered Borel Gaussian random element with law $\\mu$. Define its covariance by $C\\ell=\\mathbb E[\\ell(W)W]$ for $\\ell\\in B^*$, let $N=\\{\\ell:\\mathbb E[\\ell(W)^2]=0\\}$, and let $E$ be the completion of $B^*/N$ with inner product $\\langle[\\ell],[m]\\rangle_E=\\mathbb E[\\ell(W)m(W)]$. Let $i:E\\to B$ be the canonical injection extending $[\\ell]\\mapsto C\\ell$. For $z\\in B$ and $r>0$, write $\\overline B_B(z,r)=\\{x\\in B:\\|x-z\\|_B\\le r\\}$. Then for any $h_1,h_2\\in E$,\n$$ \\frac{\\mu(\\overline B_B(ih_1,r))}{\\mu(\\overline B_B(ih_2,r))} \\longrightarrow \\exp\\!\\left(\\frac{\\|h_2\\|_E^2-\\|h_1\\|_E^2}{2}\\right) \\qquad(r\\downarrow0). $$\nThe denominator is positive for every $r>0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-small-ball-map-estimator",
+          "source_section": "Definition",
+          "quote": "Let $B$ be a separable Banach space with norm $\\|\\cdot\\|_B$, and let $\\Pi$ be a Borel probability measure on $B$. For $z\\in B$ and $r>0$, write $\\overline B_B(z,r)=\\{u\\in B:\\|u-z\\|_B\\le r\\}$ and $m_r(z)=\\Pi(\\overline B_B(z,r))$. A **strong small-ball MAP** is a point $z\\in B$ for which\n$$ \\frac{m_r(z)}{\\sup_{x\\in B}m_r(x)}\\longrightarrow1\\qquad(r\\downarrow0). $$\nAssume AC for the covariance-induced Cameron–Martin notation. If $\\Pi$ is a posterior law formed by weighting a centered Gaussian prior $\\Pi_0$ on $B$, let $C\\ell=\\int_B\\ell(u)u\\,\\Pi_0(du)$ be its covariance operator and let $E$ be the completion of $B^*/\\ker C$ with inner product $\\langle[\\ell],[m]\\rangle_E=m(C\\ell)$; the canonical injection $i:E\\to B$ extends $[\\ell]\\mapsto C\\ell$. A **Cameron–Martin ratio mode** is a point $ih\\in iE$ such that, for every $k\\in E$, the denominator is positive for all sufficiently small $r$ and\n$$ \\lim_{r\\downarrow0}\\frac{m_r(ih)}{m_r(ik)} $$\nexists and is at least $1$. This pairwise comparison over fixed Cameron–Martin centers does not assert the global strong small-ball MAP condition.\n\nFor every $r>0$, $\\sup_{x\\in B}m_r(x)>0$: a countable dense subset gives a countable cover of $B$ by radius-$r$ open balls, each contained in its corresponding closed ball, and countable subadditivity rules out all such closed balls having zero probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-bolzano-weierstrass",
+          "source_section": "Statement",
+          "quote": "Every bounded sequence of reals has a convergent subsequence: if $(x_k)$ is a\nsequence of reals and there is $M \\in \\mathbb{R}$ with $|x_k| \\le M$ for every\n$k \\in \\mathbb{N}$ ([[def-sequence]]), then there is a strictly increasing\n$n : \\mathbb{N} \\to \\mathbb{N}$ and a real $L$ with $x_{n_j} \\to L$.\n\nEquivalently: the subsequential limit set of a bounded sequence is nonempty\n([[def-subsequential-limit]]).\n\nThe theorem is the exact repair of the false claim that a bounded sequence\nconverges. A bounded\nsequence need not converge, and the alternating sequence is the standing witness;\nwhat boundedness does force is that *some* subsequence converges. The converse of\nthe theorem is false, and badly so: a sequence with a convergent subsequence need\nnot be bounded.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $0<\\varepsilon<a$ with $a$ from [F3]. The lower bound gives $\\Phi(u)\\ge M_\\varepsilon-\\varepsilon\\|u\\|_B^2$. Define the nonnegative Borel function $M_1(t)=\\max\\{0,\\varepsilon t^2-M_\\varepsilon\\}$. Then $\\Phi(u)\\ge-M_1(\\|u\\|_B)$ and $$ e^{M_1(\\|u\\|_B)} \\le 1+e^{-M_\\varepsilon}e^{\\varepsilon\\|u\\|_B^2}. $$ The right side is $\\mu$-integrable by [F3]. Since $\\Phi$ is locally Lipschitz it is finite and continuous on $B$. Apply [F2] with the single datum and $D=B$; the prior definition in [F1] makes $\\mu$ a prior on $B$. Thus $0<Z<\\infty$ and $\\Pi$ is a probability.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $C_i=\\|i:E\\to B\\|$. If $E=\\{0\\}$, $I$ has the sole candidate $0$ and is minimized there. Otherwise $C_i>0$. Choose $\\varepsilon<1/(4C_i^2)$ and use the potential lower bound to obtain, for every $h\\in E$, $$ I(ih)\\ge M_\\varepsilon+\\frac12\\|h\\|_E^2-\\varepsilon\\|ih\\|_B^2 \\ge M_\\varepsilon+\\frac14\\|h\\|_E^2. $$ Since $I(0)=\\Phi(0)$ is finite, $\\inf_E I$ is finite and any minimizing sequence is bounded in $E$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $h\\in E$. Local Lipschitz continuity at $ih$ supplies constants $L_h<\\infty$ and $\\rho_h>0$ such that $|\\Phi(u)-\\Phi(ih)|\\le L_h r$ whenever $\\|u-ih\\|_B\\le r<\\rho_h$. Therefore $$ e^{-\\Phi(ih)-L_hr}\\mu(\\overline B_B(ih,r)) \\le \\int_{\\overline B_B(ih,r)}e^{-\\Phi(u)}\\,\\mu(du) \\le e^{-\\Phi(ih)+L_hr}\\mu(\\overline B_B(ih,r)). $$ For fixed $h_1,h_2\\in E$, divide the two integral bounds and cancel the common normalizer $Z$ in [F1]. The factors from the Lipschitz errors tend to $1$, and [F7] gives $$ \\frac{\\Pi(\\overline B_B(ih_1,r))}{\\Pi(\\overline B_B(ih_2,r))} \\longrightarrow e^{\\Phi(ih_2)-\\Phi(ih_1)} e^{(\\|h_2\\|_E^2-\\|h_1\\|_E^2)/2} =e^{I(ih_2)-I(ih_1)}. $$ The denominator is positive for small $r$: [F4] gives positive prior mass to every open ball about $ih_2$ (since $ih_2\\in iE$), and the likelihood is strictly positive and continuous there.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "F7",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Choose a minimizing sequence $(h_n)$ in $E$ and, by [F9], pass to a subsequence for which $\\|h_n\\|_E\\to L$. Its images lie in a fixed multiple of the closed $E$-unit ball, whose image is compact in $B$ by [F6]. Pass to a further subsequence with $ih_n\\to v$ in $B$; compactness means $v=ih$ for some $h\\in E$. For each $\\ell\\in B^*$, [F5] gives $$ |\\ell(ih)|=\\lim_n|\\ell(ih_n)| =\\lim_n|\\langle h_n,[\\ell]\\rangle_E| \\le L\\|[\\ell]\\|_E. $$ The classes $[\\ell]$ are dense in $E$ by [F5]. For every unit $g\\in E$, choose nonzero classes $[\\ell_n]\\to g$ and normalize them; then $[\\ell_n]/\\|[\\ell_n]\\|_E\\to g$. Thus the normalized covariance classes are dense in the unit sphere, and the supremum of $|\\langle h,[\\ell]\\rangle_E|$ over them is $\\|h\\|_E$. The displayed bound gives $\\|h\\|_E\\le L$. Local Lipschitz continuity gives $\\Phi(ih_n)\\to\\Phi(ih)$, and therefore $$ I(ih)\\le\\lim_n\\left(\\Phi(ih_n)+\\frac12\\|h_n\\|_E^2\\right)=\\inf_E I. $$ Thus $I$ attains its finite minimum.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F9",
+            "step 1.2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F7], the posterior ball ratio for fixed $ih,ik\\in iE$ is $e^{I(ik)-I(ih)}$. This limit is at least $1$ for every $k\\in E$ exactly when $I(ih)\\le I(ik)$ for every $k\\in E$. By [F8], those points are precisely the Cameron–Martin ratio modes. The comparison is only over fixed centers in $iE$; no supremum over all $B$ centers has been controlled, so it does not establish a global strong small-ball MAP.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prior is a probability on B and B may be the zero space, not an empty parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Evidence is strictly positive by the posterior propriety step; the zero-evidence case is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No assertion that evidence equals one is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If E={0}, step 1.2 identifies the sole candidate 0; the fixed-center ratio remains defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Closed balls and radii r>0 are used; local Lipschitz bounds hold on the full closed ball for sufficiently small r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC, HB and countable choice are explicit; the minimizer argument uses compact embedding and a real bounded-sequence subsequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves every minimizer is a Cameron-Martin ratio mode."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves every Cameron-Martin ratio mode minimizes I."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Reviewed Proof 1.1–3.1 and each actual supplier. Fernique plus epsilon<a gives an integrable likelihood envelope on D=B and the single-datum propriety theorem applies. The lower-envelope condition and continuous injection give coercivity with coefficient at least 1/4; E={0} is separate. For fixed centers local Lipschitz errors tend to zero, so the reviewed Gaussian ratio transfers with the correct sign. In the minimizing sequence choose a real norm-convergent subsequence, then use compactness of the image of a closed Hilbert ball, not merely relative compactness; testing against dense covariance classes yields ||h||<=lim||h_n|| and continuity of Phi completes attainment. Both directions of the ratio-mode equivalence are exactly exp(I(k)-I(h))>=1 iff I(h)<=I(k). No global supremum is substituted for fixed centers. Checked the full local compact-ball, Fernique and posterior-propriety proofs; the source notes Theorem 7.5.6 proof supplies contextual direct-method evidence. Reader changes citation metadata only."
+      }
+    },
+    "ex-ip-finite-dimensional-small-ball-map-equals-density-mode": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-centering-for-bounded-symmetric-quasiconvex-loss",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\sim N_d(m,\\Sigma)$ with positive-definite covariance\n$\\Sigma$. Let $L:\\mathbb R^d\\to[0,M]$ be Borel measurable and symmetric,\n$L(-x)=L(x)$, and quasi-convex, meaning each sublevel set\n$\\{x:L(x)\\le t\\}$ is convex. Then for every $a\\in\\mathbb R^d$,\n$$E L(X-a)\\ge E L(X-m).$$\nThus the Gaussian center $m$ minimizes expected loss. The result includes\nquasi-convex losses whose sublevel sets are not closed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-small-ball-map-estimator",
+          "source_section": "Definition",
+          "quote": "Let $B$ be a separable Banach space with norm $\\|\\cdot\\|_B$, and let $\\Pi$ be a Borel probability measure on $B$. For $z\\in B$ and $r>0$, write $\\overline B_B(z,r)=\\{u\\in B:\\|u-z\\|_B\\le r\\}$ and $m_r(z)=\\Pi(\\overline B_B(z,r))$. A **strong small-ball MAP** is a point $z\\in B$ for which\n$$ \\frac{m_r(z)}{\\sup_{x\\in B}m_r(x)}\\longrightarrow1\\qquad(r\\downarrow0). $$\nAssume AC for the covariance-induced Cameron–Martin notation. If $\\Pi$ is a posterior law formed by weighting a centered Gaussian prior $\\Pi_0$ on $B$, let $C\\ell=\\int_B\\ell(u)u\\,\\Pi_0(du)$ be its covariance operator and let $E$ be the completion of $B^*/\\ker C$ with inner product $\\langle[\\ell],[m]\\rangle_E=m(C\\ell)$; the canonical injection $i:E\\to B$ extends $[\\ell]\\mapsto C\\ell$. A **Cameron–Martin ratio mode** is a point $ih\\in iE$ such that, for every $k\\in E$, the denominator is positive for all sufficiently small $r$ and\n$$ \\lim_{r\\downarrow0}\\frac{m_r(ih)}{m_r(ik)} $$\nexists and is at least $1$. This pairwise comparison over fixed Cameron–Martin centers does not assert the global strong small-ball MAP condition.\n\nFor every $r>0$, $\\sup_{x\\in B}m_r(x)>0$: a countable dense subset gives a countable cover of $B$ by radius-$r$ open balls, each contained in its corresponding closed ball, and countable subadditivity rules out all such closed balls having zero probability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ (Translation of a subset of $\\mathbb{R}^n$). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $n\\ge1$, let $x\\in\\mathbb{R}^n$, and let $r>0$. Then the Euclidean ball $B(x,r)$ is\nLebesgue measurable and satisfies\n$$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ (The Borel sigma-algebra of a topological space) is Lebesgue\nmeasurable (Lebesgue measurable sets, the family $\\mathcal{L}(\\mathbb{R}^n)$, and the restricted set function $\\lambda_n$). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the prior and noise have positive continuous Gaussian densities proportional to $\\exp(-\\tfrac12u^TC^{-1}u)$ and $\\exp(-\\tfrac12(y-Au)^T\\Gamma^{-1}(y-Au))$, respectively. For any $w$, $w^T\\Gamma^{-1}w\\ge0$: write $w=\\Gamma v$, so $w^T\\Gamma^{-1}w=v^T\\Gamma v\\ge0$. Thus $\\Phi_y\\ge0$ and $e^{-\\Phi_y}\\le1$, so the evidence is finite by [F6] and the fact that the prior is a probability. Write $f_0$ for the prior density. The function $f_0$ is positive and continuous at $0$, and $e^{-\\Phi_y}$ is also positive and continuous there. On a sufficiently small open ball $O$ about $0$, there are constants $c_0,c_1>0$ with $f_0\\ge c_0$ and $e^{-\\Phi_y}\\ge c_1$. By [F5], $\\lambda(O)>0$; [F6] then gives $N(0,C)(O)=\\int_O f_0\\,d\\lambda\\ge c_0\\lambda(O)>0$ and $Z\\ge c_1N(0,C)(O)>0$. The posterior update [F1] is therefore defined. Its Lebesgue density is proportional to the product of the prior density and likelihood, hence to $e^{-I_y(u)}$. Put $Q=C^{-1}+A^T\\Gamma^{-1}A$. For $v\\ne0$, $v^TQv=v^TC^{-1}v+(Av)^T\\Gamma^{-1}(Av)>0$: if $z=C^{-1}v$, then $v^TC^{-1}v=z^TCz>0$, and the second term is nonnegative by the preceding argument. Thus $Q$ is positive definite. Completing the square gives the unique minimizer $m=Q^{-1}A^T\\Gamma^{-1}y$, and the posterior is the nondegenerate Gaussian $N(m,Q^{-1})$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $r>0$, apply [F2] to this posterior and the loss $L_r(x)=\\mathbf1_{\\{\\|x\\|_2>r\\}}$. Its sublevel sets are the closed radius-$r$ ball and the whole space, so it is bounded, symmetric and quasi-convex. Thus every ball of radius $r$ has posterior mass at most the ball centered at $m$, and the supremum in [F3] is attained at $m$. Consequently $m$ is a strong small-ball MAP.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $q$ be the positive continuous posterior density. By [F5], every closed Euclidean ball has positive finite Lebesgue measure; the inclusions $B(z,r)\\subseteq\\overline B(z,r)\\subseteq B(z,2r)$ and the open-ball result in [F5] give the volume bounds, while [F4] makes the volumes of same-radius balls equal. For any fixed $z\\in\\mathbb R^d$, the absolute difference between $\\lambda(\\overline B(z,r))^{-1}\\Pi(\\overline B(z,r))$ and $q(z)$ is at most $\\sup_{\\|x-z\\|_2\\le r}|q(x)-q(z)|$, by [F6]; this tends to zero by continuity. The same holds at any $v$, and the common ball volume cancels; hence $\\Pi(\\overline B(z,r))/\\Pi(\\overline B(v,r))\\to q(z)/q(v)$. Since $q$ is proportional to $e^{-I_y}$, the finite-dimensional small-ball ratio agrees with the density and Onsager–Machlup comparison.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "scalar identity-observation case",
+          "method": "exact finite calculation",
+          "input": {
+            "d": 1,
+            "m": 1,
+            "C": 1,
+            "Gamma": 1,
+            "A": 1,
+            "y": 1
+          },
+          "calculation": "Q=2 and m=Q^{-1}A^T Gamma^{-1}y=1/2; I_y(u) has the unique minimum at u=1/2 and the posterior is N(1/2,1/2).",
+          "expected": {
+            "mode": "1/2",
+            "posterior_variance": "1/2"
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "d and m are positive matrix sizes and the Gaussian prior is a probability."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-evidence fiber is considered; both covariance matrices are positive definite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No claim Z=1 is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: C and Gamma are symmetric positive definite, so the prior and posterior covariances are nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter space is R^d and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is stated for the normal density interfaces; the finite-dimensional center inequality is invoked under AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward-direction disposition: The finite Gaussian posterior density mode is shown to be a strong small-ball MAP; no reverse characterization theorem for arbitrary distributions or centers is asserted. Read: Example; Verification3.1 small-ball ratio and Anderson comparison.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Forward-direction disposition: The finite Gaussian posterior density mode is shown to be a strong small-ball MAP; no reverse characterization theorem for arbitrary distributions or centers is asserted.",
+            "item_sha256": "eb603da5961a7252dfb7eda3437854f00cc364d61cf232929621e883e72a0db2",
+            "row_sha256": "f2b48db3720413b1588f3d423ff28abb74cef1c2840885225f179183e335ba6e",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 360
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse-direction disposition: The finite Gaussian posterior density mode is shown to be a strong small-ball MAP; no reverse characterization theorem for arbitrary distributions or centers is asserted. Read: Example; Verification3.1 small-ball ratio and Anderson comparison.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Reverse-direction disposition: The finite Gaussian posterior density mode is shown to be a strong small-ball MAP; no reverse characterization theorem for arbitrary distributions or centers is asserted.",
+            "item_sha256": "eb603da5961a7252dfb7eda3437854f00cc364d61cf232929621e883e72a0db2",
+            "row_sha256": "704963bba8629a0a34064b69c191a87751986f2451a692fce60c6a7772d5d2e4",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Reviewed all three Verification steps, actual Gaussian-density/centering interfaces, and exact measure/integral/closed-ball supplier statements. For d,m>=1, positive-definite C and Gamma make Q=C^{-1}+A^T Gamma^{-1}A positive definite even when A=0 or rank deficient. The likelihood is bounded by one and positive on a positive-prior-mass neighborhood, so evidence is positive finite for every fixed datum. Completing the square gives posterior N(Q^{-1}A^T Gamma^{-1}y,Q^{-1}). Gaussian centering maximizes each closed-ball probability at the mean for every radius. Common positive finite closed-ball volumes and continuity give fixed-center mass ratios q(z)/q(v). Because the density maximum is unique, any other z has limiting ratio q(z)/q(m)<1 and cannot be a strong MAP; thus the title’s equality is supported. No singular-covariance claim is made. Reader changes source metadata only."
+      }
+    },
+    "cex-ip-infinite-dimensional-pointwise-density-fallacy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-ip-gaussian-series-prior-regularity",
+          "source_section": "Statement",
+          "quote": "Let $H_0$ and $H_1$ be separable real Hilbert spaces with a continuous inclusion $H_1\\hookrightarrow H_0$. Let $(e_j)_{j\\ge1}$ be an orthonormal basis of $H_0$ that is a complete orthogonal basis of $H_1$, write $w_j=\\|e_j\\|_{H_1}^2>0$, and set $f_j=e_j/\\sqrt{w_j}$, so $(f_j)_{j\\ge1}$ is an orthonormal basis of $H_1$. Let $(\\xi_j)_{j\\ge1}$ be independent real random variables on one probability space with $\\mathbb E\\xi_j=0$ and $\\mathbb E\\xi_j^2=1$, and let $\\lambda_j\\ge0$ satisfy $\\sum_{j\\ge1}\\lambda_jw_j<\\infty$. Then\n$$S_N=\\sum_{j=1}^N\\sqrt{\\lambda_j}\\,\\xi_j e_j$$\nconverges almost surely in $H_1$ and in $L^2(\\Omega;H_1)$ to an $H_1$-valued Borel-measurable random element $S$, with\n$$\\mathbb E\\|S\\|_{H_1}^2=\\sum_{j\\ge1}\\lambda_jw_j.$$\nThese norm-convergence conclusions use no choice axiom beyond the supplied probability space and variables. For the following Gaussian conclusions, assume in addition that each $\\xi_j$ has the standard normal law $N(0,1)$. Under the Axiom of Choice and countable choice, $S$ is a centered Borel Gaussian random element in $H_1$. Its covariance map $C:H_1^*\\to H_1$, transported to $H_1$ by the Hilbert-space Riesz identification, is diagonal in the basis $(f_j)_{j\\ge1}$ with eigenvalues $\\lambda_jw_j$, and these eigenvalues are summable. If $D$ is a Borel forward-map domain in $H_1$ and $\\mathbb P(S\\in D)=1$, then the law of $S$ is a prior on $D$. Under the Axiom of Choice there is $a>0$ such that\n$$\\mathbb E\\exp\\!\\bigl(a\\|S\\|_{H_1}^2\\bigr)<\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ (Sigma-algebras). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of Series in the nonnegative extended real line.\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ (The real numbers) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-product-of-countable",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are at most countable (Finite, countably infinite, countable, uncountable) then so is\n$A \\times B$.\n\n**No choice principle is used**: the two enumerations are given, and the\nenumeration of the product is written down from them.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-countable-union-of-countable",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let\n$(A_n)_{n \\in \\mathbb{N}}$ be a family of at most countable sets\n([[def-countable]]) indexed by $\\mathbb{N}$. Then\n\n$$U = \\bigcup_{n \\in \\mathbb{N}} A_n$$\n\nis at most countable.\n\n**The role of $\\mathrm{AC}_\\omega$.** It is spent at exactly one step, step 3.1 below, where a surjection $\\mathbb N\\to A_n$ is selected simultaneously for each nonempty $A_n$. The individual countability hypotheses assert that these sets of surjections are nonempty; they specify no simultaneous selection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In [F1], take $H_0=H_1=\\ell^2$, $w_j=1$, and $\\lambda_j=1/(j(j+1))$. The finite sums telescope as $\\sum_{j=1}^N\\lambda_j=\\sum_{j=1}^N(1/j-1/(j+1))=1-1/(N+1)\\le1$, so the required infinite sum is finite. Thus [F1] applies to the stated independent standard normals and proves that $W$ is a centered Borel Gaussian random element.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose that $\\lambda$ is a translation-invariant Borel measure finite on every bounded Borel set. Put $U_j=\\{x:\\|x-e_j\\|_2<1/3\\}$. For $j\\ne k$, $\\|e_j-e_k\\|_2=\\sqrt2>2/3$, so the $U_j$ are pairwise disjoint. Each lies in the bounded ball $\\{x:\\|x\\|_2<2\\}$ by the triangle inequality. Translation invariance gives $\\lambda(U_j)=m$ independent of $j$. If $m>0$, the first $N$ disjoint balls have total measure $Nm$ for every $N$, contradicting finiteness of the radius-two ball. Hence $m=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Translation invariance and step 1.2 make every radius-$1/3$ ball have measure zero. Let $D$ be the set of finitely supported rational sequences. [F3] makes $D$ countable: it is the countable union, over support lengths $N$, of the countable set $\\mathbb Q^N$ padded with zeros. It is dense in $\\ell^2$: for any $x\\in\\ell^2$ and $\\epsilon>0$, choose $N$ so that the squared tail sum is less than $\\epsilon^2/4$, then approximate the first $N$ coordinates by rationals with squared total error less than $\\epsilon^2/4$; the resulting padded vector is within $\\epsilon$ of $x$. The radius-$1/3$ balls centered at $D$ therefore form a countable cover of $\\ell^2$. By [F2], $\\lambda(\\ell^2)=0$, and [F4] makes every Borel subset null. This contradicts that $\\lambda$ is nonzero. Hence no such reference measure exists, refuting the statement; in particular, the displayed Gaussian has no density relative to one.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "given",
+            "algebra",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "separation of coordinate balls",
+          "method": "exact norm calculation",
+          "input": {
+            "centers": "e_j,e_k with j!=k",
+            "radius": "1/3"
+          },
+          "calculation": "||e_j-e_k||_2=sqrt(2)>2/3, and ||x||_2<1+1/3<2 for x in either ball.",
+          "expected": {
+            "disjoint": true,
+            "contained_in_radius_2_ball": true
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample space ell² is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The proof forces every radius-1/3 ball to have zero measure, then obtains the contradiction that the assumed nonzero measure vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No probability-normalizer equality is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The argument concerns a specific nondegenerate weighted Gaussian series and measure geometry, not a covariance limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The balls in the disjointness argument are open; sqrt(2)>2/3 gives strict separation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC and countable choice are stated for the Gaussian series; the measure contradiction uses the explicit countable dense rational sequences."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward-direction disposition: The example refutes existence of the proposed nonzero translation-invariant locally finite reference measure on l2; it is not an iff density characterization. Read: Statement refuted; disjoint radius1/3 balls and countable rational cover proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Forward-direction disposition: The example refutes existence of the proposed nonzero translation-invariant locally finite reference measure on l2; it is not an iff density characterization.",
+            "item_sha256": "e0838d7450176fe4b3afe64669ee67adad9d77d829f80143831b17520abc1d55",
+            "row_sha256": "b4dcec3859e92455626f7468b15b15d0562dfaa65a2cbc941dfd72e19539c4c9",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 356
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse-direction disposition: The example refutes existence of the proposed nonzero translation-invariant locally finite reference measure on l2; it is not an iff density characterization. Read: Statement refuted; disjoint radius1/3 balls and countable rational cover proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Reverse-direction disposition: The example refutes existence of the proposed nonzero translation-invariant locally finite reference measure on l2; it is not an iff density characterization.",
+            "item_sha256": "e0838d7450176fe4b3afe64669ee67adad9d77d829f80143831b17520abc1d55",
+            "row_sha256": "1b57230872efc9f70e03cda87924309d04f2b4d964bf832bc8fed582e7654105",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 355
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Independently reviewed the complete witness and Proof 1.1–2.1 with every direct dependency interface and the full batch-15 Gaussian-series proof. H0=H1=ell2, w_j=1, lambda_j=1/(j(j+1)) satisfy the precise common-basis hypotheses and telescope to total variance one; AC/countable choice cover the Gaussian branch. Disjoint open balls radius 1/3 at e_j lie in the bounded radius-two ball, forcing their common finite mass to zero. Finitely supported rational sequences are countable under the stated countable choice and dense by squared-tail and finite-coordinate error estimates; countable subadditivity then forces the entire reference measure to vanish. The refutation addresses the exact nonzero translation-invariant Borel measure finite on every bounded Borel set, without excluding densities against other references. The locally finite title is also valid: repeat the disjoint-ball argument at a sufficiently small scale inside any finite-mass neighborhood. No diagram is needed. Reader source metadata correction only."
+      }
+    },
+    "ex-ip-map-differs-from-posterior-mean": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-misfit-evidence-and-posterior-law",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separable real Banach space with its norm topology, $D\\subseteq X$ a Borel forward-map domain, and $\\mu_0$ a Borel probability measure on $X$ with $\\mu_0(D)=1$. Write $\\mu_{0,D}$ for its restriction to $D$, so $\\mu_{0,D}(A)=\\mu_0(A)$ for $A\\in\\mathcal B(D):=\\{D\\cap B:B\\in\\mathcal B(X)\\}$. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space. A likelihood potential is a function $\\Phi:D\\times\\mathsf Y\\to(-\\infty,+\\infty]$ that is measurable from $\\bigl(D\\times\\mathsf Y,\\mathcal B(D)\\otimes\\mathcal Y\\bigr)$ to $\\bigl((-\\infty,+\\infty],\\mathcal B((-\\infty,+\\infty])\\bigr)$, where $\\mathcal B((-\\infty,+\\infty])$ is the trace of $\\mathcal B(\\overline{\\mathbb R})$ on $(-\\infty,+\\infty]$. Viewing $\\Phi$ via the inclusion $(-\\infty,+\\infty]\\hookrightarrow\\overline{\\mathbb R}$, it is also product-measurable as an extended-real-valued map because for every Borel set $B\\subseteq\\overline{\\mathbb R}$, $\\Phi^{-1}(B)=\\Phi^{-1}(B\\cap(-\\infty,+\\infty])$ is measurable by the definition of the trace sigma-algebra. Here $+\\infty$ is allowed and $-\\infty$ is excluded; set $e^{-\\infty}=0$. The scalar map $t\\mapsto e^{-t}$ on this range is continuous at finite $t$, and is continuous at $+\\infty$: given $\\varepsilon>0$, the limit supplies $a\\in\\mathbb R$ such that $t>a$ implies $e^{-t}<\\varepsilon$, and the order-topology neighborhood $(a,+\\infty]$ maps into $[0,\\varepsilon)$. Hence it is Borel, so $L_\\Phi:D\\times\\mathsf Y\\to[0,+\\infty)$, $L_\\Phi(u;y):=e^{-\\Phi(u;y)}$, is product-measurable by composition, and each section $u\\mapsto L_\\Phi(u;y)$ is nonnegative and measurable. Define its evidence by\n$$\nZ_\\Phi(y):=\\int_D L_\\Phi(u;y)\\,\\mu_{0,D}(du)\\in[0,+\\infty].\n$$\nFor each fixed $y$ with $0<Z_\\Phi(y)<+\\infty$, define the normalized fiberwise update on $A\\in\\mathcal B(D)$ by\n$$\\Pi^y(A):=\\frac{\\int_A L_\\Phi(u;y)\\,\\mu_{0,D}(du)}{Z_\\Phi(y)}.$$\nNo normalized fiberwise update is defined by this formula when $Z_\\Phi(y)=0$ or $Z_\\Phi(y)=+\\infty$.\n\nFor a data-indexed claim, an observation model and its version convention must also be specified. In the dominated case, let $Q$ be a proper probability kernel from $(D,\\mathcal B(D))$ to $(\\mathsf Y,\\mathcal Y)$, let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$, and suppose $Q(u,B)=\\int_B L_\\Phi(u;y)\\,\\nu(dy)$ for every $u\\in D$ and $B\\in\\mathcal Y$. Then $Z_\\Phi$ is the density of the prior-predictive data law with respect to $\\nu$; a data-indexed conditional-law version uses $\\Pi^y$ when $0<Z_\\Phi(y)<\\infty$ and the prior $\\mu_{0,D}$ when $Z_\\Phi(y)$ is zero or infinite. These filled fibers have zero prior-predictive mass, and their chosen values are not normalized fiberwise updates. More generally, for a proper Bayesian model with standard-Borel parameter space $(D,\\mathcal B(D))$ and data space $(\\mathsf Y,\\mathcal Y)$ (each measurably isomorphic to the Borel space of a Polish space), the Axiom of Choice guarantees a data-indexed posterior kernel; its values are unique as probability measures outside one data-marginal-null set, and values on that null set remain version choices. The dominated construction is choice-free; the separate standard-Borel existence branch assumes the Axiom of Choice.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-small-ball-map-estimator",
+          "source_section": "Definition",
+          "quote": "Let $B$ be a separable Banach space with norm $\\|\\cdot\\|_B$, and let $\\Pi$ be a Borel probability measure on $B$. For $z\\in B$ and $r>0$, write $\\overline B_B(z,r)=\\{u\\in B:\\|u-z\\|_B\\le r\\}$ and $m_r(z)=\\Pi(\\overline B_B(z,r))$. A **strong small-ball MAP** is a point $z\\in B$ for which\n$$ \\frac{m_r(z)}{\\sup_{x\\in B}m_r(x)}\\longrightarrow1\\qquad(r\\downarrow0). $$\nAssume AC for the covariance-induced Cameron–Martin notation. If $\\Pi$ is a posterior law formed by weighting a centered Gaussian prior $\\Pi_0$ on $B$, let $C\\ell=\\int_B\\ell(u)u\\,\\Pi_0(du)$ be its covariance operator and let $E$ be the completion of $B^*/\\ker C$ with inner product $\\langle[\\ell],[m]\\rangle_E=m(C\\ell)$; the canonical injection $i:E\\to B$ extends $[\\ell]\\mapsto C\\ell$. A **Cameron–Martin ratio mode** is a point $ih\\in iE$ such that, for every $k\\in E$, the denominator is positive for all sufficiently small $r$ and\n$$ \\lim_{r\\downarrow0}\\frac{m_r(ih)}{m_r(ik)} $$\nexists and is at least $1$. This pairwise comparison over fixed Cameron–Martin centers does not assert the global strong small-ball MAP condition.\n\nFor every $r>0$, $\\sup_{x\\in B}m_r(x)>0$: a countable dense subset gives a countable cover of $B$ by radius-$r$ open balls, each contained in its corresponding closed ball, and countable subadditivity rules out all such closed balls having zero probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n(Lebesgue outer measure on $\\mathbb{R}^n$). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, Assuming countable choice, Lebesgue outer measure is an outer measure that restricts to elementary volume\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of Carathéodory measurable sets.\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume, which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n(Extended-real-valued measurable functions). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\nThe integral of a nonnegative simple function.\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple (Nonnegative simple measurable functions).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $k=1,2,3,4$, put $a_k=\\int_{[0,1]}\\theta^k\\,d\\pi$. These bounded continuous functions are integrable because $0\\le\\theta^k\\le1$ on the support of the probability $\\pi$. For each $N\\ge1$, partition $[0,1]$ into $I_{j,N}=[j/N,(j+1)/N)$ for $j<N-1$ and $I_{N-1,N}=[(N-1)/N,1]$. The simple lower and upper step functions with values $(j/N)^k$ and $((j+1)/N)^k$ on $I_{j,N}$ bound $\\theta^k$ pointwise; [F3] gives $\\pi(I_{j,N})=1/N$, and [F4] therefore gives $$L_{N,k}:=N^{-(k+1)}\\sum_{j=0}^{N-1}j^k\\le a_k\\le N^{-(k+1)}\\sum_{j=1}^{N}j^k=:U_{N,k}.$$ Their difference is $U_{N,k}-L_{N,k}=1/N$. Also the binomial identity telescopes to $$N^{k+1}=(k+1)\\sum_{j=0}^{N-1}j^k+\\sum_{i=0}^{k-1}\\binom{k+1}{i}\\sum_{j=0}^{N-1}j^i.$$ For each $i<k$, $\\sum_{j=0}^{N-1}j^i\\le N^{i+1}$, so after division by $N^{k+1}$ all terms in the second sum tend to zero. Hence $L_{N,k}\\to1/(k+1)$, and the squeeze gives $a_k=1/(k+1)$. Also $\\int_{[0,1]}1\\,d\\pi=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $[0,1]$, $p(\\theta)=\\theta^2(1-\\theta)\\ge0$. Its derivative is $p'(\\theta)=\\theta(2-3\\theta)$, so its maximum is $p(2/3)=4/27<1$. Therefore $p$ and $1-p$ define valid conditional probabilities for $Y=1$ and $Y=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [F5], the evidence for $Y=1$ is $$Z=\\int_{[0,1]}p(\\theta)\\,d\\pi=\\int\\theta^2\\,d\\pi-\\int\\theta^3\\,d\\pi=\\frac13-\\frac14=\\frac1{12}>0,$$ using step 1.1. The posterior formula [F1] gives density $p/Z=12\\theta^2(1-\\theta)$ relative to $\\pi$. Since $\\pi$ has Lebesgue density $\\mathbf 1_{[0,1]}$, the posterior Lebesgue density is $q(\\theta)=12\\theta^2(1-\\theta)$ on $[0,1]$, extended by zero on $\\mathbb R\\setminus[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $(0,1)$, $q'(\\theta)=12\\theta(2-3\\theta)$, so $q$ increases up to $2/3$ and decreases after it; $q(0)=q(1)=0$. Thus $q_{\\max}=q(2/3)>0$ is the unique density maximum. For any center $x\\in\\mathbb R$ and $r>0$, the posterior density relative to $\\pi$ and [F3] give $m_r(x)\\le q_{\\max}\\pi([x-r,x+r]\\cap[0,1])\\le2r q_{\\max}$. For $0<r<1/3$, $[2/3-r,2/3+r]\\subseteq[0,1]$ and its $\\pi$-mass is $2r$. Continuity of $q$ then gives $$\\left|\\frac{m_r(2/3)}{2r}-q_{\\max}\\right|\\le\\sup_{|\\theta-2/3|\\le r}|q(\\theta)-q_{\\max}|\\longrightarrow0.$$ Hence $$1\\ge\\frac{m_r(2/3)}{\\sup_{x\\in\\mathbb R}m_r(x)}\\ge\\frac{m_r(2/3)}{2r q_{\\max}}\\longrightarrow1.$$ By [F2], $2/3$ is a strong small-ball MAP.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F1], [F5], and steps 1.1 and 2.1, the posterior mean is $$\\int_{[0,1]}\\theta q(\\theta)\\,d\\pi=12\\left(\\int\\theta^3\\,d\\pi-\\int\\theta^4\\,d\\pi\\right)=12\\left(\\frac14-\\frac15\\right)=\\frac35.$$ Since $3/5\\ne2/3$, the posterior mean differs from the strong small-ball MAP. Continuity at $3/5$ gives $m_r(3/5)/(2r)\\to q(3/5)$, while step 3.1 gives $\\sup_xm_r(x)/(2r)\\to q_{\\max}$. Consequently $$\\frac{m_r(3/5)}{\\sup_xm_r(x)}\\longrightarrow\\frac{q(3/5)}{q(2/3)}=\\frac{216/125}{16/9}=\\frac{243}{250}<1,$$ so the posterior mean is not a strong small-ball MAP.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "posterior evidence, mode and mean",
+          "method": "exact polynomial integration and differentiation",
+          "input": {
+            "prior": "Uniform[0,1]",
+            "likelihood": "theta^2(1-theta)",
+            "observation": 1
+          },
+          "calculation": "Z=1/3-1/4=1/12; q'=12 theta(2-3 theta); E[theta|Y=1]=12(1/4-1/5)=3/5.",
+          "expected": {
+            "evidence": "1/12",
+            "map": "2/3",
+            "posterior_mean": "3/5"
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prior is supported on the nonempty interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The evidence is exactly 1/12>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No evidence-equals-one claim is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate Gaussian or covariance limit is present."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The likelihood and posterior density vanish at both endpoints; the maximizing point is interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The prior and binary likelihood are explicitly defined; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example refutes equality of mean and MAP using the distinct values 3/5 and 2/3; it asserts no general equivalence of these estimators.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example refutes equality of mean and MAP using the distinct values 3/5 and 2/3; it asserts no general equivalence of these estimators.",
+            "item_sha256": "dfff762780d2c915d439ee815fa41f1ee411bf15a9f2d0e48d6181dad8d03923",
+            "row_sha256": "ac1f0115163194b63058da1861d36ca1d65150ef82804df977ae1f9efd187df2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 360
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructs a posterior from its mean and MAP; Proof 3.1 only establishes the small-ball property for this actual density.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No converse reconstructs a posterior from its mean and MAP; Proof 3.1 only establishes the small-ball property for this actual density.",
+            "item_sha256": "dfff762780d2c915d439ee815fa41f1ee411bf15a9f2d0e48d6181dad8d03923",
+            "row_sha256": "22929ee98063bb0c36e26e8e4f27b331ded44c9fcca1f123dc0b282867821b70",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Reviewed all five Verification steps and all seven actual dependency interfaces. Finite uniform-prior partitions give the polynomial moments without an added choice principle; likelihood p lies in [0,4/27], evidence is 1/12, posterior q=12 theta^2(1-theta) is continuous even at 0 and 1, has unique maximum 16/9 at 2/3, and mean 3/5. Global bound m_r(x)<=2r q_max and the matching lower bound at 2/3 show sup_x m_r(x)/(2r)->q_max. The same local continuity average at 3/5 yields limiting ratio (216/125)/(16/9)=243/250<1, now explicit in 4.1. Thus the original omitted exclusion is immediate nonfatal polish, not a false title or substantial missing prerequisite. Preserved Example, title, model, dependencies and claim strength; proof-only addition, repaired contract derivation, no judge record present. Checks: reflow unchanged, changed-item precheck pass, layout five steps zero defects, strict whole-batch proof contract pass and actual KaTeX render pass."
+      },
+      "repair_confidence": 1
+    }
+  }
+}

@@ -1,0 +1,13 @@
+---
+page: planar-diagram-codes-and-knot-table-enumeration-examples
+title: Planar-diagram codes and knot-table enumeration — Examples and Counterexamples
+status: draft
+items: []
+examples:
+  - cex-knot-kt-47-boundary-case
+  - ex-knot-kt-47-worked-cases
+requires:
+  - planar-diagram-codes-and-knot-table-enumeration
+order: 3197
+page_layout: compact-v1
+---

@@ -1,0 +1,66 @@
+---
+id: lem-heegaard-floer-correction-terms-lens-space-lp1
+kind: lemma
+title: "Lens-space correction-term formula for L(p,1)"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+page: branched-cover-correction-terms-and-sliceness
+deps:
+  - def-heegaard-floer-correction-term
+  - lem-heegaard-floer-correction-term-heegaard-invariance
+  - lem-lens-space-q-one-triangles-and-cyclic-handle-maps
+  - lem-rational-heegaard-floer-absolute-grading-and-cobordism-maps
+  - def-lens-space-surgery-orientation-convention
+dependency_level: 4
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Peter S. Ozsvath and Zoltan Szabo, Absolutely Graded Floer Homologies and Intersection Forms for Four-Manifolds with Boundary"
+      url: "https://arxiv.org/pdf/math/0110170v1"
+      locator: "Section 4.1, Proposition 4.8 specialized to q=1, and Proposition 4.2"
+    - title: "Paolo Aceto and Marco Golla, Dehn Surgeries and Rational Homology Balls"
+      url: "https://arxiv.org/pdf/1509.07559v2"
+      locator: "Section 3, Proposition 3.5 and Remark 3.6; lens-space orientation convention"
+---
+
+## Statement
+
+Use the Ozsvath–Szabo orientation convention $L(p,1)$ given by positive $p$-surgery on the unknot and label its Spin$^c$ structures by $i\in\mathbb Z/p\mathbb Z$, represented by $0\le i<p$. For every integer $p\ge1$,
+$$d(L(p,1),i)=\frac{(2i-p)^2-p}{4p}.$$
+For the opposite orientation the correction terms are negated, with the conjugate Spin$^c$ label understood.
+
+## Statement references
+
+[[def-lens-space-surgery-orientation-convention|The lens-space surgery orientation]]
+
+[[def-heegaard-floer-correction-term|The correction-term convention]]
+
+[Ozsvath and Szabo, *Absolutely Graded Floer Homologies and Intersection Forms for Four-Manifolds with Boundary*, Propositions 4.2 and 4.8](https://arxiv.org/pdf/math/0110170v1)
+
+[Aceto and Golla, *Dehn Surgeries and Rational Homology Balls*, Proposition 3.5 and Remark 3.6](https://arxiv.org/pdf/1509.07559v2)
+
+## Facts & Assumptions
+
+[F1] [[lem-lens-space-q-one-triangles-and-cyclic-handle-maps]] supplies the explicit individual index-zero, basepoint-zero count-one triangles, their cyclic maps and Chern evaluation $k=2i-p$ on a generator of square $-p$.
+
+[F2] [[lem-rational-heegaard-floer-absolute-grading-and-cobordism-maps]] constructs the absolute grading, with the sphere generator at degree zero, and proves the degree formula for these actual fixed-Spin$^c$ handle maps.
+
+[F3] [[lem-heegaard-floer-correction-term-heegaard-invariance]] identifies the correction term as the bottom degree of the infinity image. The convention in the statement is [[def-lens-space-surgery-orientation-convention]].
+
+## Proof
+
+**Given:** $p\ge1$ and a label $0\le i<p$, with the torus diagrams and fixed triangle structures of [F1].
+
+1.1 The alpha-gamma diagram, and the diagram with those two attaching curves reversed, each have one intersection in each Spin$^c$ structure. Their infinity differentials are zero: the Maslov index of a self-disk in a torsion Spin$^c$ structure is $2n_z$, so cannot be one. The minus lattice in each summand is therefore exactly $U\mathbb F_2[U][x_i,0]$, and its plus image has bottom $[x_i,0]$. Its correction term is the absolute grading of that generator, with no unknown exponent shift. [F1, F3]
+
+1.2 For the negative-trace map from $S^3$ to $-L(p,1)$, the fixed triangle has index and basepoint multiplicity zero and count one. It sends the sphere generator at exponent zero to $[x_i,0]$. The four-dimensional data are $c_1^2=-k^2/p$, $\chi=1$ and $\sigma=-1$. Hence its degree is $D_i=(1-k^2/p)/4$, and $d(-L(p,1),i)=D_i$. This computes the negative orientation directly. [F1, F2, step 1.1]
+
+1.3 The cyclically reordered triangle gives the actual fixed-structure map from $L(p,1)$ to $S^3$ and sends $[x_i,0]$ to the sphere generator at exponent zero. It is the same oriented triple four-manifold with the other sphere input filled, so it has the same degree $D_i$. Consequently $0=\operatorname{gr}[x_i,0]+D_i$, and $d(L(p,1),i)=-D_i=((2i-p)^2-p)/(4p)$. This argument uses an actual turned-around triangle map rather than a general grading-duality assertion. [F1, F2, step 1.1, step 1.2]
+
+1.4 The characteristic labels under orientation reversal or conjugation are paired by $k\mapsto-k$, equivalently $i\mapsto p-i$ modulo $p$. Their squares agree, so the two computations give exactly the asserted negation for the opposite orientation with the conjugate label. For $p=1$ the same computation has $k=-1$ and both correction terms zero. [F1, step 1.2, step 1.3] ∎

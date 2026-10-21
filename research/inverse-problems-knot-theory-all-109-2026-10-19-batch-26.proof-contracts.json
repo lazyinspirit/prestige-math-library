@@ -1,0 +1,1408 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-nonlinear-exact-solution-set-is-weakly-closed",
+    "thm-ip-nonlinear-tikhonov-minimizer-exists",
+    "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution",
+    "thm-ip-nonlinear-tikhonov-weak-cluster-stability",
+    "thm-ip-nonlinear-tikhonov-vanishing-noise-convergence",
+    "ex-ip-nonlinear-tikhonov-has-two-global-minimizers",
+    "ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map"
+  ],
+  "contracts": {
+    "lem-ip-nonlinear-exact-solution-set-is-weakly-closed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real or complex normed space. Let $I$ be a nonempty directed preorder and $(x_i)_{i\\in I}$ a net in $X$ ([[def-directed-set-and-net]]). For $x\\in X$, write $x_i\\rightharpoonup x$ and say the net **converges weakly to $x$** when it converges to $x$ in $\\sigma(X,X^*)$ ([[def-weak-topology-on-a-normed-space]], [[def-net-convergence-and-cluster-point]]). Equivalently,\n\n$$\\forall f\\in X^*\\ \\forall\\varepsilon>0\\ \\exists i_0\\in I\\ \\forall i\\ge i_0:\\quad |f(x_i)-f(x)|<\\varepsilon.$$\n\nIndeed, topological convergence implies each of these eventual conditions because the inverse disk is a neighborhood. Conversely, a neighborhood contains a finite intersection of inverse scalar neighborhoods containing $x$. Coordinate convergence gives an eventual index for each of the finitely many conditions; directedness gives a common upper bound for them, after which the whole intersection contains the net. For the empty intersection use any index of the nonempty $I$. This proves the equivalence without a choice axiom.\n\nA **weakly convergent sequence** is this definition with $I=\\mathbb N$ in its usual order. A constant net converges weakly to its value, including in the zero space. The specified limit must be a point of $X$; without a separation hypothesis uniqueness is not part of the definition. Weak closure continues to mean topological closure, not merely the set of limits of sequences.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-output-limit",
+          "claim": "Since $x_n\\in S_F(y)$, each $x_n$ lies in $D$ and $F(x_n)=y$. Thus $(F(x_n))$ is the constant sequence at $y$, so it converges weakly to $y$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "limit-remains-exact",
+          "claim": "Apply [F1] to $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup y$. It follows that $x\\in D$ and $F(x)=y$, hence $x\\in S_F(y)$. This is the asserted sequential weak closedness.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the exact solution set is empty, the universal closure assertion is vacuous; steps 1.1–2.1 require no selected element."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For datum y=0 the constant image sequence still converges weakly to its value, and steps 1.1–2.1 apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the exact solution set is a singleton, any weak limit from a sequence in it is returned to that set by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If X={0}, every nonempty subset is {0}; the graph-closure implication in step 2.1 still gives the conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, radius, or endpoint occurs in this sequence-closure lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 fix an arbitrary sequence and use no family of choices or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way closure implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way closure implication, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read Statement and steps 1.1–2.1 with the current weak-map and weak-convergence definitions. Constant outputs converge weakly to y, so sequential weak-to-weak graph closure returns each input weak limit to the exact solution set. Only sequential closure is concluded; no topological closure inference is made. Empty exact sets are vacuous; y=0 and zero spaces cause no division or choice. Reader found no defect; refuter did not flag this item. No diagram or repair is needed."
+      }
+    },
+    "thm-ip-nonlinear-tikhonov-minimizer-exists": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).\n\nIt is also called the **ultrafilter lemma** and is equivalent over ZF to the Boolean prime ideal theorem, abbreviated BPI. Items below write **assume UL/BPI** precisely when they use this extension principle; they do not thereby assume the full axiom of choice.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every complete real or complex\ninner-product space $H$, with its inner-product norm, is reflexive.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]) and let $(u_j)$ be a norm-bounded sequence in $X$. Then $(u_j)$ has a subsequence converging weakly to a point of $X$ ([[def-weak-convergence-of-nets-and-sequences]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then\n\n$$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$\n\nwhere the right side is an extended nonnegative real number. No boundedness of the net is assumed.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-infimum",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:\n\n- $\\ell$ is a lower bound of $S$ ([[def-bounded-set]]), that is, $\\ell \\le s$ for\n  every $s \\in S$;\n- $\\ell' \\le \\ell$ for every lower bound $\\ell'$ of $S$.\n\nWritten out in one line:\n\n$$\\ell \\text{ is an infimum of } S \\iff \\big[(\\forall s \\in S)\\, \\ell \\le s\\big] \\text{ and } \\big[(\\forall \\ell' \\in \\mathbb{R})\\, \\big((\\forall s \\in S)\\, \\ell' \\le s\\big) \\Rightarrow \\ell' \\le \\ell\\big].$$\n\nAn infimum, when it exists, is unique ([[lem-sup-unique]]), so we may write\n$\\inf S$ for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-inf-epsilon",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below, and let $\\ell$ be a\nlower bound of $S$ ([[def-bounded-set]]). Then\n\n$$\\ell = \\inf S \\quad \\Longleftrightarrow \\quad \\text{for every } \\varepsilon > 0 \\text{ there exists } s \\in S \\text{ with } s < \\ell + \\varepsilon.$$\n\nIn words: among the lower bounds of $S$, the infimum is exactly the one that\ncannot be raised by any positive amount and still bound $S$ from below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-infimum",
+          "claim": "Let $m:=\\inf\\{J_{\\alpha,y,x_0}(x):x\\in D\\}$. The set of objective values is nonempty because $D\\ne\\varnothing$, is bounded below by $0$, and contains a finite value. Thus $m$ is a finite real number by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5"
+          ]
+        },
+        {
+          "id": "minimising-sequence",
+          "claim": "For each $n\\ge1$, [F5] gives $x_n\\in D$ with $m\\le J_{\\alpha,y,x_0}(x_n)<m+1/n$. Since DC implies countable choice by [F1], choose these points as a sequence; then $J_{\\alpha,y,x_0}(x_n)\\to m$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F5",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "penalty-coercivity",
+          "claim": "The sequence of objective values is bounded above, say by $M>0$. Nonnegativity of both summands in [F6] and $\\alpha>0$ give $\\|F(x_n)-y\\|_Y^2\\le2M$ and $\\|x_n-x_0\\|_X^2\\le2M/\\alpha$. The triangle inequality then bounds $(x_n)$, and the first estimate together with fixed $y$ bounds $(F(x_n))$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "joint-weak-subsequence",
+          "claim": "By [F2], $X$ and $Y$ are real reflexive Banach spaces: they are complete inner-product spaces, and DC supplies the countable choice assumed in [F2] by [F1]. Apply [F3] to the bounded sequence $(x_n)$ to obtain a subsequence $x_{n_k}\\rightharpoonup x$; apply [F3] in $Y$ to the bounded sequence $(F(x_{n_k}))$ and pass to a further subsequence so that $F(x_{n_k})\\rightharpoonup z$. The further subsequence still has $x_{n_k}\\rightharpoonup x$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "graph-identification",
+          "claim": "By [F7], $x\\in D$ and $F(x)=z$. Subtracting the fixed vector $y$ preserves weak convergence, so $F(x_{n_k})-y\\rightharpoonup F(x)-y$, while $x_{n_k}-x_0\\rightharpoonup x-x_0$.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "lower-limit-attainment",
+          "claim": "Apply [F4] to the two weakly convergent sequences in step 5.1. The maps $r\\mapsto r^2/2$ and $r\\mapsto\\alpha r^2/2$ are increasing and continuous on $[0,\\infty)$, so each squared-norm term is lower semicontinuous. If their limit values are $a:=\\frac12\\|F(x)-y\\|_Y^2$ and $b:=\\frac{\\alpha}{2}\\|x-x_0\\|_X^2$, then for every $\\varepsilon>0$ each sequence term is eventually at least its limit value minus $\\varepsilon/2$; taking the larger of the two eventual indices gives $J_{\\alpha,y,x_0}(x_{n_k})\\ge a+b-\\varepsilon$. Thus $J_{\\alpha,y,x_0}(x)\\le\\liminf_k J_{\\alpha,y,x_0}(x_{n_k})=m$. Since $x\\in D$, the definition of $m$ gives $m\\le J_{\\alpha,y,x_0}(x)$, so equality holds and $x$ is a global minimizer.",
+          "step": "6.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes D is nonempty, so an empty admissible domain is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If X or Y is the zero Hilbert space, the bounds in step 3.1 and weak-limit argument in steps 4.1–6.1 still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The value alpha=1 is allowed; step 3.1 uses only alpha>0, while alpha=0 is excluded by the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton domain or constant forward map still yields a nonempty minimizing sequence and the same limit argument in steps 1.1–6.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints or radius occur in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses DC=>countable choice, and step 4.1 uses UL/DC/HB; the proof assumes no full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence assertion, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all six proof steps and actual cited interfaces: infimum/epsilon selection, DC implies countable choice, countable-choice Hilbert reflexivity, UL/DC/HB weak subsequence extraction, and HB norm lower semicontinuity. Nonempty D and finite nonnegative J give a finite infimum. DC selects a minimizing sequence; alpha>0 bounds inputs and outputs. Two nested subsequence extractions preserve the input weak limit; graph closure identifies F(x). The two lower-semicontinuity bounds combine through a common eventual index and the minimizing values converge to the infimum. No exact solution, convexity, uniqueness, norm continuity or full AC is used. Zero Hilbert spaces and arbitrary datum/reference are allowed. Reader found no defect; no refuter finding, diagram or repair."
+      }
+    },
+    "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).\n\nIt is also called the **ultrafilter lemma** and is equivalent over ZF to the Boolean prime ideal theorem, abbreviated BPI. Items below write **assume UL/BPI** precisely when they use this extension principle; they do not thereby assume the full axiom of choice.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-ip-nonlinear-exact-solution-set-is-weakly-closed",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, meaning closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy this graph condition: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$. Weak convergence means convergence under every bounded real-linear functional. For $y\\in Y$, the exact solution set $S_F(y):=\\{x\\in D:F(x)=y\\}$ is weakly sequentially closed in $X$: every sequence in $S_F(y)$ that converges weakly to $x$ has $x\\in S_F(y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every complete real or complex\ninner-product space $H$, with its inner-product norm, is reflexive.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-direct-method-in-a-reflexive-banach-space",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]), let $A\\subseteq X$ be nonempty and weakly sequentially closed ([[def-weak-convergence-of-nets-and-sequences]]), and let $I:A\\to(-\\infty,+\\infty]$ be proper, coercive on $A$ and weakly sequentially lower semicontinuous on $A$ ([[def-proper-coercive-and-weakly-lower-semicontinuous-functional]]). Then $I$ attains its infimum on $A$: there exists $u_0\\in A$ with $I(u_0)=\\inf_A I$. The admissible set may be taken convex and norm closed in $X$, by [[thm-norm-closed-convex-iff-weakly-closed]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then\n\n$$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$\n\nwhere the right side is an extended nonnegative real number. No boundedness of the net is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "source_section": "Definition",
+          "quote": "**Setting.** Let $X$ be a real normed space (in particular, a Banach space as in [[def-banach-space]]) and let $A\\subseteq X$ be a nonempty subset, the **admissible set**. An **extended-real functional on $A$** is a map $I:A\\to(-\\infty,+\\infty]$; its **effective domain** is $\\operatorname{dom}I=\\{u\\in A: I(u)<+\\infty\\}$.\n**Properness.** $I$ is **proper** if $\\operatorname{dom}I\\ne\\varnothing$, equivalently if $\\inf_A I<+\\infty$; a point of $\\operatorname{dom}I$ is a **finite competitor**.\n**Coercivity.** $I$ is **coercive on $A$** if for every $M\\in\\mathbb R$ there is $R\\ge0$ such that $I(u)>M$ whenever $u\\in A$ and $\\|u\\|\\ge R$; equivalently (the form used below) every sublevel set $\\{u\\in A:I(u)\\le\\Lambda\\}$, $\\Lambda\\in\\mathbb R$, is bounded.\n**Weak lower semicontinuity.** $I$ is **weakly sequentially lower semicontinuous at $u\\in A$** if $I(u)\\le\\liminf_j I(u_j)$ for every sequence $(u_j)_{j\\in\\mathbb N}\\subseteq A$ with $u_j\\rightharpoonup u$ ([[def-weak-convergence-of-nets-and-sequences]]), and **weakly sequentially lower semicontinuous on $A$** if this holds at every $u\\in A$. Analogously $I$ is **sequentially lower semicontinuous** on $A$ if $I(u)\\le\\liminf_j I(u_j)$ whenever $u_j\\to u$ in norm; all infima and limits inferior are taken in $\\overline{\\mathbb R}=[-\\infty,+\\infty]$, using the complete extended order of [[lem-extended-reals-complete]]. For an extended-real sequence $(a_j)$, set $\\liminf_j a_j:=\\sup_N\\inf_{j\\ge N}a_j$; this extends the tail formula of [[def-limsup-liminf]] to sequences that may contain $+\\infty$ ([[def-extended-reals]]). In particular, the infimum or limit inferior may equal $-\\infty$.\n**Convention.** Only the values on $A$ enter these notions, and $I$ is identified with its restriction to $A$; a point of $X\\setminus A$ is inadmissible, not a point where $I$ equals $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-x0-minimum-norm-solution-on-weak-domain",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, meaning closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy this graph condition: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. For $x_0\\in X$ and $y\\in Y$, a point $x^\\dagger\\in D$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ when $F(x^\\dagger)=y$ and\n\n$$\n\\|x^\\dagger-x_0\\|_X\\le\\|x-x_0\\|_X\\qquad\\text{for every }x\\in D\\text{ with }F(x)=y.\n$$\n\nThis definition asserts neither existence nor uniqueness. The minimum is global over the exact solution set in $D$ and uses distance from the specified reference point $x_0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-set-direct-method-input",
+          "claim": "Let $S:=S_F(y)$. It is nonempty by hypothesis and weakly sequentially closed by [F1]. Define $I:S\\to(-\\infty,+\\infty]$ by $I(x):=\\frac12\\|x-x_0\\|_X^2$. This is finite everywhere on $S$, so it is proper. Its sublevel set $\\{x\\in S:I(x)\\le\\Lambda\\}$ is empty for $\\Lambda<0$ and, for $\\Lambda\\ge0$, satisfies $\\|x\\|_X\\le\\|x_0\\|_X+\\sqrt{2\\Lambda}$ by the triangle inequality. Hence $I$ is coercive on $S$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "weak-lower-semicontinuity",
+          "claim": "If $x_n\\in S$ and $x_n\\rightharpoonup x\\in S$, then $x_n-x_0\\rightharpoonup x-x_0$. By [F4], $\\|x-x_0\\|_X\\le\\liminf_n\\|x_n-x_0\\|_X$; since norms are nonnegative and squaring is increasing and continuous there, $I(x)\\le\\liminf_n I(x_n)$. Thus $I$ is weakly sequentially lower semicontinuous on $S$.",
+          "step": "2.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "minimum-attained",
+          "claim": "By [F2], countable choice follows from the assumed DC, so the real Hilbert space $X$ is reflexive; it is Banach by completeness in the Hilbert-space definition. The nonempty set $S$ is weakly sequentially closed by step 1.1, and $I$ is proper, coercive, and weakly sequentially lower semicontinuous by steps 1.1 and 2.1. Apply [F3], whose choice assumptions are exactly [A1], [A2], and [A3], to obtain $x^\\dagger\\in S$ minimizing $I$ on $S$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "minimum-norm-conclusion",
+          "claim": "Since $I(x)=\\frac12\\|x-x_0\\|_X^2$ and the square function is increasing on nonnegative reals, minimizing $I$ on $S$ is equivalent to minimizing $\\|x-x_0\\|_X$. Thus $x^\\dagger$ satisfies [F6] and is an $x_0$-minimum-norm exact solution.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes that the exact solution set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If x0 itself is exact, the functional has minimum zero and the direct-method application in steps 1.1–4.1 includes it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the exact solution set has one element, that element is the minimum-norm solution by the definition in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If X={0}, every nonempty exact solution set is a singleton, and steps 1.1–4.1 apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint appears in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The application uses UL, DC, and HB; DC supplies CC for Hilbert reflexivity in step 3.1, with no full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence in one direction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence in one direction, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read Statement and steps 1.1–4.1 with actual exact-set closure, direct-method theorem, proper/coercive/sequential-lsc definition, norm-lsc and Hilbert-reflexivity suppliers. Nonempty exact set is essential and explicitly assumed; the supplier needs sequential closure only, not convexity or topological weak closure. I=distance squared/2 is finite, has empty negative sublevels and bounded nonnegative sublevels, and is sequentially weak-lsc by HB. DC supplies countable choice for reflexivity; UL/DC/HB match the direct method. Increasing squaring gives precisely the global distance minimum, without uniqueness. Arbitrary x0 and zero spaces cause no problem. Reader found no defect; refuter did not flag it. No diagram or repair."
+      }
+    },
+    "thm-ip-nonlinear-tikhonov-weak-cluster-stability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).\n\nIt is also called the **ultrafilter lemma** and is equivalent over ZF to the Boolean prime ideal theorem, abbreviated BPI. Items below write **assume UL/BPI** precisely when they use this extension principle; they do not thereby assume the full axiom of choice.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, dependent choice, and the real Hahn–Banach dominated-extension principle. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, and let $F:D\\to Y$ be a map such that for every sequence $(x_n)$ in $D$ and every $x\\in X,z\\in Y$, $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$. Here $D$ is closed in the coarsest topology making every bounded real-linear functional continuous, and weak convergence means convergence under every such functional. For any $\\alpha>0$, $x_0\\in X$, and $y\\in Y$, the nonlinear Tikhonov functional\n\n$$\nJ_{\\alpha,y,x_0}(x)=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D)\n$$\n\nattains a global minimum on $D$; that is, there exists $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. No exact solution of $F(x)=y$ is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every complete real or complex\ninner-product space $H$, with its inner-product norm, is reflexive.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]) and let $(u_j)$ be a norm-bounded sequence in $X$. Then $(u_j)$ has a subsequence converging weakly to a point of $X$ ([[def-weak-convergence-of-nets-and-sequences]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then\n\n$$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$\n\nwhere the right side is an extended nonnegative real number. No boundedness of the net is assumed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "perturbed-minimizers-selected",
+          "claim": "For each $n$, [F1] makes the set $M_n$ of global minimizers of $J_{\\alpha,y_n,x_0}$ on $D$ nonempty. Since the family $(M_n)$ is countable and DC implies countable choice by [F2], choose $x_n\\in M_n$ for every $n$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "uniform-sublevel-bounds",
+          "claim": "Fix $v\\in D$, possible because $D\\ne\\varnothing$. Strong convergence $y_n\\to y$ bounds $J_{\\alpha,y_n,x_0}(v)$ by some $M>0$, and minimality gives $J_{\\alpha,y_n,x_0}(x_n)\\le M$. By [F7] and $\\alpha>0$, this bounds $\\|x_n-x_0\\|_X$ and $\\|F(x_n)-y_n\\|_Y$; the convergent sequence $(y_n)$ is bounded, so both $(x_n)$ and $(F(x_n))$ are bounded.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-cluster-subsequence",
+          "claim": "By [F3], [F4], and the bounds in step 2.1, pass to a subsequence with $x_{n_k}\\rightharpoonup x$ and then a further subsequence with $F(x_{n_k})\\rightharpoonup z$. The further subsequence still converges weakly to $x$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F3",
+            "F4",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "perturbed-graph-identification",
+          "claim": "By [F6], $x\\in D$ and $F(x)=z$. Since $y_{n_k}\\to y$ strongly, $F(x_{n_k})-y_{n_k}\\rightharpoonup F(x)-y$, and $x_{n_k}-x_0\\rightharpoonup x-x_0$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "limiting-minimizer",
+          "claim": "By [F5], each norm in [F7] is weakly lower semicontinuous; composition with the increasing continuous square function on nonnegative reals preserves this property. For any $\\varepsilon>0$, the two summand sequences are eventually at least their respective limit values minus $\\varepsilon/2$, so their sum is eventually at least $J_{\\alpha,y,x_0}(x)-\\varepsilon$. Thus $J_{\\alpha,y,x_0}(x)\\le\\liminf_k J_{\\alpha,y_{n_k},x_0}(x_{n_k})$. For any $w\\in D$, minimality gives $J_{\\alpha,y_{n_k},x_0}(x_{n_k})\\le J_{\\alpha,y_{n_k},x_0}(w)$, and the right side converges to $J_{\\alpha,y,x_0}(w)$ because $F(w)$ is fixed and $y_{n_k}\\to y$. Hence $J_{\\alpha,y,x_0}(x)\\le\\liminf_kJ_{\\alpha,y_{n_k},x_0}(x_{n_k})\\le\\limsup_kJ_{\\alpha,y_{n_k},x_0}(x_{n_k})\\le J_{\\alpha,y,x_0}(w)$. This holds for every $w\\in D$, so $x$ is a global minimizer. Applying the same argument to any weakly convergent subsequence proves the claim for every weak cluster point.",
+          "step": "5.1",
+          "inputs": [
+            "A3",
+            "F5",
+            "F7",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require a nonempty domain D."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If y_n=y for all n, step 2.1 still bounds any chosen sequence of minimizers and steps 3.1–5.1 apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The argument permits alpha=1 and every alpha>0; positivity is used in the penalty bound of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a singleton domain or zero Hilbert space, the minimizing sequence is bounded and every cluster point minimizes by step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, radius, or endpoint is part of the stability statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses DC=>CC for countably many minimizer sets; step 3.1 uses UL/DC/HB. No full AC is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way stability theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way stability theorem, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all five steps, every cited supplier interface and already reviewed minimizer-existence proof. DC selects from countably many nonempty minimizer sets. A fixed admissible v and norm-convergent data bound the objective, inputs and outputs uniformly at fixed alpha>0. Nested weak subsequences plus the graph condition identify an admissible joint limit; strong data convergence gives residual weak convergence. HB lower semicontinuity and comparison with each fixed w prove global minimality. For an arbitrary weakly convergent input subsequence, re-extract its bounded outputs while preserving that same input limit, so every such weak cluster point is covered. No exact solution or uniqueness is assumed; no full-sequence or strong convergence conclusion is claimed. Reader found no defect; no refuter finding, diagram or repair."
+      }
+    },
+    "thm-ip-nonlinear-tikhonov-vanishing-noise-convergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).\n\nIt is also called the **ultrafilter lemma** and is equivalent over ZF to the Boolean prime ideal theorem, abbreviated BPI. Items below write **assume UL/BPI** precisely when they use this extension principle; they do not thereby assume the full axiom of choice.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every complete real or complex\ninner-product space $H$, with its inner-product norm, is reflexive.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]) and let $(u_j)$ be a norm-bounded sequence in $X$. Then $(u_j)$ has a subsequence converging weakly to a point of $X$ ([[def-weak-convergence-of-nets-and-sequences]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-nonlinear-exact-solutions-have-x0-minimum-norm-solution",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, dependent choice, and HB. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy: for every sequence $x_n\\in D$ and $x\\in X,z\\in Y$, if $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$, then $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. If $S_F(y):=\\{x\\in D:F(x)=y\\}$ is nonempty for some $y\\in Y$, then for every $x_0\\in X$ there exists $x^\\dagger\\in S_F(y)$ such that $\\|x^\\dagger-x_0\\|_X\\le\\|x-x_0\\|_X$ for every $x\\in S_F(y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, dependent choice, and the real Hahn–Banach dominated-extension principle. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, and let $F:D\\to Y$ be a map such that for every sequence $(x_n)$ in $D$ and every $x\\in X,z\\in Y$, $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$. Here $D$ is closed in the coarsest topology making every bounded real-linear functional continuous, and weak convergence means convergence under every such functional. For any $\\alpha>0$, $x_0\\in X$, and $y\\in Y$, the nonlinear Tikhonov functional\n\n$$\nJ_{\\alpha,y,x_0}(x)=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D)\n$$\n\nattains a global minimum on $D$; that is, there exists $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. No exact solution of $F(x)=y$ is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm",
+          "source_section": "Statement",
+          "quote": "Assume HB ([[def-hahn-banach-extension-principle-relative]]). If a net $x_i\\rightharpoonup x$ in a real or complex normed space $X$, then\n\n$$\\|x\\|\\le\\liminf_i\\|x_i\\|:=\\sup_{i_0}\\inf_{i\\ge i_0}\\|x_i\\|,$$\n\nwhere the right side is an extended nonnegative real number. No boundedness of the net is assumed.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-ip-x0-minimum-norm-solution-on-weak-domain",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, meaning closed in the coarsest topology making every bounded real-linear functional continuous, and let $F:D\\to Y$ satisfy this graph condition: whenever $x_n\\in D$, $x_n\\rightharpoonup x$, and $F(x_n)\\rightharpoonup z$, one has $x\\in D$ and $F(x)=z$; weak convergence means convergence under every bounded real-linear functional. For $x_0\\in X$ and $y\\in Y$, a point $x^\\dagger\\in D$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ when $F(x^\\dagger)=y$ and\n\n$$\n\\|x^\\dagger-x_0\\|_X\\le\\|x-x_0\\|_X\\qquad\\text{for every }x\\in D\\text{ with }F(x)=y.\n$$\n\nThis definition asserts neither existence nor uniqueness. The minimum is global over the exact solution set in $D$ and uses distance from the specified reference point $x_0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-minimum-norm-competitor",
+          "claim": "By [F4], choose an $x_0$-minimum-norm exact solution $\\widehat x\\in D$ and put $R:=\\|\\widehat x-x_0\\|_X$. For each $n$, [F5] makes the set of global minimizers of $J_{\\alpha_n,y_n,x_0}$ nonempty; by [F1] and the assumed DC, choose one $x_n$ from each set.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "vanishing-noise-bounds",
+          "claim": "Minimality, [F8], exactness of $\\widehat x$, and $\\|y_n-y^\\dagger\\|_Y\\le\\delta_n$ give $\\frac12\\|F(x_n)-y_n\\|_Y^2+\\frac{\\alpha_n}{2}\\|x_n-x_0\\|_X^2\\le J_{\\alpha_n,y_n,x_0}(\\widehat x)\\le\\frac{\\delta_n^2}{2}+\\frac{\\alpha_n}{2}R^2$. Consequently $\\|x_n-x_0\\|_X^2\\le\\delta_n^2/\\alpha_n+R^2$, so $(x_n)$ is bounded, and $\\|F(x_n)-y_n\\|_Y^2\\le\\delta_n^2+\\alpha_nR^2\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-weak-cluster",
+          "claim": "By [F2] and [F3], a subsequence satisfies $x_{n_k}\\rightharpoonup x\\in X$. The triangle inequality and step 2.1 give $\\|F(x_{n_k})-y^\\dagger\\|_Y\\le\\|F(x_{n_k})-y_{n_k}\\|_Y+\\delta_{n_k}\\le\\sqrt{\\delta_{n_k}^2+\\alpha_{n_k}R^2}+\\delta_{n_k}\\to0$. Thus $F(x_{n_k})\\to y^\\dagger$ strongly, hence weakly. Applying [F7] gives $x\\in D$ and $F(x)=y^\\dagger$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "F7",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "minimum-norm-cluster",
+          "claim": "By [F6], $\\|x-x_0\\|_X^2\\le\\liminf_k\\|x_{n_k}-x_0\\|_X^2$. The bound in step 2.1 gives $\\limsup_k\\|x_{n_k}-x_0\\|_X^2\\le\\lim_k(\\delta_{n_k}^2/\\alpha_{n_k}+R^2)=R^2$, so $\\|x-x_0\\|_X^2\\le\\liminf_k\\|x_{n_k}-x_0\\|_X^2\\le\\limsup_k\\|x_{n_k}-x_0\\|_X^2\\le R^2$. Since $x$ is an exact solution and $\\widehat x$ minimizes distance among exact solutions by [F9], $R^2\\le\\|x-x_0\\|_X^2$; equality follows, so $x$ is an $x_0$-minimum-norm exact solution. The same reasoning applies to any weakly convergent subsequence.",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "F6",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty exact-solution set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If delta_n=0 for every n, the residual estimate in step 2.1 remains valid and steps 3.1–4.1 give an exact minimum-norm limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each alpha_n must be positive and tend to zero; alpha_n=1 may occur at an initial index, while step 2.1 uses the stated ratio limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the exact-solution set is a singleton, step 4.1 identifies its sole point as every weak cluster point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint or finite-radius boundary in the parameter statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses DC=>CC to select minimizers; step 3.1 uses UL/DC/HB for weak subsequences. No full AC is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a one-way convergence conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a one-way convergence conclusion, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read the complete Statement, facts and four proof steps with all actual suppliers, including the previously reviewed minimum-norm and minimizer-existence results. DC supplies the countable selection of minimizers; UL/DC/HB and Hilbert reflexivity license weak extraction. Comparison with a minimum-distance exact solution gives ||x_n-x0||^2 <= delta_n^2/alpha_n+R^2 and residual squared <= delta_n^2+alpha_n R^2. The first bound uses the ratio limit; the second uses alpha_n->0 and delta_n->0, giving strong output convergence to the exact datum. Sequential graph closure makes every input weak limit exact; norm lower semicontinuity and the comparison bound squeeze its distance to R. Repeating for any weakly convergent subsequence proves the quantified conclusion. Zero noise, R=0, singleton solution sets and zero spaces are covered; alpha_n=0 is excluded and exact solvability is essential. No uniqueness or full-sequence convergence is claimed. Reader found no defect; refuter did not flag this item. No diagram or repair."
+      }
+    },
+    "ex-ip-nonlinear-tikhonov-has-two-global-minimizers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real or complex normed space. Let $I$ be a nonempty directed preorder and $(x_i)_{i\\in I}$ a net in $X$ ([[def-directed-set-and-net]]). For $x\\in X$, write $x_i\\rightharpoonup x$ and say the net **converges weakly to $x$** when it converges to $x$ in $\\sigma(X,X^*)$ ([[def-weak-topology-on-a-normed-space]], [[def-net-convergence-and-cluster-point]]). Equivalently,\n\n$$\\forall f\\in X^*\\ \\forall\\varepsilon>0\\ \\exists i_0\\in I\\ \\forall i\\ge i_0:\\quad |f(x_i)-f(x)|<\\varepsilon.$$\n\nIndeed, topological convergence implies each of these eventual conditions because the inverse disk is a neighborhood. Conversely, a neighborhood contains a finite intersection of inverse scalar neighborhoods containing $x$. Coordinate convergence gives an eventual index for each of the finitely many conditions; directedness gives a common upper bound for them, after which the whole intersection contains the net. For the empty intersection use any index of the nonempty $I$. This proves the equivalence without a choice axiom.\n\nA **weakly convergent sequence** is this definition with $I=\\mathbb N$ in its usual order. A constant net converges weakly to its value, including in the zero space. The specified limit must be a point of $X$; without a separation hypothesis uniqueness is not part of the definition. Weak closure continues to mean topological closure, not merely the set of limits of sequences.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces and let $U\\subseteq X$ be a nonempty open set in the norm topology. A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$; no linearity is assumed, and linear maps are allowed as special cases. For $y\\in Y$, its exact solution set is\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nA point $x^\\dagger\\in U$ generates the exact datum $y=F(x^\\dagger)$. When $F$ is Fréchet differentiable at $x\\in U$, write $F'(x):X\\to Y$ for its unique bounded real-linear derivative.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "closed-nonlinear-quadratic-map",
+          "claim": "The domain $U=\\mathbb R$ is open and weakly closed. The map is nonlinear because $F(1)+F(-1)=2\\ne0=F(0)$. If $t_n\\rightharpoonup t$, [F2] gives $t_n\\to t$, hence $t_n^2\\to t^2$; if also $F(t_n)\\rightharpoonup z$, applying [F2] to the output gives $t_n^2\\to z$, so uniqueness of real limits gives $z=t^2$. Thus the graph has the required sequential weak-to-weak closure, and [F1, F5] identify this as an open-domain nonlinear forward map between real Hilbert spaces.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "objective-specialization",
+          "claim": "By [F4] and the given parameters, $J(t)=\\frac12(t^2-1)^2+\\frac12t^2$. Set $u=t^2\\ge0$. Then $J(t)=\\frac12(u-1)^2+\\frac12u$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-minimizer-set",
+          "claim": "Completing the square gives $J(t)=\\frac12(u-\\frac12)^2+\\frac38$. This is at least $3/8$, with equality exactly when $u=1/2$, equivalently $t=1/\\sqrt2$ or $t=-1/\\sqrt2$. These two distinct points are therefore exactly the global minimizers.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty real-line domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 the objective is finite but exceeds 3/8; step 2.1 excludes it from the minimizer set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The fixed parameter alpha=1 is positive, so the example lies at the allowed unit-parameter value in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes the full real-line domain and has no variable domain-degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use explicit real algebra and make no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all three verification steps and actual real-Hilbert, weak-convergence, open-domain, weak-map and functional definitions. The identity functional turns weak convergence in R into usual convergence; polynomial continuity identifies the output limit and R is weakly closed. Recomputed J(t)=1/2(t^2-1/2)^2+3/8. Equality holds iff t^2=1/2, giving exactly the two distinct real points ±1/sqrt(2); t=0 is not a minimizer. All parameters satisfy alpha>0; no choice or existence supplier is needed. Reader found no defect and refuter did not flag it. No diagram or repair."
+      }
+    },
+    "ex-ip-bochner-integral-defines-weakly-closed-nonlinear-map": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).\n\nIt is also called the **ultrafilter lemma** and is equivalent over ZF to the Boolean prime ideal theorem, abbreviated BPI. Items below write **assume UL/BPI** precisely when they use this extension principle; they do not thereby assume the full axiom of choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ (Sigma-algebras). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of Series in the nonnegative extended real line.\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure-space",
+          "source_section": "Definition",
+          "quote": "A **measure space** is a triple $(X,\\mathcal A,\\mu)$ in which $X$ is a set, $\\mathcal A$ is a sigma-algebra on $X$, and $\\mu$ is a measure on $(X,\\mathcal A)$ ([[def-measure]]). The members of $\\mathcal A$ are the **measurable sets** of the space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-banach-valued-simple-function-and-integral",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space and let $X$ be a real or\ncomplex Banach space. An $X$-valued **measurable simple function** is a function\n$s:\\Omega\\to X$ having a representation\n\n$$s=\\sum_{j=1}^{m}x_j\\mathbf 1_{A_j},$$\n\nwhere $m\\geq 0$, the sets $A_j\\in\\mathcal A$ are pairwise disjoint, and the\nvectors $x_j\\in X$ are distinct and nonzero. The value of $s$ off\n$\\bigcup_jA_j$ is $0$. The empty representation is therefore the zero\nfunction.\n\nThe simple function is **integrable** when $\\mu(A_j)<\\infty$ for every nonzero\ncoefficient $x_j$. Its integral over $E\\in\\mathcal A$ is\n\n$$\\int_E s\\,d\\mu:=\\sum_{j=1}^{m}\\mu(E\\cap A_j)x_j.$$\n\nIn particular, $\\int s\\,d\\mu$ means $\\int_\\Omega s\\,d\\mu$. Requiring finite\nmeasure only for the nonzero level sets avoids the undefined product\n$0\\cdot\\infty$. The next lemma proves that the displayed value does not depend\non the chosen disjoint representation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bochner-integrable-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space and $X$ a real or complex\nBanach space. A strongly measurable function $f:\\Omega\\to X$ is\n**Bochner integrable** if there is a sequence of integrable $X$-valued simple\nfunctions $(s_n)$ such that\n\n$$\\lim_{n\\to\\infty}\\int_\\Omega\\|f-s_n\\|\\,d\\mu=0.$$\n\nFor such a sequence define\n\n$$\\int_\\Omega f\\,d\\mu:=\\lim_{n\\to\\infty}\\int_\\Omega s_n\\,d\\mu.$$\n\nThe displayed norm limit exists: the simple integral inequality gives\n\n$$\\left\\|\\int s_n-\\int s_m\\right\\|\\leq\\int\\|s_n-s_m\\|\\leq\\int\\|s_n-f\\|+\\int\\|f-s_m\\|,$$\n\nso the simple integrals form a Cauchy sequence, and $X$ is complete. The next\ntheorem proves that the value is independent of the approximating sequence and\ncharacterizes existence by integrability of $\\|f\\|$.\n\nFor $E\\in\\mathcal A$, write\n$\\int_Ef\\,d\\mu:=\\int_\\Omega\\mathbf1_Ef\\,d\\mu$ whenever this function is\nBochner integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-banach-valued-simple-integral-is-well-defined",
+          "source_section": "Statement",
+          "quote": "The integral of an integrable Banach-valued simple function is independent of\nits disjoint measurable representation. It is linear, is unchanged when the\nintegrand is changed on a null set, and satisfies\n\n$$\\left\\|\\int_Es\\,d\\mu\\right\\|\\leq\\int_E\\|s\\|\\,d\\mu$$\n\nfor every measurable $E$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real\nnumber. Together with The reals form a totally ordered field, this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real or complex normed space. Let $I$ be a nonempty directed preorder and $(x_i)_{i\\in I}$ a net in $X$ ([[def-directed-set-and-net]]). For $x\\in X$, write $x_i\\rightharpoonup x$ and say the net **converges weakly to $x$** when it converges to $x$ in $\\sigma(X,X^*)$ ([[def-weak-topology-on-a-normed-space]], [[def-net-convergence-and-cluster-point]]). Equivalently,\n\n$$\\forall f\\in X^*\\ \\forall\\varepsilon>0\\ \\exists i_0\\in I\\ \\forall i\\ge i_0:\\quad |f(x_i)-f(x)|<\\varepsilon.$$\n\nIndeed, topological convergence implies each of these eventual conditions because the inverse disk is a neighborhood. Conversely, a neighborhood contains a finite intersection of inverse scalar neighborhoods containing $x$. Coordinate convergence gives an eventual index for each of the finitely many conditions; directedness gives a common upper bound for them, after which the whole intersection contains the net. For the empty intersection use any index of the nonempty $I$. This proves the equivalence without a choice axiom.\n\nA **weakly convergent sequence** is this definition with $I=\\mathbb N$ in its usual order. A constant net converges weakly to its value, including in the zero space. The specified limit must be a point of $X$; without a separation hypothesis uniqueness is not part of the definition. Weak closure continues to mean topological closure, not merely the set of limits of sequences.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces and let $U\\subseteq X$ be a nonempty open set in the norm topology. A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$; no linearity is assumed, and linear maps are allowed as special cases. For $y\\in Y$, its exact solution set is\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nA point $x^\\dagger\\in U$ generates the exact datum $y=F(x^\\dagger)$. When $F$ is Fréchet differentiable at $x\\in U$, write $F'(x):X\\to Y$ for its unique bounded real-linear derivative.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-nonlinear-tikhonov-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, dependent choice, and the real Hahn–Banach dominated-extension principle. Let $X,Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty and weakly closed, and let $F:D\\to Y$ be a map such that for every sequence $(x_n)$ in $D$ and every $x\\in X,z\\in Y$, $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$. Here $D$ is closed in the coarsest topology making every bounded real-linear functional continuous, and weak convergence means convergence under every such functional. For any $\\alpha>0$, $x_0\\in X$, and $y\\in Y$, the nonlinear Tikhonov functional\n\n$$\nJ_{\\alpha,y,x_0}(x)=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D)\n$$\n\nattains a global minimum on $D$; that is, there exists $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. No exact solution of $F(x)=y$ is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ip-weakly-closed-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be nonempty, and let $F:D\\to Y$ be a forward map. The domain $D$ is **weakly closed** when it is closed in the weak topology $\\sigma(X,X^*)$, the coarsest topology making every bounded real-linear functional on $X$ continuous. The graph of $F$ is **sequentially weak-to-weak closed** when, for every sequence $(x_n)$ in $D$ and every $x\\in X$ and $z\\in Y$, the conditions $x_n\\rightharpoonup x$ and $F(x_n)\\rightharpoonup z$ imply $x\\in D$ and $F(x)=z$; here weak convergence means convergence under every bounded real-linear functional on the corresponding Hilbert space. We call $F$ a **weakly closed forward map** when its domain is weakly closed and its graph is sequentially weak-to-weak closed. No linearity, norm continuity, Fréchet differentiability, or convexity is assumed; linear maps are allowed as special cases.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-bochner-map",
+          "claim": "The assignment $\\mu(A)=|A|/2$ is a measure: it is zero on $\\varnothing$, and any disjoint sequence of subsets of the two-point set has at most two nonempty members, so cardinalities, hence measures, add over the union. For $s\\notin\\{0,1\\}$, the two singleton level sets of $g_s$ have distinct nonzero coefficients $s,s^2$ and measure $1/2$ each. For $s=0$, use the empty representation of the zero function; for $s=1$, use $g_1=\\mathbf1_\\Omega$. In all cases [F2] gives an integrable simple function with integral $\\frac12s+\\frac12s^2$, and the constant approximating sequence in [F3] gives the same Bochner integral. Since $F(1)=1$, $F(-1)=0$, and $F(0)=0$, it fails additivity and is nonlinear.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-graph-closure",
+          "claim": "The domain $D=\\mathbb R$ is the entire weak topology space and is therefore weakly closed. If $s_n\\rightharpoonup s$, [F5] applied to the identity functional gives $s_n\\to s$ in the usual real topology. The factorization $F(s_n)-F(s)=\\frac12(s_n-s)(1+s_n+s)$ shows $F(s_n)\\to F(s)$, because convergence of $s_n$ makes the second factor bounded. If also $F(s_n)\\rightharpoonup z$, [F5] gives $F(s_n)\\to z$; uniqueness of real limits yields $z=F(s)$. Thus the graph is sequentially weak-to-weak closed.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tikhonov-existence-application",
+          "claim": "The domain $U=\\mathbb R$ is norm-open and nonempty, so [F6] confirms that this is also a forward map in the batch-25 open-domain convention. The graph and domain conditions just verified satisfy [F10]; with the real-Hilbert structure [F4] and axioms [A1]–[A3], they meet the hypotheses of [F7]. The DC-to-countable-choice consequence [F9] is the selection strength used in that theorem's proof. By [F8] this is the stated functional, so for every $\\alpha>0$, $x_0,y\\in\\mathbb R$ it attains a global minimum.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-point measure space and a nonempty real-line domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At s=0 step 1.1 uses the empty simple-function representation, with integral 0; constant approximation gives Bochner integrability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At s=1 step 1.1 uses g_1=1_Omega, a single nonzero level of measure 1, so the integral is 1; alpha=1 also satisfies the existence conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two assigned levels coincide only at s=0 or s=1. Step 1.1 explicitly discards both zero levels at 0 and merges the levels at 1; the domain remains R."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or radius occurs in the finite-space example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The integral and graph checks in steps 1.1–1.2 make no choices; step 2.1 uses only the explicitly stated UL/DC/HB branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a map and an existence consequence; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a map and an existence consequence; it is not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read complete Example, facts and verification 1.1–2.1, the finite-measure, Banach-valued-simple, Bochner and simple-linearity suppliers, and all real-Hilbert/weak-map/existence interfaces. Refuter:26:1 is confirmed nonfatal: the coefficient-measure evaluation omitted explicit normalization at s=0,1. Step 1.1 now uses the empty zero representation, the one-level constant representation at 1, and distinct nonzero singleton coefficients otherwise; constant approximation identifies the Bochner integral. The formula is unchanged in all cases, including s=-1 where additivity fails. The identity functional and polynomial difference factorization prove graph closure. Domain R and positive alpha meet the existence theorem with the exact stated UL/DC/HB assumptions. No claim/dependency/provenance change or diagram is needed. Repair confidence 1; precheck, rendering, proof-layout and strict batch proof-contract checks pass."
+      }
+    }
+  }
+}

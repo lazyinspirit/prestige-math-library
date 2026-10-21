@@ -1,0 +1,240 @@
+[
+  {
+    "order": 3096,
+    "id": "score-diffusion-inverse-solvers",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Score and diffusion methods for inverse data",
+    "companion": "score-diffusion-inverse-solvers-examples",
+    "requires": [
+      "learned-reconstruction-targets-and-risk",
+      "unrolled-inverse-solvers-and-generalization",
+      "plug-and-play-mmse-regularization",
+      "weak-convergence-tightness-and-representation",
+      "forward-ito-sde-well-posedness"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-conditional-score-and-tweedie-identities",
+        "kind": "lemma",
+        "title": "Conditional-score and Tweedie identities for Gaussian smoothing",
+        "dependency_level": 0,
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024), arXiv:2410.00083",
+              "url": "https://arxiv.org/pdf/2410.00083"
+            },
+            {
+              "title": "Yang Song et al., Score-Based Generative Modeling through Stochastic Differential Equations (2021), arXiv:2011.13456",
+              "url": "https://arxiv.org/pdf/2011.13456"
+            },
+            {
+              "title": "Simon J. D. Prince, Understanding Deep Learning, Chapter 18: Diffusion Models (2026), pp. 363–387; full course notes",
+              "url": "https://csci4052u.science.ontariotechu.ca/generative_models/chapter_18_diffusion_models/notes.html"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, let $\\sigma>0$, and let $\\mu$ be a probability measure on the Borel subsets of $\\mathbb R^d$. Write $\\varphi_\\sigma(v)=c_{\\sigma,d}\\exp(-\\|v\\|^2/(2\\sigma^2))$ for the normalized Gaussian density with respect to Lebesgue measure $dx$, define $P_\\sigma(du,dx)=\\mu(du)\\varphi_\\sigma(x-u)\\,dx$, and set $p_\\sigma(x)=\\int\\varphi_\\sigma(x-u)\\,\\mu(du)$. Define $Q_\\sigma(x,du)=\\varphi_\\sigma(x-u)\\mu(du)/p_\\sigma(x)$ and $m_\\sigma(x)=\\int u\\,Q_\\sigma(x,du)$; under $P_\\sigma$, write $X_0(u,x)=u$ and $X_\\sigma(u,x)=x$ for the coordinate random vectors. For Borel maps $h,s:\\mathbb R^d\\to\\mathbb R^d$ that are square-integrable with respect to $p_\\sigma(x)dx$, define $R(h)=\\int\\|h(x)-u\\|^2P_\\sigma(du,dx)$ and $J(s)=\\int\\|s(x)-(u-x)/\\sigma^2\\|^2P_\\sigma(du,dx)$. Then $p_\\sigma$ is positive and continuously differentiable, $Q_\\sigma$ is the conditional law of $X_0$ given $X_\\sigma=x$, and $\\nabla\\log p_\\sigma(x)=(m_\\sigma(x)-x)/\\sigma^2$ for every $x\\in\\mathbb R^d$. If $\\int\\|u\\|^2\\,\\mu(du)<\\infty$, $m_\\sigma$ uniquely minimizes $R$ up to $p_\\sigma$-almost-everywhere equality. The unique minimizer of $J$ is $\\nabla\\log p_\\sigma$, also up to $p_\\sigma$-almost-everywhere equality. Under the same Gaussian noising, suppose that for the fixed observation $y$, $\\ell_y:\\mathbb R^d\\to(0,\\infty)$ is a bounded Borel likelihood-density function relative to a fixed sigma-finite observation measure, and assume $0<Z_y=\\int\\ell_y(u)\\,\\mu(du)<\\infty$. Let $\\mu_y(du)=\\ell_y(u)\\mu(du)/Z_y$ and $p_\\sigma(x\\mid y)=\\int\\varphi_\\sigma(x-u)\\,\\mu_y(du)$. Then, for $r_\\sigma(y\\mid x)=\\int\\ell_y(u)\\,Q_\\sigma(x,du)$, the conditional score satisfies $\\nabla_x\\log p_\\sigma(x\\mid y)=\\nabla_x\\log p_\\sigma(x)+\\nabla_x\\log r_\\sigma(y\\mid x)$. No absolute-continuity or bounded-support assumption on $\\mu$ is required; $\\sigma>0$ supplies the full-support smoothing density.",
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-ip-diffusion-prior-score-and-measurement-score",
+        "kind": "definition",
+        "title": "Diffusion prior and measurement scores",
+        "dependency_level": 1,
+        "deps": [
+          "lem-ip-conditional-score-and-tweedie-identities"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024), arXiv:2410.00083",
+              "url": "https://arxiv.org/pdf/2410.00083"
+            },
+            {
+              "title": "Yang Song et al., Score-Based Generative Modeling through Stochastic Differential Equations (2021), arXiv:2011.13456",
+              "url": "https://arxiv.org/pdf/2011.13456"
+            },
+            {
+              "title": "Hyungjin Chung et al., Diffusion Posterior Sampling for General Noisy Inverse Problems (2023), arXiv:2209.14687",
+              "url": "https://arxiv.org/pdf/2209.14687"
+            }
+          ]
+        },
+        "statement": "Let $p_\\sigma$, $Q_\\sigma$, $m_\\sigma$, and $r_\\sigma(y\\mid x)$ be formed under the hypotheses of the conditional-score and Tweedie identities for Gaussian smoothing. The **diffusion prior score** is $s_\\sigma(x)=\\nabla_x\\log p_\\sigma(x)$, the exact score of the smoothed prior density. The **measurement score** is $g_\\sigma(x,y)=\\nabla_x\\log r_\\sigma(y\\mid x)$, where $r_\\sigma(y\\mid x)=\\int \\ell_y(u)\\,Q_\\sigma(x,du)$ is the likelihood density averaged over the conditional law of the clean state. For general inverse problems, evaluating this clean-state likelihood integral is generally computationally intractable. The **conditional score** is $c_\\sigma(x,y)=\\nabla_x\\log p_\\sigma(x\\mid y)$; it equals $s_\\sigma(x)+g_\\sigma(x,y)$, and the clean-state conditional mean is $m_\\sigma(x)=x+\\sigma^2s_\\sigma(x)$. A learned field $\\widehat s_\\theta$ is an estimate of $s_\\sigma$ and is exact only when it agrees with $s_\\sigma$ almost everywhere under $p_\\sigma(x)dx$. Replacing $r_\\sigma(y\\mid x)$ by the likelihood evaluated at $m_\\sigma(x)$ is a plug-in likelihood approximation, not part of the exact measurement-score definition.",
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-ip-measurement-guided-diffusion-reconstruction",
+        "kind": "algorithm",
+        "title": "Measurement-guided reverse-kernel reconstruction",
+        "dependency_level": 2,
+        "deps": [
+          "lem-ip-conditional-score-and-tweedie-identities",
+          "def-ip-diffusion-prior-score-and-measurement-score",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024), arXiv:2410.00083",
+              "url": "https://arxiv.org/pdf/2410.00083"
+            },
+            {
+              "title": "Yang Song et al., Score-Based Generative Modeling through Stochastic Differential Equations (2021), arXiv:2011.13456",
+              "url": "https://arxiv.org/pdf/2011.13456"
+            },
+            {
+              "title": "Hyungjin Chung et al., Diffusion Posterior Sampling for General Noisy Inverse Problems (2023), arXiv:2209.14687",
+              "url": "https://arxiv.org/pdf/2209.14687"
+            },
+            {
+              "title": "Simon J. D. Prince, Understanding Deep Learning, Chapter 18: Diffusion Models (2026), pp. 363–387; full course notes",
+              "url": "https://csci4052u.science.ontariotechu.ca/generative_models/chapter_18_diffusion_models/notes.html"
+            }
+          ]
+        },
+        "statement": "Let $N\\ge1$ be finite, let $0=t_0<t_1<\\dots<t_N$, let $d\\ge1$ and let the state space be $\\mathbb R^d$, and let $(\\mathsf Y,\\mathcal Y)$ be a measurable observation space. Fix a measurable forward operator $\\mathcal A:\\mathbb R^d\\to\\mathsf Y$, an observation $y\\in\\mathsf Y$, and a nonnegative measurable likelihood function $\\ell_y:\\mathbb R^d\\to[0,\\infty)$ obtained by fixing $y$ in a likelihood density relative to a fixed sigma-finite measure on $\\mathsf Y$. A **measurement-guided reverse-kernel reconstruction procedure** takes a finite Borel score field $\\widehat s_\\theta:\\mathbb R^d\\times\\{t_0,\\dots,t_N\\}\\to\\mathbb R^d$; a terminal reference probability $\\nu_N$ on the Borel sets of $\\mathbb R^d$ and a sampler that returns an exact draw or failure within finite initialization budget $b_{\\mathrm{init}}$; and, for each $k$, a measurable correction space $(\\mathsf C_k,\\mathcal C_k)$, its failure-augmented measurable space $\\mathsf C_k^\\dagger=\\mathsf C_k\\sqcup\\{\\bot\\}$ with $\\sigma$-algebra $\\mathcal C_k^\\dagger=\\{D,D\\cup\\{\\bot\\}:D\\in\\mathcal C_k\\}$, a measurable correction map $C_{k,\\widehat s_\\theta,\\mathcal A,\\ell_y}:\\mathbb R^d\\times\\mathsf Y\\to\\mathsf C_k^\\dagger$, a probability kernel $Q_{\\theta,k}(\\cdot\\mid x,y,a)$ from $\\mathbb R^d\\times\\mathsf Y\\times\\mathsf C_k$ with its product sigma-algebra to $\\mathbb R^d$ with its Borel sigma-algebra, and a sampler that returns an exact draw from that kernel or failure within finite per-step budget $b_k$. The correction map may use the supplied score, forward operator and likelihood and, when supplied for the exact-score option, the prior and scale map. It may also take, for each step, a declared Borel map $\\Pi_{k-1}:\\mathbb R^d\\to\\mathbb R^d$ and a Borel admissible set $A_{k-1}\\subseteq\\mathbb R^d$. Each per-step budget includes correction evaluation, kernel sampling and any declared projection. First draw $x_N$ from $\\nu_N$ within $b_{\\mathrm{init}}$; if initialization fails, return the terminal-initialization failure status. For $k=N,N-1,\\dots,1$, compute $a_k=C_{k,\\widehat s_\\theta,\\mathcal A,\\ell_y}(x_k,y)$; if $a_k=\\bot$, return the correction failure status at $k$; otherwise draw $x_{k-1}$ from $Q_{\\theta,k}(\\cdot\\mid x_k,y,a_k)$ within $b_k$; if drawing fails, return the sampling failure status at $k$; if $\\Pi_{k-1}$ is supplied, apply it to $x_{k-1}$ and return the admissibility failure status at $k-1$ if evaluation fails or its output is outside $A_{k-1}$. If $k>1$, continue at $k-1$ with the resulting state $x_{k-1}$; if $k=1$, return $x_0$ with completed status. A correction may use a declared surrogate without additional likelihood or noising assumptions. If it uses the exact measurement score at step $k$, the caller must also declare a Borel probability measure $\\mu$ on $\\mathbb R^d$ and a map $\\sigma:\\{t_1,\\dots,t_N\\}\\to(0,\\infty)$ associating each reverse-schedule time with its Gaussian-noising scale. For every such step, the forward noising convention at $t_k$ must be $X_{\\sigma(t_k)}=X_0+\\sigma(t_k)Z$, where $X_0\\sim\\mu$ and $Z\\sim N(0,I_d)$ is independent of $X_0$, and $\\ell_y$ must be bounded, strictly positive and Borel measurable with $0<Z_y=\\int\\ell_y(u)\\,\\mu(du)<\\infty$. The exact correction then uses $g_{\\sigma(t_k)}(x_k,y)=\\nabla_x\\log\\int\\ell_y(u)Q_{\\sigma(t_k)}(x_k,du)$, with $Q_{\\sigma(t_k)}$ formed from this prior and Gaussian noising as in the conditional-score and Tweedie identities. The procedure returns an algorithmic sample; it makes no posterior-exactness claim unless the terminal law and all transition and projection conditions are separately certified.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (init) at (0,0) {draw $x_N\\sim\\nu_N$ within $b_{\\mathrm{init}}$};\n  \\node[draw,rounded corners,align=center] (corr) at (3.5,0) {$a_k=C_k(x_k,y)$; check $a_k\\ne\\bot$};\n  \\node[draw,rounded corners,align=center] (kernel) at (7.5,0) {draw $x_{k-1}\\sim Q_{\\theta,k}(\\cdot\\mid x_k,y,a_k)$};\n  \\node[draw,rounded corners,align=center] (proj) at (11.5,0) {optional $\\Pi_{k-1}$; check $A_{k-1}$};\n  \\node[draw,diamond,aspect=2,align=center] (next) at (15.3,0) {$k=1?$};\n  \\node[draw,rounded corners,align=center] (out) at (15.3,-1.8) {return $x_0$};\n  \\node[draw,rounded corners,align=center] (stop) at (7.5,-2.2) {first failure status};\n  \\draw[->] (init)--(corr);\n  \\draw[->] (corr)--(kernel);\n  \\draw[->] (kernel)--(proj);\n  \\draw[->] (proj)--(next);\n  \\draw[->] (next.south)--node[right]{$k=1$}(out.north);\n  \\draw[->] (next.north) -- ++(0,1.5) -| node[pos=0.25,above,align=center]{$k>1$: continue at $k-1$\\\\with the just-produced state}(corr.north);\n  \\draw[->] (init.south)--(stop.north);\n  \\draw[->] (corr.south)--(stop.north);\n  \\draw[->] (kernel.south)--(stop.north);\n  \\draw[->] (proj.south)--(stop.north);\n\\end{tikzpicture}\n```\n\nThe upper return arrow repeats the reverse step with the newly produced state and decremented index. The downward arrows record immediate stopping at a failed initialization, correction, kernel draw, or declared projection. The diagram is an operational flow description and asserts no distributional identity.",
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "prop-ip-plugged-in-measurement-score-is-approximate",
+        "kind": "proposition",
+        "title": "Posterior-mean plug-in measurement scores need not be exact",
+        "dependency_level": 2,
+        "deps": [
+          "lem-ip-conditional-score-and-tweedie-identities",
+          "def-ip-diffusion-prior-score-and-measurement-score"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024), arXiv:2410.00083",
+              "url": "https://arxiv.org/pdf/2410.00083"
+            },
+            {
+              "title": "Hyungjin Chung et al., Diffusion Posterior Sampling for General Noisy Inverse Problems (2023), arXiv:2209.14687",
+              "url": "https://arxiv.org/pdf/2209.14687"
+            }
+          ]
+        },
+        "statement": "Let $X_0$ take values $-1$ and $1$ with equal probability, let $X_\\sigma=X_0+\\sigma Z$ with $\\sigma>0$ and standard Gaussian noise independent of $X_0$, and let $Y\\mid X_0=u$ have density $\\varphi_\\tau(y-u)$ for $\\tau>0$. At the observation $y=0$, the exact measurement density $r_\\sigma(0\\mid x)=\\mathbb E[\\varphi_\\tau(-X_0)\\mid X_\\sigma=x]$ is constant in $x$, so its score is zero. The exact posterior mean is $m_\\sigma(x)=\\mathbb E[X_0\\mid X_\\sigma=x]=\\tanh(x/\\sigma^2)$, where $\\tanh(t)=(e^{2t}-1)/(e^{2t}+1)$. The plug-in density $\\varphi_\\tau(-m_\\sigma(x))$ has score $-m_\\sigma(x)m_\\sigma'(x)/\\tau^2$, which is nonzero for $x\\ne0$. Thus evaluating the measurement likelihood at the exact posterior mean does not in general recover the exact measurement score; this example does not rule out equality in special models.",
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 3097,
+    "id": "score-diffusion-inverse-solvers-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Score and diffusion methods for inverse data — Examples and Counterexamples",
+    "companion": "score-diffusion-inverse-solvers",
+    "requires": [
+      "score-diffusion-inverse-solvers"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-finite-score-guidance-laws-converge-without-finite-exactness",
+        "kind": "example",
+        "title": "Weakly convergent finite-step output laws need not be exact",
+        "dependency_level": 3,
+        "deps": [
+          "alg-ip-measurement-guided-diffusion-reconstruction",
+          "def-weak-convergence-of-borel-probability-measures"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024), arXiv:2410.00083",
+              "url": "https://arxiv.org/pdf/2410.00083"
+            }
+          ]
+        },
+        "statement": "For each integer $m\\ge1$, let $\\mu_m=(1-2^{-m})\\delta_0+2^{-m}\\delta_1$ on $\\{0,1\\}\\subset\\mathbb R$, where $\\delta_a$ is unit mass at $a$, and let the target posterior be $\\pi=\\delta_0$. For example, this target is the posterior from prior $\\delta_0$ and the one-point observation model with likelihood one. The $m$th output law is realized by a one-step instance of the reverse-kernel interface with $N=1$, terminal law $\\nu_1=\\delta_0$, zero Borel score field, a constant correction into a singleton space, the constant kernel $Q_m(B\\mid x,y,a)=\\mu_m(B)$, and no projection. Its exact kernel sampler uses at most $m$ independent Bernoulli$(1/2)$ draws and returns $1$ exactly when all draws equal $1$, so it has finite budget for every $m$. The output laws $\\mu_m$ converge weakly to $\\pi$, yet $\\mu_m\\ne\\pi$ at every finite $m$ because $\\mu_m(\\{1\\})=2^{-m}$. This finite-kernel example illustrates the distinction between asymptotic weak convergence and exact posterior sampling; it is not a performance claim about a trained diffusion model.",
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-ip-diffusion-inverse-method-families-and-exactness",
+        "kind": "example",
+        "title": "Diffusion inverse solver families and their target laws",
+        "dependency_level": 3,
+        "deps": [
+          "lem-ip-conditional-score-and-tweedie-identities",
+          "def-ip-diffusion-prior-score-and-measurement-score",
+          "alg-ip-measurement-guided-diffusion-reconstruction",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024), arXiv:2410.00083",
+              "url": "https://arxiv.org/pdf/2410.00083"
+            },
+            {
+              "title": "Yang Song et al., Score-Based Generative Modeling through Stochastic Differential Equations (2021), arXiv:2011.13456",
+              "url": "https://arxiv.org/pdf/2011.13456"
+            },
+            {
+              "title": "Hyungjin Chung et al., Diffusion Posterior Sampling for General Noisy Inverse Problems (2023), arXiv:2209.14687",
+              "url": "https://arxiv.org/pdf/2209.14687"
+            },
+            {
+              "title": "Simon J. D. Prince, Understanding Deep Learning, Chapter 18: Diffusion Models (2026), pp. 363–387; full course notes",
+              "url": "https://csci4052u.science.ontariotechu.ca/generative_models/chapter_18_diffusion_models/notes.html"
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, let $\\mu_0$ be a probability measure on $\\mathbb R^d$ dominated by a sigma-finite measure $\\lambda$, with density $\\rho_0=d\\mu_0/d\\lambda$. Fix an observation vector $y\\in\\mathbb R^p$ and a nonnegative measurable likelihood function $\\ell_y:\\mathbb R^d\\to[0,\\infty)$. Assume $0<Z_y=\\int\\ell_y(x)\\rho_0(x)\\,\\lambda(dx)<\\infty$ and define the posterior probability measure by $\\pi_y(dx)=Z_y^{-1}\\ell_y(x)\\rho_0(x)\\,\\lambda(dx)$. For the latent-optimization comparison, fix a Borel measurement map $\\mathcal A:\\mathbb R^d\\to\\mathbb R^p$. The following diffusion-inverse solver families have different output laws and exactness conditions.\n\n1. **Explicit-score guidance** uses the exact conditional score $c_{\\sigma_k}(x,y)=s_{\\sigma_k}(x)+g_{\\sigma_k}(x,y)$ at each step $t_k$ of a finite schedule $0=t_0<t_1<\\dots<t_N$, where a declared map $\\sigma:\\{t_1,\\ldots,t_N\\}\\to(0,\\infty)$ gives $\\sigma_k=\\sigma(t_k)$ and the forward noising convention is $X_{\\sigma_k}=X_0+\\sigma_k Z$ with $X_0\\sim\\mu_0$ and independent $Z\\sim N(0,I_d)$. This branch requires the fixed-$y$ likelihood density to be bounded, strictly positive and Borel relative to a fixed sigma-finite observation measure, as required by the conditional-score identity. For a finite integer $N\\ge1$, a reverse-kernel sampler returns $\\pi_y$ if a supplied posterior path probability $\\Pi_y$ on $(X_0,\\ldots,X_N)$ has terminal marginal $\\nu_N$, its exact reverse conditional probability kernels are $R_k$, and the sampler starts from $\\nu_N$ and uses each $R_k$ with no projection, and initialization, corrections and transition sampling all succeed almost surely within the declared budgets. If failures are possible, exact kernels alone do not ensure that the law conditional on completed status is the posterior. A learned score, plug-in likelihood, or other surrogate does not supply that certificate by itself.\n\n2. **Variational inference** selects a probability density $q$ with respect to $\\lambda$, with $q\\ll\\pi_y$, and optimizes the evidence lower bound (ELBO) $\\operatorname{ELBO}(q)=\\int q(x)\\log(\\ell_y(x)\\rho_0(x)/q(x))\\,\\lambda(dx)$ when the logarithmic integrals are finite, using the convention that the integrand is zero where $q=0$. Its output law is the selected $q$; it equals the posterior only when $q=\\pi_y$ as probability measures, equivalently when their densities agree $\\lambda$-almost everywhere.\n\n3. **Latent optimization** specifies a latent domain $\\mathsf Z$, a generator map $G:\\mathsf Z\\to\\mathbb R^d$, and a deterministic finite-iteration procedure that returns $\\widehat z$ using the data-residual objective $\\|y-\\mathcal A(G(z))\\|^2$, without assuming global minimization. Its output law is the point mass $\\delta_{G(\\widehat z)}$. If $\\pi_y$ is not a point mass, this output law is not a posterior draw. A maximum-a-posteriori (MAP) estimate here means a maximizer of the chosen posterior density $Z_y^{-1}\\ell_y\\rho_0$ with respect to $\\lambda$; the measurement-residual objective alone does not establish that claim.\n\n4. **Markov chain Monte Carlo (MCMC)** uses a probability kernel $K_y$ on the Borel space $\\mathbb R^d$, and **sequential Monte Carlo (SMC)** produces a finite weighted particle measure $\\widehat\\pi_J=\\sum_{j=1}^J w_j\\delta_{x_j}$ for an integer $J\\ge1$, with $w_j\\ge0$ and $\\sum_jw_j=1$, where $\\delta_x$ is unit mass at $x$. If $\\pi_y$ is invariant for $K_y$ and a Markov chain starts with law $\\pi_y$, every finite-step marginal remains $\\pi_y$; invariance alone does not make every initial law exact after finitely many steps. A realized weighted particle measure equals the posterior only when the two measures are equal; every finite empirical measure differs from a non-atomic posterior, meaning one that assigns zero mass to each singleton.\n\nThese are law-level distinctions, not performance claims about any trained system.",
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

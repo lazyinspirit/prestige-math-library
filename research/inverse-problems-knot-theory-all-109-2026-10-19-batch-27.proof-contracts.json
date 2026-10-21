@@ -1,0 +1,757 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-index-function-young-conjugate-bound",
+    "lem-ip-banach-fenchel-duality-for-regularization",
+    "thm-ip-vsc-nonlinear-regularization-rate",
+    "cex-ip-vsc-unit-coefficient-does-not-control-bregman-error",
+    "ex-ip-power-index-bregman-rate",
+    "ex-ip-logarithmic-index-bregman-rate"
+  ],
+  "contracts": {
+    "lem-ip-index-function-young-conjugate-bound": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "bregman-conjugate-supremum",
+          "claim": "Put $t=C_3r$. Rearranging the given inequality and dividing by $c_2\\alpha$ gives $e\\le\\frac d{c_2\\alpha}+\\frac1{c_2}\\left(\\psi(t)-\\frac{c_1}{C_3\\alpha}t\\right)$. The parenthesized expression is bounded above by the defining supremum $H(c_1/(C_3\\alpha))$, proving the first bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "residual-conjugate-supremum",
+          "claim": "Subtracting $c_1r/2$ from the given inequality and using $c_2\\alpha e\\ge0$ gives $\\frac{c_1r}{2}\\le d+\\alpha\\left(\\psi(t)-\\frac{c_1}{2C_3\\alpha}t\\right)\\le d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)$. Multiplication by $2/c_1$ proves the second bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is a pointwise implication for specified nonnegative scalars, not a set-existence assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When r=0 and d=0, the premise forces e=0 because psi(0)=0; step 1.1 gives the bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof permits any positive c1, c2, C3 and alpha, including value one; steps 1.1 and 2.1 use only positivity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed endpoint d=0 is retained in the rearrangements of steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain endpoints r=e=d=0 are admitted and the two supremum estimates in steps 1.1 and 2.1 remain defined by A1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof applies to the given scalars and makes no selection; steps 1.1 and 2.1 use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives two inequalities and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives two inequalities and contains no equivalence."
+        }
+      ]
+    },
+    "lem-ip-banach-fenchel-duality-for-regularization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real Banach space and let $X^*$ be its continuous real dual. The dual pairing is evaluation, written $\\langle \\xi,x\\rangle_{X^*,X}:=\\xi(x)$ for $\\xi\\in X^*$ and $x\\in X$. Let $R:X\\to(-\\infty,+\\infty]$ be a proper convex functional: $R$ never takes the value $-\\infty$, its effective domain $\\operatorname{dom}R:=\\{x\\in X:R(x)<+\\infty\\}$ is nonempty, and $R((1-t)x+tz)\\le (1-t)R(x)+tR(z)$ for $x,z\\in X$ and $t\\in[0,1]$, with $0\\cdot(+\\infty):=0$ for this convex-combination formula. For $x\\in\\operatorname{dom}R$, its subdifferential is\n\n$$\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}.$$\n\nAn element of $\\partial R(x)$ is a subgradient of $R$ at $x$. Set $\\partial R(x):=\\varnothing$ when $x\\notin\\operatorname{dom}R$. The subdifferential may be empty at a point of $\\operatorname{dom}R$; no nonemptiness assertion is part of this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fenchel-young-inequality",
+          "claim": "The supremum defining $R^*(\\xi)$ includes the term at $z=x$, so $R^*(\\xi)\\ge\\langle\\xi,x\\rangle_{X^*,X}-R(x)$. Adding $R(x)$ gives the Fenchel–Young inequality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "subgradient-implies-equality",
+          "claim": "If $\\xi\\in\\partial R(x)$, [F1] gives $\\langle\\xi,z\\rangle_{X^*,X}-R(z)\\le\\langle\\xi,x\\rangle_{X^*,X}-R(x)$ for all $z$; taking the supremum and then using the term $z=x$ proves equality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "equality-implies-subgradient",
+          "claim": "Conversely, if equality holds, every term in the supremum satisfies $\\langle\\xi,z\\rangle_{X^*,X}-R(z)\\le R^*(\\xi)=\\langle\\xi,x\\rangle_{X^*,X}-R(x)$. Rearrangement gives [F1], hence $\\xi\\in\\partial R(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified x in dom R and a specified dual functional."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The supremum argument in step 1.1 also applies when the pairing or either vector is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no unit-interval or threshold parameter in the Fenchel–Young equivalence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If R*(xi)=+infinity the inequality is extended-real true and equality to the finite pairing is false; steps 1.1–3.1 cover finite equality exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The conjugate supremum includes z=x, and the supporting condition quantifies over every z in X in steps 1.1, 2.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the given x and xi only and makes no auxiliary selection; steps 1.1, 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "If xi is in the subdifferential, step 2.1 proves equality in the Fenchel–Young inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "If equality holds, step 3.1 rearranges each supremum term into the defining supporting inequality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-27",
+        "notes": "Independently read all three current proof steps and the subgradient definition and its four supplier interfaces. The z=x term yields the inequality; the global supporting inequality bounds every supremum term and attains equality at x; finite equality conversely gives every supporting inequality. Properness prevents a conjugate value of -infinity; R*(xi)=+infinity permits only the inequality, not equality at finite R(x). No lsc, reflexivity, existence of a subgradient, or choice is required. Zero space/pairing and empty subdifferential cause no exception. Read Borwein–Vanderwerff, Proposition 4.4.1(a) and proof, printed pp.171–172 (PDF pp.181–182): exact inequality/equality equivalence agrees. Reader/refuter report no item defect. Corrected only the contract endpoint locator to the actual steps; no item edit."
+      }
+    },
+    "thm-ip-vsc-nonlinear-regularization-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real Banach space and let $X^*$ be its continuous real dual. The dual pairing is evaluation, written $\\langle \\xi,x\\rangle_{X^*,X}:=\\xi(x)$ for $\\xi\\in X^*$ and $x\\in X$. Let $R:X\\to(-\\infty,+\\infty]$ be a proper convex functional: $R$ never takes the value $-\\infty$, its effective domain $\\operatorname{dom}R:=\\{x\\in X:R(x)<+\\infty\\}$ is nonempty, and $R((1-t)x+tz)\\le (1-t)R(x)+tR(z)$ for $x,z\\in X$ and $t\\in[0,1]$, with $0\\cdot(+\\infty):=0$ for this convex-combination formula. For $x\\in\\operatorname{dom}R$, its subdifferential is\n\n$$\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}.$$\n\nAn element of $\\partial R(x)$ is a subgradient of $R$ at $x$. Set $\\partial R(x):=\\varnothing$ when $x\\notin\\operatorname{dom}R$. The subdifferential may be empty at a point of $\\operatorname{dom}R$; no nonemptiness assertion is part of this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real Banach space, let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, choose $x^\\dagger\\in\\operatorname{dom}R$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. For $x\\in\\operatorname{dom}R$, the **Bregman distance** generated by $\\xi^\\dagger$ from the reference point $x^\\dagger$ to $x$ is\n\n$$D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}.$$\n\nThe subgradient inequality makes this quantity nonnegative, and $D_R^{\\xi^\\dagger}(x^\\dagger,x^\\dagger)=0$. The definition fixes the orientation: the first argument is the comparison point and the second is the reference point carrying the chosen subgradient.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Banach spaces, let $F:D(F)\\subseteq X\\to Y$, let $x^\\dagger\\in D(F)$ with exact datum $y=F(x^\\dagger)$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex with $x^\\dagger\\in\\operatorname{dom}R$. Fix $\\xi^\\dagger\\in\\partial R(x^\\dagger)$, an exponent $1\\le p<\\infty$, a continuous nondecreasing concave function $\\psi:[0,\\infty)\\to[0,\\infty)$ with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, a coefficient $0\\le\\beta<1$, and a level $R_0\\ge R(x^\\dagger)$. The **variational source condition** with these data holds on the named regularizer sublevel $L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}$ when\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad(x\\in L_{R_0}).$$\n\nThe condition is an assumption on the selected subgradient and the stated sublevel; it makes no assertion that a subgradient exists at every point or that a regularized minimizer exists.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing, concave, and satisfy $\\psi(0)=0$. Extend $g=-\\psi$ to $\\mathbb R$ by $g(s)=+\\infty$ for $s<0$, and define $H(q):=g^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$ for $q>0$, assuming the displayed suprema below are finite. For $c_1,c_2,C_3,\\alpha>0$ and $d,r,e\\ge0$, if\n\n$$c_1r+c_2\\alpha e\\le d+\\alpha\\psi(C_3r),$$\n\nthen\n\n$$e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-nonlinear-forward-map",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces and let $U\\subseteq X$ be a nonempty open set in the norm topology. A **nonlinear forward model on Hilbert spaces** is a map $F:U\\to Y$; no linearity is assumed, and linear maps are allowed as special cases. For $y\\in Y$, its exact solution set is\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nA point $x^\\dagger\\in U$ generates the exact datum $y=F(x^\\dagger)$. When $F$ is Fréchet differentiable at $x\\in U$, write $F'(x):X\\to Y$ for its unique bounded real-linear derivative.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-x0-minimum-norm-solution",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be a nonempty open set, let $F:U\\to Y$ be a forward map, let $y\\in Y$, and let $x_0\\in X$. A point $x^\\dagger\\in U$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ on $U$ if $F(x^\\dagger)=y$ and\n\n$$\\|x^\\dagger-x_0\\|\\le\\|x-x_0\\|\\qquad\\text{for every }x\\in U\\text{ with }F(x)=y.$$\n\nThis definition asserts no existence or uniqueness; it describes the minimizing property of a supplied exact solution. The minimum is global over the exact solution set on $U$, with distance measured from the specified reference point $x_0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. The same real-valued codomain is required of a metric by\n[[def-metric-space]].\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sublevel-entry",
+          "claim": "Comparing the approximate-minimum inequality with the exact solution gives $J_\\alpha^\\delta(x_\\delta)\\le\\delta^p/p+\\alpha R(x^\\dagger)+\\varepsilon_\\delta$. Since the data term is nonnegative, $R(x_\\delta)-R(x^\\dagger)\\le\\delta^p/(p\\alpha)+\\varepsilon_\\delta/\\alpha=O(\\rho_\\delta)$ by [A1] and [A3]. As $\\rho_\\delta\\to0$ and $R_0>R(x^\\dagger)$, $x_\\delta\\in L_{R_0}$ for sufficiently small $\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hilbert-subgradient-and-index",
+          "claim": "By [F5]–[F7] the special case uses the open-domain Hilbert map, the stipulated global $x_0$-minimum-norm exact solution, and the existing quadratic nonlinear Tikhonov functional. Under [A6], define $\\xi^\\dagger(h):=\\langle x^\\dagger-x_0,h\\rangle_X$. By [F10] this is a bounded real-linear functional; expansion using [F9] gives $R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}=\\frac12\\|x-x^\\dagger\\|_X^2\\ge0$, so [F1] gives $\\xi^\\dagger\\in\\partial R(x^\\dagger)$ and [F2] gives $D_R^{\\xi^\\dagger}(x,x^\\dagger)=\\frac12\\|x-x^\\dagger\\|_X^2$. Taking $\\psi(s)=(\\beta_2+1)\\sqrt{s}$, the stated Hilbert source inequality implies the VSC with $p=2$.",
+          "step": "1.2",
+          "inputs": [
+            "A6",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "data-residual-to-exact-residual",
+          "claim": "By [F8], $T_\\delta^{1/p}\\le r_\\delta+\\delta$. For $p=1$, $(u+v)^p=u^p+v^p$; for $p>1$, $t\\mapsto t^p$ is continuous at zero and has nonnegative second derivative $p(p-1)t^{p-2}$ on $(0,\\infty)$, hence is convex on $[0,\\infty)$, and its defining convexity inequality at the midpoint gives $(u+v)^p\\le2^{p-1}(u^p+v^p)$. Taking $u=r_\\delta$, $v=\\delta$ yields $T_\\delta\\le2^{p-1}(r_\\delta^p+\\delta^p)$ and thus $r_\\delta^p/p\\ge c_pT_\\delta-\\delta^p/p$. Substituting into the comparison inequality from 1.1 gives $c_pT_\\delta+\\alpha(R(x_\\delta)-R(x^\\dagger))\\le2\\delta^p/p+\\varepsilon_\\delta$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hilbert-conjugate-coupling",
+          "claim": "For $B:=\\beta_2+1>0$, the conjugate is $H(q)=\\sup_{u\\ge0}(Bu-qu^2)=B^2/(4q)$, by completing the square. With $p=2$, $c_p=1/4$, so $\\alpha H(c_p/\\alpha)=B^2\\alpha^2\\asymp\\delta^2$ and $\\rho_\\delta=H(c_p/\\alpha)=B^2\\alpha\\asymp\\delta$ when $\\alpha\\asymp\\delta$. The scale comparability in [A3] also holds because $H(c_p/(2\\alpha))=2H(c_p/\\alpha)$.",
+          "step": "2.2",
+          "inputs": [
+            "A3",
+            "A6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "absorb-vsc-subgradient",
+          "claim": "By [F2] and [F3], $R(x_\\delta)-R(x^\\dagger)=D_R^{\\xi^\\dagger}(x_\\delta,x^\\dagger)+\\langle\\xi^\\dagger,x_\\delta-x^\\dagger\\rangle_{X^*,X}\\ge(1-\\beta)D_R^{\\xi^\\dagger}(x_\\delta,x^\\dagger)-\\psi(T_\\delta)$. Combining this with the objective comparison in step 2.1 gives $c_pT_\\delta+\\alpha(1-\\beta)D_R^{\\xi^\\dagger}(x_\\delta,x^\\dagger)\\le d_\\delta+\\alpha\\psi(T_\\delta)$, where $d_\\delta:=2\\delta^p/p+\\varepsilon_\\delta$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-conjugate-estimates",
+          "claim": "Apply [F4] with $c_1=c_p$, $c_2=1-\\beta$, $C_3=1$, $r=T_\\delta$, $e=D_R^{\\xi^\\dagger}(x_\\delta,x^\\dagger)$, and $d=d_\\delta$. It follows that $D_R^{\\xi^\\dagger}(x_\\delta,x^\\dagger)\\le\\frac1{1-\\beta}\\left(\\frac{d_\\delta}{\\alpha}+\\rho_\\delta\\right)$ and $T_\\delta\\le\\frac2{c_p}\\left(d_\\delta+\\alpha H(c_p/(2\\alpha))\\right)$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-bregman-and-data-rates",
+          "claim": "From [A1] and [A3], $d_\\delta=O(\\delta^p)$, $d_\\delta/\\alpha=O(\\rho_\\delta)$, and $d_\\delta+\\alpha H(c_p/(2\\alpha))=O(\\delta^p)$. Thus $D_R^{\\xi^\\dagger}(x_\\delta,x^\\dagger)=O(\\rho_\\delta)$ and $T_\\delta=O(\\delta^p)$. The triangle inequality gives $r_\\delta\\le T_\\delta^{1/p}+\\delta$, so the noisy-data residual is $O(\\delta)$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "optional-penalty-and-norm-rates",
+          "claim": "For the penalty rate, [F2]–[F3] give $R(x_\\delta)-R(x^\\dagger)\\ge-\\psi(T_\\delta)$, while step 1.1 supplies its upper bound. If [A4] holds for a fixed $C_0$ bounding $T_\\delta/\\delta^p$, then $|R(x_\\delta)-R(x^\\dagger)|=O(\\rho_\\delta)$. If [A5] also holds, the Bregman bound in step 5.1 gives $\\|x_\\delta-x^\\dagger\\|_X^s=O(\\rho_\\delta)$.",
+          "step": "6.1",
+          "inputs": [
+            "A4",
+            "A5",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "hilbert-norm-rate",
+          "claim": "Applying the Bregman bound from step 5.1 and the exact Bregman identity from step 1.2 gives $\\|x_{\\alpha(\\delta)}^\\delta-x^\\dagger\\|_X^2=O(\\delta)$ and $\\|F(x_{\\alpha(\\delta)}^\\delta)-y^\\delta\\|_Y=O(\\delta)$, hence the asserted $O(\\sqrt\\delta)$ solution error and $O(\\delta)$ residual.",
+          "step": "7.1",
+          "inputs": [
+            "A6",
+            "step 5.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The result is conditional on the explicitly supplied approximate minimizer and exact solution; it asserts no existence when these are absent."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The rate is stated only for sufficiently small δ>0, so it never substitutes δ=0 into α/ρ comparisons. β=0 and εδ=0 are allowed without dividing by either; 1−β>0 remains valid in 4.1. The Hilbert case β₂=0 uses B=β₂+1>0 in 1.2/2.2, avoiding the zero conjugate that would violate scale comparability.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The rate is stated only for sufficiently small δ>0, so it never substitutes δ=0 into α/ρ comparisons. β=0 and εδ=0 are allowed without dividing by either; 1−β>0 remains valid in 4.1. The Hilbert case β₂=0 uses B=β₂+1>0 in 1.2/2.2, avoiding the zero conjugate that would violate scale comparability.",
+            "item_sha256": "6ec0a123d9b3cc3a67180aa19c87b75ba4ff8aef0f808c444b7292a1bc8dd96d",
+            "row_sha256": "236b7e500ab1d2a5b258f72ab7595ab21811799c49ed2a650f51b59f73cbb3a0",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 386
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint p=1 is included and handled separately in step 2.1, while beta=1 is excluded by the statement and cannot be absorbed in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The estimates allow zero exact residual T_delta=0; steps 3.1–5.1 remain valid because H is finite and D is nonnegative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameter endpoints beta=0 and p=1 are allowed, R0 is strictly above R(xdagger), and the proof treats p=1 in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The approximate minimizer and Hilbert global minimizer are supplied by the hypotheses; the proof steps 1.1, 1.2, 2.1, 2.2, 3.1, 4.1, 5.1, 6.1 and 7.1 select no element or subsequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives rate implications and contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives rate implications and contains no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-27",
+        "notes": "Independently checked all nine current steps, every F1–F10 supplier statement (and the two-step conjugate supplier proof), and reader/refuter evidence. Comparison to the supplied exact solution makes R(x_delta) finite and gives the sublevel entry before the VSC is applied: delta^p/alpha=O(rho)->0 and R0>R(xdagger). Triangle and convexity give c_p T<=r^p/p+delta^p/p also at p=1. VSC yields positive coefficient 1-beta; applying the scalar conjugate lemma with c2=1-beta gives D=O(rho), T=O(delta^p), and the noisy residual by triangle. The penalty lower bound follows from D>=0 and VSC; its upper bound is step 1.1. The optional norm lower bound has positive c_R,s. Hilbert pairing is continuous by Cauchy–Schwarz, quadratic expansion gives D=norm error squared/2, and B=beta2+1 keeps H=B^2/(4q)>0 even when beta2=0. alpha~delta meets both coupling assumptions without inferring any minimizer existence or TCC. No choice, compactness or lsc is used. Read Clason Theorem 10.7 and full displayed absorption argument (PDF pp.99–100), and Kaltenbacher Lemma 2 equations (2.2)–(2.3), Appendix A.1 (PDF pp.8,24); source coefficient restrictions and supplied-global-minimizer scope agree. Clason formula (10.17) itself is absent from parsed text; local displayed source condition checked algebraically. Weidling direct PDF access returned 403: no claim of reading that text. Published metric prose defect is nonfatal and routed separately; actual metric/norm supplier uses remain valid."
+      }
+    },
+    "cex-ip-vsc-unit-coefficient-does-not-control-bregman-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real Banach space and let $X^*$ be its continuous real dual. The dual pairing is evaluation, written $\\langle \\xi,x\\rangle_{X^*,X}:=\\xi(x)$ for $\\xi\\in X^*$ and $x\\in X$. Let $R:X\\to(-\\infty,+\\infty]$ be a proper convex functional: $R$ never takes the value $-\\infty$, its effective domain $\\operatorname{dom}R:=\\{x\\in X:R(x)<+\\infty\\}$ is nonempty, and $R((1-t)x+tz)\\le (1-t)R(x)+tR(z)$ for $x,z\\in X$ and $t\\in[0,1]$, with $0\\cdot(+\\infty):=0$ for this convex-combination formula. For $x\\in\\operatorname{dom}R$, its subdifferential is\n\n$$\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}.$$\n\nAn element of $\\partial R(x)$ is a subgradient of $R$ at $x$. Set $\\partial R(x):=\\varnothing$ when $x\\notin\\operatorname{dom}R$. The subdifferential may be empty at a point of $\\operatorname{dom}R$; no nonemptiness assertion is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real Banach space, let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, choose $x^\\dagger\\in\\operatorname{dom}R$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. For $x\\in\\operatorname{dom}R$, the **Bregman distance** generated by $\\xi^\\dagger$ from the reference point $x^\\dagger$ to $x$ is\n\n$$D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}.$$\n\nThe subgradient inequality makes this quantity nonnegative, and $D_R^{\\xi^\\dagger}(x^\\dagger,x^\\dagger)=0$. The definition fixes the orientation: the first argument is the comparison point and the second is the reference point carrying the chosen subgradient.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Banach spaces, let $F:D(F)\\subseteq X\\to Y$, let $x^\\dagger\\in D(F)$ with exact datum $y=F(x^\\dagger)$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex with $x^\\dagger\\in\\operatorname{dom}R$. Fix $\\xi^\\dagger\\in\\partial R(x^\\dagger)$, an exponent $1\\le p<\\infty$, a continuous nondecreasing concave function $\\psi:[0,\\infty)\\to[0,\\infty)$ with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, a coefficient $0\\le\\beta<1$, and a level $R_0\\ge R(x^\\dagger)$. The **variational source condition** with these data holds on the named regularizer sublevel $L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}$ when\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad(x\\in L_{R_0}).$$\n\nThe condition is an assumption on the selected subgradient and the stated sublevel; it makes no assertion that a subgradient exists at every point or that a regularized minimizer exists.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-boundary-vsc-model",
+          "claim": "The function $R$ is finite and nonnegative, hence proper. For $u,v\\in\\mathbb R$ and $t\\in[0,1]$, $R((1-t)u+tv)=\\max\\{(1-t)0+t0,(1-t)(-u)+t(-v)\\}\\le(1-t)\\max\\{0,-u\\}+t\\max\\{0,-v\\}$, so $R$ is convex. For every $z\\in\\mathbb R$, $R(z)\\ge-z=R(0)+(-1)(z-0)$, so [F1] gives $\\xi^\\dagger=-1\\in\\partial R(0)$. By [F2], $D_R^{-1}(x,0)=R(x)+x$, which equals $x$ for $x\\ge0$ and $0$ for $x<0$. Since $F$ is zero, the source inequality has left side $x$ and right side $D_R^{-1}(x,0)$; it holds for all $x$, hence on $R(x)\\le1$, with boundary coefficient $\\beta_1=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "flat-minimizer-rate-failure",
+          "claim": "For every $\\delta>0$, $J_\\delta(x)=\\delta R(x)\\ge0$, and it equals zero for every $x\\ge0$. Thus $x_\\delta=1$ is a global minimizer for every $\\delta$, but $D_R^{-1}(1,0)=1$. No fixed constant bounds $1$ by $C\\delta$ for all sufficiently small $\\delta$, so the claimed rate fails.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample specifies a nonempty scalar model and an explicit minimizer family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "As delta tends to zero through positive values, step 2.1 keeps the Bregman distance equal to one and disproves the asserted rate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary coefficient beta_1=1 is exactly the excluded endpoint in the VSC definition, and step 1.1 verifies the inequality there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero forward map creates the flat objective, and step 2.1 verifies every nonnegative scalar is a global minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The source inequality holds for every real x, including the endpoints of the sublevel R(x)<=1, by step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The concrete family x_delta=1 is explicitly supplied and no minimizer is selected by choice in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-27",
+        "notes": "Independently read both proof steps, all three current supplier interfaces and reader/refuter evidence. max(0,-x) is finite convex, and R(z)>=-z proves -1 is a subgradient at zero. D=R(x)+x is x on x>=0 and zero on x<0, so the beta=1 source inequality x<=D holds on all reals, including the named sublevel x>=-1. The zero forward map and exact zero data give J_delta=delta R>=0; the explicit family x_delta=1 attains zero globally and has D=1 for every positive delta, refuting O(delta). psi=sqrt(t), p=2, alpha=delta meet the intended rate scale; only the excluded beta=1 absorption boundary is being tested. The counterexample is self-contained, uses no choice or existence theorem and changes no supplier interface. The Weidling reference is contextual and inaccessible (403), so no reading or external proof support is claimed."
+      }
+    },
+    "ex-ip-power-index-bregman-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ip-vsc-nonlinear-regularization-rate",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be real Banach spaces, $D(F)\\subseteq X$, and $F:D(F)\\to Y$. Let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, let $x^\\dagger\\in D(F)\\cap\\operatorname{dom}R$, set $y=F(x^\\dagger)$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. Fix $1\\le p<\\infty$, $0\\le\\beta<1$, and a level $R_0>R(x^\\dagger)$. Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing and concave, with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, and assume the variational source inequality\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad\\left(x\\in L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}\\right),$$\n\nwhere $D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}$. Extend $-\\psi$ by $+\\infty$ on negative arguments and write $H(q):=(-\\psi)^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$; assume $H(q)$ is finite for sufficiently large $q$ and $H(q)\\to0$ as $q\\to\\infty$. For sufficiently small noise levels $\\delta>0$ and data $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, define $J_\\alpha^\\delta(x):=p^{-1}\\|F(x)-y^\\delta\\|_Y^p+\\alpha R(x)$. Suppose $\\alpha=\\alpha(\\delta)>0$ tends to zero, $0\\le\\varepsilon_\\delta\\le C_\\varepsilon\\delta^p$, and $x_\\alpha^{\\delta,\\varepsilon}\\in D(F)$ is an $\\varepsilon_\\delta$-minimizer, meaning $J_\\alpha^\\delta(x_\\alpha^{\\delta,\\varepsilon})\\le\\inf_{z\\in D(F)}J_\\alpha^\\delta(z)+\\varepsilon_\\delta$. Set $c_p:=2^{1-p}/p$ and $\\rho_\\delta:=H(c_p/\\alpha(\\delta))$. Assume that for constants $c_-,c_+,C_H>0$ independent of $\\delta$,\n\n$$c_-\\delta^p\\le\\alpha(\\delta)\\rho_\\delta\\le c_+\\delta^p,\\qquad H(c_p/(2\\alpha(\\delta)))\\le C_H\\rho_\\delta$$\n\nfor all sufficiently small $\\delta$. Then for all sufficiently small $\\delta$, $x_\\alpha^{\\delta,\\varepsilon}\\in L_{R_0}$ and\n\n$$D_R^{\\xi^\\dagger}(x_\\alpha^{\\delta,\\varepsilon},x^\\dagger)=O(\\rho_\\delta),\\qquad \\|F(x_\\alpha^{\\delta,\\varepsilon})-y^\\delta\\|_Y=O(\\delta).$$\n\nIf, in addition, $\\psi(C_0\\delta^p)=O(\\rho_\\delta)$ for a fixed $C_0$ such that $T_\\delta:=\\|F(x_\\alpha^{\\delta,\\varepsilon})-F(x^\\dagger)\\|_Y^p\\le C_0\\delta^p$ for all sufficiently small $\\delta$, then $|R(x_\\alpha^{\\delta,\\varepsilon})-R(x^\\dagger)|=O(\\rho_\\delta)$. If also $D_R^{\\xi^\\dagger}(x,x^\\dagger)\\ge c_R\\|x-x^\\dagger\\|_X^s$ on $L_{R_0}$ for constants $c_R,s>0$, then $\\|x_\\alpha^{\\delta,\\varepsilon}-x^\\dagger\\|_X^s=O(\\rho_\\delta)$.\n\nIn the Hilbert special case, set $p=2$ and suppose $X,Y$ are real Hilbert spaces, $F:U\\to Y$ has the real open-domain interface of a nonlinear forward map, $x^\\dagger$ is an $x_0$-minimum-norm exact solution, $R(x)=\\frac12\\|x-x_0\\|_X^2$, and the source inequality on a regularizer sublevel contained in $U$ is\n\n$$\\langle x^\\dagger-x_0,x^\\dagger-x\\rangle_X\\le\\beta_1\\frac12\\|x-x^\\dagger\\|_X^2+\\beta_2\\|F(x)-F(x^\\dagger)\\|_Y$$\n\nwith $0\\le\\beta_1<1$ and $\\beta_2\\ge0$. For exact global minimizers of the nonlinear Tikhonov functional with $\\alpha(\\delta)\\asymp\\delta$, the theorem gives $\\|x_{\\alpha(\\delta)}^\\delta-x^\\dagger\\|_X=O(\\sqrt\\delta)$ and $\\|F(x_{\\alpha(\\delta)}^\\delta)-y^\\delta\\|_Y=O(\\delta)$. The assertion is conditional on such a global minimizer being supplied; it does not assert existence or cover local numerical minima.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing, concave, and satisfy $\\psi(0)=0$. Extend $g=-\\psi$ to $\\mathbb R$ by $g(s)=+\\infty$ for $s<0$, and define $H(q):=g^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$ for $q>0$, assuming the displayed suprema below are finite. For $c_1,c_2,C_3,\\alpha>0$ and $d,r,e\\ge0$, if\n\n$$c_1r+c_2\\alpha e\\le d+\\alpha\\psi(C_3r),$$\n\nthen\n\n$$e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "power-conjugate-maximizer",
+          "claim": "For $q>0$, the function $s\\mapsto As^\\mu-qs$ has derivative $A\\mu s^{\\mu-1}-q$, which decreases from $+\\infty$ to $-q$ and vanishes only at $s_q=(A\\mu/q)^{1/(1-\\mu)}$. The function is increasing before $s_q$ and decreasing after it, with value $0$ at $s=0$ and limit $-\\infty$ as $s\\to\\infty$, so this point is its global maximizer. Substitution gives $H(q)=(1-\\mu)A^{1/(1-\\mu)}\\mu^{\\mu/(1-\\mu)}q^{-\\mu/(1-\\mu)}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "power-coupling-and-rates",
+          "claim": "With $q=c_p/\\alpha$ this gives $H(c_p/\\alpha)=C_{p,A,\\mu}\\alpha^{\\mu/(1-\\mu)}$, so the chosen $\\alpha$ yields $H(c_p/\\alpha)\\asymp\\delta^{p\\mu}$ and $\\alpha H(c_p/\\alpha)\\asymp\\delta^p$. Also $H(c_p/(2\\alpha))=2^{\\mu/(1-\\mu)}H(c_p/\\alpha)$, while $\\psi(C_0\\delta^p)=A C_0^\\mu\\delta^{p\\mu}=O(H(c_p/\\alpha))$ for every fixed $C_0>0$. Thus the parameter and penalty conditions in [F1] hold, and [F1] gives the stated Bregman and residual rates. If the additional lower bound holds with c_R,s>0, divide the Bregman bound by c_R and take the positive s-th root to obtain the asserted norm rate.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is conditional on the stated VSC and supplied approximate minimizer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For every fixed C0>0, psi(C0 delta^p) tends to zero at the same order as H(c_p/alpha), as shown in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exponent endpoint mu=1 is excluded, mu=0 is excluded, and p=1 is allowed; step 1.1 uses 0<mu<1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A>0 and 0<mu<1 make the interior maximizer positive and finite in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The global maximization checks s=0 and the limit as s tends to infinity in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The power conjugate maximizer is unique and explicitly determined in step 1.1; the rate theorem assumes its minimizer is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-27",
+        "notes": "Independently checked both proof steps, all four current dependencies and reader/refuter evidence. For A>0 and 0<mu<1 the derivative decreases from infinity to -q, with unique global maximum s_q=(A mu/q)^(1/(1-mu)); at zero the value is zero and at infinity it tends to -infinity. Substitution yields the exact positive H constant printed. Therefore alpha~delta^(p(1-mu)) tends to zero, rho~delta^(p mu), alpha rho~delta^p, H(q/2)/H(q)=2^(mu/(1-mu)), and psi(C0 delta^p)=O(rho). This checks all rate-theorem hypotheses, including p=1 and supplied approximate minimizers; mu=0,1 excluded. The optional norm conclusion omitted the essential declaration c_R,s>0; made that explicit and completed the elementary division/root inference. Without c_R>0 the lower bound can be vacuous; e.g. R=0, F=0, xi=0 and x_delta=1 meet the other hypotheses and give D=0 but no norm convergence. Updated page-manifest statement and derivation. Consumer search across items/library finds only the unchanged examples page placement and the item itself: no dependency/reference consumer. No choice used. Kaltenbacher PDF p.6 power conjugate display agrees (A=1); Weidling PDF inaccessible (403), no claim of reading it. Repair confidence 1."
+      }
+    },
+    "ex-ip-logarithmic-index-bregman-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real Banach spaces, let $F:D(F)\\subseteq X\\to Y$, let $x^\\dagger\\in D(F)$ with exact datum $y=F(x^\\dagger)$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex with $x^\\dagger\\in\\operatorname{dom}R$. Fix $\\xi^\\dagger\\in\\partial R(x^\\dagger)$, an exponent $1\\le p<\\infty$, a continuous nondecreasing concave function $\\psi:[0,\\infty)\\to[0,\\infty)$ with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, a coefficient $0\\le\\beta<1$, and a level $R_0\\ge R(x^\\dagger)$. The **variational source condition** with these data holds on the named regularizer sublevel $L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}$ when\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad(x\\in L_{R_0}).$$\n\nThe condition is an assumption on the selected subgradient and the stated sublevel; it makes no assertion that a subgradient exists at every point or that a regularized minimizer exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing, concave, and satisfy $\\psi(0)=0$. Extend $g=-\\psi$ to $\\mathbb R$ by $g(s)=+\\infty$ for $s<0$, and define $H(q):=g^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$ for $q>0$, assuming the displayed suprema below are finite. For $c_1,c_2,C_3,\\alpha>0$ and $d,r,e\\ge0$, if\n\n$$c_1r+c_2\\alpha e\\le d+\\alpha\\psi(C_3r),$$\n\nthen\n\n$$e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ip-vsc-nonlinear-regularization-rate",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be real Banach spaces, $D(F)\\subseteq X$, and $F:D(F)\\to Y$. Let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, let $x^\\dagger\\in D(F)\\cap\\operatorname{dom}R$, set $y=F(x^\\dagger)$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. Fix $1\\le p<\\infty$, $0\\le\\beta<1$, and a level $R_0>R(x^\\dagger)$. Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing and concave, with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, and assume the variational source inequality\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad\\left(x\\in L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}\\right),$$\n\nwhere $D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}$. Extend $-\\psi$ by $+\\infty$ on negative arguments and write $H(q):=(-\\psi)^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$; assume $H(q)$ is finite for sufficiently large $q$ and $H(q)\\to0$ as $q\\to\\infty$. For sufficiently small noise levels $\\delta>0$ and data $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, define $J_\\alpha^\\delta(x):=p^{-1}\\|F(x)-y^\\delta\\|_Y^p+\\alpha R(x)$. Suppose $\\alpha=\\alpha(\\delta)>0$ tends to zero, $0\\le\\varepsilon_\\delta\\le C_\\varepsilon\\delta^p$, and $x_\\alpha^{\\delta,\\varepsilon}\\in D(F)$ is an $\\varepsilon_\\delta$-minimizer, meaning $J_\\alpha^\\delta(x_\\alpha^{\\delta,\\varepsilon})\\le\\inf_{z\\in D(F)}J_\\alpha^\\delta(z)+\\varepsilon_\\delta$. Set $c_p:=2^{1-p}/p$ and $\\rho_\\delta:=H(c_p/\\alpha(\\delta))$. Assume that for constants $c_-,c_+,C_H>0$ independent of $\\delta$,\n\n$$c_-\\delta^p\\le\\alpha(\\delta)\\rho_\\delta\\le c_+\\delta^p,\\qquad H(c_p/(2\\alpha(\\delta)))\\le C_H\\rho_\\delta$$\n\nfor all sufficiently small $\\delta$. Then for all sufficiently small $\\delta$, $x_\\alpha^{\\delta,\\varepsilon}\\in L_{R_0}$ and\n\n$$D_R^{\\xi^\\dagger}(x_\\alpha^{\\delta,\\varepsilon},x^\\dagger)=O(\\rho_\\delta),\\qquad \\|F(x_\\alpha^{\\delta,\\varepsilon})-y^\\delta\\|_Y=O(\\delta).$$\n\nIf, in addition, $\\psi(C_0\\delta^p)=O(\\rho_\\delta)$ for a fixed $C_0$ such that $T_\\delta:=\\|F(x_\\alpha^{\\delta,\\varepsilon})-F(x^\\dagger)\\|_Y^p\\le C_0\\delta^p$ for all sufficiently small $\\delta$, then $|R(x_\\alpha^{\\delta,\\varepsilon})-R(x^\\dagger)|=O(\\rho_\\delta)$. If also $D_R^{\\xi^\\dagger}(x,x^\\dagger)\\ge c_R\\|x-x^\\dagger\\|_X^s$ on $L_{R_0}$ for constants $c_R,s>0$, then $\\|x_\\alpha^{\\delta,\\varepsilon}-x^\\dagger\\|_X^s=O(\\rho_\\delta)$.\n\nIn the Hilbert special case, set $p=2$ and suppose $X,Y$ are real Hilbert spaces, $F:U\\to Y$ has the real open-domain interface of a nonlinear forward map, $x^\\dagger$ is an $x_0$-minimum-norm exact solution, $R(x)=\\frac12\\|x-x_0\\|_X^2$, and the source inequality on a regularizer sublevel contained in $U$ is\n\n$$\\langle x^\\dagger-x_0,x^\\dagger-x\\rangle_X\\le\\beta_1\\frac12\\|x-x^\\dagger\\|_X^2+\\beta_2\\|F(x)-F(x^\\dagger)\\|_Y$$\n\nwith $0\\le\\beta_1<1$ and $\\beta_2\\ge0$. For exact global minimizers of the nonlinear Tikhonov functional with $\\alpha(\\delta)\\asymp\\delta$, the theorem gives $\\|x_{\\alpha(\\delta)}^\\delta-x^\\dagger\\|_X=O(\\sqrt\\delta)$ and $\\|F(x_{\\alpha(\\delta)}^\\delta)-y^\\delta\\|_Y=O(\\delta)$. The assertion is conditional on such a global minimizer being supplied; it does not assert existence or cover local numerical minima.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "log-index-concavity",
+          "claim": "For $0<t<t_0$, put $L=-\\log t$. Differentiation gives $\\psi'(t)=\\nu/(tL^{\\nu+1})$ and $\\psi''(t)=\\nu((\\nu+1)-L)/(t^2L^{\\nu+2})<0$, since $L\\ge-\\log t_0>\\nu+1$. Thus $\\psi'$ decreases on $(0,t_0)$ and has positive left limit at $t_0$; after $t_0$ the function is constant, so its derivative drops to zero and remains nonincreasing. Also $\\psi(t)\\to0$ as $t\\downarrow0$. Therefore its continuous extension at zero is nondecreasing, concave on $[0,\\infty)$, vanishes at zero and is positive for $t>0$, as required by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "log-conjugate-asymptotic",
+          "claim": "For $q>\\psi'(t_0-)$, the derivative of $s\\mapsto\\psi(s)-qs$ decreases from $+\\infty$ to a negative value on $(0,t_0)$ and is $-q<0$ for $s>t_0$. Hence the unique global maximizer is $s_q\\in(0,t_0)$ satisfying $q=\\nu/(s_qL_q^{\\nu+1})$, where $L_q=-\\log s_q$. This equation gives $\\log q=L_q-(\\nu+1)\\log L_q+\\log\\nu$, so $L_q\\to\\infty$ and $L_q/\\log q\\to1$. At the maximizer, $qs_q=\\nu L_q^{-\\nu-1}$; consequently $H(q)=L_q^{-\\nu}(1-\\nu/L_q)\\sim(\\log q)^{-\\nu}$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "log-parameter-coupling-and-rates",
+          "claim": "Set $\\ell_\\delta=\\log(1/\\delta)$. Then $\\alpha(\\delta)\\to0$ and $q_\\delta=c_p/\\alpha(\\delta)\\to\\infty$, while $\\log q_\\delta=p\\ell_\\delta-\\nu\\log\\ell_\\delta+\\log c_p\\sim p\\ell_\\delta$. By step 2.1, $\\rho_\\delta=H(q_\\delta)\\asymp\\ell_\\delta^{-\\nu}$ and $\\alpha\\rho_\\delta\\asymp\\delta^p$. Replacing $q_\\delta$ by $q_\\delta/2$ changes its logarithm by only $-\\log2$, so $H(c_p/(2\\alpha))\\asymp\\rho_\\delta$. For any fixed $C_0>0$, eventually $C_0\\delta^p<t_0$, and $\\psi(C_0\\delta^p)=(-\\log(C_0\\delta^p))^{-\\nu}\\asymp\\ell_\\delta^{-\\nu}\\asymp\\rho_\\delta$. Thus all coupling and penalty-index hypotheses in [F3] hold; applying [F3] gives the three asserted rates. If the additional Bregman lower bound holds, its combination with the Bregman rate gives $\\|x_\\alpha^{\\delta,\\varepsilon}-x^\\dagger\\|_X^s=O(\\ell_\\delta^{-\\nu})$, and taking the positive $s$-th root proves the stated norm rate.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is conditional on the stated VSC and supplied approximate minimizer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The index is continuously extended by psi(0)=0 in step 1.1 and the noise limit is taken through positive delta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The cutoff t0 joins the logarithmic branch to a constant with a downward derivative jump, as checked in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For sufficiently large q the unique maximizer lies in (0,t0), and its positive value is computed in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares the interior maximizer with s=0 and the constant branch s>=t0; step 1.1 checks continuity at t=0 and t=t0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The critical point s_q is unique; the rate theorem is conditional on the supplied minimizer, so no choice is made in steps 1.1, 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states rate implications and no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-27",
+        "notes": "Read all three current steps and each current supplier. Independently differentiated the index: psi prime=nu/(t L^(nu+1)), psi second=nu(nu+1-L)/(t^2 L^(nu+2))<0 because t0<exp(-nu-1). The continuous zero extension and downward derivative jump to the constant branch give global concavity and monotonicity. For q>psi prime(t0-), the unique critical point is the global maximum, beats s=0 and the decreasing constant branch, and satisfies q=nu exp(L)/L^(nu+1). Thus L/log q->1 and H=L^(-nu)(1-nu/L)>0 ~ (log q)^(-nu); bounded psi also makes H finite. With alpha=delta^p ell^nu, log(c_p/alpha)~p ell, both conjugate scales are comparable, alpha rho~delta^p, and psi(C0 delta^p)~ell^(-nu) for every fixed positive C0. The supplied-minimizer rate theorem applies; optional norm conclusion explicitly assumes c_R,s>0. Zero data residual, p=1, positive-noise limit and cutoff endpoints are valid; no choice. Kaltenbacher PDF p.6, equations (1.31)–(1.32) and following conjugate display, corroborate the index family, but have typographical notation issues; this exact asymptotic and cutoff restriction are proved locally. Weidling PDF inaccessible (403), no claim of reading it. Reader/refuter report no defect; no edit needed."
+      }
+    }
+  }
+}

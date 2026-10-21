@@ -1,0 +1,530 @@
+[
+  {
+    "order": 3186,
+    "id": "knot-floer-genus-and-fiberedness-detection",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Knot Floer genus and fibering detection",
+    "companion": "knot-floer-genus-and-fiberedness-detection-examples",
+    "requires": [
+      "satellite-knots-and-jsj-tori",
+      "grid-homology-and-combinatorial-knot-floer-theory"
+    ],
+    "items": [
+      {
+        "id": "def-balanced-taut-sutured-manifold-and-product-region",
+        "kind": "definition",
+        "deps": [],
+        "dependency_level": 0,
+        "title": "Balanced taut sutured manifolds and characteristic product regions",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §§2.1 and 6.1",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed pp.3–5 and 16–17; sutured manifolds, product disks and annuli, horizontal surfaces, vertical primeness, and characteristic product region"
+            },
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §§2 and 9",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Printed pp.3–5 and 31–38; balanced and taut sutured manifolds, horizontal decompositions, and the rank-one/product criterion"
+            }
+          ]
+        },
+        "statement": "A **sutured manifold** $(M,\\gamma)$ consists of a compact oriented $3$-manifold $M$ with boundary and a union $\\gamma$ of pairwise disjoint annuli and tori in $\\partial M$. Each annulus contains a suture, its oriented core circle; write $A(\\gamma)$ for the annuli and $s(\\gamma)$ for the union of their cores. Orient each component of $R(\\gamma)=\\partial M\\setminus\\operatorname{int}(\\gamma)$ so that its boundary orientation agrees in the annulus with the homology class of the suture. The regions whose normal points out of $M$ form $R_+(\\gamma)$ and those whose normal points into $M$ form $R_-(\\gamma)$. The sutured manifold is **balanced** when $M$ has no closed component, $\\chi(R_+)=\\chi(R_-)$, and every component of $\\partial M$ meets an annular component of $\\gamma$. It is **irreducible** when every embedded $2$-sphere in $M$ bounds a $3$-ball in $M$. A properly embedded surface is **incompressible** when it has no compressing disk, meaning an embedded disk whose boundary is a loop on the surface that does not bound a disk on that surface. For a compact surface $S$ put $x(S)=\\sum_{S_j}\\max(0,-\\chi(S_j))$, where the sum is over its connected components. The Thurston norm of a relative homology class in $H_2(M,\\gamma;\\mathbb Z)$ is the minimum of $x(S)$ over properly embedded oriented representatives. A balanced sutured manifold is **taut** when it is irreducible and $R(\\gamma)$ is norm-minimizing in $H_2(M,\\gamma;\\mathbb Z)$.\n\nA **product sutured manifold** is $(R\\times[0,1],\\partial R\\times[0,1])$ for a compact oriented surface $R$, with positive and negative regions $R\\times\\{1\\}$ and $R\\times\\{0\\}$. A properly embedded oriented surface $S\\subset M$ is a **decomposing surface** when every component $\\lambda$ of $S\\cap\\gamma$ is either a properly embedded nonseparating arc in an annular component meeting its suture once, a simple closed curve in an annular component homologous to that suture, or a homotopically nontrivial curve in a toroidal component, with all such curves in one torus component representing the same homology class. A **product disk** is a decomposing surface that is a disk and meets the sutures in exactly two points. A **product annulus** is a decomposing annulus with one boundary circle in $R_+$ and one in $R_-$. A **horizontal surface** $S$ in a balanced sutured manifold has no closed component, $|\\partial S|=|s(\\gamma)|$, $[S]=[R_+]$ in $H_2(M,\\gamma;\\mathbb Z)$, and $\\chi(S)=\\chi(R_+)$. The sutured manifold is **vertically prime** when every horizontal surface is parallel to $R_+$ or $R_-$, where parallel means that the surfaces cobound an embedded product between them.\n\nWhen $(M,\\gamma)$ is irreducible, $\\gamma$ has no torus component, and $R_+$ and $R_-$ are incompressible and diffeomorphic, a **product region** is a submanifold $\\Phi\\times[0,1]\\subset M$ for a compact possibly disconnected surface $\\Phi$ such that $\\Phi\\times\\{0\\}$ and $\\Phi\\times\\{1\\}$ are incompressible subsurfaces of $R_-$ and $R_+$, respectively. A **characteristic product region** is a product region $E\\times[0,1]$ such that every product region $\\Phi\\times[0,1]$ can be carried into it by an ambient isotopy of $M$."
+      },
+      {
+        "id": "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere",
+        "kind": "lemma",
+        "deps": [
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "def-universal-covering-space",
+          "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "title": "The Poincaré sphere is a nontrivial integral homology sphere",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Algebraic Topology, Winter Semester 2021/22, §4.5.12",
+              "url": "https://loeh.app.ur.de/teaching/topologie1_ws2122/lecture_notes.pdf",
+              "locator": "Printed pp.178–179; homology and fundamental group of the Poincaré sphere and the binary icosahedral group"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $I^*$ be the binary icosahedral group, the group of $120$ unit quaternions acting on the unit sphere $S^3$ by left multiplication, and put $P=S^3/I^*$. The quotient is a closed connected oriented $3$-manifold with universal cover $S^3$ and deck group $I^*$. Then $H_*(P;\\mathbb Z)\\cong H_*(S^3;\\mathbb Z)$ and $\\pi_1(P)\\cong I^*$ is nontrivial."
+      },
+      {
+        "id": "def-sutured-floer-chain-complex",
+        "kind": "definition",
+        "deps": [
+          "def-balanced-taut-sutured-manifold-and-product-region"
+        ],
+        "dependency_level": 1,
+        "title": "Sutured Floer chain complexes and homology notation",
+        "justified_by": [
+          "lem-ni-holomorphic-disk-and-jsj-analytic-inputs"
+        ],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §§2–3",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Printed pp.3–11; balanced sutured diagrams, admissibility, the chain complex, and relative Spin^c structures"
+            },
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §2.2",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed pp.5–7; the sutured Floer invariant associated to a sutured manifold and its diagram-independence construction"
+            }
+          ]
+        },
+        "statement": "For a balanced sutured manifold $(M,\\gamma)$, a **balanced sutured Heegaard diagram** is a tuple $\\mathcal H=(\\Sigma,\\boldsymbol\\alpha,\\boldsymbol\\beta)$ where $\\Sigma$ is a compact oriented surface with boundary and each of $\\boldsymbol\\alpha,\\boldsymbol\\beta$ is a finite family of pairwise disjoint simple closed curves in $\\operatorname{int}\\Sigma$. It defines $M$ by attaching $3$-dimensional $2$-handles to $\\Sigma\\times[0,1]$ along $\\boldsymbol\\alpha\\times\\{0\\}$ and $\\boldsymbol\\beta\\times\\{1\\}$, with sutures $\\partial\\Sigma\\times\\{1/2\\}$ on $\\gamma=\\partial\\Sigma\\times[0,1]$. The diagram is balanced when the two families have equal cardinality $d$ and the natural maps from components of $\\partial\\Sigma$ to components of $\\Sigma\\setminus\\bigcup\\boldsymbol\\alpha$ and $\\Sigma\\setminus\\bigcup\\boldsymbol\\beta$ are both surjective. A **domain** is an integral two-chain generated by the closures of regions of $\\Sigma\\setminus(\\bigcup\\boldsymbol\\alpha\\cup\\bigcup\\boldsymbol\\beta)$ disjoint from $\\partial\\Sigma$. A **periodic domain** is a domain whose boundary is an integral sum of full $\\alpha$- and $\\beta$-curves. The diagram is **admissible** when each nonzero periodic domain has at least one positive and one negative region coefficient.\n\nThe symmetric product $\\operatorname{Sym}^d(\\Sigma)=\\Sigma^d/S_d$ is the space of unordered $d$-tuples of points. The product tori $\\mathbb T_\\alpha,\\mathbb T_\\beta$ are the images of the products of the $d$ attaching curves in this symmetric product. A **generator** is a point of $\\mathbb T_\\alpha\\cap\\mathbb T_\\beta$, equivalently a collection of $d$ transverse intersection points, one on each attaching curve in each family. A **Whitney disk class** from generator $\\mathbf{x}$ to generator $\\mathbf{y}$ is a relative homotopy class of maps of a disk into $\\operatorname{Sym}^d(\\Sigma)$ whose two boundary arcs lie on the product tori and whose endpoints are $\\mathbf{x},\\mathbf{y}$; $\\pi_2(\\mathbf{x},\\mathbf{y})$ denotes the set of these classes. Fix a smooth path $J_t$ of almost complex structures on $\\operatorname{Sym}^d(\\Sigma)$, where an almost complex structure is a smooth bundle endomorphism $J$ with $J^2=-\\operatorname{id}$. A representative of a Whitney disk class is a smooth strip $u:\\mathbb R\\times[0,1]\\to\\operatorname{Sym}^d(\\Sigma)$ satisfying $\\partial_su+J_t(u)\\partial_tu=0$, with $u(s,0)\\in\\mathbb T_\\alpha$, $u(s,1)\\in\\mathbb T_\\beta$, and limits $\\mathbf{x},\\mathbf{y}$ as $s\\to-\\infty,+\\infty$. Its Maslov index is the Fredholm index of the linearized Cauchy--Riemann operator at a representative, and $\\mathcal M_J(\\phi)$ denotes the space of representatives of class $\\phi$. Translation of the real coordinate gives the $\\mathbb R$ action on this moduli space.\n\nWhen $d=0$, $\\operatorname{Sym}^0(\\Sigma)$ is a point, both product tori are that point, and the unique generator is the empty collection.\n\nA **periodic domain** is an integral two-chain of regions of $\\Sigma$ whose boundary is an integral sum of attaching curves and whose boundary coefficient on $\\partial\\Sigma$ is zero. Its coefficients are its multiplicities on the regions. The diagram is **admissible** when every nonzero periodic domain has at least one positive and one negative region coefficient. A Whitney disk from generator $\\mathbf x$ to generator $\\mathbf y$ is a relative homotopy class of maps of a disk into $\\operatorname{Sym}^d(\\Sigma)$ whose two boundary arcs lie on the product tori and whose endpoints are $\\mathbf x$ and $\\mathbf y$. Its Maslov index is the Fredholm index of the linearized Cauchy--Riemann operator at a representative. A coherent orientation system assigns orientations to these operators' determinant lines compatibly with gluing.\n\nFor a fixed admissible diagram, the **sutured Floer disk-count module** $SFC(\\mathcal H;R)$ is the free $R$-module on its generators, where $R=\\mathbb F_2$ or $\\mathbb Z$. For $R=\\mathbb F_2$, its formal differential counts translation classes modulo two:\n$$\\partial\\mathbf{x}=\\sum_{\\mathbf{y}}\\sum_{\\substack{\\phi\\in\\pi_2(\\mathbf{x},\\mathbf{y})\\\\\\mu(\\phi)=1}}\\#_2\\bigl(\\mathcal M_J(\\phi)/\\mathbb R\\bigr)\\,\\mathbf{y}.$$\nFor $R=\\mathbb Z$, use a coherent orientation system, which assigns orientations to determinant lines of the linearized disk operators compatibly with gluing, and replace $\\#_2$ by the signed count $\\#_{\\mathfrak o}$. The homology of this diagram-level differential is denoted $H_*(SFC(\\mathcal H;R))$ once the moduli counts are finite and the differential squares to zero. When $d=0$ the unique empty generator has zero differential. Once admissible diagram-change maps are proved to be chain homotopy equivalences, their common homology is denoted $SFH(M,\\gamma;R)$. This definition fixes the chain-level and coefficient conventions; it does not assert analytic compactness, gluing, invariance, or surface-decomposition results."
+      },
+      {
+        "id": "def-knot-relative-spinc-structure",
+        "kind": "definition",
+        "deps": [
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex"
+        ],
+        "dependency_level": 2,
+        "title": "Relative Spin-c structures and Chern classes for sutured knot exteriors",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §3",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Printed pp.6–9; boundary vector fields, sutured Spin-c structures, relative Chern classes, and generator assignment"
+            },
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §§1–2",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed pp.2 and 5–7; knot Floer Alexander summands and sutured diagrams for a null-homologous knot"
+            }
+          ]
+        },
+        "statement": "Let $(M,\\gamma)$ be a balanced sutured manifold. Fix a nowhere-zero vector field $v_0$ along $\\partial M$ that points into $M$ on $R_-(\\gamma)$, points out of $M$ on $R_+(\\gamma)$, and on each annular suture region follows the gradient of a height coordinate whose level circles are the sutures. A **sutured Spin-c structure** is a homology class of nowhere-zero vector fields $v$ on $M$ whose boundary restriction is $v_0$. Two such fields are homologous when, outside some open ball in $\\operatorname{int}M$, they are homotopic through nowhere-zero fields fixed on $\\partial M$. The set of these classes is denoted $\\operatorname{Spin}^c(M,\\gamma)$.\n\nFor a balanced Heegaard diagram of $(M,\\gamma)$ and a generator $\\mathbf{x}$, choose a Morse function compatible with the diagram. The generator specifies the multi-trajectory joining its paired index-one and index-two critical points. Modify the gradient in a regular neighborhood of that trajectory to obtain a nowhere-zero vector field agreeing with $v_0$ on $\\partial M$; for this chosen Morse data its homology class is denoted $\\mathfrak{s}(\\mathbf{x})$. The theorem that the assignment is independent of auxiliary Morse and gradient choices is part of diagram invariance, not asserted by this definition. The chain subcomplex generated by generators assigned to a fixed class $\\mathfrak{s}$ has homology denoted $SFH(M,\\gamma,\\mathfrak{s};R)$ for coefficients $R$ whenever the diagram-level differential is defined. For a chosen trivialization $t$ of the oriented plane field $v_0^\\perp$ along $\\partial M$, the relative Chern class $c_1(\\mathfrak{s},t)\\in H^2(M,\\partial M;\\mathbb Z)$ is the relative Euler obstruction to extending $t$ over $v^\\perp$, where $v$ represents $\\mathfrak{s}$ and the plane orientation is determined by the orientation of $M$ and the direction of $v$.\n\nFor an oriented null-homologous knot $K$ in a closed connected oriented $3$-manifold $Y$, let $M=Y\\setminus\\operatorname{int}N(K)$ and let $\\gamma_\\mu$ be the union of two disjoint annuli on $\\partial M$ whose core sutures are parallel meridians of $K$ with opposite orientations. A Seifert surface is regarded in $M$ after deleting a collar of its boundary, so it determines a relative class on the sutured knot exterior. The meridional direction supplies the boundary trivialization of $v_0^\\perp$ used to normalize the relative Chern-class pairing."
+      },
+      {
+        "id": "def-top-alexander-grading-of-knot-floer-homology",
+        "kind": "definition",
+        "deps": [
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex",
+          "def-knot-relative-spinc-structure"
+        ],
+        "dependency_level": 3,
+        "title": "The absolute Alexander grading of knot Floer homology",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §1",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed p.2; null-homologous knots, Seifert classes, integral Alexander summands, and top grading"
+            },
+            {
+              "title": "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and knot invariants, arXiv:math/0209056v2, §3.4",
+              "url": "https://arxiv.org/pdf/math/0209056v2",
+              "locator": "Printed p.18; the Alexander summand via half the Chern-class pairing with the capped Seifert surface"
+            },
+            {
+              "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, §§3.3–3.5 and 4.1–4.3",
+              "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+              "locator": "Printed pp.12–18; pointed diagrams, absolute grading conventions, and the S3 normalization"
+            },
+            {
+              "title": "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, arXiv:math/0607691v2, §§1–3",
+              "url": "https://arxiv.org/pdf/math/0607691v2",
+              "locator": "Printed pp.1–18; explicitly mod-two grid complexes and their Alexander grading"
+            }
+          ]
+        },
+        "statement": "Let $Y$ be a closed connected oriented $3$-manifold, let $K\\subset Y$ be a smooth oriented null-homologous knot, and let $F\\subset Y$ be a compact connected oriented embedded surface with oriented boundary $K$. Choose a closed tubular neighborhood $N(K)$, put $M=Y\\setminus\\operatorname{int}N(K)$, and let $\\gamma_\\mu$ be the union of two disjoint annuli on $\\partial M$ whose core sutures are parallel meridians of $K$ with opposite orientations. Delete a collar of $\\partial F$ to regard $F$ as a properly embedded surface in $(M,\\gamma_\\mu)$, with relative class $[F]\\in H_2(M,\\partial M;\\mathbb Z)$. Let $t_\\mu$ be the meridional boundary trivialization of the oriented plane field used in the relative Spin-c definition. For $\\mathfrak{s}\\in\\operatorname{Spin}^c(M,\\gamma_\\mu)$, its Alexander grading is\n\n$$A_F(\\mathfrak{s})=\\frac12\\left\\langle c_1(\\mathfrak{s},t_\\mu),[F]\\right\\rangle,$$\n\nwith the standard sign convention that gives the usual Alexander grading for knots in $S^3$. For a balanced admissible sutured Heegaard diagram of $(M,\\gamma_\\mu)$, the Spin-c summand $SFH(M,\\gamma_\\mu,\\mathfrak{s};\\mathbb Z)$ is the homology of the integral sutured Floer disk-count complex generated by the Heegaard generators assigned to $\\mathfrak{s}$. Define the integral knot Floer group in Alexander grading $i$ by\n\n$$\\widehat{\\mathrm{HFK}}(Y,K,[F],i;\\mathbb Z)=\\bigoplus_{\\substack{\\mathfrak{s}\\in\\operatorname{Spin}^c(M,\\gamma_\\mu)\\\\ A_F(\\mathfrak{s})=i}}SFH(M,\\gamma_\\mu,\\mathfrak{s};\\mathbb Z).$$\n\nThis fixes the integral coefficient convention. The equivalent associated-graded closed Heegaard-complex presentation, invariance under changing diagrams, and comparison with the mod-two grid complex are separate theorems; this definition supplies none of their proofs or a coefficient-change map."
+      },
+      {
+        "id": "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+        "kind": "lemma",
+        "deps": [
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "thm-jsj-decomposition-of-knot-exteriors",
+          "def-satellite-pattern-companion-and-winding-number",
+          "def-top-alexander-grading-of-knot-floer-homology",
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex",
+          "def-knot-relative-spinc-structure",
+          "def-axiom-of-choice",
+          "lem-fiber-outer-grading-and-integral-cut-euler-matrix",
+          "lem-signed-relative-surface-cut-and-horizontal-decomposition",
+          "lem-signed-essential-product-annulus-decomposition"
+        ],
+        "dependency_level": 5,
+        "title": "Analytic inputs for Ni's sutured knot Floer decompositions",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §§2.2–5",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed pp.5–15; sutured Floer setup, surface-adapted diagrams, horizontal decomposition, and separating product-annulus decomposition"
+            },
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §§1–7",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Printed pp.1–31; balanced sutured diagrams, surface-decomposition chain maps, admissibility, and analytic construction"
+            },
+            {
+              "title": "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and topological invariants for closed three-manifolds, arXiv:math/0101206",
+              "url": "https://arxiv.org/pdf/math/0101206",
+              "locator": "Printed pp.19–35; Fredholm regularity, energy bounds, compactness, and index-two boundary and gluing arguments"
+            }
+          ]
+        },
+        "statement": "Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $F$ be a genus-$g$ Seifert surface, and let $(M,\\gamma)$ be the balanced sutured manifold obtained by cutting the compact exterior of $K$ along $F$. For a surface-adapted admissible sutured Heegaard diagram, the generator correspondence between the top Alexander summand of the knot Floer complex and the sutured Floer disk-count module identifies their disk-count differentials. Under the hypotheses of a horizontal decomposition, the induced chain map realizes Ni's horizontal decomposition formula. Under the hypotheses of a separating product annulus with connected $R_+$ and $R_-$, the induced chain map realizes Ni's product-annulus tensor formula. These assertions use the specified basepoint domains, periodic-domain admissibility, and exact characteristic-product-region hypotheses; they make no claim that generic Heegaard disk existence alone supplies the decomposition maps."
+      },
+      {
+        "id": "thm-knot-floer-detects-seifert-genus",
+        "kind": "theorem",
+        "deps": [
+          "def-top-alexander-grading-of-knot-floer-homology",
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+          "lem-integral-sutured-floer-taut-hierarchy-nonvanishing",
+          "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+          "lem-fiber-outer-grading-and-integral-cut-euler-matrix",
+          "lem-countable-analytic-choice-for-fixed-sutured-floer-data"
+        ],
+        "dependency_level": 6,
+        "title": "Knot Floer homology detects the Seifert genus",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and genus bounds, arXiv:math/0311496, Theorem 1.2 and proof",
+              "url": "https://arxiv.org/pdf/math/0311496",
+              "locator": "Printed pp.2 and 18–19; zero-surgery, taut foliation, contact nonvanishing, and the genus-one connected-sum case"
+            },
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, Theorems 1.4–1.5 and Corollary 8.3",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Printed pp.2–3 and 28–29; taut sutured Floer nonvanishing, the HFK-sutured decomposition, and genus detection"
+            },
+            {
+              "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorem 2.3",
+              "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+              "locator": "Printed p.5; S3 genus-detection formula and normalization"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $K\\subset S^3$ be a smooth oriented knot, and let $g(K)$ be the least genus of a compact connected oriented embedded surface in $S^3$ with boundary $K$. With the integral Alexander normalization, the maximum Alexander grading in which the hat knot Floer homology of $K$ is nonzero is $g(K)$:\n\n$$g(K)=\\max\\{i\\in\\mathbb Z:\\widehat{\\mathrm{HFK}}(S^3,K,i;\\mathbb Z)\\ne0\\}.$$"
+      },
+      {
+        "id": "lem-ni-fiberedness-sutured-floer-and-gabai-inputs",
+        "kind": "lemma",
+        "deps": [
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "thm-jsj-decomposition-of-knot-exteriors",
+          "def-satellite-pattern-companion-and-winding-number",
+          "def-top-alexander-grading-of-knot-floer-homology",
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex",
+          "def-knot-relative-spinc-structure",
+          "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+          "lem-integral-sutured-floer-taut-hierarchy-nonvanishing",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6,
+        "title": "Ni's sutured Floer and Gabai product criterion",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §§3–7",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Author version Theorem 1.1 p.2, characteristic-region material p.29, and main proof pp.35–36; must be used with the cited Corrigendum"
+            },
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, §§8–9",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Author version Theorem 1.5 p.2, Theorem 9.7 pp.34–38 and Theorem 9.11 pp.38–39; published pagination is recorded separately below"
+            },
+            {
+              "title": "David Gabai, Foliations and the topology of 3-manifolds III, Theorem 3.13 and Theorem 8.9",
+              "url": "https://doi.org/10.2307/1971333",
+              "locator": "Taut hierarchies, norm-minimizing surfaces, and the foliations used in Ni's characteristic-product-region argument"
+            },
+            {
+              "title": "András Juhász, Holomorphic discs and sutured manifolds, Algebraic & Geometric Topology 6 (2006), 1429–1457",
+              "url": "https://msp.org/agt/2006/6-3/agt-v6-n3-p16-s.pdf",
+              "locator": "Proposition 9.18, printed pp.1452–1453: irreducible balanced and not taut implies integral SFH vanishes"
+            },
+            {
+              "title": "András Juhász, Floer homology and surface decompositions, Geometry & Topology 12 (2008), 299–350",
+              "url": "https://msp.org/gt/2008/12-1/gt-v12-n1-p07-s.pdf",
+              "locator": "Theorem 1.5 p.300, Theorem 9.7 pp.343–348 and Theorem 9.11 p.348; general ambient manifold, integral cut identification and nonproduct rank bound"
+            },
+            {
+              "title": "Yi Ni, Corrigendum to Knot Floer homology detects fibred knots, Inventiones Mathematicae 177 (2009), 235–238",
+              "url": "https://arxiv.org/pdf/0808.0940",
+              "locator": "Author version pp.1–3: Theorem 4, Definitions 5–6, Theorem 6.2-prime, Corollary 7 and corrected proof of Theorem 1.1; maximal product pairs replace the original incorrect characteristic-product-region citation"
+            }
+          ]
+        },
+        "statement": "Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, let $Y\\setminus K$ be irreducible, and let $F$ be a genus-$g$ Seifert surface. If the integral top Alexander group $\\widehat{\\mathrm{HFK}}(Y,K,[F],g;\\mathbb Z)$ is isomorphic to $\\mathbb Z$, then the sutured manifold obtained by cutting the compact knot exterior along $F$ is a product sutured manifold. The argument uses Ni's homology-product reduction, the horizontal and separating product-annulus decompositions, the characteristic product region, and Gabai's taut-foliation input under their stated hypotheses.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/carrier-ni2-source-binding-review.md"
+        }
+      },
+      {
+        "id": "thm-fibered-knot-has-rank-one-top-knot-floer-homology",
+        "kind": "theorem",
+        "deps": [
+          "def-top-alexander-grading-of-knot-floer-homology",
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex",
+          "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+          "lem-relative-sutured-diagrams-have-signed-move-equivalences",
+          "lem-marked-fiber-admits-a-sutured-surface-diagram",
+          "lem-permissible-surface-niceification-preserves-admissibility",
+          "lem-fiber-outer-grading-and-integral-cut-euler-matrix",
+          "lem-signed-outer-summand-cut-comparison-with-zero-periodic-cut"
+        ],
+        "dependency_level": 6,
+        "title": "A fibered knot has rank-one top knot Floer homology",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, §1",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed p.2; the top group of a fibered knot is a single copy of Z"
+            },
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, Theorem 1.5 and §9",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Printed pp.2–3 and 31–38; top knot Floer group as sutured Floer homology and the product criterion"
+            },
+            {
+              "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorem 2.5",
+              "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+              "locator": "Printed p.5; the S3 fibered-knot rank-one equivalence"
+            }
+          ]
+        },
+        "statement": "Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, and suppose $Y\\setminus K$ fibers over $S^1$ with connected fiber a Seifert surface $F$ of genus $g$. Then the integral top Alexander group is one copy of the integers:\n\n$$\\widehat{\\mathrm{HFK}}(Y,K,[F],g;\\mathbb Z)\\cong\\mathbb Z.$$"
+      },
+      {
+        "id": "thm-rank-one-top-knot-floer-detects-fiberedness",
+        "kind": "theorem",
+        "deps": [
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "thm-jsj-decomposition-of-knot-exteriors",
+          "def-satellite-pattern-companion-and-winding-number",
+          "def-top-alexander-grading-of-knot-floer-homology",
+          "def-balanced-taut-sutured-manifold-and-product-region",
+          "def-sutured-floer-chain-complex",
+          "def-knot-relative-spinc-structure",
+          "lem-ni-fiberedness-sutured-floer-and-gabai-inputs",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7,
+        "title": "Rank-one top knot Floer homology detects fibering",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, Theorem 1.1",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed p.2 for exact hypotheses; §§3–7 for the homology-product, horizontal-decomposition, product-annulus, characteristic-region, and regluing proof"
+            },
+            {
+              "title": "Andras Juhasz, Floer homology and surface decompositions, arXiv:math/0609779v3, Theorem 9.11 and proof",
+              "url": "https://arxiv.org/pdf/math/0609779v3",
+              "locator": "Author version Theorem 9.11 pp.38–39; published Geometry & Topology 12 (2008), Theorem 9.11 p.348, with Theorems 1.5 and 9.7"
+            }
+          ]
+        },
+        "statement": "Let $K$ be a null-homologous knot in a closed connected oriented $3$-manifold $Y$, and suppose that the knot complement $Y\\setminus K$ is irreducible. Let $F$ be a genus-$g$ Seifert surface for $K$. If the integral top Alexander group satisfies\n\n$$\\widehat{\\mathrm{HFK}}(Y,K,[F],g;\\mathbb Z)\\cong\\mathbb Z,$$\n\nthen $Y\\setminus K$ fibers over $S^1$ with fiber $F$.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/carrier-ni2-source-binding-review.md"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3187,
+    "id": "knot-floer-genus-and-fiberedness-detection-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Knot Floer genus and fibering detection — Examples and Counterexamples",
+    "companion": "knot-floer-genus-and-fiberedness-detection",
+    "requires": [
+      "knot-floer-genus-and-fiberedness-detection"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-43-boundary-case",
+        "kind": "counterexample",
+        "deps": [
+          "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "cor-homology-of-spheres",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "title": "A null-homologous unknot in a homology sphere can have reducible exterior",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Algebraic Topology, Winter Semester 2021/22, §4.5.12",
+              "url": "https://loeh.app.ur.de/teaching/topologie1_ws2122/lecture_notes.pdf",
+              "locator": "Printed pp.178–179; the Poincaré homology sphere and its nontrivial binary-icosahedral fundamental group"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §2.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+              "locator": "Mayer–Vietoris sequence for the connected-sum homology calculation"
+            },
+            {
+              "title": "Yi Ni, Knot Floer homology detects fibred knots, arXiv:math/0607156v4, Theorem 1.1",
+              "url": "https://arxiv.org/pdf/math/0607156v4",
+              "locator": "Printed p.2; the exact irreducible-complement hypothesis"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. An integral homology $3$-sphere is a closed connected oriented $3$-manifold $Y$ with $H_*(Y;\\mathbb Z)\\cong H_*(S^3;\\mathbb Z)$; a knot $K\\subset Y$ is null-homologous when $[K]=0$ in $H_1(Y;\\mathbb Z)$. The assertion that every smooth null-homologous knot in an integral homology $3$-sphere has irreducible complement is false, where irreducible means that every embedded $2$-sphere in the complement bounds a $3$-ball there."
+      },
+      {
+        "id": "ex-knot-kt-43-worked-cases",
+        "kind": "example",
+        "deps": [
+          "def-top-alexander-grading-of-knot-floer-homology",
+          "thm-knot-floer-detects-seifert-genus",
+          "thm-rank-one-top-knot-floer-detects-fiberedness",
+          "thm-fibered-knot-has-rank-one-top-knot-floer-homology",
+          "lem-knot-exterior-is-irreducible",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "title": "Trefoil and 5_2 knot Floer genus and fibering cases",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Ozsvath, Andras Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, Chapter 4",
+              "url": "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf",
+              "locator": "Printed pp.65–82; explicit grid complexes and trefoil calculations"
+            },
+            {
+              "title": "Peter Ozsvath and Zoltan Szabo, Heegaard Floer homology and alternating knots, arXiv:math/0209149v3, Theorem 1.3",
+              "url": "https://arxiv.org/pdf/math/0209149v3",
+              "locator": "Printed pp.5–8; integral HFK of alternating knots from the symmetrized Alexander polynomial and signature"
+            },
+            {
+              "title": "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorems 2.3 and 2.5",
+              "url": "https://web.stanford.edu/~cm5/hfk.pdf",
+              "locator": "Printed p.5; genus and S3 fiberedness criteria"
+            },
+            {
+              "title": "Knot Atlas, 3_1 and 5_2 tables",
+              "url": "https://katlas.org/wiki/5_2",
+              "locator": "Polynomial invariants / Alexander polynomial; compare https://katlas.org/wiki/3_1, same section"
+            }
+          ]
+        },
+        "axiom_use": "Uses the original classical AC branch for the explicitly imported integral genus/fiberedness results; the finite rank deductions use no choice. No reduction of these imported integral theorems to a stronger choice claim is asserted.",
+        "statement": "For the right-handed trefoil $T(2,3)$, the symmetrized Alexander polynomial is $t-1+t^{-1}$, the maximum Alexander grading is $1$, the integral top knot Floer group is $\\mathbb Z$, and the knot is fibered. For the standard alternating knot $5_2$, the symmetrized Alexander polynomial is $2t-3+2t^{-1}$, the maximum Alexander grading is $1$, the integral top knot Floer group is $\\mathbb Z^2$, and the knot is not fibered. The $5_2$ rank calculation uses the alternating-knot formula; its signature determines the Maslov grading shift.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-free-five-focused-final.md"
+        }
+      }
+    ]
+  }
+]

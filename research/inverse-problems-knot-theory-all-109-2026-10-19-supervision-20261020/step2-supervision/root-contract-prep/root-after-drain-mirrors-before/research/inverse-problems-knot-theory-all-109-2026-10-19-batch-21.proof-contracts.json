@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "scope": [
+    "op-ip-honest-coverage-over-ill-posed-truth-classes",
+    "ex-ip-inverse-coordinate-credible-interval-undercoverage",
+    "cex-ip-empirical-bayes-coverage-fails-for-sparse-gap-truth"
+  ],
+  "contracts": {
+    "op-ip-honest-coverage-over-ill-posed-truth-classes": {
+      "open_problem_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The formulation fixes p>0, the singular-value band, Gaussian sequence noise, AC and Countable Choice, the product Gaussian prior and selector, the positive-posterior branch, nonempty nonzero polished-tail Sobolev truth classes, uniform exact coverage, posterior mass at least 1-gamma, and the no-log ell2 diameter target. It is a question, not a theorem claim or supplier."
+        },
+        "status": {
+          "verdict": "pass",
+          "evidence": "Inspected the exact-scope inverse-sequence conservative-coverage theorem and sparse-gap counterexample, the direct p=0 exact-coverage and logarithmic-diameter result, the mildly ill-posed global ell2 contraction paper, the general sieve polished-tail framework, and the Gine-Nickl book's confidence-set limits. These establish neighboring results but do not prove or refute the simultaneous p>0 target stated here."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Full-text PDFs and the full book were inspected at the recorded locators. source-fetch-check --stamp verified 6/6 source URLs with no failures or drops; byte counts, hashes, and retrieval records are in batch-21.coverage.json."
+        }
+      }
+    },
+    "ex-ip-inverse-coordinate-credible-interval-undercoverage": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for all $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-credible-set-and-frequency-coverage",
+          "source_section": "Definition",
+          "quote": "For $0<\\gamma<1$, a data-indexed set rule $C_n:\\mathsf Y_n\\to\\mathcal P(\\Theta)$ is a posterior credible set at level $1-\\gamma$ if its membership graph $\\{(y,\\theta):\\theta\\in C_n(y)\\}$ is in $\\mathcal Y_n\\otimes\\mathcal T$ and $\\Pi_n(C_n(y)\\mid y)\\ge1-\\gamma$ for every $y$ in its declared data domain.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The positive symmetric normalized standard-normal density makes its CDF continuous and strictly increasing, with value 1/2 at zero and limit one at infinity; the intermediate value theorem gives a unique positive z with Phi(z)=0.975.",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Multiplying the N(0,1) prior density by the N(theta,1) likelihood and completing the square gives the normalized posterior N(Y/2,1/2).",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "At the fixed truth theta*=2r+1, with Y=theta*+Z, interval membership is equivalent to 1<=Z<=4r+1.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The interval membership graph is closed as the inverse image of [-r,r] under a continuous map, hence Borel, and the fixed-truth membership event is measurable.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Under the posterior N(Y/2,1/2), the central interval of radius z/sqrt(2) has mass Phi(z)-Phi(-z)=0.95 for every Y.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The event 1<=Z<=4r+1 has probability strictly less than P(Z>=0)=1/2, so the repeated-sampling coverage is below the posterior mass 0.95.",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [
+        {
+          "check": "normal-normal-finite-n-posterior",
+          "asserts": "The posterior is $N(Y/2,1/2)$"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scalar parameter and data spaces are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-noise, zero-variance, or zero-truth boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses one observation, prior variance 1, likelihood variance 1, and posterior variance 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The posterior variance is strictly positive; no degenerate prior is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting or interval-endpoint case is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: AC is explicitly assumed for the supplied standard-normal probability law; no further choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an iff statement."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The registered finite-smoke check verifies only the scalar posterior mean and variance. The undercoverage comparison is proved by the exact fixed-truth interval event; no general inverse, asymptotic, or class-wide conclusion is inferred."
+      }
+    },
+    "cex-ip-empirical-bayes-coverage-fails-for-sparse-gap-truth": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-sequence-hyperrectangle-class",
+          "source_section": "Definition",
+          "quote": "For $\\beta>0$ and $M>0$, the **Gaussian-sequence hyperrectangle** of smoothness index $\\beta$ and radius $M$ is $$\\Theta_\\beta(M):= \\left\\{\\theta\\in\\ell^2(\\mathbb N_+,\\mathbb R): \\sup_{i\\ge1}i^{1+2\\beta}\\theta_i^2\\le M\\right\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-polished-tail-class-for-gaussian-sequence",
+          "source_section": "Definition",
+          "quote": "for every integer $N\\ge N_0$, $$\\sum_{i=N}^{\\infty}\\theta_i^2 \\le L_0\\sum_{i=N}^{\\lfloor\\rho N\\rfloor}\\theta_i^2.$$ Thus each tail's total squared mass is controlled by the mass in the finite block from $N$ through $\\lfloor\\rho N\\rfloor$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cex-sparse-gap-truth-causes-empirical-bayes-credible-set-undercoverage",
+          "source_section": "Statement refuted",
+          "quote": "For every deterministic nonnegative inflation sequence for which there exist $K_L\\in(0,\\infty)$ and $j_0\\in\\mathbb N$ such that, for every $j\\ge j_0$, $$L_{n_j}\\le K_L\\sqrt M\\,\\rho_j^{(1+2p)/(8+8\\beta+8p)}$$ one has $$P_{\\theta_0}^{(n_j)}\\{\\theta_0\\in\\widehat C_{n_j}(L_{n_j})\\}\\longrightarrow0.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails",
+          "source_section": "Statement",
+          "quote": "Then there is a finite inflation constant $L>0$, depending only on the fixed model and class parameters, such that $$\\inf_{\\substack{\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)\\\\ \\theta_{0,1}=0}} P_{\\theta_0}^{(n)}\\{\\theta_0\\in\\widehat C_n(L)\\} \\longrightarrow1.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adaptive-empirical-bayes-gaussian-sequence-procedure",
+          "source_section": "Definition",
+          "quote": "At $\\widehat\\alpha_n>0$, let $r_{n,\\gamma}(\\widehat\\alpha_n)$ be the $1-\\gamma$ quantile of the centered posterior $\\ell^2$ norm and use the posterior mean given above. Define the empirical-Bayes set by $$\\widehat C_n(L;x)= \\begin{cases} \\{\\theta\\in\\ell^2: \\|\\theta-\\widehat\\theta_{n,\\widehat\\alpha_n(x)}(x)\\|_2 \\le Lr_{n,\\gamma}(\\widehat\\alpha_n(x))\\},& \\widehat\\alpha_n(x)>0,\\\\ \\ell^2,&\\widehat\\alpha_n(x)=0. \\end{cases}$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-credible-set-and-frequency-coverage",
+          "source_section": "Definition",
+          "quote": "At a fixed truth $\\theta\\in\\Theta$, its frequentist coverage is $c_n(\\theta):=P_{\\theta,n}\\{y:\\theta\\in C_n(y)\\}$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The witness coordinates are either zero or M i^(-1-2 beta), so the square-sum is finite and the weighted coordinate supremum is at most M. The first gap contains coordinate 1, hence theta_0,1=0.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The recursion separates earlier gaps below N_j/rho_j and the next gap beyond i_j; for large j the polished-tail block lies inside the current zero gap while i_j>N'_j lies outside every gap with positive coordinate, so the tail is positive and the block sum is zero.",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For fixed L>=1 choose K_L=L/sqrt(M); since rho_j^q>=1 for q=(1+2p)/(8+8 beta+8p)>0, the source inflation bound holds and its sparse-gap theorem gives coverage tending to zero along n_j.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The positive conservative-coverage theorem assumes the polished-tail condition, which this witness violates, so the two source results have distinct scopes.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sequence space and hyperrectangle include nonempty parameter sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the construction places coordinate 1 in the first zero gap, so theta_0,1=0 as required by the positive theorem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the first coordinate is placed in the first zero gap; all other coordinates obey the weighted hyperrectangle bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The prior is nondegenerate for positive alpha; no degenerate-prior case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement refuted states 0<M<=(1984 C^8)^(-1), A>beta, gamma in (0,1), and every fixed L>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement refuted assumes AC explicitly; the Gaussian product prior uses this declared choice branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The counterexample refutes only a fixed-inflation uniform-coverage claim over the full hyperrectangle. It preserves the source restrictions and does not contradict the polished-tail theorem or make a claim about growing inflation sequences. No finite-smoke check verifies this asymptotic construction."
+      }
+    }
+  }
+}

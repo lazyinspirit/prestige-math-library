@@ -1,0 +1,337 @@
+[
+  {
+    "order": 3098,
+    "id": "inverse-problem-benchmarking-and-shift",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Benchmarks, prior shift, and solver admissibility",
+    "companion": "inverse-problem-benchmarking-and-shift-examples",
+    "requires": [
+      "learned-reconstruction-targets-and-risk",
+      "neural-operator-eit-inverse-map",
+      "unrolled-inverse-solvers-and-generalization",
+      "plug-and-play-mmse-regularization",
+      "score-diffusion-inverse-solvers",
+      "statistical-inverse-model-misspecification",
+      "manifold-and-physical-constraint-inversion",
+      "numerical-pde-inversion-and-adjoint-error-control",
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "def-ip-benchmark-risk-and-compute-budget",
+        "kind": "definition",
+        "title": "Benchmark risk, compute budgets, and uncertainty records",
+        "dependency_level": 5,
+        "deps": [
+          "def-ip-admissible-constraint-class",
+          "def-ip-inverse-risk-under-train-and-test-laws",
+          "def-ip-learned-reconstruction-estimator",
+          "def-ip-operator-and-prior-mismatch",
+          "def-ip-pde-solver-admissibility-contract"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Guillaume Bal, Introduction to Inverse Problems, E6901 Lecture Notes for 2011 course, full 132-page PDF",
+              "url": "https://www.stat.uchicago.edu/~guillaumebal/COURSES/E6901/LectureNotesIP.pdf",
+              "locator": "§1.1, PDF pp. 3–4, separates measurement operator, modeling/noise, prior information, and numerical implementation; §§8.2–8.3, PDF pp. 91–97, specify data misfit, regularization/prior, likelihood, and computational limits."
+            },
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full 29-page paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§§2.1–2.3 and 3–4.2, PDF pp. 2–7, specify forward models, noise types, algorithm requirements, training/test populations, metrics, and compute measures; Appendix B.7.2, PDF pp. 27–28, describes validation-based hyperparameter selection."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; laws, methods, samples, solvers, and finite budgets are supplied inputs.",
+        "statement": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result."
+      },
+      {
+        "id": "rem-ip-inversebench-scoped-findings",
+        "kind": "remark",
+        "title": "Scope of InverseBench findings",
+        "dependency_level": 6,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "def-ip-inverse-risk-under-train-and-test-laws",
+          "def-ip-learned-reconstruction-estimator",
+          "def-ip-operator-and-prior-mismatch",
+          "def-ip-pde-solver-admissibility-contract",
+          "def-ip-diffusion-prior-score-and-measurement-score"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full 29-page paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§§3–5, PDF pp. 4–10; Appendix A.1–A.2, PDF pp. 20–22; Appendix B.1–B.7, PDF pp. 22–28; Appendix C, PDF pp. 28–29."
+            },
+            {
+              "title": "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/inverse_scatter.py",
+              "url": "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/inverse_scatter.py",
+              "locator": "Lines 326–445: `full_propagate_to_sensor`, `InverseScatter.forward`, and `compute_svd`; fixed incident field is passed to the forward routine and used to construct the fixed linear matrix."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the item reports finite experimental observations and source scope.",
+        "statement": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression."
+      }
+    ]
+  },
+  {
+    "order": 3099,
+    "id": "inverse-problem-benchmarking-and-shift-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Benchmarks, prior shift, and solver admissibility — Examples and Counterexamples",
+    "companion": "inverse-problem-benchmarking-and-shift",
+    "requires": [
+      "inverse-problem-benchmarking-and-shift"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-inversebench-first-born-scattering",
+        "kind": "example",
+        "title": "First-Born optical scattering benchmark",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§4.1 and Appendix B.1, PDF pp. 6 and 22–23: 128×128 first-Born optical-scattering setup, fixed physical dimensions, 20 transmitters, receiver counts 360/180/60, and train/validation/test split."
+            },
+            {
+              "title": "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/inverse_scatter.py",
+              "url": "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/inverse_scatter.py",
+              "locator": "Lines 326–445: fixed incident field is passed to `full_propagate_to_sensor`; the cached matrix is formed from that field and the sensor Green function."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the finite real contrast grid and fixed measurement operators are explicit inputs.",
+        "statement": "In the implemented first-Born optical-scattering benchmark, the unknown is a real $128\\times128$ array $z$ of cellwise permittivity contrasts, each equal to the object's permittivity minus the background permittivity. For each transmitter $j\\in\\{1,\\dots,20\\}$, $u_{\\rm in}^{(j)}$ is its fixed incident illumination field, and $H_{m,r}$ is the fixed Green response from cell $r$ to receiver $m$. The released forward implementation reports measurements\n\n$$y_{j,m}=\\Delta x\\Delta y\\sum_r z_r\\,\\overline{u_{\\rm in}^{(j)}(r)}\\,H_{m,r}+e_{j,m},$$\n\nwhere $m$ indexes receivers, $r$ indexes grid cells, $\\Delta x=\\Delta y=18\\,\\mathrm{cm}/128$ are the grid spacings, and $e$ is additive Gaussian measurement noise with reported level $\\sigma_y=10^{-4}$. Thus the implemented map is real-linear in $z$. The reported physical field is $18\\,\\mathrm{cm}\\times18\\,\\mathrm{cm}$, the wavelength is $0.84\\,\\mathrm{cm}$, the background permittivity is $1$, and the receiver count is $360$, $180$, or $60$. The paper reports $10{,}000$ training images of HL60-cell permittivity, $10$ validation images, and $100$ test images; validation and test samples are selected so their cosine similarities to training images are below $0.6$, where cosine similarity of nonzero image arrays $a,b$ is $\\langle a,b\\rangle/(\\|a\\|_2\\|b\\|_2)$. The paper's Appendix B.1 also prints a contrast-dependent total-field formula; this example follows the fixed-incident-field implementation and does not infer linearity from that printed formula."
+      },
+      {
+        "id": "ex-ip-inversebench-multicoil-mri",
+        "kind": "example",
+        "title": "Multi-coil MRI benchmark",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§4.1, PDF p. 7, and Appendix B.2, PDF pp. 23–24: fastMRI raw knee data, ESPIRiT sensitivity maps, 320×320 preprocessing, and training/tuning/test counts; Table 4, PDF p. 20, reports metrics over 94 test cases."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the finite coil operators and image data split are supplied inputs.",
+        "statement": "In the InverseBench multi-coil knee MRI case, a complex image $z\\in\\mathbb C^n$ with $n=320^2$ produces one k-space data vector per receiver coil:\n\n$$y_j=PFS_jz+n_j\\in\\mathbb C^m,\\qquad j=1,\\ldots,J.$$\n\nHere $J$ is the number of coils, $S_j$ is multiplication by the estimated sensitivity map of coil $j$, $F$ is the discrete Fourier transform, k-space is the Fourier-coefficient data space, $P\\in\\{0,1\\}^{m\\times n}$ selects the acquired k-space entries, and $n_j$ is the raw measurement noise in that coil. With these operators fixed, the measurement map is linear in $z$; the paper does not assume Gaussian noise for the raw-data benchmark. Its fastMRI knee split contains $25{,}012$ training images, $6$ hyperparameter-search images, and $94$ test images, preprocessed to $320\\times320$. The reported test metrics include peak signal-to-noise ratio (PSNR), structural similarity index measure (SSIM), and data misfit."
+      },
+      {
+        "id": "ex-ip-inversebench-black-hole-imaging",
+        "kind": "example",
+        "title": "Black-hole VLBI benchmark",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§3 and §4.1, PDF pp. 4–6; Appendix B.3, PDF pp. 24–25: visibility and closure-quantity model, GRMHD training images, synthetic validation/test data, and multi-modal behavior."
+            },
+            {
+              "title": "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/blackhole.py",
+              "url": "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/blackhole.py",
+              "locator": "Lines 110–197 and 231–267: orientation-corrected directed triangle products, closure-phase argument, and ordered quadruple log-amplitude ratio."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the finite telescope, image, and sample sets are supplied inputs.",
+        "statement": "In the InverseBench black-hole-imaging case, very-long-baseline interferometry correlates telescope electric-field signals to produce complex visibilities of a nonnegative source-brightness image $z(\\rho,\\delta)$ on angular coordinates $(\\rho,\\delta)$. For a telescope pair $(a,b)$ at time $t$, the ideal visibility is the corresponding Fourier sample\n\n$$I^t_{a,b}(z)=\\iint z(\\rho,\\delta)e^{-2\\pi i(u^t_{a,b}\\rho+v^t_{a,b}\\delta)}\\,d\\rho\\,d\\delta,$$\n\nwhere $(u^t_{a,b},v^t_{a,b})$ is the projected baseline. The observed visibility is\n\n$$V^t_{a,b}=g^t_ag^t_be^{-i(\\phi^t_a-\\phi^t_b)}I^t_{a,b}(z)+\\eta^t_{a,b},$$\n\nwhere $(u^t_{a,b},v^t_{a,b})$ is the projected baseline. The observed visibility is\n\n$$V^t_{a,b}=g^t_ag^t_be^{-i(\\phi^t_a-\\phi^t_b)}I^t_{a,b}(z)+\\eta^t_{a,b},$$\n\nwhere $g^t_a,g^t_b$ are telescope amplitude gains, $\\phi^t_a,\\phi^t_b$ are phase errors, and $\\eta^t_{a,b}$ is additive Gaussian thermal noise. For an oriented telescope triangle $(a,b,c)$, the closure phase is $\\arg(V^t_{a,b}V^t_{b,c}V^t_{c,a})$; when a stored visibility has the opposite baseline orientation, the implementation uses its complex conjugate. For the ordered quadrangle $(a,b,c,d)$ returned by the implementation's closure-amplitude routine, the log closure amplitude is $\\log\\!\\bigl(|V^t_{a,b}||V^t_{c,d}|/(|V^t_{a,d}||V^t_{b,c}|)\\bigr)$. The benchmark also uses total flux $\\iint z(\\rho,\\delta)\\,d\\rho\\,d\\delta$. These derived data are nonlinear functions of the visibilities, so their noise is not additive. The training images are $50{,}000$ simulated general-relativistic magnetohydrodynamic images resized to $64\\times64$. Because those images are not public, the paper generates $5$ validation and $100$ test images from a pretrained diffusion model. The sparse, nonconvex closure-data model has multiple solutions compatible with the observations; the reported tests do not make a general uniqueness or posterior-calibration claim."
+      },
+      {
+        "id": "ex-ip-inversebench-full-waveform-inversion",
+        "kind": "example",
+        "title": "Full waveform inversion benchmark",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§3, PDF pp. 5–6; §4.1, PDF p. 7; Appendix B.4, PDF p. 26: acoustic wave equation, receiver/source geometry, Devito solver, mesh, CFL time step, and sample counts."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the finite discretization, source signals, and solver are supplied inputs.",
+        "statement": "In the InverseBench full-waveform-inversion (FWI) case, the unknown $v(x)>0$ is the compressional-wave velocity on a two-dimensional physical domain $\\Omega$; its discretization is a $128\\times128$ velocity map $z$. For each source signal $q(x,t)$, the pressure field $u(x,t)$ solves\n\n$$v(x)^{-2}\\,\\partial_t^2u(x,t)-\\nabla^2u(x,t)=q(x,t),$$\n\nand the observation is the receiver restriction $y=Pu$, where $P$ samples the wavefield at the selected receivers. The benchmark uses a $2.54\\,\\mathrm{km}\\times1.27\\,\\mathrm{km}$ domain, horizontal and vertical grid spacings of $20\\,\\mathrm m$ and $10\\,\\mathrm m$, a $0.001\\,\\mathrm s$ time step chosen to satisfy the numerical solver's Courant–Friedrichs–Lewy stability condition, a $5\\,\\mathrm{Hz}$ Ricker source wavelet, and $1\\,\\mathrm s$ of simulated time. It uses $16$ sources and $129$ near-surface receivers. The reported observation noise is zero. The CurveFaultB velocity-map split has $50{,}000$ training maps, one validation map, and ten test maps, resized to $128\\times128$. These counts and solver settings define this empirical benchmark instance; they are not existence or convergence claims for full waveform inversion."
+      },
+      {
+        "id": "ex-ip-inversebench-navier-stokes",
+        "kind": "example",
+        "title": "Two-dimensional Navier–Stokes benchmark",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§3, PDF pp. 5–6; §4.1, PDF p. 7; Appendix B.5, PDF pp. 26–27; Tables 2 and 8, PDF pp. 5 and 21: vorticity model, pseudo-spectral solver, noise/gradient access, and split counts."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the finite periodic grid, random-field data generation, and numerical solver are supplied inputs.",
+        "statement": "In the InverseBench two-dimensional Navier–Stokes case, the spatial domain is the periodic square $(0,2\\pi)^2$ (the flat torus). The velocity $u(x,t)\\in\\mathbb R^2$ is divergence-free, and its scalar vorticity is $w=\\partial_1u_2-\\partial_2u_1$. For viscosity $\\nu>0$, forcing $f(x)$, and initial vorticity $w_0$, the forward model is\n\n$$\\partial_tw+u\\cdot\\nabla w=\\nu\\Delta w+f,\\qquad \\nabla\\cdot u=0,\\qquad w(\\cdot,0)=w_0.$$\n\nThe reconstruction target is $z=w_0$; the observation is $y=PL(z)+n$, where $L$ is the numerical solution map from initial vorticity to vorticity at final time $T$, $P$ samples the final field, and $n$ is Gaussian measurement noise. InverseBench uses a pseudo-spectral solver with adaptive time stepping; the reported setup has a $128\\times128$ grid, Reynolds number $200$, $10{,}000$ training samples, one validation sample, and ten test samples. The samples are generated from Gaussian random initial fields and evolved for five time units. The paper reports black-box forward access without a closed-form gradient for this implementation; the one-validation/ten-test split is part of this empirical benchmark, not a population-level guarantee."
+      },
+      {
+        "id": "ex-ip-inversebench-prior-shift",
+        "kind": "example",
+        "title": "Prior-matched and out-of-distribution cases",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings",
+          "def-ip-inverse-risk-under-train-and-test-laws",
+          "def-ip-operator-and-prior-mismatch"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§4.1, PDF pp. 6–7: task-specific training/test sets; §4.3 and Figure 5, PDF pp. 9–10: black-hole digit and nine-cell inverse-scattering out-of-distribution cases; Appendix C, PDF pp. 28–29: prior-mismatch discussion and scope."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the empirical training and test splits are supplied finite datasets.",
+        "statement": "For an operational within-source reference, InverseBench trains its multi-coil MRI diffusion prior on $25{,}012$ fastMRI knee images and evaluates on $94$ held-out images from the same named data collection. This is a dataset-family match, not a claim that the population training and test laws are equal. Its separate out-of-distribution diagnostics change the source: a black-hole-imaging prior is trained on $50{,}000$ simulated general-relativistic magnetohydrodynamic images, while one stress test uses digit images; in linear inverse scattering, the prior is trained on sources with one through six cells, while the stress test uses nine-cell sources. The paper reports outputs drawn toward black-hole structure in the digit case and more effective recovery when the scattering source is close to the trained prior. These are finite, method- and dataset-specific observations; they provide no risk bound or distribution-shift guarantee."
+      },
+      {
+        "id": "ex-ip-inversebench-solver-invalid-iterate",
+        "kind": "example",
+        "title": "A solver-invalid FWI iterate",
+        "dependency_level": 7,
+        "deps": [
+          "def-ip-benchmark-risk-and-compute-budget",
+          "rem-ip-inversebench-scoped-findings",
+          "def-ip-pde-solver-admissibility-contract"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§4.3 and Figure 3, PDF pp. 8–9: DAPS step-size sensitivity and a reported FWI velocity map that violates the PDE solver's CFL condition; Appendix B.4, PDF p. 26: the particular FWI discretization and stable time step."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the example applies a supplied solver-specific admissibility predicate to one finite trial.",
+        "statement": "Fix an FWI velocity-model solver $\\mathcal S$ with a declared finite admissibility predicate $\\operatorname{adm}_{\\mathcal S}(v)$ that checks that solver's coefficient, boundary, mesh, and time-step conditions, including its solver-specific Courant–Friedrichs–Lewy (CFL) condition. If an optimization method proposes a candidate velocity map $\\widetilde v$ with $\\operatorname{adm}_{\\mathcal S}(\\widetilde v)=\\mathrm{false}$, the benchmark records the call as a solver/admissibility failure and does not assign a data-fit or reconstruction score to that iterate. In its FWI DAPS experiment, InverseBench reports that a smaller learning rate gave numerically stable but data-ineffective outputs, while a slightly larger learning rate produced a noisy velocity map that violated the PDE solver's CFL condition and failed. The paper gives no exact violating iterate or universal CFL threshold; this example claims neither."
+      }
+    ]
+  }
+]

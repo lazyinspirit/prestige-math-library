@@ -1,0 +1,13 @@
+---
+page: kontsevich-integral-and-universal-finite-type-invariants-examples
+title: The Kontsevich integral and universality — Examples and Counterexamples
+status: draft
+requires:
+  - kontsevich-integral-and-universal-finite-type-invariants
+items: []
+examples:
+  - cex-knot-kt-35-boundary-case
+  - ex-knot-kt-35-worked-cases
+order: 3159
+page_layout: compact-v1
+---

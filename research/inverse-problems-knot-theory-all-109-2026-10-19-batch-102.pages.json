@@ -1,0 +1,402 @@
+[
+  {
+    "order": 3196,
+    "id": "planar-diagram-codes-and-knot-table-enumeration",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Planar-diagram codes and knot-table enumeration",
+    "companion": "planar-diagram-codes-and-knot-table-enumeration-examples",
+    "requires": [
+      "wirtinger-presentations-and-knot-groups",
+      "crossing-signs-writhe-and-linking-number",
+      "smooth-surgery-traces-and-handle-trading",
+      "seifert-surfaces-and-knot-genus"
+    ],
+    "items": [
+      {
+        "id": "lem-connected-plane-multigraph-euler-formula",
+        "kind": "lemma",
+        "title": "Euler formula for connected plane multigraphs",
+        "statement": "Let $G$ be a finite nonempty connected plane multigraph drawn in $\\mathbb R^2$: vertices\nare distinct points; each edge is a polygonal arc joining its endpoints; edge\ninteriors are pairwise disjoint and avoid every vertex; and loops and parallel\nedges are allowed. A loop is an edge whose two endpoints are the same vertex,\nwith its interior otherwise embedded. A face is a connected component of the\ncomplement of the drawing. If $V,E,F$ are the numbers of vertices, edges, and\nfaces, respectively, then\n\n$$V-E+F=2.$$",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "thm-euler-formula-for-connected-plane-graphs"
+        ],
+        "dependency_level": 0,
+        "strategy": "Subdivide each loop and each parallel edge twice using fresh vertices. The point-set drawing and faces stay fixed, while the resulting graph is finite, simple, connected, and plane; compare its vertex and edge counts with the original.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Diestel, Graph Theory, 6th ed., Theorem 4.2.9",
+              "url": "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch4.pdf",
+              "locator": "Chapter 4, §4.2, Theorem 4.2.9, pp. 101–102"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "def-planar-diagram-gauss-and-dowker-codes",
+        "kind": "definition",
+        "title": "Planar-diagram, Gauss, and signed Dowker–Thistlethwaite codes",
+        "statement": "Let $P$ be the projection plane in an oriented $3$-sphere and let $n$ be the\nunit viewing normal pointing toward the viewer. Orient $P$ so that $(u,v)$ is\na positive basis exactly when $(n,u,v)$ is a positive ambient basis. A\n**crossing code** has a\nfinite set $C$ of crossing labels and a finite set $D$ of **darts**, where a\ndart is one directed half-edge incident to a crossing. A fixed-point-free\ninvolution $\\alpha:D\\to D$ pairs the two ends of each edge: $\\alpha^2=\\mathrm{id}$\nand $\\alpha(d)\\ne d$. A vertex map $v:D\\to C$ records the crossing incident to\neach dart. A **rotation system** is the permutation $\\sigma$ whose cycles give\nthe clockwise order of darts at each crossing. Each crossing has four darts;\nthe two over-strand darts and the two under-strand darts are opposite in that\ncyclic order. An arrow on each dart records whether its edge is directed into\nor out of its incident crossing. The pairing $\\alpha$ must join one incoming\nend to one outgoing end. At a crossing, each opposite pair has one incoming\nand one outgoing dart, so following an edge and then the opposite dart defines\nthe oriented link components. A code is **connected** when the graph with\nvertices $C$ and edges the $\\alpha$-pairs is connected.\n\nThe sign of an oriented crossing is $+1$ or $-1$ according as\n$\\det(v_{\\rm over},v_{\\rm under})$ is positive or negative, where the two\ntangent vectors follow the oriented over- and under-strands. This item fixes\nthe local cyclic-order convention as follows. Starting with the outgoing\nover-dart and reading counterclockwise, a positive crossing has order\n$(O_{\\rm out},U_{\\rm out},O_{\\rm in},U_{\\rm in})$; a negative crossing has\norder $(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$. The stored crossing\nsign and cyclic order must agree. This is the page's explicit sign convention.\nIt agrees with the current KT-03 supplier: reversing its positive\ncounterclockwise order from outgoing over gives the clockwise record\n$(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$.\n\nFor a nonempty connected crossing graph, let $V=|C|$, $E=|D|/2$, and let\n$F$ be the number of cycles of the face permutation $\\phi=\\alpha\\circ\\sigma$.\nA **spherical code** is a code satisfying $V-E+F=2$. A spherical code becomes a\n**plane code** by distinguishing one face as the outer face and deleting a\npoint in that face from the sphere. The crossingless one-component code is a separate case: its Gauss data are one empty component word, its DT pairing and crossing-sign vector are empty at $c=0$, and its PD data are the single loop `Loop[1]`; every format also carries an orientation marker, `ccw` or `cw`, for the unit circle $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ in the oriented plane, and the outer-face marker is `outside`. Thus the crossingless code records which direction orients its circle. It has no crossing graph or face-permutation test. Disconnected crossing graphs and disconnected crossingless links are outside this code class.\n\nA **normalized planar-diagram code** with $c>0$ has crossing labels\n$C=\\{1,\\ldots,c\\}$ and four dart positions $0,1,2,3$ at each crossing, in\nclockwise order beginning with the outgoing over-dart. The opposite pair\n$(0,2)$ is over and $(1,3)$ is under. For sign $+1$, the clockwise record is\n$(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$; for sign $-1$ it is\n$(O_{\\rm out},U_{\\rm out},O_{\\rm in},U_{\\rm in})$. Edge labels are assigned\nby scanning crossings in increasing order and their four dart positions in\norder, giving the next positive integer to the pair containing the first\nnot-yet-labelled dart. The outer face is recorded by its least dart in its\nface cycle. These rules remove arbitrary edge-name and face-name choices;\ndifferent crossing labelings may still represent the same diagram. At $c=0$\na normalized code is the crossingless record with one of the two orientation\nmarkers above.\n\nA **Gauss code** for an oriented diagram records, in traversal order on each\noriented component, a signed crossing label: $+j$ means the component passes\nover at crossing $j$, and $-j$ means it passes under. For a knot there is one\ncyclic word; for a link there is one cyclic word per component. Each crossing\nlabel must occur exactly twice in total, once positively and once negatively.\nWhen $c>0$, every listed component word is nonempty; a separate crossingless\ncomponent is not part of this code class. The zero-crossing case is only the\none-component code specified above.\nThe code also carries a separate algebraic crossing-sign vector\n$\\varepsilon_j\\in\\{+1,-1\\}$, one entry for each label. Choosing a basepoint\nturns the knot's cyclic word into a based word; changing the basepoint\ncyclically shifts the word, and relabeling crossings changes only their names.\nThe visit order, over/under signs, and crossing-sign vector determine the\ncrossing rotation system; it is realizable in the sphere only when the\nresulting code is spherical. A plane Gauss code also carries an identifier of\none cycle of its face permutation to designate the outer face.\n\nA **signed Dowker–Thistlethwaite code**, in this page's convention, encodes a\nbased oriented knot with $c$ crossings by numbering its $2c$ visits\n$1,\\ldots,2c$ in traversal order. For each odd visit $2j-1$, record the even\nvisit $2k$ paired with it as $d_j=+2k$ when the odd visit is over and\n$d_j=-2k$ when it is under; also record the algebraic crossing sign\n$\\varepsilon_j\\in\\{+1,-1\\}$ for crossing label $j$, the pair containing odd\nvisit $2j-1$. Its parity conditions are that\n$|d_1|,\\ldots,|d_c|$ are exactly the even numbers $2,4,\\ldots,2c$, each once,\nand each paired crossing has one over-visit and one under-visit. The separate\n$\\varepsilon_j$ records the crossing sign; signed DT conventions elsewhere\nmay encode signs differently. The associated cyclic traversal and crossing\nsigns determine a rotation system, which must pass the same spherical\nrealizability test. A plane DT code also carries an identifier of one cycle\nof its face permutation to designate the outer face.\n\nAn **oriented planar-diagram code** labels each edge segment by an integer and\nlists its two incident darts at crossing records. Each crossing record lists\nits four directed edge ends in clockwise order, beginning with the outgoing\nover-dart, and records which opposite pair is over, the orientation of each\nstrand, and the crossing sign. Every edge label occurs exactly twice, once as\nan incoming end and once as an outgoing end. The code must satisfy the local\ncrossing-order rule above; its crossing graph must be connected when nonempty;\nand its rotation system must satisfy $V-E+F=2$. The record also carries an\nidentifier of one cycle of its face permutation as the outer face. Thus an\narbitrary word in labels, even when each label occurs twice, is not declared\nrealizable until all incidence, orientation, crossing, connectedness, and\nface-count tests pass.",
+        "deps": [
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the three finite encodings and fix their normalization and sign conventions explicitly. Keep the signed DT code knot-specific and distinguish local syntactic validity from spherical realizability.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, regular-projection and link-diagram definition, web text lines 102–121"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Abstract Graphs, Rotation Systems, and Formalities and Trivialities, lines 1–18 and 49–72"
+            },
+            {
+              "title": "Knot Atlas, Gauss Codes manual",
+              "url": "https://katlas.org/wiki/Gauss_Codes",
+              "locator": "Gauss-code definition and trefoil example, lines 65–80"
+            },
+            {
+              "title": "Knot Atlas, Planar Diagrams manual",
+              "url": "https://katlas.org/wiki/Planar_Diagrams",
+              "locator": "PD notation and crossing tuple conventions, lines 65–89"
+            },
+            {
+              "title": "Knot Atlas, DT (Dowker–Thistlethwaite) Codes manual",
+              "url": "https://www.math.toronto.edu/~drorbn/private/KAtlas/Manual/DTCode.html",
+              "locator": "Odd/even pairing and signed DT examples, lines 4–76"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "not-applicable",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-planar-diagram-code-realizability-and-face-validation",
+        "kind": "lemma",
+        "title": "Realizability and face validation for planar-diagram codes",
+        "statement": "For a code with a nonempty connected crossing graph, let $C$ be its finite\ncrossing set, $D$ its darts, $\\alpha$ its fixed-point-free edge-pairing\ninvolution, $\\sigma$ its clockwise crossing rotation, and\n$\\phi=\\alpha\\circ\\sigma$ its face permutation. A **spherical realization**\nmeans a polygonal embedding on the oriented sphere whose vertex rotations and\nedge pairings are exactly $\\sigma$ and $\\alpha$; its faces are the cycles of\n$\\phi$. If every crossing has four darts with the prescribed opposite\nover/under pairs, arrows, and sign-consistent cyclic order, then such a\nrealization exists if and only if $V-E+F=2$, where $V=|C|$, $E=|D|/2$, and\n$F$ is the number of cycles of $\\phi$. Choosing one face as the outer face\nand deleting a point in it gives the corresponding plane realization. The\ncrossingless one-component code is the single circle and is handled\nseparately.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-connected-plane-multigraph-euler-formula",
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 2,
+        "strategy": "Construct a polygonal sphere embedding from a spanning tree, then add the remaining paired edges. Each edge changes the face-cycle count by one; the Euler equality forces each step to split one face. Cap crossing disks and edge bands and lift the overpass data.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, regular-projection and link-diagram definition, web text lines 102–121"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            },
+            {
+              "title": "Jeff Erickson, Simple Polygons, Computational Topology, Chapter 1 (2013)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2017/chapters/01-simple-polygons.pdf",
+              "locator": "§1.2 Jordan Polygon Theorem proof, lines 132–220; §1.4 triangulation proof, lines 284–365; §1.6 Theorem 1.10, lines 452–569"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "alg-planar-code-validation-and-diagram-reconstruction",
+        "kind": "algorithm",
+        "title": "Planar-code validation and diagram reconstruction",
+        "statement": "**Input:** A finite tagged Gauss code, signed Dowker–Thistlethwaite code, or\noriented planar-diagram code in the conventions of this page. The crossing\ncount $c$ is a nonnegative integer. When $c>0$, the code includes the finite\ncrossing labels, edge-end incidences, strand arrows, over/under data, crossing\nsigns, and a distinguished outer face. When $c=0$, the only admissible input\nfor this procedure is the one-component crossingless code specified in the\ncode definition.\n\n**Output:** Either `Invalid(reason, witness)`, where `reason` is the first\nfailed check below and `witness` identifies the offending field, label, or\ncrossing, or `Valid(diagram, components, faces, outerFace)`. Here `diagram` is\na finite gluing record consisting of one crossing disk per vertex, one\nrectangular edge band for each pair of darts under $\\alpha$, and one cap disk\nper cycle of the face permutation. Each band is attached at its recorded dart ports, and each\ncrossing disk records its clockwise order, strand orientations, over/under\npair, and sign. `components` lists the oriented link cycles, `faces` lists the\nface-permutation cycles, and `outerFace` is the selected cycle. The gluing\nrecord represents a polygonal spherical diagram; deleting a point in its\nselected face gives the plane model. The procedure tests realizability of\nthis code only; it does not compare the represented link with another code.\n\n**Instructions:**\n\n1. Read the tag and crossing count. If the tag is unknown or $c$ is not a\n   nonnegative integer, return `invalid-header` with that field.\n\n2. If $c=0$, accept only one empty Gauss component word, the empty signed-DT\n   code, or the single `Loop[1]` PD record, each with exactly one orientation\n   marker, `ccw` or `cw`. Return\n   `invalid-crossingless-code` otherwise. For an accepted input return the\n   standard circle with the marked orientation, one component, its two sphere\n   faces, and the `outside` face selector. Do not run crossing-graph tests.\n\n3. For a Gauss code with $c>0$, reject an empty component word. Check that\n   every label lies in $\\{1,\\ldots,c\\}$, occurs exactly twice in total, and\n   occurs once with each over/under sign. Check that its separate crossing-sign\n   vector has length $c$ and entries in $\\{+1,-1\\}$. Return\n   `invalid-crossing-label` for the first out-of-range label,\n   `invalid-crossing-visit-count` with the label and its over/under counts for\n   any visit failure, or `invalid-crossing-sign-vector` with the first bad\n   position. Turn successive visits on each component word into directed edge\n   labels, including each cyclic last-to-first edge, numbering these segments\n   in the listed component order and then in traversal order, and form the\n   crossing records from the over/under visits and the stored crossing signs.\n\n4. For a signed DT code, check that its pairing list and sign vector each have\n   length $c$, each pairing value has absolute value in\n   $\\{2,4,\\ldots,2c\\}$, every such absolute value occurs once, and every sign\n   is $+1$ or $-1$. Return `invalid-dt-pairing` with the first bad index for a\n   pairing failure, or `invalid-crossing-sign-vector` with the first bad\n   position for a sign failure. The odd visit $2j-1$ is crossing $j$; if\n   $d_j>0$ it is the over-visit and if $d_j<0$ it is the under-visit. At the\n   even visit paired with $2j-1$, use crossing label $j$ and the opposite\n   over/under sign. Decode visits in order $1,\\ldots,2c$ into the corresponding\n   signed Gauss word and continue with step 3.\n\n5. For a PD code, check that there are exactly $c$ crossing records and four\n   dart occurrences at each record. Return `invalid-crossing-record` with the\n   first bad record otherwise. Use the edge labels and arrows in the records\n   to form the paired-dart involution, crossing rotations, over/under pairs,\n   and crossing signs.\n\n6. In every nonempty encoding, check that each edge label has exactly two\n   occurrences, one incoming and one outgoing; each crossing has exactly four\n   incident darts; the opposite pairs are exactly one over-strand and one\n   under-strand; each strand has one incoming and one outgoing end; and the\n   cyclic order matches the stored crossing sign. Return, in that order,\n   `invalid-edge-incidence`, `invalid-crossing-valence`,\n   `invalid-over-under-pair`, `invalid-strand-orientation`, or\n   `invalid-crossing-sign-order`, with the first offending label or crossing.\n\n7. Starting at each as-yet unvisited outgoing dart, cross its edge by $\\alpha$\n   to the incoming dart at the other endpoint and continue through the\n   opposite dart of that same strand. Stop only when the starting outgoing\n   dart is reached. If an end is missing, a dart repeats before that return, or\n   any dart remains uncovered after all cycles are traced, return\n   `invalid-component-closure` with the first such dart. Then test the crossing\n   graph for connectedness; if it is disconnected, return\n   `disconnected-crossing-graph`.\n\n8. Compute $\\phi=\\alpha\\circ\\sigma$ on all darts by finite table lookup and\n   list its cycles. Put $V=c$, $E=|D|/2$, and $F=$ the number of cycles. If\n   $V-E+F\\ne2$, return `non-spherical-face-count` with $(V,E,F)$. If the\n   supplied outer-face identifier is not one of these cycles, return\n   `invalid-outer-face` with that identifier.\n\n9. For a passing code, choose the lexicographically first spanning tree in the\n   finite edge ordering. Root it at the least crossing label and attach its\n   tree bands in increasing distance from that root, using the recorded cyclic\n   gaps. Then attach the remaining edge bands in increasing edge-label order.\n   Use the distinguished face for the plane projection, replace each crossing\n   disk by its prescribed transverse crossing, attach one cap disk along each\n   face cycle, and lift the over-strand above the under-strand. Return this\n   finite gluing record, the directed components, the face cycles, and the\n   outer-face identifier.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-planar-diagram-code-realizability-and-face-validation"
+        ],
+        "dependency_level": 3,
+        "strategy": "Scan incidence and orientation records, construct the rotation and edge-pairing permutations, check each crossing and component condition, count face cycles, test Euler characteristic two, then build crossing disks and edge bands.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, finite link-diagram representation, web text lines 102–121"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "not-applicable",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "alg-enumerate-diagrams-up-to-crossing-bound",
+        "kind": "algorithm",
+        "title": "Enumerate diagrams up to a crossing bound",
+        "statement": "**Input:** A nonnegative integer crossing bound $N$.\n\n**Output:** A finite ordered list of reconstructed knot-diagram candidates. A\ncandidate is a `Valid` output of the planar-code validation procedure whose\ncode is a normalized planar-diagram code with one oriented component and at\nmost $N$ crossings. Repeated candidates up to crossing relabeling or planar\nisotopy are allowed; the list is not a list of knot types.\n\n**Instructions:**\n\n1. If $N$ is not a nonnegative integer, return `invalid-bound`.\n2. Initialize the output list empty. Pass the two normalized crossingless\n   one-component codes, with `ccw` and `cw` orientation markers in that order,\n   through the validator and append both outputs first.\n3. For each $c=1,\\ldots,N$ in increasing order, use crossing labels\n   $\\{1,\\ldots,c\\}$ and the four normalized dart positions at each crossing.\n   Enumerate every crossing-sign vector in lexicographic order, with\n   $-1<+1$. The sign determines the incoming and outgoing positions at each\n   crossing by the normalized-code convention.\n4. For each sign vector, enumerate every bijection from the set of its\n   $2c$ outgoing darts to its $2c$ incoming darts in lexicographic order.\n   Pair each outgoing dart with its image to obtain the edge involution, and\n   assign edge labels by the normalized-code rule.\n5. Compute the cycles of $\\phi=\\alpha\\circ\\sigma$ for each pairing. For each\n   cycle, in increasing order of its least dart, select that cycle in turn as\n   the outer face and form the corresponding normalized PD code.\n6. Pass each code through the planar-code validation procedure. Append its\n   reconstructed output if and only if the validator returns `Valid` and the\n   directed component tracing has exactly one cycle. Return the list after\n   the finite loops end.\n\nThis procedure enumerates normalized finite codes and reconstructed diagrams;\nit neither identifies equivalent codes nor decides whether two candidates\nrepresent isotopic knots.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction"
+        ],
+        "dependency_level": 4,
+        "strategy": "For each crossing count in the finite range, enumerate every normalized pairing, crossing rotation, orientation, overpass assignment, and outer-face selector; retain exactly the inputs accepted by the validator.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), sections 1 and 7",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 finite diagram input and §7 polygonal reconstruction, web text lines 102–121 and 381–398"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "not-applicable",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+        "kind": "theorem",
+        "title": "Planar-code validation and reconstruction procedure properties",
+        "statement": "For every finite input in the three code formats, the validation and\nreconstruction procedure terminates. It returns an invalid-code reason\nexactly when the first failed syntax, incidence, orientation, component,\nconnectedness, face-count, or outer-face condition in its stated order occurs;\notherwise it returns the crossing-disk/edge-band model of the represented\noriented diagram, its oriented components, its face cycles, and its selected\nouter face.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "lem-planar-diagram-code-realizability-and-face-validation"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound every scan by the finite code size, prove each rejection branch matches its named failed predicate, and use the realizability lemma for the final acceptance branch.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, finite graph diagram representation and crossing data, web text lines 102–121"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+        "kind": "theorem",
+        "title": "Enumeration up to a crossing bound procedure properties",
+        "statement": "For every nonnegative integer $N$, the bounded enumeration procedure\nterminates and returns exactly the reconstructed candidates represented by\nnormalized connected one-component planar-diagram codes with at most $N$\ncrossings. Each returned candidate has a valid spherical face structure and a\nselected outer face. The procedure does not identify candidates that represent\nthe same knot type.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "strategy": "Count the finite code space at each crossing count, use the strict bound to make the outer loop finite, and apply the validator procedure theorem to every candidate.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), sections 1 and 7",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 finite diagram inputs and §7 polygonal reconstruction, web text lines 102–121 and 381–398"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-valid-code-reconstructs-the-declared-link-diagram",
+        "kind": "theorem",
+        "title": "Valid codes reconstruct the declared link diagram",
+        "statement": "Assume the Axiom of Countable Choice. For every valid connected one-component\noriented code with a selected outer face, the reconstruction procedure\nproduces a regular oriented diagram representing that code. Any two such\ndiagrams with the same code differ only by crossing and edge relabeling and\nare planar isotopic. The normalized planar-diagram code of a diagram with $c$\ncrossings appears among the candidates enumerated at bound $c$. This statement\nconcerns diagrams and their finite codes; it does not identify distinct codes\nthat may represent the same knot type. The finite realization and enumeration\nclaims are choice-free; $\\mathrm{AC}_\\omega$ is assumed only for the smooth\nambient-isotopy uniqueness clause.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-planar-diagram-code-realizability-and-face-validation",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+          "lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-fundamental-theorem-on-flows",
+          "def-countable-choice",
+          "def-planar-isotopy-of-link-diagrams"
+        ],
+        "dependency_level": 6,
+        "strategy": "Construct smooth graph neighborhoods, extend over complementary Jordan disks with exact collars and identity germ at infinity, then apply the explicit global plane rescaling isotopy.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            },
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, finite link-diagram representation, web text lines 102–121"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      }
+    ]
+  },
+  {
+    "order": 3197,
+    "id": "planar-diagram-codes-and-knot-table-enumeration-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Planar-diagram codes and knot-table enumeration — Examples and Counterexamples",
+    "companion": "planar-diagram-codes-and-knot-table-enumeration",
+    "requires": [
+      "planar-diagram-codes-and-knot-table-enumeration"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-47-boundary-case",
+        "kind": "counterexample",
+        "title": "A crossing label occurring once is invalid",
+        "statement": "The one-entry signed Gauss word $-1$ with declared crossing count $c=1$ has\nevery declared label present, but it is not a Gauss code for a closed regular\noriented diagram: label $1$ occurs once, only as an under-visit, instead of\ntwice with one over-visit and one under-visit. The validation procedure returns\n`invalid-crossing-visit-count` with counts $(0\\text{ over},1\\text{ under})$\nbefore performing any crossing-graph or face-count calculation.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the one-entry word with label 1, count its visits, and identify the validator's first failed crossing-incidence test.",
+        "sources": {
+          "references": [
+            {
+              "title": "Knot Atlas, Gauss Codes manual",
+              "url": "https://katlas.org/wiki/Gauss_Codes",
+              "locator": "Gauss-code definition, lines 65–70"
+            },
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, finite four-valent diagram representation, web text lines 102–121"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "ex-knot-kt-47-worked-cases",
+        "kind": "example",
+        "title": "Trefoil Gauss traversal and rotation reconstruction",
+        "statement": "Use the based signed Gauss code $-1,+3,-2,+1,-3,+2$, where a negative visit is\nunder, a positive visit is over, and the separate algebraic crossing-sign\nvector is $(+1,+1,+1)$. This is a cyclic shift and the relabeling $2\\leftrightarrow\n3$ of the right-trefoil signed Gauss code. Its normalized PD records in\nclockwise order beginning with outgoing over-dart are\n$$X_1=(e_1,e_2,e_3,e_4),\\qquad X_2=(e_2,e_5,e_6,e_3),\\qquad X_3=(e_5,e_1,e_4,e_6).$$\nIts face cycles are\n$$F_0=(1:e_1,2:e_2,3:e_5),\\quad F_1=(1:e_2,2:e_3),\\quad F_2=(1:e_3,3:e_4,2:e_6),\\quad F_3=(1:e_4,3:e_1),\\quad F_4=(2:e_5,3:e_6).$$\nSelecting $F_0$ as the outer face gives a valid one-component three-crossing\ncode, and the bounded enumerator includes its reconstructed candidate at\ncrossing bound $3$.\n\nThe figure displays the positive two-strand braid closure used for this code.\nThe braid strands are oriented downward, the closure arcs upward, and the\ncrossings are labeled from top to bottom $1,3,2$; the upper branch is the\nright-to-left branch at each positive crossing. The proof below verifies the\ncode and face cycles from finite dart data and does not infer them from the\ndrawing.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  % Top crossing, label 1: under branch left-to-right, over branch right-to-left.\n  \\draw[white,line width=5pt] (-1,0) -- (1,-1);\n  \\draw[->] (-1,0) -- (-0.18,-0.41);\n  \\draw[->] (0.18,-0.59) -- (1,-1);\n  \\draw[->,line width=1.2pt] (1,0) -- (-1,-1);\n  \\node at (0.34,-0.5) {$+1$};\n  % Middle crossing, label 3.\n  \\draw[white,line width=5pt] (-1,-1) -- (1,-2);\n  \\draw[->] (-1,-1) -- (-0.18,-1.41);\n  \\draw[->] (0.18,-1.59) -- (1,-2);\n  \\draw[->,line width=1.2pt] (1,-1) -- (-1,-2);\n  \\node at (0.34,-1.5) {$+3$};\n  % Bottom crossing, label 2.\n  \\draw[white,line width=5pt] (-1,-2) -- (1,-3);\n  \\draw[->] (-1,-2) -- (-0.18,-2.41);\n  \\draw[->] (0.18,-2.59) -- (1,-3);\n  \\draw[->,line width=1.2pt] (1,-2) -- (-1,-3);\n  \\node at (0.34,-2.5) {$+2$};\n  % The two closure arcs join matching left and right endpoints outside the braid.\n  \\draw[->] (1,-3) .. controls (2.1,-3) and (2.1,0) .. (1,0);\n  \\draw[->] (-1,-3) .. controls (-2.1,-3) and (-2.1,0) .. (-1,0);\n\\end{tikzpicture}\n```",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "lem-planar-diagram-code-realizability-and-face-validation",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties"
+        ],
+        "dependency_level": 6,
+        "strategy": "Trace the six signed visits, verify the edge and crossing incidences, compute the face permutation and Euler characteristic, select the outer face, and verify the finite enumerator includes the normalized code at bound three.",
+        "sources": {
+          "references": [
+            {
+              "title": "Knot Atlas, Gauss Codes manual",
+              "url": "https://katlas.org/wiki/Gauss_Codes",
+              "locator": "Gauss-code definition and trefoil code, lines 65–80"
+            },
+            {
+              "title": "C. Fish, Codes, Links and Racks, University of Warwick thesis (2001), Chapter 5, §5.2.1",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/136332/1/WRAP_Theses_Fish_2001.pdf",
+              "locator": "Signed Gauss code definition and right-trefoil code, printed pp. 67–68, PDF lines 1569–1605"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      }
+    ]
+  }
+]
