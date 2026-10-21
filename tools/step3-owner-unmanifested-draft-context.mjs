@@ -154,15 +154,15 @@ export function unmanifestedRefuterContexts(root,run,batch,scope){
   if(ownerCurrent(r.entry))continue;
   const anchor=(scope.reader_findings??[]).find(f=>f.obligation===obligation);
   if(!anchor)continue;
-  check(counts.get(r.entry.id)===1,`ambiguous registered consumer context ${r.entry.id}`);
   check((scope.manifest_post??[]).includes(r.entry.consumer_id),'context consumer is not assigned');
   unmanifestedDraftCarrier(root,run,batch,anchor);
   if(!byId.has(r.entry.id))byId.set(r.entry.id,[]);byId.get(r.entry.id).push({obligation,anchor,r});
  }
- return new Map([...byId].map(([id,rows])=>{check(rows.length===1,`ambiguous registered consumer context ${id}`);return[id,rows[0]];}));
+ return new Map([...byId].map(([id,rows])=>[id,counts.get(id)===1&&rows.length===1?rows[0]:{ambiguous:true,contexts:rows}]));
 }
 export function bindUnmanifestedRefuterContext(root,run,batch,finding,scope){
  const route=unmanifestedRefuterContexts(root,run,batch,scope).get(finding.id);check(route,'unregistered refuter context');
+ check(route.ambiguous!==true,'ambiguous registered consumer context for refuter flag');
  const native=nativeRefuter(root,run,batch),match=new RegExp(`^refuter:${batch}:([1-9]\\d*)$`).exec(finding.obligation??'');check(match,'wrong refuter obligation');
  const index=Number(match[1]),original=native.report.flagged[index-1];
  const {obligation,...raw}=finding;check(hash(raw)===hash(original)&&native.report.opened.filter(id=>id===finding.id).length===1&&!(scope.refuter_scope??[]).includes(finding.id),'changed original flagged context or assigned coverage');

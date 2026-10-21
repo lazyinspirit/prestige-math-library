@@ -1,0 +1,77 @@
+--- a/tools/step3-owner-unmanifested-draft-context.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.mjs
+@@ -154,15 +154,15 @@
+   if(ownerCurrent(r.entry))continue;
+   const anchor=(scope.reader_findings??[]).find(f=>f.obligation===obligation);
+   if(!anchor)continue;
+-  check(counts.get(r.entry.id)===1,`ambiguous registered consumer context ${r.entry.id}`);
+   check((scope.manifest_post??[]).includes(r.entry.consumer_id),'context consumer is not assigned');
+   unmanifestedDraftCarrier(root,run,batch,anchor);
+   if(!byId.has(r.entry.id))byId.set(r.entry.id,[]);byId.get(r.entry.id).push({obligation,anchor,r});
+  }
+- return new Map([...byId].map(([id,rows])=>{check(rows.length===1,`ambiguous registered consumer context ${id}`);return[id,rows[0]];}));
++ return new Map([...byId].map(([id,rows])=>[id,counts.get(id)===1&&rows.length===1?rows[0]:{ambiguous:true,contexts:rows}]));
+ }
+ export function bindUnmanifestedRefuterContext(root,run,batch,finding,scope){
+  const route=unmanifestedRefuterContexts(root,run,batch,scope).get(finding.id);check(route,'unregistered refuter context');
++ check(route.ambiguous!==true,'ambiguous registered consumer context for refuter flag');
+  const native=nativeRefuter(root,run,batch),match=new RegExp(`^refuter:${batch}:([1-9]\\d*)$`).exec(finding.obligation??'');check(match,'wrong refuter obligation');
+  const index=Number(match[1]),original=native.report.flagged[index-1];
+  const {obligation,...raw}=finding;check(hash(raw)===hash(original)&&native.report.opened.filter(id=>id===finding.id).length===1&&!(scope.refuter_scope??[]).includes(finding.id),'changed original flagged context or assigned coverage');
+--- a/tools/step3-owner-unmanifested-draft-context.md
++++ b/tools/step3-owner-unmanifested-draft-context.md
+@@ -26,7 +26,7 @@
+ 
+ ## Native refuter extra read of the same registered direct context
+ 
+-The existing registry also permits an actual refuter to open and flag that exact unchanged helper as **extra read-only supplier context**, while all required assigned coverage remains owed. No registry entry, subject scope or frontier ownership is added. Exactly one already registered reader context for the batch and helper ID must exist: a refuter schema flag has no consumer field, so multiple registered consumers/observations of that ID are ambiguous and reject. The matching reader obligation must actually be present in the batch's current version-2 scope, and its named direct consumer must remain assigned there. The entire existing reader/source/manifest authority is independently revalidated.
++The existing registry also permits an actual refuter to open and flag that exact unchanged helper as **extra read-only supplier context**, while all required assigned coverage remains owed. No registry entry, subject scope or frontier ownership is added. Flag attribution requires exactly one already registered reader context for the batch and helper ID: a refuter schema flag has no consumer field, so multiple registered consumers/observations of that ID are ambiguous and reject only when a flag needs attribution. Context discovery retains all actual reader anchors instead of rejecting ordinary collection merely because two consumer-specific reader obligations reference the same helper. The matching reader obligation must actually be present in the batch's current version-2 scope, and its named direct consumer must remain assigned there. The entire existing reader/source/manifest authority is independently revalidated.
+ 
+ For an extra opened registered helper, the actual original stable refuter result must be byte-identical to its immutable attempt result, successful in both process and terminal summary, have the exact role/label/single covered batch and prompt path, and contain a complete parsed structured tail equal to the entire canonical original refuter report. That report must actually open the helper once. The normalization binds its exact one-based flagged index and finding hash, canonical report raw hash, immutable attempt raw hash, prompt path/raw hash, original reader obligation and exact unchanged registered source hash. The prompt hash is a current collection-time binding; the successful result authenticates its native path, not an otherwise absent historical prompt-byte digest. Later changes invalidate the binding. No new historical refuter source-byte observation is invented: the source remains the exact unchanged reader-observed archive.
+ 
+@@ -55,3 +55,9 @@
+ Closure freezes owner-current source, root review, delegated review, current provenance and both archive refs along with the unchanged native evidence and registry. After genuine v3 closure, historical verification reads those frozen bytes only. Legitimate later repairs do not become new past observations and do not fail merely because current source differs; historical evidence mutation still rejects. No registry or review record is written by the module.
+ 
+ The carrier compares wrapped object values, not array values: a missing field is distinct from explicit null. Thus deleting any mandatory nullable native field rejects, and inventing null optional owner-current fields on an exact71 route also rejects.
++
++## Multiple exact reader contexts with the same helper
++
++Discovery may return an explicit ambiguous group containing all actual authenticated reader anchors. It does not choose a consumer, merge obligations or manufacture coverage. With no extra helper read or flag, ordinary collection proceeds unchanged. An actual extra read without a helper flag also proceeds: the existing successful exact native output/prompt and unchanged source/direct-edge guards authenticate that read, and no consumer attribution is needed. The helper remains only in `refuter_context_opened`, never `refuter_scope`. Every distinct original reader obligation still needs its own independently sealed decision and ordinary closed ledger.
++
++The instant a schema refuter flag needs binding to that shared helper, the binder rejects an ambiguous group before any normalization. A single uniquely registered context retains the prior actual flag behavior. Unrelated extra reads/flags, missing assigned coverage, edited source, missing native evidence and invalid attribution remain rejected. This is discovery deferral only, not a new registry or verdict/repair permission.
+--- a/tools/step3-owner-unmanifested-draft-context.test.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.test.mjs
+@@ -180,3 +180,33 @@
+ 
+ for(const field of ['consumer_id','observed_source','observed_sha256'])test(`nullable carrier rejects missing explicit ${field}`,()=>{const f=ownerCurrentFixture();try{const n=f.normalized();assert.equal(n[field],null);delete n[field];assert.throws(()=>api.unmanifestedDraftCarrier(f.root,'r','1',n),new RegExp(`changed routed ${field}`));}finally{f.close();}});
+ for(const field of ['owner_context_consumer_id','owner_current_context_basis'])test(`exact71 carrier rejects invented null optional ${field}`,()=>{const f=fixture();try{const n=f.normalized();assert.equal(Object.hasOwn(n,field),false);n[field]=null;assert.throws(()=>api.unmanifestedDraftCarrier(f.root,'r','1',n),new RegExp(`changed routed ${field}`));}finally{f.close();}});
++
++function multipleConsumersFixture(){
++ const f=fixture(),consumer2=f.consumer.replaceAll('thm-consumer','thm-consumer-two');f.put('items/thm-consumer-two.md',consumer2);f.put('research/r-capture/consumer-two.md',consumer2);
++ const manifest=[{id:'owned',category:'test',items:[{id:'thm-consumer',deps:['lem-helper']},{id:'thm-consumer-two',deps:['lem-helper']}]}];f.put('research/r-batch-1.pages.json',manifest);f.put('research/r-capture/manifest.json',manifest);f.entry.consumer_manifest=f.link('research/r-capture/manifest.json');
++ const finding2={...f.finding,consumer_id:'thm-consumer-two'},report={batch:'1',findings:[f.finding,finding2],coverage_note:'Actual reader independently checks the same direct helper at two assigned consumer uses.'};f.put('research/r-reader-findings-1.json',report);f.put('research/r-capture/findings.json',report);f.entry.findings=f.link('research/r-capture/findings.json');
++ const n=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));n.tail=JSON.stringify(report);f.put(f.entry.native_result.path,n);f.entry.native_result=f.link(f.entry.native_result.path);
++ const second={...f.entry,index:2,consumer_id:'thm-consumer-two',finding_sha256:hash(finding2),consumer_source:f.link('research/r-capture/consumer-two.md')};
++ const saveMultiple=()=>f.put('research/r-step3-owner-unmanifested-draft-context.json',{version:1,run:'r',policy:api.UNMANIFESTED_POLICY,authorized_by:'owner',authorization:'Root authorizes separate read-only routing for each genuine assigned direct consumer observation.',contexts:[f.entry,second]});saveMultiple();
++ const rows=()=>[f.normalized(),api.bindUnmanifestedDraftContext(f.root,'r','1',{...finding2,obligation:'reader:1:2'})];
++ return {...f,second,rows,saveMultiple};
++}
++test('multiple actual assigned consumers retain distinct reader anchors without inventing flag attribution',()=>{const f=multipleConsumersFixture();try{const rows=f.rows();const scope={version:2,run:'r',batch:'1',manifest_post:['thm-consumer','thm-consumer-two'],refuter_scope:['thm-consumer','thm-consumer-two'],reader_findings:rows};const contexts=api.unmanifestedRefuterContexts(f.root,'r','1',scope);assert.equal(contexts.get('lem-helper').ambiguous,true);assert.equal(contexts.get('lem-helper').contexts.length,2);assert.notEqual(rows[0].owner_unmanifested_draft_context.entry_sha256,rows[1].owner_unmanifested_draft_context.entry_sha256);for(const r of rows)assert.ok(api.unmanifestedDraftCarrier(f.root,'r','1',r).item_sha256);}finally{f.close();}});
++test('native two-consumer lifecycle: no extra read and unflagged extra read pass, ambiguous flag rejects',()=>{const f=multipleConsumersFixture();try{
++ for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(f.root,p)),{recursive:true});copyFileSync(join(code,p),join(f.root,p));}copyFileSync(join(code,'tools/step3-owner-unmanifested-draft-context.mjs'),join(f.root,'tools/step3-owner-unmanifested-draft-context.mjs'));
++ const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});const ok=(...a)=>{const r=run(...a);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
++ f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer, thm-consumer-two]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer','thm-consumer-two'],contracts:{'thm-consumer':{},'thm-consumer-two':{}}});ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');ok('post-reader','--batch','1');
++ const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));assert.equal(scope.reader_findings.length,2);assert.ok(!scope.refuter_scope.includes('lem-helper'));
++ const prompt='research/r-dispatch/refuter-refute-1.attempt-1.prompt.md';f.put(prompt,'Actual independent refuter assignment.');
++ const nativePaths=['research/r-dispatch/refuter-refute-1.result.json','research/r-dispatch/refuter-refute-1.attempt-1.result.json'];
++ const setNative=report=>{f.put('research/r-refute-1.json',report);const result={attempt:1,run:'r',role:'refuter',label:'refute-1',covers:['1'],ok:true,exit_code:0,process_exit_code:0,timed_out:false,ended_at:'2020-01-03T00:00:00Z',prompt:join(f.root,prompt),tail:JSON.stringify(report),terminal_summary:{task_completed:true,task_aborted:false}};for(const p of nativePaths)f.put(p,result);};
++ const noExtra={batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Actual independent native refuter reads only required coverage, without a supplier extra read.'};setNative(noExtra);ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
++ const extra={...noExtra,opened:[...scope.refuter_scope,'lem-helper'],coverage_note:'Actual native refuter additionally reads shared direct supplier context and reports no supplier flag.'};setNative(extra);const rawReport=readFileSync(join(f.root,'research/r-refute-1.json'));ok('collect','--batch','1');ok('check','--batch','1','--phase','split');const collected=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));assert.equal(collected.reader_findings.length,2);assert.deepEqual(collected.refuter_context_opened,['lem-helper']);assert.equal(collected.refuter_findings.length,0);assert.deepEqual(readFileSync(join(f.root,'research/r-refute-1.json')),rawReport);
++ const ambiguous={...extra,flagged:[{id:'lem-helper',location:'Statement',defect:'ill-formed',evidence:'A consumer-free refuter flag cannot select one of two genuine registered consumer anchors.',severity:'fatal'}]};setNative(ambiguous);const rejected=run('collect','--batch','1');assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/ambiguous registered consumer context for refuter flag/);
++ // Restore the genuine positive fixture input, not a real native report: all files are disposable.
++ setNative(extra);ok('collect','--batch','1');
++ const decisions=scope.reader_findings.map((r,i)=>({obligation:r.obligation,id:r.id,consumer_id:r.consumer_id,route:'reader',verdict:'false_positive',defect_ids:[`consumer-context-${i+1}`],evidence:'Independent fixture Alpha reads this exact current helper and this separate assigned consumer use, rejects the reported formatting defect and claims no source edit.'}));
++ f.put('research/defect-ledger.jsonl',decisions.map(d=>JSON.stringify({run:'r',defect_id:d.defect_ids[0],subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'false-positive'})).join('\n')+'\n');f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions});ok('stamp');ok('check','--batch','1','--phase','adjudicate');ok('check','--batch','1','--phase','final');
++ // Still reject unrelated extra context, even when the report is genuine and complete.
++ setNative({...extra,opened:[...extra.opened,'lem-unrelated']});assert.notEqual(run('collect','--batch','1').status,0);
++ }finally{f.close();}});

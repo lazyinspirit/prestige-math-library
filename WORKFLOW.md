@@ -379,7 +379,8 @@ repair instead; normal ledger, carrier seals and closure evidence remain require
 The same registered unchanged helper may be an actual refuter's extra read-only
 context and flagged obligation, with exact native output and prompt bindings.
 It gains no assigned coverage; every original reader and refuter decision is
-still independently required. Ambiguous consumer contexts fail closed.
+still independently required. Ambiguous flag attribution fails closed; an
+authenticated unflagged context read chooses no consumer.
 An explicit separate basis preserves a native `in-flight-item` finding with
 null consumer and source observation. A bound root current-proof/use review
 and separate owner consumer witness seal only the actual current context;
