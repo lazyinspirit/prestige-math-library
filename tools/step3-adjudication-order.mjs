@@ -39,7 +39,7 @@ export function prepareStep3AdjudicationOrder(root, run, group) {
     const addFinding = row => {
       if (row.owner_unmanifested_draft_context) {
         unmanifestedDraftCarrier(root, run, batch, row);
-        return otherWork.push(`${row.obligation}: unmanifested draft context ${row.id}, consumer ${row.consumer_id}; read-only, no producer home or native coverage; independently review unchanged current proof, preserve consumer_id, seal actual carrier; only false_positive, confirmed_nonfatal (nonfatal-recorded ledger), or escalated. Do not edit this context or claim a repair/acceptance. ${JSON.stringify(row)}`);
+        return otherWork.push(`${row.obligation}: unmanifested draft context ${row.id}, consumer ${row.owner_context_consumer_id ?? row.consumer_id}; ${row.owner_current_context_basis ? 'OWNER-CURRENT SOURCE ONLY: native consumer and source observation are null; retain owner_context_consumer_id separately, historical_delta_unknown=true and explicit owner_resolution; no historical source equality or whole-supplier acceptance. ' : ''}read-only, no producer home or native coverage; independently review unchanged current proof, preserve consumer_id, seal actual carrier; only false_positive, confirmed_nonfatal (nonfatal-recorded ledger), or escalated. Do not edit this context or claim a repair/acceptance. ${JSON.stringify(row)}`);
       }
       if (row.subject_type !== 'in-run-dependency') return add(row.id, row.obligation ?? 'finding');
       const producer = allById.get(row.id);

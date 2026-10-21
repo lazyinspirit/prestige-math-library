@@ -398,7 +398,7 @@ function highRiskItems(ids, batch) {
   return report.findings.filter((finding) => finding.required).map((finding) => finding.id);
 }
 
-function normalizeFindings(findings, batch, allowedSet, reportError, prefix) {
+function normalizeFindings(findings, batch, allowedSet, reportError, prefix, nullableContextIds = new Set()) {
   const defectKinds = new Set(['false-claim', 'unlicensed-inference', 'missing-hypothesis',
     'citation-inaccurate', 'ill-formed', 'overstrong-title-or-statement']);
   return findings.map((finding, index) => {
@@ -420,7 +420,7 @@ function normalizeFindings(findings, batch, allowedSet, reportError, prefix) {
     if (prefix === 'reader') {
       normalized.subject_type = finding?.subject_type;
       normalized.consumer_id = finding?.consumer_id ?? null;
-      if (finding?.observed_source != null) normalized.observed_source = finding.observed_source;
+      if (finding?.observed_source != null || nullableContextIds.has(id) && finding.observed_source === null) normalized.observed_source = finding.observed_source;
     }
     return normalized;
   });
@@ -708,10 +708,12 @@ function reportOnlyFinding(finding, refuter = false) {
     owner_partial_reader_repair: _ownerPartialReaderRepair,
     owner_unbound_reader_observation: _ownerUnboundReaderObservation,
     owner_unmanifested_draft_context: _unmanifested,
-    owner_unmanifested_refuter_context: _unmanifestedRefuter, ...row } = finding;
+    owner_unmanifested_refuter_context: _unmanifestedRefuter,
+    owner_context_consumer_id: _ownerConsumer, owner_current_context_basis: _ownerCurrentBasis, ...row } = finding;
   if (_unmanifestedRefuter && refuter) {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
-  } else if (_unmanifested) row.subject_type = 'in-run-dependency';
+  } else if (_ownerCurrentBasis) row.subject_type = 'in-flight-item';
+  else if (_unmanifested) row.subject_type = 'in-run-dependency';
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -924,7 +926,7 @@ if (command === 'split') {
     ...[...requiredPages.values()].map(r => r.entry.page),
     ...[...downstream.values()].map(r => r.entry.consumer_id)]);
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
-    batch, readerAllowed, readerError, 'reader');
+    batch, readerAllowed, readerError, 'reader', new Set([...unmanifested.values()].filter(r => r.entry.native_finding_basis).map(r => r.entry.id)));
   const live = liveFingerprints(batch);
   const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
   const partialFindings = partialReaderFindings(ROOT, run, batch);
@@ -1283,7 +1285,7 @@ if (command === 'check') {
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
             new Set([...[...unmanifested.values()].map(r => r.entry.id), ...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
               ...[...requiredPages.values()].map(r => r.entry.page),
-              ...[...downstream.values()].map(r => r.entry.consumer_id)]), reportError, 'reader');
+              ...[...downstream.values()].map(r => r.entry.consumer_id)]), reportError, 'reader', new Set([...unmanifested.values()].filter(r => r.entry.native_finding_basis).map(r => r.entry.id)));
           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
           const partialFindings = partialReaderFindings(ROOT, run, batch);
@@ -1569,6 +1571,10 @@ if (command === 'check') {
               error('unchanged-draft-context-verdict', `${decision.obligation} is read-only context; only false_positive, confirmed_nonfatal or escalation is permitted`);
               continue;
             }
+            if (target.owner_current_context_basis && (decision.historical_delta_unknown !== true
+              || decision.owner_context_consumer_id !== target.owner_context_consumer_id
+              || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40))
+              error('unmanifested-current-history', `${decision.obligation} must retain null native attribution, separate owner witness and explicit unbound-history resolution`);
             if (decision.consumer_id !== target.consumer_id || decision.producer_batch !== undefined
               || decision.subject_sha256 !== hashValue(carrier))
               error('unmanifested-context-seal', `${decision.obligation} must seal the actual unchanged context and consumer, without a producer batch`);

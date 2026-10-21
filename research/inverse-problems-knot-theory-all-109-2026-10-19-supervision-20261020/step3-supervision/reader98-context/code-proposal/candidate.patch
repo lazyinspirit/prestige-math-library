@@ -1,0 +1,275 @@
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -398,7 +398,7 @@
+   return report.findings.filter((finding) => finding.required).map((finding) => finding.id);
+ }
+ 
+-function normalizeFindings(findings, batch, allowedSet, reportError, prefix) {
++function normalizeFindings(findings, batch, allowedSet, reportError, prefix, nullableContextIds = new Set()) {
+   const defectKinds = new Set(['false-claim', 'unlicensed-inference', 'missing-hypothesis',
+     'citation-inaccurate', 'ill-formed', 'overstrong-title-or-statement']);
+   return findings.map((finding, index) => {
+@@ -420,7 +420,7 @@
+     if (prefix === 'reader') {
+       normalized.subject_type = finding?.subject_type;
+       normalized.consumer_id = finding?.consumer_id ?? null;
+-      if (finding?.observed_source != null) normalized.observed_source = finding.observed_source;
++      if (finding?.observed_source != null || nullableContextIds.has(id) && finding.observed_source === null) normalized.observed_source = finding.observed_source;
+     }
+     return normalized;
+   });
+@@ -708,10 +708,12 @@
+     owner_partial_reader_repair: _ownerPartialReaderRepair,
+     owner_unbound_reader_observation: _ownerUnboundReaderObservation,
+     owner_unmanifested_draft_context: _unmanifested,
+-    owner_unmanifested_refuter_context: _unmanifestedRefuter, ...row } = finding;
++    owner_unmanifested_refuter_context: _unmanifestedRefuter,
++    owner_context_consumer_id: _ownerConsumer, owner_current_context_basis: _ownerCurrentBasis, ...row } = finding;
+   if (_unmanifestedRefuter && refuter) {
+     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
+-  } else if (_unmanifested) row.subject_type = 'in-run-dependency';
++  } else if (_ownerCurrentBasis) row.subject_type = 'in-flight-item';
++  else if (_unmanifested) row.subject_type = 'in-run-dependency';
+   if (refuter && finding.subject_type === 'in-run-dependency') {
+     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
+   }
+@@ -924,7 +926,7 @@
+     ...[...requiredPages.values()].map(r => r.entry.page),
+     ...[...downstream.values()].map(r => r.entry.consumer_id)]);
+   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
+-    batch, readerAllowed, readerError, 'reader');
++    batch, readerAllowed, readerError, 'reader', new Set([...unmanifested.values()].filter(r => r.entry.native_finding_basis).map(r => r.entry.id)));
+   const live = liveFingerprints(batch);
+   const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
+   const partialFindings = partialReaderFindings(ROOT, run, batch);
+@@ -1283,7 +1285,7 @@
+           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
+             new Set([...[...unmanifested.values()].map(r => r.entry.id), ...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
+               ...[...requiredPages.values()].map(r => r.entry.page),
+-              ...[...downstream.values()].map(r => r.entry.consumer_id)]), reportError, 'reader');
++              ...[...downstream.values()].map(r => r.entry.consumer_id)]), reportError, 'reader', new Set([...unmanifested.values()].filter(r => r.entry.native_finding_basis).map(r => r.entry.id)));
+           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
+           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
+           const partialFindings = partialReaderFindings(ROOT, run, batch);
+@@ -1569,6 +1571,10 @@
+               error('unchanged-draft-context-verdict', `${decision.obligation} is read-only context; only false_positive, confirmed_nonfatal or escalation is permitted`);
+               continue;
+             }
++            if (target.owner_current_context_basis && (decision.historical_delta_unknown !== true
++              || decision.owner_context_consumer_id !== target.owner_context_consumer_id
++              || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40))
++              error('unmanifested-current-history', `${decision.obligation} must retain null native attribution, separate owner witness and explicit unbound-history resolution`);
+             if (decision.consumer_id !== target.consumer_id || decision.producer_batch !== undefined
+               || decision.subject_sha256 !== hashValue(carrier))
+               error('unmanifested-context-seal', `${decision.obligation} must seal the actual unchanged context and consumer, without a producer batch`);
+--- a/tools/step3-adjudication-order.mjs
++++ b/tools/step3-adjudication-order.mjs
+@@ -39,7 +39,7 @@
+     const addFinding = row => {
+       if (row.owner_unmanifested_draft_context) {
+         unmanifestedDraftCarrier(root, run, batch, row);
+-        return otherWork.push(`${row.obligation}: unmanifested draft context ${row.id}, consumer ${row.consumer_id}; read-only, no producer home or native coverage; independently review unchanged current proof, preserve consumer_id, seal actual carrier; only false_positive, confirmed_nonfatal (nonfatal-recorded ledger), or escalated. Do not edit this context or claim a repair/acceptance. ${JSON.stringify(row)}`);
++        return otherWork.push(`${row.obligation}: unmanifested draft context ${row.id}, consumer ${row.owner_context_consumer_id ?? row.consumer_id}; ${row.owner_current_context_basis ? 'OWNER-CURRENT SOURCE ONLY: native consumer and source observation are null; retain owner_context_consumer_id separately, historical_delta_unknown=true and explicit owner_resolution; no historical source equality or whole-supplier acceptance. ' : ''}read-only, no producer home or native coverage; independently review unchanged current proof, preserve consumer_id, seal actual carrier; only false_positive, confirmed_nonfatal (nonfatal-recorded ledger), or escalated. Do not edit this context or claim a repair/acceptance. ${JSON.stringify(row)}`);
+       }
+       if (row.subject_type !== 'in-run-dependency') return add(row.id, row.obligation ?? 'finding');
+       const producer = allById.get(row.id);
+--- a/tools/step3-owner-unmanifested-draft-context.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.mjs
+@@ -5,6 +5,10 @@
+ import { split, yaml } from './pathway-lib.mjs';
+ import { itemHashGuard } from './item-hash.mjs';
+ import { requiredPageHash as hash } from './step3-owner-required-page-routes.mjs';
++export const OWNER_CURRENT_CONTEXT_BASIS='in-flight-null-consumer-unobserved-owner-current-context-v1';
++const ownerCurrent=e=>e.native_finding_basis===OWNER_CURRENT_CONTEXT_BASIS;
++const contextConsumer=e=>ownerCurrent(e)?e.owner_context_consumer_id:e.consumer_id;
++const contextSource=e=>ownerCurrent(e)?e.owner_current_source:e.observed_source;
+ export const UNMANIFESTED_POLICY='owner-step3-unchanged-unmanifested-draft-context-v1';
+ const sha=x=>createHash('sha256').update(x).digest('hex');
+ const check=(x,m)=>{if(!x)throw Error(`unmanifested draft context: ${m}`);};
+@@ -26,9 +30,20 @@
+  }return homes;
+ }
+ const directEdge=(deps,id)=>Array.isArray(deps)&&validId(id)&&deps.every(validId)&&deps.includes(id);
++function validateOwnerCurrentReview(root,run,e,source,consumer){
++ const review=parse(ref(root,run,e.owner_current_review)),obligation=`reader:${e.batch}:${e.index}`;
++ check(review.version===1&&review.run===run&&review.owner_identity==='/root'&&review.completed===true&&review.full_current_proof_read===true&&review.affected_consumer_use_reviewed===true&&review.source_repaired===false&&review.mathematical_acceptance===false&&review.native_coverage_adopted===false&&review.obligation===obligation&&review.supplier_id===e.id&&review.routing_consumer_witness===contextConsumer(e),'missing genuine root current proof/use review');
++ check(Number.isFinite(Date.parse(review.recorded_at))&&Date.parse(e.at)>=Date.parse(review.recorded_at),'registration predates root review');
++ check(hash(review.current_source)===hash(e.owner_current_source)&&hash(review.current_consumer)===hash(e.consumer_source),'review archive mismatch');
++ ref(root,run,review.current_source);ref(root,run,review.current_consumer);ref(root,run,review.current_provenance);
++ const delegated=parse(ref(root,run,review.delegated_review));
++ check(delegated.run===run&&typeof delegated.reviewer==='string'&&delegated.reviewer.startsWith('/root/')&&delegated.completed===true&&delegated.mathematical_acceptance===false&&delegated.native_coverage_adopted===false&&delegated.source_repaired===false&&delegated.original_obligation===obligation&&delegated.supplier_id===e.id&&delegated.routing_consumer_witness===contextConsumer(e),'unbound delegated current review');
++ check(typeof delegated.used_clause==='string'&&delegated.used_clause.length>=40&&source.toString().includes(delegated.used_clause)&&Array.isArray(delegated.consumer_premise_quotes)&&delegated.consumer_premise_quotes.length>0&&delegated.consumer_premise_quotes.every(q=>typeof q==='string'&&q.length>=40&&consumer.toString().includes(q)),'nonliteral current proof/use evidence');
++ for(const k of ['root_actual_reading','interface_result','preserved_gap','history','limits'])check(typeof review[k]==='string'&&review[k].trim().length>=80,`missing typed review ${k}`);
++}
+ function nativeEvidence(root,run,e){
+  check(e.version===1&&e.run===run&&e.policy===UNMANIFESTED_POLICY&&e.owner_identity==='/root'&&e.reviewed===true&&e.mathematical_acceptance===false&&e.edit_permission===false&&e.coverage_adopted===false,'invalid authority');
+- check(/^[1-9]\d*$/.test(e.batch??'')&&Number.isSafeInteger(e.index)&&e.index>0&&validId(e.id)&&validId(e.consumer_id)&&e.id!==e.consumer_id,'invalid identity');
++ check(/^[1-9]\d*$/.test(e.batch??'')&&Number.isSafeInteger(e.index)&&e.index>0&&validId(e.id)&&validId(contextConsumer(e))&&e.id!==contextConsumer(e),'invalid identity');
+  check(typeof e.reason==='string'&&e.reason.trim().length>=80&&Number.isFinite(Date.parse(e.at)),'missing reason/time');
+  const report=parse(ref(root,run,e.findings)),native=parse(ref(root,run,e.native_result));ref(root,run,e.prompt);
+  check(e.reader_report?.path===`research/${run}-reader-${e.batch}.md`,'reader report must be exact canonical native prose path');ref(root,run,e.reader_report);
+@@ -39,13 +54,21 @@
+  let tail;try{tail=JSON.parse(native.tail);}catch{check(false,'complete structured native tail required');}
+  check(hash(tail)===hash(report)&&[e.batch,`${run}-batch-${e.batch}`].includes(String(report.batch)),'native report mismatch');
+  const original=report.findings?.[e.index-1];
+- check(original?.id===e.id&&original.consumer_id===e.consumer_id&&original.subject_type==='in-run-dependency'&&original.observed_source?.snapshot==='current'&&hash(original)===e.finding_sha256,'wrong original indexed finding');
+- const source=ref(root,run,e.observed_source),s=fm(source);
+- check(e.observed_source.sha256===original.observed_source.item_sha256&&s.id===e.id&&s.status==='draft'&&s.pipeline_run===run,'wrong exact observed draft archive');
++ check(e.native_finding_basis===undefined||ownerCurrent(e),'unknown native observation basis');
++ if(ownerCurrent(e)){
++  check(original?.id===e.id&&original.subject_type==='in-flight-item'&&original.consumer_id===null&&original.observed_source===null&&e.consumer_id===undefined&&e.observed_source===undefined&&hash(original)===e.finding_sha256,'wrong original nullable finding');
++ } else check(original?.id===e.id&&original.consumer_id===contextConsumer(e)&&original.subject_type==='in-run-dependency'&&original.observed_source?.snapshot==='current'&&hash(original)===e.finding_sha256,'wrong original indexed finding');
++ const source=ref(root,run,contextSource(e)),s=fm(source);
++ check(s.id===e.id&&s.status==='draft'&&s.pipeline_run===run&& (ownerCurrent(e)||e.observed_source.sha256===original.observed_source.item_sha256),'wrong current/observed draft archive');
+  const consumer=ref(root,run,e.consumer_source),c=fm(consumer),manifest=parse(ref(root,run,e.consumer_manifest));
+- const rows=(Array.isArray(manifest)?manifest:manifest.pages??[]).flatMap(p=>p.items??[]).filter(i=>(typeof i==='string'?i:i.id)===e.consumer_id);
++ const rows=(Array.isArray(manifest)?manifest:manifest.pages??[]).flatMap(p=>p.items??[]).filter(i=>(typeof i==='string'?i:i.id)===contextConsumer(e));
+  check(e.consumer_manifest.path===`research/${run}-batch-${e.batch}.pages.json`||e.consumer_manifest_original_path===`research/${run}-batch-${e.batch}.pages.json`,'wrong manifest origin');
+- check(c.id===e.consumer_id&&c.status==='draft'&&c.pipeline_run===run&&directEdge(c.deps,e.id)&&rows.length===1&&typeof rows[0]==='object'&&directEdge(rows[0].deps,e.id),'missing archived direct source/manifest edge');
++ check(c.id===contextConsumer(e)&&c.status==='draft'&&c.pipeline_run===run&&directEdge(c.deps,e.id)&&rows.length===1&&typeof rows[0]==='object'&&directEdge(rows[0].deps,e.id),'missing archived direct source/manifest edge');
++ if(ownerCurrent(e)){
++  validateOwnerCurrentReview(root,run,e,source,consumer);
++  const prose=ref(root,run,e.reader_report).toString();
++  check(prose.includes(e.id)&&prose.includes(contextConsumer(e)),'native prose does not name owner routing witness');
++ }
+  return {original,source,consumer};
+ }
+ export function loadUnmanifestedDraftContexts(root,run,batch){
+@@ -56,10 +79,11 @@
+  for(const e of doc.contexts){
+   const evidence=nativeEvidence(root,run,e),key=`reader:${e.batch}:${e.index}`;check(!seen.has(key),'duplicate obligation');seen.add(key);
+   check((homes.get(e.id)??[]).length===0,'target acquired a manifest home');
+-  const own=homes.get(e.consumer_id)??[];check(own.length===1&&own[0].batch===e.batch&&directEdge(own[0].item.deps,e.id),'consumer must have unique actual owned direct manifest edge');
+-  const current=bytes(root,`items/${e.id}.md`),cfm=fm(current),consumer=bytes(root,`items/${e.consumer_id}.md`),cm=fm(consumer);
++  const own=homes.get(contextConsumer(e))??[];check(own.length===1&&own[0].batch===e.batch&&directEdge(own[0].item.deps,e.id),'consumer must have unique actual owned direct manifest edge');
++  const current=bytes(root,`items/${e.id}.md`),cfm=fm(current),consumer=bytes(root,`items/${contextConsumer(e)}.md`),cm=fm(consumer);
+   check(cfm.id===e.id&&cfm.status==='draft'&&cfm.pipeline_run===run&&current.equals(evidence.source),'context source edited; ordinary owner repair required');
+-  check(cm.id===e.consumer_id&&cm.status==='draft'&&cm.pipeline_run===run&&directEdge(cm.deps,e.id),'current direct consumer edge removed');
++  check(cm.id===contextConsumer(e)&&cm.status==='draft'&&cm.pipeline_run===run&&directEdge(cm.deps,e.id),'current direct consumer edge removed');
++  if(ownerCurrent(e))check(consumer.equals(evidence.consumer),'current owned use changed since root review');
+   check(hash(parse(bytes(root,`research/${run}-reader-findings-${e.batch}.json`)))===hash(parse(ref(root,run,e.findings))),'canonical native findings rewritten');
+   if(e.batch!==String(batch))continue;
+   const binding={path:p,entry_sha256:hash(e)};
+@@ -70,6 +94,7 @@
+ export function bindUnmanifestedDraftContext(root,run,batch,finding){
+  const r=loadUnmanifestedDraftContexts(root,run,batch).get(finding.obligation);check(r,'missing authority');
+  const {obligation,...original}=finding;check(hash(original)===hash(r.original),'changed native finding');
++ if(ownerCurrent(r.entry))return {...finding,subject_type:'unmanifested-draft-dependency',consumer_id:null,observed_source:null,owner_context_consumer_id:contextConsumer(r.entry),owner_current_context_basis:OWNER_CURRENT_CONTEXT_BASIS,owner_unmanifested_draft_context:r.binding,observed_sha256:null,observation_basis:'unbound-native-observation; owner-current-source only'};
+  return {...finding,subject_type:'unmanifested-draft-dependency',owner_unmanifested_draft_context:r.binding,observed_sha256:hash({item_sha256:r.entry.observed_source.sha256,owner_unmanifested_draft_context:r.binding}),observation_basis:'exact-observed-source; no producer carrier or manifested home'};
+ }
+ export function unmanifestedDraftCarrier(root,run,batch,finding){
+@@ -85,7 +110,7 @@
+  }
+  const r=loadUnmanifestedDraftContexts(root,run,batch).get(finding.obligation);check(r,'missing authority');
+  const expected=bindUnmanifestedDraftContext(root,run,batch,{...r.original,obligation:finding.obligation});
+- for(const k of ['subject_type','id','consumer_id','location','defect','evidence','severity','observed_source','owner_unmanifested_draft_context','observed_sha256','observation_basis'])check(hash(finding[k])===hash(expected[k]),`changed routed ${k}`);
++ for(const k of ['subject_type','id','consumer_id','location','defect','evidence','severity','observed_source','owner_context_consumer_id','owner_current_context_basis','owner_unmanifested_draft_context','observed_sha256','observation_basis'])check(hash({value:finding[k]})===hash({value:expected[k]}),`changed routed ${k}`);
+  check(finding.producer_batch===undefined&&finding.producer_pre_snapshot===undefined,'fictitious producer');return r.carrier;
+ }
+ export const unmanifestedDraftVerdictAllowed=verdict=>['false_positive','confirmed_nonfatal','escalated'].includes(verdict);
+@@ -96,7 +121,8 @@
+  if(!(closed?.version===3&&closed.run===run&&closed.status==='closed'&&closed.basis==='dependency-ordered-step3a')){
+   check(Array.isArray(doc.contexts),'invalid context inventory');for(const b of new Set(doc.contexts.map(e=>e.batch)))loadUnmanifestedDraftContexts(root,run,b);
+  }
+- const out={[p]:sha(bytes(root,p))};for(const e of doc.contexts??[])for(const k of ['findings','native_result','prompt','reader_report','observed_source','consumer_source','consumer_manifest']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}
++ const out={[p]:sha(bytes(root,p))};for(const e of doc.contexts??[])for(const k of ['findings','native_result','prompt','reader_report',...(ownerCurrent(e)?['owner_current_source','owner_current_review']:['observed_source']),'consumer_source','consumer_manifest']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}
++ for(const e of doc.contexts??[])if(ownerCurrent(e)){const review=parse(ref(root,run,e.owner_current_review));for(const k of ['delegated_review','current_provenance','current_source','current_consumer']){ref(root,run,review[k]);out[review[k].path]=review[k].sha256;}}
+  for(const batch of new Set((doc.contexts??[]).map(e=>e.batch))){
+   const scopePath=`research/${run}-step3-scope-${batch}.json`;if(!existsSync(resolve(root,scopePath)))continue;
+   const scope=parse(bytes(root,scopePath));for(const finding of scope.refuter_findings??[])if(finding.owner_unmanifested_refuter_context){
+@@ -125,6 +151,7 @@
+  const byId=new Map(),counts=new Map();
+  for(const r of contexts.values())counts.set(r.entry.id,(counts.get(r.entry.id)??0)+1);
+  for(const [obligation,r] of contexts){
++  if(ownerCurrent(r.entry))continue;
+   const anchor=(scope.reader_findings??[]).find(f=>f.obligation===obligation);
+   if(!anchor)continue;
+   check(counts.get(r.entry.id)===1,`ambiguous registered consumer context ${r.entry.id}`);
+--- a/tools/step3-owner-unmanifested-draft-context.md
++++ b/tools/step3-owner-unmanifested-draft-context.md
+@@ -37,3 +37,21 @@
+ The existing closure-evidence helper additionally freezes every collected refuter report, immutable attempt and prompt reference from these scope bindings. Active Step 3 revalidates complete native output, exact reader authority and unchanged source. After actual sealed closure, only historical references are verified; later legitimate source repairs remain allowed and do not claim new past reading. Original reports, source, registry and native decisions are never written by this extension. It does not request a fresh native reread for a legitimate already completed supplier-context read.
+ 
+ Without any applicable registry context for the requested batch, refuter context discovery returns an empty map before applying version-2 anchor checks. Thus default legacy version-3 scopes and registries belonging only to other batches retain their previous behavior; an actual applicable opt-in still requires the strict version-2 reader scope.
++
++## Separate owner-current basis when the native reader supplied no attribution/hash
++
++An entry may explicitly set `native_finding_basis: "in-flight-null-consumer-unobserved-owner-current-context-v1"`. Unknown basis values reject; entries without this field retain every exact-observation rule above unchanged. This second basis requires the original native finding to have **exactly** `subject_type:"in-flight-item"`, `consumer_id:null`, `observed_source:null`. Do not relabel it as the reader's direct-dependency observation. The entry instead supplies `owner_context_consumer_id`, `owner_current_source` and `owner_current_review`; it must not supply `consumer_id` or `observed_source` as though native attribution existed.
++
++All original complete native findings, exact successful attempt, prompt/canonical prose, indexed finding hash, unique owned consumer, actual direct source/manifest array edges, zero helper homes, exact run marker and read-only guards remain mandatory. The canonical native reader prose must name both helper ID and separate owner consumer witness. Both archived/current consumer source and archived/current manifest edges are checked as before. The helper's current entire bytes must equal the owner-current archive, with no assertion that these were historical native source bytes.
++
++`owner_current_review` is a raw-bound own-run research JSON record, root-owned and explicitly completed. It requires version/run, `owner_identity:"/root"`, actual `recorded_at` no later than entry registration, `full_current_proof_read:true`, `affected_consumer_use_reviewed:true`, `source_repaired:false`, `mathematical_acceptance:false`, `native_coverage_adopted:false`, exact `obligation`, `supplier_id`, `routing_consumer_witness`, and exact raw refs `current_source`, `current_consumer`. Those refs must equal the entry's actual owner-current/helper and consumer archives. Required nonempty refs `delegated_review` and `current_provenance` remain bound separately. The root record must retain concrete `root_actual_reading`, `interface_result`, `preserved_gap`, `history` and `limits`, each at least 80 characters. This is a truthful root review/adoption, never a helper-generated claim of reading.
++
++The bound delegated review identifies its actual `/root/…` reviewer, run, supplier, original obligation and routing consumer, completion and no repair/acceptance/coverage claims. Its `used_clause` must literally occur in the helper archive; every nonempty `consumer_premise_quotes` entry must literally occur in the assigned consumer archive. The proof and use are not certified merely by satisfying a JSON shape: actual root/delegated reading and independent native Alpha adjudication remain necessary. This route freezes actual review evidence and preserves its limitations; it cannot convert a sound first-assertion use into acceptance of an unrelated criterion gap.
++
++In this mode the normalized finding keeps `consumer_id:null`, `observed_source:null` and `observed_sha256:null`. It separately stores the owner witness and basis. Original projection restores `in-flight-item` and both nulls exactly. The current decision carrier still binds the actual current-source/consumer/archive authority, without claiming a historical observed carrier. A decision must retain null native consumer, separate `owner_context_consumer_id`, `historical_delta_unknown:true` and explicit `owner_resolution` of at least 40 characters. Only independent nonfatal maintenance, false positive or escalation is permitted. The native severity/evidence are never silently changed. Any current helper or reviewed consumer-use source edit invalidates this route until separately authorized ordinary root review/repair and updated genuine authority; no Alpha edit permission is granted.
++
++The exact-observation refuter-context extension above deliberately excludes this nullable basis: a refuter extra-read/flag cannot silently inherit a nonexistent historical raw observation from this new mode. It remains unassigned, read-only reader context only. There is no addition to frontier, high-risk work or refuter coverage.
++
++Closure freezes owner-current source, root review, delegated review, current provenance and both archive refs along with the unchanged native evidence and registry. After genuine v3 closure, historical verification reads those frozen bytes only. Legitimate later repairs do not become new past observations and do not fail merely because current source differs; historical evidence mutation still rejects. No registry or review record is written by the module.
++
++The carrier compares wrapped object values, not array values: a missing field is distinct from explicit null. Thus deleting any mandatory nullable native field rejects, and inventing null optional owner-current fields on an exact71 route also rejects.
+--- a/tools/step3-owner-unmanifested-draft-context.test.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.test.mjs
+@@ -122,3 +122,61 @@
+ 
+ test('legacy version3 scope without applicable opt-in retains empty context defaults',()=>{const f=fixture();try{const v3={version:3,run:'r',batch:'2',items:[]};assert.equal(api.unmanifestedRefuterContexts(f.root,'r','2',v3).size,0);rmSync(join(f.root,'research/r-step3-owner-unmanifested-draft-context.json'));assert.equal(api.unmanifestedRefuterContexts(f.root,'r','1',{...v3,batch:'1'}).size,0);}finally{f.close();}});
+ test('actual applicable registered context still requires version2 scope',()=>{const f=fixture();try{assert.throws(()=>api.unmanifestedRefuterContexts(f.root,'r','1',{version:3,run:'r',batch:'1',items:['thm-consumer']}),/wrong registered reader scope/);}finally{f.close();}});
++
++function ownerCurrentFixture(){
++ const f=fixture();f.source=f.source.replace('Unchanged helper.','Current first assertion supplies the precise smooth proper disk implication used by the assigned consumer.');f.consumer=f.consumer.replace('Consumer.','The assigned consumer uses exactly the first assertion with a compact smooth orientable exterior and a whole boundary torus.');
++ f.put('items/lem-helper.md',f.source);f.put('items/thm-consumer.md',f.consumer);f.put('research/r-capture/owner-current-source.md',f.source);f.put('research/r-capture/consumer.md',f.consumer);
++ f.finding={...f.finding,subject_type:'in-flight-item',consumer_id:null,observed_source:null,severity:'nonfatal'};
++ const findings={batch:'1',findings:[f.finding],coverage_note:'Actual fixture reader preserves absent consumer and source observation.'};
++ f.put('research/r-reader-findings-1.json',findings);f.put('research/r-capture/findings.json',findings);
++ f.put('research/r-reader-1.md','The actual reader prose names lem-helper and thm-consumer as separate observed source and assigned use, without attributing a native source hash.');
++ const native=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));native.tail=JSON.stringify(findings);f.put(f.entry.native_result.path,native);
++ const e=f.entry;e.native_finding_basis=api.OWNER_CURRENT_CONTEXT_BASIS;e.owner_context_consumer_id=e.consumer_id;delete e.consumer_id;delete e.observed_source;e.owner_current_source=f.link('research/r-capture/owner-current-source.md');e.consumer_source=f.link('research/r-capture/consumer.md');e.findings=f.link('research/r-capture/findings.json');e.native_result=f.link(e.native_result.path);e.reader_report=f.link('research/r-reader-1.md');e.finding_sha256=hash(f.finding);
++ const clause='Current first assertion supplies the precise smooth proper disk implication used by the assigned consumer.';
++ const premise='The assigned consumer uses exactly the first assertion with a compact smooth orientable exterior and a whole boundary torus.';
++ const delegated={run:'r',reviewer:'/root/fixture_reviewer',completed:true,mathematical_acceptance:false,native_coverage_adopted:false,source_repaired:false,original_obligation:'reader:1:1',supplier_id:'lem-helper',routing_consumer_witness:'thm-consumer',used_clause:clause,consumer_premise_quotes:[premise]};f.put('research/r-capture/delegated-current-review.json',delegated);f.put('research/r-capture/current-provenance.json',{source:e.owner_current_source,consumer:e.consumer_source,history:'No native source observation supplied.'});
++ const rootReview={version:1,run:'r',owner_identity:'/root',recorded_at:'2020-01-01T12:00:00Z',completed:true,full_current_proof_read:true,affected_consumer_use_reviewed:true,source_repaired:false,mathematical_acceptance:false,native_coverage_adopted:false,obligation:'reader:1:1',supplier_id:'lem-helper',routing_consumer_witness:'thm-consumer',delegated_review:f.link('research/r-capture/delegated-current-review.json'),current_provenance:f.link('research/r-capture/current-provenance.json'),current_source:e.owner_current_source,current_consumer:e.consumer_source};
++ for(const key of ['root_actual_reading','interface_result','preserved_gap','history','limits'])rootReview[key]='Actual fixture owner review records only current source and its first-assertion assigned use, with the unrelated gap and absent historical native observation explicitly preserved.';
++ f.put('research/r-capture/root-current-review.json',rootReview);e.owner_current_review=f.link('research/r-capture/root-current-review.json');f.save();
++ f.normalized=()=>api.bindUnmanifestedDraftContext(f.root,'r','1',{...f.finding,obligation:'reader:1:1'});
++ return {...f,delegated,rootReview,saveReview:()=>{f.put('research/r-capture/root-current-review.json',rootReview);e.owner_current_review=f.link('research/r-capture/root-current-review.json');f.save();}};
++}
++test('owner-current basis preserves exact native nulls and binds a distinct current carrier',()=>{const f=ownerCurrentFixture();try{const original=readFileSync(join(f.root,'research/r-reader-findings-1.json'));const n=f.normalized();assert.equal(n.consumer_id,null);assert.equal(n.observed_source,null);assert.equal(n.observed_sha256,null);assert.equal(n.owner_context_consumer_id,'thm-consumer');assert.match(n.observation_basis,/unbound-native-observation/);assert.ok(api.unmanifestedDraftCarrier(f.root,'r','1',n).item_sha256);assert.deepEqual(readFileSync(join(f.root,'research/r-reader-findings-1.json')),original);}finally{f.close();}});
++for(const [name,change] of [
++ ['unknown basis',f=>f.entry.native_finding_basis='other'],
++ ['invented native consumer attribution',f=>f.entry.consumer_id='thm-consumer'],
++ ['invented historical source ref',f=>f.entry.observed_source=f.entry.owner_current_source],
++ ['missing root review',f=>delete f.entry.owner_current_review],
++ ['not root adopted',f=>{f.rootReview.owner_identity='/root/fixture_reviewer';f.saveReview();}],
++ ['missing full current proof review',f=>{f.rootReview.full_current_proof_read=false;f.saveReview();}],
++ ['review claims acceptance',f=>{f.rootReview.mathematical_acceptance=true;f.saveReview();}],
++ ['consumer use unreviewed',f=>{f.rootReview.affected_consumer_use_reviewed=false;f.saveReview();}],
++ ['wrong review obligation',f=>{f.rootReview.obligation='reader:1:2';f.saveReview();}],
++ ['source archive changed',f=>f.put(f.entry.owner_current_source.path,'Different archive')],
++ ['current source edited',f=>f.put('items/lem-helper.md',f.source+'Edited')],
++ ['current assigned use changed',f=>f.put('items/thm-consumer.md',f.consumer+'Changed assigned use after root review.')],
++ ['nonliteral supplier clause',f=>{f.delegated.used_clause='A purported supplier clause which does not literally occur in the current archived source.';f.put('research/r-capture/delegated-current-review.json',f.delegated);f.rootReview.delegated_review=f.link('research/r-capture/delegated-current-review.json');f.saveReview();}],
++ ['nonliteral consumer premise',f=>{f.delegated.consumer_premise_quotes=['A purported consumer premise which does not occur in the archived assigned consumer.'];f.put('research/r-capture/delegated-current-review.json',f.delegated);f.rootReview.delegated_review=f.link('research/r-capture/delegated-current-review.json');f.saveReview();}],
++ ['native prose lacks routing witness',f=>{f.put('research/r-reader-1.md','lem-helper only, with no consumer witness.');f.entry.reader_report=f.link('research/r-reader-1.md');}],
++ ['source deps scalar',f=>f.put('items/thm-consumer.md',f.consumer.replace('deps: [lem-helper]','deps: lem-helper'))],
++ ['manifest deps scalar',f=>f.put('research/r-batch-1.pages.json',[{id:'owned',category:'test',items:[{id:'thm-consumer',deps:'lem-helper'}]}])],
++ ['helper acquires frontier home',f=>f.put('research/r-batch-2.pages.json',[{id:'outside',items:[{id:'lem-helper'}]}])]
++])test(`owner-current rejects ${name}`,()=>{const f=ownerCurrentFixture();try{change(f);f.save();assert.throws(()=>f.normalized());}finally{f.close();}});
++test('native nullable observation cannot be rewritten even if owner entry retains a consumer witness',()=>{for(const field of ['consumer_id','observed_source']){const f=ownerCurrentFixture();try{f.finding[field]=field==='consumer_id'?'thm-consumer':{snapshot:'current',item_sha256:f.entry.owner_current_source.sha256};const report={batch:'1',findings:[f.finding],coverage_note:'Changed native shape fixture.'};f.put('research/r-reader-findings-1.json',report);f.put(f.entry.findings.path,report);f.entry.findings=f.link(f.entry.findings.path);f.entry.finding_sha256=hash(f.finding);const n=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));n.tail=JSON.stringify(report);f.put(f.entry.native_result.path,n);f.entry.native_result=f.link(f.entry.native_result.path);f.save();assert.throws(()=>f.normalized());}finally{f.close();}}});
++test('owner-current native lifecycle projects original nulls, requires independent decision and truthful history resolution',()=>{const f=ownerCurrentFixture();try{
++ for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(f.root,p)),{recursive:true});copyFileSync(join(code,p),join(f.root,p));}copyFileSync(join(code,'tools/step3-owner-unmanifested-draft-context.mjs'),join(f.root,'tools/step3-owner-unmanifested-draft-context.mjs'));
++ const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});const ok=(...a)=>{const r=run(...a);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
++ f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer'],contracts:{'thm-consumer':{}}});ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');ok('post-reader','--batch','1');
++ const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json'))),n=scope.reader_findings[0];assert.equal(n.observed_source,null);assert.equal(n.consumer_id,null);assert.equal(n.observed_sha256,null);assert.equal(n.owner_context_consumer_id,'thm-consumer');assert.deepEqual(scope.manifest_post,['thm-consumer']);assert.ok(!scope.refuter_scope.includes('lem-helper'));assert.deepEqual(api.unmanifestedRefuterContexts(f.root,'r','1',scope),new Map());
++ const order=prepareStep3AdjudicationOrder(f.root,'r',{label:'batch-1',scopeGroup:'g',covers:['1']});assert.match(readFileSync(join(f.root,order),'utf8'),/OWNER-CURRENT SOURCE ONLY/);
++ f.put('research/r-refute-1.json',{batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Actual refuter opens only assigned scope, no helper coverage claimed.'});ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
++ f.put('research/defect-ledger.jsonl',JSON.stringify({run:'r',defect_id:'owner-current-gap',subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'nonfatal-recorded'})+'\n');
++ const d={obligation:'reader:1:1',id:'lem-helper',consumer_id:null,owner_context_consumer_id:'thm-consumer',route:'reader',verdict:'confirmed_nonfatal',defect_ids:['owner-current-gap'],historical_delta_unknown:true,owner_resolution:'Independent Alpha reviews the current source and assigned use only; original native consumer/source observations remain null.',evidence:'Alpha independently records the separate current criterion gap as nonfatal maintenance; first assertion use is sound and no source repair is claimed.'};
++ const save=()=>f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions:[d]});save();ok('stamp');ok('check','--batch','1','--phase','adjudicate');ok('check','--batch','1','--phase','final');
++ const evidence=api.unmanifestedDraftClosureEvidence(f.root,'r');for(const p of [f.entry.owner_current_source.path,f.entry.owner_current_review.path,f.rootReview.delegated_review.path,f.rootReview.current_provenance.path])assert.ok(evidence[p]);
++ f.put('research/r-step3-closure.json',{version:3,run:'r',status:'closed',basis:'dependency-ordered-step3a'});f.put('items/lem-helper.md',f.source+'Later legitimate owner repair.');assert.deepEqual(api.unmanifestedDraftClosureEvidence(f.root,'r'),evidence);f.put('items/lem-helper.md',f.source);rmSync(join(f.root,'research/r-step3-closure.json'));
++ d.historical_delta_unknown=false;save();ok('stamp');assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++ }finally{f.close();}});
++
++for(const field of ['consumer_id','observed_source','observed_sha256'])test(`nullable carrier rejects missing explicit ${field}`,()=>{const f=ownerCurrentFixture();try{const n=f.normalized();assert.equal(n[field],null);delete n[field];assert.throws(()=>api.unmanifestedDraftCarrier(f.root,'r','1',n),new RegExp(`changed routed ${field}`));}finally{f.close();}});
++for(const field of ['owner_context_consumer_id','owner_current_context_basis'])test(`exact71 carrier rejects invented null optional ${field}`,()=>{const f=fixture();try{const n=f.normalized();assert.equal(Object.hasOwn(n,field),false);n[field]=null;assert.throws(()=>api.unmanifestedDraftCarrier(f.root,'r','1',n),new RegExp(`changed routed ${field}`));}finally{f.close();}});

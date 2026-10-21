@@ -380,6 +380,10 @@ The same registered unchanged helper may be an actual refuter's extra read-only
 context and flagged obligation, with exact native output and prompt bindings.
 It gains no assigned coverage; every original reader and refuter decision is
 still independently required. Ambiguous consumer contexts fail closed.
+An explicit separate basis preserves a native `in-flight-item` finding with
+null consumer and source observation. A bound root current-proof/use review
+and separate owner consumer witness seal only the actual current context;
+they supply no historical observation or whole-supplier acceptance.
 
 A definition may acquire its first real proof contract after its frozen
 pre-reader snapshot; routing preserves the original null contract hash and
