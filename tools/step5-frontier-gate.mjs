@@ -3,6 +3,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { validateFrontier } from './step5-rounds.mjs';
+import { verifyCertification } from './step5-workflow.mjs';
+import { loadOriginalSlotReclassification, projectedOriginalIds, licensedOriginalSlotReplacement } from './step5-original-slot-reclassification.mjs';
 
 const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemId = new RegExp(`^${ITEM}$`);
@@ -23,10 +25,12 @@ const supported = new Set([...Object.keys(fileCodes), ...Object.keys(idCodes), '
 const knownCode = (table, check, row) => typeof row?.code === 'string' && table[check]?.split(' ').includes(row.code);
 
 /** Strictly partition detector-owned subjects; cited suppliers are never owners. */
-export function projectFrontierGate(check, result, frontier, allIds) {
+export function projectFrontierGate(check, result, frontier, allIds, projection = null) {
   const rawOutput = `${result.stdout}${result.stderr}`;
-  const scope = new Set(frontier.ids), known = new Set(allIds);
+  const scope = new Set(projection?.currentIds ?? frontier.ids), known = new Set(allIds);
   const evidence = { frontierSha256: frontier.sha256, mode: 'json-projection', excluded: [], retained: [], global: [] };
+  if (projection) evidence.originalSlots = { count: frontier.ids.length, currentIds: projection.currentIds,
+    reclassification: projection.reclassification, creations: projection.creations };
   const base = { ...result, output: rawOutput, rawOutput, rawCode: result.code, frontierScope: evidence };
   const fail = why => {
     evidence.global.push({ scopeError: why });
@@ -97,7 +101,17 @@ export function frontierGateBattery(ctx, gates) {
   const path = join(ctx.repo, 'research', `${ctx.run}-step5-v2`, 'frontier.json');
   const frontier = validateFrontier(JSON.parse(readFileSync(path, 'utf8')));
   if (frontier.run !== ctx.run || frontier.ids.some(id => !itemId.test(id))) throw Error('invalid current Step 5 frontier');
-  const gateScope = frontier;
+  const transition = loadOriginalSlotReclassification(ctx.repo, ctx.run, { current: true });
+  const certificate = verifyCertification(ctx.repo, ctx.run);
+  if (transition && (!certificate || !licensedOriginalSlotReplacement(ctx.repo, ctx.run,
+    transition.original_id, transition.current_id, certificate))) throw Error('frontier gate requires current replacement certification');
+  const currentIds = projectedOriginalIds(ctx.repo, ctx.run, frontier.ids);
+  const creations = (certificate?.creations ?? []).map(row => row.id);
+  if (creations.some(id => currentIds.includes(id) || frontier.ids.includes(id))
+    || new Set(creations).size !== creations.length) throw Error('frontier gate creation overlaps an original slot');
+  const gateScope = { currentIds: [...currentIds, ...creations], creations,
+    reclassification: transition ? { path: transition.path, evidence: transition.evidence,
+      original_id: transition.original_id, current_id: transition.current_id } : null };
   const allIds = readdirSync(join(ctx.repo, 'items')).filter(name => name.endsWith('.md')).map(name => name.slice(0, -3));
   const preserveRaw = result => ({ ...result, output: `${result.stdout}${result.stderr}`,
     rawOutput: `${result.stdout}${result.stderr}`, rawCode: result.code });
@@ -109,12 +123,12 @@ export function frontierGateBattery(ctx, gates) {
       // Appending paths after its `--` turns them into unsupported tool flags.
       if (argv.some(arg => typeof arg === 'string' && /(?:^|\/)frontier-item-gate\.mjs$/.test(arg)))
         return { ...gate, argv, projectResult: preserveRaw };
-      const files = gateScope.ids.map(id => `items/${id}.md`);
+      const files = gateScope.currentIds.map(id => `items/${id}.md`);
       return { ...gate, argv: [...argv, ...files], needs: [...(typeof gate.needs === 'function' ? gate.needs() : gate.needs ?? []), ...files], projectResult: preserveRaw };
     }
     if (!supported.has(gate.id)) return gate; // Global/unsupported gates remain fail-closed.
     return { ...gate, argv: argv.includes('--json') ? argv : [...argv, '--json'],
       ...(gate.id === 'judge-closure' ? { liveness: { ...gate.liveness, pattern: '"frontier_judge_complete":(\\d+)' } } : {}),
-      projectResult: result => projectFrontierGate(gate.id, result, gateScope, allIds) };
+      projectResult: result => projectFrontierGate(gate.id, result, frontier, allIds, gateScope) };
   });
 }

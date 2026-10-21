@@ -148,3 +148,74 @@ definitions with the original Luna keep verdict. Both require exact full
 current-source snapshots, root full-source confirmation and literal edits as
 above. A version-2 entry without `origin_kind` retains only the unchanged
 version-1 native open-finding branch; other type values are rejected.
+
+## Finite opt-in: the two observed unit105 result alerts
+
+Version 2 also accepts `origin_kind:"native-observed-result-alert"` only for
+run `inverse-problems-knot-theory-all-109-2026-10-19`, native initial unit `105`,
+current unique owner batch `105`, and these exact report/final-output indices:
+
+| Item | Both zero-based alert indices |
+| --- | --- |
+| `lem-connected-diagram-bracket-span-bound-and-alternating-equality` | 0 |
+| `lem-connected-alternating-link-is-nonsplit` | 1 |
+
+This is separate from the unchanged definition-only typed branches. Both
+objects must have exactly `id`, `path`, `route`, `affected_use`, `reason`, and
+`minimality`. The full `items/ID.md` path is mandatory in both objects; both
+routes are literally `frontier owner`. Each of the three prose fields must
+contain at least 40 trimmed characters. Both complete raw objects remain
+separately bound to their original indexed saved report and authenticated
+successful immutable final output. In particular, their differing reason and
+minimality text, including conditional empty-diagram concerns, is preserved;
+the module neither equates nor rewrites it. No severity, canonical finding,
+root decision, or certainty is inferred from those alerts.
+
+Only these two entries may use a `kind: lemma` carrier in this new branch.
+All original unassigned-frontier, baseline/initial/current guard, Luna-keep,
+unique ownership, owner-current full raw snapshot, root full-source reading,
+individual literal correspondence, dated confirmation and unique literal
+patch requirements remain in force. Native-log reading claims are still
+forbidden in this owner-source branch. Admission additionally retains every
+existing result/attempt/prompt/log success and identity guard, creation boundary,
+collection binding, first-impact exclusion and frozen-registry guard.
+
+Root may omit either conditional alert if its actual focused mathematical
+review does not confirm a defect; this adapter does not make that decision.
+The already supported ordinary nonfatal `record-open-finding` route suffices
+for unit40's Gaussian-beam lemma finding, with its authentic native source-read
+observation. It acquires no owner-source alternative from this extension.
+All admitted work still requires ordinary native current review and any
+necessary repair; no acceptance, coverage or gate exemption is granted.
+
+## Finite opt-in: observed unit104 Haken report and final findings
+
+`origin_kind:"native-observed-result-finding"` is restricted to the same named
+run, unit/current owner batch `104`, theorem
+`thm-haken-normal-essential-disk-existence`, saved/final `ledger_updates[7]`,
+and saved `repair_notes.outside_lane_alerts[0]`. The saved alert has exactly
+`{id,status:"reported_to_frontier_owner",edited:false}`. The actual immutable
+final has no outside-alert array, and the adapter must not invent one.
+
+Retain both detailed ledger objects separately as `finding` and
+`output_finding`, their exact indices as `open_finding_index` and
+`output_finding_index`, and the sparse saved notification as `alert` with
+`outside_alert_index:0`. Both ledger objects have exactly `ledger`, `action`,
+`id`, `route`, `affected_use`, `invalidated_claim`, `minimality`, `reason`,
+`uncertain`, `source_urls`, and `familiar`. Both must retain the actual
+`canonical-defect-ledger`, `record-open-finding`,
+`frontier-owner; unassigned existing frontier item, no edit made`,
+`uncertain:false`, `familiar:false`, and sole actual source URL
+`https://pi.math.cornell.edu/~hatcher/3M/3Mfds.pdf`. Both affected uses must name
+the exact `items/ID.md` path; all four prose fields have at least 40 trimmed
+characters. No native severity or broader primary-source reading is inferred.
+
+Root supplies the existing literal `open_finding_correspondence` witness and
+a separate current classification with fatal/nonfatal severity, logic defect
+kind and actual reason. This is a root work request, not a rewritten native
+classification. The carrier must be a theorem and satisfy the same unchanged
+baseline, full owner-current snapshot, root full-source-read, literal patch,
+chronology and all common evidence/collection/freeze guards as the two lemma
+alerts. Existing typed defaults are unchanged; no arbitrary sparse alert or
+unstructured text is admitted. Root confirmation and ordinary current native
+review remain required before any acceptance.

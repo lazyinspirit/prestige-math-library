@@ -1,5 +1,6 @@
 // Owner confirmation admits work; only genuine native workers and judges supply coverage.
 import { sol61Effort } from './math-workflow-effort.mjs';
+import {supportingOriginalSlotLevelHistory} from './step5-original-slot-reclassification.mjs';
 import {existsSync,readFileSync,readdirSync,lstatSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -34,15 +35,20 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
     &&row.authorized_by==='owner'&&row.owner_identity==='/root'&&row.native_coverage_adopted===false
     &&date(row.recorded_at)&&row.bindings&&typeof row.bindings==='object'&&!Array.isArray(row.bindings),
     'invalid owner authority or admission envelope');
-  const evidence={[path]:hash(readFileSync(path,'utf8'))};
+  const evidence={[path]:hash(readFileSync(path,'utf8'))},historical=new Map(),continuityEvidence={};
   for(const [file,expected]of Object.entries(row.bindings)){
     const p=resolve(root,file);
     need(p.startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(expected)
       &&existsSync(p)&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()
-      &&hash(readFileSync(p,'utf8'))===expected,`stale or invalid binding: ${file}`);
+      ,`stale or invalid binding: ${file}`);
+    if(hash(readFileSync(p,'utf8'))!==expected){
+      const continuity=supportingOriginalSlotLevelHistory({root,run},p,expected);
+      if(continuity){historical.set(p,continuity.archive);Object.assign(continuityEvidence,continuity.evidence);}
+    }
+    need(hash(readFileSync(historical.get(p)??p,'utf8'))===expected,`stale or invalid binding: ${file}`);
     evidence[p]=expected;
   }
-  const bound=file=>{need(Object.hasOwn(evidence,resolve(file)),`missing binding: ${file}`);return read(file);};
+  const bound=file=>{need(Object.hasOwn(evidence,resolve(file)),`missing binding: ${file}`);return read(historical.get(resolve(file))??file);};
   const frontier=bound(join(dir,'frontier.json'));validateFrontier(frontier);
   const baseline=bound(join(dir,'baseline.json')),verdicts=bound(join(dir,'step4-verdicts.json'));
   const initialPath=join(dir,'initial-1.json'),initial=bound(initialPath);
@@ -250,7 +256,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
       'missing bound root review evidence');
     entries.push({...entry,...(v2?{source_kind:entry.source_kind,reader_batch:readerBatch}:{}),digest_path:digestPath});
   }
-  return {path,entries,evidence};
+  return {path,entries,evidence:{...continuityEvidence,...evidence}};
 }
 
 /** Native plan options for the actual same reviewer, never just a lane label. */

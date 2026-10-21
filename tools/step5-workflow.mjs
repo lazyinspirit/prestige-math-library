@@ -31,6 +31,7 @@ import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
 import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';
 import { loadInitialPublishedMaintenance, recordInitialPublishedMaintenance, isInitialPublishedMaintenance, initialPublishedSupportingHistory, initialPublishedBaselineExclusions, verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
+import {loadOriginalSlotReclassification,projectedOriginalIds,originalSlotView,isOriginalSlotReclassification,supportingReclassificationHistory,originalSlotCurrentReview} from './step5-original-slot-reclassification.mjs';
 export { readerConcernSession };
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
@@ -203,6 +204,7 @@ function repairedRun44LedgerHistory(history,path,expected) {
 // This run's recovery binds exact historical bytes to unchanged native reports;
 // it supplies no current-source review or gate coverage.
 function supportingMetadataHistory(history,path,expected) {
+  const reclassification=supportingReclassificationHistory(history,path,expected);if(reclassification)return reclassification;
   const siblings = supportingSiblingContractHistory(history,path,expected); if (siblings) return siblings;
   const quotes = supportingQuoteHistory(history,path,expected);
   if (quotes) return quotes;
@@ -357,7 +359,7 @@ function gateFrontier(root,run) {
   const frontier=existsSync(path)?read(path):initialize(root,run);
   validateFrontier(frontier);
   requireValue(frontier.run===run,'wrong run frontier');
-  return new Set(frontier.ids);
+  return new Set(projectedOriginalIds(root,run,frontier.ids));
 }
 function impactTargets(root,run,phase,items,seeds,discovered=[],createdIds=[]) {
   const frontier=new Set([...gateFrontier(root,run),...createdIds]),roots=[...new Set(seeds)];
@@ -541,9 +543,10 @@ function assertEmptyAdjudicationInput(root,run,phase,round,unit,inputHash) {
   requireValue(pack.run===run&&pack.phase===phase&&pack.round===round&&digest(pack)===inputHash,'empty adjudication input identity or hash mismatch');
   requireValue(emptyAdjudicationAssignment(pack,unit),`not an empty batch adjudication assignment: ${unit}`);
   const frontier=read(join(workflowDir(root,run),'frontier.json'));validateFrontier(frontier);
-  requireValue(frontier.run===run&&JSON.stringify(frontier.ids)===JSON.stringify(pack.frontier_ids)
+  const slots=phase==='initial'?null:originalSlotView(root,run,{frontier});
+  requireValue(frontier.run===run&&JSON.stringify(slots?.currentIds??frontier.ids)===JSON.stringify(pack.frontier_ids)
     &&JSON.stringify(frontier.batches.map(row=>String(row.id)))===JSON.stringify(pack.units),'empty adjudication frontier binding mismatch');
-  const owners=new Map(frontier.batches.flatMap(row=>row.items.map(id=>[id,String(row.id)])));
+  const owners=new Map(frontier.batches.flatMap(row=>row.items.map(id=>[slots?.currentId(id)??id,String(row.id)])));
   const assigned=[];
   for(const owner of pack.units){
     requireValue(Array.isArray(pack.assignments[owner]),'malformed adjudication assignments');
@@ -555,12 +558,14 @@ function assertEmptyAdjudicationInput(root,run,phase,round,unit,inputHash) {
     &&new Set(assigned).size===assigned.length
     &&JSON.stringify(assigned.sort())===JSON.stringify(pack.rejected.map(key).sort()),'adjudication rejection coverage mismatch');
   const judgeInput=join(workflowDir(root,run),phase==='initial'?'step4-verdicts.json':`judge-${round}.json`);
-  requireValue(Object.keys(pack.input_evidence??{}).length===1&&Object.hasOwn(pack.input_evidence,judgeInput),'missing exact frozen judge input');
+  requireValue(Object.keys(pack.input_evidence??{}).length===1+Object.keys(slots?.evidence??{}).length
+    &&Object.hasOwn(pack.input_evidence,judgeInput)&&Object.entries(slots?.evidence??{}).every(([p,h])=>pack.input_evidence[p]===h),'missing exact frozen judge input');
   verifyEvidence(pack.input_evidence);
   const input=read(judgeInput),verdicts=validVerdicts(phase==='initial'?input:input.verdicts),latest=new Map();
   for(const row of verdicts.filter(row=>row.model===pack.judge_model))latest.set(row.id,row);
   for(const row of pack.rejected)requireValue(latest.get(row.id)?.keep===false&&key(latest.get(row.id))===key(row),'rejection differs from frozen judge input');
-  for(const id of frontier.batches.find(row=>String(row.id)===unit).items){
+  for(const raw of frontier.batches.find(row=>String(row.id)===unit).items){
+    const id=slots?.currentId(raw)??raw;
     const row=latest.get(id);
     requireValue((phase!=='initial'||typeof row?.keep==='boolean')&&(!row||row.keep===true),`frozen judge input still owes adjudication: ${id}`);
   }
@@ -603,7 +608,8 @@ export function prepareAdjudication(root,run,phase,round) {
   if(phase==='initial')for(const id of repairable)requireValue([...latest.values()].some(row=>row.id===id&&typeof row.keep==='boolean'),`missing Step 4 verdict: ${id}`);
   for(const row of latest.values())if(repairable.has(row.id))requireValue(typeof row.keep==='boolean',`missing complete judge verdict: ${row.id}`);
   const rejected=[...latest.values()].filter(r=>r.keep===false&&repairable.has(r.id));
-  const byId=new Map(frontier.batches.flatMap(b=>b.items.map(id=>[id,String(b.id)])));
+  const slotView=originalSlotView(root,run,{frontier});
+  const byId=new Map(frontier.batches.flatMap(b=>b.items.map(id=>[slotView.currentId(id),String(b.id)])));
   const units=frontier.batches.map(b=>String(b.id));
   const order=orderedItems(runPages(root,run),{validateLabels:false});
   const rank=new Map(order.map((row,index)=>[row.id,index]));
@@ -611,10 +617,32 @@ export function prepareAdjudication(root,run,phase,round) {
   const assignments=Object.fromEntries(units.map(u=>[u,rejected.filter(r=>byId.get(r.id)===u)
     .sort((a,b)=>(rank.get(a.id)??Infinity)-(rank.get(b.id)??Infinity))]));
   const identity=libraryIdentity(root,run);
-  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:frontier.ids,run,phase,round,judge_model:activeModel,units,assignments,dependency_levels:dependencyLevels,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
+  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:phase==='initial'?frontier.ids:slotView.currentIds,run,phase,round,judge_model:activeModel,units,assignments,dependency_levels:dependencyLevels,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8')),...slotView.evidence}};
   frozen(path,pack); writeTasks(root,pack,'adjudicate'); return pack;
 }
 
+function bindOwnerRepairGuidance(root,pack){
+  if(pack.run!=='inverse-problems-knot-theory-all-109-2026-10-19')return;
+  const path=join(root,'research',`${pack.run}-step5-owner-repair-guidance.json`);if(!existsSync(path))return;
+  const guidance=read(path),assigned=new Set(Object.values(pack.assignments).flat());
+  requireValue(guidance.version===1&&guidance.kind==='owner-native-repair-guidance'&&guidance.run===pack.run
+    &&guidance.owner_identity==='/root'&&guidance.native_coverage_adopted===false&&Number.isFinite(Date.parse(guidance.recorded_at))
+    &&Array.isArray(guidance.entries)&&guidance.bindings&&typeof guidance.bindings==='object','malformed owner repair guidance');
+  const evidence={[path]:digest(readFileSync(path,'utf8'))};
+  for(const [file,hash]of Object.entries(guidance.bindings)){
+    const full=resolve(root,file);requireValue(full.startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(hash)
+      &&lstatSync(full).isFile()&&!lstatSync(full).isSymbolicLink()&&digest(readFileSync(full,'utf8'))===hash,'stale owner repair guidance binding');evidence[full]=hash;
+  }
+  const entries=guidance.entries.filter(row=>assigned.has(row.id));
+  requireValue(new Set(guidance.entries.map(row=>row.id)).size===guidance.entries.length,'duplicate owner repair guidance ID');
+  for(const row of entries)requireValue(typeof row.reason==='string'&&row.reason.trim().length>=20
+    &&Array.isArray(row.review_files)&&row.review_files.every(p=>Object.hasOwn(evidence,resolve(root,p)))
+    &&Array.isArray(row.proposed_edits)&&row.proposed_edits.every(edit=>typeof edit.source_excerpt==='string'&&edit.source_excerpt.length>0
+      &&typeof edit.proposed_replacement==='string')&&/^[a-f0-9]{64}$/.test(row.proposal_source_guard_sha256??''),'invalid assigned owner repair guidance');
+  if(!entries.length)return;
+  pack.owner_repair_guidance={path,entries,instruction_context_only:true,native_coverage_adopted:false};
+  pack.input_evidence={...(pack.input_evidence??{}),...frozenSupportingEvidence(root,pack.run,evidence)};
+}
 function writeTasks(root,pack,mode) {
   for(const unit of pack.units) {
     const report=workerReport(root,pack.run,pack.phase,pack.round,unit);
@@ -633,6 +661,10 @@ function writeTasks(root,pack,mode) {
         ? `Owner-confirmed Step-4 reader concerns assigned for genuine current review and smallest necessary repair (these are not judge rejections or downstream claims):\n${JSON.stringify(pack.reader_concerns.filter(row=>assigned.includes(row.id)),null,2)}. Review the bound original digest and individual owner evidence; repair confirmed presentation defects as well as mathematical defects. Return ordinary reviews, with no adjudication decision for these concerns. Only actual Statement/Definition changes propagate consumer examinations.` : '',
       pack.initial_scope_findings?.some(row=>assigned.includes(row.id))
         ? `Owner-confirmed findings from original native initial adjudication, assigned for current review and smallest necessary repair:\n${JSON.stringify(pack.initial_scope_findings.filter(row=>assigned.includes(row.id)),null,2)}. Read the original native report/finding and bound individual root instructions. These are explicit work requests, not Step-4 reader concerns, judge rejections, new adjudication decisions, or current acceptance. Return ordinary reviews with no adjudication decision. Only actual Statement/Definition changes propagate consumer examination.` : '',
+      pack.owner_repair_guidance?.entries.some(row=>assigned.includes(row.id))
+        ? `Bound owner instruction context for items ALREADY assigned in this lane:\n${JSON.stringify(pack.owner_repair_guidance.entries.filter(row=>assigned.includes(row.id)),null,2)}. Read the actual bound review files and literal proposals; compare their source guards/excerpts with current sources before choosing the smallest sound repair. This context adds no assignments, findings, adjudication authority, acceptance, or review credit. Return genuine ordinary current reviews; preserve actual reading limits and check affected consumers only after an actual interface change.` : '',
+      pack.original_slot_current_review_targets?.some(id=>assigned.includes(id))
+        ? 'This lane owes the FIRST actual current proof review of the reclassified original example slot. The old u21 status review and root transition grant no proof or native review credit. Read the whole current Example and Verification, exact suppliers and original question archive. Complete the ordinary proved-example proof-contract worksheet and run its required checks before reporting completion. Preserve every original model hypothesis, selector branch and quantified target; report actual checks and unresolved failures truthfully. This is the same original obligation, not a newly authored prerequisite.' : '',
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'SCOPE: repair all assigned frontier items, including published items. Publication status never exempts an assigned item from adjudication, repair certification or required rejudgment. Keep originally published items published. Outside consumers are handled by consumer maintenance; report their affected uses and escalate necessary repairs.',
@@ -1102,8 +1134,13 @@ function loadSupplierRepairs(root,pack,reports,current,items) {
   return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
 }
 
-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null}={}) {
+export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null,reclassification=null}={}) {
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
+  requireValue(!reclassification||(root&&isOriginalSlotReclassification(reclassification,pack,now)),
+    'original-slot history must pass exact guarded loading and integration currency');
+  // Only old physical review validation sees this archived post. Never expose
+  // it as a current source, certification hash, or projected canonical item.
+  if(reclassification)now={...now,[reclassification.original_id]:reclassification.before_guard};
   requireValue(!publishedMaintenance||isInitialPublishedMaintenance(publishedMaintenance,pack,now),
     'published maintenance must pass exact native guarded loading');
   requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
@@ -1116,6 +1153,7 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
     &&currentRepairs.pack_sha256===digest(pack)),'unvalidated current-root repair supplement');
   const ownerReviews=new Map(),ownerDecisions=new Map();
   for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[])]){
+    requireValue(!reclassification||row.id!==reclassification.original_id,'root review cannot replace historical u21 review');
     requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);
   }
   for(const row of [...(ownerSupplement?.decisions??[]),...(currentRepairs?.decisions??[])]){
@@ -1345,6 +1383,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
   const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):phase==='repeat'?loadRepeatMetadataHistory(root,run,round,{current:true}):null;
   const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
+  const reclassification=phase==='initial'&&round===1?loadOriginalSlotReclassification(root,run,{current:true}):null;
   // Validate original reviews against exact historical source bytes only.
   // The collection's post snapshot below always describes actual current bytes.
   if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
@@ -1364,13 +1403,14 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set([...Object.values(pack.assignments).flat(),...reports.flatMap(report=>(report.created_items??[]).map(row=>row.id))]);
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance});
+  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
-  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{});
+  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{});
   for(const [p,h]of Object.entries(withdrawal?.evidence??{})){requireValue(!evidence[p]||evidence[p]===h,'withdrawal evidence collision');evidence[p]=h;}
   verifyEvidence(evidence);
   const creationAuthors=new Map();
+  const currentSlot=reclassification??loadOriginalSlotReclassification(root,run);
   for(const unit of pack.units) {
     const p=workerReport(root,run,phase,round,unit); evidence[p]=digest(readFileSync(p,'utf8'));
     if(pack.gateRoutingVersion===1){
@@ -1412,6 +1452,14 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
         &&!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
       throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
+    if(currentSlot&&role==='alpha-repair'&&pack.assignments[unit]?.includes(currentSlot.current_id)){
+      const attempt=dispatch.replace(/\.result\.json$/,`.attempt-${receipt.attempt}.result.json`);
+      requireValue(readFileSync(attempt,'utf8')===readFileSync(dispatch,'utf8'),'reclassified example native attempt changed');
+      for(const file of [attempt,resolve(root,receipt.prompt??''),resolve(root,receipt.log??'')]){
+        requireValue(file.startsWith(resolve(root,'research')+'/')&&lstatSync(file).isFile()&&!lstatSync(file).isSymbolicLink(),
+          'current example native evidence must be actual research files');evidence[file]=digest(readFileSync(file,'utf8'));
+      }
+    }
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
   // Creation consumers are an explicit native inventory too. validateReports
@@ -1419,6 +1467,16 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   // joining them records routing, never an additional mathematical review.
   const downstream=[...new Set([...reports.flatMap(row=>row.downstream),...result.created_items.flatMap(row=>row.consumers)])];
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream,ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  if(reclassification){
+    const {original_id,current_id}=reclassification;
+    receipt.original_slot_reclassification={path:reclassification.path,original_id,current_id,historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};
+    receipt.original_slot_current_review_targets=[current_id];
+    receipt.historical_original_slot_reviews=receipt.reviews.filter(row=>row.id===original_id);
+    requireValue(digest(receipt.historical_original_slot_reviews)===digest([reclassification.historical_review]),'historical original-slot review changed');
+    receipt.reviews=receipt.reviews.filter(row=>row.id!==original_id);
+    receipt.historical_original_slot_changes=receipt.changed.filter(id=>id===original_id);
+    receipt.changed=[...new Set(receipt.changed.map(id=>id===original_id?current_id:id))];
+  }
   if(withdrawal){
     receipt.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets],review_credit_granted:false,repair_acceptance_granted:false};
     receipt.withdrawn_native_reviews=withdrawal.row.original_reviews;
@@ -1474,8 +1532,17 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
       native_execution_coverage_adopted:false,native_finding_synthesized:false};
   }
   receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));
+  if(reclassification)receipt.restated=[...new Set(receipt.restated.map(id=>id===reclassification.original_id?reclassification.current_id:id))];
   const afterStatements=statementHashes(root,run);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
+  if(reclassification){
+    receipt.statement_events=receipt.statement_events.filter(event=>event.id!==reclassification.current_id);
+    receipt.statement_events.push({kind:'original-slot-reclassification',id:reclassification.current_id,
+      original_id:reclassification.original_id,current_id:reclassification.current_id,
+      before_guard:reclassification.before_guard,after_guard:current[reclassification.current_id],
+      before_statement_sha256:reclassification.entry.before_statement_sha256,
+      after_statement_sha256:reclassification.entry.after_statement_sha256,receipt:reclassification.path});
+  }
   if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
   const frontier=gateFrontier(root,run);
   // Outside edits are context, not Step-5 repair subjects. Relevant supplier
@@ -2031,7 +2098,7 @@ export function advanceImpact(root,run,phase,round) {
     if(continuation){pack.successor_uncertainty_continuation={path:continuation.path,targets:[...continuation.targets],resume_original_reporting_session:true};}
     for(const unit of pack.units)assertReportingSessionCompatibility(root,pack,unit);
     if(reportingRecovery?.observationPath&&!existsSync(path))loadReportingOwnerRecovery(root,run,phase,round,{current:true});
-    frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+    bindOwnerRepairGuidance(root,pack);frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
   }
@@ -2151,6 +2218,18 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
     if(phase==='impact-initial'&&round===1){
       checkFrozenReaderConcernInput(root,run,saved);
       checkFrozenInitialScopeFindingInput(root,run,saved);
+      const transition=loadOriginalSlotReclassification(root,run,{current:true});
+      if(transition)requireValue(Object.values(saved.assignments).flat().filter(id=>id===transition.current_id).length===1
+        &&Object.entries(transition.evidence).every(([p,h])=>saved.input_evidence?.[p]===h),'saved owner pack omits current original-slot proof review');
+      if(transition){
+        verifyEvidence(saved.input_evidence,{root,run});
+        const unit=saved.units.find(unit=>saved.assignments[unit].includes(transition.current_id)),label=workerLabel(phase,round,unit);
+        const statePath=join(root,'.autopilot',run,'state.json'),state=existsSync(statePath)?read(statePath):null;
+        const dispatched=Object.values(state?.dispatches??{}).some(row=>row.label===label&&row.startedAt)
+          ||existsSync(join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`));
+        if(!dispatched)requireValue(itemHashGuard(readFileSync(join(root,'items',`${transition.current_id}.md`),'utf8'))===saved.before[transition.current_id],
+          'reclassified example changed before its first native owner dispatch');
+      }
     }
     return saved;
   }
@@ -2162,7 +2241,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   const {seeds,impacts}=scope;
   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
   const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;
-  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[])])];
+  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[]),...(result.original_slot_current_review_targets??[])])];
   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
   // Closure requeues reviews invalidated by a concurrent supplier repair.
   const assignments={'1':[],'2':[],'3':[]};
@@ -2171,6 +2250,12 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
   const identity=libraryIdentity(root,run);
   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
+  if(result.original_slot_reclassification){
+    pack.original_slot_reclassification=result.original_slot_reclassification;
+    pack.original_slot_current_review_targets=[...result.original_slot_current_review_targets];
+    pack.input_evidence={...result.evidence};
+    const collection=join(workflowDir(root,run),`${source}-${round}-collected.json`);pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
+  }
   if(result.metadata_history){
     pack.metadata_history_current_review_targets=[...result.metadata_history_current_review_targets];
     pack.input_evidence??={};
@@ -2194,7 +2279,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
       pack.input_evidence[file]=hash;
     }
   }
-  frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+  bindOwnerRepairGuidance(root,pack);frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
 /** Gate failures identify repair candidates, not already-repaired suppliers.
@@ -2238,10 +2323,24 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
     before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
     impacts:[],seeds:[],failures,excluded_out_of_frontier:excluded,gateAssignments,cycles,ledger_updates:[]};
   if(aggregation){pack.owner_aggregation_current_review_targets=aggregation.targets;pack.input_evidence=aggregation.evidence;}
-  frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+  bindOwnerRepairGuidance(root,pack);frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
-export function verifyCertification(root,run,{allowMissing=true}={}) {
+function verifyOriginalSlotCertificate(root,run,certificate,{current=false}={}){
+  const transition=loadOriginalSlotReclassification(root,run,{current:true});if(!transition)return;
+  requireValue(certificate.items.filter(row=>row.id===transition.current_id).length===1
+    &&!certificate.items.some(row=>row.id===transition.original_id)
+    &&!(certificate.creations??[]).some(row=>row.id===transition.current_id)
+    &&Object.entries(transition.evidence).every(([p,h])=>certificate.evidence[p]===h),
+    'certificate omits authenticated original-slot current subject/history');
+  const review=originalSlotCurrentReview(root,run,certificate,{current});
+  requireValue(review,'certificate lacks genuine current example native proof review');
+  if(current){
+    const items=readLibraryItems(root,{run}),guards=Object.fromEntries(items.map(row=>[row.id,row.guard_sha256]));
+    requireValue(reviewContexts(items).matches(review,guards),'reclassified example native proof review context is stale');
+  }
+}
+export function verifyCertification(root,run,{allowMissing=true,current=false}={}) {
   const path=join(workflowDir(root,run),'certification.json');
   if(!existsSync(path)){if(allowMissing)return null;throw Error('Step 5 certification missing');}
   const row=read(path);
@@ -2264,6 +2363,7 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
   if(row.contract_aggregation)validateCertifiedContractAggregation(root,run,row,{current:false,installed:true});
   verifyEvidence(row.evidence,{root,run,certificate:row});
   verifyInitialPublishedBaselineExclusions(root,run,row);
+  verifyOriginalSlotCertificate(root,run,row,{current});
   return row;
 }
 
@@ -2274,6 +2374,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     const staged=saved.contract_aggregation?validateCertifiedContractAggregation(root,run,saved):null;
     verifyEvidence(staged?.evidence??saved.evidence,{root,run});
     verifyInitialPublishedBaselineExclusions(root,run,saved,{current:true});
+    verifyOriginalSlotCertificate(root,run,saved,{current:true});
     const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
     const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
     const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
@@ -2299,6 +2400,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   // native owner review can supply current certification for this target.
   for(const id of sourceResult?.metadata_history_current_review_targets??[])
     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
+  for(const id of sourceResult?.original_slot_current_review_targets??[])
+    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native reclassified-example review: ${id}`);
   const publishedBaseline=initialPublishedBaselineExclusions(root,run);
   // Only this original baseline difference is historical ordinary maintenance.
   // Native consumer reviews, contexts, impacts and gates keep the full scope.
@@ -2348,7 +2451,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));
-    const decisions=sourceResult.decisions.map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
+    const view=originalSlotView(root,run,{frontier});
+    const decisions=sourceResult.decisions.map(d=>({run,round,id:d.id,...(view.originalId(d.id)!==d.id?{original_id:view.originalId(d.id)}:{}),decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
     const byId=new Map();for(const row of decisions){const old=byId.get(row.id);if(!old||row.decision==='confirmed-fatal')byId.set(row.id,row);}
     const threshold=assessFatalThreshold({frontier,round,expectedIds:[...byId.keys()],decisions:[...byId.values()]});
     if(threshold.errors.length)throw Error(threshold.errors.join('\n'));
@@ -2358,6 +2462,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   if(stagedAggregation)certificate.contract_aggregation=stagedAggregation.record;
   if(publishedBaseline)certificate.ordinary_published_baseline_exclusions=publishedBaseline.record;
   verifyInitialPublishedBaselineExclusions(root,run,certificate,{current:true});
+  verifyOriginalSlotCertificate(root,run,certificate,{current:true});
   certificate.sha256=digest(certificate);
   // The frozen candidate is a write-ahead intent. A failed derivative write
   // leaves the live old certificate untouched and has a strict saved retry.
@@ -2370,7 +2475,21 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
 
 export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=null}={}) {
   const dir=workflowDir(root,run), path=join(dir,`judge-${round}.json`);
-  if(existsSync(path))return read(path);
+  if(existsSync(path)){
+    const saved=read(path),transition=loadOriginalSlotReclassification(root,run,{current:true});
+    if(transition){
+      const cert=verifyWave(root,run,{contextHasher});verifyOriginalSlotCertificate(root,run,cert,{current:true});
+      requireValue(saved.version===2&&saved.run===run&&saved.round===round&&saved.certification_sha256===cert.sha256,
+        'cached Sol judgment belongs to another certification');
+      const current=contextHasher(root,[transition.current_id]).get(transition.current_id);
+      const rows=saved.verdicts.filter(row=>row.id===transition.current_id&&row.model===MODELS.sol61.id
+        &&typeof row.keep==='boolean'&&row.item_sha256===current?.item_sha256&&row.context_sha256===current?.context_sha256);
+      const ledger=lines(join(root,'research',`${run}-judge.jsonl`));
+      requireValue(rows.length===1&&ledger.some(row=>digest(row)===digest(rows[0])),
+        'cached Sol judgment lacks genuine current reclassified-example ledger judgment');
+    }
+    return saved;
+  }
   const cert=verifyCertification(root,run,{allowMissing:false});
   const frontier=gateFrontier(root,run),candidates=cert.items.filter(row=>frontier.has(row.id));
   const current=hashes(root,run);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
@@ -2399,6 +2518,7 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
 export function verifyWave(root,run,{contextHasher=currentHashesMany,frontierOnly=true}={}) {
   const cert=verifyCertification(root,run,{allowMissing:false}), current=hashes(root,run);
   verifyInitialPublishedBaselineExclusions(root,run,cert,{current:true});
+  verifyOriginalSlotCertificate(root,run,cert,{current:true});
   const publishedBaseline=new Set((cert.ordinary_published_baseline_exclusions?.entries??[]).map(row=>row.id));
   const frontier=frontierOnly?gateFrontier(root,run):null,items=cert.items.filter(row=>!frontier||frontier.has(row.id));
   const contexts=contextHasher(root,items.map(row=>row.id));

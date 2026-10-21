@@ -6,12 +6,19 @@ import {createHash} from 'node:crypto';
 import {validateFrontier} from './step5-rounds.mjs';
 import {itemHashGuard} from './item-hash.mjs';
 import {MODELS} from './models.mjs';
+import {supportingOriginalSlotLevelHistory} from './step5-original-slot-reclassification.mjs';
 const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
 const need=(x,m)=>{if(!x)throw Error(`Step 5 initial scope finding: ${m}`);};
 const date=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const drained=s=>Object.values(s.dispatches??{}).every(x=>!x.startedAt||Boolean(x.endedAt));
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
+// Exact observed result-alert inventory; this is work admission, not a general
+// extension of the definition-only typed branches or a native finding rewrite.
+const observedResultAlerts=new Map([
+  ['lem-connected-diagram-bracket-span-bound-and-alternating-equality',0],
+  ['lem-connected-alternating-link-is-nonsplit',1],
+]);
 export const initialScopeFindingPath=(root,run)=>join(root,'research',`${run}-step5-initial-scope-findings.json`);
 export function checkFrozenInitialScopeFindingInput(root,run,pack) {
   const p=initialScopeFindingPath(root,run),bound=pack.input_evidence?.[p];
@@ -23,16 +30,21 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
   need([1,2].includes(row.version)&&row.kind==='owner-confirmed-native-initial-scope-findings'&&row.run===run
     &&row.authorized_by==='owner'&&row.owner_identity==='/root'&&row.native_coverage_adopted===false
     &&date(row.recorded_at)&&row.bindings&&typeof row.bindings==='object'&&!Array.isArray(row.bindings), 'invalid explicit owner envelope');
-  const evidence={};
+  const evidence={},historical=new Map(),continuityEvidence={};
   const bytes=file=>{
     const p=resolve(root,file);need(p.startsWith(resolve(root,'research')+'/'),'evidence must be inside research');
     if(virtual.has(p))return virtual.get(p);
     need(existsSync(p)&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()
       &&realpathSync(p).startsWith(realpathSync(join(root,'research'))+'/'),`nonregular/outside evidence: ${file}`);
-    return readFileSync(p,'utf8');
+    return readFileSync(historical.get(p)??p,'utf8');
   };
   for(const [file,expected]of Object.entries(row.bindings)){
-    const p=resolve(root,file);need(/^[a-f0-9]{64}$/.test(expected)&&hash(bytes(p))===expected,`stale binding: ${file}`);evidence[p]=expected;
+    const p=resolve(root,file);
+    if(hash(bytes(p))!==expected){
+      const continuity=supportingOriginalSlotLevelHistory({root,run},p,expected);
+      if(continuity){historical.set(p,continuity.archive);Object.assign(continuityEvidence,continuity.evidence);}
+    }
+    need(/^[a-f0-9]{64}$/.test(expected)&&hash(bytes(p))===expected,`stale binding: ${file}`);evidence[p]=expected;
   }
   const boundText=file=>{const p=resolve(root,file);need(Object.hasOwn(evidence,p),`missing binding: ${file}`);return bytes(p);};
   const bound=file=>JSON.parse(boundText(file));
@@ -98,23 +110,32 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
     const {id,batch,unit,open_finding_index:index,owner_review:review}=entry,origin=origins.get(unit),finding=origin?.report.ledger_updates?.[index];
     const outside=row.version===2&&entry.origin_kind==='native-outside-lane-alert';
     const unclassified=row.version===2&&entry.origin_kind==='native-open-finding';
-    const ownerSource=outside||unclassified;
-    if(row.version===2)need(entry.origin_kind===undefined||['native-open-finding','native-outside-lane-alert'].includes(entry.origin_kind),'unknown typed native origin');
+    const observedResult=row.version===2&&entry.origin_kind==='native-observed-result-alert';
+    const observedHaken=row.version===2&&entry.origin_kind==='native-observed-result-finding';
+    const ownerSource=outside||unclassified||observedResult||observedHaken;
+    if(row.version===2)need(entry.origin_kind===undefined||['native-open-finding','native-outside-lane-alert','native-observed-result-alert','native-observed-result-finding'].includes(entry.origin_kind),'unknown typed native origin');
     need(/^[a-z0-9-]+$/.test(id)&&!seen.has(id)&&frontier.ids.includes(id)
       &&frontier.batches.filter(b=>b.items.includes(id)).length===1&&frontier.batches.find(b=>b.id===batch)?.items.includes(id), 'outside/duplicate/wrong original owner');seen.add(id);
     const owners=manifests.flatMap(([name,pages])=>{need(Array.isArray(pages),'bad manifest');return pages.flatMap(p=>(p.items??[]).filter(v=>v.id===id).map(()=>name));});
     need(same(owners,[`${run}-batch-${batch}.pages.json`]),'current manifest owner is not unique');
-    if(outside){
+    if(outside||observedResult){
       const ai=entry.outside_alert_index, oi=entry.output_alert_index;
       const alert=origin?.report.repair_notes?.outside_lane_alerts?.[ai];
       const summary=origin?.output.repair_notes?.outside_lane_alerts?.[oi];
       const textField=x=>typeof x==='string'&&x.trim().length>=40;
       const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
         &&same(Object.keys(value).sort(),wanted.sort());
+      const fields=['id','path','route','affected_use','reason'];
+      if(observedResult)need(run==='inverse-problems-knot-theory-all-109-2026-10-19'
+        &&unit==='105'&&batch==='105'&&observedResultAlerts.has(id)
+        &&ai===observedResultAlerts.get(id)&&oi===observedResultAlerts.get(id)
+        &&keys(alert,[...fields,'minimality'])&&keys(summary,[...fields,'minimality'])
+        &&summary.path===`items/${id}.md`&&[alert.minimality,summary.minimality].every(textField),
+        'not an exact run/unit/item/index observed result alert');
       need(origin&&Number.isSafeInteger(ai)&&ai>=0&&Number.isSafeInteger(oi)&&oi>=0
         &&same(alert,entry.alert)&&same(summary,entry.output_alert)
-        &&keys(alert,['id','path','route','affected_use','reason'])
-        &&(keys(summary,['id','route','affected_use','reason'])||keys(summary,['id','path','route','affected_use','reason']))
+        &&(observedResult||(keys(alert,fields)
+          &&(keys(summary,['id','route','affected_use','reason'])||keys(summary,fields))))
         &&alert.id===id&&alert.path===`items/${id}.md`&&alert.route==='frontier owner'
         &&summary.id===id&&(!Object.hasOwn(summary,'path')||summary.path===alert.path)
         &&summary.route===alert.route&&entry.route==='frontier-owner'
@@ -129,6 +150,37 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
         &&typeof witness.output_excerpt==='string'&&witness.output_excerpt.length>=20
         &&[summary.affected_use,summary.reason].some(value=>value.includes(witness.output_excerpt)),
         'missing individual exact outside-alert correspondence');
+    }else if(observedHaken){
+      const summary=origin?.output.ledger_updates?.[entry.output_finding_index];
+      const alert=origin?.report.repair_notes?.outside_lane_alerts?.[entry.outside_alert_index];
+      const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
+        &&same(Object.keys(value).sort(),wanted.sort());
+      const fields=['ledger','action','id','route','affected_use','invalidated_claim','minimality','reason','uncertain','source_urls','familiar'];
+      const prose=['affected_use','invalidated_claim','minimality','reason'];
+      need(run==='inverse-problems-knot-theory-all-109-2026-10-19'&&unit==='104'&&batch==='104'
+        &&id==='thm-haken-normal-essential-disk-existence'&&index===7&&entry.output_finding_index===7
+        &&entry.outside_alert_index===0&&keys(alert,['id','status','edited'])&&same(alert,entry.alert)
+        &&alert.id===id&&alert.status==='reported_to_frontier_owner'&&alert.edited===false
+        &&origin?.output.repair_notes&&!Object.hasOwn(origin.output.repair_notes,'outside_lane_alerts')
+        &&keys(finding,fields)&&keys(summary,fields)&&same(finding,entry.finding)&&same(summary,entry.output_finding)
+        &&[finding,summary].every(value=>value.id===id&&value.ledger==='canonical-defect-ledger'
+          &&value.action==='record-open-finding'&&value.route==='frontier-owner; unassigned existing frontier item, no edit made'
+          &&value.uncertain===false&&value.familiar===false
+          &&same(value.source_urls,['https://pi.math.cornell.edu/~hatcher/3M/3Mfds.pdf'])
+          &&prose.every(key=>typeof value[key]==='string'&&value[key].trim().length>=40))
+        &&finding.affected_use.includes(`items/${id}.md`)&&summary.affected_use.includes(`items/${id}.md`)
+        &&entry.route==='frontier-owner'&&!Object.hasOwn(entry,'output_alert')
+        &&!Object.hasOwn(entry,'output_alert_index')&&!Object.hasOwn(entry,'finding_shape'),
+        'not the exact observed Haken report notification and paired original ledger findings');
+      const witness=review?.open_finding_correspondence,classification=review?.classification;
+      need(witness?.confirmed_same_finding===true&&typeof witness.reason==='string'&&witness.reason.trim().length>=80
+        &&typeof witness.report_excerpt==='string'&&witness.report_excerpt.length>=20
+        &&prose.some(key=>finding[key].includes(witness.report_excerpt))
+        &&typeof witness.output_excerpt==='string'&&witness.output_excerpt.length>=20
+        &&prose.some(key=>summary[key].includes(witness.output_excerpt))
+        &&['fatal','nonfatal'].includes(classification?.severity)&&classification.defect_type==='logic'
+        &&typeof classification.reason==='string'&&classification.reason.trim().length>=40,
+        'missing separate root correspondence and classification of observed Haken finding');
     }else if(unclassified){
       const summary=origin?.output.ledger_updates?.[entry.output_finding_index];
       const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
@@ -221,7 +273,8 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
     if(unclassified&&entry.finding_shape==='classified-definition')need(text.includes(finding.source_excerpt),'classified finding excerpt is absent from current original source');
     if(ownerSource){
       const observation=entry.source_read;
-      need(/^kind:\s*definition\s*$/m.test(text)&&itemHashGuard(text)===baseline[id]&&observation?.mode==='owner-current-source-confirmation'
+      need((observedHaken?/^kind:\s*theorem\s*$/m:observedResult?/^kind:\s*lemma\s*$/m:/^kind:\s*definition\s*$/m).test(text)
+        &&itemHashGuard(text)===baseline[id]&&observation?.mode==='owner-current-source-confirmation'
         &&observation.native_full_read_adopted===false
         &&!Object.hasOwn(observation,'native_log_record')&&!Object.hasOwn(observation,'native_log_span')
         &&typeof observation.before_file==='string'&&boundText(observation.before_file)===text
@@ -256,7 +309,7 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
       &&typeof edit.proposed_replacement==='string'&&edit.proposed_replacement!==edit.source_excerpt,'stale or ambiguous exact proposed edit');
     need(edits.length>0||(!ownerSource&&review.candidate_patch_file&&boundText(review.candidate_patch_file).trim().length>=40),'exact literal edit or bound patch required');
   }
-  return {entries:row.entries,evidence};
+  return {entries:row.entries,evidence:{...continuityEvidence,...evidence}};
 }
 export function loadInitialScopeFindings(root,run,{requireCollection=true}={}) {
   const path=initialScopeFindingPath(root,run);if(!existsSync(path))return null;

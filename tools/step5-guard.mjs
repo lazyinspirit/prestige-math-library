@@ -44,6 +44,7 @@ import { frontmatterList } from './frontmatter-list.mjs';
 import { verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
 import { checkWorkflow, workflowDir } from './step5-workflow.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
+import { loadOriginalSlotReclassification, projectedOriginalIds, licensedOriginalSlotReplacement } from './step5-original-slot-reclassification.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -141,12 +142,14 @@ if (existsSync(workflowDirectory)) {
   const excluded = { changed: [], created: [], deleted: [], reason: 'Outside frozen frontier: observed, excluded from Step-5 certification, not passed' };
   let scopedChanged = [], scopedCreated = [], scopedDeleted = [];
   let licensed = 0, historicalOrdinary = 0;
+  let originalSlotReplacement = null;
   try {
     const frontier = validateFrontier(JSON.parse(readFileSync(join(workflowDirectory, 'frontier.json'), 'utf8')));
     if (frontier.run !== workflowScope.run
       || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
       throw Error('frozen original frontier does not match Step-5 scope');
-    const ids = new Set(frontier.ids);
+    const transition = loadOriginalSlotReclassification(workflowRoot, workflowScope.run, { current: true });
+    const ids = new Set(projectedOriginalIds(workflowRoot, workflowScope.run, frontier.ids));
     // Deletions share the frozen frontier boundary with changed/created items.
     // Retain current logical suppliers as integrity context, including aliases
     // captured by the original native pack before a supplier could disappear.
@@ -155,7 +158,7 @@ if (existsSync(workflowDirectory)) {
       ? JSON.parse(readFileSync(originalPackPath, 'utf8')).before_aliases : null;
     const aliasContextAvailable = originalAliases && typeof originalAliases === 'object'
       && !Array.isArray(originalAliases);
-    const protectedIds = new Set(ids);
+    const protectedIds = new Set([...frontier.ids, ...ids]);
     if (aliasContextAvailable) for (const id of protectedIds) {
       if (!Object.hasOwn(now, id)) continue; // still rejected below if deleted
       const text = readFileSync(join(ITEMS, `${id}.md`), 'utf8');
@@ -170,9 +173,10 @@ if (existsSync(workflowDirectory)) {
     // reinterpret a genuinely required deleted alias as an outside observation.
     scopedDeleted = deleted.filter(id => !aliasContextAvailable || protectedIds.has(id));
     excluded.deleted = deleted.filter(id => !scopedDeleted.includes(id));
-    for (const id of scopedDeleted) error('step5-deletion',
+    for (const id of scopedDeleted) if (id !== transition?.original_id) error('step5-deletion',
       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
-    for (const id of protectedIds) if (!Object.hasOwn(now, id) && !deleted.includes(id))
+    for (const id of protectedIds) if (!Object.hasOwn(now, id) && !deleted.includes(id)
+      && id !== transition?.original_id)
       error('step5-prerequisite-missing', `${id}: current frozen-frontier dependency context is missing`, id);
     scopedChanged = changed.filter(id => ids.has(id));
     scopedCreated = created.filter(id => ids.has(id));
@@ -180,6 +184,13 @@ if (existsSync(workflowDirectory)) {
     excluded.created = created.filter(id => !ids.has(id));
     const certificate = checkWorkflow(workflowRoot, workflowScope.run);
     if (!['impact-repeat', 'gate'].includes(certificate.phase)) throw Error('Step 5 requires a completed repeat-round certification');
+    const replacementLicensed = transition && !Object.hasOwn(now, transition.original_id)
+      && shortHash(certificate.items.find(row => row.id === transition.current_id)?.guard_sha256 ?? '') === now[transition.current_id]
+      && licensedOriginalSlotReplacement(workflowRoot, workflowScope.run, transition.original_id, transition.current_id, certificate);
+    if (replacementLicensed) originalSlotReplacement = { original_id: transition.original_id,
+      current_id: transition.current_id, receipt: transition.path };
+    for (const id of scopedDeleted) if (id === transition?.original_id && !replacementLicensed) error('step5-deletion',
+      `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
     const original = JSON.parse(readFileSync(join(workflowDirectory, 'baseline.json'), 'utf8'));
     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
@@ -198,6 +209,7 @@ if (existsSync(workflowDirectory)) {
     }
     const creationRecords = new Map((certificate.creations ?? []).map(row => [row.id, row]));
     for (const id of scopedCreated) {
+      if (replacementLicensed && id === transition.current_id) { licensed++; continue; }
       const record = creationRecords.get(id);
       if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id] || !record)
         error('step5-creation', `${id}: created item lacks exact current centralized certification and creation provenance`, id);
@@ -209,10 +221,11 @@ if (existsSync(workflowDirectory)) {
     changed: changed.length, licensed_by_centralized_certification: licensed,
     historical_ordinary_published_exclusions: historicalOrdinary,
     frontier_changed: scopedChanged.length, frontier_created: scopedCreated.length,
+    licensed_original_slot_replacements: originalSlotReplacement ? 1 : 0,
     protected_deleted: scopedDeleted.length,
     excluded_outside: excluded.changed.length + excluded.created.length + excluded.deleted.length,
     created: created.length, deleted: deleted.length, errors: errors.length, warnings: warnings.length };
-  if (asJson) console.log(JSON.stringify({ summary, changed, created, deleted, excluded, errors, warnings }, null, 2));
+  if (asJson) console.log(JSON.stringify({ summary, changed, created, deleted, originalSlotReplacement, excluded, errors, warnings }, null, 2));
   else {
     console.log(`step5-guard: baseline "${baselineLabel}" vs ${summary.compared_against}`);
     console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);

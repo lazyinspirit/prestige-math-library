@@ -1,0 +1,13 @@
+PASS: the bounded dependency-level correction preserves authenticated migration and admission history. No remaining blocker was found.
+
+The actual 1472-item graph computes level **1** for the new example; current source and manifest still say **4**. The source and two metadata candidates each change exactly one byte, `4` to `1`. Source dependencies agree with the manifest. All six audited immutable files, including the original migration receipt, frozen initial history, four-finding registry and its creation request, remained byte-identical. No actual level receipt existed at review completion.
+
+Independent verification: **150/150** protocol/history/scope tests passed on the frozen production. After the final requested reader positive was added, the two focused correction tests passed **2/2**. The positive exercises immutable scope admission and **76** reader admissions through correction, historical loading, actual collection and impact preparation, with fresh example review mandatory. Its synthetic scope registry has one finding; the actual four-finding registry was separately audited and hash-pinned. Negative coverage rejects proof edits, wrong level and inconsistent/unrelated mirror deltas. Actual current reader loading returned 76.
+
+The default reader suite remains **6/7** on the known persistent-reviewer expectation failure; an independent implementer clean-HEAD control reproduced the same failure. This review claims no pass or waiver for that unrelated test. Diff whitespace and wrapper syntax checks passed.
+
+The recorder permits only the exact computed scalar correction and captures immutable source/metadata/history evidence. Historical support is restricted to the two exact migration-after metadata archives and expected hashes. Registry bindings are not rewritten, and continuity evidence is added only after ordinary admission validation. Future proof repair remains possible without turning old review into current credit.
+
+The root application wrapper was statically reviewed and hash-pinned. It verifies every report fingerprint, exact archived preimages, paused/drained hold, and serialization identity; it repeats preimage checks under the shared write lock. Per-file atomic replacement is followed by recording, with guarded rollback on failure when no receipt exists. The wrapper was **not executed** by this reviewer. Root still owns applying the three labels, recording the followup and running ordinary checks.
+
+The JSON companion contains the exact twelve `reviewed_files_sha256` entries (including the temporary application wrapper), immutable hashes, three candidate hashes and commands. This verdict grants no proof, native review, certification, Sol or gate credit.

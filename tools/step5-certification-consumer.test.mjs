@@ -47,6 +47,12 @@ test('a changed certified neighbor does not revoke this item or manufacture fres
   assert.equal(currentStep5Certification(mixed, row.id, text, 'current-context'), row);
   assert.equal(currentStep5Certification(mixed, 'thm-neighbor', text, 'new-context'), null);
 });
+test('an old identity cannot certify a replacement even when content hashes are copied', () => {
+  const old = { items: [{ ...row, id: 'op-historical' }] };
+  assert.equal(currentStep5Certification(old, 'ex-current', text, 'current-context'), null);
+  const current = { items: [{ ...row, id: 'ex-current' }] };
+  assert.equal(currentStep5Certification(current, 'op-historical', text, 'current-context'), null);
+});
 
 test('central certification removes display endorsement without changing proof or precheck', () => {
   const block = 'verification:\n  precheck: pass\n  judge:\n    model: "Terra"\n    verdict: pass\n    date: 2026-09-21\nsources:\n  - Source\n';

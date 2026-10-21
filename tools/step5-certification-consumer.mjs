@@ -2,11 +2,16 @@
 import { basename } from 'node:path';
 import { verifyCertification } from './step5-workflow.mjs';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
+import { loadOriginalSlotReclassification, licensedOriginalSlotReplacement } from './step5-original-slot-reclassification.mjs';
 
 export function loadStep5ClosureCertification(root, run, ledgerPath = '') {
   const inferred = run || (/^(.+)-judge\.jsonl$/.exec(basename(ledgerPath))?.[1]);
   if (!inferred) return null;
   const certificate = verifyCertification(root, inferred);
+  const transition = loadOriginalSlotReclassification(root, inferred, { current: true });
+  if (certificate && transition
+    && !licensedOriginalSlotReplacement(root, inferred, transition.original_id, transition.current_id, certificate))
+    throw Error('Step 5 replacement lacks exact current native certification');
   // Initial certification is the input to the first mandatory judge round.
   return certificate && ['impact-repeat', 'gate'].includes(certificate.phase)
     ? certificate : null;

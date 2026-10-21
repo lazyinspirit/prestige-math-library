@@ -1,7 +1,7 @@
 // Metadata-only exact owned inventory. Scientific subjects are independently
 // selected; no foreign working content is walked or hashed for packaging.
 import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { preflightCloseoutScope, regularPath, treeEntries, indexEntries, textGit, git } from './run-commit-scope.mjs';
 import { runScope, splitFrontmatter } from './step6-lib.mjs';
@@ -9,6 +9,18 @@ import { scopedReadinessTree } from './step6-scoped-tree.mjs';
 import { planForeignResidual } from './step6-plan-projection.mjs';
 import { recordedPublishedRepair, unchangedPublishedClaim } from './published-repair-policy.mjs';
 import { recordedPublishedRepair as recordedPhysicsRepair } from './physics-support/published-repair-policy.mjs';
+import { loadOriginalSlotReclassification } from './step5-original-slot-reclassification.mjs';
+
+// An identity transition owns exactly the removed carrier and its replacement.
+// It never turns a missing unrelated source into an authorized deletion.
+function addOriginalSlotPaths(root, run, selected, physics) {
+  if (physics) return;
+  const replacement = loadOriginalSlotReclassification(root, run, { current: true });
+  if (!replacement) return;
+  selected.add(`items/${replacement.original_id}.md`);
+  selected.add(`items/${replacement.current_id}.md`);
+  selected.add(relative(root, replacement.path).replaceAll('\\', '/'));
+}
 
 export function step6OwnedInputs(run, root, { physics = false } = {}) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run)) throw Error('invalid scoped run identity');
@@ -16,6 +28,7 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   if (existsSync(join(root, `research/${run}-closeout-scope.json`))) {
     const authority = preflightCloseoutScope(root, run, finalReceipt, { physics });
     const selected = new Set(authority.paths);
+    addOriginalSlotPaths(root, run, selected, physics);
     return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true, fragments: authority.fragments, planProjections: authority.planProjections });
   }
   const scope = runScope(run, root);
@@ -29,6 +42,7 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   const selected = new Set([scope.ledger, ...scope.items.map(row => row.file),
     ...scope.pages.map(row => row.file), ...scope.pathwayFiles].filter(path => !imported.has(path)));
   for (const path of selected) regularPath(root, path);
+  addOriginalSlotPaths(root, run, selected, physics);
   for (const suffix of ['proof-layout.json', 'publication-readiness.json', 'step6-report-integrity.json',
     'step6-report.response.json', 'step6-report.md', 'step6-evidence.json', 'pathway-closure.json', 'judge-closure.json'])
     selected.add(`research/${run}-${suffix}`);

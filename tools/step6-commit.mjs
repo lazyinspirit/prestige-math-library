@@ -10,6 +10,8 @@ import { ownedStep6Paths } from './step6-owned-inputs.mjs';
 import { preflightCloseoutScope, git, textGit, gitPath, regularPath,
   treeEntries, indexEntries, ignoredOwnedPaths, fileState, refuseGitSideEffects, verifiedInertHook } from './run-commit-scope.mjs';
 import { runScope, sha256 } from './step6-lib.mjs';
+import { loadOriginalSlotReclassification, licensedOriginalSlotReplacement } from './step5-original-slot-reclassification.mjs';
+import { verifyCertification } from './step5-workflow.mjs';
 
 const equal = (a, b, what) => {
   if (JSON.stringify(a) !== JSON.stringify(b)) throw Error(`step6 commit: ${what} changed; owner reconciliation required`);
@@ -41,6 +43,22 @@ export function preflightStep6(root, run, { physics = false, finalReceipt = fina
   // commit hooks even when a previously reviewed inert hook is allowed.
   refuseGitSideEffects(gitRoot, paths, policy?.reviewedHook ?? verifiedInertHook(gitRoot));
   const preflightIndex = indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
+  const replacement = physics ? null : loadOriginalSlotReclassification(root, run, { current: true });
+  if (replacement) {
+    const certificate = verifyCertification(root, run, { allowMissing: false, current: true });
+    if (!licensedOriginalSlotReplacement(root, run, replacement.original_id, replacement.current_id, certificate))
+      throw Error('step6 commit: original-slot deletion lacks current replacement certification');
+    for (const id of [replacement.original_id, replacement.current_id])
+      if (!localPaths.includes(`items/${id}.md`)) throw Error('step6 commit: incomplete original-slot ownership');
+    const oldPath = `items/${replacement.original_id}.md`;
+    const headRow = treeEntries(gitRoot).find(row => row.path === oldPath);
+    const indexRow = preflightIndex.find(row => row.path === oldPath);
+    for (const row of [headRow, indexRow].filter(Boolean)) {
+      if (row.mode !== '100644' || row.flags && row.flags !== '0'
+        || !replacement.allowed_original_raw_sha256.includes(sha256(git(gitRoot, ['cat-file', 'blob', row.oid]))))
+        throw Error('step6 commit: original-slot Git preimage is not the authenticated old carrier');
+    }
+  }
   // Fail incompatible owned bases during real preparation, before final gates.
   // This read-only preflight is not an atomic snapshot; commit recomposes at CAS.
   const preflightHead = policy?.fragments?.length ? treeEntries(gitRoot) : [];

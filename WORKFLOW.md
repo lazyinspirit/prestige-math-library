@@ -632,6 +632,30 @@ session. Missing session continuity or conflicting reviewer ownership holds for
 the root. Unrelated lanes retain their existing dispatch behavior, and all later
 rounds, closure checks and complete gate batteries remain mandatory.
 
+The separately guarded [initial-scope finding requests](tools/step5-initial-scope-findings.md)
+retain original native findings and final summaries independently. The finite
+observed-result branches cover the actual unit104 Haken finding and the two
+unit105 lemma alerts in this run; they do not manufacture missing severity,
+reading or final-output fields. Admission supplies work for genuine native
+owners, with all ordinary current-review and gate obligations retained.
+
+A separate [original-slot reclassification](tools/step5-original-slot-reclassification.md)
+handles this run's answered honest-coverage question. It preserves the original
+1,472-item frontier, all 344 initial rejection tuples, the original fatal finding
+and every native handoff. A root recorder at the actual paused, drained initial
+hold authenticates the exact old source and the complete affirmative example,
+same-home metadata transition and original execution evidence. The old review
+is historical only; a navigation alias grants no coverage. The replacement
+must receive a fresh native owner proof review, ordinary example worksheet,
+current certification and Sol judgment. It is neither a new prerequisite nor
+an unchanged original Luna subject. Protected deletion and Step6 ownership
+remain limited to that authenticated source pair.
+
+Optional run-local owner repair guidance is hash-bound instruction context for
+items already assigned to a native lane. It adds no assignments, verdicts,
+source-reading claims or acceptance; later actual interface changes retain
+the ordinary same-reviewer consumer obligations.
+
 The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6

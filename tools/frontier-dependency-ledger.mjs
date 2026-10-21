@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // One derived frontier ledger; reviewers own separate consumer-batch inputs.
 import { existsSync, readFileSync, readdirSync, writeFileSync, renameSync, unlinkSync, openSync, closeSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
+import { loadOriginalSlotReclassification } from './step5-original-slot-reclassification.mjs';
 
 export function collect(root, run) {
   if (!/^[a-zA-Z0-9_-]+$/.test(run)) throw new Error('Invalid run name');
   const research = join(root, 'research');
+  const replacement = loadOriginalSlotReclassification(root, run, { current: true });
   const read = path => JSON.parse(readFileSync(path, 'utf8'));
   const homes = new Map(), records = [], batches = [];
   const names = readdirSync(research).filter(name => name.startsWith(`${run}-batch-`)
@@ -58,7 +60,7 @@ export function collect(root, run) {
       }
     }
   }
-  const reviewed_batches = [], orphaned_reviews = [];
+  const reviewed_batches = [], orphaned_reviews = [], historical_reviews = [];
   for (const batch of batches) {
     const file = `${run}-batch-${batch}.cross-batch-dependencies.json`;
     if (!existsSync(join(research, file))) continue;
@@ -67,12 +69,21 @@ export function collect(root, run) {
     reviewed_batches.push(batch);
     const seen = new Set();
     for (const row of input) {
+      // Preserve the old row as historical evidence, with no current edge
+      // credit. A fresh review must name the new canonical consumer/supplier.
+      const historical = replacement && row.kind === 'item'
+        && [row.consumer, row.supplier].includes(replacement.original_id);
+      const consumerHome = historical && row.consumer === replacement.original_id
+        ? homes.get(`item:${replacement.current_id}`) : homes.get(`${row.kind}:${row.consumer}`);
       if (!['item', 'page'].includes(row.kind) || !['open', 'verified', 'removed'].includes(row.status)
-        || !String(row.evidence ?? '').trim() || homes.get(`${row.kind}:${row.consumer}`) !== batch)
+        || !String(row.evidence ?? '').trim() || consumerHome !== batch)
         throw new Error(`${file}: invalid review or consumer ownership`);
       const key = keyOf(row);
       if (seen.has(key)) throw new Error(`${file}: duplicate consumer/supplier review`);
       seen.add(key);
+      if (historical) { historical_reviews.push({ ...row, file, current_review_credit: false,
+        original_id: replacement.original_id, current_id: replacement.current_id,
+        reclassification_receipt: relative(root, replacement.path).replaceAll('\\', '/') }); continue; }
       const target = add(row);
       if (!target) { orphaned_reviews.push({ ...row, file }); continue; }
       target.reviews.push({ status: row.status, evidence: row.evidence, file });
@@ -80,6 +91,7 @@ export function collect(root, run) {
   }
   return { run, reviewed_batches, unreviewed_batches: batches.filter(b => !reviewed_batches.includes(b)),
     edges: [...rows.values()].sort((a, b) => keyOf(a).localeCompare(keyOf(b))), orphaned_reviews,
+    ...(historical_reviews.length ? { historical_reviews } : {}),
     evidence_limit: 'Declared edges plus reviewer findings, not a mathematical certificate. Read current proofs; review notes may predate edits.' };
 }
 

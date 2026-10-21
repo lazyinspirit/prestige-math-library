@@ -6,6 +6,7 @@ import { join, dirname } from 'node:path';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { statementHash } from './step5-statement.mjs';
 import { itemHashGuard } from './item-hash.mjs';
+import { projectedOriginalIds, loadOriginalSlotReclassification } from './step5-original-slot-reclassification.mjs';
 
 const digest = (value) => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const unique = (values) => [...new Set(values)].sort();
@@ -74,7 +75,7 @@ function scopedInventoryContext(repo, run, items, requiredIds, invalid) {
   if (existsSync(frontierPath)) {
     const saved = validateFrontier(JSON.parse(readFileSync(frontierPath, 'utf8')));
     requireValue(saved.run === run, 'scoped inventory frontier run mismatch');
-    for (const id of saved.ids) frontier.add(id);
+    for (const id of projectedOriginalIds(repo,run,saved.ids)) frontier.add(id);
   }
   // Current manifest additions remain strict alongside the original frontier.
   const manifests = readdirSync(join(repo, 'research')).filter(name =>
@@ -91,7 +92,10 @@ function scopedInventoryContext(repo, run, items, requiredIds, invalid) {
     if (!aliases.has(alias)) aliases.set(alias, new Set());
     aliases.get(alias).add(item.id);
   }
+  const transition=loadOriginalSlotReclassification(repo,run);
   const resolve = raw => {
+    // This is an authenticated original work-slot replacement, never alias credit.
+    if(transition&&raw===transition.original_id)return transition.current_id;
     if (canonical.has(raw) || frontier.has(raw)) return raw;
     const targets = aliases.get(raw);requireValue(!targets || targets.size === 1, `ambiguous required alias: ${raw}`);
     return targets ? [...targets][0] : raw;

@@ -71,6 +71,19 @@ test('citation widening remains advisory and judge liveness counts only frontier
   const judge = project('judge-closure', { errors: [], judge_coverage: [{ id: 'thm-outside' }] }, 0);
   assert.equal(JSON.parse(judge.output).frontier_judge_complete, 0);
 });
+test('a projected original slot retains replacement defects and actual current judge coverage', () => {
+  const current = 'ex-current', helper = 'lem-genuine-helper';
+  const projection = { currentIds: [current, helper], creations: [helper],
+    reclassification: { original_id: 'thm-frontier', current_id: current, path: 'authenticated-receipt' } };
+  const known = [current, helper, 'thm-outside'];
+  const result = projectFrontierGate('proof-contract', raw({ errors: [error(current), error(helper), error('thm-outside')] }), frontier, known, projection);
+  assert.equal(result.code, 1);
+  assert.deepEqual(JSON.parse(result.output).errors.map(row => row.id), [current, helper]);
+  assert.equal(result.frontierScope.frontierSha256, frontier.sha256);
+  assert.equal(result.frontierScope.originalSlots.count, 1);
+  const judge = projectFrontierGate('judge-closure', raw({ errors: [], judge_coverage: [{ id: current }, { id: helper }, { id: 'thm-outside' }] }, 0), frontier, known, projection);
+  assert.equal(JSON.parse(judge.output).frontier_judge_complete, 2);
+});
 test('battery binds native file arguments and projection to validated immutable frontier only', () => {
   const repo = mkdtempSync(join(tmpdir(), 'frontier-gate-'));
   try {

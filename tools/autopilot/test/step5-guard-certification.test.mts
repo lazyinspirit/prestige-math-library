@@ -25,6 +25,7 @@ function fixture() {
   const baseline = Object.fromEntries(ids.map(id => [id, itemHashGuard(text(id, 'Before.'))]));
   for (const id of ids) writeFileSync(join(root, 'items', `${id}.md`), text(id, 'A repaired argument with its supplier correctly used.'));
   write(join(dir, 'frontier.json'), freezeFrontier({ run: 'demo', batches: [{ id: '1', items: ['a'] }] }));
+  write(join(root, 'research', 'demo-batch-1.pages.json'), [{ id: 'page', items: [{ id: 'a' }] }]);
   write(join(dir, 'baseline.json'), baseline);
   const report = join(dir, 'report.json');
   write(report, { reviewed: ids, uncertain: false });
@@ -88,6 +89,19 @@ test('centralized guard preserves the exact original touchlog baseline and front
   fx.write(join(fx.dir, 'baseline.json'), baseline);
   result = fx.guard();
   assert.equal(result.status, 1); assert.match(result.stdout, /original touchlog baseline/);
+});
+
+test('an alias and copied certification cannot license deletion of an original slot without a receipt', () => {
+  const fx = fixture(), id = 'ex-unlicensed-replacement';
+  const body = text(id, 'Affirmative construction.').replace('deps: []', 'aliases: [a]\ndeps: []');
+  unlinkSync(join(fx.root, 'items', 'a.md'));
+  writeFileSync(join(fx.root, 'items', `${id}.md`), body);
+  fx.write(join(fx.dir, 'certification.json'), { ...fx.cert, items: fx.cert.items.map(row => row.id === 'a'
+    ? { ...row, id, guard_sha256: itemHashGuard(body), item_sha256: itemHashJudge(body) } : row) });
+  const result = fx.guard(), output = JSON.parse(result.stdout);
+  assert.equal(result.status, 1);
+  assert.ok(output.errors.some((row:any) => row.code === 'step5-deletion' && row.id === 'a'));
+  assert.deepEqual(output.excluded.created, [id]);
 });
 
 test('a missing centralized certificate cannot fall back to historical licence paths', () => {

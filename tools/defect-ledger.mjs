@@ -53,6 +53,7 @@ import { validateFrontier } from './step5-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { historicalMetadataRow } from './defect-ledger-historical-metadata.mjs';
+import { originalSlotView } from './step5-original-slot-reclassification.mjs';
 
 const STEP3_SCOPE_TOOL = fileURLToPath(new URL('./step3-scope.mjs', import.meta.url));
 const STEP3_CLOSE_TOOL = fileURLToPath(new URL('./step3-close.mjs', import.meta.url));
@@ -577,7 +578,10 @@ if (cmd === 'check') {
     if (!path) throw Error('--frontier requires the frozen frontier path');
     const frontier = validateFrontier(JSON.parse(readFileSync(path, 'utf8')));
     if (frontier.run !== run) throw Error('wrong run frontier');
-    const ids = new Set(frontier.ids);
+    const slots = originalSlotView(process.cwd(), run, { frontier });
+    // Historical fatal records retain their original subject; current records
+    // belong to the authenticated replacement. Neither is outside scope.
+    const ids = new Set([...slots.originalIds, ...slots.currentIds]);
     const known = new Set(readdirSync('items').filter(name => name.endsWith('.md')).map(name => name.slice(0, -3)));
     // Unknown/page/global subjects remain obligations. Only known outside
     // item subjects are excluded; references to a supplier never own a row.

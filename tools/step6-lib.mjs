@@ -12,6 +12,7 @@ import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync } from '
 import { basename, join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { loadOriginalSlotReclassification } from './step5-original-slot-reclassification.mjs';
 
 export const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 
@@ -90,6 +91,9 @@ export function runScope(run, repo = REPO) {
   });
 
   const itemIds = [...new Set(pages.flatMap((p) => p.items))].sort();
+  const replacement = loadOriginalSlotReclassification(repo, run, { current: true });
+  if (replacement && (!itemIds.includes(replacement.current_id) || itemIds.includes(replacement.original_id)))
+    throw new Error(`${run}: Step-6 pages do not select the authenticated current original slot`);
   const items = itemIds.map((id) => {
     const file = `items/${id}.md`;
     if (!existsSync(join(repo, file))) throw new Error(`${run}: scoped item ${id} has no ${file}`);
@@ -99,7 +103,9 @@ export function runScope(run, repo = REPO) {
   const pathwayFiles = categories.map((category) => `library/${category}/_pathway.md`)
     .filter((file) => existsSync(join(repo, file)));
 
-  return { run, ledger: relative(repo, ledgerPath), pages, items, categories, pathwayFiles };
+  return { run, ledger: relative(repo, ledgerPath), pages, items, categories, pathwayFiles,
+    ...(replacement ? { original_slot_reclassification: { original_id: replacement.original_id,
+      current_id: replacement.current_id, receipt: relative(repo, replacement.path).replaceAll('\\', '/') } } : {}) };
 }
 
 export function hashFiles(files, repo = REPO) {
