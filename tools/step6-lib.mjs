@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
 // Shared, deterministic scope and hashing helpers for Step 6.
 //
 // The visual lane, its repair guard and the publication receipt must agree on
@@ -94,6 +95,8 @@ export function runScope(run, repo = REPO) {
   const replacement = loadOriginalSlotReclassification(repo, run, { current: true });
   if (replacement && (!itemIds.includes(replacement.current_id) || itemIds.includes(replacement.original_id)))
     throw new Error(`${run}: Step-6 pages do not select the authenticated current original slot`);
+  const classification=loadPnpClassificationMigration(repo,run,{current:true});
+  if(classification&&(!itemIds.includes(classification.current_id)||itemIds.includes(classification.original_id)))throw Error(`${run}: Step-6 pages do not select authenticated current algorithm`);
   const items = itemIds.map((id) => {
     const file = `items/${id}.md`;
     if (!existsSync(join(repo, file))) throw new Error(`${run}: scoped item ${id} has no ${file}`);
@@ -104,6 +107,7 @@ export function runScope(run, repo = REPO) {
     .filter((file) => existsSync(join(repo, file)));
 
   return { run, ledger: relative(repo, ledgerPath), pages, items, categories, pathwayFiles,
+    ...(classification?{pnp_classification_migration:{original_id:classification.original_id,current_id:classification.current_id,receipt:relative(repo,classification.path).replaceAll('\\','/')}}:{}),
     ...(replacement ? { original_slot_reclassification: { original_id: replacement.original_id,
       current_id: replacement.current_id, receipt: relative(repo, replacement.path).replaceAll('\\', '/') } } : {}) };
 }

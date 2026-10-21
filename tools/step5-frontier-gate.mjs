@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 // Step 5.8/7.10 alone judge item findings against the frozen original frontier.
 // Raw detector output is retained separately; exclusion is never a math pass.
 import { readFileSync, readdirSync } from 'node:fs';
@@ -105,6 +106,8 @@ export function frontierGateBattery(ctx, gates) {
   const certificate = verifyCertification(ctx.repo, ctx.run);
   if (transition && (!certificate || !licensedOriginalSlotReplacement(ctx.repo, ctx.run,
     transition.original_id, transition.current_id, certificate))) throw Error('frontier gate requires current replacement certification');
+  const classification=loadPnpClassificationMigration(ctx.repo,ctx.run,{current:true});
+  if(classification&&(!certificate||!licensedPnpReplacement(ctx.repo,ctx.run,classification.original_id,classification.current_id,certificate)))throw Error('frontier gate requires current algorithm certification');
   const currentIds = projectedOriginalIds(ctx.repo, ctx.run, frontier.ids);
   const creations = (certificate?.creations ?? []).map(row => row.id);
   if (creations.some(id => currentIds.includes(id) || frontier.ids.includes(id))

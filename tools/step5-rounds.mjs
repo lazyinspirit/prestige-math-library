@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
 // Durable evidence primitives for the owner-authorized Step-5 round protocol.
 // These functions never manufacture mathematical decisions or judge verdicts.
 import { createHash } from 'node:crypto';
@@ -92,10 +93,11 @@ function scopedInventoryContext(repo, run, items, requiredIds, invalid) {
     if (!aliases.has(alias)) aliases.set(alias, new Set());
     aliases.get(alias).add(item.id);
   }
-  const transition=loadOriginalSlotReclassification(repo,run);
+  const transition=loadOriginalSlotReclassification(repo,run),classification=loadPnpClassificationMigration(repo,run);
   const resolve = raw => {
     // This is an authenticated original work-slot replacement, never alias credit.
     if(transition&&raw===transition.original_id)return transition.current_id;
+    if(classification&&raw===classification.original_id)return classification.current_id;
     if (canonical.has(raw) || frontier.has(raw)) return raw;
     const targets = aliases.get(raw);requireValue(!targets || targets.size === 1, `ambiguous required alias: ${raw}`);
     return targets ? [...targets][0] : raw;

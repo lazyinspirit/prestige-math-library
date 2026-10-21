@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 // Selective Step-5 closure: original Luna evidence for unchanged frontier
 // items, Sol for changed items. This is evidence selection, never a verdict.
 import { readFileSync } from 'node:fs';
@@ -16,6 +17,8 @@ export function step5JudgePolicy(root, run, ids, judgeLedger) {
   const verdictPath = join(dir, 'step4-verdicts.json');
   const frontier = validateFrontier(read(frontierPath));
   const transition = loadOriginalSlotReclassification(root, run, { current: true });
+  const classification=loadPnpClassificationMigration(root,run,{current:true});
+  if(classification&&!licensedPnpReplacement(root,run,classification.original_id,classification.current_id,certificate))throw Error('selective judge policy requires current algorithm certification');
   const currentIds = projectedOriginalIds(root, run, frontier.ids);
   // Native helpers remain separately authenticated creations; they never
   // acquire an original baseline or a carried Luna verdict. The selected scope
@@ -44,9 +47,9 @@ export function step5JudgePolicy(root, run, ids, judgeLedger) {
   }
   return {
     models: [MODELS.luna.id, MODELS.sol61.id],
-    requiredModels(id, text) { return [id !== transition?.current_id && !created.includes(id) && itemHashGuard(text) === baseline[id] ? MODELS.luna.id : MODELS.sol61.id]; },
+    requiredModels(id, text) { return [id !== transition?.current_id && id !== classification?.current_id && !created.includes(id) && itemHashGuard(text) === baseline[id] ? MODELS.luna.id : MODELS.sol61.id]; },
     eligible(id, row, text) {
-      return created.includes(id) || id === transition?.current_id ? row.model === MODELS.sol61.id
+      return created.includes(id) || id === transition?.current_id || id === classification?.current_id ? row.model === MODELS.sol61.id
         : itemHashGuard(text) !== baseline[id] || originals.get(id)?.some(original => isDeepStrictEqual(original, row));
     },
   };

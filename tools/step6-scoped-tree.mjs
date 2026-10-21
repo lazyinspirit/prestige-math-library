@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
 // One native scoped selector shared by readiness and report integrity.
 // Inventories resolve identities/homes; only selected carriers, actual supplier
 // closure, relevant evidence and workflow implementation inputs are hashed.
@@ -42,9 +43,8 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
     try { if (!lstatSync(path).isDirectory()) files.add(file); }
     catch (error) { if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error; }
   };
-  const replacement = physics ? null : loadOriginalSlotReclassification(root, run, { current: true });
   const slotArchives = new Set();
-  if (replacement) {
+  for(const replacement of [physics?null:loadOriginalSlotReclassification(root,run,{current:true}),physics?null:loadPnpClassificationMigration(root,run,{current:true})].filter(Boolean)) {
     const receipt = relative(root, replacement.path).replaceAll('\\', '/');
     add(receipt);
     // Absence is part of the transition, not an omitted protected input.
@@ -53,7 +53,7 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
     // These receipt-authenticated preimages are opaque historical bytes. Their
     // extension need not describe their content (a page mirror can be .json).
     for (const file of [replacement.entry.original_source_file, replacement.entry.before_source_file,
-      replacement.entry.current_source_file, ...[...replacement.metadata.values()].flatMap(row => [row.before_file, row.current_file])])
+      replacement.entry.current_source_file, ...[...replacement.metadata.values()].flatMap(row => [row.before_file, row.current_file])].filter(Boolean))
       slotArchives.add(relative(root, resolve(root, file)).replaceAll('\\', '/'));
   }
   const scalar = (fm, key) => fm.match(new RegExp(`^${key}:\\s*([^\\n]+?)\\s*$`, 'm'))?.[1]?.replace(/^['"]|['"]$/g, '');

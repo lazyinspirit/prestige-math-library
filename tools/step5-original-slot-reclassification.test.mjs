@@ -5,6 +5,7 @@ import {tmpdir} from 'node:os';
 import {join,dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
+import {reviewContextHashes as fixtureReviewContexts} from './step5-workflow.mjs';
 import {freezeFrontier} from './step5-rounds.mjs';
 import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
 import {statementHash} from './step5-statement.mjs';
@@ -13,19 +14,20 @@ const sha=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)
 const put=(root,p,x)=>{const full=resolve(root,p);mkdirSync(dirname(full),{recursive:true});writeFileSync(full,typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');return full;};
 const get=p=>JSON.parse(readFileSync(p,'utf8'));
 // Reusable real-loader fixture. Importing this file does not register its tests.
-export function createOriginalSlotFixture({fullBaseline=false,migrationLevel=null}={}){
+export function createOriginalSlotFixture({fullBaseline=false,migrationLevel=null,extraSources={},initialRepairCount=0}={}){
  const root=mkdtempSync(join(tmpdir(),'step5-original-slot-')),run=RUN,d=`research/${run}-step5-v2`,home='credible-sets-and-frequency-coverage-in-inverse-problems';
  const old=`---\nid: ${OLD}\nkind: open-problem\nstatus: draft\npipeline_run: ${run}\ndeps: []\n---\n\n## Open problem\n\nFix all original model constants and selector branches. Does there exist a single graph-measurable rule with every uniform coverage and no-log diameter target \\eta?$$\n\n## Status\n\nOriginally unresolved.\n`;
  const before=old.replace('Originally unresolved.','Affirmative construction; classification repair remains blocked.');
  const example=old.split('## Open problem\n\n')[1].split('\n\n## Status')[0].replace('Does there exist','There exists').replace('\\eta?$$',()=> '\\eta.$$');
  const fixtureDeps=migrationLevel===null?[]:['ex-original-slot-fixture-0'];
  const current=`---\nid: ${NEW}\nkind: example\ntitle: Exact coverage example\nstatus: draft\npipeline_run: ${run}\n${migrationLevel===null?'':`dependency_level: ${migrationLevel}\n`}deps: [${fixtureDeps.join(', ')}]\njustified_by: []\naliases: [${OLD}]\nprovenance: {statement: ai-generated, proof: ai-generated}\ngeneration: {role: example}\n---\n\n## Example\n\n${example}\n\n## Verification\n\n**Given:** The exact original question.\n\n1.1 The actual finite construction verifies the question. [given, construct] ∎\n`;
- const ids=[...Array.from({length:1471},(_,i)=>`ex-original-slot-fixture-${i}`),OLD].sort();
+ const ids=[...Array.from({length:1471-Object.keys(extraSources).length},(_,i)=>`ex-original-slot-fixture-${i}`),...Object.keys(extraSources),OLD].sort();
  const nonemptyUnits=Array.from({length:87},(_,i)=>String(i+1)).filter(id=>id!=='21'),ordinaryIds=ids.filter(id=>id!==OLD);
+ const idOwner=id=>id==='def-ip-pnp-ista-with-denoiser'?'49':null;
  const batches=Array.from({length:109},(_,i)=>({id:String(i+1),items:i===20?[OLD]:ordinaryIds.filter((_,index)=>
-  (index<343?nonemptyUnits[index%nonemptyUnits.length]:'1')===String(i+1))}));
+  (idOwner(ordinaryIds[index])??(index<343?nonemptyUnits[index%nonemptyUnits.length]:'1'))===String(i+1))}));
  const frontier=freezeFrontier({run,batches}),baseline={};
- for(const id of ids){const text=id===OLD?old:`---\nid: ${id}\nkind: example\nstatus: draft\ndeps: []\n---\n\n## Example\n\nA fixed original example.\n`;baseline[id]=itemHashGuard(text);put(root,`items/${id}.md`,text);}
+ for(const id of ids){const text=id===OLD?old:extraSources[id]??`---\nid: ${id}\nkind: example\nstatus: draft\ndeps: []\n---\n\n## Example\n\nA fixed original example.\n`;baseline[id]=itemHashGuard(text);put(root,`items/${id}.md`,text);}
  put(root,`items/${OLD}.md`,before);
  if(fullBaseline)for(let i=ids.length;i<39041;i++)baseline[`ex-outside-original-slot-baseline-${i}`]=sha(`outside original context ${i}`);
  const rejection=id=>({id,model:'gpt-6-luna',context_sha256:sha('context:'+id),item_sha256:baseline[id],keep:false});
@@ -35,12 +37,15 @@ export function createOriginalSlotFixture({fullBaseline=false,migrationLevel=nul
  const pack={version:2,adjudicationSchemaVersion:1,judge_model:'gpt-6-luna',input_evidence:{[verdictPath]:sha(readFileSync(verdictPath,'utf8'))},run,phase:'initial',round:1,repair_scope:'frontier',frontier_ids:frontier.ids,units:frontier.batches.map(b=>b.id),assignments,rejected,before:baseline,before_statements:Object.fromEntries(ids.map(id=>[id,statementHash(id===OLD?old:readFileSync(join(root,`items/${id}.md`),'utf8'))]))};
  const actualRejected=verdicts.filter(v=>v.keep===false);pack.rejected=actualRejected;
  for(const [name,v]of [['frontier',frontier],['baseline',baseline],['initial-1',pack],['step4-verdicts',verdicts]])put(root,`${d}/${name}.json`,v);
+ const initialRepairIds=new Set(ids.filter(id=>id!==OLD).slice(0,initialRepairCount));
+ for(const id of initialRepairIds)put(root,`items/${id}.md`,readFileSync(join(root,`items/${id}.md`),'utf8')+'\nRouting fixture: initial native repair.\n');
+ const extraContexts=Object.keys(extraSources).length?fixtureReviewContexts(root,ids):null;
  const state={run,stage:'5.1-adjudicate',paused:true,dispatches:{}};const reports=[];
  for(const unit of pack.units){
   const assigned=assignments[unit],label=`step5-v2-initial-r1-u${unit}`,empty=!assigned.length;
-  const decision=r=>({...r,outcome:r.id===OLD?'confirmed_fatal':'false_positive',...(r.id===OLD?{defect_type:'other'}:{}),reason:'The complete actual assigned argument was checked with its suppliers and exact original targets.',uncertain:false,source_urls:[],familiar:true});
-  const reviews=assigned.map(r=>({id:r.id,disposition:r.id===OLD?'repaired':'unaffected',post_sha256:r.id===OLD?itemHashGuard(before):baseline[r.id],review_context_sha256:sha({version:3,item:[r.id,r.id===OLD?itemHashGuard(before):baseline[r.id]],suppliers:[]}),reason:'Checked the complete original question, exact supplier use and all quantified targets without narrowing.',uncertain:false,source_urls:[],familiar:true}));
-  const report={run,phase:'initial',round:1,unit,input_sha256:sha(pack),decisions:assigned.map(decision),reviews,created_items:[],downstream:[],ledger_updates:[],gate_resolutions:[],...(empty?{completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false}:{})};
+  const decision=r=>({...r,outcome:r.id===OLD?'confirmed_fatal':initialRepairIds.has(r.id)?'confirmed_nonfatal':'false_positive',...(r.id===OLD?{defect_type:'other'}:{}),reason:'The complete actual assigned argument was checked with its suppliers and exact original targets.',uncertain:false,source_urls:[],familiar:true});
+  const reviews=assigned.map(r=>({id:r.id,disposition:r.id===OLD||initialRepairIds.has(r.id)?'repaired':'unaffected',post_sha256:extraContexts?.[r.id]?.post_sha256??(r.id===OLD?itemHashGuard(before):baseline[r.id]),review_context_sha256:extraContexts?.[r.id]?.review_context_sha256??sha({version:3,item:[r.id,r.id===OLD?itemHashGuard(before):baseline[r.id]],suppliers:[]}),reason:'Checked the complete original question, exact supplier use and all quantified targets without narrowing.',uncertain:false,source_urls:[],familiar:true}));
+  const report={run,phase:'initial',round:1,unit,input_sha256:sha(pack),decisions:assigned.map(decision),reviews,created_items:[],downstream:Object.keys(extraSources).filter(id=>assigned.some(r=>extraSources[id].includes(`deps: [${r.id}]`))),ledger_updates:[],gate_resolutions:[],...(empty?{completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false}:{})};
   if(unit==='21')report.repair_notes={status:'blocked_by_reclassification_scope',repair_complete:false,report:`${d}/${label}.json`};
   reports.push(report);put(root,`${d}/${label}.json`,report);
   const nativeLabel=empty?`step5-v2-empty-initial-r1-u${unit}`:label,role=empty?'tool':'alpha-adjudicate',base=`research/${run}-dispatch/${role}-${nativeLabel}`;

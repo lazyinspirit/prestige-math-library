@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 // step5-guard.mjs — R1: step 5 is FATAL-ONLY (owner, 2026-08-03).
 //
 // node tools/step5-guard.mjs \
@@ -149,6 +150,7 @@ if (existsSync(workflowDirectory)) {
       || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
       throw Error('frozen original frontier does not match Step-5 scope');
     const transition = loadOriginalSlotReclassification(workflowRoot, workflowScope.run, { current: true });
+    const classification=loadPnpClassificationMigration(workflowRoot,workflowScope.run,{current:true});
     const ids = new Set(projectedOriginalIds(workflowRoot, workflowScope.run, frontier.ids));
     // Deletions share the frozen frontier boundary with changed/created items.
     // Retain current logical suppliers as integrity context, including aliases
@@ -173,10 +175,10 @@ if (existsSync(workflowDirectory)) {
     // reinterpret a genuinely required deleted alias as an outside observation.
     scopedDeleted = deleted.filter(id => !aliasContextAvailable || protectedIds.has(id));
     excluded.deleted = deleted.filter(id => !scopedDeleted.includes(id));
-    for (const id of scopedDeleted) if (id !== transition?.original_id) error('step5-deletion',
+    for (const id of scopedDeleted) if (id !== transition?.original_id&&id!==classification?.original_id) error('step5-deletion',
       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
     for (const id of protectedIds) if (!Object.hasOwn(now, id) && !deleted.includes(id)
-      && id !== transition?.original_id)
+      && id !== transition?.original_id&&id!==classification?.original_id)
       error('step5-prerequisite-missing', `${id}: current frozen-frontier dependency context is missing`, id);
     scopedChanged = changed.filter(id => ids.has(id));
     scopedCreated = created.filter(id => ids.has(id));
@@ -191,6 +193,7 @@ if (existsSync(workflowDirectory)) {
       current_id: transition.current_id, receipt: transition.path };
     for (const id of scopedDeleted) if (id === transition?.original_id && !replacementLicensed) error('step5-deletion',
       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
+    if(classification&&!licensedPnpReplacement(workflowRoot,workflowScope.run,classification.original_id,classification.current_id,certificate))throw Error('Step 5 algorithm deletion lacks current native certification');
     const original = JSON.parse(readFileSync(join(workflowDirectory, 'baseline.json'), 'utf8'));
     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))

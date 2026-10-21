@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
 // Metadata-only exact owned inventory. Scientific subjects are independently
 // selected; no foreign working content is walked or hashed for packaging.
 import { existsSync, readFileSync } from 'node:fs';
@@ -16,10 +17,11 @@ import { loadOriginalSlotReclassification } from './step5-original-slot-reclassi
 function addOriginalSlotPaths(root, run, selected, physics) {
   if (physics) return;
   const replacement = loadOriginalSlotReclassification(root, run, { current: true });
-  if (!replacement) return;
-  selected.add(`items/${replacement.original_id}.md`);
-  selected.add(`items/${replacement.current_id}.md`);
-  selected.add(relative(root, replacement.path).replaceAll('\\', '/'));
+  for(const transition of [replacement,loadPnpClassificationMigration(root,run,{current:true})].filter(Boolean)){
+    selected.add(`items/${transition.original_id}.md`);
+    selected.add(`items/${transition.current_id}.md`);
+    selected.add(relative(root,transition.path).replaceAll('\\','/'));
+  }
 }
 
 export function step6OwnedInputs(run, root, { physics = false } = {}) {

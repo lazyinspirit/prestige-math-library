@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 // Final transaction only. Git plumbing never touches foreign working files,
 // runs filters, or checks out a tree. All content gates precede this operation.
 import { composeFragment, fragmentRecords, recordSignature, decodeLedger } from './step6-ledger-fragment.mjs';
@@ -43,10 +44,10 @@ export function preflightStep6(root, run, { physics = false, finalReceipt = fina
   // commit hooks even when a previously reviewed inert hook is allowed.
   refuseGitSideEffects(gitRoot, paths, policy?.reviewedHook ?? verifiedInertHook(gitRoot));
   const preflightIndex = indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
-  const replacement = physics ? null : loadOriginalSlotReclassification(root, run, { current: true });
-  if (replacement) {
+  const replacements=physics?[]:[loadOriginalSlotReclassification(root,run,{current:true}),loadPnpClassificationMigration(root,run,{current:true})].filter(Boolean);
+  for(const replacement of replacements) {
     const certificate = verifyCertification(root, run, { allowMissing: false, current: true });
-    if (!licensedOriginalSlotReplacement(root, run, replacement.original_id, replacement.current_id, certificate))
+    if (!(replacement.kind==='owner-pnp-classification-migration'?licensedPnpReplacement:licensedOriginalSlotReplacement)(root, run, replacement.original_id, replacement.current_id, certificate))
       throw Error('step6 commit: original-slot deletion lacks current replacement certification');
     for (const id of [replacement.original_id, replacement.current_id])
       if (!localPaths.includes(`items/${id}.md`)) throw Error('step6 commit: incomplete original-slot ownership');

@@ -29,9 +29,11 @@ verification:
 
 ## Definition
 
-Let $n\ge1$, $\sigma,\gamma>0$, let $g:\mathbb R^n\to\mathbb R$ be continuously differentiable, let $\widetilde D_\sigma:\mathbb R^n\to\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\in\mathbb R^n$. Define
+Let $n\ge1$, $\sigma,\gamma>0$, let $g:\mathbb R^n\to\mathbb R$ be continuously differentiable, let $\widetilde D_\sigma:\mathbb R^n\to\mathbb R^n$ be a supplied deterministic map used in the denoising step, and choose $x_0\in\mathbb R^n$. Define
 $$z_t=x_{t-1}-\gamma\nabla g(x_{t-1}),\qquad x_t=\widetilde D_\sigma(z_t)\quad(t=1,2,\ldots).$$
 The output is the sequence $(x_t)_{t\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\widetilde D_\sigma$.
+
+Here “denoiser” names the role of the plug-in map; Borel measurability and training under a signal-corruption law, as in the learned-estimator interface, are not assumed.
 
 The diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.
 
@@ -47,4 +49,4 @@ The diagram depicts the data flow for one update; the displayed recurrence, not 
 
 ## Definition references
 
-[[def-ip-learned-reconstruction-estimator]]
+[[def-ip-learned-reconstruction-estimator|The narrower interface for Borel denoisers trained under a specified signal-corruption law]]

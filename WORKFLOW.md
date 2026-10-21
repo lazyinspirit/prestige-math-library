@@ -653,6 +653,16 @@ current certification and Sol judgment. It is neither a new prerequisite nor
 an unchanged original Luna subject. Protected deletion and Step6 ownership
 remain limited to that authenticated source pair.
 
+The separate [native PnP classification migration](tools/step5-pnp-classification-migration.md)
+handles only the genuine repeat1/batch49 definition-to-algorithm blocker at the
+actual paused/drained5.5 owner request. Its Definition body stays byte-identical;
+the original confirmed-nonfatal decision and physical review remain historical.
+Root classification repair grants no native credit. The unchanged1472 original
+slots and109 batches project to the current algorithm, alongside the existing
+batch21 example. Fresh native5.6 review of the algorithm and four affected
+consumers, current certification and later Sol judgment remain mandatory.
+Protected deletion and Step6 ownership recognize only both authenticated pairs.
+
 Optional run-local owner repair guidance is hash-bound instruction context for
 items already assigned to a native lane. It adds no assignments, verdicts,
 source-reading claims or acceptance; later actual interface changes retain

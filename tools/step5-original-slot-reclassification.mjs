@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration,projectPnpOriginalIds,supportingPnpClassificationHistory} from './step5-pnp-classification-migration.mjs';
 // One original obligation, two explicitly separated historical/current IDs.
 // This receipt grants no execution, review, authorship or judgment credit.
 import {createHash} from 'node:crypto';
@@ -282,19 +283,19 @@ export function loadOriginalSlotReclassification(root,run,{current=false}={}){
 }
 export function projectedOriginalIds(root,run,frontierIds){
  const history=loadOriginalSlotReclassification(root,run,{current:true});
- if(!history)return [...frontierIds];
+ if(!history)return projectPnpOriginalIds(root,run,frontierIds);
  need(same([...frontierIds].sort(),history.frontier.ids.slice().sort()),'projection must name the exact original frontier');
  const projected=frontierIds.map(id=>id===ORIGINAL_SLOT_ID?CURRENT_SLOT_ID:id);
- need(projected.length===1472&&new Set(projected).size===1472,'nonbijective original-slot projection');return projected;
+ need(projected.length===1472&&new Set(projected).size===1472,'nonbijective original-slot projection');return projectPnpOriginalIds(root,run,projected);
 }
 export function originalSlotView(root,run,{frontier=null}={}){
  const ids=Array.isArray(frontier)?frontier:frontier?.ids??read(join(dir(root,run),'frontier.json')).ids;
  const currentIds=projectedOriginalIds(root,run,ids),history=loadOriginalSlotReclassification(root,run,{current:true});
- const originalToCurrent=Object.fromEntries(ids.map((id,i)=>[id,currentIds[i]])),currentToOriginal=Object.fromEntries(currentIds.map((id,i)=>[id,ids[i]]));
+ const originalToCurrent=Object.fromEntries(ids.map((id,i)=>[id,currentIds[i]])),currentToOriginal=Object.fromEntries(currentIds.map((id,i)=>[id,ids[i]])),classification=loadPnpClassificationMigration(root,run,{current:true});
  return {originalIds:[...ids],currentIds,originalToCurrent,currentToOriginal,
   currentId:id=>originalToCurrent[id]??id,originalId:id=>currentToOriginal[id]??id,
   currentOwner:id=>history?.frontier.batches.find(b=>b.items.includes(currentToOriginal[id]??id))?.id,
-  transitionForOriginal:id=>history&&id===ORIGINAL_SLOT_ID?history:null,evidence:history?.evidence??{},history};
+  transitionForOriginal:id=>history&&id===ORIGINAL_SLOT_ID?history:null,evidence:{...(history?.evidence??{}),...(classification?.evidence??{})},history,classification};
 }
 export function historicalInitialSource(history,id){return authenticated.has(history)&&id===ORIGINAL_SLOT_ID?history.historical_source:null;}
 export function isOriginalSlotReclassification(history,pack,now){
@@ -302,7 +303,7 @@ export function isOriginalSlotReclassification(history,pack,now){
   &&!Object.hasOwn(now,ORIGINAL_SLOT_ID)&&now[CURRENT_SLOT_ID]===(history.level_correction?.after_guard??history.after_guard);
 }
 export function supportingReclassificationHistory(history,path,expected){
- if(!history?.root||!history?.run)return null;const loaded=loadOriginalSlotReclassification(history.root,history.run);if(!loaded)return null;
+ if(!history?.root||!history?.run)return null;const classification=supportingPnpClassificationHistory(history,path,expected);if(classification)return classification;const loaded=loadOriginalSlotReclassification(history.root,history.run);if(!loaded)return null;
  const c=loaded.metadata.get(relative(resolve(history.root),resolve(history.root,path)));
  if(c&&sha(readFileSync(resolve(history.root,c.before_file),'utf8'))===expected)
   return {archive:resolve(history.root,c.before_file),marker:loaded.path,evidence:loaded.evidence};

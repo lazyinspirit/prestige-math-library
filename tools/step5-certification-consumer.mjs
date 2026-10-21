@@ -1,3 +1,4 @@
+import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 // Shared read-only boundary for consumers of centrally issued Step-5 evidence.
 import { basename } from 'node:path';
 import { verifyCertification } from './step5-workflow.mjs';
@@ -12,6 +13,8 @@ export function loadStep5ClosureCertification(root, run, ledgerPath = '') {
   if (certificate && transition
     && !licensedOriginalSlotReplacement(root, inferred, transition.original_id, transition.current_id, certificate))
     throw Error('Step 5 replacement lacks exact current native certification');
+  const classification=loadPnpClassificationMigration(root,inferred,{current:true});
+  if(certificate&&classification&&!licensedPnpReplacement(root,inferred,classification.original_id,classification.current_id,certificate))throw Error('Step 5 classification replacement lacks current native certification');
   // Initial certification is the input to the first mandatory judge round.
   return certificate && ['impact-repeat', 'gate'].includes(certificate.phase)
     ? certificate : null;
