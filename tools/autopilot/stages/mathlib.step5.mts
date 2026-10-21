@@ -41,6 +41,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
     // Sibling owners run concurrently. Shared metadata edits use a short
     // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
+      nativeImpactProgressBeforeOwnerHold:true,
       unitPrerequisites:(ctx:any,u:string)=>{if(u===NEEDLE_UNIT)return ['1','2','3'];const units=ownerUnits(ctx,phase,id).filter(v=>v!==NEEDLE_UNIT),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
       onProgress:({ctx,executor,stage}:any)=>{
         if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;

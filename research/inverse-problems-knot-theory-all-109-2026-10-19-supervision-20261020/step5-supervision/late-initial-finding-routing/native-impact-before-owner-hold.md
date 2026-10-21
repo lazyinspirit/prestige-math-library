@@ -1,0 +1,9 @@
+# Native successor progress before owner battery hold
+
+Root confirmed the actual fresh controller resumed then paused prematurely at the5.2 owner hold before any successor pack/progress existed. Both owner wrappers called holdBeforeBattery before the native impact join, so completed executions looked battery-ready before actual closure discovery ran.
+
+Only native5.2/5.6/5.9 impact stages now explicitly opt into source progress before the owner hold. Both wrappers enforce those exact IDs and keep a manual pause authoritative. The native join retains all normal draining, review and current-context checks. Its updated pending unit inventory prevents a premature battery hold; actual closure still invokes the unchanged hold and consumePermission remains mandatory. Other stages and Step6 retain their existing behavior. No external caller advances or fabricates progress.
+
+The real compact-wrapped-stage regression authenticates a fixture382base, applies root Fact-only consumer edits, and invokes the native wrapper hook. It queues14ordinary same-owner successors without permission. After actual-format fixture fresh reviews, native closure completes and the wrapper pauses for the owner; gates still reject missing permission. Exact3ID/default/manual-pause and owner-gate recertification regressions cover the retained boundaries.
+
+The adjacent JSON pins7files. Only the three-line native flag declaration in shared types.mts belongs to this change; the separate priorityDependencyValidation hunk is excluded. Final combined stage/core/wrapper tests passed13/13; owner-gate regressions passed4/4. Independent FIRST passed17/17 independently run tests with all7file bindings and the unrelated shared-types hunk excluded; no repair was requested. No actual controller/state/source/evidence/coverage/gate or permission was changed by this task.

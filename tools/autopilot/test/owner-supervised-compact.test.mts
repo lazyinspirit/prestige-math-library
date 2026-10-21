@@ -100,3 +100,17 @@ test('malformed authority and wildcard or ambiguous selectors fail closed', t =>
   writeFileSync(join(f.dir, 'owner-unit-holds.json'), '{partial');
   assert.throws(() => stage.unitEligible(f.ctx, '51'));
 });
+
+test('only opted-in native impact IDs may progress before the final mandatory owner hold',async t=>{
+ for(const id of ['5.2-impact','5.6-impact','5.9-repair','1-drift']){
+  const repo=mkdtempSync(join(tmpdir(),'impact-before-hold-'));t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const ctx={repo,stateDir:repo,run:'sample'};let progressed=0,queued=false;
+  const source={id,nativeImpactProgressBeforeOwnerHold:true,units:()=>queued?['next']:['old'],gates:()=>[],onProgress:()=>{progressed++;queued=true;}};
+  const [stage]=ownerSupervisedCompactStages([source]);
+  const executor={state:{paused:false,data:{stages:{}},save(){}},inflight:new Map(),liveDispatchLabels:()=>[],pipelineGroup:()=>[stage],stageStatus:()=>({unitsDone:!queued,gatesPassed:false}),reporter:{notify(){}}};
+  await stage.onProgress({ctx,executor,stage});
+  assert.equal(progressed,id==='1-drift'?0:1);assert.equal(executor.state.paused,id==='1-drift');
+  assert.throws(()=>stage.gates(ctx),/Missing owner/);
+  executor.state.paused=true;await stage.onProgress({ctx,executor,stage});assert.equal(progressed,id==='1-drift'?0:1);
+ }
+});

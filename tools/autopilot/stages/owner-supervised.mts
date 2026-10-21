@@ -17,6 +17,13 @@ export function stagesForRun(ctx: any) {
     const stage = { ...source };
     const progress = source.onProgress;
     stage.onProgress = async (args: any) => {
+      if (source.nativeImpactProgressBeforeOwnerHold === true
+        && ['5.2-impact', '5.6-impact', '5.9-repair'].includes(source.id)) {
+        if (args.executor.state.paused) return;
+        await progress?.(args);
+        holdBeforeBattery(args);
+        return;
+      }
       holdBeforeBattery(args);
       if (args.executor.state.paused) return;
       await progress?.(args);

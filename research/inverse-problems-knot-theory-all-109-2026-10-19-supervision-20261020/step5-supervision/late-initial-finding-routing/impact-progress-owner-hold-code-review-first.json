@@ -1,0 +1,36 @@
+{
+  "review": "independent-native-impact-progress-before-owner-hold-FIRST",
+  "reviewer": "/root/step5_concerns_2",
+  "verdict": "PASS",
+  "cycle": 1,
+  "scope": "Only new owner wrapper ordering liveness edge on actual native5.2/5.6/5.9 impact stages. No mathematics, general recovery or permission changes.",
+  "code_bindings": {
+    "tools/autopilot/stages/mathlib.step5.mts": "7ff8f95c1070411935e8d93ad523ab28c39d6c29fea3a9bcd26d7ed9625b1c3c",
+    "tools/autopilot/stages/owner-supervised-compact.mts": "3183adb6dd5628ba6705e778459a5266c609a33d7874cae11725d029a2150b32",
+    "tools/autopilot/stages/owner-supervised.mts": "9d74ad90a8d061a8d5919581ba5cce417d8586aa7c182ab27e7c4be3fc3acede",
+    "tools/autopilot/src/types.mts": "db7ea17b4b0e7fb92c12b7ccfb11bd6d3bd286d5b2daa6c315e037649995fd7b",
+    "tools/autopilot/test/owner-supervised-compact.test.mts": "c1c281daf3075ff9bdb49c7c7ea794c726712b43cde5d7df8e32b151bfe21707",
+    "tools/autopilot/test/step5-needle-completion.test.mts": "8b48c43546d1ea6c85afeda25a9d60c6518fe40602047b7033ce58ca4ba03b70",
+    "tools/step5-native-interface-consumers.md": "c6a1e7d241641ef135277f199727bca68f44ff69a621501fa035eb6d52936ad8"
+  },
+  "findings": [],
+  "reason": "The native nonadjudication impact stages explicitly opt in. Both wrappers honor the literal flag only for5.2-impact/5.6-impact/5.9-repair; a manually paused run returns without native progress. Those callbacks perform existing native collection/advance before holdBeforeBattery rechecks the updated unit inventory. Newly queued successor units keep the battery incomplete and dispatchable. At true closure the unchanged hold still pauses, and unchanged gate wrappers still require actual consumed fingerprinted owner permission. Other IDs keep hold-first ordering and Step6 bypass behavior is unchanged.",
+  "checked_boundaries": [
+    "Executor invokes onProgress before dispatch readiness and gates, then rechecks actual current units and manual pause; a native queued successor therefore precedes any battery readiness decision.",
+    "The source native callbacks still require no inflight/adopted work and completed current units before advanceImpact; the wrapper does not call advance manually.",
+    "beforeGates, consumePermission, frontier fingerprints, recertify resolveEscalations requirement, owner source/metadata preparation, native report/context validation and gate descriptors are unchanged.",
+    "No source/native report/attempt/counter/permission rewrite or fabricated escalations-resolved field is introduced."
+  ],
+  "tests": [
+    {
+      "command": "node tools/tsx-run.mjs --test tools/autopilot/test/owner-supervised-compact.test.mts tools/autopilot/test/step5-needle-completion.test.mts",
+      "result": "PASS13/13 independently rerun. Actual wrapped native stage collects authentic fixture base, accepts post-base root consumer proof edits, queues14 same-session successor reviews without owner permission, and still pauses/denies gate execution after true fresh closure. Exact3ID flag, other-stage hold-first, manual pause and unit eligibility checks pass."
+    },
+    {
+      "command": "node --test tools/autopilot/test/owner-gate-supervision.test.mjs",
+      "result": "PASS4/4 independently rerun. Explicit supervisor attestation and current fingerprint checks remain mandatory; changed inputs invalidate permission; incomplete work dispatchability and committed report integrity checks pass."
+    }
+  ],
+  "reading_limits": "Read complete wrapper diffs and surrounding owner-gate supervision/native callback/executor order, new tests and documentation. The unrelated concurrent priorityDependencyValidation hunk in types.mts was not reviewed or accepted here; only the3line nativeImpactProgressBeforeOwnerHold property belongs to this task. The whole-file binding records inspected bytes but grants no review of that unrelated hunk. No actual controller restart/dispatch, actual native proof work, metadata recertification or gate run was performed. Tests use temporary synthetic evidence.",
+  "next": "No focused repair requested. Root may restart/resume the native controller normally; the existing owner hold must still be satisfied through real current recertification before the actual battery."
+}

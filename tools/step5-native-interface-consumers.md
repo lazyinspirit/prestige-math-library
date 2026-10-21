@@ -42,3 +42,14 @@ not rewrite a frozen pack or mark the unused work completed. Follow the ordinary
 fresh current preparation and recertification before the next gate attempt.
 The native controller may first dispatch the pending continuation; it holds again
 after those writers drain, before any gate.
+
+Native impact joins must discover all successor owner work before deciding that
+a battery is ready. Only `5.2-impact`, `5.6-impact` and `5.9-repair` opt into
+`nativeImpactProgressBeforeOwnerHold`. Both owner wrappers run their existing
+native progress hook first, then apply the unchanged owner hold against the
+updated unit inventory. Pending consumer work stays dispatchable without gate
+permission; true final closure still pauses for current owner recertification.
+A manually paused run never executes this progress hook. Other stages retain
+their hold-first ordering, Step6 remains unchanged, and `beforeGates` and actual
+gate permission consumption are unchanged. This ordering grants no review,
+coverage, permission or external stage advancement.

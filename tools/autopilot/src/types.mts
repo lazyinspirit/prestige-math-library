@@ -206,6 +206,9 @@ export interface Stage {
   refreshPlan?: (ctx: Ctx, unit: Unit, request: Pick<NativeRefresh, 'id' | 'reason' | 'requestedAt'>) => Plan;
   /** Dispatch ready item handoffs while the owning stage's workers wait. */
   onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
+  /** Native Step5 impact joins may enqueue successor owners before the owner
+   * battery hold. Only 5.2/5.6/5.9 wrappers honor this ordering opt-in. */
+  nativeImpactProgressBeforeOwnerHold?: true;
   /** Opt-in boundary after group work drains, before pending gate descriptors.
    * May pause for owner authorization; never replaces the onProgress handoff. */
   beforeGates?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;

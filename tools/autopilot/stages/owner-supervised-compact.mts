@@ -48,6 +48,13 @@ export function ownerSupervisedCompactStages(stages: any[]) {
     // artifacts only after native coverage is complete and writers drain.
     if (stage.id === '1-scaffold') stage.deferConstructionArtifactsUntilDrain = true;
     stage.onProgress = async (args: any) => {
+      if (source.nativeImpactProgressBeforeOwnerHold === true
+        && ['5.2-impact', '5.6-impact', '5.9-repair'].includes(source.id)) {
+        if (args.executor.state.paused) return;
+        await source.onProgress?.(args);
+        holdBeforeBattery(args);
+        return;
+      }
       holdBeforeBattery(args);
       if (args.executor.state.paused) return;
       await source.onProgress?.(args);
