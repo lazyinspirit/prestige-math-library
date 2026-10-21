@@ -14,7 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-11
+  repair: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step3-supervision/scalar-field53/application/thm-invertible-matrix-theorem/receipt.json
 sources:
   scraped: []
   references:
@@ -25,7 +25,7 @@ pipeline_run: null
 
 ## Statement
 
-For $A\in M_n(F)$, the following are equivalent:
+Let $F$ be a field and let $n\ge0$ be an integer. For $A\in M_n(F)$, the following are equivalent:
 
 1. $A$ is invertible;
 2. $x\mapsto Ax$ is a linear isomorphism;
@@ -37,7 +37,7 @@ For $A\in M_n(F)$, the following are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** A square matrix $A\in M_n(F)$.
+**Given:** A field $F$, an integer $n\ge0$, and a square matrix $A\in M_n(F)$.
 
 [L1] RREF detects consistency and parametrises solutions by its nonpivot variables ([[thm-rref-consistency-and-free-variable-parametrisation]]).
 

@@ -16,8 +16,8 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
   precheck: pass
+  repair: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step3-supervision/scalar-field53/application/thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b/receipt.json
 sources:
   scraped: []
   references:
@@ -27,7 +27,7 @@ sources:
 
 ## Statement
 
-Let $A\in M_{m\times n}(\mathbb F)$ and $b\in\mathbb F^m$. A vector $x$ is a
+Let $\mathbb F\in\{\mathbb R,\mathbb C\}$, let $A\in M_{m\times n}(\mathbb F)$ and $b\in\mathbb F^m$. A vector $x$ is a
 least-squares solution of $Ax=b$ if and only if
 
 $$x=A^+b+(I-A^+A)z$$
@@ -37,7 +37,7 @@ exactly the full solution set of $Ax=b$.
 
 ## Facts & Assumptions
 
-**Given:** A matrix $A$ and a right-hand side $b$.
+**Given:** $\mathbb F\in\{\mathbb R,\mathbb C\}$, a matrix $A\in M_{m\times n}(\mathbb F)$ and a right-hand side $b\in\mathbb F^m$.
 
 [L1] $A^+b$ is a least-squares minimiser, and every least-squares minimiser differs from it by an element of $\ker A$ ([[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]], [[thm-least-squares-solutions-and-normal-equation]]).
 
