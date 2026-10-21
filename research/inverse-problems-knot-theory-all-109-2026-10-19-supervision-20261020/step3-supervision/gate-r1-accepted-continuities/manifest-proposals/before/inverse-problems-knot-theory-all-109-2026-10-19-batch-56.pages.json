@@ -1,0 +1,389 @@
+[
+  {
+    "order": 3108,
+    "id": "wirtinger-presentations-and-knot-groups",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Wirtinger presentations and knot groups",
+    "companion": "wirtinger-presentations-and-knot-groups-examples",
+    "requires": [
+      "the-seifert-van-kampen-theorem",
+      "oriented-links-braid-closures-and-markov-equivalence"
+    ],
+    "items": [
+      {
+        "id": "def-knot-planar-code",
+        "kind": "definition",
+        "title": "Finite planar codes for oriented knot diagrams",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, \u00a74.2, pp. 34\u201336",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram, \u00a7\u00a71.2\u20133.2",
+              "url": "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
+            }
+          ]
+        },
+        "statement": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right."
+      },
+      {
+        "id": "lem-compact-knot-has-choice-free-tube",
+        "kind": "lemma",
+        "title": "A compact smooth knot has a choice-free normal tube",
+        "deps": [
+          "def-normal-addition-map-for-a-euclidean-submanifold",
+          "lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section",
+          "thm-lebesgue-number-lemma",
+          "def-retraction-and-deformation-retract"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Stillwell, Classical Topology and Combinatorial Group Theory, \u00a74.2.4, Wirtinger presentation proof",
+              "url": "https://homepages.math.uic.edu/~kauffman/Stillwell.pdf"
+            },
+            {
+              "title": "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram, \u00a72",
+              "url": "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
+            }
+          ]
+        },
+        "statement": "Let $K\\subset\\mathbb R^3$ be the image of a compact smooth embedded circle, and let $E:N^\\perp K\\to\\mathbb R^3$ be the Euclidean normal-addition map $E(p,v)=p+v$. There is a real $\\varepsilon>0$ such that $E$ restricts to a diffeomorphism from $\\{(p,v):\\|v\\|<\\varepsilon\\}$ onto an open neighborhood $N_\\varepsilon$ of $K$. Moreover, $\\mathbb R^3\\setminus K$ strongly deformation retracts onto $\\mathbb R^3\\setminus N_\\varepsilon$ by pushing each nonzero normal vector radially to length $\\varepsilon$. The construction uses only a finite cover of the compact circle and no choice axiom."
+      },
+      {
+        "id": "lem-wirtinger-crossing-ball-cover",
+        "kind": "lemma",
+        "title": "A crossing-ball cover of a knot complement",
+        "deps": [
+          "def-knot-planar-code",
+          "lem-compact-knot-has-choice-free-tube",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-retraction-and-deformation-retract",
+          "def-based-loops-and-fundamental-group",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality",
+          "thm-fundamental-group-of-the-circle",
+          "thm-fundamental-group-of-finite-wedge-of-circles",
+          "lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts",
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "thm-seifert-van-kampen",
+          "thm-polygonal-jordan-curve"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Stillwell, Classical Topology and Combinatorial Group Theory, \u00a74.2.4, Wirtinger presentation proof",
+              "url": "https://homepages.math.uic.edu/~kauffman/Stillwell.pdf"
+            },
+            {
+              "title": "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram, \u00a72",
+              "url": "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
+            },
+            {
+              "title": "Stefan Friedl, Knot Theory, \u00a75.3, proof of the Wirtinger Presentation Proposition",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+            }
+          ]
+        },
+        "statement": "Let $K\\subset\\mathbb R^3$ be a smooth oriented knot with a regular diagram represented by a valid finite planar code, and let $c$ be its number of crossings. Choose a sufficiently small closed normal tube $N(K)$ and set $E_K=\\mathbb R^3\\setminus\\operatorname{int}N(K)$. If $c>0$, there is a subspace $Y\\subset E_K$, fixed pointwise by a strong deformation retraction of $E_K$, with a finite relative-open cover\n$$Y=U\\cup V_1\\cup\\cdots\\cup V_c.$$\nThe space $U$ deformation retracts to a wedge of $c$ circles. With a common basepoint in the collar above the diagram and access paths in that collar extended into the arc charts, the positive under-arc meridians are its free basis. Each $V_i$ is contractible, $U\\cap V_i$ is an open annulus around the $i$-th crossing attachment, and distinct $V_i$ are disjoint. Thus $V_i$ meets $U$ and any previously attached crossing pieces precisely in $U\\cap V_i$.\n\nFor $c=0$, the Euclidean complement has homotopy type $S^1\\vee S^2$, with the circle represented by the positive meridian. In particular its fundamental group is infinite cyclic; the extra sphere at infinity must not be discarded. In all cases the punctured normal tube retracts radially to its boundary, giving a strong deformation retraction $\\mathbb R^3\\setminus K\\to E_K$. These constructions require only finitely many charts and no choice axiom.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-wirtinger-local-meridian-conjugacy",
+        "kind": "lemma",
+        "title": "Local meridian conjugacy at a Wirtinger crossing",
+        "deps": [
+          "def-knot-planar-code",
+          "lem-wirtinger-crossing-ball-cover",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "thm-seifert-van-kampen",
+          "thm-group-pushout-as-an-amalgamated-quotient"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, \u00a74.2, printed pp. 34\u201336",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "John Stillwell, Classical Topology and Combinatorial Group Theory, \u00a74.2.4",
+              "url": "https://homepages.math.uic.edu/~kauffman/Stillwell.pdf"
+            },
+            {
+              "title": "Stefan Friedl, Knot Theory, \u00a75.3, proof of the Wirtinger Presentation Proposition",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+            }
+          ]
+        },
+        "statement": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-knot-group-infinity-collar",
+        "kind": "lemma",
+        "title": "Removing the point at infinity preserves the knot group",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-wirtinger-crossing-ball-cover",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "def-simply-connected",
+          "thm-seifert-van-kampen",
+          "cor-seifert-van-kampen-simply-connected-overlap"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Friedl, Knot Theory, \u00a75.3, proof of the Wirtinger Presentation Proposition",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+            }
+          ]
+        },
+        "statement": "Let $K\\subset\\mathbb R^3$ be a compact smooth knot and let $b\\in\\mathbb R^3\\setminus K$. The inclusion $\\mathbb R^3\\setminus K\\hookrightarrow S^3\\setminus K$ induces an isomorphism\n$$\\pi_1(\\mathbb R^3\\setminus K,b)\\xrightarrow{\\ \\cong\\ }\\pi_1(S^3\\setminus K,b).$$",
+        "justified_by": []
+      },
+      {
+        "id": "alg-knot-wirtinger-presentation-from-code",
+        "kind": "algorithm",
+        "title": "Wirtinger presentation from a finite diagram code",
+        "deps": [
+          "def-knot-planar-code",
+          "lem-wirtinger-local-meridian-conjugacy",
+          "def-group-presentation"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram, \u00a7\u00a72\u20133",
+              "url": "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, \u00a74.2, printed pp. 34\u201336",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            }
+          ]
+        },
+        "statement": "Define a procedure $\\mathsf{Wirtinger}(D,a_0)$ on a finite planar code $D$ for one oriented knot and a designated under-arc $a_0$ as follows. First check all incidence, valence, branch-pairing, crossing over/under, edge-orientation, and one-component conditions in the code. For each pair of rational line segments in the drawing certificate, compute the determinant of their direction vectors. If it is nonzero, solve the two-coordinate linear intersection equations and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Accept an intersection only when it is a shared declared bend or crossing vertex with the recorded incidence, and at a crossing verify that the two branch direction vectors have nonzero determinant. Reject self-intersections and all unrecorded intersections. If any check fails, return `invalid-input`. Otherwise traverse the oriented knot once starting at $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. For each crossing $v$, read its oriented over-tangent and positive in-plane normal. Let $a_s$ be the under-side from which that normal points and $a_t$ the side toward which it points, and read the over-arc $a_o$. Append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. Equivalently, if the incoming under-tangent follows that normal, append $x_o^{-1}x_{\\rm in}x_ox_{\\rm out}^{-1}$; otherwise append $x_ox_{\\rm in}x_o^{-1}x_{\\rm out}^{-1}$. The orientation of a positive meridian is fixed locally by requiring the knot tangent followed by the normal-disk orientation to give the ambient orientation. Once a complement basepoint and basing paths to the meridians are fixed, interpret $x_i$ as the corresponding based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and this one relator per crossing.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-knot-wirtinger-presentation-correctness",
+        "kind": "theorem",
+        "title": "Correctness of the Wirtinger presentation",
+        "deps": [
+          "def-knot-planar-code",
+          "lem-wirtinger-crossing-ball-cover",
+          "lem-wirtinger-local-meridian-conjugacy",
+          "lem-knot-group-infinity-collar",
+          "alg-knot-wirtinger-presentation-from-code",
+          "thm-seifert-van-kampen",
+          "thm-group-pushout-as-an-amalgamated-quotient",
+          "def-group-presentation",
+          "def-free-group",
+          "thm-quotient-group-universal-property",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality",
+          "thm-fundamental-group-of-finite-wedge-of-circles",
+          "thm-fundamental-group-of-the-circle"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Stillwell, Classical Topology and Combinatorial Group Theory, \u00a74.2.4",
+              "url": "https://homepages.math.uic.edu/~kauffman/Stillwell.pdf"
+            },
+            {
+              "title": "Stefan Friedl, Knot Theory, \u00a75.3, proof of the Wirtinger Presentation Proposition",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+            },
+            {
+              "title": "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram, \u00a7\u00a72\u20133",
+              "url": "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
+            }
+          ]
+        },
+        "statement": "Let $K\\subset S^3$ be a smooth oriented knot, let $D$ be a valid finite planar code for a regular diagram of $K$, choose a basepoint $b$ in the complement, and designate a starting under-arc. The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing. For the based meridians determined by the diagram's common upper-collar paths from $b$, the homomorphism from the presented group to $\\pi_1(S^3\\setminus K,b)$ that sends each generator to its corresponding based positive meridian is an isomorphism. Changing the designated starting under-arc only relabels the same finite cyclic arc set and gives an isomorphic presentation. If all basing paths are changed by prepending the same based loop, every generator image is conjugated by the same element, so the isomorphism type is unchanged.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes",
+        "kind": "lemma",
+        "title": "Explicit unknot and figure-eight oriented Wirtinger codes",
+        "deps": [
+          "def-knot-planar-code",
+          "alg-knot-wirtinger-presentation-from-code",
+          "lem-wirtinger-local-meridian-conjugacy",
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-free-group",
+          "def-group-presentation",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Friedl, Knot Theory, Lemma 5.8, printed/PDF p. 74",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "The full figure-eight diagram and its Wirtinger example are context. The integer drawing, precise labels and signs used here are certified below."
+            }
+          ]
+        },
+        "statement": "There are the following explicit valid finite planar codes, with the standard right/up orientation of the plane and positive based meridians using compatible common upper-collar access paths.\n\nThe counterclockwise square with vertices $(0,0),(1,0),(1,1),(0,1)$ is a crossing-free unknot code. It has one under-arc and gives $\\pi_1(S^3\\setminus U)=\\langle x\\mid\\ \\rangle\\cong\\mathbb Z$, with $x$ the positive meridian.\n\nAn oriented figure-eight code has crossings $C_1,C_2,C_3,C_4$. The letters $O,U$ mean over and under, and $i,o$ mean incoming and outgoing. Its integer plane-drawing certificate is\n\n| $r$ | $C_r$ | $rOi$ | $rOo$ | $rUi$ | $rUo$ |\n|---|---|---|---|---|---|\n| $1$ | $(-423,0)$ | $(-627,102)$ | $(-363,-30)$ | $(-363,30)$ | $(-627,-102)$ |\n| $2$ | $(0,-9)$ | $(-33,-6)$ | $(99,-18)$ | $(-99,-18)$ | $(33,-6)$ |\n| $3$ | $(0,9)$ | $(33,6)$ | $(-99,18)$ | $(99,18)$ | $(-33,6)$ |\n| $4$ | $(423,0)$ | $(627,-102)$ | $(363,30)$ | $(363,-30)$ | $(627,102)$ |\n\nThe complete cyclic visit list is $$1O,\\ 2U,\\ 3O,\\ 1U,\\ 4O,\\ 3U,\\ 2O,\\ 4U.$$ For every successive pair $rB,sD$ in this list, including the last-to-first pair, use the three straight segments of the route $C_r\\to rBo\\to sDi\\to C_s$. At each crossing pair $rOi$ with $rOo$, and $rUi$ with $rUo$; the first pair is over. Smooth the degree-two bends in disjoint small disks. The cyclic orders at crossings are the counterclockwise lists $(rOo,rUi,rOi,rUo)$ for $r=1,4$ and $(rOo,rUo,rOi,rUi)$ for $r=2,3$.\n\nLabel the under-arcs $x_1:U4\\to U2$, $x_2:U2\\to U1$, $x_3:U1\\to U3$, $x_4:U3\\to U4$. In each oriented over-branch chart, let $L$ denote its left under-side (target of the positive in-plane normal), and $R$ its right under-side (source). The exact crossing table is\n\n| crossing | over | $L$ (target) | $R$ (source) | under traversal | $\\operatorname{sign}\\det(\\text{over},\\text{under})$ |\n|---|---|---|---|---|---|\n| $R_1$ | $x_1$ | $x_2$ | $x_3$ | target to source | $-1$ |\n| $R_2$ | $x_4$ | $x_2$ | $x_1$ | source to target | $+1$ |\n| $R_3$ | $x_2$ | $x_4$ | $x_3$ | source to target | $+1$ |\n| $R_4$ | $x_3$ | $x_4$ | $x_1$ | target to source | $-1$ |\n\nThus its actual positive-meridian presentation is $$\\pi_1(S^3\\setminus 4_1)=\\langle x_1,x_2,x_3,x_4\\mid x_1x_2=x_3x_1,\\ x_1x_4=x_4x_2,\\ x_3x_2=x_2x_4,\\ x_3x_4=x_1x_3\\rangle.$$ The last relation follows from the first three. Starting on $x_1$, the underpasses occur at $R_2,R_1,R_3,R_4$, and the self-writhe is zero. All drawing data, validations and algebra in this statement are finite and use no choice axiom.",
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 3109,
+    "id": "wirtinger-presentations-and-knot-groups-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Wirtinger presentations and knot groups \u2014 Examples and Counterexamples",
+    "companion": "wirtinger-presentations-and-knot-groups",
+    "requires": [
+      "wirtinger-presentations-and-knot-groups"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-01-worked-cases",
+        "kind": "example",
+        "title": "Worked Wirtinger presentations",
+        "deps": [
+          "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes",
+          "alg-knot-wirtinger-presentation-from-code",
+          "thm-knot-wirtinger-presentation-correctness",
+          "lem-wirtinger-local-meridian-conjugacy",
+          "def-group-presentation",
+          "def-free-group",
+          "thm-quotient-group-universal-property"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, \u00a74.2, printed pp. 19\u201321",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
+            },
+            {
+              "title": "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram, \u00a74",
+              "url": "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
+            },
+            {
+              "title": "Stefan Friedl, Knot Theory, \u00a7\u00a75.2\u20135.4, printed pp. 68\u201374",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+            }
+          ]
+        },
+        "statement": "The crossing-free unknot code gives the presentation $\\langle x\\mid\\ \\rangle$, hence its knot group is $\\mathbb Z$. For the standard three-crossing trefoil diagram, label the under-arcs $a,b,c$ so the crossing relations are $c=aba^{-1}$, $a=bcb^{-1}$, and $b=cac^{-1}$. Eliminating $c$ gives $\\langle a,b\\mid aba=bab\\rangle$. The assignment $a\\mapsto(12)$ and $b\\mapsto(23)$ defines a surjection of this group onto the nonabelian group $S_3$. For the four-crossing figure-eight code with under-arcs $x_1,x_2,x_3,x_4$, the crossing equations are\n$$R_1:x_1x_2=x_3x_1,\\quad R_2:x_1x_4=x_4x_2,\\quad R_3:x_3x_2=x_2x_4,\\quad R_4:x_3x_4=x_1x_3.$$\nThe figure-eight code has over-arc labels $x_1,x_4,x_2,x_3$ at $R_1,R_2,R_3,R_4$, respectively, and its oriented under-arc transitions are $x_1\\to x_2$ at $R_2$, $x_2\\to x_3$ at $R_1$, $x_3\\to x_4$ at $R_3$, and $x_4\\to x_1$ at $R_4$; the four displayed local charts give their side orders and orientations. The transition cycle verifies that the code has one component and four under-arcs.\nThe fourth equation follows from the first three: left-multiply $R_3$ by $x_1$, substitute $R_1$ and then $R_2$, and cancel the common right factor $x_2$.\n\nThe first diagram has two oriented strands crossing three times between top and bottom; the two bottom endpoints are joined to the corresponding top endpoints by the outside arcs. Its under-arc labels are chosen so that the triples $(o,L,R)$ of over-arc, left under-arc, and right under-arc are $(b,c,a)$, $(c,a,b)$, and $(a,b,c)$ at crossings $1,2,3$. The white gaps mark underpasses; the redrawn strand is over.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n\\foreach \\j in {0,1,2} {\n\\draw[->] (-1,3-\\j)--(-0.14,2.57-\\j);\n\\draw[->] (0.14,2.43-\\j)--(1,2-\\j);\n\\draw[->,line width=1.2pt] (1,3-\\j)--(-1,2-\\j);\n}\n\\draw[->] (-1,0)..controls(-1.7,0)and(-1.7,3)..(-1,3);\n\\draw[->] (1,0)..controls(1.7,0)and(1.7,3)..(1,3);\n\\node[above] at (-1,3) {$a$};\n\\node[above] at (1,3) {$b$};\n\\node[right] at (1,2) {$c$};\n\\end{tikzpicture}\n```\n\nThe panels below record the local crossing charts for the four figure-eight equations. In every panel the horizontal over-strand points right; the upper-right under-meridian is $x_L$ and the lower-left is $x_R$. The upper side is the target and lower side the source. In each panel the fixed relation is $x_L=x_o^{-1}x_Rx_o$, independently of the under-arrow direction.\n\n```tikz\n\\begin{tikzpicture}[x=1cm,y=1cm,>=stealth,line width=0.8pt]\n  % R1: over x1, left x2, right x3.\n  \\node at (0,1.05) {$R_1$};\n  \\draw (-0.5,0.02)--(-0.18,0.34);\n  \\draw (0.18,0.70)--(0.5,1.02);\n  \\draw (-0.55,0.52)--(0.55,0.52);\n  \\draw[->] (-0.55,0.52)--(0.55,0.52) node[right] {$x_1$};\n  \\draw[->] (0.47,0.99)--(0.2,0.72);\n  \\node[above right] at (0.35,0.82) {$x_2$};\n  \\node[below left] at (-0.38,0.2) {$x_3$};\n  \\node at (0,-0.15) {$x_1x_2=x_3x_1$};\n  % R2: over x4, left x2, right x1; under direction follows the positive normal.\n  \\node at (3.4,1.05) {$R_2$};\n  \\draw (2.9,0.02)--(3.22,0.34);\n  \\draw (3.58,0.70)--(3.9,1.02);\n  \\draw (2.85,0.52)--(3.95,0.52);\n  \\draw[->] (2.85,0.52)--(3.95,0.52) node[right] {$x_4$};\n  \\draw[->] (2.93,0.05)--(3.2,0.32);\n  \\node[above right] at (3.75,0.82) {$x_2$};\n  \\node[below left] at (3.02,0.2) {$x_1$};\n  \\node at (3.4,-0.15) {$x_1x_4=x_4x_2$};\n  % R3: over x2, left x4, right x3; under direction follows the positive normal.\n  \\node at (0,-1.55) {$R_3$};\n  \\draw (-0.5,-2.58)--(-0.18,-2.26);\n  \\draw (0.18,-1.90)--(0.5,-1.58);\n  \\draw (-0.55,-2.08)--(0.55,-2.08);\n  \\draw[->] (-0.55,-2.08)--(0.55,-2.08) node[right] {$x_2$};\n  \\draw[->] (-0.47,-2.55)--(-0.2,-2.28);\n  \\node[above right] at (0.35,-1.78) {$x_4$};\n  \\node[below left] at (-0.38,-2.4) {$x_3$};\n  \\node at (0,-2.75) {$x_3x_2=x_2x_4$};\n  % R4: over x3, left x4, right x1.\n  \\node at (3.4,-1.55) {$R_4$};\n  \\draw (2.9,-2.58)--(3.22,-2.26);\n  \\draw (3.58,-1.90)--(3.9,-1.58);\n  \\draw (2.85,-2.08)--(3.95,-2.08);\n  \\draw[->] (2.85,-2.08)--(3.95,-2.08) node[right] {$x_3$};\n  \\draw[->] (3.87,-1.61)--(3.6,-1.88);\n  \\node[above right] at (3.75,-1.78) {$x_4$};\n  \\node[below left] at (3.02,-2.4) {$x_1$};\n  \\node at (3.4,-2.75) {$x_3x_4=x_1x_3$};\n\\end{tikzpicture}\n```",
+        "justified_by": []
+      },
+      {
+        "id": "cex-knot-kt-01-boundary-case",
+        "kind": "counterexample",
+        "title": "Equal abelianizations do not classify knots",
+        "deps": [
+          "alg-knot-wirtinger-presentation-from-code",
+          "lem-wirtinger-local-meridian-conjugacy",
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-group-presentation",
+          "def-free-group",
+          "thm-quotient-group-universal-property",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality",
+          "def-commutator-and-commutator-subgroup",
+          "thm-derived-subgroup-is-characteristic-and-abelianization-is-universal"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Friedl, Knot Theory, \u00a7\u00a75.2\u20135.4, trefoil group and link group-abelianization corollary, printed pp. 68\u201373",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, \u00a74.2, printed pp. 34\u201336",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            }
+          ]
+        },
+        "statement": "Write $G(K):=\\pi_1(S^3\\setminus K)$ for the group of a smooth oriented knot $K$. The claim is that for every pair of such knots $K_1,K_2$, an isomorphism $G(K_1)^{\\mathrm{ab}}\\cong G(K_2)^{\\mathrm{ab}}$ implies that $K_1$ and $K_2$ are ambient isotopic.",
+        "justified_by": []
+      }
+    ]
+  }
+]

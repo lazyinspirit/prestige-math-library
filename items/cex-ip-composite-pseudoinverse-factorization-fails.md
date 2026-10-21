@@ -36,11 +36,11 @@ For every pair of bounded linear maps $F:X\to Y$ and $G:Y\to Z$ between real or 
 
 [Brandt and Horn, §2.1, pp. 2–3](https://arxiv.org/pdf/2610.13483)
 
-## Counterexample description
+## Setup
 
 Take $X=Y=Z=\mathbb R^2$ with the Euclidean inner product and let $F=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ and $G=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}$. Both maps have rank one, they do not commute, and for $A=G\circ F$ the product $F^\dagger G^\dagger$ is not $A^\dagger$.
 
-## Counterexample description references
+## Setup references
 
 [[def-moore-penrose-pseudoinverse|Finite-matrix Moore–Penrose pseudoinverse]]
 

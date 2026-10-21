@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ fd61c9c8f469 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 0b783f84be12 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 21450 |
-| now mechanically prevented | 385 |
+| defects caught before publication | 21454 |
+| now mechanically prevented | 387 |
 | escaped to publication | 7 |
 | still open | 123 |
 
@@ -976,13 +976,13 @@
 | invalid-inference | 1 |  |
 | citation-missing | 1 |  |
 
-## inverse-problems-knot-theory-all-109-2026-10-19 — 548 row(s)
+## inverse-problems-knot-theory-all-109-2026-10-19 — 552 row(s)
 
 | subclass | 3a-adjudicate |
 |---|---|
 | ill-formed | 192 |
-| citation-inaccurate | 90 |
-| missing-hypothesis | 43 |
+| citation-inaccurate | 91 |
+| missing-hypothesis | 45 |
 | unlicensed-inference | 37 |
 | ill-typed-construction | 25 |
 | invalid-inference | 19 |
@@ -996,10 +996,10 @@
 | invalid-witness | 6 |
 | reader-repair | 5 |
 | contract-mismatch | 4 |
+| other | 4 |
 | missing-choice-scope | 4 |
 | citation-truncated | 4 |
 | arithmetic-error | 3 |
-| other | 3 |
 | citation-inflated | 3 |
 | citation-corrupted | 3 |
 | invalid-refutation | 3 |

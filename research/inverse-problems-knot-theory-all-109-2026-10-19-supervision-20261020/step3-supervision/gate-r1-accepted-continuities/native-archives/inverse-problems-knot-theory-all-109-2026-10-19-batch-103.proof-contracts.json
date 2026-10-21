@@ -1,0 +1,1465 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+    "thm-exact-bracket-output-bit-growth-bound",
+    "thm-knot-linking-number-and-fox-coloring-finite-complexity",
+    "thm-bracket-state-sum-exponential-bound",
+    "thm-reidemeister-enumeration-is-only-a-semidecision",
+    "ex-knot-kt-48-worked-cases",
+    "cex-knot-kt-48-boundary-case"
+  ],
+  "contracts": {
+    "lem-dihedral-fox-coloring-count-is-reidemeister-invariant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quandle-and-knot-coloring",
+          "source_section": "Definition",
+          "quote": "A **quandle** is a set $Q$ with a binary operation $*:Q\\times Q\\to Q$ such that:\n\n1. $x*x=x$ for every $x\\in Q$;\n2. for every $y\\in Q$, the right translation $R_y:Q\\to Q$, $R_y(x)=x*y$, is a bijection;\n3. $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in Q$.\n\nWrite $x\\mathbin{\\bar *}y:=R_y^{-1}(x)$ for the unique element satisfying\n$(x\\mathbin{\\bar *}y)*y=x$. Let $D$ be a regular oriented link diagram. An\n**arc** of $D$ is a connected strand segment cut at each crossing where that\nstrand passes under; an overstrand continues through its crossing. Orient the\nprojection plane. Along an oriented overarc with tangent $t$, let $n$ be the\nunit normal in the plane for which $(t,n)$ is positively oriented. At each\ncrossing, call the underarc from which $n$ points the source underarc and the\nunderarc toward which $n$ points the target underarc. A **quandle coloring**\nof $D$ by $Q$ is an assignment $c$ of an element of $Q$ to every arc such\nthat, at each crossing, if the source, over, and target colors are $a,b,d$,\nthen $d=a*b$. Equivalently, when the source and target are named in the\nopposite order, $a=d\\mathbin{\\bar *}b$. Write $\\operatorname{Col}_Q(D)$ for\nthe set of all such assignments.\n\nThe local convention is shown below. The overarc is oriented from southwest\nto northeast, so its positive normal points northwest; the underarc is\noriented from southeast to northwest. Thus $x$ is the source color, $y$ is\nthe overarc color, and $z=x*y$ is the target color. The gap marks the\nunderpassing strand.\n\n```tikz\n\\begin{tikzpicture}[scale=1]\n  \\draw[->] (1.15,-1.15) -- (0.18,-0.18);\n  \\draw[->] (-0.18,0.18) -- (-1.15,1.15);\n  \\draw[->,line width=1.2pt] (-1.15,-1.15) -- (1.15,1.15);\n  \\node at (0.92,-0.82) {$x$};\n  \\node at (-0.82,-0.82) {$y$};\n  \\node at (-0.82,0.92) {$z$};\n  \\node[right] at (1.25,0.05) {$z=x*y$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dihedral-operation-is-a-quandle",
+          "source_section": "Statement",
+          "quote": "For an odd prime $p$, let $\\mathbb F_p=\\mathbb Z/p\\mathbb Z$ and define\n$a*b=2b-a$. Then $(\\mathbb F_p,*)$ is a quandle.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "An **oriented Reidemeister move** is one of the following local replacements of\na regular oriented link diagram ([[def-regular-oriented-link-diagram]]),\nperformed inside a small closed disk while the diagram outside the disk is left\nunchanged, and understood up to planar isotopy outside the disk\n([[def-planar-isotopy-of-link-diagrams]]). All sign and orientation variants of\neach local picture are included.\n\n**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.\n\nA local R2 or R3 picture is **braid-like** when, after a local coordinate\nchange and deformation, all participating strands run in the same positive\nlongitudinal direction. This is a local condition and does not require a\nglobally chosen braid axis. R1 is kept as a separate kink move.\n\nThe strands keep their orientations throughout every move. The union of the\nthree move types, together with planar isotopy, generates the equivalence\nrelation on diagrams used in the Reidemeister equivalence theorem below; the\nmoves are sometimes called R1, R2, R3 as above. Since every move changes the\ndiagram only inside a disk, it has a type and a finite list of local\norientation/sign variants, and each variant is realized by an ambient isotopy\nas the next items show. The complete list of variants is required because the\nMarkov and Alexander constructions below act on oriented diagrams and count\nsigned crossings.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $b\\in\\mathbb F_p$, define $R_b(a)=a*b=2b-a$. Then $R_b(R_b(a))=2b-(2b-a)=a$, so $R_b^{-1}=R_b$. Also $a*a=2a-a=a$. Thus both the forward and reverse crossing rules use the same involution, and an arc's color is uniquely recoverable across one underpass.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In an R1 disk, the coloring relation on the kinked side is either $y=x*x$ or $x=y*x$, where $x$ is the unchanged boundary color and $y$ is the color of the new interior underarc. In the first case $y=x$ by idempotency; in the second, $R_x(y)=x$ has the unique solution $y=R_x(x)=x$ because $R_x$ is bijective. Deleting the kink is the inverse restriction map. The two formulas cover both strand directions because the inverse operation equals the operation by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In an R2 disk, fix the color $b$ of the strand passing over the other strand and the incoming underarc color $a$. The first crossing changes the underarc color to $R_b(a)$, and the second changes it by $R_b^{-1}$; their composition is $R_b^{-1}(R_b(a))=a$. Therefore every boundary coloring extends uniquely across the two-crossing side, and the reverse R2 move gives the inverse bijection. Other orientation variants replace one of these maps by its inverse, which is the same map by step 1.1.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For a braid-like R3 orientation, start with boundary colors $a,b,c$. Propagating through the two sides gives respectively $(c,b*c,(a*b)*c)$ and $(c,b*c,(a*c)*(b*c))$. The last coordinates agree by right self-distributivity in [F2], so every boundary coloring on either side has a unique matching extension on the other. Reversing a crossing replaces a right translation by its inverse; step 1.1 makes that the same map, and relabeling the three strands gives every height-order and orientation variant in [F3].",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $D$ is empty, its unique empty coloring is carried to itself by planar isotopy, and no Reidemeister move is supported on the empty diagram. If $D$ is nonempty, planar isotopy carries every arc and local crossing relation bijectively to its image, while steps 2.1, 2.2, and 2.3 give explicit coloring bijections for every local move. Composing the finitely many bijections along any finite move sequence preserves the coloring count. These constructions act on finite arc labels and use no choice principle.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the unique empty coloring and the absence of a local move on the empty diagram."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers crossingless nonempty diagrams under planar isotopy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20132.3 give each local move bijection, including the one-kink R1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20132.3 handle the R1, R2, and R3 local extensions, including inverse variants."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Link diagrams are closed unions of circles and have no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 composes explicit finite arc maps and states that no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts invariance under a move, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts invariance under a move, not an if-and-only-if characterization."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: right translations are involutions and the crossing rule is reversible.",
+          "evidence": "step 1.1"
+        },
+        {
+          "check": "2.1: an R1 kink has a unique compatible new arc color.",
+          "evidence": "step 2.1"
+        },
+        {
+          "check": "2.2: the two R2 crossing maps compose to the identity.",
+          "evidence": "step 2.2"
+        },
+        {
+          "check": "2.3: the R3 outputs agree by right self-distributivity.",
+          "evidence": "step 2.3"
+        },
+        {
+          "check": "3.1: the empty coloring and finite move compositions are covered.",
+          "evidence": "step 3.1"
+        }
+      ]
+    },
+    "thm-exact-bracket-output-bit-growth-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-encoded-diagram-size-and-exact-output",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a nonempty finite regular oriented link diagram: a projection of a finite union of oriented circles with finitely many transverse double points, no triple points, and one overpassing branch specified at each double point. Let $c(D)$ be its number of crossings and $m(D)$ its number of components. An arc is a connected strand segment cut at each undercrossing; each component with no undercrossings contributes one closed arc. Write $a(D)$ for the number of arcs. If $q(D)$ components have no undercrossings, then $a(D)=c(D)+q(D)$ and $0\\le q(D)\\le m(D)$.\n\nA supplied finite code for $D$ has code length $L$, the total number of bits in that literal code, including its tags, signs, labels, and separators. The length depends on the chosen encoding. In particular, for one of the tagged Gauss, signed Dowker\u2013Thistlethwaite, or oriented planar-diagram formats, $L$ is the bit length of the supplied valid code in that format. The procedures in this page take typed mathematical diagrams or valid codes as stated; no string parser or malformed-code behavior is included in any operation count.\n\nFor an integer $z$, define its signed-magnitude bit length by $\\ell_{\\mathbb Z}(0)=1$ and $\\ell_{\\mathbb Z}(z)=1+\\lceil\\log_2(|z|+1)\\rceil$ for $z\\ne0$. For a Laurent polynomial $P(A)=\\sum_{j\\in\\mathbb Z}z_jA^j$ with finite support, define its coefficient-bit size as $0$ if $P=0$, and otherwise as $\\max_{j:z_j\\ne0}\\ell_{\\mathbb Z}(z_j)$. Its absolute Laurent degree is $\\max_{j:z_j\\ne0}|j|$, with value $0$ for $P=0$. For a prime $p$, elements of $\\mathbb F_p$ are represented exactly by residues $0,\\ldots,p-1$, and their representation uses $\\lceil\\log_2p\\rceil$ bits.\n\nAn exact output is the complete integer, finite list, or Laurent polynomial with its integer coefficients and exponents. A floating-point approximation is not an exact output. A field-operation count treats each addition, subtraction, multiplication, division by a nonzero element, and equality test in $\\mathbb F_p$ as one operation; this convention does not assert that these operations have constant bit cost as $p$ varies.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kauffman-bracket-state-sum",
+          "source_section": "Definition",
+          "quote": "The input is a nonempty unoriented regular link diagram $D$: a finite immersed\nplanar projection of one or more circles with finitely many transverse double\npoints, no triple points, and over/under data at each double point. Let $C(D)$\nbe its finite crossing set. At each crossing take the local chart in which the\nover-strand runs southwest to northeast and is drawn continuously over the\nunder-strand, which runs northwest to southeast with a gap at the intersection.\nThe A-smoothing joins the two left endpoints and the two right endpoints, with\nweight $A$; the B-smoothing joins the two top endpoints and the two bottom\nendpoints, with weight $A^{-1}$. These labels are transported with\norientation-preserving changes of local coordinates. Put\n$\\delta=-A^2-A^{-2}$. The output is the Laurent polynomial $\\langle D\\rangle$.\n\n1. Set an accumulator $p:=0$ in $\\mathbb Z[A^{\\pm1}]$.\n2. For each function $S:C(D)\\to\\{A,B\\}$, smooth every crossing according to\n   $S$, obtaining a crossingless diagram with $|S|$ circles. Count the A- and\n   B-smoothings as $a(S)$ and $b(S)$, and replace\n   $$p\\quad\\text{by}\\quad p+A^{a(S)-b(S)}\\delta^{|S|-1}.$$\n3. Return $p$ after all states have been processed.\n\nThe input is a mathematical diagram object, not a serialized string. The\nprocedure specifies no parsing or malformed-string rejection behavior. Since\nthe diagram has at least one component, every complete smoothing has\n$|S|\\ge1$ and every exponent of $\\delta$ is nonnegative.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kauffman-bracket-state-sum-procedure-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an indeterminate and let $D$ be a typed nonempty unoriented regular\nlink diagram with finite crossing set $C(D)$. At each crossing use the chart\nwith the over-strand southwest-to-northeast: A joins the left endpoints and the\nright endpoints with weight $A$, while B joins the top endpoints and bottom\nendpoints with weight $A^{-1}$. The Kauffman bracket state-sum algorithm\nterminates after exactly $2^{|C(D)|}$ state visits and returns\n$$\\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1},$$\nwhere $a(S)$ and $b(S)$ count the two smoothing types and $|S|$ counts the\ncircles in the smoothed diagram. The algorithm takes a mathematical diagram\nas input and makes no claim about parsing strings or rejecting malformed\nencodings.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The state set has exactly $2^c$ elements by [F3]. A complete smoothing starts with $m$ circles. At each crossing the four local endpoints lie on one or two current circles, and either smoothing reconnects them into one or two circles. Thus the circle count increases by at most one at each of the $c$ smoothings. Every state has $1\\le |S|\\le m+c$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed state, put $r=|S|-1$, so $0\\le r\\le m+c-1$. The binomial theorem gives $\\delta^r=(-1)^r\\sum_{k=0}^r\\binom{r}{k}A^{2r-4k}$. These exponents are distinct, so its coefficient l1 norm is $\\sum_{k=0}^r\\binom{r}{k}=2^r$; multiplication by the monomial $A^{a(S)-b(S)}$ only shifts the exponents.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $a(S)+b(S)=c$, one has $|a(S)-b(S)|\\le c$. The exponents in $\\delta^r$ lie between $-2r$ and $2r$. Using $r\\le m+c-1$, every exponent in every state term, and thus in the sum, has absolute value at most $c+2(m+c-1)=3c+2m-2$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Put $q=c+m+1\\ge2$. Represent a crossing endpoint by an integer from $1$ to $4c$, grouped into four successive ports at each crossing, and write $\\alpha$ for the supplied edge-pairing involution. For a state, let $\\beta$ pair the two left and two right ports for A, or the two top and two bottom ports for B. The multigraph on the $4c$ endpoints with one $\\alpha$-edge and one $\\beta$-edge at every vertex is two-regular, allowing parallel edges. Each connected component follows one smoothed circle, and the $u$ supplied crossingless components add $u$ further circles. Thus a traversal marking a vertex when first queued computes $|S|$ exactly. The same traversal, with the opposite ports paired instead of smoothing ports, computes the original component count $m$; perform it once initially and then compute $q$ for allocation. Use binary counters and linear scans for all table and mark lookups: there are $O(q)$ endpoint visits, each using a bounded number of scans of $O(q)$ records with $O(\\log q)$ index bits. Even with a work-tape queue or stack scanned linearly, each visit costs $O(q^2)$ bit steps, so tracing costs $O(q^3)$. Computing $a(S)-b(S)$ and adding $u$ use counters of $O(\\log q)$ bits and fit this bound. Enumerate the states with a $c$-bit binary counter, making exactly $2^c$ visits; the $c=0$ case is one empty mask with $|S|=u=m$. Reading the stated input takes $O(q\\log q)$ steps and is included.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing over all $2^c$ states, the l1 norm of the final coefficient sequence is at most the sum of the state-term l1 norms, hence at most $2^c2^{m+c-1}=2^{m+2c-1}$. Every individual coefficient therefore has absolute value at most $2^{m+2c-1}$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $M=m+2c\\ge1$. By step 3.1, a nonzero coefficient $z_j$ satisfies $|z_j|\\le2^{M-1}$, so $|z_j|+1\\le2^M$ and $\\ell_{\\mathbb Z}(z_j)=1+\\lceil\\log_2(|z_j|+1)\\rceil\\le M+1=m+2c+1$. The support lies in at most $6c+4m-3$ integer exponents by step 2.2, so storing the exact polynomial as a dense coefficient array takes $O((c+m)^2)$ bits. For a knot, $m=1$, giving degree at most $3c$ and coefficient-bit size at most $2c+2$, both linear in $c+1$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Use coefficient slots for every exponent from $-3q$ to $3q$, padded with zeros, and use $2q+3$ bits per signed-magnitude slot, plus $O(\\log q)$-bit position counters. These arrays have $O(q^2)$ tape cells. Every partial accumulator, not just the final sum, has coefficient l1 norm at most $2^c2^{m+c-1}$: apply the triangle inequality in step 3.1 to the subset of states already processed. Hence its coefficients fit the chosen width, since $m+2c-1<2q$. For one state compute $r=|S|-1$ and start with the array for $P_0=1$. For $k=0,\\ldots,r-1$, form a new array by the exact recurrence $(P_{k+1})_j=-(P_k)_{j-2}-(P_k)_{j+2}$, reading absent coefficients as zero. This is multiplication by $\\delta$, so $P_r=\\delta^r$. All intermediate powers have degree at most $2r<2q$ and l1 norm at most $2^r\\le2^{m+c-1}$, so they too fit the arrays and widths.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Here is a direct tape bound without unit-cost access or integer arithmetic. To retrieve or write a coefficient, scan an entire array of $O(q)$ slots of $O(q)$ bits, advancing a binary slot counter and comparing it with the desired index. The counter work is $O(q\\log q)$ and the scanned data have $O(q^2)$ bits, so one lookup or write costs $O(q^2)$ bit steps. Addition or subtraction of two signed integers in these slots is performed by sign comparison, a linear magnitude comparison, and the usual binary carry or borrow scan, costing $O(q)$ steps; the extra carry bit fits the reserved width. For each of the $O(q)$ destination coefficients in the recurrence of step 4.2, make at most two source lookups, one such addition, and one destination write. A multiplication by $\\delta$ therefore costs $O(q^3)$ steps. There are $r<q$ repetitions, giving $O(q^4)$ work. Shift this state polynomial by $a(S)-b(S)$ and add it to the accumulator coefficient by coefficient using the same linear scans; the state shift has magnitude at most $c$, its support stays inside the slots by step 2.2, and this accumulation costs $O(q^3)$. Clearing arrays, moving the state counter, and loop-index bookkeeping are bounded by the same charges.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.2",
+            "step 2.3",
+            "step 4.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Summing the per-state bounds in steps 2.3, 4.2, and 5.1 over exactly $2^c$ visits gives $O(2^cq^4)$ bit steps. The initial component-count traversal costs $O(q^3)$ by step 2.3; coefficient-array initialization and writing the dense exact output cost $O(q^2)$. These are absorbed because $2^c\\ge1$ and $q\\ge2$. The loop tracing and arithmetic realize exactly the state terms in [F2], so [F3] identifies the result with the bracket. When $c=0$, the single state computes $\\delta^{m-1}$ with the same bound; when $m=1$, $q=c+2$ gives $O(2^c(c+1)^4)$. All choices and operations are finite. The bit-cost argument concerns only the specified indexed table and elementary binary operations, so it makes no claim about parsing arbitrary code strings of length $L$ or the cost of an unspecified arithmetic library.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 4.1",
+            "step 2.3",
+            "step 4.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "m\u22651 excludes the empty LINK; c=0 is permitted and gives one empty state mask with |S|=u=m in2.3, so the indexed-by wording is not a missing empty-input case.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "m\u22651 excludes the empty LINK; c=0 is permitted and gives one empty state mask with |S|=u=m in2.3, so the indexed-by wording is not a missing empty-input case.",
+            "item_sha256": "88e1e1289eb4e71d72342c36ab5e37994308162e4e9d0d8b28f263f2bee8be23",
+            "row_sha256": "4a114659131baa64f14ab53bb4dfaf65c830b2429126a2710ee330f432c5b0c9",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 385
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "m\u22651 excludes the empty LINK; c=0 is permitted and gives one empty state mask with |S|=u=m in2.3, so the indexed-by wording is not a missing empty-input case.",
+            "role": "root-adopted owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 385
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.3 and6.1 include c0: the empty state mask has u=m and computes delta^(m-1); unbounded m is retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 4.1 and6.1 give m1 output bounds and O(2^c(c+1)^4) bit time, including the unknot at c0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.3,4.2,5.1 include separate crossingless components, parallel pairing edges, zero coefficients, r0, dense zero padding and partial-sum bit bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Crossing endpoints are internal incidence indices of closed diagram components, not free topological endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.3, 4.2, 5.1 and 6.1 use finite indexed traversals, deterministic binary arithmetic and finite state masks; step 6.1 explicitly states that all choices and operations are finite, so no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a bound and algorithmic realization, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a bound and algorithmic realization, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "crossingless-one-and-three-component-output",
+          "method": "manual exact bounded symbolic calculation",
+          "anchor_steps": [
+            "2.1",
+            "2.3",
+            "4.1",
+            "6.1"
+          ],
+          "calculation": "c0,m1 gives one empty state,r0,delta^0=1 with signed bit size2. c0,m3 gives one empty state,r2,delta^2=A^4+2+A^-4, degree4 and maximum signed bit size3, within3c+2m\u22122=4 andm+2c+1=4.",
+          "scope_limit": "Only these two finite link inputs; general output/bit-runtime proof is the actual indexed/tape argument, not this corroboration."
+        }
+      ],
+      "proof_status": "complete-local-proof",
+      "owner_resolution_evidence": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-bracket-size-repair-1/repair-report.json",
+        "scope_decision": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-bracket-size-repair-1/root-integration/plan-scope-decision.json",
+        "scope": "Focused local repaired proof and retained explicit runtime promise only; no native independent review/execution/fullgate acceptance."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-103",
+        "notes": "Independently checked all nine proof steps and all three actual suppliers. Circle reconnection gives 1 <= |S| <= m+c; the binomial l1 estimate gives exponent bound 3c+2m-2, coefficient magnitude 2^(m+2c-1), and signed bit bound m+2c+1. Checked endpoint traversal with parallel edges, opposite-port component count, partial-sum slot widths, dense recurrence, linear tape lookups and O(2^c q^4) total. The c=0 state has u=m; the unknot returns 1. Nonempty input, fixed indexed representation and parsing exclusions are explicit. Roberts Proposition 4.3.4 confirms the state sum; no claim of a source-proved bit complexity. No defect found."
+      }
+    },
+    "thm-knot-linking-number-and-fox-coloring-finite-complexity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-encoded-diagram-size-and-exact-output",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a nonempty finite regular oriented link diagram: a projection of a finite union of oriented circles with finitely many transverse double points, no triple points, and one overpassing branch specified at each double point. Let $c(D)$ be its number of crossings and $m(D)$ its number of components. An arc is a connected strand segment cut at each undercrossing; each component with no undercrossings contributes one closed arc. Write $a(D)$ for the number of arcs. If $q(D)$ components have no undercrossings, then $a(D)=c(D)+q(D)$ and $0\\le q(D)\\le m(D)$.\n\nA supplied finite code for $D$ has code length $L$, the total number of bits in that literal code, including its tags, signs, labels, and separators. The length depends on the chosen encoding. In particular, for one of the tagged Gauss, signed Dowker\u2013Thistlethwaite, or oriented planar-diagram formats, $L$ is the bit length of the supplied valid code in that format. The procedures in this page take typed mathematical diagrams or valid codes as stated; no string parser or malformed-code behavior is included in any operation count.\n\nFor an integer $z$, define its signed-magnitude bit length by $\\ell_{\\mathbb Z}(0)=1$ and $\\ell_{\\mathbb Z}(z)=1+\\lceil\\log_2(|z|+1)\\rceil$ for $z\\ne0$. For a Laurent polynomial $P(A)=\\sum_{j\\in\\mathbb Z}z_jA^j$ with finite support, define its coefficient-bit size as $0$ if $P=0$, and otherwise as $\\max_{j:z_j\\ne0}\\ell_{\\mathbb Z}(z_j)$. Its absolute Laurent degree is $\\max_{j:z_j\\ne0}|j|$, with value $0$ for $P=0$. For a prime $p$, elements of $\\mathbb F_p$ are represented exactly by residues $0,\\ldots,p-1$, and their representation uses $\\lceil\\log_2p\\rceil$ bits.\n\nAn exact output is the complete integer, finite list, or Laurent polynomial with its integer coefficients and exponents. A floating-point approximation is not an exact output. A field-operation count treats each addition, subtraction, multiplication, division by a nonzero element, and equality test in $\\mathbb F_p$ as one operation; this convention does not assert that these operations have constant bit cost as $p$ varies.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$.\n\nThe input is a finite regular oriented link diagram together with its declared\ncomponents. If it does not have exactly two components, return\n`invalid-input`. For a two-component diagram $D$, initialize $s:=0$ and make\none pass over its finite crossing list. At each crossing whose branches lie on\ndifferent components, add\n$$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$\nto $s$, where the determinant is taken in the oriented projection plane; ignore\nself-crossings. Return $s/2$. The even-sum lemma establishes that this output is\nan integer and is the diagram's linking number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. On every finite regular oriented diagram\nwith exactly two components, the crossing-scan algorithm halts after one\niteration per crossing and returns the integer half-sum of the mixed crossing\nsigns. On an input with any other number of components it returns\n`invalid-input` after the finite component-count check.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a two-component oriented link in $S^3$, with components $K_1,K_2$. Write\n$$S(D):=\\sum_{c\\text{ between }K_1\\text{ and }K_2}\\operatorname{sgn}(c).$$\nThen $S(D)$ is even, and\n$$\\operatorname{lk}_D(K_1,K_2):=\\frac{S(D)}2\\in\\mathbb Z$$\nis unchanged by planar isotopy and by each oriented Reidemeister move of types\nI, II, and III. Thus it has the same value on any two regular diagrams of\nambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly\none component changes its sign, and reversing both components leaves it\nunchanged.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-dihedral-fox-colorings",
+          "source_section": "Definition",
+          "quote": "Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,\nfixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set\n$\\operatorname{Col}_p(D)$ of assignments of residues in $\\mathbb F_p$ to the\narcs satisfying the Fox crossing equations, together with\n$|\\operatorname{Col}_p(D)|$.\n\n1. Create one variable $x_j$ for each arc in the supplied order, and process\n   crossings in the supplied order.\n2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append\n   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\\mathbb F_p$.\n   At a crossing, add the coefficients of any repeated arc in that row.\n3. Set the next pivot-row index to $r=1$ and process columns from left to\n   right. If $r>c$, mark this and every remaining column free and stop. If\n   $r\\le c$, search rows $r,\\ldots,c$ in order for the first nonzero entry in\n   the current column. If none exists, mark this column free and continue\n   without changing $r$. Otherwise swap the selected row into row $r$, divide\n   row $r$ by its nonzero entry in this column, and add multiples of row $r$\n   to every other row to clear this column. Record this column as a pivot\n   column with pivot row $r$, then increase $r$ by one. After the scan, every\n   column not recorded as a pivot column is free.\n4. List the free columns in increasing order and enumerate every tuple in\n   $\\mathbb F_p^f$ in lexicographic order using the residue representatives\n   $0,\\ldots,p-1$, where $f$ is the number of free columns. If $f=0$, process\n   the empty tuple once. For each tuple, assign its coordinates to the free\n   variables. For each pivot row, set its pivot variable equal to the negative\n   of the sum of the row's free-column coefficients times those assigned free\n   variables. Append the resulting assignment in the supplied arc order.\n   Return all appended assignments and their number.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$ and every finite regular oriented link diagram $D$,\nthe algorithm in the Definition terminates and returns exactly\n$\\operatorname{Col}_p(D)$. If its reduced system has $f$ free variables, it\nreturns $p^f$ colorings. For a diagram with $a$ arcs and $c$ crossings it uses\nat most $\\min(a,c)$ pivots, at most $ac$ pivot-search entry tests, at most $ac$\nrow additions to clear pivot columns, at most $a^2c$ coefficient updates in\nthose row additions, and at most $a^2$ divisions to normalize pivot rows.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+          "source_section": "Statement",
+          "quote": "Let $p$ be an odd prime. A Fox $p$-coloring of a finite regular oriented link diagram $D$ assigns an element of $\\mathbb F_p$ to each arc and satisfies $2x_o=x_i+x_j$ at every crossing, where $x_o$ is the overarc color and $x_i,x_j$ are the two underarc colors. If $D'$ is obtained from $D$ by planar isotopy or one oriented Reidemeister move of type R1, R2, or R3, restriction outside the move disk gives a bijection from the Fox $p$-colorings of $D$ to those of $D'$. Consequently the number of Fox $p$-colorings is unchanged along every finite sequence of such moves. The local bijections use no choice principle.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The linking scan performs one visit per element of the finite crossing list by [F2]. On a two-component input each visit makes at most one component-membership test and, for a mixed crossing, one integer addition, so there are at most $c$ tests and $c$ additions after the constant-size component-count check. Each added term is $+1$ or $-1$, hence the absolute value of the sum is at most $c$ and the returned half-sum has absolute value at most $c/2$. The result is an integer and is the diagram's linking number by [F3] and [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each of the $c$ crossings, [F5] contributes three coefficients to a row. If arc labels repeat, combining at most three contributions requires at most two field additions for that row, so setup uses at most $2c$ additions; initializing the dense $c\\times a$ matrix writes $ca$ zeros. There are $a$ columns, and each pivot search checks at most $c$ rows, for at most $ca$ entry tests.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $r$ be the number of pivots, so $r\\le\\min(c,a)$ and $f=a-r$. Normalizing each pivot row divides at most $a$ entries by its nonzero pivot, for at most $ra$ divisions. Clearing a pivot column from each of at most $c-1$ other rows updates at most $a$ entries, with at most one multiplication and one addition per entry. The row-reduction arithmetic count is therefore at most $ra+2r(c-1)a$. These loops are finite because there are at most $a$ columns and $c$ rows.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "There are exactly $p^f$ assignments to the $f$ free variables by [F6]. For each assignment, each of the $a-f$ pivot variables is a linear combination of at most $f$ free variables; computing it uses at most $f$ multiplications and $f$ additions/subtractions, including the final negation. Writing the full solution uses $a$ output entries. Thus listing every coloring uses at most $p^f(2f(a-f)+a)$ field arithmetic and output-write operations. The loop is finite, including $f=0$, when there is one solution and only the $a$ entries are written.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $f=0$, the count is $1$ without multiplication. For $f\\ge1$, binary repeated squaring computes $p^f$ with at most $2\\lceil\\log_2(f+1)\\rceil$ integer multiplications. Since $f\\le a$, the magnitude bit length is at most $f\\lceil\\log_2p\\rceil+1$. This count-only postprocessing does not enumerate the solution set and does not change the full-list cost in step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The diagram-by-diagram scan, matrix construction, row reduction, and finite solution enumeration above use no choice principle. By [F7], the Fox coloring count is preserved along every finite sequence of planar isotopies and oriented Reidemeister moves; by [A1] and [F8], ambient-isotopic oriented links admit such a sequence. By [F4], the linking-number half-sum has the same move invariance. Thus AC\u03c9 is used only for the ambient-isotopy interpretations, not for any finite operation count.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty link diagram."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 allow c=0: the linking sum is zero and the Fox matrix has zero rows with finite free assignments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20133.1 use the displayed bounds for every c, including a single crossing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20133.1 allow repeated arc labels and f=0 or f=a; the proof counts the corresponding finite operations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The input is a closed link diagram, so it has no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 separates choice-free finite scans from the AC\u03c9 ambient-isotopy clauses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives complexity and invariance bounds, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives complexity and invariance bounds, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: one crossing-list visit, c tests/additions, and the linking half-sum bound.",
+          "evidence": "step 1.1"
+        },
+        {
+          "check": "1.2: c by a matrix initialization and at most 2c coefficient-combination additions.",
+          "evidence": "step 1.2"
+        },
+        {
+          "check": "2.1: pivot search and row-reduction operation counts.",
+          "evidence": "step 2.1"
+        },
+        {
+          "check": "3.1: p^f assignments and full-list output operation count.",
+          "evidence": "step 3.1"
+        },
+        {
+          "check": "4.1: count-only repeated-squaring and magnitude-bit bound.",
+          "evidence": "step 4.1"
+        },
+        {
+          "check": "5.1: choice-free finite scans versus AC\u03c9 invariant interpretation.",
+          "evidence": "step 5.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-103",
+        "notes": "Checked all six steps and all nine direct suppliers, including actual algorithms. Two-component half-sum is integral and bounded by c/2; scan counts visits/tests/additions after declared-component check. Three row contributions require <=2 repeated-label additions; initialization ca writes. At most min(c,a) pivots; normalizations ra, clearing 2r(c-1)a, search ca. Direct negative dot products fit 2f operations per pivot (subtract each term), yielding p^f(2f(a-f)+a) listing cost. Binary exponentiation <=2 ceil(log2(f+1)) multiplications; magnitude bits <= f ceil(log2 p)+1. Checked c=0, r=0, f=0, repeated arcs and crossingless components a=c+q<=c+m. Finite algebra is choice-free; ambient interpretation uses stated AComega. No defect."
+      }
+    },
+    "thm-bracket-state-sum-exponential-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-encoded-diagram-size-and-exact-output",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a nonempty finite regular oriented link diagram: a projection of a finite union of oriented circles with finitely many transverse double points, no triple points, and one overpassing branch specified at each double point. Let $c(D)$ be its number of crossings and $m(D)$ its number of components. An arc is a connected strand segment cut at each undercrossing; each component with no undercrossings contributes one closed arc. Write $a(D)$ for the number of arcs. If $q(D)$ components have no undercrossings, then $a(D)=c(D)+q(D)$ and $0\\le q(D)\\le m(D)$.\n\nA supplied finite code for $D$ has code length $L$, the total number of bits in that literal code, including its tags, signs, labels, and separators. The length depends on the chosen encoding. In particular, for one of the tagged Gauss, signed Dowker\u2013Thistlethwaite, or oriented planar-diagram formats, $L$ is the bit length of the supplied valid code in that format. The procedures in this page take typed mathematical diagrams or valid codes as stated; no string parser or malformed-code behavior is included in any operation count.\n\nFor an integer $z$, define its signed-magnitude bit length by $\\ell_{\\mathbb Z}(0)=1$ and $\\ell_{\\mathbb Z}(z)=1+\\lceil\\log_2(|z|+1)\\rceil$ for $z\\ne0$. For a Laurent polynomial $P(A)=\\sum_{j\\in\\mathbb Z}z_jA^j$ with finite support, define its coefficient-bit size as $0$ if $P=0$, and otherwise as $\\max_{j:z_j\\ne0}\\ell_{\\mathbb Z}(z_j)$. Its absolute Laurent degree is $\\max_{j:z_j\\ne0}|j|$, with value $0$ for $P=0$. For a prime $p$, elements of $\\mathbb F_p$ are represented exactly by residues $0,\\ldots,p-1$, and their representation uses $\\lceil\\log_2p\\rceil$ bits.\n\nAn exact output is the complete integer, finite list, or Laurent polynomial with its integer coefficients and exponents. A floating-point approximation is not an exact output. A field-operation count treats each addition, subtraction, multiplication, division by a nonzero element, and equality test in $\\mathbb F_p$ as one operation; this convention does not assert that these operations have constant bit cost as $p$ varies.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-kauffman-bracket-state-sum",
+          "source_section": "Definition",
+          "quote": "The input is a nonempty unoriented regular link diagram $D$: a finite immersed\nplanar projection of one or more circles with finitely many transverse double\npoints, no triple points, and over/under data at each double point. Let $C(D)$\nbe its finite crossing set. At each crossing take the local chart in which the\nover-strand runs southwest to northeast and is drawn continuously over the\nunder-strand, which runs northwest to southeast with a gap at the intersection.\nThe A-smoothing joins the two left endpoints and the two right endpoints, with\nweight $A$; the B-smoothing joins the two top endpoints and the two bottom\nendpoints, with weight $A^{-1}$. These labels are transported with\norientation-preserving changes of local coordinates. Put\n$\\delta=-A^2-A^{-2}$. The output is the Laurent polynomial $\\langle D\\rangle$.\n\n1. Set an accumulator $p:=0$ in $\\mathbb Z[A^{\\pm1}]$.\n2. For each function $S:C(D)\\to\\{A,B\\}$, smooth every crossing according to\n   $S$, obtaining a crossingless diagram with $|S|$ circles. Count the A- and\n   B-smoothings as $a(S)$ and $b(S)$, and replace\n   $$p\\quad\\text{by}\\quad p+A^{a(S)-b(S)}\\delta^{|S|-1}.$$\n3. Return $p$ after all states have been processed.\n\nThe input is a mathematical diagram object, not a serialized string. The\nprocedure specifies no parsing or malformed-string rejection behavior. Since\nthe diagram has at least one component, every complete smoothing has\n$|S|\\ge1$ and every exponent of $\\delta$ is nonnegative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kauffman-bracket-state-sum-procedure-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an indeterminate and let $D$ be a typed nonempty unoriented regular\nlink diagram with finite crossing set $C(D)$. At each crossing use the chart\nwith the over-strand southwest-to-northeast: A joins the left endpoints and the\nright endpoints with weight $A$, while B joins the top endpoints and bottom\nendpoints with weight $A^{-1}$. The Kauffman bracket state-sum algorithm\nterminates after exactly $2^{|C(D)|}$ state visits and returns\n$$\\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1},$$\nwhere $a(S)$ and $b(S)$ count the two smoothing types and $|S|$ counts the\ncircles in the smoothed diagram. The algorithm takes a mathematical diagram\nas input and makes no claim about parsing strings or rejecting malformed\nencodings.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exact-bracket-output-bit-growth-bound",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a nonempty unoriented regular link diagram with $c$ crossings and $m\\ge1$ components, and let $\\langle D\\rangle=\\sum_j z_jA^j$ be its exact Kauffman bracket. Its Laurent exponents satisfy $|j|\\le 3c+2m-2$, and its signed-magnitude coefficient-bit size, as defined in the encoded diagram size definition, is at most $m+2c+1$. Consequently, a knot diagram ($m=1$) has Laurent degree and coefficient-bit size bounded linearly in $c+1$.\n\nThe state-sum algorithm admits a naive exact implementation taking\n$O(2^c(c+m+1)^4)$ elementary bit steps in the following model. Its typed\ninput gives $c$ and the number $u$ of crossingless components in\nself-delimiting binary: each number is encoded by $b$ ones, a zero, and its\n$b$ ordinary binary digits, with $b\\ge1$ the number of those digits.\nThese fields are followed by the edge-pairing table on the $4c$\nendpoints indexed by crossing and local port. Its entries are ordered by\nendpoint index and each uses $\\max(1,\\lceil\\log_2(4c+1)\\rceil)$ bits.\nAt each crossing the ports are northwest, northeast,\nsoutheast, southwest in the bracket's fixed local chart; the two smoothing\npairings are therefore fixed pairs of port indices. The table is assumed to\nbe the incidence data of the given diagram. Polynomial arithmetic uses dense\narrays of signed binary integer coefficients, and one tape-cell read, write,\nor head move on a fixed finite number of binary work tapes costs one step.\nFor knots this bound is $O(2^c(c+1)^4)$. It is a bound for this explicit\nindexed implementation, not for arbitrary black-box polynomial operations.\nConstructing the indexed input from an arbitrary literal code of length $L$,\nreading other labels or padding, and processing geometric coordinates are\noutside this bound.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-normalized-bracket-is-an-oriented-link-invariant",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $A$ be an indeterminate and let $D$\nbe a nonempty regular oriented link diagram in an oriented $3$-sphere. Fix a\nunit viewing normal $n$ and orient the projection plane $P$ so $(u,v)$ is\npositive exactly when $(n,u,v)$ is positive in the ambient $3$-space. At each\ncrossing define $\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},\nv_{\\rm under})$ from the oriented projected tangents and set\n$\\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c)$. At each crossing use the\nlocal source chart in which the over-strand runs southwest to northeast; the\nA-smoothing joins the left endpoints and the right endpoints with weight $A$,\nand the B-smoothing joins the top endpoints and the bottom endpoints with\nweight $A^{-1}$. Labels are transported by orientation-preserving changes of\nlocal coordinates. Let $C(D)$ be the finite crossing set. A state is a map\n$S:C(D)\\to\\{A,B\\}$; let $a(S)$ and $b(S)$ count its A- and B-smoothings, and\nlet $|S|$ be the number of circles after all crossings are smoothed. Set\n$$\\langle D\\rangle= \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nDefine\n$$f_D(A)=(-A^3)^{-\\operatorname{wr}(D)}\\langle D\\rangle,$$\nwhere $\\operatorname{wr}(D)$ is the sum of the determinant signs of its\noriented crossings. If two such diagrams represent ambient-isotopic\noriented links, their $f_D(A)$ values are equal. Thus $f_D$ defines an\ninvariant of nonempty oriented links.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the state-sum procedure visits every map from the $c$-element crossing set to $\\{A,B\\}$ exactly once, so it makes exactly $2^c$ state visits. The writhe is the sum of one sign from each of the $c$ crossings by [F5], so a direct scan computes it in one pass. These finite operations use no choice principle.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each crossing sign is $+1$ or $-1$, so $|\\operatorname{wr}(D)|\\le c$. Multiplication by $(-A^3)^{-\\operatorname{wr}(D)}$ shifts every Laurent exponent of the raw bracket by $-3\\operatorname{wr}(D)$ and multiplies coefficients only by a sign. Thus the absolute degree increases by at most $3c$, giving $6c+2m-2$ by [F4], while coefficient-bit size is unchanged and remains at most $m+2c+1$. For $m=1$ both bounds are linear in $c+1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $q=c+m+1$. By [F4], compute the raw bracket in $O(2^cq^4)$ bit steps in the specified representation. Summing the supplied sign bits uses an $O(\\log(q+1))$-bit signed counter and $O(c\\log(q+1))$ bit steps, rather than unit-cost unbounded arithmetic. The factor $(-A^3)^{-\\operatorname{wr}(D)}$ has sign $(-1)^{\\operatorname{wr}(D)}$ and exponent $-3\\operatorname{wr}(D)$. Allocate a dense output array with exponents from $-6q$ to $6q$ and the same $O(q)$-bit signed coefficient slots as in [F4]. For each raw slot, copy its value to the position shifted by $-3\\operatorname{wr}(D)$ and toggle the sign when necessary. There are $O(q)$ slots. Linear lookup or writing scans at most $O(q^2)$ tape cells per slot, including binary index counters, so even this naive normalization costs $O(q^3)$ bit steps. Step 1.2 ensures every shifted exponent and coefficient fits the array. This cost is absorbed in $O(2^cq^4)$, and for $m=1$ it is $O(2^c(c+1)^4)$. No arbitrary code parser or black-box arithmetic operation is assigned a false constant bit cost.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under [A1], [F5] identifies the normalized output with an invariant of the ambient-isotopy class of the oriented link. The state count, writhe pass, degree shift, coefficient estimate, and specified bit implementation in steps 1.1, 1.2, and 2.1 remain choice-free. The running-time estimate is exponential in the crossing count, and makes no polynomial-time Jones evaluation claim.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The nonempty link diagram contract requires m>=1; no empty-link extension is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 include one empty mask at c0, zero writhe, and all m>=1 crossingless components."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and2.1 retain m1 output bounds and O(2^c(c+1)^4) bit time."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles positive, negative or zero writhe, zero coefficient slots, degree offset and sign toggle without changing magnitudes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Crossing endpoints are internal incidence indices of closed diagram components, not free topological endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 confines AC_omega to ambient-link invariance; finite bit computations remain choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a bound and algorithmic realization, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a bound and algorithmic realization, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "crossingless-unlink-normalization",
+          "method": "manual exact bounded symbolic calculation",
+          "anchor_steps": [
+            "1.2",
+            "2.1"
+          ],
+          "calculation": "c0,m3 has writhe0, so normalized bracket remainsA^4+2+A^-4; degree4 iswithin6c+2m\u22122=4 and signed bit size3 iswithinm+2c+1=4.",
+          "scope_limit": "Checks zero-writhe normalization on one genuine link input only; does not establish a general runtime bound."
+        }
+      ],
+      "proof_status": "complete-local-proof",
+      "owner_resolution_evidence": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-bracket-size-repair-1/repair-report.json",
+        "scope_decision": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-bracket-size-repair-1/root-integration/plan-scope-decision.json",
+        "scope": "Focused local repaired proof and retained explicit runtime promise only; no native independent review/execution/fullgate acceptance."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-103",
+        "notes": "Checked all four steps and actual F1-F5/A1 interfaces. Exactly 2^c visits and the c-sign scan are finite. |writhe| <= c adds at most 3c to the raw degree, preserving coefficient magnitudes, hence degree 6c+2m-2 and coefficient bits m+2c+1. Binary signed counter and O(q)-slot dense shift cost O(q^3), absorbed in O(2^c q^4). Checked c=0, m=1 and crossingless unlinks. AComega is retained for ambient invariance via the normalized-bracket supplier; no parsing or unit-cost unbounded arithmetic assumption. No defect."
+      }
+    },
+    "thm-reidemeister-enumeration-is-only-a-semidecision": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-reidemeister-move-neighbors-from-code",
+          "source_section": "Definition",
+          "quote": "**Input:** A valid normalized oriented planar-diagram code $C$ for a connected one-component knot diagram, with $c$ crossings. A positive-crossing-count code records its finite crossing labels, four darts at each crossing, edge pairings, clockwise rotations, strand orientations, over/under pairs, crossing signs, and one outer face. A crossingless code records one oriented circle and its outer face.\n\n**Output:** A finite ordered list of pairs $(E,\\mu)$, where $E$ is a valid normalized one-component knot code and $\\mu$ records either the finite crossing/edge relabeling identifying the unchanged planar-isotopy class or a local disk boundary, move type, and orientation/sign variant witnessing one oriented R1, R2, or R3 move from $C$ to $E$. Different labelings of the same candidate may appear more than once.\n\n**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. To test whether two codes differ by one move, enumerate all finite choices of local edge intervals and crossing subrecords of sizes allowed by R1, R2, or R3; test that the codes agree outside the chosen disk boundary and that the two local records are one of the standard orientation/sign variants of that move. The local-site test uses the exact variants in the oriented Reidemeister-move definition.\n\n**Instructions:**\n\n1. Validate $C$ with the planar-code validation procedure. If it is invalid, return its first invalid-code result.\n2. Set $N:=c+2$ and run the bounded normalized-diagram enumerator with bound $N$. It returns a finite list of reconstructed one-component knot-diagram candidates.\n3. For each candidate, form the finite set of normalized code representatives obtained by assigning crossing labels and edge labels in every permitted order and applying the code's normalization rule.\n4. For each representative $E$, apply the finite comparison rules. Append $E$ with a relabeling certificate if it is the same code class as $C$, or with the successful local-site certificate if a comparison certifies one R1, R2, or R3 move between them. Preserve the enumerator order and retain duplicates.\n5. Return the accumulated list.\n\nThe bound $c+2$ includes every one-move result because R1 changes crossing count by one, R2 by two, and R3 by zero. This procedure lists candidates one move away; it does not decide whether two arbitrary codes are related by any number of moves.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-enumerate-diagrams-up-to-crossing-bound",
+          "source_section": "Definition",
+          "quote": "**Input:** A nonnegative integer crossing bound $N$.\n\n**Output:** A finite ordered list of reconstructed knot-diagram candidates. A\ncandidate is a `Valid` output of the planar-code validation procedure whose\ncode is a normalized planar-diagram code with one oriented component and at\nmost $N$ crossings. Repeated candidates up to crossing relabeling or planar\nisotopy are allowed; the list is not a list of knot types.\n\n**Instructions:**\n\n1. If $N$ is not a nonnegative integer, return `invalid-bound`.\n2. Initialize the output list empty. Pass the two normalized crossingless\n   one-component codes, with `ccw` and `cw` orientation markers in that order,\n   through the validator and append both outputs first.\n3. For each $c=1,\\ldots,N$ in increasing order, use crossing labels\n   $\\{1,\\ldots,c\\}$ and the four normalized dart positions at each crossing.\n   Enumerate every crossing-sign vector in lexicographic order, with\n   $-1<+1$. The sign determines the incoming and outgoing positions at each\n   crossing by the normalized-code convention.\n4. For each sign vector, enumerate every bijection from the set of its\n   $2c$ outgoing darts to its $2c$ incoming darts in lexicographic order.\n   Pair each outgoing dart with its image to obtain the edge involution, and\n   assign edge labels by the normalized-code rule.\n5. Compute the cycles of $\\phi=\\alpha\\circ\\sigma$ for each pairing. For each\n   cycle, in increasing order of its least dart, select that cycle in turn as\n   the outer face and form the corresponding normalized PD code.\n6. Pass each code through the planar-code validation procedure. Append its\n   reconstructed output if and only if the validator returns `Valid` and the\n   directed component tracing has exactly one cycle. Return the list after\n   the finite loops end.\n\nThis procedure enumerates normalized finite codes and reconstructed diagrams;\nit neither identifies equivalent codes nor decides whether two candidates\nrepresent isotopic knots.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every nonnegative integer $N$, the bounded enumeration procedure\nterminates and returns exactly the reconstructed candidates represented by\nnormalized connected one-component planar-diagram codes with at most $N$\ncrossings. Each returned candidate has a valid spherical face structure and a\nselected outer face. The procedure does not identify candidates that represent\nthe same knot type.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every finite input in the three code formats, the validation and\nreconstruction procedure terminates. It returns an invalid-code reason\nexactly when the first failed syntax, incidence, orientation, component,\nconnectedness, face-count, or outer-face condition in its stated order occurs;\notherwise it returns the crossing-disk/edge-band model of the represented\noriented diagram, its oriented components, its face cycles, and its selected\nouter face.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-valid-code-reconstructs-the-declared-link-diagram",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every valid connected one-component\noriented code with a selected outer face, the reconstruction procedure\nproduces a regular oriented diagram representing that code. Any two such\ndiagrams with the same code differ only by crossing and edge relabeling and\nare planar isotopic. The normalized planar-diagram code of a diagram with $c$\ncrossings appears among the candidates enumerated at bound $c$. This statement\nconcerns diagrams and their finite codes; it does not identify distinct codes\nthat may represent the same knot type. The finite realization and enumeration\nclaims are choice-free; $\\mathrm{AC}_\\omega$ is assumed only for the smooth\nambient-isotopy uniqueness clause.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-breadth-first-reidemeister-search",
+          "source_section": "Definition",
+          "quote": "**Input:** Two valid normalized oriented planar-diagram codes $C_0,C_1$ for connected one-component knot diagrams.\n\n**Output:** The algorithm returns Found(path) only if it has a finite sequence of code classes from $C_0$ to $C_1$, with a finite local-move certificate for each adjacent pair. It has no negative-output branch. It may run forever if the target code class is never reached.\n\n**Instructions:**\n\n1. Validate both input codes using the planar-code validation procedure. If either is invalid, return that first invalid-code result. For each valid code, form its canonical representative by checking all bijections of its finite crossing labels and edge labels, recomputing the prescribed edge normalization, and selecting the lexicographically least resulting code.\n2. Set the initial frontier to the singleton containing the canonical representative of $C_0$. Initialize a discovered-code set with that representative and an empty predecessor record.\n3. At the beginning of each breadth layer, test every code in the current frontier against the canonical representative of $C_1$. If one matches, follow its stored predecessor records back to $C_0$, reverse the resulting finite list, and return the path with its move certificates.\n4. Otherwise, for each code $C$ in the current frontier, call the Reidemeister-neighbor algorithm. For each returned pair $(E,\\mu)$, canonicalize $E$ by the finite relabeling procedure in step 1. If its canonical representative has not been discovered, add it to the next frontier and store $(C,\\mu)$ as its predecessor record.\n5. Replace the current frontier by the next frontier and repeat from step 3. If a layer is empty, continue with empty layers; do not return \u201cinequivalent.\u201d\n\nCode equality in this procedure means equality of canonical representatives under the finite crossing/edge relabelings of the normalized code convention. Every loop in one layer is finite; the number of layers has no fixed bound.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a code $C$ with $c$ crossings. The neighbor procedure uses bound $c+2$. By [F2] and [F3], this yields a finite candidate list containing every normalized connected one-component code with at most $c+2$ crossings. Each candidate has finitely many crossing labels, edge labels, and local edge intervals; the number of relabelings, subsets of at most three local crossings, boundary orders, and move variants is finite. Each candidate validation terminates by [F4]. Thus the neighbor list is finite and its local comparisons terminate.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the neighbor procedure returns $(E,\\mu)$, its certificate $\\mu$ records either a code relabeling or a local code replacement matching one of the oriented Reidemeister variants, so [F4] and [F5] identify the represented diagrams up to planar isotopy and that one local move. Conversely, any single R1, R2, or R3 move changes the crossing count by at most two. Its result therefore appears among the candidates bounded by $c+2$ by [F3]. The move disk has two, four, or six boundary endpoints and at most three local crossing records; these are among the finite sites and variants checked by [F1]. Relabeling its finite code data is also among the finite bijections tested. Hence every one-move neighbor is returned.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The initial breadth frontier is a singleton. If a frontier is finite, [F1] and step 1.1 give a finite neighbor list for each of its members; a finite union of finite lists is finite. By induction every layer is finite and is processed in finite time, including an empty layer, which the algorithm repeats without returning a negative answer.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the search returns a path, every adjacent pair has a certificate from [F1]. By step 2.1 each such pair differs by planar isotopy or one oriented Reidemeister move; concatenating the finitely many certificates gives a finite move sequence between the input diagrams. The easy direction of [F7] therefore gives ambient isotopy.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If the represented oriented knots are ambient-isotopic, [A1] and [F7] give a finite sequence of planar isotopies and oriented Reidemeister moves. By [F5], each intermediate diagram has a valid normalized code class. By step 2.1, the code class after each move appears in the corresponding neighbor list. Induction on the finite path length therefore places the target code class in a finite breadth layer; by step 2.2 that layer finishes, and [F6] returns the path.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 2.2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The algorithm has no negative-output branch by [F6]. If no finite move path exists, it never returns Found(path); any finite-depth run that has not found the target establishes only that no path of that bounded length was found. The finite enumeration proves no decision or complexity-class conclusion. Finite neighbor generation and breadth-layer processing are choice-free; $\\mathrm{AC}_\\omega$ is used only in [F5] and [F7] to interpret code and ambient-isotopy equivalence.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is connected one-component knot diagrams, not the empty link."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 include a crossingless one-component code and finite breadth layers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use the crossing bound c+2 and finite comparisons for every finite c."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 explicitly handles finite and empty layers; step 4.1 rules out negative output."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Knot diagrams are closed one-component diagrams and have no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 limits AC\u03c9 to code/ambient semantics; finite layer processing is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that any returned path gives ambient isotopy."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 proves that ambient isotopy yields a finite path eventually found by the search."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: finite candidate list and terminating local comparisons.",
+          "evidence": "step 1.1"
+        },
+        {
+          "check": "2.1: every one-move neighbor falls within c+2 crossings and the finite local checks.",
+          "evidence": "step 2.1"
+        },
+        {
+          "check": "2.2: induction that every breadth layer is finite.",
+          "evidence": "step 2.2"
+        },
+        {
+          "check": "3.1: a returned path yields ambient isotopy.",
+          "evidence": "step 3.1"
+        },
+        {
+          "check": "3.2: an ambient-isotopy move sequence is found at finite depth.",
+          "evidence": "step 3.2"
+        },
+        {
+          "check": "4.1: no negative-output branch.",
+          "evidence": "step 4.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-103",
+        "notes": "Checked six proof steps, all eight direct suppliers and the actual validation, bounded enumeration, neighbor and BFS instructions. Bound c+2 includes every R1/R2/R3 result. The enumerator exhausts 2^c sign choices, (2c)! directed pairings and finitely many outer faces; c=0 includes both orientations. Finite disk sites, relabelings and move-variant comparisons give finite sound complete neighbors using standard Reidemeister templates. Induction gives finite breadth layers and eventual target detection along any finite path; discovered-set suppression preserves shortest reachability. Certificates compose, identical initial code returns depth zero, empty frontiers loop, and inequivalent inputs have no positive or negative return. AComega is retained for smooth code-isotopy semantics and ambient Reidemeister implication. Published move definition has a nonfatal missing-picture referral, independently reviewed separately; no false template or fatal premise found. No decision/complexity-class overclaim."
+      }
+    },
+    "ex-knot-kt-48-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-kauffman-bracket-state-sum-procedure-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an indeterminate and let $D$ be a typed nonempty unoriented regular\nlink diagram with finite crossing set $C(D)$. At each crossing use the chart\nwith the over-strand southwest-to-northeast: A joins the left endpoints and the\nright endpoints with weight $A$, while B joins the top endpoints and bottom\nendpoints with weight $A^{-1}$. The Kauffman bracket state-sum algorithm\nterminates after exactly $2^{|C(D)|}$ state visits and returns\n$$\\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1},$$\nwhere $a(S)$ and $b(S)$ count the two smoothing types and $|S|$ counts the\ncircles in the smoothed diagram. The algorithm takes a mathematical diagram\nas input and makes no claim about parsing strings or rejecting malformed\nencodings.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quandle-and-knot-coloring",
+          "source_section": "Definition",
+          "quote": "A **quandle** is a set $Q$ with a binary operation $*:Q\\times Q\\to Q$ such that:\n\n1. $x*x=x$ for every $x\\in Q$;\n2. for every $y\\in Q$, the right translation $R_y:Q\\to Q$, $R_y(x)=x*y$, is a bijection;\n3. $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in Q$.\n\nWrite $x\\mathbin{\\bar *}y:=R_y^{-1}(x)$ for the unique element satisfying\n$(x\\mathbin{\\bar *}y)*y=x$. Let $D$ be a regular oriented link diagram. An\n**arc** of $D$ is a connected strand segment cut at each crossing where that\nstrand passes under; an overstrand continues through its crossing. Orient the\nprojection plane. Along an oriented overarc with tangent $t$, let $n$ be the\nunit normal in the plane for which $(t,n)$ is positively oriented. At each\ncrossing, call the underarc from which $n$ points the source underarc and the\nunderarc toward which $n$ points the target underarc. A **quandle coloring**\nof $D$ by $Q$ is an assignment $c$ of an element of $Q$ to every arc such\nthat, at each crossing, if the source, over, and target colors are $a,b,d$,\nthen $d=a*b$. Equivalently, when the source and target are named in the\nopposite order, $a=d\\mathbin{\\bar *}b$. Write $\\operatorname{Col}_Q(D)$ for\nthe set of all such assignments.\n\nThe local convention is shown below. The overarc is oriented from southwest\nto northeast, so its positive normal points northwest; the underarc is\noriented from southeast to northwest. Thus $x$ is the source color, $y$ is\nthe overarc color, and $z=x*y$ is the target color. The gap marks the\nunderpassing strand.\n\n```tikz\n\\begin{tikzpicture}[scale=1]\n  \\draw[->] (1.15,-1.15) -- (0.18,-0.18);\n  \\draw[->] (-0.18,0.18) -- (-1.15,1.15);\n  \\draw[->,line width=1.2pt] (-1.15,-1.15) -- (1.15,1.15);\n  \\node at (0.92,-0.82) {$x$};\n  \\node at (-0.82,-0.82) {$y$};\n  \\node at (-0.82,0.92) {$z$};\n  \\node[right] at (1.25,0.05) {$z=x*y$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-dihedral-fox-colorings",
+          "source_section": "Definition",
+          "quote": "Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,\nfixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set\n$\\operatorname{Col}_p(D)$ of assignments of residues in $\\mathbb F_p$ to the\narcs satisfying the Fox crossing equations, together with\n$|\\operatorname{Col}_p(D)|$.\n\n1. Create one variable $x_j$ for each arc in the supplied order, and process\n   crossings in the supplied order.\n2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append\n   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\\mathbb F_p$.\n   At a crossing, add the coefficients of any repeated arc in that row.\n3. Set the next pivot-row index to $r=1$ and process columns from left to\n   right. If $r>c$, mark this and every remaining column free and stop. If\n   $r\\le c$, search rows $r,\\ldots,c$ in order for the first nonzero entry in\n   the current column. If none exists, mark this column free and continue\n   without changing $r$. Otherwise swap the selected row into row $r$, divide\n   row $r$ by its nonzero entry in this column, and add multiples of row $r$\n   to every other row to clear this column. Record this column as a pivot\n   column with pivot row $r$, then increase $r$ by one. After the scan, every\n   column not recorded as a pivot column is free.\n4. List the free columns in increasing order and enumerate every tuple in\n   $\\mathbb F_p^f$ in lexicographic order using the residue representatives\n   $0,\\ldots,p-1$, where $f$ is the number of free columns. If $f=0$, process\n   the empty tuple once. For each tuple, assign its coordinates to the free\n   variables. For each pivot row, set its pivot variable equal to the negative\n   of the sum of the row's free-column coefficients times those assigned free\n   variables. Append the resulting assignment in the supplied arc order.\n   Return all appended assignments and their number.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$ and every finite regular oriented link diagram $D$,\nthe algorithm in the Definition terminates and returns exactly\n$\\operatorname{Col}_p(D)$. If its reduced system has $f$ free variables, it\nreturns $p^f$ colorings. For a diagram with $a$ arcs and $c$ crossings it uses\nat most $\\min(a,c)$ pivots, at most $ac$ pivot-search entry tests, at most $ac$\nrow additions to clear pivot columns, at most $a^2c$ coefficient updates in\nthose row additions, and at most $a^2$ divisions to normalize pivot rows.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+          "source_section": "Statement",
+          "quote": "Let $p$ be an odd prime. A Fox $p$-coloring of a finite regular oriented link diagram $D$ assigns an element of $\\mathbb F_p$ to each arc and satisfies $2x_o=x_i+x_j$ at every crossing, where $x_o$ is the overarc color and $x_i,x_j$ are the two underarc colors. If $D'$ is obtained from $D$ by planar isotopy or one oriented Reidemeister move of type R1, R2, or R3, restriction outside the move disk gives a bijection from the Fox $p$-colorings of $D$ to those of $D'$. Consequently the number of Fox $p$-colorings is unchanged along every finite sequence of such moves. The local bijections use no choice principle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $c=8$, the state-count formula in [F1] gives $2^8=256$ visits.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The stated incidences and [F3] give the equations $2x_1-x_2-x_3=0$, $2x_2-x_3-x_1=0$, and $2x_3-x_1-x_2=0$. In $\\mathbb F_3$, $-1=2$, so all three rows are $(2,2,2)$. Row reduction leaves one nonzero row and two zero rows, hence one pivot and two free variables. By [F4], the algorithm returns $3^2=9$ trefoil colorings.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The crossingless unknot has one arc and no crossing equations, so its matrix has one column and zero rows, rank zero, and one free variable. By [F4], it has $3^1=3$ colorings.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The crossing equation $2x_o=x_i+x_j$ is symmetric in the two underarc colors and independent of strand arrows, so reversing a component orientation does not change its Fox coloring set. If the trefoil and unknot were ambient-isotopic as unoriented knots, choose their orientations so the equivalence preserves orientation. By [A1] and [F6] the oriented diagrams would then be joined by a finite Reidemeister sequence, and [F5] would force equal coloring counts. The computed values $9$ and $3$ contradict this, so the underlying knot types are distinct.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns nonempty knot diagrams; the crossingless unknot is a nonempty circle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 explicitly treats the crossingless unknot with one free arc color."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.3 give explicit state and coloring counts for the stated finite diagrams."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles coincident matrix rows and computes rank one; step 1.3 handles a zero-row matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The trefoil and unknot are closed knot diagrams with no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.3 are finite computations; step 2.1 isolates AC\u03c9 to the knot-type distinction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes concrete counts and one distinction, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes concrete counts and one distinction, not an iff characterization."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: 2^8=256 state visits.",
+          "evidence": "step 1.1"
+        },
+        {
+          "check": "1.2: the three F3 rows reduce to one nonzero row and yield 9 solutions.",
+          "evidence": "step 1.2"
+        },
+        {
+          "check": "1.3: the one-column zero-row unknot system yields 3 solutions.",
+          "evidence": "step 1.3"
+        },
+        {
+          "check": "2.1: orientation independence and invariant-based knot distinction.",
+          "evidence": "step 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-103",
+        "notes": "Checked full Example, four Verification steps and nine suppliers. 2^8=256 counts states without asserting an evaluated bracket. Over F3 the three specified rows all equal (2,2,2), rank 1, nullity 2, giving 9; crossingless unknot gives 3. Orientation independence plus AComega Reidemeister theorem gives the underlying knot distinction. Traced the TikZ closed two-strand three-crossing braid: arcs continue through overcrossings and terminate at undercrossing gaps; C1 has over x1, C2 over x2, C3 over x3, with the other two arcs under at each. Downward braid/upward closure orientations are consistent and the closure has one component. Title-only reader change is accurate; no mathematical/interface change or further repair."
+      }
+    },
+    "cex-knot-kt-48-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "An **oriented Reidemeister move** is one of the following local replacements of\na regular oriented link diagram ([[def-regular-oriented-link-diagram]]),\nperformed inside a small closed disk while the diagram outside the disk is left\nunchanged, and understood up to planar isotopy outside the disk\n([[def-planar-isotopy-of-link-diagrams]]). All sign and orientation variants of\neach local picture are included.\n\n**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.\n\nA local R2 or R3 picture is **braid-like** when, after a local coordinate\nchange and deformation, all participating strands run in the same positive\nlongitudinal direction. This is a local condition and does not require a\nglobally chosen braid axis. R1 is kept as a separate kink move.\n\nThe strands keep their orientations throughout every move. The union of the\nthree move types, together with planar isotopy, generates the equivalence\nrelation on diagrams used in the Reidemeister equivalence theorem below; the\nmoves are sometimes called R1, R2, R3 as above. Since every move changes the\ndiagram only inside a disk, it has a type and a finite list of local\norientation/sign variants, and each variant is realized by an ambient isotopy\nas the next items show. The complete list of variants is required because the\nMarkov and Alexander constructions below act on oriented diagrams and count\nsigned crossings.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-breadth-first-reidemeister-search",
+          "source_section": "Definition",
+          "quote": "**Input:** Two valid normalized oriented planar-diagram codes $C_0,C_1$ for connected one-component knot diagrams.\n\n**Output:** The algorithm returns Found(path) only if it has a finite sequence of code classes from $C_0$ to $C_1$, with a finite local-move certificate for each adjacent pair. It has no negative-output branch. It may run forever if the target code class is never reached.\n\n**Instructions:**\n\n1. Validate both input codes using the planar-code validation procedure. If either is invalid, return that first invalid-code result. For each valid code, form its canonical representative by checking all bijections of its finite crossing labels and edge labels, recomputing the prescribed edge normalization, and selecting the lexicographically least resulting code.\n2. Set the initial frontier to the singleton containing the canonical representative of $C_0$. Initialize a discovered-code set with that representative and an empty predecessor record.\n3. At the beginning of each breadth layer, test every code in the current frontier against the canonical representative of $C_1$. If one matches, follow its stored predecessor records back to $C_0$, reverse the resulting finite list, and return the path with its move certificates.\n4. Otherwise, for each code $C$ in the current frontier, call the Reidemeister-neighbor algorithm. For each returned pair $(E,\\mu)$, canonicalize $E$ by the finite relabeling procedure in step 1. If its canonical representative has not been discovered, add it to the next frontier and store $(C,\\mu)$ as its predecessor record.\n5. Replace the current frontier by the next frontier and repeat from step 3. If a layer is empty, continue with empty layers; do not return \u201cinequivalent.\u201d\n\nCode equality in this procedure means equality of canonical representatives under the finite crossing/edge relabelings of the normalized code convention. Every loop in one layer is finite; the number of layers has no fixed bound.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "Let $P$ be the projection plane in an oriented $3$-sphere and let $n$ be the\nunit viewing normal pointing toward the viewer. Orient $P$ so that $(u,v)$ is\na positive basis exactly when $(n,u,v)$ is a positive ambient basis. A\n**crossing code** has a\nfinite set $C$ of crossing labels and a finite set $D$ of **darts**, where a\ndart is one directed half-edge incident to a crossing. A fixed-point-free\ninvolution $\\alpha:D\\to D$ pairs the two ends of each edge: $\\alpha^2=\\mathrm{id}$\nand $\\alpha(d)\\ne d$. A vertex map $v:D\\to C$ records the crossing incident to\neach dart. A **rotation system** is the permutation $\\sigma$ whose cycles give\nthe clockwise order of darts at each crossing. Each crossing has four darts;\nthe two over-strand darts and the two under-strand darts are opposite in that\ncyclic order. An arrow on each dart records whether its edge is directed into\nor out of its incident crossing. The pairing $\\alpha$ must join one incoming\nend to one outgoing end. At a crossing, each opposite pair has one incoming\nand one outgoing dart, so following an edge and then the opposite dart defines\nthe oriented link components. A code is **connected** when the graph with\nvertices $C$ and edges the $\\alpha$-pairs is connected.\n\nThe sign of an oriented crossing is $+1$ or $-1$ according as\n$\\det(v_{\\rm over},v_{\\rm under})$ is positive or negative, where the two\ntangent vectors follow the oriented over- and under-strands. This item fixes\nthe local cyclic-order convention as follows. Starting with the outgoing\nover-dart and reading counterclockwise, a positive crossing has order\n$(O_{\\rm out},U_{\\rm out},O_{\\rm in},U_{\\rm in})$; a negative crossing has\norder $(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$. The stored crossing\nsign and cyclic order must agree. This is the page's explicit sign convention.\nIt agrees with the current KT-03 supplier: reversing its positive\ncounterclockwise order from outgoing over gives the clockwise record\n$(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$.\n\nFor a nonempty connected crossing graph, let $V=|C|$, $E=|D|/2$, and let\n$F$ be the number of cycles of the face permutation $\\phi=\\alpha\\circ\\sigma$.\nA **spherical code** is a code satisfying $V-E+F=2$. A spherical code becomes a\n**plane code** by distinguishing one face as the outer face and deleting a\npoint in that face from the sphere. The crossingless one-component code is a separate case: its Gauss data are one empty component word, its DT pairing and crossing-sign vector are empty at $c=0$, and its PD data are the single loop `Loop[1]`; every format also carries an orientation marker, `ccw` or `cw`, for the unit circle $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ in the oriented plane, and the outer-face marker is `outside`. Thus the crossingless code records which direction orients its circle. It has no crossing graph or face-permutation test. Disconnected crossing graphs and disconnected crossingless links are outside this code class.\n\nA **normalized planar-diagram code** with $c>0$ has crossing labels\n$C=\\{1,\\ldots,c\\}$ and four dart positions $0,1,2,3$ at each crossing, in\nclockwise order beginning with the outgoing over-dart. The opposite pair\n$(0,2)$ is over and $(1,3)$ is under. For sign $+1$, the clockwise record is\n$(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$; for sign $-1$ it is\n$(O_{\\rm out},U_{\\rm out},O_{\\rm in},U_{\\rm in})$. Edge labels are assigned\nby scanning crossings in increasing order and their four dart positions in\norder, giving the next positive integer to the pair containing the first\nnot-yet-labelled dart. The outer face is recorded by its least dart in its\nface cycle. These rules remove arbitrary edge-name and face-name choices;\ndifferent crossing labelings may still represent the same diagram. At $c=0$\na normalized code is the crossingless record with one of the two orientation\nmarkers above.\n\nA **Gauss code** for an oriented diagram records, in traversal order on each\noriented component, a signed crossing label: $+j$ means the component passes\nover at crossing $j$, and $-j$ means it passes under. For a knot there is one\ncyclic word; for a link there is one cyclic word per component. Each crossing\nlabel must occur exactly twice in total, once positively and once negatively.\nWhen $c>0$, every listed component word is nonempty; a separate crossingless\ncomponent is not part of this code class. The zero-crossing case is only the\none-component code specified above.\nThe code also carries a separate algebraic crossing-sign vector\n$\\varepsilon_j\\in\\{+1,-1\\}$, one entry for each label. Choosing a basepoint\nturns the knot's cyclic word into a based word; changing the basepoint\ncyclically shifts the word, and relabeling crossings changes only their names.\nThe visit order, over/under signs, and crossing-sign vector determine the\ncrossing rotation system; it is realizable in the sphere only when the\nresulting code is spherical. A plane Gauss code also carries an identifier of\none cycle of its face permutation to designate the outer face.\n\nA **signed Dowker\u2013Thistlethwaite code**, in this page's convention, encodes a\nbased oriented knot with $c$ crossings by numbering its $2c$ visits\n$1,\\ldots,2c$ in traversal order. For each odd visit $2j-1$, record the even\nvisit $2k$ paired with it as $d_j=+2k$ when the odd visit is over and\n$d_j=-2k$ when it is under; also record the algebraic crossing sign\n$\\varepsilon_j\\in\\{+1,-1\\}$ for crossing label $j$, the pair containing odd\nvisit $2j-1$. Its parity conditions are that\n$|d_1|,\\ldots,|d_c|$ are exactly the even numbers $2,4,\\ldots,2c$, each once,\nand each paired crossing has one over-visit and one under-visit. The separate\n$\\varepsilon_j$ records the crossing sign; signed DT conventions elsewhere\nmay encode signs differently. The associated cyclic traversal and crossing\nsigns determine a rotation system, which must pass the same spherical\nrealizability test. A plane DT code also carries an identifier of one cycle\nof its face permutation to designate the outer face.\n\nAn **oriented planar-diagram code** labels each edge segment by an integer and\nlists its two incident darts at crossing records. Each crossing record lists\nits four directed edge ends in clockwise order, beginning with the outgoing\nover-dart, and records which opposite pair is over, the orientation of each\nstrand, and the crossing sign. Every edge label occurs exactly twice, once as\nan incoming end and once as an outgoing end. The code must satisfy the local\ncrossing-order rule above; its crossing graph must be connected when nonempty;\nand its rotation system must satisfy $V-E+F=2$. The record also carries an\nidentifier of one cycle of its face permutation as the outer face. Thus an\narbitrary word in labels, even when each label occurs twice, is not declared\nrealizable until all incidence, orientation, crossing, connectedness, and\nface-count tests pass.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-valid-code-reconstructs-the-declared-link-diagram",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every valid connected one-component\noriented code with a selected outer face, the reconstruction procedure\nproduces a regular oriented diagram representing that code. Any two such\ndiagrams with the same code differ only by crossing and edge relabeling and\nare planar isotopic. The normalized planar-diagram code of a diagram with $c$\ncrossings appears among the candidates enumerated at bound $c$. This statement\nconcerns diagrams and their finite codes; it does not identify distinct codes\nthat may represent the same knot type. The finite realization and enumeration\nclaims are choice-free; $\\mathrm{AC}_\\omega$ is assumed only for the smooth\nambient-isotopy uniqueness clause.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-quandle-and-knot-coloring",
+          "source_section": "Definition",
+          "quote": "A **quandle** is a set $Q$ with a binary operation $*:Q\\times Q\\to Q$ such that:\n\n1. $x*x=x$ for every $x\\in Q$;\n2. for every $y\\in Q$, the right translation $R_y:Q\\to Q$, $R_y(x)=x*y$, is a bijection;\n3. $(x*y)*z=(x*z)*(y*z)$ for all $x,y,z\\in Q$.\n\nWrite $x\\mathbin{\\bar *}y:=R_y^{-1}(x)$ for the unique element satisfying\n$(x\\mathbin{\\bar *}y)*y=x$. Let $D$ be a regular oriented link diagram. An\n**arc** of $D$ is a connected strand segment cut at each crossing where that\nstrand passes under; an overstrand continues through its crossing. Orient the\nprojection plane. Along an oriented overarc with tangent $t$, let $n$ be the\nunit normal in the plane for which $(t,n)$ is positively oriented. At each\ncrossing, call the underarc from which $n$ points the source underarc and the\nunderarc toward which $n$ points the target underarc. A **quandle coloring**\nof $D$ by $Q$ is an assignment $c$ of an element of $Q$ to every arc such\nthat, at each crossing, if the source, over, and target colors are $a,b,d$,\nthen $d=a*b$. Equivalently, when the source and target are named in the\nopposite order, $a=d\\mathbin{\\bar *}b$. Write $\\operatorname{Col}_Q(D)$ for\nthe set of all such assignments.\n\nThe local convention is shown below. The overarc is oriented from southwest\nto northeast, so its positive normal points northwest; the underarc is\noriented from southeast to northwest. Thus $x$ is the source color, $y$ is\nthe overarc color, and $z=x*y$ is the target color. The gap marks the\nunderpassing strand.\n\n```tikz\n\\begin{tikzpicture}[scale=1]\n  \\draw[->] (1.15,-1.15) -- (0.18,-0.18);\n  \\draw[->] (-0.18,0.18) -- (-1.15,1.15);\n  \\draw[->,line width=1.2pt] (-1.15,-1.15) -- (1.15,1.15);\n  \\node at (0.92,-0.82) {$x$};\n  \\node at (-0.82,-0.82) {$y$};\n  \\node at (-0.82,0.92) {$z$};\n  \\node[right] at (1.25,0.05) {$z=x*y$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-dihedral-fox-colorings",
+          "source_section": "Definition",
+          "quote": "Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,\nfixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set\n$\\operatorname{Col}_p(D)$ of assignments of residues in $\\mathbb F_p$ to the\narcs satisfying the Fox crossing equations, together with\n$|\\operatorname{Col}_p(D)|$.\n\n1. Create one variable $x_j$ for each arc in the supplied order, and process\n   crossings in the supplied order.\n2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append\n   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\\mathbb F_p$.\n   At a crossing, add the coefficients of any repeated arc in that row.\n3. Set the next pivot-row index to $r=1$ and process columns from left to\n   right. If $r>c$, mark this and every remaining column free and stop. If\n   $r\\le c$, search rows $r,\\ldots,c$ in order for the first nonzero entry in\n   the current column. If none exists, mark this column free and continue\n   without changing $r$. Otherwise swap the selected row into row $r$, divide\n   row $r$ by its nonzero entry in this column, and add multiples of row $r$\n   to every other row to clear this column. Record this column as a pivot\n   column with pivot row $r$, then increase $r$ by one. After the scan, every\n   column not recorded as a pivot column is free.\n4. List the free columns in increasing order and enumerate every tuple in\n   $\\mathbb F_p^f$ in lexicographic order using the residue representatives\n   $0,\\ldots,p-1$, where $f$ is the number of free columns. If $f=0$, process\n   the empty tuple once. For each tuple, assign its coordinates to the free\n   variables. For each pivot row, set its pivot variable equal to the negative\n   of the sum of the row's free-column coefficients times those assigned free\n   variables. Append the resulting assignment in the supplied arc order.\n   Return all appended assignments and their number.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dihedral-fox-colorings-terminate-and-are-correct",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$ and every finite regular oriented link diagram $D$,\nthe algorithm in the Definition terminates and returns exactly\n$\\operatorname{Col}_p(D)$. If its reduced system has $f$ free variables, it\nreturns $p^f$ colorings. For a diagram with $a$ arcs and $c$ crossings it uses\nat most $\\min(a,c)$ pivots, at most $ac$ pivot-search entry tests, at most $ac$\nrow additions to clear pivot columns, at most $a^2c$ coefficient updates in\nthose row additions, and at most $a^2$ divisions to normalize pivot rows.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-dihedral-fox-coloring-count-is-reidemeister-invariant",
+          "source_section": "Statement",
+          "quote": "Let $p$ be an odd prime. A Fox $p$-coloring of a finite regular oriented link diagram $D$ assigns an element of $\\mathbb F_p$ to each arc and satisfies $2x_o=x_i+x_j$ at every crossing, where $x_o$ is the overarc color and $x_i,x_j$ are the two underarc colors. If $D'$ is obtained from $D$ by planar isotopy or one oriented Reidemeister move of type R1, R2, or R3, restriction outside the move disk gives a bijection from the Fox $p$-colorings of $D$ to those of $D'$. Consequently the number of Fox $p$-colorings is unchanged along every finite sequence of such moves. The local bijections use no choice principle.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Starting with $U_0$, insert $2N+1$ disjoint type-I kinks, one at a time, to form a diagram $U_N$. Each insertion is one R1 move, so deleting the kinks gives an explicit sequence of $2N+1$ moves from $U_N$ to $U_0$. Both diagrams are regular one-component knot diagrams; their normalized codes are valid and occur among the enumerated candidates at their crossing bounds by [F3] and [F4]. By [A1] and [F9], the finite move sequence makes the represented oriented knots equivalent.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The crossing count difference is $c(U_N)-c(U_0)=2N+1$. By [F1], any single Reidemeister move changes crossing count by at most two. A path of at most $N$ moves could therefore change the crossing count by at most $2N$, so no such path connects these two diagrams. The search through depth $N$ completes its finite layers by [F2] without finding a path, although the diagrams are equivalent by step 1.1. This refutes the statement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The crossingless unknot has one arc and no crossing equations, so [F5]\u2013[F7] give $3^1=3$ Fox 3-colorings. For the standard trefoil with arcs $x_1,x_2,x_3$, the crossing equations are $2x_1-x_2-x_3=0$, $2x_2-x_3-x_1=0$, and $2x_3-x_1-x_2=0$. In $\\mathbb F_3$, $-1=2$, so all rows are $(2,2,2)$; the matrix has rank one and two free variables, giving $3^2=9$ colorings by [F6] and [F7]. These equations do not use strand arrows, so reversing either orientation leaves the count unchanged. If the underlying unoriented knots were ambient-isotopic, orient them compatibly; [A1] and [F9] give a finite oriented move sequence, and [F8] forces the counts to agree, contradicting $3\\ne9$. Thus the Fox count is an actual distinction, while a finite failed search alone is not one.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample domain is connected one-component knot diagrams, not the empty link."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 begins with the crossingless unknot, and step 2.1 uses its zero crossing count."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=0, steps 1.1\u20132.1 give one kink and a crossing difference of one, so the argument includes the first depth."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include the N=0 boundary and the crossingless unknot/trefoil comparison."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All diagrams are closed one-component knot diagrams with no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 are finite and choice-free; step 3.1 uses AC\u03c9 only for the ambient knot-type implication."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false assertion is a one-way bounded-search implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false assertion is a one-way bounded-search implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: construct 2N+1 disjoint R1 kinks and the finite equivalence witness.",
+          "evidence": "step 1.1"
+        },
+        {
+          "check": "2.1: crossing count changes by at most 2N in N moves, so the chosen pair has no such path.",
+          "evidence": "step 2.1"
+        },
+        {
+          "check": "3.1: independently compute the 3 and 9 Fox coloring counts.",
+          "evidence": "step 3.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-103",
+        "notes": "Checked the complete universal Statement refuted and all three counterexample steps against all eleven direct suppliers. For every N>=0, inserting 2N+1 disjoint R1 kinks on the oriented circle gives valid connected one-component codes and explicit finite equivalence. Crossing count changes at most 2 per move, so no <=N path connects crossing counts 0 and 2N+1, including N=0. Finite BFS layers terminate without yielding a negative certificate. The independent trefoil F3 matrix has all rows (2,2,2), rank 1 and nine colorings; unknot has three. Orientation-free equations and the AComega Reidemeister theorem justify the knot distinction. No claim that knot equivalence is undecidable, or that failed bounded search separates knots. No diagram required beyond explicit kink construction and incidence equations. No defect."
+      }
+    }
+  }
+}

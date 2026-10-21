@@ -9,7 +9,7 @@ page: branched-cover-correction-terms-and-sliceness
 deps:
   - def-heegaard-floer-correction-term
   - lem-rational-ball-spin-c-cobordism-map-inequality
-dependency_level: 3
+dependency_level: 4
 justified_by: []
 aliases: []
 proof_strategy: direct

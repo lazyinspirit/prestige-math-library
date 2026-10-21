@@ -1,0 +1,724 @@
+[
+  {
+    "order": 3206,
+    "id": "alternating-diagrams-and-crossing-number-minimality",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Alternating diagrams and crossing-number minimality",
+    "companion": "alternating-diagrams-and-crossing-number-minimality-examples",
+    "requires": [
+      "crossing-signs-writhe-and-linking-number",
+      "kauffman-bracket-state-sum-and-jones-polynomial"
+    ],
+    "items": [
+      {
+        "id": "def-crossing-number-of-link",
+        "kind": "definition",
+        "title": "Crossing number of a link",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-countable-choice",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "thm-well-ordering-principle"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $K$ be an unoriented link type in $S^3$. Its **crossing number** $c(K)$ is the least element of\n$$\\{\\,n\\in\\mathbb N:\\text{some regular diagram of }K\\text{ has exactly }n\\text{ crossings}\\,\\}.$$",
+        "strategy": "The regular-projection supplier makes the set of realized natural crossing counts nonempty under AC_omega; well-ordering of the natural numbers gives its least element without further choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §1.9, printed pp. 7–8",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "William W. Menasco and Morwen B. Thistlethwaite, The classification of alternating links, Annals of Mathematics 138 (1993), pp. 113–171",
+              "url": "https://doi.org/10.2307/2946636"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Countable choice is used only by the supplier guaranteeing a regular projection for every oriented link; the least-element argument on natural numbers is choice-free."
+      },
+      {
+        "id": "def-flype-crossing-ball-and-alternating-tangle-data",
+        "kind": "definition",
+        "title": "Flypes, crossing balls, and standard-position Conway spheres",
+        "deps": [
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 0,
+        "statement": "A **2-tangle diagram** is a regular diagram in a disk of two properly embedded tangle arcs and possibly finitely many closed tangle components, with four specified endpoints on the disk boundary; the arcs and circles are disjoint in the represented 3-ball, while their projections may have crossings. A **flyping circle** is a simple closed curve in the projection sphere whose intersection with the diagram consists of exactly three points, exactly one of which is a crossing; the circle is transverse to both branches at that crossing and to the diagram at the other two points. A small annular neighborhood of this circle has two complementary tangle disks. A **flype** fixes the tangle in one disk, interchanges which pair of strands crosses in the annular neighborhood, and turns over the tangle in the other disk: its projected tangle is reflected and all its over-under crossing data are reversed. This turnover is a half-turn in three-dimensional space about an axis in the projection sphere. Component orientations are transported by this motion, and the exterior diagram is fixed. The move with the opposite choice of fixed disk is also allowed; a disk containing no crossings is allowed. A flype whose fixed tangle has no crossings is called an **entire flype**. Diagrams are drawn on the oriented projection sphere; a **sphere planar isotopy** is an orientation-preserving smooth isotopy of that sphere carrying the decorated diagram. A plane diagram is obtained by choosing a point of the sphere outside the projection and deleting it. At each crossing of a link diagram, a **crossing ball** is a small 3-ball in which the overpass lies on the upper hemisphere and the underpass lies on the lower hemisphere, with the rest of the link outside that ball. Replacing all crossing disks by upper hemispheres or by lower hemispheres gives the shifted projection spheres $S_+$ and $S_-$. A **saddle disk** in a crossing ball is a properly embedded disk whose boundary meets each of the two hemispheres in two arcs and whose interior passes across the equatorial crossing disk. For a closed embedded surface transverse to the link and to $S_+$ and $S_-$, each component $C$ of its intersection with either shifted sphere has a **bubble word**: read once around $C$, recording $P$ each time it crosses the link and $S$ each time it passes through a crossing ball along a saddle disk. The surface is in **bubble standard position** if every such word is nonempty and no word records the same crossing ball more than once. A **Conway sphere** is an embedded sphere meeting the link transversely in four points; it is in crossing-ball standard position when its intersection with the crossing balls consists of saddle disks and its shifted-sphere intersection curves satisfy the bubble-standard conditions.\n\nThe turnover convention is the one in Kindred's Definition 2.9 and Figure 1. In particular, an entire flype permits viewing the whole diagram from the opposite side of the sphere, as in his Definition 2.11. Closed components inside a tangle disk are carried along with its arcs.",
+        "strategy": "Defines the local flype move, Menasco crossing-ball decomposition, 2-tangle boundary convention, and normal position data used by geometric flyping arguments.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, §2.2 (Definitions 2.9–2.11) and §§3.1–3.2, arXiv:2008.06490v3",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            },
+            {
+              "title": "William W. Menasco and Morwen B. Thistlethwaite, The classification of alternating links, Annals of Mathematics 138 (1993), pp. 113–171",
+              "url": "https://doi.org/10.2307/2946636"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "These are finite local diagram and crossing-ball conventions; no choice principle is used."
+      },
+      {
+        "id": "def-reduced-alternating-link-diagram",
+        "kind": "definition",
+        "title": "Reduced alternating link diagram",
+        "deps": [
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 0,
+        "statement": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+        "strategy": "Defines connectedness, alternation, and reducedness from the finite planar projection and its over-under data, using the face-boundary criterion for nugatory crossings.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, Definition 5.17, printed pp. 43–44",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, §2.1, arXiv:2008.06490v3",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "No choice principle is used; the properties are finite local or graph-theoretic conditions on the supplied diagram."
+      },
+      {
+        "id": "def-split-link",
+        "kind": "definition",
+        "title": "Split and nonsplit links",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy"
+        ],
+        "dependency_level": 0,
+        "statement": "An oriented link $L\\subset S^3$ is **split** if a smoothly embedded sphere $S\\subset S^3\\setminus L$ has link points in both components of $S^3\\setminus S$; otherwise $L$ is **nonsplit**.",
+        "strategy": "Defines splitness by the separating-sphere criterion for link components.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William W. Menasco, Closed incompressible surfaces in alternating knot and link complements, Topology 23 (1984), Theorem 1(a), pp. 37–41",
+              "url": "https://www.scribd.com/document/471863717/1-s2-0-0040938384900235-main-2"
+            },
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, §2.1, arXiv:2008.06490v3",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "No choice principle is used; splitness is defined by existence of a separating sphere."
+      },
+      {
+        "id": "def-tait-graph-of-a-link-diagram",
+        "kind": "definition",
+        "title": "Checkerboard coloring and Tait graphs",
+        "deps": [
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 0,
+        "statement": "For a link projection on $S^2$, a **checkerboard coloring** assigns one of two colors to each complementary region so that regions sharing an edge have different colors. Given such a coloring, the **black Tait graph** has one vertex for each black region and one edge for each crossing joining the two opposite black sectors at that crossing. The **white Tait graph** is defined by interchanging black and white. Loops and parallel edges are allowed.",
+        "strategy": "Defines both plane graphs directly from the regions and crossing sectors of the supplied checkerboard-colored projection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, pp. 160–163",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "No choice principle is used; a checkerboard coloring is supplied as part of the input."
+      },
+      {
+        "id": "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+        "kind": "lemma",
+        "title": "Connected four-valent link projections admit checkerboard colorings",
+        "deps": [
+          "def-regular-oriented-link-diagram",
+          "lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $P\\subset S^2$ be the finite connected 4-valent graph underlying a regular link projection. Its complementary regions have exactly two colorings with two colors such that regions sharing an edge have different colors.",
+        "strategy": "Fix a base region and color any other region by the parity of intersections with a generic path; an Eulerian 4-valent projection has even mod-two intersection with every closed curve, so the color is path-independent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, pp. 160–163",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "The finite mod-two path-parity construction is choice-free."
+      },
+      {
+        "id": "lem-disconnected-projection-components-separated-by-jordan-curve",
+        "kind": "lemma",
+        "title": "Disconnected projection components admit a separating Jordan curve",
+        "deps": [
+          "def-regular-oriented-link-diagram",
+          "lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $P\\subset S^2$ be the nonempty finite projection graph of a regular link diagram. If $P$ is disconnected, there is a simple closed curve $\\gamma\\subset S^2\\setminus P$ such that $P$ has points on both sides of $\\gamma$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2 and Exercise 5.14, printed pp. 42–43",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "William W. Menasco, Closed incompressible surfaces in alternating knot and link complements, Topology 23 (1984), §2, pp. 38–41",
+              "url": "https://www.scribd.com/document/471863717/1-s2-0-0040938384900235-main-2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Finite regular-neighborhood construction and planar separation are choice-free."
+      },
+      {
+        "id": "lem-kauffman-smoothing-operators-for-braid-crossings",
+        "kind": "lemma",
+        "title": "Bracket smoothings of positive and negative braid crossings",
+        "deps": [
+          "def-elementary-geometric-half-twist",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\sigma_i$ be the positive geometric Artin braid crossing in a braid rectangle whose parameter increases from bottom to top, with strand $i$ passing below and strand $i+1$ passing above. Use the bracket chart in which the over-strand runs southwest to northeast, the $A$-smoothing joins left to left and right to right with weight $A$, and the $B$-smoothing joins top to top and bottom to bottom with weight $A^{-1}$. Let $I$ be the through pairing and let $e_i$ be the pairing with a top cap and a bottom cup at positions $i,i+1$. Then the positive crossing has bracket operator $A I+A^{-1}e_i$, and the negative crossing has bracket operator $A^{-1}I+A e_i$.\n\n```tikz\n\\begin{tikzpicture}[scale=0.82, line cap=round, line join=round]\n  \\begin{scope}\n    \\draw[thick] (-0.55,-1)--(-0.55,1);\n    \\draw[thick] (0.55,-1)--(0.55,1);\n    \\node at (0,1.35) {$I$};\n  \\end{scope}\n  \\begin{scope}[xshift=2.6cm]\n    \\draw[thick] (-0.55,1) .. controls (-0.55,0.45) and (0.55,0.45) .. (0.55,1);\n    \\draw[thick] (-0.55,-1) .. controls (-0.55,-0.45) and (0.55,-0.45) .. (0.55,-1);\n    \\node at (0,1.35) {$e_i$};\n  \\end{scope}\n  \\node at (1.25,0) {$\\sigma_i=A I+A^{-1}e_i$};\n\\end{tikzpicture}\n```",
+        "strategy": "Calibrates the positive half twist against the determinant sign and identifies the two source-chart smoothings with the through and cup-cap pairings; reflection exchanges the two pairings and coefficients.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §II, pp. 155–160",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "The local crossing calculation is finite and choice-free."
+      },
+      {
+        "id": "lem-connected-projection-has-connected-tait-graphs",
+        "kind": "lemma",
+        "title": "The Tait graphs of a connected projection are connected",
+        "deps": [
+          "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "def-tait-graph-of-a-link-diagram",
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 1,
+        "statement": "For a connected regular link projection on $S^2$ with at least one crossing and either checkerboard coloring, both Tait graphs are connected.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, pp. 160–163",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "The finite medial-graph argument is choice-free."
+      },
+      {
+        "id": "lem-disconnected-link-diagram-represents-a-split-link",
+        "kind": "lemma",
+        "title": "A disconnected link projection represents a split link",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-split-link",
+          "lem-disconnected-projection-components-separated-by-jordan-curve",
+          "lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars"
+        ],
+        "dependency_level": 1,
+        "statement": "If the underlying projection of a nonempty regular link diagram on $S^2$ is disconnected, then the represented link is split.",
+        "strategy": "Choose a projection component isolated by a Jordan curve in the complement of all other projection components, then cap a vertical cylinder over its disk above and below the compact link to form a separating sphere.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2 and Exercise 5.14, printed pp. 42–43",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "William W. Menasco, Closed incompressible surfaces in alternating knot and link complements, Topology 23 (1984), Theorem 1(a), pp. 37–41",
+              "url": "https://www.scribd.com/document/471863717/1-s2-0-0040938384900235-main-2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "The proof uses finite planar separation and compactness only; no choice principle is used."
+      },
+      {
+        "id": "lem-definite-normal-pairing-forces-nonsplit-boundary",
+        "kind": "lemma",
+        "title": "A definite normal pairing forces a nonsplit boundary",
+        "deps": [
+          "def-split-link",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "cor-homology-of-spheres",
+          "thm-simplicial-and-singular-homology-agree-for-simplicial-complexes"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua E. Greene, Alternating links and definite surfaces, §§2–3 and §5, especially Corollary 3.2 and Lemma 3.3",
+              "url": "https://people.maths.ox.ac.uk/lackenby/Fox.pdf"
+            },
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, §2.1, Fact 2.4",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            }
+          ]
+        },
+        "statement": "Let $F\\subset S^3$ be a compact connected smoothly embedded surface with nonempty boundary $L$, supplied with a finite disk-and-band presentation. The surface may be nonorientable. A normal transfer $\\tau c$ of an oriented rational multicurve $c$ in the interior of $F$ is its total inverse image in the boundary of a sufficiently small normal interval neighborhood of $F$, oriented by projection onto $c$. Suppose a quadratic form $q$ on $H_1(F;\\mathbb Q)$ is positive definite or negative definite and satisfies $q([c])=\\operatorname{lk}(c,\\tau c)$ for every such rational multicurve. Then $L$ is nonsplit. Definiteness on the zero vector space is allowed.",
+        "dependency_level": 1,
+        "justified_by": [],
+        "axiom_use": "Choice-free: the surface has a supplied finite disk-and-band presentation; the argument uses finite surface cuts, finite rational chains, disk surgeries and ordinary Mayer–Vietoris. It uses neither an arbitrary surface-classification theorem nor Schoenflies or ambient-isotopy invariance of a diagram polynomial."
+      },
+      {
+        "id": "lem-connected-diagram-bracket-span-bound-and-alternating-equality",
+        "kind": "lemma",
+        "title": "Connected-diagram bracket span bound and alternating equality",
+        "deps": [
+          "def-reduced-alternating-link-diagram",
+          "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars",
+          "def-tait-graph-of-a-link-diagram",
+          "lem-connected-projection-has-connected-tait-graphs",
+          "thm-euler-formula-for-connected-plane-graphs",
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 2,
+        "statement": "For a connected regular link diagram $D$ with $c$ crossings, the Laurent-polynomial span of its Kauffman bracket is at most $4c$. If $D$ is reduced and alternating, then changing any one crossing from the all-$A$ state or the all-$B$ state merges two distinct state circles, both extreme coefficients are nonzero, and the bracket span is exactly $4c$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+        "strategy": "Bound state degrees by the all-A and all-B states, use the connected saddle surface to show the two extreme circle counts sum to at most c+2, then use checkerboard faces and reducedness to obtain equality and noncancelling extreme terms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 42–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, printed pp. 160–164",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, State Models and the Jones Polynomial, Topology 26 (1987), §2, Theorems 2.6 and 2.8, printed pp. 398–400",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/kauffmanjones.pdf"
+            },
+            {
+              "title": "Kunio Murasugi, Knot Theory and Its Applications, Springer/Birkhäuser (1996), Proposition 4.4.1 and Chapter 11, Propositions 11.1.1 and 11.2.6",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/murasug3.pdf",
+              "locator": "Chapter 4, Proposition 4.4.1; Chapter 11, Propositions 11.1.1 and 11.2.6. The stated proof arguments were read; other chapters were not audited."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "The external value-at-one input uses only finite skein and crossing-change arguments; the state-circle surface construction, plane-graph count and finite state estimates are choice-free."
+      },
+      {
+        "id": "lem-alternating-checkerboard-normal-pairing-is-definite",
+        "kind": "lemma",
+        "title": "The checkerboard normal pairing of a connected alternating diagram is definite",
+        "deps": [
+          "def-reduced-alternating-link-diagram",
+          "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "def-tait-graph-of-a-link-diagram",
+          "lem-connected-projection-has-connected-tait-graphs",
+          "lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars",
+          "thm-simplicial-and-singular-homology-agree-for-simplicial-complexes"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua E. Greene, Alternating links and definite surfaces, §5, Theorem 5.1, manuscript pp. 8–9",
+              "url": "https://people.maths.ox.ac.uk/lackenby/Fox.pdf"
+            },
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, §2.1, manuscript pp. 4–6",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            }
+          ]
+        },
+        "statement": "Let $D$ be a connected alternating regular link diagram on an oriented projection sphere. Choose either checkerboard color. Put a disk in each region of that color and join the opposite colored sectors at every crossing by a half-twisted band, with the twist chosen so that the boundary follows the over-under diagram. After rounding corners these disks and bands form a compact connected embedded spanning surface $F$ for the represented link. If $D$ has crossings, let $G$ be the corresponding Tait graph and orient its edges arbitrarily. Under the retraction of $F$ onto $G$, write a rational homology class as the unique graph cycle $a=\\sum_{e\\in E(G)}a_e e$. There is a single sign $\\epsilon\\in\\{1,-1\\}$ such that\n$$q(a)=\\epsilon\\sum_{e\\in E(G)}a_e^2=\\operatorname{lk}(c,\\tau c)$$\nfor every oriented rational multicurve $c$ representing $a$, where $\\tau c$ is its normal transfer. Thus $q$ is positive definite or negative definite on $H_1(F;\\mathbb Q)$. For a crossingless connected diagram, use either spanning disk and the zero-dimensional definite form.",
+        "dependency_level": 2,
+        "justified_by": [],
+        "axiom_use": "Choice-free: all disks, bands, graph chains and normal pushoffs are constructed from the supplied finite diagram. No link signature formula, spanning-surface classification or invariant-polynomial theorem is used."
+      },
+      {
+        "id": "lem-connected-alternating-link-is-nonsplit",
+        "kind": "lemma",
+        "title": "Connected alternating diagrams represent nonsplit links",
+        "deps": [
+          "def-split-link",
+          "def-reduced-alternating-link-diagram",
+          "lem-alternating-checkerboard-normal-pairing-is-definite",
+          "lem-definite-normal-pairing-forces-nonsplit-boundary"
+        ],
+        "dependency_level": 3,
+        "statement": "If a regular link diagram on $S^2$ is connected and alternating, then the represented link is nonsplit.",
+        "strategy": "Put a hypothetical splitting sphere in crossing-ball standard position with lexicographically minimal intersection complexity; alternating parity and an innermost-circle argument force a repeated crossing-ball intersection, contradicting standard position.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joshua E. Greene, Alternating links and definite surfaces, §§2–3 and §5, especially Corollary 3.2 and Theorem 5.1",
+              "url": "https://people.maths.ox.ac.uk/lackenby/Fox.pdf"
+            },
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, §2.1, Fact 2.4",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Choice-free: the checkerboard surface and its definite pairing are finite disk-and-band constructions; the nonsplitting obstruction uses finite rational homology and disk surgery."
+      },
+      {
+        "id": "thm-reduced-alternating-diagram-minimizes-crossings",
+        "kind": "theorem",
+        "title": "Reduced alternating diagrams minimize crossing number",
+        "deps": [
+          "def-crossing-number-of-link",
+          "def-reduced-alternating-link-diagram",
+          "lem-disconnected-link-diagram-represents-a-split-link",
+          "lem-connected-alternating-link-is-nonsplit",
+          "lem-connected-diagram-bracket-span-bound-and-alternating-equality",
+          "thm-normalized-bracket-is-an-oriented-link-invariant",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Every connected reduced alternating diagram $D$ of an oriented link $L$ realizes the crossing number of its underlying unoriented link: $c(D)=c(L)$.",
+        "strategy": "The bracket span is 4c(D) for a reduced alternating diagram and at most 4c(E) for every connected competing diagram E; nonsplitting plus the disconnected-diagram lemma makes every diagram of L connected, and the AC_ω normalized-bracket theorem makes span invariant, forcing c(D)≤c(E).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 42–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, printed pp. 164–168",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "ACω is required for the crossing-number domain and normalized-bracket invariance. The connectedness, state-span and nonsplitting comparisons are choice-free."
+      },
+      {
+        "id": "thm-tait-flyping-theorem",
+        "kind": "theorem",
+        "title": "Tait flyping theorem",
+        "deps": [
+          "def-reduced-alternating-link-diagram",
+          "def-flype-crossing-ball-and-alternating-tangle-data",
+          "def-planar-isotopy-of-link-diagrams",
+          "lem-connected-alternating-link-is-nonsplit",
+          "thm-reduced-alternating-diagram-minimizes-crossings",
+          "lem-component-marked-prime-decomposition-comparisons-lift-prime-flype-sequences",
+          "def-axiom-of-choice",
+          "lem-choice-free-smooth-jordan-disk-parameters-and-prescribed-collars",
+          "lem-smooth-sphere-diffeomorphisms-extend-over-balls"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume full AC. Any two connected reduced alternating diagrams on the oriented projection sphere that represent the same oriented link type are related by a finite sequence of sphere planar isotopies and flypes. Composite links are included; the diagrams are required to be connected, and a plane drawing is interpreted as a punctured projection sphere.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William W. Menasco and Morwen B. Thistlethwaite, The classification of alternating links, Annals of Mathematics 138 (1993), pp. 113–171, Main Theorem on p. 116; imported marked prime flyping theorem",
+              "url": "https://doi.org/10.2307/2946636"
+            },
+            {
+              "title": "William Menasco, Closed incompressible surfaces in alternating knot and link complements, Topology 23 (1984), pp. 37–44, Theorem 1(b) on p. 37 and proof on pp. 41–42; imported diagrammatic primeness theorem",
+              "url": "https://doi.org/10.1016/0040-9383(84)90023-5"
+            },
+            {
+              "title": "Thomas Kindred, A geometric proof of the flyping theorem, arXiv:2008.06490v3, full alternative proof for prime links",
+              "url": "https://arxiv.org/pdf/2008.06490v3"
+            },
+            {
+              "title": "Bruce Fontaine, To the Chairman of Examiners for Part III Mathematics, §2.2, Definitions 2.8–2.9 and Theorem 2.10, pp. 11–12; full exposition of the flat pair maps and marked prime theorem",
+              "url": "https://pi.math.cornell.edu/~bfontain/partiii.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Full AC is retained as the registered branch and implies the countable choice used by crossing minimality. No necessity claim is made.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/flyping-composite-first-independent-review.json"
+        }
+      },
+      {
+        "id": "lem-alternating-state-adequacy-and-jones-span",
+        "kind": "lemma",
+        "title": "Adequacy and Jones span of reduced alternating diagrams",
+        "deps": [
+          "def-reduced-alternating-link-diagram",
+          "lem-connected-diagram-bracket-span-bound-and-alternating-equality",
+          "thm-bracket-state-sum-matches-library-jones-specialization",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume full AC and let $D$ be a connected reduced alternating diagram with $c$ crossings. At every crossing, changing one smoothing from the all-$A$ state or from the all-$B$ state merges two distinct state circles; these are A- and B-adequacy. The Kauffman bracket has $A$-span $4c$. If $D$ represents a knot $K$, then the library Jones polynomial has $t$-span $c$, and every $c'$-crossing diagram of $K$ has $t$-span at most $c'$ under the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+        "strategy": "Combine the choice-free bracket-span lemma with the full-AC library Jones specialization and the change of variable t=A^{-4}; retain the finite adequacy argument choice-free and state full AC only for the library Jones branch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 42–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, printed pp. 160–164",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "The finite A/B adequacy and raw bracket-span claims are choice-free; full AC is used only for the library Jones specialization."
+      },
+      {
+        "id": "cor-jones-span-detects-crossing-number-for-reduced-alternating-knots",
+        "kind": "corollary",
+        "title": "Jones span detects crossing number for reduced alternating knots",
+        "deps": [
+          "def-crossing-number-of-link",
+          "def-reduced-alternating-link-diagram",
+          "lem-alternating-state-adequacy-and-jones-span",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume full AC. If $D$ is a connected reduced alternating diagram of a knot $K$, then the library Jones polynomial has $t$-span exactly $c(K)=c(D)$, in the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.",
+        "strategy": "The adequacy lemma gives span_t V_K=c(D), and its universal knot-diagram bound gives c(D)≤c(E) for every competing diagram E; the least such count is c(K).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, pp. 164–168",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Full AC is used by the Jones specialization and implies the countable-choice hypothesis needed to define crossing number; the span comparison itself is choice-free once these objects exist."
+      }
+    ]
+  },
+  {
+    "order": 3207,
+    "id": "alternating-diagrams-and-crossing-number-minimality-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Alternating diagrams and crossing-number minimality — Examples and Counterexamples",
+    "companion": "alternating-diagrams-and-crossing-number-minimality",
+    "requires": [
+      "alternating-diagrams-and-crossing-number-minimality"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-50-boundary-case",
+        "kind": "counterexample",
+        "title": "A nugatory kink defeats crossing minimality",
+        "deps": [
+          "def-crossing-number-of-link",
+          "def-reduced-alternating-link-diagram",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "thm-bracket-state-sum-matches-library-jones-specialization",
+          "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume full AC. The positive one-crossing type-I kink of the unknot is connected and alternating but not reduced; its diagram has one crossing while the represented unknot has crossing number zero, and its normalized library Jones polynomial has $t$-span zero.\n\n```tikz\n\\begin{tikzpicture}[scale=0.9, line cap=round, line join=round]\n  \\draw[->,thick] (-0.22,-0.22)--(-0.045,-0.045);\n  \\draw[->,thick] (0.045,0.045)--(0.22,0.22);\n  \\draw[->,very thick] (-0.22,0.22)--(0.22,-0.22);\n  \\draw[->,thick] (0.22,0.22) .. controls (0.95,1.0) and (-0.95,1.0) .. (-0.22,0.22);\n  \\draw[->,thick] (0.22,-0.22) .. controls (0.95,-1.0) and (-0.95,-1.0) .. (-0.22,-0.22);\n  \\node at (0,1.25) {positive type-I kink};\n\\end{tikzpicture}\n```\n\nThe arrows orient the single component; at the central crossing, the diagonal from northwest to southeast is over and the southwest-to-northeast diagonal has a gap.",
+        "strategy": "The two smoothing states give raw bracket -A^3; writhe normalization gives Jones polynomial 1. A type-I Reidemeister move identifies the diagram with the crossing-free unknot, whose crossing number is zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 43–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, printed pp. 164–168",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Full AC is used only to identify the library Jones polynomial through the bracket specialization; the kink calculation and crossing-number comparison are choice-free."
+      },
+      {
+        "id": "ex-knot-kt-50-worked-cases",
+        "kind": "example",
+        "title": "Trefoil and figure-eight Jones spans",
+        "deps": [
+          "def-crossing-number-of-link",
+          "def-reduced-alternating-link-diagram",
+          "lem-kauffman-smoothing-operators-for-braid-crossings",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-elementary-geometric-half-twist",
+          "def-closure-of-a-geometric-braid",
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "def-tait-graph-of-a-link-diagram",
+          "lem-connected-projection-has-connected-tait-graphs",
+          "thm-bracket-state-sum-matches-library-jones-specialization",
+          "cor-jones-span-detects-crossing-number-for-reduced-alternating-knots",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume full AC. The positive trefoil is represented by the closure of the three-crossing two-strand braid $\\sigma_1^3$; its library Jones polynomial is $t+t^3-t^4$, of span $4-1=3$, and the corresponding connected reduced alternating diagram has crossing number $3$. The figure-eight knot is represented by the closure of the four-crossing three-strand braid whose levels from bottom to top are $\\sigma_2^{-1},\\sigma_1,\\sigma_2^{-1},\\sigma_1$; its library Jones polynomial is $t^{-2}-t^{-1}+1-t+t^2$, of span $2-(-2)=4$, and the corresponding connected reduced alternating diagram has crossing number $4$. The convention is $t=A^{-4}$.\n\n```tikz\n\\begin{tikzpicture}[scale=0.9, line cap=round, line join=round]\n  \\begin{scope}\n    \\node at (0,1.7) {trefoil Tait graph};\n    \\fill (-0.7,0.5) circle (2pt) node[left] {$b_1$};\n    \\fill (0.7,0.5) circle (2pt) node[right] {$b_2$};\n    \\draw (-0.7,0.5) to[bend left=35] (0.7,0.5);\n    \\draw (-0.7,0.5) to (0.7,0.5);\n    \\draw (-0.7,0.5) to[bend right=35] (0.7,0.5);\n  \\end{scope}\n  \\begin{scope}[xshift=4cm]\n    \\node at (0,1.7) {figure-eight Tait graph};\n    \\fill (-0.9,0.5) circle (2pt) node[left] {$u$};\n    \\fill (0.9,0.5) circle (2pt) node[right] {$v$};\n    \\fill (0,-0.7) circle (2pt) node[below] {$w$};\n    \\draw (-0.9,0.5) to[bend left=28] (0.9,0.5);\n    \\draw (-0.9,0.5) to[bend right=28] (0.9,0.5);\n    \\draw (-0.9,0.5)--(0,-0.7)--(0.9,0.5);\n  \\end{scope}\n\\end{tikzpicture}\n```\n\nThese are black Tait graphs; the white graphs are their plane duals. Each graph edge represents one crossing of the corresponding projected diagram.",
+        "strategy": "Enumerate the eight trefoil smoothing states and the sixteen states of the closed braid (sigma_1 sigma_2^{-1})^2 for the figure-eight, then apply the library Jones specialization and the reduced-alternating-knot span corollary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque 163–164 (1988), §III, pp. 160–168",
+              "url": "https://www.numdam.org/item/AST_1988__163-164__137_0.pdf"
+            },
+            {
+              "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+              "url": "https://arxiv.org/pdf/2204.12104v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "justified_by": [],
+        "axiom_use": "Full AC is used only for the library Jones specialization and the crossing-number corollary; the two finite state enumerations and diagram checks are choice-free."
+      }
+    ]
+  }
+]

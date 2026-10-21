@@ -61,3 +61,8 @@ Exactly two decisions are supplied in the task-named companion JSON. No reader/r
 ## Reading limits
 
 The current six item arguments and their direct supplier statements/definitions were checked; the in-run propriety supplier's full proof was independently checked. This is not a new audit of every transitive published foundational proof. External source reading was limited to the cited relevant statements and proof passages in the three linked papers, rather than their complete works. Initial local PDF extraction via `pdftotext` was unavailable; the cited sections were read through web PDF text and PyMuPDF instead. These utility failures did not leave an unread cited argument or unresolved mathematical blocker.
+
+
+Owner bookkeeping classification
+
+Root corrected clean metadata/audit-enrichment classification using the original native no-defect evidence and exact recovered full preimages, archived in research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step3-supervision/gate-r1-seven-empty-refs/native-originals/. No native execution, mathematical audit or defect was created. Native substantive evidence is preserved.

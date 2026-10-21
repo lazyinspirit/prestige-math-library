@@ -50,3 +50,8 @@ Four closed mathematical/citation defect rows were appended: 3a-b51-blackhole-lo
 - The live autopilot status was read from .autopilot and current git history. At inspection it reported batch 51 awaiting adjudication and an unrelated collect-49 blocker; no engine controls, stamps or judge cycles were invoked.
 
 Batch 51 is not clear for closure: the owner must resolve the periodic Navier–Stokes dataset/model convention described in checkpoint 4 before that risk review can be completed. The unchanged item and contract derivations remain available for owner disposition.
+
+
+Owner resolution of open risk
+
+Root accepted the focused source/model repair after independent FIRST review of the full pinned 243-line solver and actual primary Navier passages/full Appendix B.5. Physical periodic curl and chosen zero-mean velocity are separated from the implementation scalar-state extension retaining a constant offset. Full Gaussian seed covariance is preserved; five-time-unit preparation produces the inversion inputs and is distinct from inversion horizon T. Actual source and claim mirrors retain grid/noise/splits/access/empirical qualifications. There are no item consumers. The original native fatal open risk remains historical; this is current owner repair and supplies no new native execution or theorem coverage.

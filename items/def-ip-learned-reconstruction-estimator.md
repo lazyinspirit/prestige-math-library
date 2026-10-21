@@ -15,6 +15,7 @@ deps:
   - def-probability-measure
   - def-measurable-function-between-measurable-spaces
   - def-measure-kernel-and-probability-kernel
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
 justified_by: []
 forward_refs: []
 aliases: []
@@ -41,7 +42,7 @@ axiom_use: "No choice axiom is required; all fitting laws, maps, and probability
 
 Let $(X,d_X)$ and $(Y,d_Y)$ be metric parameter and data spaces, let $U\subseteq X$ be a nonempty admissible truth class, let $F:U\to Y$ be a forward map, and let $(Q,d_Q)$ be a metric target space. All metric spaces in this definition carry their Borel sigma-algebras. Give $U$ the subspace Borel sigma-algebra $\mathcal B(U):=\{U\cap A:A\in\mathcal B(X)\}$, and assume that $q:U\to Q$ is measurable from $(U,\mathcal B(U))$ to $(Q,\mathcal B(Q))$. The target $q(x)$ is the recovery object assigned to truth $x$; $Q$ may be the parameter space itself or a quotient solution-class space. A **point reconstruction rule** is a Borel map $g:Y\to Q$, and its output at data $y$ is $g(y)$. A **learned point estimator** is such a map $\widehat q_\phi$ with a fitted parameter $\phi$ in a specified parameter set. A complete training description names the probability law $P_{\rm fit}$ of all variables used to fit $\phi$; those variables may be paired or unpaired. A complete test description names a probability law $P_{\rm test}$ for evaluation pairs $(Y,q(X))$. No equality between fitting and test laws is assumed.
 
-A finite **unrolled learned update** consists of an integer $K\geq1$, a Borel initialization $u_0:Y\to Q$, and Borel maps $T_{\phi,k}:Q\times Y\to Q$ for $0\leq k<K$, with $u_{k+1}(y)=T_{\phi,k}(u_k(y),y)$. Its output $u_K(y)$ is a point reconstruction rule. An **amortized inverse map** is a learned point estimator applied to multiple data inputs after a single fit; this term adds a reuse convention, not an accuracy guarantee.
+A finite **unrolled learned update** consists of an integer $K\geq1$, a Borel initialization $u_0:Y\to Q$, and maps $T_{\phi,k}:Q\times Y\to Q$ measurable from $(Q\times Y,\mathcal B(Q)\otimes\mathcal B(Y))$ to $(Q,\mathcal B(Q))$ for $0\leq k<K$, with $u_{k+1}(y)=T_{\phi,k}(u_k(y),y)$. Here the layer domain uses the product sigma-algebra, not an assumed identification with the Borel sigma-algebra of the product topology. Its output $u_K:Y\to Q$ is a point reconstruction rule: if $u_k$ is Borel, the preimage of a measurable rectangle $A\times C$ under $y\mapsto(u_k(y),y)$ is $u_k^{-1}(A)\cap C$, so this pairing is product-measurable; composing it with $T_{\phi,k}$ and applying finite induction proves that every $u_k$ is Borel. An **amortized inverse map** is a learned point estimator applied to multiple data inputs after a single fit; this term adds a reuse convention, not an accuracy guarantee.
 
 For a real Hilbert signal space $H$, a **denoiser** is a Borel map $D_\phi:H\to H$ trained under a specified signal-corruption law and used to transform a corrupted signal into a signal estimate or an update. A denoiser is the exact minimum mean-square error map only when it equals the conditional mean for the specified signal and corruption laws. A **learned prior** is a supplied Borel probability measure $\rho_\phi$ on $H$; one construction is the pushforward law $\rho_\phi(A)=\nu(G_\phi^{-1}(A))$ for $A\in\mathcal B(H)$, where $\nu$ is a specified probability measure on a measurable source space $(Z,\mathcal Z)$ and $G_\phi:(Z,\mathcal Z)\to(H,\mathcal B(H))$ is measurable. The law or generator alone is not a data-to-target estimator.
 
@@ -64,6 +65,8 @@ For a finite horizon $T>0$, a specified parameter set $\Phi$, and $\phi\in\Phi$,
 [[def-measurable-function-between-measurable-spaces|Borel measurability of reconstruction maps]]
 
 [[def-measure-kernel-and-probability-kernel|Probability kernels for posterior samplers]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras|Product-measurable layer inputs for finite unrolling]]
 
 [Ongie et al., §§3.1 and 4.1–4.2.1, full paper](https://arxiv.org/pdf/2005.06001v1)
 

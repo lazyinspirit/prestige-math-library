@@ -61,3 +61,8 @@ Both assigned pages retain empty Markdown bodies, draft status, their exact item
 Exactly one owed obligation is recorded in the companion decisions JSON: amended reader repair to the risk definition, with all three citation-repair ledger rows explicitly referenced. The collateral locator repairs arose in mandatory owned risk reviews and do not manufacture additional routed obligations. No reader/refuter/page/foreign gate decisions are owed. No judge, acceptance stamp, native transition or engine gate cycle was run.
 
 **Open escalation:** owner resolution is required for the arbitrary-metric unrolling measurability prerequisite in `def-ip-learned-reconstruction-estimator`. Its risk review remains `open` and verdict `escalated`; citation repairs do not close it. The other five current-content mathematical reviews are complete. The engine must retain the blocker before advancing this batch.
+
+
+Owner resolution of open risk
+
+Root accepted the supplier-first focused source repair after independent FIRST review: update layers are explicitly measurable for B(Q) tensor B(Y) to B(Q), pairing is measurable by rectangle inverse images, and finite induction proves Borel deployed output without an arbitrary-metric product-topology identification. Complete affected unrolling uses and all 11 direct/14 indirect defining interfaces were checked with precise reading limits. Original native open risk, source and risk object are archived; completion is an actual delegated owner repair, not native Alpha coverage.

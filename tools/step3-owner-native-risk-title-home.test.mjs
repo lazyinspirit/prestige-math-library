@@ -86,3 +86,46 @@ rmSync(join(root,'research/r-step3-native-risk-title-home-alpha-continuations.js
  const result=spawnSync(process.execPath,[join(repo,'tools/tsx-run.mjs'),script,f.root],{encoding:'utf8'});assert.equal(result.status,0,result.stdout+'\n'+result.stderr);
  }finally{f.close();}});
 test.after(()=>rmSync(code,{recursive:true,force:true}));
+
+
+// NEW exact-run, current-only two-claim metadata successor tests.
+function mirrorFixture(){
+ const R='inverse-problems-knot-theory-all-109-2026-10-19',root=mkdtempSync(join(tmpdir(),'risk-title-mirror-'));
+ const put=(p,x)=>{mkdirSync(dirname(join(root,p)),{recursive:true});writeFileSync(join(root,p),typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');};
+ const link=p=>({path:p,sha256:sha(readFileSync(join(root,p)))});
+ const mids=['cor-satellite-companion-is-detected-by-jsj','ex-knot-kt-17-worked-cases'];
+ const source0=`---\nid: ${mids[0]}\n---\n\n## Statement\n\nComplete satellite conclusion.\n\n## Proof\n\nUnchanged proof.\n`;
+ const source1=`---\nid: ${mids[1]}\n---\n\n## Example\n\nComplete satellite worked example.\n\n## Verification\n\nUnchanged verification.\n`;
+ put(`items/${mids[0]}.md`,source0.replaceAll('\\n','\n'));put(`items/${mids[1]}.md`,source1.replaceAll('\\n','\n'));put(`items/${ID}.md`,'Unchanged actual risk title source.');
+ const before=[{id:'p',items:[{id:ID,title:newTitle,statement:'Untouched risk statement.',deps:[]},{id:mids[0],statement:'Stale satellite conclusion.',deps:['x']},{id:mids[1],statement:'Stale worked example.',deps:['y']}]}];
+ const after=structuredClone(before);after[0].items[1].statement='Complete satellite conclusion.';after[0].items[2].statement='Complete satellite worked example.';
+ put(`research/${R}-original-manifest.json`,before);put(`research/${R}-current-manifest.json`,after);put(`research/${R}-batch-71.pages.json`,after);
+ put(`research/${R}-risk-source.md`,'Unchanged actual risk title source.');
+ for(const id of mids)put(`research/${R}-${id}.md`,readFileSync(join(root,`items/${id}.md`),'utf8'));
+ const e={unit:'71',registration_manifest:link(`research/${R}-original-manifest.json`),source_after:link(`research/${R}-risk-source.md`),current_inputs:mids.map(id=>link(`items/${id}.md`))};
+ const doc={version:1,run:R,unit:'71',policy:api.NATIVE_RISK_TITLE_MIRROR_POLICY,authorized_by:'owner',owner_identity:'/root',reviewed:true,at:'2026-10-21T12:00:00Z',mathematical_acceptance:false,native_reread_claimed:false,reason:'Exact current-only metadata successor preserves the immutable original title launch evidence and permits only two complete source-pinned claim mirrors, without new native or mathematical review coverage.',registration_manifest:e.registration_manifest,current_manifest:link(`research/${R}-current-manifest.json`),changes:mids.map((id,index)=>({id,field:'statement',source_section:index?'Example':'Statement',source_path:`items/${id}.md`,source_sha256:e.current_inputs[index].sha256,source_archive:link(`research/${R}-${id}.md`),before_quote:before[0].items[index+1].statement,after_quote:after[0].items[index+1].statement}))};
+ const save=()=>put(`research/${R}-step3-native-risk-title-manifest-mirror-successor.json`,doc);
+ const update=()=>{put(`research/${R}-current-manifest.json`,after);put(`research/${R}-batch-71.pages.json`,after);doc.current_manifest=link(`research/${R}-current-manifest.json`);};
+ save();return {R,root,put,link,e,doc,before,after,save,update,close:()=>rmSync(root,{recursive:true,force:true})};
+}
+test('exact-run successor accepts only two complete pinned current claims and keeps immutable launch manifest',()=>{const f=mirrorFixture();try{const old=readFileSync(join(f.root,f.e.registration_manifest.path));const x=api.nativeRiskTitleManifestMirrorSuccessor(f.root,f.R,f.e);assert.ok(x);assert.equal(x.path,`research/${f.R}-step3-native-risk-title-manifest-mirror-successor.json`);assert.deepEqual(readFileSync(join(f.root,f.e.registration_manifest.path)),old);}finally{f.close();}});
+for(const [name,change]of[
+ ['changed source',f=>f.put(f.doc.changes[0].source_path,'Changed source proof.')],
+ ['risk source changed',f=>f.put(`items/${ID}.md`,'Changed risk source.')],
+ ['risk row changed',f=>{f.after[0].items[0].statement='Changed risk Statement';f.update();}],
+ ['other field changed',f=>{f.after[0].items[1].deps.push('new-edge');f.update();}],
+ ['wrong quote',f=>{f.doc.changes[0].after_quote='Unsupported shortened quote.';f.after[0].items[1].statement=f.doc.changes[0].after_quote;f.update();}],
+ ['fake id',f=>{f.doc.changes[0].id='cor-fake-satellite';}],
+ ['missing mirror',f=>{f.doc.changes.pop();}],
+ ['wrong source pin',f=>{f.doc.changes[0].source_sha256='0'.repeat(64);}],
+ ['wrong source section',f=>{f.doc.changes[1].source_section='Statement';}],
+ ['wrong before guard',f=>{f.doc.changes[0].before_quote='Invented old statement';}],
+ ['unreviewed record',f=>{f.doc.reviewed=false;}],
+ ['claims native reread',f=>{f.doc.native_reread_claimed=true;}],
+ ['rewritten launch manifest',f=>{f.put(f.e.registration_manifest.path,f.after);}],
+ ['live manifest differs archive',f=>{f.put(`research/${f.R}-batch-71.pages.json`,[...f.after,{id:'extra-page'}]);}],
+ ['wrong unit',f=>{f.doc.unit='72';}]
+])test(`two-mirror successor rejects ${name}`,()=>{const f=mirrorFixture();try{change(f);f.save();assert.throws(()=>api.nativeRiskTitleManifestMirrorSuccessor(f.root,f.R,f.e));}finally{f.close();}});
+test('two-mirror successor absent defaults to no waiver',()=>{const f=mirrorFixture();try{rmSync(join(f.root,`research/${f.R}-step3-native-risk-title-manifest-mirror-successor.json`));assert.equal(api.nativeRiskTitleManifestMirrorSuccessor(f.root,f.R,f.e),null);}finally{f.close();}});
+
+test('historical mirror evidence permits later live edits but rejects archive tampering',()=>{const f=mirrorFixture();try{f.put(f.doc.changes[0].source_path,'Later source edit');f.put(`items/${ID}.md`,'Later risk edit');f.put(`research/${f.R}-batch-71.pages.json`,[]);assert.throws(()=>api.nativeRiskTitleManifestMirrorSuccessor(f.root,f.R,f.e));assert.ok(api.nativeRiskTitleManifestMirrorSuccessor(f.root,f.R,f.e,{current:false}));f.put(f.doc.changes[0].source_archive.path,'Tampered launch archive');assert.throws(()=>api.nativeRiskTitleManifestMirrorSuccessor(f.root,f.R,f.e,{current:false}));}finally{f.close();}});

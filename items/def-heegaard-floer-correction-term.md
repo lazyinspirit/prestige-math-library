@@ -8,9 +8,9 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 page: branched-cover-correction-terms-and-sliceness
 deps:
   - def-heegaard-floer-plus-infinity-absolute-grading
-dependency_level: 1
-justified_by:
   - lem-heegaard-floer-correction-term-heegaard-invariance
+dependency_level: 2
+justified_by: []
 aliases: []
 proof_strategy: not-applicable
 provenance:

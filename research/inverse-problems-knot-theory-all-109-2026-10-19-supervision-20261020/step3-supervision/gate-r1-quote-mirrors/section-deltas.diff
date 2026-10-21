@@ -1,0 +1,141 @@
+### def-ip-sobolev-spaces-on-compact-riemannian-domain
+--- old-contract-quote
++++ current-Definition
+@@ -1,3 +1,3 @@
+ Assume Countable Choice.
+ 
+-Let $(M,g)$ be a compact smooth Riemannian manifold with smooth boundary, with no orientability assumption. Fix a finite smooth atlas of interior and boundary charts and a smooth partition of unity subordinate to it. For an integer $k\geq0$, define $H^k(M)$ as the completion of $C^\infty(M)$ in the sum of the Euclidean $W^{k,2}$ norms of the localized coordinate representatives; derivatives in a boundary chart are taken on the corresponding half-space. Define $H_0^1(M)$ as the closure of $C_c^\infty(M^\circ)$ in $H^1(M)$. Define $H^{1/2}(\partial M)$ by the fixed finite boundary atlas and partition of unity, using the Euclidean fractional Slobodeckij space $W^{1/2,2}(\mathbb R^{n-1})$ for each localized representative. For real scalars, define $H^{-1/2}(\partial M)$ as the continuous linear dual of $H^{1/2}(\partial M)$. For complex scalars, define it as the continuous conjugate-linear dual: its pairing with $h\in H^{1/2}(\partial M)$ is linear in the dual element and conjugate-linear in $h$, using the Riemannian boundary density. These are the fixed-atlas norms used on this page; no atlas-independence assertion is part of this definition.+Let $n=\dim M\geq0$ and let $(M,g)$ be a compact smooth Riemannian manifold with smooth boundary, with no orientability assumption. Fix a finite smooth atlas of interior and boundary charts and a smooth partition of unity subordinate to it. If $n=0$, define every $H^k(M)$ to be the space of scalar-valued functions on the finite set $M$ with the counting-measure $\ell^2$ norm. For $n\geq1$ and an integer $k\geq0$, define $H^k(M)$ as the completion of $C^\infty(M)$ in the sum of the Euclidean $W^{k,2}$ norms of the localized coordinate representatives; derivatives in a boundary chart are taken on the corresponding half-space. Define $H_0^1(M)$ as the closure of $C_c^\infty(M^\circ)$ in $H^1(M)$. If $\partial M=\varnothing$, set $H^{1/2}(\partial M)=\{0\}$. If $n=1$, set $H^{1/2}(\partial M)=\mathbb K^{\partial M}$ with its counting-measure $\ell^2$ norm, where $\mathbb K$ is the scalar field. For $n\geq2$, define $H^{1/2}(\partial M)$ by the fixed finite boundary atlas and partition of unity, using the Euclidean fractional Slobodeckij space $W^{1/2,2}(\mathbb R^{n-1})$ for each localized representative. For real scalars, define $H^{-1/2}(\partial M)$ as the continuous linear dual of $H^{1/2}(\partial M)$. For complex scalars, define it as the continuous conjugate-linear dual: its pairing with $h\in H^{1/2}(\partial M)$ is linear in the dual element and conjugate-linear in $h$, using the Riemannian boundary density. These are the fixed-atlas norms used on this page; no atlas-independence assertion is part of this definition.
+
+### def-ip-pnp-ista-with-denoiser
+--- old-contract-quote
++++ current-Definition
+@@ -11,6 +11,5 @@
+   \node at (7,0) (den) {$x_t=\widetilde D_\sigma(z_t)$};
+   \draw[->] (old) -- (grad);
+   \draw[->] (grad) -- (den);
+-  \draw[->,rounded corners] (den.south) -- (7,-1) -- (0,-1) -- (old.south);
+ \end{tikzpicture}
+ ~~~
+
+### def-oriented-link-in-s-three-and-ambient-isotopy
+--- old-contract-quote
++++ current-Definition
+@@ -70,6 +70,6 @@
+ $\mathbb R^3\subset S^3$ is a link in $S^3$; conversely every link may be
+ assumed after isotopy to lie in $\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that
+ point to $\infty$ by a smooth rotation of the standard sphere. When comparing
+-links already in $\mathbb R^3$, an isotopy can also be arranged to avoid
+-$\infty$ throughout; the track-avoidance argument is given in
++links already in $\mathbb R^3$, assuming the Axiom of Countable Choice,
++an isotopy can also be arranged to avoid $\infty$ throughout; the track-avoidance argument is given in
+ [[thm-oriented-reidemeister-equivalence-theorem]].
+
+### def-regular-oriented-link-diagram
+--- old-contract-quote
++++ current-Definition
+@@ -26,8 +26,8 @@
+ crossing vertices, together with any components having no vertices. Its edges
+ are the strands between consecutive crossings, and the decoration records
+ which strand passes over at each vertex. A diagram is understood up to planar isotopy
+-([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient
+-isotopy moved off $\infty$ may be represented by diagrams differing by planar
++([[def-planar-isotopy-of-link-diagrams]]); assuming the Axiom of Countable Choice,
++two links that differ by an ambient isotopy moved off $\infty$ may be represented by diagrams differing by planar
+ isotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the
+ content of the Reidemeister equivalence theorem below.
+ 
+
+
+### thm-blackboard-framing-self-linking-is-writhe
+--- old-contract-quote
++++ current-Statement
+@@ -2,7 +2,9 @@
+ of a knot $K$ with blackboard framing $b_D$. The self-linking number of the
+ framed knot $(K,b_D)$ equals the diagram writhe:
+ $$\operatorname{sl}(K,b_D)=\operatorname{wr}(D).$$
+-For a link component $K_i$, the corresponding self-linking number is its
+-self-writhe $\operatorname{wr}_i(D)$. Total writhe of a link still includes
++More generally, let $D$ be a regular oriented diagram of an oriented link
++$L=K_1\cup\cdots\cup K_r$, and let $b_{D,i}$ be the blackboard framing
++of $K_i$ induced by its component subdiagram. Then
++$\operatorname{sl}(K_i,b_{D,i})=\operatorname{wr}_i(D)\qquad(1\le i\le r).$ Total writhe of a link still includes
+ the signs of mixed crossings, while the sum of component self-linking numbers
+ uses only self-crossings.
+
+### def-framed-knot-self-linking-and-seifert-framing
+--- old-contract-quote
++++ current-Definition
+@@ -13,18 +13,22 @@
+ positive metrics and the corresponding angle maps are homotopic.
+ 
+ Given a reference framing $[s_0]$ and another framing $[s_1]$, use a bundle
+-metric and the positive quarter-turn $J$ on each oriented normal plane to write
+-the normalized representative of $s_1$ as
+-$$s_1(x)=\cos\theta(x)s_0(x)+\sin\theta(x)Js_0(x).$$
++metric and the positive quarter-turn $J$ on each oriented normal plane. Choose
++representatives $s_0,s_1$ and normalize both to unit sections
++$\widehat s_i(x):=s_i(x)/\lVert s_i(x)\rVert$. Write
++$$\widehat s_1(x)=\cos\theta(x)\widehat s_0(x)+\sin\theta(x)J\widehat s_0(x).$$
+ The resulting map $S^1\to S^1$ has a continuous angle lift along a parameter
+ interval $[0,1]$: subdivide into finitely many intervals whose images lie in
+ open semicircles and choose consecutive local arguments agreeing at endpoints.
+-Since the map is closed, the lift changes by $2\pi m$ for some $m\in\mathbb Z$;
+-different lifts differ by a constant multiple of $2\pi$, and homotopies keep
+-$m$ fixed. This integer $m$ is the **relative framing integer** of $[s_1]$
+-with respect to $[s_0]$. Thus, once a reference framing is supplied, the
+-framing classes are an integer torsor; no absolute integer is assigned before
+-choosing a reference.
++Since the map is closed, the lift satisfies $\theta(1)-\theta(0)=2\pi m$ for
++some $m\in\mathbb Z$; different lifts differ by a constant multiple of
++$2\pi$, and homotopies keep $m$ fixed. Conversely, the difference between
++$\theta(t)$ and $\theta(0)+2\pi mt$ is periodic, so linear interpolation of
++these angles gives a homotopy to the degree-$m$ rotation of $\widehat s_0$.
++Every integer occurs by such a rotation. Thus $m$ classifies the framing class
++relative to $[s_0]$ and gives the **relative framing integer**. Once a reference
++framing is supplied, the framing classes are an integer torsor; no absolute
++integer is assigned before choosing a reference.
+ 
+ The **self-linking number** of a framed knot $(K,[s])$ is the linking number
+ of $K$ with a sufficiently small push-off along $s$, oriented parallel to $K$.
+
+
+### lem-tau-connected-sum-filtered-tensor-product
+--- old-contract-quote
++++ current-Statement
+@@ -1,2 +1,2 @@
+-Assume the Axiom of Countable Choice. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere, with chosen minimum-genus oriented Seifert surfaces. A normalized $CFK^\infty(K)$ is a free finite-rank chain complex over $\mathbb F_2[U,U^{-1}]$ with two integer filtrations $(i,j)$, where multiplication by $U$ lowers both coordinates by one. Give the connected sum $K\#J$ the fixed oriented gluing convention and the sum filtrations and Maslov/Alexander gradings. Then $CFK^\infty(K\#J)$ is bifiltered chain homotopy equivalent to $CFK^\infty(K)\otimes_{\mathbb F_2[U,U^{-1}]}CFK^\infty(J)$, with an equivalence and homotopies preserving both filtration coordinates. Moreover, the normalized finite filtered hat complex of $K\#J$ is filtered chain homotopy equivalent to $C_K\otimes C_J$ with tensor filtration $F_s(C_K\otimes C_J)=\sum_{p+q\le s}F_pC_K\otimes F_qC_J$. Consequently,
++Assume the Axiom of Countable Choice. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere, with chosen minimum-genus oriented Seifert surfaces $F_K$ and $F_J$. Use the boundary-connected-sum surface $F_K\natural F_J$ to normalize the connected-sum model. A normalized $CFK^\infty(K)$ is a free finite-rank chain complex over $\mathbb F_2[U,U^{-1}]$ with two integer filtrations $(i,j)$, where multiplication by $U$ lowers both coordinates by one. Give the connected sum $K\#J$ the fixed oriented gluing convention and the sum filtrations and Maslov/Alexander gradings. Then $CFK^\infty(K\#J)$ is bifiltered chain homotopy equivalent to $CFK^\infty(K)\otimes_{\mathbb F_2[U,U^{-1}]}CFK^\infty(J)$, with an equivalence and homotopies preserving both filtration coordinates. Moreover, the normalized finite filtered hat complex of $K\#J$ is filtered chain homotopy equivalent to $C_K\otimes C_J$ with tensor filtration $F_s(C_K\otimes C_J)=\sum_{p+q\le s}F_pC_K\otimes F_qC_J$. Consequently,
+ $$\tau(K\#J)=\tau(K)+\tau(J).$$
+
+### lem-kauffman-smoothing-operators-for-braid-crossings
+--- old-contract-quote
++++ current-Statement
+@@ -8,8 +8,8 @@
+     \node at (0,1.35) {$I$};
+   \end{scope}
+   \begin{scope}[xshift=2.6cm]
+-    \draw[thick] (-0.55,1) .. controls (0.25,0.55) and (0.25,-0.55) .. (0.55,-1);
+-    \draw[thick] (0.55,1) .. controls (-0.25,0.55) and (-0.25,-0.55) .. (-0.55,-1);
++    \draw[thick] (-0.55,1) .. controls (-0.55,0.45) and (0.55,0.45) .. (0.55,1);
++    \draw[thick] (-0.55,-1) .. controls (-0.55,-0.45) and (0.55,-0.45) .. (0.55,-1);
+     \node at (0,1.35) {$e_i$};
+   \end{scope}
+   \node at (1.25,0) {$\sigma_i=A I+A^{-1}e_i$};
+
+
+### alg-truncated-milnor-invariants-from-based-diagram
+--- old-contract-quote
++++ current-Definition
+@@ -1,9 +1,9 @@
+ Assume AC. The input is either (a) a based $r$-component string-link diagram
+-with $r\geq1$, its endpoint collars, and product-tube parallels equal to the diagram's
++with its endpoint collars and product-tube parallels equal to the diagram's
+ blackboard push-offs, or (b) a based finite regular
+ diagram of a closed $r$-component labeled oriented link with chosen product
+ tubes, one initial strand on each component, and a common basepoint and access
+-paths. The finite input records its compatible common-upper-collar reference accesses. In the compatible branch the actual accesses are these, up to a common base-path change, and the parallels are the blackboard parallels already specified. In the arbitrary-choice branch it additionally records finite words in the compatible strand meridians for each access difference $g_e$, the parallel endpoint differences $h_{0,j},h_{1,j}$, and its relative meridian winding $k_j$. These are word certificates for the chosen paths, part of the supplied based-word data; no evaluation of an unencoded smooth path is claimed. In closed-link mode the preferred longitude uses its own recorded access $h_j$, which may differ from the initial-meridian access $g_j$. Arbitrary parallels are allowed in this branch, with the recorded $k_j$. The input also includes a maximum index length $N\geq2$. The output is
++paths. In either mode require $r\geq1$. The finite input records its compatible common-upper-collar reference accesses. In the compatible branch the actual accesses are these, up to a common base-path change, and the parallels are the blackboard parallels already specified. In the arbitrary-choice branch it additionally records finite words in the compatible strand meridians for each access difference $g_e$, the parallel endpoint differences $h_{0,j},h_{1,j}$, and its relative meridian winding $k_j$. These are word certificates for the chosen paths, part of the supplied based-word data; no evaluation of an unencoded smooth path is claimed. In closed-link mode the preferred longitude uses its own recorded access $h_j$, which may differ from the initial-meridian access $g_j$. Arbitrary parallels are allowed in this branch, with the recorded $k_j$. The input also includes a maximum index length $N\geq2$. The output is
+ the integer coefficients $\mu_\tau(I)$ in string-link mode, or the based
+ coefficients $\mu_L^b(I)$, their lower indeterminacy data $\Delta_I^b$, and
+ residues $\bar\mu_L^b(I)$ in closed-link mode, for every index sequence $I$
+

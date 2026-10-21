@@ -1,0 +1,9 @@
+Research-only packet for the thirteen non-quote contract errors. No source body, claim, canonical contract, native/control artifact, gate, hash binding or acceptance was changed.
+
+Use guarded-field-patches.json. Every mutation is one field, guarded by item identity, exact source archive, unique semantic row selector and exact before value. Both current native batch and aggregate carriers were compared at those fields and match. The physical_targets list identifies both mirrors; an already-identical after value is a no-op. Preserve citation quotes and every unrelated contract field so root can merge the parallel quote corrections safely.
+
+One Tweedie derivation needs the chain-rule Fact F7 already explicitly used by actual Proof3.1 (its old contract ID remains step-2.1). Three Jones decomposition citation-use arrays need actual Proof2.1, including both sources behind Fact F3. Four boundary strings need literal Definition/actual proof anchors. The BMW algorithm has Definition procedure instructions1–6 and no numbered proof: five phantom proof references must refer to those actual instructions.
+
+The five BMW rows duplicate gate-r1-boundary/changes.json. This packet now adopts EXACTLY that existing evidence wording, as recorded in overlap-resolution.json. Eight fields are exclusive here. Do not apply competing alternatives or apply a physical field twice. independent-original-wording.json preserves the superseded research wording only and is NOT an application packet.
+
+Actual complete source text and original targeted contracts are archived under sources/ and before-contracts/. No unsupported argument was found in these bounded metadata repairs. Existing template/history fields remain untouched; this packet does not refresh any stamp or claim gate success. Root owns final fieldwise application and validation.

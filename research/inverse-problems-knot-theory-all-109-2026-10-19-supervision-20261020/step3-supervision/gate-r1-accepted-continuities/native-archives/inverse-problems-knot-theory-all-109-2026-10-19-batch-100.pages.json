@@ -1,0 +1,729 @@
+[
+  {
+    "order": 3192,
+    "id": "khovanov-to-floer-spectral-sequence",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "The Khovanov to Floer spectral sequence",
+    "companion": "khovanov-to-floer-spectral-sequence-examples",
+    "requires": [
+      "spectral-sequences",
+      "double-complexes-exact-couples-and-convergence",
+      "cyclic-branched-covers-and-knot-determinants",
+      "khovanov-homology-and-jones-categorification",
+      "grid-homology-and-combinatorial-knot-floer-theory",
+      "three-manifold-surgery-presentations-and-kirby-moves"
+    ],
+    "items": [
+      {
+        "id": "def-double-branched-cover-of-an-oriented-link",
+        "kind": "definition",
+        "title": "Double branched cover of an oriented link",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "thm-classification-of-connected-covering-spaces",
+          "def-regular-covering",
+          "thm-regular-covering-characterizations",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-double-branched-cover-of-an-oriented-link-well-defined"
+        ],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §§1–2",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 1.38 and Proposition 1.39",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assumes AC through the link-complement manifold and covering-space hypotheses; the mod-two meridian character itself is choice-free.",
+        "statement": "Assume the Axiom of Choice. Let $L=K_1\\cup\\cdots\\cup K_r$ be a nonempty finite oriented smooth link in the standard oriented three-sphere, and put $X_L=S^3\\setminus L$. A small meridian about $K_i$ is the boundary of a normal disk fiber; its orientation is immaterial modulo two. The mod-two meridian character is the homomorphism $\\epsilon_L:\\pi_1(X_L)\\to\\mathbb Z/2$ that sends every component meridian to $1$. For each $K_i$, choose an oriented tubular chart, meaning a diffeomorphism from a normal disk bundle onto a neighborhood, written $\\varphi_i:(\\mathbb R/2\\pi\\mathbb Z)\\times D^2\\to N_i$ and respecting the core orientation. Let $\\lambda_i$ be the parallel longitude given by $\\varphi_i((\\mathbb R/2\\pi\\mathbb Z)\\times\\{z_0\\})$ for a fixed $z_0\\in\\partial D^2$, and set $\\eta_i=\\epsilon_L([\\lambda_i])\\in\\{0,1\\}$. The double branched cover $\\Sigma(L)$ is the closed three-manifold obtained by taking the connected two-sheeted cover of $X_L$ classified by $\\ker\\epsilon_L$ and extending it over each $K_i$ with local normal-disk model $(s,z)\\mapsto(s,e^{\\mathrm i\\eta_i s}z^2)$ in these coordinates. Give its total space the orientation for which the covering map is orientation-preserving away from the branch locus."
+      },
+      {
+        "id": "lem-os-filtered-convergence-and-invariance-scope",
+        "kind": "lemma",
+        "title": "Filtered convergence and the scope of the Ozsváth–Szabó construction",
+        "deps": [
+          "def-filtered-chain-complex",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Remark 1.1",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free; the filtration is finite and all arguments are degreewise.",
+        "statement": "Let $(C,d,F)$ be a filtered chain complex over a field with an increasing filtration $0=F_{-1}C\\subseteq F_0C\\subseteq\\cdots\\subseteq F_nC=C$ and $d(F_pC)\\subseteq F_pC$. Its spectral sequence stabilizes and abuts to $H(C)$ with the image filtration, without any uniform bound outside the finite range $0\\le p\\le n$. If a particular filtered complex has been constructed from a fixed link diagram, this convergence assertion does not itself identify filtered complexes arising from different diagrams."
+      },
+      {
+        "id": "lem-double-branched-cover-of-an-oriented-link-well-defined",
+        "kind": "lemma",
+        "title": "Existence and isotopy invariance of the double branched cover of a link",
+        "deps": [
+          "def-double-branched-cover-of-an-oriented-link",
+          "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "thm-classification-of-connected-covering-spaces",
+          "cor-based-connected-coverings-isomorphic-iff-equal-subgroups"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §2, Proposition 2.1",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3 and Theorem 1.38",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assumes AC only through the supplied link-complement and covering-classification hypotheses; the mod-two homology character is choice-free.",
+        "statement": "Assume the Axiom of Choice. For every nonempty finite oriented smooth link $L=K_1\\cup\\cdots\\cup K_r\\subset S^3$, the homomorphism $\\epsilon_L:\\pi_1(S^3\\setminus L)\\to\\mathbb Z/2$ sending every component meridian to $1$ is well-defined and surjective. Its connected cover extends over the link with a simple order-two branch model, independently of the tubular charts used to describe that model. If $L'$ is ambient isotopic to $L$, the resulting oriented branched covers $\\Sigma(L')$ and $\\Sigma(L)$ are orientation-preservingly diffeomorphic."
+      },
+      {
+        "id": "lem-double-cover-of-two-arc-rational-tangle-is-solid-torus",
+        "kind": "lemma",
+        "title": "The double branched cover of the trivial two-arc tangle is a solid torus",
+        "deps": [
+          "def-double-branched-cover-of-an-oriented-link",
+          "thm-classification-of-connected-covering-spaces",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "thm-classification-of-compact-connected-surfaces",
+          "lem-two-disjoint-circles-in-s-two-cobound-an-annulus",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §2, proof of Proposition 2.1",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            }
+          ]
+        },
+        "axiom_use": "Assumes AC only through the compact-surface classification and the link branch-cover interfaces.",
+        "statement": "Let $B=D^2\\times[0,1]$ be a three-ball and let $A=\\{a_1,a_2\\}\\times[0,1]$ be the trivial pair of vertical properly embedded arcs, with $a_1\\ne a_2$ in the interior of $D^2$. The connected two-fold cover of $B\\setminus A$ whose meridians about both arcs have monodromy $1\\in\\mathbb Z/2$ extends across $A$ as a simple branched cover, and its total space is a solid torus."
+      },
+      {
+        "id": "def-link-surgery-filtered-complex-for-double-branched-cover",
+        "kind": "definition",
+        "title": "Link-surgery filtered complex for a double branched cover",
+        "deps": [
+          "def-double-branched-cover-of-an-oriented-link",
+          "def-hat-heegaard-floer-complex-of-a-closed-three-manifold",
+          "def-filtered-chain-complex"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-os-link-surgery-filtered-complex-and-triangle"
+        ],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §§2 and 4",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "statement": "Let $D$ be a finite regular diagram of a nonempty oriented link $L\\subset S^3$ with ordered crossing set $\\{1,\\ldots,n\\}$. The resolution cube has vertices $I\\in\\{0,1\\}^n$, and $D(I)$ is obtained by applying the indicated local smoothing at every crossing. The link-surgery filtered module associated to $D$ is the direct sum\n$$\nC_D=\\bigoplus_{I\\in\\{0,1\\}^n}\\widehat{CF}(\\Sigma(D(I));\\mathbb F_2),\n$$\nwith the summand for $I$ in increasing filtration degree $n-|I|$. Choose the subordinate Heegaard multi-diagram, compatible perturbation data and top-generator cycles for successive attaching-curve systems. The diagonal component of the candidate differential is the ordinary hat disk differential. For $I<J$ coordinatewise, sum over every ordered path $I=I_0<I_1<\\cdots<I_r=J$ changing one coordinate at each step. Its summand counts the zero-dimensional holomorphic $(r+2)$-gon spaces with input at the $I$ vertex, the selected top-generator cycles between each pair of successive attaching systems, and output at the $J$ vertex. The count includes the allowed source conformal parameters and imposes zero basepoint multiplicity. These are the surgery polygon maps; the component is zero if $I\\nleq J$. Thus changing several crossings is a sum over paths and polygon counts, not an arbitrary direct edge map. The increasing filtration is $F_pC_D=\\bigoplus_{|I|\\ge n-p}\\widehat{CF}(\\Sigma(D(I));\\mathbb F_2)$, extended by zero below $0$ and by $C_D$ at and above $n$. Thus a component increasing $|I|$ lowers its filtration degree and preserves every $F_p$. The cube direction and the reduced Khovanov cochain degree remain separate indices. The polygon-count finiteness, square-zero, and total-homology identifications are justified by the surgery lemma, which labels its actual Ozsváth–Szabó construction and top-input/filling calculations as external inputs, separately from the retained local analytic theorem and finite filtration algebra.\n\nThe local smoothing labels are those of Ozsváth–Szabó Figure1: in the chart with northwest–southeast over-strand, 0 joins the two left and two right endpoints, and 1 joins the two top and two bottom endpoints. These become A and B on the mirror chart, respectively. This fixes the convention for the consumers without a diagram-invariance assertion. The general surgery lemma also applies to links in arbitrary closed connected oriented smooth three-manifolds; this definition is only its branched-cover instance.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      },
+      {
+        "id": "lem-lift-of-two-strand-half-twist-is-annular-dehn-twist",
+        "kind": "lemma",
+        "title": "A two-strand half-twist lifts to an annular Dehn twist",
+        "deps": [
+          "lem-double-cover-of-two-arc-rational-tangle-is-solid-torus",
+          "def-dehn-twist-on-oriented-surface",
+          "thm-path-lifting-for-covering-maps",
+          "thm-homotopy-lifting-for-covering-maps"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §2, Figure 2",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            }
+          ]
+        },
+        "statement": "Let $\\tau$ be the positive half-twist mapping class of a disk interchanging two marked branch points and fixed near the disk boundary. Choose its standard supported half-turn representative in coordinates compatible with the local branched square charts, and take its unique smooth lift to the connected two-fold branched cover which fixes the annular boundary pointwise. Its smooth isotopy class relative to that boundary is the positive Dehn twist about the core when the half-twist orientation agrees with the annular orientation, and is the inverse twist when the orientation is reversed. A positive half-twist here is the usual supported rotation through $+\\pi$ in an oriented disk coordinate containing the two points, interpolated to the identity outside that coordinate disk; the assertion is independent of its cutoff representative."
+      },
+      {
+        "id": "lem-hat-CF-genus-one-lens-space-order-three-rank-three",
+        "kind": "lemma",
+        "title": "The genus-one hat Floer complex of an order-three lens space has rank three",
+        "deps": [
+          "def-hat-heegaard-floer-complex-of-a-closed-three-manifold",
+          "lem-os-disk-and-polygon-analytic-foundations",
+          "def-lens-space-surgery-orientation-convention",
+          "lem-straight-three-intersection-torus-diagram-has-no-nonconstant-disks",
+          "thm-hat-heegaard-floer-is-a-closed-three-manifold-invariant",
+          "lem-nearly-symmetric-polygons-have-positive-domains-and-degree-energy-bounds"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §3",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Ozsváth and Szabó, Holomorphic disks and topological invariants for closed three-manifolds, §§3–4",
+              "url": "https://arxiv.org/pdf/math/0101206"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §§2–5",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Uses the ACω disk-count and positivity package for the hat complex.",
+        "statement": "Assume the ACω hat Floer disk-count theory for closed three-manifolds. For either orientation of $L(3,1)$, the standard genus-one pointed Heegaard diagram has three intersection generators and its $\\widehat{CF}$ differential over $\\mathbb F_2$ is zero. Consequently $\\widehat{HF}(L(3,1);\\mathbb F_2)$ has total rank three."
+      },
+      {
+        "id": "lem-os-link-surgery-filtered-complex-and-triangle",
+        "kind": "lemma",
+        "title": "Ozsváth–Szabó link-surgery filtered complex and exact triangle",
+        "deps": [
+          "def-link-surgery-filtered-complex-for-double-branched-cover",
+          "lem-os-disk-and-polygon-analytic-foundations",
+          "thm-hat-heegaard-floer-is-a-closed-three-manifold-invariant"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §§2 and 4, Theorems 4.1 and 4.7",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Uses the ACω analytic branch of the supplied Heegaard Floer construction.",
+        "statement": "Assume the countable-choice Heegaard Floer analytic package. Let $Y$ be any closed connected oriented smooth three-manifold and let $\\mathbb L$ be an ordered framed $n$-component link in $Y$. On its $i$th exterior boundary torus let $\\mu_i$ be the meridian and $\\lambda_i$ the chosen framing longitude. Use the three filling slopes $\\lambda_i$, $\\mu_i+\\lambda_i$ and $\\mu_i$, labelled $0,1,\\infty$, respectively; $\\infty$ restores the original unfilled component. For $I\\in\\{0,1,\\infty\\}^n$ let $Y(I)$ be the simultaneous filling specified by $I$. Fix an admissible pointed Heegaard multi-diagram subordinate to these surgeries and the compatible perturbation and top-generator choices used by the polygon construction. The mod-two polygon maps on\n$$C(\\mathbb L)=\\bigoplus_{I\\in\\{0,1\\}^n}\\widehat{CF}(Y(I);\\mathbb F_2)$$\nform a differential with components only from $I$ to $J\\ge I$ coordinatewise. It preserves the increasing filtration\n$$F_pC(\\mathbb L)=\\bigoplus_{|I|\\ge n-p}\\widehat{CF}(Y(I);\\mathbb F_2),$$\nextended by zero below zero and by the whole module at and above $n$. Its total homology is isomorphic to $\\widehat{HF}(Y(\\infty,\\ldots,\\infty);\\mathbb F_2)=\\widehat{HF}(Y;\\mathbb F_2)$. For $n=1$, the total complex is the mapping cone of the $0$-to-$1$ surgery map and is quasi-isomorphic to the hat complex of the third, $\\infty$ filling; this yields the long exact surgery sequence for every surgery triad, with its cyclic ordering. For $n=0$ the cube is the single hat complex of $Y$. No filtered quasi-isomorphism between distinct surgery presentations is included.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      },
+      {
+        "id": "lem-os-unlink-resolution-covers-and-floer-tqft",
+        "kind": "lemma",
+        "title": "Unlink resolution covers and the Heegaard Floer TQFT",
+        "deps": [
+          "lem-double-branched-cover-of-an-oriented-link-well-defined",
+          "def-hat-heegaard-floer-complex-of-a-closed-three-manifold",
+          "lem-os-disk-and-polygon-analytic-foundations",
+          "thm-hat-heegaard-floer-is-a-closed-three-manifold-invariant"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Propositions 6.1 and 6.2",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Uses the ACω analytic branch of Heegaard Floer theory; the unlink topology computation itself is choice-free.",
+        "statement": "For every integer $k\\ge1$, let $U_k\\subset S^3$ be a $k$-component planar unlink with an arbitrary orientation on each component, and choose a basepoint $p$ on any one component. Its double branched cover is $\\#^{\\,k-1}(S^2\\times S^1)$, with $\\Sigma(U_1)=S^3$. Over $\\mathbb F_2$, the hat Floer group of this cover is identified with the exterior algebra on a $(k-1)$-dimensional vector space, hence has rank $2^{k-1}$. Under these identifications, the cobordism maps for saddle cobordisms between neighboring unlink resolutions, with $p$ carried outside the saddle disk, are the multiplication and comultiplication maps of the two-dimensional Frobenius algebra $\\mathbb F_2[X]/(X^2)$ after reduction at the marked component. The identification includes the marked-circle cases and fixes the basis conventions needed to compare the first surgery differential with the reduced Khovanov cube.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      },
+      {
+        "id": "lem-trefoil-double-branched-cover-is-lens-space-order-three",
+        "kind": "lemma",
+        "title": "The trefoil double branched cover is a lens space of order three",
+        "deps": [
+          "def-double-branched-cover-of-an-oriented-link",
+          "lem-double-branched-cover-of-an-oriented-link-well-defined",
+          "lem-double-cover-of-two-arc-rational-tangle-is-solid-torus",
+          "lem-lift-of-two-strand-half-twist-is-annular-dehn-twist",
+          "def-lens-space-surgery-orientation-convention",
+          "thm-seifert-van-kampen"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §3",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            }
+          ]
+        },
+        "axiom_use": "Uses AC only through the branched-cover and lens-space convention suppliers.",
+        "statement": "Let $T$ be either oriented trefoil in $S^3$. Its double branched cover $\\Sigma(T)$ is diffeomorphic, up to orientation reversal, to the lens space $L(3,1)$ in the convention in which $L(p,q)$ is the $p/q$ filling of the standard unknot exterior. In particular, $\\pi_1(\\Sigma(T))$ is cyclic of order three."
+      },
+      {
+        "id": "def-reduced-khovanov-cohomology-of-a-based-link-over-f2",
+        "kind": "definition",
+        "title": "Reduced Khovanov cohomology of a based link over F2",
+        "deps": [
+          "alg-khovanov-chain-complex-from-diagram",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "def-cochain-complex-in-an-abelian-category",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "thm-khovanov-chain-complex-from-diagram-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §5",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Shumakovitch, Torsion of the Khovanov homology, §2.2",
+              "url": "https://arxiv.org/pdf/math/0405474v2"
+            },
+            {
+              "title": "Turner, A hitchhiker’s guide to Khovanov homology, §1.2",
+              "url": "https://www.i2m.univ-amu.fr/perso/luisa.paoluzzi/Turner1.pdf"
+            }
+          ]
+        },
+        "statement": "Let $(D,p)$ be a finite regular oriented link diagram with a marked point $p$ away from crossings, and let $C(D;\\mathbb F_2)$ be its normalized Khovanov cochain complex over $\\mathbb F_2$ obtained from the algebra $\\mathcal A=\\mathbb F_2[X]/(X^2)$ with $\\deg_q(1)=1$ and $\\deg_q(X)=-1$. On each resolution state, let $X_p$ multiply by $X$ on the circle containing $p$ and act as the identity on the other circle factors. Define the reduced complex by $\\widetilde C(D,p)=C(D;\\mathbb F_2)/\\operatorname{im}X_p$, with the surviving based-circle label $1$ assigned reduced quantum degree $0$ by the shift $\\widetilde j=j-1$. Its cohomology is $\\widetilde{Kh}^{i,\\widetilde j}(D,p;\\mathbb F_2)$. The basepoint may lie on any component; for a link, independence of the chosen component is a separate theorem."
+      },
+      {
+        "id": "lem-os-first-differential-is-reduced-khovanov",
+        "kind": "lemma",
+        "title": "The first surgery differential is the reduced Khovanov TQFT differential",
+        "deps": [
+          "lem-os-link-surgery-filtered-complex-and-triangle",
+          "lem-os-unlink-resolution-covers-and-floer-tqft",
+          "def-reduced-khovanov-cohomology-of-a-based-link-over-f2"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §6, Propositions 6.1–6.2",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5.3",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "statement": "Fix a finite regular diagram $D$ of a nonempty oriented link $L\\subset S^3$, choose a basepoint $p\\in D$ away from the crossings, and choose an admissible pointed Heegaard multi-diagram subordinate to the branched-cover surgeries, with the compatible perturbation data and top-generator cycles of the link-surgery construction. Identify each first-page vertex group with the reduced state space of the corresponding crossingless resolution, based at the circle containing $p$. For every cube edge, the induced first differential is the mod-two map assigned by the saddle: multiplication when two resolution circles merge and comultiplication when one resolution circle splits, with the marked-circle quotient at $p$. Under these identifications the direct sum of edge maps is the reduced Khovanov differential of the mirror diagram $\\overline D$, based at the corresponding point, in the Ozsváth–Szabó smoothing convention.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      },
+      {
+        "id": "lem-reduced-khovanov-over-f2-basepoint-independence",
+        "kind": "lemma",
+        "title": "Reduced Khovanov homology over F2 is independent of the chosen link component",
+        "deps": [
+          "def-reduced-khovanov-cohomology-of-a-based-link-over-f2",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "alg-khovanov-chain-complex-from-diagram",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "thm-khovanov-chain-complex-from-diagram-procedure-properties"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shumakovitch, Torsion of the Khovanov homology, §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/math/0405474v2"
+            },
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §5",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Turner, A hitchhiker’s guide to Khovanov homology, §1.2",
+              "url": "https://www.i2m.univ-amu.fr/perso/luisa.paoluzzi/Turner1.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free: the proof uses only the finite cube, basis calculations over F2, and finite-dimensional linear algebra.",
+        "statement": "Let $D$ be a finite regular diagram of an oriented link and let $p,q$ be any two points of $D$ away from crossings, possibly on different link components. Over $\\mathbb F_2$, the reduced Khovanov cohomology groups defined using $p$ and $q$ are isomorphic as bigraded vector spaces. The isomorphism need not be canonical; no diagram-change invariance is asserted here."
+      },
+      {
+        "id": "lem-trefoil-reduced-khovanov-rank-three",
+        "kind": "lemma",
+        "title": "The reduced Khovanov homology of a trefoil has rank three",
+        "deps": [
+          "def-reduced-khovanov-cohomology-of-a-based-link-over-f2",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "alg-khovanov-chain-complex-from-diagram",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "thm-khovanov-chain-complex-from-diagram-procedure-properties"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §6",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Shumakovitch, Torsion of the Khovanov homology, §2.2",
+              "url": "https://arxiv.org/pdf/math/0405474v2"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free finite enumeration and linear algebra over F2.",
+        "statement": "Let $D$ be the oriented closure of the two-strand braid $\\sigma_1^3$, with both strands directed downward and the positive generator drawn with its southwest-to-northeast strand over its northwest-to-southeast strand. Mark a point away from the three crossings, use the A-smoothing (zero-resolution) as the through pairing, and use the B-smoothing (one-resolution) as the cap-cup pairing. The normalized reduced Khovanov cohomology of $D$ over $\\mathbb F_2$ has total rank $3$. The normalized cohomological and quantum grading shifts do not change this total rank."
+      },
+      {
+        "id": "lem-link-surgery-e-one-differential-is-reduced-khovanov",
+        "kind": "lemma",
+        "title": "The E1 differential of the link-surgery complex is reduced Khovanov",
+        "deps": [
+          "lem-os-first-differential-is-reduced-khovanov",
+          "def-reduced-khovanov-cohomology-of-a-based-link-over-f2",
+          "lem-reduced-khovanov-over-f2-basepoint-independence"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Theorem 6.3 and proof",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5.3",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "statement": "For a fixed finite regular diagram $D$ of a nonempty oriented link $L\\subset S^3$, with $n$ crossings and a basepoint $p\\in D$ away from the crossings, choose an admissible pointed Heegaard multi-diagram subordinate to the branched-cover surgeries and the compatible perturbation data and top-generator cycles of the link-surgery construction. Its first page and first differential are isomorphic as a cochain complex over $\\mathbb F_2$ to the reduced Khovanov cochain complex of the mirror diagram $\\overline D$, based at the corresponding point, in the specified normalized grading shifts. The resulting second page is therefore the based reduced Khovanov cohomology of $\\overline D$. The isomorphism is for this fixed diagram and makes no claim about filtered chain complexes for different diagrams.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      },
+      {
+        "id": "thm-reduced-khovanov-over-f2-link-invariance",
+        "kind": "theorem",
+        "title": "Reduced Khovanov homology over F2 is an oriented link invariant",
+        "deps": [
+          "def-reduced-khovanov-cohomology-of-a-based-link-over-f2",
+          "lem-reduced-khovanov-over-f2-basepoint-independence",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "def-countable-choice",
+          "lem-khovanov-reidemeister-chain-homotopies",
+          "lem-based-link-reduced-khovanov-reidemeister-equivalences"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §5",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Shumakovitch, Torsion of the Khovanov homology, §§2.2 and 3",
+              "url": "https://arxiv.org/pdf/math/0405474v2"
+            },
+            {
+              "title": "Turner, A hitchhiker’s guide to Khovanov homology, §1.2",
+              "url": "https://www.i2m.univ-amu.fr/perso/luisa.paoluzzi/Turner1.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assumes ACω for finite Reidemeister-move generation. The reduced-cube algebra and component-independence argument are choice-free.",
+        "statement": "Assume ACω. For every nonempty oriented link $L\\subset S^3$, the bigraded $\\mathbb F_2$ vector spaces $\\widetilde{Kh}^{i,j}(L;\\mathbb F_2)$ obtained by reducing the normalized Khovanov complex at a point on any chosen component are independent, up to noncanonical bigraded isomorphism, of the diagram and the chosen component. No filtered structure from a Floer construction is part of this invariance statement."
+      },
+      {
+        "id": "thm-os-spectral-sequence-for-a-fixed-link-diagram",
+        "kind": "theorem",
+        "title": "The Ozsváth–Szabó spectral sequence for a fixed link diagram",
+        "deps": [
+          "lem-double-branched-cover-of-an-oriented-link-well-defined",
+          "def-hat-heegaard-floer-complex-of-a-closed-three-manifold",
+          "thm-hat-heegaard-floer-is-a-closed-three-manifold-invariant",
+          "def-link-surgery-filtered-complex-for-double-branched-cover",
+          "lem-os-link-surgery-filtered-complex-and-triangle",
+          "lem-os-unlink-resolution-covers-and-floer-tqft",
+          "lem-link-surgery-e-one-differential-is-reduced-khovanov",
+          "lem-os-filtered-convergence-and-invariance-scope",
+          "def-reduced-khovanov-cohomology-of-a-based-link-over-f2"
+        ],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Theorem 6.3 and proof",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5.3",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assumes AC for the branched-cover construction and ACω for the Floer analytic package; this fixed-diagram argument does not use Khovanov diagram invariance.",
+        "statement": "Assume AC and the ACω Heegaard Floer analytic package. Let $D$ be any finite regular diagram of a nonempty oriented link $L\\subset S^3$, with a marked point away from crossings. There is a spectral sequence over $\\mathbb F_2$ associated to the link-surgery filtered complex for this fixed diagram whose $E_2$ page is isomorphic, with the normalized grading shifts of the chosen smoothing convention, to $\\widetilde{Kh}(\\overline L,p;\\mathbb F_2)$ computed from the mirror diagram, and whose abutment is $\\widehat{HF}(\\Sigma(L);\\mathbb F_2)$ with its image filtration. This is a fixed-diagram construction; it does not assert a diagram-independent filtered quasi-isomorphism type.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      },
+      {
+        "id": "thm-os-khovanov-spectral-sequence-to-branched-cover-floer",
+        "kind": "theorem",
+        "title": "The Khovanov to branched-cover Heegaard Floer spectral sequence",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "lem-double-branched-cover-of-an-oriented-link-well-defined",
+          "thm-os-spectral-sequence-for-a-fixed-link-diagram",
+          "thm-reduced-khovanov-over-f2-link-invariance"
+        ],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Theorem 1.1, Corollary 1.2, and §6",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5.3",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assumes AC for the branched-cover construction and ACω for Reidemeister invariance and the Floer analytic package; these are distinct uses.",
+        "statement": "Assume AC and ACω. For every nonempty oriented link $L\\subset S^3$, there is a spectral sequence over $\\mathbb F_2$ whose $E_2$ page is the reduced Khovanov cohomology $\\widetilde{Kh}^{*,*}(\\overline L;\\mathbb F_2)$ of the mirror link and whose abutment is $\\widehat{HF}(\\Sigma(L);\\mathbb F_2)$ with its image filtration. The page identification is an isomorphism of bigraded vector spaces; this statement does not claim a diagram-independent filtered quasi-isomorphism type for the chain-level spectral sequence.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-os-source-binding-first-check.json"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3193,
+    "id": "khovanov-to-floer-spectral-sequence-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "The Khovanov to Floer spectral sequence — Examples and Counterexamples",
+    "companion": "khovanov-to-floer-spectral-sequence",
+    "requires": [
+      "khovanov-to-floer-spectral-sequence"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-45-boundary-case",
+        "kind": "counterexample",
+        "title": "The endpoints do not determine intermediate pages",
+        "deps": [
+          "def-filtered-chain-complex",
+          "def-homological-spectral-sequence",
+          "thm-the-next-page-is-the-homology-of-the-current-page",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "Sharifi, Homological Algebra, §4",
+              "url": "https://math.ucla.edu/~sharifi/homalg.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Choice-free finite-dimensional linear algebra over F2.",
+        "statement": "The false claim is that specifying the isomorphism class of the total homology of a bounded filtered chain complex determines the isomorphism class of its early spectral-sequence pages. More strongly, the false claim is that two filtered complexes with isomorphic total homology must have isomorphic $E_1$ pages."
+      },
+      {
+        "id": "ex-knot-kt-45-worked-cases",
+        "kind": "example",
+        "title": "The trefoil Khovanov-to-Floer rank calculation",
+        "deps": [
+          "lem-trefoil-reduced-khovanov-rank-three",
+          "thm-os-khovanov-spectral-sequence-to-branched-cover-floer",
+          "lem-trefoil-double-branched-cover-is-lens-space-order-three",
+          "lem-hat-CF-genus-one-lens-space-order-three-rank-three"
+        ],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §§3 and 6",
+              "url": "https://arxiv.org/pdf/math/0309170v1"
+            },
+            {
+              "title": "Lipshitz, Heegaard Floer Homologies, §5.3",
+              "url": "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+            }
+          ]
+        },
+        "statement": "Let $T$ be the oriented left-handed trefoil, the closure of the two-strand braid $\\sigma_1^{-3}$, and choose a marked point away from its three crossings. Its mirror $\\overline T$ is the closure of $\\sigma_1^3$, depicted below. Use the smoothing convention in which the zero-resolution of this mirror diagram is the through pairing and the one-resolution is the cap-cup pairing. The reduced Khovanov cohomology of $\\overline T$ over $\\mathbb F_2$ has total rank $3$. The double branched cover of $T$ is a lens space $L(3,1)$ up to orientation, and the hat Floer group of this lens space over $\\mathbb F_2$ has total rank $3$. Thus the $E_2$ page and the abutment have equal total rank. Every spectral-sequence differential $d_r$ with $r\\ge2$ vanishes; the rank comparison gives no conclusion about the earlier differential $d_1$ from $E_1$ to $E_2$.\n\n~~~tikz\n\\begin{tikzpicture}[scale=0.55]\n\\draw (-1,6) .. controls (-3,6) and (-3,0) .. (-1,0);\n\\draw (1,6) .. controls (3,6) and (3,0) .. (1,0);\n\\foreach \\yt/\\yb in {6/4,4/2,2/0} {\n  \\draw (-1,\\yt) -- (1,\\yb);\n  \\draw[white,line width=4pt] (1,\\yt) -- (-1,\\yb);\n  \\draw[black,line width=1.1pt] (1,\\yt) -- (-1,\\yb);\n}\n\\node at (0,7) {$\\widehat{\\sigma_1^3}$};\n\\end{tikzpicture}\n~~~\n\nThe drawing depicts the closure of the braid word; the southwest-to-northeast diagonal is drawn over the northwest-to-southeast diagonal, matching the positive-generator convention in the rank calculation. The algebraic calculation uses the smoothing cube and Frobenius maps, not the picture.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/top-marked-free-five-focused-final.md"
+        }
+      }
+    ]
+  }
+]

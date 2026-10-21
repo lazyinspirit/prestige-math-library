@@ -69,3 +69,8 @@ No judging, stamping, dispatching or native gate cycle was initiated. Final deci
 
 
 Owner alert from optional run-wide ledger validation: `node tools/defect-ledger.mjs validate --run inverse-problems-knot-theory-all-109-2026-10-19` checked 488 rows and reported ten schema errors in other owners’ rows. Batch 11 uses unsupported locations in `ipkt109-b11-3a-selector-measurability`, `ipkt109-b11-3a-gradiometry-multiplicity`, and `ipkt109-b11-3a-heat-attribution`. Batch 32 uses unsupported repair_cost values in `ipkt109-b32-3a-nonempty-1`, `-2`, and `-3`. Batch 75 uses unsupported locations in `ipkt109-b75-3a-cycle-reader-false-positive`, `ipkt109-b75-3a-cycle-flagged-false-positive`, and `ipkt109-b75-3a-historical-top-step-references`; the last also uses unsupported subclass `incorrect-step-reference`. These are outside the dispatched batch and were not edited. Owner must route their schema normalization before a run-wide ledger pass; no mathematical defect row was manufactured for this mechanical failure. All eight owned rows independently validate in an explicit temporary selection from the actual ledger.
+
+
+Owner gate repair
+
+Root moved the existing Heegaard-invariance lemma from justified_by into deps because that lemma establishes the minimum/tower properties without depending on this conditional definition. The definition and two downstream computed levels and exact manifest mirrors were updated. Every source body, claim, axiom and proof is unchanged. The actual lemma tower/least-degree argument and definition were read in full, and the primary reviewer checked all six affected consumers without requiring proof changes; this records prerequisite direction, not new mathematical or native audit coverage.

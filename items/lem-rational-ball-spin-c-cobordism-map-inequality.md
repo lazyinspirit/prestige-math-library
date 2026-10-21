@@ -14,7 +14,7 @@ deps:
   - lem-commuting-laurent-and-plus-maps-give-bottom-degree-inequalities
   - lem-rational-heegaard-floer-absolute-grading-and-cobordism-maps
   - lem-rational-heegaard-floer-infinity-standardness-and-rational-cobordism-isomorphism
-dependency_level: 2
+dependency_level: 3
 justified_by: []
 aliases: []
 proof_strategy: direct

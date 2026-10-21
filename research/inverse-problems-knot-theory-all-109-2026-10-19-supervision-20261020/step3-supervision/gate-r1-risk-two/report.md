@@ -1,0 +1,7 @@
+Both native risk reviews were genuinely open. The two proposed source repairs address their actual objections; no completion stamp is proposed for the unrepaired canonical sources.
+
+The estimator now explicitly uses product-sigma-measurable update maps. Its elementary rectangle/finite-induction argument preserves arbitrary metric spaces and leaves the other estimator classes unchanged. All 11 direct and 14 indirect consumer interfaces were checked; the actual unrolling users are Euclidean and satisfy this convention.
+
+The Navier–Stokes example separates physical mean-zero curl from the released scalar-state numerical extension, and separates Gaussian seeds from the fields evolved for five units to form the dataset. The full pinned 243-line solver and actual relevant primary sections were read. No undocumented zero-mode projection or Gaussian law for evolved data is asserted. The example has no item consumers. Two existing boundary reasons incorrectly identified the inversion horizon with five-unit preparation; exact corrections are included.
+
+See report.json for actual reading limits, consumer-interface-reviews.json for each use, and the exact guarded source/metadata proposals. Completion metadata is conditional on independent review and root source integration. Original native risk objections and review identities remain preserved. No canonical edits, hashes, controls or gates were performed.

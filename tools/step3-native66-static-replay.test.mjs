@@ -4,7 +4,7 @@ import{resolve,dirname}from'node:path';import{tmpdir}from'node:os';import{pathTo
 const repo=process.cwd(),run='machine-learning-all-101-2026-10-19',id='lem-diffusion-objective-estimator-expectation',stem=`research/${run}-dispatch/alpha-3a-batch-66.attempt-1`,logPath=stem+'.log';
 const code=mkdtempSync(resolve(tmpdir(),'native66-code-'));test.after(()=>rmSync(code,{recursive:true,force:true}));
 for(const p of execFileSync('git',['ls-files','tools'],{encoding:'utf8',cwd:repo}).trim().split('\n').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(resolve(code,p)),{recursive:true});copyFileSync(resolve(repo,p),resolve(code,p));}
-for(const name of ['step3-native-creation-origin.mjs','step3-native66-static-replay.mjs'])copyFileSync(fileURLToPath(new URL(name,import.meta.url)),resolve(code,'tools',name));
+for(const name of ['step3-native-creation-origin.mjs','step3-native66-static-replay.mjs','step3-native24-restart-adoption.mjs'])copyFileSync(fileURLToPath(new URL(name,import.meta.url)),resolve(code,'tools',name));
 const api=await import(pathToFileURL(resolve(code,'tools/step3-native-creation-origin.mjs'))),extra=await import(pathToFileURL(resolve(code,'tools/step3-native66-static-replay.mjs'))),item=await import(pathToFileURL(resolve(code,'tools/item-hash.mjs')));
 const sha=x=>createHash('sha256').update(x).digest('hex'),canon=x=>Array.isArray(x)?x.map(canon):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canon(x[k])])):x,hash=x=>sha(JSON.stringify(canon(x)));
 const available=existsSync(resolve(repo,logPath));

@@ -3,6 +3,7 @@ import { existsSync,readFileSync,readdirSync,lstatSync } from 'node:fs';
 import { resolve,relative,isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { split,yaml } from './pathway-lib.mjs';
+import { sourceSectionText } from './facts-block.mjs';
 import { foreignRefuterHash as hash } from './step3-owner-foreign-refuter-routes.mjs';
 export const NATIVE_RISK_TITLE_POLICY='owner-step3-native-risk-title-home-alpha-continuation-v1';
 export const RISK_TITLE_ID='lem-incompressible-surface-torus-boundary-essential-or-parallel-annulus';
@@ -62,9 +63,58 @@ export function nativeRiskTitleHomeContinuations(root,run,{beforeDispatch=false,
  }
  return [{entry:e,binding:{path:p,entry_sha256:hash(e)},old_scope:scope,old_decisions:decisions,additional_obligations:[{obligation:`gate:${e.defect_id}`,id:RISK_TITLE_ID,batch:'71',route:'gate',defect_id:e.defect_id,owner_native_risk_title:{path:p,entry_sha256:hash(e)}}]}];
 }
+const MIRROR_RUN='inverse-problems-knot-theory-all-109-2026-10-19';
+export const NATIVE_RISK_TITLE_MIRROR_POLICY='owner-step3-native-risk-title-71-two-claim-mirrors-v1';
+const MIRRORS=[{id:'cor-satellite-companion-is-detected-by-jsj',section:'Statement'},
+ {id:'ex-knot-kt-17-worked-cases',section:'Example'}];
+const mirrorRegistry=run=>`research/${run}-step3-native-risk-title-manifest-mirror-successor.json`;
+// Current metadata only: the authentic title-launch registry is never rewritten.
+// Caller still validates the complete original native continuation and title gate.
+export function nativeRiskTitleManifestMirrorSuccessor(root,run,e,{current=true}={}){
+ const p=mirrorRegistry(run);if(!existsSync(resolve(root,p)))return null;
+ need(run===MIRROR_RUN,'claim-mirror successor outside exact run');
+ const raw=bytes(root,p),d=parse(raw);
+ need(d.version===1&&d.run===run&&d.unit==='71'&&d.policy===NATIVE_RISK_TITLE_MIRROR_POLICY
+  &&d.authorized_by==='owner'&&d.owner_identity==='/root'&&d.reviewed===true
+  &&d.mathematical_acceptance===false&&d.native_reread_claimed===false
+  &&Number.isFinite(Date.parse(d.at))&&typeof d.reason==='string'&&d.reason.trim().length>=80,
+  'invalid explicit two-mirror successor authority');
+ need(e.unit==='71'&&hash(d.registration_manifest)===hash(e.registration_manifest),
+  'successor does not retain exact immutable registration manifest');
+ const original=parse(ref(root,run,e.registration_manifest));
+ const successor=ref(root,run,d.current_manifest);
+ need(!current||successor.equals(bytes(root,`research/${run}-batch-71.pages.json`)),'current manifest differs from exact successor archive');
+ ref(root,run,e.source_after);
+ need(!current||sha(bytes(root,`items/${RISK_TITLE_ID}.md`))===e.source_after.sha256,
+  'risk-title source changed');
+ need(Array.isArray(d.changes)&&d.changes.length===MIRRORS.length
+  &&exact(d.changes.map(x=>x.id),MIRRORS.map(x=>x.id)),'wrong exact two mirror IDs');
+ const expected=structuredClone(original);
+ for(const allowed of MIRRORS){
+  const c=d.changes.find(x=>x.id===allowed.id),sourcePath=`items/${allowed.id}.md`;
+  const pins=(e.current_inputs??[]).filter(x=>x.path===sourcePath);
+  need(pins.length===1&&/^[a-f0-9]{64}$/.test(pins[0].sha256??'')
+   &&c.field==='statement'&&c.source_section===allowed.section&&c.source_path===sourcePath
+   &&c.source_sha256===pins[0].sha256,'mirror must retain actual source launch pin');
+  need(c.source_archive?.sha256===pins[0].sha256,'source archive must retain launch pin');
+  const source=ref(root,run,c.source_archive);
+  need(!current||bytes(root,sourcePath).equals(source),`changed launch source ${sourcePath}`);
+  const text=sourceSectionText(split(source.toString()).body,allowed.section)?.trim();
+  const rows=pages(expected).flatMap(p=>(p.items??[]).filter(x=>typeof x==='object'&&x.id===allowed.id));
+  need(rows.length===1&&typeof rows[0].statement==='string'&&c.before_quote===rows[0].statement
+   &&typeof text==='string'&&text.length>0&&c.after_quote===text&&c.after_quote!==c.before_quote,
+   'mirror must be exact complete current source section, with actual old field guard');
+  rows[0].statement=c.after_quote;
+ }
+ need(hash(expected)===hash(parse(successor)),
+  'successor changes risk row, inventory, or another manifest field');
+ return {path:p,sha256:sha(raw),current_manifest:d.current_manifest,sources:d.changes.map(c=>c.source_archive)};
+}
 export function nativeRiskTitleCarrier(root,run,target){
  const row=nativeRiskTitleHomeContinuations(root,run).find(r=>r.entry.unit==='71');need(row&&target.id===RISK_TITLE_ID&&target.obligation===`gate:${row.entry.defect_id}`&&hash(target.owner_native_risk_title)===hash(row.binding),'wrong actual title gate');
- const e=row.entry;need(sha(bytes(root,`items/${RISK_TITLE_ID}.md`))===e.source_after.sha256&&sha(bytes(root,`research/${run}-batch-71.pages.json`))===e.registration_manifest.sha256,'current source/manifest exceeds approved title-only successor');
+ const e=row.entry;need(sha(bytes(root,`items/${RISK_TITLE_ID}.md`))===e.source_after.sha256,'current source exceeds approved title-only successor');
+ const successor=nativeRiskTitleManifestMirrorSuccessor(root,run,e);
+ need(successor||sha(bytes(root,`research/${run}-batch-71.pages.json`))===e.registration_manifest.sha256,'current manifest exceeds approved title-only successor');
  const manifest=parse(bytes(root,`research/${run}-batch-71.pages.json`)),m=subjectRows(manifest)[0],contracts=parse(bytes(root,`research/${run}-batch-71.proof-contracts.json`));return {item_sha256:e.source_after.sha256,contract_sha256:hash(contracts.contracts?.[RISK_TITLE_ID]??null),manifest_sha256:hash({...m.item,__step4_page_id:m.page}),owner_native_risk_title:row.binding};
 }
 export function nativeRiskTitleHomeCurrentOutputs(root,run,e){
@@ -93,5 +143,5 @@ export function nativeRiskTitleHomeCurrentOutputs(root,run,e){
  return outputs;
 }
 export function nativeRiskTitleHomeClosureEvidence(root,run){
- const rows=nativeRiskTitleHomeContinuations(root,run);if(!rows.length)return {};const p=registry(run),out={[p]:sha(bytes(root,p))};for(const {entry:e}of rows)for(const k of ['previous_result','previous_attempt','previous_prompt','previous_report','previous_decisions','previous_scope','previous_risk_contract','source_before','source_after','manifest_before','registration_manifest','application','owner_review','owner_capture','task']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}return out;
+ const rows=nativeRiskTitleHomeContinuations(root,run);if(!rows.length)return {};const p=registry(run),out={[p]:sha(bytes(root,p))};for(const {entry:e}of rows)for(const k of ['previous_result','previous_attempt','previous_prompt','previous_report','previous_decisions','previous_scope','previous_risk_contract','source_before','source_after','manifest_before','registration_manifest','application','owner_review','owner_capture','task']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}for(const {entry:e}of rows){const successor=nativeRiskTitleManifestMirrorSuccessor(root,run,e,{current:false});if(successor){out[successor.path]=successor.sha256;out[successor.current_manifest.path]=successor.current_manifest.sha256;for(const source of successor.sources)out[source.path]=source.sha256;}}return out;
 }

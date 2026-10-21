@@ -1,0 +1,463 @@
+[
+  {
+    "order": 3118,
+    "id": "seifert-matrices-and-the-alexander-module",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Seifert matrices and the Alexander module",
+    "companion": "seifert-matrices-and-the-alexander-module-examples",
+    "requires": [
+      "hecke-markov-traces-and-polynomial-link-invariants",
+      "knot-exteriors-and-peripheral-systems",
+      "crossing-signs-writhe-and-linking-number",
+      "seifert-surfaces-and-knot-genus"
+    ],
+    "items": [
+      {
+        "id": "def-seifert-matrix-s-equivalence",
+        "kind": "definition",
+        "deps": [],
+        "dependency_level": 0,
+        "title": "S-equivalence of integral Seifert matrices",
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A\u20138.B",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            },
+            {
+              "title": "Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants",
+              "url": "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf"
+            },
+            {
+              "title": "Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants",
+              "url": "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf"
+            }
+          ]
+        },
+        "statement": "Let $V$ be an even-order square matrix with integer entries, of size $n=2g$. A unimodular congruence replaces $V$ by $P^TVP$ for an integer matrix $P$ with determinant $+1$ or $-1$. For $x,y\\in\\mathbb Z^n$ as column vectors and $z\\in\\mathbb Z$, the two elementary enlargements of $V$ are\n$$E_0(V;x,y,z)=\\begin{pmatrix}V&x&0\\\\y^T&z&0\\\\0^T&1&0\\end{pmatrix},\\qquad E_1(V;x,y,z)=\\begin{pmatrix}V&x&0\\\\y^T&z&1\\\\0^T&0&0\\end{pmatrix}.$$\nTwo even-order integral matrices are **S-equivalent** if one can be obtained from the other by a finite sequence of unimodular congruences, elementary enlargements, and reverse elementary enlargements."
+      },
+      {
+        "id": "def-knot-seifert-pairing-and-matrix",
+        "kind": "definition",
+        "deps": [
+          "def-oriented-seifert-surface",
+          "def-countable-choice",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice-principle-for-foliation-pair",
+          "lem-countable-choice-sequence-and-product-formulations-are-equivalent",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "thm-linking-number-equals-signed-intersection",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "justified_by": [
+          "lem-seifert-pairing-well-defined"
+        ],
+        "dependency_level": 5,
+        "title": "Seifert pairing and matrix of an oriented knot",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K:S^1\\hookrightarrow S^3$ be a smooth oriented knot in the standard oriented three-sphere, and let $F\\subset S^3$ be a connected compact smooth oriented embedded surface with boundary $K$, oriented so that its boundary orientation is the given orientation of $K$. Let $g$ be the nonnegative integer determined by $\\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of the first singular homology group $H_1(F;\\mathbb Z)$, represented by integral one-cycles on $F$. Orient the normal line of $F$ by requiring $(n,u,v)$ to be positively oriented in $S^3$ whenever $(u,v)$ is a positive tangent basis of $F$. The positive push-off $a_i^+$ is the cycle carried to a sufficiently small positive normal level in a bicollar of $F$.\n\nFor disjoint oriented closed curves $J,L\\subset S^3$, orient a meridian $\\mu_L$ of $L$ so that a positive tangent to $L$ followed by a positive basis of its normal disk gives the ambient orientation. The linking number $\\operatorname{lk}(J,L)$ is the integer determined by $[J]=\\operatorname{lk}(J,L)[\\mu_L]$ in $H_1(S^3\\setminus L;\\mathbb Z)$, using the Alexander-duality identification that sends $[\\mu_L]$ to $1$. Extend linking additively over integral one-cycles. The Seifert pairing is $\\theta_F(x,y)=\\operatorname{lk}(x^+,y)$, and its matrix in the chosen basis is $V=(V_{ij})_{i,j=1}^{2g}$, where $V_{ij}=\\theta_F(a_i,a_j)=\\operatorname{lk}(a_i^+,a_j)$. The surface and basis are part of the data; this definition asserts no knot-only matrix invariant."
+      },
+      {
+        "id": "lem-seifert-pairing-well-defined",
+        "kind": "lemma",
+        "deps": [
+          "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-parametric-transversality",
+          "def-knot-seifert-pairing-and-matrix",
+          "def-oriented-seifert-surface",
+          "def-countable-choice",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice-principle-for-foliation-pair",
+          "lem-countable-choice-sequence-and-product-formulations-are-equivalent",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "thm-linking-number-equals-signed-intersection",
+          "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-every-oriented-knot-bounds-a-seifert-surface",
+          "thm-transversality-homotopy-theorem",
+          "prop-relative-transversality-preserves-a-map-on-a-closed-good-region",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "def-oriented-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 6,
+        "title": "Well-definedness of the Seifert pairing",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K$ be a smooth oriented embedded circle in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary $K$, and let $a_1,\\ldots,a_{2g}$ be the ordered integral basis and positive normal push-off convention used to define the Seifert matrix $V$ above. Every class of $H_1(F;\\mathbb Z)$ has a representative that is a finite integral sum of pairwise disjoint smooth oriented embedded circles in $F$. For such representatives $x$ and $y$, the sum of the pairwise linking numbers between the positive push-off of $x$ and $y$ depends only on $[x]$ and $[y]$, is independent of the sufficiently small positive push-off, and equals the bilinear extension of $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. The linking number of two disjoint oriented circle components is symmetric. In particular, the Seifert pairing is a well-defined bilinear map $H_1(F;\\mathbb Z)\\times H_1(F;\\mathbb Z)\\to\\mathbb Z$."
+      },
+      {
+        "id": "lem-seifert-matrix-skew-part-is-surface-intersection",
+        "kind": "lemma",
+        "deps": [
+          "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-parametric-transversality",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-seifert-pairing-well-defined",
+          "def-oriented-seifert-surface",
+          "def-countable-choice",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice-principle-for-foliation-pair",
+          "lem-countable-choice-sequence-and-product-formulations-are-equivalent",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "thm-linking-number-equals-signed-intersection",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "thm-every-oriented-knot-bounds-a-seifert-surface",
+          "thm-transversality-homotopy-theorem",
+          "prop-relative-transversality-preserves-a-map-on-a-closed-good-region",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "def-oriented-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 7,
+        "title": "The skew part of a Seifert matrix is the surface intersection form",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K$ be a smooth oriented embedded circle in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary $K$, and let $a_1,\\ldots,a_{2g}$ be any ordered integral basis of $H_1(F;\\mathbb Z)$ with Seifert matrix $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $J_F$ be the matrix of the algebraic intersection form on $F$, with a transverse intersection of oriented curves $u,v$ counted positively exactly when their ordered tangent vectors form a positive basis of $TF$. Then $V-V^T=J_F$. The matrix $J_F$ is skew-symmetric and unimodular; when $a_1,\\ldots,a_{2g}$ is a standard handle basis, it is a direct sum of blocks $\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$."
+      },
+      {
+        "id": "lem-seifert-cut-open-cover-alexander-module-presentation",
+        "kind": "lemma",
+        "deps": [
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-seifert-pairing-well-defined",
+          "def-oriented-seifert-surface",
+          "def-countable-choice",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice-principle-for-foliation-pair",
+          "lem-countable-choice-sequence-and-product-formulations-are-equivalent",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-knot-tubular-exterior-and-boundary",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "def-the-laurent-polynomial-ring",
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "thm-classification-of-connected-covering-spaces",
+          "thm-regular-covering-characterizations",
+          "cor-deck-group-of-a-regular-covering",
+          "def-deck-transformation-and-deck-group",
+          "thm-linking-number-equals-signed-intersection",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 7,
+        "title": "The cut-open cover presentation of the Alexander module",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 7.B",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.B",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the oriented standard three-sphere and let $F$ be a connected compact smooth oriented surface with boundary $K$, oriented so that its induced boundary orientation agrees with the given orientation of $K$. Choose a sufficiently small oriented product tubular neighborhood $N(K)$ compatible with the inward conormal of $F$, set $E=S^3\\setminus\\operatorname{int}N(K)$ and $T=\\partial E$, and put $S=F\\cap E$. Thus $S$ is a connected properly embedded surface in $E$ and its boundary on $T$ projects to $K$ with degree $+1$. Orient the normal line of $F$ by requiring $(n,u,v)$ to be positively oriented in $S^3$ whenever $(u,v)$ is a positive tangent basis of $F$. Choose a product bicollar of $S$ in $E$, with $S_+$ on the $+n$ side and $S_-$ on the $-n$ side, and let $Y$ be the compact cut-open complement with these boundary copies. The inclusion $j:S\\hookrightarrow F$ obtained by removing the boundary collar induces an isomorphism $j_*:H_1(S;\\mathbb Z)\\xrightarrow{\\sim}H_1(F;\\mathbb Z)$. Let $\\iota_\\pm:S\\to Y$ be the two collar-face inclusions and define\n$$i_\\pm:=(\\iota_\\pm)_*\\circ j_*^{-1}:H_1(F;\\mathbb Z)\\to H_1(Y;\\mathbb Z).$$\nForm a space $\\widetilde E_F$ from copies $Y_n$ ($n\\in\\mathbb Z$) by gluing $S_-(Y_n)$ to $S_+(Y_{n+1})$ for every $n$, with the remaining boundary faces glued by the inherited product collar. Let $t$ be the deck shift $Y_n\\to Y_{n+1}$, which is the shift of the positive meridian, and let $\\Lambda=\\mathbb Z[t^{\\pm1}]$. Then $Y$ is connected, $\\partial S$ is the preferred longitude, and the linking-evaluation map\n$$H_1(Y;\\mathbb Z)\\longrightarrow\\operatorname{Hom}(H_1(F;\\mathbb Z),\\mathbb Z),\\qquad [\\gamma]\\longmapsto\\bigl([a]\\mapsto\\operatorname{lk}(\\gamma,a)\\bigr)$$\nis an isomorphism. There is an exact sequence of $\\Lambda$-modules\n$$H_1(F;\\mathbb Z)\\otimes\\Lambda\\xrightarrow{i_- -t i_+}H_1(Y;\\mathbb Z)\\otimes\\Lambda\\longrightarrow H_1(\\widetilde E_F;\\mathbb Z)\\longrightarrow0,$$\nThus $H_1(\\widetilde E_F;\\mathbb Z)$ is the cokernel of the displayed map."
+      },
+      {
+        "id": "lem-seifert-matrix-s-equivalence-under-isotopy",
+        "kind": "lemma",
+        "deps": [
+          "def-seifert-matrix-s-equivalence",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-seifert-pairing-well-defined",
+          "def-oriented-seifert-surface",
+          "def-countable-choice",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 7,
+        "title": "Seifert matrices of ambient-isotopic pairs are S-equivalent",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            },
+            {
+              "title": "Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants",
+              "url": "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $(K,F)$ and $(K',F')$ be oriented knot and spanning-surface pairs in the oriented standard three-sphere, and let $h_t:S^3\\to S^3$ be a smooth ambient isotopy with $h_0$ the identity, $h_1(K)=K'$, and $h_1(F)=F'$, preserving the given orientations. If $V$ and $V'$ are their Seifert matrices in any integral bases, then the basis transported by $h_1$ has matrix $V$, and any other target basis with transition matrix $P$ has matrix $V'=P^TVP$. Hence $V$ and $V'$ are S-equivalent, meaning they are related by a finite sequence of integral unimodular congruences and the two elementary rank-two enlargement moves or their reverses."
+      },
+      {
+        "id": "lem-knot-infinite-cyclic-cover-cut-and-paste-presentation",
+        "kind": "lemma",
+        "deps": [
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-seifert-pairing-well-defined",
+          "lem-seifert-cut-open-cover-alexander-module-presentation",
+          "def-countable-choice",
+          "thm-linking-number-equals-signed-intersection",
+          "def-the-laurent-polynomial-ring",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 8,
+        "title": "The Seifert-matrix map in the infinite cyclic cover",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A\u20138.B",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the oriented standard three-sphere, and let $F$ be a connected compact smooth oriented embedded surface with boundary orientation equal to that of $K$. Let $g\\ge0$ satisfy $\\chi(F)=1-2g$. Choose a small product tubular neighborhood $N(K)$ adapted to the inward conormal of $F$, put $E=S^3\\setminus\\operatorname{int}N(K)$ and $S=F\\cap E$, and cut $E$ open along a product bicollar of $S$ to obtain the compact cut-open complement $Y$. Orient the normal line $n$ of $F$ by requiring $(n,u,v)$ to be positive in $S^3$ whenever $(u,v)$ is a positive tangent basis of $F$; name the face on the $+n$ side $S_+$ and the face on the $-n$ side $S_-$. Let $j:S\\hookrightarrow F$ be the collar-removal inclusion and $\\iota_\\pm:S\\to Y$ the two face inclusions; the inclusion induces an isomorphism on $H_1$, and set $i_\\pm=(\\iota_\\pm)_*\\circ j_*^{-1}$. Form $\\widetilde E_F$ from copies $Y_n$ by gluing $S_-(Y_n)$ to $S_+(Y_{n+1})$, and let $t:Y_n\\to Y_{n+1}$ be the deck shift. Because the boundary orientation of $F$ agrees with $K$, this shift is the positive-meridian shift. Let $a_1,\\ldots,a_{2g}$ be an ordered integral basis of $H_1(F;\\mathbb Z)$ and let $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$, where $a_i^+$ is the positive normal push-off. In the linking-dual basis given by $[\\gamma]\\mapsto([a]\\mapsto\\operatorname{lk}(\\gamma,a))$ under $H_1(Y;\\mathbb Z)\\cong\\operatorname{Hom}(H_1(F;\\mathbb Z),\\mathbb Z)$, the map $i_- - t i_+$ is represented over $\\Lambda=\\mathbb Z[t^{\\pm1}]$ by $V-tV^T$. Consequently $H_1(\\widetilde E_F;\\mathbb Z)$ is the cokernel of $V-tV^T$."
+      },
+      {
+        "id": "thm-seifert-matrix-presents-knot-alexander-module",
+        "kind": "theorem",
+        "deps": [
+          "def-knot-seifert-pairing-and-matrix",
+          "def-oriented-seifert-surface",
+          "lem-knot-infinite-cyclic-cover-cut-and-paste-presentation",
+          "lem-knot-normal-circle-bundle-trivialization",
+          "lem-knot-tubular-exterior-and-boundary",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "def-the-laurent-polynomial-ring",
+          "thm-classification-of-connected-covering-spaces",
+          "thm-regular-covering-characterizations",
+          "cor-deck-group-of-a-regular-covering",
+          "def-deck-transformation-and-deck-group",
+          "def-countable-choice",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-homotopy-lifting-for-covering-maps",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology"
+        ],
+        "dependency_level": 9,
+        "title": "A Seifert matrix presents the one-variable Alexander module",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 7.B\u20138.C",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary orientation equal to that of $K$, let $g$ satisfy $\\chi(F)=1-2g$, and choose an ordered integral basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$. Use the positive normal convention $(n,u,v)>0$ and define $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Let $A_K=H_1(\\widetilde X_K;\\mathbb Z)$ be the one-variable Alexander module of the knot complement $X_K=S^3\\setminus K$, where the cover is classified by the total-linking homomorphism and $t$ acts by the deck transformation corresponding to the positive meridian. Then there is an isomorphism of $\\Lambda=\\mathbb Z[t^{\\pm1}]$-modules\n$$A_K\\cong\\operatorname{coker}\\bigl(V-tV^T:\\Lambda^{2g}\\to\\Lambda^{2g}\\bigr).$$"
+      }
+    ]
+  },
+  {
+    "order": 3119,
+    "id": "seifert-matrices-and-the-alexander-module-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Seifert matrices and the Alexander module \u2014 Examples and Counterexamples",
+    "companion": "seifert-matrices-and-the-alexander-module",
+    "requires": [
+      "seifert-matrices-and-the-alexander-module"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-06-boundary-case",
+        "kind": "counterexample",
+        "deps": [
+          "def-knot-seifert-pairing-and-matrix",
+          "def-oriented-seifert-surface",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice",
+          "def-countable-choice-principle-for-foliation-pair",
+          "lem-countable-choice-sequence-and-product-formulations-are-equivalent",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 6,
+        "title": "The unknot has a zero-order Seifert matrix",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Section 4.3 and 6.2.3",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Every Seifert matrix of an oriented knot has positive order, meaning that its number of rows and columns is at least one."
+      },
+      {
+        "id": "ex-knot-kt-06-worked-cases",
+        "kind": "example",
+        "deps": [
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-seifert-pairing-well-defined",
+          "lem-seifert-matrix-skew-part-is-surface-intersection",
+          "lem-seifert-matrix-s-equivalence-under-isotopy",
+          "thm-seifert-matrix-presents-knot-alexander-module",
+          "def-countable-choice",
+          "def-countable-choice-principle-for-foliation-pair",
+          "lem-countable-choice-sequence-and-product-formulations-are-equivalent",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 10,
+        "title": "Trefoil Seifert matrix and basis changes",
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links, Chapter 8.A\u20138.B",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, Example 6.2.11 and Theorem 6.2.9",
+              "url": "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice and take the genus-one Seifert surface for the trefoil described as $K_1$ in Cattabriga\u2013Francaviglia, Example 6.2.11. In their basis $f_1,f_2$, their negative-first Seifert form has matrix $A=\\begin{pmatrix}1&0\\\\-1&1\\end{pmatrix}$, and they identify $K_1$ as the trefoil. Their convention is $\\alpha(x,y)=\\operatorname{lk}(x^-,y)$; the positive-first convention here is $\\theta(x,y)=\\operatorname{lk}(x^+,y)$. In the swapped basis $a_1=f_2$, $a_2=f_1$, the positive-first Seifert matrix is\n$$\nV=\\begin{pmatrix}1&0\\\\-1&1\\end{pmatrix},\\qquad V-V^T=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix},\\qquad \\det(V-tV^T)=1-t+t^2.\n$$\nThe determinant-one basis change $P_0=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ gives $P_0^TVP_0=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$. It changes the off-diagonal entries but not the diagonal entries. The determinant-one basis change $P_1=\\begin{pmatrix}1&1\\\\2&3\\end{pmatrix}$ gives $P_1^TVP_1=\\begin{pmatrix}3&5\\\\4&7\\end{pmatrix}$, changing every entry. For either $P$, the transformed Alexander presentation matrix is $P^T(V-tV^T)P$, so it presents an isomorphic $\\Lambda$-module."
+      }
+    ]
+  }
+]

@@ -48,3 +48,8 @@ Six decisions are written: one touched metadata normalization and five confirmed
 Active state was checked against `.autopilot/inverse-problems-knot-theory-all-109-2026-10-19/status.md` and recent git log (HEAD ace06e03bc); the on-disk run is in Step 3a. Historical authoring notes' Step-1 status is not current run evidence. No runtime control, engine stamp, judge cycle, gate battery, certification, publication, commit or push was performed.
 
 Handoff: adjudication work complete within batch 6. Owner editorial maintenance remains pending for the two published supplier prose defects, with exact surgical strategies in the canonical published ledger. No substantial mathematical blocker or outside producer repair was identified. The engine owns current-hash stamping and subsequent gates.
+
+
+Owner gate repair
+
+The actual statement-first parser recognizes Setup as a descriptive claim section. Root replaced only Counterexample description and its references headings by Setup and Setup references. Every other byte, including the complete false Statement, references, matrices, Facts and three Verification steps, is unchanged. Direct multiplication AB=G, BA=F and the two Penrose identities were checked in the full current three-step source. Original native clean metadata disposition remains; this is an ordinary owner editorial repair with no new native audit.

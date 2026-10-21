@@ -1,0 +1,13 @@
+# Native71 current-only claim-mirror successor proposal
+
+The original title-launch continuation registry, registration manifest, native task/results/reports and title gate remain immutable. The existing entire-manifest equality remains the default. Only the exact run and unit71 can opt into a separate owner-reviewed successor record.
+
+The record permits exactly two manifest `statement` fields: the complete current Statement of `cor-satellite-companion-is-detected-by-jsj` and complete current Example of `ex-knot-kt-17-worked-cases`. Both source archives must match the authentic original `current_inputs` raw-source pins. While Step3 is active, both canonical source bytes and the unchanged risk-title source must still match their pins, and the whole current manifest must equal the exact pinned successor archive. Reconstructing the original registration manifest with only those two replacements must equal that successor structurally. Wrong quotes, other metadata, risk rows, source changes, inventory changes and fake IDs are rejected.
+
+The native title carrier shape is unchanged. Closure evidence adds the separate record, successor manifest and two pinned source archives. Historical closure collection validates archived evidence without requiring later-stage live sources to remain frozen; active native current-output validation still invokes the strict live carrier guard. This retains the existing closed-history semantics rather than granting active acceptance of changed sources.
+
+The proposed record is deliberately `reviewed:false`, `at:null`. Root must independently adopt it and record the actual adoption time before installing it at `research/RUN-step3-native-risk-title-manifest-mirror-successor.json`. No registry was written here. No new mathematics, native coverage, stamp or source edit is granted.
+
+Changed tool files for root integration: `code-proposal/tools/step3-owner-native-risk-title-home.mjs` and its `.test.mjs`. Other staged wrapper/scope files are unchanged test dependencies only and must not be applied. The focused test file includes the existing tests plus exact-run successor tests:43 pass,0 fail. Negatives cover changed source, changed risk source/row, unrelated fields, wrong quote, fake ID, missing entry, wrong pin/section/before guard, unreviewed authority, fabricated reread, rewritten launch, changed live archive and later tampering.
+
+This is a research-only code/metadata proposal frozen for one independent FIRST review. No native policy or source was applied; root owns integration and current binding. Hashes here are raw guard evidence from the authentic launch pins and bounded proposed artifacts, not native itemHash recertification.

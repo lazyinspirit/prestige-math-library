@@ -1,0 +1,1163 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-44",
+  "scope": [
+    "def-ip-pde-solver-admissibility-contract",
+    "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+    "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+    "prop-ip-discrete-adjoint-gradient-and-residual-status",
+    "alg-ip-finite-element-pde-tikhonov",
+    "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+    "ex-ip-pde-cfl-invalid-iterate",
+    "cex-ip-pde-biased-under-solved-adjoint-gradient",
+    "ex-ip-finite-element-mesh-error-at-zero-solve-residual"
+  ],
+  "contracts": {
+    "def-ip-pde-solver-admissibility-contract": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the stated domain, bounds and routine behavior cover this case."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Reviewed the entire Definition and actual mesh, unisolvent-DOF, Euclidean, finite-dimensional Riesz and nearest-point supplier statements. Positive coefficient dimensions and nonempty closed convex Q give unique projections; computability is a separate supplied finite-time routine. C1 state branch and invertible Jacobian are hypotheses, not consequences of residual tolerances. Adjoint residual is explicitly at the exact state; separate stability and derivative-data bounds are required. Zero tolerances are allowed; mesh error is a separate certificate. No minimizer, iteration convergence, infinite choice or universal CFL claim is asserted. Reader findings 1–4 are confirmed editorial defects in published context and are routed read-only; the explicit finite-dimensional definitions used here remain unambiguous. No diagrams occur."
+      }
+    },
+    "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riesz-representation-in-finite-dimensions",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, with the inner product linear in its first argument. For every linear functional $f:V\\to\\mathbb F$, there is a unique $w\\in V$ such that\n\n$$f(v)=\\langle v,w\\rangle\\qquad\\text{for every }v\\in V.$$\n\nThe map $w\\mapsto(v\\mapsto\\langle v,w\\rangle)$ is a conjugate-linear bijection from $V$ to its algebraic dual. This includes $V=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an arbitrary direction $h\\in\\mathbb R^m$. Differentiate [F1] at $q$ using [F3]. The chain rule gives $D_qR(q,S(q))h+D_uR(q,S(q))DS(q)[h]=0$. Since $D_uR(q,S(q))$ is invertible by the Statement, this identity determines $DS(q)[h]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F3] to $\\Phi(q)=J(q,S(q))$. For Euclidean vectors $z,w$, bilinearity [F5] gives $\\frac12\\|z+tw\\|_2^2-\\frac12\\|z\\|_2^2=t\\langle z,w\\rangle+\\frac{t^2}{2}\\|w\\|_2^2$, so the derivative of a squared-norm term is its residual paired with the derivative of its argument. Applying the chain rule to the data and penalty terms in $J$ gives $D\\Phi(q)[h]=\\langle\\nabla_qJ(q,S(q)),h\\rangle_{\\mathbb R^m}+\\langle\\nabla_uJ(q,S(q)),DS(q)[h]\\rangle_V$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute [F2] in the second term of step 1.2. The transpose identity [F5] gives $\\langle (D_uR)^Tp,DS[h]\\rangle_V=\\langle p,D_uR\\,DS[h]\\rangle_V$. By step 1.1, $D_uR\\,DS[h]=-D_qR\\,h$, so $D\\Phi(q)[h]=\\left\\langle \\nabla_qJ(q,S(q))-(D_qR(q,S(q)))^Tp,\\ h\\right\\rangle_{\\mathbb R^m}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The expression in step 2.1 represents the derivative functional on every $h$. By [F4] its representing vector is unique, so that vector is $\\nabla\\Phi(q)$ and has the stated formula.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There is no empty-domain instance with a fixed q in O; if no such q exists the pointwise claim is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 remain valid when derivative or gradient terms vanish; the displayed identities reduce by algebra."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The chain rule and transpose identity in steps 1.1–3.1 apply in one-dimensional Euclidean spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the assumed invertibility at the fixed point, and step 3.1 identifies the representing vector even when the derivative is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter domain O is open and the statement is pointwise at q; no ordered interval or endpoint rule occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes a finite-dimensional direction h and makes no selection from an arbitrary family or sequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a derivative identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a derivative identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all four proof steps and exact cited contract, chain-rule, Euclidean and finite-dimensional Riesz statements. Differentiating R(q,S(q))=0 gives R_q h+R_u DS h=0; adjoint substitution cancels the state derivative with the correct minus sign and Euclidean transpose dimensions. C1 branch and invertible R_u are explicit; no implicit-function or convergence theorem is silently invoked. All h including zero and scalar cases are valid, and empty O has no fixed q. Published Euclidean prose defect does not alter the explicit bilinear formula. No diagrams or AC use."
+      }
+    },
+    "lem-ip-linear-finite-element-solve-residual-controls-state-error": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Au=b$, we have $A(u-\\widetilde u)=b-A\\widetilde u$. Apply $A^{-1}$ and then [F2] to obtain $\\|u-\\widetilde u\\|_2=\\|A^{-1}(b-A\\widetilde u)\\|_2\\le\\|A^{-1}\\|\\,\\|b-A\\widetilde u\\|_2\\le K_u\\rho_u$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Likewise, $B(p-\\widetilde p)=c-B\\widetilde p$. Applying $B^{-1}$ and [F2] gives $\\|p-\\widetilde p\\|_2=\\|B^{-1}(c-B\\widetilde p)\\|_2\\le\\|B^{-1}\\|\\,\\|c-B\\widetilde p\\|_2\\le K_p\\rho_p$. Together with step 1.1, this proves both bounds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There is no empty-set case; the claim concerns given finite-dimensional systems and vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 give zero error when the corresponding residual upper bound is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The inverse estimates in steps 1.1 and 2.1 also cover one-dimensional matrices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The inequalities in steps 1.1 and 2.1 remain conditional on supplied inverse bounds; no strict residual positivity is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, ordered parameter or endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof applies the given inverse matrices and vectors directly and makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The estimate is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate is an implication, not an equivalence."
+        }
+      ]
+    },
+    "prop-ip-discrete-adjoint-gradient-and-residual-status": {
+      "risk": "medium",
+      "kind": "proposition",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $O\\subseteq\\mathbb R^m$ be open and $V=\\mathbb R^n$ have its standard Euclidean inner product. Let $R:O\\times V\\to V$ and $G:O\\times V\\to Y$ be continuously differentiable, where $Y$ is a finite-dimensional real Euclidean space. Suppose $S:O\\to V$ is continuously differentiable, $R(q,S(q))=0$ for every $q\\in O$, and the matrix $D_uR(q,S(q))$ is invertible at a fixed $q\\in O$. Let $y\\in Y$, $q_0\\in\\mathbb R^m$, and $\\alpha>0$. Define\n$$\nJ(q,u):=\\frac12\\|G(q,u)-y\\|_Y^2+\\frac\\alpha2\\|q-q_0\\|_2^2,\\qquad \\Phi(q):=J(q,S(q)).\n$$\nLet $p\\in V$ be the unique solution of\n$$\n\\bigl(D_uR(q,S(q))\\bigr)^T p=\\nabla_uJ(q,S(q)),\n$$\nwhere $\\nabla_qJ$ and $\\nabla_uJ$ are the Euclidean representatives of the two partial derivative functionals. Then for every $h\\in\\mathbb R^m$,\n$$\nD\\Phi(q)[h]=\\left\\langle \\nabla_qJ(q,S(q))-\\bigl(D_qR(q,S(q))\\bigr)^T p,\\ h\\right\\rangle_{\\mathbb R^m}.\n$$\nConsequently $\\nabla\\Phi(q)=\\nabla_qJ(q,S(q))-(D_qR(q,S(q)))^Tp$. This is the exact derivative of the specified finite-dimensional model; it asserts no convergence of an iteration that changes $q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\in\\mathbb R^n$. Then there is a unique $p\\in C$ such that $\\|x-p\\|_2\\le\\|x-z\\|_2$ for every $z\\in C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-projection-onto-closed-convex-set-is-nonexpansive",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\mathbb N$, including $d=0$. Let $C\\subseteq\\mathbb R^d$ be nonempty, closed, and convex, and let $P_C(y)$ denote the unique nearest point in $C$ to $y$. Then\n$$\\|P_C(u)-P_C(v)\\|_2\\le\\|u-v\\|_2\\qquad(u,v\\in\\mathbb R^d).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$ and $B\\in\\mathbb R^{r\\times r}$ be invertible finite-element state and adjoint system matrices. Let $u=A^{-1}b$ and $p=B^{-1}c$ be the exact solutions, and let $\\widetilde u,\\widetilde p$ be computed vectors. Suppose certified residual upper bounds $\\rho_u,\\rho_p\\ge0$ and certified operator bounds $K_u,K_p\\ge0$ satisfy\n$$\n\\|A\\widetilde u-b\\|_2\\le\\rho_u,\\quad \\|B\\widetilde p-c\\|_2\\le\\rho_p,\\quad \\|A^{-1}\\|\\le K_u,\\quad \\|B^{-1}\\|\\le K_p.\n$$\nThen the exact state and adjoint errors satisfy\n$$\n\\|u-\\widetilde u\\|_2\\le K_u\\rho_u,\\qquad \\|p-\\widetilde p\\|_2\\le K_p\\rho_p.\n$$\nThe inverse-norm bounds are separate inputs; a residual bound alone gives no state or adjoint error estimate.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the exact discrete gradient has the stated adjoint formula. In a linear finite-element state/adjoint branch, [F6] supplies one residual-to-error path for the contract's $\\eta_u,\\eta_p$ values when inverse-norm bounds are certified; a nonlinear model needs its own stability argument. Using the contract estimates in [A1], $g_h(q)-\\widetilde g_h=\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,u))^Tp+(D_qR_h(q,\\widetilde u))^T\\widetilde p$. Add and subtract $(D_qR_h(q,\\widetilde u))^Tp$. The first objective-gradient difference has norm at most $L_{J,u}\\eta_u$ by [A1]. The derivative-matrix difference term has norm at most $L_{R,u}\\eta_u\\|p\\|\\le L_{R,u}P\\eta_u$ by [A1] and [F4]. The remaining term has norm at most $M_q\\|p-\\widetilde p\\|\\le M_q\\eta_p$ by [A1] and [F4]. Summing these three bounds gives $\\|\\widetilde g_h-g_h(q)\\|\\le\\varepsilon_g$. The observation certificate in [A1] directly gives $\\|\\widetilde F_h-F_h(q)\\|\\le\\varepsilon_F$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the projections in $G_L(q)$ and $\\widetilde G_L(q)$ exist and are unique. Put $x=q-\\widetilde g_h/L$ and $z=q-g_h(q)/L$. Nonexpansiveness [F3] and step 1.1 give $\\|\\widetilde G_L(q)-G_L(q)\\|_2=L\\|P_{Q_h}(x)-P_{Q_h}(z)\\|_2\\le L\\|x-z\\|_2=\\|\\widetilde g_h-g_h(q)\\|_2\\le\\varepsilon_g$. The triangle inequality [F5] now gives $\\|G_L(q)\\|_2\\le\\|\\widetilde G_L(q)\\|_2+\\varepsilon_g$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The triangle inequality [F5] and step 1.1 give $\\|F_h(q)-y^\\delta\\|_{Y_h}\\le\\|F_h(q)-\\widetilde F_h\\|_{Y_h}+\\|\\widetilde F_h-y^\\delta\\|_{Y_h}\\le\\varepsilon_F+\\|\\widetilde F_h-y^\\delta\\|_{Y_h}$. Together with step 2.1, this proves both certificate inequalities.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes q is a given member of a nonempty closed convex set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 yields the exact gradient and forward output when eta_u=eta_p=0; steps 2.1 and 3.1 then have no certificate slack."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The bounds in steps 1.1, 2.1 and 3.1 allow unit estimates, constants and residuals without requiring strict positivity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a singleton Q_h through its unique projection; the gradient-mapping estimate remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The projection comparison in step 2.1 is valid for every q in Q_h, including boundary points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Finite-dimensional projection is unique and supplied estimates are fixed; the proof makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The certificate bounds are one-way inequalities, not equivalences."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The certificate bounds are one-way inequalities, not equivalences."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all three proof steps and exact nearest-point, nonexpansiveness, operator norm, Euclidean triangle inequality and two local lemma statements/proofs. Splitting gradient difference at R_q(q,tilde u)^T p yields (L_J,u+L_R,u P)eta_u+M_q eta_p, retaining state-data error. Projection inputs differ by gradient error/L, so multiplying nonexpansiveness by L>0 yields the claimed bound, including boundary and singleton Q. Zero certificates recover exact outputs. Raw residuals and mesh error are explicitly distinguished. Published norm/Euclidean wording issues are editorial and leave used inequalities explicit; no choice or diagrams."
+      }
+    },
+    "alg-ip-finite-element-pde-tikhonov": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the coefficient set is assumed nonempty and the input q_init is required to lie in it before model calls."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual tolerances and zero stationarity/discrepancy bounds are explicitly allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: all four budgets are positive integers, so the one-step budget case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the exact projection routine is supplied for every nonempty closed convex Q_h, including a singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the inclusive outer endpoint, final backtracking index and budget-exhaustion branches are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: all wrapper inputs and routine outputs are finite-dimensional supplied data; the algorithm makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the algorithm specifies sufficient status-return branches, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the algorithm specifies sufficient status-return branches, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Reviewed full inputs, all eight branches, global solve/evaluation accounting and exact supporting contract/proposition. Positive integer budgets bound every loop; N_iter includes validation at k=N_iter before stopping, allowing at most N_iter updates. Equality at stationarity/discrepancy tolerances is allowed; projected trials stay in Q and inadmissible trials are rejected before objective solves. L is only positive, with no Lipschitz or convergence assertion. Crucially Step 4 checks budget exhaustion after the projection: with N_eval=1 it stops before stationarity testing. This behavior is coherent but contradicts the routed mesh example, to be repaired there. No Definition change and no diagrams."
+      }
+    },
+    "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ip-finite-element-pde-tikhonov",
+          "source_section": "Definition",
+          "quote": "Assume a finite-element PDE model satisfying the admissibility and certificate contract, with nonempty closed convex coefficient set $Q_h$, discrete Tikhonov objective $\\Phi_h$ using reference coefficient $q_0$, a state/adjoint solve routine, an exact projection routine, an objective interval routine, and finite solve and evaluation budgets. Let the input be an initial coefficient $q_{\\rm init}\\in Q_h$, data $y^\\delta\\in Y_h$, noise bound $\\delta\\ge0$, penalty $\\alpha>0$, state and adjoint residual tolerances $\\tau_u,\\tau_p\\ge0$, discrepancy factor $\\kappa\\ge1$, stationarity tolerance $\\tau_g\\ge0$, scaling parameter $L>0$, and positive integer budgets $N_{\\rm iter}$, $N_{\\rm solve}$, $N_{\\rm eval}$, and $N_{\\rm backtrack}$. The global budget $N_{\\rm solve}$ counts state and adjoint solves; $N_{\\rm eval}$ counts exact projections and objective-interval evaluations. The scaling parameter $L$ is only a positive step-size scale; it is not assumed to be a Lipschitz constant. The algorithm returns a coefficient, one status from `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`, and any diagnostics certified at that coefficient.\n\n1. If $q_{\\rm init}\\notin Q_h$ or the model's exact admissibility predicate is false at $q_{\\rm init}$, return status `inadmissible` without solving a PDE. Otherwise set $q:=q_{\\rm init}$.\n\n2. For $k=0,\\ldots,N_{\\rm iter}$, first check the finite-time admissibility predicate, which includes membership in $Q_h$. If it is false, return `inadmissible`. If no global solve or evaluation budget remains, return `budget-exhausted`.\n\n3. Call the state/adjoint solver at $q$ with tolerances $\\tau_u,\\tau_p$ and the remaining solve budget. If it returns `failure`, if either certified residual bound exceeds its declared tolerance, or if any required state/adjoint error estimate or derivative bound is missing or invalid, return `linear-solve-failed`. Otherwise receive $\\widetilde g_h$, $\\widetilde F_h$, $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ and set $\\varepsilon_g=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p$ and $\\varepsilon_F=L_{G,u}\\eta_u$.\n\n4. Use the exact projection routine to compute $P_{Q_h}(q-\\widetilde g_h/L)$. If the routine fails or the evaluation budget is exhausted, return `budget-exhausted`. Set $\\widetilde\\rho:=L\\|q-P_{Q_h}(q-\\widetilde g_h/L)\\|_2$. If $\\widetilde\\rho+\\varepsilon_g\\le\\tau_g$, return `converged` with stationarity upper bound $\\widetilde\\rho+\\varepsilon_g$. This status means only that the exact projected-gradient residual of the discrete objective is within tolerance; it is not a claim that an iterate sequence converges or that $q$ is a global minimizer.\n\n5. Compute $d^+:=\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F$. If $d^+\\le\\kappa\\delta$, return `discrepancy-stopped` with data-residual upper bound $d^+$. This status certifies only the discrete model's data discrepancy.\n\n6. If $k=N_{\\rm iter}$, return `budget-exhausted` at the current coefficient with its current diagnostics. Otherwise, evaluate the current objective using its certified interval $[\\ell_h(q),u_h(q)]$. If the evaluation fails because a required state or adjoint solve fails its contract, return `linear-solve-failed`; if the global solve or evaluation budget is exhausted, return `budget-exhausted`.\n\n7. For $j=0,\\ldots,N_{\\rm backtrack}-1$, set $t_j=2^{-j}/L$ and use the exact projection routine to compute $q_j=P_{Q_h}(q-t_j\\widetilde g_h)$. If projection fails or the evaluation budget is exhausted, return `budget-exhausted`. Reject this trial and continue to the next $j$ if $q_j=q$ or its admissibility predicate is false. Otherwise evaluate a certified interval $[\\ell_h(q_j),u_h(q_j)]$. If evaluation fails because a required linear solve fails its contract, return `linear-solve-failed`; if it only exhausts the finite evaluation budget, return `budget-exhausted`. Accept the first trial with $u_h(q_j)\\le\\ell_h(q)$, set $q:=q_j$, and continue to the next outer iteration.\n\n8. If no trial is accepted within the backtracking budget, return `budget-exhausted` at the current coefficient.\n\nThe global solve budget counts all primal and adjoint solves used both at iterates and in objective trials. The evaluation budget counts every projection and objective-interval call. Any continuous-to-discrete mesh bound is reported separately by the model contract and is never inferred from the algebraic state or adjoint residuals.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-ip-discrete-adjoint-gradient-and-residual-status",
+          "source_section": "Statement",
+          "quote": "Let $Q_h\\subseteq\\mathbb R^m$ be a nonempty closed convex set and let $q\\in Q_h$. Write $u=S_h(q)$, $p=p_h(q)$, and $g_h(q)=\\nabla\\Phi_h(q)$ for the exact finite-element state, exact discrete adjoint, and exact discrete-objective gradient. Suppose a solver supplies $\\widetilde u,\\widetilde p$, a forward output $\\widetilde F_h=G_h(q,\\widetilde u)$, and a computed gradient $\\widetilde g_h=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p$. It also supplies finite nonnegative bounds $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ satisfying\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\quad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\quad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\quad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. Define\n$$\n\\varepsilon_g:=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p,\\qquad \\varepsilon_F:=L_{G,u}\\eta_u.\n$$\nThen $\\|\\widetilde g_h-g_h(q)\\|\\le\\varepsilon_g$ and $\\|\\widetilde F_h-F_h(q)\\|_{Y_h}\\le\\varepsilon_F$. For $L>0$, define\n$$\nG_L(q):=L\\bigl(q-P_{Q_h}(q-g_h(q)/L)\\bigr),\\qquad \\widetilde G_L(q):=L\\bigl(q-P_{Q_h}(q-\\widetilde g_h/L)\\bigr).\n$$\nThen $$\\|G_L(q)\\|_2\\le\\|\\widetilde G_L(q)\\|_2+\\varepsilon_g,\\qquad \\|F_h(q)-y^\\delta\\|_{Y_h}\\le\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F.$$\nThus the finite-element algorithm may certify discrete projected stationarity and discrete discrepancy from these bounds. The state and adjoint residuals must first be converted to valid $\\eta_u,\\eta_p$ bounds under the chosen model's hypotheses; raw residuals alone do not imply the asserted gradient or mesh error.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Consider any accepted line-search trial $q_j$. By [F3], $\\Phi_h(q_j)\\le u_h(q_j)$ and $\\ell_h(q)\\le\\Phi_h(q)$. The algorithm accepts only when $u_h(q_j)\\le\\ell_h(q)$, so $\\Phi_h(q_j)\\le\\Phi_h(q)$. Every accepted update therefore makes the exact discrete objective nonincreasing.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If the algorithm returns `converged`, its checked inequality is $\\|\\widetilde G_L(q)\\|_2+\\varepsilon_g\\le\\tau_g$. By [F2], $\\|G_L(q)\\|_2\\le\\|\\widetilde G_L(q)\\|_2+\\varepsilon_g$, hence $\\|G_L(q)\\|_2\\le\\tau_g$. If it returns `discrepancy-stopped`, its checked inequality is $\\|\\widetilde F_h-y^\\delta\\|+\\varepsilon_F\\le\\kappa\\delta$; [F2] gives $\\|F_h(q)-y^\\delta\\|\\le\\kappa\\delta$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The outer counter ranges only over $0,\\ldots,N_{\\rm iter}$, each line-search counter over $0,\\ldots,N_{\\rm backtrack}-1$, and all solver or objective evaluations return within a finite budget or report failure by [A1]. Therefore each loop either returns one of its named statuses, takes a bounded next step, or exhausts a finite budget. The algorithm cannot run indefinitely.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By its initial and per-iterate branches, `inadmissible` is returned only when the coefficient is outside $Q_h$ or the declared admissibility predicate is false. By its solve-validation branch, `linear-solve-failed` is returned only when a required solver fails or its residual/error certificate is missing or invalid. A `budget-exhausted` return follows a depleted global or routine-call budget, a failed finite backtracking search, or the outer-iteration limit; none of these branches claims a minimizer.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1–1.4 establish the stated objective decrease, status bounds, status meanings, and finite termination. The proof refers only to the discrete objective named by the model contract, so it supplies no mesh-convergence or true-parameter conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm input includes q_init and positive finite budgets; there is no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes zero stationarity and discrepancy tolerances when the certified bounds are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3–1.4 use finiteness and include budgets equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits a singleton admissible set, for which projection and the projected-gradient residual remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 covers the terminal outer index and final backtracking trial; step 1.4 classifies the outer-iteration limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem assumes supplied routines return finite values and uses no choice axiom to select an iterate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Each status is justified by its sufficient return branch; no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Each status is justified by its sufficient return branch; no equivalence is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all five proof steps and exact algorithm, certificate proposition and routine contract. Interval sandwich Phi(q_j)<=u(q_j)<=ell(q)<=Phi(q) proves nonincrease even at equality. Status bounds follow only after valid state/adjoint and projection certificates. The finite counters give N_iter+1 validations and N_iter*N_backtrack candidates, each routine returning finitely by assumption. Budget exhaustion, including after a successful final projection, grants no convergence or mesh accuracy. No AC, infinite process or unstated Lipschitz bound is used. No diagrams; unflagged current proof needs no edit."
+      }
+    },
+    "ex-ip-pde-cfl-invalid-iterate": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The underlying coordinate index set of $\\mathbb R^d$\nis $I_d=\\{0,\\ldots,d-1\\}$. In this definition the conventional labels\n$1\\le i\\le d$ are relabeled by $i\\mapsto i-1$: write\n$\\widehat x_i:=\\widehat x(i-1)$, and let $e_i\\in\\mathbb R^d$ be the function\non $I_d$ with $e_i(i-1)=1$ and $e_i(k)=0$ for $k\\ne i-1$.\nThe vertex and barycentric labels $0,\\ldots,d$ are distinct from these\nunderlying coordinate indices. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-reference-finite-element-and-unisolvent-dofs",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\widehat K\\subset\\mathbb R^d$ be a nonempty bounded open\nreference cell, let $q\\ge1$ be an integer, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **reference finite element** is a\ntriple $(\\widehat K,\\widehat P,\\widehat\\Sigma)$ where $\\widehat P$ is an\n$N$-dimensional subspace of $[C(\\overline{\\widehat K};\\mathbb K)]^q$ for\n$N\\in\\mathbb N_0$ and\n$\\widehat\\Sigma=(\\widehat\\sigma_1,\\ldots,\\widehat\\sigma_N)$ is a list of\nlinear functionals on $\\widehat P$ for which\n$$J_{\\widehat\\Sigma}:\\widehat P\\to\\mathbb K^N,\\qquad J_{\\widehat\\Sigma}(p):=(\\widehat\\sigma_1(p),\\ldots,\\widehat\\sigma_N(p)),$$\nis bijective. The functionals are the **degrees of freedom** and the triple\nis **unisolvent**. Its **shape functions** are the unique dual basis\n$\\widehat\\phi_1,\\ldots,\\widehat\\phi_N\\in\\widehat P$ satisfying\n$\\widehat\\sigma_i(\\widehat\\phi_j)=\\delta_{ij}$.\n\nIf $X$ is a normed vector space of functions on $\\widehat K$ containing\n$\\widehat P$, fix for each $i$ a bounded linear extension of\n$\\widehat\\sigma_i$ to $X$, and denote this chosen extension by the same\nsymbol. The **reference interpolation operator** associated with these\nchosen extensions is\n$$\\widehat I:X\\to\\widehat P,\\qquad \\widehat I v:=\\sum_{i=1}^N\\widehat\\sigma_i(v)\\widehat\\phi_i.$$\nThe definition of a reference finite element does not assert that any\nparticular list of functionals is unisolvent or bounded on a given Sobolev\nspace; those are separate proof obligations. For $N=0$, $\\widehat P=\\{0\\}$,\n$\\mathbb K^0=\\{0\\}$, the empty list gives the unique bijection between these\nzero spaces, and the shape-function list is empty. The corresponding\ninterpolation formula is the empty sum, hence the zero map into $\\{0\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ip-finite-element-pde-tikhonov",
+          "source_section": "Definition",
+          "quote": "Assume a finite-element PDE model satisfying the admissibility and certificate contract, with nonempty closed convex coefficient set $Q_h$, discrete Tikhonov objective $\\Phi_h$ using reference coefficient $q_0$, a state/adjoint solve routine, an exact projection routine, an objective interval routine, and finite solve and evaluation budgets. Let the input be an initial coefficient $q_{\\rm init}\\in Q_h$, data $y^\\delta\\in Y_h$, noise bound $\\delta\\ge0$, penalty $\\alpha>0$, state and adjoint residual tolerances $\\tau_u,\\tau_p\\ge0$, discrepancy factor $\\kappa\\ge1$, stationarity tolerance $\\tau_g\\ge0$, scaling parameter $L>0$, and positive integer budgets $N_{\\rm iter}$, $N_{\\rm solve}$, $N_{\\rm eval}$, and $N_{\\rm backtrack}$. The global budget $N_{\\rm solve}$ counts state and adjoint solves; $N_{\\rm eval}$ counts exact projections and objective-interval evaluations. The scaling parameter $L$ is only a positive step-size scale; it is not assumed to be a Lipschitz constant. The algorithm returns a coefficient, one status from `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`, and any diagnostics certified at that coefficient.\n\n1. If $q_{\\rm init}\\notin Q_h$ or the model's exact admissibility predicate is false at $q_{\\rm init}$, return status `inadmissible` without solving a PDE. Otherwise set $q:=q_{\\rm init}$.\n\n2. For $k=0,\\ldots,N_{\\rm iter}$, first check the finite-time admissibility predicate, which includes membership in $Q_h$. If it is false, return `inadmissible`. If no global solve or evaluation budget remains, return `budget-exhausted`.\n\n3. Call the state/adjoint solver at $q$ with tolerances $\\tau_u,\\tau_p$ and the remaining solve budget. If it returns `failure`, if either certified residual bound exceeds its declared tolerance, or if any required state/adjoint error estimate or derivative bound is missing or invalid, return `linear-solve-failed`. Otherwise receive $\\widetilde g_h$, $\\widetilde F_h$, $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ and set $\\varepsilon_g=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p$ and $\\varepsilon_F=L_{G,u}\\eta_u$.\n\n4. Use the exact projection routine to compute $P_{Q_h}(q-\\widetilde g_h/L)$. If the routine fails or the evaluation budget is exhausted, return `budget-exhausted`. Set $\\widetilde\\rho:=L\\|q-P_{Q_h}(q-\\widetilde g_h/L)\\|_2$. If $\\widetilde\\rho+\\varepsilon_g\\le\\tau_g$, return `converged` with stationarity upper bound $\\widetilde\\rho+\\varepsilon_g$. This status means only that the exact projected-gradient residual of the discrete objective is within tolerance; it is not a claim that an iterate sequence converges or that $q$ is a global minimizer.\n\n5. Compute $d^+:=\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F$. If $d^+\\le\\kappa\\delta$, return `discrepancy-stopped` with data-residual upper bound $d^+$. This status certifies only the discrete model's data discrepancy.\n\n6. If $k=N_{\\rm iter}$, return `budget-exhausted` at the current coefficient with its current diagnostics. Otherwise, evaluate the current objective using its certified interval $[\\ell_h(q),u_h(q)]$. If the evaluation fails because a required state or adjoint solve fails its contract, return `linear-solve-failed`; if the global solve or evaluation budget is exhausted, return `budget-exhausted`.\n\n7. For $j=0,\\ldots,N_{\\rm backtrack}-1$, set $t_j=2^{-j}/L$ and use the exact projection routine to compute $q_j=P_{Q_h}(q-t_j\\widetilde g_h)$. If projection fails or the evaluation budget is exhausted, return `budget-exhausted`. Reject this trial and continue to the next $j$ if $q_j=q$ or its admissibility predicate is false. Otherwise evaluate a certified interval $[\\ell_h(q_j),u_h(q_j)]$. If evaluation fails because a required linear solve fails its contract, return `linear-solve-failed`; if it only exhausts the finite evaluation budget, return `budget-exhausted`. Accept the first trial with $u_h(q_j)\\le\\ell_h(q)$, set $q:=q_j$, and continue to the next outer iteration.\n\n8. If no trial is accepted within the backtracking budget, return `budget-exhausted` at the current coefficient.\n\nThe global solve budget counts all primal and adjoint solves used both at iterates and in objective trials. The evaluation budget counts every projection and objective-interval call. Any continuous-to-discrete mesh bound is reported separately by the model contract and is never inferred from the algebraic state or adjoint residuals.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+          "source_section": "Statement",
+          "quote": "For any finite-element PDE model satisfying its solver and admissibility contract, the finite-budget Tikhonov algorithm returns after finitely many operations one of `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`. A `converged` return satisfies the exact discrete projected-gradient bound $\\|G_L(q)\\|_2\\le\\tau_g$; a `discrepancy-stopped` return satisfies $\\|F_h(q)-y^\\delta\\|_{Y_h}\\le\\kappa\\delta$. Every accepted safeguarded step has nonincreasing exact discrete objective $\\Phi_h$. `inadmissible` and `linear-solve-failed` are returned only on the corresponding failed predicate or solver-certificate checks. `budget-exhausted` asserts no optimizer or continuous-model accuracy.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each of the four triangles has area $1/4$. On each triangle, $\\phi$ is the affine barycentric coordinate of the center, so its gradient has magnitude $2$. The row-sum lumped mass contribution at the center is $|K|/3=1/12$ on each triangle, hence $m_h=4/12=1/3$. The stiffness is $k_h=\\sum_K\\int_K|\\nabla\\phi|^2=4\\cdot4\\cdot(1/4)=4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Dividing the semidiscrete equation by $m_h$ gives $\\dot U=-(k_h/m_h)U=-12U$. By the specified forward-Euler update, $U^1=U^0+\\Delta t\\dot U^0=(1-12\\Delta t)U^0=-2U^0$. The scalar amplification has modulus at most one exactly when $-1\\le1-12\\Delta t\\le1$, which is equivalent to $0\\le\\Delta t\\le1/6$; $\\Delta t=1/4$ violates it.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The model's admissibility predicate requires this explicit-step condition. Since the given step fails it, [F3] and [F4] show that the algorithm returns `inadmissible` before calling either state or adjoint solver. This conclusion concerns the declared discrete stability condition, not a stability theorem for the continuous heat equation.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty unit-square mesh and a specified scalar input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives amplification one for a zero time step; the selected positive step is checked separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 compute the single interior basis degree of freedom and scalar update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes equality endpoints 0 and 1/6 in the stable scalar interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks both endpoints of the stability interval and shows 1/4 lies beyond 1/6."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The mesh, coefficients and scalar inputs are specified explicitly and are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one CFL violation and rejection, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one CFL violation and rejection, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all three verification steps and exact FE mesh/unisolvence and algorithm/status suppliers. Four area-1/4 cells, affine gradient magnitude 2, row-sum lumping before boundary elimination gives m=1/3 and k=4. Hence amplification 1-12 dt; absolute value<=1 iff dt lies in [0,1/6], including endpoints. dt=1/4 gives -2 and declared predicate rejects at initialization, before solves/projection or budgets matter. Singleton Q={1} has constant projection. No continuous heat-equation stability claim. Diagram correctly shows square corners and sole center node joined into four triangles; calculation independent. No edit needed."
+      }
+    },
+    "cex-ip-pde-biased-under-solved-adjoint-gradient": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+          "source_section": "Statement",
+          "quote": "Let $O\\subseteq\\mathbb R^m$ be open and $V=\\mathbb R^n$ have its standard Euclidean inner product. Let $R:O\\times V\\to V$ and $G:O\\times V\\to Y$ be continuously differentiable, where $Y$ is a finite-dimensional real Euclidean space. Suppose $S:O\\to V$ is continuously differentiable, $R(q,S(q))=0$ for every $q\\in O$, and the matrix $D_uR(q,S(q))$ is invertible at a fixed $q\\in O$. Let $y\\in Y$, $q_0\\in\\mathbb R^m$, and $\\alpha>0$. Define\n$$\nJ(q,u):=\\frac12\\|G(q,u)-y\\|_Y^2+\\frac\\alpha2\\|q-q_0\\|_2^2,\\qquad \\Phi(q):=J(q,S(q)).\n$$\nLet $p\\in V$ be the unique solution of\n$$\n\\bigl(D_uR(q,S(q))\\bigr)^T p=\\nabla_uJ(q,S(q)),\n$$\nwhere $\\nabla_qJ$ and $\\nabla_uJ$ are the Euclidean representatives of the two partial derivative functionals. Then for every $h\\in\\mathbb R^m$,\n$$\nD\\Phi(q)[h]=\\left\\langle \\nabla_qJ(q,S(q))-\\bigl(D_qR(q,S(q))\\bigr)^T p,\\ h\\right\\rangle_{\\mathbb R^m}.\n$$\nConsequently $\\nabla\\Phi(q)=\\nabla_qJ(q,S(q))-(D_qR(q,S(q)))^Tp$. This is the exact derivative of the specified finite-dimensional model; it asserts no convergence of an iteration that changes $q$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ip-finite-element-pde-tikhonov",
+          "source_section": "Definition",
+          "quote": "Assume a finite-element PDE model satisfying the admissibility and certificate contract, with nonempty closed convex coefficient set $Q_h$, discrete Tikhonov objective $\\Phi_h$ using reference coefficient $q_0$, a state/adjoint solve routine, an exact projection routine, an objective interval routine, and finite solve and evaluation budgets. Let the input be an initial coefficient $q_{\\rm init}\\in Q_h$, data $y^\\delta\\in Y_h$, noise bound $\\delta\\ge0$, penalty $\\alpha>0$, state and adjoint residual tolerances $\\tau_u,\\tau_p\\ge0$, discrepancy factor $\\kappa\\ge1$, stationarity tolerance $\\tau_g\\ge0$, scaling parameter $L>0$, and positive integer budgets $N_{\\rm iter}$, $N_{\\rm solve}$, $N_{\\rm eval}$, and $N_{\\rm backtrack}$. The global budget $N_{\\rm solve}$ counts state and adjoint solves; $N_{\\rm eval}$ counts exact projections and objective-interval evaluations. The scaling parameter $L$ is only a positive step-size scale; it is not assumed to be a Lipschitz constant. The algorithm returns a coefficient, one status from `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`, and any diagnostics certified at that coefficient.\n\n1. If $q_{\\rm init}\\notin Q_h$ or the model's exact admissibility predicate is false at $q_{\\rm init}$, return status `inadmissible` without solving a PDE. Otherwise set $q:=q_{\\rm init}$.\n\n2. For $k=0,\\ldots,N_{\\rm iter}$, first check the finite-time admissibility predicate, which includes membership in $Q_h$. If it is false, return `inadmissible`. If no global solve or evaluation budget remains, return `budget-exhausted`.\n\n3. Call the state/adjoint solver at $q$ with tolerances $\\tau_u,\\tau_p$ and the remaining solve budget. If it returns `failure`, if either certified residual bound exceeds its declared tolerance, or if any required state/adjoint error estimate or derivative bound is missing or invalid, return `linear-solve-failed`. Otherwise receive $\\widetilde g_h$, $\\widetilde F_h$, $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ and set $\\varepsilon_g=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p$ and $\\varepsilon_F=L_{G,u}\\eta_u$.\n\n4. Use the exact projection routine to compute $P_{Q_h}(q-\\widetilde g_h/L)$. If the routine fails or the evaluation budget is exhausted, return `budget-exhausted`. Set $\\widetilde\\rho:=L\\|q-P_{Q_h}(q-\\widetilde g_h/L)\\|_2$. If $\\widetilde\\rho+\\varepsilon_g\\le\\tau_g$, return `converged` with stationarity upper bound $\\widetilde\\rho+\\varepsilon_g$. This status means only that the exact projected-gradient residual of the discrete objective is within tolerance; it is not a claim that an iterate sequence converges or that $q$ is a global minimizer.\n\n5. Compute $d^+:=\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F$. If $d^+\\le\\kappa\\delta$, return `discrepancy-stopped` with data-residual upper bound $d^+$. This status certifies only the discrete model's data discrepancy.\n\n6. If $k=N_{\\rm iter}$, return `budget-exhausted` at the current coefficient with its current diagnostics. Otherwise, evaluate the current objective using its certified interval $[\\ell_h(q),u_h(q)]$. If the evaluation fails because a required state or adjoint solve fails its contract, return `linear-solve-failed`; if the global solve or evaluation budget is exhausted, return `budget-exhausted`.\n\n7. For $j=0,\\ldots,N_{\\rm backtrack}-1$, set $t_j=2^{-j}/L$ and use the exact projection routine to compute $q_j=P_{Q_h}(q-t_j\\widetilde g_h)$. If projection fails or the evaluation budget is exhausted, return `budget-exhausted`. Reject this trial and continue to the next $j$ if $q_j=q$ or its admissibility predicate is false. Otherwise evaluate a certified interval $[\\ell_h(q_j),u_h(q_j)]$. If evaluation fails because a required linear solve fails its contract, return `linear-solve-failed`; if it only exhausts the finite evaluation budget, return `budget-exhausted`. Accept the first trial with $u_h(q_j)\\le\\ell_h(q)$, set $q:=q_j$, and continue to the next outer iteration.\n\n8. If no trial is accepted within the backtracking budget, return `budget-exhausted` at the current coefficient.\n\nThe global solve budget counts all primal and adjoint solves used both at iterates and in objective trials. The evaluation budget counts every projection and objective-interval call. Any continuous-to-discrete mesh bound is reported separately by the model contract and is never inferred from the algebraic state or adjoint residuals.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-ip-discrete-adjoint-gradient-and-residual-status",
+          "source_section": "Statement",
+          "quote": "Let $Q_h\\subseteq\\mathbb R^m$ be a nonempty closed convex set and let $q\\in Q_h$. Write $u=S_h(q)$, $p=p_h(q)$, and $g_h(q)=\\nabla\\Phi_h(q)$ for the exact finite-element state, exact discrete adjoint, and exact discrete-objective gradient. Suppose a solver supplies $\\widetilde u,\\widetilde p$, a forward output $\\widetilde F_h=G_h(q,\\widetilde u)$, and a computed gradient $\\widetilde g_h=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p$. It also supplies finite nonnegative bounds $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ satisfying\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\quad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\quad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\quad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. Define\n$$\n\\varepsilon_g:=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p,\\qquad \\varepsilon_F:=L_{G,u}\\eta_u.\n$$\nThen $\\|\\widetilde g_h-g_h(q)\\|\\le\\varepsilon_g$ and $\\|\\widetilde F_h-F_h(q)\\|_{Y_h}\\le\\varepsilon_F$. For $L>0$, define\n$$\nG_L(q):=L\\bigl(q-P_{Q_h}(q-g_h(q)/L)\\bigr),\\qquad \\widetilde G_L(q):=L\\bigl(q-P_{Q_h}(q-\\widetilde g_h/L)\\bigr).\n$$\nThen $$\\|G_L(q)\\|_2\\le\\|\\widetilde G_L(q)\\|_2+\\varepsilon_g,\\qquad \\|F_h(q)-y^\\delta\\|_{Y_h}\\le\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F.$$\nThus the finite-element algorithm may certify discrete projected stationarity and discrete discrepancy from these bounds. The state and adjoint residuals must first be converted to valid $\\eta_u,\\eta_p$ bounds under the chosen model's hypotheses; raw residuals alone do not imply the asserted gradient or mesh error.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+          "source_section": "Statement",
+          "quote": "For any finite-element PDE model satisfying its solver and admissibility contract, the finite-budget Tikhonov algorithm returns after finitely many operations one of `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`. A `converged` return satisfies the exact discrete projected-gradient bound $\\|G_L(q)\\|_2\\le\\tau_g$; a `discrepancy-stopped` return satisfies $\\|F_h(q)-y^\\delta\\|_{Y_h}\\le\\kappa\\delta$. Every accepted safeguarded step has nonincreasing exact discrete objective $\\Phi_h$. `inadmissible` and `linear-solve-failed` are returned only on the corresponding failed predicate or solver-certificate checks. `budget-exhausted` asserts no optimizer or continuous-model accuracy.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $q=0$, the unique state is $u=0$ because $R(0,u)=u=0$. Its state residual is $|R(0,0)|=0$, so the state solve is exact. Also $D_uR=1$ and $D_qR=-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $J(q,u)=\\frac12(u-1)^2+\\frac12q^2$, so $\\nabla_uJ(0,0)=-1$ and $\\nabla_qJ(0,0)=0$. The exact adjoint equation is $p=-1$. By [F1], the exact reduced gradient is $0-(-1)(-1)=-1$. The same value follows by differentiating $\\Phi(q)=\\tfrac12(q-1)^2+\\tfrac12q^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If an unchecked iterative adjoint returns $\\widetilde p=1$, its computed reduced gradient is $\\widetilde g=\\nabla_qJ(0,0)-(D_qR)^T\\widetilde p=0-(-1)(1)=1$, the opposite sign. Its exact adjoint-equation residual is $|(D_uR)^T\\widetilde p-\\nabla_uJ(0,0)|=|1-(-1)|=2$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With declared adjoint residual tolerance $\\tau_p=1$, the residual in step 2.2 exceeds tolerance. By [F2] and [F4], the algorithm rejects this vector as a solver result with status `linear-solve-failed`; it cannot receive `converged`. Step 2.2 nevertheless exhibits opposite gradient signs when the unchecked vector is substituted. Thus an exact state solve alone does not determine the gradient sign. Treating $\\widetilde p$ as a contract-valid solver result would violate the adjoint-residual requirement and the proposition's gradient-error certificate [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes one scalar residual model and one evaluation point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes an exact zero state residual while step 2.2 computes a nonzero adjoint residual and opposite reduced-gradient signs when the unchecked vector is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 verify the scalar coefficients, gradients and residual explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is scalar and uses an exact state solve; only the adjoint approximation is under-solved."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval iteration or endpoint in the fixed evaluation at q=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All vectors and parameters are specified explicitly in finite-dimensional real space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example refutes a universal sign-preservation claim by one counterexample."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example refutes a universal sign-preservation claim by one counterexample."
+        }
+      ]
+    },
+    "ex-ip-finite-element-mesh-error-at-zero-solve-residual": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-elliptic-pde-constrained-control-problem",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lipschitz domain, $V=H^1_0(\\Omega;\\mathbb R)$, and $H=L^2(\\Omega;\\mathbb R)$. Use the real integral pairing on $H$. Equip $V$ with the standard full Sobolev inner product and norm\n$$(v,w)_V=(v,w)_H+\\sum_{i=1}^d(D_i v,D_i w)_H,\\qquad \\|v\\|_V^2=\\|v\\|_H^2+\\sum_{i=1}^d\\|D_i v\\|_H^2.$$\nHere $H^1_0=W^{1,2}_0$ is the closure of $C_c^\\infty(\\Omega;\\mathbb R)$ in the $W^{1,2}$ norm of [[def-wkp-zero-as-a-sobolev-closure]]. Under Countable Choice, $H$ and $V$ are real Hilbert spaces; the local proof of completeness of $V$ is included in [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]]. The inclusion $J:V\\to H$ is continuous with $\\|J\\|\\le1$.\n\nLet $E\\subseteq\\Omega$ be bounded and measurable, $U=L^2(E;\\mathbb R)$ with its real integral inner product, and let $Q_{ad}\\subset U$ be the pointwise box of [[def-pde-box-control-set]]. Under Countable Choice, $U$ is a real Hilbert space by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Let $a:V\\times V\\to\\mathbb R$ be bilinear, bounded with constant $M$, and coercive with constant $\\beta>0$ in the stated $V$ norm; symmetry is not assumed. Let $B:U\\to V^*$ be bounded and linear, and fix $f\\in V^*$, $u_d\\in H$, and $\\alpha>0$.\n\nFor every $q\\in U$, the **state** $u(q)\\in V$ is required to satisfy\n$$\na(u(q),v)=\\langle f+Bq,v\\rangle_{V^*,V}\\qquad(v\\in V).\n$$\nThe reduced objective, defined on all of $U$ and minimized over $Q_{ad}$, is\n$$\n\\widehat J(q)=\\frac12\\|Ju(q)-u_d\\|_H^2+\\frac\\alpha2\\|q\\|_U^2.\n$$\nA spatially varying coefficient, boundary control, variational crimes, finite-element control discretization, and parabolic evolution are separate hypotheses or branches; none is implicit in this definition. The state well-definedness is supplied by [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the setting of [[def-linear-elliptic-pde-constrained-control-problem]]. For every $q\\in U$, there is a unique state $u(q)\\in V$ satisfying\n$$\na(u(q),v)=\\langle f+Bq,v\\rangle\\qquad(v\\in V),\n$$\nand\n$$\n\\|u(q)\\|_V\\le \\beta^{-1}\\|f+Bq\\|_{V^*}.\n$$\nFor every $q\\in U$, there is also a unique adjoint $p(q)\\in V$ satisfying\n$$\na(v,p(q))=(Ju(q)-u_d,Jv)_H\\qquad(v\\in V),\n$$\nwith\n$$\n\\|p(q)\\|_V\\le \\beta^{-1}\\|J\\|\\,\\|Ju(q)-u_d\\|_H.\n$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega$ be a bounded polyhedral open set with a finite matching\naffine simplicial mesh, let $1\\le p<\\infty$, and let $v$ be a real-valued\nconforming piecewise polynomial whose polynomial trace vanishes on every boundary\nfacet. Then\n$$v\\in W^{1,p}_0(\\Omega),\\qquad \\|v\\|_{L^p(\\Omega)}\\le C_\\Omega\\|\\nabla v\\|_{L^p(\\Omega)}.$$\nHere $W^{1,p}_0$ is the norm closure of $C_c^\\infty(\\Omega)$; no C1\ntrace characterization is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The underlying coordinate index set of $\\mathbb R^d$\nis $I_d=\\{0,\\ldots,d-1\\}$. In this definition the conventional labels\n$1\\le i\\le d$ are relabeled by $i\\mapsto i-1$: write\n$\\widehat x_i:=\\widehat x(i-1)$, and let $e_i\\in\\mathbb R^d$ be the function\non $I_d$ with $e_i(i-1)=1$ and $e_i(k)=0$ for $k\\ne i-1$.\nThe vertex and barycentric labels $0,\\ldots,d$ are distinct from these\nunderlying coordinate indices. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-reference-finite-element-and-unisolvent-dofs",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\widehat K\\subset\\mathbb R^d$ be a nonempty bounded open\nreference cell, let $q\\ge1$ be an integer, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **reference finite element** is a\ntriple $(\\widehat K,\\widehat P,\\widehat\\Sigma)$ where $\\widehat P$ is an\n$N$-dimensional subspace of $[C(\\overline{\\widehat K};\\mathbb K)]^q$ for\n$N\\in\\mathbb N_0$ and\n$\\widehat\\Sigma=(\\widehat\\sigma_1,\\ldots,\\widehat\\sigma_N)$ is a list of\nlinear functionals on $\\widehat P$ for which\n$$J_{\\widehat\\Sigma}:\\widehat P\\to\\mathbb K^N,\\qquad J_{\\widehat\\Sigma}(p):=(\\widehat\\sigma_1(p),\\ldots,\\widehat\\sigma_N(p)),$$\nis bijective. The functionals are the **degrees of freedom** and the triple\nis **unisolvent**. Its **shape functions** are the unique dual basis\n$\\widehat\\phi_1,\\ldots,\\widehat\\phi_N\\in\\widehat P$ satisfying\n$\\widehat\\sigma_i(\\widehat\\phi_j)=\\delta_{ij}$.\n\nIf $X$ is a normed vector space of functions on $\\widehat K$ containing\n$\\widehat P$, fix for each $i$ a bounded linear extension of\n$\\widehat\\sigma_i$ to $X$, and denote this chosen extension by the same\nsymbol. The **reference interpolation operator** associated with these\nchosen extensions is\n$$\\widehat I:X\\to\\widehat P,\\qquad \\widehat I v:=\\sum_{i=1}^N\\widehat\\sigma_i(v)\\widehat\\phi_i.$$\nThe definition of a reference finite element does not assert that any\nparticular list of functionals is unisolvent or bounded on a given Sobolev\nspace; those are separate proof obligations. For $N=0$, $\\widehat P=\\{0\\}$,\n$\\mathbb K^0=\\{0\\}$, the empty list gives the unique bijection between these\nzero spaces, and the shape-function list is empty. The corresponding\ninterpolation formula is the empty sum, hence the zero map into $\\{0\\}$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-nonlinear-tikhonov-functional",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be real Hilbert spaces, let $D\\subseteq X$ be a nonempty domain, and let $F:D\\to Y$ be a forward map. For a regularization parameter $\\alpha>0$, reference element $x_0\\in X$, and datum $y\\in Y$, the **nonlinear Tikhonov functional** is the map $J_{\\alpha,y,x_0}:D\\to[0,\\infty)$ defined by\n\n$$\nJ_{\\alpha,y,x_0}(x):=\\frac12\\|F(x)-y\\|_Y^2+\\frac{\\alpha}{2}\\|x-x_0\\|_X^2\\qquad(x\\in D).\n$$\n\nA **global minimizer** is a point $x_\\alpha\\in D$ such that $J_{\\alpha,y,x_0}(x_\\alpha)\\le J_{\\alpha,y,x_0}(x)$ for every $x\\in D$. This definition asserts neither existence nor uniqueness.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-ip-finite-element-pde-tikhonov",
+          "source_section": "Definition",
+          "quote": "Assume a finite-element PDE model satisfying the admissibility and certificate contract, with nonempty closed convex coefficient set $Q_h$, discrete Tikhonov objective $\\Phi_h$ using reference coefficient $q_0$, a state/adjoint solve routine, an exact projection routine, an objective interval routine, and finite solve and evaluation budgets. Let the input be an initial coefficient $q_{\\rm init}\\in Q_h$, data $y^\\delta\\in Y_h$, noise bound $\\delta\\ge0$, penalty $\\alpha>0$, state and adjoint residual tolerances $\\tau_u,\\tau_p\\ge0$, discrepancy factor $\\kappa\\ge1$, stationarity tolerance $\\tau_g\\ge0$, scaling parameter $L>0$, and positive integer budgets $N_{\\rm iter}$, $N_{\\rm solve}$, $N_{\\rm eval}$, and $N_{\\rm backtrack}$. The global budget $N_{\\rm solve}$ counts state and adjoint solves; $N_{\\rm eval}$ counts exact projections and objective-interval evaluations. The scaling parameter $L$ is only a positive step-size scale; it is not assumed to be a Lipschitz constant. The algorithm returns a coefficient, one status from `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`, and any diagnostics certified at that coefficient.\n\n1. If $q_{\\rm init}\\notin Q_h$ or the model's exact admissibility predicate is false at $q_{\\rm init}$, return status `inadmissible` without solving a PDE. Otherwise set $q:=q_{\\rm init}$.\n\n2. For $k=0,\\ldots,N_{\\rm iter}$, first check the finite-time admissibility predicate, which includes membership in $Q_h$. If it is false, return `inadmissible`. If no global solve or evaluation budget remains, return `budget-exhausted`.\n\n3. Call the state/adjoint solver at $q$ with tolerances $\\tau_u,\\tau_p$ and the remaining solve budget. If it returns `failure`, if either certified residual bound exceeds its declared tolerance, or if any required state/adjoint error estimate or derivative bound is missing or invalid, return `linear-solve-failed`. Otherwise receive $\\widetilde g_h$, $\\widetilde F_h$, $\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$ and set $\\varepsilon_g=(L_{J,u}+L_{R,u}P)\\eta_u+M_q\\eta_p$ and $\\varepsilon_F=L_{G,u}\\eta_u$.\n\n4. Use the exact projection routine to compute $P_{Q_h}(q-\\widetilde g_h/L)$. If the routine fails or the evaluation budget is exhausted, return `budget-exhausted`. Set $\\widetilde\\rho:=L\\|q-P_{Q_h}(q-\\widetilde g_h/L)\\|_2$. If $\\widetilde\\rho+\\varepsilon_g\\le\\tau_g$, return `converged` with stationarity upper bound $\\widetilde\\rho+\\varepsilon_g$. This status means only that the exact projected-gradient residual of the discrete objective is within tolerance; it is not a claim that an iterate sequence converges or that $q$ is a global minimizer.\n\n5. Compute $d^+:=\\|\\widetilde F_h-y^\\delta\\|_{Y_h}+\\varepsilon_F$. If $d^+\\le\\kappa\\delta$, return `discrepancy-stopped` with data-residual upper bound $d^+$. This status certifies only the discrete model's data discrepancy.\n\n6. If $k=N_{\\rm iter}$, return `budget-exhausted` at the current coefficient with its current diagnostics. Otherwise, evaluate the current objective using its certified interval $[\\ell_h(q),u_h(q)]$. If the evaluation fails because a required state or adjoint solve fails its contract, return `linear-solve-failed`; if the global solve or evaluation budget is exhausted, return `budget-exhausted`.\n\n7. For $j=0,\\ldots,N_{\\rm backtrack}-1$, set $t_j=2^{-j}/L$ and use the exact projection routine to compute $q_j=P_{Q_h}(q-t_j\\widetilde g_h)$. If projection fails or the evaluation budget is exhausted, return `budget-exhausted`. Reject this trial and continue to the next $j$ if $q_j=q$ or its admissibility predicate is false. Otherwise evaluate a certified interval $[\\ell_h(q_j),u_h(q_j)]$. If evaluation fails because a required linear solve fails its contract, return `linear-solve-failed`; if it only exhausts the finite evaluation budget, return `budget-exhausted`. Accept the first trial with $u_h(q_j)\\le\\ell_h(q)$, set $q:=q_j$, and continue to the next outer iteration.\n\n8. If no trial is accepted within the backtracking budget, return `budget-exhausted` at the current coefficient.\n\nThe global solve budget counts all primal and adjoint solves used both at iterates and in objective trials. The evaluation budget counts every projection and objective-interval call. Any continuous-to-discrete mesh bound is reported separately by the model contract and is never inferred from the algebraic state or adjoint residuals.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its polynomial space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+          "source_section": "Statement",
+          "quote": "For any finite-element PDE model satisfying its solver and admissibility contract, the finite-budget Tikhonov algorithm returns after finitely many operations one of `converged`, `discrepancy-stopped`, `linear-solve-failed`, `inadmissible`, or `budget-exhausted`. A `converged` return satisfies the exact discrete projected-gradient bound $\\|G_L(q)\\|_2\\le\\tau_g$; a `discrepancy-stopped` return satisfies $\\|F_h(q)-y^\\delta\\|_{Y_h}\\le\\kappa\\delta$. Every accepted safeguarded step has nonincreasing exact discrete objective $\\Phi_h$. `inadmissible` and `linear-solve-failed` are returned only on the corresponding failed predicate or solver-certificate checks. `budget-exhausted` asserts no optimizer or continuous-model accuracy.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four triangles have area $1/4$. On each triangle $\\phi$ is the barycentric coordinate of $O$. For $k=1,2,3$, integration on the reference triangle gives $\\int_K\\phi^k=|K|\\,2/((k+1)(k+2))$; this follows by integrating $(1-x-y)^k$ over $0\\le x\\le1$, $0\\le y\\le1-x$. Hence $\\int_\\Omega\\phi=1/3$, $\\int_\\Omega\\phi^2=1/6$, and $\\int_\\Omega\\phi^3=1/10$. Each cell's base is a unit square edge and its altitude from $O$ is $1/2$, so the affine barycentric coordinate has gradient magnitude $2$; therefore $\\int_\\Omega|\\nabla\\phi|^2=4$. By [F2], $w=\\phi^2\\in H^1_0(\\Omega)$. Since $|\\Omega|=1$, [F6] gives $|\\int_\\Omega q|\\le\\|q\\|_{L^2}$, and it also gives $|a(w,z)|\\le\\|w\\|_V\\|z\\|_V$; hence $B$ is a bounded linear map into $V^*$. The same inequality gives $|\\int_\\Omega v|\\le\\|v\\|_{L^2}\\le\\|v\\|_V$, so the observation is bounded. The form has $a(v,v)=\\|v\\|_V^2$ and continuity constant $1$, so [F1] applies and gives a unique state.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact state is $u(\\gamma)=\\gamma w$, since substituting it gives $a(u(\\gamma),z)=\\gamma a(w,z)$ for every $z\\in V$; uniqueness from [F1] identifies this as the state map. Therefore $F(\\gamma)=\\gamma\\int_\\Omega\\phi^2=\\gamma/6$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write the Galerkin state as $u_h(\\gamma)=c\\gamma\\phi$. Testing its weak equation with $\\phi$ gives $c\\,a(\\phi,\\phi)=a(\\phi^2,\\phi)$. Here $a(\\phi,\\phi)=\\int(\\phi^2+|\\nabla\\phi|^2)=1/6+4=25/6$, while $a(\\phi^2,\\phi)=\\int(\\phi^3+2\\phi|\\nabla\\phi|^2)=1/10+2\\cdot4\\cdot(1/3)=83/30$. Thus $c=(83/30)/(25/6)=83/125$, and $F_h(\\gamma)=c\\gamma\\int_\\Omega\\phi=83\\gamma/375$. The scalar Galerkin stiffness $25/6$ is positive, so this state solve is unique and its exact algebraic residual is zero.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact objective is $\\Phi(\\gamma)=\\frac12(\\gamma/6-1/6)^2+\\frac12\\gamma^2$. Its derivative is $(1/36+1)\\gamma-1/36$, so its unique minimizer is $\\gamma_*=1/37\\in[0,1]$. The discrete objective is $\\Phi_h(\\gamma)=\\frac12(83\\gamma/375-1/6)^2+\\frac12\\gamma^2$. Its derivative is $((83/375)^2+1)\\gamma-(83/375)(1/6)$. Since $(83/375)(1/6)=83/2250$ and $(83/375)^2+1=147514/140625$, its unique zero is $\\gamma_h=(83/2250)(140625/147514)=10375/295028\\in[0,1]$. Both second derivatives are positive, so these stationary points are the unique minimizers on the interval. Moreover $10375\\cdot37=383875>295028$, hence $\\gamma_h>1/37=\\gamma_*$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every $\\gamma\\in[0,1]$, $|F(\\gamma)-F_h(\\gamma)|=|\\gamma|\\,|1/6-83/375|\\le41/750$, with equality at $\\gamma=1$. Thus the forward mesh discrepancy has the explicit bound $41/750$. The scalar Galerkin state matrix is $25/6>0$, and the scalar adjoint matrix is its transpose, so both equations can be solved exactly with zero algebraic residuals. By [F4], [F5] and [F7], the exact discrete reduced gradient at $\\gamma_h$ is $\\Phi_h'(\\gamma_h)=0$. With the algorithm inputs specified in the Example, $\\gamma_h$ is interior and $P_{[0,1]}(\\gamma_h-\\Phi_h'(\\gamma_h))=\\gamma_h$, so the projected-gradient residual is zero. The state and adjoint solves use the two solve calls, while the projection uses one of the two evaluation calls, leaving the evaluation budget unexhausted at step 4; hence the algorithm returns `converged` before its discrepancy check. This status certifies only discrete stationarity while the continuous model has the different minimizer proved in step 3.1; the mesh bound remains separate.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty unit-square domain, finite mesh and scalar control interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 treats exact state and adjoint solves with zero algebraic residual yet a nonzero mesh discrepancy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 calculate the one-dimensional state and control coefficients explicitly; step 4.1 counts two solves and one projection, leaving one of two evaluation calls unused before stationarity testing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves strict convexity of both scalar objectives, excluding degenerate minimizers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies both minimizers lie in [0,1], and step 4.1 attains the mesh-error supremum at gamma=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is assumed only for the Hilbert-space well-posedness cited in step 1.1; Galerkin computations are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares explicit minimizers and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares explicit minimizers and makes no equivalence claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all five Verification steps, every actual cited supplier statement and elliptic well-posedness proof. Unit-square domain is bounded Lipschitz; w=phi^2 is conforming piecewise quadratic with zero boundary traces, so p=2 conformity applies under explicit CC. Full Sobolev form has M=beta=1, bounded rank-one B and bounded integral observation; no continuous observation-objective theorem is imported into the scalar observed objective. Recomputed moments 1/3,1/6,1/10 and energy 4; stiffness 25/6, forcing 83/30, c=83/125, F_h=83 gamma/375, minimizers 1/37 and 10375/295028, and exact supremum 41/750. Both minimizers are interior and second derivatives positive. Refuter budget defect confirmed fatal and repaired by N_eval=2; two exact solves and one projection now permit the zero-stationarity return before discrepancy. Exact inverse bound 6/25 and affine derivative data provide finite certificates. Diagram has correct square boundary, four center-corner cells and sole interior node; proof independent. Published-context findings 7–8 are editorial and recorded read-only."
+      }
+    }
+  }
+}
