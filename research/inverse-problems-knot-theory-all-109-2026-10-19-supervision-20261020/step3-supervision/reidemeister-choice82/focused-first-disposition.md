@@ -1,0 +1,9 @@
+# Reader82 — two local derived-choice qualifiers
+
+Both omissions are confirmed: the cited Reidemeister theorem assumes ACω and its Proof1.2/2.1 uses Sard/parametric general position. The two Definitions supply no independent weaker-foundation proof for whole-track avoidance or diagram move-equivalence. The exact two-fragment proposal adds “assuming the Axiom of Countable Choice” only to those derived sentences. All primitive link/diagram definitions, individual placement-off-infinity construction, other mathematical clauses, metadata and links remain unchanged. No reverse theorem edge is added to the primitive definitions.
+
+The actual reader82 bracket-definition use is solely primitive finite crossing/over-under data and remains choice-free. The normalized-bracket Statement/Given/A1/F2 already supplies ACω; its actual finite-move application is unchanged. Other identified direct derived applications (framed diagram calculus, linking-number invariance and the writhe counterexample) likewise explicitly supply ACω. No consumer edit was found necessary.
+
+`direct-consumer-inventory.json` inventories140 directly declared/cited carriers, including the repaired regular-diagram supplier itself. Its per-row dispositions are explicitly bounded to matched interfaces/metadata, not fabricated full proof audits. The relevant actual derived-clause checks and choice premises are separated in `affected-derived-clause-applications.json`. No full transitive foundational campaign was performed.
+
+Canonical edits/claims/registries/native decisions/state/hashes/gates/controls: zero. Root owns normal published pre-edit ownership/lineage/archive/checks/receipts before integration. Preserve original reader82 and native adjudicator history; this proposal is not an Alpha acceptance or another native round.

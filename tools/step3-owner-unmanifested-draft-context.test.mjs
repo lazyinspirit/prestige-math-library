@@ -10,7 +10,7 @@ const repo=process.cwd(),proposal=resolve(dirname(fileURLToPath(import.meta.url)
 const code=mkdtempSync(join(tmpdir(),'unmanifested-code-'));
 const tracked=spawnSync('git',['ls-files','-z','tools'],{encoding:'utf8'});assert.equal(tracked.status,0);
 for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(code,p)),{recursive:true});copyFileSync(join(repo,p),join(code,p));}
-for(const name of ['step3-owner-unmanifested-draft-context.mjs','step3-scope.mjs','step3-close.mjs','step3-adjudication-order.mjs'])copyFileSync(join(proposal,'tools',name),join(code,'tools',name));
+for(const name of ['step3-owner-unmanifested-draft-context.mjs','step3-scope.mjs','step3-close.mjs','step3-adjudication-order.mjs','step3-owner-native-risk-title-home.mjs','step3-owner-assigned-consumer-witness.mjs'])copyFileSync(join(proposal,'tools',name),join(code,'tools',name));
 process.env.PRESTIGE_MATH_REPO=repo;
 const api=await import(pathToFileURL(join(code,'tools/step3-owner-unmanifested-draft-context.mjs')));
 const {requiredPageHash:hash}=await import(pathToFileURL(join(code,'tools/step3-owner-required-page-routes.mjs')));
@@ -154,7 +154,7 @@ for(const [name,change] of [
  ['wrong review obligation',f=>{f.rootReview.obligation='reader:1:2';f.saveReview();}],
  ['source archive changed',f=>f.put(f.entry.owner_current_source.path,'Different archive')],
  ['current source edited',f=>f.put('items/lem-helper.md',f.source+'Edited')],
- ['current assigned use changed',f=>f.put('items/thm-consumer.md',f.consumer+'Changed assigned use after root review.')],
+ ['current assigned use changed',f=>f.put('items/thm-consumer.md',f.consumer.replace('compact smooth orientable exterior','noncompact exterior'))],
  ['nonliteral supplier clause',f=>{f.delegated.used_clause='A purported supplier clause which does not literally occur in the current archived source.';f.put('research/r-capture/delegated-current-review.json',f.delegated);f.rootReview.delegated_review=f.link('research/r-capture/delegated-current-review.json');f.saveReview();}],
  ['nonliteral consumer premise',f=>{f.delegated.consumer_premise_quotes=['A purported consumer premise which does not occur in the archived assigned consumer.'];f.put('research/r-capture/delegated-current-review.json',f.delegated);f.rootReview.delegated_review=f.link('research/r-capture/delegated-current-review.json');f.saveReview();}],
  ['native prose lacks routing witness',f=>{f.put('research/r-reader-1.md','lem-helper only, with no consumer witness.');f.entry.reader_report=f.link('research/r-reader-1.md');}],
@@ -167,7 +167,7 @@ test('owner-current native lifecycle projects original nulls, requires independe
  for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(f.root,p)),{recursive:true});copyFileSync(join(code,p),join(f.root,p));}copyFileSync(join(code,'tools/step3-owner-unmanifested-draft-context.mjs'),join(f.root,'tools/step3-owner-unmanifested-draft-context.mjs'));
  const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});const ok=(...a)=>{const r=run(...a);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
  f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer'],contracts:{'thm-consumer':{}}});ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');ok('post-reader','--batch','1');
- const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json'))),n=scope.reader_findings[0];assert.equal(n.observed_source,null);assert.equal(n.consumer_id,null);assert.equal(n.observed_sha256,null);assert.equal(n.owner_context_consumer_id,'thm-consumer');assert.deepEqual(scope.manifest_post,['thm-consumer']);assert.ok(!scope.refuter_scope.includes('lem-helper'));assert.deepEqual(api.unmanifestedRefuterContexts(f.root,'r','1',scope),new Map());
+ const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json'))),n=scope.reader_findings[0];assert.equal(n.observed_source,null);assert.equal(n.consumer_id,null);assert.equal(n.observed_sha256,null);assert.equal(n.owner_context_consumer_id,'thm-consumer');assert.deepEqual(scope.manifest_post,['thm-consumer']);assert.ok(!scope.refuter_scope.includes('lem-helper'));assert.equal(api.unmanifestedRefuterContexts(f.root,'r','1',scope).size,1);
  const order=prepareStep3AdjudicationOrder(f.root,'r',{label:'batch-1',scopeGroup:'g',covers:['1']});assert.match(readFileSync(join(f.root,order),'utf8'),/OWNER-CURRENT SOURCE ONLY/);
  f.put('research/r-refute-1.json',{batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Actual refuter opens only assigned scope, no helper coverage claimed.'});ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
  f.put('research/defect-ledger.jsonl',JSON.stringify({run:'r',defect_id:'owner-current-gap',subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'nonfatal-recorded'})+'\n');
@@ -209,4 +209,190 @@ test('native two-consumer lifecycle: no extra read and unflagged extra read pass
  f.put('research/defect-ledger.jsonl',decisions.map(d=>JSON.stringify({run:'r',defect_id:d.defect_ids[0],subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'false-positive'})).join('\n')+'\n');f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions});ok('stamp');ok('check','--batch','1','--phase','adjudicate');ok('check','--batch','1','--phase','final');
  // Still reject unrelated extra context, even when the report is genuine and complete.
  setNative({...extra,opened:[...extra.opened,'lem-unrelated']});assert.notEqual(run('collect','--batch','1').status,0);
+ }finally{f.close();}});
+
+
+test('owner-current allows unrelated owned Statement repair, reseals full consumer, and rejects any reviewed quote change',()=>{const f=ownerCurrentFixture();try{
+ const n=f.normalized(),before=api.unmanifestedDraftCarrier(f.root,'r','1',n);
+ const archive=readFileSync(join(f.root,f.entry.consumer_source.path));
+ f.put('items/thm-consumer.md',f.consumer+'\nUnrelated owned statement ambiguity corrected by its actual Alpha.\n');
+ const after=api.unmanifestedDraftCarrier(f.root,'r','1',n);
+ assert.notEqual(after.consumer_item_sha256,before.consumer_item_sha256);
+ assert.deepEqual(readFileSync(join(f.root,f.entry.consumer_source.path)),archive);
+ assert.equal(n.consumer_id,null);assert.equal(n.observed_source,null);assert.equal(n.observed_sha256,null);
+ f.put('items/thm-consumer.md',f.consumer.replace(f.delegated.consumer_premise_quotes[0],'Changed relevant premise.'));
+ assert.throws(()=>f.normalized(),/current reviewed consumer premise changed/);
+}finally{f.close();}});
+
+test('nullable refuter extra flag authenticates unique current context and retains both flags without historical source',()=>{const f=ownerCurrentFixture();try{
+ const x=refuterFixture(f),reader=f.normalized();x.scope.reader_findings=[reader];
+ f.put('research/r-step3-scope-1.json',x.scope);
+ const nativeReport=readFileSync(join(f.root,'research/r-refute-1.json'));
+ assert.equal(api.unmanifestedRefuterContexts(f.root,'r','1',x.scope).size,1);
+ assert.equal(api.validateUnmanifestedRefuterOpened(f.root,'r','1','lem-helper',x.scope),true);
+ const n=api.bindUnmanifestedRefuterContext(f.root,'r','1',x.raw(),x.scope);
+ assert.equal(n.consumer_id,null);assert.equal(n.observed_source,null);assert.equal(n.observed_sha256,null);
+ assert.equal(n.owner_context_consumer_id,'thm-consumer');
+ assert.equal(n.owner_unmanifested_refuter_context.source_sha256,undefined);
+ assert.equal(n.owner_unmanifested_refuter_context.historical_source_observed,false);
+ assert.equal(n.owner_unmanifested_refuter_context.owner_current_source_sha256,f.entry.owner_current_source.sha256);
+ assert.ok(api.unmanifestedDraftCarrier(f.root,'r','1',n).consumer_item_sha256);
+ assert.equal(x.report.flagged.length,2);assert.equal(x.report.flagged[1].id,'thm-consumer');
+ assert.deepEqual(readFileSync(join(f.root,'research/r-refute-1.json')),nativeReport);
+ for(const k of ['consumer_id','observed_source','observed_sha256']){const forged={...n,[k]:'invented'};assert.throws(()=>api.unmanifestedDraftCarrier(f.root,'r','1',forged));}
+ f.put(x.prompt,'Changed authentic prompt');assert.throws(()=>api.unmanifestedDraftCarrier(f.root,'r','1',n));
+}finally{f.close();}});
+
+test('nullable refuter context does not infer a routing witness when two reader anchors exist',()=>{const f=ownerCurrentFixture();try{
+ const x=refuterFixture(f),doc=JSON.parse(readFileSync(join(f.root,f.entry.findings.path)));doc.findings.push(f.finding);
+ f.put(f.entry.findings.path,doc);f.put('research/r-reader-findings-1.json',doc);f.entry.findings=f.link(f.entry.findings.path);
+ const native=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));native.tail=JSON.stringify(doc);f.put(f.entry.native_result.path,native);f.entry.native_result=f.link(f.entry.native_result.path);
+ const e2={...f.entry,index:2};f.put('research/r-step3-owner-unmanifested-draft-context.json',{version:1,run:'r',policy:api.UNMANIFESTED_POLICY,authorized_by:'owner',authorization:'Root authority for genuine duplicate context-reader observations; no native refuter consumer attribution.',contexts:[f.entry,e2]});
+ // The second owner-review anchor cannot be guessed or copied: it has its own
+ // required obligation. Reject even before a refuter can choose an anchor.
+ assert.throws(()=>api.bindUnmanifestedRefuterContext(f.root,'r','1',x.raw(),x.scope));
+}finally{f.close();}});
+
+
+test('current-only refuter lifecycle keeps independent flags, null observation, rows and owned consumer repair',()=>{const f=ownerCurrentFixture();try{
+ for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(f.root,p)),{recursive:true});copyFileSync(join(code,p),join(f.root,p));}copyFileSync(join(code,'tools/step3-owner-unmanifested-draft-context.mjs'),join(f.root,'tools/step3-owner-unmanifested-draft-context.mjs'));
+ const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});const ok=(...a)=>{const r=run(...a);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
+ f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer'],contracts:{'thm-consumer':{}}});ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');ok('post-reader','--batch','1');
+ const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json'))),x=refuterFixture(f);f.put('research/r-step3-scope-1.json',scope);
+ x.report.flagged[0].severity='nonfatal';x.report.opened=[...scope.refuter_scope,'lem-helper'];x.result.tail=JSON.stringify(x.report);f.put('research/r-refute-1.json',x.report);for(const p of ['research/r-dispatch/refuter-refute-1.result.json','research/r-dispatch/refuter-refute-1.attempt-1.result.json'])f.put(p,x.result);
+ const nativeBytes=readFileSync(join(f.root,'research/r-refute-1.json'));
+ ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
+ const collected=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));
+ assert.equal(collected.refuter_findings.length,2);const n=collected.refuter_findings[0];
+ for(const k of ['consumer_id','observed_source','observed_sha256'])assert.equal(n[k],null);
+ assert.ok(!collected.refuter_scope.includes('lem-helper'));assert.deepEqual(collected.refuter_context_opened,['lem-helper']);
+ const currentHistory={consumer_id:null,owner_context_consumer_id:'thm-consumer',historical_delta_unknown:true,owner_resolution:'Independent Alpha adjudicates current helper and exact reviewed premises only; native observations and consumer attribution remain absent.'};
+ const decisions=[{...currentHistory,obligation:'reader:1:1',id:'lem-helper',route:'reader',verdict:'confirmed_nonfatal',defect_ids:['helper-reader-gap'],evidence:'Independent reader obligation preserves the separate unresolved criterion gap without inventing historical bytes.'},
+ {...currentHistory,obligation:'refuter:1:1',id:'lem-helper',route:'flagged',verdict:'confirmed_nonfatal',defect_ids:['helper-refuter-gap'],evidence:'Independent actual refuter flag is separately adjudicated as current nonfatal criterion maintenance with no borrowed observation.'},
+ {obligation:'refuter:1:2',id:'thm-consumer',route:'flagged',verdict:'false_positive',defect_ids:['owned-title'],evidence:'Independent Alpha inspects the actual owned title and rejects this synthetic fixture counterexample.'}];
+ f.put('research/defect-ledger.jsonl',[{run:'r',defect_id:'helper-reader-gap',subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'nonfatal-recorded'},
+ {run:'r',defect_id:'helper-refuter-gap',subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'nonfatal-recorded'},
+ {run:'r',defect_id:'owned-title',subject:'thm-consumer',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'false-positive'}].map(x=>JSON.stringify(x)).join('\n')+'\n');
+ const save=()=>f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions});save();ok('stamp');ok('check','--batch','1','--phase','adjudicate');
+ // The current-only authority must not prevent an ordinary owned repair away
+ // from its exact reviewed use; all full carrier hashes must become fresh.
+ f.put('items/thm-consumer.md',f.consumer+'\nUnrelated owned Statement ambiguity correction.\n');
+ assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0,'old full consumer decision seal becomes stale');
+ ok('stamp');ok('check','--batch','1','--phase','adjudicate');
+ const evidence=api.unmanifestedDraftClosureEvidence(f.root,'r');assert.ok(evidence['research/r-dispatch/refuter-refute-1.attempt-1.result.json']);assert.ok(evidence['research/r-refute-1.json']);
+ assert.deepEqual(readFileSync(join(f.root,'research/r-refute-1.json')),nativeBytes);
+ decisions.splice(1,1);save();ok('stamp');assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0,'reader verdict cannot discharge refuter obligation');
+}finally{f.close();}});
+
+function repairedFixture(){
+ const f=fixture();
+ f.source='---\nid: lem-helper\nstatus: draft\npipeline_run: r\ndeps: []\n---\n\n## Statement\nFor the supplied regular data, the complete nonlinear gluing conclusion holds.\n\n## Facts & Assumptions\n\n[F1] The exact finite input interfaces remain unchanged.\n\n## Proof\n\n1.1 The normal inverse is asserted without its needed formula. [F1]\n\n2.1 The exhaustion conclusion is asserted without its boundary estimate. [step 1.1] ∎\n';
+ f.consumer='---\nid: thm-consumer\nstatus: draft\npipeline_run: r\ndeps: [lem-helper, thm-published-supplier]\n---\n\n## Statement\nThe primary construction uses the gluing collars only for the supplied regular finite-level trajectories.\n';
+ f.manifest=[{id:'owned',category:'test',items:[{id:'thm-consumer',deps:['lem-helper','thm-published-supplier']}]}];
+ f.put('items/lem-helper.md',f.source);f.put('research/r-capture/source.md',f.source);
+ f.put('items/thm-consumer.md',f.consumer);f.put('research/r-capture/consumer.md',f.consumer);
+ f.put('research/r-batch-1.pages.json',f.manifest);f.put('research/r-capture/manifest.json',f.manifest);
+ f.put('items/thm-published-supplier.md','---\nid: thm-published-supplier\nstatus: published\ndeps: []\n---\n\n## Statement\nThe quotient norm is complete.\n');
+ const published={id:'thm-published-supplier',subject_type:'published-dependency',consumer_id:'thm-consumer',observed_source:null,location:'Statement opening',defect:'ill-formed',evidence:'The published completeness sentence has a recoverable grammatical defect.',severity:'nonfatal'};
+ f.finding={...f.finding,observed_source:{snapshot:'current',item_sha256:sha(f.source)},location:'Proof1.1 and2.1',defect:'unlicensed-inference',evidence:'The inverse lacks its formula and the finite-interval boundary estimate is missing.',severity:'fatal'};
+ const doc={batch:'1',findings:[published,f.finding],coverage_note:'Two original independent findings, editorial published context and fatal exact helper.'};
+ for(const p of ['research/r-reader-findings-1.json','research/r-capture/findings.json'])f.put(p,doc);
+ const native=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));native.tail=JSON.stringify(doc);f.put(f.entry.native_result.path,native);
+ Object.assign(f.entry,{index:2,finding_sha256:hash(f.finding),findings:f.link('research/r-capture/findings.json'),native_result:f.link(f.entry.native_result.path),observed_source:f.link('research/r-capture/source.md'),consumer_source:f.link('research/r-capture/consumer.md'),consumer_manifest:f.link('research/r-capture/manifest.json'),owner_repair_basis:api.OWNER_REPAIRED_CONTEXT_BASIS,defect_id:'helper-fatal',at:'2020-01-05T00:00:00Z'});
+ const edits=[{before:'The normal inverse is asserted without its needed formula.',after:'The normal inverse is obtained from the supplied patched operator and its uniform error estimate.'},{before:'The exhaustion conclusion is asserted without its boundary estimate.',after:'The exhaustion conclusion follows from the established uniform finite-interval boundary estimate.'}];
+ f.after=edits.reduce((s,e)=>s.replace(e.before,e.after),f.source);
+ f.put('research/r-capture/root-before.md',f.source);f.put('research/r-capture/root-after.md',f.after);f.put('items/lem-helper.md',f.after);
+ Object.assign(f.entry,{owner_repair_before:f.link('research/r-capture/root-before.md'),owner_repair_after:f.link('research/r-capture/root-after.md')});
+ f.application={version:1,run:'r',owner_identity:'/root',completed:true,source_repaired:true,mathematical_acceptance:false,native_coverage_adopted:false,original_obligation:'reader:1:2',supplier_id:'lem-helper',recorded_at:'2020-01-02T00:00:00Z',before:f.entry.owner_repair_before,after:f.entry.owner_repair_after,edits};
+ f.put('research/r-capture/application.json',f.application);f.entry.owner_repair_record=f.link('research/r-capture/application.json');
+ const used='The normal inverse is obtained from the supplied patched operator and its uniform error estimate.';
+ const premise='The primary construction uses the gluing collars only for the supplied regular finite-level trajectories.';
+ f.delegated={run:'r',reviewer:'/root/primary',completed:true,full_current_proof_read:true,affected_consumer_use_reviewed:true,mathematical_acceptance:false,native_coverage_adopted:false,original_obligation:'reader:1:2',supplier_id:'lem-helper',routing_consumer_witness:'thm-consumer',current_source:f.entry.owner_repair_after,current_consumer:f.entry.consumer_source,used_clause:used,consumer_premise_quotes:[premise]};
+ f.put('research/r-capture/primary.json',f.delegated);
+ const explanation='Actual fixture owner read the entire corrected helper and the primary use independently, preserving the original fatal evidence and all remaining boundaries.';
+ f.review={version:1,run:'r',owner_identity:'/root',completed:true,full_current_proof_read:true,affected_consumer_use_reviewed:true,source_repaired:true,mathematical_acceptance:false,native_coverage_adopted:false,original_obligation:'reader:1:2',supplier_id:'lem-helper',routing_consumer_witness:'thm-consumer',recorded_at:'2020-01-03T00:00:00Z',current_source:f.entry.owner_repair_after,current_consumer:f.entry.consumer_source,application:f.entry.owner_repair_record,delegated_review:f.link('research/r-capture/primary.json'),root_actual_reading:explanation,repair_result:explanation,history:explanation,limits:explanation};
+ f.put('research/r-capture/root-review.json',f.review);f.entry.owner_repair_review=f.link('research/r-capture/root-review.json');
+ f.normalized=()=>api.bindUnmanifestedDraftContext(f.root,'r','1',{...f.finding,obligation:'reader:1:2'});
+ f.independent={recorded_at:'2020-01-06T00:00:00Z',independent:true,full_current_proof_read:true,affected_consumer_use_reviewed:true,original_obligation:'reader:1:2',supplier_id:'lem-helper',consumer_id:'thm-consumer',current_source:f.entry.owner_repair_after,current_consumer:f.entry.consumer_source,application:f.entry.owner_repair_record,used_clause:used,consumer_premise_quotes:[premise],original_gap_resolutions:[explanation+' Inverse formula and normal-complement estimate were independently checked.',explanation+' Finite-interval boundary estimate and exhaustion were independently checked.']};
+ f.save();return f;
+}
+test('repaired exact mode preserves native before and seals current after without ownership fiction',()=>{const f=repairedFixture();try{
+ const original=readFileSync(join(f.root,'research/r-reader-findings-1.json'));const n=f.normalized();const c=api.unmanifestedDraftCarrier(f.root,'r','1',n);
+ assert.equal(n.obligation,'reader:1:2');assert.equal(n.observed_source.item_sha256,sha(f.source));assert.equal(n.severity,'fatal');assert.equal(n.producer_batch,undefined);
+ assert.equal(c.item_sha256,sha(f.after));assert.equal(c.observed_before_sha256,sha(f.source));assert.equal(c.owner_repaired_context,true);assert.equal(c.unchanged_context,undefined);
+ assert.deepEqual(original,readFileSync(join(f.root,'research/r-reader-findings-1.json')));
+ for(const v of ['confirmed_fatal','escalated'])assert.equal(api.unmanifestedDraftVerdictAllowed(v,c),true);
+ for(const v of ['false_positive','confirmed_nonfatal','accepted','repaired','accepted_repair','context_accepted'])assert.equal(api.unmanifestedDraftVerdictAllowed(v,c),false);
+ const scope={version:2,run:'r',batch:'1',manifest_post:['thm-consumer'],reader_findings:[n],refuter_scope:['thm-consumer']};assert.equal(api.unmanifestedRefuterContexts(f.root,'r','1',scope).size,1);
+ const d={id:'lem-helper',obligation:'reader:1:2',consumer_id:'thm-consumer',verdict:'confirmed_fatal',repair_confidence:1,defect_ids:['helper-fatal'],independent_repair_review:f.independent};
+ api.validateUnmanifestedRepairDecision(f.root,'r',c,d);
+ const closure=api.unmanifestedDraftClosureEvidence(f.root,'r');for(const k of ['owner_repair_before','owner_repair_after','owner_repair_record','owner_repair_review'])assert.equal(closure[f.entry[k].path],f.entry[k].sha256);
+ }finally{f.close();}});
+for(const[name,change]of[
+ ['unknown basis',f=>f.entry.owner_repair_basis='permissive'],
+ ['mixed nullable basis',f=>f.entry.native_finding_basis=api.OWNER_CURRENT_CONTEXT_BASIS],
+ ['before not native bytes',f=>{f.put(f.entry.owner_repair_before.path,'forged');f.entry.owner_repair_before=f.link(f.entry.owner_repair_before.path);}],
+ ['after Statement changed',f=>{f.put(f.entry.owner_repair_after.path,f.after.replace('complete nonlinear gluing conclusion','narrow nonlinear gluing conclusion'));f.entry.owner_repair_after=f.link(f.entry.owner_repair_after.path);}],
+ ['after Facts changed',f=>{f.put(f.entry.owner_repair_after.path,f.after.replace('finite input interfaces','new input interfaces'));f.entry.owner_repair_after=f.link(f.entry.owner_repair_after.path);}],
+ ['after deps changed',f=>{f.put(f.entry.owner_repair_after.path,f.after.replace('deps: []','deps: [lem-new]'));f.entry.owner_repair_after=f.link(f.entry.owner_repair_after.path);}],
+ ['application absent',f=>delete f.entry.owner_repair_record],
+ ['application not actual completed',f=>{f.application.completed=false;f.put(f.entry.owner_repair_record.path,f.application);f.entry.owner_repair_record=f.link(f.entry.owner_repair_record.path);}],
+ ['review not whole helper',f=>{f.review.full_current_proof_read=false;f.put(f.entry.owner_repair_review.path,f.review);f.entry.owner_repair_review=f.link(f.entry.owner_repair_review.path);}],
+ ['review omits primary use',f=>{f.review.affected_consumer_use_reviewed=false;f.put(f.entry.owner_repair_review.path,f.review);f.entry.owner_repair_review=f.link(f.entry.owner_repair_review.path);}],
+ ['root review adopted as mathematics',f=>{f.review.mathematical_acceptance=true;f.put(f.entry.owner_repair_review.path,f.review);f.entry.owner_repair_review=f.link(f.entry.owner_repair_review.path);}],
+ ['current helper drift',f=>f.put('items/lem-helper.md',f.after+'drift')],
+ ['reviewed consumer drift',f=>f.put('items/thm-consumer.md',f.consumer+'drift')],
+ ['invented helper home',f=>f.put('research/r-batch-2.pages.json',[{id:'new',items:[{id:'lem-helper'}]}])],
+ ['current consumer direct edge removed',f=>f.put('items/thm-consumer.md',f.consumer.replace('lem-helper, ',''))],
+ ['premature root review',f=>{f.review.recorded_at='2019-01-01T00:00:00Z';f.put(f.entry.owner_repair_review.path,f.review);f.entry.owner_repair_review=f.link(f.entry.owner_repair_review.path);}],
+])test('repaired mode rejects '+name,()=>{const f=repairedFixture();try{change(f);f.save();assert.throws(()=>f.normalized());}finally{f.close();}});
+test('repaired decision cannot inherit owner review or omit full independent gap review',()=>{const f=repairedFixture();try{const c=api.unmanifestedDraftCarrier(f.root,'r','1',f.normalized());const d={id:'lem-helper',obligation:'reader:1:2',consumer_id:'thm-consumer',verdict:'confirmed_fatal',repair_confidence:1,defect_ids:['helper-fatal'],independent_repair_review:f.independent};for(const edit of [x=>delete x.independent_repair_review,x=>x.repair_confidence=0.99,x=>x.defect_ids=['other'],x=>x.independent_repair_review.full_current_proof_read=false,x=>x.independent_repair_review.original_gap_resolutions=[]]){const bad=structuredClone(d);edit(bad);assert.throws(()=>api.validateUnmanifestedRepairDecision(f.root,'r',c,bad));}}finally{f.close();}});
+test('repaired source requires the explicit mode; legacy byte equality is unchanged',()=>{const f=repairedFixture();try{delete f.entry.owner_repair_basis;f.save();assert.throws(()=>f.normalized(),/context source edited/);}finally{f.close();}});
+test('two original findings survive ordinary repaired-context split collect order and fatal-fixed final',()=>{const f=repairedFixture();try{
+ for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(f.root,p)),{recursive:true});copyFileSync(join(code,p),join(f.root,p));}
+ const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});
+ const ok=(...a)=>{const r=run(...a);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
+ f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer'],contracts:{'thm-consumer':{}}});
+ ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');ok('post-reader','--batch','1');
+ const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));assert.equal(scope.reader_findings.length,2);assert.equal(scope.reader_findings[0].id,'thm-published-supplier');assert.equal(scope.reader_findings[1].severity,'fatal');assert.ok(!scope.manifest_post.includes('lem-helper'));assert.ok(!scope.refuter_scope.includes('lem-helper'));
+ const order=prepareStep3AdjudicationOrder(f.root,'r',{label:'batch-1',scopeGroup:'g',covers:['1']});assert.match(readFileSync(join(f.root,order),'utf8'),/WHOLE current helper proof/);
+ f.put('research/r-refute-1.json',{batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Actual required scope only; no helper refuter coverage invented.'});ok('collect','--batch','1');ok('check','--batch','1','--phase','split');
+ const editorial={obligation:'reader:1:1',id:'thm-published-supplier',consumer_id:'thm-consumer',route:'reader',verdict:'confirmed_nonfatal',defect_ids:['published-editorial'],evidence:'Independent Alpha retains the separate recoverable published completeness wording issue as nonfatal maintenance.'};
+ const d={obligation:'reader:1:2',id:'lem-helper',consumer_id:'thm-consumer',route:'reader',verdict:'confirmed_fatal',repair_confidence:1,defect_ids:['helper-fatal'],evidence:'Independent Alpha read the whole current helper, root repair evidence and primary consumer use, and independently checked both original fatal analytic gaps.',independent_repair_review:f.independent};
+ const save=()=>f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions:[editorial,d]});
+ const row={run:'r',defect_id:'helper-fatal',subject:'lem-helper',caught_at_stage:'3a-adjudicate',severity:'fatal',disposition:'fixed',adjudication_ref:[{path:'research/r-alpha-batch-1-3a-decisions.json',obligation:'reader:1:2'}]};
+ const ledger=()=>f.put('research/defect-ledger.jsonl',[{run:'r',defect_id:'published-editorial',subject:'thm-published-supplier',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'nonfatal-recorded'},row].map(x=>JSON.stringify(x)).join('\n')+'\n');
+ save();ledger();ok('stamp');ok('check','--batch','1','--phase','adjudicate');ok('check','--batch','1','--phase','final');
+ for(const v of ['confirmed_nonfatal','false_positive','accepted_repair','context_accepted']){d.verdict=v;save();const stamped=run('stamp');if(stamped.status===0)assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);else assert.notEqual(stamped.status,0);}d.verdict='confirmed_fatal';
+ for(const disposition of ['open','narrowed','dropped','nonfatal-recorded']){row.disposition=disposition;ledger();save();ok('stamp');assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);}row.disposition='fixed';ledger();
+ delete d.independent_repair_review;save();ok('stamp');assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);d.independent_repair_review=f.independent;
+ d.repair_confidence=0.99;save();ok('stamp');assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);d.repair_confidence=1;save();ok('stamp');ok('check','--batch','1','--phase','final');
+ const path='research/r-alpha-batch-1-3a-decisions.json',sealed=JSON.parse(readFileSync(join(f.root,path)));sealed.decisions[1].subject_sha256='0'.repeat(64);f.put(path,sealed);assert.notEqual(run('check','--batch','1','--phase','final').status,0);
+ const evidence=api.unmanifestedDraftClosureEvidence(f.root,'r');f.put('research/r-step3-closure.json',{version:3,run:'r',status:'closed',basis:'dependency-ordered-step3a'});f.put('items/lem-helper.md',f.after+'Later authorized change.');assert.deepEqual(api.unmanifestedDraftClosureEvidence(f.root,'r'),evidence);f.put(f.entry.owner_repair_after.path,'tampered archive');assert.throws(()=>api.unmanifestedDraftClosureEvidence(f.root,'r'));
+ }finally{f.close();}});
+
+test('repaired context allows genuine extra read only, never an inherited refuter flag',()=>{const f=repairedFixture();try{const x=refuterFixture(f);assert.equal(api.validateUnmanifestedRefuterOpened(f.root,'r','1','lem-helper',x.scope),true);assert.throws(()=>api.bindUnmanifestedRefuterContext(f.root,'r','1',x.raw(),x.scope),/cannot inherit an extra refuter flag/);}finally{f.close();}});
+
+// Root's actual display-math application exposed String.replace replacement
+// substitutions. Exercise the real repaired-authority validator, not just JS.
+for(const [name,token] of [
+ ['display dollar pair', '$$x^2+y^2$$'],
+ ['matched substring token', '$&'],
+ ['prefix token', '$`'],
+ ['suffix token', "$'"],
+ ['all literal tokens', "$$x$$ $& $` $'"],
+])test('proof repair inserts literal '+name,()=>{const f=repairedFixture();try{
+ const edit=f.application.edits[0],oldReplacement=edit.after;
+ edit.after=oldReplacement+' The following literal source tokens must be conserved: '+token+'.';
+ f.after=f.after.replace(oldReplacement,()=>edit.after);
+ f.put(f.entry.owner_repair_after.path,f.after);f.entry.owner_repair_after=f.link(f.entry.owner_repair_after.path);f.put('items/lem-helper.md',f.after);
+ f.application.after=f.entry.owner_repair_after;f.put(f.entry.owner_repair_record.path,f.application);f.entry.owner_repair_record=f.link(f.entry.owner_repair_record.path);
+ f.delegated.current_source=f.entry.owner_repair_after;f.put(f.review.delegated_review.path,f.delegated);f.review.delegated_review=f.link(f.review.delegated_review.path);
+ f.review.current_source=f.entry.owner_repair_after;f.review.application=f.entry.owner_repair_record;
+ f.put(f.entry.owner_repair_review.path,f.review);f.entry.owner_repair_review=f.link(f.entry.owner_repair_review.path);f.save();
+ const legacy=f.application.edits.reduce((text,e)=>text.replace(e.before,e.after),f.source);
+ assert.notEqual(legacy,f.after,'The regression must expose actual replacement-string interpretation.');
+ const n=f.normalized(),c=api.unmanifestedDraftCarrier(f.root,'r','1',n);
+ assert.equal(c.item_sha256,sha(f.after));assert.ok(readFileSync(join(f.root,'items/lem-helper.md'),'utf8').includes(token));
+ assert.equal(c.owner_repaired_context,true);assert.equal(n.observed_source.item_sha256,sha(f.source));
  }finally{f.close();}});

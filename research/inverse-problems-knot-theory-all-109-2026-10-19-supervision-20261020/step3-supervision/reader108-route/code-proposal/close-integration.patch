@@ -1,0 +1,17 @@
+--- a/tools/step3-close.mjs
++++ b/tools/step3-close.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import { assignedConsumerWitnessClosureEvidence } from './step3-owner-assigned-consumer-witness.mjs';
+ // Freeze dependency-ordered Step 3a after the passed native gate and exact carrier/plan currency checks.
+ // Later stages may rewrite items, but cannot rewrite the Step-3 evidence.
+ 
+@@ -58,6 +59,8 @@
+   ...(version === 3 ? homeAlphaClosureEvidence(root, run) : {}),
+   ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),
+   ...(version === 3 ? foreignReaderClosureEvidence(root, run) : {}),
++  ...(version === 3 ? assignedConsumerWitnessClosureEvidence(root, run,
++    { frozenArtifacts: frozenManifestArtifacts }) : {}),
+   ...(version === 3 ? requiredPageClosureEvidence(root, run, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+   ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),

@@ -1,7 +1,7 @@
 ---
 id: lem-incompressible-surface-torus-boundary-essential-or-parallel-annulus
 kind: lemma
-title: "Incompressible surfaces at torus boundary are essential or parallel annuli"
+title: "Boundary-compressible incompressible surfaces at torus boundary are parallel annuli"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

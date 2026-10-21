@@ -20,7 +20,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Julien Korinman, Finite presentations for stated skein algebras and lattice gauge field theory, Algebraic & Geometric Topology 23 (2023), §2.2, printed pp. 1256–1258"
+    - title: "Julien Korinman, Finite presentations for stated skein algebras and lattice gauge field theory, Algebraic & Geometric Topology 23 (2023), §2.1, subsection “Relation with Uqsl2 and Oq[SL2]”, printed pp. 1256–1257 (PDF pp. 10–11)"
       url: "https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf"
     - title: "Noah Snyder and Peter Tingley, The half-twist for U_q(g) representations, Algebra & Number Theory 3 (2009), §§3–5, printed pp. 810–830"
       url: "https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf"
@@ -30,15 +30,15 @@ sources:
 
 ## Definition
 
-Let $\omega$ be an indeterminate, set $A=\omega^{-2}$, and put $k'=\mathbb Q(\omega)$, $q_K=A^2$, and $q_L=A^{-2}$. Work over the scalar extension to $k'$ of the library Hopf algebra at $q_L$. The parameter and Cartan-generator conversion from Korinman's convention is $q_L=q_K^{-1}$ and $K_L=K_K^{-1}$; the root generators $E,F$ correspond unchanged. The vector basis order remains $(v_+,v_-)$. Korinman displays $\rho(E)=\begin{pmatrix}0&0\\1&0\end{pmatrix}$ and $\rho(F)=\begin{pmatrix}0&1\\0&0\end{pmatrix}$; converting those displayed action matrices to the column-action convention used here transposes them. Thus the module matrices are
+Let $\omega$ be an indeterminate, set $A=\omega^{-2}$, and put $k'=\mathbb Q(\omega)$, $q_K=A^2$, and $q_L=A^{-2}$. Work over the scalar extension to $k'$ of the library Hopf algebra at $q_L$. The parameter and Cartan-generator conversion from Korinman's convention is $q_L=q_K^{-1}$ and $K_L=K_K^{-1}$; the root generators $E,F$ correspond unchanged. The vector basis order remains $(v_+,v_-)$. Korinman displays these same column-action matrices for the root generators; no transpose is required. Thus the module matrices are
 $$E=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad F=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad K_K=\begin{pmatrix}q_K&0\\0&q_K^{-1}\end{pmatrix}.$$
 Equivalently, for the library parameter use $K_L=K_K^{-1}=\operatorname{diag}(q_L,q_L^{-1})$ and the library coproduct convention $\Delta(E)=E\otimes K_L^{-1}+1\otimes E$, $\Delta(F)=F\otimes1+K_L\otimes F$. The parameters $q_K$ and $q_L$ are not identified.
 
 The object $V$ is absolutely simple in the $k'$-linear representation category.
 
-Korinman's §2.2 matrix
+Korinman's §2.1 matrix
 $$C_K=\begin{pmatrix}0&\omega\\-\omega^5&0\end{pmatrix}$$
-is an equivariant map $V^*\to V$ in its indicated dual and vector bases. It is a duality isomorphism, not an endomorphism of $V$, so it is not the matrix of $\Omega^{-1}$.
+is labeled there as the matrix of his inverse half-ribbon operator on the underlying vector space $V$. It is not the equivariant left-duality identification used below. Here $\Omega$ denotes specifically the Snyder–Tingley operator $X$, whose inverse matrix is computed independently below; it is not identified with $C_K$.
 
 To specify the half-ribbon action, use the Snyder–Tingley convention $q_{\mathrm{ST}}=q_K$, $K_{\mathrm{ST}}=K_K=K_L^{-1}$, $E_{\mathrm{ST}}=E$, and $F_{\mathrm{ST}}=F$ in the same ordered basis. Since $q_K=\omega^{-4}$, choose $q_{\mathrm{ST}}^{1/4}=\omega^{-1}$. Let $X=JT_{w_0}$ be their half-ribbon element and let $\Omega$ be its operator on $V$. On the fundamental highest- and lowest-weight vectors, their formula gives $Xv_+=-q_{\mathrm{ST}}^{3/4}v_-$ and $Xv_-=q_{\mathrm{ST}}^{3/4}v_+$. The half-ribbon action therefore gives the actual inverse matrix and its square:
 $$\operatorname{Mat}_{(v_+,v_-)}(\Omega^{-1})=\begin{pmatrix}0&-\omega^3\\\omega^3&0\end{pmatrix},\qquad \Omega^2=-\omega^{-6}\operatorname{id}_V=-A^3\operatorname{id}_V.$$
@@ -79,7 +79,7 @@ The uninterrupted strand in the drawing is the overpassing strand. This is the c
 
 [[def-left-dual-and-right-dual-object|Left-dual maps and snake identities]]
 
-[Korinman, *Finite presentations for stated skein algebras and lattice gauge field theory*, §2.2](https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf)
+[Korinman, *Finite presentations for stated skein algebras and lattice gauge field theory*, §2.1](https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf)
 
 [Snyder and Tingley, *The half-twist for $U_q(\mathfrak g)$ representations*, §§3–5](https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf)
 
@@ -97,7 +97,7 @@ The uninterrupted strand in the drawing is the overpassing strand. This is the c
 
 [F4] A ribbon twist is a natural automorphism satisfying $\theta_{X\otimes Y}=(\theta_X\otimes\theta_Y)\circ c_{Y,X}\circ c_{X,Y}$ and compatible with duality ([[def-twist-and-ribbon-structure]]).
 
-[F5] Korinman's full-text §2.2 gives the generic two-dimensional module, its duality isomorphism $C_K:V^*\to V$, the positive braiding matrix, and the Kauffman-bracket quantum dimension $-q_K-q_K^{-1}$; the parameter, Cartan-generator, and column-action conversions used here are stated in the Definition ([Korinman, §2.2](https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf)).
+[F5] Korinman's full-text §2.1 gives the generic two-dimensional module, the displayed matrix of its inverse half-ribbon operator $C_K$, the positive braiding matrix, and the Kauffman-bracket quantum dimension $-q_K-q_K^{-1}$; the parameter, Cartan-generator, and column-action conversions used here are stated in the Definition ([Korinman, §2.1](https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf)).
 
 [F6] Snyder–Tingley Lemma 3.10 computes the action of $X=JT_{w_0}$ on highest- and lowest-weight vectors; Theorems 3.11 and 5.2 establish its standard braiding and half-ribbon structure, with associated Hopf-algebra ribbon element $v=X^{-2}$ satisfying $\Delta(v)=(v\otimes v)(R_{21}R)^{-1}$ ([Snyder–Tingley, §§3, 5](https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf)).
 

@@ -1,0 +1,84 @@
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -286,6 +287,13 @@
+     validateForeignReaderFinding(ROOT, run, origin, target, carrier);
+     return { ...carrier, owner_foreign_reader_route: route.binding };
+   }
++  if (target?.owner_assigned_consumer_witness) {
++    const origin = String(target.obligation).split(':')[1];
++    const route = assignedConsumerWitness(ROOT, run, origin, target,
++      inRunDependencies(origin, manifestItems()[origin] ?? []));
++    return { ...producerCarrier(target.id, route.e.producer_batch),
++      owner_assigned_consumer_witness: route.binding };
++  }
+   if (target?.subject_type === 'in-run-dependency') {
+     return producerCarrier(target.id, target.producer_batch);
+   }
+@@ -619,10 +627,16 @@
+   return carrier?.item_sha256 ? { producer_batch: String(producer), ...carrier } : undefined;
+ }
+ 
+-function bindInRunFinding(finding, batch, dependencies, reportError) {
++function bindInRunFinding(finding, batch, dependencies, reportError, historicalValidation = false) {
+   const foreign = foreignReaderRoute(ROOT, run, batch, finding);
+   if (foreign && bindForeignReaderFinding(ROOT, run, batch, finding, producerCarrier(finding.id, foreign.e.producer_batch))) return;
+-  const route = dependencies.get(finding.id), path = route?.consumers.get(finding.consumer_id);
++  const witness = assignedConsumerWitness(ROOT, run, batch, finding, dependencies);
++  const effectiveConsumer = witness?.e.actual_consumer_id ?? finding.consumer_id;
++  const route = dependencies.get(finding.id), path = route?.consumers.get(effectiveConsumer);
++  if (witness) {
++    finding.owner_assigned_consumer_witness = witness.binding;
++    finding.owner_actual_consumer_id = effectiveConsumer;
++  }
+   if (!route || !path) { reportError(`${finding.obligation} must name an assigned consumer reaching another exact current-run draft producer`); return; }
+   const historicalBindings = route.historical?.get(finding.consumer_id);
+   const frozen = historicalBindings?.get(finding.obligation);
+@@ -654,7 +668,7 @@
+   const carrier = observed?.snapshot === 'pre' ? finding.producer_pre_snapshot.carrier : current;
+   const unbound = unboundReaderObservations(ROOT, run, batch).get(finding.obligation);
+   if (unbound) finding.owner_unbound_reader_observation = unbound;
+-  if (!unbound && observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
++  if (!historicalValidation && !unbound && observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
+   finding.observation_basis = unbound ? 'unbound' : observed?.snapshot ?? 'unbound';
+   finding.observed_sha256 = observed && !unbound ? hashValue(carrier) : null;
+ }
+@@ -668,8 +682,10 @@
+     || !/^[a-f0-9]{64}$/.test(finding.observed_source.item_sha256 ?? ''))) {
+     reportError(`${finding.obligation} has malformed observed_source`);
+   }
+-  const expected = { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id };
+-  bindInRunFinding(expected, batch, dependencies, reportError);
++  const witness = assignedConsumerWitness(ROOT, run, batch, finding, dependencies);
++  const expected = witness ? structuredClone(finding)
++    : { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id };
++  bindInRunFinding(expected, batch, dependencies, reportError, !!witness);
+   if (finding.producer_batch !== expected.producer_batch
+     || hashValue(finding.producer_pre_snapshot) !== hashValue(expected.producer_pre_snapshot)) {
+     reportError(`${finding.obligation} producer identity/immutable pre-reader snapshot changed`);
+@@ -677,7 +693,7 @@
+   // Path bytes at split remain historical evidence; require its exact IDs and
+   // valid hashes, while independently rechecking current reachability.
+   const path = finding.dependency_path;
+-  if (!Array.isArray(path) || path.length < 2 || path[0]?.id !== finding.consumer_id
++  if (!Array.isArray(path) || path.length < 2 || path[0]?.id !== (witness?.e.actual_consumer_id ?? finding.consumer_id)
+     || path.at(-1)?.id !== finding.id || !unique(path.map(row => row.id))
+     || path.some(row => !/^[a-z][a-z0-9-]*$/.test(row.id ?? '') || !/^[a-f0-9]{64}$/.test(row.item_sha256 ?? ''))) {
+     reportError(`${finding.obligation} has invalid frozen dependency path`);
+@@ -701,6 +717,9 @@
+     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
+     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
+     owner_required_page_route: _requiredPageRoute,
++    owner_assigned_consumer_witness: _assignedWitness,
++    owner_actual_consumer_id: _actualConsumer,
++    owner_assigned_reader_obligation: _assignedReader,
+     owner_foreign_reader_route: _foreignReaderRoute,
+     owner_foreign_reader_obligation: _foreignReaderObligation,
+     owner_downstream_consumer_route: _downstreamRoute,
+@@ -1072,6 +1091,7 @@
+       if (source) {
+         const carrier = producerCarrier(source.id, source.producer_batch);
+         finding.subject_type = 'in-run-dependency';
++        if (source.owner_assigned_consumer_witness) finding.owner_assigned_reader_obligation = source.obligation;
+         if (source.owner_foreign_reader_route) finding.owner_foreign_reader_obligation = source.obligation;
+         finding.consumer_id = source.consumer_id;
+         finding.observed_source = { snapshot: 'current', item_sha256: carrier?.item_sha256 };

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { assignedConsumerWitness } from './step3-owner-assigned-consumer-witness.mjs';
+import { nativeRiskTitleCarrier } from './step3-owner-native-risk-title-home.mjs';
 // Compute and close Step 3 routing from disk.
 // Version 2 is the active route: the reader/refuter pass, its exact coverage
 // and the obligations batch Alpha adjudicates. Version 3 is read-only support
@@ -12,7 +14,7 @@
 // read-modify-write one shared JSON file and erase a sibling's route.
 
 import { loadForeignReaderRoutes, foreignReaderRoute, bindForeignReaderFinding, validateForeignReaderFinding } from './step3-owner-foreign-reader-routes.mjs';
-import { loadUnmanifestedDraftContexts, bindUnmanifestedDraftContext, unmanifestedDraftCarrier, unmanifestedDraftVerdictAllowed, unmanifestedRefuterContexts, bindUnmanifestedRefuterContext, validateUnmanifestedRefuterOpened } from './step3-owner-unmanifested-draft-context.mjs';
+import { loadUnmanifestedDraftContexts, bindUnmanifestedDraftContext, unmanifestedDraftCarrier, unmanifestedDraftVerdictAllowed, validateUnmanifestedRepairDecision, unmanifestedRefuterContexts, bindUnmanifestedRefuterContext, validateUnmanifestedRefuterOpened } from './step3-owner-unmanifested-draft-context.mjs';
 import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
 import { createHash } from 'node:crypto';
@@ -274,6 +276,7 @@ function downstreamCarrier(batch, finding) {
 
 function currentDecisionCarrier(decision, target, live) {
   if (target?.owner_unmanifested_draft_context) return unmanifestedDraftCarrier(ROOT, run, String(target.obligation).split(':')[1], target);
+  if (target?.owner_native_risk_title) return nativeRiskTitleCarrier(ROOT, run, target);
   if (target?.owner_foreign_refuter_route) return foreignRefuterCarrier(ROOT, run, target);
   if (target?.owner_downstream_consumer_route) return downstreamCarrier(
     String(target.obligation).split(':')[1], target);
@@ -285,6 +288,13 @@ function currentDecisionCarrier(decision, target, live) {
     const carrier = producerCarrier(target.id, route.e.producer_batch);
     validateForeignReaderFinding(ROOT, run, origin, target, carrier);
     return { ...carrier, owner_foreign_reader_route: route.binding };
+  }
+  if (target?.owner_assigned_consumer_witness) {
+    const origin = String(target.obligation).split(':')[1];
+    const route = assignedConsumerWitness(ROOT, run, origin, target,
+      inRunDependencies(origin, manifestItems()[origin] ?? []));
+    return { ...producerCarrier(target.id, route.e.producer_batch),
+      owner_assigned_consumer_witness: route.binding };
   }
   if (target?.subject_type === 'in-run-dependency') {
     return producerCarrier(target.id, target.producer_batch);
@@ -619,10 +629,16 @@ function producerCarrier(id, producer) {
   return carrier?.item_sha256 ? { producer_batch: String(producer), ...carrier } : undefined;
 }
 
-function bindInRunFinding(finding, batch, dependencies, reportError) {
+function bindInRunFinding(finding, batch, dependencies, reportError, historicalValidation = false) {
   const foreign = foreignReaderRoute(ROOT, run, batch, finding);
   if (foreign && bindForeignReaderFinding(ROOT, run, batch, finding, producerCarrier(finding.id, foreign.e.producer_batch))) return;
-  const route = dependencies.get(finding.id), path = route?.consumers.get(finding.consumer_id);
+  const witness = assignedConsumerWitness(ROOT, run, batch, finding, dependencies);
+  const effectiveConsumer = witness?.e.actual_consumer_id ?? finding.consumer_id;
+  const route = dependencies.get(finding.id), path = route?.consumers.get(effectiveConsumer);
+  if (witness) {
+    finding.owner_assigned_consumer_witness = witness.binding;
+    finding.owner_actual_consumer_id = effectiveConsumer;
+  }
   if (!route || !path) { reportError(`${finding.obligation} must name an assigned consumer reaching another exact current-run draft producer`); return; }
   const historicalBindings = route.historical?.get(finding.consumer_id);
   const frozen = historicalBindings?.get(finding.obligation);
@@ -654,7 +670,7 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
   const carrier = observed?.snapshot === 'pre' ? finding.producer_pre_snapshot.carrier : current;
   const unbound = unboundReaderObservations(ROOT, run, batch).get(finding.obligation);
   if (unbound) finding.owner_unbound_reader_observation = unbound;
-  if (!unbound && observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
+  if (!historicalValidation && !unbound && observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
   finding.observation_basis = unbound ? 'unbound' : observed?.snapshot ?? 'unbound';
   finding.observed_sha256 = observed && !unbound ? hashValue(carrier) : null;
 }
@@ -668,8 +684,10 @@ function validateInRunFinding(finding, batch, dependencies, reportError) {
     || !/^[a-f0-9]{64}$/.test(finding.observed_source.item_sha256 ?? ''))) {
     reportError(`${finding.obligation} has malformed observed_source`);
   }
-  const expected = { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id };
-  bindInRunFinding(expected, batch, dependencies, reportError);
+  const witness = assignedConsumerWitness(ROOT, run, batch, finding, dependencies);
+  const expected = witness ? structuredClone(finding)
+    : { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id };
+  bindInRunFinding(expected, batch, dependencies, reportError, !!witness);
   if (finding.producer_batch !== expected.producer_batch
     || hashValue(finding.producer_pre_snapshot) !== hashValue(expected.producer_pre_snapshot)) {
     reportError(`${finding.obligation} producer identity/immutable pre-reader snapshot changed`);
@@ -677,7 +695,7 @@ function validateInRunFinding(finding, batch, dependencies, reportError) {
   // Path bytes at split remain historical evidence; require its exact IDs and
   // valid hashes, while independently rechecking current reachability.
   const path = finding.dependency_path;
-  if (!Array.isArray(path) || path.length < 2 || path[0]?.id !== finding.consumer_id
+  if (!Array.isArray(path) || path.length < 2 || path[0]?.id !== (witness?.e.actual_consumer_id ?? finding.consumer_id)
     || path.at(-1)?.id !== finding.id || !unique(path.map(row => row.id))
     || path.some(row => !/^[a-z][a-z0-9-]*$/.test(row.id ?? '') || !/^[a-f0-9]{64}$/.test(row.item_sha256 ?? ''))) {
     reportError(`${finding.obligation} has invalid frozen dependency path`);
@@ -701,6 +719,9 @@ function reportOnlyFinding(finding, refuter = false) {
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
     owner_required_page_route: _requiredPageRoute,
+    owner_assigned_consumer_witness: _assignedWitness,
+    owner_actual_consumer_id: _actualConsumer,
+    owner_assigned_reader_obligation: _assignedReader,
     owner_foreign_reader_route: _foreignReaderRoute,
     owner_foreign_reader_obligation: _foreignReaderObligation,
     owner_downstream_consumer_route: _downstreamRoute,
@@ -709,7 +730,7 @@ function reportOnlyFinding(finding, refuter = false) {
     owner_unbound_reader_observation: _ownerUnboundReaderObservation,
     owner_unmanifested_draft_context: _unmanifested,
     owner_unmanifested_refuter_context: _unmanifestedRefuter,
-    owner_context_consumer_id: _ownerConsumer, owner_current_context_basis: _ownerCurrentBasis, ...row } = finding;
+    owner_context_consumer_id: _ownerConsumer, owner_current_context_basis: _ownerCurrentBasis, owner_repaired_context_basis: _ownerRepairedBasis, ...row } = finding;
   if (_unmanifestedRefuter && refuter) {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   } else if (_ownerCurrentBasis) row.subject_type = 'in-flight-item';
@@ -1072,6 +1093,7 @@ if (command === 'collect') {
       if (source) {
         const carrier = producerCarrier(source.id, source.producer_batch);
         finding.subject_type = 'in-run-dependency';
+        if (source.owner_assigned_consumer_witness) finding.owner_assigned_reader_obligation = source.obligation;
         if (source.owner_foreign_reader_route) finding.owner_foreign_reader_obligation = source.obligation;
         finding.consumer_id = source.consumer_id;
         finding.observed_source = { snapshot: 'current', item_sha256: carrier?.item_sha256 };
@@ -1563,14 +1585,18 @@ if (command === 'check') {
             error('foreign-refuter-stale', `${decision.obligation} must bind current carrier and original native flag`);
         }
         let unchangedRequiredPageContext = false;
+        let repairedUnmanifestedContext = false;
         if (target?.owner_unmanifested_draft_context) {
           try {
             const carrier = currentDecisionCarrier(decision, target, null);
-            unchangedRequiredPageContext = true;
-            if (!unmanifestedDraftVerdictAllowed(decision.verdict)) {
-              error('unchanged-draft-context-verdict', `${decision.obligation} is read-only context; only false_positive, confirmed_nonfatal or escalation is permitted`);
+            unchangedRequiredPageContext = carrier.unchanged_context===true;
+            repairedUnmanifestedContext = carrier.owner_repaired_context===true;
+            if (!unmanifestedDraftVerdictAllowed(decision.verdict,carrier)) {
+              error('unchanged-draft-context-verdict', `${decision.obligation} has a verdict forbidden by its authenticated unchanged/repaired context mode`);
               continue;
             }
+            if(repairedUnmanifestedContext && decision.verdict==='confirmed_fatal')
+              validateUnmanifestedRepairDecision(ROOT,run,carrier,decision);
             if (target.owner_current_context_basis && (decision.historical_delta_unknown !== true
               || decision.owner_context_consumer_id !== target.owner_context_consumer_id
               || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40))
@@ -1894,6 +1920,9 @@ if (command === 'check') {
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
           decisionRows.push(row);
+          if(repairedUnmanifestedContext && (decision.verdict!=='confirmed_fatal'||row.severity!=='fatal'||row.disposition!=='fixed'
+            ||!row.adjudication_ref?.some(ref=>ref.path===`research/${run}-alpha-${group.label}-3a-decisions.json`&&ref.obligation===decision.obligation)))
+            error('repaired-unmanifested-ledger', `${defectId} must retain the original fatal defect and exact fixed disposition`);
           if (unchangedRequiredPageContext && decision.verdict === 'confirmed_nonfatal'
             && row.disposition !== 'nonfatal-recorded')
             error('unchanged-required-page-ledger', `${defectId} must record nonfatal maintenance without claiming a repair`);

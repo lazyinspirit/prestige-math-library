@@ -1,3 +1,4 @@
+import { nativeRiskTitleHomeContinuations, nativeRiskTitleHomeClosureEvidence, nativeRiskTitleHomeCurrentOutputs } from './step3-owner-native-risk-title-home.mjs';
 import { ownerEscalationHomeContinuations, ownerEscalationHomeClosureEvidence, ownerEscalationHomeCurrentOutputs } from './step3-owner-escalation-home-alpha-continuations.mjs';
 // One owner-registered fresh native home adjudication; never inherited acceptance.
 import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
@@ -89,7 +90,7 @@ function foreignHomeAlphaContinuations(root,run,{beforeDispatch=false,units=null
  });
 }
 export function homeAlphaContinuations(root,run,options={}){
- const rows=[...foreignHomeAlphaContinuations(root,run,options),...ownerEscalationHomeContinuations(root,run,options)];
+ const rows=[...foreignHomeAlphaContinuations(root,run,options),...ownerEscalationHomeContinuations(root,run,options),...nativeRiskTitleHomeContinuations(root,run,options)];
  need(new Set(rows.map(x=>x.entry.unit)).size===rows.length,'conflicting continuation authorities');return rows;
 }
 export function homeAlphaReviewIdentity(root,run,unit){
@@ -100,7 +101,7 @@ export function homeAlphaReviewIdentity(root,run,unit){
 }
 export function registeredHomeAlphaResult(root,run,row){
  if(!root||!run||row?.run!==run||row.role!=='alpha')return false;
- const m=/^3a-batch-([1-9]\d*)-(?:foreign-refuter|owner-escalation)-continuation-1$/.exec(row.label??'');if(!m)return false;
+ const m=/^3a-batch-([1-9]\d*)-(?:foreign-refuter|owner-escalation|native-risk-title)-continuation-1$/.exec(row.label??'');if(!m)return false;
  const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===m[1]);
  if(!(route&&row.attempt===1&&row.label===route.entry.label&&row.covers?.length===1&&String(row.covers[0])===m[1]))return false;
  try {freshHomeAlphaEvidence(root,run,route.entry);return foreignRefuterHash(row)===foreignRefuterHash(parse(bytes(root,`research/${run}-dispatch/alpha-${route.entry.label}.result.json`)));}
@@ -132,12 +133,13 @@ function freshHomeAlphaEvidence(root,run,e){
  const deliveredRegisteredTask=text.includes(ref(root,run,e.task).toString())
   &&text.includes(decisionsPath);
  need(text.split('# This dispatch\n').length===2&&(text.startsWith(header)||text.includes('\n'+header))
-  &&((e.label.endsWith('-owner-escalation-continuation-1')?deliveredRegisteredTask:(ordinary||deliveredRegisteredTask))),'fresh native prompt lacks authentic canonical assignment');
- const outputs=e.label.endsWith('-owner-escalation-continuation-1')?ownerEscalationHomeCurrentOutputs(root,run,e):{};
+  &&(((e.label.endsWith('-owner-escalation-continuation-1')||e.label.endsWith('-native-risk-title-continuation-1'))?deliveredRegisteredTask:(ordinary||deliveredRegisteredTask))),'fresh native prompt lacks authentic canonical assignment');
+ const outputs=e.label.endsWith('-owner-escalation-continuation-1')?ownerEscalationHomeCurrentOutputs(root,run,e):e.label.endsWith('-native-risk-title-continuation-1')?nativeRiskTitleHomeCurrentOutputs(root,run,e):{};
  return {...outputs,[prefix+'.result.json']:sha(stable),[prefix+'.attempt-1.result.json']:sha(attempt),[prefix+'.attempt-1.prompt.md']:sha(prompt)};
 }
 export function homeAlphaClosureEvidence(root,run){
- const extra=ownerEscalationHomeClosureEvidence(root,run);
+ const extra={...ownerEscalationHomeClosureEvidence(root,run),...nativeRiskTitleHomeClosureEvidence(root,run)};
+ for(const {entry:e} of nativeRiskTitleHomeContinuations(root,run))Object.assign(extra,freshHomeAlphaEvidence(root,run,e));
  for(const {entry:e} of ownerEscalationHomeContinuations(root,run))Object.assign(extra,freshHomeAlphaEvidence(root,run,e));
  const path=fileFor(run);if(!existsSync(resolve(root,path)))return extra;
  const doc=parse(bytes(root,path)),out={...extra,[path]:sha(bytes(root,path))};

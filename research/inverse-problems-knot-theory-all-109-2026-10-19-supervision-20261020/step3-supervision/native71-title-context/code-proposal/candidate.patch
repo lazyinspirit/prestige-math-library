@@ -1,0 +1,312 @@
+--- a/tools/autopilot/stages/home-alpha-continuations.mts
++++ b/tools/autopilot/stages/home-alpha-continuations.mts
+@@ -1,7 +1,9 @@
+ import { readFileSync, writeFileSync, lstatSync } from 'node:fs';
+ import { resolve, relative, isAbsolute } from 'node:path';
+ import { createHash } from 'node:crypto';
+-import { homeAlphaContinuations } from '../../step3-owner-home-alpha-continuations.mjs';
++const homePolicyURL = new URL('../../step3-owner-home-alpha-continuations.mjs', import.meta.url);
++homePolicyURL.search = new URL(import.meta.url).search;
++const { homeAlphaContinuations } = await import(homePolicyURL.href);
+ export function withHomeAlphaContinuation(original: any): any {
+  if(original.id!=='3a-adjudicate')return original;
+  const entries=(ctx:any,beforeDispatch=false,selected:string[]|null=null)=>homeAlphaContinuations(ctx.repo,ctx.run,{beforeDispatch,units:original.units(ctx).map(String),selected});
+--- a/tools/autopilot/test/home-alpha-continuations.test.mts
++++ b/tools/autopilot/test/home-alpha-continuations.test.mts
+@@ -10,8 +10,8 @@
+ const runtime=mkdtempSync(resolve(tmpdir(),'home-alpha-code-'));
+ for(const p of execFileSync('git',['ls-files','tools'],{cwd:repo,encoding:'utf8'}).trim().split('\n').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(resolve(runtime,p)),{recursive:true});cpSync(resolve(repo,p),resolve(runtime,p));}
+ // Overlay only these code candidates, never an untracked tool tree or state.
+-for(const p of ['step3-owner-escalation-home-alpha-continuations.mjs','step3-owner-home-alpha-continuations.mjs','step3-scope.mjs','step3-adjudication-order.mjs','step3-close.mjs','auditor-created-items.mjs','step3-owner-source-identical-continuity.mjs','step3-owner-stabilized-source-identical-continuity.mjs','step3-owner-unchanged-page-repairs.mjs','step3-manifest-history.mjs','autopilot-report-reopen.mjs','autopilot/stages/home-alpha-continuations.mts','autopilot/stages/mathlib.step3.mts']) {
+- const adjacent=resolve(candidateTools,p),input=existsSync(adjacent)?adjacent:resolve(repo,'tools',p);assert.ok(existsSync(input),`missing candidate ${p}`);const output=resolve(runtime,'tools',p);mkdirSync(dirname(output),{recursive:true});cpSync(input,output);
++for(const p of ['autopilot/src/dependency-order.mjs','step3-owner-native-risk-title-home.mjs','step3-owner-escalation-home-alpha-continuations.mjs','step3-owner-home-alpha-continuations.mjs','step3-scope.mjs','step3-adjudication-order.mjs','step3-close.mjs','auditor-created-items.mjs','step3-owner-source-identical-continuity.mjs','step3-owner-stabilized-source-identical-continuity.mjs','step3-owner-unchanged-page-repairs.mjs','step3-manifest-history.mjs','autopilot-report-reopen.mjs','autopilot/stages/home-alpha-continuations.mts','autopilot/stages/mathlib.step3.mts']) {
++ const adjacent=resolve(candidateTools,p),input=existsSync(adjacent)?adjacent:resolve(repo,'tools',p);if(p==='autopilot/src/dependency-order.mjs'&&!existsSync(input))continue;assert.ok(existsSync(input),`missing candidate ${p}`);const output=resolve(runtime,'tools',p);mkdirSync(dirname(output),{recursive:true});cpSync(input,output);
+ }
+ const api=await import(pathToFileURL(resolve(runtime,'tools/step3-owner-home-alpha-continuations.mjs')).href);
+ const foreign=await import(pathToFileURL(resolve(runtime,'tools/step3-owner-foreign-refuter-routes.mjs')).href);
+--- a/tools/autopilot/test/owner-escalation-home-alpha-continuations.test.mts
++++ b/tools/autopilot/test/owner-escalation-home-alpha-continuations.test.mts
+@@ -1,7 +1,7 @@
+ import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {fileURLToPath,pathToFileURL}from'node:url';import{createHash}from'node:crypto';import{execFileSync}from'node:child_process';
+ const repo=process.cwd(),candidateTools=fileURLToPath(new URL('../../',import.meta.url)),runtime=fs.mkdtempSync(path.join(os.tmpdir(),'owner-home-code-'));
+ for(const p of execFileSync('git',['ls-files','tools'],{cwd:repo,encoding:'utf8'}).trim().split('\n').filter(p=>/\.(mjs|mts|json)$/.test(p))){fs.mkdirSync(path.dirname(path.join(runtime,p)),{recursive:true});fs.copyFileSync(path.join(repo,p),path.join(runtime,p));}
+-for(const n of ['step3-owner-home-alpha-continuations.mjs','step3-owner-escalation-home-alpha-continuations.mjs'])fs.copyFileSync(path.join(candidateTools,n),path.join(runtime,'tools',n));
++for(const n of ['autopilot/src/dependency-order.mjs','autopilot/stages/home-alpha-continuations.mts','step3-scope.mjs','step3-owner-native-risk-title-home.mjs','step3-owner-home-alpha-continuations.mjs','step3-owner-escalation-home-alpha-continuations.mjs']){const adjacent=path.join(candidateTools,n),input=fs.existsSync(adjacent)?adjacent:path.join(repo,'tools',n);if(n==='autopilot/src/dependency-order.mjs'&&!fs.existsSync(input))continue;fs.mkdirSync(path.dirname(path.join(runtime,'tools',n)),{recursive:true});fs.copyFileSync(input,path.join(runtime,'tools',n));}
+ const api=await import(pathToFileURL(path.join(runtime,'tools/step3-owner-home-alpha-continuations.mjs')).href),owner=await import(pathToFileURL(path.join(runtime,'tools/step3-owner-escalation-home-alpha-continuations.mjs')).href),audit=await import(pathToFileURL(path.join(runtime,'tools/auditor-created-items.mjs')).href),hashes=await import(pathToFileURL(path.join(runtime,'tools/item-hash.mjs')).href),{withHomeAlphaContinuation}=await import(pathToFileURL(path.join(runtime,'tools/autopilot/stages/home-alpha-continuations.mts')).href);
+ test.after(()=>fs.rmSync(runtime,{recursive:true,force:true}));const sha=x=>createHash('sha256').update(x).digest('hex'),canon=x=>Array.isArray(x)?x.map(canon):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canon(x[k])])):x,H=x=>sha(JSON.stringify(canon(x))??'undefined');
+ function fixture(t){const root=fs.mkdtempSync(path.join(os.tmpdir(),'owner-home-case-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));const run='r',P='research/r-',put=(p,x)=>{fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.writeFileSync(path.join(root,p),typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');return link(p)},link=p=>({path:p,sha256:sha(fs.readFileSync(path.join(root,p)))}),read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+--- a/tools/step3-owner-home-alpha-continuations.mjs
++++ b/tools/step3-owner-home-alpha-continuations.mjs
+@@ -1,3 +1,4 @@
++import { nativeRiskTitleHomeContinuations, nativeRiskTitleHomeClosureEvidence, nativeRiskTitleHomeCurrentOutputs } from './step3-owner-native-risk-title-home.mjs';
+ import { ownerEscalationHomeContinuations, ownerEscalationHomeClosureEvidence, ownerEscalationHomeCurrentOutputs } from './step3-owner-escalation-home-alpha-continuations.mjs';
+ // One owner-registered fresh native home adjudication; never inherited acceptance.
+ import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
+@@ -89,7 +90,7 @@
+  });
+ }
+ export function homeAlphaContinuations(root,run,options={}){
+- const rows=[...foreignHomeAlphaContinuations(root,run,options),...ownerEscalationHomeContinuations(root,run,options)];
++ const rows=[...foreignHomeAlphaContinuations(root,run,options),...ownerEscalationHomeContinuations(root,run,options),...nativeRiskTitleHomeContinuations(root,run,options)];
+  need(new Set(rows.map(x=>x.entry.unit)).size===rows.length,'conflicting continuation authorities');return rows;
+ }
+ export function homeAlphaReviewIdentity(root,run,unit){
+@@ -100,7 +101,7 @@
+ }
+ export function registeredHomeAlphaResult(root,run,row){
+  if(!root||!run||row?.run!==run||row.role!=='alpha')return false;
+- const m=/^3a-batch-([1-9]\d*)-(?:foreign-refuter|owner-escalation)-continuation-1$/.exec(row.label??'');if(!m)return false;
++ const m=/^3a-batch-([1-9]\d*)-(?:foreign-refuter|owner-escalation|native-risk-title)-continuation-1$/.exec(row.label??'');if(!m)return false;
+  const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===m[1]);
+  if(!(route&&row.attempt===1&&row.label===route.entry.label&&row.covers?.length===1&&String(row.covers[0])===m[1]))return false;
+  try {freshHomeAlphaEvidence(root,run,route.entry);return foreignRefuterHash(row)===foreignRefuterHash(parse(bytes(root,`research/${run}-dispatch/alpha-${route.entry.label}.result.json`)));}
+@@ -132,12 +133,13 @@
+  const deliveredRegisteredTask=text.includes(ref(root,run,e.task).toString())
+   &&text.includes(decisionsPath);
+  need(text.split('# This dispatch\n').length===2&&(text.startsWith(header)||text.includes('\n'+header))
+-  &&((e.label.endsWith('-owner-escalation-continuation-1')?deliveredRegisteredTask:(ordinary||deliveredRegisteredTask))),'fresh native prompt lacks authentic canonical assignment');
+- const outputs=e.label.endsWith('-owner-escalation-continuation-1')?ownerEscalationHomeCurrentOutputs(root,run,e):{};
++  &&(((e.label.endsWith('-owner-escalation-continuation-1')||e.label.endsWith('-native-risk-title-continuation-1'))?deliveredRegisteredTask:(ordinary||deliveredRegisteredTask))),'fresh native prompt lacks authentic canonical assignment');
++ const outputs=e.label.endsWith('-owner-escalation-continuation-1')?ownerEscalationHomeCurrentOutputs(root,run,e):e.label.endsWith('-native-risk-title-continuation-1')?nativeRiskTitleHomeCurrentOutputs(root,run,e):{};
+  return {...outputs,[prefix+'.result.json']:sha(stable),[prefix+'.attempt-1.result.json']:sha(attempt),[prefix+'.attempt-1.prompt.md']:sha(prompt)};
+ }
+ export function homeAlphaClosureEvidence(root,run){
+- const extra=ownerEscalationHomeClosureEvidence(root,run);
++ const extra={...ownerEscalationHomeClosureEvidence(root,run),...nativeRiskTitleHomeClosureEvidence(root,run)};
++ for(const {entry:e} of nativeRiskTitleHomeContinuations(root,run))Object.assign(extra,freshHomeAlphaEvidence(root,run,e));
+  for(const {entry:e} of ownerEscalationHomeContinuations(root,run))Object.assign(extra,freshHomeAlphaEvidence(root,run,e));
+  const path=fileFor(run);if(!existsSync(resolve(root,path)))return extra;
+  const doc=parse(bytes(root,path)),out={...extra,[path]:sha(bytes(root,path))};
+--- a/tools/step3-owner-native-risk-title-home.md
++++ b/tools/step3-owner-native-risk-title-home.md
+@@ -0,0 +1,23 @@
++# Native risk-title-only home Alpha continuation
++
++This separate opt-in policy admits only the actual unit71 title alert for `lem-incompressible-surface-torus-boundary-essential-or-parallel-annulus`. It creates one ordinary owner gate obligation, never a fabricated reader/refuter finding or inherited verdict. The old16 plus new gate are all independently owed, with full current risk review. Foreign-refuter and unit67 escalation rules are unchanged.
++
++The registry is `research/RUN-step3-native-risk-title-home-alpha-continuations.json`, version1, policy `owner-step3-native-risk-title-home-alpha-continuation-v1`, authorized_by `owner`, explicit authorization, exactly one continuation. The isolated test fixture provides a complete schema example; it is synthetic test evidence, never a registry to install. No helper writes a registry, source, state, native report or decision.
++
++Each entry binds unit71, root ownership, fixed native-risk-title continuation label, canonical batch71, no mathematical acceptance or inherited acceptance, actual writer-drain time, immutable native result/attempt/prompt, archived original report/16decisions/scope/risk contract, exact source and manifest before/after archives, genuine root two-file application and bounded title-only review, honest root artifact capture, the actual native alert quotation, unique defect_id, task ref and all current home input raw hashes. References are run-local research paths with SHA256; symlinks, escaping/nonregular paths and changed evidence reject. Original native completion authenticates output paths, not structured report bytes; the required capture explicitly says the latter are not native-byte-attested.
++
++Root must capture actual preimages before editing. The only admitted source delta is the unique top-level single-line frontmatter title replaced with `title: "Boundary-compressible incompressible surfaces at torus boundary are parallel annuli"`. All other bytes, including Statement/Definition/proof/deps/metadata, stay identical. The parsed manifest changes only the unique target title mirror; order, pages, metadata and every other field remain identical. The target retains exactly one actual home. The original target was high-risk/untouched, never an old owed decision. The pre3a snapshot must remain absent; do not create one to manufacture extra obligations.
++
++Before selected dispatch, old canonical outputs still equal archived preimages and every actual current input matches its seal. Any completed new-label attempt, including failure, spends the one-shot route. The real wrapper checks before the ordinary planner can write a task, preserves other units, substitutes only this result label and assembles the registered task with the ordinary task. Doctor planning writes no assembled task. The delivered native task must explicitly contain all16 old obligations, the new gate, canonical outputs/identity, no inherited acceptance and full current risk review.
++
++Fresh native outputs require all17 exact ordinary routes and IDs. The new gate carries exactly its real defect_id and an ordinary independent verdict, never context_accepted. Escalations and uncertain repairs remain blocking. A fresh complete target risk review needs meaningful new notes and no unresolved alert. Ordinary native ledger, carrier checks, stamp, post3a and closure remain mandatory; this policy supplies neither mathematical acceptance nor gate passage.
++
++Active Step3 validates the approved live source/manifest carrier and fresh risk closure. Historical verification permits later legitimate owner repairs only when the v3 closed receipt freezes this exact registry, all historical refs (including source/manifest after archives), fresh native stable/attempt/prompt, and canonical fresh report/decisions at their raw hashes. A bare closed marker or mismatched artifact is rejected. Ordinary step3-close verifies the entire frozen receipt, ledger and artifact set; this bounded historical test does not replace it.
++
++## Installation and reload (root only)
++
++After independent acceptance and unit71 writer drain, root verifies the integration preimages and installs the reviewed patch, performs the actual two-file title edit/capture/review, registers truthful evidence/task/current inputs and runs the required installed suites. Do not fabricate pending application fields or timestamps.
++
++The wrapper propagates its import query to the home helper. The parent mathlib module caches Step3 by Step3 file mtime/size, so wrapper editing alone does not ensure a fresh closure. After installation root deliberately refreshes `tools/autopilot/stages/mathlib.step3.mts` mtime with `touch` (no content/state change), then uses the existing native guarded reload. Verify the actual `stages-reloaded` event/new stage epoch and unchanged durable completed prefix/units before continuing. This is not a global restart requirement or permission to mutate engine state. Relevant unit71 writers must be drained; root owns native controls.
++
++Tests exercise real TS wrapper doctor/plan/pattern/task assembly, native authorResultAllowed, before-writer rejection, old/new obligations, exact title/manifest limits, one-shot failure, fresh outputs/risk, frozen historical evidence and unchanged no-opt-in policies. Existing home and unit67 regression suites use explicit import-closure overlays, including the new module and the root's already-active dependency-order helper; that helper itself is unchanged here.
+--- a/tools/step3-owner-native-risk-title-home.mjs
++++ b/tools/step3-owner-native-risk-title-home.mjs
+@@ -0,0 +1,97 @@
++// Separate unit71 native risk-title route; no existing continuation policy relaxed.
++import { existsSync,readFileSync,readdirSync,lstatSync } from 'node:fs';
++import { resolve,relative,isAbsolute } from 'node:path';
++import { createHash } from 'node:crypto';
++import { split,yaml } from './pathway-lib.mjs';
++import { foreignRefuterHash as hash } from './step3-owner-foreign-refuter-routes.mjs';
++export const NATIVE_RISK_TITLE_POLICY='owner-step3-native-risk-title-home-alpha-continuation-v1';
++export const RISK_TITLE_ID='lem-incompressible-surface-torus-boundary-essential-or-parallel-annulus';
++const OLD_TITLE='Incompressible surfaces at torus boundary are essential or parallel annuli';
++const NEW_TITLE='Boundary-compressible incompressible surfaces at torus boundary are parallel annuli';
++const label='3a-batch-71-native-risk-title-continuation-1';
++const sha=x=>createHash('sha256').update(x).digest('hex');
++const need=(x,m)=>{if(!x)throw Error(`native risk title home: ${m}`);};
++const registry=run=>`research/${run}-step3-native-risk-title-home-alpha-continuations.json`;
++function bytes(root,p){need(typeof p==='string'&&!isAbsolute(p)&&!p.includes('\\')&&!p.split('/').some(x=>!x||x==='.'||x==='..'),'unsafe path');const full=resolve(root,p),r=relative(resolve(root),full);need(r&&!r.startsWith('..')&&!isAbsolute(r),'escaping path');let at=resolve(root);for(const part of r.split('/')){at=resolve(at,part);need(!lstatSync(at).isSymbolicLink(),'symlink');}need(lstatSync(full).isFile(),'nonregular file');return readFileSync(full);}
++const parse=b=>JSON.parse(b.toString());
++function ref(root,run,r){need(r&&r.path?.startsWith(`research/${run}-`)&&/^[a-f0-9]{64}$/.test(r.sha256??''),'invalid reference');const b=bytes(root,r.path);need(sha(b)===r.sha256,`changed evidence ${r.path}`);return b;}
++const pages=d=>Array.isArray(d)?d:d.pages??[];
++const ids=d=>pages(d).flatMap(p=>(p.items??[]).map(x=>typeof x==='string'?x:x.id));
++const exact=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&new Set(a).size===a.length&&a.every(x=>b.includes(x));
++const fm=b=>yaml().parse(split(b.toString()).fm);
++const subjectRows=m=>pages(m).flatMap(p=>(p.items??[]).filter(x=>typeof x==='object'&&x.id===RISK_TITLE_ID).map(item=>({page:p.id,item})));
++function titleOnly(before,after){
++ need(fm(before).id===RISK_TITLE_ID&&fm(after).id===RISK_TITLE_ID&&fm(before).status==='draft'&&fm(after).status==='draft'&&fm(before).title===OLD_TITLE&&fm(after).title===NEW_TITLE,'wrong draft/title transition');
++ const front=before.toString().match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);need(front,'missing frontmatter');const lines=[...front[1].matchAll(/^title:[^\r\n]*$/gm)];need(lines.length===1,'title must be one actual source line');
++ const old=lines[0][0],replacement='title: '+JSON.stringify(NEW_TITLE);need(before.toString().replace(old,replacement)===after.toString(),'source delta must be exactly the one title line');
++}
++export function nativeRiskTitleHomeContinuations(root,run,{beforeDispatch=false,units=null,selected=null}={}){
++ need(/^[A-Za-z0-9_-]+$/.test(run),'invalid run');const p=registry(run);if(!existsSync(resolve(root,p)))return [];
++ const doc=parse(bytes(root,p));need(doc.version===1&&doc.run===run&&doc.policy===NATIVE_RISK_TITLE_POLICY&&doc.authorized_by==='owner'&&typeof doc.authorization==='string'&&doc.authorization.trim().length>=40&&Array.isArray(doc.continuations)&&doc.continuations.length===1,'invalid explicit authority');
++ need(!existsSync(resolve(root,`research/${run}-step3-hash-71-pre-3a.json`)),'pre-3a snapshot would create duplicate automatic obligations');
++ const e=doc.continuations[0],canonical='batch-71',prefix=`research/${run}-dispatch/alpha-3a-batch-71`;
++ need(e.version===1&&e.run===run&&e.unit==='71'&&e.owner_identity==='/root'&&e.label===label&&e.canonical_group===canonical&&e.mathematical_acceptance===false&&e.previous_acceptance_inherited===false&&e.historical_artifact_basis==='owner-captured current completed-native artifacts; no structured-output byte attestation'&&typeof e.reason==='string'&&e.reason.trim().length>=80&&Number.isFinite(Date.parse(e.writers_drained_at)),'invalid title entry');
++ if(units)need(units.map(String).includes('71'),'unit outside actual native stage');
++ const groupsDoc=parse(bytes(root,`research/${run}-alpha-groups.json`)),owners=(Array.isArray(groupsDoc)?groupsDoc:groupsDoc.groups??[]).filter(g=>g.covers?.map(String).includes('71'));need(owners.length===1,'ambiguous native Alpha assignment');
++ const nativeBytes=ref(root,run,e.previous_result),old=parse(nativeBytes),attempt=ref(root,run,e.previous_attempt);ref(root,run,e.previous_prompt);
++ need(e.previous_result.path===prefix+'.result.json'&&Number.isSafeInteger(old.attempt)&&old.attempt>0&&e.previous_attempt.path===prefix+`.attempt-${old.attempt}.result.json`&&attempt.equals(nativeBytes)&&e.previous_prompt.path===prefix+`.attempt-${old.attempt}.prompt.md`&&old.prompt?.endsWith('/'+e.previous_prompt.path)&&old.evidence_tag===`.attempt-${old.attempt}`&&old.written_by!=='autopilot'&&old.run===run&&old.role==='alpha'&&old.label==='3a-batch-71'&&old.covers?.length===1&&String(old.covers[0])==='71'&&old.ok===true&&old.exit_code===0&&old.process_exit_code===0&&old.timed_out!==true&&old.terminal_summary?.task_completed===true&&old.terminal_summary?.task_aborted===false&&old.terminal_summary?.final_response_present===true&&typeof old.session_id==='string'&&old.session_id.length>0&&Number.isFinite(Date.parse(old.started_at))&&Number.isFinite(Date.parse(old.ended_at))&&Date.parse(old.started_at)<=Date.parse(old.ended_at)&&Date.parse(old.ended_at)<=Date.parse(e.writers_drained_at),'not genuine completed standalone native Alpha71');
++ const reportPath=`research/${run}-alpha-batch-71-3a.md`,decisionsPath=`research/${run}-alpha-batch-71-3a-decisions.json`,scopePath=`research/${run}-step3-scope-71.json`;
++ need(e.previous_report.path!==reportPath&&e.previous_decisions.path!==decisionsPath&&e.previous_scope.path!==scopePath,'old outputs require immutable archives');
++ const report=ref(root,run,e.previous_report),decisionBytes=ref(root,run,e.previous_decisions),decisions=parse(decisionBytes),scopeBytes=ref(root,run,e.previous_scope),scope=parse(scopeBytes);
++ need(old.tail?.includes(reportPath)&&old.tail?.includes(decisionsPath)&&decisions.version===1&&decisions.run===run&&decisions.group===canonical&&Array.isArray(decisions.decisions)&&decisions.decisions.length===16&&scope.version===2&&scope.run===run&&String(scope.batch)==='71'&&scope.group===String(owners[0].label),'wrong old scope/16 decisions/native completion');
++ const oldTargets=[...(scope.touched??[]).map(id=>`touched:71:${id}`),...(scope.pages_touched??[]).map(id=>`page:71:${id}`),...(scope.reader_findings??[]).map(x=>x.obligation),...(scope.refuter_findings??[]).map(x=>x.obligation)];
++ need(exact(oldTargets,decisions.decisions.map(d=>d.obligation))&&!(scope.touched??[]).includes(RISK_TITLE_ID)&&!(scope.reader_findings??[]).some(f=>f.id===RISK_TITLE_ID)&&!(scope.refuter_findings??[]).some(f=>f.id===RISK_TITLE_ID)&&(scope.high_risk??[]).includes(RISK_TITLE_ID)&&(scope.untouched??[]).includes(RISK_TITLE_ID),'target must be actually risk-only, all old obligations preserved');
++ const sourceBefore=ref(root,run,e.source_before),sourceAfter=ref(root,run,e.source_after);titleOnly(sourceBefore,sourceAfter);need(fm(sourceBefore).pipeline_run===run&&fm(sourceAfter).pipeline_run===run,'wrong source run marker');
++ const before=parse(ref(root,run,e.manifest_before)),after=parse(ref(root,run,e.registration_manifest)),b=subjectRows(before),a=subjectRows(after);need(b.length===1&&a.length===1&&b[0].page===a[0].page&&b[0].item.title===OLD_TITLE&&a[0].item.title===NEW_TITLE,'wrong exact title mirror');
++ const homes=[];for(const name of readdirSync(resolve(root,'research')).filter(n=>n.startsWith(`${run}-batch-`)&&n.endsWith('.pages.json')))for(const row of subjectRows(parse(bytes(root,`research/${name}`))))homes.push({name,row});need(homes.length===1&&homes[0].name===`${run}-batch-71.pages.json`,'target must retain unique actual manifest home');
++ const expected=structuredClone(before);subjectRows(expected)[0].item.title=NEW_TITLE;need(hash(expected)===hash(after)&&exact(ids(after),scope.manifest_post??[])&&exact(pages(after).map(p=>p.id),scope.page_manifest_post??[]),'manifest delta exceeds single title mirror or changes inventory');
++ need(e.previous_risk_contract?.path!==`research/${run}-batch-71.proof-contracts.json`,'previous risk contract must be immutable archive');
++ const contracts=parse(ref(root,run,e.previous_risk_contract)),risk=contracts.contracts?.[RISK_TITLE_ID]?.risk_review;
++ need(risk?.status==='complete'&&risk.reviewer==='alpha-batch-71'&&typeof e.native_alert_quote==='string'&&e.native_alert_quote.length>=80&&report.toString().includes(e.native_alert_quote)&&e.native_alert_quote.includes(RISK_TITLE_ID)&&e.native_alert_quote.includes(NEW_TITLE)&&risk.notes?.includes('NEW DEFECT:')&&risk.unresolved_alert==='Owner supplemental title-repair routing required; written Statement/proof sound.','not actual unresolved native risk-title alert');
++ need(typeof e.defect_id==='string'&&/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(e.defect_id)&&!decisions.decisions.some(d=>d.obligation===`gate:${e.defect_id}`),'invalid/new gate identity');
++ const application=parse(ref(root,run,e.application));need(application.run===run&&application.owner_identity==='/root'&&application.native_finding_unchanged===true&&application.files?.length===2&&application.files.some(x=>x.path===`items/${RISK_TITLE_ID}.md`&&x.before_sha256===e.source_before.sha256&&x.after_sha256===e.source_after.sha256)&&application.files.some(x=>x.path===`research/${run}-batch-71.pages.json`&&x.before_sha256===e.manifest_before.sha256&&x.after_sha256===e.registration_manifest.sha256),'not actual two-file owner title application');
++ const review=parse(ref(root,run,e.owner_review));need(review.run===run&&review.unit==='71'&&review.owner_identity==='/root'&&review.title_only===true&&review.statement_definition_proof_unchanged===true&&review.native_acceptance_claimed===false&&review.source_before_sha256===e.source_before.sha256&&review.source_after_sha256===e.source_after.sha256&&typeof review.evidence==='string'&&review.evidence.trim().length>=80,'missing actual bounded owner title review');
++ const capture=parse(ref(root,run,e.owner_capture));need(capture.version===1&&capture.run===run&&capture.unit==='71'&&capture.owner_identity==='/root'&&capture.native_acceptance_claimed===false&&capture.original_artifact_bytes_native_bound===false&&capture.report_sha256===e.previous_report.sha256&&capture.decisions_sha256===e.previous_decisions.sha256&&capture.scope_sha256===e.previous_scope.sha256&&capture.old_result_sha256===e.previous_result.sha256,'missing honest native artifact capture');
++ const paths=[scopePath,`research/${run}-batch-71.pages.json`,`research/${run}-batch-71.proof-contracts.json`,...ids(after).map(id=>`items/${id}.md`),...pages(after).map(p=>`library/${p.category}/${p.id}.md`)];need(exact(e.current_inputs?.map(x=>x.path),paths)&&e.current_inputs.every(x=>/^[a-f0-9]{64}$/.test(x.sha256??'')),'incomplete exact launch inputs');
++ const map=new Map(e.current_inputs.map(x=>[x.path,x.sha256]));need(map.get(scopePath)===e.previous_scope.sha256&&map.get(`research/${run}-batch-71.pages.json`)===e.registration_manifest.sha256&&map.get(`items/${RISK_TITLE_ID}.md`)===e.source_after.sha256&&map.get(`research/${run}-batch-71.proof-contracts.json`)===e.previous_risk_contract.sha256,'inconsistent launch input mirrors');
++ const task=ref(root,run,e.task).toString();need(task.includes(reportPath)&&task.includes(decisionsPath)&&task.includes(label)&&oldTargets.every(x=>task.includes(x))&&task.includes(`gate:${e.defect_id}`)&&task.includes('full current risk review')&&task.includes('Canonical group: batch-71')&&task.includes('No inherited acceptance'),'task omits actual old16/new gate/canonical identity/full risk');
++ if(beforeDispatch&&(selected===null||selected.map(String).includes('71'))){
++  need(!existsSync(resolve(root,`research/${run}-step3-hash-71-pre-3a.json`)),'new pre-3a snapshot would create unrelated automatic obligations');
++  need(!readdirSync(resolve(root,`research/${run}-dispatch`)).some(n=>n===`alpha-${label}.result.json`||new RegExp(`^alpha-${label}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(n)),'one-shot fresh native attempt already completed');
++  need(bytes(root,reportPath).equals(report)&&bytes(root,decisionsPath).equals(decisionBytes),'old canonical report/decisions changed before dispatch');for(const x of e.current_inputs)need(sha(bytes(root,x.path))===x.sha256,`launch carrier changed ${x.path}`);
++ }
++ return [{entry:e,binding:{path:p,entry_sha256:hash(e)},old_scope:scope,old_decisions:decisions,additional_obligations:[{obligation:`gate:${e.defect_id}`,id:RISK_TITLE_ID,batch:'71',route:'gate',defect_id:e.defect_id,owner_native_risk_title:{path:p,entry_sha256:hash(e)}}]}];
++}
++export function nativeRiskTitleCarrier(root,run,target){
++ const row=nativeRiskTitleHomeContinuations(root,run).find(r=>r.entry.unit==='71');need(row&&target.id===RISK_TITLE_ID&&target.obligation===`gate:${row.entry.defect_id}`&&hash(target.owner_native_risk_title)===hash(row.binding),'wrong actual title gate');
++ const e=row.entry;need(sha(bytes(root,`items/${RISK_TITLE_ID}.md`))===e.source_after.sha256&&sha(bytes(root,`research/${run}-batch-71.pages.json`))===e.registration_manifest.sha256,'current source/manifest exceeds approved title-only successor');
++ const manifest=parse(bytes(root,`research/${run}-batch-71.pages.json`)),m=subjectRows(manifest)[0],contracts=parse(bytes(root,`research/${run}-batch-71.proof-contracts.json`));return {item_sha256:e.source_after.sha256,contract_sha256:hash(contracts.contracts?.[RISK_TITLE_ID]??null),manifest_sha256:hash({...m.item,__step4_page_id:m.page}),owner_native_risk_title:row.binding};
++}
++export function nativeRiskTitleHomeCurrentOutputs(root,run,e){
++ const row=nativeRiskTitleHomeContinuations(root,run).find(r=>r.entry.unit===e.unit);need(row,'missing current title continuation');const reportPath=`research/${run}-alpha-batch-71-3a.md`,decisionPath=`research/${run}-alpha-batch-71-3a-decisions.json`,report=bytes(root,reportPath),body=bytes(root,decisionPath),doc=parse(body),targets=[...row.old_decisions.decisions,...row.additional_obligations];
++ need(sha(report)!==e.previous_report.sha256&&doc.version===1&&doc.run===run&&doc.group==='batch-71'&&exact(doc.decisions?.map(d=>d.obligation),targets.map(t=>t.obligation))&&targets.every(t=>doc.decisions.some(d=>d.obligation===t.obligation&&d.id===t.id&&d.route===t.route))&&doc.decisions.every(d=>d.verdict!=='escalated'&&(d.repair_confidence===undefined||d.repair_confidence===1)),'fresh native outputs omit old/new obligations or retain escalation');
++ const gate=doc.decisions.find(d=>d.obligation===`gate:${e.defect_id}`);need(exact(gate?.defect_ids,[e.defect_id])&&['confirmed_fatal','confirmed_nonfatal','false_positive'].includes(gate.verdict),'new title gate must retain real defect row and ordinary independent verdict');
++ const outputs={[reportPath]:sha(report),[decisionPath]:sha(body)};
++ const closedPath=`research/${run}-step3-closure.json`,closed=existsSync(resolve(root,closedPath))?parse(bytes(root,closedPath)):null;
++ let frozen=false;
++ if(closed?.version===3&&closed.run===run&&closed.status==='closed'&&closed.basis==='dependency-ordered-step3a'){
++  const prefix=`research/${run}-dispatch/alpha-${e.label}`,stable=prefix+'.result.json',native=parse(bytes(root,stable));
++  need(Number.isSafeInteger(native.attempt)&&native.attempt>0,'invalid frozen fresh native attempt');
++  const attempt=prefix+`.attempt-${native.attempt}.result.json`,prompt=prefix+`.attempt-${native.attempt}.prompt.md`;
++  const evidence={...nativeRiskTitleHomeClosureEvidence(root,run),...outputs,...Object.fromEntries([stable,attempt,prompt].map(p=>[p,sha(bytes(root,p))]))};
++  need(closed.artifacts&&Object.entries(evidence).every(([p,h])=>closed.artifacts[p]===h),'closure does not freeze exact title registry/history/fresh native outputs');
++  frozen=true;
++ }
++ // A sealed historical receipt binds archived title bytes, not later source reads.
++ // Active Step3 always checks the actual live title carrier and fresh risk closure.
++ if(!frozen){
++  const oldRisk=parse(ref(root,run,e.previous_risk_contract)).contracts?.[RISK_TITLE_ID]?.risk_review;
++  const risk=parse(bytes(root,`research/${run}-batch-71.proof-contracts.json`)).contracts?.[RISK_TITLE_ID]?.risk_review;
++  need(risk?.status==='complete'&&typeof risk.notes==='string'&&risk.notes.trim().length>=40&&risk.notes!==oldRisk.notes&&!(typeof risk.unresolved_alert==='string'&&risk.unresolved_alert.trim()),'fresh title risk review is missing, stale or still open');
++  nativeRiskTitleCarrier(root,run,row.additional_obligations[0]);
++ }
++ return outputs;
++}
++export function nativeRiskTitleHomeClosureEvidence(root,run){
++ const rows=nativeRiskTitleHomeContinuations(root,run);if(!rows.length)return {};const p=registry(run),out={[p]:sha(bytes(root,p))};for(const {entry:e}of rows)for(const k of ['previous_result','previous_attempt','previous_prompt','previous_report','previous_decisions','previous_scope','previous_risk_contract','source_before','source_after','manifest_before','registration_manifest','application','owner_review','owner_capture','task']){ref(root,run,e[k]);out[e[k].path]=e[k].sha256;}return out;
++}
+--- a/tools/step3-owner-native-risk-title-home.test.mjs
++++ b/tools/step3-owner-native-risk-title-home.test.mjs
+@@ -0,0 +1,88 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { mkdtempSync,mkdirSync,readFileSync,writeFileSync,copyFileSync,rmSync,existsSync } from 'node:fs';
++import { tmpdir } from 'node:os';
++import { resolve,join,dirname } from 'node:path';
++import { fileURLToPath,pathToFileURL } from 'node:url';
++import { createHash } from 'node:crypto';
++import { spawnSync } from 'node:child_process';
++const repo=process.cwd(),proposal=resolve(dirname(fileURLToPath(import.meta.url)),'..'),code=mkdtempSync(join(tmpdir(),'native-title-code-'));
++const tracked=spawnSync('git',['ls-files','-z','tools'],{encoding:'utf8'});assert.equal(tracked.status,0);
++for(const p of tracked.stdout.split('\0').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(join(code,p)),{recursive:true});copyFileSync(join(repo,p),join(code,p));}
++for(const p of ['step3-owner-native-risk-title-home.mjs','step3-owner-home-alpha-continuations.mjs','step3-scope.mjs','autopilot/stages/home-alpha-continuations.mts']){mkdirSync(dirname(join(code,'tools',p)),{recursive:true});copyFileSync(join(proposal,'tools',p),join(code,'tools',p));}
++process.env.PRESTIGE_MATH_REPO=repo;
++const api=await import(pathToFileURL(join(code,'tools/step3-owner-native-risk-title-home.mjs'))),home=await import(pathToFileURL(join(code,'tools/step3-owner-home-alpha-continuations.mjs')));
++const {authorResultAllowed}=await import(pathToFileURL(join(code,'tools/auditor-created-items.mjs')));
++const {foreignRefuterHash:hash}=await import(pathToFileURL(join(code,'tools/step3-owner-foreign-refuter-routes.mjs')));
++const sha=x=>createHash('sha256').update(x).digest('hex'),ID=api.RISK_TITLE_ID;
++const oldTitle='Incompressible surfaces at torus boundary are essential or parallel annuli',newTitle='Boundary-compressible incompressible surfaces at torus boundary are parallel annuli';
++function fixture(){
++ const root=mkdtempSync(join(tmpdir(),'native-title-fixture-')),put=(p,x)=>{mkdirSync(dirname(join(root,p)),{recursive:true});writeFileSync(join(root,p),typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');},link=p=>({path:p,sha256:sha(readFileSync(join(root,p)))});
++ const before=`---\nid: ${ID}\nkind: lemma\nstatus: draft\npipeline_run: r\ntitle: "${oldTitle}"\ndeps: []\n---\n\n## Statement\nActual statement is unchanged.\n\n## Proof\nActual proof is unchanged.\n`,after=before.replace(`title: "${oldTitle}"`,`title: "${newTitle}"`);
++ put('research/r-capture/source-before.md',before);put('research/r-capture/source-after.md',after);put(`items/${ID}.md`,after);
++ const owned=Array.from({length:16},(_,i)=>`lem-owned-${i+1}`),all=[ID,...owned];for(const id of owned)put(`items/${id}.md`,`---\nid: ${id}\nkind: lemma\nstatus: draft\npipeline_run: r\ntitle: Fixture\ndeps: []\n---\n\nFixture unchanged source.\n`);
++ const manifestBefore=[{id:'owned-page',category:'test',items:all.map(id=>({id,title:id===ID?oldTitle:'Fixture',deps:[]}))}],manifestAfter=structuredClone(manifestBefore);manifestAfter[0].items[0].title=newTitle;
++ put('research/r-capture/manifest-before.json',manifestBefore);put('research/r-capture/manifest-after.json',manifestAfter);put('research/r-batch-71.pages.json',manifestAfter);put('library/test/owned-page.md','---\npage: owned-page\nstatus: draft\nitems: ['+all.join(', ')+']\nexamples: []\n---\n');put('research/r-alpha-groups.json',[{label:'g',covers:['71']}]);
++ const reader=owned.slice(4,14).map((id,i)=>({obligation:`reader:71:${i+1}`,id,location:'Statement',defect:'ill-formed',evidence:'Fixture old finding.',severity:'nonfatal',subject_type:'in-flight-item',consumer_id:null})),refuter=owned.slice(14).map((id,i)=>({obligation:`refuter:71:${i+1}`,id,location:'Statement',defect:'ill-formed',evidence:'Fixture old flag.',severity:'nonfatal'}));
++ const scope={version:2,run:'r',batch:'71',group:'g',manifest_post:all,page_manifest_post:['owned-page'],touched:owned.slice(0,4),pages_touched:[],reader_findings:reader,refuter_findings:refuter,high_risk:[ID],untouched:all.filter(id=>!owned.slice(0,4).includes(id))};
++ const oldDecisions=[...scope.touched.map(id=>({obligation:`touched:71:${id}`,id,route:'touched',verdict:'reviewed_no_defect'})),...reader.map(r=>({...r,route:'reader',verdict:'false_positive'})),...refuter.map(r=>({...r,route:'flagged',verdict:'false_positive'}))];
++ const reportPath='research/r-alpha-batch-71-3a.md',decisionsPath='research/r-alpha-batch-71-3a-decisions.json',scopePath='research/r-step3-scope-71.json';
++ const alert=`Owner alert: ${ID} has an overstrong title. Statement and proof are sound. Surgical proposed title: ${newTitle}. Risk-only assignment has no owed decision; new title obligation remains open for owner.`;
++ const report='Original completed native Alpha71 report.\n'+alert+'\n';const decisions={version:1,run:'r',group:'batch-71',decisions:oldDecisions};
++ for(const [p,x] of [[reportPath,report],[decisionsPath,decisions],[scopePath,scope],['research/r-capture/report.md',report],['research/r-capture/decisions.json',decisions],['research/r-capture/scope.json',scope]])put(p,x);
++ const contracts={version:1,scope:all,contracts:Object.fromEntries(all.map(id=>[id,{risk_review:{status:'complete',reviewer:'alpha-batch-71',notes:id===ID?'NEW DEFECT: title claims an alternative false for a boundary-parallel disk; written Statement and proof remain sound.':'Complete old fixture current risk review.',...(id===ID?{unresolved_alert:'Owner supplemental title-repair routing required; written Statement/proof sound.'}:{})}}]))};
++ put('research/r-capture/risk-contract.json',contracts);put('research/r-batch-71.proof-contracts.json',contracts);
++ const oldPrefix='research/r-dispatch/alpha-3a-batch-71',oldPrompt=oldPrefix+'.attempt-1.prompt.md';put(oldPrompt,'Actual original standalone native Alpha71 task.');const native={run:'r',role:'alpha',label:'3a-batch-71',attempt:1,evidence_tag:'.attempt-1',covers:['71'],session_id:'actual-fixture-native-session',ok:true,exit_code:0,process_exit_code:0,timed_out:false,started_at:'2020-01-01T00:00:00Z',ended_at:'2020-01-01T01:00:00Z',prompt:join(root,oldPrompt),tail:`Wrote ${reportPath} and ${decisionsPath}; sixteen actual decisions plus unresolved risk-title alert.`,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true}};put(oldPrefix+'.result.json',native);put(oldPrefix+'.attempt-1.result.json',native);
++ const entry={version:1,run:'r',unit:'71',owner_identity:'/root',label:'3a-batch-71-native-risk-title-continuation-1',canonical_group:'batch-71',mathematical_acceptance:false,previous_acceptance_inherited:false,historical_artifact_basis:'owner-captured current completed-native artifacts; no structured-output byte attestation',reason:'Root registers the actual additional native risk-only title alert as one new mandatory ordinary gate; all sixteen original obligations and full risk work remain independently owed.',writers_drained_at:'2020-01-01T02:00:00Z',previous_result:link(oldPrefix+'.result.json'),previous_attempt:link(oldPrefix+'.attempt-1.result.json'),previous_prompt:link(oldPrompt),previous_report:link('research/r-capture/report.md'),previous_decisions:link('research/r-capture/decisions.json'),previous_scope:link('research/r-capture/scope.json'),source_before:link('research/r-capture/source-before.md'),source_after:link('research/r-capture/source-after.md'),manifest_before:link('research/r-capture/manifest-before.json'),registration_manifest:link('research/r-capture/manifest-after.json'),previous_risk_contract:link('research/r-capture/risk-contract.json'),native_alert_quote:alert,defect_id:'risk-title-71'};
++ put('research/r-capture/application.json',{run:'r',owner_identity:'/root',native_finding_unchanged:true,files:[{path:`items/${ID}.md`,before_sha256:entry.source_before.sha256,after_sha256:entry.source_after.sha256},{path:'research/r-batch-71.pages.json',before_sha256:entry.manifest_before.sha256,after_sha256:entry.registration_manifest.sha256}]});entry.application=link('research/r-capture/application.json');
++ put('research/r-capture/owner-review.json',{run:'r',unit:'71',owner_identity:'/root',title_only:true,statement_definition_proof_unchanged:true,native_acceptance_claimed:false,source_before_sha256:entry.source_before.sha256,source_after_sha256:entry.source_after.sha256,evidence:'Actual fixture root title-only review confirms the exact two-file correction preserves the written Statement and proof; no whole-supplier acceptance or new native verdict is claimed.'});entry.owner_review=link('research/r-capture/owner-review.json');
++ put('research/r-capture/capture.json',{version:1,run:'r',unit:'71',owner_identity:'/root',native_acceptance_claimed:false,original_artifact_bytes_native_bound:false,report_sha256:entry.previous_report.sha256,decisions_sha256:entry.previous_decisions.sha256,scope_sha256:entry.previous_scope.sha256,old_result_sha256:entry.previous_result.sha256});entry.owner_capture=link('research/r-capture/capture.json');
++ const task=`Exact label ${entry.label}. Canonical group: batch-71. No inherited acceptance. Write ${reportPath} and ${decisionsPath}. Independently redecide all ${oldDecisions.map(d=>d.obligation).join(' ')} and gate:${entry.defect_id}. Perform full current risk review. Do not generate pre-3a snapshot or extra obligations.`;put('research/r-capture/task.md',task);entry.task=link('research/r-capture/task.md');
++ entry.current_inputs=[scopePath,'research/r-batch-71.pages.json','research/r-batch-71.proof-contracts.json',...all.map(id=>`items/${id}.md`),'library/test/owned-page.md'].map(link);
++ const save=()=>put('research/r-step3-native-risk-title-home-alpha-continuations.json',{version:1,run:'r',policy:api.NATIVE_RISK_TITLE_POLICY,authorized_by:'owner',authorization:'Root explicitly authorizes this exact unit71 native risk-title continuation and no other policy relaxation.',continuations:[entry]});save();
++ return {root,put,link,entry,save,before,after,scope,oldDecisions,contracts,task,manifestBefore,manifestAfter,close:()=>rmSync(root,{recursive:true,force:true})};
++}
++function fresh(f){
++ const e=f.entry,reportPath='research/r-alpha-batch-71-3a.md',decisionsPath='research/r-alpha-batch-71-3a-decisions.json',prefix=`research/r-dispatch/alpha-${e.label}`;
++ const target=api.nativeRiskTitleHomeContinuations(f.root,'r')[0].additional_obligations[0];
++ const decisions=[...f.oldDecisions.map(d=>({...d,evidence:'Actual fresh independent native redecision, not inherited acceptance.'})),{obligation:target.obligation,id:ID,route:'gate',verdict:'confirmed_fatal',defect_ids:[e.defect_id],evidence:'Actual fresh Alpha confirms the old false title and independently reviews the applied title-only correction.'}];
++ f.put(reportPath,'Actual fresh full native Alpha report: all old sixteen obligations, new title gate, and full current risk reviewed.');f.put(decisionsPath,{version:1,run:'r',group:'batch-71',decisions});const c=structuredClone(f.contracts);c.contracts[ID].risk_review={status:'complete',reviewer:'alpha-batch-71',notes:'Fresh native Alpha independently reviewed the corrected title against the unchanged Statement and proof, and closed the old title alert.'};f.put('research/r-batch-71.proof-contracts.json',c);
++ const header=`# This dispatch\n\nrun: r\nrole: alpha\nlabel: ${e.label}\ncovers: 71\noutput: ${reportPath}\n\n`;f.put(prefix+'.attempt-1.prompt.md',header+f.task);
++ const result={run:'r',role:'alpha',label:e.label,attempt:1,evidence_tag:'.attempt-1',covers:['71'],session_id:'actual-fresh-fixture-session',ok:true,exit_code:0,process_exit_code:0,timed_out:false,started_at:'2020-01-01T03:00:00Z',ended_at:'2020-01-01T04:00:00Z',prompt:join(f.root,prefix+'.attempt-1.prompt.md'),terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true}};f.put(prefix+'.result.json',result);f.put(prefix+'.attempt-1.result.json',result);return {decisions,result,prefix};
++}
++test('separate route preserves old16 and adds ONE actual owner risk gate, no fake native finding',()=>{const f=fixture();try{const rows=api.nativeRiskTitleHomeContinuations(f.root,'r',{beforeDispatch:true,units:['71']});assert.equal(rows.length,1);assert.equal(rows[0].additional_obligations.length,1);assert.equal(rows[0].additional_obligations[0].obligation,'gate:risk-title-71');assert.equal(rows[0].additional_obligations[0].subject_type,undefined);const required=home.homeAlphaRequiredObligations(f.root,'r','71');assert.equal(required.length,17);assert.equal(new Set(required.map(t=>t.obligation)).size,17);assert.equal(home.homeAlphaReviewIdentity(f.root,'r','71').label,f.entry.label);assert.deepEqual(api.nativeRiskTitleHomeContinuations(f.root,'r',{beforeDispatch:true,selected:['99']}),rows);}finally{f.close();}});
++for(const [name,change]of[
++ ['canonical mutable prior risk contract',f=>f.entry.previous_risk_contract=f.link('research/r-batch-71.proof-contracts.json')],['other unit',f=>f.entry.unit='67'],['acceptance inheritance',f=>f.entry.previous_acceptance_inherited=true],['fake native success',f=>{const p=f.entry.previous_attempt.path;f.put(p,{ok:true});f.entry.previous_attempt=f.link(p);}],['source proof edit',f=>{f.put(f.entry.source_after.path,f.after+'Changed proof.');f.entry.source_after=f.link(f.entry.source_after.path);}],['source metadata edit',f=>{f.put(f.entry.source_after.path,f.after.replace('kind: lemma','kind: theorem'));f.entry.source_after=f.link(f.entry.source_after.path);}],['duplicate title key',f=>{f.put(f.entry.source_after.path,f.after.replace('deps: []','title: "'+newTitle+'"\ndeps: []'));f.entry.source_after=f.link(f.entry.source_after.path);}],['manifest unrelated edit',f=>{const m=structuredClone(f.manifestAfter);m[0].items[1].deps=['other'];f.put(f.entry.registration_manifest.path,m);f.entry.registration_manifest=f.link(f.entry.registration_manifest.path);}],['duplicate target home',f=>f.put('research/r-batch-72.pages.json',[{id:'other',items:[{id:ID,title:newTitle}]}])],['unbound native alert',f=>f.entry.native_alert_quote='Invented unrelated title alert that does not occur in genuine native completed report and is not an authentic independent observation.'],['pre3a adds automatic obligations',f=>f.put('research/r-step3-hash-71-pre-3a.json',{})],['missing old decision',f=>{const d=JSON.parse(readFileSync(join(f.root,f.entry.previous_decisions.path)));d.decisions.pop();f.put(f.entry.previous_decisions.path,d);f.entry.previous_decisions=f.link(f.entry.previous_decisions.path);}],['invented risk-only assignment',f=>{const s=structuredClone(f.scope);s.high_risk=[];f.put(f.entry.previous_scope.path,s);f.entry.previous_scope=f.link(f.entry.previous_scope.path);}]
++])test(`reject ${name}`,()=>{const f=fixture();try{change(f);f.save();assert.throws(()=>api.nativeRiskTitleHomeContinuations(f.root,'r',{beforeDispatch:true}));}finally{f.close();}});
++test('one-shot launch guard rejects any prior fresh result including failure',()=>{const f=fixture();try{f.put(`research/r-dispatch/alpha-${f.entry.label}.attempt-1.result.json`,{ok:false});assert.throws(()=>api.nativeRiskTitleHomeContinuations(f.root,'r',{beforeDispatch:true}),/already completed/);}finally{f.close();}});
++test('fresh successful native outputs require all17 actual decisions, new gate row, fresh closed risk and authentic task',()=>{const f=fixture();try{const x=fresh(f);assert.equal(home.registeredHomeAlphaResult(f.root,'r',x.result),true);assert.equal(authorResultAllowed(3,x.result,{root:f.root,run:'r'}),true);assert.equal(authorResultAllowed(3,x.result),false);assert.ok(home.homeAlphaClosureEvidence(f.root,'r')[x.prefix+'.attempt-1.prompt.md']);const current=api.nativeRiskTitleHomeCurrentOutputs(f.root,'r',f.entry);assert.ok(current['research/r-alpha-batch-71-3a-decisions.json']);x.decisions.pop();f.put('research/r-alpha-batch-71-3a-decisions.json',{version:1,run:'r',group:'batch-71',decisions:x.decisions});assert.throws(()=>api.nativeRiskTitleHomeCurrentOutputs(f.root,'r',f.entry),/omit/);}finally{f.close();}});
++for(const [name,change]of[
++ ['wrong new gate row',(f,x)=>x.decisions.at(-1).defect_ids=['unrelated']],['context accepted title',(f,x)=>x.decisions.at(-1).verdict='context_accepted'],['missing old decision',(f,x)=>x.decisions.splice(0,1)],['inherited report',(f,x)=>f.put('research/r-alpha-batch-71-3a.md',readFileSync(join(f.root,f.entry.previous_report.path),'utf8'))],['still open risk',(f,x)=>f.put('research/r-batch-71.proof-contracts.json',f.contracts)]
++])test(`fresh output rejects ${name}`,()=>{const f=fixture();try{const x=fresh(f);change(f,x);f.put('research/r-alpha-batch-71-3a-decisions.json',{version:1,run:'r',group:'batch-71',decisions:x.decisions});assert.throws(()=>api.nativeRiskTitleHomeCurrentOutputs(f.root,'r',f.entry));}finally{f.close();}});
++test('no opt-in defaults and existing unit67 policy remain separate',()=>{const f=fixture();try{rmSync(join(f.root,'research/r-step3-native-risk-title-home-alpha-continuations.json'));assert.deepEqual(home.homeAlphaContinuations(f.root,'r'),[]);assert.equal(home.homeAlphaReviewIdentity(f.root,'r','71').registered,false);assert.equal(home.registeredHomeAlphaResult(f.root,'r',{run:'r',role:'alpha',label:'3a-batch-71-native-risk-title-continuation-1',attempt:1,covers:['71']}),false);}finally{f.close();}});
++test('full staged JS syntax parses and wrapper propagates reload query with no unit/control changes',()=>{for(const name of ['step3-scope.mjs','step3-owner-home-alpha-continuations.mjs','step3-owner-native-risk-title-home.mjs']){const r=spawnSync(process.execPath,['--check',join(code,'tools',name)],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);}const wrapper=readFileSync(join(code,'tools/autopilot/stages/home-alpha-continuations.mts'),'utf8');assert.match(wrapper,/homePolicyURL.search = new URL\(import.meta.url\).search/);assert.match(wrapper,/await import\(homePolicyURL.href\)/);});
++test('closed historical evidence permits later legitimate source changes but rejects minimal or mismatched closure',()=>{const f=fixture();try{fresh(f);const evidence=home.homeAlphaClosureEvidence(f.root,'r');f.put('research/r-step3-closure.json',{version:3,run:'r',status:'closed',basis:'dependency-ordered-step3a'});assert.throws(()=>api.nativeRiskTitleHomeCurrentOutputs(f.root,'r',f.entry),/closure does not freeze/);f.put('research/r-step3-closure.json',{version:3,run:'r',status:'closed',basis:'dependency-ordered-step3a',artifacts:evidence});f.put(`items/${ID}.md`,f.after+'Legitimate later-stage owner repair.');f.put('research/r-batch-71.proof-contracts.json',{});assert.doesNotThrow(()=>api.nativeRiskTitleHomeCurrentOutputs(f.root,'r',f.entry));const wrong={...evidence,[f.entry.source_after.path]:'0'.repeat(64)};f.put('research/r-step3-closure.json',{version:3,run:'r',status:'closed',basis:'dependency-ordered-step3a',artifacts:wrong});assert.throws(()=>api.nativeRiskTitleHomeCurrentOutputs(f.root,'r',f.entry),/closure does not freeze/);}finally{f.close();}});
++test('actual TS wrapper plan, doctor, pattern, delivered task and before-writer guards compose with default route',()=>{const f=fixture();try{
++ const script=join(code,'wrapper-runtime.mts');writeFileSync(script,`
++import assert from 'node:assert/strict';
++import {readFileSync,writeFileSync,existsSync,rmSync} from 'node:fs';
++import {join} from 'node:path';
++const {withHomeAlphaContinuation}=await import('./tools/autopilot/stages/home-alpha-continuations.mts?title-runtime-epoch');
++const {registeredHomeAlphaResult}=await import('./tools/step3-owner-home-alpha-continuations.mjs?title-runtime-epoch');
++const root=process.argv[2],run='r',label='3a-batch-71-native-risk-title-continuation-1';let calls=0;
++const original={id:'3a-adjudicate',units:()=>['71','72'],pattern:/^alpha-3a-batch-(?:71|72)\\.result\\.json$/,plan:(ctx:any,pending:string[])=>{calls++;return pending.map(unit=>({covers:[unit],label:'3a-batch-'+unit,task:'research/r-original.task.md'}));}};
++writeFileSync(join(root,'research/r-original.task.md'),'Original native Alpha task; all ordinary current scope duties remain.');
++const stage=withHomeAlphaContinuation(original),ctx={repo:root,run};
++assert.equal(stage.pattern(ctx).test('alpha-3a-batch-71.result.json'),false);
++assert.equal(stage.pattern(ctx).test('alpha-'+label+'.result.json'),true);
++assert.equal(stage.pattern(ctx).test('alpha-3a-batch-72.result.json'),true);
++const assembled='research/r-alpha-batch-71-3a-home-continuation.task.md';
++assert.equal(stage.plan({...ctx,doctor:true},['71'])[0].label,label);assert.equal(existsSync(join(root,assembled)),false);
++const plans=stage.plan(ctx,['71','72']);assert.equal(plans[0].label,label);assert.equal(plans[1].label,'3a-batch-72');assert.equal(plans[0].task,assembled);
++const delivered=readFileSync(join(root,assembled),'utf8');assert.ok(delivered.includes('Original native Alpha task'));assert.ok(delivered.includes('gate:risk-title-71'));assert.ok(delivered.includes('full current risk review'));assert.equal(registeredHomeAlphaResult(root,run,JSON.parse(readFileSync(join(root,'research/r-dispatch/alpha-3a-batch-71.result.json'),'utf8'))),false);
++const before=calls;writeFileSync(join(root,'research/r-dispatch/alpha-'+label+'.attempt-1.result.json'),'{}');assert.throws(()=>stage.plan(ctx,['71']),/already completed/);assert.equal(calls,before);
++rmSync(join(root,'research/r-step3-native-risk-title-home-alpha-continuations.json'));assert.equal(stage.pattern(ctx).source,original.pattern.source);assert.equal(stage.plan(ctx,['71'])[0].label,'3a-batch-71');
++`);
++ const result=spawnSync(process.execPath,[join(repo,'tools/tsx-run.mjs'),script,f.root],{encoding:'utf8'});assert.equal(result.status,0,result.stdout+'\n'+result.stderr);
++ }finally{f.close();}});
++test.after(()=>rmSync(code,{recursive:true,force:true}));
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import { nativeRiskTitleCarrier } from './step3-owner-native-risk-title-home.mjs';
+ // Compute and close Step 3 routing from disk.
+ // Version 2 is the active route: the reader/refuter pass, its exact coverage
+ // and the obligations batch Alpha adjudicates. Version 3 is read-only support
+@@ -274,6 +275,7 @@
+ 
+ function currentDecisionCarrier(decision, target, live) {
+   if (target?.owner_unmanifested_draft_context) return unmanifestedDraftCarrier(ROOT, run, String(target.obligation).split(':')[1], target);
++  if (target?.owner_native_risk_title) return nativeRiskTitleCarrier(ROOT, run, target);
+   if (target?.owner_foreign_refuter_route) return foreignRefuterCarrier(ROOT, run, target);
+   if (target?.owner_downstream_consumer_route) return downstreamCarrier(
+     String(target.obligation).split(':')[1], target);

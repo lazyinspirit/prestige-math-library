@@ -1,0 +1,3 @@
+Completed actual full-current proof and primary consumer-use reading after root integration. The installed helper has11majorrows1.1–11.1; exactrow/reference transport preserves the previously reviewed mathematics. F3/consumerProof3.1uses its exhaustive compactindex-two boundary with separate orientation input and needs no edit.
+
+The typed record delegated-current-review.json contains literal source/use quotations and root-provided archive references. This is a primary delegated-current review and same-history numbering addendum, not nativeAlpha acceptance or new coverage. No digests, canonical changes or gates were performed.

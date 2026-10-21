@@ -1,7 +1,9 @@
 import { readFileSync, writeFileSync, lstatSync } from 'node:fs';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
-import { homeAlphaContinuations } from '../../step3-owner-home-alpha-continuations.mjs';
+const homePolicyURL = new URL('../../step3-owner-home-alpha-continuations.mjs', import.meta.url);
+homePolicyURL.search = new URL(import.meta.url).search;
+const { homeAlphaContinuations } = await import(homePolicyURL.href);
 export function withHomeAlphaContinuation(original: any): any {
  if(original.id!=='3a-adjudicate')return original;
  const entries=(ctx:any,beforeDispatch=false,selected:string[]|null=null)=>homeAlphaContinuations(ctx.repo,ctx.run,{beforeDispatch,units:original.units(ctx).map(String),selected});

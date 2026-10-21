@@ -386,6 +386,24 @@ null consumer and source observation. A bound root current-proof/use review
 and separate owner consumer witness seal only the actual current context;
 they supply no historical observation or whole-supplier acceptance.
 
+An explicitly registered proof-only owner repair of an exactly observed
+unmanifested helper preserves its original fatal finding and before source.
+The repaired-context mode binds actual application, complete current helper
+and primary-consumer review, and unchanged Statement/Facts/metadata. Fresh
+Alpha review of both original gaps, a confidence-one fatal-fixed decision,
+ordinary ledger and current seals remain required. It grants no helper home
+or inherited review. The same route documents its exact observation limits.
+
+A native risk-only title alert can use the separately guarded
+[native title continuation](tools/step3-owner-native-risk-title-home.md).
+Only its exact title and manifest mirror change; all old obligations, one
+real new gate and full risk review are independently owed. The
+`owner-step3-same-assignment-consumer-witness-v1` route preserves a native
+misattributed consumer while binding an already assigned actual direct
+consumer separately. Its complete last-message capture explicitly supplies
+no absent historical native digest. Neither route alters original findings,
+accepts mathematics or waives ordinary gates.
+
 A definition may acquire its first real proof contract after its frozen
 pre-reader snapshot; routing preserves the original null contract hash and
 requires the current contract. A reader's intermediate supplier observation

@@ -1,0 +1,41 @@
+--- a/tools/step3-owner-unmanifested-draft-context.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.mjs
+@@ -59,7 +59,7 @@
+  const record=parse(ref(root,run,e.owner_repair_record));
+  check(record.version===1&&record.run===run&&record.owner_identity==='/root'&&record.completed===true&&record.source_repaired===true&&record.mathematical_acceptance===false&&record.native_coverage_adopted===false&&record.original_obligation===`reader:${e.batch}:${e.index}`&&record.supplier_id===e.id,'missing actual root repair application');
+  check(hash(record.before)===hash(e.owner_repair_before)&&hash(record.after)===hash(e.owner_repair_after)&&Array.isArray(record.edits)&&record.edits.length>0&&record.edits.length<=4,'unbound repair application');
+- let reconstructed=a.proof;for(const edit of record.edits){check(typeof edit.before==='string'&&edit.before&&typeof edit.after==='string'&&edit.after&&edit.before!==edit.after&&reconstructed.split(edit.before).length===2,'ambiguous proof repair');reconstructed=reconstructed.replace(edit.before,edit.after);}
++ let reconstructed=a.proof;for(const edit of record.edits){check(typeof edit.before==='string'&&edit.before&&typeof edit.after==='string'&&edit.after&&edit.before!==edit.after&&reconstructed.split(edit.before).length===2,'ambiguous proof repair');reconstructed=reconstructed.replace(edit.before,()=>edit.after);}
+  check(reconstructed===z.proof,'unaccounted proof change');
+  const review=parse(ref(root,run,e.owner_repair_review));
+  check(review.version===1&&review.run===run&&review.owner_identity==='/root'&&review.completed===true&&review.full_current_proof_read===true&&review.affected_consumer_use_reviewed===true&&review.source_repaired===true&&review.mathematical_acceptance===false&&review.native_coverage_adopted===false&&review.original_obligation===record.original_obligation&&review.supplier_id===e.id&&review.routing_consumer_witness===e.consumer_id,'missing full repaired proof and primary use root review');
+--- a/tools/step3-owner-unmanifested-draft-context.test.mjs
++++ b/tools/step3-owner-unmanifested-draft-context.test.mjs
+@@ -372,3 +372,27 @@
+  }finally{f.close();}});
+ 
+ test('repaired context allows genuine extra read only, never an inherited refuter flag',()=>{const f=repairedFixture();try{const x=refuterFixture(f);assert.equal(api.validateUnmanifestedRefuterOpened(f.root,'r','1','lem-helper',x.scope),true);assert.throws(()=>api.bindUnmanifestedRefuterContext(f.root,'r','1',x.raw(),x.scope),/cannot inherit an extra refuter flag/);}finally{f.close();}});
++
++// Root's actual display-math application exposed String.replace replacement
++// substitutions. Exercise the real repaired-authority validator, not just JS.
++for(const [name,token] of [
++ ['display dollar pair', '$$x^2+y^2$$'],
++ ['matched substring token', '$&'],
++ ['prefix token', '$`'],
++ ['suffix token', "$'"],
++ ['all literal tokens', "$$x$$ $& $` $'"],
++])test('proof repair inserts literal '+name,()=>{const f=repairedFixture();try{
++ const edit=f.application.edits[0],oldReplacement=edit.after;
++ edit.after=oldReplacement+' The following literal source tokens must be conserved: '+token+'.';
++ f.after=f.after.replace(oldReplacement,()=>edit.after);
++ f.put(f.entry.owner_repair_after.path,f.after);f.entry.owner_repair_after=f.link(f.entry.owner_repair_after.path);f.put('items/lem-helper.md',f.after);
++ f.application.after=f.entry.owner_repair_after;f.put(f.entry.owner_repair_record.path,f.application);f.entry.owner_repair_record=f.link(f.entry.owner_repair_record.path);
++ f.delegated.current_source=f.entry.owner_repair_after;f.put(f.review.delegated_review.path,f.delegated);f.review.delegated_review=f.link(f.review.delegated_review.path);
++ f.review.current_source=f.entry.owner_repair_after;f.review.application=f.entry.owner_repair_record;
++ f.put(f.entry.owner_repair_review.path,f.review);f.entry.owner_repair_review=f.link(f.entry.owner_repair_review.path);f.save();
++ const legacy=f.application.edits.reduce((text,e)=>text.replace(e.before,e.after),f.source);
++ assert.notEqual(legacy,f.after,'The regression must expose actual replacement-string interpretation.');
++ const n=f.normalized(),c=api.unmanifestedDraftCarrier(f.root,'r','1',n);
++ assert.equal(c.item_sha256,sha(f.after));assert.ok(readFileSync(join(f.root,'items/lem-helper.md'),'utf8').includes(token));
++ assert.equal(c.owner_repaired_context,true);assert.equal(n.observed_source.item_sha256,sha(f.source));
++ }finally{f.close();}});

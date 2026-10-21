@@ -24,7 +24,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Julien Korinman, Finite presentations for stated skein algebras and lattice gauge field theory, Algebraic & Geometric Topology 23 (2023), §2.2, printed pp. 1256–1258"
+    - title: "Julien Korinman, Finite presentations for stated skein algebras and lattice gauge field theory, Algebraic & Geometric Topology 23 (2023), §2.1, subsection “Relation with Uqsl2 and Oq[SL2]”, printed pp. 1256–1257 (PDF pp. 10–11)"
       url: "https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf"
     - title: "Noah Snyder and Peter Tingley, The half-twist for U_q(g) representations, Algebra & Number Theory 3 (2009), §§3–5, printed pp. 810–830"
       url: "https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf"
@@ -59,7 +59,7 @@ Here $\operatorname{tr}_n$ is the normalized type-A Hecke Markov trace with brai
 
 [[def-oriented-crossing-sign-writhe-and-blackboard-framing|Positive Artin crossing convention]]
 
-[Korinman, *Finite presentations for stated skein algebras and lattice gauge field theory*, §2.2](https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf)
+[Korinman, *Finite presentations for stated skein algebras and lattice gauge field theory*, §2.1](https://msp.org/agt/2023/23-3/agt-v23-n3-p05-p.pdf)
 
 [Snyder and Tingley, *The half-twist for $U_q(\mathfrak g)$ representations*, §§3–5](https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf)
 
