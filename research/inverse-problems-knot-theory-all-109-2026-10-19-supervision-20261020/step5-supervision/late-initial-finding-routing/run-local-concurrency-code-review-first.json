@@ -1,0 +1,29 @@
+{
+  "review": "independent-run-local-global-concurrency-FIRST",
+  "reviewer": "/root/step5_concerns_2",
+  "verdict": "PASS",
+  "cycle": 1,
+  "scope": "Only optional native run-local globalConcurrency configuration override, not actual runtime configuration or resource operations.",
+  "code_bindings": {
+    "tools/autopilot/bin/autopilot.mts": "077ab565ac047941c5c3891db8fcacf858715c4790b1a84d6cac95dcb1b1ad33",
+    "tools/autopilot/test/run-local-concurrency.test.mts": "2c14126295689cab5542b47868a2127f6081788886d218f76c72ce9efe712357",
+    "tools/autopilot/README.md": "5153f791693e92a127dfa15e41aa6b9f7eb8ad0e9afb5ae806b5c283dde0c0c5"
+  },
+  "findings": [],
+  "reason": "The existing local allowlist adds only globalConcurrency. If present, it must be a number, finite, integral and positive. Required run/stages and explicit CLI-run matching remain unchanged; unknown local keys remain rejected. The override is applied only to the fresh command-local config after shared defaults/config are read. It writes neither shared nor local config and does not change stage/role limits, retry/model settings, evidence or coverage. Executor already subtracts inflight and adopted workers from this configured global cap.",
+  "tests": [
+    {
+      "command": "node tools/tsx-run.mjs --test tools/autopilot/test/run-local-concurrency.test.mts tools/autopilot/test/adoption-capacity.test.mts",
+      "result": "PASS10/10 independently rerun. Public doctor CLI observes exact local cap4; another namespace retains shared17; absent cap preserves shared17/default20; foreign run and invalid values/unknown keys/missing run or stages reject. Fixture verifies configuration bytes unchanged and no state file created. Existing capacity tests cover adoption, stage/role/global limits, double-count avoidance and unrelated-run isolation."
+    }
+  ],
+  "reading": [
+    "Full loadConfig and production diff",
+    "Complete new public CLI fixture tests",
+    "Executor existing globalCap/slots and adopted capacity call context",
+    "Owned17line run-local cap README section"
+  ],
+  "documentation_boundary": "README includes unrelated concurrent priority/DAG documentation changes; those were excluded. The run-specific statement about removal at the actual paused/drained5.8 hold before Step6 seals configuration follows root explicit direction as confirmed by author. The sealed two-key Step6 refresh recovery schema remains unchanged.",
+  "limits": "Code-only acceptance. Tests create temporary diagnostic configurations and dummy stage descriptors; they do not start native model workers. No actual run-local/shared config, runtime state, controller, item source, receipt, evidence or gate was changed or operated on. No mathematical or native coverage acceptance.",
+  "next": "No focused repair requested. Root may apply the validated optional override at its authorized actual paused/drained boundary and restart only that controller. Normal coverage, owner permission and all workflow gates remain required."
+}

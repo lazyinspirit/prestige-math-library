@@ -8,6 +8,23 @@ Mathematics inventory supports 130 pairs, one per batch, and at most three batch
 
 Current revision: `six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and defaults to a shared 20-worker cap. See `package.json` for typechecking and focused test commands.
 
+A run's `--state-dir/config.json` may optionally set `globalConcurrency` alongside
+its required `run` and `stages`, for example
+`{"run":"RUN","stages":"tools/autopilot/stages/owner-supervised-compact.mts","globalConcurrency":4}`.
+The override must be a positive finite integer and the run must match `--run`.
+Omitting it retains shared/default configuration; unknown local keys still fail.
+It uses the existing executor cap, including local and adopted workers, together
+with unchanged stage/role limits. It does not cancel jobs or change coverage,
+retry budgets, checks or permissions. Install/change it at an actual paused,
+drained boundary and restart that controller; shared configuration and other runs
+remain untouched.
+
+The separate sealed compact Step6 *refresh recovery* API still requires its exact
+two-key `run`/`stages` configuration. For the temporary Step5 resource cap in
+`inverse-problems-knot-theory-all-109-2026-10-19`, root will remove the override at
+the actual paused/drained `5.8-gate` hold before Step6 seals configuration. This
+runtime option does not broaden that recovery API.
+
 Step 3 ends with `3a-baseline` and mechanical `3a-close`. Dependency-level authoring replaces the legacy Step 3b cross-batch review; no Step 3b stage or continuation is dispatched. Historical evidence remains preserved.
 
 Within the Step-3 pipeline, ready downstream work gets available slots before

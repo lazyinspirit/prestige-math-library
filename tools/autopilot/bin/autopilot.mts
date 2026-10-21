@@ -91,16 +91,23 @@ function loadConfig(): Config {
     throw new Error(`gateFailurePolicy must be "repair", "owner", or "owner-recertify"; got ${JSON.stringify(base.gateFailurePolicy)}`);
   }
   // A checkpoint continuation may select a run-local stage table without
-  // changing other live runs or the global model/concurrency configuration.
+  // changing other live runs or the shared model/concurrency configuration.
+  // An optional local global cap uses the executor's existing cap semantics.
   const localConfigPath = join(stateDir, 'config.json');
   if (existsSync(localConfigPath)) {
     const local = JSON.parse(readFileSync(localConfigPath, 'utf8'));
-    if (!local || Object.keys(local).some(key => !['run', 'stages'].includes(key)))
+    if (!local || Object.keys(local).some(key => !['run', 'stages', 'globalConcurrency'].includes(key)))
       throw new Error(`unsupported run-local configuration: ${localConfigPath}`);
     if (typeof local.run !== 'string' || typeof local.stages !== 'string')
       throw new Error(`run-local configuration needs run and stages: ${localConfigPath}`);
     if (opt('run') && opt('run') !== local.run)
       throw new Error(`--run does not match run-local configuration: ${localConfigPath}`);
+    if (Object.hasOwn(local, 'globalConcurrency')) {
+      if (typeof local.globalConcurrency !== 'number' || !Number.isFinite(local.globalConcurrency)
+        || !Number.isInteger(local.globalConcurrency) || local.globalConcurrency <= 0)
+        throw new Error(`run-local globalConcurrency must be a positive finite integer: ${localConfigPath}`);
+      base.globalConcurrency = local.globalConcurrency;
+    }
     base.run = local.run;
     base.stages = resolve(repo, local.stages);
   }
