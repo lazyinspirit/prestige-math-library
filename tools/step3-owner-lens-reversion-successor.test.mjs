@@ -1,12 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,cpSync,readFileSync,writeFileSync,mkdirSync,rmSync,symlinkSync} from 'node:fs';
+import {mkdtempSync,cpSync,readFileSync,writeFileSync,mkdirSync,rmSync,symlinkSync,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,dirname,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {LENS_REVERSION_PINS as pins,LENS_REVERSION_POLICY as policy} from './step3-owner-lens-reversion-successor.mjs';
 import {sourceIdenticalReversionContinuity as check} from './step3-owner-source-identical-reversion.mjs';
 const RUN='inverse-problems-knot-theory-all-109-2026-10-19',ID='def-lens-space-surgery-orientation-convention';
+// Raw native prompts and operational archives are optional local fixtures, not
+// synthetic authority. Present-but-invalid evidence still fails the real guard.
+const requiredFixturePaths=[...Object.values(pins).map(p=>p.path),
+ `items/${ID}.md`,`research/${RUN}-batch-68.pages.json`,
+ `research/${RUN}-batch-68.proof-contracts.json`,'research/defect-ledger.jsonl'];
+const missingFixturePaths=requiredFixturePaths.filter(p=>!existsSync(resolve(p)));
+const actual={skip:missingFixturePaths.length
+ ? `optional actual-native lens68 fixture unavailable (${missingFixturePaths.length} required paths missing)`
+ : false};
+
 const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
 const hash=x=>createHash('sha256').update(JSON.stringify(canonical(x))).digest('hex');
 const raw=x=>createHash('sha256').update(x).digest('hex');
@@ -24,7 +34,7 @@ function fixture(t){
  return{root,run:RUN,decision,before,current,target,entry,check(){return check(this.root,this.run,this.decision,this.target,this.before,this.current,this.entry);},json(p,fn){const x=json(p);fn(x);writeFileSync(join(root,p),JSON.stringify(x));},rebind(){const c=json(`research/${RUN}-batch-68.proof-contracts.json`).contracts[ID];this.current.contract_sha256=hash(c);this.entry.current_carrier_sha256=hash(this.current);}};
 }
 test('absent opt-in remains fail closed',()=>assert.equal(check('/absent','r',{}, {},{}, {},undefined),false));
-test('actual native source reversion admits exactly two boundary evidence rows',t=>{const f=fixture(t);assert.equal(f.check(),true);assert.equal(f.decision.verdict,'reverted_change');assert.equal(f.before.item_sha256,f.current.item_sha256);assert.notEqual(f.before.contract_sha256,f.current.contract_sha256);});
+test('actual native source reversion admits exactly two boundary evidence rows',actual,t=>{const f=fixture(t);assert.equal(f.check(),true);assert.equal(f.decision.verdict,'reverted_change');assert.equal(f.before.item_sha256,f.current.item_sha256);assert.notEqual(f.before.contract_sha256,f.current.contract_sha256);});
 const changes={
  'wrong run':f=>f.run='machine-learning-all-101-2026-10-19',
  'wrong policy':f=>f.entry.policy+='-other',
@@ -57,6 +67,6 @@ const changes={
  'unsafe source archive':f=>f.entry.pre_source.path='../source',
  'symlink live source':f=>{const p=join(f.root,`items/${ID}.md`);rmSync(p);symlinkSync(join(f.root,f.entry.pre_source.path),p);},
 };
-for(const[name,mutate]of Object.entries(changes))test('reject '+name,t=>{const f=fixture(t);mutate(f);assert.equal(f.check(),false);});
-for(const key of Object.keys(pins))test('reject tampered authenticated '+key+' even with rebound supplied digest',t=>{const f=fixture(t);const p=join(f.root,f.entry[key].path);writeFileSync(p,readFileSync(p,'utf8')+'\n');f.entry[key].sha256=raw(readFileSync(p));assert.equal(f.check(),false);});
-test('root restamping only subject seal preserves immutable native semantics',t=>{const f=fixture(t);f.decision.subject_sha256=hash(f.current);assert.equal(f.check(),true);});
+for(const[name,mutate]of Object.entries(changes))test('reject '+name,actual,t=>{const f=fixture(t);mutate(f);assert.equal(f.check(),false);});
+for(const key of Object.keys(pins))test('reject tampered authenticated '+key+' even with rebound supplied digest',actual,t=>{const f=fixture(t);const p=join(f.root,f.entry[key].path);writeFileSync(p,readFileSync(p,'utf8')+'\n');f.entry[key].sha256=raw(readFileSync(p));assert.equal(f.check(),false);});
+test('root restamping only subject seal preserves immutable native semantics',actual,t=>{const f=fixture(t);f.decision.subject_sha256=hash(f.current);assert.equal(f.check(),true);});
