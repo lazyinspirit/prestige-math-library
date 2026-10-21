@@ -1,0 +1,10 @@
+# Focused unchanged required-page context review
+
+Run inverse-problems-knot-theory-all-109-2026-10-19; batch30; original native finding reader:30:16; page volume-integral-scattering-and-partial-wave-error; origin banach-range-invariance-and-eit-rates.
+
+Owner /root read the complete current page Markdown, its published metadata and inventory. This is an external formatting observation under CLAUDE.md#9: the published page retains legacy narrative prose, while this run's newly authored pages are frontmatter-only. The page remains unchanged; before and after raw hashes both 2f520d4c471a8791990c1df11f5a6683cfa0025651ebf7dd7913c591728e493d. Current origin raw hash cde026c2a0682130f697b101790ec4a6b0cf494404672473af786d1103a5b243 matches its native post snapshot and its explicit requires edge.
+
+The native subject is page with null consumer; it remains null. This is required-page context, not an asserted logical item dependency or a new prerequisite. Complete metadata BFS separately records no item path to the Fredholm page and actual paths to the other two pages; none is invented. All inventoried item identities/publication statuses/current guards were read for context binding, not their proof validity. No mathematical acceptance, page ownership, source repair, historical observation binding, new review coverage or frontier expansion is supplied. Independent Alpha must adjudicate the original preserved finding and may still escalate a real defect. The original native finding had observed_source:null; current captures do not claim what the reader historically saw.
+
+Explicit scope declaration: CLAUDE.md#9 formatting context only, unchanged page, no mathematical acceptance.
+Separately verified owner routing witness: lem-ip-centered-neumann-sequence-map-and-differentiability -> lem-spherical-harmonics-form-complete-basis-and-addition-formula. The actual source deps edge and current item guards bind this witness; it is not attributed to the original null-consumer native finding and grants no proof acceptance.

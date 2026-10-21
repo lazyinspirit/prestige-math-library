@@ -17,6 +17,9 @@ const id = x => /^[a-z][a-z0-9-]*$/.test(String(x ?? ''));
 const policy = 'owner-step3-required-published-page-route-v1';
 const nativePageRoutingBasis = 'native-page-null-consumer-owner-bound-consumer-v1';
 export const unchangedRequiredPageContextBasis = 'owner-unchanged-required-page-context-v1';
+export const unchangedRequiredPageOriginContextBasis = 'owner-unchanged-required-page-origin-context-v1';
+const isOriginContext=e=>e.routing_basis===unchangedRequiredPageOriginContextBasis;
+const isUnchangedContext=e=>e.routing_basis===unchangedRequiredPageContextBasis || isOriginContext(e);
 // An unchanged context carrier cannot attest a repair or acceptance. Escalation
 // remains an ordinary blocker; a false positive still requires Alpha and ledger.
 export const requiredPageVerdictAllowed = (carrier, verdict) => carrier?.unchanged_context !== true
@@ -35,7 +38,7 @@ const front = b => yaml().parse(split(String(b)).fm);
 function currentManifestRoute(root,run,e,manifest) {
   const rows=Array.isArray(manifest)?manifest:manifest.pages;
   const origin=rows.filter(p=>p.id===e.origin_page);assert(origin.length===1 && origin[0].requires?.includes(e.page)
-    && origin[0].items?.some(x=>(typeof x==='string'?x:x.id)===e.consumer_id),'page not required by assigned consumer home');
+    && (isOriginContext(e) || origin[0].items?.some(x=>(typeof x==='string'?x:x.id)===e.consumer_id)),'page not required by assigned consumer home');
   for(const n of readdirSync(resolve(root,'research')).filter(n=>n.startsWith(`${run}-batch-`) && /-batch-\d+\.pages\.json$/.test(n))) {
     const raw=json(root,`research/${n}`);assert(!(Array.isArray(raw)?raw:raw.pages).some(p=>p.id===e.page),'foreign page acquired run ownership');
   }
@@ -56,7 +59,7 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
   assert(safe(run) && e.version===1 && e.policy===policy && e.run===run && e.owner_identity==='/root'
     && e.mathematical_acceptance===false && e.historical_page_observation_bound===false,'invalid authority');
   assert(/^[1-9]\d*$/.test(e.batch ?? '') && Number.isSafeInteger(e.index) && e.index>0 && id(e.page)
-    && id(e.origin_page) && id(e.consumer_id),'invalid subject');
+    && id(e.origin_page) && (isOriginContext(e) ? e.consumer_id===null : id(e.consumer_id)),'invalid subject');
   assert(e.observation_basis==='unbound-native-reader; owner-current-before capture only','invented observation');
   assert(e.reviewed===true && typeof e.reason==='string' && e.reason.trim().length>=80,'missing focused owner review');
   const reportPath=`research/${run}-reader-findings-${e.batch}.json`, nativePrefix=`research/${run}-dispatch/reader-reader-${e.batch}`;
@@ -67,11 +70,32 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
   // The authority's consumer is a routing witness, not a replacement for the
   // native reader's subject or consumer. The page/null case requires an exact
   // owner opt-in; its assigned consumer and dependency path are checked below.
-  const originalDependency=finding?.subject_type==='published-dependency' && finding.consumer_id===e.consumer_id;
-  const originalPage=e.routing_basis===nativePageRoutingBasis && finding?.subject_type==='page' && finding.consumer_id===null;
+  const unchanged=isUnchangedContext(e);
+  // This opt-in binds only the original native page/null provenance. It does
+  // not loosen unchanged-context guards or replace the original null consumer.
+  const originalPageBasis=e.original_finding_basis===nativePageRoutingBasis;
+  assert((!isOriginContext(e) || originalPageBasis)
+    && (e.original_finding_basis===undefined || (unchanged && originalPageBasis)),
+    'invalid original finding basis');
+  const originalDependency=!originalPageBasis && finding?.subject_type==='published-dependency' && finding.consumer_id===e.consumer_id;
+  const originalPage=(e.routing_basis===nativePageRoutingBasis || (unchanged && originalPageBasis))
+    && finding?.subject_type==='page' && finding.consumer_id===null;
   assert(finding && finding.id===e.page && (originalDependency || originalPage)
     && finding.observed_source==null && requiredPageHash(finding)===e.finding_sha256,'changed original finding');
-  assert(report.includes(e.page) && report.includes(e.consumer_id),'report lacks original page/consumer');
+  assert(report.includes(e.page) && report.includes(isOriginContext(e) ? e.origin_page : e.consumer_id),
+    'report lacks original page/consumer or origin');
+  let originBytes;
+  if(isOriginContext(e)) {
+    assert(/^library\/[a-z0-9-]+\/[a-z0-9-]+\.md$/.test(e.origin_path ?? '')
+      && e.origin_path.endsWith('/'+e.origin_page+'.md'),'wrong origin page path');
+    const homes=readdirSync(resolve(root,'library'),{withFileTypes:true}).filter(d=>d.isDirectory()
+      && existsSync(resolve(root,'library',d.name,e.origin_page+'.md')));
+    assert(homes.length===1 && e.origin_path===`library/${homes[0].name}/${e.origin_page}.md`,'ambiguous origin page home');
+    originBytes=bytes(root,e.origin_path);
+    const meta=front(originBytes);
+    assert(meta.page===e.origin_page && meta.requires?.includes(e.page),'origin source does not require page');
+    assert(Array.isArray(e.dependency_path) && e.dependency_path.length===0,'page context cannot invent item dependency path');
+  }
   assert(new RegExp(`^${nativePrefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result.path),'wrong native attempt');
   const result=JSON.parse(ref(root,e.native_result));
   assert(result.run===run && result.role==='reader' && result.label===`reader-${e.batch}` && result.ok===true
@@ -86,9 +110,13 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
     const r=e[`${label}_snapshot`];assert(r.path===`research/${run}-step3-hash-${e.batch}-${label}.json`,'wrong snapshot path');
     const s=JSON.parse(ref(root,r));assert(s.version===2 && s.run===run && String(s.batch)===e.batch && s.label===label
       && !s.page_manifest?.includes(e.page),'invalid foreign page snapshot');
-    if(e.routing_basis===unchangedRequiredPageContextBasis)
+    if(unchanged) {
       assert(Array.isArray(s.page_manifest) && Array.isArray(s.manifest)
-        && s.manifest.includes(e.consumer_id),'unchanged context needs explicit native page inventory and assigned consumer');
+        && (isOriginContext(e) ? s.page_manifest.includes(e.origin_page) : s.manifest.includes(e.consumer_id)),
+        'unchanged context needs explicit native inventories and assigned origin/consumer');
+      if(isOriginContext(e)) assert(s.page_hashes?.[e.origin_page]?.file_sha256===sha(originBytes),
+        'native origin page hash differs from current source');
+    }
   }
   assert(e.manifest.path===`research/${run}-batch-${e.batch}.pages.json`,'wrong manifest');
   currentManifestRoute(root,run,e,JSON.parse(ref(root,e.manifest)));
@@ -97,9 +125,8 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
   const homes=readdirSync(resolve(root,'library'),{withFileTypes:true}).filter(d=>d.isDirectory()
     && existsSync(resolve(root,'library',d.name,e.page+'.md')));
   assert(homes.length===1 && e.current_path===`library/${homes[0].name}/${e.page}.md`,'ambiguous physical page home');
-  const unchanged=e.routing_basis===unchangedRequiredPageContextBasis;
   assert(!unchanged || (e.scope_policy==='claude9-external-formatting-only-v1'
-    && finding.subject_type==='published-dependency' && finding.defect==='ill-formed'),'invalid unchanged-context scope policy');
+    && (originalDependency || originalPage) && finding.defect==='ill-formed'),'invalid unchanged-context scope policy');
   const before=ref(root,e.before),after=ref(root,e.after),beforeFm=front(before),afterFm=front(after);
   assert(beforeFm.page===e.page && beforeFm.status==='published' && requiredPageHash(beforeFm)===requiredPageHash(afterFm),'changed page metadata');
   if(unchanged) {
@@ -121,13 +148,15 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
       && e.page_item_guards.every((node,i)=>node.id===pageItems[i]
         && itemHashGuard(bytes(root,`items/${node.id}.md`).toString())===node.guard_sha256),'changed published page context');
   }
+  if(!isOriginContext(e)) {
   const path=e.dependency_path;assert(Array.isArray(path) && path.length>=2 && path[0]?.id===e.consumer_id
     && pageItems.includes(path.at(-1)?.id) && new Set(path.map(x=>x.id)).size===path.length,'invalid dependency path');
   for(let i=0;i<path.length;i++) {const node=path[i];assert(id(node.id),'invalid path item');const source=bytes(root,`items/${node.id}.md`).toString();
     assert(front(source).id===node.id && itemHashGuard(source)===node.guard_sha256,'changed logical supplier context');
     if(i+1<path.length)assert(front(source).deps?.includes(path[i+1].id),'missing actual dependency edge');
     else assert(front(source).status==='published','terminal page item not published');}
-  const review=ref(root,e.review).toString();assert(review.includes(run) && review.includes(e.page) && review.includes(e.consumer_id)
+  }
+  const review=ref(root,e.review).toString();assert(review.includes(run) && review.includes(e.page) && review.includes(isOriginContext(e) ? e.origin_page : e.consumer_id)
     && review.includes(e.before.sha256) && review.includes(e.after.sha256),'owner review lacks exact guards');
   if(unchanged) assert(review.includes('CLAUDE.md#9') && review.includes('formatting')
     && review.includes('unchanged') && review.includes('no mathematical acceptance'),'missing scope-only unchanged context review');
@@ -147,7 +176,7 @@ export function requiredPageCarrier(root,run,batch,finding) {
     && finding.subject_type===route.original.subject_type && requiredPageHash(finding.owner_required_page_route)===requiredPageHash(route.binding)
     && finding.observed_sha256===null && finding.observation_basis==='unbound' && finding.pre_sha256===undefined,'lost exact foreign-page route');
   return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding,
-    ...(route.entry.routing_basis===unchangedRequiredPageContextBasis ? {unchanged_context:true} : {})};
+    ...(isUnchangedContext(route.entry) ? {unchanged_context:true} : {})};
 }
 
 // Freeze only this route's authenticated historical inputs. Current mathematical

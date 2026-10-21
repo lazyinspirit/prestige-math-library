@@ -138,11 +138,11 @@ test('without the new registry closure artifact mapping preserves historical ins
  const evaluate=(source,version)=>{
   let calls=0;
   const fn=Function('artifactNames','sha256','readFileSync','R','requiredPageClosureEvidence','root','run',
-   'homeAlphaClosureEvidence','foreignRefuterClosureEvidence','downstreamConsumerClosureEvidence','closureEvidence','ownerRepairEvidenceClosure','nativeOriginClosureEvidence',
+   'homeAlphaClosureEvidence','foreignRefuterClosureEvidence','foreignReaderClosureEvidence','downstreamConsumerClosureEvidence','closureEvidence','ownerRepairEvidenceClosure','nativeOriginClosureEvidence',
    'OBSERVATION_EVIDENCE_POLICY','OWNER_REPAIR_EVIDENCE_FREEZE_POLICY','NATIVE_ORIGIN_FREEZE_POLICY',
    extract(source)+'\nreturn artifactHashes;')(
    ()=>names,sha,path=>'fixture bytes for '+path,(...parts)=>parts.join('/'),()=>{calls++;return {};},'/fixture','r',
-   ()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),'fixture-observation-policy','fixture-repair-policy','fixture-native-policy');
+   ()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),'fixture-observation-policy','fixture-repair-policy','fixture-native-policy');
   const value=fn(version);return {value,calls};
  };
  for(const version of [2,3]) {

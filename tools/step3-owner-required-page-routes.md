@@ -108,7 +108,8 @@ coverage. The extension changes none of those guards.
 
 ## Unchanged external formatting context (explicit opt-in)
 
-An original `published-dependency` / `ill-formed` finding may concern only an
+An original `published-dependency` / `ill-formed` finding (or the exact native
+`page` / null-consumer shape under the additional opt-in below) may concern only an
 unrelated formatting retrofit of a published required page. CLAUDE.md rule 9
 retains dependency context without requiring that external formatting repair.
 This case uses a separate explicit authority:
@@ -143,3 +144,85 @@ ledger disposition required by the existing native conditions.
 Routing does not suppress any finding, alter the defect ledger or grant review
 coverage. Existing edited-page routes still require one or two real prose
 edits and retain all previous behavior.
+
+### Native page/null findings with unchanged context (additional explicit opt-in)
+
+For an original native `subject_type: page`, explicitly null `consumer_id`, and
+`defect: ill-formed`, the unchanged-context authority must additionally contain:
+
+```json
+{
+  "routing_basis": "owner-unchanged-required-page-context-v1",
+  "original_finding_basis": "native-page-null-consumer-owner-bound-consumer-v1",
+  "scope_policy": "claude9-external-formatting-only-v1",
+  "edits": []
+}
+```
+
+This combines two existing narrowly defined facts: native page/null provenance
+and unchanged external formatting context. The authority's assigned consumer
+is still a separate routing witness and must have the actual guarded dependency
+path to a published item on that required page. It is never attributed to the
+native finding. The opt-in must match an original page/null finding exactly; it
+cannot relabel an original published-dependency or accept an omitted/non-null
+consumer. Without this explicit field, the unchanged-context policy continues
+to permit only the original published-dependency shape. Unknown values, null
+values, or this field on an edited-page route are rejected.
+
+All existing successful native-result, complete tail, prompt, report, immutable
+reference, explicit pre/post page and item inventory, manifest ownership,
+required-origin, unique published page, page-item mathematical guard, actual
+logical dependency-edge, byte-identical before/after/current archive, and focused
+owner-review guards remain mandatory. The same independent-verdict restrictions
+apply: only false_positive, confirmed_nonfatal or blocking escalated is allowed,
+with the ordinary independent decision and ledger obligations. This opt-in
+creates no edits, mathematical acceptance, historical source observation,
+coverage, native transition or registry entry by itself. Existing routes that
+do not opt in retain their previous behavior.
+
+### Page-level origin context without an item dependency path
+
+A separate explicit authority is available only for unchanged external formatting
+context of a native page/null finding. It does not claim that an assigned item
+logically consumes an item on the foreign page:
+
+```json
+{
+  "routing_basis": "owner-unchanged-required-page-origin-context-v1",
+  "original_finding_basis": "native-page-null-consumer-owner-bound-consumer-v1",
+  "scope_policy": "claude9-external-formatting-only-v1",
+  "consumer_id": null,
+  "origin_path": "library/CATEGORY/ORIGIN-PAGE.md",
+  "dependency_path": [],
+  "edits": []
+}
+```
+
+This is page-level context only. The original finding must be `page`, its consumer
+must be explicitly null, and its defect must be `ill-formed`. The authority also
+retains a null consumer and an explicitly empty dependency path. Supplying an
+item consumer or path is rejected rather than inventing a logical dependency.
+The original reader report must contain both the origin page and flagged page.
+
+The unique current physical origin page must identify that origin and directly
+`requires` the foreign page. Its actual source bytes must match
+`page_hashes[origin_page].file_sha256` in **both** authenticated native pre/post
+snapshots, and both explicit page inventories must contain the origin and omit
+the foreign page. The batch manifest must separately identify that same origin
+and its direct `requires` edge; the full run manifest exclusion for the foreign
+page still applies. The origin source is read via the existing relative regular
+non-symlink path guards. No origin change between either observation and current
+source is accepted by this authority.
+
+Every unchanged-page guard remains: genuine successful native completion and
+exact tail, prompt, finding and Markdown references, explicitly unbound historical
+observation, byte-identical current/before/after published page, unchanged page
+metadata, complete published-item inventory and current item guards, exact focused
+owner review with the unchanged/no-mathematical-acceptance declaration. Only the
+existing independent false_positive, confirmed_nonfatal or blocking escalated
+verdicts may be used, with ordinary ledger requirements. It cannot authorize a
+page repair, mathematical acceptance, an edited-page route or a native transition.
+
+Existing item-consumer logical-path routes keep their original minimum length,
+source guards and actual `deps`-edge checks. This additional authority does not
+weaken those routes; it records a different, explicitly page-level context fact.
