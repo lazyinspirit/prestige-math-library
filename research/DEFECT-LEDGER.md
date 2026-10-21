@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ c1a4bfbb52ee by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ bc65507abf0d by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 20996 |
+| defects caught before publication | 21224 |
 | now mechanically prevented | 384 |
 | escaped to publication | 7 |
-| still open | 120 |
+| still open | 121 |
 
 ## bayesian-computational-statistics-62 — 219 row(s)
 
@@ -976,23 +976,32 @@
 | invalid-inference | 1 |  |
 | citation-missing | 1 |  |
 
-## inverse-problems-knot-theory-all-109-2026-10-19 — 94 row(s)
+## inverse-problems-knot-theory-all-109-2026-10-19 — 322 row(s)
 
 | subclass | 3a-adjudicate |
 |---|---|
-| ill-formed | 47 |
-| citation-inaccurate | 21 |
+| ill-formed | 130 |
+| citation-inaccurate | 63 |
+| missing-hypothesis | 18 |
+| unlicensed-inference | 17 |
+| citation-missing | 12 |
+| ill-typed-construction | 11 |
+| false-or-overstrong-statement | 10 |
+| invalid-inference | 9 |
 | citation-misattributed | 8 |
+| unsupported-inference | 8 |
+| false-or-overstrong-title | 6 |
+| undefined-notation | 6 |
 | reader-repair | 5 |
-| false-or-overstrong-title | 3 |
-| missing-hypothesis | 2 |
-| unlicensed-inference | 2 |
-| ill-typed-construction | 1 |
-| unsupported-inference | 1 |
+| ill-typed-claim | 4 |
+| arithmetic-error | 3 |
+| contract-mismatch | 3 |
+| invalid-witness | 2 |
+| missing-case | 2 |
+| other | 2 |
 | overstrong-statement | 1 |
-| citation-missing | 1 |
-| arithmetic-error | 1 |
-| false-or-overstrong-statement | 1 |
+| false-claim | 1 |
+| citation-inflated | 1 |
 
 ## machine-learning-all-101-2026-10-19 — 549 row(s)
 
@@ -1609,3 +1618,4 @@
 - `math81-b77-3a-fibonacci-positive-pivot-prerequisite` non-ml-math-remaining-81-2026-10-18 · unsupported-inference · ex-fibonacci-golden-chain-projectors-and-noninvertibility
 - `ml101-b68-reverse-generator-domination` machine-learning-all-101-2026-10-19 · unlicensed-inference · lem-reversed-kernels-and-generator-identity
 - `ipkt109-b11-3a-published-ftc-pointwise-strength` inverse-problems-knot-theory-all-109-2026-10-19 · overstrong-statement · thm-first-fundamental-theorem-of-calculus-for-l-one
+- `inverse-problems-knot-theory-all-109-2026-10-19-3a-b51-ns-periodic-model` inverse-problems-knot-theory-all-109-2026-10-19 · missing-hypothesis · ex-ip-inversebench-navier-stokes

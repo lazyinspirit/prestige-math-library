@@ -7,6 +7,7 @@ items:
   - lem-ip-lipschitz-ode-triangular-flow-and-c1-density
   - thm-ip-exact-triangular-transport-disintegrates-to-posterior
   - alg-ip-conditional-flow-matching
+  - lem-ip-conditional-flow-matching-population-and-exact-flow-meaning
   - op-ip-function-space-flow-matching-error-theory
 examples: []
 requires:

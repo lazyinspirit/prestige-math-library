@@ -1,0 +1,52 @@
+---
+id: lem-grid-bridge-like-refinement
+kind: lemma
+title: "Every grid has a finite bridge-like refinement by grid moves"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-grid-diagram-for-an-oriented-knot
+dependency_level: 1
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Ozsvath, Stipsicz and Szabo, Grid Homology for Knots and Links"
+      url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
+      locator: "Appendix B.4, Lemma B.4.8 and Figure B.19"
+---
+
+## Statement
+
+Let $G$ be a finite nonempty planar marked grid with vertical-over crossing convention. A horizontal segment is a cap if its two incident vertical segments both extend above it or both extend below it; otherwise it is monotone. A marked stabilization splits a marked cell into a two-by-two block with the chosen marking type twice at opposite corners, the other type once and one empty corner, preserving one of each type per row and column. A legal column commutation exchanges adjacent columns with disjoint or strictly nested closed vertical marking intervals. There is a finite sequence of marked stabilizations and legal commutations carrying $G$ to a grid in which every cap has no crossing and every monotone horizontal segment has exactly one crossing. Thus the resulting grid is bridge-like: slightly tilt its crossing-containing horizontal segments in the direction of height travel and round its empty caps to obtain a bridge diagram. Every operation respects the oriented $O,X$ convention of the grid-diagram definition, and the number of link components is unchanged. The decorated planar diagram before and after the entire refinement is planar isotopic after rounding corners; in particular no Reidemeister move is needed for this refinement. No global grid-move generation theorem is assumed.
+
+## Statement references
+
+[[def-grid-diagram-for-an-oriented-knot]]
+
+## Facts & Assumptions
+
+**Given:** The finite nonempty marked grid. Every row and column has one mark of each type, and all horizontal and vertical coordinates are distinct.
+
+[F1] [[def-grid-diagram-for-an-oriented-knot]] fixes the marking and vertical-over convention.
+
+## Proof
+
+1.1 We first describe a row-splitting operation with full marking data. Write the chosen row as $H$, its left endpoint column as $A$, its right endpoint column as $B$, and its marks there as $a,b$, respectively, where $\{a,b\}=\{O,X\}$. Insert a new row $H'$ immediately above or immediately below $H$, and a column $C$ immediately to the right of $A$. Replace the $a$ at $(A,H)$ by $$a\text{ at }(A,H'),\qquad b\text{ at }(C,H'),\qquad a\text{ at }(C,H).$$ Keep the $b$ at $(B,H)$. If $H'>H$, the new block has $a$ northwest and southeast, $b$ northeast and empty southwest; if $H'<H$, it has $a$ southwest and northeast, $b$ southeast and empty northwest. Both are allowed stabilizations. Each new row and column has one mark of each type, and the old column $A$ retains its complementary exterior mark. The oriented path is obtained by subdividing the same old row path into a horizontal, vertical, horizontal path; its incidence with the rest of the link is unchanged. [F1, given, construct, cases]
+
+2.1 The new column $C$ has closed vertical interval between the consecutive levels $H,H'$. An old column strictly between $A,B$ has no endpoint at $H$, since the only old endpoints there are $A,B$; it has no endpoint at the newly inserted $H'$. Since no old row lies between $H,H'$, that old column's interval either contains $[H,H']$ in its interior or is disjoint from it. Thus $C$ can be commuted to any specified column gap strictly between $A,B$, one adjacent old column at a time, by legal commutations. Stop before $B$. The resulting path replacing the old row is $A$ at height $H'$, horizontally to $C$, vertically to height $H$, and horizontally to $B$. At an old column strictly between $A,B$, its vertical segment crosses height $H'$ if and only if it crosses $H$, because neither level is an endpoint and no old endpoint level lies between them. Hence the old crossings of row $H$ are divided, in their original order, between the two new horizontal segments, with no extra crossing. [F1, step 1.1, given, construct, cases]
+
+3.1 No other horizontal row changes its crossing count or cap/monotone type. The short column $C$ meets no such level; changing the endpoint of column $A$ from $H$ to the adjacent $H'$ passes no other row; and each old column commuted with $C$ moves across no other old column. Thus its incidences and its order relative to all other old columns are unchanged. For an exterior row incident to a moved column, its endpoint moves only across the short new column, which has no intersection with that exterior row. For an exterior row incident to $A$, the direction of its vertical leg is unchanged since $H,H'$ are consecutive levels. These observations verify the claim for both kinds of exterior row, including rows whose horizontal intervals strictly contain the new short column. We additionally verify planar isotopy, not just crossing counts. Choose a band about $H$ containing no other old row, and choose $H'$ arbitrarily close to $H$ inside it. In a narrow column gap about the final position of $C$, replace the short vertical jog by a steep smooth graph connecting the heights $H'$ and $H$; the gap contains no old column. The replacement of the old row is now a smooth graph $y=f(x)$, equal to $H'$ on the left and $H$ on the right outside that gap. For every $x$ choose an increasing smooth vertical reparameterization supported in the row band that sends $H$ to $f(x)$. Such reparameterizations exist smoothly in $x$: take a fixed bump equal to one near the two close heights and use $y\mapsto y+(f(x)-H)\chi(y)$, choosing $|H'-H|\|\chi'\|_\infty<1$. Interpolating its displacement with zero gives a plane isotopy. It keeps every old vertical line setwise, carries its intersection with the old row to the correct new height, and changes no exterior horizontal row. At the two endpoint columns it carries the incident vertical endpoint to the prescribed new endpoint. Rounding the steep connecting graph into the new vertical jog inside its empty gap is an isotopy of that embedded arc fixing its endpoints; use the same monotone graph interpolation before rounding. Thus the new decorated diagram is planar isotopic to the old one, with all crossing decorations fixed. The short-column commutations only select this empty gap and do not change any old-column order, so this proof covers their whole composite. [step 1.1, step 2.1, construct, cases]
+
+3.2 Let $s_A,s_B\in\{+1,-1\}$ record whether the other endpoint of column $A$, respectively $B$, is above or below $H$. These signs are also the directions of those old vertical legs relative to the adjacent new levels. Put $\epsilon=\operatorname{sign}(H'-H)$. At the new horizontal segment $A$--$C$ in row $H'$, the two vertical-leg signs are $s_A,-\epsilon$. At the retained segment $C$--$B$ in row $H$, they are $\epsilon,s_B$. These formulas give all the following cases without a pictorial assumption. If the old row is a cap, $s_A=s_B=s$, choose $\epsilon=-s$ and leave $C$ in the immediate gap after $A$. The new $H'$ segment is a cap with zero crossings, and the retained $H$ segment is monotone with all the old crossings. If the old row is monotone, $s_A=-s_B$, choose $\epsilon=s_A$ to make both new segments monotone; choose instead $\epsilon=s_B$ to make both new segments caps. [step 1.1, step 2.1, given, algebra, cases]
+
+4.1 Apply the splitting rule to a bad row as follows. A cap with $k\ge1$ crossings is treated by the first case of step 3.2, producing one empty cap and one monotone row with $k$ crossings. A monotone row with zero crossings is treated by its second sign choice in step 3.2, producing two empty caps. A monotone row with $k\ge2$ crossings is treated by its first sign choice; commute $C$ to a gap after the first crossing and before the second. Such a gap exists because distinct crossing columns are distinct and strictly between $A,B$. The two resulting monotone rows then have one and $k-1$ crossings. A cap with zero crossings or a monotone row with one crossing needs no operation. All choices are finite and allow either orientation through the variable $a$. [step 2.1, step 3.2, construct, cases]
+
+5.1 Define a nonnegative integer on grids by summing, over all rows, the following contribution: for a cap with $k$ crossings use $k$; for a monotone row with $k\ge1$ crossings use $k-1$; for a monotone row with zero crossings use $1$. In the three bad cases of step 4.1 the total contribution changes respectively from $k$ to $k-1$, from $1$ to $0$, and from $k-1$ to $k-2$. Every other row's contribution is unchanged by step 3.1. Thus each operation reduces the integer by exactly one, and after finitely many operations it is zero. A zero contribution means precisely an empty cap or a one-crossing monotone row. Each operation was an actual marked stabilization followed by finitely many actual legal commutations. [step 3.1, step 4.1, construct, algebra]
+
+6.1 Finally choose disjoint small horizontal bands about the row levels of the resulting grid. Tilt each monotone horizontal segment so that its traversal passes strictly monotonically from one incident vertical leg to the other; it has only one crossing, which remains a transverse vertical-over crossing. Round its two corners without a height extremum. Replace each empty cap by a smooth arch with precisely one nondegenerate height extremum in its band, rounding its corners into the incident vertical legs; its empty horizontal interval and a sufficiently thin band avoid every other strand. Distinct bands give distinct special heights, and the crossing preimages are not height-critical. Outside the bands the pieces are vertical. These changes are planar isotopies in small neighborhoods of the embedded edges and crossings, with their decorations fixed. This constructs the asserted smoothing. Because each marked row split only subdivided one oriented path and each column commutation transported the same incidence graph, none of the operations changes the number or orientation of components. This proves the claim by explicit finite moves. [F1, step 1.1, step 2.1, step 5.1, construct] ∎

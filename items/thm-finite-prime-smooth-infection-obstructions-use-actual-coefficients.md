@@ -1,0 +1,106 @@
+---
+id: thm-finite-prime-smooth-infection-obstructions-use-actual-coefficients
+kind: theorem
+title: Finite-prime smooth infection obstructions use actual coefficients
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+aliases: []
+deps:
+  - def-axiom-of-choice
+  - thm-ultrafilter-lemma
+  - lem-standard-infection-cobordisms-have-boundary-generated-second-homology
+  - thm-excision-and-mayer-vietoris-with-local-coefficients
+  - lem-finite-disk-band-knot-longitudes-lie-in-the-second-derived-subgroup
+  - thm-unimodular-infection-tower-data-force-mixed-derived-meridian-survival
+  - thm-three-branch-infection-data-admit-nonhomomorphism-coefficient-quotients
+  - thm-mixed-rational-and-prime-quotients-satisfy-strebel-and-folner-conditions
+  - thm-topological-lifted-half-pairs-force-amenable-signature-defect-zero
+  - thm-topological-finite-projective-l2-duality-and-boundary-gluing
+  - thm-smooth-group-signature-defects-are-independent-and-uniformly-bounded
+  - lem-finite-prime-families-have-explicit-separating-knot-signature-bumps
+  - thm-canonical-finite-cyclic-knot-defects-equal-seifert-signature-averages
+  - thm-time-dependent-vector-fields-have-local-smooth-evolution-operators
+  - thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space
+  - thm-every-smooth-manifold-admits-a-riemannian-metric
+  - thm-smooth-inverse-function-theorem-on-manifolds
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Cha and Kim, Iterated satellite operators on the knot concordance group
+      url: https://arxiv.org/pdf/2402.04629v2
+      locator: Complete printed11–19 and19–24; full finite-prime coefficient and bounding-defect assembly supplied below, keeping the normalized1/p companion average
+---
+
+## Statement
+
+Assume AC. Fix $n\ge1$ and a smooth winding-zero pattern $P$ whose axis has nonzero integral classical Blanchfield self-value, equivalently using the actual exterior-to-zero-surgery identification. Supply finite smooth disk-band models, peripheral product tubes, paths and compatible collars for the finitely many knots and infection pieces used below.
+
+For every $m\ge1$ there are smooth knots $J_1,\ldots,J_m$ with explicit finite disk-band surfaces such that no nonzero signed connected sum
+$$K=\mathop{\#}_{i=1}^m a_i P^n(J_i),\qquad (a_1,\ldots,a_m)\in\mathbb Z^m\setminus\{0\},$$
+bounds a compact connected oriented smooth four-manifold $V$ with collared boundary $M(K)$ and the following lifted half-pair data: boundary inclusion identifies $H_1(M(K);\mathbb Z)=\mathbb Z[\mu]$ with $H_1(V;\mathbb Z)$, $H_2(V;\mathbb Z)=\mathbb Z^{2r}$, there are exactly $r$ height-$n$ equivariant pairs $x_i,y_i$ with zero $x$-pairings and unit $x,y$-pairings, and the $x_i$ lift to height $n+1$ with zero pairings. Height $h$ means coefficients $\mathbb Z[\pi_1(V)/\pi_1(V)^{(h)}]$. Signed knots use the marked mirror-and-reverse inverse convention.
+
+There is also one smooth knot $J$, with explicit finite disk-band surface, for which
+$$P^n(J)\#P^n(J)\#\bigl(-P^n(J\#J)\bigr)$$
+is not smoothly slice. More generally its zero surgery bounds no compact connected smooth integral homology-circle four-manifold with boundary-meridian $H_1$ isomorphism.
+
+The coefficient maps and all signature sums used to obtain these obstructions are maps on the actual smooth bounding manifolds and infection pieces. No TOP-to-smooth rho comparison, choice-free analytic conclusion, integral-filtration subgroup construction, or quotient-rank conclusion is implicit in this supplied-data obstruction theorem.
+
+## Statement references
+
+[[thm-unimodular-infection-tower-data-force-mixed-derived-meridian-survival]]
+
+[[thm-three-branch-infection-data-admit-nonhomomorphism-coefficient-quotients]]
+
+[Cha–Kim, proofs in sections4–5](https://arxiv.org/pdf/2402.04629v2)
+
+## Facts & Assumptions
+
+**Given:** AC, $n,m,P$, the nonzero integral axis self-value and the supplied finite geometric data. Ordinary and $L^2$ signatures use the same oriented cap convention, and $\rho_{\mathrm{sm}}$ is the invariant among smooth bounding extensions.
+
+[A1] AC is retained from the analytic and smooth suppliers. It also supplies ultrafilter extension, hence invariant means from the explicitly supplied finite Folner sets. [[def-axiom-of-choice]], [[thm-ultrafilter-lemma]]
+
+[F1] A standard infection piece $E(P,K)$ is an actual collared smooth product gluing with boundary $M(P(U))\sqcup M(K)\sqcup(-M(P(K)))$ and spine $M(P(U))\cup_S M(K)$, where the common solid torus $S$ has core the companion meridian. Standard connected-sum pieces are finite iterated winding-one versions. Their ordinary incoming boundary classes generate $H_2$, and their outgoing $H_1$ maps are meridian isomorphisms. Product-collared Mayer–Vietoris is valid for arbitrary local coefficient fibers. [[lem-standard-infection-cobordisms-have-boundary-generated-second-homology]], [[thm-excision-and-mayer-vietoris-with-local-coefficients]]
+
+[F2] Knot-surgery groups in the supplied finite models are normally generated by their meridian and have ordinary $H_1=\mathbb Z[\mu]$. [[lem-finite-disk-band-knot-longitudes-lie-in-the-second-derived-subgroup]], [[lem-standard-infection-cobordisms-have-boundary-generated-second-homology]]
+
+[F3] The full finite-forest quotient gives simultaneous bottom meridians of exact order $p$, with all rational prefixes PTFA. Its sufficient intersection-data criterion applies to the actual standard attachments from the initial height-$n$ pair data of the Statement. The integral axis value remains nonzero rationally and over every odd prime outside one finite exceptional set. [[thm-unimodular-infection-tower-data-force-mixed-derived-meridian-survival]]
+
+[F4] For the three-branch construction starting at any supplied homology-circle $V$, the prime quotient kills the distinguished bottom $J\#J$ branch and makes each other bottom image trivial or cyclic of order $p$, with at least one nontrivial. It has derived length at most $n+1$, meridian infinite order and a rational-prefix series followed by an elementary abelian $p$ factor. [[thm-three-branch-infection-data-admit-nonhomomorphism-coefficient-quotients]]
+
+[F5] These finite mixed-factor quotients lie in $D(\mathbb F_p)$ and have finite Folner sets. With ultrafilter extension they admit invariant means. [[thm-mixed-rational-and-prime-quotients-satisfy-strebel-and-folner-conditions]]
+
+[F6] The lifted half-pair hypotheses, an amenable $D(\mathbb F_p)$ target of derived length at most $n+1$ and an infinite-order meridian force the actual initial signature defect to vanish, in TOP as well as smooth categories. Finite-projective completed cap models give model-independent signatures and group-subgroup induction, with no closed-range inference. [[thm-topological-lifted-half-pairs-force-amenable-signature-defect-zero]], [[thm-topological-finite-projective-l2-duality-and-boundary-gluing]]
+
+[F7] Among smooth bounds and arbitrary injective target enlargements, signature defect is independent, additive over disjoint boundaries and negated by orientation reversal. Each fixed smooth three-manifold has a group-independent finite bound. [[thm-smooth-group-signature-defects-are-independent-and-uniformly-bounded]]
+
+[F8] Given distinct odd primes and positive heights, explicit finite disk-band knots have nonnegative first-push signature functions equal to $2N_i$ at their own two selected primitive roots, zero at their other selected roots and all other selected-prime roots, with $2N_i$ exceeding the prescribed height. Their actual canonical finite-cyclic bounding defects are the normalized signature means, including singular roots and the separate zero-character term. [[lem-finite-prime-families-have-explicit-separating-knot-signature-bumps]], [[thm-canonical-finite-cyclic-knot-defects-equal-seifert-signature-averages]]
+
+[F9] Under AC the boundaryless collar extension of the ambient smooth manifold has a smooth Euclidean embedding and a Riemannian metric. Its smooth orthogonal normal planes over the extended disk form a rank-two bundle; using the ambient embedding, projection to this subbundle is a finite smooth matrix $Q$. The ordinary local smooth ODE and inverse-function theorems apply with compact parameters. [[thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space]], [[thm-every-smooth-manifold-admits-a-riemannian-metric]], [[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]], [[thm-smooth-inverse-function-theorem-on-manifolds]]
+
+## Proof
+
+1.1 First establish the actual twisted signatures of the standard pieces in the coefficient cases that will occur. Put $A=\mathcal NG$. In the spine of $E(P,K)$ the circle meridian $g$ of $S$ has chain differential $g^{-1}-1$. If $g$ has infinite order, its kernel in $A$ is zero: applying an operator column to $\delta_e$ would give a square-summable vector constant on an infinite $\langle g\rangle$ orbit, hence zero; right translations then make the column operator zero. Thus $H_1(S;A)=0$. If instead the coefficient restriction of $\pi_1M(K)$ factors through its abelianization $\mathbb Z[\mu]$, the meridian circle inclusion is split on local homology: choose a map $M(K)\to S^1$ inducing this abelianization, by [F7]'s explicit CW construction of classifying maps; its composite with the marked meridian has degree one, and its pulled-back coefficient system is exactly the stipulated cyclic restriction. Hence $H_1(S;A)\to H_1(M(K);A)$ is injective. Either case makes the degree-one difference map in spine Mayer–Vietoris injective. Since $H_2(S;A)=0$, exactness shows that the two actual incoming boundary maps generate all $H_2(E;A)$. These conditions are verified conditions on the actual restriction; no assertion for arbitrary finite noncyclic images is being made. [F1, F2, F6, F7, given, construct, algebra]
+
+1.2 For a smooth compact $W$ with oriented boundary components $N_b$, supply its actual group map to $G$. To identify its defect with the sum of the $\rho_{\mathrm{sm}}(N_b)$, choose their smooth bounding extensions from [F7], enlarge the groups into their finite iterated amalgam over $G$, and glue the oppositely oriented bounds to the corresponding boundary components of $W$. Van Kampen supplies the single map on the resulting closed smooth four-manifold, with based paths fixed along its finite gluing graph. Its defect is zero by [F7]'s closed smooth equality. Whole-component additivity and subgroup induction therefore give $$\operatorname{sign}^{(2)}_G(W)-\operatorname{sign}(W)=\sum_b\rho_{\mathrm{sm}}(N_b,\phi_b),$$ with the actual boundary orientations. This proves the identity for the actual multi-boundary $W$, rather than assuming it from a Definition of rho. [F6, F7, construct, algebra]
+
+1.3 If a bottom knot-surgery restriction has exact cyclic image $\langle g\rangle$ of order $p$, choose the canonical bound $W_F$ from [F8] for its actual supplied surface. Its positive meridian generator maps to $g$, so its fundamental-group map extends the actual boundary restriction into the same ambient $G$. Subgroup induction [F6] makes its ambient $G$ defect equal its $\mathbb Z/p$ defect, and independence [F7] identifies it with the actual ambient boundary $\rho_{\mathrm{sm}}$. Therefore this term equals $p^{-1}\sum_r\sigma_F(\exp(2\pi i r/p))$. Choosing a different generator only permutes the residues $r$ and changes no average. A trivial restriction has rho zero, by any smooth bound with constant coefficients; a negatively oriented marked surgery has the negative value. Thus for [F8]'s finite-prime knots the own-prime term is exactly $4N_i/p_i$, and every other selected-prime term is zero, on the actual coefficient maps. [F6, F7, F8, construct, algebra]
+
+2.1 An incoming boundary image has zero intersection with every class: the pair sequence kills its image in $H_2(E,\partial E;A)$, which under cap duality is exactly the restriction of its inverse relative-cap class, so its cap/evaluation intersection is zero. Thus step 1.1 makes the intersection form identically zero on algebraic $A$ homology. Finite-projective harmonic parts are dense and the completed form is bounded by [F6], so the completed operator is zero and $\operatorname{sign}^{(2)}_G E=0$. Ordinary signature is zero by the incoming boundary-generation assertion in [F1] and the same argument with trivial coefficients. For a connected-sum piece $C$, each joining circle has the common meridian image; when this image has infinite order the same spine Mayer–Vietoris argument, adding one new surgery product at a time, proves boundary generation and zero $L^2$ signature. Its ordinary signature is again zero by [F1]. Orientation reversal negates these forms, hence preserves their vanishing. [F1, F6, step 1.1, algebra]
+
+2.2 Let $L>0$ be greater than the uniform bound in [F7] for the fixed smooth $M(P(U))$. Fix $m$. Choose distinct odd primes $p_1,\ldots,p_m$ outside the finite axis exception set of [F3], and apply [F8] with height $H_i=p_i mnL/2$. The resulting $J_i$ satisfy $$D_i=\rho_{\mathrm{sm}}(M(J_i),\mu\mapsto1\bmod p_i)=4N_i/p_i>mnL,$$ and all their selected cross-prime terms vanish. This is the normalized inequality actually needed: a bound on the point signature without the factor $p_i$ would not imply it. All choices at this stage are finite. [F3, F7, F8, step 1.3, construct, algebra]
+
+3.1 With the finite family from step 2.2 fixed, suppose that a nonzero vector $(a_i)$ has a smooth $V$ with the Statement's half-pair data. Make one branch for each of the $|a_i|$ copies, reversing its orientation for $a_i<0$. Form the actual standard connected-sum piece $C$ and $W_n=V\cup C$, then all $n$ infection layers. In Mayer–Vietoris at the first gluing, the boundary $H_1=\mathbb Z$ maps to $H_1(V)\oplus H_1(C)=\mathbb Z^2$ as $(1,-1)$ up to the supplied orientation sign. Its degree-zero difference map is injective. Hence $H_1(W_n)=\mathbb Z$, and every incoming meridian is either generator by [F1]. The same statement persists at the further outgoing infection gluings because their outgoing $H_1$ maps are isomorphisms. The sufficient criterion in [F3] applies to the actual height-$n$ pairs of $V$ and these standard attachments. Choose $i_*$ with maximal $|a_i|$ among nonzero coefficients, and apply that full finite-forest quotient with $p=p_{i_*}$, not a separate quotient for only one branch. It gives the actual $\phi:\pi_1W_0\to G$, where $G\in D(\mathbb F_p)$ has derived length at most $n+1$, all bottom meridians have exact order $p$, and the top meridian has infinite order through its projection to the first $\mathbb Z$ quotient. The finite Folner sets of [F5], extended by [A1]'s ultrafilter, give an invariant mean, so $G$ is amenable. [A1, F1, F3, F5, step 2.2, given, construct, algebra]
+
+4.1 All rational-prefix quotients of this $G$ are torsion-free, so every finite-order element lies in the last normal elementary abelian $p$ subgroup. For any companion surgery in a standard piece, if its meridian has infinite order step 1.1 applies. If its meridian has finite order, normal generation [F2] puts its entire image in that normal abelian subgroup, so its image is precisely the cyclic subgroup generated by its meridian; step 1.1 again applies, including the trivial case. The meridians of the connected-sum piece represent the top generator and have infinite order. Thus all actual $C,E$ pieces have zero signature defect by step 2.1. The restriction of $\phi$ to $V$ has the derived-length, mean, $D(\mathbb F_p)$ and infinite-meridian hypotheses of [F6]; its given height-$n+1$ isotropic lifts make its actual defect zero. Additivity over these actual whole-component gluings gives defect$(W_0)=0$. [F1, F2, F3, F5, F6, step 1.1, step 2.1, step 3.1, algebra]
+
+5.1 The boundary of $W_0$ consists of its signed bottom $M(J_i)$ components, $|a_i|$ for each $i$, and exactly $n$ signed copies of the fixed $M(P(U))$ per branch. By step 1.2 its total rho sum is zero. The actual bottom images have order $p_{i_*}$, so step 1.3 makes their signed sum exactly $a_{i_*}D_{i_*}$. Each remaining pattern term has absolute value less than $L$. Consequently $$|a_{i_*}|D_{i_*}\le nL\sum_i|a_i|\le nLm\,|a_{i_*}|,$$ contradicting step 2.2. This proves the asserted nonexistence of every smooth half-pair bound, for the whole finite family and arbitrary integer coefficients. It uses the largest coefficient after the entire finite family has been chosen; no unproved countable companion selection or coefficient-independent domination of an arbitrary sum is asserted. [F7, step 1.2, step 1.3, step 2.2, step 3.1, step 4.1, algebra]
+
+6.1 The first assertion is established in step 5.1. For the three-branch assertion choose one allowed odd prime $p$ and apply [F8] with height $p(3nL)/2$, obtaining one $J$ whose actual own-prime value $D=4N/p$ exceeds $3nL$. If a smooth homology-circle $V$ bounded the stated difference knot's surgery, form the actual three-branch $W_0$ of [F4]. Its prime quotient has the same derived and mean hypotheses as before, kills the distinguished bottom $J\#J$ restriction, and makes each other bottom restriction trivial or order $p$, at least one of the latter. The two surviving branch signs are positive. step 1.3 therefore makes the total bottom rho sum $sD$ for some $s\in\{1,2\}$, with the distinguished negative term exactly zero. All $3n$ pattern terms have absolute value less than $L$. [A1, F4, F5, F7, F8, step 1.3, step 2.2, step 5.1, construct, algebra]
+
+7.1 The rational prefix of [F4]'s modified series still has only torsion-free abelian factors, with its last elementary abelian $p$ factor normal. Hence the finite-order/cyclic-restriction argument of step 4.1 applies to every piece of this three-branch construction as well. The connected-sum meridians are infinite order, so its defect is zero too. The initial homology-circle $V$ has the empty half-pair list, valid at every height; [F6] applies with $r=0$ and the same actual infinite-order top meridian. Thus defect$(W_0)=0$. step 1.2 would make $sD$ plus the $3n$ bounded pattern terms zero, whereas $sD\ge D>3nL$. This contradiction proves the no-homology-circle conclusion. [F1, F2, F4, F5, F6, step 1.1, step 2.1, step 1.2, step 4.1, step 6.1, algebra]
+
+8.1 Finally a smooth slice disk really would give the excluded smooth homology-circle bound. Extend its supplied product collar slightly beyond the standard ball. For a smooth ambient embedding supplied by [F9], the normal quotient bundle is represented by smooth rank-two orthogonal planes in a fixed Euclidean space. Along the radial segments of the parametrized disk, solve $\dot U=[\dot Q,Q]U$ from one fixed orthonormal frame. The coefficient is skew-symmetric and bounded on the compact parameter disk and time interval, so norm-preserving local solutions extend throughout the interval and depend smoothly on the radial endpoint. This gives a smooth frame of the normal quotient bundle. Choose an ambient metric product-shaped on the boundary collar, by interpolating any metric with the collar product using a smooth one-variable cutoff. Its orthogonal normal bundle is smoothly isomorphic to that quotient, so inherits the frame. Its geodesic exponential is product-shaped on the collar. In coordinates it is the local smooth flow from [F9] of $\ddot x^k=-\tfrac12g^{k\ell}(\partial_i g_{j\ell}+\partial_jg_{i\ell}-\partial_\ell g_{ij})\dot x^i\dot x^j$; the chain rule verifies compatibility under coordinate changes. In particular its differential along the zero section sends tangent-plus-normal to their sum, so the inverse-function theorem makes it a local diffeomorphism there. There is a uniform positive injective radius on the compact original disk: otherwise pairs of different normal vectors of lengths tending to zero with the same image have convergent basepoints; their image limits make those basepoints equal, contradicting the local inverse near that zero vector. Shrink the radius also inside the finite local flow domains and the product collar. Thus a small closed tube $N\cong D^2\times D^2$ is smooth and product-shaped at the ambient boundary; its exterior corners admit the usual product-sector rounding. For $V=\overline{B^4\setminus N}$, the product-collared intersection in $B^4=V\cup N$ retracts to $D^2\times S^1$. Since $B^4,N$ are contractible, ordinary integral Mayer–Vietoris gives $H_0(V)=\mathbb Z$, $H_1(V)=\mathbb Z[\mu]$ and $H_i(V)=0$ for $i>1$, with the circle fiber giving the stated meridian generator. Its boundary is surgery on the knot with the disk's induced integer framing $b$. Ordinary exterior homology kills the preferred longitude, so its surgery has $H_1=\mathbb Z/b$ generated by the meridian. That meridian maps to the infinite generator of $H_1(V)$ just computed; this forces $b=0$. Hence the boundary is the actual oriented zero surgery and its $H_1$ meridian inclusion is an isomorphism. All tubes here are smooth normal tubes of a given smooth disk; no locally flat disk neighborhood theorem has been assumed. step 7.1 now rules out such a disk for the stated difference knot. [F1, F9, step 7.1, construct, algebra] ∎

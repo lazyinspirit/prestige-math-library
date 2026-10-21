@@ -1,4 +1,5 @@
 // Generate one Step-3 batch's exact item order, retaining legacy group support.
+import { unmanifestedDraftCarrier } from './step3-owner-unmanifested-draft-context.mjs';
 import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterObligations } from './step3-owner-foreign-refuter-routes.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -36,6 +37,10 @@ export function prepareStep3AdjudicationOrder(root, run, group) {
     for (const id of scope.pages_touched ?? []) add(id, 'page');
     if (scope.version === 3) for (const id of scope.pages ?? []) add(id, 'page');
     const addFinding = row => {
+      if (row.owner_unmanifested_draft_context) {
+        unmanifestedDraftCarrier(root, run, batch, row);
+        return otherWork.push(`${row.obligation}: unmanifested draft context ${row.id}, consumer ${row.consumer_id}; read-only, no producer home or native coverage; independently review unchanged current proof, preserve consumer_id, seal actual carrier; only false_positive, confirmed_nonfatal (nonfatal-recorded ledger), or escalated. Do not edit this context or claim a repair/acceptance. ${JSON.stringify(row)}`);
+      }
       if (row.subject_type !== 'in-run-dependency') return add(row.id, row.obligation ?? 'finding');
       const producer = allById.get(row.id);
       if (!producer || producer.batch !== row.producer_batch || producer.batch === batch) {

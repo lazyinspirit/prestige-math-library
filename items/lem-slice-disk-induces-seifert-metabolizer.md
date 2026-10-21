@@ -70,7 +70,7 @@ Assume full AC. Let $K$ be a smooth oriented knot in the oriented standard $3$-s
 
 [F4] A $g$-dimensional rational subspace on which $V$ vanishes saturates to a rank-$g$ direct summand of the integral lattice, still with vanishing restriction. [[lem-rational-isotropic-subspace-saturates-to-integral-metabolizer]]
 
-[F5] For the given locally flat slice disk the hypersurface supplier constructs the compact oriented locally flat Seifert three-manifold with an actual two-sided product and positive-push alignment. Its pre-collar-push model meets the outer sphere in $F$, with the stated product corners at $K$. Its smooth branch remains the previously supplied smooth construction; its TOP branch explicitly imports separate relative normal-bundle and microbundle-transversality theorems. [[lem-locally-flat-slice-surface-bounds-seifert-hypersurface]]
+[F5] For the given locally flat slice disk, the hypersurface supplier constructs the compact oriented locally flat Seifert three-manifold with an actual two-sided product and positive-push alignment. Its single TOP-category construction applies also when the disk is smooth and explicitly imports the relative normal-bundle and strongly relative microbundle-transversality theorems. [[lem-locally-flat-slice-surface-bounds-seifert-hypersurface]]
 
 [F6] Smooth chains compute continuous real homology, including for a smooth manifold with boundary. This is invoked below only in smooth ambient neighborhoods, not by treating a locally flat $R$ as an already smooth submanifold. [[thm-smooth-singular-chains-compute-singular-homology]]
 

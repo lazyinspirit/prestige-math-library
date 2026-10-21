@@ -1,0 +1,65 @@
+---
+id: lem-finite-pl-winding-one-annuli-in-standard-solid-tori-have-marked-products
+kind: lemma
+title: Finite PL winding-one annuli in standard solid tori have marked products
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-axiom-of-choice
+  - lem-finite-pl-peripheral-multicurves-admit-minimal-annular-position
+  - thm-finite-pl-schoenflies-in-dimension-three
+  - lem-parametrized-pl-balls-absorb-standard-boundary-windows
+  - lem-finite-polygonal-disk-and-collar-surgery
+  - lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar
+  - thm-fundamental-group-of-the-circle
+  - thm-fundamental-group-of-a-product
+justified_by: []
+proof_strategy: direct
+axiom_use: Full AC is inherited from the actual finite PL surface-isotopy supplier. All additional general-position, disk-exchange and marked-ball constructions are finite; no arbitrary TOP triangulation, smoothing or noncompact plane-unknotting assertion is used.
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: Albert Marden, The geometry of finitely generated Kleinian groups
+      url: https://www.maths.gla.ac.uk/~mpowell/Marden-on-Mostow-rigidity-GeometryFinitelyGenerated-1974.pdf
+      locator: Printed401–405 and427, Lemma3.1 and Corollary6.5, for the cyclic-cylinder application context. The finite marked annulus proof below is supplied independently of the unrestricted noncompact plane assertion in Lemma1.12.
+    - title: Allen Hatcher, Notes on Basic 3-Manifold Topology
+      url: https://pi.math.cornell.edu/~hatcher/3M/3M.pdf
+      locator: Lemma1.10, printed15–16, boundary-compression context. The proof below treats the exact given finite PL standard-solid-torus input and its marking directly.
+---
+
+## Statement
+
+Assume AC. Let $V$ be a compact standard PL solid torus with a supplied finite PL homeomorphism to $S^1\times D^2$, including its inverse and compatible finite manifold triangulations. Let $A\subset V$ be a connected properly embedded two-sided finite PL annulus, with a supplied PL annulus parameter and the local flat product and boundary quadrant collars of a proper PL surface. Suppose its core generates $\pi_1(V)\cong\mathbb Z$ up to sign.
+
+The complement of $A$ has two components. The closure $U$ of EITHER component admits a finite PL product parameter $A\times[0,1]\to U$ that is the given inclusion on $A\times\{0\}$ and maps $A\times\{1\}\cup\partial A\times[0,1]$ onto one of the two annuli of $\partial V$ between the rims of $A$. In particular the actual annulus is boundary-parallel. All product maps and inverses are finite PL after compatible subdivisions.
+
+This is a marked assertion inside the supplied standard solid torus. It does not classify arbitrary irreducible PL manifolds with fundamental group $\mathbb Z$, supply a TOP-to-PL conversion, or assert that a merely complementary pair of annuli on the boundary of an unmarked solid torus determines a product.
+
+## Facts & Assumptions
+
+**Given:** The standard finite PL product $V$, the parametrized proper PL annulus and its supplied local pair collars, and the winding-one hypothesis.
+
+[F1] Essential freely homotopic finite PL circles on an oriented surface can be carried to one another by an ambient PL isotopy. Disjoint ones bound a parametrized PL annulus; the same assertion works with compact support inside a surface with boundary. The isotopies extend over a supplied PL boundary collar. These are the actual conclusions and proofs2.1,7.1,11.1 of [[lem-finite-pl-peripheral-multicurves-admit-minimal-annular-position]]. No marked meridian-normalization conclusion is presumed from that supplier.
+
+[F2] Polygonal disks have finite PL parameters and prescribed boundary maps extend over them. Compact locally collared PL faces have PL collars. [[lem-finite-polygonal-disk-and-collar-surgery]] [[lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar]]
+
+[F3] Finite PL spheres in the supplied standard PL three-space bound parametrized PL balls. Proper finite PL disk cuts in such a ball give two parametrized balls: cap the disk with each complementary boundary disk, use the sphere assertion after a collar push, and restore that boundary window by the actual ball-window lemma. Prescribed PL boundary sphere maps extend over parametrized balls by finite coning. [[thm-finite-pl-schoenflies-in-dimension-three]] [[lem-parametrized-pl-balls-absorb-standard-boundary-windows]]
+
+[F4] The product and circle computations give $\pi_1(V)=\mathbb Z$, $\pi_1(\partial V)=\mathbb Z^2$ and $\pi_1(A)=\mathbb Z$. In the meridian-longitude coordinates $(\mu,\lambda)$ the boundary inclusion sends $(p,q)$ to $q$. [[thm-fundamental-group-of-the-circle]] [[thm-fundamental-group-of-a-product]]
+
+[A1] Full choice is [[def-axiom-of-choice]].
+
+## Proof
+
+1.1 First construct the marked meridian, rather than assuming that homotopic rims are already affine. Write the oriented rim classes as $(p,q)$ with $q=1$ or $q=-1$, orienting them consistently with the annulus parameter. They have the same unoriented class and are essential, by [F4] and the winding-one hypothesis. On the standard flat boundary torus, the line $t\mapsto(pt,qt)$ modulo $\mathbb Z^2$ is an embedded affine circle. A lift of either rim to $\mathbb R^2$ has endpoint difference $(p,q)$; interpolation of that lift with this line is an equivariant homotopy, so [F1] gives a PL ambient isotopy carrying the first rim to an affine circle of this slope. Its complement is an explicit flat open annulus: the integer vectors $(p,q),(1,0)$ form a lattice basis since their determinant is $-q=\pm1$. The moved second rim is a compact essential core in this open annulus. Choose an affine parallel level near one of the missing boundary levels and disjoint from that compact rim. The disjoint-circle annulus construction and interior-supported isotopy of [F1] carry the second rim to this level while fixing the first. Thus a PL isotopy homotopic to the identity carries both actual rims to parallel affine circles. A standard meridian circle $(t,\lambda_0)$ meets each precisely once, since the equation $qt+b=\lambda_0$ modulo one has exactly one solution. Choose $\lambda_0$ off the finitely many marked vertices. Extend the boundary isotopy across the supplied collar by [F1] and take the inverse image of the standard meridian disk. This gives a proper finite PL disk $E$ whose boundary is a meridian and meets each ORIGINAL rim once. In particular $\pi_1(A)\to\pi_1(V)$ is injective: its generator maps to $\pm1$. [A1, F1, F2, F4, given, construct, algebra]
+
+2.1 Make $E$ transverse to $A$ relative to its boundary. Near the two boundary intersections use the given quadrant collars to make the disk and annulus product sheets. On their remaining compact parts take finite linear subdivisions in the standard polyhedral model and perturb interior disk vertices off the finitely many affine determinant degeneracies. A sufficiently small perturbation preserves embedding: finitely many nonincident compact simplices stay disjoint and the incident disk stars retain their product charts. Thus $E\cap A$ is a finite union of simple circles and proper arcs with the specified two endpoints. Every intersection circle is nullhomotopic on $A$, since it bounds a subdisk of $E$ and the inclusion of $A$ is injective by step1.1. Its disk on the parametrized annulus is supplied by [F2], using a planar strip parameter or capping its two boundary circles to a sphere. Choose one innermost ON $A$; its disk has interior disjoint from $E$. Indeed another circle there contradicts innermostness, and an intersection arc with endpoints on $\partial A$ cannot enter this disk across its disjoint boundary. Replace the subdisk of $E$ bounded by this circle with a close parallel copy of its disk on $A$, joining along the outer disk shore in the product collar. Its interior misses the retained part of $E$; this gives an embedded disk with the SAME boundary, now with fewer intersection circles. No ambient isotopy of the exchanged disks is assumed. Repeat finitely. There remains exactly one proper intersection arc $\alpha$, since there are exactly two endpoints. Its ends lie on the two different rims, so it spans $A$. The resulting disk is still denoted $E$. Choose its thin product neighborhood respecting this single transverse arc: the finite crossing rectangles give the local product, and their edge parameters match by the disk and strip extensions of [F2]. [F2, F4, step 1.1, construct, algebra]
+
+3.1 The annulus separates $V$. To check this explicitly, intersection parity with the cooriented annulus defines a homomorphism $\pi_1(V)\to\mathbb F_2$: a generic compact homotopy has a finite inverse-image one-manifold of $A$, whose boundary endpoints show invariance of parity, and concatenation adds crossings. The rim generator of step1.1 can be pushed to the boundary-torus side of its quadrant collar, missing $A$, so this homomorphism is zero on a generator and therefore zero everywhere. If $V\setminus A$ were connected, a short arc crossing $A$ once could be closed by a path in its complement, giving intersection parity one. This is impossible. There are exactly two components: every component has closure meeting $A$, by connectedness of $V$; the two local sides chain consistently along connected $A$, so at most those two components occur. Also $V\mathbin{\|}E$ is connected. Its boundary is the torus cut along its meridian and capped by the two copies of $E$, hence is a single PL sphere. Every component of this finite disk cut has nonempty boundary; a boundaryless component would be both open and closed in connected $V$. Thus the connected boundary belongs to the only component. [F2, F4, step 1.1, step 2.1, construct, algebra, contradiction]
+
+4.1 Realize the standard product $V$ piecewise linearly as a square planar annulus times an interval in $\mathbb R^3$; its four rectangular band sectors give an explicit finite PL product parameter. This model has connected exterior: the vertical central hole and the region outside the outer square connect through either side beyond the interval endpoints. Any finite PL sphere in its interior bounds a ball lying inside it, by [F3]: that connected exterior lies on the unbounded side of the sphere. More directly the compact connected disk cut $B=V\mathbin{\|}E$ is a polyhedral submanifold of this standard space with its single spherical boundary. By [F3] that boundary bounds a parametrized ball. The local half-space charts place the interior of $B$ on one side; connectedness and compactness make it exactly the bounded side, so $B$ is that ball. The surface $R=A\mathbin{\|}\alpha$ is a proper parametrized PL disk in $B$. By [F3] it divides $B$ into two parametrized PL balls $B_1,B_2$. The two disk faces of the cut along $E$ each meet $R$ in its one spanning side, and that side divides each disk face into two parametrized PL disks by [F2]. Thus each $B_i$ has two disk windows, one on each $E$ face, the rectangle $R$, and one further rectangle from the boundary torus cut along its meridian and two rims. Restoring the $E$ face identifications pairs the windows of each $B_i$ with each other: pairing a window of $B_1$ with one of $B_2$ would connect the two sides in $V\setminus A$, contrary to step3.1. [F2, F3, step 2.1, step 3.1, construct, algebra]
+
+5.1 Match the marks before regluing. For each $B_i$ choose a PL parameter of its first disk window onto the square face of a cube at $t=0$, sending its arc on $R$ onto the edge $v=0$. Use the actual window-identification map to prescribe the parameter on the second window at $t=1$; their two parameters then agree under regluing. The parametrized disk extension of [F2] allows precisely those marked arcs and their endpoints to be prescribed. The remaining two disks are $R$ and the boundary-torus rectangle. Extend their already prescribed boundary maps by [F2], taking $R$ to $v=0$ and the other disk to the union of the other three lateral cube faces. These face maps have the matching cyclic orders from the original two-sided annulus and window collars. They paste to a PL boundary-sphere homeomorphism, which extends over the parametrized ball $B_i$ by [F3]'s coning construction. The cube end faces now identify by the identity, so the map descends to a finite PL parameter of $U_i$ by $[0,1]^2\times S^1$. The face $v=0$ is exactly $A$, and the other three sides are exactly its actual boundary annulus in $\partial V$. With $v$ as the product interval, this is the required boundary-parallel product. Its restriction on $A$ may initially differ from the supplied annulus parameter; precompose every product level with that same finite PL self-homeomorphism of $A$ to make the bottom restriction precisely the stated inclusion. The maps and inverses descend through the same finite face identifications, so remain finite PL. No disk rotation depending bilinearly on angle and radius was used. [F2, F3, step 3.1, step 4.1, construct, algebra] ∎

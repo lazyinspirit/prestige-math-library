@@ -22,7 +22,6 @@ deps:
   - def-ip-posterior-computation-error-budget
 justified_by: []
 forward_refs: []
-proof_strategy: direct
 axiom_use: >-
   AC supplies the conditional-expectation L2 projection and standard-Borel
   posterior kernel interfaces. Its consequences Countable Choice and
@@ -31,7 +30,7 @@ axiom_use: >-
   integration is exact is made.
 provenance:
   statement: literature-derived
-  proof: ai-altered
+  proof: not-applicable
 sources:
   references:
     - title: "Jan Blechschmidt, Oliver G. Ernst, Moritz Poguntke, and Björn Sprungk, Flow Matching for Fast Posterior Sampling in Bayesian Inverse Problems"
@@ -113,11 +112,3 @@ If the exact triangular flow of $\widehat v$ were known to satisfy $T_{\#}(\eta\
 [F6] If the exact triangular terminal map has joint pushforward $\pi$, its exact conditional fibers push $\eta$ to $\pi_y$ for $\pi_Y$-almost every datum; this needs the joint identity as a separate hypothesis. [[thm-ip-exact-triangular-transport-disintegrates-to-posterior]]
 
 [F7] The six-term posterior-computation budget is a telescoping ledger and supplies no learned-flow regression or optimizer bound. [[def-ip-posterior-computation-error-budget]]
-
-## Verification
-
-**Given:** The hypotheses and procedure in the Definition.
-
-1.1 The sampled variables have joint law $\operatorname{Unif}[0,1]\otimes\eta\otimes\pi$ by the algorithm's independent-draw specification and [F4]. Since $\pi$ is the proper Bayesian prior-predictive joint law, [F1] identifies its selected conditional kernel as a posterior version. The moment assumption makes $V=X_1-X_0$ square-integrable, so [F2] identifies its unique population squared-loss regression class and [F3] represents that class measurably in the coordinates $(t,X_t,Y)$. Each empirical loss is a finite sum of finite residuals; for an integrable candidate loss, [F4] gives $\mathbb E[\widehat{\mathcal L}_n(\theta)]=\mathcal L(\theta)$. This establishes the regression target and population meaning of the empirical objective without claiming the finite optimizer attains the population minimum or that the stopping statistic bounds population error. [A1, F1, F2, F3, F4, given, algebra]
-
-2.1 If the fitted field passes the stated regularity check, [F5] supplies the exact mathematical ODE flow and terminal map. If that exact map also satisfies the distinct joint pushforward hypothesis in [F6], the exact transport theorem gives the posterior fiber law. The algorithm instead returns numerical endpoints only when the solver reports success, so its actual finite-budget output remains an approximation unless an error certificate establishes otherwise. By [F7], a missing training or optimizer term in the posterior ledger remains separately reported rather than inferred as zero. [F5, F6, F7, given] ∎

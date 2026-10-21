@@ -370,6 +370,13 @@ snapshot and exact remaining findings/carriers. Both touched and reader
 obligations remain; normal independent adjudication, ledger closure and all
 gates are still required. Missing or changed authority fails closed.
 
+An exact native finding about an unchanged own-run draft helper outside every
+current manifest may use the explicit [unmanifested draft context route](tools/step3-owner-unmanifested-draft-context.md). It binds the genuine native
+observation and direct assigned consumer, creates no producer home or frontier
+coverage, and permits only independent nonfatal, false-positive or escalated
+disposition. Context edits and fatal-repair acceptance require ordinary owner
+repair instead; normal ledger, carrier seals and closure evidence remain required.
+
 A definition may acquire its first real proof contract after its frozen
 pre-reader snapshot; routing preserves the original null contract hash and
 requires the current contract. A reader's intermediate supplier observation

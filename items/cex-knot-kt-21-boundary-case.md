@@ -70,7 +70,7 @@ Every abstract oriented cobordism between two oriented knot circles in the stand
 
 [A2] Full Axiom of Choice implies the countable-choice hypothesis used by [F6]. ([[thm-choice-implies-dependent-implies-countable-choice]])
 
-[F7] For a smooth slice disk, the actual smooth branch of [[lem-slice-disk-induces-seifert-metabolizer]] constructs a metabolizer for every specified smooth Seifert surface: its Proof1.1–2.2 uses the actual smooth hypersurface and positive product constructed in Proof1.1–7.1 of [[lem-locally-flat-slice-surface-bounds-seifert-hypersurface]]. The separate unresolved TOP branches are not used here. This direct finite-form obstruction needs neither surface-choice invariance nor a general signature-vanishing theorem.
+[F7] For a smooth slice disk, the smooth branch of [[lem-slice-disk-induces-seifert-metabolizer]] constructs a metabolizer for every specified smooth Seifert surface using the actual hypersurface and positive product supplied by [[lem-locally-flat-slice-surface-bounds-seifert-hypersurface]]. The separate TOP branch of the slice-to-metabolizer lemma is not used here. This direct finite-form obstruction needs neither surface-choice invariance nor a general signature-vanishing theorem.
 
 ## Counterexample
 

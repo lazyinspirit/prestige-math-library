@@ -12,6 +12,7 @@
 // read-modify-write one shared JSON file and erase a sibling's route.
 
 import { loadForeignReaderRoutes, foreignReaderRoute, bindForeignReaderFinding, validateForeignReaderFinding } from './step3-owner-foreign-reader-routes.mjs';
+import { loadUnmanifestedDraftContexts, bindUnmanifestedDraftContext, unmanifestedDraftCarrier, unmanifestedDraftVerdictAllowed } from './step3-owner-unmanifested-draft-context.mjs';
 import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
 import { createHash } from 'node:crypto';
@@ -272,6 +273,7 @@ function downstreamCarrier(batch, finding) {
 }
 
 function currentDecisionCarrier(decision, target, live) {
+  if (target?.owner_unmanifested_draft_context) return unmanifestedDraftCarrier(ROOT, run, String(target.obligation).split(':')[1], target);
   if (target?.owner_foreign_refuter_route) return foreignRefuterCarrier(ROOT, run, target);
   if (target?.owner_downstream_consumer_route) return downstreamCarrier(
     String(target.obligation).split(':')[1], target);
@@ -701,7 +703,9 @@ function reportOnlyFinding(finding, refuter = false) {
     owner_downstream_consumer_route: _downstreamRoute,
     owner_downstream_reader_obligation: _downstreamReader,
     owner_partial_reader_repair: _ownerPartialReaderRepair,
-    owner_unbound_reader_observation: _ownerUnboundReaderObservation, ...row } = finding;
+    owner_unbound_reader_observation: _ownerUnboundReaderObservation,
+    owner_unmanifested_draft_context: _unmanifested, ...row } = finding;
+  if (_unmanifested) row.subject_type = 'in-run-dependency';
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -909,7 +913,8 @@ if (command === 'split') {
   const inRun = findingDependencies(batch, derived.manifestPost, Array.isArray(readerReport.findings) ? readerReport.findings : []);
   const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
   const downstream = loadDownstreamConsumerRoutes(ROOT, run, batch);
-  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
+  const unmanifested = loadUnmanifestedDraftContexts(ROOT, run, batch);
+  const readerAllowed = new Set([...[...unmanifested.values()].map(r => r.entry.id),...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
     ...[...requiredPages.values()].map(r => r.entry.page),
     ...[...downstream.values()].map(r => r.entry.consumer_id)]);
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
@@ -918,6 +923,10 @@ if (command === 'split') {
   const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
   const partialFindings = partialReaderFindings(ROOT, run, batch);
   for (const finding of readerFindings) {
+    if (unmanifested.has(finding.obligation)) {
+      Object.assign(finding, bindUnmanifestedDraftContext(ROOT, run, batch, finding));
+      continue;
+    }
     const downstreamRoute = downstream.get(finding.obligation);
     if (downstreamRoute) {
       finding.owner_downstream_consumer_route = downstreamRoute.binding;
@@ -1033,6 +1042,8 @@ if (command === 'collect') {
   for (const finding of scope.reader_findings ?? []) if (finding.owner_downstream_consumer_route
     || downstream.has(finding.obligation)) downstreamCarrier(batch, finding);
   const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? []);
+  for (const finding of scope.reader_findings ?? []) if (finding.owner_unmanifested_draft_context)
+    unmanifestedDraftCarrier(ROOT, run, batch, finding);
   for (const finding of scope.reader_findings ?? []) if (finding.subject_type === 'in-run-dependency') {
     validateInRunFinding(finding, batch, inRun, error);
   }
@@ -1260,14 +1271,19 @@ if (command === 'check') {
             publishedDependencies(derived.manifestPost, allRunIds), scope);
           const inRun = findingDependencies(batch, derived.manifestPost,
             [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests);
+          const unmanifested = loadUnmanifestedDraftContexts(ROOT, run, batch);
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
-            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
+            new Set([...[...unmanifested.values()].map(r => r.entry.id), ...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys(),
               ...[...requiredPages.values()].map(r => r.entry.page),
               ...[...downstream.values()].map(r => r.entry.consumer_id)]), reportError, 'reader');
           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
           const partialFindings = partialReaderFindings(ROOT, run, batch);
           for (const finding of scope.reader_findings ?? []) {
+            if (finding.owner_unmanifested_draft_context || unmanifested.has(finding.obligation)) {
+              try { unmanifestedDraftCarrier(ROOT, run, batch, finding); } catch (cause) { reportError(cause.message); }
+              continue;
+            }
             if (finding.owner_downstream_consumer_route || downstream.has(finding.obligation)) {
               try { downstreamCarrier(batch, finding); } catch (cause) { reportError(cause.message); }
               continue;
@@ -1532,6 +1548,19 @@ if (command === 'check') {
             error('foreign-refuter-stale', `${decision.obligation} must bind current carrier and original native flag`);
         }
         let unchangedRequiredPageContext = false;
+        if (target?.owner_unmanifested_draft_context) {
+          try {
+            const carrier = currentDecisionCarrier(decision, target, null);
+            unchangedRequiredPageContext = true;
+            if (!unmanifestedDraftVerdictAllowed(decision.verdict)) {
+              error('unchanged-draft-context-verdict', `${decision.obligation} is read-only context; only false_positive, confirmed_nonfatal or escalation is permitted`);
+              continue;
+            }
+            if (decision.consumer_id !== target.consumer_id || decision.producer_batch !== undefined
+              || decision.subject_sha256 !== hashValue(carrier))
+              error('unmanifested-context-seal', `${decision.obligation} must seal the actual unchanged context and consumer, without a producer batch`);
+          } catch (cause) { error('unmanifested-context-authority', cause.message); continue; }
+        }
         if (target?.owner_required_page_route) {
           try {
             const carrier = currentDecisionCarrier(decision, target, null);
