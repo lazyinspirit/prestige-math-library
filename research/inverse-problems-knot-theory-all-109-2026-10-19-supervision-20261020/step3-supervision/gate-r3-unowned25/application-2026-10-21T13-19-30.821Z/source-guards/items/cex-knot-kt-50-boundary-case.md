@@ -1,0 +1,83 @@
+---
+id: cex-knot-kt-50-boundary-case
+kind: counterexample
+title: A nugatory kink defeats crossing minimality
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 5
+deps:
+  - def-crossing-number-of-link
+  - def-reduced-alternating-link-diagram
+  - def-oriented-crossing-sign-writhe-and-blackboard-framing
+  - def-kauffman-bracket-smoothing-and-loop-value
+  - thm-bracket-state-sum-matches-library-jones-specialization
+  - lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy
+  - def-axiom-of-choice
+justified_by: []
+aliases: []
+proof_strategy: direct
+axiom_use: Full AC is used only to identify the library Jones polynomial through
+  the bracket specialization; the kink calculation and crossing-number
+  comparison are choice-free.
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 43–45
+      url: https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf
+    - title: Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque
+        163–164 (1988), §III, printed pp. 164–168
+      url: https://www.numdam.org/item/AST_1988__163-164__137_0.pdf
+---
+
+## Statement refuted
+
+Assume full AC. The positive one-crossing type-I kink of the unknot is connected and alternating but not reduced; its diagram has one crossing while the represented unknot has crossing number zero, and its normalized library Jones polynomial has $t$-span zero.
+
+```tikz
+\begin{tikzpicture}[scale=0.9, line cap=round, line join=round]
+  \draw[->,thick] (-0.22,-0.22)--(-0.045,-0.045);
+  \draw[->,thick] (0.045,0.045)--(0.22,0.22);
+  \draw[->,very thick] (-0.22,0.22)--(0.22,-0.22);
+  \draw[->,thick] (0.22,0.22) .. controls (0.95,1.0) and (-0.95,1.0) .. (-0.22,0.22);
+  \draw[->,thick] (0.22,-0.22) .. controls (0.95,-1.0) and (-0.95,-1.0) .. (-0.22,-0.22);
+  \node at (0,1.25) {positive type-I kink};
+\end{tikzpicture}
+```
+
+The arrows orient the single component; at the central crossing, the diagonal from northwest to southeast is over and the southwest-to-northeast diagonal has a gap.
+
+## Statement references
+
+[Calegari, *Introduction to Knot Theory*, §5.2](https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf)
+
+[Kauffman, *New Invariants in the Theory of Knots*, §III](https://www.numdam.org/item/AST_1988__163-164__137_0.pdf)
+
+## Facts & Assumptions
+
+**Given:** Full AC, the positive type-I kink diagram $D_+$ of the unknot, and the bracket and Jones conventions in the statement.
+
+[F1] A crossing contributes $A$ for its $A$-smoothing and $A^{-1}$ for its $B$-smoothing, a state with $k$ circles contributes $\delta^{k-1}$, and $\delta=-A^2-A^{-2}$ ([[def-kauffman-bracket-smoothing-and-loop-value]]).
+
+[F2] The positive geometric crossing has sign $+1$, and writhe is the sum of crossing signs ([[def-oriented-crossing-sign-writhe-and-blackboard-framing]]).
+
+[F3] A connected diagram has connected projection graph, alternation switches over-under at successive visits, and reducedness excludes a crossing repeated on a region boundary ([[def-reduced-alternating-link-diagram]]).
+
+[F4] A type-I Reidemeister move is realized by an ambient isotopy of the represented link ([[lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy]]).
+
+[F5] Under full AC, the normalized bracket state sum specializes to the library Jones polynomial by $V_K(t)=f_K(t^{-1/4})$ with $t=A^{-4}$ ([[thm-bracket-state-sum-matches-library-jones-specialization]]).
+
+[F6] The crossing number is the least crossing count among regular diagrams of the same underlying unoriented link type ([[def-crossing-number-of-link]]).
+
+[A1] Full AC is the choice-function principle for arbitrary families of nonempty sets ([[def-axiom-of-choice]]).
+
+## Counterexample
+**Proof technique:** direct.
+
+1.1 The two states of a positive kink consist of an $A$-smoothing that leaves the original arc and creates one trivial circle, and a $B$-smoothing that leaves only the original arc. By [F1] their total bracket factor is $A\delta+A^{-1}=A(-A^2-A^{-2})+A^{-1}=-A^3$, so $\langle D_+\rangle=-A^3$. [given, F1, construct, algebra]
+
+2.1 The kink has one positive crossing, so [F2] gives $\operatorname{wr}(D_+)=1$. Its normalized bracket is $f_{D_+}(A)=(-A^3)^{-1}(-A^3)=1$. By [A1] and [F5], the library Jones polynomial is therefore $1$, whose $t$-span is $0$. The one-crossing projection is connected; its unique component visits the crossing once over and once under, so it is alternating; the exterior region has the crossing twice on its boundary, so it is not reduced by [F3]. [A1, F2, F3, F5, step 1.1, algebra]
+
+3.1 By [F4], the type-I move carries $D_+$ to the crossing-free unknot diagram. Thus the represented link has a diagram with zero crossings. Since crossing counts are nonnegative by [F6], its crossing number is zero, strictly less than the one crossing in $D_+$. This verifies the claimed failure of crossing minimality at a non-reduced alternating diagram. [F4, F6, given, step 2.1, algebra] ∎
