@@ -1,6 +1,33 @@
 # Machine Learning and Adaptive Decision Methods — integrated prose scaffold
 
-**Status: refreshed 2026-10-18; prose planning only.** Preserve ML-01–83 and all twelve original prerequisite IDs; add P-SDE-03 as a new probability supplier pair. ML-84–93 add ten pairs; the category now proposes 100 A/B pairs (93 ML plus seven category-local prerequisite pairs), with five additional published prerequisite pairs reused in their existing homes and the new P-SDE-03 probability prerequisite pair. Historical six-reader dossiers and the 2026-10-12 audit remain inherited evidence, not new reading or proof acceptance. Current supplier reconciliation and new source-reading limits are recorded in `research/scaffold-refresh-2026-10-18/machine-learning/`. No items or pages are authored here.
+## Current category organization
+
+The owner-approved 100-pair track is organized into four published categories:
+
+| Category | Pairs | Existing pair labels |
+|---|---:|---|
+| Statistical Learning and Classical Models | 34 | ML-01–29, ML-64, ML-84, ML-90, ML-92–93 |
+| Neural Networks and Learning Dynamics | 28 | ML-30–50, ML-85–87, P-RMT-01–02, P-WGF-01–02 |
+| Representation Learning and Generative Models | 17 | ML-51–63, ML-89, P-KR-01–02, P-SDE-02 |
+| Online and Reinforcement Learning | 21 | ML-65–83, ML-88, ML-91 |
+
+The exact page paths and reading-part assignments are in
+[machine-learning-category-reorganization.json](machine-learning-category-reorganization.json).
+Each category has a published overview and a five-part reading pathway.
+Statistical learning supplies selected prerequisites to the other three;
+neural learning also supplies selected prerequisites to generative modeling
+and preference optimization. The generative and online/reinforcement branches
+are otherwise parallel. Prerequisites outside this track retain their homes.
+
+The prose scaffold below preserves its original mathematical contracts and
+historical source-reading limits. Its older numbered “Category 4” means the
+entire ML track, following the three earlier statistics collections; it does
+not mean the fourth category in this new split. Historical authoring-status
+language is not a current publication report: current status comes from the
+actual carriers and owner-publication record. No mathematical content or
+review evidence is changed by the reorganization.
+
+**Status: refreshed 2026-10-18; prose planning only.** Preserve ML-01–83 and all twelve original prerequisite IDs; add P-SDE-03 as a new probability supplier pair. ML-84–93 add ten pairs; the combined track contains 100 A/B pairs (93 ML plus seven category-local prerequisite pairs), with five additional published prerequisite pairs reused in their existing homes and the new P-SDE-03 probability prerequisite pair. Historical six-reader dossiers and the 2026-10-12 audit remain inherited evidence, not new reading or proof acceptance. Current supplier reconciliation and new source-reading limits are recorded in `research/scaffold-refresh-2026-10-18/machine-learning/`. No items or pages are authored here.
 
 Category 4 may consume published mathematics and the earlier statistical
 categories 1–3. Every dependency below points to a previous ML pair or an
@@ -629,7 +656,7 @@ Define a finite-budget GRPO-style procedure, separately from any guarantee: at e
 Owner direction (2026-10-17): the Machine Learning and Adaptive Decision Methods
 category originally contained 90 A/B pairs: ML-01–ML-83 plus P-KR-01, P-KR-02, P-SDE-02,
 P-WGF-01, P-WGF-02, P-RMT-01 and P-RMT-02. These seven prerequisite pairs
-belong to `machine-learning` and precede their consumers. The 2026-10-18 additions ML-84–93 bring the category total to 100 pairs. Their mathematical
+remain in the learning track and precede their consumers; their current category homes are listed above. The 2026-10-18 additions ML-84–93 bring the category total to 100 pairs. Their mathematical
 scope remains general: category placement does not introduce a dependency on
 learning-specific results. The other five prerequisite designs below retain
 their existing probability/numerical homes and are reused without duplication.

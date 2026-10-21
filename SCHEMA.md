@@ -336,6 +336,12 @@ pairs belong to `numerical-differential-equations-and-stochastic-dynamics`;
 page/item identities and historical run receipts retain their original identities
 and recorded paths, respectively.
 
+The former `machine-learning` category is split into Statistical Learning and
+Classical Models, Neural Networks and Learning Dynamics, Representation Learning
+and Generative Models, and Online and Reinforcement Learning. The exact 100-pair
+mapping is in [the owner-approved category record](research/machine-learning-category-reorganization.json).
+Page/item IDs, publication status and historical workflow evidence are preserved.
+
 - Page file: `library/<category>/<page>.md`. Frontmatter uses `page`, `title`,
   `status`, `items: [id, ...]`, and `examples: [id, ...]`; the body is the page
   summary. The two lists control placement, not item kind. Entries must resolve
