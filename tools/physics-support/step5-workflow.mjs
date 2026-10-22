@@ -10,6 +10,7 @@ import { spawnSync } from 'node:child_process';
 import { freezeFrontier, validateFrontier, readLibraryItems, discoverDownstream, assessFatalThreshold } from './step5-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { publishedMaintenance, isPublishedMaintenance } from './step5-published-maintenance.mjs';
+import { explanatoryReviewPhase, explanatoryReviewProgressPath, prepareExplanatoryReview, explanatoryReviewCompletion, isExplanatoryReviewCompletion, verifyExplanatoryReviewReplay } from './step5-explanatory-edit-review.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
@@ -400,9 +401,18 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null,publishedLocalMaintenance=null}={}) {
-  const childReview=id=>ownerFindingCorrection?.token===ownerFindingCollectionToken
-    ?ownerFindingCorrection.reviews.find(row=>row.id===id):null;
+function currentExplanatoryReview(root,run){
+  const progress=explanatoryReviewProgressPath(root,run);if(!existsSync(progress))return null;
+  const sealed=existsSync(join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json'));
+  return explanatoryReviewCompletion(root,run,sealed?{}:reviewContextHashes(root,read(progress).subjects));
+}
+
+export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null,publishedLocalMaintenance=null,explanatoryEditReview=null}={}) {
+  explanatoryEditReview??=root&&pack.phase==='initial'&&pack.round===1?currentExplanatoryReview(root,pack.run):null;
+  const childReview=id=>(ownerFindingCorrection?.token===ownerFindingCollectionToken
+    ?ownerFindingCorrection.reviews.find(row=>row.id===id):null)
+    ??(isExplanatoryReviewCompletion(explanatoryEditReview)&&explanatoryEditReview.guards[id]===now[id]
+      ?explanatoryEditReview.reviews.find(row=>row.id===id):null);
   const corrected=id=>(scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id)||!!childReview(id);
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   for(const unit of pack.units) {
@@ -502,7 +512,8 @@ export function adjudicationCorrectionWork(root,run,phase,round) {
     ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[]),
     ...(existsSync(ownerFindingProgressPath(root,run,phase,round))?['1','2','3'].map(unit=>ownerFindingPhase(phase)+':'+unit):[]),
     ...(phase==='initial'&&existsSync(pageCorrectionProgressPath(root,run,round))?[pageCorrectionPhase+':1']:[]),
-    ...(phase==='initial'&&round===1&&existsSync(reviewCorrectionProgressPath(root,run))?[reviewCorrectionPhase+':1']:[])];
+    ...(phase==='initial'&&round===1&&existsSync(reviewCorrectionProgressPath(root,run))?[reviewCorrectionPhase+':1']:[]),
+    ...(phase==='initial'&&round===1&&existsSync(explanatoryReviewProgressPath(root,run))?[explanatoryReviewPhase+':1']:[])];
 }
 
 function reviewCorrectionContext(root,run,phase,round){
@@ -709,6 +720,17 @@ function advanceOwnerFindingQueue(root,run,phase,round) {
 }
 
 export function advanceAdjudicationCorrection(root,run,phase,round) {
+  let explanatory=null;
+  if(phase==='initial'&&round===1&&!existsSync(join(workflowDir(root,run),'initial-1-collected.json'))){
+    explanatory=prepareExplanatoryReview(root,run,phase,round);
+    if(explanatory){
+      const completion=currentExplanatoryReview(root,run);
+      if(!completion)return explanatory;
+      const {sha256:priorSeal,...payload}=completion;
+      frozen(join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json'),{...payload,sha256:digest(payload)});
+    }
+  }
+
   // Pending writers retain their frozen authority. Full scientific current-
   // state authentication belongs at the drained completion join, not mid-edit.
   if(phase==='initial'&&(existsSync(pageCorrectionProgressPath(root,run,round))||round===1&&existsSync(reviewCorrectionProgressPath(root,run)))
@@ -760,7 +782,7 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
   const review=advanceReviewCorrection(root,run,phase,round);
   if(review){if(!review.completion)return review;collect(root,run,phase,round);return {...review,parent_collected:true};}
   const context=inheritedContext(root,run,phase,round);
-  if(!context)return null;
+  if(!context)return explanatory?{...explanatory,explanatory_review_completed:true}:null;
   assertCorrectionDrained(root,context);
   const dir=workflowDir(root,run),path=correctionProgressPath(dir,phase,round);
   const correction=correctionPhase(phase),request=context.payload;
@@ -819,7 +841,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     }
     verifyHistoricalEvidence(root,run,prior.evidence);
     if(prior.published_local_repairs?.length)publishedMaintenance(root,run,readPack(root,run,phase,round),hashes(root),{replay:prior.published_local_repairs});
-    if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);}
+    if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);verifyExplanatoryReviewReplay(root,run,prior);}
     syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
   const pack=readPack(root,run,phase,round);
@@ -827,6 +849,16 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const collectionItems=pack.scientific_repair?readLibraryItems(root):null;
   const current=hashes(root,collectionItems??undefined),reported={...current};
+  // Authenticate the actual current published state once before validating
+  // preserved intermediate owner/scientific snapshots as well as the final map.
+  const publishedLocalMaintenance=phase==='initial'&&round===1?publishedMaintenance(root,run,pack,current):null;
+  const explanatoryProgress=phase==='initial'&&round===1?explanatoryReviewProgressPath(root,run):null;
+  const explanatoryEditReview=explanatoryProgress&&existsSync(explanatoryProgress)
+    ?currentExplanatoryReview(root,run):null;
+  if(phase==='initial'&&round===1&&existsSync(join(workflowDir(root,run),'owner-explanatory-edit-review-request.json')))
+    requireValue(explanatoryEditReview&&existsSync(join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json')),
+      'explicit explanatory edit awaits genuine sealed native review');
+
   const pageProgress=phase==='initial'?pageCorrectionProgressPath(root,run,round):null;
   const pageCompletion=pageProgress&&existsSync(pageProgress)
     ?pageCorrectionCompletion(root,run,round,pageCorrectionRequest(root,run,phase,round,{continuation:true})):null;
@@ -864,7 +896,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       'missing or stale scientific correction request');
     assertScientificCorrectionDrained(root,context);verifyEvidence(progress.evidence);
     const historical={...(ownerPack?.before??reported),[context.payload.subject]:context.payload.narrowed_content_sha256};
-    const originalValidation=validateReports(pack,historicalReports,historical,{root});
+    const originalValidation=validateReports(pack,historicalReports,historical,{root,publishedLocalMaintenance,explanatoryEditReview});
     requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
     const childPhase=scientificCorrectionPhase(phase),child=read(workerReport(root,run,childPhase,round,'1'));
     scientificAdopted=scientificCorrectionCompletion(child,context.payload,current,
@@ -888,7 +920,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     // current map. Every original report must validate before any projection.
     const historical={...ownerPack.before};
     if(scientificContext)historical[scientificContext.payload.subject]=scientificContext.payload.narrowed_content_sha256;
-    const originals=validateReports(pack,historicalReports,historical,{root});
+    const originals=validateReports(pack,historicalReports,historical,{root,publishedLocalMaintenance,explanatoryEditReview});
     requireValue(!originals.errors.length,originals.errors.join('\n'));
     ownerCorrection=collect(root,run,childPhase,round,{correctionToken:ownerFindingCollectionToken});
     const decisions=new Map(ownerCompletion.decisions.map(row=>[key(row),row]));
@@ -897,10 +929,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       decisions:report.decisions.map(row=>decisions.get(key(row))??row),
       reviews:report.reviews.map(row=>reviews.get(row.id)??row)}));
   }
-  const publishedLocalMaintenance=phase==='initial'&&round===1?publishedMaintenance(root,run,pack,current):null;
-  const result=validateReports(pack,effectiveReports,reported,{root,publishedLocalMaintenance,
+  const result=validateReports(pack,effectiveReports,reported,{root,publishedLocalMaintenance,explanatoryEditReview,
     scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null,
     ownerFindingCorrection:ownerCompletion?{token:ownerFindingCollectionToken,reviews:ownerCompletion.reviews}:null});
+  if(explanatoryEditReview)result.reviews.push(...explanatoryEditReview.reviews);
   if(ownerCompletion){
     const assigned=new Set(result.reviews.map(row=>row.id));
     result.reviews.push(...ownerCompletion.reviews.filter(row=>!assigned.has(row.id)));
@@ -983,6 +1015,12 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   if(publishedLocalMaintenance?.repairs.length)receipt.published_local_repairs=publishedLocalMaintenance.repairs;
+  if(explanatoryEditReview){
+    const path=join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json');
+    Object.assign(receipt.evidence,explanatoryEditReview.evidence,{[path]:digest(readFileSync(path,'utf8'))});
+    receipt.native_explanatory_edit_review=explanatoryEditReview;
+  }
+
   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
   if(scientificCompletion)receipt.scientific_repair_completion=scientificCompletion;
   if(correction){

@@ -43,7 +43,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
     id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
     modelProfile:SOL61_HIGH,
     units:(ctx:any)=>adjudication ? adjudicationUnits(ctx,phase,id) : ownerUnits(ctx,phase,id),
-    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-(?:(?:scientific|owner-finding)-)?correction-'+phase+'-r'+round(ctx,id)+'-u[123]\\.result\\.json$'+(phase==='initial'?'|^alpha-repair-step5-v2-(?:page|review)-correction-initial-r'+round(ctx,id)+'-u1\\.result\\.json$':'')):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
+    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-(?:(?:scientific|owner-finding)-)?correction-'+phase+'-r'+round(ctx,id)+'-u[123]\\.result\\.json$'+(phase==='initial'?'|^alpha-repair-step5-v2-(?:(?:page|review)-correction|explanatory-review)-initial-r'+round(ctx,id)+'-u1\\.result\\.json$':'')):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
     // Sibling owners run concurrently. Shared metadata edits use a short
     // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
@@ -60,6 +60,13 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
         const complete=executor.unitsComplete(stage,ctx);
         if(adjudicationBaseUnits(ctx).every((u:string)=>complete.has(u))){
           const progress=advanceAdjudicationCorrection(ctx.repo,ctx.run,phase,round(ctx,id));
+          if(progress?.explanatory_review_completed&&executor.state){
+            const handoff=executor.state.stage(id);
+            if(!handoff.explanatoryReviewPausedAt){
+              handoff.explanatoryReviewPausedAt=new Date().toISOString();executor.state.paused=true;
+              executor.reporter.notify('paused','User explanatory edits received genuine native review; Root may add later owner findings before the initial parent collects.',{stage:id});
+            }
+          }
           if(progress?.parent_collected&&executor.state){
             const handoff=executor.state.stage(id);
             if(!handoff.ownerFindingCollectionPausedAt){
@@ -89,7 +96,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
         }
         const [pass,unit]=decode(phase,u);
         if(pass==='correction-'+phase||pass==='scientific-correction-'+phase||pass==='owner-finding-correction-'+phase
-          ||phase==='initial'&&['page-correction-initial','review-correction-initial'].includes(pass)){
+          ||phase==='initial'&&['page-correction-initial','review-correction-initial','explanatory-review-initial'].includes(pass)){
           return {role:'alpha-repair',label:workerLabel(pass,n,unit),job:'authoring',covers:[u],profile:SOL61_HIGH,
             brief:'briefs/step5-owner-repair.md',task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};
         }

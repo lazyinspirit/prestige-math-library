@@ -383,6 +383,48 @@ context checks, owner recertification and the complete gate battery remain
 required. The initial pack, original reports and mechanical zero-work results
 stay immutable.
 
+An explicitly authorized user edit already applied only to existing diagram
+explanation prose in `## Remarks` has a separate read-only native adoption route.
+It does not use the published-repair exemption. Root advertises
+`research/RUN-step5-v2/owner-explanatory-edit-review-request.json` with
+`{version:1, run, request:{path,sha256}}`, naming immutable
+`owner-explanatory-edit-review-ID.json` in that directory. The request contains
+`version:1`, `run`, `phase:"initial"`, `round:1`, `reviewer:"/root"`,
+`kind:"user-authorized-preapplied-remarks-edit"`, `source_edit_authority:false`,
+`native_execution_coverage_adopted:false`, a concrete `reason`, a bound
+`user_authorization:{path,sha256}`, and nonempty `entries` with `id`,
+`before_source:{path,sha256}` and `current_source:{path,sha256}`. All evidence
+is exact-byte, run-local research evidence; no original source is invented.
+
+Each target must be an unassigned local draft in the original frozen frontier.
+The genuine original source must match both the immutable initial content hash
+and the Step-5 auditor baseline's raw carrier hash. Only the prose between the
+unique Remarks heading and existing TikZ fence may differ: the complete prefix
+and TikZ suffix remain byte-identical. New headings, fences or links are outside
+this bounded route. After original writers drain, native `onProgress` creates
+`explanatory-review-initial:1`, retaining the Sol 6.1 high profile. The worker
+reviews the exact explanations, unchanged claims/proofs/diagram, actual suppliers
+and current context, records actual focused checks, and changes no source or
+shared metadata. It returns actual `unaffected` reviews and separately attributed
+`user-authorized-side-edit` adoptions, with no adjudication or authorship claim.
+
+Native completion requires the exact current target sources, genuine current
+review contexts and authorized completed native dispatch. Original workflow
+artifacts, canonical ledger, current run batch pages/contracts and relevant merged
+pages/contracts are protected during this read-only child. The engine seals the
+actual review and pauses once before parent collection, allowing Root to advertise
+later scientific owner findings. Those later authorized repairs do not rewrite or
+permanently freeze the child's historical metadata. A sealed review retains its
+actual old context; later supplier changes require ordinary fresh impact review,
+never a substituted digest. Verification-only bookkeeping retains the normal
+canonical-content boundary. The initial parent binds the exact actual child
+review and adopted source guards while preserving every original pack, report,
+assignment and judge tuple. All other draft writes still require ordinary source
+ownership and review. Authentic published maintenance is checked before both
+intermediate historical parent validations and final validation, without projecting
+away those changes. Normal current-context closure, certification, rejudgment,
+owner recertification and complete gates remain required.
+
 The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
 Coverage gates retain the singleton original Step-4 lineup bound by the frozen
 `step4-verdicts.json` and initial adjudication pack. Before Step 5 is frozen,
