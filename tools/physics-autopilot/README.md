@@ -22,7 +22,7 @@ Each batch still requires its predecessor receipts and artifacts, with no live
 predecessor writer. Stage, role, and global caps include workers adopted after a
 controller restart; the full group gate barrier remains in place.
 
-One owner-authorized fresh Step-3 refutation can be enabled with the same
+One owner-authorized fresh Step-3 refutation per unit can be enabled with the same
 hash-bound protocol documented in `../autopilot/REFUTER-COVERAGE-CONTINUATIONS.md`.
 The new native refuter performs all scoped reads independently; original
 coverage assertions are not accepted as proof of reading. The original report

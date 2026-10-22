@@ -4,9 +4,17 @@
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep3 } from './step3-hold.mts';
-import { withRefuterContinuation } from './refuter-continuations.mts';
+import { statSync } from 'node:fs';
 import { prepareStep3AdjudicationOrder } from '../../physics-support/step3-adjudication-order.mjs';
 import { batchAdjudicator, step3Adjudicators } from '../../physics-support/step3-adjudicators.mjs';
+
+// The controller watches sibling stage modules. Version this helper as well so
+// a guarded live reload actually adopts changed continuation validation.
+const REFUTER_CONTINUATION_URL = new URL('./refuter-continuations.mts', import.meta.url);
+const REFUTER_CONTINUATION_STAT = statSync(REFUTER_CONTINUATION_URL);
+const { withRefuterContinuation } = await import(
+  `${REFUTER_CONTINUATION_URL.href}?v=${REFUTER_CONTINUATION_STAT.mtimeMs}:${REFUTER_CONTINUATION_STAT.size}`
+);
 
 // Step-3 readers and refuters use GPT-6 Luna max;
 // batch adjudicators use Sol 6.1/medium.

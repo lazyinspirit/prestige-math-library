@@ -343,13 +343,19 @@ finding, an exact original finding and typed post-reader snapshot, and an
 explicit same-defect reference with substantive evidence. Independent ledger,
 severity, current-content and application checks remain mandatory.
 
-One bounded refuter coverage correction may be authorized through
+One bounded refuter coverage correction per unit may be authorized through
 `research/RUN-step3-refuter-continuations.json`. When the native receipt's
 40-line diagnostic clips the coverage headers, `original_last_message` can bind
 the exact prior positive-attempt native message file. Its parsed complete report
 must equal the immutable report archive; receipt identity, archive hashes and
 the diagnostic suffix still authenticate the original process. Current scope,
-task and subject guards are checked before the single fresh dispatch. This
+task and subject guards are checked before that unit's single fresh dispatch.
+Multiple units require distinct unit entries and exact correction labels; each
+retains its own immutable receipt, archive and one-attempt budget. Only selected
+pending correction units undergo pre-dispatch current-input and spent-attempt
+checks, so a completed sibling does not block another unit. Every corrected
+unit's original stable receipt is excluded from coverage, and only its exact
+correction stable filename can replace it; attempt filenames cannot do so. This
 authenticates history only: fresh complete reads, collection, adjudication and
 the ordinary gates remain required. The original report and receipt are never
 rewritten to manufacture coverage.

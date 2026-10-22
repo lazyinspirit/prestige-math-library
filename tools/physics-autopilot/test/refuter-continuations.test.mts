@@ -155,3 +155,94 @@ test('native stage changes only correction label/task and retains model, schema 
   assert.deepEqual(plans.map((p: any) => p.covers), [['7'], ['8']]);
   assert.equal(stage.artifacts(f.ctx, '7'), 'research/r-refute-7.json');
 });
+
+function multipleFixture(t: any) {
+  const f = fixture(t);
+  const ref = (path: string) => ({ path, sha256: createHash('sha256').update(readFileSync(join(f.repo, path))).digest('hex') });
+  const report = { batch: '8', opened: ['def-b', 'def-context'], not_opened: [], flagged: [] };
+  f.write('research/r-refute-8.json', report); f.write('research/r-old-report-8.json', report);
+  f.write('research/r-step3-scope-8.json', { refuter_scope: ['def-b'] });
+  f.write('research/r-batch-8.pages.json', []);
+  f.write('items/def-b.md', 'second fixture carrier');
+  f.write('research/r-correction-task-8.md', 'second independent fresh read');
+  f.write('research/r-dispatch/refuter-refute-8.result.json', {
+    run: 'r', role: 'refuter', label: 'refute-8', covers: ['8'], ok: true, exit_code: 0,
+    ended_at: '2026-10-08T04:19:33Z', tail: JSON.stringify(report),
+  });
+  const second = { ...f.entry, unit: '8', label: 'refute-8-coverage-correction-1',
+    previous_result: ref('research/r-dispatch/refuter-refute-8.result.json'),
+    report_path: 'research/r-refute-8.json', report_sha256: ref('research/r-refute-8.json').sha256,
+    original_report: ref('research/r-old-report-8.json'), scope_sha256: ref('research/r-step3-scope-8.json').sha256,
+    subjects: [{ id: 'def-b', ...ref('items/def-b.md') }], task: ref('research/r-correction-task-8.md') };
+  f.auth.continuations.push(second); f.save();
+  const stage = { ...f.stage, id: '3a-refute', units: () => ['7', '8', '9'],
+    plan: (_ctx: any, pending: string[]) => pending.map(unit => ({ label: `refute-${unit}`, covers: [unit], task: 'original-task' })) };
+  f.write('research/r-dispatch/refuter-refute-9.result.json', { run: 'r', covers: ['9'], ok: true });
+  return { ...f, second, stage };
+}
+
+test('multiple corrections replace only their respective original stable receipts', t => {
+  const f = multipleFixture(t), pattern = refuterContinuationPattern(f.ctx, f.stage);
+  assert.deepEqual([...covered(join(f.repo, 'research/r-dispatch'), pattern)], ['9']);
+  for (const unit of ['7', '8']) {
+    assert.equal(pattern.test(`refuter-refute-${unit}.result.json`), false);
+    assert.equal(pattern.test(`refuter-refute-${unit}-coverage-correction-1.result.json`), true);
+    assert.equal(pattern.test(`refuter-refute-${unit}-coverage-correction-2.result.json`), false);
+    assert.equal(pattern.test(`refuter-refute-${unit}-coverage-correction-1.attempt-1.result.json`), false);
+    assert.equal(pattern.test(`refuter-refute-${unit}-coverage-correction-1XresultXjson`), false);
+  }
+  assert.equal(pattern.test('refuter-refute-9-coverage-correction-1.result.json'), false);
+  f.write('research/r-dispatch/refuter-refute-7-coverage-correction-1.result.json', { run: 'r', covers: ['7'], ok: true });
+  f.write('research/r-dispatch/refuter-refute-8-coverage-correction-1.result.json', { run: 'r', covers: ['8'], ok: false });
+  assert.deepEqual([...covered(join(f.repo, 'research/r-dispatch'), pattern)].sort(), ['7', '9']);
+});
+
+test('pending-unit guards allow a completed sibling but still spend each correction once', t => {
+  for (const ok of [true, false]) {
+    const f = multipleFixture(t), wrapped = withRefuterContinuation(f.stage);
+    const initial = wrapped.plan(f.ctx, ['7', '8', '9']);
+    assert.deepEqual(initial.map((p: any) => [p.label, p.task]), [
+      [f.entry.label, f.entry.task.path], [f.second.label, f.second.task.path], ['refute-9', 'original-task'],
+    ]);
+    f.write('research/r-dispatch/refuter-refute-7-coverage-correction-1.result.json', { run: 'r', covers: ['7'], ok });
+    // A finished sibling may legitimately replace its report and evolve inputs.
+    f.write(f.entry.report_path, '{}'); f.write('research/r-step3-scope-7.json', '{}');
+    f.write('items/def-a.md', 'changed after sibling completion');
+    assert.equal(wrapped.plan(f.ctx, ['8'])[0].label, f.second.label);
+    assert.throws(() => wrapped.plan(f.ctx, ['7']), /already attempted/);
+    f.write('research/r-dispatch/refuter-refute-8-coverage-correction-1.result.json', { run: 'r', covers: ['8'], ok: false });
+    assert.throws(() => wrapped.plan(f.ctx, ['8']), /already attempted/);
+    assert.equal(wrapped.plan(f.ctx, ['9'])[0].label, 'refute-9');
+  }
+});
+
+test('multiple entries retain immutable history and selected current-input guards', t => {
+  for (const mutate of [
+    (f: any) => f.write(f.second.previous_result.path, '{}'),
+    (f: any) => f.write(f.second.original_report.path, '{}'),
+    (f: any) => f.write(f.second.task.path, 'changed task'),
+    (f: any) => f.write(f.second.report_path, '{}'),
+    (f: any) => f.write('research/r-step3-scope-8.json', '{}'),
+    (f: any) => f.write('items/def-b.md', 'changed pending subject'),
+  ]) {
+    const f = multipleFixture(t); mutate(f);
+    assert.throws(() => withRefuterContinuation(f.stage).plan(f.ctx, ['8']), /Invalid owner/);
+  }
+  const f = multipleFixture(t);
+  f.write(f.entry.original_report.path, '{}');
+  // Immutable sibling authentication remains mandatory even when not selected.
+  assert.throws(() => withRefuterContinuation(f.stage).plan(f.ctx, ['8']), /Invalid owner/);
+});
+
+test('continuation lists reject duplicate units, duplicate labels and empty authorization', t => {
+  for (const mutate of [
+    (f: any) => f.auth.continuations.push({ ...f.entry }),
+    (f: any) => { f.second.unit = 7; },
+    (f: any) => { f.second.label = f.entry.label; },
+    (f: any) => { f.auth.continuations = []; },
+    (f: any) => { f.auth.authorization = ' '; },
+  ]) {
+    const f = multipleFixture(t); mutate(f); f.save();
+    assert.throws(() => refuterContinuations(f.ctx, f.stage), /Invalid owner/);
+  }
+});
