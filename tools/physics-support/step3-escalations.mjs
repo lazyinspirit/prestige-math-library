@@ -13,6 +13,31 @@ const canonical = value => Array.isArray(value) ? value.map(canonical)
 const hashValue = value => sha256(JSON.stringify(canonical(value)) ?? 'undefined');
 const meaningful = value => typeof value === 'string' && value.trim().length >= 80;
 
+export function recordedMaintenanceToDeferred(entry, prior, current, { run, decisionPath, obligation, hashValue }) {
+  const transitions = entry?.maintenance_disposition_transitions;
+  if (!Array.isArray(transitions) || transitions.length !== 1) return false;
+  const transition = transitions[0];
+  const keys = ['prior_defect_id', 'prior_row_sha256', 'from', 'to', 'reviewed_by', 'rationale'];
+  if (!transition || typeof transition !== 'object' || Array.isArray(transition)
+    || Object.keys(transition).length !== keys.length
+    || !keys.every(key => Object.hasOwn(transition, key))) return false;
+  if (!prior || !current || prior.disposition !== 'nonfatal-recorded' || current.disposition !== 'deferred'
+    || prior.run !== run || current.run !== run
+    || prior.caught_at_stage !== '3a-adjudicate' || current.caught_at_stage !== '3a-adjudicate'
+    || prior.severity === 'fatal' || current.severity === 'fatal'
+    || typeof prior.defect_id !== 'string' || !prior.defect_id
+    || transition.prior_defect_id !== prior.defect_id
+    || transition.prior_row_sha256 !== hashValue(prior)
+    || transition.from !== 'nonfatal-recorded' || transition.to !== 'deferred'
+    || transition.reviewed_by !== 'root' || typeof transition.rationale !== 'string'
+    || transition.rationale.trim().length < 100) return false;
+  if (!['subject', 'class', 'subclass', 'severity', 'location', 'batch', 'consumer_id']
+    .every(key => prior[key] === current[key])) return false;
+  const hasReference = row => Array.isArray(row.adjudication_ref)
+    && row.adjudication_ref.some(ref => ref?.path === decisionPath && ref.obligation === obligation);
+  return hasReference(prior) && hasReference(current);
+}
+
 /** An outside supplier remains a maintenance finding. Only its exact owned
  * use can be accepted, on current mathematical bytes and explicit premises.
  * Shared by the owner hold, stamp, and routing gate; no outside-item bypass. */
@@ -143,7 +168,10 @@ export function externalContextReceipt(root, run, decision, target = null, group
       if (typeof id !== 'string' || supersededIds.has(id)) return reject('invalid outside superseded row chain');
       const matches = ledgerRows.filter(row => row.defect_id === id), prior = matches[0];
       if (matches.length !== 1 || prior.run !== run || prior.subject !== finding.id
-        || prior.caught_at_stage !== '3a-adjudicate' || !['open', 'deferred'].includes(prior.disposition)
+        || prior.caught_at_stage !== '3a-adjudicate'
+        || (prior.disposition === 'nonfatal-recorded'
+          ? !recordedMaintenanceToDeferred(entry, prior, ledgerRow, { run, decisionPath, obligation: finding.obligation, hashValue })
+          : !['open', 'deferred'].includes(prior.disposition))
         || !['class', 'subclass', 'severity', 'location', 'batch', 'consumer_id']
           .every(key => prior[key] === ledgerRow[key])
         || !(prior.adjudication_ref ?? []).some(ref => ref.path === decisionPath

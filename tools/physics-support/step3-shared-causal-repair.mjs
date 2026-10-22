@@ -24,13 +24,19 @@ export function sharedCausalRepair({run,prior,decision,target,canonicalRow,
     const entries=receipt.repairs.filter(x=>x.canonical_defect_id===canonicalRow.defect_id
       &&x.primary.obligation===prior.obligation&&x.aliases.some(a=>a.obligation===decision.obligation));
     require(entries.length===1,'one exact repair');const e=entries[0];
+    const readinessReference=e.kind==='single-historical-readiness-reference'
+      &&run==='fluid-dynamics-all-47-2026-10-23'
+      &&e.subject==='def-fd-quantity-and-frame-conventions'
+      &&e.primary?.batch==='3'&&e.primary?.obligation==='touched:3:def-fd-quantity-and-frame-conventions'
+      &&e.aliases?.length===1&&e.aliases[0].batch==='4'&&e.aliases[0].obligation==='reader:4:1'
+      &&e.aliases[0].route==='reader';
     require(e.subject===canonicalRow.subject&&e.subject===prior.id&&e.subject===decision.id
       &&canonicalRow.run===run&&canonicalRow.caught_at_stage==='3a-adjudicate'
-      &&canonicalRow.disposition==='fixed'&&canonicalRow.severity==='fatal'
+      &&canonicalRow.disposition==='fixed'&&canonicalRow.severity===(readinessReference?'nonfatal':'fatal')
       &&canonicalRow.repair_confidence===1,'one repaired fatal subject');
     require(hashValue(canonicalRow)===e.canonical_row_sha256,'exact merged row');
-    require(Array.isArray(e.merged_original_ids)&&e.merged_original_ids.length===2
-      &&new Set(e.merged_original_ids).size===2
+    require(Array.isArray(e.merged_original_ids)&&(readinessReference?[1,2].includes(e.merged_original_ids.length):e.merged_original_ids.length===2)
+      &&new Set(e.merged_original_ids).size===(readinessReference?e.merged_original_ids.length:2)
       &&hashValue([...canonicalRow.supersedes].sort())===hashValue([...e.merged_original_ids].sort()),'two original rows merged');
     require(e.one_actual_defect===true&&typeof e.causal_statement==='string'
       &&e.causal_statement.length>=100,'explicit one-cause determination');
@@ -39,7 +45,7 @@ export function sharedCausalRepair({run,prior,decision,target,canonicalRow,
         &&!g.path.split('/').includes('..')&&/^[a-f0-9]{64}$/.test(g.sha256),'guard shape');
       const b=readBytes(g.path);require(digest(b)===g.sha256,'guard bytes');return JSON.parse(b);
     };
-    require(e.original_ledger_row_guards?.length===2,'original ledger row guards');
+    require((readinessReference?[1,2].includes(e.original_ledger_row_guards?.length):e.original_ledger_row_guards?.length===2),'original ledger row guards');
     const originals=e.original_ledger_row_guards.map(bind);
     require(originals.every(x=>x.run===run&&x.subject===e.subject)
       &&hashValue(originals.map(x=>x.defect_id).sort())===hashValue([...e.merged_original_ids].sort()),'same actual original subject');
@@ -56,7 +62,7 @@ export function sharedCausalRepair({run,prior,decision,target,canonicalRow,
       &&['accepted_repair','amended_repair'].includes(prior.verdict)
       &&prior.repair_confidence===1,'actual producer repair');
     require(['reader','flagged'].includes(a.route)&&decision.route===a.route
-      &&decision.verdict==='confirmed_fatal'&&decision.repair_confidence===1
+      &&decision.verdict===(readinessReference?'confirmed_nonfatal':'confirmed_fatal')&&decision.repair_confidence===1
       &&decision.same_defect_as===p.obligation
       &&typeof decision.same_defect_evidence==='string'&&decision.same_defect_evidence.length>=100,'explicit cross-group causal pointer');
     const frozen=[...(scope12.reader_findings??[]),...(scope12.refuter_findings??[])]
@@ -73,13 +79,30 @@ export function sharedCausalRepair({run,prior,decision,target,canonicalRow,
       require(hashValue(decision[key]??null)===hashValue(frozen[0][key]??null),'unchanged observation fields');
     // Both aliases must be independently guarded, including their original
     // differing severities; every declared lane is present in the frozen scope.
-    require(e.aliases.length===2&&new Set(e.aliases.map(x=>x.route)).size===2,'reader and refuter only');
+    require(readinessReference||e.aliases.length===2&&new Set(e.aliases.map(x=>x.route)).size===2,'exact reviewed alias cardinality');
     for(const alias of e.aliases){
       const f=[...(scope12.reader_findings??[]),...(scope12.refuter_findings??[])]
         .find(x=>x.obligation===alias.obligation);
       require(f&&hashValue(f)===alias.frozen_finding_sha256
         &&f.id===e.subject&&f.producer_batch===frozen[0].producer_batch
         &&f.consumer_id===alias.consumer_id,'all original aliases preserved');
+    }
+    if(readinessReference){
+      const h=e.historical_source_guard;
+      require(h?.path?.startsWith(`research/${run}-`)&&!h.path.split('/').includes('..')
+        &&/^[a-f0-9]{64}$/.test(h.sha256),'readiness historical source guard');
+      const old=readBytes(h.path);
+      require(digest(old)===h.sha256&&old.toString().includes('The current supplier readiness record is missing.'),'actual historical false sentence');
+      if(frozen[0].observation_basis==='unbound'){
+        require(decision.historical_delta_unknown===true&&typeof decision.owner_resolution==='string'
+          &&decision.owner_resolution.length>=100,'unbound historical limit retained');
+      }else require(frozen[0].observed_source?.item_sha256===h.sha256,'actual originally bound readiness source');
+      const ready=bind(e.ready_record_guard);
+      require(ready.run===run&&ready.item==='def-fd-smooth-motion'&&ready.decision==='ready'
+        &&ready.at==='2026-10-22T19:46:20.450Z','actual readiness record');
+      const now=readBytes(`items/${e.subject}.md`);
+      require(digest(now)===currentCarrier.item_sha256
+        &&!now.toString().includes('The current supplier readiness record is missing.'),'current false sentence removed');
     }
     const primaryDecision=bind(p.decision_guard).decisions.find(x=>x.obligation===p.obligation);
     require(primaryDecision&&primaryDecision.id===prior.id&&primaryDecision.route===prior.route

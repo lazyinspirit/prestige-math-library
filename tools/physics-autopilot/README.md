@@ -60,11 +60,23 @@ statements/descriptions and separate following reference lines. Existing runs
 keep their original revision and table. See [the editorial policy](../STATEMENT-FIRST.md).
 
 A Root-reviewed cross-group causal-repair receipt may consolidate duplicate
-producer/consumer defect records into one append-only successor. It requires the
-exact producer touched decision, two frozen consumer reader/refuter observations,
+producer/consumer defect records into one append-only successor. The fatal-repair
+route requires an exact producer touched decision, two frozen consumer findings,
 both original row archives, all reports/pre/post snapshots, current supplier
-carrier, complete adjudication references and substantive final repair evidence.
-The private checker authenticates the receipt and decision cores; all ordinary
+carrier, complete references and substantive final repair evidence. The bounded
+Fluid Dynamics historical-readiness route separately authenticates producer3 and
+reader4 against the archived false sentence and exact dated ready record; it
+retains any unbound-history limitation and permits only that repaired nonfatal
+record. The private checker authenticates receipt and decision cores; ordinary
 route, severity, observation and current-carrier checks still apply. Stamp current
 decisions before binding the primary file, then add consumer receipt pointers.
-The owner gate snapshot follows this authority's exact evidence input map.
+The owner gate snapshot follows the authority's exact evidence input map.
+
+The existing outside-context receipt can retain a genuinely unfixed published
+maintenance finding through an append-only `nonfatal-recorded` to `deferred`
+successor. That transition requires an explicit Root review, the exact canonical
+prior-row digest, unchanged finding identity and exact adjudication references.
+It applies only inside the authenticated supersession chain; ordinary open and
+deferred handling and all source, consumer, premise and receipt checks remain
+required. Acceptance covers the exact owned consumer use, while outside
+maintenance stays deferred and its original history remains intact.
